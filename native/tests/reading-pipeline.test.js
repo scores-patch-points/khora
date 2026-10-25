@@ -146,3 +146,11 @@ test("the Node door asks the local Wiktionary pack first, and an absent pack is 
   assert.match(off.aliasReport.gap, /without the hyperlexicon/);
   assert.ok(off.sentences.some((s) => s.text === "In 1850 Messrs."), "FALSIFIER: with no giver the cut is the splitter's own");
 });
+
+test("a surface extends the base extraction without rebuilding it", () => {
+  let base = null;
+  const reader = makeReader({ language: "en", extendRelations: (b) => { base = b; return (t, o) => [...b(t, o), ...(/\bschool\b/.test(t) ? [{ end1: "the town council", label: "built", end2: "a school", polarity: "+", offset: 0 }] : [])]; } });
+  const w = readWith(DOC, { language: "en", reader });
+  assert.equal(typeof base, "function");
+  assert.ok(w.edges.length >= readWith(DOC, { language: "en" }).edges.length);
+});

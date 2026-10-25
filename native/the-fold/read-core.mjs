@@ -149,16 +149,19 @@ function dispatchFor(stem, classify, roleConfig) {
 /**
  * The relation reader, assembled once from its priors. `features` are the switches a surface may turn off to see what each organ
  * costs (every one defaults on): posPrior, morphology, nounPhraseSubjects, phrasalPredicates. `sameAct` widens the lemmatizer's
- * same-act test (a surface's own class, never a rewrite of a label). Any organ makeRelationReader takes may be passed to replace
- * this assembly's (extractRelations, discoverRelationVocab …), and `closedClasses` replaces the language's received set.
+ * same-act test (a surface's own class, never a rewrite of a label). `extendRelations(base)` returns the extractor to use in place
+ * of this assembly's clause-aware dispatch, given that dispatch — a surface adds a pass over the base reading without rebuilding
+ * it. Any organ makeRelationReader takes may be passed to replace this assembly's (discoverRelationVocab …), and `closedClasses`
+ * replaces the language's received set.
  */
-export function makeReader({ priors = null, language = "eng", abbreviations = null, features = {}, classifyWord: classify = classifyWord, roleConfig = null, sameAct = null, closedClasses = undefined, ...extra } = {}) {
+export function makeReader({ priors = null, language = "eng", abbreviations = null, features = {}, classifyWord: classify = classifyWord, roleConfig = null, sameAct = null, closedClasses = undefined, extendRelations = null, ...extra } = {}) {
   const stem = stemOf(language) ?? String(language);
   const pr = priors ?? priorsFor(stem);
   const split = abbreviations ? (t, o = {}) => splitSentences(t, { ...o, abbreviations: o.abbreviations ?? abbreviations }) : splitSentences;
   const closed = closedClasses === undefined ? closedClassesFor(stem) : closedClasses;
   const usePos = features.posPrior !== false;
   const useMorph = features.morphology !== false && !!pr.lemmatizer;
+  const baseExtract = (text, opts = {}) => { const d = dispatchFor(stem, classify, roleConfig); return d.extractRelations(text, d.mode === "gfp" ? { ...opts, clauseAware: true } : opts); };
   const same = (a, b) => (sameAct ? sameAct(a, b) ?? null : null) ?? (useMorph ? pr.lemmatizer.sameAct(a, b) : String(a).toLowerCase() === String(b).toLowerCase());
   return makeRelationReader({
     splitSentences: split,
@@ -169,7 +172,7 @@ export function makeReader({ priors = null, language = "eng", abbreviations = nu
     // read at CALL time, not bound at construction: a reader built once picks up a later dispatch change
     discoverRelationVocab: (...a) => dispatchFor(stem, classify, roleConfig).discoverRelationVocab(...a),
     // clause-aware adjacency in GFP mode (2026-09-23: 195 → 150 arrangements on Marie Curie, a strict subset, all dropped cross-clause)
-    extractRelations: (text, opts = {}) => { const d = dispatchFor(stem, classify, roleConfig); return d.extractRelations(text, d.mode === "gfp" ? { ...opts, clauseAware: true } : opts); },
+    extractRelations: extendRelations ? extendRelations(baseExtract) : baseExtract,
     extractorsMode: "dispatch",
     tokenize,
     posPriorFor: () => (usePos ? pr.posPrior : null),
