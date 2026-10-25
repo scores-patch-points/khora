@@ -85,6 +85,12 @@ test("the cast is the reader's own index, every mention addressed; the sentences
     assert.ok(c.allSurfaces.some((x) => x.replace(/\./g, "").toLowerCase() === got), `${c.surface}: ${got} reads back`);
   }
   for (const s of w.sentences) assert.equal(DOC.slice(s.offset, s.offset + s.text.length), s.text, "a sentence's offset reads back");
+  // mentionsAt is the weft's unit, UTF-8 bytes: on text with a multi-byte character before a name the two units differ
+  const accented = `Café owners met. ${DOC}`;
+  const w2 = readToWeft(accented, { address: "accented" });
+  const smith2 = w2.cast.find((c) => c.allSurfaces.includes("Smith"));
+  const buf = Buffer.from(accented, "utf8");
+  for (const at of smith2.mentionsAt) assert.equal(buf.subarray(at, at + 5).toString("utf8"), "Smith", "a byte address reads back from the bytes");
   assert.ok(w.cast.every((c) => c.standing === "referent") && w.heard.every((c) => c.standing === "heard"), "beings and heard nominals are kept apart");
 });
 

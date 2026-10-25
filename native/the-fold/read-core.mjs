@@ -19,8 +19,9 @@
 //                                     forms the priors and the text cannot settle (organs/lexicon.js)
 //   makeReader({ priors, language, abbreviations, features, ...organs }) → the relation reader (organs/hypergraph.js)
 //   relationsFor(list, opts)        → the reader's report over passages (chunked, read through the language's ear)
-//   readWith(text, opts)            → WeftEntry@4: edges, the reader's own cast with every mention's address, its sentences, its
-//                                     pronoun bindings, the clause tree, polarity, surprise, and every gap typed
+//   readWith(text, opts)            → WeftEntry@4: edges, the reader's own cast with every mention's address (mentionsAt: UTF-8 byte
+//                                     offsets, the weft's unit; mentionSpans: character spans), its sentences and pronoun bindings
+//                                     (character offsets), the clause tree, polarity, surprise, and every gap typed
 //
 // Nothing here is a word list. The English closed classes (adapters/text/priors.js) are passed only to an English read; another
 // language without its own is a typed gap, never English applied to it (the Greenberg rule).
@@ -216,6 +217,13 @@ function toRawOffsets(raw) {
   return (i) => map[Math.min(Math.max(0, i), map.length - 1)];
 }
 
+// UTF-8 byte offset of every character position: the weft addresses a mention as `<source>#<byteOffset>` (weft.js::holonAddress)
+function byteOffsets(str) {
+  const cum = new Uint32Array(str.length + 1); let b = 0;
+  for (let i = 0; i < str.length; i++) { cum[i] = b; const c = str.charCodeAt(i); if (c < 0x80) b += 1; else if (c < 0x800) b += 2; else if (c >= 0xd800 && c <= 0xdbff && i + 1 < str.length && (str.charCodeAt(i + 1) & 0xfc00) === 0xdc00) { b += 4; cum[++i] = b; } else b += 3; }
+  cum[str.length] = b; return cum;
+}
+
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /** Every place a surface stands as a whole word, longest surface first, overlaps given to the longer. The index keeps a name in
  *  its folded form ("Mr Brown" for "Mr. Brown", a lower-cased "messrs"), so a token may carry its period in the text and a
@@ -284,6 +292,7 @@ export function readWith(text, { address = null, category = null, language = nul
   let cast = [], heardRows = [];
   try {
     const capital = new Set(extractSurfaces(cuts, {}).map((x) => x.surface));
+    const bytes = byteOffsets(str);
     const byRef = new Map();
     for (const ev of out?.index?.events ?? []) {
       if (ev?.type !== "DEF.admit" || !ev.referent_id || !ev.surface) continue;
@@ -294,7 +303,8 @@ export function readWith(text, { address = null, category = null, language = nul
       const surface = out.index.represent?.(r.ref) ?? [...r.surfaces].sort((a, b) => b.length - a.length)[0];
       const spans = mentionsOf(norm, r.surfaces).map(([a, b]) => [raw(a), raw(b)]);
       const being = [...r.surfaces].some((x) => capital.has(x));
-      const row = { ref: r.ref, surface, allSurfaces: [...r.surfaces], mentionsAt: spans.map(([a]) => a), mentionSpans: spans, standing: being ? "referent" : "heard" };
+      // mentionsAt: UTF-8 byte offsets, the weft's address unit; mentionSpans: [start, end) character spans into the text given
+      const row = { ref: r.ref, surface, allSurfaces: [...r.surfaces], mentionsAt: spans.map(([a]) => bytes[a]), mentionSpans: spans, standing: being ? "referent" : "heard" };
       (being ? cast : heardRows).push(row);
     }
   } catch (e) { if (!err) err = `cast_failed: ${String(e?.message ?? e)}`; }

@@ -40,7 +40,7 @@ reader-bundle read through it, so nothing in the reader's import graph imports `
   so the clause tree and the relations never disagree about where a sentence ends.
 
 **What the entry carries that the reader saw** (WeftEntry@4, additive fields): `cast` — the reader's own referent index (the
-ids its edges were resolved against), each being with `mentionsAt` (offsets) and `mentionSpans`; `heard` — the rows the index
+ids its edges were resolved against), each being with `mentionsAt` (UTF-8 byte offsets, the weft's `<source>#<byteOffset>` unit) and `mentionSpans` (character spans); `heard` — the rows the index
 holds only through the heard tier (common nouns are not beings, so they stay out of the weft's company); `sentences` with
 offsets that read back in the caller's text; `pronouns` — every binding the resolver made, addressed and named; `language`,
 `abbreviations`, `aliasReport`, and `gaps`. The door adds a `truncated` gap when `maxCharacters` cut the text.
