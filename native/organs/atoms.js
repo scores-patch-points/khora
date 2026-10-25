@@ -25,13 +25,16 @@ export function atomize({ claims, rows, mentions, entities, text }) {
     return { value: ws.length ? textOfIds(ws.map((w) => w.id)) : end.text, ids: end.ids ?? [] };
   };
   const dropped = (vid) => { const m = mentions.find((x) => x.how === "dropped" && x.hid === vid); return m?.entity && E.get(m.entity) ? { entity: m.entity, name: E.get(m.entity).name, ids: [] } : null; };
-  const caseOf = (end) => { const w = (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP"); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
+  const caseRow = (end) => (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP") ?? null;
+  const caseOf = (end) => { const w = caseRow(end); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
   const out = [], seen = new Set();
-  const push = (pred, args, base, idsUsed) => {
+  // head: the row id of the word that carries the predicate (the verb, the adjective, the case word), kept so a later reader (stage.js) can
+  // read its features; each argument keeps the row ids of its words
+  const push = (pred, args, base, idsUsed, head = base.head ?? null) => {
     const as = args.filter(Boolean); if (!pred || !as.length) return;
     const key = JSON.stringify([pred, as.map((a) => a.entity ?? lc(a.value)), base.neg]); if (seen.has(key)) return; seen.add(key);
     const ws = [...new Set(idsUsed.flat().filter((x) => x != null))].map(byId).filter(Boolean);
-    out.push({ pred, args: as.map(({ ids, ...a }) => a), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from });
+    out.push({ pred, args: as.map(({ ids, ...a }) => ({ ...a, ids: ids ?? [] })), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from, head });
   };
   // an adjective keeps its degree: "the largest lake" is most:large, "más alto" more:tall (a "more" word or the Degree feature; with a
   // definite article on its noun, the comparative is a superlative)
@@ -45,7 +48,7 @@ export function atomize({ claims, rows, mentions, entities, text }) {
   const word = (w) => { const l = lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form), f = lc(w.form); return l.slice(0, 3) === f.slice(0, 3) || /[^\x00-\x7f]/.test(f) ? l : f; };
   const adjAtoms = (end, owner, base) => {
     const head = end?.hid != null ? byId(end.hid) : null; if (!head || head.upos === "PROPN" || !owner) return;
-    for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []]);
+    for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []], w.id);
   };
   // a modifier phrase is a relation between its owner and it; a coordinated word repeats the relation of the word it is coordinated with
   const modAtoms = (end, owner, base, parent = null) => {
@@ -53,13 +56,13 @@ export function atomize({ claims, rows, mentions, entities, text }) {
       const a = arg(n);
       if (n.conj) { if (parent) push(parent.pred, [parent.owner, a], base, [parent.owner?.ids ?? [], n.ids ?? []]); adjAtoms(n, a, base); modAtoms(n, a, base, parent); continue; }
       const pred = caseOf(n) ?? "of";
-      if (!skipMod.has(n.hid)) push(pred, [owner, a], base, [owner?.ids ?? [], n.ids ?? []]);
+      if (!skipMod.has(n.hid)) push(pred, [owner, a], base, [owner?.ids ?? [], n.ids ?? []], caseRow(n)?.id ?? null);
       adjAtoms(n, a, base); modAtoms(n, a, base, { pred, owner });
     }
   };
   let skipMod = new Set();
   for (const c of claims) {
-    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id };
+    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id, head: c.vid ?? null };
     if (c.rel === "fig") {
       const being = arg(c.ARG0), f = c.fig ?? {};
       const inBr = (c.ids ?? []).some((id) => { let d = 0; for (const r of rows) { if (r.id >= id) break; if (r.form === "(") d++; else if (r.form === ")") d--; } return d > 0; });

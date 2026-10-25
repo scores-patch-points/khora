@@ -2,7 +2,7 @@
 // entities by coref.js, or by the learned ranker → EOTClaim@1 claims → atoms.js, plus the learned producer's further atoms when given).
 // The meaning check reads a claim and its source this way and weighs atom against atom (atom-support.js).
 //   readAtoms({ text, lang, title, previous, grammar, pack, same, lookup, corefModel, producer, chooser, filter, keysOf })
-//     → { atoms, entities, mentions, claims, rows }
+//     → { atoms, entities, mentions, claims, rows, unread, page }
 //   grammar: { rowsOf(text), claimsOf(text, rows) } (grammar-en.js, or grammar-ud.js's loadGrammar)
 import { resolvePage } from "./coref.js";
 import { resolveWithModel } from "./coref-learned.js";
@@ -28,8 +28,8 @@ export function readAtoms({ text, lang = "en", title = null, previous = [], gram
   const original = text, C = cleanText(text); text = C.text; previous = previous.map((p) => cleanText(p).text);
   const sentences = [...previous, text];
   const R0 = resolvePage({ lang, title, sentences, rowsOf: grammar.rowsOf, pack, same, lookup });
-  let entities = R0.entities, mentions = R0.sentences.at(-1).mentions;
-  if (corefModel) { const L = resolveWithModel(R0, { lang, title, same, proDrop: !!pack?.proDrop }, corefModel); entities = L.entities; mentions = L.sentences.at(-1).mentions; }
+  let entities = R0.entities, mentions = R0.sentences.at(-1).mentions, pageMentions = R0.sentences.map((s) => s.mentions);
+  if (corefModel) { const L = resolveWithModel(R0, { lang, title, same, proDrop: !!pack?.proDrop }, corefModel); entities = L.entities; mentions = L.sentences.at(-1).mentions; pageMentions = L.sentences.map((s) => s.mentions); }
   const rows = R0.sentences.at(-1).rows, claims = grammar.claimsOf(text, rows);
   const ctx = { rows, mentions, entities, text, lang, keysOf };
   const base = atomize({ claims, ...ctx });
@@ -43,5 +43,7 @@ export function readAtoms({ text, lang = "en", title = null, previous = [], gram
   // and a content word no atom carries, unless it heads a claim (its predicate is then written by its English key)
   const missed = rows.filter((r) => /^(NOUN|PROPN|ADJ|NUM)$/.test(r.upos) && !/^(det|case|mark|punct|fixed|compound:prt)/.test(r.deprel) && !heads.has(r.id) && !all.includes(low(r.form)) && !(r.lemma && r.lemma !== "_" && all.includes(low(r.lemma).slice(0, Math.max(4, low(r.lemma).length - 2))))).map((r) => r.form);
   const unread = [...new Set([...claims.flatMap((c) => c.unread ?? []), ...missed])].filter((w) => !carried.includes(low(w)));
-  return { atoms: out, entities, mentions, claims, rows, unread };
+  // the page as read (title, earlier sentences, this one): each sentence's rows and mentions, so a referent's every naming on the page is at hand
+  const page = R0.sentences.map((s, i) => ({ text: s.text, rows: s.rows, mentions: pageMentions[i] ?? [] }));
+  return { atoms: out, entities, mentions, claims, rows, unread, page };
 }
