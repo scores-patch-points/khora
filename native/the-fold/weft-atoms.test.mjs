@@ -63,3 +63,25 @@ test("Spanish reads through the same door and gets the recipient shape from the 
   const Pes = await rowsOfFor("spa"), via = atomsFromWeft(w, { claimsOf: Pes.claimsOf, corefModel, lang: "es" });
   assert.ok(via.atoms.some((a) => a.pred === "dar_a"), via.atoms.map((a) => a.text).join(" ; "));
 });
+
+// ── the page as one reading (atomsOfPage): one entity id is one being across the whole entry ──
+const { atomsOfPage } = await import(path.join(K, "native/the-fold/weft-atoms.js"));
+const pageOf = async (t) => atomsOfPage(await read(t, { rows: true }), { claimsOf: P.claimsOf, corefModel, lang: "en" });
+test("a page is resolved ONCE: a pronoun in a later sentence is the being of an earlier one, under one id", async () => {
+  const pg = await pageOf("Sagard is a lender. It sold additional receivables to us.");
+  const kind = pg.atoms.find((a) => a.pred === "is_a"), sold = pg.atoms.find((a) => a.pred === "sell");
+  assert.equal(sold.args[0].entity, kind.args[0].entity, pg.atoms.map((a) => a.text).join(" ; "));
+  assert.equal(new Set(pg.entities.map((e) => e.id)).size, pg.entities.length);
+});
+test("entity ids are page-wide: two sentences never reuse an id for two beings", async () => {
+  const pg = await pageOf("Anna wrote a letter. Boris read the report.");
+  const ids = pg.sentences.map((s) => new Set(s.atoms.flatMap((a) => a.args.map((x) => x.entity)).filter((x) => x != null)));
+  assert.equal([...ids[0]].filter((i) => ids[1].has(i)).length, 0);
+});
+// KNOWN, observed failing: the learned ranker opens a NEW entity for a later mention of an already-named being ("Sagard" ... "Sagard"), so an identity world built on the page
+// holds two nodes for one being. A coreference fault (coref-learned.js), not this module's.
+test("the same name later on the page is the same being", { todo: "coref-learned.js opens a new entity for a repeated name" }, async () => {
+  const pg = await pageOf("Sagard is a lender. We sold additional receivables to Sagard.");
+  const ids = new Set(pg.atoms.flatMap((a) => a.args.filter((x) => /sagard/i.test(x.name ?? x.value ?? "")).map((x) => x.entity)));
+  assert.equal(ids.size, 1, [...ids].join(","));
+});

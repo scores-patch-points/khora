@@ -1260,3 +1260,18 @@ fast: 7 files · 5 affected test files, 52 pass · law: ok (pre-existing dup-hea
 | Holmes | stage-run.mjs | `ATOMS_VIA=weft` | clean | the default path is unchanged; the flag is the only new branch |
 
 clean: none silent. Additive law: `readDocument(..., { rows: true })` equals the same read without it, byte for byte, but for `parse` and `parseBy` (tested).
+
+## 2026-10-26 — identity through THE reader's page: atomsOfPage, janus resolve and the holographic test wired as evals (branch `weft-rows`, #66)
+
+fast: 6 files · 3 affected test files · law: ok (pre-existing dup-header WARN S17/S96) · stage 108 pairs unchanged both ways · parity 655/664 unchanged · reading-pipeline + reader-speed 29/29
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Holmes | weft-atoms.test.mjs, the todo | one being or two | noted, real | the learned ranker opens a NEW entity for a repeated name ("Sagard" ... "Sagard"); an identity world on the page then holds two nodes for one being. A `todo` test observed failing; the fault is coref-learned.js's, not weft-atoms.js's |
+| Dijkstra | resolve-run.mjs:18 `tok` | a lowercased last token standing in for a name | disclosed | gold = the one page referent sharing the mention's last name token (atom-world.js keyOf's own rule); English pages only; mentions with none or several are not scored (54 of 82), stated in WEFT-IDENTITY.md |
+| Ostrom | WEFT-IDENTITY.md | scope of the null result | disclosed | "resolve never asserts" is under the default lens (the pool's chance floor, 0.977 at n=43) and an EMPTY neighbour graph; it is not a claim that resolve cannot assert. The stakes (`lens.assertAt`) are the user's to state and none was chosen |
+| Frankfurt | WEFT-IDENTITY.md | no number stands in for a missing prior | clean | no assertAt, no threshold, no tuned constant added |
+| Lévi-Strauss | stash vs the repeated-name problem | | none applies | 2 candidates read (an empty-connector fix, a loose results file); neither bears on coreference |
+| Simon/Chekhov | identity-run.mjs, resolve-run.mjs | evals no test imports | noted | CLI evals by design (like stage-run.mjs); their result is in WEFT-IDENTITY.md and the page module they stand on (`atomsOfPage`) is tested |
+
+clean: Alexander (not routed). The machine was at load average 80+ (other sessions' stage jobs), which made the grammar-loading tests take 4 minutes; all passed.
