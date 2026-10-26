@@ -8763,7 +8763,15 @@ export async function runProxyTurn({ sessionId, userId = null, model, task, chat
         // only when a FRESH door contradicts it; the dated-record adoption
         // above already overwrites a stale link with the door's own bytes,
         // so a veto is never issued from this site.
-        if (onNote) onNote({ move: "fact_gate", verdict: verdictOut.verdict, count: verdictOut.count, searched: factGate.searched, route: factRoute, kind: factKind?.label ?? null });
+        // THE ISTHMUS ENCODE LEG, IN SHADOW (native/docs/THE-ISTHMUS.md): the same fact said through the language's codec (organs/encode.js:
+        // the frame decoded by the language's own grammar, the copula and the order from its UDGrammar@1) is computed and RECORDED beside the
+        // lens template; the person still reads the template. FOLD_ENCODE=0 turns the shadow off. Adoption waits on its measurement
+        // (native/organs/encode.test.mjs: agreement with the hand lenses, and the languages where the codec's own tables mislead).
+        let encoded = null;
+        if (process.env.FOLD_ENCODE !== "0" && verdictOut.frame && verdictOut.groundValue && verdictOut.lang) {
+          try { const { encodeCopula } = await import("./native/organs/encode.js"); encoded = await encodeCopula({ frame: verdictOut.frame, value: verdictOut.groundValue, language: verdictOut.lang }); } catch (e) { encoded = { text: null, gaps: [{ gap: "encode_error", detail: String(e?.message ?? e).slice(0, 120) }] }; }
+        }
+        if (onNote) onNote({ move: "fact_gate", verdict: verdictOut.verdict, count: verdictOut.count, searched: factGate.searched, route: factRoute, kind: factKind?.label ?? null, ...(encoded ? { encoded: { shadow: true, text: encoded.text, gaps: (encoded.gaps ?? []).map((g) => g.gap), by: encoded.by ?? null, template: verdictOut.replacement } } : {}) });
       } else {
         factGateOut = decideGate({ ask: task, answer: text, ground: factGate.ground, context: ctx, searched: factGate.searched, groundSource: factKind && factLink ? "the refreshed facts check" : "a web search", lens: lensForText(task) });
         if (factGateOut.open && factGateOut.append) {
