@@ -165,3 +165,30 @@ Same kernel (identity-cancel.js), same gold as the page experiments (one source 
 - **Never wrong where company is right, and once right where company is not.** The two signatures compose: company nominates (wide), difference certifies (narrow); on the 12 both decide they agree.
 - **Not done:** the record itself. The passes (RereadRec rows) are still a jsonl beside the eval; the design the operator names is that THEY are the EOT content and a being's identity is its
   trajectory of differences across passes (kernel/identity-trajectory.js is the organ: stages, similarityAt, continuity). The signature here is one pass (the whole read), not a trajectory.
+
+## EXPERIMENT 7 — identity from the READER'S side (`native/kernel/reader-identity.js`, `eval/meaning/reader-identity-run.mjs`, 2026-10-26)
+The other agent's diagnosis, confirmed in the code: the identity test had treated the reading as the evidence (corpus-identity.js: nodes per mention, three occurrences on both sides, the reader a
+constant stamped on the verdict). Built instead: the reader is the instrument. THE STATE is an append-only log of admissions (address, relation, value) kept as a holograph of slots
+(bayes-surprise.js); MEETING a mention is scored by how far it moves the state (bits). **Same for the reader if meeting B moves the state the way meeting A again would; new if it moves like a new
+thing; undecided named; the margin read off the candidates; a deranged-order null (values shuffled among addresses within each relation) before a same is a finding.** Recall is on what the thing
+IS (its arrangements that are not one-valued slots), a tie broken by what it SAYS, and the one-valued slots are read at the recalled address AFTER: a slot that moves is the discrepancy.
+
+Four things the build taught, each from a run that went wrong first:
+1. **Two facts sit at the chance floor.** Values shuffled independently per relation among n addresses co-land on one address with probability n^-(k-1); the floor is the (1 - 1/n) quantile, so one
+   distinctive fact is a coincidence, two sit at the floor, three are a finding. The null's arithmetic, not a constant.
+2. **The name is an arrangement the reader meets.** Left out (to test company alone), a claim about one measure shared nothing distinctive and was met as new; the discrepancy was never read. "A name is a
+   mouth": it nominates the address; what the thing then says of itself moves the slots.
+3. **Recall first, slots after.** With the slots in the recall, a wrong value at the recalled address costs MORE than an empty slot (a slot holding one value expects another less than an empty one does),
+   so "Mercury with a wrong radius" lost to "a new thing" and the slot was never read.
+4. **A slot value meets within the margin the two state.** 2,440 km against 1,516 miles converted (2,439.77 km) and 79 lb against 36 kg "moved" the slot as strings: the two false flags. `valuesMeet`:
+   within the stated resolution of either when the caller supplies it, else the stage's own 2% rule. The falsification's finding (a figure's last digit is its DMD), now a line of code.
+
+| 108 pairs, the reader meets each source being then each claim end | result |
+|---|---|
+| recall (165 ends with a name-token gold) | same 132, right 132; 15 above the null; 33 met as new. Nearly tautological: the gold IS the name token and the name is an arrangement |
+| the null | licenses 15 of 132: a one-sentence source holds 2-4 beings, so by the arithmetic above almost every same sits at or below the floor. Honest, and the same verdict the holographic test gave ("needs deeper reading"), now with the reason as a number |
+| **the discrepancy finder** (a one-valued `has_<measure>` slot that moves at the recalled address) | **4 pairs flagged, 4 labelled C, 0 false**; before the margin, 6 flagged with 2 false (the unit-conversion pairs) |
+| against the stage's licensed measure check | the stage names 8 (figures 5, a superlative holder, bracketed alternates, approx 5%); the reader finds 4 from its own movement with one declaration and no license table |
+
+Not done: the reader's state written to the weft (the log IS the state here, in memory); the reader as a trajectory across passes (re-entry's rec rows as admissions, so a being's identity is what it
+did to the reader over time: identity-trajectory.js); the Motorola resolution against its exhibits, the first real discrepancy case the analysis names; a null for the slot movement itself.
