@@ -109,3 +109,10 @@ test("Isthmus: a question about code is work, even when it names two quantities;
   assert.equal(settled.kind, "mechanical");
   assert.equal(settled.settled, true);
 });
+
+test("Isthmus: every verdict carries the lane's reading of the ask's mood (intents, demand)", async () => {
+  const ask = await routeOf("What is DEFAULT_TIMEOUT_MS in src/a.ts?");
+  assert.ok(Array.isArray(ask.intents)); assert.equal(ask.demand, false);
+  const order = await routeOf("Change DEFAULT_TIMEOUT_MS in src/a.ts to 3");
+  assert.equal(order.demand, true, "FALSIFIER: an instruction read as no demand");
+});

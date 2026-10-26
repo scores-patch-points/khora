@@ -241,8 +241,12 @@ async function decide(ask, { history = [] } = {}) {
   if (!text) return { gap: "empty-ask", detail: "no ask to route" };
   const lang = languageOf(text);
   const langs = lang && compiled[lang] ? [lang] : Object.keys(compiled).filter((l) => compiled[l].script === "spaced");
-  const verdict = (kind, why, extra = {}) => ({ kind, research: kind === "account" || kind === "search", why, language: lang ?? "undecided", ...(kind === "account" && hit.genre && hit.produce ? { form: "longform" } : {}), ...extra });
-  const gap = (g, detail) => ({ gap: g, detail, language: lang ?? "undecided" });
+  // the lane's own reading of the ask's mood rides every verdict (intents, demand), so a caller can tell a question from an instruction by
+  // the parse, not by English words (foldcode's mechanical resolver serves a lookup only when the ask is not a demand)
+  const lane = await laneFor({ ask: text }).catch(() => null);
+  const mood = lane?.ok ? { intents: lane.intents ?? [], demand: lane.demand === true } : {};
+  const verdict = (kind, why, extra = {}) => ({ kind, research: kind === "account" || kind === "search", why, language: lang ?? "undecided", ...(kind === "account" && hit.genre && hit.produce ? { form: "longform" } : {}), ...mood, ...extra });
+  const gap = (g, detail) => ({ gap: g, detail, language: lang ?? "undecided", ...mood });
   const { hit, toks, at } = kindsIn(text, langs);
   const numbers = toks.filter(isNumberToken);
   const en = lang === "en" ? await englishFacts(text) : null;
@@ -251,7 +255,7 @@ async function decide(ask, { history = [] } = {}) {
   const imperative = en ? en.imperative : false;
 
   // 1. settled by computation: the reason-gate's own mechanical lane (English), or arithmetic and conversion read as kinds over numbers
-  { const lane = await laneFor({ ask: text }).catch(() => null); if (lane?.ok && lane.lane === "mechanical") return verdict("mechanical", "a mechanism settles it (computed, never generated)", { settled: true }); }
+  if (lane?.ok && lane.lane === "mechanical") return verdict("mechanical", "a mechanism settles it (computed, never generated)", { settled: true });
   // THE ISTHMUS (native/docs/THE-ISTHMUS.md): below this line no organ settled the ask. It is still computation, not
   // research, so the kind stands; but it is never presented as settled. Outside English the lane's operator words have no
   // codec, so the reason is a typed gap (no_codec), never the model's own sum dressed as a mechanical answer.
