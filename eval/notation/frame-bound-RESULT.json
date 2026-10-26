@@ -1,0 +1,109 @@
+{
+ "prereg": "eval/notation/FRAME-PREREG.md @ cd03b6b5",
+ "P_dev": {
+  "n": 22,
+  "frames": {
+   "0": 1,
+   "2": 2,
+   "3": 7,
+   "4": 7,
+   "5": 3,
+   "7": 2
+  },
+  "max": 7
+ },
+ "P_held": {
+  "n": 20,
+  "frames": {
+   "0": 1,
+   "2": 1,
+   "3": 7,
+   "4": 8,
+   "5": 2,
+   "6": 1
+  },
+  "recallAtNstar": 1,
+  "recallAtDeclared": 1
+ },
+ "N": {
+  "filesScanned": 649,
+  "n": 631,
+  "frames": {
+   "0": 345,
+   "1": 152,
+   "2": 31,
+   "3": 12,
+   "4": 6,
+   "5": 7,
+   "6": 11,
+   "7": 5,
+   "8": 7,
+   "9": 12,
+   "10": 9,
+   "11": 4,
+   "12": 4,
+   "13": 4,
+   "14": 3,
+   "15": 1,
+   "16": 3,
+   "17": 3,
+   "19": 3,
+   "21": 1,
+   "23": 1,
+   "30": 1,
+   "36": 1,
+   "37": 2,
+   "44": 1,
+   "49": 1,
+   "75": 1
+  },
+  "acceptAtNstar": 0.901743264659271,
+  "acceptAtDeclared": 0.9128367670364501,
+  "sample": [
+   {
+    "file": "05-academic-papers/handbook-citations/ioannidis-2005-why-most-published-research-findings-are-false.txt",
+    "s": "4 × 10−4.",
+    "frame": 0
+   },
+   {
+    "file": "05-academic-papers/ntrs-white-papers/19650003019_heat-transfer-measurements-in-partially-ionized-gases-research-report-no-196.txt",
+    "s": "5   - 1.",
+    "frame": 0
+   },
+   {
+    "file": "05-academic-papers/ntrs-white-papers/19650010801_heat-transfer-measurements-in-partially-ionized-gases.txt",
+    "s": "5   - 1.",
+    "frame": 0
+   },
+   {
+    "file": "05-academic-papers/ntrs-white-papers/19650010801_heat-transfer-measurements-in-partially-ionized-gases.txt",
+    "s": "1 - 0.",
+    "frame": 0
+   },
+   {
+    "file": "05-academic-papers/ntrs-white-papers/19650010801_heat-transfer-measurements-in-partially-ionized-gases.txt",
+    "s": "LL   30 -                        0",
+    "frame": 1
+   },
+   {
+    "file": "05-academic-papers/ntrs-white-papers/19650025750_infrared-radiation-measurements-of-combustion-gases-third-quarterly-progress-rep.txt",
+    "s": "3 -                                       3",
+    "frame": 0
+   },
+   {
+    "file": "05-academic-papers/ntrs-white-papers/19660006294_naca-conference-on-aerodynamics-of-high-speed-aircraft-a-compilation-of-the-pape.txt",
+    "s": "A1 - 2 S(Xo)",
+    "frame": 2
+   },
+   {
+    "file": "05-academic-papers/ntrs-white-papers/19660006294_naca-conference-on-aerodynamics-of-high-speed-aircraft-a-compilation-of-the-pape.txt",
+    "s": "0 × 106",
+    "frame": 0
+   }
+  ]
+ },
+ "declared": 8,
+ "Nstar": 7,
+ "adopt": true,
+ "falsified": "N acceptance above 0.5: the frame bound does not separate asks from statements"
+}
