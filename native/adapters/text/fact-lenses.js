@@ -205,3 +205,29 @@ export function lensForAsk(ask) {
   }
   return null;
 }
+// ── THE LENS FOR ANY ASK (the Isthmus, native/docs/THE-ISTHMUS.md, 2026-10-26) ──
+// lensForAsk reads only a WH-opener, and the gate used to fill every miss with the
+// English lens (fact-gate.js `lensOf`), so a Spanish or Dutch ask that does not open
+// with a wh-word was typed with English function words and answered with English
+// templates — the "no lens is read by no grammar" promise above, broken by a default.
+// The language is the material's: the opener's lens; else the language the ask's own
+// words are heard in (language-context.js), and its lens; a heard language with NO
+// lens is the typed gap NO_LENS (the gate leaves the answer untouched and says so);
+// only an ask whose language is not heard at all takes the English lens, marked as
+// that default (`defaulted: true`), never presented as read.
+import { languageContextFor } from "../../the-fold/language-context.js";
+
+export const NO_LENS = Object.freeze({ noLens: true, gap: "no_lens" });
+const STEM_TO_LENS = Object.freeze({ spa: "spa", fra: "fra", deu: "deu", ita: "ita", por: "por", rus: "rus", arb: "arb", ara: "arb", jpn: "jpn", hin: "hin", swa: "swa", swh: "swa", eng: "eng" });
+
+/** lensForText(ask) → a lens, NO_LENS (a heard language with no lens), or the English lens marked `defaulted`. */
+export function lensForText(ask) {
+  const byOpener = lensForAsk(ask);
+  if (byOpener) return byOpener;
+  const heard = languageContextFor(String(ask ?? ""), {}).language ?? null;
+  if (heard) {
+    const key = STEM_TO_LENS[heard] ?? heard;
+    return FACT_LENSES[key] ?? Object.freeze({ ...NO_LENS, language: heard });
+  }
+  return Object.freeze({ ...DEFAULT_LENS, defaulted: true });
+}

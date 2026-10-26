@@ -66,7 +66,10 @@ export const DEFAULT_LENS = Object.freeze({
   mismatch: (d, t) => `That does not match what I found (as of ${d}): ${t}`,
   ordinal: /(\d+)(?:st|nd|rd|th)\b/i,
 });
-const lensOf = (l) => l ?? DEFAULT_LENS;
+// A lens the caller did not choose is English (the kernel's own default). NO_LENS (fact-lenses.js lensForText: a heard
+// language with no lens) never reaches a reading function: the two gates return untouched with the typed gap first.
+const lensOf = (l) => (l && !l.noLens ? l : DEFAULT_LENS);
+const noLens = (l) => Boolean(l?.noLens);
 
 const words = (s) => String(s ?? "").match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu) ?? [];
 const low = (w) => String(w).toLowerCase();
@@ -267,6 +270,7 @@ export function holderQueryFor({ ask, answer } = {}) {
  *   searched   whether a declared preflight was actually run
  */
 export function decideGate({ ask, answer, ground = [], context = "", now = new Date(), searched = false, groundSource = "a web search", lens = null } = {}) {
+  if (noLens(lens)) return { open: false, pair: null, grounded: null, searched, append: null, jurisdiction: null, basis: null, gap: "no_lens", language: lens.language ?? null };
   const L = lensOf(lens);
   const date = dateOf(now);
   const askShape = factShape(ask, L);
@@ -375,6 +379,7 @@ const frameFromAsk = (ask, lens) => {
  *   untouched         no flaggable claim (the caller keeps its own path)
  */
 export function applyVerdictGate({ ask, answer, ground = [], kind = null, link = null, route = null, now = new Date(), lens = null } = {}) {
+  if (noLens(lens)) return { text: String(answer ?? ""), gated: false, verdict: "untouched", count: 0, kind, link, gap: "no_lens", language: lens.language ?? null };
   const L = lensOf(lens);
   const date = dateOf(now);
   const text = String(answer ?? "");
