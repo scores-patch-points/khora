@@ -1,5 +1,5 @@
 // attach-prior.js — AttachPrior@1: where a dative phrase attaches is a fact about the VERB, induced from a treebank's gold, in any language.
-//   instancesOf(sentence, { adps }) → [{ verb, attach: "verb" | "noun" }]   one per dative-marked phrase after a verb's direct object
+//   instancesOf(sentence, { adps }) → [{ verb, attach: "verb" | "noun", v, o, k }]   one per dative-marked phrase after a verb's direct object (token ids: verb, object, phrase head)
 //   buildPrior(sentences, { adps }) → { [verbLemma]: { verb, noun } }       counts only; nothing is decided here
 //   decide(prior, lemma) → "verb" | "noun" | null                           strict majority; a tie or an unseen lemma abstains (null)
 // A phrase is dative-marked when its case word is one of the language's declared recipient adpositions (grammar-packs RECIPIENT) or the phrase's
@@ -17,8 +17,8 @@ export function instancesOf(s, { adps = new Set() } = {}) {
     if (v.upos !== "VERB") continue;
     const o = (kids.get(v.id) ?? []).find((k) => k.deprel === "obj"); if (!o) continue;
     const lemma = String(v.lemma ?? v.form).toLowerCase();
-    for (const k of kids.get(v.id) ?? []) if (base(k.deprel) === "obl" && k.id > o.id && marked(k)) out.push({ verb: lemma, attach: "verb" });
-    for (const k of kids.get(o.id) ?? []) if (base(k.deprel) === "nmod" && k.id > o.id && marked(k)) out.push({ verb: lemma, attach: "noun" });
+    for (const k of kids.get(v.id) ?? []) if (base(k.deprel) === "obl" && k.id > o.id && marked(k)) out.push({ verb: lemma, attach: "verb", v: v.id, o: o.id, k: k.id });
+    for (const k of kids.get(o.id) ?? []) if (base(k.deprel) === "nmod" && k.id > o.id && marked(k)) out.push({ verb: lemma, attach: "noun", v: v.id, o: o.id, k: k.id });
   }
   return out;
 }
