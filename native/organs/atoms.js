@@ -47,11 +47,13 @@ export function atomize({ claims, rows, mentions, entities, text, lang }) {
   const out = [], seen = new Set();
   // head: the row id of the word that carries the predicate (the verb, the adjective, the case word), kept so a later reader (stage.js) can
   // read its features; each argument keeps the row ids of its words
+  // SLOTS: the role position of each kept argument in the atom's full argument list (agent 0, patient 1, recipient 2). An argument absent from the sentence (a passive with
+  // no agent: "climbers are drawn to Hood") is dropped from `args`, and without the slots the patient would read as the first argument, the agent. `slots` keeps the role.
   const push = (pred, args, base, idsUsed, head = base.head ?? null) => {
-    const as = args.filter(Boolean); if (!pred || !as.length) return;
+    const slots = args.map((a, i) => (a ? i : null)).filter((i) => i != null), as = args.filter(Boolean); if (!pred || !as.length) return;
     const key = JSON.stringify([pred, as.map((a) => a.entity ?? lc(a.value)), base.neg]); if (seen.has(key)) return; seen.add(key);
     const ws = [...new Set(idsUsed.flat().filter((x) => x != null))].map(byId).filter(Boolean);
-    out.push({ pred, args: as.map(({ ids, ...a }) => ({ ...a, ids: ids ?? [] })), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, tense: base.tense ?? null, time: base.time ?? null, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from, head });
+    out.push({ pred, args: as.map(({ ids, ...a }) => ({ ...a, ids: ids ?? [] })), ...(slots.some((x, i) => x !== i) ? { slots } : {}), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, tense: base.tense ?? null, time: base.time ?? null, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from, head });
   };
   // an adjective keeps its degree: "the largest lake" is most:large, "más alto" more:tall (a "more" word or the Degree feature; with a
   // definite article on its noun, the comparative is a superlative)

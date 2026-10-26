@@ -38,7 +38,12 @@ for (const s of ["fresh", "heldout", "relations", "fresh19", "fresh20"]) {
 const rulesOf = (A, B) => atomSupport(A.atoms, B.atoms, { unread: A.unread }).verdict;
 const GIVERS = LICENSES.map((l) => l.giver);
 // commit a contradiction only if the independent checker (proof-check.js, no shared code) accepts every proof behind it
-const arm = (A, B, lic) => { const r = rulesOf(A, B); if (r !== "N") return { v: r, proofs: [] }; const st = stageFromAtoms(B.atoms, { doc: "src" }), j = judgeClaim(st, A.atoms, { licenses: lic });
+// IDENTITY=cancel: the stage binder's identity hook served by cancellation over canonical features (the-fold/cancel-identity.js); synonymy from FOLD_WIKT_SLIM when set
+const IDN = process.env.IDENTITY === "cancel" ? await import(path.join(K, "native/the-fold/cancel-identity.js")) : null;
+const SLIM = IDN && process.env.FOLD_WIKT_SLIM ? (await import(path.join(K, "native/organs/wikt-slim.js"))).openSlim(process.env.FOLD_WIKT_SLIM) : null;
+const SAME = SLIM ? (await import(path.join(K, "native/organs/wikt-gloss.js"))).makeSynonymy({ lookup: (l, w) => SLIM.entries(l, w) }) : null;
+const identityFor = (A, B) => (IDN ? IDN.makeCancelIdentity({ claimAtoms: A.atoms, sourceAtoms: B.atoms, same: SAME, lang: "en" }) : null);
+const arm = (A, B, lic) => { const r = rulesOf(A, B); if (r !== "N") return { v: r, proofs: [] }; const st = stageFromAtoms(B.atoms, { doc: "src" }), j = judgeClaim(st, A.atoms, { licenses: lic, ...(IDN ? { identity: identityFor(A, B) } : {}) });
   if (j.verdict === "C") { const bad = j.proofs.filter((x) => x.verdict === "contradicted" && !checkProof(x.record, (SRC.get(B) ?? ""), { licenses: GIVERS }).ok); if (bad.length) return { v: "N", proofs: j.proofs, rejected: bad.length }; }
   return { v: j.verdict, proofs: j.proofs, gaps: j.gaps, stage: st }; };
 
@@ -95,7 +100,8 @@ if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pai
   const named = (hx) => pairs.filter((p) => p.label === "C" && rulesOf(p.A, p.B) === "N" && judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src", hyperlexicon: hx }), p.A.atoms, {}).verdict === "C").length;
   const SF = await import(path.join(K, "native/kernel/stage.js"));
   console.log(`\nhyperlexicon: contradictions beyond the rules with the given rows ${named(SF.defaultHyperlexicon())}, with the rows only nominated ${named(cand)}, with an empty hyperlexicon ${named(HX.createHyperlexicon())}`);
-  const kinds = {}; for (const p of pairs) for (const g of judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, {}).gaps) kinds[g.kind] = (kinds[g.kind] ?? 0) + 1;
+  const kinds = {}; let chosen = 0; for (const p of pairs) { const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, IDN ? { identity: identityFor(p.A, p.B) } : {}); for (const g of j.gaps) kinds[g.kind] = (kinds[g.kind] ?? 0) + 1; chosen += (j.proofs ?? []).filter((x) => /chose it/.test(x.binds?.join(" ") ?? "")).length; }
+  if (IDN) kinds.chosen_by_cancellation = chosen;
   console.log(`DMD-bounded identity: gaps raised while binding claim ends: ${JSON.stringify(kinds)}`); }
 // HOLOGRAPHIC IDENTITY (adapters/text/atom-world.js over corpus-identity.js): a shared name only NOMINATES a pair; whether it is one being is decided by the
 // universe folded on each, against a null the material supplies. The world is every reading in these pairs, claims and sources. An end the fold cannot decide is

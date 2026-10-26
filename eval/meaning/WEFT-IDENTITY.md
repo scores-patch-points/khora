@@ -91,3 +91,57 @@ Same 28 mentions, same page candidates, same gold as experiments 2 and 3, no sta
 ## What the build now needs (the operator's first sentence: the full reading pipeline should give the atoms we need)
 Identity can only cancel features that share one vocabulary and discriminate. The pipeline's atoms must therefore be canonical (a predicate and its synonyms one key, a role one name, a being typed), typed with the perspective W
 (unit and currency, direction, period and as-of) so a one-valued dimension can exclude, and the features that every candidate carries must be dropped (they never make a difference). That is the next change, in the reader, not here.
+
+## EXPERIMENT 5 — all the way: canonical features, the stage wiring, and the SECOND MEDIUM (2026-10-26; branch `pipeline-atoms`)
+The essay (AN-EQUALS-SIGN-IS-A-DOOR) set the order and the bars. Each step, measured, in that order.
+
+**1. Canonical, perspective-typed features (`the-fold/arrangement-features.js`).** One predicate key per synonym class (giver: Wiktionary's listed synonyms and shared translations, `makeSynonymy`; the key is the
+alphabetically first member; the vocabulary is the MATERIAL's, both sides registered before any feature is written, a test pins that it is unstable otherwise); the being's POSITION in the atom as the direction
+(`v:sell@0` / `@1`); a figure's measure (`m:`); the atom's stated years (`asof=`) and a figure's measure (`unit=`) as one-valued dimensions; `k:` for is_a. Two reader faults found by reading the misses, both
+universal: a passive with no agent lost its role (the patient became the first argument; atoms now carry `slots`), and "X is one of the Ys" produced no claim at all (a NUM copula head; now be(X, Ys): the rules
+arm gains one supported pair, 19 -> 20 of 57, nothing else moves). A `dir=` dimension from the dative suffix was built and withdrawn: "drawn TO Hood" (a goal) read as a transfer out.
+
+| 28-29 page mentions, company only | same | right | on SUPPORTED claims right / same |
+|---|---|---|---|
+| plain features (experiment 4) | 11 | 5 (45%) | 3 / 9 |
+| plain, after the two reader fixes | 10 | 5 (50%) | 3 / 8 |
+| canonical | 12 | 7 (58%) | 5 / 9 |
+| canonical, name as a node | 14 | 13 (93%) | 9 / 9 |
+
+The bar was "well above 45%": 58% is a lift, not a large one. Of the 5 wrong: 3 are ends that are not beings ("water", "metro", "detroit": the name-token gold is wrong there), 1 is entailment, not restatement
+("sit at the same elevation" against "basins conjoined": not identity's job). Set those aside and it is 7 of 9. The perspective dimensions (`unit=`, `asof=`) and the universal-feature drop never fired on this
+data (0 mentions carry a dimension; no feature is carried by all 43 candidates): untested here, not refuted.
+
+**2. The stage wiring (`the-fold/cancel-identity.js`; `kernel/stage.js` bindEnd).** The binder nominates anchors by name and, where several are nominated, asks the injected identity to CHOOSE; a being is the same as
+at most one claim end (two ends that both cancel to it CONTEST it: neither is chosen; found when "Baleen whales" and "toothed whales" both cancelled to one anchor by a single shared feature). `IDENTITY=cancel
+node eval/meaning/stage-run.mjs`: ambiguous binds 35 -> 18, 9 binds chosen by cancellation, verdicts unchanged (C 8/35, E 22/57, 0 false-C, checker 5/5 and 20/20). **It does not beat the name binder; it equals it
+with fewer loose ends.**
+
+**3. The second medium: CODE (`eval/meaning/identity-cancel-code.mjs`).** The same kernel, nothing in it knowing what code is. A function's features are who it calls and who calls it (adapters/code/edges.js, real
+edges). Mask and recover across two versions of a file from git history (8 files; the newer version's function names hidden; gold = the same name in the older version; real evolution is the noise).
+
+| | functions | same | right | undecided (gold in the tied set) | refused |
+|---|---|---|---|---|---|
+| real (two versions) | 210 | 165 | 163 (98.8%) | 45 (45) | 0 |
+| planted (one version twice) | 289 | 234 | 234 (100%) | 55 (55) | 0 |
+| deranged (feature sets relabelled among functions) | 210 | 165 | 11 (5%) | | 0 |
+
+The deranged control says "same" exactly as often as the real run. **The verdict carries no information about its own correctness**: the kernel finds a plateau in a wrong world as readily as in the right one
+(THE-CORE-MECHANISM's wall: a general finder is a general finder of coincidences). So a "same" needs a search-aware null, and relabelling cannot be it (it keeps every true feature set in the pool under a wrong name,
+so the best candidate carries exactly what the real one does; measured: ceiling 1.00 everywhere). **The null that binds destroys the RELATION** (janus correspond.mjs's: per feature kind, the values shuffled among
+all candidates, degrees kept): `kernel/identity-cancel.js standingOf`, per mention, in counts, the (1 - 1/n) quantile over 20 rewired worlds, no constant.
+
+| standingOf, 20 rewirings | same | above the null | right among those | right but below | wrong |
+|---|---|---|---|---|---|
+| code, 8 files | 165 | 133 | 132 (99.2%) | 31 | 2 (1 above, 1 below) |
+| text, company only | 12 | 4 | 3 (75%) | 4 | 4 (1 above, 3 below) |
+| text, name as a node | 14 | 6 | 5 | 8 | 0 |
+
+The null costs 31 right answers on code that cannot be told from coincidence and catches one of the two wrong ones. On text it lifts company-only precision from 58% to 75% at n = 4.
+
+**What this says about the engine.** The kernel transfers: on code it is near-perfect where it commits and never silent-wrong, on text it is weak, and the difference is the ground, not the kernel: a function's
+company is typed, discrete and complete (every call is an edge), a claim's company is one sentence read by an imperfect reader into features that may be the wrong facts. That is the starving floor, now with a
+control that shows what a non-starving floor looks like.
+
+**Not done.** Document-against-document identity (step 5); a door (step 6); the perspective dimensions on data that exercises them; rename gold on code (79 functions in the newer versions have no name in the
+older and were not scored: new functions and renamed ones, together); a fresh pre-registered text set.

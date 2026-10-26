@@ -45,3 +45,24 @@ test("deterministic: the same inputs give identical bytes", () => {
   const i = { mention: ["a", "b", "c"], candidates: [C("X", "a", "b"), C("Y", "a", "c", "d"), C("Z", "q")] };
   assert.equal(JSON.stringify(cancelIdentity(i)), JSON.stringify(cancelIdentity(structuredClone(i))));
 });
+
+test("a feature every candidate carries is ground, not figure: dropped and reported; a mention that is all ground is refused", () => {
+  const r = cancelIdentity({ mention: ["v:be", "w:lake", "w:michigan"], candidates: [C("A", "v:be", "w:lake", "w:michigan"), C("B", "v:be", "w:lake", "w:huron")], dropUniversal: true });
+  assert.equal(r.verdict, "same"); assert.equal(r.id, "A"); assert.deepEqual(r.universal.sort(), ["v:be", "w:lake"]);
+  const g = cancelIdentity({ mention: ["v:be", "w:lake"], candidates: [C("A", "v:be", "w:lake", "x"), C("B", "v:be", "w:lake", "y")], dropUniversal: true });
+  assert.equal(g.verdict, "refused"); assert.match(g.why, /all ground/);
+});
+
+import { standingOf } from "./identity-cancel.js";
+test("standing: a same that survives the relations being rewired is above the null; a one-feature coincidence is below it", () => {
+  // six candidates with distinct, rich company; the mention is one of them: rewiring the world cannot reproduce five shared features by chance
+  const cands = Array.from({ length: 6 }, (_, i) => C(`f${i}`, ...Array.from({ length: 5 }, (_, j) => `calls:x${i}_${j}`), `calledby:y${i}`));
+  const rich = standingOf({ mention: cands[2].feats, candidates: cands }); assert.equal(rich.verdict, "same"); assert.equal(rich.id, "f2"); assert.equal(rich.standing, "same_above_null"); assert.ok(rich.carried > rich.ceiling);
+  // a mention of ONE feature cancels with exactly one candidate (same), but a rewired world carries it just as often: below the null
+  const thin = standingOf({ mention: ["calledby:y4"], candidates: cands }); assert.equal(thin.verdict, "same"); assert.equal(thin.standing, "same_below_null");
+  // deterministic
+  assert.equal(JSON.stringify(standingOf({ mention: cands[2].feats, candidates: cands })), JSON.stringify(rich));
+});
+test("standing on a non-same verdict is the verdict itself, with no ceiling", () => {
+  const r = standingOf({ mention: ["a", "b"], candidates: [C("X", "a", "b"), C("Y", "a", "b")] }); assert.equal(r.verdict, "undecided"); assert.equal(r.standing, "undecided"); assert.equal(r.ceiling, null);
+});
