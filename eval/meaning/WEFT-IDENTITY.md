@@ -43,3 +43,25 @@ mention's name token (28 of 82 mentions have exactly one; the rest are not score
 
 ## Not done
 Wiring identity into any door; a corpus-on-both-sides world (Motorola resolution vs exhibits); a neighbour graph for `resolve` (the run passes none: `neighbors` is empty); janus `same.mjs`/`correspond.mjs` over the page (correspond takes dependency rows, which the entry now carries, but it matches two graphs of one language or of editions, not a mention to a being).
+
+## EXPERIMENT 3 — confidence determined regionally (`eval/meaning/regional-resolve.mjs`)
+The operator's direction (2026-10-26): confidence is not a number anyone states; it is "regionally determined based on DMD of relative assertions and a baseline from past experience".
+Experiment 2's page-wide pool (n about 43) put resolve's own chance floor at 0.977, which no mention reached. Built from organs the repo has, janus's `resolve.mjs` unchanged:
+- **region:** the mention's company widened hop by hop through the page's own referent graph (nodes sharing an atom are neighbours), radius 0 to 3; at each radius only the candidates whose region
+  overlaps the mention's are in play, so the pool's chance floor `1 - 1/n` is read over the REGION's n;
+- **DMD:** resolve at every radius; the window is the shallowest radius whose top candidate equals the widest radius's (`activation.js dmdWindow`);
+- **experience:** per region key (window, regional pool size) the share of earlier tops that were right, add-half smoothed, from OTHER pages only (leave-one-page-out); no experience, no assertion;
+- **assert** when resolve asserts at the window and the key's past precision reaches the region's chance floor.
+
+| 28 scored mentions, 32 pages | window found | top right at the window | resolve asserts (right) | with the experience gate: asserts (right) | no experience |
+|---|---|---|---|---|---|
+| name as a node | 28 | 20 | 9 (9) | 12 (12) | 11 |
+| company only | 28 | 2 | 4 (2) | 1 (0) | 11 |
+
+- Page-wide, resolve asserted nothing in either variant; over the regional pool it asserts, and with the name as a node every assertion it makes is right (12 of 12 gated; 9 of 9 ungated).
+- **Company only is the real test of "what a claim says of a thing finds the thing", and it stays weak**: the window stabilises (it is found for all 28) but the top it stabilises on is right 2 of 28 times,
+  and the experience gate keeps the system nearly silent (1 assertion, wrong). Regional determination removes the stated threshold; it does not make weak evidence strong.
+- **Power is small and the claim is narrow.** 28 mentions, leave-one-page-out experience from the other 31 pages, 11 mentions with no past experience for their key, one language, gold by name token. The NAMED row
+  is nearly tautological (the name is a node). Not shown: that this holds on another corpus, that the window radii (0-3) are the right family, that the experience keys (window, n) are the right keys.
+- **Next, in the direction given:** keys from the experience organ's own signature (`experience-priors.js` network signature: topology, cycle rank, branching, size) in place of (window, n); and experience that outlives a run
+  (a prior file, built from earlier readings and carried in the weft) instead of one rebuilt from this set.
