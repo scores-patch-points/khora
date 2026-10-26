@@ -85,12 +85,23 @@ export function stageFromAtoms(atoms, { doc = "doc", hyperlexicon = defaultHyper
 // anchors the end meets are derived from the first `depth` source anchors, and the binding is trusted at the shallowest depth whose conclusion equals
 // the whole's. No candidate depth agreeing is a typed gap (reach_exceeds_candidates) and the end stays unbound. An end that meets two different
 // anchors is ambiguous, never "the first one": it stays unbound too.
-function bindEnd(stage, end, kind) {
+//
+// HOLOGRAPHIC IDENTITY (adapters/text/atom-world.js, corpus-identity.js): a shared name only NOMINATES. When the caller injects `identity`, each
+// nominated source anchor of a referent is asked whether it is the same being, FOR the reading that holds it, and the answer is one of four standings:
+//   same                  bound, and said to be settled
+//   against               the end is not that being: the candidate falls away (only a declared exclusion says this)
+//   raised_difference     a difference of use was measured; it convicts nothing, so the bind stands and the standing travels with it
+//   needs_deeper_reading  the reading is too thin to decide: not "same", not "different". The bind by name and DMD stands, marked provisional, and
+//                         the proof says how much reading is missing. Nothing that rests on it is presented as settled.
+// With no `identity` injected, nothing changes.
+function bindEnd(stage, end, kind, identity = null) {
   const M = stage._M, all = [...stage._anchors.values()];
+  const stand = new Map();
+  const standOf = (a) => { if (!identity || kind !== "referent" || end.entity == null || a.arg?.entity == null) return null; if (!stand.has(a.id)) stand.set(a.id, identity.standing(end, a.arg)); return stand.get(a.id); };
   const meets = (a) => kind === "quantity"
     ? (a.kind === "quantity" && FIG(end) && a.figure?.measure === end.measure && M.figMeet(end, a.figure) ? `meets ${a.label} (${end.measure})` : null)
     : kind === "value" ? (a.kind === "value" && end.value != null && low(a.arg.value ?? "") === low(end.value) ? `is the value ${a.label}` : null)
-    : ((a.kind === "referent" || a.kind === "kind") && M.refMeet(end, a.arg) && !namesClash(end, a.arg) ? `is ${a.label}` : null);
+    : ((a.kind === "referent" || a.kind === "kind") && M.refMeet(end, a.arg) && !namesClash(end, a.arg) && standOf(a)?.kind !== "against" ? `is ${a.label}` : null);
   const derive = (obs) => obs.map((a) => ({ id: a.id, how: meets(a) })).filter((x) => x.how);
   const whole = derive(all);
   if (!whole.length) return null;
@@ -103,11 +114,29 @@ function bindEnd(stage, end, kind) {
   const w = dmdWindow(near, derive, { candidates, restrict: (o, d) => o.slice(0, d) });
   if (w.gap) return { gap: w.gap };
   if (whole.length > 1) return { gap: "ambiguous_binding", among: whole.map((x) => x.id) };
-  return { id: whole[0].id, how: `${whole[0].how} [identity settled by depth ${w.window ?? all.length} of ${all.length}]` };
+  const st = standOf(stage._anchors.get(whole[0].id)), said = !st ? "" : st.kind === "same" ? "; holographic identity: the same being"
+    : st.kind === "raised_difference" ? "; holographic identity: a difference of use is raised, nothing is convicted"
+    : `; holographic identity: needs deeper reading (${st.reason}; ${st.have[0]} and ${st.have[1]} occurrence(s), ${st.need} needed)`;
+  const depth = `${w.window ?? all.length} of ${all.length}`;
+  return { id: whole[0].id, how: `${whole[0].how} [${st ? `name nominated, DMD depth ${depth}${said}` : `identity settled by depth ${depth}`}]`, identity: st ? { end: argText(end), ...st } : null };
 }
 
-export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id) } = {}) {
-  const C = canonical(claimAtoms), CM = meeters(C, C, {}), proofs = [], gaps = [];
+// judgeClaim(stage, claimAtoms, { licenses, identity }) → as judgeInner, plus `reach` on a committed verdict (E or C) when `identity` is injected:
+//   { standing: "settled" }                  every referent the verdict rests on is holographically the same being as the source's
+//   { standing: "needs_deeper_reading", ends } at least one is bound by name and DMD only, and the reading is too thin to say more: the verdict
+//                                              stands, provisional, and `ends` names each end, the reason and how much reading is missing
+export function judgeClaim(stage, claimAtoms, opts = {}) {
+  const r = judgeInner(stage, claimAtoms, opts);
+  if (opts.identity && (r.verdict === "E" || r.verdict === "C")) {
+    // a contradiction rests on the proofs that name it; a support rests on every end the claim bound
+    const open = (r.verdict === "C" ? r.proofs.filter((p) => p.verdict === "contradicted").flatMap((p) => p.identity ?? []) : r.stands ?? []).filter((s) => s.kind !== "same");
+    r.reach = open.length ? { standing: "needs_deeper_reading", ends: open } : { standing: "settled" };
+  }
+  r.standings = r.stands ?? []; delete r.stands;      // every holographic standing the claim's binds drew, whatever the verdict
+  return r;
+}
+function judgeInner(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id), identity = null } = {}) {
+  const C = canonical(claimAtoms), CM = meeters(C, C, {}), proofs = [], gaps = [], stands = [];
   const on = new Set(licenses);
   // a stage restricted to the licenses switched on (ablation): declarations are rebuilt, edges are shared
   const hl = createStage(); hl.anchors = new Set(stage.hl.anchors); hl.types = new Map(stage.hl.types); hl.edges = new Map(stage.hl.edges);
@@ -117,18 +146,21 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
   for (const [i, a] of C.entries()) {
     const as = a.args ?? [];
     let rel = a.pred, s, o, binds = [], bs = null, bk = null;
+    // the holographic standing of every referent this atom binds travels with its proof; one that is not "same" is also a typed gap
+    const cur = [], bind = (end, kind) => { const b = bindEnd(stage, end, kind, identity), st = b?.identity;
+      if (st) { cur.push(st); stands.push(st); if (st.kind !== "same") gaps.push({ kind: st.kind, end: st.end, reason: st.reason, have: st.have, need: st.need, atom: a.text }); } return b; };
     if (isHas(rel) && as.length === 2 && FIG(as[1]) && !a.neg && !a.hedged) {
-      bs = bindEnd(stage, as[0], "referent"); if (!bs) continue; if (bs.gap) { gaps.push({ kind: bs.gap, atom: a.text }); continue; }
+      bs = bind(as[0], "referent"); if (!bs) continue; if (bs.gap) { gaps.push({ kind: bs.gap, atom: a.text }); continue; }
       binds.push(`${argText(as[0])} ${bs.how}`);
-      const bq = bindEnd(stage, as[1], "quantity");
+      const bq = bind(as[1], "quantity");
       let qid; if (bq?.gap) { gaps.push({ kind: bq.gap, atom: a.text }); continue; } if (bq) { qid = bq.id; binds.push(`${argText(as[1])} ${bq.how}`); }
       else { qid = `claim:q:${i}`; addAnchor(hl, qid, "quantity"); binds.push(`${argText(as[1])} meets no source ${as[1].measure}, enters as a fresh value`); }
       s = bs.id; o = qid;
     } else if (isMost(rel) && as.length === 1 && !a.neg && !a.hedged) {
       const K = kindOf(C, as[0], CM); if (!K) continue;
-      bk = bindEnd(stage, K, "kind"); if (!bk) continue; if (bk.gap) { gaps.push({ kind: bk.gap, atom: a.text }); continue; }
+      bk = bind(K, "kind"); if (!bk) continue; if (bk.gap) { gaps.push({ kind: bk.gap, atom: a.text }); continue; }
       binds.push(`kind ${argText(K)} ${bk.how}`);
-      const bh = bindEnd(stage, as[0], "referent");
+      const bh = bind(as[0], "referent");
       if (bh?.gap) { gaps.push({ kind: bh.gap, atom: a.text }); continue; }
       let hid; if (bh) { hid = bh.id; binds.push(`${argText(as[0])} ${bh.how}`); }
       else { hid = `claim:h:${i}`; addAnchor(hl, hid, "referent"); binds.push(`${argText(as[0])} is not in the source; it enters fresh because the slot it fills (${rel} of ${argText(K)}) is functional`); }
@@ -136,10 +168,10 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     } else if (as.length === 2 && !isHas(rel) && !isMost(rel) && rel !== "is_a" && rel !== "named" && !a.neg && !a.hedged) {
       // a binary relation: IDENTITY decides. Both ends bind to source anchors and the source holds the same relation between them, in the same
       // order, positively: that is a supported atom. The reverse order is a swap, never support. No contradiction is read from a relation.
-      const b0 = bindEnd(stage, as[0], "referent"), b1 = as[1].entity != null ? bindEnd(stage, as[1], "referent") : bindEnd(stage, as[1], "value");
+      const b0 = bind(as[0], "referent"), b1 = as[1].entity != null ? bind(as[1], "referent") : bind(as[1], "value");
       if (b0?.gap || b1?.gap) { gaps.push({ kind: (b0?.gap ?? b1.gap), atom: a.text }); continue; }
       if (!b0 || !b1) continue;
-      if (hasEdge(rel, b0.id, b1.id)) { supported++; proofs.push({ atom: a.text, rel, binds: [`${argText(as[0])} ${b0.how}`, `${argText(as[1])} ${b1.how}`], lic: [], verdict: "bound", cites: [] }); }
+      if (hasEdge(rel, b0.id, b1.id)) { supported++; proofs.push({ atom: a.text, rel, binds: [`${argText(as[0])} ${b0.how}`, `${argText(as[1])} ${b1.how}`], lic: [], verdict: "bound", cites: [], identity: cur }); }
       else if (hasEdge(rel, b1.id, b0.id)) gaps.push({ kind: "direction_swap", atom: a.text });
       continue;
     } else continue;
@@ -152,7 +184,7 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     const cites = heldE.map((e) => e.source).flat();
     const lab = (id) => stage._anchors.get(id)?.label ?? null, fg = (id) => stage._anchors.get(id)?.figure ?? null;
     const claimEnd = isHas(rel) ? { label: argText(as[1]), measure: as[1].measure, base: as[1].base } : { label: argText(as[0]) };
-    proofs.push({ atom: a.text, rel, binds, lic: [...hl.functional.entries()].filter(([r]) => r === rel).map(([r, d]) => `functional(${r}) giver "${d.giver}"`), verdict: v, cites,
+    proofs.push({ atom: a.text, rel, binds, lic: [...hl.functional.entries()].filter(([r]) => r === rel).map(([r, d]) => `functional(${r}) giver "${d.giver}"`), verdict: v, cites, identity: cur,
       record: { rel, subject: lab(s) ?? lab(bs?.id ?? bk?.id), giver: hl.functional.get(rel)?.giver ?? null, claim: claimEnd,
         held: heldE.map((e) => ({ span: String(e.source[0]).replace(/^[^:]*:/, "").split("-").map(Number), label: lab(e.o), measure: fg(e.o)?.measure ?? null, base: fg(e.o)?.base ?? null })) } });
     if (v === CONTRADICTED) verdict = CONTRADICTED; else if (v === BOUND) { supported++; if (verdict !== CONTRADICTED) verdict = BOUND; }
@@ -161,7 +193,7 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
   if (verdict === CONTRADICTED) {
     const spans = new Set(proofs.flatMap((p) => p.cites));
     const undecided = stage.arrangements.filter((r) => spans.has(`${stage.doc}:${r.span[0]}-${r.span[1]}`) && !r.reading?.decided);
-    if (undecided.length) { gaps.push({ kind: "undecided_reading", arrangements: undecided.map((r) => r.id) }); return { verdict: "N", hl: UNBOUND, proofs, gaps }; }
+    if (undecided.length) { gaps.push({ kind: "undecided_reading", arrangements: undecided.map((r) => r.id) }); return { verdict: "N", hl: UNBOUND, proofs, gaps, stands }; }
   }
   // E: every atom of the claim is covered and SAME as the source holds it (identity, never a score); anything uncovered leaves it unknown
   // SCAFFOLD: "Mercury has a radius of 2,440 km" is read as have(Mercury, a radius), of(a radius, 2,440 km) AND has_radius(Mercury, 2,440 km).
@@ -177,8 +209,8 @@ export function judgeClaim(stage, claimAtoms, { licenses = LICENSES.map((l) => l
     const isHave = /^(have|has|had)$/.test(a.pred) && low(argText(a.args[1])).includes(attr) && argText(a.args[0]) === argText(owner.args[0]);
     if (isOf || isHave) scaffold++;
   }
-  if (verdict !== CONTRADICTED && C.length && supported + scaffold === C.length) return { verdict: "E", hl: BOUND, proofs, gaps };
-  return { verdict: verdict === CONTRADICTED ? "C" : "N", hl: verdict, proofs, gaps };
+  if (verdict !== CONTRADICTED && C.length && supported + scaffold === C.length) return { verdict: "E", hl: BOUND, proofs, gaps, stands };
+  return { verdict: verdict === CONTRADICTED ? "C" : "N", hl: verdict, proofs, gaps, stands };
 }
 
 // canonical text of a stage, for the determinism check (same bytes, same stage)
