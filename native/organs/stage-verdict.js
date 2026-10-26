@@ -19,7 +19,7 @@
 //   stageVerdict({ claim, source, bind, licenses, layers, layered, gapRule, sourceText }) → { verdict, label, contested, binding, path, licenses, gaps, conjuncts, claimGaps }
 import { plan } from "../the-fold/turn-order.js";
 import { read, BOUND, CONTRADICTED, CONTESTED, UNBOUND, BEYOND_REACH } from "../interpretation/hl.js";
-import { hlStageOf, HOLDS } from "./stage.js";
+import { hlStageOf, classOf, HOLDS } from "./stage.js";
 
 export const LABEL_OF = Object.freeze({ [BOUND]: "E", [CONTRADICTED]: "C", [CONTESTED]: "N", [UNBOUND]: "N", [BEYOND_REACH]: "N" });
 
@@ -49,6 +49,17 @@ export function classGaps(claim, sourceText) {
   const src = foldWord(sourceText ?? "");
   return unreadGaps(claim).map((g) => ({ text: g.text, span: g.span, class: sourceText != null && src.includes(foldWord(g.text)) ? "reading_failure" : "unknown" }));
 }
+/** R7 at read time: a formula's atom over r is the disjunction of its atom over each relation of r's class (layer prefix kept); the stage is
+ *  untouched. A license set with no equivalence expands nothing. */
+export function expandEquivalents(phi, licenses) {
+  if (!(licenses ?? []).some((l) => l.kind === "equivalent")) return phi;
+  const one = (a) => {
+    const m = /^([AU]:)?(.*)$/s.exec(a[1]), cls = classOf(licenses, m[2]);
+    if (cls.length === 1) return a;
+    return cls.map((r) => ["atom", `${m[1] ?? ""}${r}`, a[2], a[3], a[4]]).reduceRight((acc, p) => (acc ? ["or", p, acc] : p), null);
+  };
+  return phi[0] === "not" ? ["not", one(phi[1])] : one(phi);
+}
 export const conjoin = (phis) => (phis.length ? phis.slice(0, -1).reduceRight((acc, p) => ["and", p, acc], phis.at(-1)) : null);
 
 export function stageVerdict({ claim, source, bind, licenses = [], layers = ["asserted", "reported"], layered = false, gapRule = false, sourceText = null } = {}) {
@@ -62,8 +73,8 @@ export function stageVerdict({ claim, source, bind, licenses = [], layers = ["as
     { name: "read", cell: "EVA", needs: ["conjuncts", "licensed"], gives: ["verdict"], run: (c) => {
       const cs = c.conjuncts;
       if (!cs.length) return { verdict: { hl: BEYOND_REACH, per: [], why: "the claim opens nothing the reader read" } };
-      const H = c.licensed.stage(layers);
-      return { verdict: { hl: read(H, conjoin(cs.map((k) => k.phi))), per: cs.map((k) => ({ arrangement: k.arrangement, rel: k.rel, hl: read(H, k.phi) })) } };
+      const H = c.licensed.stage(layers), E = (k) => expandEquivalents(k.phi, licenses);
+      return { verdict: { hl: read(H, conjoin(cs.map(E))), per: cs.map((k) => ({ arrangement: k.arrangement, rel: k.rel, hl: read(H, E(k)) })) } };
     } },
     { name: "record", cell: "REC", needs: ["verdict", "binding", "licensed"], gives: ["record"], run: (c) => ({ record: {
       verdict: c.verdict.hl, label: LABEL_OF[c.verdict.hl], contested: c.verdict.hl === CONTESTED ? "the source disagrees with itself" : null,
@@ -75,7 +86,7 @@ export function stageVerdict({ claim, source, bind, licenses = [], layers = ["as
   const { order } = plan(steps);
   const ctx = {}, path = [];
   for (const s of order) { const out = s.run(ctx); for (const g of s.gives) ctx[g] = Object.freeze(out[g]); path.push({ cell: s.cell, name: s.name }); }
-  return { ...ctx.record, path, trace: { conjuncts: ctx.conjuncts, binding: ctx.binding, stage: ctx.licensed.stage } };
+  return { ...ctx.record, path, trace: { conjuncts: ctx.conjuncts, binding: ctx.binding, stage: ctx.licensed.stage, licenses } };
 }
 
 /** V5 (PREREG run 23): constructed role and direction swaps of a verdict's bound two-place arrangements, read on the same stage. For each such
@@ -98,7 +109,7 @@ export function swapReads(rec, claim, source) {
     if (A.get(o0)?.kind === "referent") for (const x of refs) if (x !== s0 && x !== o0) cands.push(["role-o", s0, x]);
     for (const [kind, s2, o2] of cands) {
       if (stated.has(`${s2}\u0000${o2}`)) continue;
-      const sw = ["atom", atom[1], s2, o2, null], phis = conjuncts.map((c, j) => (j === i ? (neg ? ["not", sw] : sw) : c.phi));
+      const sw = ["atom", atom[1], s2, o2, null], phis = conjuncts.map((c, j) => expandEquivalents(j === i ? (neg ? ["not", sw] : sw) : c.phi, rec.trace.licenses));
       out.push({ kind, rel: k.rel, hl: read(H, conjoin(phis)) });
     }
   });

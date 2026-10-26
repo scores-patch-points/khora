@@ -276,3 +276,36 @@ test("the verdict carries the trace V5 and the ablation read", () => {
   const rec = stageVerdict({ claim, source, bind: bindFolded });
   assert.ok(rec.trace.conjuncts.length && typeof rec.trace.stage === "function" && rec.trace.binding.map instanceof Map);
 });
+
+// ---- M5: the equivalent license (R7), read at read time, never by rewriting the stage -------------------------------------------------------
+import { declareEquivalent, classOf, candidateEquivalences } from "./stage.js";
+import { expandEquivalents } from "./stage-verdict.js";
+const GIVER = "test synonymy";
+test("R7: declareEquivalent needs a named giver and two different relations", () => {
+  assert.throws(() => declareEquivalent("a", "b"), /no_giver/);
+  assert.throws(() => declareEquivalent("a", "a", { giver: GIVER }), /malformed/);
+  assert.deepEqual(declareEquivalent("come_from", "derive_from", { giver: GIVER }).rels, ["come_from", "derive_from"]);
+});
+test("R7: a class is pairwise (no transitive closure), and a claim atom is read as the disjunction over its class", () => {
+  const L = [declareEquivalent("a", "b", { giver: GIVER }), declareEquivalent("b", "c", { giver: GIVER })];
+  assert.deepEqual(classOf(L, "a"), ["a", "b"]); assert.deepEqual(classOf(L, "b"), ["b", "a", "c"]);
+  assert.deepEqual(expandEquivalents(["atom", "A:a", "x", "y", null], L), ["or", ["atom", "A:a", "x", "y", null], ["atom", "A:b", "x", "y", null]]);
+  assert.deepEqual(expandEquivalents(["not", ["atom", "z", "x", "y", null]], L), ["not", ["atom", "z", "x", "y", null]], "an unrelated relation is untouched");
+  assert.deepEqual(expandEquivalents(["atom", "a", "x", "y", null], []), ["atom", "a", "x", "y", null]);
+});
+test("R7: structural relations are never candidates; words must be identical or synonyms position by position", () => {
+  const mk = (...p) => ({ arrangements: p.map((lemma) => ({ rel: { lemma } })) });
+  const syn = (a, b) => (a === "come" && b === "derive") || (a === "derive" && b === "come");
+  const eq = candidateEquivalences(mk("come_from", "is_a", "has_area", "most:high"), mk("derive_from", "is_a", "has_depth", "most:old", "come_in"), syn, { giver: GIVER });
+  assert.deepEqual(eq.map((l) => l.rels), [["come_from", "derive_from"]]);
+});
+test("R7 in the verdict: synonymous relations meet through the class; without the license they do not; a negated claim contradicts through it", () => {
+  const claim = stageOf(withAtoms([be_in({ pred: "derive_from" })])), source = sourceOf(withAtoms([be_in({ pred: "come_from" })]));
+  const lic = [declareEquivalent("come_from", "derive_from", { giver: GIVER })];
+  assert.equal(stageVerdict({ claim, source, bind: bindFolded, licenses: lic }).verdict, "bound");
+  assert.equal(stageVerdict({ claim, source, bind: bindFolded, licenses: [] }).verdict, "unbound", "law 1: no license, no meeting");
+  const negClaim = stageOf(withAtoms([be_in({ pred: "derive_from", neg: true })]));
+  assert.equal(stageVerdict({ claim: negClaim, source, bind: bindFolded, licenses: lic }).verdict, "contradicted");
+  assert.equal(stageVerdict({ claim: negClaim, source, bind: bindFolded, licenses: [] }).verdict, "unbound");
+  assert.ok(![...source.arrangements].some((r) => r.rel.lemma === "derive_from"), "the stage itself was not rewritten");
+});

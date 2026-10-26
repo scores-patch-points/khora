@@ -11,7 +11,7 @@ import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url)), N = path.join(HERE, "../../native");
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i < 0 ? d : process.argv[i + 1]; };
-const { readStage, stageHash, serializeStage } = await import(`${N}/organs/stage.js`);
+const { readStage, stageHash, serializeStage, candidateEquivalences } = await import(`${N}/organs/stage.js`);
 const BIND = await import(`${N}/organs/stage-bind.js`);
 const { stageVerdict, swapReads } = await import(`${N}/organs/stage-verdict.js`);
 const { readAtoms } = await import(`${N}/organs/read-atoms.js`);
@@ -59,6 +59,8 @@ export function readPair(p) {
 const resolveBind = (R, { correspond = true, quantities = false } = {}) => BIND.makeResolveBind({ resolveReferent: JANUS.resolve.resolveReferent, correspond: correspond ? JANUS.correspond : null, keysOf, claimLang: R.claimLang, sourceLang: R.sourceLang, claimReading: R.claimReading, sourceReading: R.sourceReading, quantities: quantities ? BIND.bindQuantity : null });
 // the licenses both stages declared (each with its giver), one per kind and relation
 export const licensesOf = (R) => { const m = new Map(); for (const l of [...R.claim.licenses, ...R.source.licenses]) for (const rel of l.rels) { const k = `${l.kind}\u0000${rel}`; if (!m.has(k)) m.set(k, { kind: l.kind, rels: [rel], giver: l.giver, standing: l.standing }); } return [...m.values()].sort((a, b) => (a.rels[0] < b.rels[0] ? -1 : a.rels[0] > b.rels[0] ? 1 : 0)); };
+const EQ_GIVER = "Wiktionary synonymy (the slim English Wiktionary through the reader's makeSynonymy): thesaurus-grade, admitted on marginal gains";
+export const equivalencesOf = (R) => (R.eq ??= candidateEquivalences(R.claim, R.source, (a, b) => ["NOUN", "VERB", "ADJ"].some((u) => syn("en", a, b, u).same), { giver: EQ_GIVER }));
 // one binding per pair and mode family, shared by the modes built on it (the deranged control moves exactly the binding the arm used)
 const cached = (R, k, f) => (c, s) => ((R.cache ??= {})[k] ??= f(c, s));
 export const MODES = {
@@ -77,6 +79,9 @@ export const MODES = {
   "m4-unlicensed": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: () => [], opts: { layered: true, gapRule: true } },
   // RC5's check: the same stage read on the asserted layer only (no layering)
   "m4-asserted-only": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layers: ["asserted"], gapRule: true } },
+  // M5: R7, the equivalent license, its giver the reader's own Wiktionary synonymy
+  m5: { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => [...licensesOf(R), ...equivalencesOf(R)], opts: { layered: true, gapRule: true } },
+  "m5-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "m3", resolveBind(R, { quantities: true }))(c, s), s), licenses: (R) => [...licensesOf(R), ...equivalencesOf(R)], opts: { layered: true, gapRule: true } },
   "m4-nogaps": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layered: true } },
 };
 
@@ -120,7 +125,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
           for (let i = 0; i < full.length; i++) { const less = full.filter((_, j) => j !== i), r2 = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: less, sourceText: p.sentence, ...(M.opts ?? {}) });
             ABL.runs++; if (r2.verdict !== rec.verdict) { ABL.moved++; const toward = (r2.verdict === "bound" && rec.verdict !== "bound") || (r2.verdict === "contradicted" && rec.verdict !== "contradicted") ? "AWAY" : "unknown"; ABL[toward]++; res.push({ removed: full[i].rels[0], from: rec.verdict, to: r2.verdict, toward }); if (toward === "AWAY") ABL.bugs.push({ set, id: p.id, removed: full[i].rels[0], from: rec.verdict, to: r2.verdict }); } }
           ABL.pairs++; extra.ablation = res; }
-        if (pairsOut && m === "m4") extra.claimGaps = rec.claimGaps;
+        if (pairsOut && /^m[45]$/.test(m)) { extra.claimGaps = rec.claimGaps; extra.reported = { claim: R.claim.arrangements.filter((x) => x.layer === "reported").length, source: R.source.arrangements.filter((x) => x.layer === "reported").length }; }
+        if (pairsOut && m === "m5") extra.equivalences = R.eq?.map((l) => l.rels);
         if (pairsOut) fs.appendFileSync(pairsOut, JSON.stringify({ set, id: p.id, mode: m, label: p.label, v: rec.label, hl: rec.verdict, conjuncts: rec.conjuncts, gaps: rec.gaps.map((g) => g.kind), correspondence: R.cache?.resolve?.correspondence ?? null,
           // each claim figure and what the binding cell made of it: the source figure it meets, "distinct" (a value of its own), or unbound
           quantities: R.claim.anchors.filter((a) => a.kind === "quantity").map((a) => { const b = R.cache?.[m]?.map?.get(a.id) ?? null; return { label: a.label, measure: a.measure, bound: b == null ? null : b === a.id ? "distinct" : R.source.anchors.find((x) => x.id === b)?.label ?? b }; }),

@@ -196,6 +196,34 @@ export function fromArrangements(st) {
   return st.arrangements.filter((r) => !r.derived && !r.rewritten).map((r) => ({ pred: r.rel.lemma, args: [r.s, ...(r.o === HOLDS ? [] : [r.o]), ...(r.key != null ? [r.key] : [])].map(argOf), neg: r.polarity === "-", hedged: r.layer === "reported", approx: !!r.approx }));
 }
 
+/** R7: declare two relations equivalent. A license, not a rewrite: the verdict reads a claim arrangement over either through the class at read
+ *  time (stage-verdict.js). Refused without a named giver (law 4). */
+export function declareEquivalent(relA, relB, { giver } = {}) {
+  if (!giver || typeof giver !== "string") { const e = new Error(`stage: no_giver — equivalent(${relA}, ${relB}) requires a named giver — a declaration is exactly as strong as its acquisition`); e.refused = { type: "no_giver", detail: String(giver) }; throw e; }
+  if (!relA || !relB || relA === relB) throw Object.assign(new Error("stage: malformed_equivalence — two different relations are required"), { refused: { type: "malformed_equivalence" } });
+  return { kind: "equivalent", rels: [relA, relB].sort(), giver, standing: "given" };
+}
+/** the relations a license set declares equivalent to rel (itself first); pairwise, no transitive closure */
+export function classOf(licenses, rel) {
+  const out = [rel];
+  for (const l of licenses ?? []) if (l.kind === "equivalent" && l.rels.includes(rel)) for (const r of l.rels) if (r !== rel && !out.includes(r)) out.push(r);
+  return out;
+}
+const STRUCTURAL = /^(is_a|named|has_|most:|more:|less:|least:)/;
+/** the candidate equivalences of two stages' lexical relations, by an injected synonymy (same(a, b) over a relation's words) */
+export function candidateEquivalences(claim, source, same, { giver } = {}) {
+  const rels = (st) => [...new Set(st.arrangements.filter((r) => !r.superseded && !STRUCTURAL.test(r.rel.lemma)).map((r) => r.rel.lemma))].sort();
+  const out = [], seen = new Set();
+  for (const a of rels(claim)) for (const b of rels(source)) {
+    if (a === b) continue;
+    const wa = a.split("_"), wb = b.split("_"); if (wa.length !== wb.length) continue;
+    if (!wa.every((w, i) => w === wb[i] || same(w, wb[i]))) continue;
+    const k = [a, b].sort().join("\u0000"); if (seen.has(k)) continue; seen.add(k);
+    out.push(declareEquivalent(a, b, { giver }));
+  }
+  return out;
+}
+
 /** an HL stage over a Stage@1: every anchor, and every arrangement in the named layers as an edge whose provenance is the arrangement's id */
 // layered (RC5): the stage is read in two views of one HL stage. An asserted edge is an edge of the asserted view (A:rel) and of the union
 // view (U:rel); a reported edge (hedged text) only of the union view. An asserted claim reads the asserted view, so a reported edge neither
@@ -214,6 +242,7 @@ export function hlStageOf(st, { layers = ["asserted", "reported"], licenses = st
   for (const l of licenses) {
     if (l.kind === "functional") for (const rel of l.rels) for (const v of views(rel)) declareFunctional(H, v, { giver: l.giver });
     else if (l.kind === "transitive") for (const rel of l.rels) for (const v of views(rel)) declareTransitive(H, v, { giver: l.giver });
+    // an `equivalent` license is read at read time (stage-verdict.js classOf), never written into the stage
   }
   return H;
 }
