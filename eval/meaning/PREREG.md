@@ -788,3 +788,18 @@ V5 and the other tests' construction, fixed at M4 before V5, the ablation or the
  Pair languages: fresh20.json writes its 16 English-claim cross-language pairs with the source's language alone ("es", not "es-en", as
     fresh19.json does), so run.mjs and this runner read the English claim with the source language's grammar, as every earlier run did. Not
     changed here (a spent set); the rules arm and the stage arm read it alike. Run 23 writes "xx-en".
+M4 RESULT (code c46b7616; first run, the nine spent sets; mode m4 = M3 + the hedge layer + coverage as gaps):
+ Arm: accuracy 56.0%; E 22 of 194 (M3: 23); false accepts 1 of 199 (0.5%; M3: 4); C 3 of 129; false-C 0 of 264.
+ The gap rule moved two pairs against m4-nogaps (the layered arm without it: E 23, false accepts 2): fresh 409 (E, lost: its claim has an
+    unread word) and fresh-ml 642 (C, no longer accepted: the rules' false accept "Luftseilbahn/Zahnradbahn"). 115 of the 393 claims carry an
+    unread word.
+ RC7 acceptance, on fresh19: 22 of its 48 E pairs have an unread claim word (the rules' guard blocked 22 of the 47 it had read, 19b). By the
+    class against the source sentence: 11 have every unread word in the source (reading failures), 4 have none of them in it (real unknowns),
+    7 a mix. Over the nine sets: 58 of 194 E pairs carry an unread word: 28 reading failures, 10 real unknowns, 20 mixed.
+ RC5 acceptance: m4 and the asserted-layer-only read (m4-asserted-only) differ on one pair only, fresh 417 (E): a hedged claim supported by a
+    reported edge, accepted by the layered read and not by the asserted-only one. Two of the 393 claims carry a hedged arrangement.
+ Deranged control (m4-deranged): E 1 of 194, C 0 of 129, false accepts 2, false-C 1: against the real binding's E 22 and C 3, both at or under
+    half. The control collapses V3 and V4 on the spent sets.
+ V5, over the 23 pairs the arm accepts (those with a bound two-place arrangement): 273 swaps tried (direction 55, role 218), 0 read bound.
+ License ablation: 82 single-license removals over 393 pairs; no verdict moved.
+ Licenses (m4 against m4-unlicensed): identical on every pair.
