@@ -78,5 +78,25 @@ if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pai
   console.log(`\nhyperlexicon: contradictions beyond the rules with the given rows ${named(SF.defaultHyperlexicon())}, with the rows only nominated ${named(cand)}, with an empty hyperlexicon ${named(HX.createHyperlexicon())}`);
   const kinds = {}; for (const p of pairs) for (const g of judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, {}).gaps) kinds[g.kind] = (kinds[g.kind] ?? 0) + 1;
   console.log(`DMD-bounded identity: gaps raised while binding claim ends: ${JSON.stringify(kinds)}`); }
+// HOLOGRAPHIC IDENTITY (adapters/text/atom-world.js over corpus-identity.js): a shared name only NOMINATES a pair; whether it is one being is decided by the
+// universe folded on each, against a null the material supplies. The world is every reading in these pairs, claims and sources. An end the fold cannot decide is
+// "needs deeper reading": not "same", not "different", and the verdict it supports stands but is provisional. Every committed verdict is asked, the atoms arm's
+// too (it meets ends by name): its met and contradicted atoms are paired with the source atom that met them and their referent ends asked through the same world.
+{ const { atomIdentity } = await import(path.join(K, "native/adapters/text/atom-world.js")), { meeters } = await import(path.join(K, "native/kernel/atom-support.js"));
+  const W = atomIdentity(pairs.flatMap((p, i) => [{ doc: `${i}:claim`, atoms: p.A.atoms }, { doc: `${i}:src`, atoms: p.B.atoms }])), M = meeters([], [], {});
+  const bump = (o, k) => { o[k] = (o[k] ?? 0) + 1; }, binds = {}, why = {}, rows = { C: {}, E: {} }, stageC = [];
+  pairs.forEach((p, i) => {
+    const idn = { standing: (c, s) => W.standing(`${i}:claim`, c, `${i}:src`, s) }, rv = rulesOf(p.A, p.B); let v = rv, st = [];
+    if (rv === "N") { const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, { licenses: all, identity: idn }); v = j.verdict; for (const s of j.standings) bump(binds, s.kind);
+      st = v === "C" ? j.proofs.filter((x) => x.verdict === "contradicted").flatMap((x) => x.identity) : v === "E" ? j.standings : []; if (v === "C") stageC.push({ p, st }); }
+    else if (rv === "C" || rv === "E") for (const r of atomSupport(p.A.atoms, p.B.atoms, { unread: p.A.unread }).table.filter((t) => t.by && (t.state === "met" || t.state === "contradicted")))
+      for (const x of r.atom.args ?? []) if (x.entity != null) { const y = (r.by.args ?? []).find((q) => q.entity != null && M.refMeet(x, q)), s = y && idn.standing(x, y); if (s) { st.push({ end: x.name ?? x.value, ...s }); bump(binds, s.kind); } }
+    if (v === "C" || v === "E") { bump(rows[v], !st.length ? "no referent asked" : st.some((s) => s.kind !== "same") ? "needs deeper reading" : "settled"); for (const s of st) if (s.kind !== "same") bump(why, s.reason); } });
+  const fmt = (o) => Object.entries(o).map(([k, n]) => `${k} ${n}`).join(", ") || "none";
+  console.log(`\nholographic identity: ${W.record.size} nodes in the world; a node needs ${W.need} occurrences before the fold will speak`);
+  console.log(`  referent binds asked: ${fmt(binds)}   (why not decided: ${fmt(why)})`);
+  console.log(`  committed contradictions (${Object.values(rows.C).reduce((a, b) => a + b, 0)}): ${fmt(rows.C)}`);
+  console.log(`  committed supports       (${Object.values(rows.E).reduce((a, b) => a + b, 0)}): ${fmt(rows.E)}`);
+  for (const { p, st } of stageC) console.log(`  [${p.set} ${p.id}] ${st.map((s) => `${s.end}: ${s.kind}${s.kind === "same" ? "" : ` (${s.reason}; ${s.have[0]} and ${s.have[1]} occurrence(s))`}`).join("; ") || "no referent end asked"}`); }
 if (process.env.WHYE) { const why = {}; for (const p of pairs.filter((q) => q.label === "E" && arm(q.A, q.B, all).v !== "E")) { const preds = [...new Set(p.A.atoms.map((a) => a.pred.replace(/^(has_|most:).*/, "$1*")))]; const g = (arm(p.A, p.B, all).gaps ?? []).map((x) => x.kind); const k = `${p.A.atoms.length ? preds.join(",") : "no atoms"}${g.length ? " | gaps " + [...new Set(g)] : ""}`; why[k] = (why[k] ?? 0) + 1; } console.log("\nmissed E by claim predicates:"); for (const [k, n] of Object.entries(why).sort((a, b) => b[1] - a[1]).slice(0, 14)) console.log(String(n).padStart(3), k.slice(0, 150)); }
 if (process.env.FALSEE) for (const p of pairs) { const r = arm(p.A, p.B, all); if (r.v === "E" && p.label !== "E") console.log(`\nFALSE-E [${p.set} ${p.id}] ${p.label}: ${p.claim}\n  src: ${p.sentence.slice(0, 200)}\n  atoms: ${p.A.atoms.map((a) => a.text).join(" ; ")}\n  rules said ${rulesOf(p.A, p.B)}`); }
