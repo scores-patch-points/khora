@@ -145,3 +145,23 @@ control that shows what a non-starving floor looks like.
 
 **Not done.** Document-against-document identity (step 5); a door (step 6); the perspective dimensions on data that exercises them; rename gold on code (79 functions in the newer versions have no name in the
 older and were not scored: new functions and renamed ones, together); a fresh pre-registered text set.
+
+## EXPERIMENT 6 — identity as the difference a being makes TO THE READER (`eval/meaning/identity-by-difference.mjs`, 2026-10-26)
+The operator's correction: the work had made identity the company a thing keeps (a feature set of the thing) and treated the read as the EOT content. The house definition says identity is "the
+difference a being makes to a ground that exceeds the ground's own variation", and the ground here is the reader; the record of getting to the read is the content, the read a projection of it.
+Tested by the core mechanism's one act at F1: delete the being, refold, read the difference. A being's SIGNATURE is what the reader concluded differently once its atoms were gone: `bind:<claim atom>`
+(a bind or proof lost), `gap:<kind>` (a gap that appeared or vanished), `verdict:<from>><to>`. The vocabulary is the READER's, so a claim end and a source being cancel without sharing a word.
+Same kernel (identity-cancel.js), same gold as the page experiments (one source being sharing the end's name token), 84 pairs that reach the stage, 112 ends with a gold.
+
+| signature | same | right | undecided (gold in the tied set) | refused |
+|---|---|---|---|---|
+| company (arrangement-features: what it keeps, canonical) | 74 | 57 (77%) | 25 (22) | 13 |
+| **difference to the reader** (what changes when it is deleted) | 14 | 13 (93%) | 37 (33) | **61** |
+| where both decide | | agree 12, disagree 0 | | |
+
+- **More precise, far less covering, and the coverage is the reader's.** 61 of 112 claim ends are INERT: deleting them changes nothing the reader concluded, because the reader concluded nothing
+  about them (no bind, no proof, no gap). Identity by difference can only be as rich as the reader's conclusions, which is the operator's point stated as a number: as the upper layers conclude
+  more, the lower layer's beings acquire identity. The inert 61 are not a defect to drive to zero; they are the open ground, typed.
+- **Never wrong where company is right, and once right where company is not.** The two signatures compose: company nominates (wide), difference certifies (narrow); on the 12 both decide they agree.
+- **Not done:** the record itself. The passes (RereadRec rows) are still a jsonl beside the eval; the design the operator names is that THEY are the EOT content and a being's identity is its
+  trajectory of differences across passes (kernel/identity-trajectory.js is the organ: stages, similarityAt, continuity). The signature here is one pass (the whole read), not a trajectory.
