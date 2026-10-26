@@ -65,3 +65,29 @@ Experiment 2's page-wide pool (n about 43) put resolve's own chance floor at 0.9
   is nearly tautological (the name is a node). Not shown: that this holds on another corpus, that the window radii (0-3) are the right family, that the experience keys (window, n) are the right keys.
 - **Next, in the direction given:** keys from the experience organ's own signature (`experience-priors.js` network signature: topology, cycle rank, branching, size) in place of (window, n); and experience that outlives a run
   (a prior file, built from earlier readings and carried in the weft) instead of one rebuilt from this set.
+
+## EXPERIMENT 4 — identity as cancellation within a plateau (`native/kernel/identity-cancel.js`, `eval/meaning/identity-cancel-run.mjs`)
+The restated equation (EQUALITY-FALSIFIED.md part 2) as code. A candidate's RESIDUAL is how many of the mention's features it does not carry; the best residual is the NOISE; the next distinct residual is the
+DMD (the smallest difference that changes the answer); any margin in [noise, dmd) gives the same answer, so no constant is chosen. `same` when one candidate has the noise residual alone; `undecided` when several tie
+(named, never broken by order); `refused` when the mention keeps nothing, no candidate does, or nothing cancels. A candidate holding ANOTHER value of a dimension the perspective declares one-valued (direction, unit,
+as-of) is EXCLUDED, not given a residual (an opposite value is a difference that makes a difference; absence is noise). 9 unit tests, each refusal a constructed violation first.
+
+Same 28 mentions, same page candidates, same gold as experiments 2 and 3, no stated threshold:
+
+| | radius 0 (the company as it stands) | widened to radius 1 / 2 / 3 |
+|---|---|---|
+| name as a node | same 15 (13 right, 87%); undecided 13, gold among the tied in 9, median tied set 2 | same 12 / 9 / 13 |
+| company only | same 11 (5 right, 45%); undecided 17, gold among the tied in 8, median tied set 4 (of about 43) | same 6 / 1 / 0, right 1 / 0 / 0 |
+
+- **It is parameter-free and it narrows.** Undecided is not silence: the tied set is a short named list (median 4 of about 43 when the claim carries no name; median 2 with the name).
+- **Company-only still misidentifies (6 of 9 "same" calls on SUPPORTED claims are the wrong referent; the 2 on contradicting pairs are right, so contradiction is not the cause).** Read one by one: the mentions are thin and generic
+  (`v:has_count, w:one` for "Indiana"; `v:more:more` for "water"; `v:small_than, w:region` for "metro"), a feature carried by many referents separates nothing, and the claim's wording ("is one of the Great Lakes")
+  does not share a vocabulary with the page's atoms (`v:be`, `v:is_a`, `v:of`). Some scored "ends" are not beings the page names at all ("water", "river"), so the name-token gold is itself weak there.
+- **The fold-depth failure janus recorded reproduces here.** Widening the fold radius collapses the verdict into ties: 11 -> 6 -> 1 -> 0 "same" calls and every mention tied at radius 3. `dmdWindow` read as "the conclusion
+  equals the whole" lands on radius 3 for 27 of 28 (the whole is the vacuous tie). One parameter-free alternative, stated before it was run and run once (the shallowest radius with the fewest candidates tied at the best residual):
+  company-only same 14 (6 right), named same 21 (17 right, 81%): no clear gain at n = 28; not adopted.
+- **Not shown:** that this beats resolve's cosine posterior (7 of 28 top-1, 2 assertions both wrong) on a fair footing: both are weak without the name, and n is 28. What it adds is the plateau, the typed refusals and a short named list.
+
+## What the build now needs (the operator's first sentence: the full reading pipeline should give the atoms we need)
+Identity can only cancel features that share one vocabulary and discriminate. The pipeline's atoms must therefore be canonical (a predicate and its synonyms one key, a role one name, a being typed), typed with the perspective W
+(unit and currency, direction, period and as-of) so a one-valued dimension can exclude, and the features that every candidate carries must be dropped (they never make a difference). That is the next change, in the reader, not here.
