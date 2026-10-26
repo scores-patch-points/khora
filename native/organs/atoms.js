@@ -39,16 +39,19 @@ export function atomize({ claims, rows, mentions, entities, text, lang }) {
     return { value: ws.length ? textOfIds(ws.map((w) => w.id)) : end.text, ids: end.ids ?? [] };
   };
   const dropped = (vid) => { const m = mentions.find((x) => x.how === "dropped" && x.hid === vid); return m?.entity && E.get(m.entity) ? { entity: m.entity, name: E.get(m.entity).name, ids: [] } : null; };
-  const caseOf = (end) => { const w = (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP"); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
+  const caseRow = (end) => (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP") ?? null;
+  const caseOf = (end) => { const w = caseRow(end); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
   // THE RECIPIENT. UD marks it as the indirect object, as the dative case on the word itself (Case=Dat), or by the dative adposition; the first two carry no
   // adposition to name the relation by, so they are written with the language's declared dative (grammar-packs RECIPIENT), else "dat" for a Case=Dat word.
   const dative = (end) => { const h = end?.hid != null ? byId(end.hid) : null; return h && /(^|\|)Case=Dat(\||$)/.test(h.feats ?? "") ? (RECIPIENT[lang] ?? "dat") : null; };
   const out = [], seen = new Set();
-  const push = (pred, args, base, idsUsed) => {
+  // head: the row id of the word that carries the predicate (the verb, the adjective, the case word), kept so a later reader (stage.js) can
+  // read its features; each argument keeps the row ids of its words
+  const push = (pred, args, base, idsUsed, head = base.head ?? null) => {
     const as = args.filter(Boolean); if (!pred || !as.length) return;
     const key = JSON.stringify([pred, as.map((a) => a.entity ?? lc(a.value)), base.neg]); if (seen.has(key)) return; seen.add(key);
     const ws = [...new Set(idsUsed.flat().filter((x) => x != null))].map(byId).filter(Boolean);
-    out.push({ pred, args: as.map(({ ids, ...a }) => a), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, tense: base.tense ?? null, time: base.time ?? null, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from });
+    out.push({ pred, args: as.map(({ ids, ...a }) => ({ ...a, ids: ids ?? [] })), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, tense: base.tense ?? null, time: base.time ?? null, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from, head });
   };
   // an adjective keeps its degree: "the largest lake" is most:large, "más alto" more:tall (a "more" word or the Degree feature; with a
   // definite article on its noun, the comparative is a superlative)
@@ -62,7 +65,7 @@ export function atomize({ claims, rows, mentions, entities, text, lang }) {
   const word = (w) => { const l = lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form), f = lc(w.form); return l.slice(0, 3) === f.slice(0, 3) || /[^\x00-\x7f]/.test(f) ? l : f; };
   const adjAtoms = (end, owner, base) => {
     const head = end?.hid != null ? byId(end.hid) : null; if (!head || head.upos === "PROPN" || !owner) return;
-    for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []]);
+    for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []], w.id);
   };
   // a modifier phrase is a relation between its owner and it; a coordinated word repeats the relation of the word it is coordinated with.
   // `inner` is the polarity of what sits inside a noun phrase (see WHERE A NEGATION LANDS); a repeated oblique relation keeps its parent's own
@@ -71,13 +74,13 @@ export function atomize({ claims, rows, mentions, entities, text, lang }) {
       const a = arg(n);
       if (n.conj) { if (parent) push(parent.pred, [parent.owner, a], parent.base ?? inner, [parent.owner?.ids ?? [], n.ids ?? []]); adjAtoms(n, a, inner); modAtoms(n, a, inner, parent); continue; }
       const pred = caseOf(n) ?? "of";
-      if (!skipMod.has(n.hid)) push(pred, [owner, a], inner, [owner?.ids ?? [], n.ids ?? []]);
+      if (!skipMod.has(n.hid)) push(pred, [owner, a], inner, [owner?.ids ?? [], n.ids ?? []], caseRow(n)?.id ?? null);
       adjAtoms(n, a, inner); modAtoms(n, a, inner, { pred, owner });
     }
   };
   let skipMod = new Set();
   for (const c of claims) {
-    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id, tense: c.tense ?? null, time: c.time ?? null };
+    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id, head: c.vid ?? null, tense: c.tense ?? null, time: c.time ?? null };
     const quantified = [c.ARG0, c.ARG1, c.ARG2].some((e) => NO.test(e?.text ?? ""));
     const pres = base.neg && !quantified ? { ...base, neg: false } : base;
     const predHead = c.rel === "be" && c.ARG1?.hid != null ? byId(c.ARG1.hid) : null;
@@ -92,7 +95,7 @@ export function atomize({ claims, rows, mentions, entities, text, lang }) {
       if (f.measure === "date" || (inBr && outside) || !being?.entity || /^(PRON|DET|NUM)$/.test(byId(c.ARG0?.hid)?.upos ?? "")) continue;
       const pred = `has_${f.attribute ?? String(f.measure ?? "value").replace(/^count:/, "number_of_")}`;
       // the value keeps its measure in base units and its bracketed equivalents, so "281 metres" meets "923 ft (281 m)"
-      push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [], measure: f.measure ?? null, base: f.base ?? null, alts: f.alts ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
+      push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [], measure: f.measure ?? null, attribute: f.attribute ?? null, base: f.base ?? null, alts: f.alts ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
       continue;
     }
     const A0 = arg(c.ARG0) ?? (c.ARG1 && c.voice !== "passive" ? dropped(c.vid) : null) ?? (c.rel === "be" ? dropped(c.vid) : null);

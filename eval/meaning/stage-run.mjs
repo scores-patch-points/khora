@@ -46,9 +46,18 @@ rep("stage arm, no licenses", (p) => arm(p.A, p.B, []).v);
 let broke = 0; for (const p of pairs) { const on = arm(p.A, p.B, all).v, off = arm(p.A, p.B, []).v; if (rank[off] > rank[on]) broke++; }
 console.log(`\nlaw 1 (licenses off never gains a verdict): ${broke === 0 ? "holds" : `BROKEN on ${broke} pairs`}`);
 
-// control built to fail: each claim against the NEXT pair's source (a source that does not hold it)
-const derange = pairs.map((p, i) => arm(p.A, pairs[(i + 1) % pairs.length].B, all).v);
-console.log(`control, deranged sources: ${derange.filter((v) => v === "C").length} of ${pairs.length} claims called contradicted (the same claims against their own sources: ${pairs.filter((p) => arm(p.A, p.B, all).v === "C").length})`);
+// control built to fail: each claim against a source that does not hold it. The source must share NO content word with the claim (4+ letters),
+// found by walking forward from the pair. The first version took the NEXT pair's source, but neighbouring pairs in a set are often one topic
+// ("Mercury is the hottest planet" against "Mercury is not the hottest planet"), so 2 of its 4 "contradictions" (later 2 of 2) were true ones and
+// the control read as a failure of the arm. The sibling figure is kept below, labelled, so the two numbers can be compared.
+const termsOf = (t) => new Set((String(t).toLowerCase().match(/[\p{L}\p{N}]{4,}/gu) ?? []));
+const disjoint = (a, b) => { for (const w of termsOf(a)) if (termsOf(b).has(w)) return false; return true; };
+const unrelated = pairs.map((p, i) => { for (let k = 1; k < pairs.length; k++) { const q = pairs[(i + k) % pairs.length]; if (disjoint(p.claim, q.sentence)) return q; } return null; });
+const derange = pairs.map((p, i) => (unrelated[i] ? arm(p.A, unrelated[i].B, all).v : null));
+const deranged = derange.filter((v) => v !== null);
+console.log(`control, unrelated sources (no shared content word): ${deranged.filter((v) => v === "C").length} of ${deranged.length} claims called contradicted, ${deranged.filter((v) => v === "E").length} called supported (the same claims against their own sources: ${pairs.filter((p) => arm(p.A, p.B, all).v === "C").length} contradicted)`);
+const sibling = pairs.map((p, i) => arm(p.A, pairs[(i + 1) % pairs.length].B, all).v);
+console.log(`  (old control, the next pair's source: ${sibling.filter((v) => v === "C").length} contradicted, ${sibling.filter((v) => v === "E").length} supported; neighbours share a topic, so these are not false)`);
 
 // determinism: the same bytes give the same stage, twice, and through a fresh read
 const h = (s) => crypto.createHash("sha256").update(s).digest("hex").slice(0, 12);
