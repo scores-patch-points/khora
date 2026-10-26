@@ -1246,3 +1246,17 @@ fast: 7 files · 3 affected test files, 17 pass + 1 todo (observed failing, kept
 | Simon/Chekhov | atoms.js, coref-learned.js | no test imports them directly | noted | both are reached through read-atoms.js by coref-person.test.mjs and recipient-role.test.mjs |
 
 clean: none routed and silent.
+
+## 2026-10-26 — the meaning layer reads THE reader's entry: rows on the WeftEntry, atoms from the weft (branch `weft-rows`, stacked on #64)
+
+fast: 7 files · 5 affected test files, 52 pass · law: ok (pre-existing dup-header WARN S17/S96) · reading-pipeline + reader-speed guards 29/29 · full native suite 996 tests, 4 real failures (greekClauses x2, janus second maker, material-doorway), all in main's known set, none new
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Greenberg (self-review, found in the work) | reading.js universal-parse hook | `unknown` language | fixed | a declared language with no stem filed is read with the default priors (read-core's own typed gap); my hook then parsed it with the English parser. Now `no_parser`, no parse; tested |
+| Alexander | weft-atoms.js | the seam | clean | every miss is a typed gap (`no_rows`, `cut_disagrees`, `atoms_failed`); nothing defaults to "don't compose" or to a second parse |
+| Feynman | weft-parity.mjs:35 | `differ.length < 12` | noted | a display cap on printed differences; the counts are over all 664 texts |
+| Simon/Chekhov | weft-atoms.js | production | noted, real | tested and measured (parity, stage) but NOT called by any door or the reason-gate: the stage still runs only in evals |
+| Holmes | stage-run.mjs | `ATOMS_VIA=weft` | clean | the default path is unchanged; the flag is the only new branch |
+
+clean: none silent. Additive law: `readDocument(..., { rows: true })` equals the same read without it, byte for byte, but for `parse` and `parseBy` (tested).
