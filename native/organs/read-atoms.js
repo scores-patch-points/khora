@@ -26,6 +26,9 @@ export function cleanText(text) {
   map.push(text.length);
   return { text: out, map, cuts };
 }
+// atoms in the CLEANED text's offsets → the text as given (the cleaned text's map), each with its words and its span
+export const mapAtoms = (atoms, C, original) => atoms.map((a) => { const start = a.start != null ? C.map[a.start] : null, end = a.end != null ? C.map[Math.min(a.end, C.map.length - 1)] : null;
+  return { ...a, start, end, text: realize(a), span: start != null ? original.slice(start, end) : null }; });
 export function readAtoms({ text, lang = "en", title = null, previous = [], grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
   const original = text, C = cleanText(text); text = C.text; previous = previous.map((p) => cleanText(p).text);
   const sentences = [...previous, text];
@@ -36,8 +39,7 @@ export function readAtoms({ text, lang = "en", title = null, previous = [], gram
   const ctx = { rows, mentions, entities, text, lang, keysOf };
   const base = atomize({ claims, ...ctx });
   const atoms = producer ? [...base, ...produce(ctx, producer, { have: base, chooser, filter })] : base;
-  const out = atoms.map((a) => { const start = a.start != null ? C.map[a.start] : null, end = a.end != null ? C.map[Math.min(a.end, C.map.length - 1)] : null;
-    return { ...a, start, end, text: realize(a), span: start != null ? original.slice(start, end) : null }; });
+  const out = mapAtoms(atoms, C, original);
   // what this reading did not read: the grammar's own unread words (claim-coverage.js), less those a produced atom carries
   const low = (x) => String(x ?? "").normalize("NFKC").toLowerCase();
   const carried = low(out.filter((a) => a.from === "path").map((a) => a.text).join(" "));

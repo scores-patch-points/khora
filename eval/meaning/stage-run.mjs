@@ -15,13 +15,23 @@ const { stageFromAtoms, judgeClaim, stageBytes, LICENSES } = await import(path.j
 const grammar = { rowsOf: GE.rowsOf, claimsOf: (t, rows) => GE.claimsOf(t, rows) };
 const corefModel = JSON.parse(fs.readFileSync(path.join(HERE, "atoms/coref-ranker.json"), "utf8"));
 const SRC = new WeakMap();
+// ATOMS_VIA=weft: every text is read by THE reader (reading.js readDocument, rows: true) and its atoms come from the entry's own parse and cut (weft-atoms.js), not from a
+// second cut and parse here. Default: the old path, unchanged. The two are compared by eval/meaning/weft-parity.mjs.
+const VIA = process.env.ATOMS_VIA === "weft";
+const WEFT = VIA ? { reading: await import(path.join(K, "native/reading.js")), wa: await import(path.join(K, "native/the-fold/weft-atoms.js")) } : null;
+const readText = async (text) => {
+  if (!VIA) return readAtoms({ text, lang: "en", grammar, corefModel });
+  const w = await WEFT.reading.readDocument(text, { language: "en", lexicon: false, minCharacters: 0, rows: true });
+  const r = WEFT.wa.atomsFromWeft(w, { claimsOf: grammar.claimsOf, corefModel, lang: "en" });
+  return { atoms: r.atoms, unread: r.unread, weftGaps: r.gaps };
+};
 const rank = { E: 2, C: 2, N: 0 };
 
 const pairs = [];
 for (const s of ["fresh", "heldout", "relations", "fresh19", "fresh20"]) {
   const d = JSON.parse(fs.readFileSync(path.join(HERE, `${s}.json`), "utf8"));
   for (const p of d.pairs ?? d) if ((p.lang ?? "en") === "en") {
-    const A = readAtoms({ text: p.claim, lang: "en", grammar, corefModel }), B = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel });
+    const A = await readText(p.claim), B = await readText(p.sentence);
     SRC.set(B, p.sentence); pairs.push({ ...p, set: s, A, B });
   }
 }
@@ -61,7 +71,7 @@ console.log(`  (old control, the next pair's source: ${sibling.filter((v) => v =
 
 // determinism: the same bytes give the same stage, twice, and through a fresh read
 const h = (s) => crypto.createHash("sha256").update(s).digest("hex").slice(0, 12);
-let same = 0; for (const p of pairs) { const b2 = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel }); if (h(stageBytes(stageFromAtoms(p.B.atoms, { doc: "src" }))) === h(stageBytes(stageFromAtoms(b2.atoms, { doc: "src" })))) same++; }
+let same = 0; for (const p of pairs) { const b2 = await readText(p.sentence); if (h(stageBytes(stageFromAtoms(p.B.atoms, { doc: "src" }))) === h(stageBytes(stageFromAtoms(b2.atoms, { doc: "src" })))) same++; }
 console.log(`determinism: ${same}/${pairs.length} sources give a byte-identical stage on a second read`);
 
 // the checker: every contradiction proof accepted; and mutants (corrupted proofs) all rejected

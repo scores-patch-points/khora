@@ -295,7 +295,7 @@ const edgeOf = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.la
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null } = {}) {
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -333,6 +333,18 @@ export function readWith(text, { address = null, category = null, language = nul
   // `cuts` are in the newline-normalised space the clause parser reads; `sentences` carry the caller's addresses.
   const cuts = splitSentences(norm, { abbreviations: abbr.set }).map((x) => ({ text: x.text, offset: x.offset }));
   const sentences = cuts.map((c, order) => ({ text: c.text, offset: raw(c.offset), order }));
+  // THE PARSE, handed in by the surface (opt-in; nothing here loads a parser, so this module stays page-safe). `rowsOf(sentenceText)` returns that sentence's
+  // dependency rows (UD: id, form, lemma, upos, feats, head, deprel) from whatever universal parser the surface holds (reading.js hands in grammar-en / grammar-ud
+  // by the language this read decided). The rows ride the entry beside the sentences they parse, so a layer above (atoms, the stage) reads the ONE parse and the
+  // one cut instead of cutting and parsing again. A sentence the parser cannot read is a typed gap on the entry, never a silent hole.
+  let parsed = null;
+  if (typeof rowsOf === "function") {
+    parsed = sentences.map((x, order) => {
+      try { const rows = rowsOf(x.text); if (Array.isArray(rows) && rows.length) return { order, offset: x.offset, text: x.text, rows }; gaps.push({ gap: "parse_empty", detail: `sentence ${order} parsed to no rows` }); }
+      catch (e) { gaps.push({ gap: "parse_failed", detail: `sentence ${order}: ${String(e?.message ?? e).slice(0, 80)}` }); }
+      return { order, offset: x.offset, text: x.text, rows: null };
+    });
+  }
   const sentenceAt = (at) => { let lo = 0, hi = cuts.length - 1, best = -1; while (lo <= hi) { const m = (lo + hi) >> 1; if (cuts[m].offset <= at) { best = m; lo = m + 1; } else hi = m - 1; } return best; };
   // THE CAST — the reader's own index, the beings its edges were resolved against (its ids, its floor), each with the address of
   // every mention. A being is what the capital tier names; a row the index holds only through the heard tier (a caseless nominal,
@@ -396,6 +408,7 @@ export function readWith(text, { address = null, category = null, language = nul
     vocabulary: out?.vocabulary ?? null,
     cast, heard: heardRows, edges, clauses, quality: qualityReport, surprise,
     sentences, pronouns,
+    ...(parsed ? { parse: parsed } : {}),
     ...(selfRead ? { claims: claims ?? [] } : {}),
     error: err, ms: Date.now() - t0,
   };
