@@ -1,0 +1,1254 @@
+{
+ "schema": "pairs",
+ "authored": "Claude subagent, 2026-10-25: hand-written claims from sentences.json only, no code or other evals read",
+ "pairs": [
+  {
+   "id": 901,
+   "lang": "en",
+   "label": "E",
+   "type": "paraphrase with reordered sides",
+   "claim": "The Canadian province of Ontario lies along the northern and eastern sides of Lake Huron, and Michigan lies along its southern and western sides.",
+   "sentence": "It is shared on the north and east by the Canadian province of Ontario and on the south and west by the U.S. state of Michigan.",
+   "source": {
+    "sid": "en-1",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 902,
+   "lang": "en",
+   "label": "C",
+   "type": "reversed roles",
+   "claim": "Michigan borders Lake Huron on the north and east, while Ontario borders it on the south and west.",
+   "sentence": "It is shared on the north and east by the Canadian province of Ontario and on the south and west by the U.S. state of Michigan.",
+   "source": {
+    "sid": "en-1",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 903,
+   "lang": "en",
+   "label": "E",
+   "type": "paraphrase of name origin",
+   "claim": "Lake Huron takes its name from early French explorers, who named it after the Huron (Wyandot) people living around it.",
+   "sentence": "The name of the lake is derived from early French explorers who named it for the indigenous people they knew as Huron (Wyandot) inhabiting the region.",
+   "source": {
+    "sid": "en-2",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 904,
+   "lang": "en",
+   "label": "E",
+   "type": "plain restatement",
+   "claim": "Lake Huron has the same surface elevation as Lake Michigan, and the two lakes are joined by the wide, deep Straits of Mackinac.",
+   "sentence": "Hydrologically, Lake Huron comprises the eastern portion of Lake Michigan–Huron, having the same surface elevation as Lake Michigan, to which it is connected by the wide and deep Straits of Mackinac.",
+   "source": {
+    "sid": "en-3",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 905,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong comparison (elevation)",
+   "claim": "Lake Huron has a noticeably lower surface elevation than Lake Michigan.",
+   "sentence": "Hydrologically, Lake Huron comprises the eastern portion of Lake Michigan–Huron, having the same surface elevation as Lake Michigan, to which it is connected by the wide and deep Straits of Mackinac.",
+   "source": {
+    "sid": "en-3",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 906,
+   "lang": "en",
+   "label": "E",
+   "type": "paraphrase of superlative",
+   "claim": "Taken together, Lake Michigan–Huron is the biggest freshwater lake in the world by surface area.",
+   "sentence": "Combined, Lake Michigan–Huron is the largest freshwater lake by area in the world.",
+   "source": {
+    "sid": "en-4",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 907,
+   "lang": "en",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "The Huronian glaciation is among the oldest ice ages recorded in Earth's geologic history.",
+   "sentence": "The Huronian glaciation was named from evidence collected from the Lake Huron region.",
+   "source": {
+    "sid": "en-5",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 908,
+   "lang": "en",
+   "label": "E",
+   "type": "reordered list",
+   "claim": "Georgian Bay and the North Channel are both in the northern part of Lake Huron.",
+   "sentence": "The northern parts of the lake include the North Channel and Georgian Bay.",
+   "source": {
+    "sid": "en-6",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 909,
+   "lang": "en",
+   "label": "C",
+   "type": "wrong place (corner of the lake)",
+   "claim": "Saginaw Bay lies in the northeast corner of Lake Huron.",
+   "sentence": "Saginaw Bay is located in the southwest corner of the lake.",
+   "source": {
+    "sid": "en-7",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 910,
+   "lang": "en",
+   "label": "E",
+   "type": "restated comparison",
+   "claim": "Lake Huron has a water retention time of just 22 years, shorter than that of the other Great Lakes.",
+   "sentence": "Water flows through Lake Huron faster than the other Great Lakes with a retention time of only 22 years.",
+   "source": {
+    "sid": "en-12",
+    "url": "https://en.wikipedia.org/wiki/Lake_Huron",
+    "revid": 1380795818
+   }
+  },
+  {
+   "id": 911,
+   "lang": "en",
+   "label": "E",
+   "type": "alias / naming relation",
+   "claim": "Canada's Yukon territory takes its name from the Yukon River.",
+   "sentence": "From its source in British Columbia, it flows through Canada's territory of Yukon (itself named after the river).",
+   "source": {
+    "sid": "en-14",
+    "url": "https://en.wikipedia.org/wiki/Yukon_River",
+    "revid": 1380316255
+   }
+  },
+  {
+   "id": 912,
+   "lang": "en",
+   "label": "C",
+   "type": "reversed direction",
+   "claim": "The lower half of the Yukon River runs eastward through the U.S. state of Alaska.",
+   "sentence": "The lower half of the river continues westward through the U.S. state of Alaska.",
+   "source": {
+    "sid": "en-15",
+    "url": "https://en.wikipedia.org/wiki/Yukon_River",
+    "revid": 1380316255
+   }
+  },
+  {
+   "id": 913,
+   "lang": "en",
+   "label": "E",
+   "type": "paraphrase of superlative",
+   "claim": "No other river in Alaska or Yukon is longer than the Yukon River, which was a main transport route during the Klondike Gold Rush of 1896–1903.",
+   "sentence": "The longest river in Alaska and Yukon, it was one of the principal means of transportation during the 1896–1903 Klondike Gold Rush.",
+   "source": {
+    "sid": "en-20",
+    "url": "https://en.wikipedia.org/wiki/Yukon_River",
+    "revid": 1380316255
+   }
+  },
+  {
+   "id": 914,
+   "lang": "en",
+   "label": "C",
+   "type": "negated claim",
+   "claim": "The Yukon River was not used for transportation during the Klondike Gold Rush.",
+   "sentence": "The longest river in Alaska and Yukon, it was one of the principal means of transportation during the 1896–1903 Klondike Gold Rush.",
+   "source": {
+    "sid": "en-20",
+    "url": "https://en.wikipedia.org/wiki/Yukon_River",
+    "revid": 1380316255
+   }
+  },
+  {
+   "id": 915,
+   "lang": "en",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "Most of the paddle-wheel riverboats that worked the Yukon River were built in Whitehorse.",
+   "sentence": "Paddle-wheel riverboats continued to ply the river until the 1950s, when the Klondike Highway was completed.",
+   "source": {
+    "sid": "en-22",
+    "url": "https://en.wikipedia.org/wiki/Yukon_River",
+    "revid": 1380316255
+   }
+  },
+  {
+   "id": 916,
+   "lang": "en",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "The Alaska Commercial Company was headquartered in San Francisco.",
+   "sentence": "After the purchase of Alaska by the United States in 1867, the Alaska Commercial Company acquired the assets of the Russian-American Company and constructed several posts at various locations on the Yukon River.",
+   "source": {
+    "sid": "en-23",
+    "url": "https://en.wikipedia.org/wiki/Yukon_River",
+    "revid": 1380316255
+   }
+  },
+  {
+   "id": 917,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase of list of cities",
+   "claim": "El Tajo atraviesa ciudades españolas importantes como Aranjuez, Toledo y Talavera de la Reina.",
+   "sentence": "Las ciudades más importantes por las que pasa son Aranjuez, Toledo y Talavera de la Reina en España; y Abrantes, Santarém y Lisboa, en Portugal.",
+   "source": {
+    "sid": "es-33",
+    "url": "https://es.wikipedia.org/wiki/Tajo",
+    "revid": 174403807
+   }
+  },
+  {
+   "id": 918,
+   "lang": "es",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "La Confederación Hidrográfica del Tajo se creó a comienzos del siglo XX.",
+   "sentence": "Por lo que respecta al territorio español, se encuentra regulada por la Confederación Hidrográfica del Tajo, organismo dependiente del Ministerio para la Transición Ecológica y el Reto Demográfico.",
+   "source": {
+    "sid": "es-38",
+    "url": "https://es.wikipedia.org/wiki/Tajo",
+    "revid": 174403807
+   }
+  },
+  {
+   "id": 919,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase with reordering",
+   "claim": "El curso medio-bajo del Tajo cuenta con protección legal gracias al parque nacional de Monfragüe, situado en la provincia de Cáceres.",
+   "sentence": "También su curso medio-bajo está protegido legalmente, mediante el parque nacional de Monfragüe, localizado en la provincia de Cáceres.",
+   "source": {
+    "sid": "es-40",
+    "url": "https://es.wikipedia.org/wiki/Tajo",
+    "revid": 174403807
+   }
+  },
+  {
+   "id": 920,
+   "lang": "es",
+   "label": "C",
+   "type": "wrong place (province)",
+   "claim": "El parque nacional de Monfragüe, que protege el curso medio-bajo del Tajo, se encuentra en la provincia de Toledo.",
+   "sentence": "También su curso medio-bajo está protegido legalmente, mediante el parque nacional de Monfragüe, localizado en la provincia de Cáceres.",
+   "source": {
+    "sid": "es-40",
+    "url": "https://es.wikipedia.org/wiki/Tajo",
+    "revid": 174403807
+   }
+  },
+  {
+   "id": 921,
+   "lang": "es",
+   "label": "E",
+   "type": "plain restatement",
+   "claim": "La reserva natural del Estuario del Tajo está situada en la desembocadura del río.",
+   "sentence": "En su desembocadura se encuentra la reserva natural del Estuario del Tajo.",
+   "source": {
+    "sid": "es-42",
+    "url": "https://es.wikipedia.org/wiki/Tajo",
+    "revid": 174403807
+   }
+  },
+  {
+   "id": 922,
+   "lang": "es",
+   "label": "C",
+   "type": "swapped roles (music vs lyrics)",
+   "claim": "La guarania «Recuerdos de Ypacaraí» tiene música de Zulema de Mirkin y letra de Demetrio Ortiz.",
+   "sentence": "El lago es reconocido por inspirar la célebre guarania «Recuerdos de Ypacaraí», compuesta por Demetrio Ortiz con letra de Zulema de Mirkin, una de las obras más emblemáticas de la música paraguaya.",
+   "source": {
+    "sid": "es-45",
+    "url": "https://es.wikipedia.org/wiki/Lago_Ypacara%C3%AD",
+    "revid": 171671102
+   }
+  },
+  {
+   "id": 923,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase of list of towns",
+   "claim": "Areguá, Itauguá, Luque y San Bernardino son localidades que rodean el lago Ypacaraí.",
+   "sentence": "Además de la ciudad homónima, las localidades que rodean el lago incluyen Areguá, Itauguá, Luque y San Bernardino, conformando una importante zona turística y cultural.",
+   "source": {
+    "sid": "es-46",
+    "url": "https://es.wikipedia.org/wiki/Lago_Ypacara%C3%AD",
+    "revid": 171671102
+   }
+  },
+  {
+   "id": 924,
+   "lang": "es",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "Areguá es conocida por su cerámica artesanal.",
+   "sentence": "Además de la ciudad homónima, las localidades que rodean el lago incluyen Areguá, Itauguá, Luque y San Bernardino, conformando una importante zona turística y cultural.",
+   "source": {
+    "sid": "es-46",
+    "url": "https://es.wikipedia.org/wiki/Lago_Ypacara%C3%AD",
+    "revid": 171671102
+   }
+  },
+  {
+   "id": 925,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "En verano el lago Ypacaraí recibe una gran afluencia de visitantes que disfrutan de sus playas y de sus paisajes.",
+   "sentence": "El lago constituye un espacio de recreación y esparcimiento, especialmente durante la temporada estival, cuando recibe gran afluencia de visitantes que disfrutan de sus playas y paisajes naturales.",
+   "source": {
+    "sid": "es-47",
+    "url": "https://es.wikipedia.org/wiki/Lago_Ypacara%C3%AD",
+    "revid": 171671102
+   }
+  },
+  {
+   "id": 926,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase of finding",
+   "claim": "En 2013 se detectó una alta presencia de la cianobacteria Cylindrospermopsis raciborskii en el lago Ypacaraí.",
+   "sentence": "En 2013, estudios ambientales detectaron una elevada presencia de cianobacterias del tipo Cylindrospermopsis raciborskii.",
+   "source": {
+    "sid": "es-48",
+    "url": "https://es.wikipedia.org/wiki/Lago_Ypacara%C3%AD",
+    "revid": 171671102
+   }
+  },
+  {
+   "id": 927,
+   "lang": "es",
+   "label": "C",
+   "type": "negated claim",
+   "claim": "En 2013 los estudios ambientales no hallaron cianobacterias en el lago Ypacaraí.",
+   "sentence": "En 2013, estudios ambientales detectaron una elevada presencia de cianobacterias del tipo Cylindrospermopsis raciborskii.",
+   "source": {
+    "sid": "es-48",
+    "url": "https://es.wikipedia.org/wiki/Lago_Ypacara%C3%AD",
+    "revid": 171671102
+   }
+  },
+  {
+   "id": 928,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase (sudoeste/suroeste)",
+   "claim": "El Guadiana corre por el sudoeste de la península ibérica.",
+   "sentence": "El Guadiana es un río del sudoeste de la península ibérica.",
+   "source": {
+    "sid": "es-50",
+    "url": "https://es.wikipedia.org/wiki/Guadiana",
+    "revid": 175684790
+   }
+  },
+  {
+   "id": 929,
+   "lang": "es",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "En su curso bajo, el Guadiana forma la frontera entre España y Portugal a lo largo de muchos tramos.",
+   "sentence": "En su curso bajo, el río, que discurre por España y Portugal, hace de frontera entre ambos países a lo largo de numerosos tramos.",
+   "source": {
+    "sid": "es-52",
+    "url": "https://es.wikipedia.org/wiki/Guadiana",
+    "revid": 175684790
+   }
+  },
+  {
+   "id": 930,
+   "lang": "es",
+   "label": "C",
+   "type": "negated claim",
+   "claim": "El Guadiana no hace de frontera entre España y Portugal en ninguno de sus tramos.",
+   "sentence": "En su curso bajo, el río, que discurre por España y Portugal, hace de frontera entre ambos países a lo largo de numerosos tramos.",
+   "source": {
+    "sid": "es-52",
+    "url": "https://es.wikipedia.org/wiki/Guadiana",
+    "revid": 175684790
+   }
+  },
+  {
+   "id": 931,
+   "lang": "es",
+   "label": "C",
+   "type": "wrong ranking",
+   "claim": "El Guadiana es el río más largo de la península ibérica.",
+   "sentence": "Se trata del cuarto río más largo de la península ibérica.",
+   "source": {
+    "sid": "es-53",
+    "url": "https://es.wikipedia.org/wiki/Guadiana",
+    "revid": 175684790
+   }
+  },
+  {
+   "id": 932,
+   "lang": "es",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "El nombre Guadiana procede del árabe.",
+   "sentence": "Hoy día también se llama Guadiana en portugués, aunque su nombre antiguo era Odiana, con la misma etimología que la forma española.",
+   "source": {
+    "sid": "es-54",
+    "url": "https://es.wikipedia.org/wiki/Guadiana",
+    "revid": 175684790
+   }
+  },
+  {
+   "id": 933,
+   "lang": "fr",
+   "label": "E",
+   "type": "alias",
+   "claim": "Le lac de Saint-Point est parfois appelé, à tort, lac de Malbuisson.",
+   "sentence": "Le lac de Saint-Point, lac Saint-Point (localement), ou incorrectement lac de Malbuisson, est le neuvième parmi les plus vastes lacs naturels de France métropolitaine.",
+   "source": {
+    "sid": "fr-55",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Saint-Point",
+    "revid": 240516717
+   }
+  },
+  {
+   "id": 934,
+   "lang": "fr",
+   "label": "C",
+   "type": "wrong place (town)",
+   "claim": "Le lac de Saint-Point est situé à une quinzaine de kilomètres de Besançon.",
+   "sentence": "Il se situe dans le département du Doubs, au sein du massif du Jura, à une quinzaine de kilomètres de la ville de Pontarlier.",
+   "source": {
+    "sid": "fr-56",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Saint-Point",
+    "revid": 240516717
+   }
+  },
+  {
+   "id": 935,
+   "lang": "fr",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "Le lac de Saint-Point repose dans une vaste dépression dont l'origine est glaciaire, creusée dans un synclinal du Crétacé.",
+   "sentence": "Le plan d'eau occupe une vaste dépression d'origine glaciaire au sein d'un synclinal crétacé.",
+   "source": {
+    "sid": "fr-57",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Saint-Point",
+    "revid": 240516717
+   }
+  },
+  {
+   "id": 936,
+   "lang": "fr",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "La profondeur maximale du lac de Saint-Point dépasse quarante mètres.",
+   "sentence": "En raison de l'altitude et de la rigueur du climat, le lac gèle assez fréquemment en hiver, de façon partielle ou totale.",
+   "source": {
+    "sid": "fr-61",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Saint-Point",
+    "revid": 240516717
+   }
+  },
+  {
+   "id": 937,
+   "lang": "fr",
+   "label": "E",
+   "type": "paraphrase (past vs present use)",
+   "claim": "Le lac de Saint-Point était autrefois surtout exploité pour la pêche, mais les collectivités locales y favorisent aujourd'hui le tourisme.",
+   "sentence": "Alors qu'historiquement, le lac était principalement exploité pour la pêche, l'ensemble des collectivités du secteur (les communes riveraines, la communauté de communes des Lacs et Montagnes du Haut-Doubs, ainsi que le conseil départemental du Doubs) favorisent désormais l'activité touristique, tant l'été (baignade et randonnée) que l'hiver (ski nordique, patinage).",
+   "source": {
+    "sid": "fr-62",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Saint-Point",
+    "revid": 240516717
+   }
+  },
+  {
+   "id": 938,
+   "lang": "fr",
+   "label": "C",
+   "type": "reversed before/after",
+   "claim": "Autrefois centré sur le tourisme, le lac de Saint-Point est aujourd'hui exploité principalement pour la pêche.",
+   "sentence": "Alors qu'historiquement, le lac était principalement exploité pour la pêche, l'ensemble des collectivités du secteur (les communes riveraines, la communauté de communes des Lacs et Montagnes du Haut-Doubs, ainsi que le conseil départemental du Doubs) favorisent désormais l'activité touristique, tant l'été (baignade et randonnée) que l'hiver (ski nordique, patinage).",
+   "source": {
+    "sid": "fr-62",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Saint-Point",
+    "revid": 240516717
+   }
+  },
+  {
+   "id": 939,
+   "lang": "fr",
+   "label": "E",
+   "type": "paraphrase of shape and orientation",
+   "claim": "Le bassin de la Meuse est assez étroit et s'étend globalement du sud vers le nord.",
+   "sentence": "Son bassin est relativement étroit et est orienté sud-nord bien que, entre Namur et Liège, son cours soit orienté ouest-est et est-ouest depuis un de ses affluents, la Niers, jusqu'à la mer du Nord.",
+   "source": {
+    "sid": "fr-64",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 940,
+   "lang": "fr",
+   "label": "C",
+   "type": "wrong description (width and direction)",
+   "claim": "Le bassin de la Meuse est très large et orienté d'est en ouest sur toute sa longueur.",
+   "sentence": "Son bassin est relativement étroit et est orienté sud-nord bien que, entre Namur et Liège, son cours soit orienté ouest-est et est-ouest depuis un de ses affluents, la Niers, jusqu'à la mer du Nord.",
+   "source": {
+    "sid": "fr-64",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 941,
+   "lang": "fr",
+   "label": "E",
+   "type": "subset of listed cities",
+   "claim": "Verdun, Dinant, Namur et Liège font partie des villes que traverse la Meuse.",
+   "sentence": "Le cours d'eau traverse de nombreuses villes dont l'histoire est directement liée à la Meuse et à ses affluents, telles que Verdun, Charleville-Mézières, Dinant, Namur, Liège, Maastricht, Venlo, Nimègue ou Rotterdam.",
+   "source": {
+    "sid": "fr-66",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 942,
+   "lang": "fr",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "Le port autonome de Liège est le premier port fluvial de Belgique.",
+   "sentence": "C'est son parcours entre le sillon Sambre-et-Meuse et son embouchure qui lui apporte une reconnaissance économique importante, avec notamment le port autonome de Liège ou la vallée de la Meuse en Wallonie qui a su faire de la Meuse un atout majeur pour son développement industriel.",
+   "source": {
+    "sid": "fr-67",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 943,
+   "lang": "fr",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "Aux Pays-Bas, la Meuse et le Rhin se jettent dans un delta qu'ils partagent.",
+   "sentence": "Aux Pays-Bas, son cours est souvent partagé avec celui du Rhin et les deux fleuves ont un delta commun.",
+   "source": {
+    "sid": "fr-68",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 944,
+   "lang": "fr",
+   "label": "C",
+   "type": "negated shared delta",
+   "claim": "Aux Pays-Bas, la Meuse et le Rhin ont chacun leur propre delta, sans aucun lien entre eux.",
+   "sentence": "Aux Pays-Bas, son cours est souvent partagé avec celui du Rhin et les deux fleuves ont un delta commun.",
+   "source": {
+    "sid": "fr-68",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 945,
+   "lang": "fr",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "Le Rhin est fortement endigué depuis le XIXe siècle.",
+   "sentence": "Il est la colonne vertébrale de l'Europe rhénane, l’espace économique le plus dynamique d’Europe et l’un des grands lieux de puissance du monde.",
+   "source": {
+    "sid": "fr-74",
+    "url": "https://fr.wikipedia.org/wiki/Rhin",
+    "revid": 239996481
+   }
+  },
+  {
+   "id": 946,
+   "lang": "fr",
+   "label": "E",
+   "type": "paraphrase of naming relation",
+   "claim": "Le Rhin a donné son nom à la Rhénanie, à la Rhénanie-du-Nord-Westphalie, à la Rhénanie-Palatinat, ainsi qu'au Haut-Rhin et au Bas-Rhin.",
+   "sentence": "Il donne son nom à la Rhénanie, une région de l'Ouest de l'Allemagne, à deux länder de l'Allemagne — la Rhénanie-du-Nord-Westphalie (Nordrhein-Westfalen) et la Rhénanie-Palatinat (Rheinland-Pfalz) — ainsi qu'aux deux départements français du Haut-Rhin et du Bas-Rhin.",
+   "source": {
+    "sid": "fr-77",
+    "url": "https://fr.wikipedia.org/wiki/Rhin",
+    "revid": 239996481
+   }
+  },
+  {
+   "id": 947,
+   "lang": "fr",
+   "label": "C",
+   "type": "wrong figure (number of länder and departments)",
+   "claim": "Le Rhin donne son nom à trois länder allemands et à un seul département français.",
+   "sentence": "Il donne son nom à la Rhénanie, une région de l'Ouest de l'Allemagne, à deux länder de l'Allemagne — la Rhénanie-du-Nord-Westphalie (Nordrhein-Westfalen) et la Rhénanie-Palatinat (Rheinland-Pfalz) — ainsi qu'aux deux départements français du Haut-Rhin et du Bas-Rhin.",
+   "source": {
+    "sid": "fr-77",
+    "url": "https://fr.wikipedia.org/wiki/Rhin",
+    "revid": 239996481
+   }
+  },
+  {
+   "id": 948,
+   "lang": "fr",
+   "label": "E",
+   "type": "subset of listed cities",
+   "claim": "Strasbourg et Bâle comptent parmi les grandes villes situées sur le Rhin.",
+   "sentence": "Parmi les villes les plus grandes et importantes sur le Rhin se trouvent Rotterdam aux Pays-Bas, Cologne et Düsseldorf en Allemagne, Strasbourg en France et Bâle en Suisse.",
+   "source": {
+    "sid": "fr-78",
+    "url": "https://fr.wikipedia.org/wiki/Rhin",
+    "revid": 239996481
+   }
+  },
+  {
+   "id": 949,
+   "lang": "de",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "Der Rhein hat sein Quellgebiet größtenteils im Schweizer Kanton Graubünden und ist der wasserreichste Zufluss der Nordsee.",
+   "sentence": "Das Quellgebiet des Rheins liegt überwiegend im Schweizer Kanton Graubünden, seine Mündungsarme erreichen in den Niederlanden die Nordsee, deren wasserreichster Zufluss er ist.",
+   "source": {
+    "sid": "de-80",
+    "url": "https://de.wikipedia.org/wiki/Rhein",
+    "revid": 271383095
+   }
+  },
+  {
+   "id": 950,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong place (end of section)",
+   "claim": "Der Alpenrhein reicht bis zum Genfersee.",
+   "sentence": "Ab dem Zusammenfluss der beiden Hauptquelläste Vorderrhein und Hinterrhein wird der Fluss meist in folgende Hauptabschnitte gegliedert: Alpenrhein (bis zum Bodensee), Hochrhein (einschließlich des den oberen mit dem unteren Bodensee verbindenden Seerheins), Oberrhein, Mittelrhein und Niederrhein, einschließlich der drei Mündungsarme des Deltarheins: Waal, Lek und IJssel.",
+   "source": {
+    "sid": "de-81",
+    "url": "https://de.wikipedia.org/wiki/Rhein",
+    "revid": 271383095
+   }
+  },
+  {
+   "id": 951,
+   "lang": "de",
+   "label": "E",
+   "type": "paraphrase of list",
+   "claim": "Aare, Neckar, Main, Mosel und Maas zählen zu den größten Nebenflüssen des Rheins.",
+   "sentence": "Die größten Nebenflüsse des Rheins, gemessen an Länge, Einzugsgebiet und Mittlerem Abfluss (MQ), sind, von der Quelle bis zur Mündung geordnet: Aare, Neckar, Main, Mosel und Maas.",
+   "source": {
+    "sid": "de-82",
+    "url": "https://de.wikipedia.org/wiki/Rhein",
+    "revid": 271383095
+   }
+  },
+  {
+   "id": 952,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong ranking (largest share)",
+   "claim": "Frankreich hat den flächenmäßig größten Anteil am Einzugsgebiet des Rheins, noch vor Deutschland.",
+   "sentence": "Der flächenmäßig größte Teil davon liegt in Deutschland, gefolgt von Frankreich, den Niederlanden und der Schweiz.",
+   "source": {
+    "sid": "de-84",
+    "url": "https://de.wikipedia.org/wiki/Rhein",
+    "revid": 271383095
+   }
+  },
+  {
+   "id": 953,
+   "lang": "de",
+   "label": "E",
+   "type": "derived figure (rank to count)",
+   "claim": "In Europa gibt es neun Flüsse, die länger sind als der Rhein.",
+   "sentence": "Der Rhein ist der zehntlängste Fluss Europas und der siebtlängste, der direkt ins Meer mündet.",
+   "source": {
+    "sid": "de-85",
+    "url": "https://de.wikipedia.org/wiki/Rhein",
+    "revid": 271383095
+   }
+  },
+  {
+   "id": 954,
+   "lang": "de",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "Der Rhein diente bereits den Römern als Grenzfluss.",
+   "sentence": "Unter den Flüssen des deutschen Sprachraums ist er der zweitlängste nach der Donau und vor der Elbe.",
+   "source": {
+    "sid": "de-86",
+    "url": "https://de.wikipedia.org/wiki/Rhein",
+    "revid": 271383095
+   }
+  },
+  {
+   "id": 955,
+   "lang": "de",
+   "label": "E",
+   "type": "paraphrase of location",
+   "claim": "Der Traunsee liegt in Oberösterreich, im Salzkammergut.",
+   "sentence": "Der Traunsee ist ein See im oberösterreichischen Teil des Salzkammerguts am Nordrand der nördlichen Kalkalpen.",
+   "source": {
+    "sid": "de-87",
+    "url": "https://de.wikipedia.org/wiki/Traunsee",
+    "revid": 270681415
+   }
+  },
+  {
+   "id": 956,
+   "lang": "de",
+   "label": "C",
+   "type": "reversed direction",
+   "claim": "Die Traun durchfließt den Traunsee von Gmunden im Norden nach Ebensee im Süden.",
+   "sentence": "Die Traun durchfließt ihn der Länge nach von Ebensee am Traunsee im Süden nach Gmunden im Norden.",
+   "source": {
+    "sid": "de-90",
+    "url": "https://de.wikipedia.org/wiki/Traunsee",
+    "revid": 270681415
+   }
+  },
+  {
+   "id": 957,
+   "lang": "de",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "Das Salz wurde auf dem Traunsee hauptsächlich mit flachen Holzschiffen, sogenannten Plätten, transportiert.",
+   "sentence": "Historisch war der Traunsee eng mit dem Salzhandel verbunden und spielte eine wichtige Rolle im Transportwesen des Salzkammerguts.",
+   "source": {
+    "sid": "de-93",
+    "url": "https://de.wikipedia.org/wiki/Traunsee",
+    "revid": 270681415
+   }
+  },
+  {
+   "id": 958,
+   "lang": "de",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "Der Traunsee gehört den Österreichischen Bundesforsten und zieht als Badesee sowie als Surf- und Segelrevier Touristen in Oberösterreich an.",
+   "sentence": "Der Traunsee im Besitz der Österreichischen Bundesforste ist ein bedeutendes Tourismusziel in Oberösterreich, ein beliebter Badesee sowie ein Surf- und Segelrevier.",
+   "source": {
+    "sid": "de-94",
+    "url": "https://de.wikipedia.org/wiki/Traunsee",
+    "revid": 270681415
+   }
+  },
+  {
+   "id": 959,
+   "lang": "de",
+   "label": "E",
+   "type": "plain restatement",
+   "claim": "Der Königssee liegt in der Gemeinde Schönau am Königssee im Berchtesgadener Land.",
+   "sentence": "Der Königssee ist ein Gebirgssee in der Gemeinde Schönau am Königssee im Landkreis Berchtesgadener Land.",
+   "source": {
+    "sid": "de-95",
+    "url": "https://de.wikipedia.org/wiki/K%C3%B6nigssee",
+    "revid": 269719454
+   }
+  },
+  {
+   "id": 960,
+   "lang": "de",
+   "label": "C",
+   "type": "wrong direction (compass point)",
+   "claim": "Der kleinere Obersee ist dem Königssee nordwestlich vorgelagert.",
+   "sentence": "Eingebettet zwischen den steilen Berghängen von Watzmann und Hagengebirge hat der langgestreckte See zusammen mit dem südöstlich vorgelagerten kleineren Obersee – um den das Steinerne Meer den Talabschluss bildet – einen fjordartigen Charakter.",
+   "source": {
+    "sid": "de-96",
+    "url": "https://de.wikipedia.org/wiki/K%C3%B6nigssee",
+    "revid": 269719454
+   }
+  },
+  {
+   "id": 961,
+   "lang": "de",
+   "label": "C",
+   "type": "opposite quality",
+   "claim": "Der Königssee zählt zu den am stärksten verschmutzten Seen Deutschlands.",
+   "sentence": "Er gehört zu den saubersten Seen Deutschlands.",
+   "source": {
+    "sid": "de-97",
+    "url": "https://de.wikipedia.org/wiki/K%C3%B6nigssee",
+    "revid": 269719454
+   }
+  },
+  {
+   "id": 962,
+   "lang": "de",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "Der Königssee befindet sich zum größten Teil im Nationalpark Berchtesgaden.",
+   "sentence": "Der Großteil des Königssees liegt im Nationalpark Berchtesgaden.",
+   "source": {
+    "sid": "de-98",
+    "url": "https://de.wikipedia.org/wiki/K%C3%B6nigssee",
+    "revid": 269719454
+   }
+  },
+  {
+   "id": 963,
+   "lang": "de",
+   "label": "E",
+   "type": "paraphrase of ownership",
+   "claim": "Der Königssee gehört dem Freistaat Bayern.",
+   "sentence": "Eigentümer ist der Freistaat Bayern.",
+   "source": {
+    "sid": "de-99",
+    "url": "https://de.wikipedia.org/wiki/K%C3%B6nigssee",
+    "revid": 269719454
+   }
+  },
+  {
+   "id": 964,
+   "lang": "de",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "Die meisten Besucher des Königssees kommen aus dem Ausland.",
+   "sentence": "Der See zählt mit (Stand: 2014) 580.000 Besuchern der von der Bayerischen Seenschifffahrt betriebenen Schifffahrt zu den touristischen Hauptattraktionen in der Landkreisteilregion Berchtesgadener Land.",
+   "source": {
+    "sid": "de-100",
+    "url": "https://de.wikipedia.org/wiki/K%C3%B6nigssee",
+    "revid": 269719454
+   }
+  },
+  {
+   "id": 965,
+   "lang": "ja",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "田沢湖は秋田県の仙北市に位置する淡水の湖である。",
+   "sentence": "田沢湖（たざわこ）は、秋田県仙北市にある淡水湖。",
+   "source": {
+    "sid": "ja-104",
+    "url": "https://ja.wikipedia.org/wiki/%E7%94%B0%E6%B2%A2%E6%B9%96",
+    "revid": 110963422
+   }
+  },
+  {
+   "id": 966,
+   "lang": "ja",
+   "label": "C",
+   "type": "opposite superlative",
+   "claim": "田沢湖は日本で最も浅い湖である。",
+   "sentence": "日本で最も深い湖であり、日本で19番目に広い湖沼でもある。",
+   "source": {
+    "sid": "ja-106",
+    "url": "https://ja.wikipedia.org/wiki/%E7%94%B0%E6%B2%A2%E6%B9%96",
+    "revid": 110963422
+   }
+  },
+  {
+   "id": 967,
+   "lang": "ja",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "田沢湖の湖畔には温泉施設がある。",
+   "sentence": "その全域が田沢湖抱返り県立自然公園に指定されており、日本百景にも選ばれている景勝地である。",
+   "source": {
+    "sid": "ja-107",
+    "url": "https://ja.wikipedia.org/wiki/%E7%94%B0%E6%B2%A2%E6%B9%96",
+    "revid": 110963422
+   }
+  },
+  {
+   "id": 968,
+   "lang": "ja",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "岩木山は青森県の弘前市と鰺ヶ沢町にまたがる火山である。",
+   "sentence": "岩木山（いわきさん）は、青森県弘前市および西津軽郡鰺ヶ沢町に位置する火山。",
+   "source": {
+    "sid": "ja-109",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B2%A9%E6%9C%A8%E5%B1%B1",
+    "revid": 111347270
+   }
+  },
+  {
+   "id": 969,
+   "lang": "ja",
+   "label": "C",
+   "type": "wrong place (prefecture)",
+   "claim": "岩木山は秋田県に位置する火山である。",
+   "sentence": "岩木山（いわきさん）は、青森県弘前市および西津軽郡鰺ヶ沢町に位置する火山。",
+   "source": {
+    "sid": "ja-109",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B2%A9%E6%9C%A8%E5%B1%B1",
+    "revid": 111347270
+   }
+  },
+  {
+   "id": 970,
+   "lang": "ja",
+   "label": "E",
+   "type": "alias",
+   "claim": "岩木山は津軽富士という別名でも呼ばれている。",
+   "sentence": "その山容から津軽富士とも呼ばれるほか、しばしば「お」をつけて「お岩木」、「お岩木山」あるいは「お岩木様」とも呼ばれる。",
+   "source": {
+    "sid": "ja-112",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B2%A9%E6%9C%A8%E5%B1%B1",
+    "revid": 111347270
+   }
+  },
+  {
+   "id": 971,
+   "lang": "ja",
+   "label": "C",
+   "type": "wrong kind (volcano type)",
+   "claim": "磐梯山は成層火山ではなく楯状火山である。",
+   "sentence": "磐梯朝日国立公園（磐梯吾妻・猪苗代地域）に属する成層火山である。",
+   "source": {
+    "sid": "ja-114",
+    "url": "https://ja.wikipedia.org/wiki/%E7%A3%90%E6%A2%AF%E5%B1%B1",
+    "revid": 109861601
+   }
+  },
+  {
+   "id": 972,
+   "lang": "ja",
+   "label": "E",
+   "type": "alias with reason",
+   "claim": "磐梯山は会津盆地の側から三角形の頂が見えることから、会津富士とも呼ばれる。",
+   "sentence": "会津盆地側からは、綺麗な三角の頂が見えることから会津富士（あいづふじ）、あるいは民謡にあるように会津磐梯山（あいづばんだいさん）とも呼ばれている。",
+   "source": {
+    "sid": "ja-115",
+    "url": "https://ja.wikipedia.org/wiki/%E7%A3%90%E6%A2%AF%E5%B1%B1",
+    "revid": 109861601
+   }
+  },
+  {
+   "id": 973,
+   "lang": "ja",
+   "label": "C",
+   "type": "reversed direction (source and mouth)",
+   "claim": "阿賀野川は新潟県に源流を持ち、福島県を流れて日本海に注ぐ。",
+   "sentence": "阿賀野川（あがのがわ）は、福島県に源流を持ち、新潟県を流れ日本海に注ぐ日本の河川。",
+   "source": {
+    "sid": "ja-117",
+    "url": "https://ja.wikipedia.org/wiki/%E9%98%BF%E8%B3%80%E9%87%8E%E5%B7%9D",
+    "revid": 110886997
+   }
+  },
+  {
+   "id": 974,
+   "lang": "ja",
+   "label": "E",
+   "type": "paraphrase with different words",
+   "claim": "阿賀野川は一級河川であり、阿賀野川水系の本流にあたる。",
+   "sentence": "国が指定した一級水系阿賀野川水系の本流であり一級河川に指定されている。",
+   "source": {
+    "sid": "ja-118",
+    "url": "https://ja.wikipedia.org/wiki/%E9%98%BF%E8%B3%80%E9%87%8E%E5%B7%9D",
+    "revid": 110886997
+   }
+  },
+  {
+   "id": 975,
+   "lang": "ja",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "阿賀野川の上流部には多数の発電用ダムがある。",
+   "sentence": "また、下流部の河川水流量は日本最大級の一級水系である。",
+   "source": {
+    "sid": "ja-120",
+    "url": "https://ja.wikipedia.org/wiki/%E9%98%BF%E8%B3%80%E9%87%8E%E5%B7%9D",
+    "revid": 110886997
+   }
+  },
+  {
+   "id": 976,
+   "lang": "ja",
+   "label": "E",
+   "type": "paraphrase of location",
+   "claim": "榛名山は群馬県のほぼ中央、関東平野の北西の端に位置している。",
+   "sentence": "榛名山（はるなさん）は、関東平野の北西端、群馬県のほぼ中央に位置する山。",
+   "source": {
+    "sid": "ja-121",
+    "url": "https://ja.wikipedia.org/wiki/%E6%A6%9B%E5%90%8D%E5%B1%B1",
+    "revid": 110045940
+   }
+  },
+  {
+   "id": 977,
+   "lang": "ja",
+   "label": "C",
+   "type": "wrong direction (compass point)",
+   "claim": "榛名神社は榛名山の北東のふもとに祀られている。",
+   "sentence": "古来山岳信仰を受けてきた山で、山の南西麓に榛名神社が祀られている。",
+   "source": {
+    "sid": "ja-123",
+    "url": "https://ja.wikipedia.org/wiki/%E6%A6%9B%E5%90%8D%E5%B1%B1",
+    "revid": 110045940
+   }
+  },
+  {
+   "id": 978,
+   "lang": "ja",
+   "label": "E",
+   "type": "plain restatement",
+   "claim": "九重山の最高峰は中岳で、標高は1,791メートルである。",
+   "sentence": "最高峰は九州本土最高峰でもある中岳（標高1,791m）。",
+   "source": {
+    "sid": "ja-125",
+    "url": "https://ja.wikipedia.org/wiki/%E4%B9%9D%E9%87%8D%E5%B1%B1",
+    "revid": 110194325
+   }
+  },
+  {
+   "id": 979,
+   "lang": "ja",
+   "label": "E",
+   "type": "alias / name usage",
+   "claim": "九重山の主峰である久住山の標高は1,787メートルである。",
+   "sentence": "一般的には火山群や周辺地域全体を指すときはくじゅう連山（九重連山）、その主峰となっている一山（標高1,787m）を指す場合には久住山も用いている。",
+   "source": {
+    "sid": "ja-126",
+    "url": "https://ja.wikipedia.org/wiki/%E4%B9%9D%E9%87%8D%E5%B1%B1",
+    "revid": 110194325
+   }
+  },
+  {
+   "id": 980,
+   "lang": "ja",
+   "label": "T",
+   "type": "topical claim the sentence does not address",
+   "claim": "九重山では現在も活発な噴気活動が続いている。",
+   "sentence": "日本百名山の一つに数えられ、一帯は阿蘇くじゅう国立公園に指定されている。",
+   "source": {
+    "sid": "ja-128",
+    "url": "https://ja.wikipedia.org/wiki/%E4%B9%9D%E9%87%8D%E5%B1%B1",
+    "revid": 110194325
+   }
+  },
+  {
+   "id": 981,
+   "lang": "es-en",
+   "label": "E",
+   "type": "cross-language: plain restatement",
+   "claim": "The Tagus Estuary nature reserve lies at the mouth of the Tagus river.",
+   "sentence": "En su desembocadura se encuentra la reserva natural del Estuario del Tajo.",
+   "source": {
+    "sid": "es-42",
+    "url": "https://es.wikipedia.org/wiki/Tajo",
+    "revid": 174403807
+   }
+  },
+  {
+   "id": 982,
+   "lang": "es-en",
+   "label": "E",
+   "type": "cross-language: paraphrase",
+   "claim": "Lake Ypacaraí is a place for recreation, especially in summer, when many visitors come to enjoy its beaches and natural scenery.",
+   "sentence": "El lago constituye un espacio de recreación y esparcimiento, especialmente durante la temporada estival, cuando recibe gran afluencia de visitantes que disfrutan de sus playas y paisajes naturales.",
+   "source": {
+    "sid": "es-47",
+    "url": "https://es.wikipedia.org/wiki/Lago_Ypacara%C3%AD",
+    "revid": 171671102
+   }
+  },
+  {
+   "id": 983,
+   "lang": "es-en",
+   "label": "C",
+   "type": "cross-language: wrong place (compass point)",
+   "claim": "The Guadiana is a river in the northeast of the Iberian Peninsula.",
+   "sentence": "El Guadiana es un río del sudoeste de la península ibérica.",
+   "source": {
+    "sid": "es-50",
+    "url": "https://es.wikipedia.org/wiki/Guadiana",
+    "revid": 175684790
+   }
+  },
+  {
+   "id": 984,
+   "lang": "es-en",
+   "label": "T",
+   "type": "cross-language: topical claim the sentence does not address",
+   "claim": "The Tagus International Natural Park is home to a colony of black storks.",
+   "sentence": "Más adelante se encuentra parque natural del Tajo Internacional, entre la provincia de Cáceres y Portugal.",
+   "source": {
+    "sid": "es-41",
+    "url": "https://es.wikipedia.org/wiki/Tajo",
+    "revid": 174403807
+   }
+  },
+  {
+   "id": 985,
+   "lang": "fr-en",
+   "label": "E",
+   "type": "cross-language: subset of listed cities",
+   "claim": "Strasbourg in France and Basel in Switzerland are among the large and important cities on the Rhine.",
+   "sentence": "Parmi les villes les plus grandes et importantes sur le Rhin se trouvent Rotterdam aux Pays-Bas, Cologne et Düsseldorf en Allemagne, Strasbourg en France et Bâle en Suisse.",
+   "source": {
+    "sid": "fr-78",
+    "url": "https://fr.wikipedia.org/wiki/Rhin",
+    "revid": 239996481
+   }
+  },
+  {
+   "id": 986,
+   "lang": "fr-en",
+   "label": "E",
+   "type": "cross-language: paraphrase",
+   "claim": "The Meuse (Maas) drainage basin covers only a small area in France but a large share of Wallonia.",
+   "sentence": "Son bassin versant occupe une petite surface en France tandis qu'il occupe une grande partie de la superficie de la Région wallonne (botte du Hainaut, province de Namur, Luxembourg belge, une partie de la province de Liège et des bandes plus étroites dans d'autres provinces) et la partie sud des Pays-Bas (principalement les provinces de Limbourg et du Brabant-Septentrional).",
+   "source": {
+    "sid": "fr-71",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 987,
+   "lang": "fr-en",
+   "label": "C",
+   "type": "cross-language: swapped places",
+   "claim": "The bottom of the basin of the Lac de Saint-Point is covered by recent river alluvium, while its two ends are covered by glacial deposits.",
+   "sentence": "Les deux extrémités sont occupées par des alluvions récentes, déposées par la rivière, le fond de cette cuvette étant, quant à lui, tapissé de dépôts glaciaires et fluvio-glaciaires.",
+   "source": {
+    "sid": "fr-60",
+    "url": "https://fr.wikipedia.org/wiki/Lac_de_Saint-Point",
+    "revid": 240516717
+   }
+  },
+  {
+   "id": 988,
+   "lang": "fr-en",
+   "label": "T",
+   "type": "cross-language: topical claim the sentence does not address",
+   "claim": "The Meuse valley is popular with cyclists and kayakers.",
+   "sentence": "Sa vallée présente de nombreux paysages variés alliant de hautes falaises et des méandres rocheux à des plaines s'étendant sur des kilomètres.",
+   "source": {
+    "sid": "fr-70",
+    "url": "https://fr.wikipedia.org/wiki/Meuse_(fleuve)",
+    "revid": 240637325
+   }
+  },
+  {
+   "id": 989,
+   "lang": "de-en",
+   "label": "E",
+   "type": "cross-language: paraphrase",
+   "claim": "The catchment area of the Rhine has a share in nine states.",
+   "sentence": "Mit ihnen hat sein Einzugsgebiet Anteil an neun Staaten.",
+   "source": {
+    "sid": "de-83",
+    "url": "https://de.wikipedia.org/wiki/Rhein",
+    "revid": 271383095
+   }
+  },
+  {
+   "id": 990,
+   "lang": "de-en",
+   "label": "E",
+   "type": "cross-language: plain restatement",
+   "claim": "The Traun flows through the Traunsee along its length, from Ebensee in the south to Gmunden in the north.",
+   "sentence": "Die Traun durchfließt ihn der Länge nach von Ebensee am Traunsee im Süden nach Gmunden im Norden.",
+   "source": {
+    "sid": "de-90",
+    "url": "https://de.wikipedia.org/wiki/Traunsee",
+    "revid": 270681415
+   }
+  },
+  {
+   "id": 991,
+   "lang": "de-en",
+   "label": "C",
+   "type": "cross-language: wrong place (region)",
+   "claim": "The Traunsee is located in the Styrian part of the Salzkammergut.",
+   "sentence": "Der Traunsee ist ein See im oberösterreichischen Teil des Salzkammerguts am Nordrand der nördlichen Kalkalpen.",
+   "source": {
+    "sid": "de-87",
+    "url": "https://de.wikipedia.org/wiki/Traunsee",
+    "revid": 270681415
+   }
+  },
+  {
+   "id": 992,
+   "lang": "de-en",
+   "label": "T",
+   "type": "cross-language: topical claim the sentence does not address",
+   "claim": "The national park that contains most of the Königssee was established in 1978.",
+   "sentence": "Der Großteil des Königssees liegt im Nationalpark Berchtesgaden.",
+   "source": {
+    "sid": "de-98",
+    "url": "https://de.wikipedia.org/wiki/K%C3%B6nigssee",
+    "revid": 269719454
+   }
+  },
+  {
+   "id": 993,
+   "lang": "ja-en",
+   "label": "E",
+   "type": "cross-language: paraphrase",
+   "claim": "Mount Bandai is listed among the 100 Famous Japanese Mountains and is regarded as one of the symbols of Fukushima Prefecture.",
+   "sentence": "日本百名山に選定されており、福島県のシンボルの一つとされている。",
+   "source": {
+    "sid": "ja-116",
+    "url": "https://ja.wikipedia.org/wiki/%E7%A3%90%E6%A2%AF%E5%B1%B1",
+    "revid": 109861601
+   }
+  },
+  {
+   "id": 994,
+   "lang": "ja-en",
+   "label": "E",
+   "type": "cross-language: plain restatement",
+   "claim": "Mount Haruna is one of the Jomo Sanzan, the Three Mountains of Jomo.",
+   "sentence": "上毛三山の一つである。",
+   "source": {
+    "sid": "ja-122",
+    "url": "https://ja.wikipedia.org/wiki/%E6%A6%9B%E5%90%8D%E5%B1%B1",
+    "revid": 110045940
+   }
+  },
+  {
+   "id": 995,
+   "lang": "ja-en",
+   "label": "C",
+   "type": "cross-language: reversed naming direction",
+   "claim": "Lake Tazawa was named after the town of Tazawako, which existed from 1956 to 2005.",
+   "sentence": "1956年（昭和31年）から2005年（平成17年）まで存在した自治体である田沢湖町の名の由来であり、現在も旧田沢湖町の区域の地名冠称として使われている。",
+   "source": {
+    "sid": "ja-108",
+    "url": "https://ja.wikipedia.org/wiki/%E7%94%B0%E6%B2%A2%E6%B9%96",
+    "revid": 110963422
+   }
+  },
+  {
+   "id": 996,
+   "lang": "ja-en",
+   "label": "T",
+   "type": "cross-language: topical claim the sentence does not address",
+   "claim": "Mount Iwaki has a ski resort on its slopes.",
+   "sentence": "日本百名山および新日本百名山に選定されている。",
+   "source": {
+    "sid": "ja-111",
+    "url": "https://ja.wikipedia.org/wiki/%E5%B2%A9%E6%9C%A8%E5%B1%B1",
+    "revid": 111347270
+   }
+  }
+ ]
+}

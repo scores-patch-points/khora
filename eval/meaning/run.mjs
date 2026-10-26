@@ -65,7 +65,7 @@ const arms = {
 // MEANING_ATOMS=1: an "atoms" arm — grammar-ud's verdict, and the claim and its source read as ATOMS (read-atoms.js, the page's referents by the
 // learned coreference ranker) and weighed atom by atom (atom-support.js): supported when the claim matcher says so or every claim atom is met,
 // contradicted when either finds a contradiction. MEANING_ATOMS=produce adds the learned producer, predicate chooser and filter.
-let ATOMS = null, NLI = null;
+let ATOMS = null;
 if (process.env.MEANING_ATOMS && SLIM && arms["grammar-ud"]) {
   const { readAtoms, cleanText } = await import("../../native/organs/read-atoms.js"), { atomSupport, swapFlags } = await import("../../native/kernel/atom-support.js");
   const { matchVerdict, matchUnits } = await import("../../native/kernel/atom-match.js");
@@ -95,9 +95,6 @@ if (process.env.MEANING_ATOMS && SLIM && arms["grammar-ud"]) {
     return { ...r, swaps: swapFlags(A.atoms, B.atoms, o), claimAtoms: A.atoms, sourceAtoms: B.atoms, units: process.env.MEANING_ATOMS_UNITS ? matchUnits(A.atoms, B.atoms, o).units.map((u) => ({ what: u.what, options: u.options })) : null };
   };
   arms.atoms = arms["grammar-ud"];
-  // MEANING_NLI=<scores.jsonl>:<threshold>: the "nli" arm (PREREG run 20b): contradiction as the atoms arm finds it, else E when the NLI model's
-  // entailment probability (nli-score.mjs; sentence as premise, claim as hypothesis) reaches the threshold
-  if (process.env.MEANING_NLI) arms.nli = arms["grammar-ud"];
 }
 const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
 const sets = { main: path.join(C3, "battery.json"), cf: path.join(C3, "battery-cf.json"), heldout: path.join(HERE, "heldout.json"), other: path.join(HERE, "heldout-other.json"), fresh: path.join(HERE, "fresh.json"), relations: path.join(HERE, "relations.json"), "fresh-ml": path.join(HERE, "fresh-ml.json") };
@@ -105,13 +102,15 @@ const sets = { main: path.join(C3, "battery.json"), cf: path.join(C3, "battery-c
 for (const kv of (process.env.MEANING_EXTRA ?? "").split(",").filter(Boolean)) { const [k, f] = kv.split("="); sets[k] = f; }
 if (process.env.MEANING_ONLY) for (const k of Object.keys(sets)) if (!process.env.MEANING_ONLY.split(",").includes(k)) delete sets[k];
 console.log(`reader: ${READER}`);
+// MEANING_ARMS=a,b: run only these arms (and the wording judge only when named)
+if (process.env.MEANING_ARMS) for (const k of Object.keys(arms)) if (!process.env.MEANING_ARMS.split(",").includes(k)) delete arms[k];
 const out = {};
 for (const [name, f] of Object.entries(sets)) {
   if (!fs.existsSync(f)) continue;
   const pairs = JSON.parse(fs.readFileSync(f, "utf8")).pairs;
   const nE = pairs.filter((p) => p.label === "E").length, nNot = pairs.length - nE, nC = pairs.filter((p) => p.label === "C").length;
   console.log(`\n== ${name} (${pairs.length} pairs: ${nE} E, ${nC} C)`);
-  const all = { ...Object.fromEntries(Object.keys(arms).map((a) => [a, null])), wording: null };
+  const all = { ...Object.fromEntries(Object.keys(arms).map((a) => [a, null])), ...(!process.env.MEANING_ARMS || process.env.MEANING_ARMS.split(",").includes("wording") ? { wording: null } : {}) };
   for (const arm of Object.keys(all)) {
     let acc = 0, fa = 0, fr = 0, cc = 0, gap = 0; const rows = [];
     // janus over every pair this arm can read, in one call (one ground per pair)
@@ -121,8 +120,6 @@ for (const [name, f] of Object.entries(sets)) {
       let v;
       if (arm === "wording") v = lexical(p.claim, p.sentence);
       else { const A = arms[arm](p.claim, lang, "claim"), B = arms[arm](p.sentence, lang, "source", contextOf(p)); let why = null; if (!A || !B) { v = "G"; gap++; } else { const r = verdict(A, B, arm === "grammar-defs" || arm === "grammar-ud" || arm === "atoms" ? { relations: DEFS } : {}); v = r.v; why = r.why; if (v !== "C" && jset.has(String(p.id))) { v = "C"; why = "janus"; }
-          if (arm === "nli" && v !== "C") { const at = ATOMS(p), [nf, nt] = process.env.MEANING_NLI.split(":"); NLI ??= new Map(fs.readFileSync(nf, "utf8").trim().split("\n").map((l) => JSON.parse(l)).map((r) => [`${r.set}:${r.id}`, r.nli]));
-            const e = NLI.get(`${name}:${p.id}`)?.[0]; if (at?.rule?.verdict === "C" || at?.verdict === "C") { v = "C"; why = "atoms"; } else if (e != null && e >= +nt) { v = "E"; why = "nli"; } else v = "N"; }
           if (arm === "atoms" && v !== "C") { const at = ATOMS(p), base = v;
             if (process.env.MEANING_ATOMS_UNITS && at) fs.appendFileSync(process.env.MEANING_ATOMS_UNITS, JSON.stringify({ set: name, id: p.id, label: p.label, lang: p.lang ?? "en", base, rule: at.rule?.verdict ?? at.verdict, units: at.units }) + "\n"); if (at?.verdict === "C") { v = "C"; why = "atoms"; } else if (at?.verdict === "E") { v = "E"; why = "atoms"; } if (process.env.MEANING_ATOMS_DUMP && at) fs.appendFileSync(process.env.MEANING_ATOMS_DUMP, JSON.stringify({ set: name, id: p.id, label: p.label, v, claim: p.claim, sentence: p.sentence, table: at.table.map((t) => ({ atom: t.atom.text, state: t.state, by: t.by?.text ?? null })), unread: at.unread, swaps: at.swaps, source: at.sourceAtoms.map((a) => a.text) }) + "\n"); } }
         // MEANING_DUMP=<file.jsonl>: every pair's verdict, basis and claims, per arm, for the failure breakdown
