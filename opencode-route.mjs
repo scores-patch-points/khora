@@ -258,6 +258,9 @@ async function decide(ask, { history = [] } = {}) {
   const unsettled = () => (lang && lang !== "en"
     ? { settled: false, gap: "no_codec", detail: `the mechanical lane reads operator words in English and notation in any language; this ask's operators are ${lang} words, which no codec on the lane reads yet` }
     : { settled: false, gap: "no_mechanism", detail: "no mechanism on the lane settles this shape" });
+  // code outranks an UNSETTLED computation: "why does `a = 3 * 4` fail?" names two quantities, but it is a question about code, and no organ
+  // computed anything (the lane, above, did not settle it). Only a settled computation comes before the code check.
+  if (spaceWords(text).some(codeShaped) || hit.work) return verdict("work", "a code-shaped token or a work noun");
   if (hit.compute && numbers.length >= 1) return verdict("mechanical", "a computing verb over a number", unsettled());
   if (hit.arith && numbers.length >= 2) return verdict("mechanical", "an arithmetic word over two numbers", unsettled());
   if (en?.questionTwoQuantities && question) return verdict("mechanical", "a question over two quantities with nothing named", unsettled());
