@@ -1233,3 +1233,16 @@ fast: 5 files · 53 affected tests pass · law: ok (WARN pre-existing S17 S96 du
 | Ostrom | — | native/the-fold/read-core.mjs:167 (`lexicon.log[last].gap`) | fixed | a read whose forms were all known inherited an earlier read's unanswered ask; the gap is now the consult's own asks, tested |
 | Kondo | — | native/adapters/text/wiktionary-pack.js | noted | unwired (reading.js was its one importer); stashed in place, not deleted |
 clean: Dijkstra (identity is the exact form, case kept — "as written"), Holmes (aliasOf returns the givers' own `of` targets, no surface merge), Frankfurt (standing is the door's, no placeholder)
+
+## 2026-10-26 — the recipient role has one shape in every language; object pronouns are disjoint from the subject (branch `reader-recipient`, stacked on #63)
+
+fast: 7 files · 3 affected test files, 17 pass + 1 todo (observed failing, kept as the record) · law: ok (pre-existing dup-header WARN S17/S96) · full native suite: 988 tests, 4 real failures (greekClauses x2, janus second maker, material-doorway), all in main's known set, none new
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Greenberg | greenberg.js scan, diff lines | atoms.js, grammar-packs.js, coref-learned.js | fixed | `atomize` had silently defaulted `lang` to "en"; removed, an unspecified language keeps the old shape. RECIPIENT is a declared per-language class (en es fr ja), a language not listed degrades, never guessed; UD Case=Dat is read first. The 3 scan hits are pre-existing lines (coref-learned.js:24, 25, 200), not this diff |
+| Holmes | atoms.js:33 | `person: "1pl"` | fixed | the first-person class merges on UD Person/Number (or the pack's declared words), never on spelling; the one assumption (claim and source speak in one voice) was undeclared, now stated at the line |
+| Frankfurt | recipient-role.test.mjs:42 | the `todo` test | noted | not a placeholder: a constructed pair observed failing (PP attachment to the noun after a determiner), kept as a `todo` with its giver named (the verb frame), lesson 70 |
+| Simon/Chekhov | atoms.js, coref-learned.js | no test imports them directly | noted | both are reached through read-atoms.js by coref-person.test.mjs and recipient-role.test.mjs |
+
+clean: none routed and silent.

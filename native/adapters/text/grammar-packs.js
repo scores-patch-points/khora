@@ -9,6 +9,12 @@ const set = (s) => new Set(s.split(/\s+/).filter(Boolean));
 const SI = (o) => Object.fromEntries(Object.entries(o).flatMap(([k, v]) => k.split("|").map((w) => [w, v])));
 const LEN = (f) => ["length", f], MASS = (f) => ["mass", f], TIME = (f) => ["time", f], AREA = (f) => ["area", f];
 
+// RECIPIENT: the word a language marks the recipient of a transfer with (giver: that language's reference grammar), used by atoms.js to give the
+// indirect object, the dative case and the dative adposition ONE shape. UD's Case=Dat is read first; this is only the label the atom is written
+// with, so a recipient from "sold Sagard receivables" and from "sold receivables to Sagard" meet. A language not listed has no declared dative: its
+// recipient stays as the grammar read it (never a guessed label), and a Case=Dat word with no adposition is written "dat".
+export const RECIPIENT = Object.freeze({ en: "to", es: "a", fr: "à", ja: "に" });
+
 export const PACKS = {
   es: {
     neg: set("no nunca jamás tampoco ni"), agent: set("por"), than: set("que"), more: set("más"), less: set("menos"), with: set("con"),

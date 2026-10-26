@@ -20,21 +20,29 @@
 // adjective is the focus and the head noun's kind and the clause's frame (its obliques) are presupposed with it. A clause negated through a quantifier
 // ("no mountain is higher than Y") keeps every atom under its polarity: atom-support.js's canonical() rewrites them together.
 import { NO } from "../kernel/atom-support.js";
+import { RECIPIENT } from "../adapters/text/grammar-packs.js";
 const lc = (s) => String(s ?? "").toLowerCase();
 
-export function atomize({ claims, rows, mentions, entities, text }) {
+export function atomize({ claims, rows, mentions, entities, text, lang }) {
   const byId = (id) => rows.find((r) => r.id === id), E = new Map(entities.map((e) => [e.id, e]));
   const mentionOf = (hid) => mentions.find((m) => m.hid === hid) ?? mentions.find((m) => m.ids?.includes(hid)) ?? null;
   const textOfIds = (ids) => { const ws = ids.map(byId).filter(Boolean); if (!ws.length) return ""; return text.slice(Math.min(...ws.map((w) => w.start)), Math.max(...ws.map((w) => w.end))); };
   const arg = (end) => {
     if (!end) return null;
     const m = end.hid != null ? mentionOf(end.hid) : null;
-    if (m?.entity && E.get(m.entity)) return { entity: m.entity, name: E.get(m.entity).name, ids: end.ids ?? [] };
+    // a first-person mention ("we", "us", "our", "nos", "nous"; coref.js reads Person=1 Number=Plur) is one referent whatever its case: the atom carries
+    // that class so the meeting of two ends does not rest on the spelling (Frege: reference is an equivalence class, never a spelling). SCOPE, declared: it
+    // equates the speakers of a claim and its source (the claim is written about the filing in its voice, "Centessa paid us"). That convention already held
+    // for the string "we" meeting the string "we"; this extends it across case ("us", "our", "nos", "nous"), from evidence (UD Person/Number) and no word list.
+    if (m?.entity && E.get(m.entity)) return { entity: m.entity, name: E.get(m.entity).name, ids: end.ids ?? [], ...(m.how === "we" ? { person: "1pl" } : {}) };
     const ws = (end.ids ?? []).map(byId).filter((w) => w && !/^(DET|ADP|PUNCT)$/.test(w.upos));
     return { value: ws.length ? textOfIds(ws.map((w) => w.id)) : end.text, ids: end.ids ?? [] };
   };
   const dropped = (vid) => { const m = mentions.find((x) => x.how === "dropped" && x.hid === vid); return m?.entity && E.get(m.entity) ? { entity: m.entity, name: E.get(m.entity).name, ids: [] } : null; };
   const caseOf = (end) => { const w = (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP"); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
+  // THE RECIPIENT. UD marks it as the indirect object, as the dative case on the word itself (Case=Dat), or by the dative adposition; the first two carry no
+  // adposition to name the relation by, so they are written with the language's declared dative (grammar-packs RECIPIENT), else "dat" for a Case=Dat word.
+  const dative = (end) => { const h = end?.hid != null ? byId(end.hid) : null; return h && /(^|\|)Case=Dat(\||$)/.test(h.feats ?? "") ? (RECIPIENT[lang] ?? "dat") : null; };
   const out = [], seen = new Set();
   const push = (pred, args, base, idsUsed) => {
     const as = args.filter(Boolean); if (!pred || !as.length) return;
@@ -99,8 +107,12 @@ export function atomize({ claims, rows, mentions, entities, text }) {
         push("is_a", [A0, { value: kind || c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], frame, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
         adjAtoms(c.ARG1, A0, base);
       }
+    } else if (A2 && RECIPIENT[lang]) {
+      // an indirect object is the recipient oblique said without its adposition: the same two atoms ("sold Sagard receivables" = "sold receivables to Sagard")
+      push(c.rel, [A0, A1], base, [V, A0?.ids ?? [], A1?.ids ?? []]);
+      push(`${c.rel}_${RECIPIENT[lang]}`, [A0 ?? A1, A2], base, [V, A2?.ids ?? []]);
     } else push(c.rel, [A0, A1, A2], base, [V, A0?.ids ?? [], A1?.ids ?? [], A2?.ids ?? []]);
-    for (const o of c.OBL ?? []) push(`${c.rel}_${caseOf(o) ?? "at"}`, [A0 ?? A1, arg(o)], frame, [V, o.ids ?? []]);
+    for (const o of c.OBL ?? []) push(`${c.rel}_${caseOf(o) ?? dative(o) ?? "at"}`, [A0 ?? A1, arg(o)], frame, [V, o.ids ?? []]);
     // an oblique already said as the claim's own place or time is not said again as a modifier of its predicate noun
     skipMod = new Set((c.OBL ?? []).map((o) => o.hid));
     for (const [end, a] of [[c.ARG0, A0], [c.ARG1, c.rel === "be" ? A0 : A1], [c.ARG2, A2], ...(c.OBL ?? []).map((o) => [o, arg(o)])]) {
@@ -109,7 +121,7 @@ export function atomize({ claims, rows, mentions, entities, text }) {
       if (c.rel !== "be" || end !== c.ARG1) adjAtoms(end, a, pres);
       // an oblique's coordinated words repeat its relation ("borders … Wisconsin, Iowa, Illinois"), under the clause's polarity; a modifier's do as before
       const isObl = (c.OBL ?? []).includes(end);
-      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, inner, isObl ? { pred: `${c.rel}_${caseOf(end) ?? "at"}`, owner: A0 ?? A1, base: frame } : null);
+      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, inner, isObl ? { pred: `${c.rel}_${caseOf(end) ?? dative(end) ?? "at"}`, owner: A0 ?? A1, base: frame } : null);
     }
   }
   // every other name the sentence gives an entity is a fact of the sentence (named), and a name joined to a common noun through "de" / "of"
