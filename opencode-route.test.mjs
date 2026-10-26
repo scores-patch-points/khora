@@ -87,3 +87,17 @@ test("the topic keeps what the question asks about: the attribute noun and the p
   assert.equal((await routeOf("who invented the telephone")).kind, "account", "a sentence-initial who is a question, not the verb 'invent' asked of the model");
   assert.equal((await routeOf("invent a name for my cat")).kind, "creative");
 });
+
+// THE ISTHMUS: a mechanical verdict no organ settled is typed, never presented as computed (native/docs/THE-ISTHMUS.md).
+test("Isthmus: a mechanical verdict says whether an organ settled it", async () => {
+  const en = await routeOf("What is 17 times 24?");
+  assert.equal(en.kind, "mechanical");
+  assert.equal(en.settled, true);
+  const es = await routeOf("¿Cuánto es 17 por 24?");
+  assert.equal(es.kind, "mechanical");
+  assert.equal(es.settled, false, "FALSIFIER: Spanish operator words presented as settled");
+  assert.equal(es.gap, "no_codec");
+  const notation = await routeOf("¿Cuánto es 17 × 24?");
+  assert.equal(notation.kind, "mechanical", "FALSIFIER: a notation span in a Spanish sentence was routed away from computation");
+  assert.equal(notation.settled, true);
+});
