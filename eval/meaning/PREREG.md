@@ -873,3 +873,12 @@ arm and the wording judge on the same 96 pairs; the bars of this entry, read as 
     such words): the reader's coverage, not HL, is what is missing; (3) no converse giver was named, so
     role swaps are never accepted, not caught (M6 was not built); (4) a conjunction that lets one unbound end absorb a bound core is a design choice of
     HL's ∧, not of the spec's laws.
+
+### Run 23: as merged (2026-10-26)
+
+The arm is **not adopted** (V3 and V4 missed on the nine spent sets and on the 96-pair held-out set `fresh23.json`); it is merged as the published record, **off by default**, and nothing is frozen. While this branch waited, main merged a different Stage@1 (`native/kernel/stage.js`, PRs #57, #58 and #59), so on merge:
+
+- the arm's files are `native/organs/stage-arm.js`, `stage-arm-bind.js`, `stage-arm-verdict.js`, `stage-arm.test.mjs`, `eval/meaning/stage-arm-run.mjs` and `stage-arm-coverage.mjs`, and its schema is **`StageArm@1`**, so main carries one `Stage@1`; the text above says `stage.js`, `stage-run.mjs` and "Stage@1" for the arm, as it was written and run;
+- RC6's retirement of `canonical()` from `native/kernel/atom-support.js` is **not applied**: main's `kernel/stage.js` imports it, and retiring it is a step of adopting the arm. `atom-support.js` and `atom-match.js` are main's, and the rules arm in `run.mjs` reads `A.atoms` as on main (the reader's `forms` field and `atom-forms.js` stay, additive, unused by the rules arm);
+- `atoms.js` carries both changes: main's `tense`, `time` and negation-presupposition frame, and the arm's argument word ids and `head` row id;
+- M0 (the NLI arms and scripts deleted) stands, as the spec's step 0.

@@ -1,4 +1,4 @@
-// stage.js — Stage@1: one sentence as the reader read it, written as one record HL can reason over (the stage spec, proposal 2026-10-25).
+// stage-arm.js — StageArm@1: one sentence as the reader read it, written as one record HL can reason over (the stage spec, proposal 2026-10-25).
 //
 // The reader (read-atoms.js) writes atoms: n-ary facts over the page's referents. HL (interpretation/hl.js) reads binary edges between
 // anchors. Before this file the meaning check never met HL: it scored atoms against atoms with its own matcher (atom-support.js). A stage is
@@ -14,14 +14,14 @@
 // reading is `<doc>#<entity id>`; an end the reading did not resolve is kept, as an anchor whose `via` says so, with an end_unresolved gap over
 // its words. A copula's kind (is_a) and a naming's name (named) are anchors of their own kind, identified by their words. Every arrangement
 // keeps its byte span in the original sentence and a content address (RC8); every list is sorted by id, so the same bytes give the same stage.
-//   readStage(reading, { text, lang, title, previous, grammar, priors }) → Stage@1
+//   readStage(reading, { text, lang, title, previous, grammar, priors }) → StageArm@1
 //   fromArrangements(stage) → atoms (the atoms the arrangements encode, for checking that nothing was lost)
 //   serializeStage(stage) → the canonical JSON text; stageHash(stage) → its sha256
 //   hlStageOf(stage, { layers, licenses }) → an HL stage (createStage …) carrying the arrangements as edges, with provenance
 import { sha256hex } from "../adapters/text/sha256hex.js";
 import { createStage, addAnchor, addEdge, declareFunctional, declareTransitive } from "../interpretation/hl.js";
 
-export const STAGE_SCHEMA = "Stage@1";
+export const STAGE_SCHEMA = "StageArm@1";
 export const STAGE_READER_VERSION = "stage-reader@1 (2026-10-25)";
 export const HOLDS = "holds";
 
@@ -197,7 +197,7 @@ export function fromArrangements(st) {
 }
 
 /** R7: declare two relations equivalent. A license, not a rewrite: the verdict reads a claim arrangement over either through the class at read
- *  time (stage-verdict.js). Refused without a named giver (law 4). */
+ *  time (stage-arm-verdict.js). Refused without a named giver (law 4). */
 export function declareEquivalent(relA, relB, { giver } = {}) {
   if (!giver || typeof giver !== "string") { const e = new Error(`stage: no_giver — equivalent(${relA}, ${relB}) requires a named giver — a declaration is exactly as strong as its acquisition`); e.refused = { type: "no_giver", detail: String(giver) }; throw e; }
   if (!relA || !relB || relA === relB) throw Object.assign(new Error("stage: malformed_equivalence — two different relations are required"), { refused: { type: "malformed_equivalence" } });
@@ -224,7 +224,7 @@ export function candidateEquivalences(claim, source, same, { giver } = {}) {
   return out;
 }
 
-/** an HL stage over a Stage@1: every anchor, and every arrangement in the named layers as an edge whose provenance is the arrangement's id */
+/** an HL stage over a StageArm@1: every anchor, and every arrangement in the named layers as an edge whose provenance is the arrangement's id */
 // layered (RC5): the stage is read in two views of one HL stage. An asserted edge is an edge of the asserted view (A:rel) and of the union
 // view (U:rel); a reported edge (hedged text) only of the union view. An asserted claim reads the asserted view, so a reported edge neither
 // binds nor contradicts it; a hedged claim reads the union view, supported by either. Licenses hold in both views.
@@ -242,7 +242,7 @@ export function hlStageOf(st, { layers = ["asserted", "reported"], licenses = st
   for (const l of licenses) {
     if (l.kind === "functional") for (const rel of l.rels) for (const v of views(rel)) declareFunctional(H, v, { giver: l.giver });
     else if (l.kind === "transitive") for (const rel of l.rels) for (const v of views(rel)) declareTransitive(H, v, { giver: l.giver });
-    // an `equivalent` license is read at read time (stage-verdict.js classOf), never written into the stage
+    // an `equivalent` license is read at read time (stage-arm-verdict.js classOf), never written into the stage
   }
   return H;
 }

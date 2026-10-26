@@ -1,11 +1,11 @@
-// stage.test.mjs — Stage@1 (stage.js), its bindings (stage-bind.js) and the HL verdict over it (stage-verdict.js), on hand-built readings:
+// stage.test.mjs — StageArm@1 (stage-arm.js), its bindings (stage-arm-bind.js) and the HL verdict over it (stage-arm-verdict.js), on hand-built readings:
 // no parser, no priors, so what is pinned is the re-encoding and the logic, not a reading.
 //   node --test organs/stage.test.mjs
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readStage, fromArrangements, serializeStage, stageHash, byteSpan, HOLDS, STAGE_SCHEMA } from "./stage.js";
-import { bindNone, bindFolded } from "./stage-bind.js";
-import { stageVerdict, conjunctsOf } from "./stage-verdict.js";
+import { readStage, fromArrangements, serializeStage, stageHash, byteSpan, HOLDS, STAGE_SCHEMA } from "./stage-arm.js";
+import { bindNone, bindFolded } from "./stage-arm-bind.js";
+import { stageVerdict, conjunctsOf } from "./stage-arm-verdict.js";
 import { sha256hex } from "../adapters/text/sha256hex.js";
 
 // "Lake Baikal is a rift lake in Siberia." with its words as a parse would give them
@@ -106,7 +106,7 @@ test("no reading is a parser_absent gap, never a verdict", () => {
 });
 
 // ---- M2: binding by janus's resolve (injected) and the deranged control ------------------------------------------------------------------
-import { makeResolveBind, derange } from "./stage-bind.js";
+import { makeResolveBind, derange } from "./stage-arm-bind.js";
 import { JANUS_DIR } from "../the-fold/priors-home.js";
 import fs from "node:fs";
 import path from "node:path";
@@ -150,7 +150,7 @@ test("INS with janus's own resolve.mjs, where the janus checkout is beside khora
 });
 
 // ---- M3: figures bound by value, their attribute's license, superlatives over their comparison class (RC3, RC6) ---------------------------
-import { bindQuantity } from "./stage-bind.js";
+import { bindQuantity } from "./stage-arm-bind.js";
 // a reading from tokens: [form, lemma, upos, head, deprel, feats]
 const readingOf = (text, toks, { entities, mentions, atoms }) => {
   let at = 0; const rows = toks.map(([form, lemma, upos, head, deprel, feats = null], i) => { const start = text.indexOf(form, at); at = start + form.length; return { id: i + 1, form, lemma, upos, head, deprel, feats, start, end: start + form.length }; });
@@ -215,8 +215,8 @@ test("RC6: the reader's canonical forms are kept beside the atoms they replace, 
 });
 
 // ---- M4: the hedge layer (RC5) and coverage as gaps (RC7) --------------------------------------------------------------------------------
-import { classGaps, unreadGaps } from "./stage-verdict.js";
-import { hlStageOf } from "./stage.js";
+import { classGaps, unreadGaps } from "./stage-arm-verdict.js";
+import { hlStageOf } from "./stage-arm.js";
 const be_in = (o = {}) => ({ pred: "be_in", args: [BAIKAL, { value: "Siberia", ids: [8] }], neg: false, hedged: false, approx: false, start: 0, end: 37, head: 7, ...o });
 const withAtoms = (atoms, extra = {}) => ({ ...reading(), atoms, ...extra });
 const m4 = (claim, source, o = {}) => stageVerdict({ claim, source, bind: bindFolded, layered: true, gapRule: true, ...o });
@@ -259,7 +259,7 @@ test("RC7: an unread word is a reading failure when the source states it, a real
 });
 
 // ---- V5: constructed role and direction swaps, drawn from the source's own universe -----------------------------------------------------
-import { swapReads } from "./stage-verdict.js";
+import { swapReads } from "./stage-arm-verdict.js";
 test("V5: a swap is a claim the source does not state, and HL does not bind it", () => {
   const two = withAtoms([be_in()], { entities: [{ id: "E1", name: "Lake Baikal" }, { id: "E3", name: "Angara" }], page: [{ rows: [], mentions: [{ text: "Angara", how: "name", entity: "E3" }] }, { rows: ROWS, mentions: [{ text: "Lake Baikal", ids: [1, 2], hid: 2, how: "name", entity: "E1" }] }] });
   const source = sourceOf(two), claim = stageOf(withAtoms([be_in()]));
@@ -278,8 +278,8 @@ test("the verdict carries the trace V5 and the ablation read", () => {
 });
 
 // ---- M5: the equivalent license (R7), read at read time, never by rewriting the stage -------------------------------------------------------
-import { declareEquivalent, classOf, candidateEquivalences } from "./stage.js";
-import { expandEquivalents } from "./stage-verdict.js";
+import { declareEquivalent, classOf, candidateEquivalences } from "./stage-arm.js";
+import { expandEquivalents } from "./stage-arm-verdict.js";
 const GIVER = "test synonymy";
 test("R7: declareEquivalent needs a named giver and two different relations", () => {
   assert.throws(() => declareEquivalent("a", "b"), /no_giver/);

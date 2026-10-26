@@ -1,149 +1,123 @@
-// eval/meaning/stage-run.mjs — the STAGE arm (PREREG run 23): claim and source each read by read-atoms.js into a Stage@1 record (stage.js), the
-// claim's ends bound to the source's anchors (stage-bind.js), the verdict HL's read(stage, formula) (stage-verdict.js). Nothing else decides.
-// Each pair is read once; every binding mode is then judged on the same stages, so modes differ only in their binding or licenses.
-//   node eval/meaning/stage-run.mjs [--sets main,cf,…] [--modes none,folded] [--out result.json] [--stages stages.jsonl] [--pairs pairs.jsonl]
-// Sets: the nine spent sets by default (The Fold's C3 main and counterfactual from FOLD_C3_DIR, and this folder's), or any name=file.json.
-// Environment as run.mjs: FOLD_WIKT_SLIM (the slim Wiktionary), FOLD_WIKT_TRANSLATIONS, KHORA_PRIORS_DIR (the priors the reader reads).
+// eval/meaning/stage-run.mjs — the Stage@1 arm (native/kernel/stage.js) against the atoms rules, on the English pairs of the spent sets.
+// POST HOC and diagnostic: these sets are spent; the arm has no trained parameter and no threshold. English only: no Wiktionary is read, so
+// predicate equivalence is off for both the rules and the stage arm (a fair floor). A fresh pre-registered set is the real test (PREREG run 23).
+//   node eval/meaning/stage-run.mjs        (V=1 prints every proof)
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
+const HERE = path.dirname(fileURLToPath(import.meta.url)), K = path.join(HERE, "../..");
+const GE = await import(path.join(K, "native/adapters/text/grammar-en.js"));
+const { readAtoms } = await import(path.join(K, "native/organs/read-atoms.js"));
+const { atomSupport } = await import(path.join(K, "native/kernel/atom-support.js"));
+const { checkProof } = await import(path.join(K, "native/kernel/proof-check.js"));
+const { stageFromAtoms, judgeClaim, stageBytes, LICENSES } = await import(path.join(K, "native/kernel/stage.js"));
+const grammar = { rowsOf: GE.rowsOf, claimsOf: (t, rows) => GE.claimsOf(t, rows) };
+const corefModel = JSON.parse(fs.readFileSync(path.join(HERE, "atoms/coref-ranker.json"), "utf8"));
+const SRC = new WeakMap();
+const rank = { E: 2, C: 2, N: 0 };
 
-const HERE = path.dirname(fileURLToPath(import.meta.url)), N = path.join(HERE, "../../native");
-const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i < 0 ? d : process.argv[i + 1]; };
-const { readStage, stageHash, serializeStage, candidateEquivalences } = await import(`${N}/organs/stage.js`);
-const BIND = await import(`${N}/organs/stage-bind.js`);
-const { stageVerdict, swapReads } = await import(`${N}/organs/stage-verdict.js`);
-const { readAtoms } = await import(`${N}/organs/read-atoms.js`);
-const GE = await import(`${N}/adapters/text/grammar-en.js`), { loadGrammar } = await import(`${N}/adapters/text/grammar-ud.js`), { PACKS } = await import(`${N}/adapters/text/grammar-packs.js`);
-const { openSlim } = await import(`${N}/organs/wikt-slim.js`), { makeGlossary, makeSynonymy, loadTranslations } = await import(`${N}/organs/wikt-gloss.js`);
-const { priorsHome } = await import(`${N}/the-fold/prior-source.mjs`);
-// janus's identity organs, read where khora reads janus (priors-home.js JANUS_DIR, the sibling checkout), or from MEANING_JANUS_DIR: imported,
-// never copied (janus native/organs/identity/resolve.mjs, correspond.mjs)
-const { JANUS_DIR } = await import(`${N}/the-fold/priors-home.js`);
-const JD = process.env.MEANING_JANUS_DIR ?? JANUS_DIR;
-const JANUS = await (async () => { try { return { resolve: await import(path.join(JD, "native/organs/identity/resolve.mjs")), correspond: await import(path.join(JD, "native/organs/identity/correspond.mjs")) }; } catch { return null; } })();
-
-// ---- the reader, as the atoms arm reads (run.mjs): English by grammar-en, the rest by grammar-ud, glossed from the slim Wiktionary --------
-const SLIM = openSlim(process.env.FOLD_WIKT_SLIM ?? `${process.env.HOME}/.cache/live_priors/wiktionary/wiktionary-slim-2026-10-01-v2.pack`);
-const T = loadTranslations(process.env.FOLD_WIKT_TRANSLATIONS ?? path.join(HERE, "../../../data/wiktionary-translations"));
-const lookup = (l, w) => SLIM.entries(l, w), gl = makeGlossary(lookup, { translations: T }), syn = makeSynonymy({ lookup, translations: T });
-const UDG = {}; for (const lang of ["es", "fr", "de", "ja"]) { const g = await loadGrammar(lang, { glossary: makeGlossary(lookup) }); if (g) UDG[lang] = g; }
-const corefModel = JSON.parse(fs.readFileSync(path.join(HERE, "atoms", "coref-ranker.json"), "utf8"));
-const grammarOf = (lang) => (lang === "en" ? { rowsOf: GE.rowsOf, claimsOf: (t, rows) => GE.claimsOf(t, rows) } : UDG[lang] ?? null);
-const grammarName = (lang) => (lang === "en" ? `grammar-en/${GE.READER}` : UDG[lang] ? `grammar-ud/${lang}` : null);
-export const keysOf = (lang, w) => [...new Set([...(gl.all?.(lang, w, "NOUN") ?? []), ...(gl.all?.(lang, w, "VERB") ?? []), ...(gl.all?.(lang, w, "ADJ") ?? [])])];
-export const same = (lang, a, b) => ["NOUN", "VERB", "ADJ"].some((u) => syn(lang, a, b, u).same);
-// the priors the reader read, as one hash: every file of the priors home, by name and content
-const PRIORS = (() => { const dir = priorsHome().dir; if (!dir || !fs.existsSync(dir)) return null; const h = crypto.createHash("sha256");
-  for (const f of fs.readdirSync(dir).sort()) { const p = path.join(dir, f); if (!fs.statSync(p).isFile()) continue; h.update(f + "\0"); h.update(crypto.createHash("sha256").update(fs.readFileSync(p)).digest("hex") + "\n"); } return h.digest("hex"); })();
-
-// a pair's page (title and the sentences before its source sentence), as run.mjs finds it
-const PAGES = new Map(); for (const f of fs.readdirSync(HERE).filter((x) => x.endsWith(".sources.json"))) for (const pg of JSON.parse(fs.readFileSync(path.join(HERE, f), "utf8")).pages ?? []) PAGES.set(pg.url, pg);
-const sentencesOf = (pg) => (pg.lang === "ja" ? pg.text.replace(/\n+/g, "").split(/(?<=。)/) : pg.text.replace(/\n+/g, " ").split(/(?<=[.!?])\s+(?=[A-ZÁÉÍÓÚÑÀÂÈÊÎÔÛÄÖÜ«"(])/)).map((x) => x.trim()).filter(Boolean);
-const contextOf = (p) => { const pg = p.source?.url && PAGES.get(p.source.url); if (!pg) return null; const ss = sentencesOf(pg), head = p.sentence.slice(0, 30), i = ss.findIndex((x) => x.startsWith(head)); return { title: pg.title, previous: i > 0 ? ss.slice(0, i) : [] }; };
-const sideLang = (lang, side) => { const [src, claim] = String(lang).split("-"); return side === "claim" ? (claim ?? src) : src; };
-
-export function readSide(text, lang, ctx) {
-  const g = grammarOf(lang), title = ctx?.title ?? null, previous = ctx?.previous ?? [];
-  const r = g ? readAtoms({ text, lang, title, previous, grammar: g, pack: PACKS[lang] ?? null, same: (a, b) => syn(lang, a, b, "NOUN").same, lookup, corefModel, keysOf: lang === "en" ? null : (w, u) => gl.all?.(lang, w, u) ?? null }) : null;
-  return { reading: r, stage: readStage(r, { text, lang, title, previous, grammar: grammarName(lang), priors: PRIORS }) };
-}
-export function readPair(p) {
-  const ctx = contextOf(p), cl = sideLang(p.lang ?? "en", "claim"), sl = sideLang(p.lang ?? "en", "source");
-  const C = readSide(p.claim, cl, ctx ? { title: ctx.title, previous: [] } : null), S = readSide(p.sentence, sl, ctx);
-  return { pair: p, claimLang: cl, sourceLang: sl, claim: C.stage, source: S.stage, claimReading: C.reading, sourceReading: S.reading };
-}
-
-// ---- modes: a binding (and, from M3, licenses) per name ------------------------------------------------------------------------------------
-const resolveBind = (R, { correspond = true, quantities = false } = {}) => BIND.makeResolveBind({ resolveReferent: JANUS.resolve.resolveReferent, correspond: correspond ? JANUS.correspond : null, keysOf, claimLang: R.claimLang, sourceLang: R.sourceLang, claimReading: R.claimReading, sourceReading: R.sourceReading, quantities: quantities ? BIND.bindQuantity : null });
-// the licenses both stages declared (each with its giver), one per kind and relation
-export const licensesOf = (R) => { const m = new Map(); for (const l of [...R.claim.licenses, ...R.source.licenses]) for (const rel of l.rels) { const k = `${l.kind}\u0000${rel}`; if (!m.has(k)) m.set(k, { kind: l.kind, rels: [rel], giver: l.giver, standing: l.standing }); } return [...m.values()].sort((a, b) => (a.rels[0] < b.rels[0] ? -1 : a.rels[0] > b.rels[0] ? 1 : 0)); };
-const EQ_GIVER = "Wiktionary synonymy (the slim English Wiktionary through the reader's makeSynonymy): thesaurus-grade, admitted on marginal gains";
-export const equivalencesOf = (R) => (R.eq ??= candidateEquivalences(R.claim, R.source, (a, b) => ["NOUN", "VERB", "ADJ"].some((u) => syn("en", a, b, u).same), { giver: EQ_GIVER }));
-// one binding per pair and mode family, shared by the modes built on it (the deranged control moves exactly the binding the arm used)
-const cached = (R, k, f) => (c, s) => ((R.cache ??= {})[k] ??= f(c, s));
-export const MODES = {
-  none: { bind: () => BIND.bindNone },
-  folded: { bind: () => BIND.bindFolded },
-  resolve: { bind: (R) => cached(R, "resolve", resolveBind(R)) },
-  "resolve-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "resolve", resolveBind(R))(c, s), s) },
-  "resolve-only": { bind: (R) => cached(R, "resolve-only", resolveBind(R, { correspond: false })) },
-  // M3: figures bound by value (RC3) and the functional licenses the reader declared, with their givers, on either stage (RC3, RC6)
-  m3: { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R) },
-  "m3-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "m3", resolveBind(R, { quantities: true }))(c, s), s), licenses: (R) => licensesOf(R) },
-  "m3-unlicensed": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: () => [] },
-  // M4: the hedge layer (RC5) and coverage as gaps (RC7) on top of M3
-  m4: { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layered: true, gapRule: true } },
-  "m4-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "m3", resolveBind(R, { quantities: true }))(c, s), s), licenses: (R) => licensesOf(R), opts: { layered: true, gapRule: true } },
-  "m4-unlicensed": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: () => [], opts: { layered: true, gapRule: true } },
-  // RC5's check: the same stage read on the asserted layer only (no layering)
-  "m4-asserted-only": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layers: ["asserted"], gapRule: true } },
-  // M5: R7, the equivalent license, its giver the reader's own Wiktionary synonymy
-  m5: { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => [...licensesOf(R), ...equivalencesOf(R)], opts: { layered: true, gapRule: true } },
-  "m5-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "m3", resolveBind(R, { quantities: true }))(c, s), s), licenses: (R) => [...licensesOf(R), ...equivalencesOf(R)], opts: { layered: true, gapRule: true } },
-  "m4-nogaps": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layered: true } },
-};
-
-// ---- scoring: accuracy E against not-E, false accepts, E accepted, C named, false-C, per set and pooled, and per language ---------------------
-export function score(rows) {
-  const n = rows.length, E = rows.filter((r) => r.label === "E"), notE = rows.filter((r) => r.label !== "E"), Cs = rows.filter((r) => r.label === "C"), nonC = rows.filter((r) => r.label !== "C");
-  const ok = rows.filter((r) => (r.v === "E") === (r.label === "E")).length;
-  return { n, acc: ok / n, ea: E.filter((r) => r.v === "E").length, nE: E.length, fa: notE.filter((r) => r.v === "E").length, nNotE: notE.length, cn: Cs.filter((r) => r.v === "C").length, nC: Cs.length, fc: nonC.filter((r) => r.v === "C").length, nNonC: nonC.length };
-}
-export const fmt = (s) => `acc ${(100 * s.acc).toFixed(1)}%  E ${s.ea}/${s.nE} (${(100 * s.ea / Math.max(1, s.nE)).toFixed(1)}%)  false-accept ${s.fa}/${s.nNotE} (${(100 * s.fa / Math.max(1, s.nNotE)).toFixed(1)}%)  C ${s.cn}/${s.nC}  false-C ${s.fc}/${s.nNonC} (${(100 * s.fc / Math.max(1, s.nNonC)).toFixed(1)}%)`;
-export const langKey = (p) => (/^cross/.test(p.type ?? "") || String(p.lang ?? "en").includes("-") ? "cross" : p.lang ?? "en");
-
-export function setsOf(names) {
-  const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
-  const all = { main: path.join(C3, "battery.json"), cf: path.join(C3, "battery-cf.json"), heldout: path.join(HERE, "heldout.json"), other: path.join(HERE, "heldout-other.json"), fresh: path.join(HERE, "fresh.json"), relations: path.join(HERE, "relations.json"), "fresh-ml": path.join(HERE, "fresh-ml.json"), fresh19: path.join(HERE, "fresh19.json"), fresh20: path.join(HERE, "fresh20.json"), fresh23: path.join(HERE, "fresh23.json") };
-  const out = {};
-  for (const k of names) { const [n, f] = k.includes("=") ? k.split("=") : [k, all[k]]; if (!f || !fs.existsSync(f)) throw new Error(`no set ${k}`); out[n] = JSON.parse(fs.readFileSync(f, "utf8")).pairs; }
-  return out;
-}
-
-if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
-  const sets = setsOf(arg("sets", "main,cf,heldout,other,fresh,relations,fresh-ml,fresh19,fresh20").split(","));
-  const modes = arg("modes", "none,folded").split(",");
-  const stagesOut = arg("stages", null), pairsOut = arg("pairs", null), out = arg("out", null);
-  if (stagesOut) fs.writeFileSync(stagesOut, ""); if (pairsOut) fs.writeFileSync(pairsOut, "");
-  const rows = Object.fromEntries(modes.map((m) => [m, []]));
-  const V5MODE = arg("v5", null), ABLATE = arg("ablate", null), V5 = { pairs: 0, tried: {}, bound: [] }, ABL = { pairs: 0, runs: 0, moved: 0, unknown: 0, AWAY: 0, bugs: [] };
-  if (modes.some((m) => /^resolve/.test(m)) && !JANUS) throw new Error(`janus's identity organs are not at ${JD} (set MEANING_JANUS_DIR)`);
-  console.log(`stage arm · reader ${GE.READER} · priors ${PRIORS?.slice(0, 12) ?? "none"} · janus ${JANUS ? JD : "absent"} · modes ${modes.join(", ")}`);
-  for (const [set, pairs] of Object.entries(sets)) {
-    for (const p of pairs) {
-      const R = readPair(p);
-      if (stagesOut) fs.appendFileSync(stagesOut, JSON.stringify({ set, id: p.id, claim: stageHash(R.claim), source: stageHash(R.source) }) + "\n");
-      for (const m of modes) {
-        const M = MODES[m], rec = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: M.licenses?.(R) ?? [], sourceText: p.sentence, ...(M.opts ?? {}) });
-        rows[m].push({ set, id: p.id, label: p.label, v: rec.label, hl: rec.verdict, lang: langKey(p) });
-        // V5 (--v5 <mode>): constructed role and direction swaps of the arm's accepted pairs; ablation (--ablate <mode>): each license removed in turn
-        let extra = {};
-        if (m === V5MODE && rec.label === "E") { const sw = swapReads(rec, R.claim, R.source); V5.pairs++; for (const x of sw) { V5.tried[x.kind.replace(/-.*/, "")] = (V5.tried[x.kind.replace(/-.*/, "")] ?? 0) + 1; if (x.hl === "bound") { V5.bound.push({ set, id: p.id, ...x }); } } extra.swaps = sw.length; }
-        if (m === ABLATE) { const full = M.licenses?.(R) ?? [], res = [];
-          for (let i = 0; i < full.length; i++) { const less = full.filter((_, j) => j !== i), r2 = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: less, sourceText: p.sentence, ...(M.opts ?? {}) });
-            ABL.runs++; if (r2.verdict !== rec.verdict) { ABL.moved++; const toward = (r2.verdict === "bound" && rec.verdict !== "bound") || (r2.verdict === "contradicted" && rec.verdict !== "contradicted") ? "AWAY" : "unknown"; ABL[toward]++; res.push({ removed: full[i].rels[0], from: rec.verdict, to: r2.verdict, toward }); if (toward === "AWAY") ABL.bugs.push({ set, id: p.id, removed: full[i].rels[0], from: rec.verdict, to: r2.verdict }); } }
-          ABL.pairs++; extra.ablation = res; }
-        if (pairsOut && /^m[45]$/.test(m)) { extra.claimGaps = rec.claimGaps; extra.reported = { claim: R.claim.arrangements.filter((x) => x.layer === "reported").length, source: R.source.arrangements.filter((x) => x.layer === "reported").length }; }
-        if (pairsOut && m === "m5") extra.equivalences = R.eq?.map((l) => l.rels);
-        if (pairsOut) fs.appendFileSync(pairsOut, JSON.stringify({ set, id: p.id, mode: m, label: p.label, v: rec.label, hl: rec.verdict, conjuncts: rec.conjuncts, gaps: rec.gaps.map((g) => g.kind), correspondence: R.cache?.resolve?.correspondence ?? null,
-          // each claim figure and what the binding cell made of it: the source figure it meets, "distinct" (a value of its own), or unbound
-          quantities: R.claim.anchors.filter((a) => a.kind === "quantity").map((a) => { const b = R.cache?.[m]?.map?.get(a.id) ?? null; return { label: a.label, measure: a.measure, bound: b == null ? null : b === a.id ? "distinct" : R.source.anchors.find((x) => x.id === b)?.label ?? b }; }),
-          licenses: rec.licenses.map((l) => l.rels[0]), ...extra }) + "\n");
-      }
-    }
+const pairs = [];
+for (const s of ["fresh", "heldout", "relations", "fresh19", "fresh20"]) {
+  const d = JSON.parse(fs.readFileSync(path.join(HERE, `${s}.json`), "utf8"));
+  for (const p of d.pairs ?? d) if ((p.lang ?? "en") === "en") {
+    const A = readAtoms({ text: p.claim, lang: "en", grammar, corefModel }), B = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel });
+    SRC.set(B, p.sentence); pairs.push({ ...p, set: s, A, B });
   }
-  const result = {};
-  for (const m of modes) {
-    console.log(`\n== mode ${m}`);
-    for (const set of Object.keys(sets)) console.log(`  ${set.padEnd(10)} ${fmt(score(rows[m].filter((r) => r.set === set)))}`);
-    const pooled = score(rows[m]); console.log(`  ${"pooled".padEnd(10)} ${fmt(pooled)}`);
-    const langs = [...new Set(rows[m].map((r) => r.lang))].sort();
-    console.log(`  per language: ${langs.map((l) => { const s = score(rows[m].filter((r) => r.lang === l)); return `${l} ${(100 * s.acc).toFixed(1)}% (E ${s.ea}/${s.nE}, fa ${s.fa}, C ${s.cn}/${s.nC})`; }).join(" · ")}`);
-    result[m] = { pooled, perSet: Object.fromEntries(Object.keys(sets).map((s) => [s, score(rows[m].filter((r) => r.set === s))])), rows: rows[m] };
-  }
-  if (V5MODE) console.log(`\nV5 (${V5MODE}): ${V5.pairs} accepted pairs; swaps tried ${JSON.stringify(V5.tried)}; read bound (false accepts): ${V5.bound.length}${V5.bound.length ? " " + JSON.stringify(V5.bound.slice(0, 10)) : ""}`);
-  if (ABLATE) console.log(`\nlicense ablation (${ABLATE}): ${ABL.pairs} pairs, ${ABL.runs} single-license removals; verdict moved ${ABL.moved} (toward unknown ${ABL.unknown}, AWAY from unknown ${ABL.AWAY}); bugs ${JSON.stringify(ABL.bugs)}`);
-  if (out) fs.writeFileSync(out, JSON.stringify({ ...result, v5: V5MODE ? V5 : undefined, ablation: ABLATE ? ABL : undefined }));
 }
+const rulesOf = (A, B) => atomSupport(A.atoms, B.atoms, { unread: A.unread }).verdict;
+const GIVERS = LICENSES.map((l) => l.giver);
+// commit a contradiction only if the independent checker (proof-check.js, no shared code) accepts every proof behind it
+const arm = (A, B, lic) => { const r = rulesOf(A, B); if (r !== "N") return { v: r, proofs: [] }; const st = stageFromAtoms(B.atoms, { doc: "src" }), j = judgeClaim(st, A.atoms, { licenses: lic });
+  if (j.verdict === "C") { const bad = j.proofs.filter((x) => x.verdict === "contradicted" && !checkProof(x.record, (SRC.get(B) ?? ""), { licenses: GIVERS }).ok); if (bad.length) return { v: "N", proofs: j.proofs, rejected: bad.length }; }
+  return { v: j.verdict, proofs: j.proofs, gaps: j.gaps, stage: st }; };
+
+const all = LICENSES.map((l) => l.id), tally = (f) => { const t = {}; for (const p of pairs) { const k = `${p.label}>${f(p)}`; t[k] = (t[k] ?? 0) + 1; } return t; };
+const C = pairs.filter((p) => p.label === "C"), nonC = pairs.filter((p) => p.label !== "C");
+const rep = (name, f) => { console.log(`${name.padEnd(34)} C named ${String(C.filter((p) => f(p) === "C").length).padStart(2)}/${C.length}   false-C ${nonC.filter((p) => f(p) === "C").length}/${nonC.length}   E accepted ${pairs.filter((p) => p.label === "E" && f(p) === "E").length}/${pairs.filter((p) => p.label === "E").length}   false-E ${nonC.concat(C).filter((p) => p.label !== "E" && f(p) === "E").length}`); };
+
+console.log(`${pairs.length} English pairs (${[...new Set(pairs.map((p) => p.set))].join(", ")}); no model, no threshold\n`);
+rep("rules (atoms arm)", (p) => rulesOf(p.A, p.B));
+rep("stage arm, both licenses", (p) => arm(p.A, p.B, all).v);
+for (const l of all) rep(`stage arm, only '${l}'`, (p) => arm(p.A, p.B, [l]).v);
+rep("stage arm, no licenses", (p) => arm(p.A, p.B, []).v);
+
+// law 1: switching licenses off never makes a verdict more supported or more contradicted than with them on
+let broke = 0; for (const p of pairs) { const on = arm(p.A, p.B, all).v, off = arm(p.A, p.B, []).v; if (rank[off] > rank[on]) broke++; }
+console.log(`\nlaw 1 (licenses off never gains a verdict): ${broke === 0 ? "holds" : `BROKEN on ${broke} pairs`}`);
+
+// control built to fail: each claim against a source that does not hold it. The source must share NO content word with the claim (4+ letters),
+// found by walking forward from the pair. The first version took the NEXT pair's source, but neighbouring pairs in a set are often one topic
+// ("Mercury is the hottest planet" against "Mercury is not the hottest planet"), so 2 of its 4 "contradictions" (later 2 of 2) were true ones and
+// the control read as a failure of the arm. The sibling figure is kept below, labelled, so the two numbers can be compared.
+const termsOf = (t) => new Set((String(t).toLowerCase().match(/[\p{L}\p{N}]{4,}/gu) ?? []));
+const disjoint = (a, b) => { for (const w of termsOf(a)) if (termsOf(b).has(w)) return false; return true; };
+const unrelated = pairs.map((p, i) => { for (let k = 1; k < pairs.length; k++) { const q = pairs[(i + k) % pairs.length]; if (disjoint(p.claim, q.sentence)) return q; } return null; });
+const derange = pairs.map((p, i) => (unrelated[i] ? arm(p.A, unrelated[i].B, all).v : null));
+const deranged = derange.filter((v) => v !== null);
+console.log(`control, unrelated sources (no shared content word): ${deranged.filter((v) => v === "C").length} of ${deranged.length} claims called contradicted, ${deranged.filter((v) => v === "E").length} called supported (the same claims against their own sources: ${pairs.filter((p) => arm(p.A, p.B, all).v === "C").length} contradicted)`);
+const sibling = pairs.map((p, i) => arm(p.A, pairs[(i + 1) % pairs.length].B, all).v);
+console.log(`  (old control, the next pair's source: ${sibling.filter((v) => v === "C").length} contradicted, ${sibling.filter((v) => v === "E").length} supported; neighbours share a topic, so these are not false)`);
+
+// determinism: the same bytes give the same stage, twice, and through a fresh read
+const h = (s) => crypto.createHash("sha256").update(s).digest("hex").slice(0, 12);
+let same = 0; for (const p of pairs) { const b2 = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel }); if (h(stageBytes(stageFromAtoms(p.B.atoms, { doc: "src" }))) === h(stageBytes(stageFromAtoms(b2.atoms, { doc: "src" })))) same++; }
+console.log(`determinism: ${same}/${pairs.length} sources give a byte-identical stage on a second read`);
+
+// the checker: every contradiction proof accepted; and mutants (corrupted proofs) all rejected
+let okN = 0, tot = 0, mutOk = 0, mutTot = 0, undec = 0, refuted = 0;
+for (const p of pairs) { const st = stageFromAtoms(p.B.atoms, { doc: "src" }); refuted += st.licenses.filter((l) => l.standing === "refuted").length;
+  const j = judgeClaim(st, p.A.atoms, {}); if (j.gaps.some((g) => g.kind === "undecided_reading")) undec++;
+  for (const x of j.proofs.filter((y) => y.verdict === "contradicted")) { tot++; if (checkProof(x.record, (SRC.get(p.B) ?? ""), { licenses: GIVERS }).ok) okN++;
+    const R = x.record, muts = [{ ...R, giver: "made up" }, { ...R, held: R.held.map((h) => ({ ...h, span: [h.span[0], h.span[1] + 99999] })) }, { ...R, held: R.held.map((h) => ({ ...h, label: "zzzz" })) }, { ...R, held: R.held.map((h) => ({ ...h, base: R.claim.base ?? h.base, label: R.claim.label })) }];
+    for (const m of muts) { mutTot++; if (!checkProof(m, (SRC.get(p.B) ?? ""), { licenses: GIVERS }).ok) mutOk++; } } }
+console.log(`independent checker: accepts ${okN}/${tot} contradiction proofs; rejects ${mutOk}/${mutTot} corrupted proofs; licenses refuted by their own source: ${refuted}; contradictions withheld for an undecided reading: ${undec}`);
+
+console.log("\nproofs for every contradiction the licenses name:");
+for (const p of pairs) { const r = arm(p.A, p.B, all); if (r.v !== "C" || !r.proofs.length) continue;
+  console.log(`\n[${p.set} ${p.id}] labelled ${p.label}${p.type ? ` (${p.type})` : ""}\n  claim : ${p.claim}\n  source: ${p.sentence.slice(0, 150)}`);
+  for (const pr of r.proofs.filter((x) => x.verdict === "contradicted")) console.log(`  atom  : ${pr.atom}\n  INS   : ${pr.binds.join("; ")}\n  CON   : ${pr.lic.join("; ")}\n  EVA   : HL read(${pr.atom.split("(")[0]}) = ${pr.verdict}; the source holds ${pr.cites.join(", ")}`); }
+if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pairs.length], r = arm(p.A, q.B, all); if (r.v === "C") console.log(`\nDERANGED C: claim "${p.claim}"\n  vs source "${q.sentence.slice(0, 160)}"\n  ${r.proofs.filter((x) => x.verdict === "contradicted").map((x) => x.binds.join("; ")).join(" | ")}`); });
+
+// hyperlexicon: the license rows are data. A hyperlexicon with the same rows only NOMINATED (candidates) licenses nothing; an empty one likewise.
+{ const HX = await import(path.join(K, "native/kernel/hyperlexicon.js"));
+  const cand = HX.admitHyperlexiconCandidates(HX.createHyperlexicon(), LICENSES.map((l) => ({ left: "functional", right: l.on, giver: l.giver })));
+  const named = (hx) => pairs.filter((p) => p.label === "C" && rulesOf(p.A, p.B) === "N" && judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src", hyperlexicon: hx }), p.A.atoms, {}).verdict === "C").length;
+  const SF = await import(path.join(K, "native/kernel/stage.js"));
+  console.log(`\nhyperlexicon: contradictions beyond the rules with the given rows ${named(SF.defaultHyperlexicon())}, with the rows only nominated ${named(cand)}, with an empty hyperlexicon ${named(HX.createHyperlexicon())}`);
+  const kinds = {}; for (const p of pairs) for (const g of judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, {}).gaps) kinds[g.kind] = (kinds[g.kind] ?? 0) + 1;
+  console.log(`DMD-bounded identity: gaps raised while binding claim ends: ${JSON.stringify(kinds)}`); }
+// HOLOGRAPHIC IDENTITY (adapters/text/atom-world.js over corpus-identity.js): a shared name only NOMINATES a pair; whether it is one being is decided by the
+// universe folded on each, against a null the material supplies. The world is every reading in these pairs, claims and sources. An end the fold cannot decide is
+// "needs deeper reading": not "same", not "different", and the verdict it supports stands but is provisional. Every committed verdict is asked, the atoms arm's
+// too (it meets ends by name): its met and contradicted atoms are paired with the source atom that met them and their referent ends asked through the same world.
+{ const { atomIdentity } = await import(path.join(K, "native/adapters/text/atom-world.js")), { meeters } = await import(path.join(K, "native/kernel/atom-support.js"));
+  const W = atomIdentity(pairs.flatMap((p, i) => [{ doc: `${i}:claim`, atoms: p.A.atoms }, { doc: `${i}:src`, atoms: p.B.atoms }])), M = meeters([], [], {});
+  const bump = (o, k) => { o[k] = (o[k] ?? 0) + 1; }, binds = {}, why = {}, rows = { C: {}, E: {} }, stageC = [];
+  pairs.forEach((p, i) => {
+    const idn = { standing: (c, s) => W.standing(`${i}:claim`, c, `${i}:src`, s) }, rv = rulesOf(p.A, p.B); let v = rv, st = [];
+    if (rv === "N") { const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, { licenses: all, identity: idn }); v = j.verdict; for (const s of j.standings) bump(binds, s.kind);
+      st = v === "C" ? j.proofs.filter((x) => x.verdict === "contradicted").flatMap((x) => x.identity) : v === "E" ? j.standings : []; if (v === "C") stageC.push({ p, st }); }
+    else if (rv === "C" || rv === "E") for (const r of atomSupport(p.A.atoms, p.B.atoms, { unread: p.A.unread }).table.filter((t) => t.by && (t.state === "met" || t.state === "contradicted")))
+      for (const x of r.atom.args ?? []) if (x.entity != null) { const y = (r.by.args ?? []).find((q) => q.entity != null && M.refMeet(x, q)), s = y && idn.standing(x, y); if (s) { st.push({ end: x.name ?? x.value, ...s }); bump(binds, s.kind); } }
+    if (v === "C" || v === "E") { bump(rows[v], !st.length ? "no referent asked" : st.some((s) => s.kind !== "same") ? "needs deeper reading" : "settled"); for (const s of st) if (s.kind !== "same") bump(why, s.reason); } });
+  const fmt = (o) => Object.entries(o).map(([k, n]) => `${k} ${n}`).join(", ") || "none";
+  console.log(`\nholographic identity: ${W.record.size} nodes in the world; a node needs ${W.need} occurrences before the fold will speak`);
+  console.log(`  referent binds asked: ${fmt(binds)}   (why not decided: ${fmt(why)})`);
+  console.log(`  committed contradictions (${Object.values(rows.C).reduce((a, b) => a + b, 0)}): ${fmt(rows.C)}`);
+  console.log(`  committed supports       (${Object.values(rows.E).reduce((a, b) => a + b, 0)}): ${fmt(rows.E)}`);
+  for (const { p, st } of stageC) console.log(`  [${p.set} ${p.id}] ${st.map((s) => `${s.end}: ${s.kind}${s.kind === "same" ? "" : ` (${s.reason}; ${s.have[0]} and ${s.have[1]} occurrence(s))`}`).join("; ") || "no referent end asked"}`); }
+// PERSPECTIVE (stage.js): nothing is true everywhere. A reading is one author's view, read FOR a question (for-whom.js), and a verdict is "by this reading, in
+// the sense it states it". A value the source states for other years is another sense: neither a contradiction nor support, a typed gap. Only STATED years
+// decide (the reader's tense is a heuristic: it reads "paid", "bought", "sold" as present). The atoms arm holds the same rule (atom-support.js otherYears).
+{ const kinds = {}, by = { C: {}, E: {} }; let stated = 0, frame = null;
+  for (const p of pairs) { if (p.A.atoms.some((a) => a.time) || p.B.atoms.some((a) => a.time)) stated++;
+    const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, { licenses: all }); frame ??= j.forWhom;
+    for (const g of j.gaps) if (g.kind === "different_sense") kinds[g.why.replace(/:.*/, "")] = (kinds[g.why.replace(/:.*/, "")] ?? 0) + 1;
+    if (rulesOf(p.A, p.B) === "N" && (j.verdict === "C" || j.verdict === "E")) by[j.verdict][j.sense] = (by[j.verdict][j.sense] ?? 0) + 1; }
+  const f = (o) => Object.entries(o).map(([k, n]) => `${k} ${n}`).join(", ") || "none";
+  console.log(`\nperspective: every stage verdict is read FOR a frame: ${frame.id} — "${frame.question}"`);
+  console.log(`  pairs where either side states years: ${stated} of ${pairs.length}; held for another sense (withheld as a typed gap, neither contradiction nor support): ${f(kinds)}`);
+  console.log(`  stage-committed contradictions by sense: ${f(by.C)}; supports: ${f(by.E)}`); }
+if (process.env.WHYE) { const why = {}; for (const p of pairs.filter((q) => q.label === "E" && arm(q.A, q.B, all).v !== "E")) { const preds = [...new Set(p.A.atoms.map((a) => a.pred.replace(/^(has_|most:).*/, "$1*")))]; const g = (arm(p.A, p.B, all).gaps ?? []).map((x) => x.kind); const k = `${p.A.atoms.length ? preds.join(",") : "no atoms"}${g.length ? " | gaps " + [...new Set(g)] : ""}`; why[k] = (why[k] ?? 0) + 1; } console.log("\nmissed E by claim predicates:"); for (const [k, n] of Object.entries(why).sort((a, b) => b[1] - a[1]).slice(0, 14)) console.log(String(n).padStart(3), k.slice(0, 150)); }
+if (process.env.FALSEE) for (const p of pairs) { const r = arm(p.A, p.B, all); if (r.v === "E" && p.label !== "E") console.log(`\nFALSE-E [${p.set} ${p.id}] ${p.label}: ${p.claim}\n  src: ${p.sentence.slice(0, 200)}\n  atoms: ${p.A.atoms.map((a) => a.text).join(" ; ")}\n  rules said ${rulesOf(p.A, p.B)}`); }

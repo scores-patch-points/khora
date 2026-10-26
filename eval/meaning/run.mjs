@@ -91,9 +91,8 @@ if (process.env.MEANING_ATOMS && SLIM && arms["grammar-ud"]) {
     if (!A || !B) return null;
     const o = { claimLang: cl, sourceLang: sl, same, keysOf, unread: A.unread, sourceText: cleanText(p.sentence).text, vectors: VECTORS };
     // MEANING_MATCHER=<model.json>: the learned matcher decides E (atom-match.js); MEANING_ATOMS_UNITS=<file.jsonl>: its features, for training
-    // the claim in its canonical forms, as the reader wrote them (read-atoms.js `forms`); the source as read
-    const r = MATCHER ? matchVerdict(A.forms, B.atoms, o, MATCHER) : atomSupport(A.forms, B.atoms, o);
-    return { ...r, swaps: swapFlags(A.forms, B.atoms, o), claimAtoms: A.atoms, sourceAtoms: B.atoms, units: process.env.MEANING_ATOMS_UNITS ? matchUnits(A.forms, B.atoms, o).units.map((u) => ({ what: u.what, options: u.options })) : null };
+    const r = MATCHER ? matchVerdict(A.atoms, B.atoms, o, MATCHER) : atomSupport(A.atoms, B.atoms, o);
+    return { ...r, swaps: swapFlags(A.atoms, B.atoms, o), claimAtoms: A.atoms, sourceAtoms: B.atoms, units: process.env.MEANING_ATOMS_UNITS ? matchUnits(A.atoms, B.atoms, o).units.map((u) => ({ what: u.what, options: u.options })) : null };
   };
   arms.atoms = arms["grammar-ud"];
 }

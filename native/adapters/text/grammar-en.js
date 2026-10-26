@@ -9,7 +9,8 @@ import * as P from "./english-parser.js";
 import { bindFigures } from "./figure-binding.js";
 import { unreadWords } from "./claim-coverage.js";
 const K = new URL("../..", import.meta.url).pathname.replace(/\/$/, "");
-const model = P.loadModel(JSON.parse(fs.readFileSync(`${K}/priors/parser-eng-ewt.json`, "utf8")), { morphology: JSON.parse(fs.readFileSync(`${K}/priors/morphology-eng.json`, "utf8")) });
+const MORPH = JSON.parse(fs.readFileSync(`${K}/priors/morphology-eng.json`, "utf8"));
+const model = P.loadModel(JSON.parse(fs.readFileSync(`${K}/priors/parser-eng-ewt.json`, "utf8")), { morphology: MORPH });
 const LEX = JSON.parse(fs.readFileSync(`${K}/priors/pos-eng-lexicon.json`, "utf8")).classes;
 export const VERB_FORMS = new Set(LEX.VERB.map((w) => String(w).toLowerCase()));
 const VERBISH = new Set([...LEX.VERB, ...LEX["NOUN|VERB"]].map((w) => String(w).toLowerCase()));
@@ -23,9 +24,21 @@ const UM0 = U ? await U.readJsonMaybeGz(UD_MODEL) : null;
 // the clusters file is read only when the model was trained with one (its meta names it)
 const UM = U ? U.loadModel(UM0, { lex: fs.existsSync(UD_LEX) ? await U.loadLexiconFile(UD_LEX) : null, clusters: UM0.meta?.clusters && fs.existsSync(UD_CL) ? await U.loadClustersFile(UD_CL) : null }) : null;
 export const READER = UM ? "ud-parser" : "english-parser";
+// A SUPERLATIVE THE TREEBANK NEVER SAW ("hottest", "saddest", "happiest") comes back from the UD reader as a positive adjective that is its own
+// lemma, so "the hottest planet" was atomised as hottest(planet) and never met most:hot. The english-parser path already asks the morphology
+// prior for such a lemma (priorLemma); the UD path did not. Two givers, in order, and only for a form the treebank does not attest as an
+// adjective itself ("modest", "honest" keep what the treebank says): the prior's own table (UniMorph English: hottest → hot), else the regular
+// -est spelling (happiest → happy, saddest → sad, largest → large) whose base the treebank attests as an adjective.
+const estBases = (f) => [...(/iest$/.test(f) ? [`${f.slice(0, -4)}y`] : []), ...(/([bdgmnprt])\1est$/.test(f) ? [f.slice(0, -4)] : []), f.slice(0, -3), f.slice(0, -2)];
+function superlativeLemma(r) {
+  const f = r.form.toLowerCase();
+  if (r.upos !== "ADJ" || f.length < 5 || !f.endsWith("est") || /Degree=Sup/.test(r.feats ?? "") || String(r.lemma).toLowerCase() !== f || UM.lexicon.form[`${f}|ADJ`]) return r;
+  const base = P.priorLemma({ morphology: { forms: MORPH.forms }, lexicon: UM.lexicon }, r.form, "ADJ") ?? estBases(f).find((b) => UM.lexicon.form[`${b}|ADJ`]);
+  return base ? { ...r, lemma: base, feats: /Degree=/.test(r.feats ?? "") ? r.feats.replace(/Degree=\w+/, "Degree=Sup") : "Degree=Sup" } : r;
+}
 const build = (forms, tags) => {
   // a number and a name are their own lemma ("Jan" is not "January")
-  if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r.upos === "PROPN" ? { ...r, lemma: r.form } : r));
+  if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r.upos === "PROPN" ? { ...r, lemma: r.form } : superlativeLemma(r)));
   const words = ["ROOT", ...forms], T = ["ROOT", ...tags];
   const heads = P.parseSentence(model.parser, words, T), labels = P.labelSentence(model.labeller, heads, words, T);
   return forms.map((form, k) => { const { lemma, feats } = P.lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma: tags[k] === "NUM" ? form.toLowerCase() : lemma, upos: tags[k], feats, head: heads[k + 1], deprel: labels[k + 1] }; });
@@ -256,7 +269,32 @@ export function claimsOf(text, rows = undefined) {
   const R = rows ?? rowsOf(text), props = propositionsOf(text, R);
   // the sentence's content words no claim read (claim-coverage.js): carried on every claim, so the check never calls a partly read claim supported
   const unread = unreadWords(R.filter((r) => !props.framed.has(r.id)), props, bindFigures(R, FIGURE_LEX), { isUnit: (f) => !!FIGURE_LEX.unitOf(f), key: lem });
-  return [...propositionClaims(text, R, props), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
+  // every claim carries `time`: the year its own adjunct names AS A POINT ("in 1900"), never a year inside a participant's name (a figure's is its own, below)
+  const timeOf = (c) => { const ys = [...new Set((c.OBL ?? []).map((o) => pointYear(o?.text)).filter(Boolean))].sort(); return ys.length ? ys : null; };
+  return [...propositionClaims(text, R, props).map((c) => ({ ...c, time: timeOf(c) })), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
+}
+// TIME, AS A READING STATES IT. A year is a time of the fact only when the whole adjunct is a bare POINT: "in 1900", "In May 2024", "on March 3, 2010",
+// "during 1999". Every other year-bearing phrase says something else, and is NOT read as a time: "since 2010" and "until 2010" open an interval,
+// "between 1950 and 2022" is an interval, "by 2020" is a deadline, "in the 1990s" is a decade, and "according to the 2008 report" dates the SAYING, not
+// the fact (a year is a point on some clock in some role; a set of years conflates them). Those stay unstated, and a verdict that needs them says so.
+const POINT_MONTHS = "january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept?|oct|nov|dec";
+const POINT = new RegExp(`^(?:in|on|during|at)\\s+(?:the\\s+year\\s+)?(?:\\d{1,2}(?:st|nd|rd|th)?\\s+)?(?:(?:${POINT_MONTHS})\\.?\\s+)?(?:\\d{1,2}(?:st|nd|rd|th)?,?\\s+)?(1[0-9]{3}|2[01][0-9]{2})$`, "i");
+const pointYear = (t) => POINT.exec(String(t ?? "").trim().replace(/[.;:,]+$/, ""))?.[1] ?? null;
+// THE SENSE A FIGURE IS SAID IN. It was read as a positive, asserted, present figure whatever its clause said ("the radius is NOT 6,000 km", "NASA says
+// the radius is 2,440 km", "the radius was 2,440 km in 1900"). A figure takes the sense of the predicate it sits in, read from that predicate's own
+// words and from the figure's own tokens (a parse may hang "not" on the number), the same tests the proposition claims use: a negator, past or future
+// auxiliaries and endings, a reporting verb above it, a modal, and the years its adjuncts name. A clause with no predicate keeps the default.
+const NEGATOR = /^(not|n't|never)$/i;
+function figureSense(rows, text, f) {
+  const p = f.predId != null ? rows.find((r) => r.id === f.predId) : null; if (!p) return { polarity: "+", tense: "present", asserted: true, time: null };
+  const ks = kids(rows, p.id), own = new Set(f.ids), auxes = ks.filter((k) => /^(aux|cop|aux:pass)$/.test(k.deprel));
+  const neg = [...ks, ...f.ids.flatMap((id) => kids(rows, id))].some((k) => !own.has(k.id) && NEGATOR.test(k.form));
+  const forms = [p, ...auxes].map((w) => w.form.toLowerCase()), passive = ks.some((k) => k.deprel === "aux:pass" || k.deprel === "nsubj:pass");
+  const tense = forms.some((x) => /^(was|were|had|did)$/.test(x)) || (/ed$/.test(p.form) && !auxes.some((k) => /^(is|are|am|has|have)$/i.test(k.form)) && !passive) ? "past" : forms.some((x) => /^(will|shall)$/.test(x)) ? "future" : "present";
+  const reported = (() => { let x = p; for (let i = 0; i < 6 && x; i++) { const h = rows.find((r) => r.id === x.head); if (!h) return false; if (/^(ccomp|parataxis)$/.test(x.deprel) && REPORT.has(lem(h))) return true; x = h; } return false; })();
+  const asserted = !reported && !auxes.some((k) => /^(may|might|could|would)$/i.test(k.form));
+  const ys = [...new Set(ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && !own.has(k.id)).map((k) => pointYear(endOf(rows, k.id, text)?.text)).filter(Boolean))].sort();
+  return { polarity: neg ? "-" : "+", tense, asserted, time: ys.length ? ys : null };
 }
 function propositionClaims(text, rows, props = propositionsOf(text, rows)) {
   return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, alias: !!p.alias, vid: p.vid ?? null, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
@@ -325,6 +363,6 @@ export const FIGURE_LEX = {
 };
 /** the figures of a sentence as EOT claims: rel "fig", ARG0 the being they describe, the binding on the claim */
 export function figureClaimsOf(text, rows = rowsOf(text)) {
-  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
+  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], ...figureSense(rows, text, f), asym: false,
     fig: { measure: f.measure, attribute: f.attribute, event: f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }));
 }

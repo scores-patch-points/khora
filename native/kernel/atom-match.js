@@ -9,7 +9,7 @@
 //   matchUnits(C0, S, { claimLang, sourceLang, same, keysOf, unread, sourceText }) → { units: [{ what, options: [[feature…]…] }], rule }
 //   matchVerdict(C0, S, opts, model) → { verdict, table, unread, rule }
 //   trainMatcher([{ units, label }]) → model (AtomMatcher@1)
-import { atomSupport, meeters, words, stem, argText, DEG } from "./atom-support.js";
+import { atomSupport, canonical, meeters, words, stem, argText, DEG } from "./atom-support.js";
 
 const kind = (p) => (p === "is_a" ? "is_a" : p === "named" ? "named" : /^has_/.test(p) ? "has" : DEG.test(p) ? "deg" : String(p).split("_").every((w) => w.length <= 4) ? "case" : "verb");
 const bucket = (x) => (x <= 0 ? "0" : x < 0.5 ? "lo" : x < 1 ? "hi" : "1");
@@ -19,7 +19,7 @@ const CJK = /\p{Script=Han}|\p{Script=Hiragana}|\p{Script=Katakana}/u;
 const vb = (x) => (x == null ? "none" : x < 0.2 ? "0" : x < 0.35 ? "1" : x < 0.5 ? "2" : x < 0.65 ? "3" : "4");
 export function matchUnits(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [], sourceText = "", vectors = null } = {}) {
   const rule = atomSupport(C0, S, { claimLang, sourceLang, same, keysOf, unread });
-  const C = C0, M = meeters(C, S, { claimLang, sourceLang, same, keysOf }); // C0: the claim in its canonical forms (read-atoms.js `forms`)
+  const C = canonical(C0), M = meeters(C, S, { claimLang, sourceLang, same, keysOf });
   const lp = claimLang === sourceLang ? "same" : "cross";
   const memo = new Map(), V = (l, t) => { const k = l + "\u0000" + t; if (!memo.has(k)) memo.set(k, vectors?.vec(l, t) ?? null); return memo.get(k); };
   const cos = (x, y) => { if (!x || !y) return null; let s = 0; for (let d = 0; d < x.length; d++) s += x[d] * y[d]; return s; };

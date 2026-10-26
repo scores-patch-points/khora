@@ -80,7 +80,21 @@ export function resolveLearned(page, model, { trainer = null } = {}) {
       if (m0.entity) seenRule.add(m0.entity);
       // the candidates, most recently mentioned first
       const order = [...ents].sort((a, b) => b.lastSi - a.lastSi || b.mentions.length - a.mentions.length);
-      const cands = [...order.map((e, rank) => ({ e, rank })), { isNew: true, rank: order.length }];
+      // GRAMMATICAL PERSON is a law, not a cue to weigh: a first-person mention (how "we", read from Person=1 by coref.js) and a third-person one (a
+      // pronoun, a relative pronoun: Person=3) are never one being in the same voice, so an entity already holding a third-person pronoun is no
+      // candidate for a "we", and one holding a "we" is none for a third-person pronoun. A name or a description may still join a "we" (a filing's
+      // "the Company ... we"). The feature is UD's, so the rule reads every language the grammar reads; no word is listed.
+      const THIRD = /^(pronoun|relative)$/, voice = (e, f) => e.mentions.some((x) => f(x.how));
+      const person = (e) => (m.how === "we" ? voice(e, (h) => THIRD.test(h)) : THIRD.test(m.how) ? voice(e, (h) => h === "we") : false);
+      // BINDING (Principle B), for SUBJECT pronouns only: a personal pronoun that is the subject of its predicate (UD nsubj) is not one being with another
+      // argument of that same predicate: "In May, we entered" ("May" and "we" both depend on "entered"), "Avec une altitude de 4 807 m, il est ..." (il is not
+      // the altitude). Measured on the 448 non-English sentences of the spent sets, the rule for every pronoun was wrong where a language doubles or
+      // fuses an object with a clitic (Spanish "este pico lo visitan", French "en", "se"): those are objects or expletives, never nsubj, and UD marks the
+      // difference, so the rule reads the dependency and lists no word.
+      const rowOf = (x) => (s.rows ?? []).find((r) => r.id === x.hid);
+      const me = rowOf(m), subj = (m.how === "we" || m.how === "pronoun") && me && /^nsubj/.test(me.deprel) && me.head !== 0;
+      const coarg = (e) => subj && e.mentions.some((x) => x.si === si && x.hid !== m.hid && rowOf(x)?.head === me.head);
+      const cands = [...order.filter((e) => !person(e) && !coarg(e)).map((e, rank) => ({ e, rank })), { isNew: true, rank: order.length }];
       const featsOf = (c) => { const fs = featuresOf(m, c, { rank: c.rank, synonym, sentenceHas: (e) => here.has(e) }); return drop ? fs.filter((x) => !drop.test(x)) : fs; };
       const score = (fs) => fs.reduce((a, x) => a + (w[x] ?? 0), 0);
       let pick = null;

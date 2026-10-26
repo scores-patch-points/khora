@@ -1,12 +1,12 @@
-// eval/meaning/stage-coverage.mjs — PREREG run 23, bar S2: every gold atom that today's atoms meet is met by the atoms read back from their
-// stage's arrangements (stage.js toArrangements → fromArrangements), by the mechanical recall proxy (atoms/proxy-recall.mjs metBy; the judges of
+// eval/meaning/stage-arm-coverage.mjs — PREREG run 23, bar S2: every gold atom that today's atoms meet is met by the atoms read back from their
+// stage's arrangements (stage-arm.js toArrangements → fromArrangements), by the mechanical recall proxy (atoms/proxy-recall.mjs metBy; the judges of
 // runs 13–18 cannot be rerun). The atoms are the reader's own for the six atom sets, written by atoms/run.mjs (COREF_MODEL=atoms/coref-ranker.json).
-//   node eval/meaning/stage-coverage.mjs <dir>=<system.json> …     (dir: atoms, atoms14 … atoms18, each with its sentences.json and gold.json)
+//   node eval/meaning/stage-arm-coverage.mjs <dir>=<system.json> …     (dir: atoms, atoms14 … atoms18, each with its sentences.json and gold.json)
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const { readStage, fromArrangements } = await import("../../native/organs/stage.js");
+const { readStage, fromArrangements } = await import("../../native/organs/stage-arm.js");
 const { metBy } = await import("./atoms/proxy-recall.mjs");
 const read = (f) => JSON.parse(fs.readFileSync(f, "utf8"));
 let T = { gold: 0, before: 0, after: 0, lost: 0, gained: 0 };

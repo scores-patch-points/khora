@@ -1,4 +1,4 @@
-// stage-bind.js — the INS cell of the stage check: which source anchor each claim end is (the stage spec, §7, law 3).
+// stage-arm-bind.js — the INS cell of the stage check: which source anchor each claim end is (the stage spec, §7, law 3).
 //
 // Binding is its own cell, before any verdict. Its product is a map from claim anchor ids to source anchor ids and the typed gaps of the ends
 // it could not bind; an end that does not bind is simply absent from the map, so every atom over it reads beyond-reach and no later cell can
@@ -10,7 +10,7 @@
 //   derange(binding, source)           the control built to fail: every bound end moved to another anchor
 //   bindQuantity                       M3's quantity binding (RC3), passed to makeResolveBind as `quantities`
 // Each returns { how, map: Map(claimId → sourceId), gaps: [{ kind, anchor, detail }] }.
-import { HOLDS, fold } from "./stage.js";
+import { HOLDS, fold } from "./stage-arm.js";
 
 const sorted = (xs) => [...xs].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
 

@@ -1,4 +1,4 @@
-// stage-verdict.js — a claim read against its source's stage by HL, in the cube's dependency order (the stage spec, §6–7).
+// stage-arm-verdict.js — a claim read against its source's stage by HL, in the cube's dependency order (the stage spec, §6–7).
 //
 // The claim goes through the same reader as its source and becomes a formula: the conjunction of its load-bearing arrangements over the
 // source anchors their ends were bound to, negation as polarity. The verdict is HL's read(stage, formula) and nothing else: no matcher, no
@@ -6,7 +6,7 @@
 //   bound → E (supported) · contradicted → C · unbound, beyond-reach → N (unknown) · contested → N, recorded as "the source disagrees with itself"
 // The cells, ordered by plan() (the-fold/turn-order.js), which refuses at construction any cell that needs a later cell's product:
 //   NUL  the claim opens what would have to be true      SIG  the claim's and the source's stages (read before this call)
-//   INS  binding (stage-bind.js): an unbound end ends its atom's chain at beyond-reach, and no later cell can bind it
+//   INS  binding (stage-arm-bind.js): an unbound end ends its atom's chain at beyond-reach, and no later cell can bind it
 //   SEG  the formula: roles and direction from the ordered ends      CON  the licenses declared on the source's HL stage
 //   EVA  read(stage, formula)                           REC  the verdict, its path, its licenses and gaps, as one record
 // M4 (both off by default, so the earlier modes read as they were recorded):
@@ -19,7 +19,7 @@
 //   stageVerdict({ claim, source, bind, licenses, layers, layered, gapRule, sourceText }) → { verdict, label, contested, binding, path, licenses, gaps, conjuncts, claimGaps }
 import { plan } from "../the-fold/turn-order.js";
 import { read, BOUND, CONTRADICTED, CONTESTED, UNBOUND, BEYOND_REACH } from "../interpretation/hl.js";
-import { hlStageOf, classOf, HOLDS } from "./stage.js";
+import { hlStageOf, classOf, HOLDS } from "./stage-arm.js";
 
 export const LABEL_OF = Object.freeze({ [BOUND]: "E", [CONTRADICTED]: "C", [CONTESTED]: "N", [UNBOUND]: "N", [BEYOND_REACH]: "N" });
 

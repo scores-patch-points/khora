@@ -13,11 +13,38 @@ const words = (s) => low(s).replace(ART, "").replace(/[’']/g, " ").replace(/[�
 const stem = (w) => low(w).replace(/[^\p{L}\p{N}]/gu, "").slice(0, 5);
 const numOf = (s) => { const m = /(\d[\d\s.,']*\d|\d)/u.exec(String(s ?? "")); if (!m) return null; let t = m[1].replace(/[\s']/g, ""); if (/,\d{3}(\D|$)/.test(t) && !/\.\d/.test(t)) t = t.replace(/,/g, ""); else if (/\.\d{3}(\D|$)/.test(t) && /,/.test(t)) t = t.replace(/\./g, "").replace(",", "."); else t = t.replace(",", "."); const v = parseFloat(t); return Number.isFinite(v) ? v : null; };
 const DEG = /^(most|more|less|least):/;
+// PERSPECTIVE: an atom is held in a sense, and two atoms stated for different years are of different senses (stage.js senseStanding): the source's neither
+// meets the claim's nor contradicts it. Only STATED years decide; an atom with none is held in no stated year and is compared as before.
+export const otherYears = (c, s) => !!(c.time?.length && s.time?.length && !c.time.some((y) => s.time.includes(y)));
 const argText = (a) => (a && typeof a === "object" ? a.name ?? a.value ?? "" : String(a ?? ""));
 
 // unread: the claim's content words no claim atom carries; a claim with any is never supported (what was not read cannot be checked)
-// The claim arrives in its CANONICAL FORMS, as the reader wrote them (organs/atom-forms.js canonicalForms, returned by read-atoms.js as
-// `forms`): the negated-comparative and "another name for" rewrites are the reader's (the stage spec, RC6), no longer done here.
+// CANONICAL REWRITES of the claim, declared once (MEANING-ATOMS §5.1), so it meets a source that says the same in its usual form:
+// - "no X is higher than Y" is "Y is the highest": a negated comparison from a "no" quantifier becomes the superlative of its second
+//   referent, and the other negated atoms on the "no X" referent are said of that referent, asserted ("NOT in(no mountain, Washington)" →
+//   in(Rainier, Washington));
+// - "X is another name for Y" is named(Y, X).
+const NO = /^(no|none|neither|kein|keine|keiner|keinen|aucun|aucune|nul|nulle|ningún|ninguna|ninguno|nadie)\s/i;
+const NAME = /^(name|nom|nombre|name|bezeichnung|名前|別名|名称)$/i;
+export function canonical(C) {
+  let out = [...C];
+  const noArg = (a) => a && typeof a === "object" && NO.test(String(a.name ?? a.value ?? ""));
+  const cmp = out.find((c) => c.neg && (c.args ?? []).length === 2 && noArg(c.args[0]) && !noArg(c.args[1]));
+  if (cmp) {
+    const Y = cmp.args[1], X = cmp.args[0], w = low(cmp.pred).replace(/^(more|most):/, "").split(/[_\s]+/)[0];
+    const key = (a) => a.entity ?? low(a.value ?? a.name);
+    out = out.filter((c) => !(c.pred === cmp.pred || (c.args ?? []).length === 2 && key(c.args[0]) === key(X) && key(c.args[1]) === key(Y)))
+      .map((c) => (c.neg && noArg(c.args?.[0]) && key(c.args[0]) === key(X) ? { ...c, neg: false, args: [Y, ...c.args.slice(1)], rewritten: "no-comparative" } : c));
+    out.push({ pred: `most:${w}`, args: [Y], neg: false, hedged: !!cmp.hedged, rewritten: "no-comparative", text: `most:${w}(${Y.name ?? Y.value})` });
+  }
+  for (const n of out.filter((c) => c.pred === "is_a" && NAME.test(low(c.args?.[1]?.value ?? c.args?.[1]?.name ?? "").replace(ART, "").split(/\s+/).at(-1) ?? ""))) {
+    const X = n.args[0], f = out.find((c) => c !== n && (c.args ?? []).length === 2 && /(_|^)(for|de|für|pour|del|の)$/.test(c.pred) && (c.args[0].entity ?? c.args[0].value) === (X.entity ?? X.value));
+    if (!f) continue;
+    out = out.filter((c) => c !== n && c !== f);
+    out.push({ pred: "named", args: [f.args[1], X], neg: !!n.neg, hedged: !!n.hedged, rewritten: "another-name", text: `named(${f.args[1].name ?? f.args[1].value}, ${X.name ?? X.value})` });
+  }
+  return out;
+}
 // the meeting tests over one claim and one source (its referents' names on each side), shared with the learned matcher (atom-match.js)
 export function meeters(C, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null } = {}) {
   const keys = (lang, w) => { const ks = new Set([stem(w)]); if (keysOf && lang !== "en") for (const k of keysOf(lang, low(w)) ?? []) for (const x of words(k)) ks.add(stem(x)); return ks; };
@@ -74,12 +101,12 @@ export function meeters(C, S, { claimLang = "en", sourceLang = "en", same = null
   const standing = (c, s) => !s.hedged || !!c.hedged;
   return { wordMeet, refMeet, figMeet, predMeet, predWords, argsMeet, standing, canon };
 }
-export { low, words, stem, argText, DEG };
+export { low, words, stem, argText, DEG, NO };
 // swapFlags (PREREG run 22a): claim atoms (two or more arguments; not is_a, named, has_*) whose arguments the source holds under a different
 // predicate (role swap), or in the reverse order under a meeting predicate (direction swap). A different predicate over the same arguments is a
 // swap; no lexicon of antonyms or converses is consulted.
 export function swapFlags(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null } = {}) {
-  const C = C0, { predMeet, argsMeet } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
+  const C = canonical(C0), { predMeet, argsMeet } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
   const out = [];
   for (const c of C) {
     const cargs = c.args ?? []; if (cargs.length < 2 || c.pred === "is_a" || c.pred === "named" || /^has_/.test(c.pred) || DEG.test(c.pred)) continue;
@@ -92,7 +119,7 @@ export function swapFlags(C0, S, { claimLang = "en", sourceLang = "en", same = n
   return out;
 }
 export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same = null, keysOf = null, unread = [] } = {}) {
-  const C = C0;
+  const C = canonical(C0);
   const { wordMeet, refMeet, predMeet, predWords, argsMeet, standing } = meeters(C, S, { claimLang, sourceLang, same, keysOf });
   const table = [];
   for (const c of C) {
@@ -102,6 +129,7 @@ export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same =
     if (cargs.length === 1) { const w = predWords(c.pred).at(-1), t = argText(cargs[0]); if (w && new RegExp(`(^|\\s)\\p{Lu}`, "u").test(t) && words(t).some((x) => stem(x) === stem(w)) && /\p{Lu}/u.test(t.split(/\s+/).find((x) => stem(x) === stem(w)) ?? "")) { table.push({ atom: c, state: "met", by: null, identifying: true }); continue; } }
     for (const s of S) {
       const sargs = s.args ?? []; if (sargs.length < cargs.length) continue;
+      if (otherYears(c, s)) continue;
       if (cargs.length === 1) {
         // a one-place fact: the same adjective on the same referent, or a source referent whose words carry it
         if (sargs.length === 1 && predMeet(c.pred, s.pred) && refMeet(cargs[0], sargs[0])) { if (!!c.neg === !!s.neg) { if (standing(c, s)) { by = s; break; } continue; } if (!s.hedged) contra ??= s; continue; }
