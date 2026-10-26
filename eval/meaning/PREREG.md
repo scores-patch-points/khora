@@ -842,3 +842,34 @@ transitive license); no change to the arm after this commit.
  Run 23 is run once: the stage arm (mode m4) beside the rules arm (the atoms arm of run.mjs as of e1e1dac0) and the wording judge, with the deranged
  control, V5 and the ablation, reported per language and same- vs cross-language. If the bars are met only in part, the result is recorded and the
  arm is not adopted (nothing frozen).
+RUN 23 RESULT (the arm frozen at ebd80f1b, mode m4; first and only run on fresh23, no change to the arm since the set was committed at f3cba37f; the rules
+arm and the wording judge on the same 96 pairs; the bars of this entry, read as registered):
+ stage arm: accuracy 50.0% (48 of 96); E accepted 0 of 48; false accepts 0 of 48; C named 0 of 29; false-C 0 of 67; every language 50.0%
+    (en, es, fr, de, ja, cross-language). rules arm: accuracy 46.9% (45 of 96); E accepted 1 of 48; false accepts 4 of 48 (8.3%: en 2, es 1, ja 1);
+    C named 0 of 29; en 43.8%, es 43.8%, fr 50.0%, de 50.0%, ja 43.8%, cross 50.0%. wording judge: 55.2% (53 of 96); E accepted 10 of 48; false
+    accepts 5 of 48 (10.4%); C named 0 of 29; five E and T pairs called C.
+ V1 MET on run 23 (50.0 ≥ 46.9), only because the rules arm's four false accepts cost it more than its one true accept: the arm accepted nothing.
+    On the nine spent sets V1 is MISSED: 56.0% against 63.6%.
+ V2 MET: 0 of 48 on run 23 (rules 4 of 48); 1 of 199 (0.5%) on the spent sets (rules 3.5%).
+ V3 MISSED: 0 of 48 E accepted against the rules' 1; the quarter bar run 20's NLI arm failed: 0 of 48 (0%). Spent sets: 22 of 194 against 58.
+ V4 MISSED: 0 of 29 C named against the rules' 0 plus 15 points (5 of 29). Spent sets: 3 of 129 (2.3%) against the rules' 27.1% plus 15 points (55 of
+    129). The false-C half is MET: 0 of 67 on run 23, 0 of 264 on the spent sets (bar 5%).
+ V5 MET on the spent sets (273 constructed swaps of the 23 accepted pairs, 0 bound) and NOT EXERCISED on run 23: no pair was accepted, so there was
+    nothing to swap.
+ Control (deranged anchors): MET on the spent sets (E 22 → 1, C 3 → 0). On run 23 it is uninformative: the real binding also accepts 0 and names 0.
+ License ablation MET: no verdict moved on any removal (82 on the spent sets, 14 on run 23).
+ S1 MET on rerun: all 978 stages (489 pairs, the nine spent sets and run 23, claim and source) are byte-identical on a second run in a fresh process (cwd /tmp, TZ
+    Asia/Tokyo, locale de_DE), and the nine sets' hashes equal those of the M5 run. Across machines: NOT RUN (one machine; the VM is not used). S2 MET (final
+    code): 1,083 of 1,083 gold atoms.
+ So the bars are met in part, V3 and V4 are missed on both the spent sets and run 23, nothing is frozen and the arm is not adopted.
+ Why, from the per-conjunct reads (a reading, not a re-judgement): all 48 E pairs read beyond-reach. Each has at least one claim arrangement whose end
+    binds to no source anchor (23 with no unread word; 25 with an unread word as well), and HL's conjunction lets beyond-reach absorb the rest. 9 of the 48
+    have at least one arrangement HL reads bound. Across the 96 claims 278 ends were resolve's ask (end_unresolved: torn between page referents) and 158
+    its gap (no_correspondence). The 25 E pairs with an unread claim word carry 74 such words: 45 stated by the source sentence (reading failures), 29 not.
+    No claim or source carried a hedged arrangement. The functional licenses and R7 had nothing to do here.
+ What the record says a new frame (a REC) might be built on, proposed and not adopted or built: (1) binding is the bottleneck, and its assert rule is
+    the pool's chance floor (1 − 1/n) because no purpose states `lens.assertAt`: the stakes of a wrong binding are the user's to state; (2) of the 74 unread
+    claim words on run 23's E pairs, 45 are stated by the source sentence (and on the spent sets 28 of the 58 E pairs with an unread word carry only
+    such words): the reader's coverage, not HL, is what is missing; (3) no converse giver was named, so
+    role swaps are never accepted, not caught (M6 was not built); (4) a conjunction that lets one unbound end absorb a bound core is a design choice of
+    HL's ∧, not of the spec's laws.
