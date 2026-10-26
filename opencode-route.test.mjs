@@ -101,3 +101,11 @@ test("Isthmus: a mechanical verdict says whether an organ settled it", async () 
   assert.equal(notation.kind, "mechanical", "FALSIFIER: a notation span in a Spanish sentence was routed away from computation");
   assert.equal(notation.settled, true);
 });
+
+test("Isthmus: a question about code is work, even when it names two quantities; a settled computation still comes first", async () => {
+  const code = await routeOf("why does `a = 3 * 4` fail?");
+  assert.equal(code.kind, "work", "FALSIFIER: a code question routed as an unsettled computation");
+  const settled = await routeOf("What is 17 times 24?");
+  assert.equal(settled.kind, "mechanical");
+  assert.equal(settled.settled, true);
+});
