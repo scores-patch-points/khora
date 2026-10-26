@@ -258,11 +258,14 @@ const toAsciiDigits = (s) =>
     while (z > 0 && /\p{Nd}/u.test(String.fromCodePoint(z - 1)) && cp - (z - 1) < 10) z--; // decimal digits run in blocks of ten
     return String((cp - z) % 10);
   });
-// DECLARED, NOT EARNED (II.11, disclosed): the most words a frame around the span may carry. Six is the longest frame in
-// the multilingual cases this was written against ("17 × 24 はいくつですか" segments to 4; "Wie viel ist" 3); eight leaves
-// room. A measured value is owed: the frame-length distribution of eval/route's multilingual arithmetic asks against
-// the same for asks that merely contain a span. Until then it is a named bound, never a tuned one.
-const NOTATION_FRAME_WORDS = 8;
+// EARNED (II.11) by eval/notation/FRAME-PREREG.md (cd03b6b5), result in eval/notation/frame-bound-RESULT.json: the longest
+// frame among the router's dev arithmetic asks in 8 languages is 7 words; held-out recall at 7 is 20/20; real statements that
+// carry a span (Zenodotus, 631 sentences) are accepted 0.902 at 7 against 0.913 at the declared 8, so 7 was adopted by the rule.
+// THE FALSIFYING CONTROL FIRED, and is kept here: 90% of those statements still pass, because most are bare equation
+// fragments (frame 0-1) a word count cannot tell from a bare ask. The bound guards only against a span inside a LONG claim;
+// separating an ask from a statement is the ask's mood (a question mark of any script, the lane's intents), owed its own
+// pre-registration, never a smaller number here.
+const NOTATION_FRAME_WORDS = 7;
 const FRAME_SEGMENTER = new Intl.Segmenter("und", { granularity: "word" });
 const NUM = String.raw`\d+(?:\.\d+)?`;
 const OP = String.raw`(?:\s*[${NOTATION_TIGHT}]\s*|\s+[-/]\s+)`;
@@ -270,6 +273,13 @@ const SPAN_RE = new RegExp(String.raw`\(?\s*${NUM}\s*\)?(?:${OP}\(?\s*${NUM}\s*\
 
 /** The single arithmetic span a text carries in notation, as an ASCII expression, or null (none, or more than one reading). */
 export function notationSpan(question) {
+  const p = notationParts(question);
+  if (!p || p.gap) return p;
+  return p.frameWords > NOTATION_FRAME_WORDS ? null : { expression: p.expression };
+}
+
+/** notationParts(question) → every gate but the frame bound: null, a typed gap, or { expression, frameWords } (eval/notation measures the bound with it). */
+export function notationParts(question) {
   const s = toAsciiDigits(String(question ?? "").normalize("NFKC"));
   const spans = [...s.matchAll(SPAN_RE)];
   if (spans.length !== 1) return null;
@@ -279,14 +289,14 @@ export function notationSpan(question) {
   // THE FRAME: what surrounds the span must be a short ask about its value, in any language, never code or a longer
   // claim the span sits inside ("why does `a = 3 * 4` fail", "I paid 3 + 4 dollars for the tickets yesterday").
   if (/[=`{};<>_]/.test(outside)) return null;
-  const words = [...FRAME_SEGMENTER.segment(outside)].filter((w) => w.isWordLike).length;
-  if (words > NOTATION_FRAME_WORDS) return null;
+  const frameWords = [...FRAME_SEGMENTER.segment(outside)].filter((w) => w.isWordLike).length;
   if (/\d,\d/.test(s.slice(Math.max(0, m.index - 1), m.index + m[0].length + 1)) || /\d\s*,\s*$/.test(s.slice(0, m.index)) || /^,\d/.test(s.slice(m.index + m[0].length))) return { gap: "decimal_separator_undeclared" };
   const expr = m[0].replace(/[×·∙]/g, "*").replace(/÷/g, "/").replace(/−/g, "-").replace(/\s+/g, " ").trim();
-  return { expression: expr };
+  return { expression: expr, frameWords };
 }
 
 /** checkNotation(question, { math }) → the checkArithmetic shape with `codec: "notation"`, a typed gap, or null. */
+export const NOTATION_FRAME_BOUND = () => NOTATION_FRAME_WORDS;
 export function checkNotation(question, { math } = {}) {
   const raw = toAsciiDigits(String(question ?? "").normalize("NFKC"));
   // a comma between digits makes the number itself undeclared; checked before the span, which would cut at the comma
