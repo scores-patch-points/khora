@@ -771,3 +771,20 @@ M3 RESULT (code 9662980a; first run, the nine spent sets; modes m3 = quantities 
     rules' loose predicate meeting, not a figure meeting; 641 is one of the rules' false accepts.
  RC6 acceptance: the rules arm's per-pair verdicts with the two rewrites in the reader are identical to before on all nine sets.
  No M3 gate was pre-registered. The pre-registered V1, V3 and V4 are read on the final arm.
+V5 and the other tests' construction, fixed at M4 before V5, the ablation or the run 23 set is run (a construction detail, not a bar):
+ V5: the registered text keeps a swap only if "the source stage relates the two ends under no relation at all". Read literally that discards
+    every direction swap, since the claim's own relation relates them in the source. The intent is "the swapped claim is one the source does not
+    state", so a swap is kept when the source stage holds no edge, under any relation and either polarity, from the swapped first end to the
+    swapped second end. The swapped conjunct replaces the original in the claim's conjunction and is read on the same HL stage; a reading of
+    bound is a false accept. Tried on every pair the arm calls E, over its bound two-place arrangements (no key, no holds), by direction and by
+    each referent end replaced in turn by each other referent of the source page (stage.js anchors of kind referent). Reported by kind.
+ License ablation: each license of the pair's union (claim and source), removed one at a time, and the pair re-read. A verdict that becomes
+    bound or contradicted on a removal when it was not is a bug; a move toward unbound or beyond-reach is the allowed one.
+ M4's layers and gaps: hedged text (the reader's `hedged` flag on an atom) is the reported layer. An asserted claim arrangement reads the
+    asserted view of the source (A:rel); a hedged one reads the union view (U:rel). A claim arrangement whose byte span overlaps one of the
+    claim's unread_word gaps is beyond reach; an unread word spanned by no arrangement adds a beyond-reach conjunct. The words the reader cuts
+    before reading (a pronunciation in brackets) are recorded as gaps marked cut and block nothing. The unread gaps are classed against the
+    source sentence (the word is in it: a reading failure; else a real unknown); the class is reported and decides nothing.
+ Pair languages: fresh20.json writes its 16 English-claim cross-language pairs with the source's language alone ("es", not "es-en", as
+    fresh19.json does), so run.mjs and this runner read the English claim with the source language's grammar, as every earlier run did. Not
+    changed here (a spent set); the rules arm and the stage arm read it alike. Run 23 writes "xx-en".
