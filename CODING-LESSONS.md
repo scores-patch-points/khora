@@ -2857,3 +2857,20 @@ quick English-only fix would have "solved" and quietly broken elsewhere.
 - **Withdraw a recommendation the measurement refutes.** An earlier proposal (a VerbNet "directional" license) would have changed zero verdicts, because no
   pair reached the swap path; the faults were upstream, in the reader. The first real reversed pair now reaches `direction_swap`, and its verdict stays N:
   no license says that a swap contradicts, and none is invented.
+
+## 84. Before patching a reader, find which reader the doc says is THE reader — and check what its defaults are before you measure it (2026-10-26)
+
+Seven PRs of reader fixes (recipient role, person class, binding, an attach prior) were built on `readAtoms`, the meaning eval's own sentence reader. The pipeline doc
+(`native/docs/THE-READING-PIPELINE.md`, two days old) names ONE reader — `readDocument` -> `readToWeft` -> `read-core.mjs` — and says "nothing assembles a second reader". The
+meaning layer imported none of it: its own sentence cut, its own language default, its own coreference, its own parse call. The fixes were sound and in the wrong place.
+
+- **Read the doc that names the canonical path before the code that happens to work.** A path that works in an eval is not a path that is the system's.
+- **Check the reader's defaults before measuring it.** "The real reader returns nothing on a single sentence" was reported and was wrong: `readWith` has `minCharacters = 200` and returns
+  `skipped: "too_short"` under it. With the floor lifted it reads 57 of 108 sources. A measurement of a tool at its default is a measurement of its default.
+- **Join at the shared artifact, not at the output.** The two readers shared one thing, the UD parse. So the connection is the parse: the surface hands the master reader a `rowsOf`
+  hook (opt-in, so the reader stays page-safe and the entry stays byte-identical), the rows ride the entry beside the one cut, and the layer above reads THEM. Same parser behind both,
+  so parity is a proof: 655 of 664 texts (5 languages) read identical atoms, and the stage's 108 English pairs are identical (8/35, 22/57).
+- **A parity check shows who was wrong.** The 9 differences are the canonical cut splitting a text the old path took whole ("In Hann. Münden ...": the German punctuation prior lacks
+  "Hann."). That is a fault in the shared prior, invisible until the layers shared a cut; and 3 more were a layering fault of mine (pronunciation brackets cleaned in atoms, not with the parse).
+- **A hook that applies a default language is a leak.** The first version parsed a declared-but-unknown language with the English parser; the unknown-language test was written to
+  fail it, and it did.
