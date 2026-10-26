@@ -96,7 +96,7 @@ export const langKey = (p) => (/^cross/.test(p.type ?? "") || String(p.lang ?? "
 
 export function setsOf(names) {
   const C3 = process.env.FOLD_C3_DIR ?? path.join(HERE, "../../../the-fold/eval/ants/c3");
-  const all = { main: path.join(C3, "battery.json"), cf: path.join(C3, "battery-cf.json"), heldout: path.join(HERE, "heldout.json"), other: path.join(HERE, "heldout-other.json"), fresh: path.join(HERE, "fresh.json"), relations: path.join(HERE, "relations.json"), "fresh-ml": path.join(HERE, "fresh-ml.json"), fresh19: path.join(HERE, "fresh19.json"), fresh20: path.join(HERE, "fresh20.json") };
+  const all = { main: path.join(C3, "battery.json"), cf: path.join(C3, "battery-cf.json"), heldout: path.join(HERE, "heldout.json"), other: path.join(HERE, "heldout-other.json"), fresh: path.join(HERE, "fresh.json"), relations: path.join(HERE, "relations.json"), "fresh-ml": path.join(HERE, "fresh-ml.json"), fresh19: path.join(HERE, "fresh19.json"), fresh20: path.join(HERE, "fresh20.json"), fresh23: path.join(HERE, "fresh23.json") };
   const out = {};
   for (const k of names) { const [n, f] = k.includes("=") ? k.split("=") : [k, all[k]]; if (!f || !fs.existsSync(f)) throw new Error(`no set ${k}`); out[n] = JSON.parse(fs.readFileSync(f, "utf8")).pairs; }
   return out;

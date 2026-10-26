@@ -1,0 +1,35 @@
+{
+ "schema": "audit",
+ "auditor": "Claude subagent; blind relabel from id/claim/sentence/page only (no labels, no types, no code), compared after all 96 decided",
+ "agreed": 95,
+ "disagreements": [
+  {
+   "id": 956,
+   "authored": "C",
+   "audit": "E",
+   "note": "The sentence says the Traun flows through the lake from Ebensee in the south to Gmunden in the north; the claim says from Gmunden in the north to Ebensee in the south. The direction is reversed, so C stands as authored; the auditor read it as E."
+  }
+ ],
+ "borderline": [
+  {
+   "id": 932,
+   "note": "Sentence gives the same etymology as the Spanish form for Odiana but never says Arabic, so T rather than E; a reader with outside knowledge would say E."
+  },
+  {
+   "id": 934,
+   "note": "Sentence gives about fifteen km from Pontarlier and is silent on Besançon; I read the swapped city as C, but T is defensible."
+  },
+  {
+   "id": 953,
+   "note": "Tenth longest river in Europe implies nine longer rivers; labelled E as a figure derived from the sentence's own number."
+  },
+  {
+   "id": 995,
+   "note": "Sentence says the lake is the origin of the municipality's name (town named after lake); the claim reverses this, so C."
+  },
+  {
+   "id": 913,
+   "note": "'Longest river in Alaska and Yukon' read as equivalent to 'no other river there is longer'; E."
+  }
+ ]
+}

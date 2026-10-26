@@ -824,3 +824,21 @@ M5 RESULT (code 2b115644; the gate's first run, the nine spent sets; m5 = m4 + R
     510, 522, fresh-ml 615, 630, 662, fresh19 731, fresh20 805, 808) are held by other ends and words.
  Control (m5-deranged): E 1, C 0, as m4's. V5 over the 23 accepted pairs: 273 swaps, 0 bound. Ablation (99 removals): no verdict moved.
  RC5: 11 of the 393 pairs carry a reported arrangement (2 on the claim side, 10 on the source side).
+Run 23 set, committed with this entry before any arm runs on it. The arm is frozen at the code of ebd80f1b (mode m4: resolve binding with correspond,
+quantities bound by value, the reader's functional licenses, the layered hedge view, the gap rule; no R7, which failed its gate; no converse; no
+transitive license); no change to the arm after this commit.
+ Set: eval/meaning/fresh23.json, 96 pairs (48 E, 29 C, 19 T; 80 same-language, 16 English-claim cross-language "xx-en"), over 77 of the 129
+ sentences of 17 Wikipedia pages used by no earlier set (en Lake Huron, Yukon River; es Tajo, Lago Ypacaraí, Guadiana; fr Meuse (fleuve), Lac de
+ Saint-Point, Rhin; de Rhein, Traunsee, Königssee; ja 田沢湖, 磐梯山, 阿賀野川, 九重山, 岩木山, 榛名山), fetched 2026-10-25 from each language's
+ Wikipedia API (intro extracts) with revision ids (fresh23.sources.json). The pages were chosen by title before any text or any result was seen;
+ pages and sentences were then dropped only to bring the set near 18 pages and 120 sentences, by sentence count, before any pair existed.
+ Pairs were written and labelled by a separate subagent from sentences.json alone (no code, no other sets, no results), 16 same-language pairs per
+ language (8 E, 5 C, 3 T) and 4 cross-language pairs for each of es, fr, de, ja (2 E, 1 C, 1 T); the sentences were checked by script to be
+ copied exactly, the ids consecutive (901–996) and the counts as asked. A second subagent relabelled all 96 blind (id, claim, sentence, page; no
+ labels or types): 95 of 96 agree (fresh23.audit.json). The one disagreement, 956 (the Traun through the Traunsee: the claim reverses the sentence's
+ direction), stands as authored (C): the auditor read it as E, and the sentence plainly gives the opposite direction. Borderline, kept as given:
+ 913 (longest river in Alaska and the Yukon, read as "no longer river"), 932 (an etymology the sentence gives for the Spanish form, not the Arabic
+ one), 934 (distance given from one city, a swapped city), 953 (tenth-longest implies nine longer), 995 (a town named after a lake, reversed).
+ Run 23 is run once: the stage arm (mode m4) beside the rules arm (the atoms arm of run.mjs as of e1e1dac0) and the wording judge, with the deranged
+ control, V5 and the ablation, reported per language and same- vs cross-language. If the bars are met only in part, the result is recorded and the
+ arm is not adopted (nothing frozen).
