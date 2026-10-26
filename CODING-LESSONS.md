@@ -2829,3 +2829,31 @@ daemon-queue estimate with nothing in flight (12.6 s past a 12 s promise, so
 every turn was refused and none ended to refresh it; now the queue term counts
 only behind work), and /v1/code answered a pressure hold with 400, which a
 caller reads as a bad request (now 429 + Retry-After; the ladder waits on 429).
+
+## 83. A rule that fixes one language's sentence is a hypothesis about all of them — measure it on the others, and scope it by the role the grammar marks (2026-10-26)
+
+Reading the "direction reversed" misses ("Sagard sold us receivables" against "we sold receivables to Sagard") turned up three reader faults, each of which a
+quick English-only fix would have "solved" and quietly broken elsewhere.
+
+- **The recipient has one meaning and three spellings.** UD marks it as the indirect object, as the dative case on the word (Case=Dat), or by the dative
+  adposition; the atoms gave each a different shape (a three-argument atom; a generic `_at`; `_to`), so one fact read as three. Now each gives
+  `<rel>(agent, theme)` and `<rel>_<dative>(agent, recipient)`. The feature is read first; the pack (`RECIPIENT`, a declared closed class: en es fr ja) only
+  names the label, and a language not listed degrades to the old shape rather than a guessed one.
+- **A binding law is a measurable hypothesis.** Principle B ("a pronoun is not its own co-argument") fixed "In May, we entered ... under which we sold", then
+  measured on the 448 non-English sentences of the spent sets it broke Spanish clitic doubling ("este pico lo visitan") and French "en". Scoped to what UD
+  marks (a subject pronoun against any argument; an object pronoun against the SUBJECT only) it kept the fix and the doubling. The scope was found by reading
+  the diff of every changed atom, not by the test that motivated the rule.
+- **Parser noise is not a rule failure.** One sentence regressed because the parser labelled a fronted object `nsubj`. The rule was not tuned to it: the
+  net across the set was judged (improvements: "elle" bound to the page topic, not the Loire; `dar_at` becomes `dar_a`), and the test that had asserted the
+  accident was replaced by one on a sentence the parser gets right ("A Boris lo conoce Ana").
+- **Reference is an equivalence class, never a spelling (Frege).** "we", "us", "our", "nos", "nous" met only when the strings matched, so a reversed transfer
+  could never reach the direction-swap gap. Now a first-person mention carries `person: "1pl"` (UD Person/Number, or the pack's declared words) and two such
+  ends meet. The assumption is declared at the line: the speaker of a claim and of its source are one voice.
+- **A language parameter that defaults to English is a leak (Greenberg).** `atomize({ lang = "en" })` was added and removed in review; an unspecified language
+  keeps the old shape.
+- **Write the violation first, record where it cannot fire (Popper, lesson 70).** Five tests were written and watched failing before the code. A sixth
+  failed for a reason no rule here can fix: the English parser attaches "to Sagard" to the NOUN after a determiner and to the VERB when the object is bare.
+  Only the verb's frame (VerbNet's Recipient role) would decide, and no frame prior ships. It stays as a `todo` with its giver named.
+- **Withdraw a recommendation the measurement refutes.** An earlier proposal (a VerbNet "directional" license) would have changed zero verdicts, because no
+  pair reached the swap path; the faults were upstream, in the reader. The first real reversed pair now reaches `direction_swap`, and its verdict stays N:
+  no license says that a swap contradicts, and none is invented.

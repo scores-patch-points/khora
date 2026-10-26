@@ -63,7 +63,7 @@ export function meeters(C, S, { claimLang = "en", sourceLang = "en", same = null
   const allNames = (a, N) => [argText(a), ...(a?.entity != null ? [...(N.get(a.entity) ?? [])] : [])];
   // two figures of one measure meet by their values in base units (any bracketed equivalent too), within 2%, or 5% when either is approximate
   const figMeet = (x, y) => { if (!x?.measure || x.measure !== y?.measure || x.base == null || y.base == null) return null; const tol = 0.02; return [x.base, ...(x.alts ?? [])].some((a) => [y.base, ...(y.alts ?? [])].some((b) => Math.abs(a - b) <= tol * Math.max(Math.abs(a), Math.abs(b), 1e-9))); };
-  const refMeet = (x, y) => { const f = figMeet(x, y); if (f != null) return f; return allNames(x, NC).some((tx) => allNames(y, NS).some((ty) => refMeet1(tx, ty))); };
+  const refMeet = (x, y) => { const f = figMeet(x, y); if (f != null) return f; if (x?.person && x.person === y?.person) return true; return allNames(x, NC).some((tx) => allNames(y, NS).some((ty) => refMeet1(tx, ty))); };
   // two names of one referent: every content word of the claim's is met by a word of the source's
   const STOP = new Set(["de", "del", "des", "du", "of", "von", "vom", "der", "die", "das", "la", "le", "el", "the", "di", "da", "y", "et", "und", "and", "en", "in", "a", "à"]);
   const refMeet1 = (tx, ty) => {
