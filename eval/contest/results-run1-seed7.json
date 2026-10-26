@@ -1,0 +1,2153 @@
+{
+ "seed": 7,
+ "pairs": 300,
+ "claims": 661,
+ "planted": 115,
+ "clean": 185,
+ "contests": 76,
+ "cross": 5,
+ "recall": 0.591304347826087,
+ "falseRate": 0.016216216216216217,
+ "settledRight": 31,
+ "settledAll": 51,
+ "nullMean": 10.65,
+ "nullFalseMean": 0,
+ "bars": {
+  "B1": false,
+  "B2": true,
+  "B3": false
+ },
+ "perCond": {
+  "count/conflict": {
+   "n": 23,
+   "found": 22
+  },
+  "count/settled-scope": {
+   "n": 5,
+   "found": 2
+  },
+  "yearmonth/unrelated-relation": {
+   "n": 8,
+   "found": 1
+  },
+  "measure/consistent-equal": {
+   "n": 11,
+   "found": 0
+  },
+  "measure/settled-third": {
+   "n": 11,
+   "found": 8
+  },
+  "yearmonth/consistent-range": {
+   "n": 11,
+   "found": 0
+  },
+  "year/unrelated-relation": {
+   "n": 8,
+   "found": 2
+  },
+  "yearmonth/unrelated-ordinal": {
+   "n": 9,
+   "found": 0
+  },
+  "count/unrelated-referent": {
+   "n": 9,
+   "found": 0
+  },
+  "year/unrelated-referent": {
+   "n": 7,
+   "found": 0
+  },
+  "yearmonth/settled-third": {
+   "n": 3,
+   "found": 1
+  },
+  "year/consistent-equal": {
+   "n": 5,
+   "found": 0
+  },
+  "measure/settled-scope": {
+   "n": 7,
+   "found": 3
+  },
+  "measure/consistent-range": {
+   "n": 8,
+   "found": 0
+  },
+  "measure/unrelated-referent": {
+   "n": 8,
+   "found": 0
+  },
+  "yearmonth/conflict": {
+   "n": 15,
+   "found": 0
+  },
+  "count/consistent-equal": {
+   "n": 7,
+   "found": 0
+  },
+  "count/unrelated-head": {
+   "n": 8,
+   "found": 0
+  },
+  "year/unrelated-ordinal": {
+   "n": 7,
+   "found": 0
+  },
+  "measure/conflict": {
+   "n": 17,
+   "found": 9
+  },
+  "measure/consistent-round": {
+   "n": 12,
+   "found": 0
+  },
+  "year/consistent-range": {
+   "n": 12,
+   "found": 0
+  },
+  "count/consistent-round": {
+   "n": 11,
+   "found": 0
+  },
+  "count/settled-narrow": {
+   "n": 8,
+   "found": 8
+  },
+  "count/consistent-range": {
+   "n": 9,
+   "found": 0
+  },
+  "year/conflict": {
+   "n": 9,
+   "found": 2
+  },
+  "measure/unrelated-head": {
+   "n": 8,
+   "found": 0
+  },
+  "yearmonth/consistent-equal": {
+   "n": 10,
+   "found": 0
+  },
+  "yearmonth/unrelated-referent": {
+   "n": 5,
+   "found": 0
+  },
+  "count/unrelated-ordinal": {
+   "n": 8,
+   "found": 0
+  },
+  "measure/unrelated-ordinal": {
+   "n": 4,
+   "found": 0
+  },
+  "count/settled-third": {
+   "n": 8,
+   "found": 8
+  },
+  "year/settled-third": {
+   "n": 9,
+   "found": 5
+  }
+ },
+ "dolphins": 1,
+ "gaps": 76,
+ "contestsList": [
+  {
+   "a": {
+    "id": 0,
+    "at": "p0-a",
+    "text": "Fifty-one lamps are recorded at Ashbury Lighthouse."
+   },
+   "b": {
+    "id": 1,
+    "at": "p0-b",
+    "text": "Sixty lamps are recorded at Ashbury Lighthouse."
+   },
+   "ends": [
+    "ashbury",
+    "ashbury lighthouse",
+    "lamp",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "Fifty-one",
+    "Sixty"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 8,
+    "at": "p4-a",
+    "text": "Oxbury Lighthouse stretches 7 years."
+   },
+   "b": {
+    "id": 9,
+    "at": "p4-b",
+    "text": "Oxbury Lighthouse stretches 22 years."
+   },
+   "ends": [
+    "lighthouse",
+    "oxbury",
+    "oxbury lighthouse",
+    "stretch",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "7",
+    "22"
+   ],
+   "settled": {
+    "by": "p4-c",
+    "how": "a third claim carries both: Oxbury Lighthouse's years rose from 7 to twenty-two."
+   }
+  },
+  {
+   "a": {
+    "id": 21,
+    "at": "p10-a",
+    "text": "In 1734 Fenmere Lighthouse was founded."
+   },
+   "b": {
+    "id": 22,
+    "at": "p10-b",
+    "text": "In 1798 Fenmere Lighthouse was founded."
+   },
+   "ends": [
+    "fenmere lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1734",
+    "1798"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 30,
+    "at": "p14-a",
+    "text": "In 2008 cormere Lighthouse stretches eighty-nine metres."
+   },
+   "b": {
+    "id": 31,
+    "at": "p14-b",
+    "text": "Cormere Lighthouse stretches 105 metres."
+   },
+   "ends": [
+    "lighthouse",
+    "metre",
+    "stretch"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-nine",
+    "105"
+   ],
+   "settled": {
+    "by": "p14-a",
+    "how": "time-scoped: 2008"
+   }
+  },
+  {
+   "a": {
+    "id": 30,
+    "at": "p14-a",
+    "text": "In 2008 cormere Lighthouse stretches eighty-nine metres."
+   },
+   "b": {
+    "id": 80,
+    "at": "p38-b",
+    "text": "Kelby Lighthouse stretches ninety-two metres."
+   },
+   "ends": [
+    "lighthouse",
+    "metre",
+    "stretch"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-nine",
+    "ninety-two"
+   ],
+   "settled": {
+    "by": "p14-a",
+    "how": "time-scoped: 2008"
+   }
+  },
+  {
+   "a": {
+    "id": 30,
+    "at": "p14-a",
+    "text": "In 2008 cormere Lighthouse stretches eighty-nine metres."
+   },
+   "b": {
+    "id": 93,
+    "at": "p45-a",
+    "text": "Holmrow Lighthouse stretches 6,087 metres."
+   },
+   "ends": [
+    "lighthouse",
+    "metre",
+    "stretch"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-nine",
+    "6,087"
+   ],
+   "settled": {
+    "by": "p14-a",
+    "how": "time-scoped: 2008"
+   }
+  },
+  {
+   "a": {
+    "id": 30,
+    "at": "p14-a",
+    "text": "In 2008 cormere Lighthouse stretches eighty-nine metres."
+   },
+   "b": {
+    "id": 94,
+    "at": "p45-b",
+    "text": "Holmrow Lighthouse stretches about 6,000 metres."
+   },
+   "ends": [
+    "lighthouse",
+    "metre",
+    "stretch"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-nine",
+    "6,000"
+   ],
+   "settled": {
+    "by": "p14-a",
+    "how": "time-scoped: 2008"
+   }
+  },
+  {
+   "a": {
+    "id": 30,
+    "at": "p14-a",
+    "text": "In 2008 cormere Lighthouse stretches eighty-nine metres."
+   },
+   "b": {
+    "id": 138,
+    "at": "p66-b",
+    "text": "Holmham Lighthouse stretches 76 to 79 metres."
+   },
+   "ends": [
+    "lighthouse",
+    "metre",
+    "stretch"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-nine",
+    "76 to 79"
+   ],
+   "settled": {
+    "by": "p14-a",
+    "how": "time-scoped: 2008"
+   }
+  },
+  {
+   "a": {
+    "id": 30,
+    "at": "p14-a",
+    "text": "In 2008 cormere Lighthouse stretches eighty-nine metres."
+   },
+   "b": {
+    "id": 182,
+    "at": "p87-b",
+    "text": "Kelton Lighthouse stretches about 8,000 metres."
+   },
+   "ends": [
+    "lighthouse",
+    "metre",
+    "stretch"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-nine",
+    "8,000"
+   ],
+   "settled": {
+    "by": "p14-a",
+    "how": "time-scoped: 2008"
+   }
+  },
+  {
+   "a": {
+    "id": 60,
+    "at": "p29-a",
+    "text": "Kelwick Lighthouse is 52 percent long."
+   },
+   "b": {
+    "id": 61,
+    "at": "p29-b",
+    "text": "Kelwick Lighthouse is seventy-one percent long."
+   },
+   "ends": [
+    "kelwick",
+    "kelwick lighthouse",
+    "lighthouse",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "52",
+    "seventy-one"
+   ],
+   "settled": {
+    "by": "p29-c",
+    "how": "a third claim carries both: Kelwick Lighthouse's percent rose from 52 to 71."
+   }
+  },
+  {
+   "a": {
+    "id": 63,
+    "at": "p30-a",
+    "text": "Morwick Lighthouse | volumes | thirty-two"
+   },
+   "b": {
+    "id": 64,
+    "at": "p30-b",
+    "text": "Forty-four volumes are recorded at Morwick Lighthouse."
+   },
+   "ends": [
+    "lighthouse",
+    "morwick",
+    "morwick lighthouse",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-two",
+    "Forty-four"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 77,
+    "at": "p37-a",
+    "text": "five thousand volumes of Holmby Lighthouse are kept at Ickby Lighthouse."
+   },
+   "b": {
+    "id": 78,
+    "at": "p37-b",
+    "text": "Holmby Lighthouse has 8,000 volumes."
+   },
+   "ends": [
+    "holmby",
+    "holmby lighthouse",
+    "lighthouse",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "five thousand",
+    "8,000"
+   ],
+   "settled": {
+    "by": "p37-a",
+    "how": "narrower scope: ickby lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 95,
+    "at": "p46-a",
+    "text": "Kelrow Lighthouse was opened in 1788."
+   },
+   "b": {
+    "id": 96,
+    "at": "p46-b",
+    "text": "Kelrow Lighthouse was opened in 1816."
+   },
+   "ends": [
+    "kelrow",
+    "kelrow lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1788",
+    "1816"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 105,
+    "at": "p51-a",
+    "text": "In 1958 corrow Lighthouse measures 5,000 kilometres."
+   },
+   "b": {
+    "id": 106,
+    "at": "p51-b",
+    "text": "Corrow Lighthouse measures 7,000 kilometres."
+   },
+   "ends": [
+    "corrow",
+    "kilometre",
+    "lighthouse",
+    "measure"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "5,000",
+    "7,000"
+   ],
+   "settled": {
+    "by": "p51-b",
+    "how": "narrower scope: corrow lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 116,
+    "at": "p56-a",
+    "text": "Kelley Lighthouse | villages | three thousand"
+   },
+   "b": {
+    "id": 117,
+    "at": "p56-b",
+    "text": "Kelley Lighthouse | villages | seven thousand"
+   },
+   "ends": [
+    "kelley",
+    "kelley lighthouse",
+    "lighthouse",
+    "village"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "three thousand",
+    "seven thousand"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 118,
+    "at": "p57-a",
+    "text": "83 volumes are recorded at Morley Lighthouse."
+   },
+   "b": {
+    "id": 119,
+    "at": "p57-b",
+    "text": "Morley Lighthouse counts ninety-four to 101 volumes."
+   },
+   "ends": [
+    "lighthouse",
+    "morley",
+    "morley lighthouse",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "83",
+    "ninety-four to 101"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 120,
+    "at": "p58-a",
+    "text": "Oxley Lighthouse | volumes | 3"
+   },
+   "b": {
+    "id": 121,
+    "at": "p58-b",
+    "text": "Oxley Lighthouse counts 9 volumes."
+   },
+   "ends": [
+    "lighthouse",
+    "oxley",
+    "oxley lighthouse",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "3",
+    "9"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 124,
+    "at": "p60-a",
+    "text": "There are 4 residents at Thornley Lighthouse."
+   },
+   "b": {
+    "id": 125,
+    "at": "p60-b",
+    "text": "Thornley Lighthouse has sixteen residents."
+   },
+   "ends": [
+    "lighthouse",
+    "resident",
+    "thornley",
+    "thornley lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "4",
+    "sixteen"
+   ],
+   "settled": {
+    "by": "p60-c",
+    "how": "a third claim carries both: Thornley Lighthouse's residents rose from four to 16."
+   }
+  },
+  {
+   "a": {
+    "id": 127,
+    "at": "p61-a",
+    "text": "In 1977 varley Lighthouse is 28 years long."
+   },
+   "b": {
+    "id": 128,
+    "at": "p61-b",
+    "text": "Varley Lighthouse measures 38 years."
+   },
+   "ends": [
+    "lighthouse",
+    "varley",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "28",
+    "38"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 137,
+    "at": "p66-a",
+    "text": "Holmham Lighthouse is 68 metres long."
+   },
+   "b": {
+    "id": 138,
+    "at": "p66-b",
+    "text": "Holmham Lighthouse stretches 76 to 79 metres."
+   },
+   "ends": [
+    "holmham",
+    "holmham lighthouse",
+    "lighthouse",
+    "metre"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "68",
+    "76 to 79"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 145,
+    "at": "p70-a",
+    "text": "70 lamps are recorded at Radham Lighthouse."
+   },
+   "b": {
+    "id": 146,
+    "at": "p70-b",
+    "text": "Radham Lighthouse counts 87 lamps."
+   },
+   "ends": [
+    "lamp",
+    "lighthouse",
+    "radham",
+    "radham lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "70",
+    "87"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 159,
+    "at": "p77-a",
+    "text": "22 bells of Morworth Lighthouse are kept at Norworth Lighthouse."
+   },
+   "b": {
+    "id": 160,
+    "at": "p77-b",
+    "text": "There are twenty-four bells at Morworth Lighthouse."
+   },
+   "ends": [
+    "bell",
+    "lighthouse",
+    "morworth",
+    "morworth lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "22",
+    "twenty-four"
+   ],
+   "settled": {
+    "by": "p77-a",
+    "how": "narrower scope: norworth lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 165,
+    "at": "p80-a",
+    "text": "In 1896 Varworth Lighthouse was closed."
+   },
+   "b": {
+    "id": 166,
+    "at": "p80-b",
+    "text": "Varworth Lighthouse | closed | 1950"
+   },
+   "ends": [
+    "lighthouse",
+    "varworth",
+    "varworth lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1896",
+    "1950"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 176,
+    "at": "p85-a",
+    "text": "Fenton Lighthouse | length | 94 years"
+   },
+   "b": {
+    "id": 177,
+    "at": "p85-b",
+    "text": "Fenton Lighthouse is 104 years long."
+   },
+   "ends": [
+    "fenton",
+    "fenton lighthouse",
+    "lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "94",
+    "104"
+   ],
+   "settled": {
+    "by": "p85-c",
+    "how": "a third claim carries both: Fenton Lighthouse's years rose from 94 to 104."
+   }
+  },
+  {
+   "a": {
+    "id": 183,
+    "at": "p88-a",
+    "text": "Oxton Lighthouse is 23 kilometres long."
+   },
+   "b": {
+    "id": 184,
+    "at": "p88-b",
+    "text": "Oxton Lighthouse measures 39 kilometres."
+   },
+   "ends": [
+    "kilometre",
+    "lighthouse",
+    "oxton",
+    "oxton lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "23",
+    "39"
+   ],
+   "settled": {
+    "by": "p88-c",
+    "how": "a third claim carries both: Oxton Lighthouse's kilometres rose from 23 to 39."
+   }
+  },
+  {
+   "a": {
+    "id": 192,
+    "at": "p92-a",
+    "text": "Corton Lighthouse | restored | 1888"
+   },
+   "b": {
+    "id": 193,
+    "at": "p92-b",
+    "text": "In 1978 Corton Lighthouse was closed."
+   },
+   "ends": [
+    "corton",
+    "corton lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1888",
+    "1978"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 194,
+    "at": "p93-a",
+    "text": "Ashstead Lighthouse | opened | 1664"
+   },
+   "b": {
+    "id": 195,
+    "at": "p93-b",
+    "text": "Ashstead Lighthouse | opened | 1693"
+   },
+   "ends": [
+    "ashstead lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1664",
+    "1693"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 200,
+    "at": "p96-a",
+    "text": "84 branches of Holmstead Lighthouse are kept at Ickstead Lighthouse."
+   },
+   "b": {
+    "id": 201,
+    "at": "p96-b",
+    "text": "103 branches are recorded at Holmstead Lighthouse."
+   },
+   "ends": [
+    "branch",
+    "holmstead lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "84",
+    "103"
+   ],
+   "settled": {
+    "by": "p96-a",
+    "how": "narrower scope: ickstead lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 202,
+    "at": "p97-a",
+    "text": "Radstead Lighthouse has eighty-seven bells."
+   },
+   "b": {
+    "id": 203,
+    "at": "p97-b",
+    "text": "Radstead Lighthouse has ninety-one bells."
+   },
+   "ends": [
+    "bell",
+    "lighthouse",
+    "radstead",
+    "radstead lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-seven",
+    "ninety-one"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 215,
+    "at": "p103-a",
+    "text": "Kelcombe Lighthouse measures 4,000 percent."
+   },
+   "b": {
+    "id": 216,
+    "at": "p103-b",
+    "text": "Kelcombe Lighthouse measures 7,000 percent."
+   },
+   "ends": [
+    "kelcombe",
+    "kelcombe lighthouse",
+    "lighthouse",
+    "measure",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "4,000",
+    "7,000"
+   ],
+   "settled": {
+    "by": "p103-c",
+    "how": "a third claim carries both: Kelcombe Lighthouse's percent rose from 4,000 to 7,000."
+   }
+  },
+  {
+   "a": {
+    "id": 218,
+    "at": "p104-a",
+    "text": "Morcombe Lighthouse is 50 years long."
+   },
+   "b": {
+    "id": 219,
+    "at": "p104-b",
+    "text": "Morcombe Lighthouse stretches seventy years."
+   },
+   "ends": [
+    "lighthouse",
+    "morcombe",
+    "morcombe lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "50",
+    "seventy"
+   ],
+   "settled": {
+    "by": "p104-c",
+    "how": "a third claim carries both: Morcombe Lighthouse's years rose from 50 to seventy."
+   }
+  },
+  {
+   "a": {
+    "id": 225,
+    "at": "p107-a",
+    "text": "Seven thousand species are recorded at Thorncombe Lighthouse."
+   },
+   "b": {
+    "id": 226,
+    "at": "p107-b",
+    "text": "Thorncombe Lighthouse counts ten thousand species."
+   },
+   "ends": [
+    "lighthouse",
+    "specie",
+    "thorncombe",
+    "thorncombe lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "Seven thousand",
+    "ten thousand"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 229,
+    "at": "p109-a",
+    "text": "Fenmoor Lighthouse | employees | 84"
+   },
+   "b": {
+    "id": 230,
+    "at": "p109-b",
+    "text": "Fenmoor Lighthouse has ninety-three to 99 employees."
+   },
+   "ends": [
+    "employee",
+    "fenmoor",
+    "fenmoor lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "84",
+    "ninety-three to 99"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 235,
+    "at": "p112-a",
+    "text": "ninety-four floors of Oxmoor Lighthouse are kept at Pemmoor Lighthouse."
+   },
+   "b": {
+    "id": 236,
+    "at": "p112-b",
+    "text": "Oxmoor Lighthouse | floors | one hundred"
+   },
+   "ends": [
+    "floor",
+    "lighthouse",
+    "oxmoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "ninety-four",
+    "one hundred"
+   ],
+   "settled": {
+    "by": "p112-a",
+    "how": "narrower scope: pemmoor lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 241,
+    "at": "p115-a",
+    "text": "In 1793 Yarmoor Lighthouse was founded."
+   },
+   "b": {
+    "id": 242,
+    "at": "p115-b",
+    "text": "In 1873 Yarmoor Lighthouse was built."
+   },
+   "ends": [
+    "lighthouse",
+    "yarmoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1793",
+    "1873"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 257,
+    "at": "p123-a",
+    "text": "At 35 kilometres, Raddale Lighthouse is the longest of its kind."
+   },
+   "b": {
+    "id": 258,
+    "at": "p123-b",
+    "text": "Raddale Lighthouse is 39 kilometres long."
+   },
+   "ends": [
+    "kilometre",
+    "lighthouse",
+    "raddale",
+    "raddale lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "35",
+    "39"
+   ],
+   "settled": {
+    "by": "p123-c",
+    "how": "a third claim carries both: Raddale Lighthouse's kilometres rose from 35 to thirty-nine."
+   }
+  },
+  {
+   "a": {
+    "id": 266,
+    "at": "p127-a",
+    "text": "There are 62 branches at Holmbury Bridge."
+   },
+   "b": {
+    "id": 267,
+    "at": "p127-b",
+    "text": "66 to seventy-one branches are recorded at Holmbury Bridge."
+   },
+   "ends": [
+    "branch",
+    "bridge",
+    "holmbury",
+    "holmbury lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "62",
+    "66 to seventy-one"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 268,
+    "at": "p128-a",
+    "text": "There are seven volumes at Kelbury Bridge."
+   },
+   "b": {
+    "id": 269,
+    "at": "p128-b",
+    "text": "Kelbury Bridge counts 25 volumes."
+   },
+   "ends": [
+    "bridge",
+    "kelbury",
+    "kelbury lighthouse",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seven",
+    "25"
+   ],
+   "settled": {
+    "by": "p128-c",
+    "how": "a third claim carries both: Kelbury Bridge's volumes rose from seven to twenty-five."
+   }
+  },
+  {
+   "a": {
+    "id": 277,
+    "at": "p132-a",
+    "text": "In 1989 twenty bells are recorded at Thornbury Bridge."
+   },
+   "b": {
+    "id": 278,
+    "at": "p132-b",
+    "text": "Thornbury Bridge counts 23 bells."
+   },
+   "ends": [
+    "bell",
+    "bridge",
+    "thornbury",
+    "thornbury lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "twenty",
+    "23"
+   ],
+   "settled": {
+    "by": "p132-a",
+    "how": "time-scoped: 1989"
+   }
+  },
+  {
+   "a": {
+    "id": 321,
+    "at": "p153-a",
+    "text": "13 lamps of Radford Bridge are kept at Selford Bridge."
+   },
+   "b": {
+    "id": 322,
+    "at": "p153-b",
+    "text": "Radford Bridge has 23 lamps."
+   },
+   "ends": [
+    "bridge",
+    "lamp",
+    "radford",
+    "radford lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "13",
+    "23"
+   ],
+   "settled": {
+    "by": "p153-a",
+    "how": "narrower scope: selford bridge"
+   }
+  },
+  {
+   "a": {
+    "id": 323,
+    "at": "p154-a",
+    "text": "67 branches of Thornford Bridge are kept at Uxford Bridge."
+   },
+   "b": {
+    "id": 324,
+    "at": "p154-b",
+    "text": "Thornford Bridge | branches | eighty-two"
+   },
+   "ends": [
+    "branch",
+    "bridge",
+    "thornford",
+    "thornford lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "67",
+    "eighty-two"
+   ],
+   "settled": {
+    "by": "p154-a",
+    "how": "narrower scope: uxford bridge"
+   }
+  },
+  {
+   "a": {
+    "id": 335,
+    "at": "p160-a",
+    "text": "Oxwick Bridge counts thirteen islands."
+   },
+   "b": {
+    "id": 336,
+    "at": "p160-b",
+    "text": "There are thirty-one to 34 islands at Oxwick Bridge."
+   },
+   "ends": [
+    "bridge",
+    "island",
+    "oxwick",
+    "oxwick lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirteen",
+    "thirty-one to 34"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 346,
+    "at": "p165-a",
+    "text": "Dunby Bridge | volumes | sixty-one"
+   },
+   "b": {
+    "id": 347,
+    "at": "p165-b",
+    "text": "Dunby Bridge | volumes | 73"
+   },
+   "ends": [
+    "bridge",
+    "dunby",
+    "dunby bridge",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-one",
+    "73"
+   ],
+   "settled": {
+    "by": "p165-c",
+    "how": "a third claim carries both: Dunby Bridge's volumes rose from 61 to 73."
+   }
+  },
+  {
+   "a": {
+    "id": 359,
+    "at": "p171-a",
+    "text": "thirteen keepers of Corby Bridge are kept at Dalby Bridge."
+   },
+   "b": {
+    "id": 360,
+    "at": "p171-b",
+    "text": "20 keepers are recorded at Corby Bridge."
+   },
+   "ends": [
+    "bridge",
+    "corby",
+    "corby lighthouse",
+    "keeper"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirteen",
+    "20"
+   ],
+   "settled": {
+    "by": "p171-a",
+    "how": "narrower scope: dalby bridge"
+   }
+  },
+  {
+   "a": {
+    "id": 367,
+    "at": "p175-a",
+    "text": "Holmrow Bridge | length | 3,000 years"
+   },
+   "b": {
+    "id": 368,
+    "at": "p175-b",
+    "text": "Holmrow Bridge | length | 8,000 years"
+   },
+   "ends": [
+    "bridge",
+    "holmrow lighthouse",
+    "length",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "3,000",
+    "8,000"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 369,
+    "at": "p176-a",
+    "text": "Kelrow Bridge has twenty-three lamps."
+   },
+   "b": {
+    "id": 370,
+    "at": "p176-b",
+    "text": "Kelrow Bridge | lamps | 41"
+   },
+   "ends": [
+    "bridge",
+    "kelrow",
+    "kelrow lighthouse",
+    "lamp"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "twenty-three",
+    "41"
+   ],
+   "settled": {
+    "by": "p176-c",
+    "how": "a third claim carries both: Kelrow Bridge's lamps rose from 23 to 41."
+   }
+  },
+  {
+   "a": {
+    "id": 374,
+    "at": "p178-a",
+    "text": "Radrow Bridge counts 87 keepers."
+   },
+   "b": {
+    "id": 375,
+    "at": "p178-b",
+    "text": "Radrow Bridge | keepers | 103"
+   },
+   "ends": [
+    "bridge",
+    "keeper",
+    "radrow",
+    "radrow lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "87",
+    "103"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 376,
+    "at": "p179-a",
+    "text": "Seventy-seven volumes are recorded at Thornrow Bridge."
+   },
+   "b": {
+    "id": 377,
+    "at": "p179-b",
+    "text": "There are eighty volumes at Thornrow Bridge."
+   },
+   "ends": [
+    "bridge",
+    "thornrow",
+    "thornrow bridge",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "Seventy-seven",
+    "eighty"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 378,
+    "at": "p180-a",
+    "text": "Yarrow Bridge has 8,000 floors."
+   },
+   "b": {
+    "id": 379,
+    "at": "p180-b",
+    "text": "There are 10,000 to 10,008 floors at Yarrow Bridge."
+   },
+   "ends": [
+    "bridge",
+    "floor",
+    "yarrow lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "8,000",
+    "10,000 to 10,008"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 382,
+    "at": "p182-a",
+    "text": "44 keepers are recorded at Dunley Bridge."
+   },
+   "b": {
+    "id": 383,
+    "at": "p182-b",
+    "text": "There are 59 to sixty-eight keepers at Dunley Bridge."
+   },
+   "ends": [
+    "bridge",
+    "dunley",
+    "dunley lighthouse",
+    "keeper"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "44",
+    "59 to sixty-eight"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 384,
+    "at": "p183-a",
+    "text": "Kelley Bridge has 4,000 islands."
+   },
+   "b": {
+    "id": 385,
+    "at": "p183-b",
+    "text": "Eight thousand islands are recorded at Kelley Bridge."
+   },
+   "ends": [
+    "bridge",
+    "island",
+    "kelley",
+    "kelley lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "4,000",
+    "Eight thousand"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 386,
+    "at": "p184-a",
+    "text": "Morley Bridge stretches 22 metres."
+   },
+   "b": {
+    "id": 387,
+    "at": "p184-b",
+    "text": "Morley Bridge is 35 metres long."
+   },
+   "ends": [
+    "bridge",
+    "metre",
+    "morley",
+    "morley lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "22",
+    "35"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 388,
+    "at": "p185-a",
+    "text": "Radley Bridge is two thousand years long."
+   },
+   "b": {
+    "id": 389,
+    "at": "p185-b",
+    "text": "Radley Bridge | length | eight thousand to 8,004 years"
+   },
+   "ends": [
+    "bridge",
+    "radley",
+    "radley lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "two thousand",
+    "eight thousand to 8,004"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 402,
+    "at": "p192-a",
+    "text": "In 1536 Kelham Bridge was restored."
+   },
+   "b": {
+    "id": 403,
+    "at": "p192-b",
+    "text": "Kelham Bridge | completed | 1624"
+   },
+   "ends": [
+    "bridge",
+    "kelham",
+    "kelham lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1536",
+    "1624"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 404,
+    "at": "p193-a",
+    "text": "76 floors are recorded at Morham Bridge."
+   },
+   "b": {
+    "id": 405,
+    "at": "p193-b",
+    "text": "Morham Bridge counts 92 floors."
+   },
+   "ends": [
+    "bridge",
+    "floor",
+    "morham",
+    "morham lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "76",
+    "92"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 406,
+    "at": "p194-a",
+    "text": "Oxham Bridge has seven bells."
+   },
+   "b": {
+    "id": 407,
+    "at": "p194-b",
+    "text": "Oxham Bridge | bells | 18"
+   },
+   "ends": [
+    "bell",
+    "bridge",
+    "oxham",
+    "oxham lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seven",
+    "18"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 416,
+    "at": "p199-a",
+    "text": "At six thousand kilometres, Oxworth Bridge is the longest of its kind."
+   },
+   "b": {
+    "id": 417,
+    "at": "p199-b",
+    "text": "At ten thousand kilometres, Oxworth Bridge is the longest of its kind."
+   },
+   "ends": [
+    "bridge",
+    "kilometre",
+    "kind",
+    "longest",
+    "oxworth",
+    "oxworth lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "six thousand",
+    "ten thousand"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 422,
+    "at": "p202-a",
+    "text": "Ashton Bridge measures twenty-four kilometres."
+   },
+   "b": {
+    "id": 423,
+    "at": "p202-b",
+    "text": "Ashton Bridge measures thirty-nine kilometres."
+   },
+   "ends": [
+    "ashton",
+    "ashton lighthouse",
+    "bridge",
+    "kilometre",
+    "measure"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "twenty-four",
+    "thirty-nine"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 424,
+    "at": "p203-a",
+    "text": "There are sixty-two bells at Dunton Bridge."
+   },
+   "b": {
+    "id": 425,
+    "at": "p203-b",
+    "text": "Dunton Bridge | bells | 74"
+   },
+   "ends": [
+    "bell",
+    "bridge",
+    "dunton",
+    "dunton lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-two",
+    "74"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 428,
+    "at": "p205-a",
+    "text": "Oxton Bridge | length | eight thousand percent"
+   },
+   "b": {
+    "id": 429,
+    "at": "p205-b",
+    "text": "Oxton Bridge | length | 14,000 percent"
+   },
+   "ends": [
+    "bridge",
+    "length",
+    "oxton",
+    "oxton lighthouse",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eight thousand",
+    "14,000"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 434,
+    "at": "p208-a",
+    "text": "Varton Bridge | employees | 7,000"
+   },
+   "b": {
+    "id": 435,
+    "at": "p208-b",
+    "text": "There are eleven thousand employees at Varton Bridge."
+   },
+   "ends": [
+    "bridge",
+    "employee",
+    "varton",
+    "varton lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "7,000",
+    "eleven thousand"
+   ],
+   "settled": {
+    "by": "p208-c",
+    "how": "a third claim carries both: Varton Bridge's employees rose from seven thousand to 11,000."
+   }
+  },
+  {
+   "a": {
+    "id": 449,
+    "at": "p215-a",
+    "text": "The records say Radstead Bridge was closed in 1790."
+   },
+   "b": {
+    "id": 450,
+    "at": "p215-b",
+    "text": "The records say Radstead Bridge was closed in 1868."
+   },
+   "ends": [
+    "bridge",
+    "radstead",
+    "radstead lighthouse",
+    "record",
+    "records"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1790",
+    "1868"
+   ],
+   "settled": {
+    "by": "p215-c",
+    "how": "a third claim carries both: Radstead Bridge was closed between 1790 and 1868."
+   }
+  },
+  {
+   "a": {
+    "id": 460,
+    "at": "p220-a",
+    "text": "There are eighty branches at Morcombe Bridge."
+   },
+   "b": {
+    "id": 461,
+    "at": "p220-b",
+    "text": "Morcombe Bridge | branches | 86"
+   },
+   "ends": [
+    "branch",
+    "bridge",
+    "morcombe",
+    "morcombe lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty",
+    "86"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 478,
+    "at": "p229-a",
+    "text": "Kelmoor Bridge counts 82 floors."
+   },
+   "b": {
+    "id": 479,
+    "at": "p229-b",
+    "text": "Kelmoor Bridge counts ninety-four floors."
+   },
+   "ends": [
+    "bridge",
+    "count",
+    "floor",
+    "kelmoor",
+    "kelmoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "82",
+    "ninety-four"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 499,
+    "at": "p239-a",
+    "text": "The records say Mordale Bridge was closed in 1902."
+   },
+   "b": {
+    "id": 500,
+    "at": "p239-b",
+    "text": "The records say Mordale Bridge was closed in 1958."
+   },
+   "ends": [
+    "bridge",
+    "mordale",
+    "mordale bridge",
+    "record",
+    "records"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1902",
+    "1958"
+   ],
+   "settled": {
+    "by": "p239-c",
+    "how": "a third claim carries both: Mordale Bridge was closed between 1902 and 1958."
+   }
+  },
+  {
+   "a": {
+    "id": 508,
+    "at": "p243-a",
+    "text": "Vardale Bridge is forty-six percent long."
+   },
+   "b": {
+    "id": 509,
+    "at": "p243-b",
+    "text": "At fifty-six percent, Vardale Bridge is the longest of its kind."
+   },
+   "ends": [
+    "bridge",
+    "percent",
+    "vardale",
+    "vardale lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "forty-six",
+    "fifty-six"
+   ],
+   "settled": {
+    "by": "p243-c",
+    "how": "a third claim carries both: Vardale Bridge's percent rose from forty-six to fifty-six."
+   }
+  },
+  {
+   "a": {
+    "id": 513,
+    "at": "p245-a",
+    "text": "In 1967 95 volumes are recorded at Cordale Bridge."
+   },
+   "b": {
+    "id": 514,
+    "at": "p245-b",
+    "text": "Cordale Bridge has 100 volumes."
+   },
+   "ends": [
+    "bridge",
+    "cordale",
+    "cordale lighthouse",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "95",
+    "100"
+   ],
+   "settled": {
+    "by": "p245-a",
+    "how": "time-scoped: 1967"
+   }
+  },
+  {
+   "a": {
+    "id": 517,
+    "at": "p247-a",
+    "text": "Kelbury Tower counts forty-four volumes."
+   },
+   "b": {
+    "id": 518,
+    "at": "p247-b",
+    "text": "Kelbury Tower | volumes | 53"
+   },
+   "ends": [
+    "kelbury",
+    "kelbury lighthouse",
+    "tower",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "forty-four",
+    "53"
+   ],
+   "settled": {
+    "by": "p247-c",
+    "how": "a third claim carries both: Kelbury Tower's volumes rose from forty-four to 53."
+   }
+  },
+  {
+   "a": {
+    "id": 532,
+    "at": "p254-a",
+    "text": "There are 4,000 students at Dunmere Tower."
+   },
+   "b": {
+    "id": 533,
+    "at": "p254-b",
+    "text": "Dunmere Tower counts 8,000 to 8,003 students."
+   },
+   "ends": [
+    "dunmere lighthouse",
+    "student",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "4,000",
+    "8,000 to 8,003"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 538,
+    "at": "p257-a",
+    "text": "The records say Radmere Tower was founded in 1880."
+   },
+   "b": {
+    "id": 539,
+    "at": "p257-b",
+    "text": "Radmere Tower was founded in 1989."
+   },
+   "ends": [
+    "radmere bridge",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1880",
+    "1989"
+   ],
+   "settled": {
+    "by": "p257-c",
+    "how": "a third claim carries both: Radmere Tower was founded between 1880 and 1989."
+   }
+  },
+  {
+   "a": {
+    "id": 568,
+    "at": "p271-a",
+    "text": "Dunwick Tower was restored in 1714."
+   },
+   "b": {
+    "id": 569,
+    "at": "p271-b",
+    "text": "Dunwick Tower was restored in 1774."
+   },
+   "ends": [
+    "dunwick",
+    "dunwick lighthouse",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1714",
+    "1774"
+   ],
+   "settled": {
+    "by": "p271-c",
+    "how": "a third claim carries both: Dunwick Tower was restored between 1714 and 1774."
+   }
+  },
+  {
+   "a": {
+    "id": 583,
+    "at": "p278-a",
+    "text": "At 44 metres, Varwick Tower is the longest of its kind."
+   },
+   "b": {
+    "id": 584,
+    "at": "p278-b",
+    "text": "Varwick Tower is 63 metres long."
+   },
+   "ends": [
+    "metre",
+    "tower",
+    "varwick",
+    "varwick lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "44",
+    "63"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 595,
+    "at": "p284-a",
+    "text": "sixty-one rooms of Morby Tower are kept at Norby Tower."
+   },
+   "b": {
+    "id": 596,
+    "at": "p284-b",
+    "text": "Morby Tower has seventy-four rooms."
+   },
+   "ends": [
+    "morby",
+    "morby lighthouse",
+    "room",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-one",
+    "seventy-four"
+   ],
+   "settled": {
+    "by": "p284-a",
+    "how": "narrower scope: norby tower"
+   }
+  },
+  {
+   "a": {
+    "id": 606,
+    "at": "p289-a",
+    "text": "Corby Tower counts 81 members."
+   },
+   "b": {
+    "id": 607,
+    "at": "p289-b",
+    "text": "There are 101 members at Corby Tower."
+   },
+   "ends": [
+    "corby",
+    "corby lighthouse",
+    "member",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "81",
+    "101"
+   ],
+   "settled": {
+    "by": "p289-c",
+    "how": "a third claim carries both: Corby Tower's members rose from 81 to 101."
+   }
+  },
+  {
+   "a": {
+    "id": 609,
+    "at": "p290-a",
+    "text": "Ashrow Tower | members | 46"
+   },
+   "b": {
+    "id": 610,
+    "at": "p290-b",
+    "text": "Ashrow Tower counts sixty-one members."
+   },
+   "ends": [
+    "ashrow lighthouse",
+    "member",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "46",
+    "sixty-one"
+   ],
+   "settled": {
+    "by": "p290-c",
+    "how": "a third claim carries both: Ashrow Tower's members rose from 46 to sixty-one."
+   }
+  },
+  {
+   "a": {
+    "id": 612,
+    "at": "p291-a",
+    "text": "Dunrow Tower measures fifty-two percent."
+   },
+   "b": {
+    "id": 613,
+    "at": "p291-b",
+    "text": "Dunrow Tower is 59 to 61 percent long."
+   },
+   "ends": [
+    "dunrow",
+    "dunrow bridge",
+    "percent",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "fifty-two",
+    "59 to 61"
+   ],
+   "settled": null
+  }
+ ]
+}
