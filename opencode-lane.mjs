@@ -43,13 +43,18 @@ export const LANE_ON = () => process.env.FOLD_LANE !== "0";
 export const laneBudgetMs = () => Number(process.env.FOLD_LANE_MS ?? 800);
 
 let _mech = null;
+let _mechGap = null;
 async function mechanisms() {
   if (_mech) return _mech;
   try {
     const { buildMechanisms } = await import("./native/organs/mechanisms.js");
     _mech = buildMechanisms();
-  } catch {
+  } catch (e) {
+    // A lane with no mechanisms cannot settle anything, and every ask then reads as `register`: the model phrases the sum.
+    // Measured 2026-10-26: a checkout with no node_modules (mathjs absent) sent "What is 17 times 24?" to register, silently.
+    // The failure is now a typed gap on every lane verdict (mechanismsGap), never an empty list passed off as "nothing to settle".
     _mech = [];
+    _mechGap = `the mechanisms did not load (${String(e?.code ?? e?.message ?? e).slice(0, 120)}): no ask can be settled mechanically`;
   }
   return _mech;
 }
@@ -111,6 +116,7 @@ export async function laneFor({ ask, material = null, history = [], surfaced = n
     casedScript: lang.casedScript ?? null,
     casedFraction: lang.casedFraction ?? null,
     langGap: lang.gap ?? null,
+    mechanismsGap: injected ? null : _mechGap,
     grounding: groundingFor(lang.language),
     observation: gate.observation
       ? { mechanism: gate.observation.mechanism ?? null, kind: gate.observation.kind ?? null, text: gate.observation.text ?? null }
@@ -142,6 +148,7 @@ export function laneBlock(info) {
     `from="the current ask" made="reason-gate + language leg"`;
   const body = [`lane: ${info.lane} — ${LANE_LINE[info.lane] ?? info.reason ?? ""}`];
   if (info.observation?.text) body.push(`settled: ${info.observation.text}`);
+  if (info.mechanismsGap) body.push(`mechanisms: GAP — ${info.mechanismsGap}; a number in this answer is not computed`);
   body.push(
     `language: ${info.language ?? "unknown"} (${casedWord(info.casedScript)} script). grounding: ${info.grounding}` +
       (info.grounding === "full"

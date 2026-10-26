@@ -1,0 +1,6695 @@
+{
+ "seed": 9,
+ "pairs": [
+  {
+   "id": 0,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Ashbury Lighthouse has seventy inhabitants.",
+    "The fourth Ashbury Lighthouse has 85 inhabitants."
+   ]
+  },
+  {
+   "id": 1,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Dunbury Lighthouse counts 4,365 bells.",
+    "There are about 4,000 bells at Dunbury Lighthouse."
+   ]
+  },
+  {
+   "id": 2,
+   "kind": "year",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Fenbury Lighthouse was restored in 1723.",
+    "The fourth Fenbury Lighthouse was restored in 1828."
+   ]
+  },
+  {
+   "id": 3,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Holmbury Lighthouse is 51 percent long.",
+    "Holmbury Lighthouse | length | sixty-two to sixty-seven percent"
+   ]
+  },
+  {
+   "id": 4,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Morbury Lighthouse | length | 60 percent",
+    "Morbury Lighthouse is between 55 and 64 percent long."
+   ]
+  },
+  {
+   "id": 5,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxbury Lighthouse | restored | 1510",
+    "The records say Pembury Lighthouse was restored in 1598."
+   ]
+  },
+  {
+   "id": 6,
+   "kind": "year",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Radbury Lighthouse was closed in 1614.",
+    "The fourth Radbury Lighthouse was closed in 1697."
+   ]
+  },
+  {
+   "id": 7,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In July 1773 Varbury Lighthouse was founded.",
+    "Varbury Lighthouse was founded in March 1773."
+   ]
+  },
+  {
+   "id": 8,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Ashmere Lighthouse measures 3,000 metres.",
+    "Ashmere Lighthouse is 5,000 metres long."
+   ]
+  },
+  {
+   "id": 9,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Fenmere Lighthouse stretches four thousand percent.",
+    "At 7,000 percent, Garmere Lighthouse is the longest of its kind."
+   ]
+  },
+  {
+   "id": 10,
+   "kind": "year",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Holmmere Lighthouse was closed in December 1534.",
+    "The records say Holmmere Lighthouse was closed in 1534."
+   ]
+  },
+  {
+   "id": 11,
+   "kind": "yearmonth",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1675 Kelmere Lighthouse was restored.",
+    "In 1731 Kelmere Lighthouse was opened."
+   ]
+  },
+  {
+   "id": 12,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Mormere Lighthouse | founded | June 1556",
+    "Mormere Lighthouse was founded in September 1556."
+   ]
+  },
+  {
+   "id": 13,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxmere Lighthouse is 7,009 kilometres long.",
+    "Oxmere Lighthouse is about 7,000 kilometres long."
+   ]
+  },
+  {
+   "id": 14,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Radmere Lighthouse was built in 1588.",
+    "In 1645 Selmere Lighthouse was built."
+   ]
+  },
+  {
+   "id": 15,
+   "kind": "measure",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Cormere Lighthouse measures 89 kilometres.",
+    "Cormere Lighthouse stretches 105 metres."
+   ]
+  },
+  {
+   "id": 16,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Ashford Lighthouse | opened | November 1807",
+    "Ashford Lighthouse was opened in September 1807."
+   ]
+  },
+  {
+   "id": 17,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p17-c"
+   ],
+   "units": [
+    "Fenford Lighthouse was restored in 1661.",
+    "Fenford Lighthouse | restored | 1732",
+    "Fenford Lighthouse was restored between 1661 and 1732."
+   ]
+  },
+  {
+   "id": 18,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmford Lighthouse | built | 1854",
+    "Holmford Lighthouse was built in 1854."
+   ]
+  },
+  {
+   "id": 19,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Kelford Lighthouse | length | seventy-six kilometres",
+    "Kelford Lighthouse | length | 78 kilometres"
+   ]
+  },
+  {
+   "id": 20,
+   "kind": "measure",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxford Lighthouse measures 74 percent.",
+    "Oxford Lighthouse measures eighty-five metres."
+   ]
+  },
+  {
+   "id": 21,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radford Lighthouse | built | February 1696",
+    "In January 1696 Radford Lighthouse was built."
+   ]
+  },
+  {
+   "id": 22,
+   "kind": "year",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Founded in March 1871, Thornford Lighthouse still stands.",
+    "In 1871 Thornford Lighthouse was founded."
+   ]
+  },
+  {
+   "id": 23,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Founded in 1910, Varford Lighthouse still stands.",
+    "The records say Varford Lighthouse was completed in 2028."
+   ]
+  },
+  {
+   "id": 24,
+   "kind": "yearmonth",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarford Lighthouse was opened in 1539.",
+    "In 1539 Yarford Lighthouse was opened."
+   ]
+  },
+  {
+   "id": 25,
+   "kind": "count",
+   "cond": "settled-narrow",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p25-a"
+   ],
+   "units": [
+    "ninety-five volumes of Corford Lighthouse are kept at Dalford Lighthouse.",
+    "Corford Lighthouse has 102 volumes."
+   ]
+  },
+  {
+   "id": 26,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ashwick Lighthouse | length | 8,269 kilometres",
+    "Ashwick Lighthouse measures about 8,000 kilometres."
+   ]
+  },
+  {
+   "id": 27,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 9,000 kilometres, Dunwick Lighthouse is the longest of its kind.",
+    "At nine thousand kilometres, Dunwick Lighthouse is the longest of its kind."
+   ]
+  },
+  {
+   "id": 28,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Fenwick Lighthouse is 39 kilometres long.",
+    "At fifty-three kilometres, Garwick Lighthouse is the longest of its kind."
+   ]
+  },
+  {
+   "id": 29,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmwick Lighthouse | villages | 8,288",
+    "Holmwick Lighthouse has about 8,000 villages."
+   ]
+  },
+  {
+   "id": 30,
+   "kind": "yearmonth",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Morwick Lighthouse was completed in 1828.",
+    "The records say Morwick Lighthouse was opened in 1900."
+   ]
+  },
+  {
+   "id": 31,
+   "kind": "yearmonth",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Opened in 1728, Oxwick Lighthouse still stands.",
+    "Opened in 1728, Oxwick Lighthouse still stands."
+   ]
+  },
+  {
+   "id": 32,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "The records say Radwick Lighthouse was restored in December 1960.",
+    "The records say Radwick Lighthouse was restored in August 1960."
+   ]
+  },
+  {
+   "id": 33,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Thornwick Lighthouse has 68 percent.",
+    "The fourth Thornwick Lighthouse has seventy-eight percent."
+   ]
+  },
+  {
+   "id": 34,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varwick Lighthouse measures 30 kilometres.",
+    "Varwick Lighthouse stretches thirty-seven kilometres.",
+    "Varwick Lighthouse's kilometres rose from 30 to 37."
+   ]
+  },
+  {
+   "id": 35,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Corwick Lighthouse has fourteen keepers.",
+    "The fourth Corwick Lighthouse has thirty keepers."
+   ]
+  },
+  {
+   "id": 36,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Fenby Lighthouse counts eighteen members.",
+    "Fenby Lighthouse | members | between 17 and 23"
+   ]
+  },
+  {
+   "id": 37,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelby Lighthouse stretches 47 metres.",
+    "Kelby Lighthouse stretches between 42 and forty-eight metres."
+   ]
+  },
+  {
+   "id": 38,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Morby Lighthouse was completed in April 1822.",
+    "In June 1822 Morby Lighthouse was completed."
+   ]
+  },
+  {
+   "id": 39,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Oxby Lighthouse | branches | fifteen",
+    "Twenty-three branches are recorded at Oxby Lighthouse."
+   ]
+  },
+  {
+   "id": 40,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Thornby Lighthouse stretches 70 years.",
+    "Uxby Lighthouse measures 80 years."
+   ]
+  },
+  {
+   "id": 41,
+   "kind": "measure",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varby Lighthouse measures fifty-eight kilometres.",
+    "Varby Lighthouse | length | sixty-two years"
+   ]
+  },
+  {
+   "id": 42,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p42-b"
+   ],
+   "units": [
+    "In 2006 yarby Lighthouse measures sixty-six metres.",
+    "Yarby Lighthouse measures eighty metres."
+   ]
+  },
+  {
+   "id": 43,
+   "kind": "yearmonth",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Corby Lighthouse was restored in 2 April 1582.",
+    "Corby Lighthouse | restored | April 1582"
+   ]
+  },
+  {
+   "id": 44,
+   "kind": "yearmonth",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Opened in 1625, Ashrow Lighthouse still stands.",
+    "In 1744 Ashrow Lighthouse was restored."
+   ]
+  },
+  {
+   "id": 45,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1964 dunrow Lighthouse | length | 71 metres",
+    "Dunrow Lighthouse is seventy-seven metres long."
+   ]
+  },
+  {
+   "id": 46,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmrow Lighthouse | bells | 9,000",
+    "Holmrow Lighthouse | bells | 9,000"
+   ]
+  },
+  {
+   "id": 47,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Morrow Lighthouse was opened in March 1923.",
+    "Morrow Lighthouse was opened in June 1923."
+   ]
+  },
+  {
+   "id": 48,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ninety-five lamps are recorded at Oxrow Lighthouse.",
+    "Oxrow Lighthouse has ninety-five lamps."
+   ]
+  },
+  {
+   "id": 49,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Radrow Lighthouse | length | 31 percent",
+    "Radrow Lighthouse is forty-two percent long."
+   ]
+  },
+  {
+   "id": 50,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Completed in 1878, Thornrow Lighthouse still stands.",
+    "Completed in 1945, Uxrow Lighthouse still stands."
+   ]
+  },
+  {
+   "id": 51,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varrow Lighthouse was founded in 1827.",
+    "Varrow Lighthouse was built in 1914."
+   ]
+  },
+  {
+   "id": 52,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p52-c"
+   ],
+   "units": [
+    "Closed in 1667, Yarrow Lighthouse still stands.",
+    "Yarrow Lighthouse was closed in 1699.",
+    "Yarrow Lighthouse was closed between 1667 and 1699."
+   ]
+  },
+  {
+   "id": 53,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "In 1790 Corrow Lighthouse was built.",
+    "In 1845 Corrow Lighthouse was built."
+   ]
+  },
+  {
+   "id": 54,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Dunley Lighthouse was opened in 1639.",
+    "Elsley Lighthouse | opened | 1667"
+   ]
+  },
+  {
+   "id": 55,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p55-c"
+   ],
+   "units": [
+    "Closed in 1576, Fenley Lighthouse still stands.",
+    "Fenley Lighthouse was closed in 1648.",
+    "Fenley Lighthouse was closed between 1576 and 1648."
+   ]
+  },
+  {
+   "id": 56,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Six thousand villages are recorded at Holmley Lighthouse.",
+    "Holmley Lighthouse has 6,000 villages."
+   ]
+  },
+  {
+   "id": 57,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelley Lighthouse is fifty-one metres long.",
+    "Lanley Lighthouse stretches fifty-eight metres."
+   ]
+  },
+  {
+   "id": 58,
+   "kind": "count",
+   "cond": "settled-narrow",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p58-a"
+   ],
+   "units": [
+    "6,000 residents of Oxley Lighthouse are kept at Pemley Lighthouse.",
+    "Oxley Lighthouse has 9,000 residents."
+   ]
+  },
+  {
+   "id": 59,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Radley Lighthouse has 4,000 kilometres.",
+    "The fourth Radley Lighthouse has seven thousand kilometres."
+   ]
+  },
+  {
+   "id": 60,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Thornley Lighthouse was restored in 1568.",
+    "In 1629 Thornley Lighthouse was restored."
+   ]
+  },
+  {
+   "id": 61,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p61-c"
+   ],
+   "units": [
+    "Varley Lighthouse | opened | 1566",
+    "Varley Lighthouse | opened | 1684",
+    "Varley Lighthouse was opened between 1566 and 1684."
+   ]
+  },
+  {
+   "id": 62,
+   "kind": "count",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Forty-three employees are recorded at Yarley Lighthouse.",
+    "There are fifty-seven floors at Yarley Lighthouse."
+   ]
+  },
+  {
+   "id": 63,
+   "kind": "year",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Built in November 1572, Corley Lighthouse still stands.",
+    "The records say Corley Lighthouse was built in 1572."
+   ]
+  },
+  {
+   "id": 64,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Ashham Lighthouse | length | 61 kilometres",
+    "Ashham Lighthouse is sixty-five kilometres long."
+   ]
+  },
+  {
+   "id": 65,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p65-c"
+   ],
+   "units": [
+    "Eighty-nine branches are recorded at Fenham Lighthouse.",
+    "Fenham Lighthouse has ninety-four branches.",
+    "Fenham Lighthouse's branches rose from 89 to 94."
+   ]
+  },
+  {
+   "id": 66,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Completed in November 1930, Kelham Lighthouse still stands.",
+    "Kelham Lighthouse | completed | June 1930"
+   ]
+  },
+  {
+   "id": 67,
+   "kind": "count",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxham Lighthouse has 90 students.",
+    "There are 107 students at Pemham Lighthouse."
+   ]
+  },
+  {
+   "id": 68,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 3,000 years, Radham Lighthouse is the longest of its kind.",
+    "Radham Lighthouse stretches nine thousand to 9,008 years."
+   ]
+  },
+  {
+   "id": 69,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Thornham Lighthouse was restored in 1589.",
+    "Restored in 1624, Uxham Lighthouse still stands."
+   ]
+  },
+  {
+   "id": 70,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Varham Lighthouse | length | six thousand years",
+    "Varham Lighthouse | length | nine thousand to 9,008 years"
+   ]
+  },
+  {
+   "id": 71,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Corham Lighthouse has fifty-nine steps.",
+    "The fourth Corham Lighthouse has 73 steps."
+   ]
+  },
+  {
+   "id": 72,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Dunworth Lighthouse was built in February 1812.",
+    "The records say Dunworth Lighthouse was built in June 1812."
+   ]
+  },
+  {
+   "id": 73,
+   "kind": "yearmonth",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1882 Holmworth Lighthouse was opened.",
+    "Holmworth Lighthouse was opened in 1882."
+   ]
+  },
+  {
+   "id": 74,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelworth Lighthouse has 5,085 steps.",
+    "About 5,000 steps are recorded at Kelworth Lighthouse."
+   ]
+  },
+  {
+   "id": 75,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p75-c"
+   ],
+   "units": [
+    "The records say Morworth Lighthouse was restored in 1794.",
+    "Morworth Lighthouse | restored | 1803",
+    "Morworth Lighthouse was restored between 1794 and 1803."
+   ]
+  },
+  {
+   "id": 76,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Radworth Lighthouse has nineteen kilometres.",
+    "The fourth Radworth Lighthouse has twenty-nine kilometres."
+   ]
+  },
+  {
+   "id": 77,
+   "kind": "yearmonth",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Varworth Lighthouse was completed in 1717.",
+    "The fourth Varworth Lighthouse was completed in 1828."
+   ]
+  },
+  {
+   "id": 78,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Yarworth Lighthouse | floors | 5,000",
+    "Yarworth Lighthouse | floors | 7,000"
+   ]
+  },
+  {
+   "id": 79,
+   "kind": "count",
+   "cond": "settled-narrow",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "58 branches of Corworth Lighthouse are kept at Dalworth Lighthouse.",
+    "Corworth Lighthouse counts sixty-three branches."
+   ]
+  },
+  {
+   "id": 80,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "51 students are recorded at Dunton Lighthouse.",
+    "Dunton Lighthouse counts sixty-three students."
+   ]
+  },
+  {
+   "id": 81,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "At thirty-four percent, Fenton Lighthouse is the longest of its kind.",
+    "At 48 percent, Fenton Lighthouse is the longest of its kind."
+   ]
+  },
+  {
+   "id": 82,
+   "kind": "yearmonth",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Completed in 4 November 1696, Holmton Lighthouse still stands.",
+    "Completed in November 1696, Holmton Lighthouse still stands."
+   ]
+  },
+  {
+   "id": 83,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p83-c"
+   ],
+   "units": [
+    "Kelton Lighthouse is 4,000 percent long.",
+    "Kelton Lighthouse stretches eight thousand percent.",
+    "Kelton Lighthouse's percent rose from four thousand to 8,000."
+   ]
+  },
+  {
+   "id": 84,
+   "kind": "yearmonth",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Oxton Lighthouse was built in 1558.",
+    "The fourth Oxton Lighthouse was built in 1648."
+   ]
+  },
+  {
+   "id": 85,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1573 Thornton Lighthouse was founded.",
+    "Thornton Lighthouse was founded in 1573."
+   ]
+  },
+  {
+   "id": 86,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarton Lighthouse measures five years.",
+    "At 5 years, Yarton Lighthouse is the longest of its kind."
+   ]
+  },
+  {
+   "id": 87,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Corton Lighthouse was founded in 1676.",
+    "Corton Lighthouse | founded | 1676"
+   ]
+  },
+  {
+   "id": 88,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ashstead Lighthouse measures sixty-three years.",
+    "Ashstead Lighthouse stretches 63 years."
+   ]
+  },
+  {
+   "id": 89,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Dunstead Lighthouse was founded in 1834.",
+    "Elsstead Lighthouse was founded in 1836."
+   ]
+  },
+  {
+   "id": 90,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "There are 57 employees at Fenstead Lighthouse.",
+    "Fenstead Lighthouse has between fifty-three and sixty employees."
+   ]
+  },
+  {
+   "id": 91,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "65 lamps are recorded at Holmstead Lighthouse.",
+    "Holmstead Lighthouse has between 63 and 67 lamps."
+   ]
+  },
+  {
+   "id": 92,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Kelstead Lighthouse was built in March 1844.",
+    "Built in October 1844, Kelstead Lighthouse still stands."
+   ]
+  },
+  {
+   "id": 93,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Morstead Lighthouse counts ninety-three volumes.",
+    "Morstead Lighthouse has 93 volumes."
+   ]
+  },
+  {
+   "id": 94,
+   "kind": "measure",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At forty-eight metres, Thornstead Lighthouse is the longest of its kind.",
+    "Thornstead Lighthouse measures sixty-six percent."
+   ]
+  },
+  {
+   "id": 95,
+   "kind": "count",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varstead Lighthouse | villages | 6",
+    "14 villages are recorded at Welstead Lighthouse."
+   ]
+  },
+  {
+   "id": 96,
+   "kind": "year",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p96-c"
+   ],
+   "units": [
+    "The records say Yarstead Lighthouse was completed in 1728.",
+    "In 1736 Yarstead Lighthouse was completed.",
+    "Yarstead Lighthouse was completed between 1728 and 1736."
+   ]
+  },
+  {
+   "id": 97,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At eight thousand percent, Duncombe Lighthouse is the longest of its kind.",
+    "Duncombe Lighthouse measures 14,000 percent.",
+    "Duncombe Lighthouse's percent rose from 8,000 to 14,000."
+   ]
+  },
+  {
+   "id": 98,
+   "kind": "year",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p98-c"
+   ],
+   "units": [
+    "Fencombe Lighthouse | restored | 1818",
+    "In 1885 Fencombe Lighthouse was restored.",
+    "Fencombe Lighthouse was restored between 1818 and 1885."
+   ]
+  },
+  {
+   "id": 99,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1988 holmcombe Lighthouse | length | thirty years",
+    "Holmcombe Lighthouse measures 33 years."
+   ]
+  },
+  {
+   "id": 100,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Kelcombe Lighthouse counts seventy-eight keepers.",
+    "Kelcombe Lighthouse counts eighty-four keepers."
+   ]
+  },
+  {
+   "id": 101,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 5,283 metres, Oxcombe Lighthouse is the longest of its kind.",
+    "Oxcombe Lighthouse | length | about 5,000 metres"
+   ]
+  },
+  {
+   "id": 102,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Thorncombe Lighthouse | bells | 20",
+    "Twenty bells are recorded at Thorncombe Lighthouse."
+   ]
+  },
+  {
+   "id": 103,
+   "kind": "count",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p103-b"
+   ],
+   "units": [
+    "In 1968 varcombe Lighthouse | residents | fifty-three",
+    "Sixty-nine residents are recorded at Varcombe Lighthouse."
+   ]
+  },
+  {
+   "id": 104,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarcombe Lighthouse was restored in January 1815.",
+    "Restored in November 1815, Yarcombe Lighthouse still stands."
+   ]
+  },
+  {
+   "id": 105,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Ashmoor Lighthouse was closed in 1921.",
+    "Caldmoor Lighthouse | closed | 2016"
+   ]
+  },
+  {
+   "id": 106,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Dunmoor Lighthouse was founded in 1615.",
+    "The records say Dunmoor Lighthouse was founded in 1692."
+   ]
+  },
+  {
+   "id": 107,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "60 bells are recorded at Fenmoor Lighthouse.",
+    "Fenmoor Lighthouse | bells | sixty-three"
+   ]
+  },
+  {
+   "id": 108,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "The records say Kelmoor Lighthouse was opened in 1633.",
+    "The records say Kelmoor Lighthouse was opened in 1753."
+   ]
+  },
+  {
+   "id": 109,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p109-c"
+   ],
+   "units": [
+    "Mormoor Lighthouse | built | 1673",
+    "Mormoor Lighthouse was built in 1738.",
+    "Mormoor Lighthouse was built between 1673 and 1738."
+   ]
+  },
+  {
+   "id": 110,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Oxmoor Lighthouse has 7,000 members.",
+    "The fourth Oxmoor Lighthouse has ten thousand members."
+   ]
+  },
+  {
+   "id": 111,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p111-c"
+   ],
+   "units": [
+    "Radmoor Lighthouse | branches | thirty-eight",
+    "Radmoor Lighthouse has 40 branches.",
+    "Radmoor Lighthouse's branches rose from thirty-eight to forty."
+   ]
+  },
+  {
+   "id": 112,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p112-c"
+   ],
+   "units": [
+    "The records say Thornmoor Lighthouse was closed in 1892.",
+    "The records say Thornmoor Lighthouse was closed in 1947.",
+    "Thornmoor Lighthouse was closed between 1892 and 1947."
+   ]
+  },
+  {
+   "id": 113,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Varmoor Lighthouse is seven thousand kilometres long.",
+    "Varmoor Lighthouse measures 12,000 kilometres."
+   ]
+  },
+  {
+   "id": 114,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarmoor Lighthouse measures 4,329 years.",
+    "Yarmoor Lighthouse measures about 4,000 years."
+   ]
+  },
+  {
+   "id": 115,
+   "kind": "yearmonth",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Cormoor Lighthouse was completed in 1834.",
+    "The fourth Cormoor Lighthouse was completed in 1890."
+   ]
+  },
+  {
+   "id": 116,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Ashdale Lighthouse | length | eighty-three percent",
+    "Ashdale Lighthouse | length | 86 to 92 percent"
+   ]
+  },
+  {
+   "id": 117,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p117-a"
+   ],
+   "units": [
+    "In 2003 at forty-three metres, Dundale Lighthouse is the longest of its kind.",
+    "Dundale Lighthouse is fifty-nine metres long."
+   ]
+  },
+  {
+   "id": 118,
+   "kind": "year",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p118-c"
+   ],
+   "units": [
+    "Fendale Lighthouse | built | 1775",
+    "Fendale Lighthouse | built | 1805",
+    "Fendale Lighthouse was built between 1775 and 1805."
+   ]
+  },
+  {
+   "id": 119,
+   "kind": "count",
+   "cond": "settled-narrow",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "81 villages of Keldale Lighthouse are kept at Landale Lighthouse.",
+    "Keldale Lighthouse counts ninety-one villages."
+   ]
+  },
+  {
+   "id": 120,
+   "kind": "count",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p120-a"
+   ],
+   "units": [
+    "In 2002 there are seventy-four residents at Mordale Lighthouse.",
+    "Mordale Lighthouse | residents | 87"
+   ]
+  },
+  {
+   "id": 121,
+   "kind": "year",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p121-c"
+   ],
+   "units": [
+    "Oxdale Lighthouse | founded | 1561",
+    "Oxdale Lighthouse | founded | 1601",
+    "Oxdale Lighthouse was founded between 1561 and 1601."
+   ]
+  },
+  {
+   "id": 122,
+   "kind": "yearmonth",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Opened in 14 April 1581, Raddale Lighthouse still stands.",
+    "In April 1581 Raddale Lighthouse was opened."
+   ]
+  },
+  {
+   "id": 123,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Vardale Lighthouse was restored in 1778.",
+    "The records say Vardale Lighthouse was restored in 1861."
+   ]
+  },
+  {
+   "id": 124,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Yardale Lighthouse was closed in January 1807.",
+    "In April 1807 Yardale Lighthouse was closed."
+   ]
+  },
+  {
+   "id": 125,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Cordale Lighthouse has thirty-two lamps.",
+    "Cordale Lighthouse counts 32 lamps."
+   ]
+  },
+  {
+   "id": 126,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Dunbury Bridge is eighty-six years long.",
+    "Dunbury Bridge measures between eighty-one and ninety years."
+   ]
+  },
+  {
+   "id": 127,
+   "kind": "count",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "3,000 employees are recorded at Fenbury Bridge.",
+    "Fenbury Bridge counts 8,000 bells."
+   ]
+  },
+  {
+   "id": 128,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At seventeen percent, Kelbury Bridge is the longest of its kind.",
+    "At 17 percent, Kelbury Bridge is the longest of its kind."
+   ]
+  },
+  {
+   "id": 129,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Closed in 1538, Oxbury Bridge still stands.",
+    "In 1591 Oxbury Bridge was closed."
+   ]
+  },
+  {
+   "id": 130,
+   "kind": "yearmonth",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Radbury Bridge was built in 1687.",
+    "Built in 1687, Radbury Bridge still stands."
+   ]
+  },
+  {
+   "id": 131,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Thornbury Bridge was closed in 1739.",
+    "The records say Thornbury Bridge was completed in 1853."
+   ]
+  },
+  {
+   "id": 132,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p132-b"
+   ],
+   "units": [
+    "In 1954 varbury Bridge is six thousand years long.",
+    "Varbury Bridge is twelve thousand years long."
+   ]
+  },
+  {
+   "id": 133,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "There are 31 members at Yarbury Bridge.",
+    "Yarbury Bridge | members | between twenty-seven and 36"
+   ]
+  },
+  {
+   "id": 134,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Ashmere Bridge | closed | 1940",
+    "In 2050 Ashmere Bridge was closed."
+   ]
+  },
+  {
+   "id": 135,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 35 metres, Fenmere Bridge is the longest of its kind.",
+    "Fenmere Bridge stretches between thirty-one and thirty-seven metres."
+   ]
+  },
+  {
+   "id": 136,
+   "kind": "count",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmmere Bridge | steps | 41",
+    "Holmmere Bridge has fifty inhabitants."
+   ]
+  },
+  {
+   "id": 137,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelmere Bridge counts thirty-one steps.",
+    "Between 28 and 33 steps are recorded at Kelmere Bridge."
+   ]
+  },
+  {
+   "id": 138,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Mormere Bridge | length | seventy-six years",
+    "Mormere Bridge measures 92 years.",
+    "Mormere Bridge's years rose from 76 to ninety-two."
+   ]
+  },
+  {
+   "id": 139,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxmere Bridge was founded in 1580.",
+    "Closed in 1589, Oxmere Bridge still stands."
+   ]
+  },
+  {
+   "id": 140,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radmere Bridge was opened in June 1839.",
+    "In November 1839 Radmere Bridge was opened."
+   ]
+  },
+  {
+   "id": 141,
+   "kind": "year",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Varmere Bridge was restored in 1900.",
+    "The fourth Varmere Bridge was restored in 1949."
+   ]
+  },
+  {
+   "id": 142,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarmere Bridge counts forty-five members.",
+    "Yarmere Bridge counts between 42 and forty-nine members."
+   ]
+  },
+  {
+   "id": 143,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Cormere Bridge has 4 kilometres.",
+    "The fourth Cormere Bridge has six kilometres."
+   ]
+  },
+  {
+   "id": 144,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Ashford Bridge has ninety-two villages.",
+    "The fourth Ashford Bridge has ninety-seven villages."
+   ]
+  },
+  {
+   "id": 145,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p145-c"
+   ],
+   "units": [
+    "Dunford Bridge counts 94 members.",
+    "Dunford Bridge has 101 members.",
+    "Dunford Bridge's members rose from ninety-four to 101."
+   ]
+  },
+  {
+   "id": 146,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Fenford Bridge | founded | 1627",
+    "Garford Bridge was founded in 1744."
+   ]
+  },
+  {
+   "id": 147,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p147-c"
+   ],
+   "units": [
+    "44 lamps are recorded at Oxford Bridge.",
+    "Forty-six lamps are recorded at Oxford Bridge.",
+    "Oxford Bridge's lamps rose from forty-four to 46."
+   ]
+  },
+  {
+   "id": 148,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radford Bridge counts 83 branches.",
+    "Radford Bridge has between eighty-one and eighty-seven branches."
+   ]
+  },
+  {
+   "id": 149,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p149-c"
+   ],
+   "units": [
+    "In 1732 Thornford Bridge was built.",
+    "Thornford Bridge was built in 1828.",
+    "Thornford Bridge was built between 1732 and 1828."
+   ]
+  },
+  {
+   "id": 150,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varford Bridge was built in June 1685.",
+    "Varford Bridge was built in March 1685."
+   ]
+  },
+  {
+   "id": 151,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Yarford Bridge | inhabitants | 61",
+    "Yarford Bridge | inhabitants | 79"
+   ]
+  },
+  {
+   "id": 152,
+   "kind": "yearmonth",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Restored in 12 November 1892, Corford Bridge still stands.",
+    "Restored in November 1892, Corford Bridge still stands."
+   ]
+  },
+  {
+   "id": 153,
+   "kind": "yearmonth",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ashwick Bridge was closed in 1583.",
+    "In 1583 Ashwick Bridge was closed."
+   ]
+  },
+  {
+   "id": 154,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Fenwick Bridge | length | 79 years",
+    "Fenwick Bridge is eighty-three to 89 years long."
+   ]
+  },
+  {
+   "id": 155,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmwick Bridge | founded | 1758",
+    "Ickwick Bridge was founded in 1802."
+   ]
+  },
+  {
+   "id": 156,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxwick Bridge | length | seventeen percent",
+    "Oxwick Bridge is seventeen percent long."
+   ]
+  },
+  {
+   "id": 157,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radwick Bridge stretches 70 kilometres.",
+    "Radwick Bridge stretches 70 kilometres."
+   ]
+  },
+  {
+   "id": 158,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varwick Bridge has 6,459 lamps.",
+    "There are about 6,000 lamps at Varwick Bridge."
+   ]
+  },
+  {
+   "id": 159,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Yarwick Bridge has 75 metres.",
+    "The fourth Yarwick Bridge has 83 metres."
+   ]
+  },
+  {
+   "id": 160,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1939 Dunby Bridge was opened.",
+    "The records say Dunby Bridge was opened in 1939."
+   ]
+  },
+  {
+   "id": 161,
+   "kind": "count",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1974 fenby Bridge counts forty-seven branches.",
+    "Fenby Bridge has fifty-six branches."
+   ]
+  },
+  {
+   "id": 162,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmby Bridge | length | 44 metres",
+    "At between 39 and 47 metres, Holmby Bridge is the longest of its kind."
+   ]
+  },
+  {
+   "id": 163,
+   "kind": "yearmonth",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelby Bridge was restored in 1701.",
+    "Kelby Bridge | restored | 1701"
+   ]
+  },
+  {
+   "id": 164,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Restored in 1636, Morby Bridge still stands.",
+    "Norby Bridge | restored | 1700"
+   ]
+  },
+  {
+   "id": 165,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Founded in 1864, Oxby Bridge still stands.",
+    "Pemby Bridge | founded | 1898"
+   ]
+  },
+  {
+   "id": 166,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At fifty-four years, Radby Bridge is the longest of its kind.",
+    "Radby Bridge | length | between fifty and fifty-seven years"
+   ]
+  },
+  {
+   "id": 167,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Thornby Bridge stretches 7 years.",
+    "Uxby Bridge stretches 14 years."
+   ]
+  },
+  {
+   "id": 168,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1768 Varby Bridge was closed.",
+    "Varby Bridge was opened in 1820."
+   ]
+  },
+  {
+   "id": 169,
+   "kind": "count",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarby Bridge has ninety-two residents.",
+    "Yarby Bridge | villages | 112"
+   ]
+  },
+  {
+   "id": 170,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Built in 1679, Corby Bridge still stands.",
+    "Corby Bridge was built in 1737."
+   ]
+  },
+  {
+   "id": 171,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "4,188 islands are recorded at Fenrow Bridge.",
+    "Fenrow Bridge has about 4,000 islands."
+   ]
+  },
+  {
+   "id": 172,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmrow Bridge stretches 4,448 metres.",
+    "Holmrow Bridge is about 4,000 metres long."
+   ]
+  },
+  {
+   "id": 173,
+   "kind": "year",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In February 1685 Kelrow Bridge was completed.",
+    "Completed in 1685, Kelrow Bridge still stands."
+   ]
+  },
+  {
+   "id": 174,
+   "kind": "count",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p174-a"
+   ],
+   "units": [
+    "In 1954 54 floors are recorded at Morrow Bridge.",
+    "Morrow Bridge counts sixty-seven floors."
+   ]
+  },
+  {
+   "id": 175,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "There are 29 keepers at Oxrow Bridge.",
+    "Oxrow Bridge counts 29 keepers."
+   ]
+  },
+  {
+   "id": 176,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Thornrow Bridge stretches ninety kilometres.",
+    "Uxrow Bridge | length | 92 kilometres"
+   ]
+  },
+  {
+   "id": 177,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarrow Bridge has 8,295 employees.",
+    "There are about 8,000 employees at Yarrow Bridge."
+   ]
+  },
+  {
+   "id": 178,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "74 lamps are recorded at Corrow Bridge.",
+    "74 lamps are recorded at Corrow Bridge."
+   ]
+  },
+  {
+   "id": 179,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Dunley Bridge | restored | 1789",
+    "In 1826 Elsley Bridge was restored."
+   ]
+  },
+  {
+   "id": 180,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Fenley Bridge stretches thirty-seven metres.",
+    "Fenley Bridge stretches 37 metres."
+   ]
+  },
+  {
+   "id": 181,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p181-c"
+   ],
+   "units": [
+    "There are sixty volumes at Holmley Bridge.",
+    "Seventy-eight volumes are recorded at Holmley Bridge.",
+    "Holmley Bridge's volumes rose from 60 to seventy-eight."
+   ]
+  },
+  {
+   "id": 182,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "7,388 floors are recorded at Kelley Bridge.",
+    "Kelley Bridge | floors | about 7,000"
+   ]
+  },
+  {
+   "id": 183,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Morley Bridge has 9,000 branches.",
+    "Morley Bridge | branches | 15,000"
+   ]
+  },
+  {
+   "id": 184,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 21 kilometres, Oxley Bridge is the longest of its kind.",
+    "Oxley Bridge | length | 38 kilometres"
+   ]
+  },
+  {
+   "id": 185,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radley Bridge | length | 9,000 years",
+    "Radley Bridge stretches between 8,999 and 9,003 years."
+   ]
+  },
+  {
+   "id": 186,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "59 members are recorded at Thornley Bridge.",
+    "There are seventy-nine members at Thornley Bridge."
+   ]
+  },
+  {
+   "id": 187,
+   "kind": "count",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Six keepers are recorded at Yarley Bridge.",
+    "There are 26 to 35 keepers at Yarley Bridge."
+   ]
+  },
+  {
+   "id": 188,
+   "kind": "count",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "49 bells are recorded at Corley Bridge.",
+    "There are between forty-seven and fifty-one bells at Corley Bridge."
+   ]
+  },
+  {
+   "id": 189,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Ashham Bridge has 6,000 kilometres.",
+    "The fourth Ashham Bridge has eleven thousand kilometres."
+   ]
+  },
+  {
+   "id": 190,
+   "kind": "count",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Dunham Bridge counts eighty residents.",
+    "There are 98 villages at Dunham Bridge."
+   ]
+  },
+  {
+   "id": 191,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Holmham Bridge was restored in 1789.",
+    "In 1825 Holmham Bridge was completed."
+   ]
+  },
+  {
+   "id": 192,
+   "kind": "count",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxham Bridge counts two thousand inhabitants.",
+    "Pemham Bridge | inhabitants | six thousand"
+   ]
+  },
+  {
+   "id": 193,
+   "kind": "yearmonth",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Restored in 1990, Radham Bridge still stands.",
+    "Closed in 2027, Radham Bridge still stands."
+   ]
+  },
+  {
+   "id": 194,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varham Bridge stretches 4 kilometres.",
+    "Varham Bridge measures 4 kilometres."
+   ]
+  },
+  {
+   "id": 195,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Yarham Bridge | restored | 1980",
+    "Restored in 2033, Yarham Bridge still stands."
+   ]
+  },
+  {
+   "id": 196,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p196-c"
+   ],
+   "units": [
+    "Corham Bridge counts thirty-eight lamps.",
+    "Corham Bridge has 44 lamps.",
+    "Corham Bridge's lamps rose from thirty-eight to forty-four."
+   ]
+  },
+  {
+   "id": 197,
+   "kind": "year",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p197-c"
+   ],
+   "units": [
+    "Opened in 1731, Ashworth Bridge still stands.",
+    "The records say Ashworth Bridge was opened in 1834.",
+    "Ashworth Bridge was opened between 1731 and 1834."
+   ]
+  },
+  {
+   "id": 198,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Dunworth Bridge is 36 metres long.",
+    "Dunworth Bridge | length | between 32 and 39 metres"
+   ]
+  },
+  {
+   "id": 199,
+   "kind": "measure",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Fenworth Bridge measures 4,000 kilometres.",
+    "Fenworth Bridge | length | seven thousand percent"
+   ]
+  },
+  {
+   "id": 200,
+   "kind": "yearmonth",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Holmworth Bridge was completed in 1506.",
+    "The fourth Holmworth Bridge was completed in 1606."
+   ]
+  },
+  {
+   "id": 201,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Oxworth Bridge | opened | October 1665",
+    "The records say Oxworth Bridge was opened in December 1665."
+   ]
+  },
+  {
+   "id": 202,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Radworth Bridge has 48 species.",
+    "The fourth Radworth Bridge has sixty-five species."
+   ]
+  },
+  {
+   "id": 203,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Thornworth Bridge | length | 7,331 percent",
+    "Thornworth Bridge stretches about 7,000 percent."
+   ]
+  },
+  {
+   "id": 204,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varworth Bridge measures 8,000 years.",
+    "At 14,000 years, Varworth Bridge is the longest of its kind."
+   ]
+  },
+  {
+   "id": 205,
+   "kind": "count",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarworth Bridge counts eighty-nine inhabitants.",
+    "Ninety-six inhabitants are recorded at Braeworth Bridge."
+   ]
+  },
+  {
+   "id": 206,
+   "kind": "measure",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Corworth Bridge is sixty-four percent long.",
+    "Corworth Bridge is 76 metres long."
+   ]
+  },
+  {
+   "id": 207,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1782 Ashton Bridge was opened.",
+    "In 1782 Ashton Bridge was opened."
+   ]
+  },
+  {
+   "id": 208,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Dunton Bridge | keepers | 6",
+    "Dunton Bridge counts 6 keepers."
+   ]
+  },
+  {
+   "id": 209,
+   "kind": "yearmonth",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1682 Holmton Bridge was opened.",
+    "In 1772 Holmton Bridge was completed."
+   ]
+  },
+  {
+   "id": 210,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p210-c"
+   ],
+   "units": [
+    "Kelton Bridge is ninety-five kilometres long.",
+    "Kelton Bridge is 110 kilometres long.",
+    "Kelton Bridge's kilometres rose from ninety-five to 110."
+   ]
+  },
+  {
+   "id": 211,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Oxton Bridge | length | 13 kilometres",
+    "At 27 kilometres, Oxton Bridge is the longest of its kind."
+   ]
+  },
+  {
+   "id": 212,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Thornton Bridge was restored in January 1856.",
+    "Thornton Bridge | restored | March 1856"
+   ]
+  },
+  {
+   "id": 213,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varton Bridge measures thirty-two percent.",
+    "Varton Bridge measures thirty-two percent."
+   ]
+  },
+  {
+   "id": 214,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarton Bridge was built in 1828.",
+    "Yarton Bridge | completed | 1934"
+   ]
+  },
+  {
+   "id": 215,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Corton Bridge counts 9,388 steps.",
+    "There are about 9,000 steps at Corton Bridge."
+   ]
+  },
+  {
+   "id": 216,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ashstead Bridge was founded in 1972.",
+    "In 1972 Ashstead Bridge was founded."
+   ]
+  },
+  {
+   "id": 217,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Dunstead Bridge measures 60 kilometres.",
+    "Dunstead Bridge | length | 72 to 80 kilometres"
+   ]
+  },
+  {
+   "id": 218,
+   "kind": "year",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Opened in October 1554, Fenstead Bridge still stands.",
+    "The records say Fenstead Bridge was opened in 1554."
+   ]
+  },
+  {
+   "id": 219,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Opened in September 1985, Holmstead Bridge still stands.",
+    "In February 1985 Holmstead Bridge was opened."
+   ]
+  },
+  {
+   "id": 220,
+   "kind": "count",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelstead Bridge counts 8,000 inhabitants.",
+    "Lanstead Bridge | inhabitants | 14,000"
+   ]
+  },
+  {
+   "id": 221,
+   "kind": "count",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Morstead Bridge | villages | thirty-three",
+    "51 villages are recorded at Norstead Bridge."
+   ]
+  },
+  {
+   "id": 222,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radstead Bridge | founded | June 1809",
+    "In March 1809 Radstead Bridge was founded."
+   ]
+  },
+  {
+   "id": 223,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 5,000 years, Thornstead Bridge is the longest of its kind.",
+    "Thornstead Bridge | length | between 4,995 and 5,001 years"
+   ]
+  },
+  {
+   "id": 224,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1978 at seven thousand kilometres, Varstead Bridge is the longest of its kind.",
+    "Varstead Bridge measures thirteen thousand kilometres."
+   ]
+  },
+  {
+   "id": 225,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p225-c"
+   ],
+   "units": [
+    "Yarstead Bridge | residents | 71",
+    "Yarstead Bridge | residents | eighty-three",
+    "Yarstead Bridge's residents rose from seventy-one to eighty-three."
+   ]
+  },
+  {
+   "id": 226,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At two thousand percent, Corstead Bridge is the longest of its kind.",
+    "Corstead Bridge stretches 7,000 percent."
+   ]
+  },
+  {
+   "id": 227,
+   "kind": "year",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p227-c"
+   ],
+   "units": [
+    "In 1727 Ashcombe Bridge was founded.",
+    "The records say Ashcombe Bridge was founded in 1798.",
+    "Ashcombe Bridge was founded between 1727 and 1798."
+   ]
+  },
+  {
+   "id": 228,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "The records say Duncombe Bridge was closed in 1731.",
+    "Duncombe Bridge | closed | 1816"
+   ]
+  },
+  {
+   "id": 229,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Holmcombe Bridge has 3 kilometres.",
+    "The fourth Holmcombe Bridge has six kilometres."
+   ]
+  },
+  {
+   "id": 230,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Oxcombe Bridge has thirty floors.",
+    "The fourth Oxcombe Bridge has 34 floors."
+   ]
+  },
+  {
+   "id": 231,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radcombe Bridge was founded in 1656.",
+    "In 1698 Radcombe Bridge was closed."
+   ]
+  },
+  {
+   "id": 232,
+   "kind": "measure",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Thorncombe Bridge is sixty-three percent long.",
+    "Thorncombe Bridge stretches sixty-three percent."
+   ]
+  },
+  {
+   "id": 233,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p233-c"
+   ],
+   "units": [
+    "Corcombe Bridge counts 39 inhabitants.",
+    "Fifty-three inhabitants are recorded at Corcombe Bridge.",
+    "Corcombe Bridge's inhabitants rose from 39 to 53."
+   ]
+  },
+  {
+   "id": 234,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ashmoor Bridge | length | 9 metres",
+    "At 17 metres, Ashmoor Bridge is the longest of its kind.",
+    "Ashmoor Bridge's metres rose from nine to seventeen."
+   ]
+  },
+  {
+   "id": 235,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Fenmoor Bridge | length | 67 years",
+    "Garmoor Bridge measures eighty-six years."
+   ]
+  },
+  {
+   "id": 236,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Completed in 1619, Holmmoor Bridge still stands.",
+    "The records say Ickmoor Bridge was completed in 1728."
+   ]
+  },
+  {
+   "id": 237,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelmoor Bridge was opened in 1641.",
+    "In 1704 Lanmoor Bridge was opened."
+   ]
+  },
+  {
+   "id": 238,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "The records say Mormoor Bridge was opened in 1847.",
+    "In 1873 Mormoor Bridge was opened."
+   ]
+  },
+  {
+   "id": 239,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "At thirty-two percent, Oxmoor Bridge is the longest of its kind.",
+    "Oxmoor Bridge is 42 to 44 percent long."
+   ]
+  },
+  {
+   "id": 240,
+   "kind": "year",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Radmoor Bridge was founded in 1525.",
+    "The fourth Radmoor Bridge was founded in 1531."
+   ]
+  },
+  {
+   "id": 241,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Thornmoor Bridge was closed in 1974.",
+    "Opened in 2042, Thornmoor Bridge still stands."
+   ]
+  },
+  {
+   "id": 242,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p242-c"
+   ],
+   "units": [
+    "Varmoor Bridge is twenty-one years long.",
+    "Varmoor Bridge | length | thirty-nine years",
+    "Varmoor Bridge's years rose from 21 to 39."
+   ]
+  },
+  {
+   "id": 243,
+   "kind": "count",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "62 floors are recorded at Yarmoor Bridge.",
+    "There are 62 floors at Yarmoor Bridge."
+   ]
+  },
+  {
+   "id": 244,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "There are 3,204 islands at Cormoor Bridge.",
+    "Cormoor Bridge | islands | about 3,000"
+   ]
+  },
+  {
+   "id": 245,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p245-c"
+   ],
+   "units": [
+    "Ashdale Bridge counts 50 villages.",
+    "55 villages are recorded at Ashdale Bridge.",
+    "Ashdale Bridge's villages rose from fifty to 55."
+   ]
+  },
+  {
+   "id": 246,
+   "kind": "yearmonth",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Dundale Bridge was opened in 1565.",
+    "In 1626 Dundale Bridge was built."
+   ]
+  },
+  {
+   "id": 247,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p247-c"
+   ],
+   "units": [
+    "Fendale Bridge counts forty floors.",
+    "Fifty-five floors are recorded at Fendale Bridge.",
+    "Fendale Bridge's floors rose from 40 to fifty-five."
+   ]
+  },
+  {
+   "id": 248,
+   "kind": "count",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmdale Bridge counts 44 inhabitants.",
+    "Ickdale Bridge counts 63 inhabitants."
+   ]
+  },
+  {
+   "id": 249,
+   "kind": "year",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Keldale Bridge was closed in 1766.",
+    "Closed in 1883, Landale Bridge still stands."
+   ]
+  },
+  {
+   "id": 250,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p250-a"
+   ],
+   "units": [
+    "In 1984 oxdale Bridge is 47 percent long.",
+    "At fifty percent, Oxdale Bridge is the longest of its kind."
+   ]
+  },
+  {
+   "id": 251,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1821 Raddale Bridge was completed.",
+    "The records say Raddale Bridge was founded in 1914."
+   ]
+  },
+  {
+   "id": 252,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "In 1572 Vardale Bridge was closed.",
+    "The records say Vardale Bridge was closed in 1611."
+   ]
+  },
+  {
+   "id": 253,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Yardale Bridge | restored | 1817",
+    "Restored in 1861, Yardale Bridge still stands."
+   ]
+  },
+  {
+   "id": 254,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Restored in October 1773, Cordale Bridge still stands.",
+    "Cordale Bridge | restored | August 1773"
+   ]
+  },
+  {
+   "id": 255,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Ashbury Tower has thirty-six islands.",
+    "The fourth Ashbury Tower has 53 islands."
+   ]
+  },
+  {
+   "id": 256,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 2000 fenbury Tower stretches three thousand kilometres.",
+    "Fenbury Tower measures 9,000 kilometres."
+   ]
+  },
+  {
+   "id": 257,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Holmbury Tower measures 84 metres.",
+    "At 103 metres, Ickbury Tower is the longest of its kind."
+   ]
+  },
+  {
+   "id": 258,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Restored in 1589, Kelbury Tower still stands.",
+    "The records say Kelbury Tower was restored in 1589."
+   ]
+  },
+  {
+   "id": 259,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Morbury Tower is fifty-one kilometres long.",
+    "Morbury Tower is 69 kilometres long."
+   ]
+  },
+  {
+   "id": 260,
+   "kind": "measure",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p260-a"
+   ],
+   "units": [
+    "In 1959 at forty-five metres, Oxbury Tower is the longest of its kind.",
+    "At 62 metres, Oxbury Tower is the longest of its kind."
+   ]
+  },
+  {
+   "id": 261,
+   "kind": "yearmonth",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radbury Tower was closed in 22 June 1739.",
+    "Radbury Tower was closed in June 1739."
+   ]
+  },
+  {
+   "id": 262,
+   "kind": "year",
+   "cond": "unrelated-relation",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varbury Tower | completed | 1961",
+    "In 2029 Varbury Tower was founded."
+   ]
+  },
+  {
+   "id": 263,
+   "kind": "measure",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Yarbury Tower has 76 kilometres.",
+    "The fourth Yarbury Tower has eighty-four kilometres."
+   ]
+  },
+  {
+   "id": 264,
+   "kind": "count",
+   "cond": "settled-narrow",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p264-a"
+   ],
+   "units": [
+    "six thousand rooms of Corbury Tower are kept at Dalbury Tower.",
+    "There are 11,000 rooms at Corbury Tower."
+   ]
+  },
+  {
+   "id": 265,
+   "kind": "yearmonth",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Ashmere Tower was completed in 1716.",
+    "The fourth Ashmere Tower was completed in 1778."
+   ]
+  },
+  {
+   "id": 266,
+   "kind": "yearmonth",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Dunmere Tower was founded in 1932.",
+    "The fourth Dunmere Tower was founded in 1949."
+   ]
+  },
+  {
+   "id": 267,
+   "kind": "yearmonth",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Holmmere Tower was restored in 1981.",
+    "The records say Holmmere Tower was restored in 1981."
+   ]
+  },
+  {
+   "id": 268,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Kelmere Tower measures eight thousand metres.",
+    "At ten thousand metres, Kelmere Tower is the longest of its kind."
+   ]
+  },
+  {
+   "id": 269,
+   "kind": "year",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p269-c"
+   ],
+   "units": [
+    "Mormere Tower | completed | 1642",
+    "Mormere Tower | completed | 1755",
+    "Mormere Tower was completed between 1642 and 1755."
+   ]
+  },
+  {
+   "id": 270,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Built in 1798, Varmere Tower still stands.",
+    "Varmere Tower was built in 1798."
+   ]
+  },
+  {
+   "id": 271,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Yarmere Tower has 86 employees.",
+    "The fourth Yarmere Tower has 100 employees."
+   ]
+  },
+  {
+   "id": 272,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Cormere Tower stretches forty-nine metres.",
+    "At 58 metres, Dalmere Tower is the longest of its kind."
+   ]
+  },
+  {
+   "id": 273,
+   "kind": "year",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In March 1777 Ashford Tower was closed.",
+    "In 1777 Ashford Tower was closed."
+   ]
+  },
+  {
+   "id": 274,
+   "kind": "year",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Completed in 1609, Dunford Tower still stands.",
+    "The records say Dunford Tower was completed in 1664."
+   ]
+  },
+  {
+   "id": 275,
+   "kind": "year",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Fenford Tower was opened in 1688.",
+    "The fourth Fenford Tower was opened in 1714."
+   ]
+  },
+  {
+   "id": 276,
+   "kind": "count",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "In 2000 holmford Tower has seven thousand members.",
+    "Holmford Tower counts 9,000 members."
+   ]
+  },
+  {
+   "id": 277,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Kelford Tower has 45 steps.",
+    "The fourth Kelford Tower has fifty-four steps."
+   ]
+  },
+  {
+   "id": 278,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Morford Tower | restored | November 1827",
+    "The records say Morford Tower was restored in September 1827."
+   ]
+  },
+  {
+   "id": 279,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "In January 1729 Oxford Tower was built.",
+    "Built in October 1729, Oxford Tower still stands."
+   ]
+  },
+  {
+   "id": 280,
+   "kind": "measure",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radford Tower is 26 kilometres long.",
+    "Radford Tower is between 23 and twenty-nine kilometres long."
+   ]
+  },
+  {
+   "id": 281,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Thornford Tower was built in 1915.",
+    "Built in 1999, Uxford Tower still stands."
+   ]
+  },
+  {
+   "id": 282,
+   "kind": "yearmonth",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p282-c"
+   ],
+   "units": [
+    "In 1781 Varford Tower was opened.",
+    "Opened in 1825, Varford Tower still stands.",
+    "Varford Tower was opened between 1781 and 1825."
+   ]
+  },
+  {
+   "id": 283,
+   "kind": "measure",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 87 kilometres, Yarford Tower is the longest of its kind.",
+    "Yarford Tower stretches ninety-eight kilometres.",
+    "Yarford Tower's kilometres rose from eighty-seven to 98."
+   ]
+  },
+  {
+   "id": 284,
+   "kind": "count",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Corford Tower counts 7,052 lamps.",
+    "Corford Tower | lamps | about 7,000"
+   ]
+  },
+  {
+   "id": 285,
+   "kind": "measure",
+   "cond": "unrelated-head",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ashwick Tower stretches seventy-five metres.",
+    "At eighty-five years, Ashwick Tower is the longest of its kind."
+   ]
+  },
+  {
+   "id": 286,
+   "kind": "year",
+   "cond": "consistent-equal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Fenwick Tower was opened in 1869.",
+    "Fenwick Tower was opened in 1869."
+   ]
+  },
+  {
+   "id": 287,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 3,363 metres, Holmwick Tower is the longest of its kind.",
+    "Holmwick Tower measures about 3,000 metres."
+   ]
+  },
+  {
+   "id": 288,
+   "kind": "count",
+   "cond": "settled-third",
+   "label": "settled",
+   "found": true,
+   "settledBy": [
+    "p288-c"
+   ],
+   "units": [
+    "Morwick Tower has 6,000 residents.",
+    "12,000 residents are recorded at Morwick Tower.",
+    "Morwick Tower's residents rose from 6,000 to 12,000."
+   ]
+  },
+  {
+   "id": 289,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Radwick Tower measures eight thousand percent.",
+    "Radwick Tower | length | fourteen thousand to 14,004 percent"
+   ]
+  },
+  {
+   "id": 290,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Built in April 1848, Thornwick Tower still stands.",
+    "Thornwick Tower | built | March 1848"
+   ]
+  },
+  {
+   "id": 291,
+   "kind": "measure",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Varwick Tower measures 72 years.",
+    "Welwick Tower is eighty-two years long."
+   ]
+  },
+  {
+   "id": 292,
+   "kind": "count",
+   "cond": "settled-scope",
+   "label": "settled",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1959 yarwick Tower counts 17 branches.",
+    "Yarwick Tower | branches | 20"
+   ]
+  },
+  {
+   "id": 293,
+   "kind": "measure",
+   "cond": "consistent-round",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "At 5,399 years, Corwick Tower is the longest of its kind.",
+    "Corwick Tower | length | about 5,000 years"
+   ]
+  },
+  {
+   "id": 294,
+   "kind": "measure",
+   "cond": "conflict",
+   "label": "contest",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Ashby Tower | length | 26 years",
+    "Ashby Tower measures thirty-five to thirty-nine years."
+   ]
+  },
+  {
+   "id": 295,
+   "kind": "yearmonth",
+   "cond": "unrelated-referent",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "In 1871 Dunby Tower was founded.",
+    "Founded in 1982, Elsby Tower still stands."
+   ]
+  },
+  {
+   "id": 296,
+   "kind": "count",
+   "cond": "unrelated-ordinal",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The third Oxby Tower has 81 steps.",
+    "The fourth Oxby Tower has 83 steps."
+   ]
+  },
+  {
+   "id": 297,
+   "kind": "year",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "The records say Thornby Tower was opened in October 1857.",
+    "Thornby Tower | opened | 1857"
+   ]
+  },
+  {
+   "id": 298,
+   "kind": "yearmonth",
+   "cond": "consistent-range",
+   "label": "none",
+   "found": false,
+   "settledBy": [],
+   "units": [
+    "Yarby Tower was opened in 11 August 1671.",
+    "In August 1671 Yarby Tower was opened."
+   ]
+  },
+  {
+   "id": 299,
+   "kind": "yearmonth",
+   "cond": "conflict",
+   "label": "contest",
+   "found": true,
+   "settledBy": [
+    null
+   ],
+   "units": [
+    "Ashrow Tower was completed in August 1782.",
+    "Ashrow Tower | completed | September 1782"
+   ]
+  }
+ ],
+ "claims": 665,
+ "planted": 122,
+ "clean": 178,
+ "contests": 105,
+ "cross": 19,
+ "recall": 0.7049180327868853,
+ "falseRate": 0,
+ "settledRight": 38,
+ "settledAll": 55,
+ "nullMean": 12.6,
+ "nullFalseMean": 0.0005617977528089887,
+ "bars": {
+  "B1": false,
+  "B2": true,
+  "B3": false
+ },
+ "perCond": {
+  "count/unrelated-ordinal": {
+   "n": 11,
+   "found": 0
+  },
+  "count/consistent-round": {
+   "n": 10,
+   "found": 0
+  },
+  "year/unrelated-ordinal": {
+   "n": 5,
+   "found": 0
+  },
+  "measure/conflict": {
+   "n": 21,
+   "found": 12
+  },
+  "measure/consistent-range": {
+   "n": 10,
+   "found": 0
+  },
+  "year/unrelated-referent": {
+   "n": 9,
+   "found": 0
+  },
+  "yearmonth/conflict": {
+   "n": 23,
+   "found": 9
+  },
+  "measure/unrelated-referent": {
+   "n": 10,
+   "found": 0
+  },
+  "year/consistent-range": {
+   "n": 7,
+   "found": 0
+  },
+  "yearmonth/unrelated-relation": {
+   "n": 6,
+   "found": 0
+  },
+  "measure/consistent-round": {
+   "n": 8,
+   "found": 0
+  },
+  "measure/unrelated-head": {
+   "n": 7,
+   "found": 0
+  },
+  "yearmonth/settled-third": {
+   "n": 9,
+   "found": 9
+  },
+  "year/consistent-equal": {
+   "n": 9,
+   "found": 0
+  },
+  "year/unrelated-relation": {
+   "n": 11,
+   "found": 0
+  },
+  "yearmonth/consistent-equal": {
+   "n": 7,
+   "found": 0
+  },
+  "count/settled-narrow": {
+   "n": 5,
+   "found": 3
+  },
+  "measure/consistent-equal": {
+   "n": 10,
+   "found": 0
+  },
+  "measure/unrelated-ordinal": {
+   "n": 8,
+   "found": 0
+  },
+  "measure/settled-third": {
+   "n": 8,
+   "found": 3
+  },
+  "count/consistent-range": {
+   "n": 8,
+   "found": 0
+  },
+  "count/conflict": {
+   "n": 9,
+   "found": 9
+  },
+  "measure/settled-scope": {
+   "n": 9,
+   "found": 5
+  },
+  "yearmonth/consistent-range": {
+   "n": 6,
+   "found": 0
+  },
+  "count/consistent-equal": {
+   "n": 10,
+   "found": 0
+  },
+  "yearmonth/unrelated-referent": {
+   "n": 8,
+   "found": 0
+  },
+  "year/conflict": {
+   "n": 14,
+   "found": 14
+  },
+  "count/unrelated-head": {
+   "n": 5,
+   "found": 0
+  },
+  "count/settled-third": {
+   "n": 11,
+   "found": 11
+  },
+  "count/unrelated-referent": {
+   "n": 7,
+   "found": 0
+  },
+  "yearmonth/unrelated-ordinal": {
+   "n": 6,
+   "found": 0
+  },
+  "year/settled-third": {
+   "n": 7,
+   "found": 7
+  },
+  "count/settled-scope": {
+   "n": 6,
+   "found": 4
+  }
+ },
+ "dolphins": 1,
+ "gaps": 33,
+ "contestsList": [
+  {
+   "a": {
+    "id": 6,
+    "at": "p3-a",
+    "text": "Holmbury Lighthouse is 51 percent long."
+   },
+   "b": {
+    "id": 7,
+    "at": "p3-b",
+    "text": "Holmbury Lighthouse | length | sixty-two to sixty-seven percent"
+   },
+   "ends": [
+    "holmbury",
+    "holmbury lighthouse",
+    "lighthouse",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "51",
+    "sixty-two to sixty-seven"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 16,
+    "at": "p8-a",
+    "text": "Ashmere Lighthouse measures 3,000 metres."
+   },
+   "b": {
+    "id": 17,
+    "at": "p8-b",
+    "text": "Ashmere Lighthouse is 5,000 metres long."
+   },
+   "ends": [
+    "ashmere lighthouse",
+    "lighthouse",
+    "metre"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "3,000",
+    "5,000"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 24,
+    "at": "p12-a",
+    "text": "Mormere Lighthouse | founded | June 1556"
+   },
+   "b": {
+    "id": 25,
+    "at": "p12-b",
+    "text": "Mormere Lighthouse was founded in September 1556."
+   },
+   "ends": [
+    "lighthouse",
+    "mormere lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1556",
+    "1556"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 32,
+    "at": "p16-a",
+    "text": "Ashford Lighthouse | opened | November 1807"
+   },
+   "b": {
+    "id": 33,
+    "at": "p16-b",
+    "text": "Ashford Lighthouse was opened in September 1807."
+   },
+   "ends": [
+    "ashford",
+    "ashford lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1807",
+    "1807"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 34,
+    "at": "p17-a",
+    "text": "Fenford Lighthouse was restored in 1661."
+   },
+   "b": {
+    "id": 35,
+    "at": "p17-b",
+    "text": "Fenford Lighthouse | restored | 1732"
+   },
+   "ends": [
+    "fenford",
+    "fenford lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1661",
+    "1732"
+   ],
+   "settled": {
+    "by": "p17-c",
+    "how": "a third claim carries both: Fenford Lighthouse was restored between 1661 and 1732."
+   }
+  },
+  {
+   "a": {
+    "id": 39,
+    "at": "p19-a",
+    "text": "Kelford Lighthouse | length | seventy-six kilometres"
+   },
+   "b": {
+    "id": 40,
+    "at": "p19-b",
+    "text": "Kelford Lighthouse | length | 78 kilometres"
+   },
+   "ends": [
+    "kelford",
+    "kelford lighthouse",
+    "kilometre",
+    "length",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seventy-six",
+    "78"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 51,
+    "at": "p25-a",
+    "text": "ninety-five volumes of Corford Lighthouse are kept at Dalford Lighthouse."
+   },
+   "b": {
+    "id": 52,
+    "at": "p25-b",
+    "text": "Corford Lighthouse has 102 volumes."
+   },
+   "ends": [
+    "corford",
+    "corford lighthouse",
+    "lighthouse",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "ninety-five",
+    "102"
+   ],
+   "settled": {
+    "by": "p25-a",
+    "how": "narrower scope: dalford lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 65,
+    "at": "p32-a",
+    "text": "The records say Radwick Lighthouse was restored in December 1960."
+   },
+   "b": {
+    "id": 66,
+    "at": "p32-b",
+    "text": "The records say Radwick Lighthouse was restored in August 1960."
+   },
+   "ends": [
+    "lighthouse",
+    "radwick",
+    "radwick lighthouse",
+    "record",
+    "records"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1960",
+    "1960"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 80,
+    "at": "p39-a",
+    "text": "Oxby Lighthouse | branches | fifteen"
+   },
+   "b": {
+    "id": 81,
+    "at": "p39-b",
+    "text": "Twenty-three branches are recorded at Oxby Lighthouse."
+   },
+   "ends": [
+    "branch",
+    "lighthouse",
+    "oxby",
+    "oxby lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "fifteen",
+    "Twenty-three"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 85,
+    "at": "p41-b",
+    "text": "Varby Lighthouse | length | sixty-two years"
+   },
+   "b": {
+    "id": 209,
+    "at": "p99-a",
+    "text": "In 1988 holmcombe Lighthouse | length | thirty years"
+   },
+   "ends": [
+    "length",
+    "lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-two",
+    "thirty"
+   ],
+   "settled": {
+    "by": "p99-a",
+    "how": "time-scoped: 1988"
+   }
+  },
+  {
+   "a": {
+    "id": 86,
+    "at": "p42-a",
+    "text": "In 2006 yarby Lighthouse measures sixty-six metres."
+   },
+   "b": {
+    "id": 87,
+    "at": "p42-b",
+    "text": "Yarby Lighthouse measures eighty metres."
+   },
+   "ends": [
+    "lighthouse",
+    "measure",
+    "metre",
+    "yarby"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-six",
+    "eighty"
+   ],
+   "settled": {
+    "by": "p42-b",
+    "how": "narrower scope: yarby lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 100,
+    "at": "p49-a",
+    "text": "Radrow Lighthouse | length | 31 percent"
+   },
+   "b": {
+    "id": 101,
+    "at": "p49-b",
+    "text": "Radrow Lighthouse is forty-two percent long."
+   },
+   "ends": [
+    "lighthouse",
+    "percent",
+    "radrow",
+    "radrow lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "31",
+    "forty-two"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 106,
+    "at": "p52-a",
+    "text": "Closed in 1667, Yarrow Lighthouse still stands."
+   },
+   "b": {
+    "id": 107,
+    "at": "p52-b",
+    "text": "Yarrow Lighthouse was closed in 1699."
+   },
+   "ends": [
+    "lighthouse",
+    "yarrow lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1667",
+    "1699"
+   ],
+   "settled": {
+    "by": "p52-c",
+    "how": "a third claim carries both: Yarrow Lighthouse was closed between 1667 and 1699."
+   }
+  },
+  {
+   "a": {
+    "id": 109,
+    "at": "p53-a",
+    "text": "In 1790 Corrow Lighthouse was built."
+   },
+   "b": {
+    "id": 110,
+    "at": "p53-b",
+    "text": "In 1845 Corrow Lighthouse was built."
+   },
+   "ends": [
+    "corrow",
+    "corrow lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1790",
+    "1845"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 113,
+    "at": "p55-a",
+    "text": "Closed in 1576, Fenley Lighthouse still stands."
+   },
+   "b": {
+    "id": 114,
+    "at": "p55-b",
+    "text": "Fenley Lighthouse was closed in 1648."
+   },
+   "ends": [
+    "fenley",
+    "fenley lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1576",
+    "1648"
+   ],
+   "settled": {
+    "by": "p55-c",
+    "how": "a third claim carries both: Fenley Lighthouse was closed between 1576 and 1648."
+   }
+  },
+  {
+   "a": {
+    "id": 120,
+    "at": "p58-a",
+    "text": "6,000 residents of Oxley Lighthouse are kept at Pemley Lighthouse."
+   },
+   "b": {
+    "id": 121,
+    "at": "p58-b",
+    "text": "Oxley Lighthouse has 9,000 residents."
+   },
+   "ends": [
+    "lighthouse",
+    "oxley",
+    "oxley lighthouse",
+    "resident"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "6,000",
+    "9,000"
+   ],
+   "settled": {
+    "by": "p58-a",
+    "how": "narrower scope: pemley lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 124,
+    "at": "p60-a",
+    "text": "Thornley Lighthouse was restored in 1568."
+   },
+   "b": {
+    "id": 125,
+    "at": "p60-b",
+    "text": "In 1629 Thornley Lighthouse was restored."
+   },
+   "ends": [
+    "lighthouse",
+    "thornley",
+    "thornley lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1568",
+    "1629"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 126,
+    "at": "p61-a",
+    "text": "Varley Lighthouse | opened | 1566"
+   },
+   "b": {
+    "id": 127,
+    "at": "p61-b",
+    "text": "Varley Lighthouse | opened | 1684"
+   },
+   "ends": [
+    "lighthouse",
+    "varley",
+    "varley lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1566",
+    "1684"
+   ],
+   "settled": {
+    "by": "p61-c",
+    "how": "a third claim carries both: Varley Lighthouse was opened between 1566 and 1684."
+   }
+  },
+  {
+   "a": {
+    "id": 133,
+    "at": "p64-a",
+    "text": "Ashham Lighthouse | length | 61 kilometres"
+   },
+   "b": {
+    "id": 134,
+    "at": "p64-b",
+    "text": "Ashham Lighthouse is sixty-five kilometres long."
+   },
+   "ends": [
+    "ashham",
+    "ashham lighthouse",
+    "kilometre",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "61",
+    "sixty-five"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 135,
+    "at": "p65-a",
+    "text": "Eighty-nine branches are recorded at Fenham Lighthouse."
+   },
+   "b": {
+    "id": 136,
+    "at": "p65-b",
+    "text": "Fenham Lighthouse has ninety-four branches."
+   },
+   "ends": [
+    "branch",
+    "fenham",
+    "fenham lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "Eighty-nine",
+    "ninety-four"
+   ],
+   "settled": {
+    "by": "p65-c",
+    "how": "a third claim carries both: Fenham Lighthouse's branches rose from 89 to 94."
+   }
+  },
+  {
+   "a": {
+    "id": 146,
+    "at": "p70-a",
+    "text": "Varham Lighthouse | length | six thousand years"
+   },
+   "b": {
+    "id": 147,
+    "at": "p70-b",
+    "text": "Varham Lighthouse | length | nine thousand to 9,008 years"
+   },
+   "ends": [
+    "length",
+    "lighthouse",
+    "varham",
+    "varham lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "six thousand",
+    "nine thousand to 9,008"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 146,
+    "at": "p70-a",
+    "text": "Varham Lighthouse | length | six thousand years"
+   },
+   "b": {
+    "id": 209,
+    "at": "p99-a",
+    "text": "In 1988 holmcombe Lighthouse | length | thirty years"
+   },
+   "ends": [
+    "length",
+    "lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "six thousand",
+    "thirty"
+   ],
+   "settled": {
+    "by": "p99-a",
+    "how": "time-scoped: 1988"
+   }
+  },
+  {
+   "a": {
+    "id": 147,
+    "at": "p70-b",
+    "text": "Varham Lighthouse | length | nine thousand to 9,008 years"
+   },
+   "b": {
+    "id": 209,
+    "at": "p99-a",
+    "text": "In 1988 holmcombe Lighthouse | length | thirty years"
+   },
+   "ends": [
+    "length",
+    "lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "nine thousand to 9,008",
+    "thirty"
+   ],
+   "settled": {
+    "by": "p99-a",
+    "how": "time-scoped: 1988"
+   }
+  },
+  {
+   "a": {
+    "id": 156,
+    "at": "p75-a",
+    "text": "The records say Morworth Lighthouse was restored in 1794."
+   },
+   "b": {
+    "id": 157,
+    "at": "p75-b",
+    "text": "Morworth Lighthouse | restored | 1803"
+   },
+   "ends": [
+    "lighthouse",
+    "morworth",
+    "morworth lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1794",
+    "1803"
+   ],
+   "settled": {
+    "by": "p75-c",
+    "how": "a third claim carries both: Morworth Lighthouse was restored between 1794 and 1803."
+   }
+  },
+  {
+   "a": {
+    "id": 163,
+    "at": "p78-a",
+    "text": "Yarworth Lighthouse | floors | 5,000"
+   },
+   "b": {
+    "id": 164,
+    "at": "p78-b",
+    "text": "Yarworth Lighthouse | floors | 7,000"
+   },
+   "ends": [
+    "floor",
+    "lighthouse",
+    "yarworth",
+    "yarworth lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "5,000",
+    "7,000"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 167,
+    "at": "p80-a",
+    "text": "51 students are recorded at Dunton Lighthouse."
+   },
+   "b": {
+    "id": 168,
+    "at": "p80-b",
+    "text": "Dunton Lighthouse counts sixty-three students."
+   },
+   "ends": [
+    "dunton",
+    "dunton lighthouse",
+    "lighthouse",
+    "student"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "51",
+    "sixty-three"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 169,
+    "at": "p81-a",
+    "text": "At thirty-four percent, Fenton Lighthouse is the longest of its kind."
+   },
+   "b": {
+    "id": 170,
+    "at": "p81-b",
+    "text": "At 48 percent, Fenton Lighthouse is the longest of its kind."
+   },
+   "ends": [
+    "fenton",
+    "fenton lighthouse",
+    "kind",
+    "lighthouse",
+    "longest",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-four",
+    "48"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 173,
+    "at": "p83-a",
+    "text": "Kelton Lighthouse is 4,000 percent long."
+   },
+   "b": {
+    "id": 174,
+    "at": "p83-b",
+    "text": "Kelton Lighthouse stretches eight thousand percent."
+   },
+   "ends": [
+    "kelton",
+    "kelton lighthouse",
+    "lighthouse",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "4,000",
+    "eight thousand"
+   ],
+   "settled": {
+    "by": "p83-c",
+    "how": "a third claim carries both: Kelton Lighthouse's percent rose from four thousand to 8,000."
+   }
+  },
+  {
+   "a": {
+    "id": 192,
+    "at": "p92-a",
+    "text": "Kelstead Lighthouse was built in March 1844."
+   },
+   "b": {
+    "id": 193,
+    "at": "p92-b",
+    "text": "Built in October 1844, Kelstead Lighthouse still stands."
+   },
+   "ends": [
+    "kelstead",
+    "kelstead lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1844",
+    "1844"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 200,
+    "at": "p96-a",
+    "text": "The records say Yarstead Lighthouse was completed in 1728."
+   },
+   "b": {
+    "id": 201,
+    "at": "p96-b",
+    "text": "In 1736 Yarstead Lighthouse was completed."
+   },
+   "ends": [
+    "lighthouse",
+    "yarstead lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1728",
+    "1736"
+   ],
+   "settled": {
+    "by": "p96-c",
+    "how": "a third claim carries both: Yarstead Lighthouse was completed between 1728 and 1736."
+   }
+  },
+  {
+   "a": {
+    "id": 206,
+    "at": "p98-a",
+    "text": "Fencombe Lighthouse | restored | 1818"
+   },
+   "b": {
+    "id": 207,
+    "at": "p98-b",
+    "text": "In 1885 Fencombe Lighthouse was restored."
+   },
+   "ends": [
+    "fencombe",
+    "fencombe lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1818",
+    "1885"
+   ],
+   "settled": {
+    "by": "p98-c",
+    "how": "a third claim carries both: Fencombe Lighthouse was restored between 1818 and 1885."
+   }
+  },
+  {
+   "a": {
+    "id": 211,
+    "at": "p100-a",
+    "text": "Kelcombe Lighthouse counts seventy-eight keepers."
+   },
+   "b": {
+    "id": 212,
+    "at": "p100-b",
+    "text": "Kelcombe Lighthouse counts eighty-four keepers."
+   },
+   "ends": [
+    "count",
+    "keeper",
+    "kelcombe",
+    "kelcombe lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seventy-eight",
+    "eighty-four"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 217,
+    "at": "p103-a",
+    "text": "In 1968 varcombe Lighthouse | residents | fifty-three"
+   },
+   "b": {
+    "id": 218,
+    "at": "p103-b",
+    "text": "Sixty-nine residents are recorded at Varcombe Lighthouse."
+   },
+   "ends": [
+    "lighthouse",
+    "resident",
+    "varcombe"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "fifty-three",
+    "Sixty-nine"
+   ],
+   "settled": {
+    "by": "p103-b",
+    "how": "narrower scope: varcombe lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 223,
+    "at": "p106-a",
+    "text": "Dunmoor Lighthouse was founded in 1615."
+   },
+   "b": {
+    "id": 224,
+    "at": "p106-b",
+    "text": "The records say Dunmoor Lighthouse was founded in 1692."
+   },
+   "ends": [
+    "dunmoor",
+    "dunmoor lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1615",
+    "1692"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 225,
+    "at": "p107-a",
+    "text": "60 bells are recorded at Fenmoor Lighthouse."
+   },
+   "b": {
+    "id": 226,
+    "at": "p107-b",
+    "text": "Fenmoor Lighthouse | bells | sixty-three"
+   },
+   "ends": [
+    "bell",
+    "fenmoor",
+    "fenmoor lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "60",
+    "sixty-three"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 227,
+    "at": "p108-a",
+    "text": "The records say Kelmoor Lighthouse was opened in 1633."
+   },
+   "b": {
+    "id": 228,
+    "at": "p108-b",
+    "text": "The records say Kelmoor Lighthouse was opened in 1753."
+   },
+   "ends": [
+    "kelmoor",
+    "kelmoor lighthouse",
+    "lighthouse",
+    "record",
+    "records"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1633",
+    "1753"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 229,
+    "at": "p109-a",
+    "text": "Mormoor Lighthouse | built | 1673"
+   },
+   "b": {
+    "id": 230,
+    "at": "p109-b",
+    "text": "Mormoor Lighthouse was built in 1738."
+   },
+   "ends": [
+    "lighthouse",
+    "mormoor",
+    "mormoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1673",
+    "1738"
+   ],
+   "settled": {
+    "by": "p109-c",
+    "how": "a third claim carries both: Mormoor Lighthouse was built between 1673 and 1738."
+   }
+  },
+  {
+   "a": {
+    "id": 234,
+    "at": "p111-a",
+    "text": "Radmoor Lighthouse | branches | thirty-eight"
+   },
+   "b": {
+    "id": 235,
+    "at": "p111-b",
+    "text": "Radmoor Lighthouse has 40 branches."
+   },
+   "ends": [
+    "branch",
+    "lighthouse",
+    "radmoor",
+    "radmoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-eight",
+    "40"
+   ],
+   "settled": {
+    "by": "p111-c",
+    "how": "a third claim carries both: Radmoor Lighthouse's branches rose from thirty-eight to forty."
+   }
+  },
+  {
+   "a": {
+    "id": 237,
+    "at": "p112-a",
+    "text": "The records say Thornmoor Lighthouse was closed in 1892."
+   },
+   "b": {
+    "id": 238,
+    "at": "p112-b",
+    "text": "The records say Thornmoor Lighthouse was closed in 1947."
+   },
+   "ends": [
+    "lighthouse",
+    "record",
+    "records",
+    "thornmoor",
+    "thornmoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1892",
+    "1947"
+   ],
+   "settled": {
+    "by": "p112-c",
+    "how": "a third claim carries both: Thornmoor Lighthouse was closed between 1892 and 1947."
+   }
+  },
+  {
+   "a": {
+    "id": 240,
+    "at": "p113-a",
+    "text": "Varmoor Lighthouse is seven thousand kilometres long."
+   },
+   "b": {
+    "id": 241,
+    "at": "p113-b",
+    "text": "Varmoor Lighthouse measures 12,000 kilometres."
+   },
+   "ends": [
+    "kilometre",
+    "lighthouse",
+    "varmoor",
+    "varmoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seven thousand",
+    "12,000"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 246,
+    "at": "p116-a",
+    "text": "Ashdale Lighthouse | length | eighty-three percent"
+   },
+   "b": {
+    "id": 247,
+    "at": "p116-b",
+    "text": "Ashdale Lighthouse | length | 86 to 92 percent"
+   },
+   "ends": [
+    "ashdale",
+    "ashdale lighthouse",
+    "length",
+    "lighthouse",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "eighty-three",
+    "86 to 92"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 248,
+    "at": "p117-a",
+    "text": "In 2003 at forty-three metres, Dundale Lighthouse is the longest of its kind."
+   },
+   "b": {
+    "id": 249,
+    "at": "p117-b",
+    "text": "Dundale Lighthouse is fifty-nine metres long."
+   },
+   "ends": [
+    "dundale",
+    "dundale lighthouse",
+    "lighthouse",
+    "metre"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "forty-three",
+    "fifty-nine"
+   ],
+   "settled": {
+    "by": "p117-a",
+    "how": "time-scoped: 2003"
+   }
+  },
+  {
+   "a": {
+    "id": 250,
+    "at": "p118-a",
+    "text": "Fendale Lighthouse | built | 1775"
+   },
+   "b": {
+    "id": 251,
+    "at": "p118-b",
+    "text": "Fendale Lighthouse | built | 1805"
+   },
+   "ends": [
+    "fendale",
+    "fendale lighthouse",
+    "lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1775",
+    "1805"
+   ],
+   "settled": {
+    "by": "p118-c",
+    "how": "a third claim carries both: Fendale Lighthouse was built between 1775 and 1805."
+   }
+  },
+  {
+   "a": {
+    "id": 255,
+    "at": "p120-a",
+    "text": "In 2002 there are seventy-four residents at Mordale Lighthouse."
+   },
+   "b": {
+    "id": 256,
+    "at": "p120-b",
+    "text": "Mordale Lighthouse | residents | 87"
+   },
+   "ends": [
+    "lighthouse",
+    "mordale",
+    "mordale lighthouse",
+    "resident"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seventy-four",
+    "87"
+   ],
+   "settled": {
+    "by": "p120-a",
+    "how": "time-scoped: 2002"
+   }
+  },
+  {
+   "a": {
+    "id": 257,
+    "at": "p121-a",
+    "text": "Oxdale Lighthouse | founded | 1561"
+   },
+   "b": {
+    "id": 258,
+    "at": "p121-b",
+    "text": "Oxdale Lighthouse | founded | 1601"
+   },
+   "ends": [
+    "lighthouse",
+    "oxdale lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1561",
+    "1601"
+   ],
+   "settled": {
+    "by": "p121-c",
+    "how": "a third claim carries both: Oxdale Lighthouse was founded between 1561 and 1601."
+   }
+  },
+  {
+   "a": {
+    "id": 262,
+    "at": "p123-a",
+    "text": "Vardale Lighthouse was restored in 1778."
+   },
+   "b": {
+    "id": 263,
+    "at": "p123-b",
+    "text": "The records say Vardale Lighthouse was restored in 1861."
+   },
+   "ends": [
+    "lighthouse",
+    "vardale",
+    "vardale lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1778",
+    "1861"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 272,
+    "at": "p128-a",
+    "text": "At seventeen percent, Kelbury Bridge is the longest of its kind."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seventeen",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 273,
+    "at": "p128-b",
+    "text": "At 17 percent, Kelbury Bridge is the longest of its kind."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "17",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 274,
+    "at": "p129-a",
+    "text": "Closed in 1538, Oxbury Bridge still stands."
+   },
+   "b": {
+    "id": 275,
+    "at": "p129-b",
+    "text": "In 1591 Oxbury Bridge was closed."
+   },
+   "ends": [
+    "bridge",
+    "oxbury",
+    "oxbury lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1538",
+    "1591"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 280,
+    "at": "p132-a",
+    "text": "In 1954 varbury Bridge is six thousand years long."
+   },
+   "b": {
+    "id": 281,
+    "at": "p132-b",
+    "text": "Varbury Bridge is twelve thousand years long."
+   },
+   "ends": [
+    "bridge",
+    "varbury",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "six thousand",
+    "twelve thousand"
+   ],
+   "settled": {
+    "by": "p132-b",
+    "how": "narrower scope: varbury lighthouse"
+   }
+  },
+  {
+   "a": {
+    "id": 284,
+    "at": "p134-a",
+    "text": "Ashmere Bridge | closed | 1940"
+   },
+   "b": {
+    "id": 285,
+    "at": "p134-b",
+    "text": "In 2050 Ashmere Bridge was closed."
+   },
+   "ends": [
+    "ashmere lighthouse",
+    "bridge"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1940",
+    "2050"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 307,
+    "at": "p145-a",
+    "text": "Dunford Bridge counts 94 members."
+   },
+   "b": {
+    "id": 308,
+    "at": "p145-b",
+    "text": "Dunford Bridge has 101 members."
+   },
+   "ends": [
+    "bridge",
+    "dunford",
+    "dunford bridge",
+    "member"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "94",
+    "101"
+   ],
+   "settled": {
+    "by": "p145-c",
+    "how": "a third claim carries both: Dunford Bridge's members rose from ninety-four to 101."
+   }
+  },
+  {
+   "a": {
+    "id": 312,
+    "at": "p147-a",
+    "text": "44 lamps are recorded at Oxford Bridge."
+   },
+   "b": {
+    "id": 313,
+    "at": "p147-b",
+    "text": "Forty-six lamps are recorded at Oxford Bridge."
+   },
+   "ends": [
+    "bridge",
+    "lamp",
+    "oxford",
+    "oxford bridge"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "44",
+    "Forty-six"
+   ],
+   "settled": {
+    "by": "p147-c",
+    "how": "a third claim carries both: Oxford Bridge's lamps rose from forty-four to 46."
+   }
+  },
+  {
+   "a": {
+    "id": 317,
+    "at": "p149-a",
+    "text": "In 1732 Thornford Bridge was built."
+   },
+   "b": {
+    "id": 318,
+    "at": "p149-b",
+    "text": "Thornford Bridge was built in 1828."
+   },
+   "ends": [
+    "bridge",
+    "thornford",
+    "thornford lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1732",
+    "1828"
+   ],
+   "settled": {
+    "by": "p149-c",
+    "how": "a third claim carries both: Thornford Bridge was built between 1732 and 1828."
+   }
+  },
+  {
+   "a": {
+    "id": 322,
+    "at": "p151-a",
+    "text": "Yarford Bridge | inhabitants | 61"
+   },
+   "b": {
+    "id": 323,
+    "at": "p151-b",
+    "text": "Yarford Bridge | inhabitants | 79"
+   },
+   "ends": [
+    "bridge",
+    "inhabitant",
+    "yarford",
+    "yarford bridge"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "61",
+    "79"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 328,
+    "at": "p154-a",
+    "text": "Fenwick Bridge | length | 79 years"
+   },
+   "b": {
+    "id": 329,
+    "at": "p154-b",
+    "text": "Fenwick Bridge is eighty-three to 89 years long."
+   },
+   "ends": [
+    "bridge",
+    "fenwick",
+    "fenwick lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "79",
+    "eighty-three to 89"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 332,
+    "at": "p156-a",
+    "text": "Oxwick Bridge | length | seventeen percent"
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seventeen",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 333,
+    "at": "p156-b",
+    "text": "Oxwick Bridge is seventeen percent long."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seventeen",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 360,
+    "at": "p170-a",
+    "text": "Built in 1679, Corby Bridge still stands."
+   },
+   "b": {
+    "id": 361,
+    "at": "p170-b",
+    "text": "Corby Bridge was built in 1737."
+   },
+   "ends": [
+    "bridge",
+    "corby",
+    "corby lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1679",
+    "1737"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 368,
+    "at": "p174-a",
+    "text": "In 1954 54 floors are recorded at Morrow Bridge."
+   },
+   "b": {
+    "id": 369,
+    "at": "p174-b",
+    "text": "Morrow Bridge counts sixty-seven floors."
+   },
+   "ends": [
+    "bridge",
+    "floor",
+    "morrow",
+    "morrow lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "54",
+    "sixty-seven"
+   ],
+   "settled": {
+    "by": "p174-a",
+    "how": "time-scoped: 1954"
+   }
+  },
+  {
+   "a": {
+    "id": 382,
+    "at": "p181-a",
+    "text": "There are sixty volumes at Holmley Bridge."
+   },
+   "b": {
+    "id": 383,
+    "at": "p181-b",
+    "text": "Seventy-eight volumes are recorded at Holmley Bridge."
+   },
+   "ends": [
+    "bridge",
+    "holmley",
+    "holmley bridge",
+    "volume"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty",
+    "Seventy-eight"
+   ],
+   "settled": {
+    "by": "p181-c",
+    "how": "a third claim carries both: Holmley Bridge's volumes rose from 60 to seventy-eight."
+   }
+  },
+  {
+   "a": {
+    "id": 387,
+    "at": "p183-a",
+    "text": "Morley Bridge has 9,000 branches."
+   },
+   "b": {
+    "id": 388,
+    "at": "p183-b",
+    "text": "Morley Bridge | branches | 15,000"
+   },
+   "ends": [
+    "branch",
+    "bridge",
+    "morley",
+    "morley bridge"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "9,000",
+    "15,000"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 393,
+    "at": "p186-a",
+    "text": "59 members are recorded at Thornley Bridge."
+   },
+   "b": {
+    "id": 394,
+    "at": "p186-b",
+    "text": "There are seventy-nine members at Thornley Bridge."
+   },
+   "ends": [
+    "bridge",
+    "member",
+    "thornley",
+    "thornley lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "59",
+    "seventy-nine"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 395,
+    "at": "p187-a",
+    "text": "Six keepers are recorded at Yarley Bridge."
+   },
+   "b": {
+    "id": 396,
+    "at": "p187-b",
+    "text": "There are 26 to 35 keepers at Yarley Bridge."
+   },
+   "ends": [
+    "bridge",
+    "keeper",
+    "yarley",
+    "yarley lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "Six",
+    "26 to 35"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 411,
+    "at": "p195-a",
+    "text": "Yarham Bridge | restored | 1980"
+   },
+   "b": {
+    "id": 412,
+    "at": "p195-b",
+    "text": "Restored in 2033, Yarham Bridge still stands."
+   },
+   "ends": [
+    "bridge",
+    "yarham",
+    "yarham bridge"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1980",
+    "2033"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 413,
+    "at": "p196-a",
+    "text": "Corham Bridge counts thirty-eight lamps."
+   },
+   "b": {
+    "id": 414,
+    "at": "p196-b",
+    "text": "Corham Bridge has 44 lamps."
+   },
+   "ends": [
+    "bridge",
+    "corham",
+    "corham lighthouse",
+    "lamp"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-eight",
+    "44"
+   ],
+   "settled": {
+    "by": "p196-c",
+    "how": "a third claim carries both: Corham Bridge's lamps rose from thirty-eight to forty-four."
+   }
+  },
+  {
+   "a": {
+    "id": 416,
+    "at": "p197-a",
+    "text": "Opened in 1731, Ashworth Bridge still stands."
+   },
+   "b": {
+    "id": 417,
+    "at": "p197-b",
+    "text": "The records say Ashworth Bridge was opened in 1834."
+   },
+   "ends": [
+    "ashworth",
+    "ashworth bridge",
+    "bridge"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1731",
+    "1834"
+   ],
+   "settled": {
+    "by": "p197-c",
+    "how": "a third claim carries both: Ashworth Bridge was opened between 1731 and 1834."
+   }
+  },
+  {
+   "a": {
+    "id": 422,
+    "at": "p199-b",
+    "text": "Fenworth Bridge | length | seven thousand percent"
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seven thousand",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 425,
+    "at": "p201-a",
+    "text": "Oxworth Bridge | opened | October 1665"
+   },
+   "b": {
+    "id": 426,
+    "at": "p201-b",
+    "text": "The records say Oxworth Bridge was opened in December 1665."
+   },
+   "ends": [
+    "bridge",
+    "oxworth",
+    "oxworth bridge"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1665",
+    "1665"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 429,
+    "at": "p203-a",
+    "text": "Thornworth Bridge | length | 7,331 percent"
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "7,331",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 430,
+    "at": "p203-b",
+    "text": "Thornworth Bridge stretches about 7,000 percent."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "7,000",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 435,
+    "at": "p206-a",
+    "text": "Corworth Bridge is sixty-four percent long."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-four",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 443,
+    "at": "p210-a",
+    "text": "Kelton Bridge is ninety-five kilometres long."
+   },
+   "b": {
+    "id": 444,
+    "at": "p210-b",
+    "text": "Kelton Bridge is 110 kilometres long."
+   },
+   "ends": [
+    "bridge",
+    "kelton",
+    "kelton bridge",
+    "kilometre"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "ninety-five",
+    "110"
+   ],
+   "settled": {
+    "by": "p210-c",
+    "how": "a third claim carries both: Kelton Bridge's kilometres rose from ninety-five to 110."
+   }
+  },
+  {
+   "a": {
+    "id": 450,
+    "at": "p213-a",
+    "text": "Varton Bridge measures thirty-two percent."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-two",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 451,
+    "at": "p213-b",
+    "text": "Varton Bridge measures thirty-two percent."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-two",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 462,
+    "at": "p219-a",
+    "text": "Opened in September 1985, Holmstead Bridge still stands."
+   },
+   "b": {
+    "id": 463,
+    "at": "p219-b",
+    "text": "In February 1985 Holmstead Bridge was opened."
+   },
+   "ends": [
+    "bridge",
+    "holmstead lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1985",
+    "1985"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 474,
+    "at": "p225-a",
+    "text": "Yarstead Bridge | residents | 71"
+   },
+   "b": {
+    "id": 475,
+    "at": "p225-b",
+    "text": "Yarstead Bridge | residents | eighty-three"
+   },
+   "ends": [
+    "bridge",
+    "resident",
+    "yarstead lighthouse"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "71",
+    "eighty-three"
+   ],
+   "settled": {
+    "by": "p225-c",
+    "how": "a third claim carries both: Yarstead Bridge's residents rose from seventy-one to eighty-three."
+   }
+  },
+  {
+   "a": {
+    "id": 477,
+    "at": "p226-a",
+    "text": "At two thousand percent, Corstead Bridge is the longest of its kind."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "two thousand",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 478,
+    "at": "p226-b",
+    "text": "Corstead Bridge stretches 7,000 percent."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "7,000",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 479,
+    "at": "p227-a",
+    "text": "In 1727 Ashcombe Bridge was founded."
+   },
+   "b": {
+    "id": 480,
+    "at": "p227-b",
+    "text": "The records say Ashcombe Bridge was founded in 1798."
+   },
+   "ends": [
+    "ashcombe",
+    "ashcombe bridge",
+    "bridge"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1727",
+    "1798"
+   ],
+   "settled": {
+    "by": "p227-c",
+    "how": "a third claim carries both: Ashcombe Bridge was founded between 1727 and 1798."
+   }
+  },
+  {
+   "a": {
+    "id": 482,
+    "at": "p228-a",
+    "text": "The records say Duncombe Bridge was closed in 1731."
+   },
+   "b": {
+    "id": 483,
+    "at": "p228-b",
+    "text": "Duncombe Bridge | closed | 1816"
+   },
+   "ends": [
+    "bridge",
+    "duncombe",
+    "duncombe lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1731",
+    "1816"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 490,
+    "at": "p232-a",
+    "text": "Thorncombe Bridge is sixty-three percent long."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-three",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 491,
+    "at": "p232-b",
+    "text": "Thorncombe Bridge stretches sixty-three percent."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "sixty-three",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 492,
+    "at": "p233-a",
+    "text": "Corcombe Bridge counts 39 inhabitants."
+   },
+   "b": {
+    "id": 493,
+    "at": "p233-b",
+    "text": "Fifty-three inhabitants are recorded at Corcombe Bridge."
+   },
+   "ends": [
+    "bridge",
+    "corcombe",
+    "corcombe bridge",
+    "inhabitant"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "39",
+    "Fifty-three"
+   ],
+   "settled": {
+    "by": "p233-c",
+    "how": "a third claim carries both: Corcombe Bridge's inhabitants rose from 39 to 53."
+   }
+  },
+  {
+   "a": {
+    "id": 504,
+    "at": "p238-a",
+    "text": "The records say Mormoor Bridge was opened in 1847."
+   },
+   "b": {
+    "id": 505,
+    "at": "p238-b",
+    "text": "In 1873 Mormoor Bridge was opened."
+   },
+   "ends": [
+    "bridge",
+    "mormoor",
+    "mormoor lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1847",
+    "1873"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 506,
+    "at": "p239-a",
+    "text": "At thirty-two percent, Oxmoor Bridge is the longest of its kind."
+   },
+   "b": {
+    "id": 507,
+    "at": "p239-b",
+    "text": "Oxmoor Bridge is 42 to 44 percent long."
+   },
+   "ends": [
+    "bridge",
+    "oxmoor lighthouse",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-two",
+    "42 to 44"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 506,
+    "at": "p239-a",
+    "text": "At thirty-two percent, Oxmoor Bridge is the longest of its kind."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "thirty-two",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 507,
+    "at": "p239-b",
+    "text": "Oxmoor Bridge is 42 to 44 percent long."
+   },
+   "b": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "42 to 44",
+    "47"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 512,
+    "at": "p242-a",
+    "text": "Varmoor Bridge is twenty-one years long."
+   },
+   "b": {
+    "id": 513,
+    "at": "p242-b",
+    "text": "Varmoor Bridge | length | thirty-nine years"
+   },
+   "ends": [
+    "bridge",
+    "varmoor",
+    "varmoor lighthouse",
+    "year"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "twenty-one",
+    "thirty-nine"
+   ],
+   "settled": {
+    "by": "p242-c",
+    "how": "a third claim carries both: Varmoor Bridge's years rose from 21 to 39."
+   }
+  },
+  {
+   "a": {
+    "id": 519,
+    "at": "p245-a",
+    "text": "Ashdale Bridge counts 50 villages."
+   },
+   "b": {
+    "id": 520,
+    "at": "p245-b",
+    "text": "55 villages are recorded at Ashdale Bridge."
+   },
+   "ends": [
+    "ashdale",
+    "ashdale lighthouse",
+    "bridge",
+    "village"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "50",
+    "55"
+   ],
+   "settled": {
+    "by": "p245-c",
+    "how": "a third claim carries both: Ashdale Bridge's villages rose from fifty to 55."
+   }
+  },
+  {
+   "a": {
+    "id": 524,
+    "at": "p247-a",
+    "text": "Fendale Bridge counts forty floors."
+   },
+   "b": {
+    "id": 525,
+    "at": "p247-b",
+    "text": "Fifty-five floors are recorded at Fendale Bridge."
+   },
+   "ends": [
+    "bridge",
+    "fendale",
+    "fendale lighthouse",
+    "floor"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "forty",
+    "Fifty-five"
+   ],
+   "settled": {
+    "by": "p247-c",
+    "how": "a third claim carries both: Fendale Bridge's floors rose from 40 to fifty-five."
+   }
+  },
+  {
+   "a": {
+    "id": 531,
+    "at": "p250-a",
+    "text": "In 1984 oxdale Bridge is 47 percent long."
+   },
+   "b": {
+    "id": 532,
+    "at": "p250-b",
+    "text": "At fifty percent, Oxdale Bridge is the longest of its kind."
+   },
+   "ends": [
+    "bridge",
+    "percent"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "47",
+    "fifty"
+   ],
+   "settled": {
+    "by": "p250-a",
+    "how": "time-scoped: 1984"
+   }
+  },
+  {
+   "a": {
+    "id": 535,
+    "at": "p252-a",
+    "text": "In 1572 Vardale Bridge was closed."
+   },
+   "b": {
+    "id": 536,
+    "at": "p252-b",
+    "text": "The records say Vardale Bridge was closed in 1611."
+   },
+   "ends": [
+    "bridge",
+    "vardale",
+    "vardale lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1572",
+    "1611"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 537,
+    "at": "p253-a",
+    "text": "Yardale Bridge | restored | 1817"
+   },
+   "b": {
+    "id": 538,
+    "at": "p253-b",
+    "text": "Restored in 1861, Yardale Bridge still stands."
+   },
+   "ends": [
+    "bridge",
+    "yardale",
+    "yardale lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1817",
+    "1861"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 539,
+    "at": "p254-a",
+    "text": "Restored in October 1773, Cordale Bridge still stands."
+   },
+   "b": {
+    "id": 540,
+    "at": "p254-b",
+    "text": "Cordale Bridge | restored | August 1773"
+   },
+   "ends": [
+    "bridge",
+    "cordale",
+    "cordale lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1773",
+    "1773"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 549,
+    "at": "p259-a",
+    "text": "Morbury Tower is fifty-one kilometres long."
+   },
+   "b": {
+    "id": 550,
+    "at": "p259-b",
+    "text": "Morbury Tower is 69 kilometres long."
+   },
+   "ends": [
+    "kilometre",
+    "morbury",
+    "morbury lighthouse",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "fifty-one",
+    "69"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 551,
+    "at": "p260-a",
+    "text": "In 1959 at forty-five metres, Oxbury Tower is the longest of its kind."
+   },
+   "b": {
+    "id": 552,
+    "at": "p260-b",
+    "text": "At 62 metres, Oxbury Tower is the longest of its kind."
+   },
+   "ends": [
+    "kind",
+    "longest",
+    "metre",
+    "oxbury",
+    "oxbury lighthouse",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "forty-five",
+    "62"
+   ],
+   "settled": {
+    "by": "p260-a",
+    "how": "time-scoped: 1959"
+   }
+  },
+  {
+   "a": {
+    "id": 559,
+    "at": "p264-a",
+    "text": "six thousand rooms of Corbury Tower are kept at Dalbury Tower."
+   },
+   "b": {
+    "id": 560,
+    "at": "p264-b",
+    "text": "There are 11,000 rooms at Corbury Tower."
+   },
+   "ends": [
+    "corbury",
+    "corbury tower",
+    "room",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "six thousand",
+    "11,000"
+   ],
+   "settled": {
+    "by": "p264-a",
+    "how": "narrower scope: dalbury tower"
+   }
+  },
+  {
+   "a": {
+    "id": 569,
+    "at": "p269-a",
+    "text": "Mormere Tower | completed | 1642"
+   },
+   "b": {
+    "id": 570,
+    "at": "p269-b",
+    "text": "Mormere Tower | completed | 1755"
+   },
+   "ends": [
+    "mormere tower",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1642",
+    "1755"
+   ],
+   "settled": {
+    "by": "p269-c",
+    "how": "a third claim carries both: Mormere Tower was completed between 1642 and 1755."
+   }
+  },
+  {
+   "a": {
+    "id": 580,
+    "at": "p274-a",
+    "text": "Completed in 1609, Dunford Tower still stands."
+   },
+   "b": {
+    "id": 581,
+    "at": "p274-b",
+    "text": "The records say Dunford Tower was completed in 1664."
+   },
+   "ends": [
+    "dunford",
+    "dunford bridge",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1609",
+    "1664"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 584,
+    "at": "p276-a",
+    "text": "In 2000 holmford Tower has seven thousand members."
+   },
+   "b": {
+    "id": 585,
+    "at": "p276-b",
+    "text": "Holmford Tower counts 9,000 members."
+   },
+   "ends": [
+    "holmford",
+    "member",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "seven thousand",
+    "9,000"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 590,
+    "at": "p279-a",
+    "text": "In January 1729 Oxford Tower was built."
+   },
+   "b": {
+    "id": 591,
+    "at": "p279-b",
+    "text": "Built in October 1729, Oxford Tower still stands."
+   },
+   "ends": [
+    "oxford",
+    "oxford tower",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1729",
+    "1729"
+   ],
+   "settled": null
+  },
+  {
+   "a": {
+    "id": 596,
+    "at": "p282-a",
+    "text": "In 1781 Varford Tower was opened."
+   },
+   "b": {
+    "id": 597,
+    "at": "p282-b",
+    "text": "Opened in 1825, Varford Tower still stands."
+   },
+   "ends": [
+    "tower",
+    "varford",
+    "varford lighthouse"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1781",
+    "1825"
+   ],
+   "settled": {
+    "by": "p282-c",
+    "how": "a third claim carries both: Varford Tower was opened between 1781 and 1825."
+   }
+  },
+  {
+   "a": {
+    "id": 610,
+    "at": "p288-a",
+    "text": "Morwick Tower has 6,000 residents."
+   },
+   "b": {
+    "id": 611,
+    "at": "p288-b",
+    "text": "12,000 residents are recorded at Morwick Tower."
+   },
+   "ends": [
+    "morwick",
+    "morwick lighthouse",
+    "resident",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "count",
+   "values": [
+    "6,000",
+    "12,000"
+   ],
+   "settled": {
+    "by": "p288-c",
+    "how": "a third claim carries both: Morwick Tower's residents rose from 6,000 to 12,000."
+   }
+  },
+  {
+   "a": {
+    "id": 633,
+    "at": "p299-a",
+    "text": "Ashrow Tower was completed in August 1782."
+   },
+   "b": {
+    "id": 634,
+    "at": "p299-b",
+    "text": "Ashrow Tower | completed | September 1782"
+   },
+   "ends": [
+    "ashrow lighthouse",
+    "tower"
+   ],
+   "kind": "value",
+   "type": "date",
+   "values": [
+    "1782",
+    "1782"
+   ],
+   "settled": null
+  }
+ ]
+}

@@ -257,3 +257,15 @@ test("start and every step answer carry the outline as data: each section's stat
   assert.deepEqual(last.outline.map((s) => s.state), ["written", "written", "written", "cut", "written"], "when the piece is done every state is final; the placeholder section is cut");
   assert.ok(last.outline.every((s) => s.state !== "writing" && s.state !== "planned"));
 });
+
+test("each line the model writes from is an addressed snip: its source and address follow the dash, found from the page's own passage", () => {
+  const passages = [
+    { name: "https://www.example.org/dolphins", text: "Dolphins are marine mammals of the order Cetacea, closely related to whales and porpoises. They are found worldwide." },
+    { name: "research record (assembled by the door)", text: "Read 2 sources." },
+  ];
+  const refs = E.addressLines(QUOTES, passages);
+  assert.equal(refs[QUOTES[0]], "example.org @https://www.example.org/dolphins", "a line found in a page's passage is addressed by host and url");
+  assert.equal(refs[QUOTES[1]], undefined, "a line no page's passage contains rides without an address");
+  const { prompt } = E.longformStart({ ask: "write me a piece about dolphins", topic: "dolphins", gathered: { ...gathered, passages }, outline: OUTLINE, now: 1_700_000_000_777 });
+  assert.ok(prompt.includes(`- ${QUOTES[0]} — example.org @https://www.example.org/dolphins`), "the section prompt carries the addressed snip");
+});
