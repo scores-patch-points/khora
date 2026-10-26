@@ -269,11 +269,17 @@ export function claimsOf(text, rows = undefined) {
   const R = rows ?? rowsOf(text), props = propositionsOf(text, R);
   // the sentence's content words no claim read (claim-coverage.js): carried on every claim, so the check never calls a partly read claim supported
   const unread = unreadWords(R.filter((r) => !props.framed.has(r.id)), props, bindFigures(R, FIGURE_LEX), { isUnit: (f) => !!FIGURE_LEX.unitOf(f), key: lem });
-  // every claim carries `time`: the years its own adjuncts name ("in 1900"), never the years inside a participant's name (a figure's is its own, below)
-  const timeOf = (c) => { const ys = [...new Set((c.OBL ?? []).flatMap((o) => String(o?.text ?? "").match(YEAR) ?? []))].sort(); return ys.length ? ys : null; };
+  // every claim carries `time`: the year its own adjunct names AS A POINT ("in 1900"), never a year inside a participant's name (a figure's is its own, below)
+  const timeOf = (c) => { const ys = [...new Set((c.OBL ?? []).map((o) => pointYear(o?.text)).filter(Boolean))].sort(); return ys.length ? ys : null; };
   return [...propositionClaims(text, R, props).map((c) => ({ ...c, time: timeOf(c) })), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
 }
-const YEAR = /\b(?:1[0-9]{3}|2[01][0-9]{2})\b/g;
+// TIME, AS A READING STATES IT. A year is a time of the fact only when the whole adjunct is a bare POINT: "in 1900", "In May 2024", "on March 3, 2010",
+// "during 1999". Every other year-bearing phrase says something else, and is NOT read as a time: "since 2010" and "until 2010" open an interval,
+// "between 1950 and 2022" is an interval, "by 2020" is a deadline, "in the 1990s" is a decade, and "according to the 2008 report" dates the SAYING, not
+// the fact (a year is a point on some clock in some role; a set of years conflates them). Those stay unstated, and a verdict that needs them says so.
+const POINT_MONTHS = "january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept?|oct|nov|dec";
+const POINT = new RegExp(`^(?:in|on|during|at)\\s+(?:the\\s+year\\s+)?(?:\\d{1,2}(?:st|nd|rd|th)?\\s+)?(?:(?:${POINT_MONTHS})\\.?\\s+)?(?:\\d{1,2}(?:st|nd|rd|th)?,?\\s+)?(1[0-9]{3}|2[01][0-9]{2})$`, "i");
+const pointYear = (t) => POINT.exec(String(t ?? "").trim().replace(/[.;:,]+$/, ""))?.[1] ?? null;
 // THE SENSE A FIGURE IS SAID IN. It was read as a positive, asserted, present figure whatever its clause said ("the radius is NOT 6,000 km", "NASA says
 // the radius is 2,440 km", "the radius was 2,440 km in 1900"). A figure takes the sense of the predicate it sits in, read from that predicate's own
 // words and from the figure's own tokens (a parse may hang "not" on the number), the same tests the proposition claims use: a negator, past or future
@@ -287,7 +293,7 @@ function figureSense(rows, text, f) {
   const tense = forms.some((x) => /^(was|were|had|did)$/.test(x)) || (/ed$/.test(p.form) && !auxes.some((k) => /^(is|are|am|has|have)$/i.test(k.form)) && !passive) ? "past" : forms.some((x) => /^(will|shall)$/.test(x)) ? "future" : "present";
   const reported = (() => { let x = p; for (let i = 0; i < 6 && x; i++) { const h = rows.find((r) => r.id === x.head); if (!h) return false; if (/^(ccomp|parataxis)$/.test(x.deprel) && REPORT.has(lem(h))) return true; x = h; } return false; })();
   const asserted = !reported && !auxes.some((k) => /^(may|might|could|would)$/i.test(k.form));
-  const ys = [...new Set(ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && !own.has(k.id)).flatMap((k) => String(endOf(rows, k.id, text)?.text ?? "").match(YEAR) ?? []))].sort();
+  const ys = [...new Set(ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && !own.has(k.id)).map((k) => pointYear(endOf(rows, k.id, text)?.text)).filter(Boolean))].sort();
   return { polarity: neg ? "-" : "+", tense, asserted, time: ys.length ? ys : null };
 }
 function propositionClaims(text, rows, props = propositionsOf(text, rows)) {

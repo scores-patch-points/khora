@@ -77,6 +77,16 @@ test("the checker rejects a held value that the source states for another year t
   assert.match(bad.why[0], /stated for 1900, the claim for 2020: another time/);
 });
 
+test("the checker counts point years only: a since-year or a report date is not another time", () => {
+  const lic = { licenses: [LICENSES[0].giver] };
+  for (const src of ["Since 1900 Mercury has had a radius of 2,440 km.", "According to the 1900 report, Mercury has a radius of 2,440 km.", "In the 1900s Mercury had a radius of 2,440 km."]) {
+    const a = src.indexOf("Mercury"), b = src.indexOf("km.") + 2;
+    const rec = { rel: "has_radius", giver: LICENSES[0].giver, subject: "Mercury", claim: { label: "6,000 km", measure: "length", base: 6e6 }, sense: { claim: { tense: null, time: ["2020"] } },
+      held: [{ span: [a, b], label: "2,440 km", measure: "length", base: 2.44e6 }] };
+    assert.equal(checkProof(rec, src, lic).ok, true, src);
+  }
+});
+
 test("the reader gives a figure the sense of the clause it sits in", async () => {
   const GE = await import("../adapters/text/grammar-en.js");
   const fig1 = (t) => GE.claimsOf(t).find((c) => c.rel === "fig" && c.fig.measure !== "date");   // "In 1900 ..." has the year itself as a date figure first
@@ -86,4 +96,25 @@ test("the reader gives a figure the sense of the clause it sits in", async () =>
   assert.equal(fig1("Mercury radius is not 6,000 kilometres.").polarity, "-", "the parse hangs the negator on the number");
   assert.equal(fig1("NASA says the radius of Mercury is 2,440 kilometres.").asserted, false);
   assert.equal(fig1("The population is 5 million.").time, null);
+});
+
+test("only a bare POINT year is a time of the fact; every other year-bearing phrase is unstated", async () => {
+  const GE = await import("../adapters/text/grammar-en.js");
+  const figs = (t) => GE.claimsOf(t).filter((c) => c.rel === "fig" && c.fig.measure !== "date");
+  const times = (t) => figs(t).map((c) => c.time);
+  // points
+  assert.deepEqual(times("The population was 3 million in 1900."), [["1900"]]);
+  assert.deepEqual(times("In May 2024 the population was 3 million."), [["2024"]]);
+  assert.deepEqual(times("On March 3, 2010 the population was 3 million."), [["2010"]]);
+  assert.deepEqual(times("During 1999 Mercury had a radius of 2,440 kilometres."), [["1999"]]);
+  // an interval opening or closing, an interval, a deadline, a decade, and a date for the SAYING are not points of the fact
+  assert.deepEqual(times("Since 2010 the population has grown to 5 million."), [null], "since opens an interval");
+  assert.deepEqual(times("By 2020 the radius was 2,440 kilometres."), [null], "by is a deadline");
+  assert.deepEqual(times("In the 1990s the population was 3 million."), [null], "a decade is not a year");
+  assert.ok(times("According to the 2008 report, about 80,000 people are at risk.").every((t) => t === null), "2008 dates the saying, not the fact");
+  assert.ok(times("Between 1950 and 2022, about 47,000 people attempted to climb.").every((t) => t === null), "an interval is not two points");
+  // and a proposition claim reads its own adjunct the same way
+  const c = (t) => GE.claimsOf(t).find((q) => q.rel !== "fig");
+  assert.deepEqual(c("In May 2024 we entered into the Amendment.").time, ["2024"]);
+  assert.equal(c("Since 2010 the population has grown.").time, null);
 });
