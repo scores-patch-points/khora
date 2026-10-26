@@ -269,7 +269,26 @@ export function claimsOf(text, rows = undefined) {
   const R = rows ?? rowsOf(text), props = propositionsOf(text, R);
   // the sentence's content words no claim read (claim-coverage.js): carried on every claim, so the check never calls a partly read claim supported
   const unread = unreadWords(R.filter((r) => !props.framed.has(r.id)), props, bindFigures(R, FIGURE_LEX), { isUnit: (f) => !!FIGURE_LEX.unitOf(f), key: lem });
-  return [...propositionClaims(text, R, props), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
+  // every claim carries `time`: the years its own adjuncts name ("in 1900"), never the years inside a participant's name (a figure's is its own, below)
+  const timeOf = (c) => { const ys = [...new Set((c.OBL ?? []).flatMap((o) => String(o?.text ?? "").match(YEAR) ?? []))].sort(); return ys.length ? ys : null; };
+  return [...propositionClaims(text, R, props).map((c) => ({ ...c, time: timeOf(c) })), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
+}
+const YEAR = /\b(?:1[0-9]{3}|2[01][0-9]{2})\b/g;
+// THE SENSE A FIGURE IS SAID IN. It was read as a positive, asserted, present figure whatever its clause said ("the radius is NOT 6,000 km", "NASA says
+// the radius is 2,440 km", "the radius was 2,440 km in 1900"). A figure takes the sense of the predicate it sits in, read from that predicate's own
+// words and from the figure's own tokens (a parse may hang "not" on the number), the same tests the proposition claims use: a negator, past or future
+// auxiliaries and endings, a reporting verb above it, a modal, and the years its adjuncts name. A clause with no predicate keeps the default.
+const NEGATOR = /^(not|n't|never)$/i;
+function figureSense(rows, text, f) {
+  const p = f.predId != null ? rows.find((r) => r.id === f.predId) : null; if (!p) return { polarity: "+", tense: "present", asserted: true, time: null };
+  const ks = kids(rows, p.id), own = new Set(f.ids), auxes = ks.filter((k) => /^(aux|cop|aux:pass)$/.test(k.deprel));
+  const neg = [...ks, ...f.ids.flatMap((id) => kids(rows, id))].some((k) => !own.has(k.id) && NEGATOR.test(k.form));
+  const forms = [p, ...auxes].map((w) => w.form.toLowerCase()), passive = ks.some((k) => k.deprel === "aux:pass" || k.deprel === "nsubj:pass");
+  const tense = forms.some((x) => /^(was|were|had|did)$/.test(x)) || (/ed$/.test(p.form) && !auxes.some((k) => /^(is|are|am|has|have)$/i.test(k.form)) && !passive) ? "past" : forms.some((x) => /^(will|shall)$/.test(x)) ? "future" : "present";
+  const reported = (() => { let x = p; for (let i = 0; i < 6 && x; i++) { const h = rows.find((r) => r.id === x.head); if (!h) return false; if (/^(ccomp|parataxis)$/.test(x.deprel) && REPORT.has(lem(h))) return true; x = h; } return false; })();
+  const asserted = !reported && !auxes.some((k) => /^(may|might|could|would)$/i.test(k.form));
+  const ys = [...new Set(ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && !own.has(k.id)).flatMap((k) => String(endOf(rows, k.id, text)?.text ?? "").match(YEAR) ?? []))].sort();
+  return { polarity: neg ? "-" : "+", tense, asserted, time: ys.length ? ys : null };
 }
 function propositionClaims(text, rows, props = propositionsOf(text, rows)) {
   return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, alias: !!p.alias, vid: p.vid ?? null, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
@@ -338,6 +357,6 @@ export const FIGURE_LEX = {
 };
 /** the figures of a sentence as EOT claims: rel "fig", ARG0 the being they describe, the binding on the claim */
 export function figureClaimsOf(text, rows = rowsOf(text)) {
-  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
+  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], ...figureSense(rows, text, f), asym: false,
     fig: { measure: f.measure, attribute: f.attribute, event: f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }));
 }

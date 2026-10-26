@@ -13,6 +13,9 @@ const words = (s) => low(s).replace(ART, "").replace(/[â€™']/g, " ").replace(/[â
 const stem = (w) => low(w).replace(/[^\p{L}\p{N}]/gu, "").slice(0, 5);
 const numOf = (s) => { const m = /(\d[\d\s.,']*\d|\d)/u.exec(String(s ?? "")); if (!m) return null; let t = m[1].replace(/[\s']/g, ""); if (/,\d{3}(\D|$)/.test(t) && !/\.\d/.test(t)) t = t.replace(/,/g, ""); else if (/\.\d{3}(\D|$)/.test(t) && /,/.test(t)) t = t.replace(/\./g, "").replace(",", "."); else t = t.replace(",", "."); const v = parseFloat(t); return Number.isFinite(v) ? v : null; };
 const DEG = /^(most|more|less|least):/;
+// PERSPECTIVE: an atom is held in a sense, and two atoms stated for different years are of different senses (stage.js senseStanding): the source's neither
+// meets the claim's nor contradicts it. Only STATED years decide; an atom with none is held in no stated year and is compared as before.
+export const otherYears = (c, s) => !!(c.time?.length && s.time?.length && !c.time.some((y) => s.time.includes(y)));
 const argText = (a) => (a && typeof a === "object" ? a.name ?? a.value ?? "" : String(a ?? ""));
 
 // unread: the claim's content words no claim atom carries; a claim with any is never supported (what was not read cannot be checked)
@@ -126,6 +129,7 @@ export function atomSupport(C0, S, { claimLang = "en", sourceLang = "en", same =
     if (cargs.length === 1) { const w = predWords(c.pred).at(-1), t = argText(cargs[0]); if (w && new RegExp(`(^|\\s)\\p{Lu}`, "u").test(t) && words(t).some((x) => stem(x) === stem(w)) && /\p{Lu}/u.test(t.split(/\s+/).find((x) => stem(x) === stem(w)) ?? "")) { table.push({ atom: c, state: "met", by: null, identifying: true }); continue; } }
     for (const s of S) {
       const sargs = s.args ?? []; if (sargs.length < cargs.length) continue;
+      if (otherYears(c, s)) continue;
       if (cargs.length === 1) {
         // a one-place fact: the same adjective on the same referent, or a source referent whose words carry it
         if (sargs.length === 1 && predMeet(c.pred, s.pred) && refMeet(cargs[0], sargs[0])) { if (!!c.neg === !!s.neg) { if (standing(c, s)) { by = s; break; } continue; } if (!s.hedged) contra ??= s; continue; }
