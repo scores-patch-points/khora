@@ -803,3 +803,12 @@ M4 RESULT (code c46b7616; first run, the nine spent sets; mode m4 = M3 + the hed
  V5, over the 23 pairs the arm accepts (those with a bound two-place arrangement): 273 swaps tried (direction 55, role 218), 0 read bound.
  License ablation: 82 single-license removals over 393 pairs; no verdict moved.
  Licenses (m4 against m4-unlicensed): identical on every pair.
+M5 construction, fixed before M5 is run: declareEquivalent(relA, relB, { giver }) (native/organs/stage.js) returns an `equivalent` license and
+refuses without a giver (law 4); HL's engine is untouched. A pair's candidate equivalences are the lexical relation lemmas of the claim stage
+against those of the source stage: not is_a, named, has_*, most:*, more:*, less:*, least:*, whose structure is the reader's own; the same number
+of "_"-joined words; every word position identical or a synonym by the reader's own synonymy (wikt-gloss makeSynonymy, `same("en", a, b)` over
+NOUN, VERB, ADJ: the slim Wiktionary's listed synonyms, then shared keys, vetoed by listed antonyms), at least one position differing. Giver:
+"Wiktionary synonymy (the slim English Wiktionary through the reader's makeSynonymy): thesaurus-grade, admitted on marginal gains". Pairwise: the
+class of a relation is itself and the relations declared equivalent to it, with no transitive closure (the hub predicates the spec names can
+therefore not chain). Read at read time: a claim arrangement over relation r is the disjunction (HL's ∨) of its atom over r and over each
+relation of r's class; the stage is not rewritten, and the layered views and the gap rule apply as before. M5 mode: m5 = m4 plus these licenses.
