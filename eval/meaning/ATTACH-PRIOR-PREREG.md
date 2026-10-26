@@ -59,3 +59,13 @@ prior is a proxy for something else); or the prior helps gold but changes no par
 - **Stage 2 is NOT run**: it was registered to run only if P1 held in at least two languages. English is mixed and Spanish holds by a margin of one to four instances on dev sets of 58 and 183.
 - **The exploratory count did not survive held-out scoring.** send 57:1 and bring 37:1 were counted on train+dev pooled over 18 files; scored on a held-out dev, a per-verb prior is not reliably better than "the dative phrase hangs on the verb" (or on the noun, in ATIS-like corpora). The dev sets are small (13 to 183 instances), so a difference of one or two instances is the whole margin: this result cannot show the prior is useless, only that it is not shown useful.
 - **What is learned, universal:** a lexical signal seen in a pooled count is a hypothesis; held-out scoring against the strongest lemma-blind baseline is what decides it, and the baseline here (the corpus's majority attachment) is strong.
+
+---
+
+## AMENDMENT 1 (2026-10-26, written after RESULT 1 and before this run; RESULT 1 stands)
+
+RESULT 1's training sets are small (161 to 2377 instances) and the signal appeared pooled. So: for each language, pool the train splits of ALL its treebanks that have both a train and a
+dev split, and score on the pooled dev splits. Everything else is as registered: the rule (strict majority, a tie or unseen lemma abstains), the lemma-blind majority class of the pooled
+train, P1 to P4, the deranged control. One run, no re-tuning. The risk that makes it a fair test and not a rescue: pooling mixes genres (ATIS "flights to Boston" is noun-attached, a
+filing is verb-attached), so a prior pooled across genres can be worse than any one genre's; if so that is the result. Languages: those with at least 2 such treebanks and
+dative-marked instances: en, es, fr, de (ja has one). If P1 holds in at least two of the four languages, stage 2 is run as registered; otherwise the idea is closed here.
