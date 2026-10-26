@@ -1,7 +1,9 @@
 // atoms.js — a sentence's EOTClaim@1 claims as ATOMS: one fact each, over the page's entities (coref.js), with the character span of the words
 // that state it. The atom is the unit the meaning check weighs (MEANING-ATOMS.md): a claim is supported atom by atom, so a paraphrase that
 // repackages the same facts meets, a misattachment damages one atom and not the claim, and what was not read is reported, atom by atom.
-//   atomize({ claims, rows, mentions, entities, text }) → [{ pred, args: [{ entity, name } | { value }], neg, hedged, approx, start, end, from }]
+//   atomize({ claims, rows, mentions, entities, text }) → [{ pred, args: [{ entity, name } | { value }], neg, hedged, approx, tense, start, end, from }]
+//   tense and time are the sense an atom is said in: the claim's tense ("past" | "present" | "future") and the years its own adjuncts name ("in
+//   1900"), or null. A figure takes its clause's (grammar-en.js claimsOf). Atoms of one claim share `from`.
 //   realize(atom) → "pred(arg, arg)" in plain words, for reading and judging
 // Atoms, and where they come from:
 //   is_a(x, kind)          a copula with a noun ("Lake Baikal is a rift lake")
@@ -38,7 +40,7 @@ export function atomize({ claims, rows, mentions, entities, text }) {
     const as = args.filter(Boolean); if (!pred || !as.length) return;
     const key = JSON.stringify([pred, as.map((a) => a.entity ?? lc(a.value)), base.neg]); if (seen.has(key)) return; seen.add(key);
     const ws = [...new Set(idsUsed.flat().filter((x) => x != null))].map(byId).filter(Boolean);
-    out.push({ pred, args: as.map(({ ids, ...a }) => a), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from });
+    out.push({ pred, args: as.map(({ ids, ...a }) => a), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, tense: base.tense ?? null, time: base.time ?? null, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from });
   };
   // an adjective keeps its degree: "the largest lake" is most:large, "más alto" more:tall (a "more" word or the Degree feature; with a
   // definite article on its noun, the comparative is a superlative)
@@ -67,7 +69,7 @@ export function atomize({ claims, rows, mentions, entities, text }) {
   };
   let skipMod = new Set();
   for (const c of claims) {
-    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id };
+    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id, tense: c.tense ?? null, time: c.time ?? null };
     const quantified = [c.ARG0, c.ARG1, c.ARG2].some((e) => NO.test(e?.text ?? ""));
     const pres = base.neg && !quantified ? { ...base, neg: false } : base;
     const predHead = c.rel === "be" && c.ARG1?.hid != null ? byId(c.ARG1.hid) : null;

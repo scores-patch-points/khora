@@ -98,5 +98,17 @@ if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pai
   console.log(`  committed contradictions (${Object.values(rows.C).reduce((a, b) => a + b, 0)}): ${fmt(rows.C)}`);
   console.log(`  committed supports       (${Object.values(rows.E).reduce((a, b) => a + b, 0)}): ${fmt(rows.E)}`);
   for (const { p, st } of stageC) console.log(`  [${p.set} ${p.id}] ${st.map((s) => `${s.end}: ${s.kind}${s.kind === "same" ? "" : ` (${s.reason}; ${s.have[0]} and ${s.have[1]} occurrence(s))`}`).join("; ") || "no referent end asked"}`); }
+// PERSPECTIVE (stage.js): nothing is true everywhere. A reading is one author's view, read FOR a question (for-whom.js), and a verdict is "by this reading, in
+// the sense it states it". A value the source states for other years is another sense: neither a contradiction nor support, a typed gap. Only STATED years
+// decide (the reader's tense is a heuristic: it reads "paid", "bought", "sold" as present). The atoms arm holds the same rule (atom-support.js otherYears).
+{ const kinds = {}, by = { C: {}, E: {} }; let stated = 0, frame = null;
+  for (const p of pairs) { if (p.A.atoms.some((a) => a.time) || p.B.atoms.some((a) => a.time)) stated++;
+    const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, { licenses: all }); frame ??= j.forWhom;
+    for (const g of j.gaps) if (g.kind === "different_sense") kinds[g.why.replace(/:.*/, "")] = (kinds[g.why.replace(/:.*/, "")] ?? 0) + 1;
+    if (rulesOf(p.A, p.B) === "N" && (j.verdict === "C" || j.verdict === "E")) by[j.verdict][j.sense] = (by[j.verdict][j.sense] ?? 0) + 1; }
+  const f = (o) => Object.entries(o).map(([k, n]) => `${k} ${n}`).join(", ") || "none";
+  console.log(`\nperspective: every stage verdict is read FOR a frame: ${frame.id} — "${frame.question}"`);
+  console.log(`  pairs where either side states years: ${stated} of ${pairs.length}; held for another sense (withheld as a typed gap, neither contradiction nor support): ${f(kinds)}`);
+  console.log(`  stage-committed contradictions by sense: ${f(by.C)}; supports: ${f(by.E)}`); }
 if (process.env.WHYE) { const why = {}; for (const p of pairs.filter((q) => q.label === "E" && arm(q.A, q.B, all).v !== "E")) { const preds = [...new Set(p.A.atoms.map((a) => a.pred.replace(/^(has_|most:).*/, "$1*")))]; const g = (arm(p.A, p.B, all).gaps ?? []).map((x) => x.kind); const k = `${p.A.atoms.length ? preds.join(",") : "no atoms"}${g.length ? " | gaps " + [...new Set(g)] : ""}`; why[k] = (why[k] ?? 0) + 1; } console.log("\nmissed E by claim predicates:"); for (const [k, n] of Object.entries(why).sort((a, b) => b[1] - a[1]).slice(0, 14)) console.log(String(n).padStart(3), k.slice(0, 150)); }
 if (process.env.FALSEE) for (const p of pairs) { const r = arm(p.A, p.B, all); if (r.v === "E" && p.label !== "E") console.log(`\nFALSE-E [${p.set} ${p.id}] ${p.label}: ${p.claim}\n  src: ${p.sentence.slice(0, 200)}\n  atoms: ${p.A.atoms.map((a) => a.text).join(" ; ")}\n  rules said ${rulesOf(p.A, p.B)}`); }
