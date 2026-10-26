@@ -39,3 +39,22 @@ the defs don't eva, you rec them". Built as `native/the-fold/reread.js`; measure
 ## Not done
 The lexicon tier (the door); re-entry from the identity layer's own standings (`same_below_null` as a trigger); the delta written into the weft entry and the hyperlexicon (the record of the
 mind being changed) rather than a jsonl beside the eval; a fresh pre-registered set.
+
+## The reader's state and the record are one log (`the-fold/reader-log.js`, `eval/meaning/reader-reentry-run.mjs`, 2026-10-26)
+Re-entry (above) and identity from the reader's side (WEFT-IDENTITY experiment 7) joined: the first reading admits each being's arrangements at pass 0; every directed pass appends what the more careful
+reading added as admissions and what it removed as RETRACTIONS, tagged with the pass (the log is never rewritten); the reader at any cursor is the projection (`stateAt`); a being's identity is its
+trajectory across the cursors (`trajectoryOf`). Each claim end is met at the first cursor and at the last.
+
+| 108 pairs, 51 re-read, 102 passes, 272 claim ends met | first reading | after re-entry |
+|---|---|---|
+| same / new / undecided | 144 / 121 / 7 | 148 / 116 / 8 |
+| same above the null | 15 | 17 |
+| moved | | new -> same 6, undecided -> same 1, same -> other 3, null gained 4 |
+| discrepancy finder (pairs flagged / contradictions / false) | 4 / 4 / 0 | 4 / 4 / 0 |
+| the record | | 2,087 rows (RereadAdmission@1 admissions and retractions, RereadRec@1 passes), one file, sha256 in the run's output |
+
+- The upper layer's gaps, sent down, changed what the reader could place: 7 ends it met as new or tied it now recalls, and 4 of its recalls now clear the null. A more careful reading can also
+  UN-settle (3 ends): the re-read page or beam changed what the source said of a being, and the reader says so, rather than keeping a settled thing settled.
+- The discrepancy finder did not move: the figure contradictions it finds were readable in the first reading; re-entry's remedies (page, beam) add referent and parse facts, not figures.
+- The record is the product: what was read, what was read again and why, what each pass added and retracted, and what the reader concluded at each cursor, in one append-only file. The weft
+  (the-fold/weft.js) is where it belongs; it is a jsonl beside the eval here.

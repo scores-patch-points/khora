@@ -22,14 +22,25 @@ export const READER_IDENTITY_SCHEMA = "ReaderIdentity@1";
 export function createReader({ alpha = 1 } = {}) { return { schema: READER_IDENTITY_SCHEMA, alpha, admissions: [], addresses: new Set() }; }
 
 /** admit(reader, address, arrangements) → the reader after meeting the thing at `address` saying `arrangements` ([{ rel, value }]); appended, never rewritten */
-export function admit(reader, address, arrangements = []) {
-  const next = { ...reader, admissions: [...reader.admissions, ...arrangements.map((a, i) => ({ address, rel: a.rel, value: String(a.value), at: reader.admissions.length + i }))], addresses: new Set([...reader.addresses, address]) };
+export function admit(reader, address, arrangements = [], meta = {}) {
+  const next = { ...reader, admissions: [...reader.admissions, ...arrangements.map((a, i) => ({ address, rel: a.rel, value: String(a.value), at: reader.admissions.length + i, kind: "admit", ...meta }))], addresses: new Set([...reader.addresses, address]) };
   return next;
+}
+/** retract(reader, address, arrangements, meta) → the reader with RETRACTION events appended (the log is never rewritten; the projection drops what a later retraction names) */
+export function retract(reader, address, arrangements = [], meta = {}) {
+  return { ...reader, admissions: [...reader.admissions, ...arrangements.map((a, i) => ({ address, rel: a.rel, value: String(a.value), at: reader.admissions.length + i, kind: "retract", ...meta }))] };
+}
+/** stateAt(reader, cursor) → the reader as it stood after the admission at `cursor` (the fold at a cursor: admissions with at <= cursor, each dropped by a retraction up to that cursor) */
+export function stateAt(reader, cursor = Infinity) {
+  const upTo = reader.admissions.filter((a) => a.at <= cursor), live = [];
+  const retracted = new Map(); for (const a of upTo) if (a.kind === "retract") { const k = `${a.address}\u0000${a.rel}\u0000${a.value}`; retracted.set(k, (retracted.get(k) ?? 0) + 1); }
+  for (const a of upTo) { if (a.kind === "retract") continue; const k = `${a.address}\u0000${a.rel}\u0000${a.value}`; const n = retracted.get(k) ?? 0; if (n > 0) { retracted.set(k, n - 1); continue; } live.push(a); }
+  return { ...reader, admissions: live, addresses: new Set(live.map((a) => a.address)), cursor };
 }
 // the holograph of a reader: one slot per (address, relation), counts over values, built from the log (the fold is the log's projection)
 function holographOf(reader, admissions = reader.admissions) {
   const h = createHolograph({ alpha: reader.alpha });
-  for (const a of admissions) { const slot = `${a.address}\u0000${a.rel}`; const m = h.slots.get(slot) ?? h.slots.set(slot, new Map()).get(slot); m.set(a.value, (m.get(a.value) ?? 0) + 1); }
+  for (const a of admissions) { if (a.kind === "retract") continue; const slot = `${a.address}\u0000${a.rel}`; const m = h.slots.get(slot) ?? h.slots.set(slot, new Map()).get(slot); m.set(a.value, (m.get(a.value) ?? 0) + 1); }
   h.admitted = admissions.length; return h;
 }
 const bitsAt = (h, address, arrangements) => arrangements.reduce((s, a) => s + predict(h, `${address}\u0000${a.rel}`, String(a.value)).bits, 0);
@@ -69,9 +80,10 @@ export function meet(reader, arrangements = [], { oneValued = () => false, rewir
   // the null: the saving (bitsNew - noise) against R states with the values shuffled among addresses within each relation
   let s = seed >>> 0; const rnd = () => ((s = (s * 1103515245 + 12345) % 2147483648) / 2147483648);
   const savings = []; for (let k = 0; k < rewirings; k++) {
-    const byRel = new Map(); for (const a of reader.admissions) (byRel.get(a.rel) ?? byRel.set(a.rel, []).get(a.rel)).push(a.value);
+    const liveAdm = reader.admissions.filter((a) => a.kind !== "retract");
+    const byRel = new Map(); for (const a of liveAdm) (byRel.get(a.rel) ?? byRel.set(a.rel, []).get(a.rel)).push(a.value);
     for (const vals of byRel.values()) for (let i = vals.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [vals[i], vals[j]] = [vals[j], vals[i]]; }
-    const idx = new Map(); const shuffled = reader.admissions.map((a) => { const i = idx.get(a.rel) ?? 0; idx.set(a.rel, i + 1); return { ...a, value: byRel.get(a.rel)[i] }; });
+    const idx = new Map(); const shuffled = liveAdm.map((a) => { const i = idx.get(a.rel) ?? 0; idx.set(a.rel, i + 1); return { ...a, value: byRel.get(a.rel)[i] }; });
     const hk = holographOf(reader, shuffled); const best = Math.min(...addrs.map((address) => bitsAt(hk, address, arr))); savings.push(bitsAt(hk, "\u0000new", arr) - best);
   }
   savings.sort((x, y) => x - y); const n = Math.max(2, addrs.length), ceiling = +savings[Math.min(rewirings - 1, Math.floor(rewirings * (1 - 1 / n)))].toFixed(6);
