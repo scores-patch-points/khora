@@ -812,3 +812,15 @@ NOUN, VERB, ADJ: the slim Wiktionary's listed synonyms, then shared keys, vetoed
 class of a relation is itself and the relations declared equivalent to it, with no transitive closure (the hub predicates the spec names can
 therefore not chain). Read at read time: a claim arrangement over relation r is the disjunction (HL's ∨) of its atom over r and over each
 relation of r's class; the stage is not rewritten, and the layered views and the gap rule apply as before. M5 mode: m5 = m4 plus these licenses.
+M5 RESULT (code 2b115644; the gate's first run, the nine spent sets; m5 = m4 + R7):
+ Equivalences were declared in 14 of 393 pairs (from Wiktionary synonymy: buy ~ purchase, obtain ~ receive, connect ~ link, chief ~ main, attract ~ draw,
+    get ~ reach, develop ~ make, and thesaurus-grade misses: great ~ mean, have ~ receive, cause ~ have, lose ~ reduce). m5 and m4 read every pair
+    to the same HL verdict (0 of 393 differ): E 22 of 194, false accepts 1 of 199, C 3 of 129, accuracy 56.0%, both.
+ M5 GATE FAIL: E accepted does not rise over M4 (22 → 22). By the registered rule R7 is left out and the build stops at M5. Nothing is adjusted
+    and nothing is redrawn in this frame. The arm that goes to run 23 is M4 (mode m4). declareEquivalent and the read-time expansion stay in the
+    code, off, so the result can be reproduced (mode m5).
+ Why, from the per-conjunct reads (a reading, not a re-judgement): in each of the 14 pairs another conjunct of the claim is unbound, unread or
+    beyond reach, so the synonymous relation meets but the conjunction does not become bound. The E pairs a synonym would free (relations
+    510, 522, fresh-ml 615, 630, 662, fresh19 731, fresh20 805, 808) are held by other ends and words.
+ Control (m5-deranged): E 1, C 0, as m4's. V5 over the 23 accepted pairs: 273 swaps, 0 bound. Ablation (99 removals): no verdict moved.
+ RC5: 11 of the 393 pairs carry a reported arrangement (2 on the claim side, 10 on the source side).
