@@ -488,12 +488,13 @@ export function applyVerdictGate({ ask, answer, ground = [], kind = null, link =
   // the mechanical replacement — assembled from the KIND and the LINK (or,
   // for a record ground with no kind, from the ask's own frame) through the
   // LENS's own templates, never from the draft's words
-  let replacement;
+  let replacement, usedFrame = null;
   if (verdict === "contradicted") {
     if (holderAsk && kind && link) {
       replacement = L.holderValue(groundDate, link.holder, kindFrame ?? kind.label);
     } else {
       const frame = kindFrame ?? frameFromAsk(ask, L);
+      usedFrame = groundValue ? frame : null;
       replacement = groundValue
         ? L.value(groundDate, frame, groundValue)
         : L.unsourced(date);
@@ -508,5 +509,6 @@ export function applyVerdictGate({ ask, answer, ground = [], kind = null, link =
       if (i === flagged[0].i) out.push(replacement);
     } else out.push(sentences[i]);
   }
-  return { text: out.join("\n\n"), gated: true, verdict, count: flagged.length, replacement, kind, link, groundDate, groundValue };
+  // `frame` and `lang` let a caller say the same fact through the language's codec (organs/encode.js, the Isthmus encode leg)
+  return { text: out.join("\n\n"), gated: true, verdict, count: flagged.length, replacement, kind, link, groundDate, groundValue, frame: usedFrame, lang: L.lang ?? null };
 }
