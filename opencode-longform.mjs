@@ -100,38 +100,51 @@ export const sectionText = (file, id) => { const a = open(id), b = close(id); co
 
 // ── prompts: short, positive, one section ──────────────────────────────────────────────────────────────────────────────
 
-const lineBlock = (lines) => lines.map((l) => `- ${clean(l).slice(0, LIMITS.lineChars)}`).join("\n");
+// ADDRESSED SNIPS: each line the model writes from carries its source and address (`— <host> @<url>`), so the model writes from addressed snips
+// and the grader can face each sentence against a named page. `refs` is the job's line -> address map (addressLines below). What is still short of a
+// holograph: the gather's `quotes` are its top sentences per page (the lines it showed), cut by relevance, not at the point where one more line
+// stops changing what the page concludes (see the gather's `passages`, which keep each line's neighbours); the address is found by locating the
+// line in its page's passage. A line no passage contains (a research-record line) rides without an address.
+const lineBlock = (lines, refs = {}) => lines.map((l) => { const t = clean(l).slice(0, LIMITS.lineChars); const a = refs[clean(l)]; return `- ${t}${a ? ` — ${a}` : ""}`; }).join("\n");
+const hostOf = (name) => { try { return new URL(name).hostname.replace(/^www\./, ""); } catch { return ""; } };
+/** line -> `host @url`, from the passage (the page's own holograph) that contains the line; a line found in no page's passage gets no address. */
+export const addressLines = (lines, passages = []) => {
+  const pages = (passages ?? []).filter((p) => /^https?:/.test(String(p?.name ?? "")) && typeof p?.text === "string").map((p) => ({ url: p.name, host: hostOf(p.name), text: clean(p.text) }));
+  const refs = {};
+  for (const line of lines) { const t = clean(line); const key = t.replace(/[.!?]$/, ""); const hit = pages.find((p) => p.text.includes(key)); if (hit) refs[t] = `${hit.host || hit.url} @${hit.url}`; }
+  return refs;
+};
 const tail = (text) => clean(text).slice(-200);
 
 /** A section is as long as its lines allow: a model asked for 220 words from two lines pads them by repeating them. */
 export const wordsFor = (lines) => Math.max(40, Math.min(LIMITS.sectionWords, Math.round(lines.reduce((n, l) => n + clean(l).split(" ").length, 0) * 1.2)));
 
-export const sectionPrompt = ({ topic, section, lines, before = null, words: w = wordsFor(lines), freeform = false }) =>
+export const sectionPrompt = ({ topic, section, lines, before = null, words: w = wordsFor(lines), freeform = false, refs = {} }) =>
   [
     `Write the section "${section.title}" of a piece on ${topic}, about ${w} words, as plain paragraphs with no heading.`,
     freeform
-      ? (lines.length ? `Here are facts you may draw on, each quoted from a page:\n${lineBlock(lines)}` : `No page gave a fact for this section; write one short paragraph, in new words of its own, that connects the sections around it from what they say.`)
-      : (lines.length ? `Write from these lines, each quoted from a page:\n${lineBlock(lines)}` : `No page gave a line for this section; write one short paragraph, in new words of its own, that connects the sections around it from what they say.`),
+      ? (lines.length ? `Here are facts you may draw on, each quoted from a page (its source and address follow the dash):\n${lineBlock(lines, refs)}` : `No page gave a fact for this section; write one short paragraph, in new words of its own, that connects the sections around it from what they say.`)
+      : (lines.length ? `Write from these lines, each quoted from a page (its source and address follow the dash):\n${lineBlock(lines, refs)}` : `No page gave a line for this section; write one short paragraph, in new words of its own, that connects the sections around it from what they say.`),
     before ? `The section before it ends: "${tail(before)}"` : "",
     freeform
       ? `Write freely in your own words, in your own structure and voice, but write ONLY from the facts above: explain and connect them, and add nothing they do not support.`
       : `The section says what the lines say, once each.`,
   ].filter(Boolean).join("\n\n").slice(0, LIMITS.promptChars);
 
-export const repairPrompt = ({ topic, section, lines, failed, round }) =>
+export const repairPrompt = ({ topic, section, lines, failed, round, refs = {} }) =>
   [
     `Write the section "${section.title}" of a piece on ${topic} again (attempt ${round + 1}), about ${wordsFor(lines)} words, as plain paragraphs with no heading.`,
-    `Write from these lines, each quoted from a page:\n${lineBlock(lines)}`,
+    `Write from these lines, each quoted from a page (its source and address follow the dash):\n${lineBlock(lines, refs)}`,
     failed.length ? `The previous attempt said these things, and the lines do not state them:\n${failed.slice(0, 5).map((f) => `- ${clean(f).slice(0, 160)}`).join("\n")}` : "",
     `The new section keeps to what the lines state, close to their own words.`,
   ].filter(Boolean).join("\n\n").slice(0, LIMITS.promptChars);
 
-export const revisePrompt = ({ topic, section, lines, current, instruction, freeform = false }) =>
+export const revisePrompt = ({ topic, section, lines, current, instruction, freeform = false, refs = {} }) =>
   [
     `Revise the section "${section.title}" of a piece on ${topic}.`,
     `The section now reads:\n${clean(current).slice(0, 1800)}`,
     `The change asked for: ${clean(instruction).slice(0, 300)}`,
-    lines.length ? `Write from these lines, each quoted from a page:\n${lineBlock(lines)}` : "",
+    lines.length ? `Write from these lines, each quoted from a page (its source and address follow the dash):\n${lineBlock(lines, refs)}` : "",
     freeform
       ? `Return the whole revised section as plain paragraphs with no heading; write freely in your own words, drawing on the facts above.`
       : `Return the whole revised section as plain paragraphs with no heading; what the lines do not state is left out.`,
@@ -151,7 +164,9 @@ export const PLACEHOLDERS = Object.freeze(["(The model wrote nothing for this se
 export const outlineStates = (job) => job.outline.map((s, i) => {
   const text = job.texts?.[s.id];
   const state = typeof text === "string" ? (PLACEHOLDERS.includes(text.trim()) ? "cut" : "written") : i === job.idx ? "writing" : "planned";
-  return { id: s.id, title: s.title, facts: (job.material?.[s.id] ?? []).length, state };
+  const st = job.standing?.[s.id];
+  const preview = typeof text === "string" && state === "written" ? text.replace(/\s+/g, " ").slice(0, 220) : null;
+  return { id: s.id, title: s.title, facts: (job.material?.[s.id] ?? []).length, state, ...(st ? { sentences: st.sentences, supported: st.supported, cut: st.cut, rounds: st.rounds, ...(st.freeform ? { freeform: true } : {}) } : {}), ...(preview ? { preview } : {}), ...(i === job.idx && job.round ? { round: job.round } : {}) };
 });
 
 /** longformStart: the outline, the material per section, the file, and the first prompt. `gathered` is the door's gather result ({ passages, text, quotes }). */
@@ -165,14 +180,15 @@ export function longformStart({ ask, topic, gathered, outline: nominated = null,
   const facets = (gathered?.voids ?? []).map((v) => v.label).filter(Boolean);
   const outline = validateOutline(nominated) ?? defaultOutline(topic, facets.length ? facets : (gathered?.parts ?? []));
   const material = assignMaterial(outline, lines);
+  const refs = addressLines(lines, gathered?.passages ?? []);
   const id = `longform-${slug(topic)}-${sha(`${ask}|${now}`).slice(0, 8)}`;
   const dir = root ?? taskDir(id);
   if (!dir) return { gap: { kind: "bad-address", reason: "no work tree for this longform" } };
   fs.mkdirSync(dir, { recursive: true });
   const file = path.join(dir, "longform.md");
-  const job = { id, ask, topic, outline, material: Object.fromEntries(outline.map((s) => [s.id, material.get(s.id)])), passages: gathered?.passages ?? [], file, idx: 0, round: 0, texts: {}, standing: {}, calls: 0, cut: [], gaps: [], freeform, startedAt: now };
+  const job = { id, ask, topic, outline, material: Object.fromEntries(outline.map((s) => [s.id, material.get(s.id)])), passages: gathered?.passages ?? [], refs, file, idx: 0, round: 0, texts: {}, standing: {}, calls: 0, cut: [], gaps: [], freeform, startedAt: now };
   fs.writeFileSync(file, fileOf(`${topic}`, outline));
-  return { job, prompt: sectionPrompt({ topic, section: outline[0], lines: job.material[outline[0].id], freeform }), section: outline[0].id, title: outline[0].title, facts: job.material[outline[0].id], outline: outlineStates(job) };
+  return { job, prompt: sectionPrompt({ topic, section: outline[0], lines: job.material[outline[0].id], freeform, refs }), section: outline[0].id, title: outline[0].title, facts: job.material[outline[0].id], outline: outlineStates(job) };
 }
 
 const record = (job, detail, now) => { try { EOT.append({ task: job.id, agent: "longform", stage: "reason", source: { kind: "tool", locator: `longform:${detail.section}:${detail.round}`, meta: { sha256: sha(JSON.stringify(detail)), exit: detail.accepted ? 0 : 1, judge: "ground" } }, unit: `${detail.section}:${detail.round}`, detail: { kind: "longform-section", ...detail }, now }); } catch { /* the log never blocks a draft */ } };
@@ -200,7 +216,7 @@ export async function longformStep(job, modelText, { ground, now = Date.now(), f
   if (!accepted && job.round < LIMITS.maxRec) {
     // REC: the frame changes (the failed claims are named, the material is restated); a redraw in the same frame is not repair
     job.round++;
-    return { next: { prompt: repairPrompt({ topic: job.topic, section, lines, failed, round: job.round }), section: section.id, round: job.round, title: section.title, facts: lines }, outline: outlineStates(job) };
+    return { next: { prompt: repairPrompt({ topic: job.topic, section, lines, failed, round: job.round, refs: job.refs ?? {} }), section: section.id, round: job.round, title: section.title, facts: lines }, graded: { section: section.id, title: section.title, round: job.round - 1, sentences: sents.length, supported: supportedSents.length, accepted: false, failed: failed.slice(0, 6) }, outline: outlineStates(job) };
   }
   // accepted, or out of rounds: what failed is cut, never kept
   const kept = accepted ? supportedSents.join(" ") : "";
@@ -211,12 +227,13 @@ export async function longformStep(job, modelText, { ground, now = Date.now(), f
   if (!applied.ok) { job.gaps.push({ section: section.id, kind: applied.gap.kind, reason: applied.gap.reason }); } else fs.writeFileSync(job.file, applied.file);
   job.texts[section.id] = body;
   job.standing[section.id] = { sentences: sents.length, supported: supportedSents.length, rounds: job.round + 1, cut: failed.length, ...(freeform ? { freeform: true } : {}) };
+  const graded = { section: section.id, title: section.title, round: job.round, sentences: sents.length, supported: supportedSents.length, accepted, failed: failed.slice(0, 6), ...(freeform ? { freeform: true } : {}) };
   job.round = 0;
-  if (job.revising) { job.revising = false; job.idx = job.outline.length; return { done: finish(job), outline: outlineStates(job) }; } // a revision touches one section and stops
+  if (job.revising) { job.revising = false; job.idx = job.outline.length; return { done: finish(job), graded, outline: outlineStates(job) }; } // a revision touches one section and stops
   job.idx++;
   const nextSection = job.outline[job.idx];
-  if (!nextSection) return { done: finish(job), outline: outlineStates(job) };
-  return { next: { prompt: sectionPrompt({ topic: job.topic, section: nextSection, lines: job.material[nextSection.id], before: body, freeform }), section: nextSection.id, round: 0, title: nextSection.title, facts: job.material[nextSection.id] }, outline: outlineStates(job) };
+  if (!nextSection) return { done: finish(job), graded, outline: outlineStates(job) };
+  return { next: { prompt: sectionPrompt({ topic: job.topic, section: nextSection, lines: job.material[nextSection.id], before: body, freeform, refs: job.refs ?? {} }), section: nextSection.id, round: 0, title: nextSection.title, facts: job.material[nextSection.id] }, graded, outline: outlineStates(job) };
 }
 
 const finish = (job) => {
@@ -232,5 +249,5 @@ export function longformRevise(job, sectionId, instruction) {
   const file = fs.readFileSync(job.file, "utf8");
   job.idx = i; job.round = 0;
   job.revising = true;
-  return { next: { prompt: revisePrompt({ topic: job.topic, section: job.outline[i], lines: job.material[sectionId], current: sectionText(file, sectionId) ?? "", instruction, freeform: job.freeform ?? freeformOn() }), section: sectionId, round: 0, title: job.outline[i].title, facts: job.material[sectionId] }, outline: outlineStates(job) };
+  return { next: { prompt: revisePrompt({ topic: job.topic, section: job.outline[i], lines: job.material[sectionId], current: sectionText(file, sectionId) ?? "", instruction, freeform: job.freeform ?? freeformOn(), refs: job.refs ?? {} }), section: sectionId, round: 0, title: job.outline[i].title, facts: job.material[sectionId] }, outline: outlineStates(job) };
 }
