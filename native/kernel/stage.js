@@ -130,6 +130,11 @@ function bindEnd(stage, end, kind, identity = null) {
   const candidates = []; for (let d = 1; d < near.length; d *= 2) candidates.push(d); candidates.push(near.length);
   const w = dmdWindow(near, derive, { candidates, restrict: (o, d) => o.slice(0, d) });
   if (w.gap) return { gap: w.gap };
+  // several anchors nominated by name: an injected identity that can CHOOSE (cancellation, the-fold/cancel-identity.js) picks the one the end cancels with; else the end stays unbound
+  if (whole.length > 1 && identity?.choose) {
+    const pick = identity.choose(end, whole.map((x) => stage._anchors.get(x.id).arg)); const hit = pick ? whole.find((x) => stage._anchors.get(x.id).arg === pick) : null;
+    if (hit) { const st = standOf(stage._anchors.get(hit.id)); return { id: hit.id, how: `${hit.how} [name nominated ${whole.length}; identity by cancellation chose it: ${st?.reason ?? ""}]`, identity: st ? { end: argText(end), ...st } : null, chosenAmong: whole.map((x) => x.id) }; }
+  }
   if (whole.length > 1) return { gap: "ambiguous_binding", among: whole.map((x) => x.id) };
   const st = standOf(stage._anchors.get(whole[0].id)), said = !st ? "" : st.kind === "same" ? "; holographic identity: the same being"
     : st.kind === "raised_difference" ? "; holographic identity: a difference of use is raised, nothing is convicted"

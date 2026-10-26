@@ -1275,3 +1275,32 @@ fast: 6 files · 3 affected test files · law: ok (pre-existing dup-header WARN 
 | Simon/Chekhov | identity-run.mjs, resolve-run.mjs | evals no test imports | noted | CLI evals by design (like stage-run.mjs); their result is in WEFT-IDENTITY.md and the page module they stand on (`atomsOfPage`) is tested |
 
 clean: Alexander (not routed). The machine was at load average 80+ (other sessions' stage jobs), which made the grammar-loading tests take 4 minutes; all passed.
+
+## 2026-10-26 — identity as cancellation within a plateau [noise, DMD): kernel/identity-cancel.js and its measurement (branch `pipeline-atoms`)
+
+fast: 4 files · 9 tests pass (each refusal a constructed violation first) · law: ok (pre-existing dup-header WARN S17/S96) · production code changed: none (a new pure kernel module, wired into nothing)
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | identity-cancel-run.mjs, the fold-depth rule | the one-shot alternative | disclosed | the rule (shallowest radius with the fewest tied at the best residual) was written before it was run and run ONCE for its result; the script was then re-run to add diagnostics (the wrong-on-supported listing), deterministic, same numbers. It gave no clear gain at n = 28 and is NOT adopted. No constant exists in identity-cancel.js: the margin is read off the candidates' own residual levels |
+| Dijkstra | identity-cancel-run.mjs:16 `tok` | a lowercased last token standing in for a name | disclosed | same rule as atom-world.js keyOf, English pages only; WEFT-IDENTITY.md says some scored ends ("water", "river") are not beings the page names, so the gold is weak there |
+| Holmes | WEFT-IDENTITY.md experiment 4 | one entity or two | noted | the page's repeated names fragment into several referents (the `todo` in weft-atoms.test.mjs); a mention's gold is scored only when exactly one referent shares its name token |
+| Simon/Chekhov | identity-cancel.js | wired into nothing | noted, real | tested and measured, but the stage binder still uses name + DMD shells and the optional `identity` hook is still atomIdentity; wiring is the next step and needs the canonical atoms (see the doc) |
+
+clean: Alexander (not routed).
+
+## 2026-10-26 — all the way, steps 1-4: canonical features, the stage chooser, the second medium (code), the rewiring null as standing (branch `pipeline-atoms`)
+
+fast: 12 files · affected tests: native 65 pass + 1 pre-existing fail (janus second maker, in main's known set); root suite opencode-gather-reason 5 pass 5 fail — **pre-existing on main, verified by stash: identical without this diff** · law: WARN "S0" is the variable `S0` in the grammar-en.js lines edited, not a citation (false positive) · 92 tests of the touched organs pass (2 known todo) · stage 108: rules arm E 19 -> 20 (the membership fix), stage arm unchanged, 0 false-C
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Diaconis | identity-cancel.js standingOf | the null | fixed twice | the first null pooled carried SHARES (ceiling 1.00 everywhere: a one-feature mention is fully carried by some world every time); the second relabelled candidates (keeps every true set in the pool: ceiling 1.00 again); the one that binds REWIRES per feature kind (janus correspond's null), per mention, in counts, at the pool's chance floor. Each failure is recorded in WEFT-IDENTITY.md |
+| Feynman | arrangement-features.js `dir=` | withdrawn | fixed | built from the dative suffix, measured ("drawn TO Hood" read as a transfer out), withdrawn; direction is the position of the same canonical predicate |
+| Greenberg | grammar-en.js memberKind | "X is one of the Ys" | disclosed | an English shape (NUM cop + "of"); the same shape in grammar-ud (es "uno de los", fr "l'un des") is NOT done and is named in the code comment as the grammar's, not a word's |
+| Holmes | cancel-identity.js one-to-one | contest | fixed | two claim ends cancelling to one anchor ("Baleen whales", "toothed whales") contest it; neither is chosen |
+| Ostrom | WEFT-IDENTITY.md experiment 5 | scope | disclosed | code: 79 functions with no name in the older version (new or renamed) are not scored; text: 3 of 5 wrong calls are non-being ends (the gold's fault), said so |
+| Simon/Chekhov | cancel-identity.js | wired | real | wired into the stage binder behind the identity hook; `IDENTITY=cancel` in stage-run; not in any door |
+| Kondo | eval-side null versions | | noted | the eval-side rewiring code was replaced by the kernel's standingOf; nothing dead left in the tree |
+
+clean: Dijkstra (lowercase last-token key, same as before, disclosed), Lévi-Strauss (nothing in the stash bears on it), Marshall (no law edited).

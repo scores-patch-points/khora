@@ -189,7 +189,10 @@ function propositionsOf(text, rows = rowsOf(text)) {
     if (/^acl/.test(v.deprel) && !/relcl/.test(v.deprel)) return byId(v.head);
     return null;
   };
-  const isMain = (r) => /^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(r.upos);
+  // MEMBERSHIP, a closed shape: "X is one of the Ys" has a NUM as the copula's head and the kind as its "of" dependent (UD: cop + nmod with case "of"). The claim it states is
+  // be(X, Ys), the same claim as "X is a Y"; without this the numeral head yields no claim at all and a stray count. The shape is the grammar's, not a word's.
+  const memberKind = (r) => (r.upos === "NUM" && kids(rows, r.id).some((k) => k.deprel === "cop") ? kids(rows, r.id).find((k) => k.deprel === "nmod" && /^(NOUN|PROPN)$/.test(k.upos) && kids(rows, k.id).some((c) => c.deprel === "case" && /^of$/i.test(c.form))) ?? null : null);
+  const isMain = (r) => /^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(r.upos) || !!memberKind(r);
   for (const v of rows) {
     if (!isMain(v)) continue;
     const ks = kids(rows, v.id);
@@ -213,7 +216,7 @@ function propositionsOf(text, rows = rowsOf(text)) {
     const asserted = !reportedUnder(v) && ![...auxes, ...inherited].some((k) => /^(may|might|could|would)$/i.test(k.form));
     // a DISCOURSE connective ("In addition, …", "For example, …") frames the sentence and says nothing of its event (declared English closed class)
     const discourse = (k) => /^(in addition|in particular|for example|for instance|in fact|in turn|in short|in contrast|on the other hand|as a result|in summary|in conclusion)$/i.test(spanOf(rows, k.id).map((w) => w.form).join(" "));
-    const obls = ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && k !== agent && !discourse(k)).map((k) => ({ ...endOf(rows, k.id, text), than: kids(rows, k.id).some((c) => /^than$/i.test(c.form)), with: kids(rows, k.id).some((c) => /^with$/i.test(c.form)) }));
+    const obls = ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && k !== agent && k !== memberKind(v) && !discourse(k)).map((k) => ({ ...endOf(rows, k.id, text), than: kids(rows, k.id).some((c) => /^than$/i.test(c.form)), with: kids(rows, k.id).some((c) => /^with$/i.test(c.form)) }));
     for (const k of ks) if (/^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && discourse(k)) for (const w of spanOf(rows, k.id)) framed.add(w.id);
     const base = { vid: v.id, polarity: neg ? "-" : "+", tense, asserted, OBL: obls.filter((o) => !o.with), main: v.head === 0 || (v.deprel === "conj" && byId(v.head)?.head === 0) };
     const conjRoot = subj && subj.deprel === "conj" ? byId(subj.head) : subj;
@@ -224,7 +227,7 @@ function propositionsOf(text, rows = rowsOf(text)) {
       if (cop && S0) {
         const than = obls.find((o) => o.than);
         if (v.upos === "ADJ" && than) out.push({ ...base, rel: comparativeBase(v.form), ARG0: endOf(rows, S0.id, text), ARG1: than, asym: true });
-        else out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, v.id, text) });
+        else { const mk = memberKind(v); out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, (mk ?? v).id, text), ...(mk ? { member: true } : {}) }); }
       } else if (/^(VERB|AUX|ADJ)$/.test(v.upos) && (S0 || obj)) {
         // a NAMING verb says the two are one ("X is called Y", "X, also known as Y", "X is named Y"): its subject (or, as a participle, the
         // noun it modifies) and each name it gives, as "be" claims (declared English closed class: call, name, dub, term, nickname; know
@@ -363,6 +366,8 @@ export const FIGURE_LEX = {
 };
 /** the figures of a sentence as EOT claims: rel "fig", ARG0 the being they describe, the binding on the claim */
 export function figureClaimsOf(text, rows = rowsOf(text)) {
-  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], ...figureSense(rows, text, f), asym: false,
+  // a numeral that is a copula's head with an "of" kind ("one of the states") is membership, not a count of anything (claimsOf reads it as be(X, kind))
+  const kids = (id) => rows.filter((r) => r.head === id), member = new Set(rows.filter((r) => r.upos === "NUM" && kids(r.id).some((k) => k.deprel === "cop") && kids(r.id).some((k) => k.deprel === "nmod" && kids(k.id).some((c) => c.deprel === "case" && /^of$/i.test(c.form)))).map((r) => r.id));
+  return bindFigures(rows, FIGURE_LEX).filter((f) => !(f.ids ?? []).some((id) => member.has(id))).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], ...figureSense(rows, text, f), asym: false,
     fig: { measure: f.measure, attribute: f.attribute, event: f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }));
 }
