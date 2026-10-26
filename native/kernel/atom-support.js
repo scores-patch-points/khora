@@ -98,7 +98,7 @@ export function meeters(C, S, { claimLang = "en", sourceLang = "en", same = null
   const standing = (c, s) => !s.hedged || !!c.hedged;
   return { wordMeet, refMeet, figMeet, predMeet, predWords, argsMeet, standing, canon };
 }
-export { low, words, stem, argText, DEG };
+export { low, words, stem, argText, DEG, NO };
 // swapFlags (PREREG run 22a): claim atoms (two or more arguments; not is_a, named, has_*) whose arguments the source holds under a different
 // predicate (role swap), or in the reverse order under a meeting predicate (direction swap). A different predicate over the same arguments is a
 // swap; no lexicon of antonyms or converses is consulted.
