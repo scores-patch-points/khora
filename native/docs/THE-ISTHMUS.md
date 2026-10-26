@@ -93,7 +93,7 @@ the-fold d10174e; foldcode `fold` b314d1e321.
 | penelope | no (own composed reader, `pos-eng`) | no | LLM | never calls THE reader, `eot-realize` or `nl-eot` |
 | foldcode | delegates to the door | — | English notices | English regex fallback (`physics.ts`) takes over exactly when the door returns a typed gap; `physics-mech.ts` as above |
 
-**The one sentence:** every piece of the Isthmus exists, and none is joined to a door. Decode is `rowsOfFor` and
+**The one sentence (2026-10-26, before the repairs below):** every piece of the Isthmus exists, and none is joined to a door. Decode is `rowsOfFor` and
 `nl-eot.read`, reasoning is Stage@1, and encode is `eot-realize` and `nl-eot.write`. Every serving path crosses
 somewhere else.
 
@@ -116,18 +116,35 @@ were UD deprel tags (`^(ccomp|csubj|xcomp)`) and Python builtins, which are a co
 witness says where to look; S89's licensed case (an English-scoped mechanism, declared) is judged from the context
 attached.
 
-## Order of repair (owed, not done)
+## Order of repair — what landed (2026-10-26) and what is owed
 
-1. **Join the decode to THE reader.** #66 put the rows on the entry. Have `/v1/read` and the lane pass `rows: true` and
-   read atoms from the weft (`atomsOfPage`), so the meaning layer and the mechanical lane decode through the material's codec.
-2. **Commit the codecs.** Push janus's 95 `ud-grammar-*` and the remaining parsers and tokenizers (they are untracked
-   on disk). Until they are pushed, `nl-eot.write` returns `grammar_absent` for every language on GitHub.
-3. **Make the mechanical lane read EOT.** Arithmetic, comparison and puzzles should read operators from EOT cells.
-   Until then they type a language gap for a non-English ask instead of passing silently.
-4. **Remove the English fallbacks that override a typed gap.** That means foldcode `Physics.classify` after a route
-   gap, `fact-gate.js:69`, and holodeck `foreign?.iso3 || 'eng'`. Fold `physics-mech.ts` into khora's `mechanical`
-   lane rather than ahead of it.
-5. **Join the encode.** Call `eot-realize` / `nl-eot.write` (or `telling-grammar.<lang>`) from the answer path.
+**Landed** (each measured; the numbers are in the PR and its RESULT files):
+- **Decode joined to THE reader.** #66 put the UD rows on the entry. #71 made any language's codec readable, from the
+  priors or this machine's codec cache, and a codec with no closed-class pack still decodes.
+- **Codecs committed or pointed at** (janus #25). 78 codecs are committed under their treebank's licence. 17 are pointed
+  at by repo, file and sha256, and vendored on the machine that uses them on first use (`codec_vendoring` meanwhile).
+- **The mechanical lane reads a notation.** #68: digits and operator symbols are their own codec, in any language's
+  sentence. An unsettled `mechanical` route is typed `no_codec`, and a failed engine load is disclosed. #73 earned the
+  frame bound (7). **Its falsifying control fired:** a word count cannot separate an ask from a statement. #72: code
+  outranks an unsettled computation.
+- **English fallbacks that overrode a typed gap, removed:** fact-gate (#69: the lens is the heard language, and no lens
+  is a gap), holodeck #28 (never declare English for a document), foldcode #17 and #18 (a symbol is not a question; the
+  door's route and lane read the ask first, and #74 carries the lane's mood on the route).
+- **The encode leg, in shadow** (#75). `organs/encode.js` says a fact through the target's codec, recorded beside the
+  fact-gate's lens template on every turn. It agrees with the hand lens on the copula in eng, spa, fra, ita and hin.
+  **It is wrong in rus, because the codec's own table tags *будет* `Tense=Pres`.**
+- **One reader at the surfaces.** the-fold #41: the meaning ledger is read by the vendored read-core. penelope #9: the
+  prose box on THE reader was **measured and not adopted**. It settles 16 units where the composed reader settles 1,
+  but only 1 of the 4 the universe gate admits answers its question.
+
+**Owed:**
+1. **The ask's mood and role, read through its codec.** It now blocks two adoptions: the notation gate (an ask vs a
+   statement) and penelope's box (which role the unit's question asks for). Pre-register it with #73's statements as its
+   negative set and GL-UD-16's units as its positives.
+2. **Per-language adoption of the encode leg**, pre-registered: agreement with the lens, plus a falsifying control per
+   language. Russian is excluded until its table's present tense is checked.
+3. **khora's language table** should file stems for the codecs it can now read (lij, auv…), so a declared language is not
+   read as `declared-unknown` with English priors.
 
 ## Falsifying controls
 
