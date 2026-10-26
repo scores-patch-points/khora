@@ -231,6 +231,73 @@ export function checkArithmetic(question, { math } = {}) {
   }
 }
 
+// ── THE NOTATION CODEC (the Isthmus, native/docs/THE-ISTHMUS.md, 2026-10-26) ──
+//
+// Everything above reads English: WORD_OPS, WRAPPER_RE ("what is"), the
+// preamble rule (a Latin-letter clause). So "¿Cuánto es 17 × 24?" fell to the
+// register lane and the MODEL did the sum: measured, while bare "17 × 24"
+// computed. Digits and operator symbols are a notation, not a language, and a
+// notation has its own codec. This decodes the one arithmetic span a text
+// carries, whatever language surrounds it, and hands it to the same engine.
+//
+// What it refuses (each is a typed gap or "not this codec's", never a guess):
+//   - a hyphen or slash with no space on both sides: a range (10-20) or a date
+//     (12/05), never a subtraction or a division;
+//   - two spans, or any digit outside the one span ("En 2020, 17 × 24"): which
+//     numbers the question is about is a reading this codec cannot do;
+//   - a comma between digits: decimal or thousands is the LANGUAGE's fact
+//     (es "1,5", en "1,500"); with no declared number codec it is a gap.
+// Operator words (por, fois, mal, 乘以) are not notation: they belong to each
+// language's codec, and none is filed for this lane yet — the router types
+// that gap (opencode-route.mjs), it does not guess a word's operator here.
+const NOTATION_TIGHT = "×·∙*÷+−^"; // unambiguous between numbers, spaced or not
+const toAsciiDigits = (s) =>
+  s.replace(/\p{Nd}/gu, (c) => {
+    const cp = c.codePointAt(0);
+    let z = cp;
+    while (z > 0 && /\p{Nd}/u.test(String.fromCodePoint(z - 1)) && cp - (z - 1) < 10) z--; // decimal digits run in blocks of ten
+    return String((cp - z) % 10);
+  });
+// DECLARED, NOT EARNED (II.11, disclosed): the most words a frame around the span may carry. Six is the longest frame in
+// the multilingual cases this was written against ("17 × 24 はいくつですか" segments to 4; "Wie viel ist" 3); eight leaves
+// room. A measured value is owed: the frame-length distribution of eval/route's multilingual arithmetic asks against
+// the same for asks that merely contain a span. Until then it is a named bound, never a tuned one.
+const NOTATION_FRAME_WORDS = 8;
+const FRAME_SEGMENTER = new Intl.Segmenter("und", { granularity: "word" });
+const NUM = String.raw`\d+(?:\.\d+)?`;
+const OP = String.raw`(?:\s*[${NOTATION_TIGHT}]\s*|\s+[-/]\s+)`;
+const SPAN_RE = new RegExp(String.raw`\(?\s*${NUM}\s*\)?(?:${OP}\(?\s*${NUM}\s*\)?)+`, "g");
+
+/** The single arithmetic span a text carries in notation, as an ASCII expression, or null (none, or more than one reading). */
+export function notationSpan(question) {
+  const s = toAsciiDigits(String(question ?? "").normalize("NFKC"));
+  const spans = [...s.matchAll(SPAN_RE)];
+  if (spans.length !== 1) return null;
+  const [m] = spans;
+  const outside = s.slice(0, m.index) + s.slice(m.index + m[0].length);
+  if (/\d/.test(outside)) return null; // a digit the span does not hold: not this codec's question
+  // THE FRAME: what surrounds the span must be a short ask about its value, in any language, never code or a longer
+  // claim the span sits inside ("why does `a = 3 * 4` fail", "I paid 3 + 4 dollars for the tickets yesterday").
+  if (/[=`{};<>_]/.test(outside)) return null;
+  const words = [...FRAME_SEGMENTER.segment(outside)].filter((w) => w.isWordLike).length;
+  if (words > NOTATION_FRAME_WORDS) return null;
+  if (/\d,\d/.test(s.slice(Math.max(0, m.index - 1), m.index + m[0].length + 1)) || /\d\s*,\s*$/.test(s.slice(0, m.index)) || /^,\d/.test(s.slice(m.index + m[0].length))) return { gap: "decimal_separator_undeclared" };
+  const expr = m[0].replace(/[×·∙]/g, "*").replace(/÷/g, "/").replace(/−/g, "-").replace(/\s+/g, " ").trim();
+  return { expression: expr };
+}
+
+/** checkNotation(question, { math }) → the checkArithmetic shape with `codec: "notation"`, a typed gap, or null. */
+export function checkNotation(question, { math } = {}) {
+  const raw = toAsciiDigits(String(question ?? "").normalize("NFKC"));
+  // a comma between digits makes the number itself undeclared; checked before the span, which would cut at the comma
+  if (/\d,\d/.test(raw) && new RegExp(`[${NOTATION_TIGHT}]|\\s[-/]\\s`).test(raw)) return { expression: null, gap: "decimal_separator_undeclared", codec: "notation" };
+  const span = notationSpan(question);
+  if (!span) return null;
+  if (span.gap) return { expression: null, gap: span.gap, codec: "notation" };
+  const f = checkArithmetic(span.expression, { math });
+  return f ? { ...f, codec: "notation" } : null;
+}
+
 /** The claimed numeric answer inside a model draft, read the way `cite.js`
  * reads a figure: the LAST bare number in the text, since a worked answer
  * often restates the operands before stating the result ("17 times 24 is
@@ -814,7 +881,8 @@ export function enforceComparison(text, comparison, { splitSentences } = {}) {
 }
 
 export function checkQuantity(question, { math, now } = {}) {
-  return checkArithmetic(question, { math }) ?? checkShaped(question, { math }) ?? checkCalendar(question) ?? checkClock(question, { now }) ?? checkComparison(question, { math });
+  // the notation codec runs LAST: every English reading keeps its own result, and only what none of them read reaches it
+  return checkArithmetic(question, { math }) ?? checkShaped(question, { math }) ?? checkCalendar(question) ?? checkClock(question, { now }) ?? checkComparison(question, { math }) ?? checkNotation(question, { math });
 }
 
 // ── A COMPUTED ANSWER RESISTS A FALSE CORRECTION (added 2026-09-15) ──────────
