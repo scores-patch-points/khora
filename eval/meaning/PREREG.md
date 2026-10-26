@@ -756,3 +756,18 @@ M2 RESULT (code 95ea7f1a; the gate's first run, the nine spent sets):
  Deranged control: E 1 of 194 (heldout 220); false accepts 2 (main 12, cf 105); C 0; false-C 1 (fresh 403).
  M2 GATE PASS: the deranged control hurts. E accepted falls 19 → 1, and C named 2 → 0 (not more).
  Folded-string anchors for comparison (unchanged from M1): E 22, false accepts 4, C 2.
+M3 RESULT (code 9662980a; first run, the nine spent sets; modes m3 = quantities bound by value + the reader's functional licenses):
+ Arm: accuracy 55.5%; E 23 of 194 (M2: 19); false accepts 4 of 199 (2.0%); C 3 of 129 (M2: 2); false-C 0 of 264.
+ Without the licenses (m3-unlicensed): every verdict identical (0 of 393 pairs differ). The licenses are declared in 71 pairs, and none of
+    them moved a verdict. The license ablation therefore finds no pair moving toward supported (law 1 holds, trivially).
+ Why contradictions stay few, from the per-conjunct reads: 108 of the 129 C pairs read beyond-reach as a whole, 16 unbound, 3 contradicted,
+    2 bound (false). HL's conjunction lets beyond-reach absorb, and a claim usually has an end that binds nothing. 3 C pairs carry a conjunct
+    HL reads contradicted but are called N by the whole (cf 109 carries one the whole does read C; fresh 407's has_radius is contradicted
+    inside a beyond-reach whole). 78 claim figures entered as distinct quantities; none of them reached R2 with its subject bound and
+    every other conjunct bound.
+ RC3 acceptance (the figures the rules arm meets still meet): 23 of the 26 has_* atoms the rules meet are met by a stage quantity binding
+    (the 19b bracketed-figure and unit cases among them). The 3 that are not are a German "ein/eine" counted as a figure whose measure is
+    the count of a different kind on each side (count:luftseilbahn against count:railway, fresh-ml 641 and fresh19 764, fresh20 858): the
+    rules' loose predicate meeting, not a figure meeting; 641 is one of the rules' false accepts.
+ RC6 acceptance: the rules arm's per-pair verdicts with the two rewrites in the reader are identical to before on all nine sets.
+ No M3 gate was pre-registered. The pre-registered V1, V3 and V4 are read on the final arm.
