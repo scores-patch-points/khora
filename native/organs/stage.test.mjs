@@ -213,3 +213,66 @@ test("RC6: the reader's canonical forms are kept beside the atoms they replace, 
   assert.deepEqual(conjunctsOf(st, new Map(st.anchors.map((a) => [a.id, a.id]))).map((k) => k.rel).sort(), ["is_a", "most:deep"]);
   assert.deepEqual(fromArrangements(st).map((a) => a.pred).sort(), ["be_in", "is_a"], "read back: the atoms as read");
 });
+
+// ---- M4: the hedge layer (RC5) and coverage as gaps (RC7) --------------------------------------------------------------------------------
+import { classGaps, unreadGaps } from "./stage-verdict.js";
+import { hlStageOf } from "./stage.js";
+const be_in = (o = {}) => ({ pred: "be_in", args: [BAIKAL, { value: "Siberia", ids: [8] }], neg: false, hedged: false, approx: false, start: 0, end: 37, head: 7, ...o });
+const withAtoms = (atoms, extra = {}) => ({ ...reading(), atoms, ...extra });
+const m4 = (claim, source, o = {}) => stageVerdict({ claim, source, bind: bindFolded, layered: true, gapRule: true, ...o });
+
+test("RC5: a reported edge cannot bind an asserted claim or contradict it; a hedged claim is supported by a reported or an asserted edge", () => {
+  const asserted = sourceOf(withAtoms([be_in()])), reportedPos = sourceOf(withAtoms([be_in({ hedged: true })])), reportedNeg = sourceOf(withAtoms([be_in({ hedged: true, neg: true })]));
+  const claim = stageOf(withAtoms([be_in()])), hedged = stageOf(withAtoms([be_in({ hedged: true })]));
+  assert.equal(m4(claim, asserted).verdict, "bound");
+  assert.equal(m4(claim, reportedPos).verdict, "unbound", "a reported edge does not bind an asserted claim");
+  assert.equal(m4(claim, reportedNeg).verdict, "unbound", "an asserted claim cannot contradict through a reported edge");
+  assert.equal(stageVerdict({ claim, source: reportedPos, bind: bindFolded }).verdict, "bound", "(the unlayered read, as M1–M3 recorded, bound it)");
+  assert.equal(m4(hedged, reportedPos).verdict, "bound", "a hedged claim is supported by a reported edge");
+  assert.equal(m4(hedged, asserted).verdict, "bound", "and by an asserted one");
+  const H = hlStageOf(asserted, { layered: true });
+  assert.ok([...H.edges.values()].some((e) => e.rel === "A:be_in") && [...H.edges.values()].some((e) => e.rel === "U:be_in"));
+});
+
+test("RC7: a claim arrangement over an unread word is beyond reach, not unbound; a gap outside every arrangement makes the whole beyond reach", () => {
+  const source = sourceOf(withAtoms([be_in()]));
+  const clean = stageOf(withAtoms([be_in()]));
+  assert.equal(m4(clean, source).verdict, "bound");
+  const unreadIn = stageOf(withAtoms([be_in()], { unread: ["Siberia"] }));
+  assert.deepEqual(unreadGaps(unreadIn).map((g) => g.text), ["Siberia"]);
+  const r = m4(unreadIn, source);
+  assert.equal(r.verdict, "beyond-reach"); assert.deepEqual(r.conjuncts.find((k) => k.rel === "be_in").gapped, ["Siberia"]);
+  // the same claim with no gap rule reads bound (it is the rule that withholds the verdict)
+  assert.equal(stageVerdict({ claim: unreadIn, source, bind: bindFolded }).verdict, "bound");
+  // a word the reading cut (a pronunciation in brackets) is recorded, and never blocks
+  const cut = stageOf(withAtoms([be_in()], { cuts: [{ start: 5, end: 12, text: "(ray-NEER)" }] }));
+  assert.equal(cut.gaps.filter((g) => g.why === "cut").length, 1); assert.equal(m4(cut, source).verdict, "bound");
+  // an unread word that no arrangement spans: the span of the word is outside the atom's
+  const outside = stageOf(withAtoms([{ ...be_in(), start: 0, end: 12 }], { unread: ["Siberia"] }));
+  const o = m4(outside, source); assert.equal(o.verdict, "beyond-reach"); assert.ok(o.conjuncts.some((k) => k.rel === "unread"));
+});
+
+test("RC7: an unread word is a reading failure when the source states it, a real unknown when it does not", () => {
+  const claim = stageOf(withAtoms([be_in()], { unread: ["Siberia"] }));
+  assert.deepEqual(classGaps(claim, "Lake Baikal lies in Siberia.").map((g) => g.class), ["reading_failure"]);
+  assert.deepEqual(classGaps(claim, "Lake Baikal is deep.").map((g) => g.class), ["unknown"]);
+});
+
+// ---- V5: constructed role and direction swaps, drawn from the source's own universe -----------------------------------------------------
+import { swapReads } from "./stage-verdict.js";
+test("V5: a swap is a claim the source does not state, and HL does not bind it", () => {
+  const two = withAtoms([be_in()], { entities: [{ id: "E1", name: "Lake Baikal" }, { id: "E3", name: "Angara" }], page: [{ rows: [], mentions: [{ text: "Angara", how: "name", entity: "E3" }] }, { rows: ROWS, mentions: [{ text: "Lake Baikal", ids: [1, 2], hid: 2, how: "name", entity: "E1" }] }] });
+  const source = sourceOf(two), claim = stageOf(withAtoms([be_in()]));
+  const rec = m4(claim, source); assert.equal(rec.verdict, "bound");
+  const sw = swapReads(rec, claim, source);
+  assert.ok(sw.length >= 2 && sw.some((x) => x.kind === "direction"), "the reversed claim is tried");
+  assert.ok(sw.every((x) => x.hl !== "bound"), "no swap reads bound");
+  // a swap of an end the source DOES state under another relation is not a swap of ours: it is left out of the tries
+  const stated = sourceOf(withAtoms([be_in(), { ...be_in(), pred: "touch", args: [{ entity: "E1", name: "Lake Baikal", ids: [1, 2] }, { value: "Siberia", ids: [8] }] }]));
+  assert.ok(swapReads(m4(claim, stated), claim, stated).every((x) => x.hl !== "bound"));
+});
+test("the verdict carries the trace V5 and the ablation read", () => {
+  const claim = stageOf(reading()), source = sourceOf(reading());
+  const rec = stageVerdict({ claim, source, bind: bindFolded });
+  assert.ok(rec.trace.conjuncts.length && typeof rec.trace.stage === "function" && rec.trace.binding.map instanceof Map);
+});

@@ -61,7 +61,9 @@ export function readStage(reading, { text, lang = "en", title = null, previous =
   const lemmasOfIds = (ids, rs = byRow) => (ids ?? []).map((i) => rs.get(i)).filter((r) => r && CONTENT.test(r.upos)).map(lemmaOf);
   const lemmasOfText = (t) => words(t).filter((w) => w.length > 1 || /\p{Script=Han}/u.test(w));
   const anchor = (id, kind, via, extra = {}) => { let a = anchors.get(id); if (!a) { a = { id, kind, names: new Set(), lemmas: new Set(), via, ...extra }; anchors.set(id, a); } return a; };
-  const spanOfIds = (ids) => { const ws = (ids ?? []).map((i) => byRow.get(i)).filter(Boolean); return ws.length ? byteSpan(text, Math.min(...ws.map((w) => w.start)), Math.max(...ws.map((w) => w.end))) : null; };
+  // the parse's offsets are into the reader's cleaned text; spanMap takes them back to the sentence as given
+  const M = reading.spanMap ?? null, orig = (i) => (M ? M[Math.min(i, M.length - 1)] : i);
+  const spanOfIds = (ids) => { const ws = (ids ?? []).map((i) => byRow.get(i)).filter(Boolean); return ws.length ? byteSpan(text, orig(Math.min(...ws.map((w) => w.start))), orig(Math.max(...ws.map((w) => w.end)))) : null; };
   // every naming of an entity on the page (title, earlier sentences, this one): its texts and the lemmas of their content words
   const namings = new Map();
   for (const s of reading.page ?? [{ rows, mentions: reading.mentions ?? [] }]) {
@@ -157,6 +159,10 @@ export function readStage(reading, { text, lang = "en", title = null, previous =
   // has_<attribute> is functional; its key is the time the text gives, and no time is read today, so the key is empty on both sides. A figure
   // named only by its measure (has_length for a height, a depth or a prominence alike) is not licensed.
   for (const r of arrangements) { const q = anchors.get(r.o); if (q?.kind === "quantity" && q.attribute && r.rel.lemma === `has_${q.attribute}` && !r.superseded) licenses.push({ kind: "functional", rels: [r.rel.lemma], giver: "a being has one value of an attribute at one time (the stage spec, §6); key: the time the text gives (none read)", standing: "given" }); }
+  // RC7, coverage as gaps: every word the reading left unread (read-atoms.js `unread`: a claim word no claim read, a content word no atom
+  // carries) is an unread_word gap over its own bytes; what the reader cut before reading (a pronunciation in brackets) is one too, marked cut
+  for (const w of reading.unread ?? []) { const r = rows.find((x) => x.form === w); gaps.push({ kind: "unread_word", span: r ? spanOfIds([r.id]) : null, text: w, why: "unread" }); }
+  for (const c of reading.cuts ?? []) gaps.push({ kind: "unread_word", span: byteSpan(text, c.start, c.end), text: c.text, why: "cut" });
   // every referent of the page's reading is an anchor of this stage, stated about here or not: the universe a claim end may be bound into
   for (const e of reading.entities ?? []) referent(e.id);
   return finish({ schema: STAGE_SCHEMA, reader, doc, anchors: [...anchors.values()].map((a) => ({ ...a, names: [...a.names], lemmas: [...a.lemmas] })), arrangements, licenses, gaps });
@@ -169,7 +175,7 @@ function finish(st) {
   const seen = new Set(), arrangements = [];
   for (const r of [...st.arrangements].sort((a, b) => cmp(a.id, b.id))) { if (seen.has(r.id)) continue; seen.add(r.id); arrangements.push(r); }
   const gk = (g) => JSON.stringify([g.kind, g.span, g.text ?? null]), gseen = new Set(), gaps = [];
-  for (const g of [...st.gaps].sort((a, b) => cmp(gk(a), gk(b)))) { if (gseen.has(gk(g))) continue; gseen.add(gk(g)); gaps.push({ kind: g.kind, span: g.span ?? null, text: g.text ?? null }); }
+  for (const g of [...st.gaps].sort((a, b) => cmp(gk(a), gk(b)))) { if (gseen.has(gk(g))) continue; gseen.add(gk(g)); gaps.push({ kind: g.kind, span: g.span ?? null, text: g.text ?? null, ...(g.why ? { why: g.why } : {}) }); }
   const lk = (l) => JSON.stringify([l.kind, l.rels, l.giver]), lseen = new Set(), licenses = [];
   for (const l of [...st.licenses].sort((a, b) => cmp(lk(a), lk(b)))) { if (lseen.has(lk(l))) continue; lseen.add(lk(l)); licenses.push({ kind: l.kind, rels: [...l.rels], giver: l.giver, standing: l.standing ?? "given" }); }
   return { schema: st.schema, reader: st.reader, doc: st.doc, anchors, arrangements, licenses, gaps };
@@ -191,14 +197,23 @@ export function fromArrangements(st) {
 }
 
 /** an HL stage over a Stage@1: every anchor, and every arrangement in the named layers as an edge whose provenance is the arrangement's id */
-export function hlStageOf(st, { layers = ["asserted", "reported"], licenses = st.licenses ?? [], extraAnchors = [] } = {}) {
+// layered (RC5): the stage is read in two views of one HL stage. An asserted edge is an edge of the asserted view (A:rel) and of the union
+// view (U:rel); a reported edge (hedged text) only of the union view. An asserted claim reads the asserted view, so a reported edge neither
+// binds nor contradicts it; a hedged claim reads the union view, supported by either. Licenses hold in both views.
+export const viewRel = (layer, rel) => `${layer === "reported" ? "U" : "A"}:${rel}`;
+export function hlStageOf(st, { layers = ["asserted", "reported"], licenses = st.licenses ?? [], extraAnchors = [], layered = false } = {}) {
   const H = createStage();
   for (const a of st.anchors) addAnchor(H, a.id, a.kind);
   for (const a of extraAnchors) addAnchor(H, a.id, a.kind);
-  for (const r of st.arrangements) if (layers.includes(r.layer)) addEdge(H, { rel: r.rel.lemma, s: r.s, o: r.o, key: r.key ?? null, polarity: r.polarity, source: r.id });
+  for (const r of st.arrangements) {
+    if (!layers.includes(r.layer)) continue;
+    const rels = layered ? (r.layer === "asserted" ? [`A:${r.rel.lemma}`, `U:${r.rel.lemma}`] : [`U:${r.rel.lemma}`]) : [r.rel.lemma];
+    for (const rel of rels) addEdge(H, { rel, s: r.s, o: r.o, key: r.key ?? null, polarity: r.polarity, source: r.id });
+  }
+  const views = (rel) => (layered ? [`A:${rel}`, `U:${rel}`] : [rel]);
   for (const l of licenses) {
-    if (l.kind === "functional") for (const rel of l.rels) declareFunctional(H, rel, { giver: l.giver });
-    else if (l.kind === "transitive") for (const rel of l.rels) declareTransitive(H, rel, { giver: l.giver });
+    if (l.kind === "functional") for (const rel of l.rels) for (const v of views(rel)) declareFunctional(H, v, { giver: l.giver });
+    else if (l.kind === "transitive") for (const rel of l.rels) for (const v of views(rel)) declareTransitive(H, v, { giver: l.giver });
   }
   return H;
 }

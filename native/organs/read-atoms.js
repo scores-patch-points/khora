@@ -2,7 +2,7 @@
 // entities by coref.js, or by the learned ranker → EOTClaim@1 claims → atoms.js, plus the learned producer's further atoms when given).
 // The meaning check reads a claim and its source this way and weighs atom against atom (atom-support.js).
 //   readAtoms({ text, lang, title, previous, grammar, pack, same, lookup, corefModel, producer, chooser, filter, keysOf })
-//     → { atoms, forms, entities, mentions, claims, rows, unread, page }
+//     → { atoms, forms, entities, mentions, claims, rows, unread, page, spanMap, cuts }
 //   grammar: { rowsOf(text), claimsOf(text, rows) } (grammar-en.js, or grammar-ud.js's loadGrammar)
 import { resolvePage } from "./coref.js";
 import { resolveWithModel } from "./coref-learned.js";
@@ -15,15 +15,16 @@ import { canonicalForms } from "./atom-forms.js";
 // are mapped back. A reading in kana （びわこ） stays: it names the referent.
 const PRON = /\((?:\s*|\s+[^()\d]{1,40}|[^()\d]*[ˈˌːəɪʊæɑɔʃʒθðŋɜɒʌʁɛøœɲçʎɥɐɨ][^()\d]*|\s*[A-Za-zəɪ]+(?:-[A-Za-zəɪ]+)*-[A-Z]{2,}[A-Za-z-]*\s*)\)/gu;
 export function cleanText(text) {
-  const map = []; let out = "", last = 0;
+  const map = [], cuts = []; let out = "", last = 0;
   for (const m of text.matchAll(PRON)) {
+    cuts.push({ start: m.index, end: m.index + m[0].length, text: m[0] });
     for (let i = last; i < m.index; i++) { map.push(i); out += text[i]; }
     last = m.index + m[0].length;
     if (out.endsWith(" ") && (text[last] === " " || /[,.;:)]/.test(text[last] ?? ""))) { out = out.slice(0, -1); map.pop(); } // no space left before a mark
   }
   for (let i = last; i < text.length; i++) { map.push(i); out += text[i]; }
   map.push(text.length);
-  return { text: out, map };
+  return { text: out, map, cuts };
 }
 export function readAtoms({ text, lang = "en", title = null, previous = [], grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
   const original = text, C = cleanText(text); text = C.text; previous = previous.map((p) => cleanText(p).text);
@@ -47,5 +48,6 @@ export function readAtoms({ text, lang = "en", title = null, previous = [], gram
   // the page as read (title, earlier sentences, this one): each sentence's rows and mentions, so a referent's every naming on the page is at hand
   const page = R0.sentences.map((s, i) => ({ text: s.text, rows: s.rows, mentions: pageMentions[i] ?? [] }));
   // the atoms in their canonical forms (atom-forms.js): what a claim says, as a check reads it; `atoms` stay as read
-  return { atoms: out, forms: canonicalForms(out), entities, mentions, claims, rows, unread, page };
+  // the reading's own offsets map back to the sentence as given (spanMap: cleaned offset → original), and what was cut is said (cuts)
+  return { atoms: out, forms: canonicalForms(out), entities, mentions, claims, rows, unread, page, spanMap: C.map, cuts: C.cuts };
 }

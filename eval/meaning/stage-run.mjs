@@ -13,7 +13,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url)), N = path.join(HERE, "
 const arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i < 0 ? d : process.argv[i + 1]; };
 const { readStage, stageHash, serializeStage } = await import(`${N}/organs/stage.js`);
 const BIND = await import(`${N}/organs/stage-bind.js`);
-const { stageVerdict } = await import(`${N}/organs/stage-verdict.js`);
+const { stageVerdict, swapReads } = await import(`${N}/organs/stage-verdict.js`);
 const { readAtoms } = await import(`${N}/organs/read-atoms.js`);
 const GE = await import(`${N}/adapters/text/grammar-en.js`), { loadGrammar } = await import(`${N}/adapters/text/grammar-ud.js`), { PACKS } = await import(`${N}/adapters/text/grammar-packs.js`);
 const { openSlim } = await import(`${N}/organs/wikt-slim.js`), { makeGlossary, makeSynonymy, loadTranslations } = await import(`${N}/organs/wikt-gloss.js`);
@@ -52,7 +52,7 @@ export function readSide(text, lang, ctx) {
 export function readPair(p) {
   const ctx = contextOf(p), cl = sideLang(p.lang ?? "en", "claim"), sl = sideLang(p.lang ?? "en", "source");
   const C = readSide(p.claim, cl, ctx ? { title: ctx.title, previous: [] } : null), S = readSide(p.sentence, sl, ctx);
-  return { claimLang: cl, sourceLang: sl, claim: C.stage, source: S.stage, claimReading: C.reading, sourceReading: S.reading };
+  return { pair: p, claimLang: cl, sourceLang: sl, claim: C.stage, source: S.stage, claimReading: C.reading, sourceReading: S.reading };
 }
 
 // ---- modes: a binding (and, from M3, licenses) per name ------------------------------------------------------------------------------------
@@ -71,6 +71,13 @@ export const MODES = {
   m3: { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R) },
   "m3-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "m3", resolveBind(R, { quantities: true }))(c, s), s), licenses: (R) => licensesOf(R) },
   "m3-unlicensed": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: () => [] },
+  // M4: the hedge layer (RC5) and coverage as gaps (RC7) on top of M3
+  m4: { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layered: true, gapRule: true } },
+  "m4-deranged": { bind: (R) => (c, s) => BIND.derange(cached(R, "m3", resolveBind(R, { quantities: true }))(c, s), s), licenses: (R) => licensesOf(R), opts: { layered: true, gapRule: true } },
+  "m4-unlicensed": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: () => [], opts: { layered: true, gapRule: true } },
+  // RC5's check: the same stage read on the asserted layer only (no layering)
+  "m4-asserted-only": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layers: ["asserted"], gapRule: true } },
+  "m4-nogaps": { bind: (R) => cached(R, "m3", resolveBind(R, { quantities: true })), licenses: (R) => licensesOf(R), opts: { layered: true } },
 };
 
 // ---- scoring: accuracy E against not-E, false accepts, E accepted, C named, false-C, per set and pooled, and per language ---------------------
@@ -96,6 +103,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   const stagesOut = arg("stages", null), pairsOut = arg("pairs", null), out = arg("out", null);
   if (stagesOut) fs.writeFileSync(stagesOut, ""); if (pairsOut) fs.writeFileSync(pairsOut, "");
   const rows = Object.fromEntries(modes.map((m) => [m, []]));
+  const V5MODE = arg("v5", null), ABLATE = arg("ablate", null), V5 = { pairs: 0, tried: {}, bound: [] }, ABL = { pairs: 0, runs: 0, moved: 0, unknown: 0, AWAY: 0, bugs: [] };
   if (modes.some((m) => /^resolve/.test(m)) && !JANUS) throw new Error(`janus's identity organs are not at ${JD} (set MEANING_JANUS_DIR)`);
   console.log(`stage arm · reader ${GE.READER} · priors ${PRIORS?.slice(0, 12) ?? "none"} · janus ${JANUS ? JD : "absent"} · modes ${modes.join(", ")}`);
   for (const [set, pairs] of Object.entries(sets)) {
@@ -103,12 +111,20 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
       const R = readPair(p);
       if (stagesOut) fs.appendFileSync(stagesOut, JSON.stringify({ set, id: p.id, claim: stageHash(R.claim), source: stageHash(R.source) }) + "\n");
       for (const m of modes) {
-        const M = MODES[m], rec = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: M.licenses?.(R) ?? [], ...(M.layers ? { layers: M.layers } : {}) });
+        const M = MODES[m], rec = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: M.licenses?.(R) ?? [], sourceText: p.sentence, ...(M.opts ?? {}) });
         rows[m].push({ set, id: p.id, label: p.label, v: rec.label, hl: rec.verdict, lang: langKey(p) });
+        // V5 (--v5 <mode>): constructed role and direction swaps of the arm's accepted pairs; ablation (--ablate <mode>): each license removed in turn
+        let extra = {};
+        if (m === V5MODE && rec.label === "E") { const sw = swapReads(rec, R.claim, R.source); V5.pairs++; for (const x of sw) { V5.tried[x.kind.replace(/-.*/, "")] = (V5.tried[x.kind.replace(/-.*/, "")] ?? 0) + 1; if (x.hl === "bound") { V5.bound.push({ set, id: p.id, ...x }); } } extra.swaps = sw.length; }
+        if (m === ABLATE) { const full = M.licenses?.(R) ?? [], res = [];
+          for (let i = 0; i < full.length; i++) { const less = full.filter((_, j) => j !== i), r2 = stageVerdict({ claim: R.claim, source: R.source, bind: M.bind(R), licenses: less, sourceText: p.sentence, ...(M.opts ?? {}) });
+            ABL.runs++; if (r2.verdict !== rec.verdict) { ABL.moved++; const toward = (r2.verdict === "bound" && rec.verdict !== "bound") || (r2.verdict === "contradicted" && rec.verdict !== "contradicted") ? "AWAY" : "unknown"; ABL[toward]++; res.push({ removed: full[i].rels[0], from: rec.verdict, to: r2.verdict, toward }); if (toward === "AWAY") ABL.bugs.push({ set, id: p.id, removed: full[i].rels[0], from: rec.verdict, to: r2.verdict }); } }
+          ABL.pairs++; extra.ablation = res; }
+        if (pairsOut && m === "m4") extra.claimGaps = rec.claimGaps;
         if (pairsOut) fs.appendFileSync(pairsOut, JSON.stringify({ set, id: p.id, mode: m, label: p.label, v: rec.label, hl: rec.verdict, conjuncts: rec.conjuncts, gaps: rec.gaps.map((g) => g.kind), correspondence: R.cache?.resolve?.correspondence ?? null,
           // each claim figure and what the binding cell made of it: the source figure it meets, "distinct" (a value of its own), or unbound
           quantities: R.claim.anchors.filter((a) => a.kind === "quantity").map((a) => { const b = R.cache?.[m]?.map?.get(a.id) ?? null; return { label: a.label, measure: a.measure, bound: b == null ? null : b === a.id ? "distinct" : R.source.anchors.find((x) => x.id === b)?.label ?? b }; }),
-          licenses: rec.licenses.map((l) => l.rels[0]) }) + "\n");
+          licenses: rec.licenses.map((l) => l.rels[0]), ...extra }) + "\n");
       }
     }
   }
@@ -121,5 +137,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
     console.log(`  per language: ${langs.map((l) => { const s = score(rows[m].filter((r) => r.lang === l)); return `${l} ${(100 * s.acc).toFixed(1)}% (E ${s.ea}/${s.nE}, fa ${s.fa}, C ${s.cn}/${s.nC})`; }).join(" · ")}`);
     result[m] = { pooled, perSet: Object.fromEntries(Object.keys(sets).map((s) => [s, score(rows[m].filter((r) => r.set === s))])), rows: rows[m] };
   }
-  if (out) fs.writeFileSync(out, JSON.stringify(result));
+  if (V5MODE) console.log(`\nV5 (${V5MODE}): ${V5.pairs} accepted pairs; swaps tried ${JSON.stringify(V5.tried)}; read bound (false accepts): ${V5.bound.length}${V5.bound.length ? " " + JSON.stringify(V5.bound.slice(0, 10)) : ""}`);
+  if (ABLATE) console.log(`\nlicense ablation (${ABLATE}): ${ABL.pairs} pairs, ${ABL.runs} single-license removals; verdict moved ${ABL.moved} (toward unknown ${ABL.unknown}, AWAY from unknown ${ABL.AWAY}); bugs ${JSON.stringify(ABL.bugs)}`);
+  if (out) fs.writeFileSync(out, JSON.stringify({ ...result, v5: V5MODE ? V5 : undefined, ablation: ABLATE ? ABL : undefined }));
 }
