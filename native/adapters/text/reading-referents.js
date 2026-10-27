@@ -87,10 +87,12 @@ function modifiersOf(str, a, b, abbrSet) {
   const mention = str.slice(a, b);
   const tokens = mention.split(/\s+/).filter(Boolean);
   let left = null, leftStart = a;
-  if (tokens.length >= 2 && abbreviated(tokens[0], abbrSet) && /^\p{Lu}/u.test(tokens[0])) left = tokens[0].replace(/\.$/, "");
+  // a title has two letters or more: ONE capital and a period is an initial ("James P. Cannon"), the given or middle name's, and says nothing of the bearer's rank
+  const titleLike = (tok) => abbreviated(tok, abbrSet) && /^\p{Lu}/u.test(tok) && (tok.match(/\p{L}/gu) ?? []).length >= 2;
+  if (tokens.length >= 2 && titleLike(tokens[0])) left = tokens[0].replace(/\.$/, "");
   else {
-    const from = Math.max(0, a - 24), pre = /(?:^|[\s("“'‘])(\p{Lu}\p{L}*)\.?\s+$/du.exec(str.slice(from, a));
-    if (pre && abbreviated(pre[1], abbrSet)) { left = pre[1]; leftStart = from + pre.indices[1][0]; }
+    const from = Math.max(0, a - 24), pre = /(?:^|[\s("“'‘])(\p{Lu}\p{L}*)\.?\s+(?:\p{Lu}\.\s+)*$/du.exec(str.slice(from, a));   // a title, then any initials, then the name ("Mr. P. Cannon")
+    if (pre && titleLike(pre[1])) { left = pre[1]; leftStart = from + pre.indices[1][0]; }
   }
   let right = null, end = b;
   const post = str.slice(b, b + 16).match(/^\s+([IVXLCDM]+)(?![\p{L}\p{N}])(\.\s+\p{Lu})?/u);
