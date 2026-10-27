@@ -43,6 +43,7 @@ import { classifyWord, dominantClass } from "../adapters/text/wordclass.js";
 import { createLemmatizer, morphologyFromPrior } from "../adapters/text/morphology.js";
 import * as P from "../adapters/text/priors.js";
 import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
+import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
@@ -430,5 +431,10 @@ export async function readDocument(text, { language = null, lexicon = null, prio
   const stem = (language ? stemOf(language) : null) ?? (heard?.language ? stemOf(heard.language) ?? heard.language : null) ?? "eng";
   const pr = priors ?? priorsFor(stem);
   const c = await consultAliases(str, lexicon, { priors: pr });
-  return readWith(str, { ...opts, language, priors: pr, aliases: [...(opts.aliases ?? []), ...c.aliases], aliasReport: { giver: c.giver, rows: c.rows, gap: c.gap, ...(c.settled ? { settled: c.settled } : {}) } });
+  // the same lexicon is asked a second thing, once: which of the text's words are common nouns, and which time names, so the
+  // pronoun resolver is told who is NOT a person (adapters/text/non-personal.js). No lexicon, no ask: the read is what it was.
+  // A caller's own readerOptions.nonPersonalOf wins over the givers'.
+  const np = lexicon ? await consultNonPersonal(str, lexicon, { timePrior: priorJson("time-prior.json"), language: stem }) : null;
+  const readerOptions = np?.nonPersonalOf ? { nonPersonalOf: np.nonPersonalOf, ...(opts.readerOptions ?? {}) } : opts.readerOptions;
+  return readWith(str, { ...opts, ...(readerOptions ? { readerOptions } : {}), language, priors: pr, aliases: [...(opts.aliases ?? []), ...c.aliases], aliasReport: { giver: c.giver, rows: c.rows, gap: c.gap, ...(c.settled ? { settled: c.settled } : {}), ...(np ? { nonPersonal: np.report } : {}) } });
 }
