@@ -53,16 +53,17 @@ test("a control built to fail: a prior whose endings lead nowhere folds nothing;
   // known limit, not asserted as right: Пётр and Петра differ by a vowel alternation (ё/е) that an ending rule does not reach, so they stay two here
 });
 
-test("the gate: a form the part-of-speech prior uses more as other than as a nominal is not folded; an unseen form is", () => {
+test("the gate: a form the part-of-speech prior uses significantly more as other than as a nominal is not folded; an unseen form, or one seen too few times to say, is", () => {
   const prior = { schema: "DeclensionPrior@1", rules: [{ from: "а", to: "", count: 100 }] };
-  const posPrior = { forms: { приехала: { VERB: 9, NOUN: 1 }, приехал: { VERB: 10 }, она: { PRON: 50 }, он: { PRON: 80 }, пьер: { PROPN: 3 } } };
+  const posPrior = { forms: { приехала: { VERB: 9, NOUN: 1 }, приехал: { VERB: 10 }, она: { PRON: 50 }, он: { PRON: 80 }, пьер: { PROPN: 3 }, наташ: { CCONJ: 1 } } };
   const captured = {};
   const organs = declensionOrgansFor({ prior }, { stem: "rus", pr: { posPrior }, discoverReferents: () => null, namesCorefer: (a, b, o) => { captured.gated = o.sameStem; return false; }, gaps: [], report: () => {} });
   organs.namesCorefer("x", "y");
   const sameStem = captured.gated;
   assert.equal(sameStem("приехала", "приехал"), false, "a verb is not folded though the ending rule reaches it");
   assert.equal(sameStem("она", "он"), false, "a pronoun is not folded");
-  assert.equal(sameStem("наташа", "наташ"), true, "an unseen form is folded by the rule");
+  assert.equal(sameStem("наташа", "наташ"), true, "a form seen once as something else is not significant at a fair coin, so it is folded by the rule (one stray count cannot veto the case forms of a name)");
+  assert.equal(sameStem("ольга", "ольг"), true, "(an unseen pair) folded");
   // the same pair under a part-of-speech prior that does not know it: the rule reaches it (so it was the gate that refused it above)
   const open = declensionOrgansFor({ prior }, { stem: "rus", pr: { posPrior: { forms: { другое: { NOUN: 1 } } } }, discoverReferents: () => null, namesCorefer: (a, b, o) => { captured.open = o.sameStem; return false; }, gaps: [], report: () => {} });
   open.namesCorefer("x", "y");

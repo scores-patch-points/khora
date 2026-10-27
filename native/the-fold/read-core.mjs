@@ -47,7 +47,7 @@ import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { buildReferentLedger } from "../adapters/text/reading-referents.js";
 import { createDeclensionFolder } from "../adapters/text/declension.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
-import { formUsageFor, formUsageOf } from "../adapters/text/form-usage.js";
+import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
@@ -297,7 +297,7 @@ const edgeOf = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.la
 
 /**
  * The organs the declension fold adds to the reader, or {} (and a typed gap) when it cannot run. `option` is true (read the language's prior by name) or { prior } (a caller's own).
- * Pure given its inputs; the gate is the part-of-speech prior's own count (form-usage.js::formUsageOf): a form it has seen used more as a non-nominal than as a nominal is not folded.
+ * Pure given its inputs; the gate is the part-of-speech prior's own count (form-usage.js::formUsageOf, form-usage.js::usedMostlyAsOther): a form it has seen used significantly more as a non-nominal than as a nominal (an exact tail at a fair coin, the capital's own test) is not folded.
  */
 export function declensionOrgansFor(option, { stem, pr, discoverReferents: discover, namesCorefer: corefer, gaps, report }) {
   if (!option) return {};
@@ -307,9 +307,9 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
   const usage = formUsageOf(pr?.posPrior);
   if (!usage) { gaps.push({ gap: "declension_ungated", stem, detail: `no part-of-speech prior for ${stem}: the fold would join pronouns and verbs with the names, so it is not run` }); report({ stem, folded: false, why: "declension_ungated" }); return {}; }
   const memo = new Map();
-  const functional = (t) => { let v = memo.get(t); if (v === undefined) { const u = usage(t); v = !!u && u.other > u.nominal; memo.set(t, v); } return v; };
+  const functional = (t) => { let v = memo.get(t); if (v === undefined) { v = usedMostlyAsOther(usage(t)); memo.set(t, v); } return v; };
   const sameStem = (a, b) => !functional(a) && !functional(b) && folder.sameStem(a, b);
-  report({ stem, folded: true, giver: prior.provenance?.giver ?? null, gate: { prior: pr.posPrior?.provenance?.giver ?? null, rule: "a form the part-of-speech prior uses more as other than as NOUN, PROPN or ADJ is not folded; an unseen form is" } });
+  report({ stem, folded: true, giver: prior.provenance?.giver ?? null, gate: { prior: pr.posPrior?.provenance?.giver ?? null, rule: "a form the part-of-speech prior uses significantly more (exact tail at a fair coin, alpha 0.05) as other than as NOUN, PROPN or ADJ is not folded; a form it has not seen, or seen too few times to say, is" } });
   return {
     discoverReferents: (s, o = {}) => discover(s, { ...o, sameStem }),
     namesCorefer: (a, b, o = {}) => corefer(a, b, { ...(typeof o === "function" ? { sameStem: o } : o), sameStem }),
