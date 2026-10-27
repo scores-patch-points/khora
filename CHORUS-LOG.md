@@ -1327,3 +1327,14 @@ fast: 4 files · affected tests: native 96 pass (6 files), the new file 19 pass;
 | Simon/Chekhov | `features.figures` | wired, not consumed | disclosed | new source with a test and a hook in `read-core`; no door passes `features.figures` yet. The consumer is the prose-against-structured verdict (pipeline log, entries G2-3/G2-4); byte parity of the entry with the feature off is tested |
 | Holmes | package.json (routed on the word "identity" in the test list) | | false-positive | no identity logic touched |
 clean: Alexander, Marshall (no law edited; no P/S citation in the diff), Kondo (nothing dead), Lévi-Strauss (nothing in the stash bears on it).
+
+## 2026-10-27 — five wrap fixes for the period binder, each a flag (`adapters/text/figure-period.en.js`; branch `figure-period-wrap` on top of #84's frozen commit, no PR)
+fast: 2 files · affected tests: 28 pass (19 + 9 new, each new case with a control: the same text with its flag off gives the wrong answer); mutation check: turning each flag off by default fails the test for that flag (wrap 3, yearless 1, ytd 1, qnotation 2, fromComparative 1) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | the five fixes | fitted | disclosed | named from the 19 wrong claims of the held-out pass (PIPELINE-LOG ladder-36); on that filer wrong 19 → 0, precision 73/73 — a FIT, said so in PREREG-G2-4W.md; the two original filers (not used to name them) are unchanged: 225/225, 18/20 planted, zero convictions, every bar registered before the flags-on numbers were computed |
+| Feynman | cost not in a bar | claimed share | disclosed | on the fitted filer the join of wrapped lines put the period before the second money figure of "reported net income of $X ... for the first quarter of 2011 on net sales of $Y", which the binder calls a detail with no period: 12 formerly right claims became unclaimed (9 detail, 2 none, 1 ambiguous); claimed share 0.806 → 0.709 (bar 0.70). Precision up, recall down, named |
+| Greenberg | wrap rule `FINAL` / `CONTINUES` | convention | disclosed | an English-like convention (a lowercase letter or a digit after an unfinished line continues it; sentence-final marks are ASCII); kept to a degree, not a rule; module stays English by declaration and the reader hook still gives other languages `figures: []` plus the typed gap |
+| Dijkstra | `\p{Ll}` / `\p{Nd}` | script | disclosed | caseless scripts have no lowercase, so the wrap join would not fire for them; unreachable through the hook (English only) |
+| Simon/Chekhov | `FIXES` export | wired, not consumed | disclosed | the flags are exercised by the tests and the scorer; no door passes `fixes` |
+clean: Holmes (not routed), Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
