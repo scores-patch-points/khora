@@ -45,8 +45,9 @@ import * as P from "../adapters/text/priors.js";
 import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
 import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { buildReferentLedger } from "../adapters/text/reading-referents.js";
+import { createDeclensionFolder } from "../adapters/text/declension.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
-import { formUsageFor } from "../adapters/text/form-usage.js";
+import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
@@ -296,12 +297,33 @@ function mentionsOf(text, surfaces) {
 const edgeOf = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.label, end2: e.end2, end2Face: e.end2Face ?? null, polarity: e.polarity ?? null, refs: e.refs ?? null, spans: e.spans ?? null, assertion: e.assertion ?? null });
 
 /**
+ * The organs the declension fold adds to the reader, or {} (and a typed gap) when it cannot run. `option` is true (read the language's prior by name) or { prior } (a caller's own).
+ * Pure given its inputs; the gate is the part-of-speech prior's own count (form-usage.js::formUsageOf, form-usage.js::usedMostlyAsOther): a form it has seen used significantly more as a non-nominal than as a nominal (an exact tail at a fair coin, the capital's own test) is not folded.
+ */
+export function declensionOrgansFor(option, { stem, pr, discoverReferents: discover, namesCorefer: corefer, gaps, report }) {
+  if (!option) return {};
+  const prior = option === true ? priorJson(`declension-${stem}.json`) : option.prior ?? null;
+  const folder = createDeclensionFolder(prior);
+  if (folder.gap) { gaps.push({ gap: folder.gap.reason, stem, detail: folder.gap.detail }); report({ stem, folded: false, why: folder.gap.reason }); return {}; }
+  const usage = formUsageOf(pr?.posPrior);
+  if (!usage) { gaps.push({ gap: "declension_ungated", stem, detail: `no part-of-speech prior for ${stem}: the fold would join pronouns and verbs with the names, so it is not run` }); report({ stem, folded: false, why: "declension_ungated" }); return {}; }
+  const memo = new Map();
+  const functional = (t) => { let v = memo.get(t); if (v === undefined) { v = usedMostlyAsOther(usage(t)); memo.set(t, v); } return v; };
+  const sameStem = (a, b) => !functional(a) && !functional(b) && folder.sameStem(a, b);
+  report({ stem, folded: true, giver: prior.provenance?.giver ?? null, gate: { prior: pr.posPrior?.provenance?.giver ?? null, rule: "a form the part-of-speech prior uses significantly more (exact tail at a fair coin, alpha 0.05) as other than as NOUN, PROPN or ADJ is not folded; a form it has not seen, or seen too few times to say, is" } });
+  return {
+    discoverReferents: (s, o = {}) => discover(s, { ...o, sameStem }),
+    namesCorefer: (a, b, o = {}) => corefer(a, b, { ...(typeof o === "function" ? { sameStem: o } : o), sameStem }),
+  };
+}
+
+/**
  * Read one document into a WeftEntry@4. `language` is declared (any BCP-47/ISO name) or, when null, heard from the text; neither
  * gives the repo's default, English, and says so. `aliases` are the dotted forms the hyperlexicon resolved (consultAliases) — the
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null } = {}) {
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
@@ -325,11 +347,17 @@ export function readWith(text, { address = null, category = null, language = nul
     return { ...empty, sentences, skipped: "too_short" };
   }
   const t0 = Date.now();
-  let out = null, chunks = [], err = null, R = null, claims;
+  let out = null, chunks = [], err = null, R = null, claims, declensionReport = null;
   try {
     // a surface's own organs (readerOptions: classifyWord, extendRelations, sameAct, roleConfig …) join the one assembly; the
     // abbreviations are this read's, so a surface never builds a reader beside it
-    R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...readerOrgans });
+    // THE DECLENSION FOLD (opt-in, `declension: true` or `{ prior }`; off, nothing here runs and the entry is byte-identical): "Пьер", "Пьера" and "Пьеру" are one name in different cases. The language's
+    // declension prior (UniMorph rules, janus/priors/declension-<stem>.json; adapters/text/declension.js) answers pairwise whether one observed form reaches another, and the index
+    // and the pronoun pass consult it through the organs they already take (discoverReferents, namesCorefer: no second reader). Ungated it also folds pronouns and verbs the capital tier admitted
+    // ("Он"/"Она", "Приехала"/"Приехал"), so a form the language's own part-of-speech prior uses more often as something other than a noun, a name or an adjective is refused:
+    // the gate is that prior's count (form-usage.js), a form it has not seen is not refused, and with no part-of-speech prior the fold is not run, with a typed gap.
+    const declensionOrgans = declensionOrgansFor(declension, { stem, pr, discoverReferents, namesCorefer, gaps, report: (r) => { declensionReport = r; } });
+    R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...declensionOrgans, ...readerOrgans });
     ({ report: out, chunks } = relationsFor([{ text: str }], { reader: R, language: language ? stem : null }));
     // selfRead: the material read back as an answer against itself, so every claim carries the reader's verdict and its span
     if (selfRead && out?.read) claims = out.read(str)?.claims ?? [];
@@ -453,6 +481,7 @@ export function readWith(text, { address = null, category = null, language = nul
       for (const g of L.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "referents_failed", detail: String(e?.message ?? e).slice(0, 160) }); }
   }
+  if (declension) entry.declension = declensionReport;
   return entry;
 }
 

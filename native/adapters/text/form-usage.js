@@ -67,6 +67,13 @@ function ratesOf(posPrior) {
 
 const LEDGERED = new Set(["eng"]);   // the stems the Conventions@1 prior has a measured row for (janus conventions-eng.json)
 
+/**
+ * Does the prior's count say a form is MOSTLY used as something other than a nominal? The same exact one-sided tail at a fair coin and the same alpha the capital's test uses: a form seen once
+ * as a conjunction (1 of 1) is not significant and stays undecided, a pronoun seen fifty times (50 of 50) is. `u` is formUsageOf(posPrior)(form), or null for a form the prior has not seen.
+ * (Added for the declension fold, read-core.mjs::declensionOrgansFor, which must not let one stray count veto the case forms of a name.)
+ */
+export const usedMostlyAsOther = (u) => !!u && u.other > u.nominal && upperTail(u.other, u.nominal + u.other, 0.5) < ALPHA;
+
 export function formUsageFor(stem, posPrior) {
   return LEDGERED.has(stem) ? formUsageOf(posPrior) : null;
 }
