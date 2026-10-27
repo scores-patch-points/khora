@@ -204,3 +204,16 @@ test("the fixes change nothing on text with none of these shapes", () => {
   const all = Object.fromEntries(Object.keys(FIXES).map((k) => [k, false]));
   assert.equal(JSON.stringify(figuresOf(t, { timePrior: TP })), JSON.stringify(figuresOf(t, { timePrior: TP, fixes: all })));
 });
+
+test("continuation: 'for the first quarter of 2011 on net sales of $222 million' is one period for both figures; an appositive is still a detail", () => {
+  const t = "The Company reported net income of $3.2 million and $0.05 per diluted share for the first quarter of 2011 on net sales of $222 million.";
+  const f = only(t);
+  assert.deepEqual(f.map(per), ["3mo 2011-03-31", "3mo 2011-03-31"]); assert.equal(f[1].inherited, true); assert.equal(f[0].inherited, undefined);
+  assert.match(t.slice(...f[1].periodSpan), /first quarter of 2011/);
+  const off = only(t, { fixes: OFF("continuation") });
+  assert.equal(off[1].period, null); assert.equal(off[1].basis, "detail");
+  assert.equal(only("Net income was $1.0 million for 2020 with revenue of $9.0 million.")[1].period.end, "2020-12-31");
+  const app = only("Revenues were $15.0 million for the year ended December 31, 2022, including a $60.0 million amendment payment.");
+  assert.equal(app[1].period, null); assert.equal(app[1].basis, "detail");
+  assert.equal(only("Revenues were $5.0 million for 2020 on sales growth of 5 percent to $9.0 million.")[1].period, null, "digits between the phrase and the figure end the continuation");
+});

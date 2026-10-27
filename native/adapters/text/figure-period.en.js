@@ -44,8 +44,10 @@ const FORWARD = /\b(?:outlook|guidance|anticipate[sd]?|expects?|expected|forecas
 //   ytd: "year to date ... the third quarter 2020" is three months per quarter so far
 //   qnotation: "Q4 2011" and "2011 Q4" are quarters
 //   fromComparative: "from $492 million in the prior year quarter" opens a comparative clause
-export const FIXES = Object.freeze({ wrap: true, yearless: true, ytd: true, qnotation: true, fromComparative: true });
+//   continuation: a figure after the clause's last period phrase takes it when a preposition of the main clause attaches a measure ("... for the first quarter of 2011 on net sales of $222 million"); an appositive ("including a $60.0 million payment") stays a detail
+export const FIXES = Object.freeze({ wrap: true, yearless: true, ytd: true, qnotation: true, fromComparative: true, continuation: true });
 const FROM_PRIOR = /\bfrom\s+(?=\(?\$?\s?\d[\d,]*(?:\.\d+)?\)?\s*(?:million|billion)\b[^.;]{0,50}?\b(?:prior|previous|year[- ]ago|last\s+year|year\s+earlier|a\s+year\s+(?:ago|earlier)))/gi;
+const CONTINUATION = /^[\s,]*(?:on|with)\s+(?:[A-Za-z-]+\s+){0,3}of\s*$/i;
 const FINAL = /[.!?;:]["”’')\]]*\s*$/, CONTINUES = /^\s*[\p{Ll}\p{Nd}]/u;
 const NEGATIVE_CUE = /\b(?:loss(?:es)?|deficit)\b|\bused\s+in\b/gi, POSITIVE_CUE = /\b(?:income|profit|earnings)\b|\bprovided\s+by\b/gi;
 
@@ -190,6 +192,12 @@ export function figuresOf(text, { sentences = null, timePrior = null, fixes = nu
         if (cand.length === bl.items.length) cand.forEach((f, k) => assign.set(f, bl.items[k])); else if (bl.items.length === 1) cand.forEach((f) => assign.set(f, bl.items[0]));
         prevEnd = bl.b;
       }
+      // (fixes.continuation) a figure after the last period phrase of the clause, attached by "on / with <up to three words> of", is covered by that phrase when it names one period
+      if (fx.continuation) for (const f of inClauseOf[ci]) {
+        if (assign.has(f)) continue;
+        const bl = [...blocks].reverse().find((b) => b.b <= f.a);
+        if (bl && bl.items.length === 1 && CONTINUATION.test(u.text.slice(bl.b, f.a))) assign.set(f, { ...bl.items[0], inherited: true });
+      }
       assigns.push({ assign, hasPeriods: ps.length > 0 });
     }
     for (const [ci, cl] of clauses.entries()) {
@@ -218,7 +226,7 @@ export function figuresOf(text, { sentences = null, timePrior = null, fixes = nu
         const cues = [...[...win.matchAll(NEGATIVE_CUE)].map((m) => ({ at: m.index, len: m[0].length, p: "negative" })), ...[...win.matchAll(POSITIVE_CUE)].map((m) => ({ at: m.index, len: m[0].length, p: "positive" }))].sort((x, y) => y.at - x.at);
         if (f.parenNegative) { polarity = "negative"; polaritySpan = [u.offset + f.a, u.offset + f.b]; } else if (cues.length) { polarity = cues[0].p; polaritySpan = [u.offset + from + cues[0].at, u.offset + from + cues[0].at + cues[0].len]; }
         else if (i > 0 && /^[\s,]*(?:and|or)?[\s,]*$/i.test(u.text.slice(inClause[i - 1].b, f.a).replace(/\s*(?:million|billion)\s*$/i, ""))) { const pf = figures[figures.length - 1]; if (pf) { polarity = pf.polarity; polaritySpan = pf.polaritySpan; } }
-        figures.push({ value: f.value, scale: f.scale, stated: f.stated, text: f.text, span: [u.offset + f.a, u.offset + f.b], sentence: [u.offset, u.offset + u.text.length], period, basis, periodSpan, ...(own?.via ? { partSpan: [u.offset + own.via[0], u.offset + own.via[1]] } : {}), frameSpan, ...(candidates ? { candidates } : {}), comparative: cl.comparative, polarity, polaritySpan, forwardLooking: forward });
+        figures.push({ value: f.value, scale: f.scale, stated: f.stated, text: f.text, span: [u.offset + f.a, u.offset + f.b], sentence: [u.offset, u.offset + u.text.length], period, basis, periodSpan, ...(own?.inherited ? { inherited: true } : {}), ...(own?.via ? { partSpan: [u.offset + own.via[0], u.offset + own.via[1]] } : {}), frameSpan, ...(candidates ? { candidates } : {}), comparative: cl.comparative, polarity, polaritySpan, forwardLooking: forward });
       }
     }
   }
