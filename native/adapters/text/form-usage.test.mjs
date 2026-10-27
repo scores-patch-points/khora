@@ -7,8 +7,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { formUsageOf } from "./form-usage.js";
 import { extractSurfaces } from "./surfaces.js";
-import { conventionsLedger, CONVENTIONS } from "./conventions.js";
+import { conventionOf, conventionsGap } from "./conventions.js";
 import { readWith, buildPriors } from "../../the-fold/read-core.mjs";
+import { priorJson } from "../../the-fold/prior-source.mjs";
 
 // POSPrior@1-shaped: a form keeps every UPOS tag with its count (the keys are case-folded)
 const posPrior = { forms: { gather: { VERB: 19 }, government: { NOUN: 62, PROPN: 1 }, french: { ADJ: 15, PROPN: 4, NOUN: 1 }, paris: { PROPN: 50 }, well: { ADV: 161, INTJ: 43, ADJ: 7, NOUN: 2 }, foo: { VERB: 100 } } };
@@ -88,21 +89,40 @@ test("byte-identical with no pos prior, and for another language", () => {
   assert.equal(strip(readWith(text, { language: "deu", priors: withPrior, minCharacters: 0 })), strip(readWith(text, { language: "deu", priors: withPrior, minCharacters: 0, readerOptions: { formUsage: null } })), "the capital is English's convention here; German reads as it was");
 });
 
-test("the ledger: every convention names its giver or its builder (never revealed), where the reader stands on it, and where it departs", () => {
-  const ledger = conventionsLedger();
-  assert.equal(ledger.schema, "Nomos@1");
-  assert.equal(ledger.rows.length, CONVENTIONS.length);
-  assert.ok(Object.isFrozen(ledger.rows) && ledger.rows.every((r) => Object.isFrozen(r)));
+// Conventions@1 as janus keeps it (priors/conventions-eng.json); a stub here, so no priors directory is needed
+const conventionsPrior = { schema: "Conventions@1", language: "eng", provenance: { builder: "scripts/build-conventions-prior.mjs", source: "g.conllu sha256:" + "ab".repeat(32) }, conventions: [
+  { stem: "capital-marks-a-name", says: "a mid-sentence capital marks a name", scope: "cased scripts", address: "native/adapters/text/surfaces.js::accumulateSurfaceEvidence", giver: null, builder: "scripts/build-conventions-prior.mjs", witnesses: [], departs: ["German"] },
+  { stem: "treebank-attests-a-forms-use", says: "a treebank attests a form's use", scope: "English", address: "native/adapters/text/form-usage.js::formUsageOf", giver: "UD_English-EWT", builder: null, witnesses: [], departs: [] },
+] };
+
+test("conventionOf: the reader cites a convention by its stem from the prior it was handed; no copy is held here", () => {
+  const c = conventionOf(conventionsPrior, "treebank-attests-a-forms-use");
+  assert.deepEqual(c, { stem: "treebank-attests-a-forms-use", says: "a treebank attests a form's use", scope: "English", site: "native/adapters/text/form-usage.js::formUsageOf", giver: "UD_English-EWT", builder: "scripts/build-conventions-prior.mjs", source: conventionsPrior.provenance.source });
+  assert.equal(conventionOf(conventionsPrior, "no-such-convention"), null);
+  assert.equal(conventionOf(null, "capital-marks-a-name"), null);
+  assert.equal(conventionsGap(conventionsPrior), null);
+  assert.match(conventionsGap(null), /no Conventions@1 prior/, "an absent prior is a typed gap, never an invented row");
+  assert.match(conventionsGap({ schema: "POSPrior@1" }), /no Conventions@1 prior/);
+});
+
+test("the cast's report cites the conventions it read by when the prior is in reach, names the gap when not, and the entry is the same either way", () => {
+  const text = "Steps Gather all needed materials for the day. Paris Hilton met Paris Hilton near the river. Paris Hilton left the river early.";
+  const withPrior = readWith(text, { language: "eng", priors: buildPriors({ pos: posPrior, conventions: conventionsPrior, stem: "eng" }), minCharacters: 0 });
+  const without = readWith(text, { language: "eng", priors: buildPriors({ pos: posPrior, stem: "eng" }), minCharacters: 0 });
+  assert.deepEqual(withPrior.formUsageReport.conventions.map((c) => c.stem), ["capital-marks-a-name", "treebank-attests-a-forms-use"]);
+  assert.equal(withPrior.formUsageReport.gap, null);
+  assert.deepEqual(without.formUsageReport.conventions, []);
+  assert.match(without.formUsageReport.gap, /no Conventions@1 prior/);
+  assert.equal(JSON.stringify({ ...withPrior, ms: 0 }), JSON.stringify({ ...without, ms: 0 }), "citing a convention changes nothing the reader reports");
+});
+
+test("the real prior, when janus is beside this checkout: every convention's site re-expands into code here (skipped without it)", (t) => {
+  const prior = priorJson("conventions-eng.json");
+  if (!prior) return t.skip("janus priors/conventions-eng.json is not beside this checkout");
+  assert.equal(conventionsGap(prior), null);
   const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-  for (const r of ledger.rows) {
-    assert.equal(r.schema, "NomosRule@1");
-    assert.equal(r.kind, "convention");
-    assert.ok(r.giver || r.builder, `${r.stem}: a convention is given or extracted, never revealed`);
-    assert.ok(r.standing === (r.giver ? "given" : "candidate"), `${r.stem}: standing follows the giver`);
-    assert.ok(r.says && r.scope && r.basis && r.witnesses.length && r.departs.length, `${r.stem}: complete`);
-    const file = r.address.split("::")[0];
-    assert.ok(fs.existsSync(path.join(root, file)), `${r.stem}: its address ${file} re-expands into code`);
-    if (r.builder) assert.ok(fs.existsSync(path.join(root, r.builder)), `${r.stem}: its builder ${r.builder} exists`);
+  for (const c of prior.conventions) {
+    assert.ok(c.giver || c.builder || prior.provenance?.builder, `${c.stem}: given or extracted, never revealed`);
+    assert.ok(fs.existsSync(path.join(root, c.address.split("::")[0])), `${c.stem}: its site ${c.address} re-expands into code`);
   }
-  assert.deepEqual(ledger.stats.byStanding, { candidate: 3, given: 1 });
 });
