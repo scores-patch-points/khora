@@ -435,6 +435,25 @@ export function readWith(text, { address = null, category = null, language = nul
       pronouns.push({ pronoun: b.pronoun, at: [raw(at), raw(at + String(b.pronoun ?? "").length)], sentence: sentenceAt(at), surface: b.surface ?? null, ref: b.surface ? refOf(b.surface) : null, margin: b.margin ?? null });
     }
   });
+  // THE UNBOUND PRONOUNS (readerOptions.pronounGaps === true; default off, and then nothing below runs and the entry is what it was): every pronoun of the
+  // resolver's own class this read did not bind, as a typed item addressed like entry.pronouns, with the reason, the regime that ran and the beings the
+  // resolver had in hand. A gap the resolver filed, a frame it did not read, a passage with no being to bind to: none is a silent drop any more.
+  let pronounGaps = null;
+  if (readerOrgans.pronounGaps === true) {
+    pronounGaps = [];
+    (out?.pronounGaps ?? []).forEach((list, pi) => {
+      for (const g of list ?? []) {
+        const at = bases[pi] + (g.offset ?? 0);
+        pronounGaps.push({
+          pronoun: g.pronoun, at: [raw(at), raw(at + String(g.pronoun ?? "").length)], sentence: sentenceAt(at),
+          reason: g.reason, regime: g.regime ?? "none",
+          candidates: (g.candidates ?? []).map((c) => ({ ref: c.surface ? refOf(c.surface) : null, surface: c.surface ?? null, score: c.score ?? null })),
+          detail: g.detail ?? null,
+        });
+      }
+    });
+    pronounGaps.sort((a, b) => a.at[0] - b.at[0]);
+  }
   // SURPRISE — the canonical cycle's second constitutive gate (SEG+EVA)
   let surprise = null;
   try { surprise = surpriseCut(tokenEvents(str)); } catch (e) { if (!err) err = `surprise_failed: ${String(e?.message ?? e)}`; }
@@ -461,6 +480,7 @@ export function readWith(text, { address = null, category = null, language = nul
     vocabulary: out?.vocabulary ?? null,
     cast, heard: heardRows, edges, clauses, quality: qualityReport, surprise,
     sentences, pronouns,
+    ...(pronounGaps ? { pronounGaps } : {}),
     // OPT-IN (features.figures): the money figures of the document with the period and sign each is about, as atoms with addresses (adapters/text/figure-period.en.js); absent, the entry is exactly what it was
     ...(features.figures ? { figures: stem === "eng" ? figuresOf(str, { sentences, timePrior: priorJson("time-prior.json") }) : { figures: [], gaps: [{ gap: "figures_english_only", detail: `the period binder reads English; this read is ${stem}` }] } } : {}),
     ...(parsed ? { parse: parsed } : {}),
