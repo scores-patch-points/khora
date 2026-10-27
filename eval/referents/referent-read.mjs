@@ -5,7 +5,8 @@
 //
 //   GUM_TRAIN=/path/en_gum-ud-train.conllu WIKTIONARY_READER=... node eval/referents/referent-read.mjs [--slice A,E] [--out file.json] [--dump-off file.json]
 //
-//   --slice A,E   A is the design slice (seed 20261110), E the fresh confirmation slice (seed 20261201). Default A.
+//   --slice A,E,F A is the design slice (seed 20261110), E the first confirmation slice (seed 20261201; only 6 documents were left to draw), F the second confirmation
+//                 (PREREG-REFERENT-READ-2.md: every document of the golden's B, C and D). Default A.
 //   --dump-only   with --dump-off: dump the hashes and score nothing
 //   --dump-off f  write, for every document read and every fixture, the sha256 of the entry read WITHOUT the option (ms zeroed); run it on the base commit and on the branch
 //                 and diff the two files: C2 of the pre-registration, zero differing bytes.
@@ -35,7 +36,7 @@ export function slicesAE(docs) {
   const restE = left.filter((d) => !inD.has(d.id));
   const E = shuffled(restE.length, rng(20261201)).slice(0, 30).map((i) => restE[i]);
   for (const d of E) if (inA.has(d.id) || inB.has(d.id) || inC.has(d.id) || inD.has(d.id) || aside.has(d.id)) throw new Error("referent-read: slice E is not fresh");
-  return { A, E };
+  return { A, E, F: [...B, ...C, ...D].sort((a, b) => (a.id < b.id ? -1 : 1)) };
 }
 
 const overlap = (a, b, c, d) => Math.min(b, d) - Math.max(a, c);
@@ -103,7 +104,11 @@ export async function scoreDocument(doc, lexicon) {
   const ms = Date.now() - t0;
   const plainSpans = []; for (const c of entry.cast ?? []) for (const [a, b] of c.mentionSpans ?? []) plainSpans.push({ a, b, label: c.ref });
   const L = entry.referents;
-  const ledgerOf = new Map(); for (const r of L?.referents ?? []) for (const sid of r.mentions) ledgerOf.set(sid, r.id);
+  // the same universe as the plain arm: its labels come from the CAST only, so the ledger's come from the referents it inserted as beings (standing "referent"), never from the common nouns of `heard`
+  const ledgerOf = new Map(); for (const r of L?.referents ?? []) if (r.standing === "referent") for (const sid of r.mentions) ledgerOf.set(sid, r.id);
+  // the universes are the same by construction, and checked: every referent a ledger label comes from stands on a row of the plain cast
+  const castRefs = new Set((entry.cast ?? []).map((c) => c.ref));
+  for (const r of L?.referents ?? []) if (r.standing === "referent" && !castRefs.has(r.engine)) throw new Error(`referent-read: ledger referent ${r.id} (engine ${r.engine}) is not a row of the plain cast: the arms would be scored over different universes`);
   const ledgerSpans = []; for (const s of L?.spans ?? []) if (s.kind === "name" && ledgerOf.has(s.id)) ledgerSpans.push({ a: s.at[0], b: s.at[1], label: ledgerOf.get(s.id) });
   const G = [];
   for (const g of names) {
