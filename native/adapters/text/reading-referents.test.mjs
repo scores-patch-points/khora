@@ -305,3 +305,25 @@ test("the module does not import reading-timeline.js (which reaches node:fs), an
   const L = on(SMITHS).referents;
   for (const ev of L.log) { const cell = CELLS[ev.op]; assert.deepEqual({ site: ev.site, stance: ev.stance }, cell); }
 });
+
+// ── a middle initial is not a title (found on corpus text: "James P. Cannon" and "Mr. Cannon" are one man, and the title cue split them by "P" and "Mr") ──
+test("an initial is not a title: 'James P. Cannon' and 'Mr. Cannon' in one sentence stay one referent; two real titles still split", () => {
+  const t = "James P. Cannon wrote to Mr. Cannon about the strike. Mr. Cannon replied to James P. Cannon at once.";
+  const spans = []; for (let i = t.indexOf("Cannon"); i >= 0; i = t.indexOf("Cannon", i + 1)) spans.push([i, i + 6]);
+  const run = (abbr) => buildReferentLedger({ text: t, cast: [row("ref:auto:cannon", "Cannon", spans)], sentences: [{ offset: 0, text: t.slice(0, 54) }, { offset: 55, text: t.slice(55) }], abbreviations: new Set(abbr) });
+  const { ledger, gaps } = run(["P", "p", "Mr", "mr"]);
+  assert.equal(ledger.referents.length, 1, "one man");
+  assert.equal(gaps.some((g) => g.gap === "referent_split"), false);
+  // the initial after a lowercase word, where no name token stands before it: still no title (this is the case the two-letter rule decides; the pattern before the mention alone does not)
+  const t3 = "Smith wrote to P. Cannon and to Mr. Cannon about it. Later Mr. Cannon replied to P. Cannon at once.";
+  const sp3 = []; for (let i = t3.indexOf("Cannon"); i >= 0; i = t3.indexOf("Cannon", i + 1)) sp3.push([i, i + 6]);
+  const third = buildReferentLedger({ text: t3, cast: [row("ref:auto:cannon", "Cannon", sp3)], sentences: [{ offset: 0, text: t3.slice(0, 52) }, { offset: 53, text: t3.slice(53) }], abbreviations: new Set(["P", "p", "Mr", "mr"]) });
+  assert.equal(third.ledger.referents.length, 1);
+  assert.equal(third.gaps.some((g) => g.gap === "referent_split"), false);
+  // a title in front of the initial is still read: "Mr. P. Cannon" carries the title Mr
+  const t2 = "Mr. P. Cannon met Mrs. P. Cannon at the station. Mr. P. Cannon left.";
+  const sp2 = []; for (let i = t2.indexOf("Cannon"); i >= 0; i = t2.indexOf("Cannon", i + 1)) sp2.push([i, i + 6]);
+  const two = buildReferentLedger({ text: t2, cast: [row("ref:auto:cannon", "Cannon", sp2)], sentences: [{ offset: 0, text: t2.slice(0, 47) }, { offset: 48, text: t2.slice(48) }], abbreviations: new Set(["P", "p", "Mr", "mr", "Mrs", "mrs"]) });
+  assert.equal(two.gaps.find((g) => g.gap === "referent_split").by, "title");
+  assert.deepEqual(two.ledger.referents.filter((r) => r.split).map((r) => r.split.key).sort(), ["Mr", "Mrs"]);
+});
