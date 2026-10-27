@@ -1247,6 +1247,21 @@ fast: 7 files · 3 affected test files, 17 pass + 1 todo (observed failing, kept
 
 clean: none routed and silent.
 
+## 2026-10-26 — AttachPrior@1: a dative phrase attaches by the verb, induced from gold per language (branch `attach-prior`, stacked on #64)
+
+fast: 6 files · 1 affected test file, 5 pass · law: ok (pre-existing dup-header WARN S17/S96)
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Marshall | ATTACH-PRIOR-PREREG.md bars "P1-P4" | prereg, build script, kernel | fixed | the bars were named like the law's `P<n>` entries and so read as citations of entries that do not exist; renamed B1-B4 |
+| Feynman | build-attach-prior.mjs `devInst.length >= 30` | B3 floor | noted | a declared constant, giver = the pre-registration (fewer than 30 dev instances is reported "too few", never a pass); no constant tuned against its own result |
+| Dijkstra | attach-prior.js `toLowerCase()` on lemma and adposition | instancesOf | noted | the declared adpositions (to a à に) and lemmas are compared lowercased; scope is the languages in RECIPIENT, and a language outside it has no instances, not wrong ones |
+| Ostrom | RESULT 2 pooling | de row | disclosed | German pooled only GSD (the other German treebanks here lack a train or a dev split): stated in the table, not read as "German has no more data" |
+| Simon/Chekhov | attach-prior.js, the CLI scripts | no reader import | noted, real | the prior is NOT wired into the reader; Result 3 says so ("not yet measured, so not claimed"). Reached only by its test and the two scripts |
+| Greenberg | attach-stage2.mjs | no language default | clean | `RECIPIENT[CODE]` has no fallback; non-English reads through loadGrammar |
+
+clean: Holmes (the package.json hit is the test list).
+
 ## 2026-10-26 — the meaning layer reads THE reader's entry: rows on the WeftEntry, atoms from the weft (branch `weft-rows`, stacked on #64)
 
 fast: 7 files · 5 affected test files, 52 pass · law: ok (pre-existing dup-header WARN S17/S96) · reading-pipeline + reader-speed guards 29/29 · full native suite 996 tests, 4 real failures (greekClauses x2, janus second maker, material-doorway), all in main's known set, none new
@@ -1315,3 +1330,47 @@ fast: 3 files · affected tests: 27 native pass; opencode-semantic.test.mjs S-f 
 | Simon/Chekhov | weftReferents `identity` | unwired | disclosed | no consumer passes `identity: true` yet (janus kind induction, eval/law/identity-fold*.mjs); the option is tested and importable, and parity with the option off is held byte for byte |
 | Marshall | "P3" in the docstring | cited | false-positive | the `(P3)` is the weft's own property label (weft.js header, THE-HOLOGRAPH.md §1: the fold at a cursor), unchanged text, not a POLICIES.md entry |
 clean: Dijkstra (`refKey` untouched, the slug is not re-derived), Lévi-Strauss (nothing in the stash bears on it).
+
+## 2026-10-27 — stage 2 of a prose-against-structured check: the period and sign of each money figure, with its address (`adapters/text/figure-period.en.js`; branch `figure-period`, opt-in `features.figures`, off by default)
+fast: 4 files · affected tests: native 96 pass (6 files), the new file 19 pass; mutation check (pairing reversed, negative cue removed, English guard removed) fails 1, 2 and 1 tests as built · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | figure-period.en.js windows (90 chars / nine tokens back from "ended", heading ≤120 / >220 chars, 60 chars for "full year") | dev-tuned constants | disclosed | chosen while looking at two development filers (0000874238, 0001370053); named as such in the header; the held-out filer (0000879526) is the test of them and was not read while they were set |
+| Feynman | development result | 227 of 228 right, 1 wrong | disclosed | the one wrong (N053) pairs a full-year guidance sentence with a half-year record in the ground; the binder's twelve months is the sentence's own period, so it is the ground that is at fault, and the figure is flagged `forwardLooking`. Not edited to agree. A 100% known share on dev is a fit to dev, not a rate |
+| Greenberg | figure-period.en.js (ten ASCII `\b` word patterns; number words, ordinals, loss/income cues; "ended", "as of") | scope | disclosed | English by declaration in the file name (`.en.`), the header and the hook: `read-core` runs it only for `stem === "eng"` and any other language gets `figures: []` plus the typed gap `figures_english_only`; the test reads Japanese, Arabic and German and checks the gap. The Latin-capitalised month probe in the `no_time_prior` gap was replaced by `\p{L}+` |
+| Dijkstra | monthTable | lower-cased names, three-letter prefix | disclosed | month names come from TimePrior@1 (janus priors), not a list in the file; the lower-case key and 3-letter abbreviation are English-and-Latin conventions of the same declared scope; a clash (two months sharing three letters) names none, and the deranged-prior test shows the dates follow the prior |
+| Simon/Chekhov | `features.figures` | wired, not consumed | disclosed | new source with a test and a hook in `read-core`; no door passes `features.figures` yet. The consumer is the prose-against-structured verdict (pipeline log, entries G2-3/G2-4); byte parity of the entry with the feature off is tested |
+| Holmes | package.json (routed on the word "identity" in the test list) | | false-positive | no identity logic touched |
+clean: Alexander, Marshall (no law edited; no P/S citation in the diff), Kondo (nothing dead), Lévi-Strauss (nothing in the stash bears on it).
+
+## 2026-10-27 — five wrap fixes for the period binder, each a flag (`adapters/text/figure-period.en.js`; branch `figure-period-wrap` on top of #84's frozen commit, no PR)
+fast: 2 files · affected tests: 28 pass (19 + 9 new, each new case with a control: the same text with its flag off gives the wrong answer); mutation check: turning each flag off by default fails the test for that flag (wrap 3, yearless 1, ytd 1, qnotation 2, fromComparative 1) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | the five fixes | fitted | disclosed | named from the 19 wrong claims of the held-out pass (PIPELINE-LOG ladder-36); on that filer wrong 19 → 0, precision 73/73 — a FIT, said so in PREREG-G2-4W.md; the two original filers (not used to name them) are unchanged: 225/225, 18/20 planted, zero convictions, every bar registered before the flags-on numbers were computed |
+| Feynman | cost not in a bar | claimed share | disclosed | on the fitted filer the join of wrapped lines put the period before the second money figure of "reported net income of $X ... for the first quarter of 2011 on net sales of $Y", which the binder calls a detail with no period: 12 formerly right claims became unclaimed (9 detail, 2 none, 1 ambiguous); claimed share 0.806 → 0.709 (bar 0.70). Precision up, recall down, named |
+| Greenberg | wrap rule `FINAL` / `CONTINUES` | convention | disclosed | an English-like convention (a lowercase letter or a digit after an unfinished line continues it; sentence-final marks are ASCII); kept to a degree, not a rule; module stays English by declaration and the reader hook still gives other languages `figures: []` plus the typed gap |
+| Dijkstra | `\p{Ll}` / `\p{Nd}` | script | disclosed | caseless scripts have no lowercase, so the wrap join would not fire for them; unreachable through the hook (English only) |
+| Simon/Chekhov | `FIXES` export | wired, not consumed | disclosed | the flags are exercised by the tests and the scorer; no door passes `fixes` |
+clean: Holmes (not routed), Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
+
+## 2026-10-27 — the "detail" rule: sixth flag `continuation` for the period binder (`adapters/text/figure-period.en.js`; branch `figure-period-wrap`, no PR)
+fast: 2 files · affected tests: 29 pass (28 + 1 new, with its control: the same text with the flag off leaves the second figure a detail; the appositive "including a $60.0 million amendment payment" stays a detail; flag off by default fails the test) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | continuation | fitted | disclosed | the pattern ("on net sales of") was read from the third filer's unclaimed sentences (post-hoc diagnostic of ladder-40), so its numbers there are a fit: claimed 73 → 86 of 103, wrong 0, planted found 13 → 15 of 20, 3 formerly right claims still unclaimed; the original filers are unchanged (the flag is inert on them: 225/225) and every bar was registered (PREREG-G2-4X) before the flag's performance was computed |
+| Feynman | S2 | cost not in a bar | disclosed | the better period reader makes A1 convict more across measures: shuffled-concept records convicted 42 → 53 of 76 on the third filer. A1 has no measure identity (A3 does); until the join is made, wiring `features.figures` into a verdict without A3 would convict across measures |
+| Greenberg | CONTINUATION `on|with … of` | English | disclosed | an English preposition pattern; the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
+| Simon/Chekhov | `FIXES.continuation` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
+clean: Dijkstra (nothing new), Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
+
+## 2026-10-27 — three headline flags for the period binder: `ordinalDigits`, `fullYearClause`, `periodWords` (`adapters/text/figure-period.en.js`; branch `figure-period-wrap`, no PR)
+fast: 2 files · affected tests: 32 pass (29 + 3 new, each flag with a flag-off control); mutation check: each flag off by default fails a test (ordinalDigits 1, periodWords 2, fullYearClause 1 once a case under a heading naming only a quarter was added, because periodWords covers its two-period cases) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | the three flags | fitted | disclosed | named from the 15 ambiguous pairs of the third filer (9 had a cue, 6 none); on that filer claimed 86 → 95 of 103, wrong 0, planted found 15 → 18 of 20, and exactly the six cue-less pairs stay ambiguous — a FIT; the original filers are unchanged (225/225, 18/20); every bar registered (PREREG-G2-4Y) before the flags' performance was computed |
+| Feynman | ablation | two flags unproven | disclosed | removing `ordinalDigits` or `fullYearClause` alone changes no count on either ground (`periodWords` reads the same cues); they are kept as generality for cases only the constructed tests show, and are the candidates to drop if a fresh filer shows them inert |
+| Feynman | the 60-character window | dev-tuned constant | fixed | the "full year" look-back of 60 characters, chosen on the first two filers, missed a cue 62 characters away; `fullYearClause` looks back to the clause start |
+| Greenberg | `Q_CUE` / `Y_CUE` | English | disclosed | closed English cue words (quarterly, <ordinal> quarter, full-year, annual, consecutive year, fiscal year); the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
+| Simon/Chekhov | `FIXES` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
+clean: Dijkstra, Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
