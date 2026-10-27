@@ -75,3 +75,13 @@ test("FALSIFIER: a budget-exceeded call returns a typed gap and never throws", a
   assert.equal(typeof res.gap, "string");
   assert.equal(res.block, null);
 });
+
+// THE ISTHMUS: a lane whose mechanisms failed to load says so on every verdict, never an empty list read as "nothing to settle".
+test("Isthmus: the lane carries a mechanisms gap, and the block shows it", async () => {
+  const { laneFor, laneBlock } = await import("./opencode-lane.mjs");
+  const info = await laneFor({ ask: "What is 17 times 24?" });
+  assert.ok("mechanismsGap" in info, "FALSIFIER: the lane has no field for a failed mechanism load");
+  if (info.mechanismsGap === null) assert.equal(info.lane, "mechanical");
+  const block = laneBlock({ ...info, lane: "register", mechanismsGap: "the mechanisms did not load (ERR_MODULE_NOT_FOUND)" });
+  assert.match(block, /mechanisms: GAP/);
+});

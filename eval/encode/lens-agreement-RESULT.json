@@ -1,0 +1,114 @@
+{
+ "ranAt": "2026-10-26T18:17:16.700Z",
+ "rows": [
+  {
+   "lang": "eng",
+   "frame": "the president of the France",
+   "encoded": "The president of the France is Emmanuel Macron",
+   "gaps": [],
+   "template": "As of 26 October 2026, the president of the France is Emmanuel Macron.",
+   "copula": "is",
+   "agrees": true
+  },
+  {
+   "lang": "spa",
+   "frame": "el presidente de Francia",
+   "encoded": "El presidente de Francia es Emmanuel Macron",
+   "gaps": [],
+   "template": "Desde el 26 October 2026, el presidente de Francia es Emmanuel Macron.",
+   "copula": "es",
+   "agrees": true
+  },
+  {
+   "lang": "fra",
+   "frame": "le président de France",
+   "encoded": "Le président de France est Emmanuel Macron",
+   "gaps": [],
+   "template": "En date du 26 October 2026, le président de France est Emmanuel Macron.",
+   "copula": "est",
+   "agrees": true
+  },
+  {
+   "lang": "deu",
+   "frame": "der Präsident von Frankreich",
+   "encoded": null,
+   "gaps": [
+    "no_codec"
+   ],
+   "template": "Seit dem 26 October 2026 ist der Präsident von Frankreich Emmanuel Macron.",
+   "copula": null,
+   "agrees": null
+  },
+  {
+   "lang": "ita",
+   "frame": "il presidente di Francia",
+   "encoded": "Il presidente di Francia è Emmanuel Macron",
+   "gaps": [],
+   "template": "Dal 26 October 2026, il presidente di Francia è Emmanuel Macron.",
+   "copula": "è",
+   "agrees": true
+  },
+  {
+   "lang": "por",
+   "frame": "o presidente de França",
+   "encoded": null,
+   "gaps": [
+    "no_codec"
+   ],
+   "template": "Desde 26 October 2026, o presidente de França é Emmanuel Macron.",
+   "copula": null,
+   "agrees": null
+  },
+  {
+   "lang": "rus",
+   "frame": "президент",
+   "encoded": "Президент будет Emmanuel Macron",
+   "gaps": [],
+   "template": "По состоянию на 26 October 2026, президент — это Emmanuel Macron.",
+   "copula": "будет",
+   "agrees": false
+  },
+  {
+   "lang": "arb",
+   "frame": "الرئيس",
+   "encoded": "Emmanuel Macron الرئيس",
+   "gaps": [
+    "nominal_present"
+   ],
+   "template": "اعتبارًا من 26 October 2026، الرئيس هو Emmanuel Macron.",
+   "copula": null,
+   "agrees": "nominal"
+  },
+  {
+   "lang": "jpn",
+   "frame": "フランスの大統領",
+   "encoded": null,
+   "gaps": [
+    "form_unmarked"
+   ],
+   "template": "26 October 2026時点で、フランスの大統領はEmmanuel Macronです。",
+   "copula": null,
+   "agrees": null
+  },
+  {
+   "lang": "hin",
+   "frame": "राष्ट्रपति",
+   "encoded": "राष्ट्रपति Emmanuel Macron है",
+   "gaps": [],
+   "template": "26 October 2026 तक, राष्ट्रपति Emmanuel Macron है।",
+   "copula": "है",
+   "agrees": true
+  },
+  {
+   "lang": "swa",
+   "frame": "rais",
+   "encoded": null,
+   "gaps": [
+    "no_codec"
+   ],
+   "template": "Kuanzia 26 October 2026, rais ni Emmanuel Macron.",
+   "copula": null,
+   "agrees": null
+  }
+ ]
+}

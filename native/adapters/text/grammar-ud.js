@@ -5,7 +5,10 @@
 // gloss(lang, lemma, upos) → the neutral key (English Wiktionary's gloss of the word), so "descubrir" and "discover" are one relation. With no
 // glossary, keys stay the language's own lemmas: two sentences in one language still meet; across languages they do not, and say so.
 //   makeGrammar(lang, { model, tokenizer, glossary }) → { rowsOf(text), claimsOf(text) }
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { homedir } from "node:os";
+import { stemOf } from "../../the-fold/language-grammar.js";
 import { analyse, loadModel, readJsonMaybeGz, loadLexiconFile } from "./ud-parser.js";
 import { tokenizeWith, loadTokenizer } from "./ud-tokenize.js";
 import { bindFigures } from "./figure-binding.js";
@@ -48,9 +51,12 @@ function figureLex(L) {
   };
 }
 
+const EMPTY_PACK = Object.freeze(Object.fromEntries(Object.entries(PACKS.es).map(([k, v]) => [k, v instanceof Set ? new Set() : v instanceof Map ? new Map() : Array.isArray(v) ? [] : typeof v === "boolean" ? false : v && typeof v === "object" ? {} : v])));
 /** makeGrammar(lang, { model, tokenizer, glossary }) — model: loadModel(ud-parser JSON); tokenizer: loadTokenizer(ud-tokenize JSON) */
 export function makeGrammar(lang, { model, tokenizer, glossary = null }) {
-  const L = PACKS[lang]; if (!L) throw new Error(`no grammar pack for ${lang}`);
+  // a language whose codec is on this machine but whose closed-class pack is not filed still DECODES (its UD rows are the codec's own); what
+  // the pack adds (negators, months, units, naming verbs for claims) is empty, and the grammar says so (packGap) — never another language's pack
+  const L = PACKS[lang] ?? EMPTY_PACK;
   const LEX = figureLex(L);
   // the neutral key of a word: the glossary's, else the language's own lemma
   // a verb with its reflexive pronoun ("se llama", "sich verlaufen") reads the senses Wiktionary tags reflexive
@@ -220,10 +226,39 @@ export const UD_PRIORS = { es: { code: "spa", treebank: "ancora" }, fr: { code: 
 const PRIORS = new URL("../../priors", import.meta.url).pathname;
 /** loadGrammar(lang, { priors, glossary }) → the language's grammar from its priors (ud-parser-<code>-<treebank>.json.gz, ud-tokenizer-<code>.json.gz,
  *  unimorph-<code>-pos.json.gz when the parser was trained with it), or null when they are not on disk: that language is a typed gap */
-export async function loadGrammar(lang, { priors = PRIORS, glossary = null } = {}) {
-  const P = UD_PRIORS[lang]; if (!P) return null;
-  const m = `${priors}/ud-parser-${P.code}-${P.treebank}.json.gz`, t = `${priors}/ud-tokenizer-${P.code}.json.gz`, lx = `${priors}/unimorph-${P.code}-pos.json.gz`;
-  if (!existsSync(m) || !existsSync(t)) return null;
-  const model = loadModel(await readJsonMaybeGz(m), { lex: existsSync(lx) ? await loadLexiconFile(lx) : null });
-  return makeGrammar(lang, { model, tokenizer: loadTokenizer(await readJsonMaybeGz(t)), glossary });
+// THE ISTHMUS (native/docs/THE-ISTHMUS.md): any language whose codec is on this machine is read, not only the four above. A codec is committed
+// to the priors when its treebank's licence allows it; one that does not is POINTED AT by janus's manifest (priors/ud-codecs.json) and vendored
+// on the machine that uses it into the local codec cache ($FOLD_UD_CODECS, else ~/.fold/ud-codecs) — janus scripts/vendor-ud-codec.mjs, run by
+// janus nl-eot.mjs on first use. This module reads both places as data; it never runs the vendoring (khora imports janus nowhere).
+export const codecCache = () => process.env.FOLD_UD_CODECS || join(homedir(), ".fold", "ud-codecs");
+const codeOf = (lang) => {
+  const s = String(lang ?? "").toLowerCase();
+  if (UD_PRIORS[s]) return UD_PRIORS[s].code;
+  if (/^[a-z]{3}$/.test(s)) return s;
+  return stemOf(s) ?? null;
+};
+const findCodecFile = (dirs, pred) => { for (const d of dirs) { try { const f = readdirSync(d).find(pred); if (f) return join(d, f); } catch { /* an absent dir holds nothing */ } } return null; };
+const _codecManifests = new Map();
+/** codecStatus(lang) → what this machine holds for the language's codec, and where its source is when it is pointed at (never fetched here). */
+export function codecStatus(lang, { priors = PRIORS, cache = codecCache() } = {}) {
+  const code = codeOf(lang);
+  if (!code) return { code: null, held: false, why: `no ISO 639-3 code for ${lang}` };
+  const held = Boolean(findCodecFile([priors, cache], (f) => f.startsWith(`ud-parser-${code}-`) && f.endsWith(".json.gz")));
+  if (!_codecManifests.has(priors)) { let m = null; try { m = JSON.parse(readFileSync(join(priors, "ud-codecs.json"), "utf8")); } catch { /* no manifest: nothing is pointed at */ } _codecManifests.set(priors, m); }
+  const row = _codecManifests.get(priors)?.codecs?.[code] ?? null;
+  return { code, held, pointed: row ? !row.redistribute : null, licence: row?.licence ?? null, source: row?.source?.repo ?? null,
+    why: held ? null : row && !row.redistribute ? `${code}'s codec is pointed at (${row.licence}, not redistributed): vendor it with janus scripts/vendor-ud-codec.mjs ${code} (janus nl-eot.mjs does on first use)` : `no UD codec is filed for ${code}` };
+}
+
+export async function loadGrammar(lang, { priors = PRIORS, cache = codecCache(), glossary = null } = {}) {
+  const code = codeOf(lang); if (!code) return null;
+  const P = UD_PRIORS[lang] ?? Object.values(UD_PRIORS).find((x) => x.code === code) ?? null;
+  const dirs = [priors, cache];
+  const m = findCodecFile(dirs, (f) => (P ? f === `ud-parser-${P.code}-${P.treebank}.json.gz` : f.startsWith(`ud-parser-${code}-`) && f.endsWith(".json.gz")));
+  const t = findCodecFile(dirs, (f) => f === `ud-tokenizer-${code}.json.gz`), lx = findCodecFile(dirs, (f) => f === `unimorph-${code}-pos.json.gz`);
+  if (!m || !t) return null;
+  const model = loadModel(await readJsonMaybeGz(m), { lex: lx ? await loadLexiconFile(lx) : null });
+  const g = makeGrammar(lang, { model, tokenizer: loadTokenizer(await readJsonMaybeGz(t)), glossary });
+  if (!PACKS[lang]) g.packGap = `no closed-class pack is filed for ${lang}: its rows are read, its claims carry no negators, months, units or naming verbs`;
+  return g;
 }

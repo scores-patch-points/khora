@@ -1261,3 +1261,72 @@ fast: 6 files · 1 affected test file, 5 pass · law: ok (pre-existing dup-heade
 | Greenberg | attach-stage2.mjs | no language default | clean | `RECIPIENT[CODE]` has no fallback; non-English reads through loadGrammar |
 
 clean: Holmes (the package.json hit is the test list).
+
+## 2026-10-26 — the meaning layer reads THE reader's entry: rows on the WeftEntry, atoms from the weft (branch `weft-rows`, stacked on #64)
+
+fast: 7 files · 5 affected test files, 52 pass · law: ok (pre-existing dup-header WARN S17/S96) · reading-pipeline + reader-speed guards 29/29 · full native suite 996 tests, 4 real failures (greekClauses x2, janus second maker, material-doorway), all in main's known set, none new
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Greenberg (self-review, found in the work) | reading.js universal-parse hook | `unknown` language | fixed | a declared language with no stem filed is read with the default priors (read-core's own typed gap); my hook then parsed it with the English parser. Now `no_parser`, no parse; tested |
+| Alexander | weft-atoms.js | the seam | clean | every miss is a typed gap (`no_rows`, `cut_disagrees`, `atoms_failed`); nothing defaults to "don't compose" or to a second parse |
+| Feynman | weft-parity.mjs:35 | `differ.length < 12` | noted | a display cap on printed differences; the counts are over all 664 texts |
+| Simon/Chekhov | weft-atoms.js | production | noted, real | tested and measured (parity, stage) but NOT called by any door or the reason-gate: the stage still runs only in evals |
+| Holmes | stage-run.mjs | `ATOMS_VIA=weft` | clean | the default path is unchanged; the flag is the only new branch |
+
+clean: none silent. Additive law: `readDocument(..., { rows: true })` equals the same read without it, byte for byte, but for `parse` and `parseBy` (tested).
+
+## 2026-10-26 — identity through THE reader's page: atomsOfPage, janus resolve and the holographic test wired as evals (branch `weft-rows`, #66)
+
+fast: 6 files · 3 affected test files · law: ok (pre-existing dup-header WARN S17/S96) · stage 108 pairs unchanged both ways · parity 655/664 unchanged · reading-pipeline + reader-speed 29/29
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Holmes | weft-atoms.test.mjs, the todo | one being or two | noted, real | the learned ranker opens a NEW entity for a repeated name ("Sagard" ... "Sagard"); an identity world on the page then holds two nodes for one being. A `todo` test observed failing; the fault is coref-learned.js's, not weft-atoms.js's |
+| Dijkstra | resolve-run.mjs:18 `tok` | a lowercased last token standing in for a name | disclosed | gold = the one page referent sharing the mention's last name token (atom-world.js keyOf's own rule); English pages only; mentions with none or several are not scored (54 of 82), stated in WEFT-IDENTITY.md |
+| Ostrom | WEFT-IDENTITY.md | scope of the null result | disclosed | "resolve never asserts" is under the default lens (the pool's chance floor, 0.977 at n=43) and an EMPTY neighbour graph; it is not a claim that resolve cannot assert. The stakes (`lens.assertAt`) are the user's to state and none was chosen |
+| Frankfurt | WEFT-IDENTITY.md | no number stands in for a missing prior | clean | no assertAt, no threshold, no tuned constant added |
+| Lévi-Strauss | stash vs the repeated-name problem | | none applies | 2 candidates read (an empty-connector fix, a loose results file); neither bears on coreference |
+| Simon/Chekhov | identity-run.mjs, resolve-run.mjs | evals no test imports | noted | CLI evals by design (like stage-run.mjs); their result is in WEFT-IDENTITY.md and the page module they stand on (`atomsOfPage`) is tested |
+
+clean: Alexander (not routed). The machine was at load average 80+ (other sessions' stage jobs), which made the grammar-loading tests take 4 minutes; all passed.
+
+## 2026-10-26 — identity as cancellation within a plateau [noise, DMD): kernel/identity-cancel.js and its measurement (branch `pipeline-atoms`)
+
+fast: 4 files · 9 tests pass (each refusal a constructed violation first) · law: ok (pre-existing dup-header WARN S17/S96) · production code changed: none (a new pure kernel module, wired into nothing)
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | identity-cancel-run.mjs, the fold-depth rule | the one-shot alternative | disclosed | the rule (shallowest radius with the fewest tied at the best residual) was written before it was run and run ONCE for its result; the script was then re-run to add diagnostics (the wrong-on-supported listing), deterministic, same numbers. It gave no clear gain at n = 28 and is NOT adopted. No constant exists in identity-cancel.js: the margin is read off the candidates' own residual levels |
+| Dijkstra | identity-cancel-run.mjs:16 `tok` | a lowercased last token standing in for a name | disclosed | same rule as atom-world.js keyOf, English pages only; WEFT-IDENTITY.md says some scored ends ("water", "river") are not beings the page names, so the gold is weak there |
+| Holmes | WEFT-IDENTITY.md experiment 4 | one entity or two | noted | the page's repeated names fragment into several referents (the `todo` in weft-atoms.test.mjs); a mention's gold is scored only when exactly one referent shares its name token |
+| Simon/Chekhov | identity-cancel.js | wired into nothing | noted, real | tested and measured, but the stage binder still uses name + DMD shells and the optional `identity` hook is still atomIdentity; wiring is the next step and needs the canonical atoms (see the doc) |
+
+clean: Alexander (not routed).
+
+## 2026-10-26 — all the way, steps 1-4: canonical features, the stage chooser, the second medium (code), the rewiring null as standing (branch `pipeline-atoms`)
+
+fast: 12 files · affected tests: native 65 pass + 1 pre-existing fail (janus second maker, in main's known set); root suite opencode-gather-reason 5 pass 5 fail — **pre-existing on main, verified by stash: identical without this diff** · law: WARN "S0" is the variable `S0` in the grammar-en.js lines edited, not a citation (false positive) · 92 tests of the touched organs pass (2 known todo) · stage 108: rules arm E 19 -> 20 (the membership fix), stage arm unchanged, 0 false-C
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Diaconis | identity-cancel.js standingOf | the null | fixed twice | the first null pooled carried SHARES (ceiling 1.00 everywhere: a one-feature mention is fully carried by some world every time); the second relabelled candidates (keeps every true set in the pool: ceiling 1.00 again); the one that binds REWIRES per feature kind (janus correspond's null), per mention, in counts, at the pool's chance floor. Each failure is recorded in WEFT-IDENTITY.md |
+| Feynman | arrangement-features.js `dir=` | withdrawn | fixed | built from the dative suffix, measured ("drawn TO Hood" read as a transfer out), withdrawn; direction is the position of the same canonical predicate |
+| Greenberg | grammar-en.js memberKind | "X is one of the Ys" | disclosed | an English shape (NUM cop + "of"); the same shape in grammar-ud (es "uno de los", fr "l'un des") is NOT done and is named in the code comment as the grammar's, not a word's |
+| Holmes | cancel-identity.js one-to-one | contest | fixed | two claim ends cancelling to one anchor ("Baleen whales", "toothed whales") contest it; neither is chosen |
+| Ostrom | WEFT-IDENTITY.md experiment 5 | scope | disclosed | code: 79 functions with no name in the older version (new or renamed) are not scored; text: 3 of 5 wrong calls are non-being ends (the gold's fault), said so |
+| Simon/Chekhov | cancel-identity.js | wired | real | wired into the stage binder behind the identity hook; `IDENTITY=cancel` in stage-run; not in any door |
+| Kondo | eval-side null versions | | noted | the eval-side rewiring code was replaced by the kernel's standingOf; nothing dead left in the tree |
+
+clean: Dijkstra (lowercase last-token key, same as before, disclosed), Lévi-Strauss (nothing in the stash bears on it), Marshall (no law edited).
+
+## 2026-10-27 — the weft's identity says which rung it reached: `weftReferents(weft, { identity: true })` (branch `weft-identity-rung`, additive, off by default)
+fast: 3 files · affected tests: 27 native pass; opencode-semantic.test.mjs S-f and S-j fail identically on main without this diff (verified by stash), 7 of its 10 pass either way · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff); WARN P3, see Marshall
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | native/the-fold/weft.js identityOf | `passes.length < 2`, `withCompany.length < 2` | false-positive | counts, not tuned constants: a merge needs two passes to compare and a comparison needs company in two of them; no threshold anywhere |
+| Holmes | native/the-fold/weft.js identityOf | the merge | clean | one entity or two: the record is NOT split and the merge rule (keyed by `ref`) is unchanged; the identity names the groups and says `against: false`; a difference of company convicts nothing |
+| Ostrom | eval on 30 UD English-GUM documents (unregistered sanity run) | scope | disclosed | 54 referents appear in 2+ passes: 36 `raised_difference`, 18 `needs_deeper_reading`, 0 reach rung 2 (united_states: 7 passes, 5 groups); company overlap needs more mass than a corpus of unrelated documents gives, so `raised_difference` there is not evidence of two beings and the standing says so |
+| Simon/Chekhov | weftReferents `identity` | unwired | disclosed | no consumer passes `identity: true` yet (janus kind induction, eval/law/identity-fold*.mjs); the option is tested and importable, and parity with the option off is held byte for byte |
+| Marshall | "P3" in the docstring | cited | false-positive | the `(P3)` is the weft's own property label (weft.js header, THE-HOLOGRAPH.md §1: the fold at a cursor), unchanged text, not a POLICIES.md entry |
+clean: Dijkstra (`refKey` untouched, the slug is not re-derived), Lévi-Strauss (nothing in the stash bears on it).
