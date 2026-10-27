@@ -1348,3 +1348,14 @@ fast: 2 files · affected tests: 29 pass (28 + 1 new, with its control: the same
 | Greenberg | CONTINUATION `on|with … of` | English | disclosed | an English preposition pattern; the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
 | Simon/Chekhov | `FIXES.continuation` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
 clean: Dijkstra (nothing new), Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
+
+## 2026-10-27 — three headline flags for the period binder: `ordinalDigits`, `fullYearClause`, `periodWords` (`adapters/text/figure-period.en.js`; branch `figure-period-wrap`, no PR)
+fast: 2 files · affected tests: 32 pass (29 + 3 new, each flag with a flag-off control); mutation check: each flag off by default fails a test (ordinalDigits 1, periodWords 2, fullYearClause 1 once a case under a heading naming only a quarter was added, because periodWords covers its two-period cases) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | the three flags | fitted | disclosed | named from the 15 ambiguous pairs of the third filer (9 had a cue, 6 none); on that filer claimed 86 → 95 of 103, wrong 0, planted found 15 → 18 of 20, and exactly the six cue-less pairs stay ambiguous — a FIT; the original filers are unchanged (225/225, 18/20); every bar registered (PREREG-G2-4Y) before the flags' performance was computed |
+| Feynman | ablation | two flags unproven | disclosed | removing `ordinalDigits` or `fullYearClause` alone changes no count on either ground (`periodWords` reads the same cues); they are kept as generality for cases only the constructed tests show, and are the candidates to drop if a fresh filer shows them inert |
+| Feynman | the 60-character window | dev-tuned constant | fixed | the "full year" look-back of 60 characters, chosen on the first two filers, missed a cue 62 characters away; `fullYearClause` looks back to the clause start |
+| Greenberg | `Q_CUE` / `Y_CUE` | English | disclosed | closed English cue words (quarterly, <ordinal> quarter, full-year, annual, consecutive year, fiscal year); the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
+| Simon/Chekhov | `FIXES` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
+clean: Dijkstra, Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
