@@ -221,3 +221,17 @@ named, 8 undecided and 4 separated, **all 12 are names in the gold**.
 - **Other languages.** The twin is English's; the gate keeps every other language, and every language with no filed stem, as it was. A no-space script still gets zero mention spans from
   `mentionsOf` (`\p{L}` word bounds), recorded as a typed gap with an owner in `read-core.mjs`.
 - That the registration is independent: hashed and timestamped by this machine's clock and in the same PR as the code.
+
+## referent-read.mjs — the referent ledger against the plain index (pre-registered)
+
+`readWith(text, { referents: true })` adds `entry.referents` (ReadingReferents@1, `native/adapters/text/reading-referents.js`): a referent inserted once and addressed
+`ref_<hash of its INS event>` (never a slug of a spelling), spans content-addressed, mentions bound by CON events, edges between referents per statement, and typed gaps for
+what the spans cannot decide. The plain index (`entry.cast`, `ref:auto:<slug>`) is untouched, so the two arms are one read. The option is off by default and the entry is then byte-identical.
+
+```bash
+GUM_TRAIN=/path/en_gum-ud-train.conllu node eval/referents/referent-read.mjs --slice A,E,F [--out f.json] [--dump-off f.json --dump-only]
+```
+
+Scores name clustering (B-cubed and pairwise, micro-pooled) of both arms over the same gold names (PROPN-headed, non-nested, covered by a plain cast span), a shuffled-assignment control, and
+(with `--dump-off`) hashes of the entries read without the option, to be diffed between the base commit and the branch. The registration is `PREREG-REFERENT-READ.md` (and `-2`, an amendment
+after the first confirmation slice came out red because the harness scored the arms over different universes); `.sha256` and `.time` sit beside each. Read the registrations before the numbers.
