@@ -51,6 +51,7 @@ import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
 import { priorJson, priorGeneration } from "./prior-source.mjs";
+import { figuresOf } from "../adapters/text/figure-period.en.js";
 
 export const READ_CORE = Object.freeze({
   schema: "ReadCore@1",
@@ -431,6 +432,8 @@ export function readWith(text, { address = null, category = null, language = nul
     vocabulary: out?.vocabulary ?? null,
     cast, heard: heardRows, edges, clauses, quality: qualityReport, surprise,
     sentences, pronouns,
+    // OPT-IN (features.figures): the money figures of the document with the period and sign each is about, as atoms with addresses (adapters/text/figure-period.en.js); absent, the entry is exactly what it was
+    ...(features.figures ? { figures: stem === "eng" ? figuresOf(str, { sentences, timePrior: priorJson("time-prior.json") }) : { figures: [], gaps: [{ gap: "figures_english_only", detail: `the period binder reads English; this read is ${stem}` }] } } : {}),
     ...(parsed ? { parse: parsed } : {}),
     ...(selfRead ? { claims: claims ?? [] } : {}),
     error: err, ms: Date.now() - t0,
