@@ -76,4 +76,85 @@ Read it so:
   pack, and the door (`HL_DOOR`, port 11450) was not running when it was measured.
 - That the golden's notion of right is the only one. It counts a binding right when the bound being overlaps a gold mention of the entity,
   which credits a being the cast has merged correctly and a cast artifact that happens to sit on a gold span alike.
-- Anything about the cast itself: sentence-initial words admitted as beings are a different problem (see the PR description).
+- Anything about the cast itself: sentence-initial words admitted as beings are a different problem, measured below by `cast-initial.mjs`.
+
+# The cast: a capital that is only the sentence's
+
+The cast (`read-core.mjs`) names a being what the capital tier names. A word the text never writes lower-case, whose one capital the sentence
+cut calls mid-sentence ("Grab" after a heading with no full stop, "Well" in a transcript), used to pass on that capital: `surfaces.js` read
+"capitalised, never lower-case" as the strongest evidence of a name and skipped the test it runs for every word written both ways. A probe over GUM
+slices B, C and D before this change found 70 of 2,321 cast beings that were one word with every mention at a sentence start; about 32 had no gold mention (IF, Well, First,
+After, Why, While, Actually, Create, Wow, Sometimes …).
+
+A capital is a **convention**, kept more or less by a text, not a rule. `native/adapters/text/conventions.js` is its ledger, in the shape of
+janus's nomos (`NomosRule@1`): four rows (a capital marks a name; a capital opens a sentence; a sentence end is marked; the treebank attests a
+form's use), each with its standing, its giver or builder, its witnesses, the address where the reader stands on it, and where it departs. The
+figures in the witnesses are measured by `convention-witness.mjs` on GUM train and describe how closely English keeps each convention: a name is a
+capital mid-sentence 97.1% of the time, a word that is not a name 3.1%, so a mid-sentence capital is a name 68.9% of the time; a sentence-initial
+capital is a name 8.0% of the time; 9.1% of gold sentences end with no terminal mark. The cast never reads them.
+
+## The change
+
+One branch in `surfaces.js::surfacesFromEvidence`, in the test the file already has. For a single word with no lower-case occurrence in the text,
+`form-usage.js` hands it the received treebank's use of the form (`pos-eng.json`, UD_English-EWT, tag counts kept; read through the repo's own
+`wordclass.js::classifyWord`): `nominal` (tagged NOUN, PROPN or ADJ) and `other`. The same exact tail and the same alpha as the two-sided test asks
+whether `other` exceeds what `nominal` plus the text's own capitals balance. "Grab" (8 uses, all verbs) is refused on its one capital; "Government"
+never is; a form the treebank has not seen is undecided and stays a being; a word the text also writes lower-case is not asked. A refused word
+leaves `entry.cast` and stays in `entry.heard`. English only, and only with a pos prior: another language, or no prior, reads as before.
+No word list, no part-of-speech rule, no lexicon.
+
+```bash
+GUM_TRAIN=/path/to/en_gum-ud-train.conllu node eval/referents/cast-initial.mjs [--set E|A] [--json out.json]
+```
+
+## Pre-registration
+
+`PREREG-CAST.md` (sha256 in `PREREG-CAST.sha`, 2026-10-27T14:13:51Z) fixed the bars and the sets before any code; `PREREG-CAST-A1.md`
+(`PREREG-CAST-A1.sha`, 2026-10-27T14:26:42Z) amended the *mechanism* after slice A was read and before E, B, C or D was scored. It says what A
+overturned: the first mechanism (the lexicon's name-sense share as the null of the tail) was inverted in direction and dropped 22% of the gold-overlapping
+beings on A; no dictionary-only rating separates "Grab" from "Google" (a verb in Wiktionary); and the defect is not the eval's space-join (a newline
+join leaves 26 of 27). The bar numbers were not changed.
+
+| set | draw | role |
+|---|---|---|
+| A | 30 documents, seed 20261110 | design: the rule's form was chosen on it (in-sample) |
+| E | 30 of the 65 documents set aside by seed 20261140, mulberry32 seed 20261150 | confirmation: scored once, after A1 |
+| B, C, D | the pronoun golden's slices | regression of the pronoun binding |
+
+## Result
+
+```
+set E (confirmation, out of sample): cast beings 869 -> 843; initial-only single-word 37 (14 with a gold mention, 23 without)
+B1  held     15 of 23 = 65.2%  initial-only beings without a gold mention dropped (bar >= 50%)
+B2  held     initial-only with a gold mention dropped 1 of 14 = 7.1% (bar <= 25%); all gold-overlapping dropped 7 of 831 = 0.8% (bar <= 1.0%)
+B3  held     share of cast beings with a gold mention 95.63% -> 97.75%
+B4  held     0 beings added, 0 multi-word surfaces dropped
+B5  held     30 documents of E (pos prior withheld) and a German passage read to byte-identical entries by the base commit and by this one
+B6  held     pronoun golden, B+C+D, default run: shipped 18 right / 44 wrong, shipped + np 49 right / 29 wrong; the same as before
+K1  drop every initial-only being: B2 FAILED (14 of 14 dropped), as built
+K2  shuffled giver: B1 FAILED (1 of 23) and B2 FAILED (9 of 831 = 1.1%), as built
+```
+
+Design set A, for comparison (in-sample; the bars were registered for E): 827 -> 804; B1 63.6% (7 of 11); B2 would FAIL, 6 of 16 initial-only with gold
+(37.5%: "Anything", "We", "Three", "Each", "Figure", "He": a pronoun, a determiner, a numeral, a caption) and 12 of 806 gold-overlapping (1.5%).
+
+The 26 dropped on E: 15 initial-only without gold (However, Together, Imagine, Try, How ×2, Probably, While, Yeah, Oh ×2, Why, On, Somehow, Who),
+1 initial-only with gold (What), 6 other gold-overlapping (Let, My, Still, Figure, Hi, May), 4 other without (Hey ×2, Yeah, Wow). The 8 initial-only
+beings without gold that stay on E: Due, Describe, Distinguish, Sorry, Breathing, Mm, Okay, Operating ("Okay" is tagged ADJ and INTJ in the treebank, so
+its nominal share is not low; the imperatives the treebank has not seen are undecided). Reported with no bar: the narrower class (NOUN and PROPN only)
+drops 18 of the 23 but 26 of 831 gold-overlapping beings (3.1%); on A the extra losses were mostly demonyms.
+
+## Not shown
+
+- That it transfers beyond English, beyond GUM's genres, or to the hyperlexicon door's answers. E is one draw of 30 documents with 23 false admissions
+  in it: 15 of 23 has a wide interval.
+- That the pronoun bindings improve: the golden is unchanged to the digit, which is what B6 asked, not more.
+- The cause. The sentence cut does not break at a heading that carries no full stop, with or without a newline; the cast only decides what to do with
+  the lone capital the cut leaves. Eight false admissions stay on E, and a fix in `spans.js::splitSentences` would change every downstream count.
+- A case-aware prior. `pos-eng.json` is keyed on the case-folded form, so a name whose lower-case twin is a function word ("May", "Will") is judged by
+  the twin's use and is refused unless the text's capitals nearly balance it. That is one of the 7 gold-overlapping beings dropped on E.
+- That the adjective belongs in the nominal class on principle: it was added after A showed the narrower class dropping 17 demonym occurrences, a choice
+  made by reading A and recorded in A1.
+- That "gold-overlapping" means "a being": GUM marks "What", "Let", "My" and "Hi" as mentions, and the bars count their loss against the rule.
+- That the registration is independent of me: it is hashed and timestamped by this machine's clock and lands in the same PR as the code, so it shows
+  the order of work (A1 before E) to a reader who trusts the clock, and nothing more.

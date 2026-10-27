@@ -45,6 +45,7 @@ import * as P from "../adapters/text/priors.js";
 import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
 import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
+import { formUsageOf } from "../adapters/text/form-usage.js";
 import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
@@ -297,6 +298,10 @@ const edgeOf = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.la
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
 export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null } = {}) {
+  // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
+  // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
+  // wins; null turns it off.
+  const { formUsage: callerUsage, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -320,7 +325,7 @@ export function readWith(text, { address = null, category = null, language = nul
   try {
     // a surface's own organs (readerOptions: classifyWord, extendRelations, sameAct, roleConfig …) join the one assembly; the
     // abbreviations are this read's, so a surface never builds a reader beside it
-    R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...readerOptions });
+    R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...readerOrgans });
     ({ report: out, chunks } = relationsFor([{ text: str }], { reader: R, language: language ? stem : null }));
     // selfRead: the material read back as an answer against itself, so every claim carries the reader's verdict and its span
     if (selfRead && out?.read) claims = out.read(str)?.claims ?? [];
@@ -353,9 +358,15 @@ export function readWith(text, { address = null, category = null, language = nul
   // nouns are not beings. SCOPE (Greenberg): the capital tier is a cased-script test. In a caseless script it names nothing, so
   // every row is `heard` and the cast is empty, as the second cast this replaced also was; in German, where every noun is
   // capitalised, every noun is a being. A being test that holds across scripts is owed, not implied.
-  let cast = [], heardRows = [];
+  let cast = [], heardRows = [], formUsageReport = null;
   try {
-    const capital = new Set(extractSurfaces(cuts, {}).map((x) => x.surface));
+    // English only: the pos prior is English's and a capital is a convention of the language (conventions.js). Another language, or no
+    // pos prior (a typed gap already: `no_pos_prior`), reads the capital tier exactly as it was.
+    const formUsage = callerUsage !== undefined ? callerUsage : stem === "eng" ? formUsageOf(pr.posPrior) : null;
+    const capitalSurfaces = extractSurfaces(cuts, formUsage ? { formUsage } : {});
+    const capital = new Set(capitalSurfaces.map((x) => x.surface));
+    // what the treebank's use refused, kept beside the entry (not enumerable: the wire stays what it was) so the rule is auditable
+    if (formUsage) formUsageReport = { convention: "capital-marks-a-name", giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s)) };
     const bytes = byteOffsets(str);
     const byRef = new Map();
     for (const ev of out?.index?.events ?? []) {
@@ -417,6 +428,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // not enumerable, so the entry stays plain data on the wire and in the weft
   Object.defineProperty(entry, "reader", { value: R, enumerable: false });
   Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
+  Object.defineProperty(entry, "formUsageReport", { value: formUsageReport, enumerable: false });
   return entry;
 }
 

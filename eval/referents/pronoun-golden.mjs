@@ -37,8 +37,8 @@ const arg = (k, d) => { const i = process.argv.indexOf(k); return i > 0 ? proces
 const flag = (k) => process.argv.includes(k);
 
 /** mulberry32 */
-const rng = (seed) => { let s = seed >>> 0; return () => { s = (s + 0x6d2b79f5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
-const shuffled = (n, r) => { const a = Array.from({ length: n }, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+export const rng = (seed) => { let s = seed >>> 0; return () => { s = (s + 0x6d2b79f5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; };
+export const shuffled = (n, r) => { const a = Array.from({ length: n }, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 
 /** GUM conllu → documents → sentences (text, tokens with char offsets) → gold mentions (entity id, span, head token). */
 export function parseGum(file) {
@@ -72,13 +72,14 @@ function finish(s) {
 /** The three slices. */
 export function slicesOf(docs) {
   const ord = docs.filter((d) => d.sents.length >= 20).sort((a, b) => (a.id < b.id ? -1 : 1));
-  const A = new Set(shuffled(ord.length, rng(20261110)).slice(0, 30).map((i) => ord[i].id));
+  const Adocs = shuffled(ord.length, rng(20261110)).slice(0, 30).map((i) => ord[i]), A = new Set(Adocs.map((d) => d.id));
   const restB = ord.filter((d) => !A.has(d.id)), B = shuffled(restB.length, rng(20261120)).slice(0, 30).map((i) => restB[i]), inB = new Set(B.map((d) => d.id));
   const restC = ord.filter((d) => !A.has(d.id) && !inB.has(d.id)), C = shuffled(restC.length, rng(20261130)).slice(0, 30).map((i) => restC[i]), inC = new Set(C.map((d) => d.id));
   const unused = ord.filter((d) => !A.has(d.id) && !inB.has(d.id) && !inC.has(d.id));
-  const aside = new Set(shuffled(unused.length, rng(20261140)).slice(0, 65).map((i) => unused[i].id)), left = unused.filter((d) => !aside.has(d.id));
+  const asideDocs = shuffled(unused.length, rng(20261140)).slice(0, 65).map((i) => unused[i]), aside = new Set(asideDocs.map((d) => d.id)), left = unused.filter((d) => !aside.has(d.id));
   const D = shuffled(left.length, rng(20261141)).slice(0, 30).map((i) => left[i]);
-  return { B, C, D };
+  // A (spent by the pronoun work) and the 65 set aside by seed 20261140 are drawn here too, for the evals that need a slice no earlier work read
+  return { B, C, D, A: Adocs, aside: asideDocs };
 }
 
 /** The reader's bindings on one document against the gold: { answerable, right, wrong }. */
