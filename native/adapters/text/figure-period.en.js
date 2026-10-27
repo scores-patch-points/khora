@@ -37,6 +37,16 @@ const NUMBER_WORDS = Object.freeze({ one: 1, two: 2, three: 3, four: 4, five: 5,
 const ORDINALS = Object.freeze({ first: 1, second: 2, third: 3, fourth: 4 });
 const COMPARATIVE = /\b(?:as\s+)?compared\s+(?:to|with)\b|\bversus\b|\bvs\.?\s/gi;
 const FORWARD = /\b(?:outlook|guidance|anticipate[sd]?|expects?|expected|forecast|to be|will\b|projected)/i;
+// THE WRAP FIXES (each a flag, so each can be ablated; all on by default). Named from the held-out pass of PREREG-G2-4 (ladder-36), so they are FITTED to that filer's errors: a number they
+// produce on that filer is a fit, not a rate.
+//   wrap: a unit continues across a newline when the line before has no sentence-final mark and the next begins with a lowercase letter or a digit ("... ended December 31,\n2016, the Company ...")
+//   yearless: "the six months ended June 30, ... for 2011 compared to ... for 2010": one duration, and the year of each "for <year>" that follows
+//   ytd: "year to date ... the third quarter 2020" is three months per quarter so far
+//   qnotation: "Q4 2011" and "2011 Q4" are quarters
+//   fromComparative: "from $492 million in the prior year quarter" opens a comparative clause
+export const FIXES = Object.freeze({ wrap: true, yearless: true, ytd: true, qnotation: true, fromComparative: true });
+const FROM_PRIOR = /\bfrom\s+(?=\(?\$?\s?\d[\d,]*(?:\.\d+)?\)?\s*(?:million|billion)\b[^.;]{0,50}?\b(?:prior|previous|year[- ]ago|last\s+year|year\s+earlier|a\s+year\s+(?:ago|earlier)))/gi;
+const FINAL = /[.!?;:]["”’')\]]*\s*$/, CONTINUES = /^\s*[\p{Ll}\p{Nd}]/u;
 const NEGATIVE_CUE = /\b(?:loss(?:es)?|deficit)\b|\bused\s+in\b/gi, POSITIVE_CUE = /\b(?:income|profit|earnings)\b|\bprovided\s+by\b/gi;
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -54,15 +64,15 @@ export function monthTable(timePrior) {
 }
 
 /** The period expressions of one stretch of text, in order of position: [{ kind, months?, end, calendar?, a, b, text }] (offsets relative to `str`). */
-export function periodsIn(str, months, { gaps = null } = {}) {
+export function periodsIn(str, months, { gaps = null, fixes = FIXES } = {}) {
   const out = [], taken = [];
   const free = (a, b) => !taken.some(([x, y]) => a < y && b > x);
   const take = (a, b) => taken.push([a, b]);
   if (months.size) {
     const MON = [...months.keys()].sort((x, y) => y.length - x.length).join("|"), DATE = String.raw`(?<mon>${MON})[\s,.]+(?<day>\d{1,2})(?:st|nd|rd|th)?,?\s+(?<year>\d{4})`;
     // 1. "<units> ended <date>": the units name one or several durations ("three and six months", "three months and year", "quarter and year")
-    for (const m of str.matchAll(new RegExp(String.raw`\bended\s+${DATE}`, "gi"))) {
-      const endAt = m.index, from = Math.max(0, endAt - 90), back = str.slice(from, endAt);
+    const durationsBefore = (endAt) => {
+      const from = Math.max(0, endAt - 90), back = str.slice(from, endAt);
       // the tokens just before "ended", contiguous (only spaces and commas between them), at most nine
       const all = [...back.matchAll(/[A-Za-z0-9]+/g)].map((t) => ({ t: t[0].toLowerCase(), at: from + t.index, end: from + t.index + t[0].length }));
       const toks = []; for (let i = all.length - 1; i >= 0 && toks.length < 9; i--) { const gap = str.slice(all[i].end, i === all.length - 1 ? endAt : all[i + 1].at); if (!/^[\s,-]*$/.test(gap)) break; toks.unshift(all[i]); }
@@ -74,15 +84,34 @@ export function periodsIn(str, months, { gaps = null } = {}) {
         else if (t === "months" || t === "month") { if (pending.length) { durations.push(...pending); pending = []; } }
         else if (t === "quarter") { durations.push(3); mark(tk); } else if (t === "year") { durations.push(12); mark(tk); }
       }
+      return { durations, first };
+    };
+    for (const m of str.matchAll(new RegExp(String.raw`\bended\s+${DATE}`, "gi"))) {
+      const endAt = m.index, { durations, first } = durationsBefore(endAt);
       const end = dateOf(Number(m.groups.year), months.get(m.groups.mon.toLowerCase()), Number(m.groups.day));
       const a = first ?? endAt, b = endAt + m[0].length;
       if (durations.length && free(a, b)) { take(a, b); for (const d of durations) out.push({ kind: "duration", months: d, end, a, b, text: str.slice(a, b).trim() }); }
+    }
+    // 1b. (fixes.yearless) a date with no year: one duration, and each "for <year>" after it gives the year of one period; the period is placed at that year phrase, with `via` the words that gave the month and day
+    if (fixes.yearless) for (const m of str.matchAll(new RegExp(String.raw`\bended\s+(?<mon>${MON})[\s.]+(?<day>\d{1,2})(?:st|nd|rd|th)?(?!\d)(?!,?\s*\d{4}\b)`, "gi"))) {
+      const endAt = m.index, { durations, first } = durationsBefore(endAt); if (durations.length !== 1) continue;
+      const mon = months.get(m.groups.mon.toLowerCase()), day = Number(m.groups.day), after = endAt + m[0].length, from = first ?? endAt;
+      const years = [...str.slice(after).matchAll(/\b(?:for|in|during)\s+(?:the\s+(?:full[- ]year|year)\s+)?(?<year>(?:19|20)\d{2})\b/gi)].map((y) => ({ y: Number(y.groups.year), a: after + y.index, b: after + y.index + y[0].length })).filter((y) => free(y.a, y.b));
+      if (!years.length || !free(from, after)) continue;
+      take(from, after);
+      for (const y of years) { take(y.a, y.b); out.push({ kind: "duration", months: durations[0], end: dateOf(y.y, mon, day), a: y.a, b: y.b, text: str.slice(y.a, y.b), via: [from, after] }); }
     }
     // 2. an instant: "at / as of <date>"
     for (const m of str.matchAll(new RegExp(String.raw`\b(?:at|as\s+of)\s+${DATE}`, "gi"))) { const a = m.index, b = a + m[0].length; if (free(a, b)) { take(a, b); out.push({ kind: "instant", end: dateOf(Number(m.groups.year), months.get(m.groups.mon.toLowerCase()), Number(m.groups.day)), a, b, text: m[0] }); } }
   } else if (gaps && /\b(?:ended|at|as\s+of)\s+\p{L}+\.?\s+\d{1,2},?\s+\d{4}/u.test(str)) gaps.push({ gap: "no_time_prior", detail: "a period needs a month name and TimePrior@1 is absent" });
   // 3. a quarter named by ordinal and year ("the second quarter of 2021", "2017 fourth quarter"), 3 months on a calendar quarter
   const ORD = Object.keys(ORDINALS).join("|");
+  // 3a. (fixes.ytd) "year to date ... the third quarter of 2020": the quarters so far, three months each
+  if (fixes.ytd) for (const re of [new RegExp(String.raw`\byear[- ]to[- ]date\b[^.;]{0,60}?\b(?<ord>${ORD})\s+quarter(?:\s+of)?(?:\s+fiscal)?\s*,?\s*(?<year>\d{4})\b`, "gi"), new RegExp(String.raw`\b(?<ord>${ORD})\s+quarter(?:\s+of)?(?:\s+fiscal)?\s*,?\s*(?<year>\d{4})\b[^.;]{0,30}?\byear[- ]to[- ]date\b`, "gi")])
+    for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); const q = ORDINALS[m.groups.ord.toLowerCase()]; out.push({ kind: "duration", months: 3 * q, end: quarterEnd(Number(m.groups.year), q), calendar: "assumed", a, b, text: m[0] }); }
+  // 3b. (fixes.qnotation) "Q4 2011", "Q4, 2011", "2011 Q4"
+  if (fixes.qnotation) for (const re of [/\bQ(?<q>[1-4])\s*,?\s*(?:of\s+)?(?<year>(?:19|20)\d{2})\b/g, /\b(?<year>(?:19|20)\d{2})\s+Q(?<q>[1-4])\b/g])
+    for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); out.push({ kind: "duration", months: 3, end: quarterEnd(Number(m.groups.year), Number(m.groups.q)), calendar: "assumed", a, b, text: m[0] }); }
   for (const re of [new RegExp(String.raw`\b(?<ord>${ORD})\s+quarter(?:\s+of)?(?:\s+fiscal)?\s*,?\s*(?<year>\d{4})\b`, "gi"), new RegExp(String.raw`\b(?<year>\d{4})\s+(?<ord>${ORD})\s+quarter\b`, "gi")])
     for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); out.push({ kind: "duration", months: 3, end: quarterEnd(Number(m.groups.year), ORDINALS[m.groups.ord.toLowerCase()]), calendar: "assumed", a, b, text: m[0] });
       const tail = str.slice(b, b + 20).match(/^\s+and\s+full[- ]year/i); if (tail) { out.push({ kind: "duration", months: 12, end: dateOf(Number(m.groups.year), 12, 31), calendar: "assumed", a, b: b + tail[0].length, text: m[0] + tail[0] }); take(b, b + tail[0].length); } }
@@ -100,18 +129,25 @@ export function periodsIn(str, months, { gaps = null } = {}) {
 const shiftPeriod = (p, by) => ({ ...p, end: shiftYear(p.end, by) });
 const NUM = /(\(?)\$?\s?(\(?)(\d[\d,]*(?:\.\d+)?)\)?\s*(million|billion)\b/gi;
 
-/** The units to read: the caller's sentences (offsets in `text`), cut again at newlines, or an internal cut. */
-function unitsOf(text, sentences) {
+/** The units to read: the caller's sentences (offsets in `text`), cut again at newlines, or an internal cut; with `wrap`, adjacent pieces that are one sentence across a line wrap are joined again (the newline stays in the text, so offsets still index `text`). */
+function unitsOf(text, sentences, wrap) {
   const base = Array.isArray(sentences) && sentences.length ? sentences.map((s) => ({ text: s.text, offset: s.offset })) : [...text.matchAll(/[^\n]+/g)].map((m) => ({ text: m[0], offset: m.index }));
   const out = [];
   for (const s of base) { let o = 0; for (const piece of s.text.split("\n")) { if (piece.trim()) out.push({ text: piece, offset: s.offset + o }); o += piece.length + 1; } }
-  return out;
+  if (!wrap) return out;
+  const merged = [];
+  for (const u of out) {
+    const prev = merged[merged.length - 1];
+    if (prev && /^[ \t]*\n[ \t]*$/.test(text.slice(prev.offset + prev.text.length, u.offset)) && !FINAL.test(prev.text) && CONTINUES.test(u.text)) { prev.text = text.slice(prev.offset, u.offset + u.text.length); continue; }
+    merged.push({ ...u });
+  }
+  return merged;
 }
 
-export function figuresOf(text, { sentences = null, timePrior = null } = {}) {
-  const str = String(text ?? ""), gaps = [], months = monthTable(timePrior);
+export function figuresOf(text, { sentences = null, timePrior = null, fixes = null } = {}) {
+  const str = String(text ?? ""), gaps = [], months = monthTable(timePrior), fx = { ...FIXES, ...(fixes ?? {}) };
   if (!months.size) gaps.push({ gap: "no_time_prior", detail: "TimePrior@1 is absent: periods that need a month name are not read" });
-  const units = unitsOf(str, sentences);
+  const units = unitsOf(str, sentences, fx.wrap);
   // FRAMES: lines that name a period and state no money figure and no forward-looking cue
   const frames = []; let lead = true;
   for (const u of units) {
@@ -120,7 +156,7 @@ export function figuresOf(text, { sentences = null, timePrior = null } = {}) {
     // the lead region (up to the first line that states a money figure) may set a frame by any line naming a period; after it only a heading may (short, no sentence punctuation at its end)
     const headingShaped = u.text.trim().length <= 120 && !/[.,;]\s*$/.test(u.text.trim()) || /:\s*$/.test(u.text.trim());
     if (hasFigure || u.text.length > 220 || FORWARD.test(u.text) || !(lead || headingShaped)) continue;
-    const ps = periodsIn(u.text, months); if (!ps.length) continue;
+    const ps = periodsIn(u.text, months, { fixes: fx }); if (!ps.length) continue;
     const cut = [...u.text.matchAll(COMPARATIVE)][0]; const split = cut ? cut.index : u.text.length;
     const cur = ps.filter((p) => p.a < split), cmp = ps.filter((p) => p.a >= split);
     if (!cur.length) continue;
@@ -136,9 +172,10 @@ export function figuresOf(text, { sentences = null, timePrior = null } = {}) {
     for (const m of u.text.matchAll(/(?:compared\s+(?:to|with)|versus|and)\s+(zero)\b|\b(zero)\s+and\b/gi)) { const a = m.index + m[0].toLowerCase().indexOf("zero"); figs.push({ a, b: a + 4, value: 0, scale: 1, stated: 0, text: "zero", parenNegative: false }); }
     if (!figs.length) continue; figs.sort((x, y) => x.a - y.a);
     // clauses: split at comparative markers
-    const cuts = [0, ...[...u.text.matchAll(COMPARATIVE)].map((m) => m.index), u.text.length];
+    const cutAt = [...u.text.matchAll(COMPARATIVE)].map((m) => m.index); if (fx.fromComparative) for (const m of u.text.matchAll(FROM_PRIOR)) cutAt.push(m.index);
+    const cuts = [0, ...[...new Set(cutAt)].sort((x, y) => x - y), u.text.length];
     const clauses = []; for (let i = 0; i < cuts.length - 1; i++) clauses.push({ a: cuts[i], b: cuts[i + 1], comparative: i > 0 });
-    const periods = periodsIn(u.text, months, { gaps });
+    const periods = periodsIn(u.text, months, { gaps, fixes: fx });
     // PAIRING in each clause. A phrase such as "for the three and six months ended ..." is a BLOCK of one or several durations. A block governs the figures just before it
     // (or, when none stands before it, those just after it up to the next block): as many figures as durations, by order, or all of them when it names one duration.
     // A figure no block governs is a detail of the sentence ("... and the $60.0 million amendment payment") and gets no period of its own.
@@ -181,7 +218,7 @@ export function figuresOf(text, { sentences = null, timePrior = null } = {}) {
         const cues = [...[...win.matchAll(NEGATIVE_CUE)].map((m) => ({ at: m.index, len: m[0].length, p: "negative" })), ...[...win.matchAll(POSITIVE_CUE)].map((m) => ({ at: m.index, len: m[0].length, p: "positive" }))].sort((x, y) => y.at - x.at);
         if (f.parenNegative) { polarity = "negative"; polaritySpan = [u.offset + f.a, u.offset + f.b]; } else if (cues.length) { polarity = cues[0].p; polaritySpan = [u.offset + from + cues[0].at, u.offset + from + cues[0].at + cues[0].len]; }
         else if (i > 0 && /^[\s,]*(?:and|or)?[\s,]*$/i.test(u.text.slice(inClause[i - 1].b, f.a).replace(/\s*(?:million|billion)\s*$/i, ""))) { const pf = figures[figures.length - 1]; if (pf) { polarity = pf.polarity; polaritySpan = pf.polaritySpan; } }
-        figures.push({ value: f.value, scale: f.scale, stated: f.stated, text: f.text, span: [u.offset + f.a, u.offset + f.b], sentence: [u.offset, u.offset + u.text.length], period, basis, periodSpan, frameSpan, ...(candidates ? { candidates } : {}), comparative: cl.comparative, polarity, polaritySpan, forwardLooking: forward });
+        figures.push({ value: f.value, scale: f.scale, stated: f.stated, text: f.text, span: [u.offset + f.a, u.offset + f.b], sentence: [u.offset, u.offset + u.text.length], period, basis, periodSpan, ...(own?.via ? { partSpan: [u.offset + own.via[0], u.offset + own.via[1]] } : {}), frameSpan, ...(candidates ? { candidates } : {}), comparative: cl.comparative, polarity, polaritySpan, forwardLooking: forward });
       }
     }
   }

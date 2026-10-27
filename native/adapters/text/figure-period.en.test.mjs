@@ -138,3 +138,69 @@ test("deterministic: the same text gives the same figures", () => {
   const t = "Revenues were $15.0 million for the three months ended March 31, 2022 compared to $12.0 million a year ago. Net loss was $2.0 million.";
   assert.equal(JSON.stringify(figuresOf(t, { timePrior: TP })), JSON.stringify(figuresOf(t, { timePrior: TP })));
 });
+
+// ---- the wrap fixes (each a flag; each case has its control: the same text with that flag off must give the wrong answer the fix exists to remove) ----
+import { FIXES } from "./figure-period.en.js";
+const OFF = (name) => ({ [name]: false });
+const wrapped = "Acme Reports Fourth Quarter Ended December 31, 2016 Results\n\nFor the twelve months ended December 31,\n2016, the Company reported net income of $119.4 million, or $1.82 per diluted share, on net sales of $1.85 billion, compared to\nnet income of $104.3 million, or $1.50 per diluted share, on net sales of $1.77 billion.";
+
+test("wrap: a sentence broken across lines keeps its period, and its comparative takes the year before", () => {
+  const f = only(wrapped);
+  assert.deepEqual(f.map(per), ["12mo 2016-12-31", "12mo 2016-12-31", "12mo 2015-12-31", "12mo 2015-12-31"]);
+  assert.equal(f[0].basis, "sentence"); assert.match(wrapped.slice(...f[0].periodSpan), /twelve months ended December 31,\n2016/);
+  const off = only(wrapped, { fixes: OFF("wrap") });
+  assert.equal(per(off[0]), "3mo 2016-12-31", "without the join the figure falls to the heading above it: a quarter, the wrong period");
+});
+
+test("wrap: a line that ends a sentence, or a line that starts with a capital, is a boundary; a heading keeps its frame", () => {
+  const t = "Acme Reports First Quarter Ended March 31, 2018 Results\nRevenues were $5.0 million.\nNet income was $1.0 million.";
+  const f = only(t);
+  assert.deepEqual(f.map(per), ["3mo 2018-03-31", "3mo 2018-03-31"]); assert.equal(f[0].basis, "frame"); assert.equal(f[1].basis, "frame");
+  assert.deepEqual(only(t, { fixes: OFF("wrap") }).map(per), f.map(per), "nothing to join, so the flag changes nothing here");
+});
+
+test("wrap: a digit after an unfinished line continues it ('Q4' / '2010 Net Income')", () => {
+  const f = only("Acme Reports Fourth Quarter and Full Year 2010 Results\nQ4\n2010 Net Income of $4.9 Million, or $0.07 per Share");
+  assert.equal(per(f[0]), "3mo 2010-12-31"); assert.equal(f[0].basis, "sentence");
+});
+
+test("yearless: 'the six months ended June 30' with the years after it ('for 2011 ... for 2010')", () => {
+  const t = "For the six months ended June 30, the Company reported net income of $6.5 million, or $0.09 per diluted share, on net sales of $509 million for 2011 compared to a net loss of $144.7 million, or $4.78 per diluted share, on net sales of $228 million for 2010.";
+  const f = only(t);
+  assert.deepEqual(f.map(per), ["6mo 2011-06-30", "6mo 2011-06-30", "6mo 2010-06-30", "6mo 2010-06-30"]);
+  assert.equal(f[2].polarity, "negative");
+  assert.match(t.slice(...f[0].partSpan), /six months ended June 30/); assert.match(t.slice(...f[0].periodSpan), /for 2011/);
+  assert.equal(per(only(t, { fixes: OFF("yearless") })[0]), "12mo 2011-12-31", "without it 'for 2011' is read as the whole year");
+});
+
+test("yearless: no year anywhere after the date means no guess from this rule (the older reading stands)", () => {
+  const f = only("For the six months ended June 30, the Company reported net income of $6.5 million.");
+  assert.equal(f[0].period, null);
+});
+
+test("ytd: 'year to date at the close of the third quarter 2020' is nine months", () => {
+  const f = only("Operating cash flow was $107.1 million and free cash flow was $93.4 million year to date at the close of the third quarter 2020, which compares to a burn.");
+  assert.equal(per(f[0]), "9mo 2020-09-30");
+  assert.equal(per(only("Operating cash flow was $107.1 million year to date at the close of the third quarter 2020.", { fixes: OFF("ytd") })[0]), "3mo 2020-09-30");
+});
+
+test("qnotation: 'Q4 2011' is a quarter even when the heading above names the quarter and the full year", () => {
+  const t = "Acme Announces Fourth Quarter and Full Year 2011 Results\nQ4 2011 Net Income of $7.5 Million,\nor $0.11 per Share";
+  const f = only(t);
+  assert.equal(per(f[0]), "3mo 2011-12-31"); assert.equal(f[0].basis, "sentence");
+  assert.equal(only(t, { fixes: OFF("qnotation") })[0].basis, "ambiguous", "without it the figure carries both candidates");
+});
+
+test("fromComparative: 'from $492 million in the prior year quarter' is the comparative period, a year earlier", () => {
+  const t = "For the third quarter of 2015, the Company's\nnet sales increased 8 percent to a record $531 million from $492 million in the prior year quarter, and operating income rose.";
+  const f = only(t);
+  assert.deepEqual(f.map(per), ["3mo 2015-09-30", "3mo 2014-09-30"]); assert.equal(f[1].basis, "comparative-shifted"); assert.equal(f[1].comparative, true);
+  assert.equal(per(only(t, { fixes: OFF("fromComparative") })[1]), "3mo 2015-09-30", "without it the prior-year figure gets the current period");
+  assert.equal(per(only("Revenues rose to $5.0 million from $4.0 million in 2020.")[1]), "12mo 2020-12-31", "'from' with no prior-year words is not a comparative cut");
+});
+
+test("the fixes change nothing on text with none of these shapes", () => {
+  const t = "Acme Reports First Quarter Ended March 31, 2018 Results\n\nRevenues were $15.0 million for the three months ended March 31, 2018 compared to $12.0 million for the three months ended March 31, 2017. Net loss was $2.0 million.\nCash was $8.0 million at March 31, 2018.";
+  const all = Object.fromEntries(Object.keys(FIXES).map((k) => [k, false]));
+  assert.equal(JSON.stringify(figuresOf(t, { timePrior: TP })), JSON.stringify(figuresOf(t, { timePrior: TP, fixes: all })));
+});
