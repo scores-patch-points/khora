@@ -43,7 +43,10 @@ import { classifyWord, dominantClass } from "../adapters/text/wordclass.js";
 import { createLemmatizer, morphologyFromPrior } from "../adapters/text/morphology.js";
 import * as P from "../adapters/text/priors.js";
 import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
+import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
+import { formUsageFor } from "../adapters/text/form-usage.js";
+import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
@@ -60,7 +63,7 @@ export const READ_CORE = Object.freeze({
 // ── priors ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 /** The received priors, from data handed in. Data-gated: an absent piece leaves that leg bare (exact match), never a guess. */
-export function buildPriors({ pos = null, posLexicon = null, morphology = null, unimorph = null, punctuation = null, dotted = null, stem = null } = {}) {
+export function buildPriors({ pos = null, posLexicon = null, morphology = null, unimorph = null, punctuation = null, dotted = null, conventions = null, stem = null } = {}) {
   // a copy, so the class lexicon rides this reader's prior and never the shared one other organs read
   const posPrior = pos ? (posLexicon ? { ...pos, lexicon: posLexicon } : pos) : null;
   const morph = morphology ? morphologyFromPrior(morphology) : null;
@@ -88,7 +91,7 @@ export function buildPriors({ pos = null, posLexicon = null, morphology = null, 
   if (!lemmatizer) gaps.push({ gap: "no_morphology", stem, detail: `no morphology prior for ${stem ?? "?"}: verbs match exactly` });
   if (!punctuation) gaps.push({ gap: "no_punctuation_prior", stem, detail: `punctuation-${stem ?? "?"}.json absent: abbreviations come from the text and the hyperlexicon only` });
   if (!dotted) gaps.push({ gap: "no_dotted_prior", stem, detail: `dotted-${stem ?? "?"}.json absent: only the live hyperlexicon knows the words written with their period` });
-  return { stem, posPrior, verbForms: forms.size ? forms : null, lemmatizer, punctuation: punctuation ?? null, dotted: dotted ? new Set(dotted.words || []) : null, dottedGiver: dotted?.giver ?? null, gaps };
+  return { stem, posPrior, verbForms: forms.size ? forms : null, lemmatizer, punctuation: punctuation ?? null, dotted: dotted ? new Set(dotted.words || []) : null, dottedGiver: dotted?.giver ?? null, conventions: conventions ?? null, gaps };
 }
 
 const priorCache = new Map();
@@ -104,6 +107,7 @@ export function priorsFor(language = "eng") {
     morphology: priorJson(`morphology-${stem}.json`),
     punctuation: priorJson(`punctuation-${stem}.json`),
     dotted: priorJson(`dotted-${stem}.json`),
+    conventions: priorJson(`conventions-${stem}.json`),
   });
   if (priorCache.size > 16) priorCache.clear();
   priorCache.set(key, built);
@@ -296,6 +300,10 @@ const edgeOf = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.la
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
 export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null } = {}) {
+  // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
+  // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
+  // wins; null turns it off.
+  const { formUsage: callerUsage, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -319,7 +327,7 @@ export function readWith(text, { address = null, category = null, language = nul
   try {
     // a surface's own organs (readerOptions: classifyWord, extendRelations, sameAct, roleConfig …) join the one assembly; the
     // abbreviations are this read's, so a surface never builds a reader beside it
-    R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...readerOptions });
+    R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...readerOrgans });
     ({ report: out, chunks } = relationsFor([{ text: str }], { reader: R, language: language ? stem : null }));
     // selfRead: the material read back as an answer against itself, so every claim carries the reader's verdict and its span
     if (selfRead && out?.read) claims = out.read(str)?.claims ?? [];
@@ -352,9 +360,24 @@ export function readWith(text, { address = null, category = null, language = nul
   // nouns are not beings. SCOPE (Greenberg): the capital tier is a cased-script test. In a caseless script it names nothing, so
   // every row is `heard` and the cast is empty, as the second cast this replaced also was; in German, where every noun is
   // capitalised, every noun is a being. A being test that holds across scripts is owed, not implied.
-  let cast = [], heardRows = [];
+  // TYPED GAP (2026-10-27, found by the Referents session and routed by the omnilingual check; owner: the referent-read session, branch referent-read):
+  // `mentionsOf` bounds a mention by \p{L} on both sides, so in a script written without spaces (a zh probe) every row gets zero spans and the cast
+  // is empty. Not fixed here: it changes the cast's output for every language and needs its own registration. Suggested fix: take the mention
+  // boundaries from the language's tokenizer adapter (Intl.Segmenter), not the regex.
+  let cast = [], heardRows = [], formUsageReport = null;
   try {
-    const capital = new Set(extractSurfaces(cuts, {}).map((x) => x.surface));
+    // A capital is a convention of the language (conventions.js): form-usage.js decides, per language, whether it has a ledgered convention to read by
+    // (English). Another language, or no pos prior (a typed gap already: `no_pos_prior`), reads the capital tier exactly as it was.
+    // The language must be KNOWN (declared with a filed stem, or heard): a language with no stem filed is read with the English priors as a typed gap
+    // (`unknown_language`, `language_default`), and an English treebank's counts say nothing of a Turkish or Swahili capital.
+    const languageKnown = languageRead.source === "declared" || languageRead.source === "heard";
+    const formUsage = callerUsage !== undefined ? callerUsage : languageKnown ? formUsageFor(stem, pr.posPrior) : null;
+    const verdicts = formUsage ? { undecided: [], separated: [] } : null;
+    const capitalSurfaces = extractSurfaces(cuts, formUsage ? { formUsage, verdicts } : {});
+    const capital = new Set(capitalSurfaces.map((x) => x.surface));
+    // what the treebank's use refused, kept beside the entry (not enumerable: the wire stays what it was) so the rule is auditable
+    // the conventions this branch reads by, cited from their one home (janus priors/conventions-<stem>.json); a gap is typed here, not on the wire
+    if (formUsage) formUsageReport = { conventions: ["capital-marks-a-name", "treebank-attests-a-forms-use"].map((s) => conventionOf(pr.conventions, s)).filter(Boolean), gap: conventionsGap(pr.conventions), giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s) && !verdicts.undecided.some((u) => u.surface === s)), undecided: verdicts.undecided, separated: verdicts.separated };
     const bytes = byteOffsets(str);
     const byRef = new Map();
     for (const ev of out?.index?.events ?? []) {
@@ -416,6 +439,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // not enumerable, so the entry stays plain data on the wire and in the weft
   Object.defineProperty(entry, "reader", { value: R, enumerable: false });
   Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
+  Object.defineProperty(entry, "formUsageReport", { value: formUsageReport, enumerable: false });
   return entry;
 }
 
@@ -430,5 +454,10 @@ export async function readDocument(text, { language = null, lexicon = null, prio
   const stem = (language ? stemOf(language) : null) ?? (heard?.language ? stemOf(heard.language) ?? heard.language : null) ?? "eng";
   const pr = priors ?? priorsFor(stem);
   const c = await consultAliases(str, lexicon, { priors: pr });
-  return readWith(str, { ...opts, language, priors: pr, aliases: [...(opts.aliases ?? []), ...c.aliases], aliasReport: { giver: c.giver, rows: c.rows, gap: c.gap, ...(c.settled ? { settled: c.settled } : {}) } });
+  // the same lexicon is asked a second thing, once: which of the text's words are common nouns, and which time names, so the
+  // pronoun resolver is told who is NOT a person (adapters/text/non-personal.js). No lexicon, no ask: the read is what it was.
+  // A caller's own readerOptions.nonPersonalOf wins over the givers'.
+  const np = lexicon ? await consultNonPersonal(str, lexicon, { timePrior: priorJson("time-prior.json"), language: stem }) : null;
+  const readerOptions = np?.nonPersonalOf ? { nonPersonalOf: np.nonPersonalOf, ...(opts.readerOptions ?? {}) } : opts.readerOptions;
+  return readWith(str, { ...opts, ...(readerOptions ? { readerOptions } : {}), language, priors: pr, aliases: [...(opts.aliases ?? []), ...c.aliases], aliasReport: { giver: c.giver, rows: c.rows, gap: c.gap, ...(c.settled ? { settled: c.settled } : {}), ...(np ? { nonPersonal: np.report } : {}) } });
 }

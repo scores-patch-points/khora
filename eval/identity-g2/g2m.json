@@ -1,0 +1,4126 @@
+{
+ "schema": "G2M@1",
+ "seed": 20261101,
+ "built": "see file mtime",
+ "source": {
+  "g2pairs_sha256": "062da61125fd232a58af0429b38a17303ec4c2f1e5ac53b7f7319baa8ffbdafc",
+  "timeline": "/Users/mlacy/Downloads/workspace/EO-terminal/data/observations/timeline.json"
+ },
+ "counts": {
+  "measure": 60,
+  "scope": 30
+ },
+ "note": "FICTIONAL by construction for the scope class (a cue inserted into a real sentence); the measure class pairs a real sentence with a real record of another concept. Tests machinery, not the world.",
+ "pairs": [
+  {
+   "id": "M001",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N090",
+   "concept": "Cash",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-17-000013.json",
+    "exhibitSha256": "f9dd9844ccffc1520be0bd38dd2821e001e6dd3237798c708c5c236ce004af20",
+    "span": [
+     880,
+     929
+    ],
+    "quote": "•  Cash and Cash Equivalents were $66.5 million ;",
+    "numberText": "$66.5 million",
+    "statedValue": 66500000,
+    "statedPrecision": 100000,
+    "delivered": "2017-11-01"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:StockholdersEquity:USD",
+    "accession": "0000874238-17-000011",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Stockholders’ equity",
+    "period": {
+     "start": null,
+     "end": "2017-09-30"
+    },
+    "value": 138917000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2017-10-31",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2017-11-01",
+    "structured": "2017-10-31"
+   }
+  },
+  {
+   "id": "M002",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N201",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-14-025348.json",
+    "exhibitSha256": "cd92cc5a0f23551e87e0268f016c05d4d7f31d3c1cfcba5840e35d561fa2c078",
+    "span": [
+     970,
+     1099
+    ],
+    "quote": "was $7.3 million, or $0.10 per diluted share, compared to the first quarter 2013 net income of $5.7 million, or $0.08 per diluted",
+    "numberText": "$7.3 million",
+    "statedValue": 7300000,
+    "statedPrecision": 100000,
+    "delivered": "2014-04-28"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0001144204-14-025365",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Operating cash flow",
+    "period": {
+     "start": "2014-01-01",
+     "end": "2014-03-31"
+    },
+    "value": -44055000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2014-04-28",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2014-04-28",
+    "structured": "2014-04-28"
+   }
+  },
+  {
+   "id": "M003",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N301",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-21-000055.json",
+    "exhibitSha256": "db2df90af50950f618f2c9b031411c4280a81a12e12345d06475043743eb1d7f",
+    "span": [
+     7019,
+     7310
+    ],
+    "quote": "•Net loss was $0.4 million and $18.6 million for the three and six months ended June 30, 2021, or a net loss per share of $0.02, and $0.68, compared to a net loss of $21.5 million and $29.8 million for the three and six months ended June 30, 2020, or a net loss per share of $0.79 and $1.09.",
+    "numberText": "$18.6 million",
+    "statedValue": 18600000,
+    "statedPrecision": 100000,
+    "delivered": "2021-08-09"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0001370053-21-000056",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Revenue",
+    "period": {
+     "start": "2021-01-01",
+     "end": "2021-06-30"
+    },
+    "value": 41274000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-08-09",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2021-08-09",
+    "structured": "2021-08-09"
+   }
+  },
+  {
+   "id": "M004",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N099",
+   "concept": "Cash",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-20-000082.json",
+    "exhibitSha256": "6064bd527e878ae0d1271218f642d8db2aa8c5de677a09295c3a007b8d81bbf1",
+    "span": [
+     798,
+     908
+    ],
+    "quote": "•Cash and Cash Equivalents were $70.6 million at June 30, 2020 compared to $45.7 million at December 31, 2019;",
+    "numberText": "$70.6 million",
+    "statedValue": 70600000,
+    "statedPrecision": 100000,
+    "delivered": "2020-08-04"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:Assets:USD",
+    "accession": "0000874238-20-000089",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Total assets",
+    "period": {
+     "start": null,
+     "end": "2020-06-30"
+    },
+    "value": 1017510000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-08-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2020-08-04",
+    "structured": "2020-08-04"
+   }
+  },
+  {
+   "id": "M005",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N085",
+   "concept": "Cash",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0001171843-16-009575.json",
+    "exhibitSha256": "138544500e8f2215b17841f53d27b804ed09234f889bab6d7ad1d226ccb996e0",
+    "span": [
+     2811,
+     2913
+    ],
+    "quote": "&middot;  Working capital totaled $32.4 million, including $14.9 million of cash and cash equivalents.",
+    "numberText": "$14.9 million",
+    "statedValue": 14900000,
+    "statedPrecision": 100000,
+    "delivered": "2016-05-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:Assets:USD",
+    "accession": "0001171843-16-009576",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Total assets",
+    "period": {
+     "start": null,
+     "end": "2016-03-31"
+    },
+    "value": 284007000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-05-02",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2016-05-02",
+    "structured": "2016-05-02"
+   }
+  },
+  {
+   "id": "M006",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N198",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-13-057442.json",
+    "exhibitSha256": "4a79955de9e35f2138c0eebd223b02dd613d5aa75ff046db26d8caf4d9d2cb0e",
+    "span": [
+     437,
+     568
+    ],
+    "quote": "&ndash; Wabash National Corporation (NYSE: WNC) reported third quarter 2013 net income of $16.2 million, or $0.23 per diluted share",
+    "numberText": "$16.2 million",
+    "statedValue": 16200000,
+    "statedPrecision": 100000,
+    "delivered": "2013-10-29"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-13-057447",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "period": {
+     "start": "2013-07-01",
+     "end": "2013-09-30"
+    },
+    "value": 439977000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2013-10-29",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2013-10-29",
+    "structured": "2013-10-29"
+   }
+  },
+  {
+   "id": "M007",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N170",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-16-078498.json",
+    "exhibitSha256": "e6d8bce6735bf83ac89c11f8ea99c59bd844cac1418c10638e3281c5ca773335",
+    "span": [
+     1012,
+     1103
+    ],
+    "quote": "&middot;  Record quarterly net sales of $544 million, up 3.1 percent over prior year period",
+    "numberText": "$544 million",
+    "statedValue": 544000000,
+    "statedPrecision": 1000000,
+    "delivered": "2016-02-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-16-084690",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "period": {
+     "start": "2015-10-01",
+     "end": "2015-12-31"
+    },
+    "value": 33286000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-02-26",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2016-02-02",
+    "structured": "2016-02-26"
+   }
+  },
+  {
+   "id": "M008",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N058",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-21-000006.json",
+    "exhibitSha256": "8601d353dac896e4a8cd6fadba386a908e11512c0b73674236d9367e25f8723b",
+    "span": [
+     1285,
+     1368
+    ],
+    "quote": "•Net Income attributable to Sterling common stockholders was $42.3 million in 2020.",
+    "numberText": "$42.3 million",
+    "statedValue": 42300000,
+    "statedPrecision": 100000,
+    "delivered": "2021-03-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-21-000010",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2020-01-01",
+     "end": "2020-12-31"
+    },
+    "value": 1.5,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-03-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2021-03-03",
+    "structured": "2021-03-03"
+   }
+  },
+  {
+   "id": "M009",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N123",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-21-000024.json",
+    "exhibitSha256": "2aa08e3982c478fe34ded4e95b8d89e0b497733cbe1f827c8b357123a84635c3",
+    "span": [
+     973,
+     1136
+    ],
+    "quote": "•Cash provided by operating activities were $38.7 million for the three months ended March 31, 2021 compared to $10.8 million for the comparable prior year period;",
+    "numberText": "$38.7 million",
+    "statedValue": 38700000,
+    "statedPrecision": 100000,
+    "delivered": "2021-05-04"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-21-000028",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "period": {
+     "start": "2021-01-01",
+     "end": "2021-03-31"
+    },
+    "value": 315316000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-05-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2021-05-04",
+    "structured": "2021-05-04"
+   }
+  },
+  {
+   "id": "M010",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N164",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-15-061062.json",
+    "exhibitSha256": "fc91910bba5b2a66f4f67d4f37d54c53e250b07e656733f3fc39d47e65d04007",
+    "span": [
+     1845,
+     1975
+    ],
+    "quote": "net sales increased 8 percent to a record $531 million from $492 million in the prior year quarter, and operating income increased",
+    "numberText": "$492 million",
+    "statedValue": 492000000,
+    "statedPrecision": 1000000,
+    "delivered": "2015-10-27"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-14-063374",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "period": {
+     "start": "2014-07-01",
+     "end": "2014-09-30"
+    },
+    "value": 18307000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2014-10-28",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2015-10-27",
+    "structured": "2014-10-28"
+   }
+  },
+  {
+   "id": "M011",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N020",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-21-000006.json",
+    "exhibitSha256": "8601d353dac896e4a8cd6fadba386a908e11512c0b73674236d9367e25f8723b",
+    "span": [
+     1073,
+     1126
+    ],
+    "quote": "•Revenues were $1.4 billion compared to $1.1 billion;",
+    "numberText": "$1.4 billion",
+    "statedValue": 1400000000,
+    "statedPrecision": 100000000,
+    "delivered": "2021-03-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0000874238-21-000010",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Operating cash flow",
+    "period": {
+     "start": "2020-01-01",
+     "end": "2020-12-31"
+    },
+    "value": 119283000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-03-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2021-03-03",
+    "structured": "2021-03-03"
+   }
+  },
+  {
+   "id": "M012",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N269",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-24-000010.json",
+    "exhibitSha256": "f310e32a3228ff3be05a2d2a599a089e6275e7d3c58461fd82922fe65ab400f6",
+    "span": [
+     7059,
+     7273
+    ],
+    "quote": "•Collaboration revenue was $9.0 million and $17.2 million for the three and twelve months ended December 31, 2023, compared to $6.8 million and $10.3 million for the three and twelve months ended December 31, 2022.",
+    "numberText": "$17.2 million",
+    "statedValue": 17200000,
+    "statedPrecision": 100000,
+    "delivered": "2024-03-11"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001370053-24-000011",
+    "form": "10-K",
+    "entity": "0001370053",
+    "concept": "Net income",
+    "period": {
+     "start": "2023-01-01",
+     "end": "2023-12-31"
+    },
+    "value": -163619000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2024-03-11",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2024-03-11",
+    "structured": "2024-03-11"
+   }
+  },
+  {
+   "id": "M013",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N241",
+   "concept": "Cash",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0000879526-20-000059.json",
+    "exhibitSha256": "879efbd309d91177f3882c4df971de348bfcb7e460dddd62c5c92490ee1dc0fe",
+    "span": [
+     2638,
+     2890
+    ],
+    "quote": "Liquidity as of the end of the second quarter was $304 million with cash of $136 million and a fully untapped revolving credit line of $168 million following the second quarter repayment of a proactive drawdown of the revolver during the first quarter.",
+    "numberText": "$136 million",
+    "statedValue": 136000000,
+    "statedPrecision": 1000000,
+    "delivered": "2020-07-29"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:StockholdersEquity:USD",
+    "accession": "0000879526-20-000061",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Stockholders’ equity",
+    "period": {
+     "start": null,
+     "end": "2020-06-30"
+    },
+    "value": 393217000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-07-29",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2020-07-29",
+    "structured": "2020-07-29"
+   }
+  },
+  {
+   "id": "M014",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N056",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-18-000028.json",
+    "exhibitSha256": "4edb8b05df4a84d847b2fed75a4da3fc3812d8b9e58f0e0d73d6de69886c8fd4",
+    "span": [
+     1138,
+     1256
+    ],
+    "quote": "•  Net income attributable to Sterling common stockholders was $11.6 million compared to a loss of $9.2 million ; and,",
+    "numberText": "$9.2 million",
+    "statedValue": 9200000,
+    "statedPrecision": 100000,
+    "delivered": "2018-03-09"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-19-000044",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "period": {
+     "start": "2016-01-01",
+     "end": "2016-12-31"
+    },
+    "value": 690123000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2019-03-06",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2018-03-09",
+    "structured": "2019-03-06"
+   }
+  },
+  {
+   "id": "M015",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N144",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-10-057007.json",
+    "exhibitSha256": "406541cf1f6f19fe5672499850ce9ef687dde5dafd8277e519f7c11d2c980457",
+    "span": [
+     4806,
+     4857
+    ],
+    "quote": "third quarter of 2010 on net sales of $171 million.",
+    "numberText": "$171 million",
+    "statedValue": 171000000,
+    "statedPrecision": 1000000,
+    "delivered": "2010-11-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-11-060608",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "period": {
+     "start": "2010-07-01",
+     "end": "2010-09-30"
+    },
+    "value": -1938000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2011-11-01",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2010-11-02",
+    "structured": "2011-11-01"
+   }
+  },
+  {
+   "id": "M016",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N327",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-25-000088.json",
+    "exhibitSha256": "361e90aed0c70f0407ab93fcaf5b67f3ccce485b81209224a8d30ddd5f5a2520",
+    "span": [
+     10265,
+     10647
+    ],
+    "quote": "•Net income was $15.1 million for the three months ended September 30, 2025, or a net income per share of $0.54 and a net loss of $62.8 million for the nine months ended September 30, 2025, or a net loss per share of $2.16, compared to a net loss of $32.9 million and $123.4 million for the three and nine months ended September 30, 2024, or a net loss per share of $1.14 and $4.46.",
+    "numberText": "$62.8 million",
+    "statedValue": 62800000,
+    "statedPrecision": 100000,
+    "delivered": "2025-11-04"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0001370053-25-000089",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Revenue",
+    "period": {
+     "start": "2025-01-01",
+     "end": "2025-09-30"
+    },
+    "value": 126354000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2025-11-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2025-11-04",
+    "structured": "2025-11-04"
+   }
+  },
+  {
+   "id": "M017",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N050",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0001171843-16-008569.json",
+    "exhibitSha256": "16174a5fdeaa6f56e5627753cfb83dfcf999c13bd97cae73ba20fbf1e96d2ec6",
+    "span": [
+     1272,
+     1379
+    ],
+    "quote": "&middot;  Net loss attributable to Sterling common stockholders was $20.4 million compared to $9.8 million;",
+    "numberText": "$20.4 million",
+    "statedValue": 20400000,
+    "statedPrecision": 100000,
+    "delivered": "2016-03-15"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0001171843-16-008548",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Operating cash flow",
+    "period": {
+     "start": "2015-01-01",
+     "end": "2015-12-31"
+    },
+    "value": 8969000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-03-14",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2016-03-15",
+    "structured": "2016-03-14"
+   }
+  },
+  {
+   "id": "M018",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N220",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-18-056142.json",
+    "exhibitSha256": "ebb76339ce7792245f4c9f037e70b557ee3b0f43f05765009ef27a77f3e01d90",
+    "span": [
+     4470,
+     4596
+    ],
+    "quote": "$4.7 million, or $0.08 per diluted share, compared to the third quarter 2017 net income of $18.9 million, or $0.30 per diluted",
+    "numberText": "$4.7 million",
+    "statedValue": 4700000,
+    "statedPrecision": 100000,
+    "delivered": "2018-10-30"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001144204-18-056205",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2018-07-01",
+     "end": "2018-09-30"
+    },
+    "value": 0.08,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2018-10-30",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2018-10-30",
+    "structured": "2018-10-30"
+   }
+  },
+  {
+   "id": "M019",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N207",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-16-078498.json",
+    "exhibitSha256": "e6d8bce6735bf83ac89c11f8ea99c59bd844cac1418c10638e3281c5ca773335",
+    "span": [
+     1463,
+     1590
+    ],
+    "quote": "was $33.3 million, or $0.50 per diluted share, compared to fourth quarter 2014 net income of $19.1, or $0.27 per diluted share.",
+    "numberText": "$33.3 million",
+    "statedValue": 33300000,
+    "statedPrecision": 100000,
+    "delivered": "2016-02-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-16-084690",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "period": {
+     "start": "2015-10-01",
+     "end": "2015-12-31"
+    },
+    "value": 543711000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-02-26",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2016-02-02",
+    "structured": "2016-02-26"
+   }
+  },
+  {
+   "id": "M020",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N134",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-25-000021.json",
+    "exhibitSha256": "a794666daaa4b2f126535fb0a81424a9f84e111c60d938295d1f5dc577d5ab3b",
+    "span": [
+     1359,
+     1455
+    ],
+    "quote": "•Cash flows from operations totaled $497.1 million for the twelve months ended December 31, 2024",
+    "numberText": "$497.1 million",
+    "statedValue": 497100000,
+    "statedPrecision": 100000,
+    "delivered": "2025-02-26"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-25-000025",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "period": {
+     "start": "2024-01-01",
+     "end": "2024-12-31"
+    },
+    "value": 2115756000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2025-02-26",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2025-02-26",
+    "structured": "2025-02-26"
+   }
+  },
+  {
+   "id": "M021",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N047",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0001171843-15-002727.json",
+    "exhibitSha256": "6dcd29d5d60ddb07120aa9d13465d21983d7390a3d9fd012741157ec48b84dce",
+    "span": [
+     675,
+     796
+    ],
+    "quote": "·  Net loss attributable to Sterling common stockholders was $17.0 million compared to a net income of $0.2 million; and,",
+    "numberText": "$17.0 million",
+    "statedValue": 17000000,
+    "statedPrecision": 100000,
+    "delivered": "2015-05-12"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001171843-15-002705",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2015-01-01",
+     "end": "2015-03-31"
+    },
+    "value": -0.9,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2015-05-11",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2015-05-12",
+    "structured": "2015-05-11"
+   }
+  },
+  {
+   "id": "M022",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N310",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-22-000064.json",
+    "exhibitSha256": "6e1fe3523160a6a78a1fabe13471195168f75b890260b13155c06d6643437915",
+    "span": [
+     6621,
+     6924
+    ],
+    "quote": "•Net loss was $33.5 million and $102.3 million for the three and nine months ended September 30, 2022, or a net loss per share of $1.18 and $3.64, compared to a net loss of $6.7 million and $25.3 million for the three and nine months ended September 30, 2021, or a net loss per share of $0.24 and $0.92.",
+    "numberText": "$33.5 million",
+    "statedValue": 33500000,
+    "statedPrecision": 100000,
+    "delivered": "2022-11-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-22-000066",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2022-07-01",
+     "end": "2022-09-30"
+    },
+    "value": -1.18,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-11-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2022-11-08",
+    "structured": "2022-11-08"
+   }
+  },
+  {
+   "id": "M023",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N302",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-21-000055.json",
+    "exhibitSha256": "db2df90af50950f618f2c9b031411c4280a81a12e12345d06475043743eb1d7f",
+    "span": [
+     7019,
+     7310
+    ],
+    "quote": "•Net loss was $0.4 million and $18.6 million for the three and six months ended June 30, 2021, or a net loss per share of $0.02, and $0.68, compared to a net loss of $21.5 million and $29.8 million for the three and six months ended June 30, 2020, or a net loss per share of $0.79 and $1.09.",
+    "numberText": "$0.4 million",
+    "statedValue": 400000,
+    "statedPrecision": 100000,
+    "delivered": "2021-08-09"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0001370053-21-000056",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Revenue",
+    "period": {
+     "start": "2021-04-01",
+     "end": "2021-06-30"
+    },
+    "value": 30027000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-08-09",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2021-08-09",
+    "structured": "2021-08-09"
+   }
+  },
+  {
+   "id": "M024",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N154",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-12-042023.json",
+    "exhibitSha256": "8fd8fe673229536f39066baae69516c893bf9c6b97979539c5f724b3245ce54e",
+    "span": [
+     664,
+     738
+    ],
+    "quote": "diluted share for the second quarter of 2012 on net sales of $362 million.",
+    "numberText": "$362 million",
+    "statedValue": 362000000,
+    "statedPrecision": 1000000,
+    "delivered": "2012-07-31"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001144204-12-042591",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2012-04-01",
+     "end": "2012-06-30"
+    },
+    "value": 0.03,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2012-08-02",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2012-07-31",
+    "structured": "2012-08-02"
+   }
+  },
+  {
+   "id": "M025",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N309",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-22-000064.json",
+    "exhibitSha256": "6e1fe3523160a6a78a1fabe13471195168f75b890260b13155c06d6643437915",
+    "span": [
+     6621,
+     6924
+    ],
+    "quote": "•Net loss was $33.5 million and $102.3 million for the three and nine months ended September 30, 2022, or a net loss per share of $1.18 and $3.64, compared to a net loss of $6.7 million and $25.3 million for the three and nine months ended September 30, 2021, or a net loss per share of $0.24 and $0.92.",
+    "numberText": "$102.3 million",
+    "statedValue": 102300000,
+    "statedPrecision": 100000,
+    "delivered": "2022-11-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-22-000066",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2022-01-01",
+     "end": "2022-09-30"
+    },
+    "value": -3.64,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-11-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2022-11-08",
+    "structured": "2022-11-08"
+   }
+  },
+  {
+   "id": "M026",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N195",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-13-006134.json",
+    "exhibitSha256": "197eb0cb1262003099517798b06a64fda4b947d96804ffa0c691747da6b57a79",
+    "span": [
+     609,
+     685
+    ],
+    "quote": "The Company reported net income of $80.2 million, or $1.16 per diluted share",
+    "numberText": "$80.2 million",
+    "statedValue": 80200000,
+    "statedPrecision": 100000,
+    "delivered": "2013-02-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-13-011760",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "period": {
+     "start": "2012-10-01",
+     "end": "2012-12-31"
+    },
+    "value": 415847000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2013-02-28",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2013-02-05",
+    "structured": "2013-02-28"
+   }
+  },
+  {
+   "id": "M027",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N053",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0001171843-16-011422.json",
+    "exhibitSha256": "2d0999f87e7d717856538c414172897ec4a656d8ef561a5273dcd716d7704a83",
+    "span": [
+     5815,
+     5900
+    ],
+    "quote": "to $690 million and net income to be $2 million to $5 million for the full year 2016.",
+    "numberText": "$5 million",
+    "statedValue": 5000000,
+    "statedPrecision": 1000000,
+    "delivered": "2016-08-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001171843-17-004586",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2016-01-01",
+     "end": "2016-06-30"
+    },
+    "value": -0.25,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2017-08-02",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2016-08-02",
+    "structured": "2017-08-02"
+   }
+  },
+  {
+   "id": "M028",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N014",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-19-000129.json",
+    "exhibitSha256": "792a83ad204a6add5f56d65b32adb2dd5096cd3abc2550e45233cb72900da913",
+    "span": [
+     469,
+     529
+    ],
+    "quote": "•  Revenues were $291.7 million compared to $291.3 million ;",
+    "numberText": "$291.7 million",
+    "statedValue": 291700000,
+    "statedPrecision": 100000,
+    "delivered": "2019-11-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-19-000132",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2019-07-01",
+     "end": "2019-09-30"
+    },
+    "value": 0.3,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2019-11-05",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2019-11-05",
+    "structured": "2019-11-05"
+   }
+  },
+  {
+   "id": "M029",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N267",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-23-000064.json",
+    "exhibitSha256": "d72596420133f3a17abb1024db8e99b87f3a60f407f89ebd55883f1d3f76a050",
+    "span": [
+     6397,
+     6607
+    ],
+    "quote": "•Collaboration revenue was $3.3 million and $8.2 million for the three and nine months ended September 30, 2023, compared to $1.3 million and $3.5 million for the three and nine months ended September 30, 2022.",
+    "numberText": "$8.2 million",
+    "statedValue": 8200000,
+    "statedPrecision": 100000,
+    "delivered": "2023-11-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-23-000065",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2023-01-01",
+     "end": "2023-09-30"
+    },
+    "value": -4.49,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2023-11-02",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2023-11-02",
+    "structured": "2023-11-02"
+   }
+  },
+  {
+   "id": "M030",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N143",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-10-040949.json",
+    "exhibitSha256": "e46f3852aa124ee450da493dbbbc11226725b18b5adf89ed51b8432af5cbf72b",
+    "span": [
+     5960,
+     6012
+    ],
+    "quote": "second quarter of 2010 on net sales of $150 million.",
+    "numberText": "$150 million",
+    "statedValue": 150000000,
+    "statedPrecision": 1000000,
+    "delivered": "2010-08-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-11-043577",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "period": {
+     "start": "2010-04-01",
+     "end": "2010-06-30"
+    },
+    "value": -5602000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2011-08-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2010-08-03",
+    "structured": "2011-08-03"
+   }
+  },
+  {
+   "id": "M031",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N218",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-18-024491.json",
+    "exhibitSha256": "e429e3566d00e3c9d265b4330bb18037cfc3485e01b4db29071401398bb3ef4f",
+    "span": [
+     3286,
+     3417
+    ],
+    "quote": "was $21.3 million, or $0.35 per diluted share, compared to the first quarter 2017 net income of $20.2 million, or $0.32 per diluted",
+    "numberText": "$21.3 million",
+    "statedValue": 21300000,
+    "statedPrecision": 100000,
+    "delivered": "2018-05-01"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-18-024493",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "period": {
+     "start": "2018-01-01",
+     "end": "2018-03-31"
+    },
+    "value": 491319000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2018-05-01",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2018-05-01",
+    "structured": "2018-05-01"
+   }
+  },
+  {
+   "id": "M032",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N271",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-24-000039.json",
+    "exhibitSha256": "af2d6ea097bbe807a839404464e7f623e2abb6f6f663d5d4e1672d656bb15b9e",
+    "span": [
+     6347,
+     6547
+    ],
+    "quote": "•Collaboration revenue was $11.0 million and $18.2 million for the three and six months ended June 30, 2024, compared to $3.5 million and $4.8 million for the three and six months ended June 30, 2023.",
+    "numberText": "$18.2 million",
+    "statedValue": 18200000,
+    "statedPrecision": 100000,
+    "delivered": "2024-08-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-24-000041",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2024-01-01",
+     "end": "2024-06-30"
+    },
+    "value": -3.35,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2024-08-05",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2024-08-05",
+    "structured": "2024-08-05"
+   }
+  },
+  {
+   "id": "M033",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N093",
+   "concept": "Cash",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-19-000046.json",
+    "exhibitSha256": "8ddba25aa0af8c47d6ff6ebee8c31b4263ec5e069079548c22d48d4909625468",
+    "span": [
+     1482,
+     1575
+    ],
+    "quote": "•  Cash and Cash Equivalents were $94.1 million and exceeded our total debt by $12.1 million;",
+    "numberText": "$94.1 million",
+    "statedValue": 94100000,
+    "statedPrecision": 100000,
+    "delivered": "2019-03-06"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:Assets:USD",
+    "accession": "0000874238-19-000044",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Total assets",
+    "period": {
+     "start": null,
+     "end": "2018-12-31"
+    },
+    "value": 482573000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2019-03-06",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2019-03-06",
+    "structured": "2019-03-06"
+   }
+  },
+  {
+   "id": "M034",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N141",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-10-006021.json",
+    "exhibitSha256": "6dce275267a5b1d8ad1d17fbec940a9f4ae51ad15295ebeaafaaa92daef4f6d3",
+    "span": [
+     4853,
+     4885
+    ],
+    "quote": "share, on sales of $338 million.",
+    "numberText": "$338 million",
+    "statedValue": 338000000,
+    "statedPrecision": 1000000,
+    "delivered": "2010-02-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0001144204-12-012010",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Operating cash flow",
+    "period": {
+     "start": "2009-01-01",
+     "end": "2009-12-31"
+    },
+    "value": -6979000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2012-02-29",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2010-02-08",
+    "structured": "2012-02-29"
+   }
+  },
+  {
+   "id": "M035",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N045",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0001171843-14-005416.json",
+    "exhibitSha256": "89ac724368be3886136dbeb0a191d4ddb79ca87613093d934be65446be42e701",
+    "span": [
+     805,
+     923
+    ],
+    "quote": "·  Net loss attributable to Sterling common stockholders was $3.9 million compared to a net loss of $0.2 million; and,",
+    "numberText": "$3.9 million",
+    "statedValue": 3900000,
+    "statedPrecision": 100000,
+    "delivered": "2014-11-11"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001171843-14-005379",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2014-07-01",
+     "end": "2014-09-30"
+    },
+    "value": -0.21,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2014-11-10",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2014-11-11",
+    "structured": "2014-11-10"
+   }
+  },
+  {
+   "id": "M036",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N194",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-13-006134.json",
+    "exhibitSha256": "197eb0cb1262003099517798b06a64fda4b947d96804ffa0c691747da6b57a79",
+    "span": [
+     1434,
+     1559
+    ],
+    "quote": "months ended December 31, 2012 the Company reported net income of $105.6 million, or $1.53 per diluted share, on net sales of",
+    "numberText": "$105.6 million",
+    "statedValue": 105600000,
+    "statedPrecision": 100000,
+    "delivered": "2013-02-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-13-011760",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "period": {
+     "start": "2012-01-01",
+     "end": "2012-12-31"
+    },
+    "value": 1461854000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2013-02-28",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2013-02-05",
+    "structured": "2013-02-28"
+   }
+  },
+  {
+   "id": "M037",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N060",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-22-000046.json",
+    "exhibitSha256": "d41b2f44ab9e68b3d748cf5080318aadb90ff1c7b35cc55ee776d6fbd56ae679",
+    "span": [
+     497,
+     596
+    ],
+    "quote": "•Net Income was $19.3 million, or $0.64 per diluted share, an increase of 82% and 73%, respectively",
+    "numberText": "$19.3 million",
+    "statedValue": 19300000,
+    "statedPrecision": 100000,
+    "delivered": "2022-05-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-22-000048",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "period": {
+     "start": "2022-01-01",
+     "end": "2022-03-31"
+    },
+    "value": 410320000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-05-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2022-05-03",
+    "structured": "2022-05-03"
+   }
+  },
+  {
+   "id": "M038",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N165",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-15-005608.json",
+    "exhibitSha256": "ad2d840106d89cb9498e311c2277dd3e94314851c0df85abfabf58274b5770da",
+    "span": [
+     353,
+     460
+    ],
+    "quote": "&middot;  Record net sales for the third consecutive year of $1.86 billion, up 13.9 percent over prior year",
+    "numberText": "$1.86 billion",
+    "statedValue": 1860000000,
+    "statedPrecision": 10000000,
+    "delivered": "2015-02-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-15-012408",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "period": {
+     "start": "2014-01-01",
+     "end": "2014-12-31"
+    },
+    "value": 60930000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2015-02-27",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2015-02-03",
+    "structured": "2015-02-27"
+   }
+  },
+  {
+   "id": "M039",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N226",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0000879526-20-000004.json",
+    "exhibitSha256": "b5f7107dc4421a09bc4256e18e260b840db7907aa68c50105a06b7f8408c0cba",
+    "span": [
+     1270,
+     1355
+    ],
+    "quote": "Net income for the fourth quarter 2019 was $18.4 million, or $0.34 per diluted share.",
+    "numberText": "$18.4 million",
+    "statedValue": 18400000,
+    "statedPrecision": 100000,
+    "delivered": "2020-02-12"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000879526-20-000021",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2019-10-01",
+     "end": "2019-12-31"
+    },
+    "value": 0.34,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-02-25",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2020-02-12",
+    "structured": "2020-02-25"
+   }
+  },
+  {
+   "id": "M040",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N073",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-25-000119.json",
+    "exhibitSha256": "978da34c31968d6aa26c56802410e5a4fa7e834a6bfc9771a13a63b90f475bcd",
+    "span": [
+     920,
+     1050
+    ],
+    "quote": "•Net income of $71.0 million, or $2.31 per diluted share, increases of 37% and 38%, respectively, and a new second quarter record.",
+    "numberText": "$71.0 million",
+    "statedValue": 71000000,
+    "statedPrecision": 100000,
+    "delivered": "2025-08-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-25-000122",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "period": {
+     "start": "2025-04-01",
+     "end": "2025-06-30"
+    },
+    "value": 614468000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2025-08-05",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2025-08-05",
+    "structured": "2025-08-05"
+   }
+  },
+  {
+   "id": "M041",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N059",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-22-000020.json",
+    "exhibitSha256": "8cc16a5f4cb4c51b326094ba44516aa280b18aaa66b153673d22f284502c9a46",
+    "span": [
+     1684,
+     1864
+    ],
+    "quote": "For the full-year ended December 31, 2021, the Company reported net income of $62.6 million, or $2.15 per diluted share, versus $42.3 million, or $1.50 per diluted share, for 2020.",
+    "numberText": "$62.6 million",
+    "statedValue": 62600000,
+    "statedPrecision": 100000,
+    "delivered": "2022-03-01"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-22-000023",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2021-01-01",
+     "end": "2021-12-31"
+    },
+    "value": 2.15,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-03-02",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2022-03-01",
+    "structured": "2022-03-02"
+   }
+  },
+  {
+   "id": "M042",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N150",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-11-060600.json",
+    "exhibitSha256": "3f6d837113a82cdd4b643af62a75c5a2cbf8c9ce11a5e3b36cce13cc8794a2ab",
+    "span": [
+     429,
+     691
+    ],
+    "quote": "The Company reported net income of $1.1 million, or $0.02 per diluted share for the third quarter of 2011 on net sales of $336 million compared to a net loss of $1.9 million, or $0.03 per diluted share, on net sales of $171 million for the third quarter of 2010.",
+    "numberText": "$336 million",
+    "statedValue": 336000000,
+    "statedPrecision": 1000000,
+    "delivered": "2011-11-01"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-11-060608",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "period": {
+     "start": "2011-07-01",
+     "end": "2011-09-30"
+    },
+    "value": 1092000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2011-11-01",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2011-11-01",
+    "structured": "2011-11-01"
+   }
+  },
+  {
+   "id": "M043",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N319",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-24-000039.json",
+    "exhibitSha256": "af2d6ea097bbe807a839404464e7f623e2abb6f6f663d5d4e1672d656bb15b9e",
+    "span": [
+     7631,
+     7922
+    ],
+    "quote": "•Net loss was $46.7 million and $90.6 million for the three and six months ended June 30, 2024, or a net loss per share of $1.71 and $3.35, compared to a net loss of $39.8 million and $84.1 million for the three and six months ended June 30, 2023, or a net loss per share of $1.50 and $3.08.",
+    "numberText": "$90.6 million",
+    "statedValue": 90600000,
+    "statedPrecision": 100000,
+    "delivered": "2024-08-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-24-000041",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2024-01-01",
+     "end": "2024-06-30"
+    },
+    "value": -3.35,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2024-08-05",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2024-08-05",
+    "structured": "2024-08-05"
+   }
+  },
+  {
+   "id": "M044",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N004",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-17-000013.json",
+    "exhibitSha256": "f9dd9844ccffc1520be0bd38dd2821e001e6dd3237798c708c5c236ce004af20",
+    "span": [
+     404,
+     464
+    ],
+    "quote": "•  Revenues were $304.2 million compared to $205.6 million ;",
+    "numberText": "$304.2 million",
+    "statedValue": 304200000,
+    "statedPrecision": 100000,
+    "delivered": "2017-11-01"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-17-000011",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2017-07-01",
+     "end": "2017-09-30"
+    },
+    "value": 0.26,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2017-10-31",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2017-11-01",
+    "structured": "2017-10-31"
+   }
+  },
+  {
+   "id": "M045",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N206",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-16-078498.json",
+    "exhibitSha256": "e6d8bce6735bf83ac89c11f8ea99c59bd844cac1418c10638e3281c5ca773335",
+    "span": [
+     2637,
+     2768
+    ],
+    "quote": "2015, the Company reported net income of $104.3 million, or $1.50 per diluted share, on record net sales of $2.03 billion, compared",
+    "numberText": "$104.3 million",
+    "statedValue": 104300000,
+    "statedPrecision": 100000,
+    "delivered": "2016-02-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0001144204-18-011800",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Operating cash flow",
+    "period": {
+     "start": "2015-01-01",
+     "end": "2015-12-31"
+    },
+    "value": 131795000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2018-02-28",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2016-02-02",
+    "structured": "2018-02-28"
+   }
+  },
+  {
+   "id": "M046",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N124",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-21-000065.json",
+    "exhibitSha256": "a475dc8644e8ca48f50d2c85b84c956ca86ad69918637978f39c8f93eec484ed",
+    "span": [
+     766,
+     871
+    ],
+    "quote": "•Cash provided by operating activities was a record $91.5 million for the six months ended June 30, 2021.",
+    "numberText": "$91.5 million",
+    "statedValue": 91500000,
+    "statedPrecision": 100000,
+    "delivered": "2021-08-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-21-000069",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2021-01-01",
+     "end": "2021-06-30"
+    },
+    "value": 1.06,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-08-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2021-08-03",
+    "structured": "2021-08-03"
+   }
+  },
+  {
+   "id": "M047",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N132",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-24-000118.json",
+    "exhibitSha256": "c502d4f6bff64d69a878da8cc1c3be13b2fdf2ca00994accf040c70d1dacfe55",
+    "span": [
+     677,
+     766
+    ],
+    "quote": "•Cash flows from operations totaled $170.6 million for the six months ended June 30, 2024",
+    "numberText": "$170.6 million",
+    "statedValue": 170600000,
+    "statedPrecision": 100000,
+    "delivered": "2024-08-06"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0000874238-24-000121",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Net income",
+    "period": {
+     "start": "2024-01-01",
+     "end": "2024-06-30"
+    },
+    "value": 82927000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2024-08-06",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2024-08-06",
+    "structured": "2024-08-06"
+   }
+  },
+  {
+   "id": "M048",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N171",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-16-096376.json",
+    "exhibitSha256": "e6af8612b68deebf446a49e125fccf3566a0597e4a32eef62d207b0bb6a866dc",
+    "span": [
+     552,
+     659
+    ],
+    "quote": "&middot;  Net sales of $448 million for first quarter 2016 represents best first quarter in company history",
+    "numberText": "$448 million",
+    "statedValue": 448000000,
+    "statedPrecision": 1000000,
+    "delivered": "2016-04-26"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-16-096381",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "period": {
+     "start": "2016-01-01",
+     "end": "2016-03-31"
+    },
+    "value": 27524000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-04-26",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2016-04-26",
+    "structured": "2016-04-26"
+   }
+  },
+  {
+   "id": "M049",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N015",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-20-000027.json",
+    "exhibitSha256": "fa9d91a0d805053e4952f9756ae381b11b63b094f34c877527237c57459276ca",
+    "span": [
+     1571,
+     1627
+    ],
+    "quote": "•  Revenues were $1.1 billion compared to $1.0 billion ;",
+    "numberText": "$1.1 billion",
+    "statedValue": 1100000000,
+    "statedPrecision": 100000000,
+    "delivered": "2020-03-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-20-000033",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2019-01-01",
+     "end": "2019-12-31"
+    },
+    "value": 1.47,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-03-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2020-03-03",
+    "structured": "2020-03-04"
+   }
+  },
+  {
+   "id": "M050",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N240",
+   "concept": "Cash",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0000879526-20-000039.json",
+    "exhibitSha256": "0b51e1fb0bf8d6ad4e4b2f60cec6d05cedb1103bb0715a91eb759235b178ad0b",
+    "span": [
+     2352,
+     2481
+    ],
+    "quote": "Liquidity as of the end of the first quarter was $277 million with cash of $155 million and available borrowings of $122 million.",
+    "numberText": "$155 million",
+    "statedValue": 155000000,
+    "statedPrecision": 1000000,
+    "delivered": "2020-05-14"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:StockholdersEquity:USD",
+    "accession": "0000879526-20-000049",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Stockholders’ equity",
+    "period": {
+     "start": null,
+     "end": "2020-03-31"
+    },
+    "value": 393969000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-05-14",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2020-05-14",
+    "structured": "2020-05-14"
+   }
+  },
+  {
+   "id": "M051",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N323",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-25-000023.json",
+    "exhibitSha256": "f687eeee85bee328bbde1971cf8108a0ed041eae51381f015dab9ebe69610c04",
+    "span": [
+     8833,
+     9140
+    ],
+    "quote": "•Net loss was $21.8 million and $145.2 million for the three and twelve months ended December 31, 2024, or a net loss per share of $0.72 and $5.12, compared to a net loss of $42.2 million and $163.6 million for the three and twelve months ended December 31, 2023, or a net loss per share of $1.59 and $6.08.",
+    "numberText": "$145.2 million",
+    "statedValue": 145200000,
+    "statedPrecision": 100000,
+    "delivered": "2025-02-27"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-25-000024",
+    "form": "10-K",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2024-01-01",
+     "end": "2024-12-31"
+    },
+    "value": -5.12,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2025-02-27",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2025-02-27",
+    "structured": "2025-02-27"
+   }
+  },
+  {
+   "id": "M052",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N135",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-25-000065.json",
+    "exhibitSha256": "ea66264d21f407215d2c69aa6d919e175c2eb4f1d100ac1c7f33dd6382475d97",
+    "span": [
+     1225,
+     1274
+    ],
+    "quote": "•Cash flows from operations totaled $84.9 million",
+    "numberText": "$84.9 million",
+    "statedValue": 84900000,
+    "statedPrecision": 100000,
+    "delivered": "2025-05-06"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-25-000069",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2025-01-01",
+     "end": "2025-03-31"
+    },
+    "value": 1.28,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2025-05-06",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2025-05-06",
+    "structured": "2025-05-06"
+   }
+  },
+  {
+   "id": "M053",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N031",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-24-000076.json",
+    "exhibitSha256": "3aaee5ef89d5479ba7f98de4a5e310489ada6ae7a001a8b72d9172327643bf53",
+    "span": [
+     400,
+     446
+    ],
+    "quote": "•Revenues of $440.4 million, an increase of 9%",
+    "numberText": "$440.4 million",
+    "statedValue": 440400000,
+    "statedPrecision": 100000,
+    "delivered": "2024-05-07"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0000874238-24-000081",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Operating cash flow",
+    "period": {
+     "start": "2024-01-01",
+     "end": "2024-03-31"
+    },
+    "value": 49591000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2024-05-07",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2024-05-07",
+    "structured": "2024-05-07"
+   }
+  },
+  {
+   "id": "M054",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N297",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-20-000064.json",
+    "exhibitSha256": "4f6580a27e6beefd3ae73a1f589c125883829f78b3271cc4b57d6a7698f81fef",
+    "span": [
+     7859,
+     8161
+    ],
+    "quote": "Net loss was $23.8 million and $53.6 million for the three and nine months ended September 30, 2020, or a net loss per share of $0.87 and $1.96, compared to a net loss of $31.0 million and $77.1 million for the three and nine months ended September 30, 2019, or a net loss per share of $1.15 and $2.85.",
+    "numberText": "$53.6 million",
+    "statedValue": 53600000,
+    "statedPrecision": 100000,
+    "delivered": "2020-11-04"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-21-000069",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2020-01-01",
+     "end": "2020-09-30"
+    },
+    "value": -1.96,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-11-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2020-11-04",
+    "structured": "2021-11-04"
+   }
+  },
+  {
+   "id": "M055",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N286",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-19-000041.json",
+    "exhibitSha256": "aa1d7fb3e1921a8b35f9880252660f30b2a39e46de0d1c5f0add39fce6c4baa7",
+    "span": [
+     6372,
+     6681
+    ],
+    "quote": "•  Net loss was $31.0 million and $77.1 million for the three and nine months ended September 30, 2019 , or a net loss per share of $1.15 and $2.85 , compared to a net loss of $16.0 million and $44.7 million for the three and nine months ended September 30, 2018 , or a net loss per share of $0.66 and $1.86 .",
+    "numberText": "$16.0 million",
+    "statedValue": 16000000,
+    "statedPrecision": 100000,
+    "delivered": "2019-11-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-19-000006",
+    "form": "10-K",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2018-07-01",
+     "end": "2018-09-30"
+    },
+    "value": -0.66,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2019-02-27",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2019-11-08",
+    "structured": "2019-02-27"
+   }
+  },
+  {
+   "id": "M056",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N087",
+   "concept": "Cash",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0001171843-16-012853.json",
+    "exhibitSha256": "52c0b61f97315d426d0013bba0d7b72e03aa96ce80e0e954dbc56bc3082075ca",
+    "span": [
+     3161,
+     3215
+    ],
+    "quote": "&middot;  Cash and cash equivalents was $43.0 million.",
+    "numberText": "$43.0 million",
+    "statedValue": 43000000,
+    "statedPrecision": 100000,
+    "delivered": "2016-11-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:StockholdersEquity:USD",
+    "accession": "0001171843-16-012746",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Stockholders’ equity",
+    "period": {
+     "start": null,
+     "end": "2016-09-30"
+    },
+    "value": 113295000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-11-01",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2016-11-02",
+    "structured": "2016-11-01"
+   }
+  },
+  {
+   "id": "M057",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N232",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0000879526-23-000006.json",
+    "exhibitSha256": "57f1313c731d4ed3f595a8dbfddff02ec414dd7b4c5d06ca15f5941629b1985d",
+    "span": [
+     1289,
+     1393
+    ],
+    "quote": "Full year net income attributable to common stockholders was $112.3 million, or $2.25 per diluted share.",
+    "numberText": "$112.3 million",
+    "statedValue": 112300000,
+    "statedPrecision": 100000,
+    "delivered": "2023-02-02"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0000879526-23-000014",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Operating cash flow",
+    "period": {
+     "start": "2022-01-01",
+     "end": "2022-12-31"
+    },
+    "value": 124084000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2023-02-23",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2023-02-02",
+    "structured": "2023-02-23"
+   }
+  },
+  {
+   "id": "M058",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N298",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-20-000064.json",
+    "exhibitSha256": "4f6580a27e6beefd3ae73a1f589c125883829f78b3271cc4b57d6a7698f81fef",
+    "span": [
+     7859,
+     8161
+    ],
+    "quote": "Net loss was $23.8 million and $53.6 million for the three and nine months ended September 30, 2020, or a net loss per share of $0.87 and $1.96, compared to a net loss of $31.0 million and $77.1 million for the three and nine months ended September 30, 2019, or a net loss per share of $1.15 and $2.85.",
+    "numberText": "$23.8 million",
+    "statedValue": 23800000,
+    "statedPrecision": 100000,
+    "delivered": "2020-11-04"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-21-000069",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2020-07-01",
+     "end": "2020-09-30"
+    },
+    "value": -0.87,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-11-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2020-11-04",
+    "structured": "2021-11-04"
+   }
+  },
+  {
+   "id": "M059",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N244",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-18-000013.json",
+    "exhibitSha256": "9ceb61dff5b1188408c380b77d9c9182aeeab575490a249c5b6e9c0dda5eac5c",
+    "span": [
+     5862,
+     6310
+    ],
+    "quote": "•  Revenue was $3.0 million and $10.0 million for the quarter and year ended December 31, 2017 , which related to milestones earned from the Company’s partnership with TESARO, compared to $2.8 million and $16.7 million for the quarter and year ended December 31, 2016 which related to the amortization of the upfront payment from TESARO, research and development services reimbursed by TESARO and milestone-related revenues from TESARO and Celgene.",
+    "numberText": "$10.0 million",
+    "statedValue": 10000000,
+    "statedPrecision": 100000,
+    "delivered": "2018-03-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0001370053-18-000014",
+    "form": "10-K",
+    "entity": "0001370053",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2017-01-01",
+     "end": "2017-12-31"
+    },
+    "value": -1.52,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2018-03-05",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2018-03-05",
+    "structured": "2018-03-05"
+   }
+  },
+  {
+   "id": "M060",
+   "truth": "not_comparable",
+   "truth_rule": "measure",
+   "basedOn": "N029",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-23-000103.json",
+    "exhibitSha256": "e69814bb56007295a4f2c352b37022401e25bdd3405fccec544438ad33a7a41d",
+    "span": [
+     489,
+     538
+    ],
+    "quote": "•Revenues of $522.3 million, an increase of 13.1%",
+    "numberText": "$522.3 million",
+    "statedValue": 522300000,
+    "statedPrecision": 100000,
+    "delivered": "2023-08-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:EarningsPerShareDiluted:USD/shares",
+    "accession": "0000874238-23-000108",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Diluted EPS",
+    "period": {
+     "start": "2023-04-01",
+     "end": "2023-06-30"
+    },
+    "value": 1.27,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2023-08-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2023-08-08",
+    "structured": "2023-08-08"
+   }
+  },
+  {
+   "id": "M061",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N145",
+   "cueInserted": "from continuing operations",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-11-006675.json",
+    "exhibitSha256": "c1fd3ca643b664c5837c3a5b2e3a3fa019e63c932b90e1dcd84adac84d1a41fc",
+    "span": [
+     4605,
+     4657
+    ],
+    "quote": "fourth quarter of 2010 on net sales from continuing operations of $242 million.",
+    "numberText": "$242 million",
+    "statedValue": 242000000,
+    "statedPrecision": 1000000,
+    "delivered": "2011-02-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-13-011760",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2010-10-01",
+     "end": "2010-12-31"
+    },
+    "value": 241551000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2013-02-28",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2011-02-08",
+    "structured": "2013-02-28"
+   }
+  },
+  {
+   "id": "M062",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N305",
+   "cueInserted": "before income taxes",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-22-000008.json",
+    "exhibitSha256": "f880ec1624622c981c8326a0294dd04ae2f8cf243ec4367c68dcb12a0ccee2e8",
+    "span": [
+     5160,
+     5536
+    ],
+    "quote": "•Net loss before income taxes was $32.5 million and $57.8 million for the three and twelve months ended December 31, 2021, or a net loss per share of $1.18, and $2.11, compared to net income of $33.6 million for the three months ended December 31, 2020 or net income per share of $1.23 and a net loss of $19.9 million for the twelve months ended December 31, 2020, or net loss per share of $0.73.",
+    "numberText": "$57.8 million",
+    "statedValue": 57800000,
+    "statedPrecision": 100000,
+    "delivered": "2022-03-07"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001370053-22-000009",
+    "form": "10-K",
+    "entity": "0001370053",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2021-01-01",
+     "end": "2021-12-31"
+    },
+    "value": -57796000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-03-07",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2022-03-07",
+    "structured": "2022-03-07"
+   }
+  },
+  {
+   "id": "M063",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N248",
+   "cueInserted": "excluding discontinued operations",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-20-000025.json",
+    "exhibitSha256": "c1641dc190ff5565a079fc0cb5d9dbc74cb93bac84b643eb1609230a4997f29d",
+    "span": [
+     7143,
+     7376
+    ],
+    "quote": "•  Collaboration revenue excluding discontinued operations was $15.0 million for the three months ended March 31, 2020, which related to milestone payments for successful BLA and MAA filings for dostarlimab, compared to zero for the three months ended March 31, 2019.",
+    "numberText": "$15.0 million",
+    "statedValue": 15000000,
+    "statedPrecision": 100000,
+    "delivered": "2020-05-06"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0001370053-20-000026",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2020-01-01",
+     "end": "2020-03-31"
+    },
+    "value": 15000000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-05-06",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2020-05-06",
+    "structured": "2020-05-06"
+   }
+  },
+  {
+   "id": "M064",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N215",
+   "cueInserted": "from continuing operations",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-17-055185.json",
+    "exhibitSha256": "e7b6e625904f761a2d88d81250bcf7dd43f2fd0d47410c82b548f110dd2610c9",
+    "span": [
+     1304,
+     1431
+    ],
+    "quote": "was $18.9 million, or $0.30 per diluted share, compared to third quarter 2016 net income from continuing operations of $33.4 million, or $0.51 per diluted",
+    "numberText": "$18.9 million",
+    "statedValue": 18900000,
+    "statedPrecision": 100000,
+    "delivered": "2017-10-31"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-17-055193",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2017-07-01",
+     "end": "2017-09-30"
+    },
+    "value": 18947000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2017-10-31",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2017-10-31",
+    "structured": "2017-10-31"
+   }
+  },
+  {
+   "id": "M065",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N204",
+   "cueInserted": "from continuing operations",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-16-114509.json",
+    "exhibitSha256": "c32fd493d2cd75aa2396c2d309af897165e3b70aec22a240b9a1ccb5ffe325aa",
+    "span": [
+     1492,
+     1624
+    ],
+    "quote": "was $35.5 million, or $0.53 per diluted share, compared to the second quarter 2015 net income from continuing operations of $28.6 million, or $0.41 per diluted",
+    "numberText": "$28.6 million",
+    "statedValue": 28600000,
+    "statedPrecision": 100000,
+    "delivered": "2016-07-26"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-16-114516",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2015-04-01",
+     "end": "2015-06-30"
+    },
+    "value": 28649000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-07-26",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2016-07-26",
+    "structured": "2016-07-26"
+   }
+  },
+  {
+   "id": "M066",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N191",
+   "cueInserted": "from continuing operations",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-12-025012.json",
+    "exhibitSha256": "b3fc9a18346cb008c039bb947cb6a459c4228e9e2a2de0942861fdfe7d6e1a79",
+    "span": [
+     466,
+     555
+    ],
+    "quote": "The Company reported net income from continuing operations of $5.1 million, or $0.07 per diluted share for the first",
+    "numberText": "$5.1 million",
+    "statedValue": 5100000,
+    "statedPrecision": 100000,
+    "delivered": "2012-04-30"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-12-025299",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2012-01-01",
+     "end": "2012-03-31"
+    },
+    "value": 5064000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2012-05-01",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2012-04-30",
+    "structured": "2012-05-01"
+   }
+  },
+  {
+   "id": "M067",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N025",
+   "cueInserted": "excluding discontinued operations",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-22-000046.json",
+    "exhibitSha256": "d41b2f44ab9e68b3d748cf5080318aadb90ff1c7b35cc55ee776d6fbd56ae679",
+    "span": [
+     444,
+     496
+    ],
+    "quote": "•Total Revenue excluding discontinued operations of $410.3 million, an increase of 30%",
+    "numberText": "$410.3 million",
+    "statedValue": 410300000,
+    "statedPrecision": 100000,
+    "delivered": "2022-05-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-22-000048",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2022-01-01",
+     "end": "2022-03-31"
+    },
+    "value": 410320000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-05-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2022-05-03",
+    "structured": "2022-05-03"
+   }
+  },
+  {
+   "id": "M068",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N051",
+   "cueInserted": "from continuing operations",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0001171843-16-008569.json",
+    "exhibitSha256": "16174a5fdeaa6f56e5627753cfb83dfcf999c13bd97cae73ba20fbf1e96d2ec6",
+    "span": [
+     724,
+     846
+    ],
+    "quote": "&middot;  Net loss from continuing operations attributable to Sterling common stockholders was $1.1 million compared with a net loss of $7.3 million;",
+    "numberText": "$1.1 million",
+    "statedValue": 1100000,
+    "statedPrecision": 100000,
+    "delivered": "2016-03-15"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001171843-16-008548",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2015-10-01",
+     "end": "2015-12-31"
+    },
+    "value": -1124000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2016-03-14",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2016-03-15",
+    "structured": "2016-03-14"
+   }
+  },
+  {
+   "id": "M069",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N313",
+   "cueInserted": "before income taxes",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-23-000048.json",
+    "exhibitSha256": "4e3029338970d5691854e93b8332e1e1b57a3792a23cbd11a2a578c80accd4d0",
+    "span": [
+     7835,
+     8126
+    ],
+    "quote": "•Net loss before income taxes was $39.8 million and $84.1 million for the three and six months ended June 30, 2023, or a net loss per share of $1.50 and $3.08, compared to a net loss of $32.6 million and $68.8 million for the three and six months ended June 30, 2022, or a net loss per share of $1.15 and $2.46.",
+    "numberText": "$84.1 million",
+    "statedValue": 84100000,
+    "statedPrecision": 100000,
+    "delivered": "2023-08-07"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001370053-23-000049",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2023-01-01",
+     "end": "2023-06-30"
+    },
+    "value": -84100000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2023-08-07",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2023-08-07",
+    "structured": "2023-08-07"
+   }
+  },
+  {
+   "id": "M070",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N162",
+   "cueInserted": "including noncontrolling interests",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-14-006181.json",
+    "exhibitSha256": "c9775668543be6e2ddefc058243a6e87e1e466802e21aa213232da97fe2a02a4",
+    "span": [
+     476,
+     582
+    ],
+    "quote": "&middot;  Record quarterly net sales including noncontrolling interests of $458 million for 4th quarter 2013, up 10.2 percent over prior year",
+    "numberText": "$458 million",
+    "statedValue": 458000000,
+    "statedPrecision": 1000000,
+    "delivered": "2014-02-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-14-012076",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2013-10-01",
+     "end": "2013-12-31"
+    },
+    "value": 458354000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2014-02-27",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2014-02-05",
+    "structured": "2014-02-27"
+   }
+  },
+  {
+   "id": "M071",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N016",
+   "cueInserted": "excluding discontinued operations",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-20-000027.json",
+    "exhibitSha256": "fa9d91a0d805053e4952f9756ae381b11b63b094f34c877527237c57459276ca",
+    "span": [
+     632,
+     692
+    ],
+    "quote": "•  Revenues excluding discontinued operations were $346.5 million compared to $255.2 million ;",
+    "numberText": "$346.5 million",
+    "statedValue": 346500000,
+    "statedPrecision": 100000,
+    "delivered": "2020-03-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-20-000033",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2019-10-01",
+     "end": "2019-12-31"
+    },
+    "value": 346544000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-03-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2020-03-03",
+    "structured": "2020-03-04"
+   }
+  },
+  {
+   "id": "M072",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N168",
+   "cueInserted": "including noncontrolling interests",
+   "concept": "Revenue",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-15-061062.json",
+    "exhibitSha256": "fc91910bba5b2a66f4f67d4f37d54c53e250b07e656733f3fc39d47e65d04007",
+    "span": [
+     397,
+     491
+    ],
+    "quote": "&middot;  Record net sales including noncontrolling interests of $531 million for third quarter 2015, up 8 percent year over year",
+    "numberText": "$531 million",
+    "statedValue": 531000000,
+    "statedPrecision": 1000000,
+    "delivered": "2015-10-27"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:SalesRevenueNet:USD",
+    "accession": "0001144204-15-061065",
+    "form": "10-Q",
+    "entity": "0000879526",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2015-07-01",
+     "end": "2015-09-30"
+    },
+    "value": 531350000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2015-10-27",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2015-10-27",
+    "structured": "2015-10-27"
+   }
+  },
+  {
+   "id": "M073",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N260",
+   "cueInserted": "including noncontrolling interests",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-22-000040.json",
+    "exhibitSha256": "bd2f9c8b0686cb6d71a59fa92f6c2ac036caa5b77d4c5964c871ce9434ec3b72",
+    "span": [
+     2682,
+     2889
+    ],
+    "quote": "•Collaboration revenue including noncontrolling interests was $1.2 million and $2.2 million for the three and six months ended June 30, 2022, compared to $30.0 million and $41.3 million for the three months and six months ended June 30, 2021.",
+    "numberText": "$1.2 million",
+    "statedValue": 1200000,
+    "statedPrecision": 100000,
+    "delivered": "2022-08-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0001370053-22-000043",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2022-04-01",
+     "end": "2022-06-30"
+    },
+    "value": 1216000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-08-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2022-08-08",
+    "structured": "2022-08-08"
+   }
+  },
+  {
+   "id": "M074",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N291",
+   "cueInserted": "before income taxes",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-19-000041.json",
+    "exhibitSha256": "aa1d7fb3e1921a8b35f9880252660f30b2a39e46de0d1c5f0add39fce6c4baa7",
+    "span": [
+     6372,
+     6681
+    ],
+    "quote": "•  Net loss before income taxes was $31.0 million and $77.1 million for the three and nine months ended September 30, 2019 , or a net loss per share of $1.15 and $2.85 , compared to a net loss of $16.0 million and $44.7 million for the three and nine months ended September 30, 2018 , or a net loss per share of $0.66 and $1.86 .",
+    "numberText": "$77.1 million",
+    "statedValue": 77100000,
+    "statedPrecision": 100000,
+    "delivered": "2019-11-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001370053-19-000042",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2019-01-01",
+     "end": "2019-09-30"
+    },
+    "value": -77073000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2019-11-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2019-11-08",
+    "structured": "2019-11-08"
+   }
+  },
+  {
+   "id": "M075",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N129",
+   "cueInserted": "from continuing operations",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-23-000103.json",
+    "exhibitSha256": "e69814bb56007295a4f2c352b37022401e25bdd3405fccec544438ad33a7a41d",
+    "span": [
+     733,
+     822
+    ],
+    "quote": "•Cash flows from operations from continuing operations totaled $181.1 million for the six months ended June 30, 2023",
+    "numberText": "$181.1 million",
+    "statedValue": 181100000,
+    "statedPrecision": 100000,
+    "delivered": "2023-08-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0000874238-23-000108",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Operating cash flow",
+    "k": 6,
+    "period": {
+     "start": "2023-01-01",
+     "end": "2023-06-30"
+    },
+    "value": 181107000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2023-08-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2023-08-08",
+    "structured": "2023-08-08"
+   }
+  },
+  {
+   "id": "M076",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N200",
+   "cueInserted": "from continuing operations",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-14-006181.json",
+    "exhibitSha256": "c9775668543be6e2ddefc058243a6e87e1e466802e21aa213232da97fe2a02a4",
+    "span": [
+     729,
+     855
+    ],
+    "quote": "&ndash; Wabash National Corporation (NYSE: WNC) reported fourth quarter 2013 net income from continuing operations of $10.4 million, or $0.15 per diluted",
+    "numberText": "$10.4 million",
+    "statedValue": 10400000,
+    "statedPrecision": 100000,
+    "delivered": "2014-02-05"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-14-012076",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2013-10-01",
+     "end": "2013-12-31"
+    },
+    "value": 10423000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2014-02-27",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2014-02-05",
+    "structured": "2014-02-27"
+   }
+  },
+  {
+   "id": "M077",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N137",
+   "cueInserted": "before income taxes",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-25-000133.json",
+    "exhibitSha256": "9d792399e842d0e92ebcbbc074e229f9cf797e4d00931e460cccef55fac9181f",
+    "span": [
+     1377,
+     1473
+    ],
+    "quote": "•Cash flows from operations before income taxes totaled $253.9 million for the nine months ended September 30, 2025.",
+    "numberText": "$253.9 million",
+    "statedValue": 253900000,
+    "statedPrecision": 100000,
+    "delivered": "2025-11-04"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0000874238-25-000136",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Operating cash flow",
+    "k": 6,
+    "period": {
+     "start": "2025-01-01",
+     "end": "2025-09-30"
+    },
+    "value": 253937000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2025-11-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2025-11-04",
+    "structured": "2025-11-04"
+   }
+  },
+  {
+   "id": "M078",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N122",
+   "cueInserted": "including noncontrolling interests",
+   "concept": "Operating cash flow",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-21-000006.json",
+    "exhibitSha256": "8601d353dac896e4a8cd6fadba386a908e11512c0b73674236d9367e25f8723b",
+    "span": [
+     1569,
+     1717
+    ],
+    "quote": "•Cash flows from operations including noncontrolling interests were $119.3 million for the year ended December 31, 2020 compared to $41.1 million for the comparable prior year period;",
+    "numberText": "$119.3 million",
+    "statedValue": 119300000,
+    "statedPrecision": 100000,
+    "delivered": "2021-03-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetCashProvidedByUsedInOperatingActivities:USD",
+    "accession": "0000874238-21-000010",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Operating cash flow",
+    "k": 6,
+    "period": {
+     "start": "2020-01-01",
+     "end": "2020-12-31"
+    },
+    "value": 119283000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2021-03-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2021-03-03",
+    "structured": "2021-03-03"
+   }
+  },
+  {
+   "id": "M079",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N281",
+   "cueInserted": "excluding discontinued operations",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001193125-26-088239.json",
+    "exhibitSha256": "23946e5afc746a658765074fc2a6042c684282e456699c7d43f8de4f369553b1",
+    "span": [
+     8410,
+     8513
+    ],
+    "quote": "•Collaboration revenue excluding discontinued operations was $108.2 million and $234.6 million for the three and twelve months ended Dec.",
+    "numberText": "$234.6 million",
+    "statedValue": 234600000,
+    "statedPrecision": 100000,
+    "delivered": "2026-03-03"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0001193125-26-088290",
+    "form": "10-K",
+    "entity": "0001370053",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2025-01-01",
+     "end": "2025-12-31"
+    },
+    "value": 234603000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2026-03-03",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2026-03-03",
+    "structured": "2026-03-03"
+   }
+  },
+  {
+   "id": "M080",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N308",
+   "cueInserted": "attributable to noncontrolling interests",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-22-000040.json",
+    "exhibitSha256": "bd2f9c8b0686cb6d71a59fa92f6c2ac036caa5b77d4c5964c871ce9434ec3b72",
+    "span": [
+     4352,
+     4642
+    ],
+    "quote": "•Net loss attributable to noncontrolling interests was $32.6 million and $68.8 million for the three and six months ended June 30, 2022, or a net loss per share of $1.15 and $2.46, compared to a net loss of $0.4 million and $18.6 million for the three and six months ended June 30, 2021, or a net loss per share of $0.02 and $0.68.",
+    "numberText": "$32.6 million",
+    "statedValue": 32600000,
+    "statedPrecision": 100000,
+    "delivered": "2022-08-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001370053-22-000043",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2022-04-01",
+     "end": "2022-06-30"
+    },
+    "value": -32554000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-08-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2022-08-08",
+    "structured": "2022-08-08"
+   }
+  },
+  {
+   "id": "M081",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N065",
+   "cueInserted": "excluding discontinued operations",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-23-000103.json",
+    "exhibitSha256": "e69814bb56007295a4f2c352b37022401e25bdd3405fccec544438ad33a7a41d",
+    "span": [
+     586,
+     684
+    ],
+    "quote": "•Net Income excluding discontinued operations of $39.5 million, or $1.27 per diluted share, an increase of 40% and 37%, respectively",
+    "numberText": "$39.5 million",
+    "statedValue": 39500000,
+    "statedPrecision": 100000,
+    "delivered": "2023-08-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0000874238-23-000108",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2023-04-01",
+     "end": "2023-06-30"
+    },
+    "value": 39480000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2023-08-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2023-08-08",
+    "structured": "2023-08-08"
+   }
+  },
+  {
+   "id": "M082",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N009",
+   "cueInserted": "excluding discontinued operations",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-18-000087.json",
+    "exhibitSha256": "fcdc72933bf8be30adf02d5eb937e6f1baf35a9f7e62d1443d551a737440dd82",
+    "span": [
+     495,
+     555
+    ],
+    "quote": "•  Revenues excluding discontinued operations were $291.3 million compared to $304.2 million ;",
+    "numberText": "$291.3 million",
+    "statedValue": 291300000,
+    "statedPrecision": 100000,
+    "delivered": "2018-11-09"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-19-000044",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2018-07-01",
+     "end": "2018-09-30"
+    },
+    "value": 291266000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2019-03-06",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2018-11-09",
+    "structured": "2019-03-06"
+   }
+  },
+  {
+   "id": "M083",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N179",
+   "cueInserted": "including noncontrolling interests",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-10-006021.json",
+    "exhibitSha256": "6dce275267a5b1d8ad1d17fbec940a9f4ae51ad15295ebeaafaaa92daef4f6d3",
+    "span": [
+     4776,
+     4852
+    ],
+    "quote": "December 31, 2009, the net loss including noncontrolling interests totaled $101.8 million, or $3.48 per diluted",
+    "numberText": "$101.8 million",
+    "statedValue": 101800000,
+    "statedPrecision": 100000,
+    "delivered": "2010-02-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-12-012010",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2009-01-01",
+     "end": "2009-12-31"
+    },
+    "value": -101765000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2012-02-29",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2010-02-08",
+    "structured": "2012-02-29"
+   }
+  },
+  {
+   "id": "M084",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N261",
+   "cueInserted": "including noncontrolling interests",
+   "concept": "Revenue",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001370053-22-000064.json",
+    "exhibitSha256": "6e1fe3523160a6a78a1fabe13471195168f75b890260b13155c06d6643437915",
+    "span": [
+     4838,
+     5057
+    ],
+    "quote": "•Collaboration revenue including noncontrolling interests was $1.3 million and $3.5 million for the three and nine months ended September 30, 2022, compared to $20.9 million and $62.2 million for the three months and nine months ended September 30, 2021.",
+    "numberText": "$3.5 million",
+    "statedValue": 3500000,
+    "statedPrecision": 100000,
+    "delivered": "2022-11-08"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0001370053-22-000066",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2022-01-01",
+     "end": "2022-09-30"
+    },
+    "value": 3479000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2022-11-08",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2022-11-08",
+    "structured": "2022-11-08"
+   }
+  },
+  {
+   "id": "M085",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N095",
+   "cueInserted": "attributable to noncontrolling interests",
+   "concept": "Cash",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-19-000101.json",
+    "exhibitSha256": "45181781391ee8b72c280b11b95caded05bf1533ab8c0764e9c3cee671ec1abc",
+    "span": [
+     950,
+     999
+    ],
+    "quote": "•  Cash and Cash Equivalents attributable to noncontrolling interests were $71.7 million ;",
+    "numberText": "$71.7 million",
+    "statedValue": 71700000,
+    "statedPrecision": 100000,
+    "delivered": "2019-08-06"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:CashAndCashEquivalentsAtCarryingValue:USD",
+    "accession": "0000874238-19-000104",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Cash",
+    "k": 5,
+    "period": {
+     "start": null,
+     "end": "2019-06-30"
+    },
+    "value": 71730000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2019-08-06",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2019-08-06",
+    "structured": "2019-08-06"
+   }
+  },
+  {
+   "id": "M086",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N071",
+   "cueInserted": "attributable to noncontrolling interests",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-25-000021.json",
+    "exhibitSha256": "a794666daaa4b2f126535fb0a81424a9f84e111c60d938295d1f5dc577d5ab3b",
+    "span": [
+     1713,
+     1859
+    ],
+    "quote": "The Company reported net income attributable to noncontrolling interests of $257.5 million, or $8.27 per diluted share in 2024, versus $138.7 million, or $4.44 per diluted share, in 2023.",
+    "numberText": "$257.5 million",
+    "statedValue": 257500000,
+    "statedPrecision": 100000,
+    "delivered": "2025-02-26"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0000874238-25-000025",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2024-01-01",
+     "end": "2024-12-31"
+    },
+    "value": 257461000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2025-02-26",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2025-02-26",
+    "structured": "2025-02-26"
+   }
+  },
+  {
+   "id": "M087",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N070",
+   "cueInserted": "before income taxes",
+   "concept": "Net income",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-24-000142.json",
+    "exhibitSha256": "32f85e0fc5f8597cfac4440d3c8f3e245616ff83016d8c21f9fe295a09abfe20",
+    "span": [
+     539,
+     632
+    ],
+    "quote": "•Net Income before income taxes of $61.3 million, or $1.97 per diluted share, an increase of 56% for both metrics",
+    "numberText": "$61.3 million",
+    "statedValue": 61300000,
+    "statedPrecision": 100000,
+    "delivered": "2024-11-07"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0000874238-24-000144",
+    "form": "10-Q",
+    "entity": "0000874238",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2024-07-01",
+     "end": "2024-09-30"
+    },
+    "value": 61321000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2024-11-07",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2024-11-07",
+    "structured": "2024-11-07"
+   }
+  },
+  {
+   "id": "M088",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N330",
+   "cueInserted": "before income taxes",
+   "concept": "Net income",
+   "entity": "0001370053",
+   "prose": {
+    "path": "data/releases/0001370053/0001193125-26-219500.json",
+    "exhibitSha256": "dc5e986e9151d6467d12dca90012e19f6da615b52debe861802fb835ec61d4e5",
+    "span": [
+     6110,
+     6331
+    ],
+    "quote": "•Net loss before income taxes was $52.9 million for the three months ended March 31, 2026, or a net loss per share of $1.84, compared to a net loss of $39.3 million for the three months ended March 31, 2025, or a net loss per share of $1.28.",
+    "numberText": "$52.9 million",
+    "statedValue": 52900000,
+    "statedPrecision": 100000,
+    "delivered": "2026-05-12"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001193125-26-219515",
+    "form": "10-Q",
+    "entity": "0001370053",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2026-01-01",
+     "end": "2026-03-31"
+    },
+    "value": -52884000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2026-05-12",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0001370053.json",
+     "sha256": "ec4a76b54613eb80a688b16f0c661c74344806d68381c6f1d1db947e69774e3b"
+    }
+   },
+   "asof": {
+    "prose": "2026-05-12",
+    "structured": "2026-05-12"
+   }
+  },
+  {
+   "id": "M089",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N212",
+   "cueInserted": "attributable to noncontrolling interests",
+   "concept": "Net income",
+   "entity": "0000879526",
+   "prose": {
+    "path": "data/releases/0000879526/0001144204-17-005106.json",
+    "exhibitSha256": "39347516c8a760b92012297576783a65a61d3971a97502c4235f61ba5ea70d47",
+    "span": [
+     1490,
+     1617
+    ],
+    "quote": "was $23.0 million, or $0.36 per diluted share, compared to the fourth quarter of 2015 net income attributable to noncontrolling interests of $33.3 million, or $0.50 per",
+    "numberText": "$23.0 million",
+    "statedValue": 23000000,
+    "statedPrecision": 100000,
+    "delivered": "2017-01-31"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:NetIncomeLoss:USD",
+    "accession": "0001144204-17-011303",
+    "form": "10-K",
+    "entity": "0000879526",
+    "concept": "Net income",
+    "k": 1,
+    "period": {
+     "start": "2016-10-01",
+     "end": "2016-12-31"
+    },
+    "value": 23000000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2017-02-27",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000879526.json",
+     "sha256": "7d2db02837726f0639f4943b103ef1ad1b8e84e37053227374a1893e534c9890"
+    }
+   },
+   "asof": {
+    "prose": "2017-01-31",
+    "structured": "2017-02-27"
+   }
+  },
+  {
+   "id": "M090",
+   "truth": "not_comparable",
+   "truth_rule": "scope",
+   "basedOn": "N011",
+   "cueInserted": "including noncontrolling interests",
+   "concept": "Revenue",
+   "entity": "0000874238",
+   "prose": {
+    "path": "data/releases/0000874238/0000874238-19-000046.json",
+    "exhibitSha256": "8ddba25aa0af8c47d6ff6ebee8c31b4263ec5e069079548c22d48d4909625468",
+    "span": [
+     546,
+     606
+    ],
+    "quote": "•  Revenues including noncontrolling interests were $255.2 million compared to $253.9 million ;",
+    "numberText": "$255.2 million",
+    "statedValue": 255200000,
+    "statedPrecision": 100000,
+    "delivered": "2019-03-06"
+   },
+   "structured": {
+    "source": "sec-companyfacts",
+    "tag": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax:USD",
+    "accession": "0000874238-20-000033",
+    "form": "10-K",
+    "entity": "0000874238",
+    "concept": "Revenue",
+    "k": 0,
+    "period": {
+     "start": "2018-10-01",
+     "end": "2018-12-31"
+    },
+    "value": 255175000,
+    "unit": "USD",
+    "scale": 1,
+    "delivered": "2020-03-04",
+    "evidence": {
+     "path": "raw/sec-companyfacts/2026-10-20/CIK0000874238.json",
+     "sha256": "fced306d544a9bdb8d531f6f63d0378599cda4ea78145b0b06de35102a28e23c"
+    }
+   },
+   "asof": {
+    "prose": "2019-03-06",
+    "structured": "2020-03-04"
+   }
+  }
+ ]
+}

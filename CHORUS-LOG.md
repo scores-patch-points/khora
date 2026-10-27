@@ -1304,3 +1304,14 @@ fast: 12 files · affected tests: native 65 pass + 1 pre-existing fail (janus se
 | Kondo | eval-side null versions | | noted | the eval-side rewiring code was replaced by the kernel's standingOf; nothing dead left in the tree |
 
 clean: Dijkstra (lowercase last-token key, same as before, disclosed), Lévi-Strauss (nothing in the stash bears on it), Marshall (no law edited).
+
+## 2026-10-27 — the weft's identity says which rung it reached: `weftReferents(weft, { identity: true })` (branch `weft-identity-rung`, additive, off by default)
+fast: 3 files · affected tests: 27 native pass; opencode-semantic.test.mjs S-f and S-j fail identically on main without this diff (verified by stash), 7 of its 10 pass either way · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff); WARN P3, see Marshall
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | native/the-fold/weft.js identityOf | `passes.length < 2`, `withCompany.length < 2` | false-positive | counts, not tuned constants: a merge needs two passes to compare and a comparison needs company in two of them; no threshold anywhere |
+| Holmes | native/the-fold/weft.js identityOf | the merge | clean | one entity or two: the record is NOT split and the merge rule (keyed by `ref`) is unchanged; the identity names the groups and says `against: false`; a difference of company convicts nothing |
+| Ostrom | eval on 30 UD English-GUM documents (unregistered sanity run) | scope | disclosed | 54 referents appear in 2+ passes: 36 `raised_difference`, 18 `needs_deeper_reading`, 0 reach rung 2 (united_states: 7 passes, 5 groups); company overlap needs more mass than a corpus of unrelated documents gives, so `raised_difference` there is not evidence of two beings and the standing says so |
+| Simon/Chekhov | weftReferents `identity` | unwired | disclosed | no consumer passes `identity: true` yet (janus kind induction, eval/law/identity-fold*.mjs); the option is tested and importable, and parity with the option off is held byte for byte |
+| Marshall | "P3" in the docstring | cited | false-positive | the `(P3)` is the weft's own property label (weft.js header, THE-HOLOGRAPH.md §1: the fold at a cursor), unchanged text, not a POLICIES.md entry |
+clean: Dijkstra (`refKey` untouched, the slug is not re-derived), Lévi-Strauss (nothing in the stash bears on it).
