@@ -236,6 +236,13 @@ Scores name clustering (B-cubed and pairwise, micro-pooled) of both arms over th
 (with `--dump-off`) hashes of the entries read without the option, to be diffed between the base commit and the branch. The registration is `PREREG-REFERENT-READ.md` (and `-2`, an amendment
 after the first confirmation slice came out red because the harness scored the arms over different universes); `.sha256` and `.time` sit beside each. Read the registrations before the numbers.
 
+## folded-card.js — a referent's folded identity as a card (pre-registered: PREREG-FOLDED-CARD.md)
+
+`renderCard(entry, referentId, { asOf, forWhom, question, window, stated, declension, swap })` (`native/adapters/text/folded-card.js`) renders one referent of the ledger as plain information for a model:
+the frame, the names with the giver of each fold, the appearances, the edges, the pronoun bindings, the rows a giver states, and what the card does not hold, as fact. Each item carries an ordinal local to the card;
+a **private map** from ordinal to fold address is a separate return value and never in the text (Archon Gary's no-address). Size follows the question and a stated window, and nothing is dropped silently (each omission is a count).
+`swap` produces the name-swap control. Off by default: `readWith(text, { referents: true, card: true })` attaches a non-enumerable `entry.renderCard`. `node eval/referents/folded-card-report.mjs` prints card sizes on the Russian excerpt. No model is called.
+
 # The pronouns the reader did not bind
 
 The pronoun golden counts what the reader bound. Most answerable pronouns are not bound, and nothing on the entry said why: `resolvePronouns` returns `{ bindings, gaps, regime }`, but `organs/hypergraph.js::pronounBindingsFor`

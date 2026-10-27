@@ -45,6 +45,7 @@ import * as P from "../adapters/text/priors.js";
 import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
 import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { buildReferentLedger } from "../adapters/text/reading-referents.js";
+import { renderCard } from "../adapters/text/folded-card.js";
 import { createDeclensionFolder } from "../adapters/text/declension.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
@@ -323,7 +324,7 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false } = {}) {
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
@@ -500,6 +501,15 @@ export function readWith(text, { address = null, category = null, language = nul
       entry.referents = L.ledger;
       for (const g of L.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "referents_failed", detail: String(e?.message ?? e).slice(0, 160) }); }
+  }
+  // THE FOLDED CARD (opt-in, `card: true`, needs `referents: true`; off, the entry is byte-identical): a NON-ENUMERABLE entry.renderCard(referentId, opts) that renders one referent's fold as plain
+  // information with a private map to its addresses (adapters/text/folded-card.js). It is a method of the entry and not a field of it, so the entry on the wire is unchanged.
+  if (card) {
+    if (!entry.referents) gaps.push({ gap: "card_needs_referents", detail: "card: true renders from the referent ledger; read with referents: true" });
+    else {
+      const decPrior = declension ? (declension === true ? priorJson(`declension-${stem}.json`) : declension.prior ?? null) : null;
+      Object.defineProperty(entry, "renderCard", { value: (referentId, o = {}) => renderCard(entry, referentId, { declension: decPrior ? { prior: decPrior } : null, ...o }), enumerable: false });
+    }
   }
   if (declension) entry.declension = declensionReport;
   return entry;
