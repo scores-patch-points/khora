@@ -41,6 +41,16 @@
 //   · Typos are not handled (a graded claim would need a measured degree, and none is invented). Connector names ("Ludwig van Beethoven") and
 //     coordination are not handled: telling "van" from "and" needs the parse or a giver. Digits after a name are not read as numerals.
 //   · Not the atoms path (weft-atoms.js mints its own entities and is not reached by readDocument) and not the weft's cross-document identity.
+//
+// LANGUAGE AND MODALITY (the omnilingual/omnimodal check, 2026-10-27)
+//   · The address and the log do not depend on a script: a span is `{ unit, at }` and its id hashes the unit, so a referent is anchored to its seed span whatever the unit.
+//     Here every unit is "utf16" (the character offsets of the reader's own mentionSpans). An audio range, an image region or a video segment enters the same INS-mention
+//     and CON events under its own unit ("ms", "bbox", ...) without changing a referent's id or the fold; no such reader exists in this repo yet, so none is built.
+//   · The two structural cues (a title token of the read's abbreviation set before a name, a Roman numeral after it) read WHITESPACE-separated, CASED text. They are switched on only
+//     when the text's letters are mostly cased (a count compared with a count, no constant); in a caseless or no-space script they do not fire, nothing is split, and the typed gap
+//     `ledger_script_unread` says so. The reader's own mention search is word-bounded (read-core.mjs::mentionsOf), so in a no-space script the plain rows carry no spans and the ledger holds none.
+//   · Reference with no span (zero anaphora, pro-drop), classifier-marked reference, and the honorific or evidentiality a language marks on a reference are not read: a CON needs a span to
+//     bind, and such a reference would need one anchored to its predicate. They are the characters a sign carries of its object (MS 793), not handled here and not defaulted to English.
 
 import { CELLS } from "./reading-timeline.js";
 import { sha256hex } from "./sha256hex.js";
@@ -102,7 +112,8 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
   const str = String(text ?? "");
   const sourceId = source ?? `src_${h16(str)}`;
   const gaps = [];
-  const spanId = (a, b) => `spn_${h16(`${sourceId}|${a}|${b}`)}`;
+  const UNIT = "utf16";
+  const spanId = (a, b, unit = UNIT) => `spn_${h16(`${sourceId}|${unit}|${a}|${b}`)}`;
   const log = [];
   const emit = (body) => {
     const ev = { id: `evt_${h16({ source: sourceId, ...body })}`, source: sourceId, ...body };
@@ -132,7 +143,11 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
     else if (mentions.at(-1).ri !== c.ri) { overlaps++; (overlappedBy.get(c.ri) ?? overlappedBy.set(c.ri, new Set()).get(c.ri)).add(mentions.at(-1).ri); }
   }
   if (overlaps) gaps.push({ gap: "mention_overlap", count: overlaps, detail: "two rows of the plain index claim overlapping spans; the longer, earlier span is kept and the other mention is not bound" });
-  for (const m of mentions) Object.assign(m, modifiersOf(str, m.a, m.b, abbreviations));
+  // the cues read whitespace-separated, cased text: a count of cased letters against a count of caseless ones decides whether they are read at all
+  const letters = str.match(/\p{L}/gu)?.length ?? 0, casedLetters = str.match(/[\p{Lu}\p{Ll}\p{Lt}]/gu)?.length ?? 0, caselessLetters = letters - casedLetters;
+  const casedScript = casedLetters >= caselessLetters;
+  if (!casedScript) gaps.push({ gap: "ledger_script_unread", cased: casedLetters, caseless: caselessLetters, detail: "most of the text's letters are in a script with no case: the reader's capital tier names few or no beings there and its mention search is word-bounded, so the ledger holds what the plain rows hold and the title and numeral cues are not read" });
+  for (const m of mentions) Object.assign(m, casedScript ? modifiersOf(str, m.a, m.b, abbreviations) : { left: null, right: null, leftStart: m.a, end: m.b });
 
   // ── 2. split a row's mentions where the text around them says two bearers: a numeral, or two titles in one sentence ──
   const parts = [];   // one per referent to be inserted: { row, key, mentions }
@@ -170,7 +185,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
   const referents = [], spans = new Map(), bound = [];   // bound: { a, b, ref, span, sign }
   const insSpan = (a, b, kind, text0) => {
     const id = spanId(a, b);
-    if (!spans.has(id)) { spans.set(id, { id, at: [a, b], text: text0, kind }); emit({ op: "INS", ...CELLS.INS, kind: "mention", span: id, at: [a, b], text: text0, mentionKind: kind, giver: "reader" }); }
+    if (!spans.has(id)) { spans.set(id, { id, unit: UNIT, at: [a, b], text: text0, kind }); emit({ op: "INS", ...CELLS.INS, kind: "mention", span: id, unit: UNIT, at: [a, b], text: text0, mentionKind: kind, giver: "reader" }); }
     return id;
   };
   const refOfPlain = new Map();   // plain ref -> ledger id (an unsplit row only)

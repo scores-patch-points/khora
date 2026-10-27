@@ -217,3 +217,44 @@ test("a pronoun the resolver bound to a being the ledger split is bound to none 
   assert.equal(g.count, 1); assert.equal(g.candidates.length, 2);
   assert.equal(stateOf(ledger).assign.get(ledger.spans.find((s) => s.kind === "pronoun").id), null);
 });
+
+// ── language and modality (the omnilingual/omnimodal check): the address does not depend on a script, and the cues that do are switched off where they cannot be read ──
+const RU = "Пьер пошёл в Москву утром. Наташа осталась дома с матерью. Пьер читал книгу весь вечер. Наташа ждала Пьера у окна. Потом Пьер вернулся домой из Москвы. Наташа улыбнулась Пьеру.";
+const DE = "Peter ging nach Berlin am Morgen. Anna blieb zu Hause bei der Mutter. Peter las ein Buch den ganzen Abend. Anna wartete auf Peter am Fenster. Dann kehrte Peter aus Berlin zurück. Anna lächelte Peter an.";
+const ZH = "彼得早上去了北京。娜塔莎和母亲留在家里。彼得整个晚上都在读书。娜塔莎在窗边等彼得。后来彼得从北京回来了。娜塔莎对彼得笑了。";
+
+for (const [lang, text, name] of [["ru", RU, "Пьер"], ["de", DE, "Peter"]]) {
+  test(`${lang}: a non-English cased text gets the same ledger, and the address of a being survives a prefix read`, () => {
+    const whole = on(text, { language: lang, address: `doc:${lang}` });
+    const prefix = on(text.split(". ").slice(0, 5).join(". ") + ".", { language: lang, address: `doc:${lang}` });
+    const w = whole.referents.referents.find((r) => r.face === name), p = prefix.referents.referents.find((r) => r.face === name);
+    assert.ok(w && p, `${name} is a referent in both reads`);
+    assert.equal(w.id, p.id);
+    assert.ok(w.mentions.length >= 3);
+    const S = stateOf(whole.referents);
+    for (const id of w.mentions) assert.equal(S.assign.get(id), w.id);
+    for (const s of whole.referents.spans) { assert.equal(s.unit, "utf16"); assert.equal(whole.referents.spans.length > 0, true); }
+    // the cues are read here (a cased script) and fire on nothing, so nothing is split and nothing is claimed unread
+    assert.equal(whole.gaps.some((g) => g.gap === "ledger_script_unread" || g.gap === "referent_split"), false);
+  });
+}
+
+test("a caseless, no-space script: the ledger holds what the plain rows hold, the cues are not read, and the typed gap says so", () => {
+  const e = on(ZH, { language: "zh" });
+  assert.equal(e.cast.length, 0);
+  assert.equal(e.referents.referents.length, 0);
+  const g = e.gaps.find((x) => x.gap === "ledger_script_unread");
+  assert.ok(g && g.caseless > g.cased);
+  assert.equal(e.error, null);
+  // the same Latin text with the same cues would split; here the cue is not even read
+  const mixed = on("彼得 Mr. Bennet 去了北京。娜塔莎 Mrs. Bennet 留在家里。彼得 Mr. Bennet 读书。娜塔莎 Mrs. Bennet 等待。", { language: "zh" });
+  assert.equal(mixed.gaps.some((x) => x.gap === "referent_split"), false);
+});
+
+test("a span carries its unit and the unit is part of its address; a referent's id depends on the seed span, whatever the unit", () => {
+  const L = on(SMITHS).referents;
+  assert.ok(L.spans.every((s) => s.unit === "utf16" && s.at.length === 2));
+  assert.ok(L.log.filter((e) => e.kind === "mention").every((e) => e.unit === "utf16"));
+  const again = buildReferentLedger({ text: STR, cast: [row("ref:auto:anna", "Anna", [at(STR, "Anna")])] }).ledger;
+  assert.match(again.spans[0].id, /^spn_[0-9a-f]{16}$/);
+});

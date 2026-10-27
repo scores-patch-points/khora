@@ -111,7 +111,10 @@ export async function scoreDocument(doc, lexicon) {
     G.push({ gold: g.ent, plain: labelFor(g, plainSpans), ledger: labelFor(g, ledgerSpans) });
   }
   const gaps = {}; for (const x of entry.gaps ?? []) gaps[x.gap] = (gaps[x.gap] ?? 0) + 1;
-  return { G, gaps, ms, entry, text };
+  // reported, not barred: what the ledger does to the plain arm's edges (a plain edge folds every statement that shares its form into one)
+  const pe = entry.edges ?? [], le = L?.edges ?? [];
+  const edgeStats = { plain: pe.length, plainStatements: pe.reduce((n, e) => n + (e.spans?.length ?? 0), 0), plainCorroborated: pe.filter((e) => (e.spans?.length ?? 0) >= 2).length, ledger: le.length, ledgerStatements: le.reduce((n, e) => n + e.statements.length, 0), ledgerCorroborated: le.filter((e) => e.statements.length >= 2).length, referents: L?.referents.length ?? 0, plainBeings: (entry.cast?.length ?? 0) + (entry.heard?.length ?? 0) };
+  return { G, gaps, ms, entry, text, edgeStats };
 }
 
 const mulberryPick = (seed) => rng(seed);
@@ -166,14 +169,14 @@ async function main() {
     fs.writeFileSync(dump, `${JSON.stringify(dumped, null, 1)}\n`); console.log(`dumped ${Object.keys(dumped).length} entries to ${dump}`); return;
   }
   for (const name of want) {
-    const perDoc = [], Mp = metricsInit(), Ml = metricsInit(), gapTotals = {}; let bound = 0, total = 0, msOn = 0, msOff = 0, stab = { plain: [0, 0], ledger: [0, 0] };
+    const perDoc = [], Mp = metricsInit(), Ml = metricsInit(), gapTotals = {}; const edgeSum = {}; let bound = 0, total = 0, msOn = 0, msOff = 0, stab = { plain: [0, 0], ledger: [0, 0] };
     for (const d of slices[name]) {
       const r = await scoreDocument(d, lexicon);
       perDoc.push(r.G);
       metricsAdd(Mp, r.G.map((x) => ({ gold: x.gold, sys: x.plain }))); metricsAdd(Ml, r.G.map((x) => ({ gold: x.gold, sys: x.ledger })));
       for (const x of r.G) { total++; if (x.ledger) bound++; }
       for (const [k, v] of Object.entries(r.gaps)) gapTotals[k] = (gapTotals[k] ?? 0) + v;
-      msOn += r.ms;
+      msOn += r.ms; for (const [k, v] of Object.entries(r.edgeStats)) edgeSum[k] = (edgeSum[k] ?? 0) + v;
       const t0 = Date.now(); const off = await readDocument(r.text, { language: "en", minCharacters: 0, lexicon }); msOff += Date.now() - t0;
       if (dump) dumped[`${name}:${d.id}`] = sha(JSON.stringify({ ...off, ms: 0 }));
       if (name === "A") { const s = await stability(d, lexicon, null); stab.plain[0] += s.plain[0]; stab.plain[1] += s.plain[1]; stab.ledger[0] += s.ledger[0]; stab.ledger[1] += s.ledger[1]; }
@@ -184,7 +187,7 @@ async function main() {
       B1_b3: ledger.b3.f1 >= plain.b3.f1 - margin, B2_pair: ledger.pair.f1 >= plain.pair.f1 - margin, B3_bound: bound / total >= 1 - margin,
       C1_control: ledger.b3.f1 > nul.p95,
     };
-    report.slices[name] = { documents: slices[name].length, goldNames: plain.n, plain, ledger, bound: [bound, total], shuffled: nul, bars, gaps: gapTotals, ms: { on: msOn, off: msOff }, ...(name === "A" ? { stability: { plain: stab.plain, ledger: stab.ledger } } : {}) };
+    report.slices[name] = { documents: slices[name].length, goldNames: plain.n, plain, ledger, bound: [bound, total], shuffled: nul, bars, gaps: gapTotals, edges: edgeSum, ms: { on: msOn, off: msOff }, ...(name === "A" ? { stability: { plain: stab.plain, ledger: stab.ledger } } : {}) };
     const f3 = (x) => x.toFixed(3);
     console.log(`\nslice ${name}: ${slices[name].length} documents, ${plain.n} gold names covered by the plain cast`);
     console.log("            B3 P / R / F1            pairwise P / R / F1");
@@ -193,6 +196,7 @@ async function main() {
     console.log(`ledger binds ${bound}/${total} of the covered names (${f3(bound / total)}); shuffled control: mean ${f3(nul.mean)}, p95 ${f3(nul.p95)}, max ${f3(nul.max)} over ${nul.draws} draws (seed ${nul.seed})`);
     console.log("bars:", Object.entries(bars).map(([k, v]) => `${k} ${v ? "PASS" : "FAIL"}`).join("  "), `(margin ${margin})`);
     console.log("gaps:", JSON.stringify(gapTotals));
+    console.log("edges (reported):", JSON.stringify(edgeSum));
     console.log(`ms on / off: ${msOn} / ${msOff}`);
     if (name === "A") console.log(`id stability across prefix and whole (reported): plain ${stab.plain[0]}/${stab.plain[1]}, ledger ${stab.ledger[0]}/${stab.ledger[1]}`);
   }
