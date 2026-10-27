@@ -7,7 +7,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readWith } from "../../the-fold/read-core.mjs";
-import { foldLog, isCoherent } from "./reading-timeline.js";
+import { foldLog, isCoherent, CELLS } from "./reading-timeline.js";
 import { buildReferentLedger, assertClaim, READING_REFERENTS_SCHEMA } from "./reading-referents.js";
 import { universeSpans } from "../../../eval/referents/referent-read.mjs";
 
@@ -294,4 +294,14 @@ test("the harness labels a name from the cast on both sides: a heard row never l
   // and on a real read the two universes line up: every ledger being stands on a cast row
   const real = on(SMITHS);
   assert.doesNotThrow(() => universeSpans(real));
+});
+
+// ── the reader's import graph stays free of node: (native/tests/reading-pipeline.test.js walks it from read-core.mjs); this module must not reach reading-timeline.js ──
+test("the module does not import reading-timeline.js (which reaches node:fs), and the cells it uses are reading-timeline's own", async () => {
+  const fsMod = await import("node:fs");
+  const src = fsMod.readFileSync(new URL("./reading-referents.js", import.meta.url), "utf8");
+  const imports = [...src.matchAll(/^\s*import\s+(?:[^'"]*?from\s+)?["']([^"']+)["']/gm)].map((m) => m[1]);
+  assert.deepEqual(imports.sort(), ["./sha256hex.js", "./surfaces.js"]);
+  const L = on(SMITHS).referents;
+  for (const ev of L.log) { const cell = CELLS[ev.op]; assert.deepEqual({ site: ev.site, stance: ev.stance }, cell); }
 });

@@ -52,11 +52,15 @@
 //   · Reference with no span (zero anaphora, pro-drop), classifier-marked reference, and the honorific or evidentiality a language marks on a reference are not read: a CON needs a span to
 //     bind, and such a reference would need one anchored to its predicate. They are the characters a sign carries of its object (MS 793), not handled here and not defaulted to English.
 
-import { CELLS } from "./reading-timeline.js";
 import { sha256hex } from "./sha256hex.js";
 import { isRomanNumeral } from "./surfaces.js";
 
 export const READING_REFERENTS_SCHEMA = "ReadingReferents@1";
+
+// The two cells this module's events sit in, as reading-timeline.js names them (INS at Entity/Making, CON at Link/Binding). They are NOT imported: reading-timeline.js reaches
+// kernel/reality-register.js, which imports node:fs and node:path, and the reader's import graph must stay free of node: (native/tests/reading-pipeline.test.js, "the core loads
+// in a page"). The test file pins these two against reading-timeline.js's own CELLS, so a drift fails there.
+const LEDGER_CELLS = Object.freeze({ INS: Object.freeze({ site: "Entity", stance: "Making" }), CON: Object.freeze({ site: "Link", stance: "Binding" }) });
 
 const canon = (x) => JSON.stringify(x, (_k, v) => (v && typeof v === "object" && !Array.isArray(v) ? Object.fromEntries(Object.keys(v).sort().map((k) => [k, v[k]])) : v));
 const h16 = (x) => sha256hex(typeof x === "string" ? x : canon(x)).slice(0, 16);
@@ -192,7 +196,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
   const referents = [], spans = new Map(), bound = [];   // bound: { a, b, ref, span, sign }
   const insSpan = (a, b, kind, text0) => {
     const id = spanId(a, b);
-    if (!spans.has(id)) { spans.set(id, { id, unit: UNIT, at: [a, b], text: text0, kind }); emit({ op: "INS", ...CELLS.INS, kind: "mention", span: id, unit: UNIT, at: [a, b], text: text0, mentionKind: kind, giver: "reader" }); }
+    if (!spans.has(id)) { spans.set(id, { id, unit: UNIT, at: [a, b], text: text0, kind }); emit({ op: "INS", ...LEDGER_CELLS.INS, kind: "mention", span: id, unit: UNIT, at: [a, b], text: text0, mentionKind: kind, giver: "reader" }); }
     return id;
   };
   const refOfPlain = new Map();   // plain ref -> ledger id (an unsplit row only)
@@ -201,7 +205,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
   for (const p of parts) {
     const first = p.first;
     const seed = insSpan(first.a, first.b, "name", str.slice(first.a, first.b));
-    const ins = emit({ op: "INS", ...CELLS.INS, kind: "referent", seed, giver: "reader/index", lens: "name-variant coreference over the reader's index", engine: p.row.ref, basis: "an INS made from the text alone: a nomination, no collateral acquaintance, no claim that it exists" });
+    const ins = emit({ op: "INS", ...LEDGER_CELLS.INS, kind: "referent", seed, giver: "reader/index", lens: "name-variant coreference over the reader's index", engine: p.row.ref, basis: "an INS made from the text alone: a nomination, no collateral acquaintance, no claim that it exists" });
     // the face is a view: the representative spelling of the plain index, or, for a split part, its first mention with the characters its sign carries
     const face = p.key ? str.slice(first.leftStart, first.end).replace(/\s+/g, " ").trim() : p.row.surface;
     const rec = { id: ins.ref, face, engine: p.row.ref, seed, standing: p.row.standing, forms: [], mentions: [], ...(p.splitBy ? { split: { from: p.row.ref, by: p.splitBy, key: p.key } } : {}) };
@@ -210,7 +214,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
     for (const m of p.mentions) {
       const t = str.slice(m.a, m.b), span = insSpan(m.a, m.b, "name", t);
       const sameForm = fold(t) === fold(face) || fold(t) === fold(p.row.surface);
-      emit({ op: "CON", ...CELLS.CON, span, ref: ins.ref, supersedes: null, giver: "reader/index", lens: "name-variant coreference over the reader's index", sign: "symbol", basis: sameForm ? "the same form as the referent's face" : "a form the reader's index clusters with the referent's face" });
+      emit({ op: "CON", ...LEDGER_CELLS.CON, span, ref: ins.ref, supersedes: null, giver: "reader/index", lens: "name-variant coreference over the reader's index", sign: "symbol", basis: sameForm ? "the same form as the referent's face" : "a form the reader's index clusters with the referent's face" });
       rec.mentions.push(span); bound.push({ a: m.a, b: m.b, ref: ins.ref, span, sign: "symbol", kind: "name", right: m.right ?? null, inAdj: inAdj.has(m) });
       const f = fold(t); if (f && !rec.forms.includes(f)) rec.forms.push(f);
     }
@@ -221,7 +225,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
   const ambiguousNames = new Map();
   for (const { m, plain } of unboundNames) {
     const span = insSpan(m.a, m.b, "name", str.slice(m.a, m.b));
-    emit({ op: "CON", ...CELLS.CON, span, ref: null, supersedes: null, giver: "reader/index", lens: "name-variant coreference over the reader's index", sign: "symbol", basis: "unbound: the reader's index clustered this form with more than one bearer of the name" });
+    emit({ op: "CON", ...LEDGER_CELLS.CON, span, ref: null, supersedes: null, giver: "reader/index", lens: "name-variant coreference over the reader's index", sign: "symbol", basis: "unbound: the reader's index clustered this form with more than one bearer of the name" });
     ambiguousNames.set(plain, (ambiguousNames.get(plain) ?? 0) + 1);
   }
   for (const [plain, sp] of splitOf) {
@@ -239,10 +243,10 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
     const span = insSpan(a, b, "pronoun", str.slice(a, b));
     const target = p.ref ? refOfPlain.get(p.ref) ?? null : null;
     if (target) {
-      emit({ op: "CON", ...CELLS.CON, span, ref: target, supersedes: null, giver: "reader/pronouns", lens: "pronoun resolution over the reader's index", sign: "index", basis: "the pronoun resolver bound it to this being by recall of the discourse" });
+      emit({ op: "CON", ...LEDGER_CELLS.CON, span, ref: target, supersedes: null, giver: "reader/pronouns", lens: "pronoun resolution over the reader's index", sign: "index", basis: "the pronoun resolver bound it to this being by recall of the discourse" });
       referents.find((r) => r.id === target).mentions.push(span); bound.push({ a, b, ref: target, span, sign: "index", kind: "pronoun" });
     } else {
-      emit({ op: "CON", ...CELLS.CON, span, ref: null, supersedes: null, giver: "reader/pronouns", lens: "pronoun resolution over the reader's index", sign: "index", basis: p.ref ? "unbound: the being the resolver named was split into candidates" : "unbound: the resolver bound it to no being" });
+      emit({ op: "CON", ...LEDGER_CELLS.CON, span, ref: null, supersedes: null, giver: "reader/pronouns", lens: "pronoun resolution over the reader's index", sign: "index", basis: p.ref ? "unbound: the being the resolver named was split into candidates" : "unbound: the resolver bound it to no being" });
       if (p.ref && splitOf.has(p.ref)) pronounAmbiguous.set(p.ref, (pronounAmbiguous.get(p.ref) ?? 0) + 1);
     }
   }
