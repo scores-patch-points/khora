@@ -5,8 +5,8 @@
 //
 //   GUM_TRAIN=/path/en_gum-ud-train.conllu WIKTIONARY_READER=... node eval/referents/referent-read.mjs [--slice A,E] [--out file.json] [--dump-off file.json]
 //
-//   --slice A,E,F A is the design slice (seed 20261110), E the first confirmation slice (seed 20261201; only 6 documents were left to draw), F the second confirmation
-//                 (PREREG-REFERENT-READ-2.md: every document of the golden's B, C and D). Default A.
+//   --slice A,E,F,G A is the design slice (seed 20261110), E the first confirmation slice (seed 20261201; only 6 documents were left to draw), F the second confirmation
+//                 (PREREG-REFERENT-READ-2.md: every document of the golden's B, C and D), G the third (PREREG-REFERENT-READ-3.md: the 65 set aside, names only). Default A.
 //   --dump-only   with --dump-off: dump the hashes and score nothing
 //   --dump-off f  write, for every document read and every fixture, the sha256 of the entry read WITHOUT the option (ms zeroed); run it on the base commit and on the branch
 //                 and diff the two files: C2 of the pre-registration, zero differing bytes.
@@ -36,7 +36,12 @@ export function slicesAE(docs) {
   const restE = left.filter((d) => !inD.has(d.id));
   const E = shuffled(restE.length, rng(20261201)).slice(0, 30).map((i) => restE[i]);
   for (const d of E) if (inA.has(d.id) || inB.has(d.id) || inC.has(d.id) || inD.has(d.id) || aside.has(d.id)) throw new Error("referent-read: slice E is not fresh");
-  return { A, E, F: [...B, ...C, ...D].sort((a, b) => (a.id < b.id ? -1 : 1)) };
+  // G: the 65 documents the golden set aside (seed 20261140), read for NAMES ONLY under PREREG-REFERENT-READ-3.md; never read by any name evaluation or by the ledger before
+  const G = [...aside].map((id) => ord.find((d) => d.id === id)).filter(Boolean).sort((a, b) => (a.id < b.id ? -1 : 1));
+  const SLICES_FILE = process.env.GUM_SLICES || "/Users/mlacy/Downloads/workspace/reading-rules-audit/gum-slices.json";
+  if (fs.existsSync(SLICES_FILE)) { const listed = new Set(JSON.parse(fs.readFileSync(SLICES_FILE, "utf8")).aside); if (listed.size !== G.length || G.some((d) => !listed.has(d.id))) throw new Error("referent-read: the rebuilt aside set is not the one in gum-slices.json"); }
+  for (const d of G) if (inA.has(d.id) || inB.has(d.id) || inC.has(d.id) || inD.has(d.id)) throw new Error("referent-read: slice G is not disjoint from A, B, C, D");
+  return { A, E, F: [...B, ...C, ...D].sort((a, b) => (a.id < b.id ? -1 : 1)), G };
 }
 
 const overlap = (a, b, c, d) => Math.min(b, d) - Math.max(a, c);
@@ -98,6 +103,22 @@ function selfcheck() {
   if (!(lump.b3.r === 1 && lump.b3.p < 1)) throw new Error("metric selfcheck: one lump must have recall 1 and lower precision");
 }
 
+/** the spans each arm labels a gold name from: the plain arm from the CAST rows, the ledger arm from the referents it inserted as beings (standing "referent"), never from `heard`.
+ *  The universes are the same by construction, and asserted: a ledger being must stand on a row of the plain cast, or the arms would be scored over different universes. */
+export function universeSpans(entry) {
+  const plainSpans = []; for (const c of entry.cast ?? []) for (const [a, b] of c.mentionSpans ?? []) plainSpans.push({ a, b, label: c.ref });
+  const L = entry.referents;
+  const castRefs = new Set((entry.cast ?? []).map((c) => c.ref));
+  const ledgerOf = new Map();
+  for (const r of L?.referents ?? []) {
+    if (r.standing !== "referent") continue;
+    if (!castRefs.has(r.engine)) throw new Error(`referent-read: ledger referent ${r.id} (engine ${r.engine}) is not a row of the plain cast: the arms would be scored over different universes`);
+    for (const sid of r.mentions) ledgerOf.set(sid, r.id);
+  }
+  const ledgerSpans = []; for (const s of L?.spans ?? []) if (s.kind === "name" && ledgerOf.has(s.id)) ledgerSpans.push({ a: s.at[0], b: s.at[1], label: ledgerOf.get(s.id) });
+  return { plainSpans, ledgerSpans };
+}
+
 /** one document, both arms: [{ gold, plain, ledger }] over the evaluation set G, plus the entries and the timings */
 export async function scoreDocument(doc, lexicon) {
   const { text, names } = goldNames(doc);
@@ -106,14 +127,7 @@ export async function scoreDocument(doc, lexicon) {
   const t0 = Date.now();
   const entry = await readDocument(text, { language: "en", minCharacters: 0, lexicon, referents: true });
   const ms = Date.now() - t0;
-  const plainSpans = []; for (const c of entry.cast ?? []) for (const [a, b] of c.mentionSpans ?? []) plainSpans.push({ a, b, label: c.ref });
-  const L = entry.referents;
-  // the same universe as the plain arm: its labels come from the CAST only, so the ledger's come from the referents it inserted as beings (standing "referent"), never from the common nouns of `heard`
-  const ledgerOf = new Map(); for (const r of L?.referents ?? []) if (r.standing === "referent") for (const sid of r.mentions) ledgerOf.set(sid, r.id);
-  // the universes are the same by construction, and checked: every referent a ledger label comes from stands on a row of the plain cast
-  const castRefs = new Set((entry.cast ?? []).map((c) => c.ref));
-  for (const r of L?.referents ?? []) if (r.standing === "referent" && !castRefs.has(r.engine)) throw new Error(`referent-read: ledger referent ${r.id} (engine ${r.engine}) is not a row of the plain cast: the arms would be scored over different universes`);
-  const ledgerSpans = []; for (const s of L?.spans ?? []) if (s.kind === "name" && ledgerOf.has(s.id)) ledgerSpans.push({ a: s.at[0], b: s.at[1], label: ledgerOf.get(s.id) });
+  const L = entry.referents, { plainSpans, ledgerSpans } = universeSpans(entry);
   const G = [];
   for (const g of names) {
     if (!plainSpans.some((s) => overlap(g.a, g.b, s.a, s.b) > 0)) continue;

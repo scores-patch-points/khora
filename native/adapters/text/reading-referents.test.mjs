@@ -9,6 +9,7 @@ import assert from "node:assert/strict";
 import { readWith } from "../../the-fold/read-core.mjs";
 import { foldLog, isCoherent } from "./reading-timeline.js";
 import { buildReferentLedger, assertClaim, READING_REFERENTS_SCHEMA } from "./reading-referents.js";
+import { universeSpans } from "../../../eval/referents/referent-read.mjs";
 
 const read = (t, o = {}) => readWith(t, { language: "en", minCharacters: 0, ...o });
 const on = (t, o = {}) => read(t, { referents: true, ...o });
@@ -271,4 +272,26 @@ test("a span carries its unit and the unit is part of its address; a referent's 
   assert.ok(L.log.filter((e) => e.kind === "mention").every((e) => e.unit === "utf16"));
   const again = buildReferentLedger({ text: STR, cast: [row("ref:auto:anna", "Anna", [at(STR, "Anna")])] }).ledger;
   assert.match(again.spans[0].id, /^spn_[0-9a-f]{16}$/);
+});
+
+// ── the eval harness scores both arms over ONE universe (the first confirmation failed because it did not) ──
+test("the harness labels a name from the cast on both sides: a heard row never labels it, and a ledger being that is no cast row throws", () => {
+  const entry = {
+    cast: [{ ref: "ref:auto:padalecki", mentionSpans: [[0, 9]] }],
+    referents: {
+      referents: [
+        { id: "ref_a", engine: "ref:auto:padalecki", standing: "referent", mentions: ["spn_1"] },
+        { id: "ref_b", engine: "ref:auto:depression", standing: "heard", mentions: ["spn_2"] },
+      ],
+      spans: [{ id: "spn_1", kind: "name", at: [0, 9] }, { id: "spn_2", kind: "name", at: [60, 70] }],
+    },
+  };
+  const { plainSpans, ledgerSpans } = universeSpans(entry);
+  assert.deepEqual(plainSpans.map((s) => s.label), ["ref:auto:padalecki"]);
+  assert.deepEqual(ledgerSpans.map((s) => s.label), ["ref_a"], "the heard row's span is not in the ledger arm's universe");
+  const bad = { ...entry, referents: { ...entry.referents, referents: [{ id: "ref_c", engine: "ref:auto:not_in_cast", standing: "referent", mentions: ["spn_1"] }] } };
+  assert.throws(() => universeSpans(bad), /different universes/);
+  // and on a real read the two universes line up: every ledger being stands on a cast row
+  const real = on(SMITHS);
+  assert.doesNotThrow(() => universeSpans(real));
 });
