@@ -46,6 +46,7 @@ import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
 import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { formUsageOf } from "../adapters/text/form-usage.js";
+import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
@@ -62,7 +63,7 @@ export const READ_CORE = Object.freeze({
 // ── priors ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
 /** The received priors, from data handed in. Data-gated: an absent piece leaves that leg bare (exact match), never a guess. */
-export function buildPriors({ pos = null, posLexicon = null, morphology = null, unimorph = null, punctuation = null, dotted = null, stem = null } = {}) {
+export function buildPriors({ pos = null, posLexicon = null, morphology = null, unimorph = null, punctuation = null, dotted = null, conventions = null, stem = null } = {}) {
   // a copy, so the class lexicon rides this reader's prior and never the shared one other organs read
   const posPrior = pos ? (posLexicon ? { ...pos, lexicon: posLexicon } : pos) : null;
   const morph = morphology ? morphologyFromPrior(morphology) : null;
@@ -90,7 +91,7 @@ export function buildPriors({ pos = null, posLexicon = null, morphology = null, 
   if (!lemmatizer) gaps.push({ gap: "no_morphology", stem, detail: `no morphology prior for ${stem ?? "?"}: verbs match exactly` });
   if (!punctuation) gaps.push({ gap: "no_punctuation_prior", stem, detail: `punctuation-${stem ?? "?"}.json absent: abbreviations come from the text and the hyperlexicon only` });
   if (!dotted) gaps.push({ gap: "no_dotted_prior", stem, detail: `dotted-${stem ?? "?"}.json absent: only the live hyperlexicon knows the words written with their period` });
-  return { stem, posPrior, verbForms: forms.size ? forms : null, lemmatizer, punctuation: punctuation ?? null, dotted: dotted ? new Set(dotted.words || []) : null, dottedGiver: dotted?.giver ?? null, gaps };
+  return { stem, posPrior, verbForms: forms.size ? forms : null, lemmatizer, punctuation: punctuation ?? null, dotted: dotted ? new Set(dotted.words || []) : null, dottedGiver: dotted?.giver ?? null, conventions: conventions ?? null, gaps };
 }
 
 const priorCache = new Map();
@@ -106,6 +107,7 @@ export function priorsFor(language = "eng") {
     morphology: priorJson(`morphology-${stem}.json`),
     punctuation: priorJson(`punctuation-${stem}.json`),
     dotted: priorJson(`dotted-${stem}.json`),
+    conventions: priorJson(`conventions-${stem}.json`),
   });
   if (priorCache.size > 16) priorCache.clear();
   priorCache.set(key, built);
@@ -366,7 +368,8 @@ export function readWith(text, { address = null, category = null, language = nul
     const capitalSurfaces = extractSurfaces(cuts, formUsage ? { formUsage } : {});
     const capital = new Set(capitalSurfaces.map((x) => x.surface));
     // what the treebank's use refused, kept beside the entry (not enumerable: the wire stays what it was) so the rule is auditable
-    if (formUsage) formUsageReport = { convention: "capital-marks-a-name", giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s)) };
+    // the conventions this branch reads by, cited from their one home (janus priors/conventions-<stem>.json); a gap is typed here, not on the wire
+    if (formUsage) formUsageReport = { conventions: ["capital-marks-a-name", "treebank-attests-a-forms-use"].map((s) => conventionOf(pr.conventions, s)).filter(Boolean), gap: conventionsGap(pr.conventions), giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s)) };
     const bytes = byteOffsets(str);
     const byRef = new Map();
     for (const ev of out?.index?.events ?? []) {

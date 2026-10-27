@@ -86,12 +86,15 @@ cut calls mid-sentence ("Grab" after a heading with no full stop, "Well" in a tr
 slices B, C and D before this change found 70 of 2,321 cast beings that were one word with every mention at a sentence start; about 32 had no gold mention (IF, Well, First,
 After, Why, While, Actually, Create, Wow, Sometimes …).
 
-A capital is a **convention**, kept more or less by a text, not a rule. `native/adapters/text/conventions.js` is its ledger, in the shape of
-janus's nomos (`NomosRule@1`): four rows (a capital marks a name; a capital opens a sentence; a sentence end is marked; the treebank attests a
-form's use), each with its standing, its giver or builder, its witnesses, the address where the reader stands on it, and where it departs. The
-figures in the witnesses are measured by `convention-witness.mjs` on GUM train and describe how closely English keeps each convention: a name is a
+A capital is a **convention**, kept more or less by a text, not a rule. Its home is **janus**: `priors/conventions-eng.json` (`Conventions@1`),
+built by janus `scripts/build-conventions-prior.mjs` and folded by `native/organs/nomos.js` into one `NomosRule@1` per convention, each with the
+standing of its own giver or builder, its witnesses, the address where the reader stands on it, and where it departs. There are four (a capital marks a
+name; a capital opens a sentence; a sentence end is marked; the treebank attests a form's use). khora holds no copy: `native/adapters/text/conventions.js`
+reads the prior as data (`conventionOf(prior, stem)`), the cast's report cites the conventions it read by, and an absent prior is a typed gap. The
+figures are measured by the builder on GUM train (sha256 pinned in the prior) and describe how closely English keeps each convention: a name is a
 capital mid-sentence 97.1% of the time, a word that is not a name 3.1%, so a mid-sentence capital is a name 68.9% of the time; a sentence-initial
-capital is a name 8.0% of the time; 9.1% of gold sentences end with no terminal mark. The cast never reads them.
+capital is a name 8.0% of the time; 9.1% of gold sentences end with no terminal mark. The cast never reads them. (The frozen registrations
+`PREREG-CAST*.md` name `conventions.js` and `convention-witness.mjs` as they were when written; the measuring moved to the builder, with the same counts.)
 
 ## The change
 

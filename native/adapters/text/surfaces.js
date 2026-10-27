@@ -745,7 +745,7 @@ export const surfacesFromEvidence = (evidence, { functionWords = null, abbreviat
       //   signal, not *the* signal (THE-CASE-FREE-CAST, 2026-10-09).
       if (lower > 0 && cap > 0 && !capitalisationIsSignificant(cap, lower)) continue;
       // A CAPITAL IS A CONVENTION, AND A WORD THE TEXT NEVER WRITES LOWER-CASE GIVES THE TEST NOTHING TO STAND ON (the nomos row
-      // "capital-marks-a-name", adapters/text/conventions.js). Where the received treebank has measured how this form is USED
+      // "capital-marks-a-name", janus priors/conventions-eng.json, read by adapters/text/conventions.js). Where the received treebank has measured how this form is USED
       // (`formUsage(surface)` → { nominal, other }, adapters/text/form-usage.js), the SAME test is asked of that use: the word is refused
       // when its non-nominal uses (a verb, an adverb, an interjection …) are more than its nominal uses plus the text's own capitals
       // balance, exactly as the two-sided case above asks it of capitals and lower-case. A form the treebank has not seen is undecided
