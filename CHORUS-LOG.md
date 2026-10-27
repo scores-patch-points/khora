@@ -1338,3 +1338,13 @@ fast: 2 files · affected tests: 28 pass (19 + 9 new, each new case with a contr
 | Dijkstra | `\p{Ll}` / `\p{Nd}` | script | disclosed | caseless scripts have no lowercase, so the wrap join would not fire for them; unreachable through the hook (English only) |
 | Simon/Chekhov | `FIXES` export | wired, not consumed | disclosed | the flags are exercised by the tests and the scorer; no door passes `fixes` |
 clean: Holmes (not routed), Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
+
+## 2026-10-27 — the "detail" rule: sixth flag `continuation` for the period binder (`adapters/text/figure-period.en.js`; branch `figure-period-wrap`, no PR)
+fast: 2 files · affected tests: 29 pass (28 + 1 new, with its control: the same text with the flag off leaves the second figure a detail; the appositive "including a $60.0 million amendment payment" stays a detail; flag off by default fails the test) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | continuation | fitted | disclosed | the pattern ("on net sales of") was read from the third filer's unclaimed sentences (post-hoc diagnostic of ladder-40), so its numbers there are a fit: claimed 73 → 86 of 103, wrong 0, planted found 13 → 15 of 20, 3 formerly right claims still unclaimed; the original filers are unchanged (the flag is inert on them: 225/225) and every bar was registered (PREREG-G2-4X) before the flag's performance was computed |
+| Feynman | S2 | cost not in a bar | disclosed | the better period reader makes A1 convict more across measures: shuffled-concept records convicted 42 → 53 of 76 on the third filer. A1 has no measure identity (A3 does); until the join is made, wiring `features.figures` into a verdict without A3 would convict across measures |
+| Greenberg | CONTINUATION `on|with … of` | English | disclosed | an English preposition pattern; the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
+| Simon/Chekhov | `FIXES.continuation` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
+clean: Dijkstra (nothing new), Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
