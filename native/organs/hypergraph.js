@@ -346,11 +346,28 @@ const sourceOf = (ref) => String(ref ?? "").split("#")[0] || null;
 // here — corpus.js's own header names exactly what these are: "an
 // engineering starting point, not yet validated against a retrieval-quality
 // golden... moving these two numbers as one gets built is expected, not a
-// regression." No golden exists for pronoun binding in THIS repo either, so
-// the honest move is the same number, credited, not a fresh guess dressed as
-// a considered choice.
+// regression." The dials stay that number, credited, not a fresh guess dressed
+// as a considered choice; what changed is that there is now a golden to
+// measure them against: eval/referents/pronoun-golden.mjs scores the bindings
+// the real pipeline reports against UD_English-GUM's coreference (numbers in
+// eval/referents/README.md). The same golden scores the resolver's other two
+// regimes (adjudicated, null-tested with the presence arbiter); none is adopted
+// here. What IS supplied, through `organs.nonPersonalOf`, is the resolver's own
+// `nonPersonal` input, which nothing filled before.
 const PRONOUN_MIN_ACTIVATION = 0.05;
 const PRONOUN_MIN_MARGIN = 0.2;
+
+// The two dials, plus `nonPersonal` when the caller supplied a ruling (`organs.nonPersonalOf`, adapters/text/non-personal.js: months and
+// weekdays from TimePrior@1, a head word the lexicon giver lists as a common noun and never as a name): the referent ids a personal
+// pronoun must not bind. resolvePronouns' own header names this input and the production call never filled it. Without a ruling, or
+// when the ruling throws or names nothing, the options are the two dials alone, byte for byte what this call was before.
+function pronounOptions(surfaceToReferent, nonPersonalOf) {
+  const dials = { minActivation: PRONOUN_MIN_ACTIVATION, minMargin: PRONOUN_MIN_MARGIN };
+  if (typeof nonPersonalOf !== "function") return dials;
+  let ids;
+  try { ids = nonPersonalOf(surfaceToReferent); } catch { return dials; }
+  return ids?.length ? { ...dials, nonPersonal: ids } : dials;
+}
 
 /**
  * A pronoun subject is disclosed elsewhere in this file as noise, not a
@@ -428,7 +445,7 @@ const PRONOUN_MIN_MARGIN = 0.2;
  * anything, ever. A sentence's address is `sentences[i]`, computed exactly
  * once, from the author's own bytes, for the whole life of this call.
  */
-function pronounBindingsFor(sentences, resolvePronouns, { extractSurfaces, discoverReferents }) {
+function pronounBindingsFor(sentences, resolvePronouns, { extractSurfaces, discoverReferents, nonPersonalOf = null }) {
   const empty = { bindings: [], bestSurface: new Map() };
   if (!resolvePronouns || !sentences?.length) return empty;
   let discovery;
@@ -450,10 +467,7 @@ function pronounBindingsFor(sentences, resolvePronouns, { extractSurfaces, disco
   }
   let resolved;
   try {
-    resolved = resolvePronouns(sentences, surfaceToReferent, {
-      minActivation: PRONOUN_MIN_ACTIVATION,
-      minMargin: PRONOUN_MIN_MARGIN,
-    });
+    resolved = resolvePronouns(sentences, surfaceToReferent, pronounOptions(surfaceToReferent, nonPersonalOf));
   } catch {
     return empty;
   }
@@ -646,7 +660,7 @@ function sentenceWithBlanking(sentence, blankFurniture) {
 function confirmLeadingReferents(
   list,
   pooledSurfaces,
-  { splitSentences, extractSurfaces, extractLeadingSurfaces, discoverReferents, resolvePronouns, diaNorm, functionWords, thirdPersonSingular },
+  { splitSentences, extractSurfaces, extractLeadingSurfaces, discoverReferents, resolvePronouns, nonPersonalOf = null, diaNorm, functionWords, thirdPersonSingular },
 ) {
   // `functionWords` alone is not enough to keep a PRONOUN out of its own
   // candidate pool — measured live, not assumed: the corpus-scale closed
@@ -707,10 +721,7 @@ function confirmLeadingReferents(
 
     let resolved;
     try {
-      resolved = resolvePronouns(sentences, surfaceToReferent, {
-        minActivation: PRONOUN_MIN_ACTIVATION,
-        minMargin: PRONOUN_MIN_MARGIN,
-      });
+      resolved = resolvePronouns(sentences, surfaceToReferent, pronounOptions(surfaceToReferent, nonPersonalOf));
     } catch {
       continue;
     }
@@ -790,7 +801,7 @@ function buildIndexFromEvents(events, { namesCorefer, diaNorm }) {
 function withConfirmedLeadingReferents(
   list,
   baseIndex,
-  { splitSentences, extractSurfaces, extractLeadingSurfaces, discoverReferents, resolvePronouns, namesCorefer, diaNorm, functionWords, thirdPersonSingular },
+  { splitSentences, extractSurfaces, extractLeadingSurfaces, discoverReferents, resolvePronouns, nonPersonalOf = null, namesCorefer, diaNorm, functionWords, thirdPersonSingular },
 ) {
   if (!extractLeadingSurfaces || !resolvePronouns) return baseIndex;
   let pooledSurfaces;
@@ -809,6 +820,7 @@ function withConfirmedLeadingReferents(
       extractLeadingSurfaces,
       discoverReferents,
       resolvePronouns,
+      nonPersonalOf,
       diaNorm,
       functionWords,
       thirdPersonSingular,
@@ -884,6 +896,10 @@ export function makeRelationReader(organs) {
     blankFurniture = null,
     normaliseNewlines = null,
     resolvePronouns = null,
+    // `organs.nonPersonalOf` — OPTIONAL, `(surfaceToReferent: Map) => referent ids`: the ids the caller's givers rule NOT a person, passed to
+    // `resolvePronouns` as its `nonPersonal` (adapters/text/non-personal.js builds it from TimePrior@1 and the lexicon giver). Omitted,
+    // every pronoun call is byte-identical to before.
+    nonPersonalOf = null,
     classifyConnector = null,
     minShare = undefined,
     extractLeadingSurfaces = null,
@@ -1071,6 +1087,7 @@ export function makeRelationReader(organs) {
       extractLeadingSurfaces,
       discoverReferents,
       resolvePronouns,
+      nonPersonalOf,
       namesCorefer,
       diaNorm,
       functionWords,
@@ -1124,7 +1141,7 @@ export function makeRelationReader(organs) {
     const passageToRaw = list.map((p, pi) =>
       passageBlanked[pi] != null && normaliseNewlines ? normaliseNewlines(String(p.text ?? "")).toRaw : null);
     const passageBindings = list.map((p, pi) =>
-      resolvePronouns ? pronounBindingsFor(passageSentences[pi], resolvePronouns, { extractSurfaces, discoverReferents }) : { bindings: [], bestSurface: new Map() });
+      resolvePronouns ? pronounBindingsFor(passageSentences[pi], resolvePronouns, { extractSurfaces, discoverReferents, nonPersonalOf }) : { bindings: [], bestSurface: new Map() });
 
     /**
      * This passage's sentence i, rewritten locally for extraction only.
