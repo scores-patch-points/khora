@@ -1,0 +1,80 @@
+{
+ "schema": "Regression108@1",
+ "frozen": "2026-10-26",
+ "at": "khora main 1cf8891f (PR #70 merged)",
+ "rule": "these 108 English pairs are a REGRESSION set: never tuned on, never relabelled; a change that moves a number below is reported as a change, a run that cannot reproduce the baseline replaces every number that cites it (Plan: Identity Determination, P0/G0)",
+ "files": {
+  "eval/meaning/fresh.json": "18808da65eed36914cea79591c21e09e8ed25071b6d4c3f4dac700de8da98e18",
+  "eval/meaning/heldout.json": "4f63c790f4bc2016f86beab570f6d2f742325b7ca22ca0f2c6e819cb92ca3ceb",
+  "eval/meaning/relations.json": "29fe70cbc2b0ce5a83a3533c2ce78b3a7849c1fd7bd286f06e59ccc7abbc6037",
+  "eval/meaning/fresh19.json": "89cb36dce5be7b9e80f5a5fdca12d2d54f7d15642ead9ec6c68fd9dd84939c93",
+  "eval/meaning/fresh19.sources.json": "3ed0ba861d3c0ef0672387eaf974b13f958a636e9404f172b9e125bd26224b31",
+  "eval/meaning/fresh20.json": "7d4e7f9c90bd4da14e3e25fa06f573e1ff4ea9b5e7ce48f3d82a4063b970d0fe",
+  "eval/meaning/fresh20.sources.json": "e949e6098acf1136bc89256e39be9b551ed61973810aa538df0e58ebe528dd9d"
+ },
+ "baseline": {
+  "stage-run.mjs": {
+   "rules": {
+    "C": "3/35",
+    "falseC": "0/73",
+    "E": "20/57",
+    "falseE": 1
+   },
+   "stage": {
+    "C": "8/35",
+    "falseC": "0/73",
+    "E": "22/57",
+    "falseE": 1
+   },
+   "control": "0 of 108 contradicted, 0 supported",
+   "determinism": "108/108",
+   "checker": "5/5 proofs, 20/20 corrupted rejected"
+  },
+  "stage-run.mjs IDENTITY=cancel": {
+   "stage": {
+    "C": "8/35",
+    "E": "22/57"
+   },
+   "ambiguous_binding": 18,
+   "chosen_by_cancellation": 9
+  },
+  "reader-identity-run.mjs": {
+   "ends": 272,
+   "same": 132,
+   "right": 132,
+   "aboveNull": 15,
+   "new": 33,
+   "finder": {
+    "flagged": 4,
+    "C": 4,
+    "false": 0
+   }
+  },
+  "reread-run.mjs IDENTITY=cancel": {
+   "oneWay": {
+    "C": 8,
+    "E": 23
+   },
+   "directed": {
+    "C": 8,
+    "E": 24,
+    "movedRight": 1,
+    "movedWrong": 0
+   },
+   "blanket": {
+    "C": 9,
+    "E": 24
+   },
+   "random": {
+    "C": 8,
+    "E": 24
+   }
+  },
+  "pairs": {
+   "total": 108,
+   "C": 35,
+   "E": 57,
+   "other": 16
+  }
+ }
+}
