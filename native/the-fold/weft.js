@@ -141,20 +141,59 @@ export function* weftAttestations(weft, { asOf = Infinity } = {}) {
 }
 
 export const WEFT_REFERENTS_SCHEMA = "WeftReferents@2";
+export const WEFT_IDENTITY_SCHEMA = "WeftIdentity@1";
 
 /** THE @2 SEAM janus asked for (janus/KIND-INDUCTION-REPLY.md): per-REFERENT records for kind induction, folded
  *  at a cursor. Yields `{ ref, surfaces, mentionsAt, passes, company }` where COMPANY is a `Map<otherRef,count>`
  *  — **company only, never content** — over BOTH-BOUND relations (`standing:"referent"` on every end). `passes`
  *  is the number of weft passes the referent appears in. Additive to `weftAttestations`; the weft stays
  *  kind-free — the consumer induces kinds from `company` (company-induced, never taught). Pure; generator; `asOf`
- *  is a pass-seq cursor (P3), so kinds re-key without erasing. */
+ *  is a pass-seq cursor (P3), so kinds re-key without erasing.
+ *
+ *  IDENTITY (opt-in, `identity: true`; off, the records are byte-identical to before). The record is keyed by `ref`, a slug of a
+ *  spelling (`ref:auto:mercury`), so "the same referent in two passes" means "the same name in two passes": the first rung of the
+ *  ladder of specificity (the bytes exist in both places), handed forward as if it were a verdict. With `identity: true` each record
+ *  also says how far that merge was earned, as a `WeftIdentity@1`: the rung it reached, a standing, and the typed gap above it.
+ *    rung 1  the name is shared (always true here). Standing `needs_deeper_reading` when fewer than two of the passes carry any
+ *            company, so nothing can be compared; `raised_difference` when the passes' company falls into groups that share no
+ *            neighbour (a planet and a singer both called Mercury). A difference of company convicts nothing: the record is not
+ *            split, the groups are named, and the consumer decides how much a spelling is worth.
+ *    rung 2  the passes' company overlaps (every pass with company is linked to the others through shared neighbours): standing
+ *            `same` at rung 2. The weft runs no definition or evaluation, so rung 3 is a typed gap above it. `sharedNeighbours`
+ *            carries how many referents each shared neighbour is in the company of (`carriedBy`), so a hub is not mistaken for
+ *            evidence; no threshold is set here.
+ *  Counts only; no constant. */
 const refKey = (s) => String(s ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
-export function* weftReferents(weft, { asOf = Infinity } = {}) {
+function identityOf(r, carriedBy) {
+  const passes = r.byPass ? [...r.byPass.keys()].sort((a, b) => a - b) : [];
+  const withCompany = passes.filter((p) => r.byPass.get(p).size), without = passes.filter((p) => !r.byPass.get(p).size);
+  const parent = new Map(withCompany.map((p) => [p, p]));
+  const find = (p) => { while (parent.get(p) !== p) { parent.set(p, parent.get(parent.get(p))); p = parent.get(p); } return p; };
+  const holder = new Map(), metBy = new Map();
+  for (const p of withCompany) for (const n of [...r.byPass.get(p)].sort()) {
+    (metBy.get(n) ?? metBy.set(n, []).get(n)).push(p);
+    if (holder.has(n)) parent.set(find(p), find(holder.get(n))); else holder.set(n, p);
+  }
+  const byGroup = new Map(); for (const p of withCompany) { const g = find(p); (byGroup.get(g) ?? byGroup.set(g, []).get(g)).push(p); }
+  const groups = [...byGroup.values()].map((ps) => freeze({ passes: freeze(ps), neighbours: freeze([...new Set(ps.flatMap((p) => [...r.byPass.get(p)]))].sort()) }));
+  const sharedNeighbours = [...metBy].filter(([, ps]) => ps.length > 1).map(([n, ps]) => freeze({ ref: n, passes: ps.length, carriedBy: carriedBy.get(n) ?? 0 })).sort((a, b) => a.carriedBy - b.carriedBy || (a.ref < b.ref ? -1 : 1));
+  const base = { schema: WEFT_IDENTITY_SCHEMA, basis: "ref: the same spelled name in several passes", passes: passes.length, passesWithCompany: withCompany.length, passesWithoutCompany: without.length };
+  if (passes.length < 2) return freeze({ ...base, merged: false, rung: 1, standing: null, why: "the name appears in one pass: nothing was merged", above: freeze({ rung: 2, gap: "one_pass" }) });
+  if (withCompany.length < 2) return freeze({ ...base, merged: true, rung: 1, standing: "needs_deeper_reading", why: `the name is shared by ${passes.length} passes and ${withCompany.length} of them carry company: nothing can be compared`, above: freeze({ rung: 2, gap: "no_company_to_compare" }) });
+  if (groups.length === 1) return freeze({ ...base, merged: true, rung: 2, standing: "same", why: `the company of all ${withCompany.length} passes with company is linked through ${sharedNeighbours.length} shared neighbour(s)`, groups: freeze(groups), sharedNeighbours: freeze(sharedNeighbours), above: freeze({ rung: 3, gap: "the weft runs no definition or evaluation" }) });
+  return freeze({ ...base, merged: true, rung: 1, standing: "raised_difference", against: false, why: `the company of the passes falls into ${groups.length} groups that share no neighbour: a difference of company convicts nothing, and the passes are not shown to be one being`, groups: freeze(groups), sharedNeighbours: freeze(sharedNeighbours), above: freeze({ rung: 2, gap: "company_disjoint" }) });
+}
+
+export function* weftReferents(weft, { asOf = Infinity, identity = false } = {}) {
   const byRef = new Map();
   const ensure = (ref) => { if (!byRef.has(ref)) byRef.set(ref, { ref, surfaces: new Set(), mentionsAt: [], passes: 0, company: new Map() }); return byRef.get(ref); };
+  let ix = -1, at = -1;   // the pass's place in the weft, and its own seq when it has one (only read when `identity` is on)
+  const inPass = (r) => { if (identity && !(r.byPass ??= new Map()).has(at)) r.byPass.set(at, new Set()); };
+  const metIn = (r, other) => { if (identity) { inPass(r); r.byPass.get(at).add(String(other)); } };
   for (const pass of weft) {
     if (Number.isFinite(pass.seq) && pass.seq > asOf) break;
+    ix += 1; at = Number.isFinite(pass.seq) ? pass.seq : ix;
     const seen = new Set();
     const hasCast = Array.isArray(pass.cast) && pass.cast.length > 0;
     const castBySurface = new Map();   // refKey(surface) -> cast ref (the admitted beings)
@@ -165,6 +204,7 @@ export function* weftReferents(weft, { asOf = Infinity } = {}) {
       for (const s of c.allSurfaces ?? []) { r.surfaces.add(s); castBySurface.set(refKey(s), ref); }
       for (const at of c.mentionsAt ?? []) r.mentionsAt.push(at);
       if (!seen.has(ref)) { seen.add(ref); r.passes += 1; }
+      inPass(r);
     }
     for (const rel of pass.relations ?? []) {
       const parts = rel.participants ?? [];
@@ -175,6 +215,7 @@ export function* weftReferents(weft, { asOf = Infinity } = {}) {
         if (!self || !other || self === other) continue;
         const r = ensure(self);
         r.company.set(String(other), (r.company.get(String(other)) ?? 0) + 1);
+        metIn(r, other);
       }
     }
     // edges — company between BEINGS. When the pass carries a `cast` (WeftEntry@3+), only ends that
@@ -185,13 +226,17 @@ export function* weftReferents(weft, { asOf = Infinity } = {}) {
       if (!A || !B) continue;
       let a, b;
       if (hasCast) { a = castBySurface.get(refKey(A)); b = castBySurface.get(refKey(B)); if (!a || !b) continue; }
-      else { a = A; b = B; for (const s of [a, b]) { const r = ensure(s); r.surfaces.add(s); if (!seen.has(s)) { seen.add(s); r.passes += 1; } } }
-      if (a !== b) { ensure(a).company.set(String(b), (ensure(a).company.get(String(b)) ?? 0) + 1); ensure(b).company.set(String(a), (ensure(b).company.get(String(a)) ?? 0) + 1); }
+      else { a = A; b = B; for (const s of [a, b]) { const r = ensure(s); r.surfaces.add(s); if (!seen.has(s)) { seen.add(s); r.passes += 1; } inPass(r); } }
+      if (a !== b) { ensure(a).company.set(String(b), (ensure(a).company.get(String(b)) ?? 0) + 1); ensure(b).company.set(String(a), (ensure(b).company.get(String(a)) ?? 0) + 1); metIn(ensure(a), b); metIn(ensure(b), a); }
     }
   }
+  let carriedBy = null;   // neighbour -> how many referents carry it in their company (a hub carries many)
+  if (identity) { carriedBy = new Map(); for (const r of byRef.values()) for (const k of r.company.keys()) carriedBy.set(k, (carriedBy.get(k) ?? 0) + 1); }
   for (const r of byRef.values()) {
     const company = {}; for (const [k, v] of r.company) company[k] = v;
-    yield freeze({ schema: WEFT_REFERENTS_SCHEMA, ref: r.ref, surfaces: freeze([...r.surfaces]), mentionsAt: freeze([...new Set(r.mentionsAt)].sort((a, b) => a - b)), passes: r.passes, company: freeze(company) });
+    const rec = { schema: WEFT_REFERENTS_SCHEMA, ref: r.ref, surfaces: freeze([...r.surfaces]), mentionsAt: freeze([...new Set(r.mentionsAt)].sort((a, b) => a - b)), passes: r.passes, company: freeze(company) };
+    if (identity) rec.identity = identityOf(r, carriedBy);
+    yield freeze(rec);
   }
 }
 
