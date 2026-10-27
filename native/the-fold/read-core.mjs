@@ -44,6 +44,7 @@ import { createLemmatizer, morphologyFromPrior } from "../adapters/text/morpholo
 import * as P from "../adapters/text/priors.js";
 import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
 import { consultNonPersonal } from "../adapters/text/non-personal.js";
+import { buildReferentLedger } from "../adapters/text/reading-referents.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { formUsageOf } from "../adapters/text/form-usage.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
@@ -299,7 +300,7 @@ const edgeOf = (e) => ({ end1: e.end1, end1Face: e.end1Face ?? null, label: e.la
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false } = {}) {
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
@@ -432,6 +433,15 @@ export function readWith(text, { address = null, category = null, language = nul
   Object.defineProperty(entry, "reader", { value: R, enumerable: false });
   Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
   Object.defineProperty(entry, "formUsageReport", { value: formUsageReport, enumerable: false });
+  // THE REFERENT LEDGER (opt-in, `referents: true`; off, the entry is byte-identical to before): the same reading projected onto referents, each inserted once and
+  // addressed by its event, a span only its address, an edge between referents per statement; what the spans cannot decide is a typed gap (adapters/text/reading-referents.js).
+  if (referents) {
+    try {
+      const L = buildReferentLedger({ text: str, source: address, cast, heard: heardRows, pronouns, edges, sentences, chunks, bases, norm, toRaw: raw, abbreviations: abbr.set });
+      entry.referents = L.ledger;
+      for (const g of L.gaps) gaps.push(g);
+    } catch (e) { gaps.push({ gap: "referents_failed", detail: String(e?.message ?? e).slice(0, 160) }); }
+  }
   return entry;
 }
 
