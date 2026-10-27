@@ -44,9 +44,14 @@ const FORWARD = /\b(?:outlook|guidance|anticipate[sd]?|expects?|expected|forecas
 //   ytd: "year to date ... the third quarter 2020" is three months per quarter so far
 //   qnotation: "Q4 2011" and "2011 Q4" are quarters
 //   fromComparative: "from $492 million in the prior year quarter" opens a comparative clause
+//   ordinalDigits: "4th quarter 2013" (1st-4th) is an ordinal like "fourth"
+//   fullYearClause: "full year" anywhere earlier in the clause makes a frameless figure twelve months (the window was 60 characters)
+//   periodWords: when the frame names a quarter AND a full year, one of a closed pair of cue words (quarterly / <ordinal> quarter, versus full-year / annual / consecutive year / fiscal year) picks the 3- or 12-month candidate; both or neither leaves it ambiguous
 //   continuation: a figure after the clause's last period phrase takes it when a preposition of the main clause attaches a measure ("... for the first quarter of 2011 on net sales of $222 million"); an appositive ("including a $60.0 million payment") stays a detail
-export const FIXES = Object.freeze({ wrap: true, yearless: true, ytd: true, qnotation: true, fromComparative: true, continuation: true });
+export const FIXES = Object.freeze({ wrap: true, yearless: true, ytd: true, qnotation: true, fromComparative: true, continuation: true, ordinalDigits: true, fullYearClause: true, periodWords: true });
 const FROM_PRIOR = /\bfrom\s+(?=\(?\$?\s?\d[\d,]*(?:\.\d+)?\)?\s*(?:million|billion)\b[^.;]{0,50}?\b(?:prior|previous|year[- ]ago|last\s+year|year\s+earlier|a\s+year\s+(?:ago|earlier)))/gi;
+const Q_CUE = /\bquarterly\b|\b(?:first|second|third|fourth|[1-4](?:st|nd|rd|th))\s+quarter\b/i, Y_CUE = /\bfull[- ]year\b|\bannual(?:ly)?\b|\bconsecutive\s+year\b|\bfiscal\s+year\b/i;
+const byWords = (text, set) => { const q = Q_CUE.test(text), y = Y_CUE.test(text); if (q === y) return null; const hits = set.filter((p) => p.months === (q ? 3 : 12)); return hits.length === 1 ? hits[0] : null; };
 const CONTINUATION = /^[\s,]*(?:on|with)\s+(?:[A-Za-z-]+\s+){0,3}of\s*$/i;
 const FINAL = /[.!?;:]["”’')\]]*\s*$/, CONTINUES = /^\s*[\p{Ll}\p{Nd}]/u;
 const NEGATIVE_CUE = /\b(?:loss(?:es)?|deficit)\b|\bused\s+in\b/gi, POSITIVE_CUE = /\b(?:income|profit|earnings)\b|\bprovided\s+by\b/gi;
@@ -107,20 +112,20 @@ export function periodsIn(str, months, { gaps = null, fixes = FIXES } = {}) {
     for (const m of str.matchAll(new RegExp(String.raw`\b(?:at|as\s+of)\s+${DATE}`, "gi"))) { const a = m.index, b = a + m[0].length; if (free(a, b)) { take(a, b); out.push({ kind: "instant", end: dateOf(Number(m.groups.year), months.get(m.groups.mon.toLowerCase()), Number(m.groups.day)), a, b, text: m[0] }); } }
   } else if (gaps && /\b(?:ended|at|as\s+of)\s+\p{L}+\.?\s+\d{1,2},?\s+\d{4}/u.test(str)) gaps.push({ gap: "no_time_prior", detail: "a period needs a month name and TimePrior@1 is absent" });
   // 3. a quarter named by ordinal and year ("the second quarter of 2021", "2017 fourth quarter"), 3 months on a calendar quarter
-  const ORD = Object.keys(ORDINALS).join("|");
+  const ordTable = fixes.ordinalDigits ? { ...ORDINALS, "1st": 1, "2nd": 2, "3rd": 3, "4th": 4 } : ORDINALS, ORD = Object.keys(ordTable).join("|");
   // 3a. (fixes.ytd) "year to date ... the third quarter of 2020": the quarters so far, three months each
   if (fixes.ytd) for (const re of [new RegExp(String.raw`\byear[- ]to[- ]date\b[^.;]{0,60}?\b(?<ord>${ORD})\s+quarter(?:\s+of)?(?:\s+fiscal)?\s*,?\s*(?<year>\d{4})\b`, "gi"), new RegExp(String.raw`\b(?<ord>${ORD})\s+quarter(?:\s+of)?(?:\s+fiscal)?\s*,?\s*(?<year>\d{4})\b[^.;]{0,30}?\byear[- ]to[- ]date\b`, "gi")])
-    for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); const q = ORDINALS[m.groups.ord.toLowerCase()]; out.push({ kind: "duration", months: 3 * q, end: quarterEnd(Number(m.groups.year), q), calendar: "assumed", a, b, text: m[0] }); }
+    for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); const q = ordTable[m.groups.ord.toLowerCase()]; out.push({ kind: "duration", months: 3 * q, end: quarterEnd(Number(m.groups.year), q), calendar: "assumed", a, b, text: m[0] }); }
   // 3b. (fixes.qnotation) "Q4 2011", "Q4, 2011", "2011 Q4"
   if (fixes.qnotation) for (const re of [/\bQ(?<q>[1-4])\s*,?\s*(?:of\s+)?(?<year>(?:19|20)\d{2})\b/g, /\b(?<year>(?:19|20)\d{2})\s+Q(?<q>[1-4])\b/g])
     for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); out.push({ kind: "duration", months: 3, end: quarterEnd(Number(m.groups.year), Number(m.groups.q)), calendar: "assumed", a, b, text: m[0] }); }
   for (const re of [new RegExp(String.raw`\b(?<ord>${ORD})\s+quarter(?:\s+of)?(?:\s+fiscal)?\s*,?\s*(?<year>\d{4})\b`, "gi"), new RegExp(String.raw`\b(?<year>\d{4})\s+(?<ord>${ORD})\s+quarter\b`, "gi")])
-    for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); out.push({ kind: "duration", months: 3, end: quarterEnd(Number(m.groups.year), ORDINALS[m.groups.ord.toLowerCase()]), calendar: "assumed", a, b, text: m[0] });
+    for (const m of str.matchAll(re)) { const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b); out.push({ kind: "duration", months: 3, end: quarterEnd(Number(m.groups.year), ordTable[m.groups.ord.toLowerCase()]), calendar: "assumed", a, b, text: m[0] });
       const tail = str.slice(b, b + 20).match(/^\s+and\s+full[- ]year/i); if (tail) { out.push({ kind: "duration", months: 12, end: dateOf(Number(m.groups.year), 12, 31), calendar: "assumed", a, b: b + tail[0].length, text: m[0] + tail[0] }); take(b, b + tail[0].length); } }
   // 3b. "<ordinal> quarter and full year 2021": one year shared by a quarter and the year, so the expression names TWO periods
   for (const m of str.matchAll(new RegExp(String.raw`\b(?<ord>${ORD})\s+quarter\s+(?:and|&)\s+(?:full[- ]year|fiscal\s+year|year)\s+(?:of\s+)?(?<year>\d{4})\b`, "gi"))) {
     const a = m.index, b = a + m[0].length; if (!free(a, b)) continue; take(a, b);
-    out.push({ kind: "duration", months: 3, end: quarterEnd(Number(m.groups.year), ORDINALS[m.groups.ord.toLowerCase()]), calendar: "assumed", a, b, text: m[0] }, { kind: "duration", months: 12, end: dateOf(Number(m.groups.year), 12, 31), calendar: "assumed", a, b, text: m[0] });
+    out.push({ kind: "duration", months: 3, end: quarterEnd(Number(m.groups.year), ordTable[m.groups.ord.toLowerCase()]), calendar: "assumed", a, b, text: m[0] }, { kind: "duration", months: 12, end: dateOf(Number(m.groups.year), 12, 31), calendar: "assumed", a, b, text: m[0] });
   }
   // 4. a year: "full year 2017", "fiscal year 2017", "for 2020", "in 2023"
   for (const re of [/\b(?:full[- ]year|fiscal\s+year|year)\s+(?:of\s+)?(?<year>\d{4})\b/gi, /\b(?:for|in|during)\s+(?:the\s+(?:full[- ]year|year)\s+)?(?<year>20\d{2}|19\d{2})\b(?!\s*(?:,|\.)?\s*(?:\d))/gi])
@@ -203,7 +208,7 @@ export function figuresOf(text, { sentences = null, timePrior = null, fixes = nu
     for (const [ci, cl] of clauses.entries()) {
       const inClause = inClauseOf[ci], { assign, hasPeriods } = assigns[ci];
       for (const [i, f] of inClause.entries()) {
-        let period = null, basis = "none", periodSpan = null, frameSpan = null, candidates;
+        let period = null, basis = "none", periodSpan = null, frameSpan = null, candidates, viaWords = false;
         const own = assign.get(f) ?? null;
         if (own) { period = { kind: own.kind, months: own.months, end: own.end, ...(own.calendar ? { calendar: own.calendar } : {}) }; basis = "sentence"; periodSpan = [u.offset + own.a, u.offset + own.b]; }
         else if (!hasPeriods && cl.comparative && ci > 0) {
@@ -216,9 +221,10 @@ export function figuresOf(text, { sentences = null, timePrior = null, fixes = nu
           const fr = frameAt(u.offset + f.a);
           if (fr) { const set = cl.comparative ? fr.comparative : fr.current; frameSpan = fr.span;
             // "full year revenues" with no year of its own: twelve months ending where the frame ends
-            const fullYear = !cl.comparative && /\bfull[- ]year\b/i.test(u.text.slice(Math.max(cl.a, f.a - 60), f.a));
+            const fullYear = !cl.comparative && /\bfull[- ]year\b/i.test(u.text.slice(fx.fullYearClause ? cl.a : Math.max(cl.a, f.a - 60), f.a));
             if (fullYear && set.length) { const e = set[0].end; period = { kind: "duration", months: 12, end: e, calendar: "assumed" }; basis = "frame"; }
             else if (set.length === 1) { period = { ...set[0] }; basis = cl.comparative ? "frame-comparative" : "frame"; }
+            else if (set.length > 1 && fx.periodWords && byWords(u.text.slice(cl.a, cl.b), set)) { period = { ...byWords(u.text.slice(cl.a, cl.b), set) }; basis = cl.comparative ? "frame-comparative" : "frame"; viaWords = true; }
             else if (set.length > 1) { basis = "ambiguous"; candidates = set.map((p) => ({ kind: p.kind, months: p.months, end: p.end })); } }
         }
         // sign: the last loss/income cue between the previous figure (or the clause start) and this one; parentheses are negative; a coordinated figure keeps the cue of the one before it
@@ -226,7 +232,7 @@ export function figuresOf(text, { sentences = null, timePrior = null, fixes = nu
         const cues = [...[...win.matchAll(NEGATIVE_CUE)].map((m) => ({ at: m.index, len: m[0].length, p: "negative" })), ...[...win.matchAll(POSITIVE_CUE)].map((m) => ({ at: m.index, len: m[0].length, p: "positive" }))].sort((x, y) => y.at - x.at);
         if (f.parenNegative) { polarity = "negative"; polaritySpan = [u.offset + f.a, u.offset + f.b]; } else if (cues.length) { polarity = cues[0].p; polaritySpan = [u.offset + from + cues[0].at, u.offset + from + cues[0].at + cues[0].len]; }
         else if (i > 0 && /^[\s,]*(?:and|or)?[\s,]*$/i.test(u.text.slice(inClause[i - 1].b, f.a).replace(/\s*(?:million|billion)\s*$/i, ""))) { const pf = figures[figures.length - 1]; if (pf) { polarity = pf.polarity; polaritySpan = pf.polaritySpan; } }
-        figures.push({ value: f.value, scale: f.scale, stated: f.stated, text: f.text, span: [u.offset + f.a, u.offset + f.b], sentence: [u.offset, u.offset + u.text.length], period, basis, periodSpan, ...(own?.inherited ? { inherited: true } : {}), ...(own?.via ? { partSpan: [u.offset + own.via[0], u.offset + own.via[1]] } : {}), frameSpan, ...(candidates ? { candidates } : {}), comparative: cl.comparative, polarity, polaritySpan, forwardLooking: forward });
+        figures.push({ value: f.value, scale: f.scale, stated: f.stated, text: f.text, span: [u.offset + f.a, u.offset + f.b], sentence: [u.offset, u.offset + u.text.length], period, basis, periodSpan, ...(own?.inherited ? { inherited: true } : {}), ...(viaWords ? { disambiguated: true } : {}), ...(own?.via ? { partSpan: [u.offset + own.via[0], u.offset + own.via[1]] } : {}), frameSpan, ...(candidates ? { candidates } : {}), comparative: cl.comparative, polarity, polaritySpan, forwardLooking: forward });
       }
     }
   }

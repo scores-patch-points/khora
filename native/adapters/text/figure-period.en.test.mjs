@@ -217,3 +217,36 @@ test("continuation: 'for the first quarter of 2011 on net sales of $222 million'
   assert.equal(app[1].period, null); assert.equal(app[1].basis, "detail");
   assert.equal(only("Revenues were $5.0 million for 2020 on sales growth of 5 percent to $9.0 million.")[1].period, null, "digits between the phrase and the figure end the continuation");
 });
+
+// ---- headlines that name a quarter AND the full year (flags ordinalDigits, fullYearClause, periodWords; each with its flag-off control) ----
+const HEAD = "Acme Reports Fourth Quarter and Full Year 2021 Results\n\n";
+
+test("ordinalDigits: '4th quarter 2013' is a quarter like 'fourth quarter 2013'", () => {
+  const t = "Record quarterly net sales of $458 million for 4th quarter 2013, up 10.2 percent over prior year";
+  const [a] = only(HEAD + t);
+  assert.equal(per(a), "3mo 2013-12-31"); assert.equal(a.basis, "sentence");
+  assert.notEqual(only(HEAD + t, { fixes: OFF("ordinalDigits") })[0].basis, "sentence");
+});
+
+test("fullYearClause: 'Full year' more than 60 characters before the figure still makes it twelve months", () => {
+  const t = HEAD + "Full year net income attributable to common stockholders was $112.3 million, or $2.25 per diluted share.";
+  const [a] = only(t);
+  assert.equal(per(a), "12mo 2021-12-31");
+  assert.equal(only(t, { fixes: { ...OFF("fullYearClause"), ...OFF("periodWords") } })[0].basis, "ambiguous", "with the 60-character window the cue is missed (and periodWords, which also reads 'full year', is off) and the figure carries both candidates");
+  assert.equal(only(t, { fixes: OFF("fullYearClause") })[0].disambiguated, true, "periodWords alone reads the same cue, so the two flags overlap on this case");
+  const one = "Acme Reports Fourth Quarter Ended December 31, 2021 Results\n\nFull year net income attributable to common stockholders was $112.3 million, or $2.25 per diluted share.";
+  assert.equal(per(only(one)[0]), "12mo 2021-12-31", "a heading that names only the quarter: the clause cue still says twelve months");
+  assert.equal(per(only(one, { fixes: OFF("fullYearClause") })[0]), "3mo 2021-12-31", "with the 60-character window the figure takes the heading's quarter, the wrong period");
+});
+
+test("periodWords: one cue of a closed pair picks the 3- or 12-month candidate; both or neither leaves it ambiguous; 'prior year' is no cue", () => {
+  const q = only(HEAD + "Record quarterly net sales of $527 million, up 15.1 percent over prior year period")[0], q2 = only(HEAD + "Net sales for the fourth quarter increased 18 percent to $543 million")[0];
+  assert.equal(per(q), "3mo 2021-12-31"); assert.equal(q.disambiguated, true); assert.equal(per(q2), "3mo 2021-12-31");
+  const y = only(HEAD + "Record net sales for the third consecutive year of $1.86 billion, up 13.9 percent over prior year")[0];
+  assert.equal(per(y), "12mo 2021-12-31"); assert.equal(y.disambiguated, true);
+  const none = only(HEAD + "Net loss was $(25.3) million, or $(0.51) per diluted share.")[0];
+  assert.equal(none.period, null); assert.equal(none.basis, "ambiguous");
+  const both = only(HEAD + "Quarterly revenue was $5.0 million against annual revenue of $20.0 million.")[0];
+  assert.equal(both.basis, "ambiguous", "a quarter cue and a year cue together decide nothing");
+  assert.equal(only(HEAD + "Record quarterly net sales of $527 million, up 15.1 percent over prior year period", { fixes: OFF("periodWords") })[0].basis, "ambiguous");
+});
