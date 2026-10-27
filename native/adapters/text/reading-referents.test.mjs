@@ -182,13 +182,27 @@ test("a row with no span is not inserted: a referent with no span is empty (refe
   assert.equal(gaps.find((g) => g.gap === "referent_without_span").plain, "ref:auto:ghost");
 });
 
-test("two rows claiming overlapping spans: the longer stands, the other is not bound and, left with no span, is not inserted (mention_overlap, referent_overlapped)", () => {
+test("rows claiming overlapping spans: every span stays a mention of its own referent (a name nested in a name), and an edge reads the outermost (mention_overlap)", () => {
   const { ledger, gaps } = buildReferentLedger({ text: STR, cast: [row("ref:auto:rome", "in Rome", [at(STR, "in Rome")]), row("ref:auto:rome2", "Rome", [at(STR, "Rome")])] });
-  assert.deepEqual(ledger.referents.map((r) => r.engine), ["ref:auto:rome"]);
+  assert.deepEqual(ledger.referents.map((r) => r.engine).sort(), ["ref:auto:rome", "ref:auto:rome2"]);
+  assert.ok(ledger.referents.every((r) => r.mentions.length === 1), "the inner mention is not dropped, so no being is left with no span");
   assert.equal(gaps.find((g) => g.gap === "mention_overlap").count, 1);
-  const g = gaps.find((x) => x.gap === "referent_overlapped");
-  assert.equal(g.plain, "ref:auto:rome2"); assert.deepEqual(g.by, ["ref:auto:rome"]);
-  assert.equal(gaps.some((x) => x.gap === "referent_without_span"), false, "a being whose spans were overlapped is not a being with no span");
+  assert.equal(gaps.some((g) => g.gap === "referent_without_span"), false);
+});
+
+test("a cast being's span is not suppressed by a longer heard row; the heard row keeps its own span too", () => {
+  const t = "Frank said hello to Boris. Frank left.";
+  const { ledger } = buildReferentLedger({ text: t, cast: [row("ref:auto:frank", "Frank", [at(t, "Frank"), at(t, "Frank", 20)])], heard: [row("ref:auto:frank_said", "frank said", [at(t, "Frank said")], "heard")] });
+  const frank = ledger.referents.find((r) => r.engine === "ref:auto:frank");
+  assert.equal(frank.mentions.length, 2);
+  assert.equal(ledger.referents.find((r) => r.engine === "ref:auto:frank_said").mentions.length, 1);
+});
+
+test("crossing spans of two rows are both mentions", () => {
+  const t = "Children Jerome Richard Jeanne Moreau sang.";
+  const { ledger } = buildReferentLedger({ text: t, cast: [row("ref:auto:kids", "Children Jerome Richard Jeanne", [at(t, "Children Jerome Richard Jeanne")]), row("ref:auto:moreau", "Jeanne Moreau", [at(t, "Jeanne Moreau")])] });
+  assert.equal(ledger.referents.length, 2);
+  assert.ok(ledger.referents.every((r) => r.mentions.length === 1));
 });
 
 test("a statement that cannot be placed, and one whose ends are no bound mention, are typed gaps and not edges (edge_statement_unlocated, edge_ends_unbound)", () => {

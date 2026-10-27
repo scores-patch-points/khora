@@ -56,10 +56,14 @@ export function goldNames(doc) {
   return { text, names: out };
 }
 
-/** the label a set of spans [{a, b, label}] gives a gold name: the label of the span overlapping most (ties: the earlier), or null */
+/** the label a set of spans [{a, b, label}] gives a gold name: the label of the span overlapping most; ties go to the EARLIER span (the one that starts first), then the longer;
+ *  the preregistration says "the earlier span" and the first harness took the first in list order, which differs between the arms (cast order, insertion order) */
 const labelFor = (g, spans) => {
   let best = null, bo = 0;
-  for (const s of spans) { const ov = overlap(g.a, g.b, s.a, s.b); if (ov > bo) { bo = ov; best = s; } }
+  for (const s of spans) {
+    const ov = overlap(g.a, g.b, s.a, s.b);
+    if (ov > bo || (ov === bo && ov > 0 && (s.a < best.a || (s.a === best.a && s.b - s.a > best.b - best.a)))) { bo = ov; best = s; }
+  }
   return best ? best.label : null;
 };
 

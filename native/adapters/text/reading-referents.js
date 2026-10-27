@@ -135,14 +135,22 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
       if (b > a0) cand.push({ a: a0, b, ri });
     }
   });
-  cand.sort((x, y) => x.a - y.a || (y.b - y.a) - (x.b - x.a));
-  const mentions = []; let lastEnd = -1, overlaps = 0;
-  const overlappedBy = new Map();   // row index -> the rows whose longer span stood over one of its spans
-  for (const c of cand) {
-    if (c.a >= lastEnd) { mentions.push(c); lastEnd = c.b; }
-    else if (mentions.at(-1).ri !== c.ri) { overlaps++; (overlappedBy.get(c.ri) ?? overlappedBy.set(c.ri, new Set()).get(c.ri)).add(mentions.at(-1).ri); }
+  // EVERY span the plain index claims is a mention (a name nested in a longer name is a mention of its own being, and two rows may claim crossing spans): the ledger projects the
+  // reader's reading and does not drop what the reader found. Two rows claiming the very same span: the first row keeps it. The reading of an edge needs a set of spans that do not
+  // overlap, so the OUTERMOST of them (a being's cast row before a heard row, then the longer, then the earlier) is kept apart for that.
+  cand.sort((x, y) => x.a - y.a || (y.b - y.a) - (x.b - x.a) || x.ri - y.ri);
+  const mentions = []; let overlaps = 0;
+  for (const c of cand) { const last = mentions.at(-1); if (last && last.a === c.a && last.b === c.b) { if (last.ri !== c.ri) overlaps++; continue; } mentions.push(c); }
+  const rank = (c) => (rows[c.ri].standing === "referent" ? 0 : 1);
+  const adj = [], inAdj = new Set();   // adj: non-overlapping, sorted by start
+  const clash = (c) => { let lo = 0, hi = adj.length - 1; while (lo <= hi) { const m = (lo + hi) >> 1; if (adj[m].b <= c.a) lo = m + 1; else if (adj[m].a >= c.b) hi = m - 1; else return adj[m]; } return null; };
+  const slot = (c) => { let lo = 0, hi = adj.length; while (lo < hi) { const m = (lo + hi) >> 1; if (adj[m].a < c.a) lo = m + 1; else hi = m; } return lo; };
+  for (const c of [...mentions].sort((x, y) => rank(x) - rank(y) || (y.b - y.a) - (x.b - x.a) || x.a - y.a)) {
+    const w = clash(c);
+    if (w) { if (w.ri !== c.ri) overlaps++; continue; }
+    adj.splice(slot(c), 0, c); inAdj.add(c);
   }
-  if (overlaps) gaps.push({ gap: "mention_overlap", count: overlaps, detail: "two rows of the plain index claim overlapping spans; the longer, earlier span is kept and the other mention is not bound" });
+  if (overlaps) gaps.push({ gap: "mention_overlap", count: overlaps, detail: "spans of different rows of the plain index overlap (one nested in the other, or crossing): every one is kept as a mention of its own referent, and the reading of an edge takes the outermost, a cast row before a heard row, then the longer" });
   // the cues read whitespace-separated, cased text: a count of cased letters against a count of caseless ones decides whether they are read at all
   const letters = str.match(/\p{L}/gu)?.length ?? 0, casedLetters = str.match(/[\p{Lu}\p{Ll}\p{Lt}]/gu)?.length ?? 0, caselessLetters = letters - casedLetters;
   const casedScript = casedLetters >= caselessLetters;
@@ -157,8 +165,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
   rows.forEach((row, ri) => {
     const ms = byRow.get(ri) ?? [];
     if (!ms.length) {
-      if (overlappedBy.has(ri)) gaps.push({ gap: "referent_overlapped", plain: row.ref, face: row.surface, by: [...overlappedBy.get(ri)].map((j) => rows[j].ref), detail: "every span of this being of the plain index stands inside a longer mention of another being: the index holds a fragment as a being of its own. It is not inserted (its spans are the longer mention's), and the pair is a candidate for one name, which this module does not decide" });
-      else gaps.push({ gap: "referent_without_span", plain: row.ref, detail: "the plain index holds a being no span of the text could be bound to; it is not inserted (a referent with no span is empty)" });
+      gaps.push({ gap: "referent_without_span", plain: row.ref, detail: "the plain index holds a being no span of the text could be bound to; it is not inserted (a referent with no span is empty)" });
       return;
     }
     const numerals = new Set(ms.map((m) => m.right).filter(Boolean));
@@ -204,7 +211,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
       const t = str.slice(m.a, m.b), span = insSpan(m.a, m.b, "name", t);
       const sameForm = fold(t) === fold(face) || fold(t) === fold(p.row.surface);
       emit({ op: "CON", ...CELLS.CON, span, ref: ins.ref, supersedes: null, giver: "reader/index", lens: "name-variant coreference over the reader's index", sign: "symbol", basis: sameForm ? "the same form as the referent's face" : "a form the reader's index clusters with the referent's face" });
-      rec.mentions.push(span); bound.push({ a: m.a, b: m.b, ref: ins.ref, span, sign: "symbol", kind: "name", right: m.right ?? null });
+      rec.mentions.push(span); bound.push({ a: m.a, b: m.b, ref: ins.ref, span, sign: "symbol", kind: "name", right: m.right ?? null, inAdj: inAdj.has(m) });
       const f = fold(t); if (f && !rec.forms.includes(f)) rec.forms.push(f);
     }
   }
@@ -223,7 +230,7 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
     if (ambiguousNames.get(plain)) gaps.push({ gap: "mention_ambiguous", plain, count: ambiguousNames.get(plain), candidates: ids, detail: "bare mentions of a split core are bound to none of the candidates" });
   }
 
-  const overlapsName = (a, b) => { let lo = 0, hi = mentions.length - 1; while (lo <= hi) { const m = (lo + hi) >> 1; if (mentions[m].b <= a) lo = m + 1; else if (mentions[m].a >= b) hi = m - 1; else return true; } return false; };
+  const overlapsName = (a, b) => { let lo = 0, hi = adj.length - 1; while (lo <= hi) { const m = (lo + hi) >> 1; if (adj[m].b <= a) lo = m + 1; else if (adj[m].a >= b) hi = m - 1; else return true; } return false; };
   // ── 4. the pronoun bindings the reader made, bound as INDEX; a plain ref that was split makes the binding ambiguous ──
   const pronounAmbiguous = new Map();
   for (const p of pronouns) {
@@ -241,11 +248,12 @@ export function buildReferentLedger({ text, source = null, cast = [], heard = []
   }
   for (const [plain, count] of pronounAmbiguous) gaps.push({ gap: "pronoun_ambiguous", plain, count, candidates: splitOf.get(plain).parts.map((x) => referents.find((r) => r.split?.from === plain && r.split.key === x.key)?.id).filter(Boolean), detail: "the pronoun resolver named a being the ledger split into candidates; the pronoun is bound to none" });
   bound.sort((x, y) => x.a - y.a);
+  const adjBound = bound.filter((x) => x.inAdj !== false);   // the outermost, non-overlapping mentions: what an edge's ends are read against
 
   // ── 5. edges, per statement, between referents ──
   const GAP_TEXT = /^[\s,;:()"“”'’‘—–-]*$/u;
-  const nearestBefore = (pos) => { let lo = 0, hi = bound.length - 1, best = -1; while (lo <= hi) { const m = (lo + hi) >> 1; if (bound[m].b <= pos) { best = m; lo = m + 1; } else hi = m - 1; } return best >= 0 && GAP_TEXT.test(str.slice(bound[best].b, pos)) ? bound[best] : null; };
-  const nearestAfter = (pos) => { let lo = 0, hi = bound.length - 1, best = -1; while (lo <= hi) { const m = (lo + hi) >> 1; if (bound[m].a >= pos) { best = m; hi = m - 1; } else lo = m + 1; } return best >= 0 && GAP_TEXT.test(str.slice(pos, bound[best].a)) ? bound[best] : null; };
+  const nearestBefore = (pos) => { let lo = 0, hi = adjBound.length - 1, best = -1; while (lo <= hi) { const m = (lo + hi) >> 1; if (adjBound[m].b <= pos) { best = m; lo = m + 1; } else hi = m - 1; } return best >= 0 && GAP_TEXT.test(str.slice(adjBound[best].b, pos)) ? adjBound[best] : null; };
+  const nearestAfter = (pos) => { let lo = 0, hi = adjBound.length - 1, best = -1; while (lo <= hi) { const m = (lo + hi) >> 1; if (adjBound[m].a >= pos) { best = m; hi = m - 1; } else lo = m + 1; } return best >= 0 && GAP_TEXT.test(str.slice(pos, adjBound[best].a)) ? adjBound[best] : null; };
   const agrees = (endText, m, side) => {
     if (m.kind === "pronoun") return true;   // the end the extractor read was the pronoun's rewrite; the agreement is the binding's
     const e = fold(endText), mf = fold(str.slice(m.a, m.b));
