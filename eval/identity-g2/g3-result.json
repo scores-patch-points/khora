@@ -1,0 +1,82 @@
+{
+ "G2M": {
+  "A1": {
+   "measure -> undecided:period-unstated": 54,
+   "measure -> contradictory:value": 6,
+   "scope -> aligned": 29,
+   "scope -> undecided:polarity": 1
+  },
+  "A3": {
+   "measure -> refused:measure": 60,
+   "scope -> refused:scope": 28,
+   "scope -> aligned": 2
+  }
+ },
+ "regression": {
+  "A1": {
+   "natural/aligned/rounding -> aligned": 317,
+   "natural/aligned/rounding -> undecided:polarity": 1,
+   "natural/aligned/exact -> aligned": 9,
+   "natural/aligned/rounding -> undecided:period-unstated": 1,
+   "natural/aligned/exact -> undecided:period": 3
+  },
+  "A3": {
+   "natural/aligned/rounding -> aligned": 315,
+   "natural/aligned/rounding -> refused:scope": 1,
+   "natural/aligned/rounding -> refused:measure": 2,
+   "natural/aligned/exact -> aligned": 9,
+   "natural/aligned/rounding -> undecided:period-unstated": 1,
+   "natural/aligned/exact -> undecided:period": 3
+  }
+ },
+ "shuffled": {
+  "A1": {
+   "refused:entity": 222,
+   "undecided:period-unstated": 93,
+   "undecided:period": 15,
+   "contradictory:value": 1
+  },
+  "A3": {
+   "refused:entity": 222,
+   "refused:measure": 70,
+   "undecided:period-unstated": 32,
+   "undecided:period": 7
+  }
+ },
+ "planted": {
+  "A1": {
+   "planted/contradictory/scale -> undecided:period-unstated": 11,
+   "planted/contradictory/scale -> contradictory:scale": 1,
+   "planted/contradictory/sign -> contradictory:sign": 1,
+   "planted/contradictory/sign -> undecided:period-unstated": 9,
+   "planted/contradictory/sign -> undecided:polarity": 2,
+   "planted/not_comparable/period -> undecided:period-unstated": 12,
+   "planted/not_comparable/entity -> refused:entity": 12,
+   "planted/aligned/form -> aligned": 12
+  },
+  "A3": {
+   "planted/contradictory/scale -> undecided:period-unstated": 10,
+   "planted/contradictory/scale -> refused:measure": 1,
+   "planted/contradictory/scale -> contradictory:scale": 1,
+   "planted/contradictory/sign -> contradictory:sign": 1,
+   "planted/contradictory/sign -> undecided:period-unstated": 9,
+   "planted/contradictory/sign -> undecided:polarity": 2,
+   "planted/not_comparable/period -> undecided:period-unstated": 12,
+   "planted/not_comparable/entity -> refused:entity": 12,
+   "planted/aligned/form -> aligned": 12
+  }
+ },
+ "N138_as_given": {
+  "v": "aligned",
+  "frame": {
+   "asofProse": "2026-02-26",
+   "asofRecord": "2026-02-26",
+   "period": "equal",
+   "periodWhy": null,
+   "pool": [
+    "the single record given with the pair"
+   ]
+  },
+  "step": "a1"
+ }
+}

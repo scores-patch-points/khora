@@ -1,0 +1,44 @@
+{
+ "pairs": 391,
+ "A1": {
+  "natural/aligned/rounding -> aligned": 317,
+  "natural/aligned/rounding -> undecided:polarity": 1,
+  "natural/aligned/exact -> aligned": 9,
+  "natural/aligned/rounding -> undecided:period-unstated": 1,
+  "natural/aligned/exact -> undecided:period": 3,
+  "planted/contradictory/scale -> undecided:period-unstated": 11,
+  "planted/contradictory/scale -> contradictory:scale": 1,
+  "planted/contradictory/sign -> contradictory:sign": 1,
+  "planted/contradictory/sign -> undecided:period-unstated": 9,
+  "planted/contradictory/sign -> undecided:polarity": 2,
+  "planted/not_comparable/period -> undecided:period-unstated": 12,
+  "planted/not_comparable/entity -> refused:entity": 12,
+  "planted/aligned/form -> aligned": 12
+ },
+ "A0": {
+  "natural/aligned/rounding -> aligned": 318,
+  "natural/aligned/exact -> aligned": 12,
+  "natural/aligned/rounding -> contradictory:sign": 1,
+  "planted/contradictory/scale -> contradictory:scale": 11,
+  "planted/contradictory/scale -> contradictory:value": 1,
+  "planted/contradictory/sign -> contradictory:sign": 10,
+  "planted/contradictory/sign -> aligned": 2,
+  "planted/not_comparable/period -> contradictory:value": 12,
+  "planted/not_comparable/entity -> contradictory:value": 12,
+  "planted/aligned/form -> aligned": 12
+ },
+ "shuffledControl": {
+  "n": 331,
+  "A1": {
+   "refused:entity": 222,
+   "undecided:period-unstated": 93,
+   "undecided:period": 15,
+   "contradictory:value": 1
+  },
+  "A0": {
+   "contradictory:value": 331
+  },
+  "A1VerdictChangedVsUnshuffled": 330
+ },
+ "falseAlarmsA1Natural": []
+}
