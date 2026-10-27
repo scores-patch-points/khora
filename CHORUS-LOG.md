@@ -1247,6 +1247,21 @@ fast: 7 files · 3 affected test files, 17 pass + 1 todo (observed failing, kept
 
 clean: none routed and silent.
 
+## 2026-10-26 — AttachPrior@1: a dative phrase attaches by the verb, induced from gold per language (branch `attach-prior`, stacked on #64)
+
+fast: 6 files · 1 affected test file, 5 pass · law: ok (pre-existing dup-header WARN S17/S96)
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Marshall | ATTACH-PRIOR-PREREG.md bars "P1-P4" | prereg, build script, kernel | fixed | the bars were named like the law's `P<n>` entries and so read as citations of entries that do not exist; renamed B1-B4 |
+| Feynman | build-attach-prior.mjs `devInst.length >= 30` | B3 floor | noted | a declared constant, giver = the pre-registration (fewer than 30 dev instances is reported "too few", never a pass); no constant tuned against its own result |
+| Dijkstra | attach-prior.js `toLowerCase()` on lemma and adposition | instancesOf | noted | the declared adpositions (to a à に) and lemmas are compared lowercased; scope is the languages in RECIPIENT, and a language outside it has no instances, not wrong ones |
+| Ostrom | RESULT 2 pooling | de row | disclosed | German pooled only GSD (the other German treebanks here lack a train or a dev split): stated in the table, not read as "German has no more data" |
+| Simon/Chekhov | attach-prior.js, the CLI scripts | no reader import | noted, real | the prior is NOT wired into the reader; Result 3 says so ("not yet measured, so not claimed"). Reached only by its test and the two scripts |
+| Greenberg | attach-stage2.mjs | no language default | clean | `RECIPIENT[CODE]` has no fallback; non-English reads through loadGrammar |
+
+clean: Holmes (the package.json hit is the test list).
+
 ## 2026-10-26 — the meaning layer reads THE reader's entry: rows on the WeftEntry, atoms from the weft (branch `weft-rows`, stacked on #64)
 
 fast: 7 files · 5 affected test files, 52 pass · law: ok (pre-existing dup-header WARN S17/S96) · reading-pipeline + reader-speed guards 29/29 · full native suite 996 tests, 4 real failures (greekClauses x2, janus second maker, material-doorway), all in main's known set, none new
