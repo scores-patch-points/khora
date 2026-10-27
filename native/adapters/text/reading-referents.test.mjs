@@ -314,6 +314,12 @@ test("an initial is not a title: 'James P. Cannon' and 'Mr. Cannon' in one sente
   const { ledger, gaps } = run(["P", "p", "Mr", "mr"]);
   assert.equal(ledger.referents.length, 1, "one man");
   assert.equal(gaps.some((g) => g.gap === "referent_split"), false);
+  // the initial after a lowercase word, where no name token stands before it: still no title (this is the case the two-letter rule decides; the pattern before the mention alone does not)
+  const t3 = "Smith wrote to P. Cannon and to Mr. Cannon about it. Later Mr. Cannon replied to P. Cannon at once.";
+  const sp3 = []; for (let i = t3.indexOf("Cannon"); i >= 0; i = t3.indexOf("Cannon", i + 1)) sp3.push([i, i + 6]);
+  const third = buildReferentLedger({ text: t3, cast: [row("ref:auto:cannon", "Cannon", sp3)], sentences: [{ offset: 0, text: t3.slice(0, 52) }, { offset: 53, text: t3.slice(53) }], abbreviations: new Set(["P", "p", "Mr", "mr"]) });
+  assert.equal(third.ledger.referents.length, 1);
+  assert.equal(third.gaps.some((g) => g.gap === "referent_split"), false);
   // a title in front of the initial is still read: "Mr. P. Cannon" carries the title Mr
   const t2 = "Mr. P. Cannon met Mrs. P. Cannon at the station. Mr. P. Cannon left.";
   const sp2 = []; for (let i = t2.indexOf("Cannon"); i >= 0; i = t2.indexOf("Cannon", i + 1)) sp2.push([i, i + 6]);
