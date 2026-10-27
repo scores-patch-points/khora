@@ -162,6 +162,65 @@ drops 18 of the 23 but 26 of 831 gold-overlapping beings (3.1%); on A the extra 
 - That the registration is independent of me: it is hashed and timestamped by this machine's clock and lands in the same PR as the code, so it shows
   the order of work (A1 before E) to a reader who trusts the clock, and nothing more.
 
+# The cast: a name that is also a function word
+
+A form that is **both a name and a function word** ("US"/"us", "May"/"may") used to be decided by counts: `pos-eng.json` is keyed on the case-folded form, so
+its counts mostly describe the lower-case function word. "May" (53 name tags, 186 closed-class) was refused and "US" (162, 169) was kept, either way by
+counts about the other reading. The cast now gives such a form the verdict the identity work asked for (`P-20261027T144520Z-identity-1`): **undecided**,
+`tied: ["name", "function word"]`, not a candidate, and never counted as a hit or a miss, unless the text itself separates the readings by the form heading a
+capitalised run ("US Army", "May Day"), in which case it stays a candidate.
+
+A **twin** is derived, not listed: the form's PROPN count and its closed-class count (UD's declared split: ADP AUX CCONJ DET NUM PART PRON SCONJ) must each
+exceed the share a random token of the prior has (PROPN 0.0617, closed-class 0.4198 of its 204,578 tokens), by the exact one-sided binomial tail at the alpha
+the capital test already uses. **On `pos-eng.json` that is two forms: "us" and "may". "Will" is not one** (1 name tag in 835): the example in the request was half
+supported by its giver. In all of GUM train (191 documents of at least 20 sentences) every one of the 62 mid-sentence "US" and "May" tokens is a name.
+
+`entry.formUsageReport` (not enumerable) now lists `undecided` and `separated` twins with their counts and the tied set; `refused` no longer includes an
+undecided form. `formUsageFor(stem, posPrior)` in `form-usage.js` is the per-language gate (English only), so `read-core.mjs` names no language, and it requires
+a language that was declared or heard: a language with no stem filed is read with the English priors as a typed gap, and the English rule must not run on it.
+
+```bash
+GUM_TRAIN=/path/to/en_gum-ud-train.conllu node eval/referents/twin-undecided.mjs [--set F|A|E] [--json out.json]
+```
+
+## Pre-registration
+
+`PREREG-TWIN.md` (sha256 in `PREREG-TWIN.sha`, 2026-10-27T15:55:51Z) fixed the twin derivation, the bars and the controls before the verdict was implemented. Set F is
+the 35 of the 65 documents set aside by seed 20261140 that E did not draw, scored once at 16:01:30Z; its freshness is as asserted by the brief that named the 65, not
+verified here. **One deviation, after the registration and before F was scored:** the omnilingual check found that a language with no filed stem fell back to the English
+priors and would have armed the English rule, so the gate moved into `formUsageFor` and requires a known language. It changes no English-declared read (the harness
+declares `en`) and is covered by tests for German, Russian, Turkish, Chinese and Arabic; no bar moved.
+
+## Result (set F, fresh, scored once)
+
+```
+twin candidates (one-word, no lower-case twin in the text, a twin by the prior): 4 (all "US"); undecided 1, separated 3; all 4 have a gold mention
+T1  untestable  4 of 4 covered with both readings named; fewer than the 5 the registration required
+T3  held        1 gold-overlapping being left the cast of 730 = 0.14% (bar <= 0.50%)
+T4  held        0 non-twin beings removed, 0 beings added that are not separated twins
+T5  untestable  3 of 3 separated twins have a gold mention; fewer than 5
+T6  held        35 documents (pos prior withheld) and a German passage read to byte-identical entries by 4ea6fa9 and by this branch
+T7  held        pronoun golden B+C+D: shipped 18 right / 44 wrong, shipped + np 49 right / 29 wrong; unchanged
+K1  counts only: T1 untestable (0 of 4 covered), so it is not shown to fail
+K2  everything undecided: T3 FAILED, 217 of 730 = 29.73%, as built
+K3  shuffled giver: T3 FAILED (15 of 730 = 2.05%) and T4 FAILED (15 non-twin beings removed, 14 added), as built
+```
+
+Spent sets, reported with no bar. A (design): 5 twin candidates (3 "US", 2 "May"), all undecided, all with a gold mention; 3 beings left the cast of 794 (0.38%); the two "May" were
+already refused. E: 3 (2 undecided, 1 separated), all with a gold mention; 1 left the cast of 824 (0.12%). Pooled over A, E and F: 12 twin candidates, 12 reported with both readings
+named, 8 undecided and 4 separated, **all 12 are names in the gold**.
+
+## Not shown
+
+- **An accuracy gain.** In GUM every twin is a name, so the verdict can only cost recall: across A, E and F, 5 "US" beings that khora#80 kept left the cast (the 3 "May" were already out).
+  What it buys is that a tie is named and no longer decided by counts about the wrong reading; whether that is worth 5 names in 12 is the reader's call, and the registration expected a cost.
+- **T1 and T5 on fresh data.** F held 4 twin candidates, not the roughly 11 the registration expected (no "May" at all), so two bars are untestable by their own rule. The pooled spent-set
+  figures are descriptive and do not stand in for them.
+- **Anything about "Will", "Rose", "Mark" or any form the prior does not mark as a twin.** Their lower-case twin's counts still decide them as in khora#80.
+- **That the separating signal is a giver's.** A capitalised run is a judgement made here; it admitted 4 of 4 twins that headed one, and all 4 were names.
+- **Other languages.** The twin is English's; the gate keeps every other language, and every language with no filed stem, as it was. A no-space script still gets zero mention spans from
+  `mentionsOf` (`\p{L}` word bounds), recorded as a typed gap with an owner in `read-core.mjs`.
+- That the registration is independent: hashed and timestamped by this machine's clock and in the same PR as the code.
 
 ## referent-read.mjs — the referent ledger against the plain index (pre-registered)
 
