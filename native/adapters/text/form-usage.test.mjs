@@ -5,7 +5,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { formUsageOf } from "./form-usage.js";
+import { formUsageOf, formUsageFor } from "./form-usage.js";
 import { extractSurfaces } from "./surfaces.js";
 import { conventionOf, conventionsGap } from "./conventions.js";
 import { readWith, buildPriors } from "../../the-fold/read-core.mjs";
@@ -22,10 +22,10 @@ const surfacesOf = (opts) => extractSurfaces(sentences, opts).map((s) => s.surfa
 
 test("formUsageOf: the nominal and the other uses of a form, from the prior's own counts", () => {
   const use = formUsageOf(posPrior);
-  assert.deepEqual(use("Gather"), { nominal: 0, other: 19 });
-  assert.deepEqual(use("Government"), { nominal: 63, other: 0 });
-  assert.deepEqual(use("French"), { nominal: 20, other: 0 }, "an adjective that names a people is nominal");
-  assert.deepEqual(use("Well"), { nominal: 9, other: 204 });
+  assert.deepEqual(use("Gather"), { nominal: 0, other: 19, twin: false });
+  assert.deepEqual(use("Government"), { nominal: 63, other: 0, twin: false });
+  assert.deepEqual(use("French"), { nominal: 20, other: 0, twin: false }, "an adjective that names a people is nominal");
+  assert.deepEqual(use("Well"), { nominal: 9, other: 204, twin: false });
   assert.equal(use("Zorblax"), null, "a form the treebank has not seen is undecided");
   assert.equal(use("2.5"), null, "a shape attests a class and counts nothing");
 });
@@ -125,4 +125,102 @@ test("the real prior, when janus is beside this checkout: every convention's sit
     assert.ok(c.giver || c.builder || prior.provenance?.builder, `${c.stem}: given or extracted, never revealed`);
     assert.ok(fs.existsSync(path.join(root, c.address.split("::")[0])), `${c.stem}: its site ${c.address} re-expands into code`);
   }
+});
+
+// ── the name/function-word twin: undecided with the tied set, never decided by counts (PREREG-TWIN.md) ────────────────────────────────────────
+const twinPrior = { forms: {
+  may: { AUX: 186, PROPN: 53 }, us: { PRON: 169, PROPN: 162 }, a: { DET: 3756, PROPN: 7 }, gather: { VERB: 19 }, government: { NOUN: 62, PROPN: 1 },
+  filler: { NOUN: 9000, VERB: 3000, ADP: 2000, DET: 2000, PUNCT: 3000 },
+} };
+const sents = (...texts) => texts.map((text, order) => ({ text, order }));
+const withoutTwin = (use) => (s) => { const u = use(s); return u && { nominal: u.nominal, other: u.other }; };   // khora#80's usage: counts only
+
+test("twin: a form is a twin when its name tags AND its closed-class tags each exceed the prior's own base rates; noise is not", () => {
+  const use = formUsageOf(twinPrior);
+  assert.equal(use("May").twin, true, "53 name tags of 239 against a base rate under 1%, 186 closed-class against about a third");
+  assert.equal(use("US").twin, true);
+  assert.equal(use("A").twin, false, "7 name tags among 3,763 tokens is annotation noise, not a reading");
+  assert.equal(use("Gather").twin, false, "a verb with no name tag");
+  assert.equal(use("Government").twin, false);
+  assert.deepEqual(Object.keys(use("May")).sort(), ["nominal", "other", "twin"]);
+});
+
+test("twin: a lone capital of a twin is UNDECIDED with the tied set named, not refused or kept by counts", () => {
+  const text = sents("Steps May visit all needed places for the day.", "We saw Gather near the US border.");
+  const use = formUsageOf(twinPrior);
+  const v1 = extractSurfaces(text, { formUsage: withoutTwin(use) }).map((s) => s.surface).sort();
+  assert.ok(!v1.includes("May") && v1.includes("US"), "khora#80: the counts refuse May and keep US");
+  const verdicts = { undecided: [], separated: [] };
+  const v2 = extractSurfaces(text, { formUsage: use, verdicts }).map((s) => s.surface).sort();
+  assert.ok(!v2.includes("May") && !v2.includes("US"), "neither is a candidate: it is not a being yet");
+  assert.deepEqual(verdicts.undecided.map((u) => u.surface).sort(), ["May", "US"]);
+  for (const u of verdicts.undecided) assert.deepEqual(u.tied, ["name", "function word"]);
+  assert.deepEqual(v1.filter((s) => s !== "US"), v2, "nothing else moves");
+});
+
+test("twin: the text separates the readings when the form heads a capitalised run", () => {
+  const text = sents("We met the US Army near the river.", "Then she saw May Day approach.");
+  const verdicts = { undecided: [], separated: [] };
+  const got = extractSurfaces(text, { formUsage: formUsageOf(twinPrior), verdicts }).map((s) => s.surface);
+  assert.ok(got.includes("US") && got.includes("May"), "the capitalised run is the text's own evidence: both stay candidates");
+  assert.deepEqual(verdicts.separated.map((s) => s.surface).sort(), ["May", "US"]);
+  assert.deepEqual(verdicts.undecided, []);
+});
+
+test("twin: byte-identical to khora#80 when the usage carries no twin field, and with no sink", () => {
+  const text = sents("Steps May visit all needed places for the day.", "We saw Gather near the US border.");
+  const v1 = JSON.stringify(extractSurfaces(text, { formUsage: withoutTwin(formUsageOf(twinPrior)) }));
+  assert.equal(JSON.stringify(extractSurfaces(text, { formUsage: withoutTwin(formUsageOf(twinPrior)), verdicts: { undecided: [], separated: [] } })), v1, "a sink changes nothing");
+  assert.doesNotThrow(() => extractSurfaces(text, { formUsage: formUsageOf(twinPrior) }), "a twin with no sink handed in is still returned undecided");
+});
+
+test("twin: the cast report names the undecided and keeps them out of the cast and out of 'refused'", () => {
+  const text = "Steps May visit all needed places for the day. Paris Hilton met Paris Hilton near the river. Paris Hilton left the river early.";
+  const e = readWith(text, { language: "eng", priors: buildPriors({ pos: twinPrior, stem: "eng" }), minCharacters: 0 });
+  assert.equal(e.error, null);
+  assert.ok(!e.cast.some((c) => c.allSurfaces.includes("May")), "an undecided twin is not a being");
+  assert.deepEqual(e.formUsageReport.undecided.map((u) => [u.surface, u.tied]), [["May", ["name", "function word"]]]);
+  assert.ok(!e.formUsageReport.refused.includes("May"), "undecided and refused are different verdicts");
+  assert.equal(Object.keys(e).includes("formUsageReport"), false, "the report rides the entry, not the wire");
+});
+
+test("twin: on the real prior, when janus is beside this checkout, the twins are exactly 'us' and 'may' (skipped without it)", async (t) => {
+  const { priorsFor } = await import("../../the-fold/read-core.mjs");
+  const posPrior = priorsFor("eng").posPrior;
+  if (!posPrior?.forms) return t.skip("janus priors/pos-eng.json is not beside this checkout");
+  const use = formUsageOf(posPrior);
+  assert.deepEqual(Object.keys(posPrior.forms).filter((f) => use(f)?.twin).sort(), ["may", "us"], "PREREG-TWIN.md: two forms; 'will' is not one");
+});
+
+// ── language balance: the rule is inert wherever the language has no ledgered convention (cased, caseless, non-space-delimited) ───────────────────
+const LANGUAGES = [
+  ["German (every noun capitalised)", "deu", "Gestern Abend trafen wir Anna und Peter im Café am Marktplatz. Anna erzählte von ihrer Reise nach Berlin, wo sie Thomas besucht hatte. Peter hörte aufmerksam zu."],
+  ["Russian (Cyrillic, cased)", "rus", "Анна Павловна встретила Пьера у входа. Потом Пьер рассказал Андрею о поездке в Петербург. Андрей слушал внимательно и молчал."],
+  ["Chinese (caseless, no spaces)", "zho", "昨天晚上我们在市场广场的咖啡馆见到了安娜和彼得。安娜讲了她去柏林拜访托马斯的旅行。彼得认真地听着，又点了一杯咖啡。"],
+  ["Turkish (Latin script, no filed stem: read with the English priors as a typed gap)", "tur", "Dün akşam pazar meydanındaki kafede Ayşe ve Mehmet ile buluştuk. Ayşe, Berlin'e yaptığı ve Ahmet'i ziyaret ettiği yolculuğu anlattı. Mehmet dikkatle dinledi."],
+  ["Arabic (caseless, right to left)", "ara", "التقينا أمس مساء بأنا وبيتر في المقهى. حكت أنا عن رحلتها إلى برلين حيث زارت توماس. استمع بيتر باهتمام وطلب فنجانا آخر من القهوة."],
+];
+test("language balance: formUsageFor names the languages it has a ledgered convention for; the rest are null, so core names none", () => {
+  assert.equal(typeof formUsageFor("eng", twinPrior), "function");
+  for (const [, stem] of LANGUAGES) assert.equal(formUsageFor(stem, twinPrior), null, `${stem}: no ledgered capital convention here`);
+  assert.equal(formUsageFor("eng", null), null);
+});
+for (const [name, stem, text] of LANGUAGES) {
+  test(`language balance: ${name} reads byte-identically with the capital rule on and off, even with a pos prior in hand`, () => {
+    const priors = buildPriors({ pos: twinPrior, stem });
+    const strip = (e) => JSON.stringify({ ...e, ms: 0 });
+    const on = readWith(text, { language: stem, priors, minCharacters: 0 });
+    const off = readWith(text, { language: stem, priors, minCharacters: 0, readerOptions: { formUsage: null } });
+    assert.equal(on.error, null);
+    assert.equal(strip(on), strip(off));
+    assert.equal(on.formUsageReport, null, "the rule did not run");
+  });
+}
+
+test("language balance: a text whose language is neither declared nor heard is not read by an English convention", () => {
+  const text = "Steps Gather all needed materials for the day. Paris Hilton met Paris Hilton near the river. Paris Hilton left the river early.";
+  const e = readWith(text, { priors: buildPriors({ pos: posPrior, stem: "eng" }), minCharacters: 0, language: "xx" });
+  assert.equal(e.language.source, "declared-unknown");
+  assert.equal(e.formUsageReport, null, "no stem filed for xx: the English priors are a typed gap, not licence to run an English rule");
+  assert.ok(e.cast.some((c) => c.allSurfaces.includes("Gather")), "the capital tier reads as it did");
 });

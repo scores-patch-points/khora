@@ -21,11 +21,55 @@
 // re-read. English only (the prior is English's, and what a capital means is a convention of the language): the caller does not build
 // this for another language.
 //
-//   formUsageOf(posPrior) → (surface) => { nominal, other } | null, synchronous; null for a form with no measured count
+// A TWIN (2026-10-27, PREREG-TWIN.md): a form that is BOTH a name and a function word ("US"/"us", "May"/"may"). The prior is keyed on the case-folded
+// form, so its counts are dominated by the lower-case function word and describe the other reading as much as the capital's: a twin decided by counts is
+// decided by the wrong twin. `twin` says the prior attests both readings beyond its own base rates: the form's PROPN count AND its closed-class count (UD's
+// declared split: ADP AUX CCONJ DET NUM PART PRON SCONJ) each exceed the share a random token of the prior has, by the exact one-sided binomial tail at the
+// alpha surfaces.js already uses. No typed threshold: the null rates are the prior's own (PROPN 0.0617, closed-class 0.4198 of its 204,578 tokens), and on
+// pos-eng.json that is two forms, "us" and "may". surfaces.js then returns the tied verdict, not a decision.
+//
+//   formUsageOf(posPrior) → (surface) => { nominal, other, twin } | null, synchronous; null for a form with no measured count
+//   formUsageFor(stem, posPrior) → the above for the languages whose capital this adapter has a ledgered convention for (English), else null: the
+//                              per-language gate lives HERE, so read-core.mjs names no language. A language is added by its own row in the Conventions
+//                              prior (janus conventions-<stem>.json), its own pos prior and its own measurement, never by widening this line.
 
 import { classifyWord } from "./wordclass.js";
 
 const NOMINAL = new Set(["NOUN", "PROPN", "ADJ"]);
+const CLOSED = new Set(["ADP", "AUX", "CCONJ", "DET", "NUM", "PART", "PRON", "SCONJ"]);   // UD's own closed-class tags
+const ALPHA = 0.05;                                                                          // the alpha of surfaces.js CAP_SIG_ALPHA, the rule this amends
+
+/** P(X >= k | n, p), exact, in log space (no overflow at any n the prior holds). */
+const upperTail = (k, n, p) => {
+  if (k <= 0) return 1;
+  if (k > n) return 0;
+  const step = Math.log(p) - Math.log1p(-p);
+  let term = n * Math.log1p(-p), max = -Infinity;
+  const kept = [];
+  for (let j = 0; j < n; j++) {
+    term += Math.log(n - j) - Math.log(j + 1) + step;                // log P(X = j + 1)
+    if (j + 1 >= k) { kept.push(term); if (term > max) max = term; }
+  }
+  return Math.exp(max + Math.log(kept.reduce((a, t) => a + Math.exp(t - max), 0)));
+};
+
+const baseRates = new WeakMap();
+function ratesOf(posPrior) {
+  let r = baseRates.get(posPrior);
+  if (!r) {
+    let tokens = 0, proper = 0, closed = 0;
+    for (const counts of Object.values(posPrior.forms)) for (const [tag, n] of Object.entries(counts)) { tokens += n; if (tag === "PROPN") proper += n; if (CLOSED.has(tag)) closed += n; }
+    r = { proper: tokens ? proper / tokens : 0, closed: tokens ? closed / tokens : 0 };
+    baseRates.set(posPrior, r);
+  }
+  return r;
+}
+
+const LEDGERED = new Set(["eng"]);   // the stems the Conventions@1 prior has a measured row for (janus conventions-eng.json)
+
+export function formUsageFor(stem, posPrior) {
+  return LEDGERED.has(stem) ? formUsageOf(posPrior) : null;
+}
 
 export function formUsageOf(posPrior) {
   if (!posPrior || typeof posPrior.forms !== "object" || !posPrior.forms) return null;
@@ -33,6 +77,10 @@ export function formUsageOf(posPrior) {
     const c = classifyWord(String(surface ?? ""), { posPrior });
     if (!c.found || !(c.total > 0)) return null;   // a shape or a class lexicon attests a form; it counts nothing
     const nominal = c.candidates.filter((x) => NOMINAL.has(x.upos)).reduce((n, x) => n + x.count, 0);
-    return { nominal, other: c.total - nominal };
+    const name = c.candidates.find((x) => x.upos === "PROPN")?.count ?? 0;
+    const closed = c.candidates.filter((x) => CLOSED.has(x.upos)).reduce((n, x) => n + x.count, 0);
+    let twin = false;
+    if (name > 0 && closed > 0) { const r = ratesOf(posPrior); twin = r.proper > 0 && r.proper < 1 && r.closed > 0 && r.closed < 1 && upperTail(name, c.total, r.proper) < ALPHA && upperTail(closed, c.total, r.closed) < ALPHA; }
+    return { nominal, other: c.total - nominal, twin };
   };
 }

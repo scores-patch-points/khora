@@ -45,7 +45,7 @@ import * as P from "../adapters/text/priors.js";
 import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
 import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
-import { formUsageOf } from "../adapters/text/form-usage.js";
+import { formUsageFor } from "../adapters/text/form-usage.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
@@ -360,16 +360,24 @@ export function readWith(text, { address = null, category = null, language = nul
   // nouns are not beings. SCOPE (Greenberg): the capital tier is a cased-script test. In a caseless script it names nothing, so
   // every row is `heard` and the cast is empty, as the second cast this replaced also was; in German, where every noun is
   // capitalised, every noun is a being. A being test that holds across scripts is owed, not implied.
+  // TYPED GAP (2026-10-27, found by the Referents session and routed by the omnilingual check; owner: the referent-read session, branch referent-read):
+  // `mentionsOf` bounds a mention by \p{L} on both sides, so in a script written without spaces (a zh probe) every row gets zero spans and the cast
+  // is empty. Not fixed here: it changes the cast's output for every language and needs its own registration. Suggested fix: take the mention
+  // boundaries from the language's tokenizer adapter (Intl.Segmenter), not the regex.
   let cast = [], heardRows = [], formUsageReport = null;
   try {
-    // English only: the pos prior is English's and a capital is a convention of the language (conventions.js). Another language, or no
-    // pos prior (a typed gap already: `no_pos_prior`), reads the capital tier exactly as it was.
-    const formUsage = callerUsage !== undefined ? callerUsage : stem === "eng" ? formUsageOf(pr.posPrior) : null;
-    const capitalSurfaces = extractSurfaces(cuts, formUsage ? { formUsage } : {});
+    // A capital is a convention of the language (conventions.js): form-usage.js decides, per language, whether it has a ledgered convention to read by
+    // (English). Another language, or no pos prior (a typed gap already: `no_pos_prior`), reads the capital tier exactly as it was.
+    // The language must be KNOWN (declared with a filed stem, or heard): a language with no stem filed is read with the English priors as a typed gap
+    // (`unknown_language`, `language_default`), and an English treebank's counts say nothing of a Turkish or Swahili capital.
+    const languageKnown = languageRead.source === "declared" || languageRead.source === "heard";
+    const formUsage = callerUsage !== undefined ? callerUsage : languageKnown ? formUsageFor(stem, pr.posPrior) : null;
+    const verdicts = formUsage ? { undecided: [], separated: [] } : null;
+    const capitalSurfaces = extractSurfaces(cuts, formUsage ? { formUsage, verdicts } : {});
     const capital = new Set(capitalSurfaces.map((x) => x.surface));
     // what the treebank's use refused, kept beside the entry (not enumerable: the wire stays what it was) so the rule is auditable
     // the conventions this branch reads by, cited from their one home (janus priors/conventions-<stem>.json); a gap is typed here, not on the wire
-    if (formUsage) formUsageReport = { conventions: ["capital-marks-a-name", "treebank-attests-a-forms-use"].map((s) => conventionOf(pr.conventions, s)).filter(Boolean), gap: conventionsGap(pr.conventions), giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s)) };
+    if (formUsage) formUsageReport = { conventions: ["capital-marks-a-name", "treebank-attests-a-forms-use"].map((s) => conventionOf(pr.conventions, s)).filter(Boolean), gap: conventionsGap(pr.conventions), giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s) && !verdicts.undecided.some((u) => u.surface === s)), undecided: verdicts.undecided, separated: verdicts.separated };
     const bytes = byteOffsets(str);
     const byRef = new Map();
     for (const ev of out?.index?.events ?? []) {

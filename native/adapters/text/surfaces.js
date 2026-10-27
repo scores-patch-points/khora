@@ -272,6 +272,7 @@ const logBinomialTailAtHalf = (k, n) => {
  * can never clear it (not enough evidence either way), where the same
  * split at high volume would.
  */
+const TWIN_TIED = Object.freeze(["name", "function word"]);
 const capitalisationIsSignificant = (cap, lower) => {
   const n = cap + lower;
   return Math.exp(logBinomialTailAtHalf(cap, n)) < CAP_SIG_ALPHA;
@@ -696,7 +697,7 @@ export const accumulateSurfaceEvidence = (sentences, evidence, { abbreviations =
   return evidence;
 };
 
-export const surfacesFromEvidence = (evidence, { functionWords = null, abbreviations = null, minGlyphs = 2, formUsage = null } = {}) => {
+export const surfacesFromEvidence = (evidence, { functionWords = null, abbreviations = null, minGlyphs = 2, formUsage = null, verdicts = null } = {}) => {
   const { capCounts, lowerCounts, sentenceIndex, lowerSentenceIndex } = evidence;
   const abbrev = abbreviations ? new Set(abbreviations) : null;
   // The physics filter (eoreader5, measured): a NAME essentially never appears
@@ -721,6 +722,7 @@ export const surfacesFromEvidence = (evidence, { functionWords = null, abbreviat
   // coin than chance alone would produce AT THIS WORD'S OWN SAMPLE SIZE —
   // derived per candidate from its own two counts, not a fixed shared band.
   const surfaces = [];
+  let runHeads = null;
   for (const [surface, cap] of capCounts) {
     const words = surface.split(/\s+/);
     // Numbers and single glyphs, per the two orthographic facts above.
@@ -752,7 +754,14 @@ export const surfacesFromEvidence = (evidence, { functionWords = null, abbreviat
       // and stays a candidate. Absent `formUsage`, this is not asked: byte-identical to before.
       if (lower === 0 && cap > 0 && typeof formUsage === "function") {
         const u = formUsage(surface);
-        if (u && u.other > 0 && capitalisationIsSignificant(u.other, u.nominal + cap)) continue;
+        if (u?.twin) {
+          // A TWIN (a name AND a function word, both attested by the prior beyond its base rates) is not decided by counts the case-folded key mostly
+          // spends on the other reading: it is returned UNDECIDED with the tied set named, and a gap is never a hit (PREREG-TWIN.md). The text's own
+          // evidence can separate them: the form heading a capitalised run ("US Army") stays a candidate. `verdicts` is a sink the caller may hand in.
+          runHeads ??= new Set([...capCounts.keys()].filter((k) => /\s/.test(k)).map((k) => k.split(/\s+/)[0]));
+          if (runHeads.has(surface)) verdicts?.separated.push({ surface, tied: TWIN_TIED, nominal: u.nominal, other: u.other, capitals: cap });
+          else { verdicts?.undecided.push({ surface, tied: TWIN_TIED, nominal: u.nominal, other: u.other, capitals: cap }); continue; }
+        } else if (u && u.other > 0 && capitalisationIsSignificant(u.other, u.nominal + cap)) continue;
       }
     }
     surfaces.push({ surface, mentions: cap, sentences: sentenceIndex.get(surface).size });
