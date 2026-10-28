@@ -882,3 +882,82 @@ The arm is **not adopted** (V3 and V4 missed on the nine spent sets and on the 9
 - RC6's retirement of `canonical()` from `native/kernel/atom-support.js` is **not applied**: main's `kernel/stage.js` imports it, and retiring it is a step of adopting the arm. `atom-support.js` and `atom-match.js` are main's, and the rules arm in `run.mjs` reads `A.atoms` as on main (the reader's `forms` field and `atom-forms.js` stay, additive, unused by the rules arm);
 - `atoms.js` carries both changes: main's `tense`, `time` and negation-presupposition frame, and the arm's argument word ids and `head` row id;
 - M0 (the NLI arms and scripts deleted) stands, as the spec's step 0.
+
+## Run 24 (2026-10-28): holographic identity at CORPUS scale — the Motorola resolution against its exhibits — PRE-REGISTERED (written before any standing or verdict was computed on the corpus)
+The problem measured (stage-run.mjs, last section): the world built from the 108 sentence-sized spent pairs (746 nodes, a node needs 3 occurrences) settles 14 of
+305 referent binds as `same`; 291 are `needs_deeper_reading`; none of the 31 committed verdicts is settled; `against` cannot fire because corpus-identity.js declared no
+functional relation. Identity can only be earned where a node is met often enough for the fold to speak, so this run builds that world and asks the nominated pairs in it.
+THE SET (the 108 spent pairs are not part of it). RS2026-2264, the resolution accepting the Sourcewell master agreement 030425-MOT with Motorola Solutions, and its three
+exhibits, as plain text (found in the author's project folders: holodeck/demo-motorola): the resolution and its cooperative-purchase certification (sha256 6e374847…), the
+Sourcewell master agreement (e6ebfe3c…, a PDF extraction, much of it fragmentary), Metro Code 13.08.080 (98919442…), the verbatim record of the council debate of 2026-10-06
+(92405b94…). Full hashes are in eval/meaning/identity-corpus.mjs, which refuses a corpus that does not match. The documents are NOT committed: they are public records, but the
+certification carries a city employee's phone number and email address and the debate record a public commenter's name. Planted material is committed: eval/meaning/identity-corpus/decoys.txt
+(9645e87c…), four people in other stories who share a surname with someone in the resolution or the debate (Rosenberg, Allen, Butler, Reed).
+WHAT WAS LOOKED AT BEFORE THIS ENTRY (so the registration is honest about what it was not blind to). The text of all four documents. The reader's output on the resolution only: its
+first 25 sentences for timing, then atom, entity and occurrence counts per document and the top entities of the resolution by occurrence (no standing). The agreement's atom and
+entity counts. The shape of the atoms (is_a, has_*, most:*) on constructed sentences. No standing, no verdict, no pair, no occurrence count of any NOMINATED pair was computed on
+the corpus. The wiring was tested only on constructed atoms (native/adapters/text/corpus-exclusion.test.mjs) and on a tiny synthetic corpus, never on the registered documents.
+THE READING. Each document is a PAGE: read-atoms.js readPage (new; readAtoms is readPage from the last sentence and is byte-identical on the spent sets), grammar-en with the
+learned coreference ranker (eval/meaning/atoms/coref-ranker.json), no title, no producer. Preparation, declared (identity-corpus.mjs pageSentences): control characters out; a paragraph is
+a block between blank lines and its line breaks are wraps, joined by a space; a sentence ends at . ! ? followed by a space and a capital, a digit, a quote or a bracket; a block without two letters in a row is dropped.
+THE WIRING (this PR). (1) stage.js functionalRegister: the licenses (has_* measure, most:* holder) are read from the Hyperlexicon rows with their givers; a candidate or absent row licenses
+nothing and that relation is `unlicensed`, never bound; has_count / has_value are unkeyed and not licensed. (2) corpus-identity.js: `prepare(record, facts)` hands the register and the readings'
+assertions to identity-exclusion.js; with no facts, exactly the old constant (`no_functional_relation_declared`). A measure is one-valued per BEING, so the kind is the universal one
+("being", the row's own word) and every referent is one; the holder is one-valued per KIND, so it is registered but a referent pair is never convicted by it (the slot is a kind, which the
+world has no node for; asking kind pairs would turn every holder contradiction into "not the same kind", erasing the C). (3) atom-world.js factsFromReadings: a positive has_* atom with a
+keyed figure is an assertion of its subject, cited by its span; a hedged one is carried but not witnessed (a conflict resting on it is raised, convicts nothing); a negated one asserts no value;
+a figure in a sentence that states a year numeral is timed and incomparable (the row says "time-keyed when the text gives a time"); a being whose own reading holds two figures of one measure that
+do not meet has refuted the license for itself and that relation is dropped for it; two figures meet within 2% (atom-support.js figMeet). (4) `against` is any exclusion conviction on witnessed
+assertions of a GIVEN relation, whether or not the fold also joined them (then `contested`); it needs no fold depth, because it is a proof and not an inference from reading, so a thin pair CAN be
+`against` with its citation, and thin reading alone never yields `against`, `same` or `raised_difference`. (5) stage.js: the relations of the claim being judged are handed to standing as `except`
+(they are the question, not evidence of which being the claim speaks of), and an end whose nominated anchors all fell away to a declared exclusion is a typed gap `against` with the proof.
+IDENTITY_PARAMS are NOT touched (draws 199, alpha 0.05, seed 20261014, minOccurrences 3, resolution 1, maxHop 1): declared, never fitted to a document.
+THE QUESTION. Nominated pairs: every pair of named entities in two DIFFERENT readings that share a name word (the reader's cues on name and alias mentions; a description nominates nothing),
+each node an entity some atom names. Standing per pair: same / against / raised_difference / needs_deeper_reading. `askable` = both nodes have at least 3 occurrences.
+GOLD, by rule and never by hand. From the names alone: `same_name` when the two name-word sets are equal; `different_name` when neither is a subset of the other; otherwise `unlabeled` (a short form).
+Planted truth where there is one: every decoy×real pair is different; in world H the pairs with equal name words between the agreement's two halves are the same being; in world X a node and its doubled
+self are one being; in world S the names carry no information, so every pair is different. The name rule is a proxy (two readings can name two beings alike); a bar that fails on it is reported with the pair.
+WORLDS. R: the four documents. D: R and the decoys. H: R with the agreement replaced by its odd and its even sentences (each read as its own page). X: R and the resolution with every keyed
+figure doubled. S: R with the named entities of each document trading names under a seeded permutation (seed 20261028+i).
+BARS (each pass / FAIL / N/E, N/E when the askable count is under the floor; nothing is tuned if one fails):
+ I1  a pair with a node under 3 occurrences is never `same` and never `raised_difference` (all worlds).
+ I2  every `against` carries a proof: each conflict a given relation with its giver and both assertions' spans (all worlds).
+ I3  every `against` comes from an exclusion (reason `exclusion:<rel>`), never from a measured difference of use (all worlds).
+ I6  every verdict judgeClaim commits (E or C) with identity injected carries a reach, and it is `settled` only when no end it rests on is anything but `same`.
+ I7  node eval/meaning/stage-run.mjs prints the same arm numbers (rules 3/35 C, 19/57 E; stage 8/35, 22/57; 0/73 false C), and the spent-set sections are byte-identical except the last.
+ II1 no `same` between a decoy and a real node, over the askable decoy×real pairs of D. Floor 10.
+ III1 no `same` on an askable `different_name` pair of R. Floor 10.
+ IV1 in S, `same` among the askable pairs is at most alpha (0.05) of them. Floor 20.
+ V1  in X, a node whose reading states a witnessed, untimed, named figure (has_* other than has_count / has_value, positive, not hedged, in a sentence with no year numeral, not contradicted by its own
+     reading) is `against` its doubled self with a has_* conflict cited; every other node is not. Floor 1. This is a wiring control on real text, not a finding about the documents.
+ VI1 in H, at least half of the askable planted-same pairs are `same`. Floor 20. This asks whether the fold can join a document to itself at this scale at all.
+NO BAR, REPORTED: the distribution of standings in R (how much of the corpus stays `needs_deeper_reading`, and why: `not_enough_reading` against `idle`); every `same`, `against` and
+`raised_difference` in R with its names and counts; every `against` in R on a `same_name` pair, which may be a real disagreement between two documents or a mislabel, and is read, not scored;
+the verdicts judgeClaim commits for each resolution sentence against each exhibit, with their reach.
+PREDICTIONS, written before the run: most nominated pairs in R stay `needs_deeper_reading` (over 90%), because most names are met once or twice; the agreement supplies nearly all the nodes that reach 3
+occurrences; `same` in R is few (under 20) and `against` in R is 0 to 3; the committed verdicts are few (under 10) and at most a handful are `settled`; II1, III1 and VI1 are N/E or marginal, and
+VI1 fails if it is evaluable, because the agreement is a fragmentary extraction in which most entities are one-sentence descriptions; I1–I3, I6 and V1 pass because they are structural. If a
+prediction is wrong the result says so.
+RESULT (run 24, one scoring run on the registered corpus at registration commit 2bbcaf4; the second run reproduced the report byte for byte, sha256 d7a92aa56a81d2c2…; IDENTITY_PARAMS untouched):
+ The agreement read as a page: 1,083 sentences, 5,675 atoms, 5,191 entities (almost every entity is met once: the extraction is fragmentary); resolution 117 sentences / 347 atoms; code 39 / 517; debate 62 / 362.
+ R (the four documents): 4,477 nodes, 1,405 with 3 or more occurrences; 1,334 nominated pairs, of which 134 askable (116 agreement×resolution, 9 agreement×debate, 3+3+3 the rest). 0 `same`, 0 `against`, 0 `raised_difference`,
+  1,334 `needs_deeper_reading` (100%): `not_enough_reading` 1,200, `idle` 133, `no_positive_evidence` 1. The least-read node of a nominated pair has 1 occurrence in 896 pairs, 2 in 304, 3 in 74, 4 or more in 60.
+  The corpus did NOT earn identity: the sentence-scale world settled 14 of 305 binds, and this world settles 0 of 1,334 pairs. Its verdicts: 210 (70 resolution sentences with atoms × 3 exhibits) all `N`; 43 of them drew
+  holographic standings (117, all `needs_deeper_reading`); no E or C was committed, so there is no `reach` to be settled or open.
+ BARS. I1 pass (14,670 thin pairs, none `same`/`raised_difference`). I2 pass, I3 pass (one `against` in all worlds, see V1; cited, from an exclusion). I6 VACUOUS: 0 committed verdicts, nothing tested. I7 pass (stage-run.mjs byte-identical to PR #59's, all
+  sections). II1 pass, n=11, but see below: it is satisfied by silence. III1 N/E (one askable `different_name` pair: Central Emergency Notification ~ Emergency Communications, `no_positive_evidence`). IV1 pass (162 askable shuffled pairs, 0 `same`).
+  V1 pass (75 same-named resolution/doubled pairs, 1 `against`, 0 differ from the expectation). VI1 FAIL: 1 of 1,505 askable planted-same pairs joined (the agreement's even half with its odd half: "the Sourcewell office" ~ "Sourcewell", 5 and 3 occurrences).
+ WHAT THE PASSES ARE WORTH. II1: of the 11 askable decoy×real pairs only 4 are the planted people (Allen, against Council Member Allen); 7 involve the entity "the Motorola resolution", which my own fixture's preface sentence created (a flaw in the registered
+  decoys.txt: that sentence names the real resolution, so its pairs are mislabelled `different_planted`). All 11 were `idle`: the fold said nothing, so no decoy was kept apart by the fold; none was joined. Rosenberg nominated 35 pairs and none is askable (the reader splits the planted Sarah Rosenberg
+  into entities met once or twice each); Butler and Reed nominated no pair at all. IV1 the same: 162 pairs, all `idle`. V1 is a wiring control and it works on real text, but the one conviction is a spurious figure: the reader read "one" in a statute citation as
+  has_number_of_equipment(Tennessee Code Annotated § 12-3-1205(b), one); 74 of the 75 resolution nodes state no keyed, untimed figure at all, so `against` has almost nothing to read in these documents.
+ WHY THE FOLD IS SILENT (post hoc diagnostic, IDENTITY_DIAGNOSE=1, nothing rescored): the share of nodes that carry weight against the rest of the corpus (test 3) by occurrences, in R: 3: 70 of 618, 4: 53 of 333, 5: 30 of 172, 6–9: 76 of 233, 10–19: 24 of 48;
+  in H the same within a few nodes. A pair needs both its nodes to carry weight, then its worlds to match, then its consequence to align; at 3 to 5 occurrences about one node in six carries weight, so about one pair in thirty-five can even be asked the next
+  question. The declared minimum (3) is the least the fold needs to run, not the least it needs to speak; at these declared numbers it begins to speak around 10 occurrences, and this corpus has 49 such nodes of 1,405 (48 judged and the anchor, which has 18).
+ PREDICTIONS CHECKED. Over 90% of pairs stay `needs_deeper_reading`: held (100%). The agreement supplies nearly all the askable nodes: held (128 of 134 askable pairs have an agreement node). `same` in R under 20, `against` 0 to 3: held (0, 0). Committed verdicts under 10, a handful settled:
+  held (0, 0). VI1 fails if evaluable: held; II1/III1/VI1 "N/E or marginal": wrong for VI1 (1,505 askable, decisive failure) and II1 (evaluable, vacuously). I1–I3, I6, V1 "pass": I6 passed only because it tested nothing.
+ FOR THE NEXT RUN (the Nashville civic graph, not run here): nodes met dozens of times in clean records, not once in an extracted PDF; a decoy fixture without a preface that names a real entity; a floor for I6 (at least 10 committed verdicts, else N/E).
+ Code changes after the run: the post-hoc diagnostic section of identity-corpus.mjs, and the removal of an unverified "identical on a second run" remark from its last line (the second run then verified it). The bars and the registered worlds are unchanged.
+ RE-RUN ON THE MERGED CODE (2026-10-28, after main moved on; same script and corpus, reader as on main at the merge, nothing else changed; not a second scoring of the registered run): the same bars pass and fail. R: 4,475 nodes, 1,370 nominated pairs,
+  134 askable, 0 `same`, 0 `against`, 0 `raised_difference`, 100% `needs_deeper_reading`. II1 pass (13 askable decoy pairs), III1 N/E (1), IV1 pass (129 askable, 0 `same`), V1 pass (75, 1 `against`), VI1 FAIL (1 of 1,314), I6 vacuous (0 committed
+  verdicts). Weight-carrying nodes in R by occurrences: 3: 71 of 630, 4: 56 of 322, 5: 24 of 163, 6–9: 77 of 227, 10–19: 27 of 56. The registered numbers above stand; these are within a few percent of them and move no bar.

@@ -3,6 +3,7 @@
 // The meaning check reads a claim and its source this way and weighs atom against atom (atom-support.js).
 //   readAtoms({ text, lang, title, previous, grammar, pack, same, lookup, corefModel, producer, chooser, filter, keysOf })
 //     → { atoms, forms, entities, mentions, claims, rows, unread, page, spanMap, cuts }
+//   readPage({ sentences, from, ...same }) → [{ atoms, … }] one per sentence from `from`, the page resolved ONCE (entity ids stable across the page)
 //   grammar: { rowsOf(text), claimsOf(text, rows) } (grammar-en.js, or grammar-ud.js's loadGrammar)
 import { resolvePage } from "./coref.js";
 import { resolveWithModel } from "./coref-learned.js";
@@ -29,27 +30,37 @@ export function cleanText(text) {
 // atoms in the CLEANED text's offsets → the text as given (the cleaned text's map), each with its words and its span
 export const mapAtoms = (atoms, C, original) => atoms.map((a) => { const start = a.start != null ? C.map[a.start] : null, end = a.end != null ? C.map[Math.min(a.end, C.map.length - 1)] : null;
   return { ...a, start, end, text: realize(a), span: start != null ? original.slice(start, end) : null }; });
-export function readAtoms({ text, lang = "en", title = null, previous = [], grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
-  const original = text, C = cleanText(text); text = C.text; previous = previous.map((p) => cleanText(p).text);
-  const sentences = [...previous, text];
-  const R0 = resolvePage({ lang, title, sentences, rowsOf: grammar.rowsOf, pack, same, lookup });
-  let entities = R0.entities, mentions = R0.sentences.at(-1).mentions, pageMentions = R0.sentences.map((s) => s.mentions);
-  if (corefModel) { const L = resolveWithModel(R0, { lang, title, same, proDrop: !!pack?.proDrop }, corefModel); entities = L.entities; mentions = L.sentences.at(-1).mentions; pageMentions = L.sentences.map((s) => s.mentions); }
-  const rows = R0.sentences.at(-1).rows, claims = grammar.claimsOf(text, rows);
-  const ctx = { rows, mentions, entities, text, lang, keysOf };
-  const base = atomize({ claims, ...ctx });
-  const atoms = producer ? [...base, ...produce(ctx, producer, { have: base, chooser, filter })] : base;
-  const out = mapAtoms(atoms, C, original);
-  // what this reading did not read: the grammar's own unread words (claim-coverage.js), less those a produced atom carries
+// readPage({ sentences, ... }) → one reading per sentence from `from` on, the page resolved ONCE: an entity keeps its id from the sentence that
+// introduces it to the last, so a document read as a page has nodes with real occurrence counts (adapters/text/atom-world.js). Each reading's `page` is
+// the page up to and including its sentence, as readAtoms (one sentence with the page before it) gives it: readAtoms is readPage from the last sentence.
+// `lang` is the caller's to say (readAtoms keeps its own default; a page reader adds none).
+export function readPage({ sentences, from = 0, lang, title = null, grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
+  const cleaned = sentences.map((t) => cleanText(t));
+  const R0 = resolvePage({ lang, title, sentences: cleaned.map((c) => c.text), rowsOf: grammar.rowsOf, pack, same, lookup });
+  let entities = R0.entities, pageMentions = R0.sentences.map((s) => s.mentions);
+  if (corefModel) { const L = resolveWithModel(R0, { lang, title, same, proDrop: !!pack?.proDrop }, corefModel); entities = L.entities; pageMentions = L.sentences.map((s) => s.mentions); }
+  // the page as read: each sentence's rows and mentions, so a referent's every naming on the page is at hand
+  const pageAll = R0.sentences.map((s, i) => ({ text: s.text, rows: s.rows, mentions: pageMentions[i] ?? [] }));
   const low = (x) => String(x ?? "").normalize("NFKC").toLowerCase();
-  const carried = low(out.filter((a) => a.from === "path").map((a) => a.text).join(" "));
-  const all = low(out.map((a) => a.text).join(" ")), heads = new Set(claims.map((c) => c.vid).filter((x) => x != null));
-  // and a content word no atom carries, unless it heads a claim (its predicate is then written by its English key)
-  const missed = rows.filter((r) => /^(NOUN|PROPN|ADJ|NUM)$/.test(r.upos) && !/^(det|case|mark|punct|fixed|compound:prt)/.test(r.deprel) && !heads.has(r.id) && !all.includes(low(r.form)) && !(r.lemma && r.lemma !== "_" && all.includes(low(r.lemma).slice(0, Math.max(4, low(r.lemma).length - 2))))).map((r) => r.form);
-  const unread = [...new Set([...claims.flatMap((c) => c.unread ?? []), ...missed])].filter((w) => !carried.includes(low(w)));
-  // the page as read (title, earlier sentences, this one): each sentence's rows and mentions, so a referent's every naming on the page is at hand
-  const page = R0.sentences.map((s, i) => ({ text: s.text, rows: s.rows, mentions: pageMentions[i] ?? [] }));
-  // the atoms in their canonical forms (atom-forms.js): what a claim says, as a check reads it; `atoms` stay as read
-  // the reading's own offsets map back to the sentence as given (spanMap: cleaned offset → original), and what was cut is said (cuts)
-  return { atoms: out, forms: canonicalForms(out), entities, mentions, claims, rows, unread, page, spanMap: C.map, cuts: C.cuts };
+  const reads = [];
+  for (let si = Math.max(0, from); si < sentences.length; si++) {
+    const C = cleaned[si], original = sentences[si], text = C.text, mentions = pageMentions[si], rows = R0.sentences[si].rows, claims = grammar.claimsOf(text, rows);
+    const ctx = { rows, mentions, entities, text, lang, keysOf };
+    const base = atomize({ claims, ...ctx });
+    const atoms = producer ? [...base, ...produce(ctx, producer, { have: base, chooser, filter })] : base;
+    const out = mapAtoms(atoms, C, original);
+    // what this reading did not read: the grammar's own unread words (claim-coverage.js), less those a produced atom carries
+    const carried = low(out.filter((a) => a.from === "path").map((a) => a.text).join(" "));
+    const all = low(out.map((a) => a.text).join(" ")), heads = new Set(claims.map((c) => c.vid).filter((x) => x != null));
+    // and a content word no atom carries, unless it heads a claim (its predicate is then written by its English key)
+    const missed = rows.filter((r) => /^(NOUN|PROPN|ADJ|NUM)$/.test(r.upos) && !/^(det|case|mark|punct|fixed|compound:prt)/.test(r.deprel) && !heads.has(r.id) && !all.includes(low(r.form)) && !(r.lemma && r.lemma !== "_" && all.includes(low(r.lemma).slice(0, Math.max(4, low(r.lemma).length - 2))))).map((r) => r.form);
+    const unread = [...new Set([...claims.flatMap((c) => c.unread ?? []), ...missed])].filter((w) => !carried.includes(low(w)));
+    // the atoms in their canonical forms (atom-forms.js): what a claim says, as a check reads it; `atoms` stay as read
+    // the reading's own offsets map back to the sentence as given (spanMap: cleaned offset → original), and what was cut is said (cuts)
+    reads.push({ atoms: out, forms: canonicalForms(out), entities, mentions, claims, rows, unread, page: pageAll.slice(0, si + 1), spanMap: C.map, cuts: C.cuts });
+  }
+  return reads;
+}
+export function readAtoms({ text, lang = "en", previous = [], ...rest }) {
+  return readPage({ ...rest, lang, sentences: [...previous, text], from: previous.length })[0];
 }

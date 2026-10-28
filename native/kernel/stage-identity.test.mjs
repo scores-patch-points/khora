@@ -56,6 +56,14 @@ test("against: the end is not that being, so it binds to nothing and no contradi
   const j = judgeClaim(source(), [radius(6000)], { identity: idn({ kind: "against", same: false, against: true, reason: "exclusion", have: [30, 30], need: 3 }) });
   assert.equal(j.verdict, "N");
   assert.equal(j.proofs.length, 0);
+  const gap = j.gaps.find((g) => g.kind === "against");
+  assert.deepEqual([gap.end, gap.reason], ["Mercury", "exclusion"], "the gap names the end and the reason it fell away");
+});
+
+test("the claim's own relations are handed to standing as `except`: they are the question, not evidence", () => {
+  let seen = null;
+  judgeClaim(source(), [radius(6000)], { identity: { standing: (c, s, o) => { seen = o; return DEEP; } } });
+  assert.deepEqual([...seen.except], ["has_radius"]);
 });
 
 test("an end that is no referent is never asked", () => {
