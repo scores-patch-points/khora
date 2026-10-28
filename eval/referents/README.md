@@ -294,3 +294,58 @@ Development slice B, for comparison: 341 answerable, 17 bound right / 5 wrong (t
 - That the candidates of a `frame_not_read` item contain the antecedent (the room control says they mostly do not).
 - Anything about out-of-class forms, or a language other than English (no pronoun prior, no items; a test shows the entry unchanged).
 - G's freshness beyond what this session knows: the dev split was not read here; another session may have.
+
+# A presence rung beside the shipped pronoun resolver
+
+The shipped resolver's "activation" is associative recall of vocabulary with no recency term, no mention count and no grammatical role (`memory/activation.js`), and in the default refused regime it never reads a frame that carries a
+name beside the pronoun. `pronoun-activation/FINDINGS.md` found no regression but a missing rung: a plain recency-plus-salience baseline bound far more. `readerOptions.pronounPresence = { window, boost, feed, floor, margin, locality }`
+(opt-in, **every dial declared, no defaults**; off = absent, and then the entry is what it was) adds `entry.pronounsPresence`: the pronouns of the resolver's own class bound by **decayed presence** over the cast
+(`adapters/text/pronouns.js::resolvePronounsByPresence`, `kernel/activation.js`'s own `gammaFor`; +`boost` for the first cast mention of a sentence, a position proxy for the subject, else +1; the resolver's own non-personal ruling and
+causal clause-local gender evidence; bind iff presence >= `floor` and the lead over the runner-up >= `margin`). `locality: true` adds the legacy `namedScope: "local"` rung (the sole being named in the pronoun's clause decides). The shipped
+`entry.pronouns` is untouched and is the control. The pure rung is re-runnable on the entry's own inputs (`entry.presenceInputs`, not enumerable), which is how the evaluation tries other dials on one read.
+
+```bash
+GUM_TRAIN=... node eval/referents/pronoun-presence.mjs --select --out dials-B.json          # development: choose the dials on slice B by the registered grid and rule
+GUM_TRAIN=... node eval/referents/pronoun-presence.mjs --set E --dials dials-B.json         # confirmation: refuses to run without a dials file
+```
+
+## Pre-registration
+
+`PREREG-PRESENCE.md` (sha256 in `PREREG-PRESENCE.sha`, 2026-10-27T21:46:08Z) fixed the arms, the grid (1,728 configurations), the selection rule (most right subject to precision >= the shipped resolver's on the same slice), the bars
+and the control before the option existed. The dials were chosen on **B** only and frozen (`PRESENCE-DIALS-B.json`, sha256 in `PRESENCE-DIALS-B.sha`, 21:53:41Z) before **E** (30 set-aside documents, scored for cast admission and never for
+pronouns) was read: window 3, boost 1, feed 1, floor 0, margin 0, binding 221 right / 41 wrong of 341 on B against the shipped resolver's 17 / 5.
+
+## Result (E, scored once)
+
+```
+answerable pronouns 329          right / wrong / unbound    coverage  precision
+  R   the shipped resolver          4 /  26 /  299            0.091     0.133
+  P   presence, dials chosen on B 128 / 130 /   71            0.784     0.496
+  PL  P + locality                125 / 133 /   71            0.784     0.484
+  P-A the diagnosis agent's dials 101 /  34 /  194            0.410     0.748     (window 4, boost 2, feed 1, floor 2, margin 0.3, chosen by it on slice A)
+  K1  mention-to-being permuted   109 / 149 /   71            0.784     0.422     (control)
+
+Q1  held     P right - R right = 124, paired bootstrap over documents 95% [36, 245]
+Q2  held     P precision 0.496 vs R 0.133
+Q3  FAILED   locality's own precision 0.439 (18 right, 23 wrong) vs P 0.496; PL right 125 vs P right 128
+Q4  held     (a) the option-off entries of all 30 documents are byte-identical to main (e957279); (b) option on minus the field equals option off; the pipeline's field equals the pure rung re-run on the entry's inputs
+Q5  held     P-A right - R right = 97, [26, 204]; precision 0.748 vs R 0.133
+K1  HELD BOTH Q1 and Q2: the bars cannot tell a resolver from noise (right - R right 105, [22, 223]; precision 0.422)
+```
+
+## Read it so
+
+- **The registered bars do not discriminate, and the registration said what that means.** K1, the same rung with the being each mention names shuffled, also beats the shipped resolver on E, because the shipped resolver binds 30 pronouns and gets 4 right. Q1 and Q2 show the shipped resolver's floor is very low;
+  they do not show that the rung reads recency well. The informative comparison is not one of the bars: **P 128 right / 130 wrong against K1 109 / 149** (precision 0.496 against 0.422).
+- **The dials the registered rule picked do not transfer.** On B they bind 221 right / 41 wrong (precision 0.843); on E the same dials bind 128 / 130 (0.496). The rule (most right subject to a precision floor taken from the shipped resolver, which is strong on B) selects a permissive operating point (floor 0, margin 0) that
+  binds nearly every pronoun, and 1,728 configurations on 30 documents is a wide search. The diagnosis agent's stricter dials, chosen on another slice, hold 0.748 precision on E at 41% coverage. Which operating point to ship is a decision this evaluation does not make, and the dials were not moved after E.
+- **The locality rung loses in English, as binding theory predicts** (a non-reflexive pronoun is disjoint from a same-clause antecedent): 18 right, 23 wrong, all 41 bindings non-reflexive; it costs 3 right bindings. On B it cost 27 (221 → 194 right).
+- **Where the rung binds:** in a sentence that carries a cast mention 97 right / 69 wrong (the sentences the shipped resolver skips); in a nameless sentence 31 right / 61 wrong. 53 of the 329 answerable pronouns ("it" 37, "its" 15, "itself" 1) are out of the class and neither rung scans them.
+
+## Not shown
+
+- That the rung is good: at the registered dials it is about half right. That it beats a shuffle is shown only descriptively (128 / 130 against 109 / 149; no interval computed).
+- That the window is right for any material but English GUM: it is a **declaration** (`window_declared`), not measured per material (READING-POLICY P1). `dmdWindow` needs a gold-free conclusion to ask "does forgetting older mentions change what the reader concludes?", and none is registered.
+- That the first-mention boost is a subject (`boost_is_position_proxy`): the reader's UD rows were not asked for. The chosen dials have boost 1, so on E the proxy plays no part in P; it does in P-A.
+- Any language but English; any genre GUM lacks; that gold coreference is truth. 30 documents, a few of which hold most of the bindings, as the bootstrap's width says.
+- That the registration is independent: hashed and timestamped by this machine's clock, in the same PR as the code.

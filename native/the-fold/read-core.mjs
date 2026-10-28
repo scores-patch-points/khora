@@ -37,7 +37,7 @@ import { splitSentences, deriveAbbreviations } from "../adapters/text/spans.js";
 import { GRAMMAR_MIN_SHARE } from "../adapters/text/grain-typing.js";
 import { extractSurfaces, discoverReferents, namesCorefer, diaNorm } from "../adapters/text/surfaces.js";
 import { withEar } from "../adapters/text/active-ear.js";
-import { resolvePronouns } from "../adapters/text/pronouns.js";
+import { resolvePronouns, resolvePronounsByPresence } from "../adapters/text/pronouns.js";
 import { relationExtractorsFor } from "../adapters/text/relations-language.js";
 import { classifyWord, dominantClass } from "../adapters/text/wordclass.js";
 import { createLemmatizer, morphologyFromPrior } from "../adapters/text/morphology.js";
@@ -328,7 +328,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -436,6 +436,24 @@ export function readWith(text, { address = null, category = null, language = nul
       pronouns.push({ pronoun: b.pronoun, at: [raw(at), raw(at + String(b.pronoun ?? "").length)], sentence: sentenceAt(at), surface: b.surface ?? null, ref: b.surface ? refOf(b.surface) : null, margin: b.margin ?? null });
     }
   });
+  // THE PRESENCE RUNG (readerOptions.pronounPresence = { window, boost, feed, floor, margin, locality }; opt-in, every dial declared, off = absent and then
+  // nothing below runs and the entry is what it was): the pronouns of the resolver's own class bound by decayed presence over the beings of THIS cast
+  // (adapters/text/pronouns.js::resolvePronounsByPresence, PREREG-PRESENCE.md), beside the shipped resolver's `entry.pronouns`, which it does not touch.
+  let pronounsPresence = null, presenceInputs = null;
+  if (pronounPresence && typeof pronounPresence === "object") {
+    pronounsPresence = [];
+    try {
+      const refSurface = new Map(), surfaceToRef = new Map();
+      for (const c of cast) { refSurface.set(c.ref, c.surface); for (const x of c.allSurfaces) surfaceToRef.set(x, c.ref); }
+      let np = [];
+      try { if (typeof readerOrgans.nonPersonalOf === "function") np = readerOrgans.nonPersonalOf(surfaceToRef) ?? []; } catch { np = []; }
+      const mentions = cast.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
+      presenceInputs = { sentences, mentions, nonPersonal: np };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
+      const r = resolvePronounsByPresence(sentences, mentions, { ...pronounPresence, nonPersonal: np });
+      for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
+      for (const g of r.gaps) gaps.push(g);
+    } catch (e) { gaps.push({ gap: "pronoun_presence_failed", detail: String(e?.message ?? e).slice(0, 120) }); }
+  }
   // THE UNBOUND PRONOUNS (readerOptions.pronounGaps === true; default off, and then nothing below runs and the entry is what it was): every pronoun of the
   // resolver's own class this read did not bind, as a typed item addressed like entry.pronouns, with the reason, the regime that ran and the beings the
   // resolver had in hand. A gap the resolver filed, a frame it did not read, a passage with no being to bind to: none is a silent drop any more.
@@ -481,6 +499,7 @@ export function readWith(text, { address = null, category = null, language = nul
     vocabulary: out?.vocabulary ?? null,
     cast, heard: heardRows, edges, clauses, quality: qualityReport, surprise,
     sentences, pronouns,
+    ...(pronounsPresence ? { pronounsPresence } : {}),
     ...(pronounGaps ? { pronounGaps } : {}),
     // OPT-IN (features.figures): the money figures of the document with the period and sign each is about, as atoms with addresses (adapters/text/figure-period.en.js); absent, the entry is exactly what it was
     ...(features.figures ? { figures: stem === "eng" ? figuresOf(str, { sentences, timePrior: priorJson("time-prior.json") }) : { figures: [], gaps: [{ gap: "figures_english_only", detail: `the period binder reads English; this read is ${stem}` }] } } : {}),
@@ -493,6 +512,7 @@ export function readWith(text, { address = null, category = null, language = nul
   Object.defineProperty(entry, "reader", { value: R, enumerable: false });
   Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
   Object.defineProperty(entry, "formUsageReport", { value: formUsageReport, enumerable: false });
+  if (presenceInputs) Object.defineProperty(entry, "presenceInputs", { value: presenceInputs, enumerable: false });
   // THE REFERENT LEDGER (opt-in, `referents: true`; off, the entry is byte-identical to before): the same reading projected onto referents, each inserted once and
   // addressed by its event, a span only its address, an edge between referents per statement; what the spans cannot decide is a typed gap (adapters/text/reading-referents.js).
   if (referents) {

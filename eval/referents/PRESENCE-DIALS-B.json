@@ -1,0 +1,22 @@
+{
+ "dials": {
+  "window": 3,
+  "boost": 1,
+  "feed": 1,
+  "floor": 0,
+  "margin": 0
+ },
+ "selectedOn": "B",
+ "rule": "max right s.t. precision >= shipped precision on B",
+ "shippedOnB": {
+  "answerable": 341,
+  "right": 17,
+  "wrong": 5
+ },
+ "onB": {
+  "answerable": 341,
+  "right": 221,
+  "wrong": 41
+ },
+ "at": "2026-10-27T21:53:23.744Z"
+}
