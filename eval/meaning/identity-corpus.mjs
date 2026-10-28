@@ -48,7 +48,7 @@ const CACHE = process.env.IDENTITY_READ_CACHE && fs.existsSync(process.env.IDENT
 const read = (id, sentences) => {
   const key = sha(`${id}\n${sentences.join("\n")}`);
   if (!CACHE[key]) {
-    const t0 = Date.now(), R = readPage({ sentences, grammar, corefModel });
+    const t0 = Date.now(), R = readPage({ sentences, lang: "en", grammar, corefModel });
     // the name words an entity was met under: the reader's own cues on its name and alias mentions (the resolver's learned entities carry only a label)
     const names = new Map(); for (const m of R.flatMap((r) => r.mentions)) if (m.entity != null && (m.how === "name" || m.how === "alias")) for (const w of m.cues?.names ?? []) (names.get(m.entity) ?? names.set(m.entity, new Set()).get(m.entity)).add(w);
     CACHE[key] = { sentences, atoms: R.map((r, si) => r.atoms.map((a) => ({ ...a, sentence: sentences[si] }))), entities: (R[0]?.entities ?? []).map((e) => ({ id: e.id, name: e.name, names: [...(names.get(e.id) ?? [])].sort() })) };

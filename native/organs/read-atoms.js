@@ -33,7 +33,8 @@ export const mapAtoms = (atoms, C, original) => atoms.map((a) => { const start =
 // readPage({ sentences, ... }) → one reading per sentence from `from` on, the page resolved ONCE: an entity keeps its id from the sentence that
 // introduces it to the last, so a document read as a page has nodes with real occurrence counts (adapters/text/atom-world.js). Each reading's `page` is
 // the page up to and including its sentence, as readAtoms (one sentence with the page before it) gives it: readAtoms is readPage from the last sentence.
-export function readPage({ sentences, from = 0, lang = "en", title = null, grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
+// `lang` is the caller's to say (readAtoms keeps its own default; a page reader adds none).
+export function readPage({ sentences, from = 0, lang, title = null, grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
   const cleaned = sentences.map((t) => cleanText(t));
   const R0 = resolvePage({ lang, title, sentences: cleaned.map((c) => c.text), rowsOf: grammar.rowsOf, pack, same, lookup });
   let entities = R0.entities, pageMentions = R0.sentences.map((s) => s.mentions);
@@ -60,6 +61,6 @@ export function readPage({ sentences, from = 0, lang = "en", title = null, gramm
   }
   return reads;
 }
-export function readAtoms({ text, previous = [], ...rest }) {
-  return readPage({ ...rest, sentences: [...previous, text], from: previous.length })[0];
+export function readAtoms({ text, lang = "en", previous = [], ...rest }) {
+  return readPage({ ...rest, lang, sentences: [...previous, text], from: previous.length })[0];
 }

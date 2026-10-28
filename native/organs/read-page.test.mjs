@@ -10,7 +10,7 @@ const page = ["Sourcewell is a public institution in Minnesota.", "Motorola Solu
 const ids = (r, name) => [...new Set(r.atoms.flatMap((a) => a.args).filter((x) => x.entity != null && x.name === name).map((x) => x.entity))];
 
 test("a name met in several sentences keeps its entity across the page", () => {
-  const R = readPage({ sentences: page, grammar });
+  const R = readPage({ sentences: page, lang: "en", grammar });
   assert.equal(R.length, 3);
   const m = R.flatMap((r) => ids(r, "Motorola Solutions, Inc"));
   assert.ok(m.length >= 2, "Motorola Solutions is named in two sentences");
@@ -19,7 +19,7 @@ test("a name met in several sentences keeps its entity across the page", () => {
 });
 
 test("readAtoms is readPage from the last sentence: the same atoms, spans and unread", () => {
-  const all = readPage({ sentences: page, grammar }), one = readAtoms({ text: page[2], previous: page.slice(0, 2), grammar });
+  const all = readPage({ sentences: page, lang: "en", grammar }), one = readAtoms({ text: page[2], previous: page.slice(0, 2), grammar });
   assert.deepEqual(one, all[2], "the whole reading, its page, forms, cuts and span map included");
-  assert.equal(readPage({ sentences: page, grammar, from: 2 }).length, 1);
+  assert.equal(readPage({ sentences: page, lang: "en", grammar, from: 2 }).length, 1);
 });
