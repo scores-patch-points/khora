@@ -170,4 +170,23 @@ console.log(`\n── in R: ${worlds.R.pairs.length} nominated pairs; ${Ra.lengt
 for (const p of worlds.R.pairs.filter((q) => q.kind !== "needs_deeper_reading").slice(0, 60)) console.log(`   ${p.kind.padEnd(17)} ${p.gold.padEnd(14)} ${p.a} "${p.names[0]}" ~ ${p.b} "${p.names[1]}"  have ${p.have}  ${p.reason}${p.proof ? `  cites ${p.proof.map((c) => `${c.rel} ${c.a.text} | ${c.b.text}`).join("; ")}` : ""}`);
 if (process.env.IDENTITY_REPORT_OUT) fs.writeFileSync(process.env.IDENTITY_REPORT_OUT, JSON.stringify({ params: IDENTITY_PARAMS, worlds: Object.fromEntries(Object.entries(worlds).map(([k, w]) => [k, w.pairs])), verdicts: V, bars }, null, 1));
 const report = JSON.stringify({ worlds: Object.fromEntries(Object.entries(worlds).map(([k, w]) => [k, w.pairs])), verdicts: V, bars });
-console.log(`\nreport sha256 ${sha(report).slice(0, 16)} (identical on a second run of the same code and corpus)`);
+console.log(`\nreport sha256 ${sha(report).slice(0, 16)}`);
+
+// POST HOC DIAGNOSTIC (added after the registered run; no bar, IDENTITY_DIAGNOSE=1): how many occurrences does a node need before the fold's weight test (test 3 of
+// identity-induction.js: does the node depart from the rest of the corpus more than a same-size slice of the rest departs from itself) can pass at the DECLARED params? Every
+// node with the declared minimum or more is judged against the best-attested node of its world, and its own weight is read; nothing is tuned and no pair is rescored.
+if (process.env.IDENTITY_DIAGNOSE) {
+  const { makeIdentityInduction } = await import(path.join(K, "native/kernel/identity-induction.js"));
+  for (const w of [worlds.R, worlds.H]) {
+    const rec = w.W.record, ind = makeIdentityInduction(rec, { ...IDENTITY_PARAMS, namesNode: (f) => (f.startsWith("w:") ? f.slice(2) : null) });
+    const nodes = [...rec].filter(([, o]) => o.length >= need).sort((a, b) => b[1].length - a[1].length || (a[0] < b[0] ? -1 : 1)), anchor = nodes[0][0], bucket = (n) => (n <= 5 ? String(n) : n <= 9 ? "6-9" : n <= 19 ? "10-19" : n <= 39 ? "20-39" : "40+");
+    const tab = new Map();
+    for (const [n, occ] of nodes.slice(1)) {
+      const wt = ind.judge(n, anchor).tests?.weight?.a, row = tab.get(bucket(occ.length)) ?? tab.set(bucket(occ.length), { nodes: 0, carries: 0 }).get(bucket(occ.length));
+      if (wt) { row.nodes++; if (wt.carries) row.carries++; }
+    }
+    const order = ["3", "4", "5", "6-9", "10-19", "20-39", "40+"];
+    console.log(`\n── diagnostic (post hoc), world ${w.label[0]}: nodes that carry weight against the rest of the corpus, by occurrences (anchor ${anchor} has ${rec.get(anchor).length})`);
+    console.log("   " + order.filter((k) => tab.has(k)).map((k) => `${k}: ${tab.get(k).carries}/${tab.get(k).nodes}`).join("   "));
+  }
+}
