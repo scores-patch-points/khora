@@ -2,7 +2,8 @@
 // entities by coref.js, or by the learned ranker → EOTClaim@1 claims → atoms.js, plus the learned producer's further atoms when given).
 // The meaning check reads a claim and its source this way and weighs atom against atom (atom-support.js).
 //   readAtoms({ text, lang, title, previous, grammar, pack, same, lookup, corefModel, producer, chooser, filter, keysOf })
-//     → { atoms, entities, mentions, claims, rows }
+//     → { atoms, entities, mentions, claims, rows, unread }
+//   readPage({ sentences, from, ...same }) → [{ atoms, … }] one per sentence from `from`, the page resolved once (entity ids stable across the page)
 //   grammar: { rowsOf(text), claimsOf(text, rows) } (grammar-en.js, or grammar-ud.js's loadGrammar)
 import { resolvePage } from "./coref.js";
 import { resolveWithModel } from "./coref-learned.js";
@@ -24,24 +25,33 @@ export function cleanText(text) {
   map.push(text.length);
   return { text: out, map };
 }
-export function readAtoms({ text, lang = "en", title = null, previous = [], grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
-  const original = text, C = cleanText(text); text = C.text; previous = previous.map((p) => cleanText(p).text);
-  const sentences = [...previous, text];
-  const R0 = resolvePage({ lang, title, sentences, rowsOf: grammar.rowsOf, pack, same, lookup });
-  let entities = R0.entities, mentions = R0.sentences.at(-1).mentions;
-  if (corefModel) { const L = resolveWithModel(R0, { lang, title, same, proDrop: !!pack?.proDrop }, corefModel); entities = L.entities; mentions = L.sentences.at(-1).mentions; }
-  const rows = R0.sentences.at(-1).rows, claims = grammar.claimsOf(text, rows);
-  const ctx = { rows, mentions, entities, text, lang, keysOf };
-  const base = atomize({ claims, ...ctx });
-  const atoms = producer ? [...base, ...produce(ctx, producer, { have: base, chooser, filter })] : base;
-  const out = atoms.map((a) => { const start = a.start != null ? C.map[a.start] : null, end = a.end != null ? C.map[Math.min(a.end, C.map.length - 1)] : null;
-    return { ...a, start, end, text: realize(a), span: start != null ? original.slice(start, end) : null }; });
-  // what this reading did not read: the grammar's own unread words (claim-coverage.js), less those a produced atom carries
-  const low = (x) => String(x ?? "").normalize("NFKC").toLowerCase();
-  const carried = low(out.filter((a) => a.from === "path").map((a) => a.text).join(" "));
-  const all = low(out.map((a) => a.text).join(" ")), heads = new Set(claims.map((c) => c.vid).filter((x) => x != null));
-  // and a content word no atom carries, unless it heads a claim (its predicate is then written by its English key)
-  const missed = rows.filter((r) => /^(NOUN|PROPN|ADJ|NUM)$/.test(r.upos) && !/^(det|case|mark|punct|fixed|compound:prt)/.test(r.deprel) && !heads.has(r.id) && !all.includes(low(r.form)) && !(r.lemma && r.lemma !== "_" && all.includes(low(r.lemma).slice(0, Math.max(4, low(r.lemma).length - 2))))).map((r) => r.form);
-  const unread = [...new Set([...claims.flatMap((c) => c.unread ?? []), ...missed])].filter((w) => !carried.includes(low(w)));
-  return { atoms: out, entities, mentions, claims, rows, unread };
+// readPage({ sentences, ... }) → one reading per sentence from `from` on, the page resolved ONCE: an entity keeps its id from the sentence that
+// introduces it to the last, so a document read as a page has nodes with real occurrence counts (adapters/text/atom-world.js).
+// readAtoms (one sentence with the page before it) is this with `from` at the last sentence.
+export function readPage({ sentences, from = 0, lang = "en", title = null, grammar, pack = null, same = null, lookup = null, corefModel = null, producer = null, chooser = null, filter = null, keysOf = null }) {
+  const cleaned = sentences.map((t) => cleanText(t));
+  const R0 = resolvePage({ lang, title, sentences: cleaned.map((c) => c.text), rowsOf: grammar.rowsOf, pack, same, lookup });
+  const R = corefModel ? resolveWithModel(R0, { lang, title, same, proDrop: !!pack?.proDrop }, corefModel) : R0;
+  const out = [];
+  for (let si = Math.max(0, from); si < sentences.length; si++) {
+    const C = cleaned[si], original = sentences[si], text = C.text, entities = R.entities, mentions = R.sentences[si].mentions;
+    const rows = R0.sentences[si].rows, claims = grammar.claimsOf(text, rows);
+    const ctx = { rows, mentions, entities, text, lang, keysOf };
+    const base = atomize({ claims, ...ctx });
+    const atoms = producer ? [...base, ...produce(ctx, producer, { have: base, chooser, filter })] : base;
+    const read = atoms.map((a) => { const start = a.start != null ? C.map[a.start] : null, end = a.end != null ? C.map[Math.min(a.end, C.map.length - 1)] : null;
+      return { ...a, start, end, text: realize(a), span: start != null ? original.slice(start, end) : null }; });
+    // what this reading did not read: the grammar's own unread words (claim-coverage.js), less those a produced atom carries
+    const low = (x) => String(x ?? "").normalize("NFKC").toLowerCase();
+    const carried = low(read.filter((a) => a.from === "path").map((a) => a.text).join(" "));
+    const all = low(read.map((a) => a.text).join(" ")), heads = new Set(claims.map((c) => c.vid).filter((x) => x != null));
+    // and a content word no atom carries, unless it heads a claim (its predicate is then written by its English key)
+    const missed = rows.filter((r) => /^(NOUN|PROPN|ADJ|NUM)$/.test(r.upos) && !/^(det|case|mark|punct|fixed|compound:prt)/.test(r.deprel) && !heads.has(r.id) && !all.includes(low(r.form)) && !(r.lemma && r.lemma !== "_" && all.includes(low(r.lemma).slice(0, Math.max(4, low(r.lemma).length - 2))))).map((r) => r.form);
+    const unread = [...new Set([...claims.flatMap((c) => c.unread ?? []), ...missed])].filter((w) => !carried.includes(low(w)));
+    out.push({ atoms: read, entities, mentions, claims, rows, unread });
+  }
+  return out;
+}
+export function readAtoms({ text, previous = [], ...rest }) {
+  return readPage({ ...rest, sentences: [...previous, text], from: previous.length })[0];
 }

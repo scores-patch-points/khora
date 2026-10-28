@@ -28,6 +28,27 @@ export function defaultHyperlexicon() {
 const FIG = (a) => (a && typeof a === "object" && a.measure && a.base != null ? a : null);
 const isHas = (p) => /^has_/.test(p);
 const isMost = (p) => /^most:/.test(p);
+
+// The license row that speaks for a relation, and what the hyperlexicon says of it. A missing or only-nominated row licenses nothing.
+export const licenseRowFor = (rel) => LICENSES.find((L) => (L.on === "has_*" ? isHas(rel) : isMost(rel))) ?? null;
+export function licenseStandingOf(L, hyperlexicon = defaultHyperlexicon()) { const aff = compositionAffordance(hyperlexicon, "functional", L.on); return { aff, ls: licenseStanding(aff) }; }
+// FUNCTIONAL REGISTER for the identity exclusion (kernel/identity-exclusion.js `functional`): of these relations, which are one-valued, by whose word.
+// `licensed` is rel → { license, giver, key, tier } for every relation a GIVEN hyperlexicon row licenses; `unlicensed` names each relation a row exists
+// for and does not license (candidate, or given with no chemistry stamp or charter binding), with why: it convicts nothing. A relation no row speaks
+// for is in neither: it is simply not declared. `key` is what the row is one-valued PER: a measure is one-valued per being; a superlative's holder is
+// one-valued per kind, so it is keyed on the kind and no referent pair is ever convicted by it (the kind is the slot, not a referent).
+export function functionalRegister(rels, { hyperlexicon = defaultHyperlexicon() } = {}) {
+  const licensed = new Map(), unlicensed = [];
+  for (const rel of new Set(rels)) {
+    const L = licenseRowFor(rel); if (!L) continue;
+    // a figure whose attribute the reading did not name has no key, so the measure license does not apply to it (as in stageFromAtoms)
+    if (L.id === "measure" && /^has_(count|value)$/.test(rel)) { unlicensed.push({ rel, license: L.id, giver: L.giver, standing: "unkeyed", why: "the attribute is not named" }); continue; }
+    const { aff, ls } = licenseStandingOf(L, hyperlexicon);
+    if (ls.licensed) licensed.set(rel, { license: L.id, giver: aff.giver, key: L.id === "measure" ? "being" : "kind", tier: ls.tier });
+    else unlicensed.push({ rel, license: L.id, giver: aff.giver ?? null, standing: aff.standing === "given" ? "ungrounded" : aff.standing, why: ls.why });
+  }
+  return { licensed, unlicensed };
+}
 // two NAMED ends are the same only if their names share a capitalised word: the reader's coreference is lenient on kind (two persons "meet"),
 // identity is not
 const caps = (t) => new Set(String(t ?? "").match(/\b\p{Lu}[\p{L}\p{N}'-]*/gu)?.map((w) => w.toLowerCase()) ?? []);
@@ -65,7 +86,7 @@ export function stageFromAtoms(atoms, { doc = "doc", hyperlexicon = defaultHyper
   const rels = [...new Set(arrangements.map((r) => r.rel))];
   const licenses = [];
   for (const rel of rels) for (const L of LICENSES) if (L.on === "has_*" ? isHas(rel) : isMost(rel)) {
-    const aff = compositionAffordance(hyperlexicon, "functional", L.on), ls = licenseStanding(aff);
+    const { aff, ls } = licenseStandingOf(L, hyperlexicon);
     if (!ls.licensed) { licenses.push({ id: L.id, rel, giver: aff.giver ?? null, standing: aff.standing === "given" ? "ungrounded" : aff.standing, why: ls.why }); gaps.push({ kind: "license_not_given", license: L.id, rel, standing: aff.standing }); continue; }
     // REFUTATION PATH: a license is a claim about the world and the source can refute it. If the source itself holds two different values for one
     // key (one subject, one relation, asserted positively), the license is refuted for this reading and nothing is judged under it.
@@ -93,18 +114,20 @@ export function stageFromAtoms(atoms, { doc = "doc", hyperlexicon = defaultHyper
 //   raised_difference     a difference of use was measured; it convicts nothing, so the bind stands and the standing travels with it
 //   needs_deeper_reading  the reading is too thin to decide: not "same", not "different". The bind by name and DMD stands, marked provisional, and
 //                         the proof says how much reading is missing. Nothing that rests on it is presented as settled.
-// With no `identity` injected, nothing changes.
-function bindEnd(stage, end, kind, identity = null) {
+// The claim's own relations are the QUESTION, not evidence of which being the claim speaks of: standing(end, anchorArg, { except }) is handed the set of
+// relations the claim rests on, so a declared exclusion never reads them (a claim that Mercury's radius is 6,000 km must not argue that it is not the
+// Mercury whose radius the source gives). With no `identity` injected, nothing changes.
+function bindEnd(stage, end, kind, identity = null, except = null) {
   const M = stage._M, all = [...stage._anchors.values()];
-  const stand = new Map();
-  const standOf = (a) => { if (!identity || kind !== "referent" || end.entity == null || a.arg?.entity == null) return null; if (!stand.has(a.id)) stand.set(a.id, identity.standing(end, a.arg)); return stand.get(a.id); };
+  const stand = new Map(), fell = new Map();   // fell: the nominated anchors a declared exclusion says this end is not
+  const standOf = (a) => { if (!identity || kind !== "referent" || end.entity == null || a.arg?.entity == null) return null; if (!stand.has(a.id)) stand.set(a.id, identity.standing(end, a.arg, { except })); return stand.get(a.id); };
   const meets = (a) => kind === "quantity"
     ? (a.kind === "quantity" && FIG(end) && a.figure?.measure === end.measure && M.figMeet(end, a.figure) ? `meets ${a.label} (${end.measure})` : null)
     : kind === "value" ? (a.kind === "value" && end.value != null && low(a.arg.value ?? "") === low(end.value) ? `is the value ${a.label}` : null)
-    : ((a.kind === "referent" || a.kind === "kind") && M.refMeet(end, a.arg) && !namesClash(end, a.arg) && standOf(a)?.kind !== "against" ? `is ${a.label}` : null);
+    : ((a.kind === "referent" || a.kind === "kind") && M.refMeet(end, a.arg) && !namesClash(end, a.arg) ? (standOf(a)?.kind === "against" ? (fell.set(a.id, standOf(a)), null) : `is ${a.label}`) : null);
   const derive = (obs) => obs.map((a) => ({ id: a.id, how: meets(a) })).filter((x) => x.how);
   const whole = derive(all);
-  if (!whole.length) return null;
+  if (!whole.length) return fell.size ? { fell: [...fell.values()].map((st) => ({ end: argText(end), ...st })) } : null;
   // DMD runs over SHELLS around the first anchor the end meets (graph distance over the stage's arrangements), not over insertion order: the
   // window is the shallowest number of nearest anchors whose met-set already equals the whole's. A position in the text is not evidence depth.
   const seed = whole[0].id, adj = new Map(); for (const r of stage.arrangements) { (adj.get(r.s) ?? adj.set(r.s, []).get(r.s)).push(r.o); (adj.get(r.o) ?? adj.set(r.o, []).get(r.o)).push(r.s); }
@@ -137,7 +160,7 @@ export function judgeClaim(stage, claimAtoms, opts = {}) {
 }
 function judgeInner(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id), identity = null } = {}) {
   const C = canonical(claimAtoms), CM = meeters(C, C, {}), proofs = [], gaps = [], stands = [];
-  const on = new Set(licenses);
+  const on = new Set(licenses), except = new Set(C.map((a) => a.pred));
   // a stage restricted to the licenses switched on (ablation): declarations are rebuilt, edges are shared
   const hl = createStage(); hl.anchors = new Set(stage.hl.anchors); hl.types = new Map(stage.hl.types); hl.edges = new Map(stage.hl.edges);
   for (const L of stage.licenses) if (on.has(L.id) && L.standing === "given") declareFunctional(hl, L.rel, { giver: L.giver });
@@ -147,7 +170,9 @@ function judgeInner(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id), i
     const as = a.args ?? [];
     let rel = a.pred, s, o, binds = [], bs = null, bk = null;
     // the holographic standing of every referent this atom binds travels with its proof; one that is not "same" is also a typed gap
-    const cur = [], bind = (end, kind) => { const b = bindEnd(stage, end, kind, identity), st = b?.identity;
+    const cur = [], bind = (end, kind) => { const b = bindEnd(stage, end, kind, identity, except), st = b?.identity;
+      // a declared exclusion made every nominated anchor fall away: the end binds to nothing, and the gap says which relation convicted and where
+      if (b?.fell) { for (const f of b.fell) { cur.push(f); stands.push(f); gaps.push({ kind: "against", end: f.end, reason: f.reason, proof: f.proof, atom: a.text }); } return null; }
       if (st) { cur.push(st); stands.push(st); if (st.kind !== "same") gaps.push({ kind: st.kind, end: st.end, reason: st.reason, have: st.have, need: st.need, atom: a.text }); } return b; };
     if (isHas(rel) && as.length === 2 && FIG(as[1]) && !a.neg && !a.hedged) {
       bs = bind(as[0], "referent"); if (!bs) continue; if (bs.gap) { gaps.push({ kind: bs.gap, atom: a.text }); continue; }

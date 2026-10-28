@@ -86,11 +86,11 @@ if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pai
   const W = atomIdentity(pairs.flatMap((p, i) => [{ doc: `${i}:claim`, atoms: p.A.atoms }, { doc: `${i}:src`, atoms: p.B.atoms }])), M = meeters([], [], {});
   const bump = (o, k) => { o[k] = (o[k] ?? 0) + 1; }, binds = {}, why = {}, rows = { C: {}, E: {} }, stageC = [];
   pairs.forEach((p, i) => {
-    const idn = { standing: (c, s) => W.standing(`${i}:claim`, c, `${i}:src`, s) }, rv = rulesOf(p.A, p.B); let v = rv, st = [];
+    const idn = { standing: (c, s, o) => W.standing(`${i}:claim`, c, `${i}:src`, s, o) }, rv = rulesOf(p.A, p.B); let v = rv, st = [];
     if (rv === "N") { const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, { licenses: all, identity: idn }); v = j.verdict; for (const s of j.standings) bump(binds, s.kind);
       st = v === "C" ? j.proofs.filter((x) => x.verdict === "contradicted").flatMap((x) => x.identity) : v === "E" ? j.standings : []; if (v === "C") stageC.push({ p, st }); }
     else if (rv === "C" || rv === "E") for (const r of atomSupport(p.A.atoms, p.B.atoms, { unread: p.A.unread }).table.filter((t) => t.by && (t.state === "met" || t.state === "contradicted")))
-      for (const x of r.atom.args ?? []) if (x.entity != null) { const y = (r.by.args ?? []).find((q) => q.entity != null && M.refMeet(x, q)), s = y && idn.standing(x, y); if (s) { st.push({ end: x.name ?? x.value, ...s }); bump(binds, s.kind); } }
+      for (const x of r.atom.args ?? []) if (x.entity != null) { const y = (r.by.args ?? []).find((q) => q.entity != null && M.refMeet(x, q)), s = y && idn.standing(x, y, { except: new Set(p.A.atoms.map((q) => q.pred)) }); if (s) { st.push({ end: x.name ?? x.value, ...s }); bump(binds, s.kind); } }
     if (v === "C" || v === "E") { bump(rows[v], !st.length ? "no referent asked" : st.some((s) => s.kind !== "same") ? "needs deeper reading" : "settled"); for (const s of st) if (s.kind !== "same") bump(why, s.reason); } });
   const fmt = (o) => Object.entries(o).map(([k, n]) => `${k} ${n}`).join(", ") || "none";
   console.log(`\nholographic identity: ${W.record.size} nodes in the world; a node needs ${W.need} occurrences before the fold will speak`);
