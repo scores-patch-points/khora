@@ -15,20 +15,35 @@ const { stageFromAtoms, judgeClaim, stageBytes, LICENSES } = await import(path.j
 const grammar = { rowsOf: GE.rowsOf, claimsOf: (t, rows) => GE.claimsOf(t, rows) };
 const corefModel = JSON.parse(fs.readFileSync(path.join(HERE, "atoms/coref-ranker.json"), "utf8"));
 const SRC = new WeakMap();
+// ATOMS_VIA=weft: every text is read by THE reader (reading.js readDocument, rows: true) and its atoms come from the entry's own parse and cut (weft-atoms.js), not from a
+// second cut and parse here. Default: the old path, unchanged. The two are compared by eval/meaning/weft-parity.mjs.
+const VIA = process.env.ATOMS_VIA === "weft";
+const WEFT = VIA ? { reading: await import(path.join(K, "native/reading.js")), wa: await import(path.join(K, "native/the-fold/weft-atoms.js")) } : null;
+const readText = async (text) => {
+  if (!VIA) return readAtoms({ text, lang: "en", grammar, corefModel });
+  const w = await WEFT.reading.readDocument(text, { language: "en", lexicon: false, minCharacters: 0, rows: true });
+  const r = WEFT.wa.atomsFromWeft(w, { claimsOf: grammar.claimsOf, corefModel, lang: "en" });
+  return { atoms: r.atoms, unread: r.unread, weftGaps: r.gaps };
+};
 const rank = { E: 2, C: 2, N: 0 };
 
 const pairs = [];
 for (const s of ["fresh", "heldout", "relations", "fresh19", "fresh20"]) {
   const d = JSON.parse(fs.readFileSync(path.join(HERE, `${s}.json`), "utf8"));
   for (const p of d.pairs ?? d) if ((p.lang ?? "en") === "en") {
-    const A = readAtoms({ text: p.claim, lang: "en", grammar, corefModel }), B = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel });
+    const A = await readText(p.claim), B = await readText(p.sentence);
     SRC.set(B, p.sentence); pairs.push({ ...p, set: s, A, B });
   }
 }
 const rulesOf = (A, B) => atomSupport(A.atoms, B.atoms, { unread: A.unread }).verdict;
 const GIVERS = LICENSES.map((l) => l.giver);
 // commit a contradiction only if the independent checker (proof-check.js, no shared code) accepts every proof behind it
-const arm = (A, B, lic) => { const r = rulesOf(A, B); if (r !== "N") return { v: r, proofs: [] }; const st = stageFromAtoms(B.atoms, { doc: "src" }), j = judgeClaim(st, A.atoms, { licenses: lic });
+// IDENTITY=cancel: the stage binder's identity hook served by cancellation over canonical features (the-fold/cancel-identity.js); synonymy from FOLD_WIKT_SLIM when set
+const IDN = process.env.IDENTITY === "cancel" ? await import(path.join(K, "native/the-fold/cancel-identity.js")) : null;
+const SLIM = IDN && process.env.FOLD_WIKT_SLIM ? (await import(path.join(K, "native/organs/wikt-slim.js"))).openSlim(process.env.FOLD_WIKT_SLIM) : null;
+const SAME = SLIM ? (await import(path.join(K, "native/organs/wikt-gloss.js"))).makeSynonymy({ lookup: (l, w) => SLIM.entries(l, w) }) : null;
+const identityFor = (A, B) => (IDN ? IDN.makeCancelIdentity({ claimAtoms: A.atoms, sourceAtoms: B.atoms, same: SAME, lang: "en" }) : null);
+const arm = (A, B, lic) => { const r = rulesOf(A, B); if (r !== "N") return { v: r, proofs: [] }; const st = stageFromAtoms(B.atoms, { doc: "src" }), j = judgeClaim(st, A.atoms, { licenses: lic, ...(IDN ? { identity: identityFor(A, B) } : {}) });
   if (j.verdict === "C") { const bad = j.proofs.filter((x) => x.verdict === "contradicted" && !checkProof(x.record, (SRC.get(B) ?? ""), { licenses: GIVERS }).ok); if (bad.length) return { v: "N", proofs: j.proofs, rejected: bad.length }; }
   return { v: j.verdict, proofs: j.proofs, gaps: j.gaps, stage: st }; };
 
@@ -46,13 +61,22 @@ rep("stage arm, no licenses", (p) => arm(p.A, p.B, []).v);
 let broke = 0; for (const p of pairs) { const on = arm(p.A, p.B, all).v, off = arm(p.A, p.B, []).v; if (rank[off] > rank[on]) broke++; }
 console.log(`\nlaw 1 (licenses off never gains a verdict): ${broke === 0 ? "holds" : `BROKEN on ${broke} pairs`}`);
 
-// control built to fail: each claim against the NEXT pair's source (a source that does not hold it)
-const derange = pairs.map((p, i) => arm(p.A, pairs[(i + 1) % pairs.length].B, all).v);
-console.log(`control, deranged sources: ${derange.filter((v) => v === "C").length} of ${pairs.length} claims called contradicted (the same claims against their own sources: ${pairs.filter((p) => arm(p.A, p.B, all).v === "C").length})`);
+// control built to fail: each claim against a source that does not hold it. The source must share NO content word with the claim (4+ letters),
+// found by walking forward from the pair. The first version took the NEXT pair's source, but neighbouring pairs in a set are often one topic
+// ("Mercury is the hottest planet" against "Mercury is not the hottest planet"), so 2 of its 4 "contradictions" (later 2 of 2) were true ones and
+// the control read as a failure of the arm. The sibling figure is kept below, labelled, so the two numbers can be compared.
+const termsOf = (t) => new Set((String(t).toLowerCase().match(/[\p{L}\p{N}]{4,}/gu) ?? []));
+const disjoint = (a, b) => { for (const w of termsOf(a)) if (termsOf(b).has(w)) return false; return true; };
+const unrelated = pairs.map((p, i) => { for (let k = 1; k < pairs.length; k++) { const q = pairs[(i + k) % pairs.length]; if (disjoint(p.claim, q.sentence)) return q; } return null; });
+const derange = pairs.map((p, i) => (unrelated[i] ? arm(p.A, unrelated[i].B, all).v : null));
+const deranged = derange.filter((v) => v !== null);
+console.log(`control, unrelated sources (no shared content word): ${deranged.filter((v) => v === "C").length} of ${deranged.length} claims called contradicted, ${deranged.filter((v) => v === "E").length} called supported (the same claims against their own sources: ${pairs.filter((p) => arm(p.A, p.B, all).v === "C").length} contradicted)`);
+const sibling = pairs.map((p, i) => arm(p.A, pairs[(i + 1) % pairs.length].B, all).v);
+console.log(`  (old control, the next pair's source: ${sibling.filter((v) => v === "C").length} contradicted, ${sibling.filter((v) => v === "E").length} supported; neighbours share a topic, so these are not false)`);
 
 // determinism: the same bytes give the same stage, twice, and through a fresh read
 const h = (s) => crypto.createHash("sha256").update(s).digest("hex").slice(0, 12);
-let same = 0; for (const p of pairs) { const b2 = readAtoms({ text: p.sentence, lang: "en", grammar, corefModel }); if (h(stageBytes(stageFromAtoms(p.B.atoms, { doc: "src" }))) === h(stageBytes(stageFromAtoms(b2.atoms, { doc: "src" })))) same++; }
+let same = 0; for (const p of pairs) { const b2 = await readText(p.sentence); if (h(stageBytes(stageFromAtoms(p.B.atoms, { doc: "src" }))) === h(stageBytes(stageFromAtoms(b2.atoms, { doc: "src" })))) same++; }
 console.log(`determinism: ${same}/${pairs.length} sources give a byte-identical stage on a second read`);
 
 // the checker: every contradiction proof accepted; and mutants (corrupted proofs) all rejected
@@ -76,7 +100,8 @@ if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pai
   const named = (hx) => pairs.filter((p) => p.label === "C" && rulesOf(p.A, p.B) === "N" && judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src", hyperlexicon: hx }), p.A.atoms, {}).verdict === "C").length;
   const SF = await import(path.join(K, "native/kernel/stage.js"));
   console.log(`\nhyperlexicon: contradictions beyond the rules with the given rows ${named(SF.defaultHyperlexicon())}, with the rows only nominated ${named(cand)}, with an empty hyperlexicon ${named(HX.createHyperlexicon())}`);
-  const kinds = {}; for (const p of pairs) for (const g of judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, {}).gaps) kinds[g.kind] = (kinds[g.kind] ?? 0) + 1;
+  const kinds = {}; let chosen = 0; for (const p of pairs) { const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, IDN ? { identity: identityFor(p.A, p.B) } : {}); for (const g of j.gaps) kinds[g.kind] = (kinds[g.kind] ?? 0) + 1; chosen += (j.proofs ?? []).filter((x) => /chose it/.test(x.binds?.join(" ") ?? "")).length; }
+  if (IDN) kinds.chosen_by_cancellation = chosen;
   console.log(`DMD-bounded identity: gaps raised while binding claim ends: ${JSON.stringify(kinds)}`); }
 // HOLOGRAPHIC IDENTITY (adapters/text/atom-world.js over corpus-identity.js): a shared name only NOMINATES a pair; whether it is one being is decided by the
 // universe folded on each, against a null the material supplies. The world is every reading in these pairs, claims and sources. An end the fold cannot decide is
@@ -98,5 +123,17 @@ if (process.env.DERANGE) pairs.forEach((p, i) => { const q = pairs[(i + 1) % pai
   console.log(`  committed contradictions (${Object.values(rows.C).reduce((a, b) => a + b, 0)}): ${fmt(rows.C)}`);
   console.log(`  committed supports       (${Object.values(rows.E).reduce((a, b) => a + b, 0)}): ${fmt(rows.E)}`);
   for (const { p, st } of stageC) console.log(`  [${p.set} ${p.id}] ${st.map((s) => `${s.end}: ${s.kind}${s.kind === "same" ? "" : ` (${s.reason}; ${s.have[0]} and ${s.have[1]} occurrence(s))`}`).join("; ") || "no referent end asked"}`); }
+// PERSPECTIVE (stage.js): nothing is true everywhere. A reading is one author's view, read FOR a question (for-whom.js), and a verdict is "by this reading, in
+// the sense it states it". A value the source states for other years is another sense: neither a contradiction nor support, a typed gap. Only STATED years
+// decide (the reader's tense is a heuristic: it reads "paid", "bought", "sold" as present). The atoms arm holds the same rule (atom-support.js otherYears).
+{ const kinds = {}, by = { C: {}, E: {} }; let stated = 0, frame = null;
+  for (const p of pairs) { if (p.A.atoms.some((a) => a.time) || p.B.atoms.some((a) => a.time)) stated++;
+    const j = judgeClaim(stageFromAtoms(p.B.atoms, { doc: "src" }), p.A.atoms, { licenses: all }); frame ??= j.forWhom;
+    for (const g of j.gaps) if (g.kind === "different_sense") kinds[g.why.replace(/:.*/, "")] = (kinds[g.why.replace(/:.*/, "")] ?? 0) + 1;
+    if (rulesOf(p.A, p.B) === "N" && (j.verdict === "C" || j.verdict === "E")) by[j.verdict][j.sense] = (by[j.verdict][j.sense] ?? 0) + 1; }
+  const f = (o) => Object.entries(o).map(([k, n]) => `${k} ${n}`).join(", ") || "none";
+  console.log(`\nperspective: every stage verdict is read FOR a frame: ${frame.id} — "${frame.question}"`);
+  console.log(`  pairs where either side states years: ${stated} of ${pairs.length}; held for another sense (withheld as a typed gap, neither contradiction nor support): ${f(kinds)}`);
+  console.log(`  stage-committed contradictions by sense: ${f(by.C)}; supports: ${f(by.E)}`); }
 if (process.env.WHYE) { const why = {}; for (const p of pairs.filter((q) => q.label === "E" && arm(q.A, q.B, all).v !== "E")) { const preds = [...new Set(p.A.atoms.map((a) => a.pred.replace(/^(has_|most:).*/, "$1*")))]; const g = (arm(p.A, p.B, all).gaps ?? []).map((x) => x.kind); const k = `${p.A.atoms.length ? preds.join(",") : "no atoms"}${g.length ? " | gaps " + [...new Set(g)] : ""}`; why[k] = (why[k] ?? 0) + 1; } console.log("\nmissed E by claim predicates:"); for (const [k, n] of Object.entries(why).sort((a, b) => b[1] - a[1]).slice(0, 14)) console.log(String(n).padStart(3), k.slice(0, 150)); }
 if (process.env.FALSEE) for (const p of pairs) { const r = arm(p.A, p.B, all); if (r.v === "E" && p.label !== "E") console.log(`\nFALSE-E [${p.set} ${p.id}] ${p.label}: ${p.claim}\n  src: ${p.sentence.slice(0, 200)}\n  atoms: ${p.A.atoms.map((a) => a.text).join(" ; ")}\n  rules said ${rulesOf(p.A, p.B)}`); }

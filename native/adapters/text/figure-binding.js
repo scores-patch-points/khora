@@ -29,7 +29,8 @@ function subjectOf(rows, p) {
   return null;
 }
 
-/** bindFigures(rows, lex) → [{ value, hi, base, alts, measure, attribute, beingId, eventLemma, approx, ids }] */
+/** bindFigures(rows, lex) → [{ value, hi, base, alts, measure, attribute, beingId, eventLemma, predId, approx, ids }]
+ *  predId is the row id of the clause predicate the figure sits in, so a caller can give the figure the sense (polarity, tense, who holds it) of that clause */
 export function bindFigures(rows, lex) {
   const out = [], used = new Set();
   for (let i = 0; i < rows.length; i++) {
@@ -83,7 +84,7 @@ export function bindFigures(rows, lex) {
     if (!being) { const root = rows.find((x) => x.head === 0); being = root ? subjectOf(rows, root) : null; }
     // the figure counts the subject itself: "Twelve astronauts walked on the Moon"
     if (counted && being && counted.id === being.id) being = counted;
-    out.push({ value, hi, base: toBase(value), hiBase: hi != null ? toBase(hi) : null, alts, measure, attribute, beingId: being?.id ?? null, eventLemma: pred ? lem(pred) : null, approx: lex.isApprox(rows, i), ids: mine });
+    out.push({ value, hi, base: toBase(value), hiBase: hi != null ? toBase(hi) : null, alts, measure, attribute, beingId: being?.id ?? null, eventLemma: pred ? lem(pred) : null, predId: pred?.id ?? null, approx: lex.isApprox(rows, i), ids: mine });
   }
   return out;
 }

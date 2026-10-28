@@ -80,7 +80,22 @@ export function resolveLearned(page, model, { trainer = null } = {}) {
       if (m0.entity) seenRule.add(m0.entity);
       // the candidates, most recently mentioned first
       const order = [...ents].sort((a, b) => b.lastSi - a.lastSi || b.mentions.length - a.mentions.length);
-      const cands = [...order.map((e, rank) => ({ e, rank })), { isNew: true, rank: order.length }];
+      // GRAMMATICAL PERSON is a law, not a cue to weigh: a first-person mention (how "we", read from Person=1 by coref.js) and a third-person one (a
+      // pronoun, a relative pronoun: Person=3) are never one being in the same voice, so an entity already holding a third-person pronoun is no
+      // candidate for a "we", and one holding a "we" is none for a third-person pronoun. A name or a description may still join a "we" (a filing's
+      // "the Company ... we"). The feature is UD's, so the rule reads every language the grammar reads; no word is listed.
+      const THIRD = /^(pronoun|relative)$/, voice = (e, f) => e.mentions.some((x) => f(x.how));
+      const person = (e) => (m.how === "we" ? voice(e, (h) => THIRD.test(h)) : THIRD.test(m.how) ? voice(e, (h) => h === "we") : false);
+      // BINDING (Principle B): a personal pronoun that is not reflexive does not corefer with the SUBJECT of its own predicate, and a subject pronoun does
+      // not corefer with any other argument of it: "In May, we entered" ("May" and "we" both depend on "entered"), "Avec une altitude de 4 807 m, il est ..."
+      // (il is not the altitude), "Ana le dio un libro" (le is not Ana). What is NOT excluded is an object pronoun with another OBJECT: that is how a language
+      // doubles or fuses an object with a clitic (Spanish "este pico lo visitan", French "en"), measured on the 448 non-English sentences of the spent sets,
+      // where excluding it broke both. UD marks the roles (nsubj, Reflex=Yes, expl*), so the rule reads the dependency and lists no word.
+      const rowOf = (x) => (s.rows ?? []).find((r) => r.id === x.hid);
+      const me = rowOf(m), pron = (m.how === "we" || m.how === "pronoun") && me && me.head !== 0 && !/Reflex=Yes/.test(me.feats ?? "") && !/^expl/.test(me.deprel);
+      const subj = pron && /^nsubj/.test(me.deprel);
+      const coarg = (e) => pron && e.mentions.some((x) => x.si === si && x.hid !== m.hid && rowOf(x)?.head === me.head && (subj || /^nsubj/.test(rowOf(x)?.deprel ?? "")));
+      const cands = [...order.filter((e) => !person(e) && !coarg(e)).map((e, rank) => ({ e, rank })), { isNew: true, rank: order.length }];
       const featsOf = (c) => { const fs = featuresOf(m, c, { rank: c.rank, synonym, sentenceHas: (e) => here.has(e) }); return drop ? fs.filter((x) => !drop.test(x)) : fs; };
       const score = (fs) => fs.reduce((a, x) => a + (w[x] ?? 0), 0);
       let pick = null;

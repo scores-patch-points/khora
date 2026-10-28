@@ -11,7 +11,8 @@
 import { createStage, addAnchor, addEdge, declareFunctional, read, BOUND, CONTRADICTED, CONTESTED, UNBOUND, BEYOND_REACH } from "../interpretation/hl.js";
 import { dmdWindow } from "./activation.js";
 import { createHyperlexicon, giveHyperlexiconAffordance, compositionAffordance, licenseStanding } from "./hyperlexicon.js";
-import { meeters, canonical, argText, low } from "./atom-support.js";
+import { meeters, canonical, argText, low, otherYears } from "./atom-support.js";
+import { createForWhom } from "./for-whom.js";
 
 export const STAGE_SCHEMA = "Stage@1";
 export const LICENSES = Object.freeze([
@@ -55,6 +56,22 @@ const caps = (t) => new Set(String(t ?? "").match(/\b\p{Lu}[\p{L}\p{N}'-]*/gu)?.
 const namesClash = (x, y) => { const a = caps(argText(x)), b = caps(argText(y)); if (!a.size || !b.size) return false; for (const w of a) if (b.has(w)) return false; return true; };
 const nameOf = (a) => (a.entity != null ? `@${a.entity}` : `#${a.value}`);
 
+// PERSPECTIVE. Nothing is true everywhere: an assertion is true in a SENSE, and two assertions can conflict, or agree, only in the SAME sense. A reading is
+// one author's view (a for-whom frame, for-whom.js: "a claim without a frame is a view from nowhere"), and what it holds, it holds in a sense:
+//   holder  asserted by the author, or only reported ("NASA says")  (the layer an arrangement is on)
+//   time    the years the clause's own adjuncts name ("in 1900")
+//   tense   the clause's, carried for the record and NOT used to decide: the reader's tense is a heuristic (it reads "paid", "bought", "sold" as present;
+//           measured on the 108 pairs, 3 of the 4 tense clashes it raised were that), and "was named" / "is named" are one fact in two tenses
+// Two senses CLASH only where both STATE years and the years share none. A clash is a DIFFERENT SENSE: the two neither contradict nor support each other,
+// and that is a typed gap (different_sense), never a verdict. Where one side states no years the sense is "unstated": the verdict stands and says so.
+// A verdict is always "by this reading, in the sense it states it", never "everywhere".
+export const senseOf = (a) => ({ holder: a.hedged ? "reported" : "asserted", tense: a.tense ?? null, time: a.time?.length ? [...a.time] : null });
+export function senseStanding(c, s) {
+  if (otherYears(c, s)) return { standing: "differs", why: `time: the claim is of ${c.time.join("/")}, the source of ${s.time.join("/")}` };
+  return c.time && s.time ? { standing: "shared" } : { standing: "unstated" };
+}
+const frameOf = (doc) => createForWhom({ id: `reading:${doc}`, giver: `the author of ${doc}, as the reader read it`, question: "does this reading hold the claim, in the sense it states it?", ground: doc, medium: "text", knowing: "the reading's atoms, each with its span" });
+
 // the kind a referent belongs to in this reading: is_a(x, kind)
 const kindOf = (atoms, x, M) => atoms.find((k) => k.pred === "is_a" && !k.neg && k.args?.[0] && M.refMeet(k.args[0], x))?.args?.[1] ?? null;
 
@@ -66,15 +83,15 @@ export function stageFromAtoms(atoms, { doc = "doc", hyperlexicon = defaultHyper
     const as = a.args ?? [];
     if (as.length === 2 && !isHas(a.pred) && !a.pred.startsWith("most:") && a.pred !== "is_a" && a.pred !== "named") {
       const s = anchor(as[0], "referent"), o = anchor(as[1], as[1].entity != null ? "referent" : "value");
-      arrangements.push({ id: `a${i}`, rel: a.pred, s, o, polarity: a.neg ? "-" : "+", layer: a.hedged ? "reported" : "asserted", span: [a.start, a.end] });
+      arrangements.push({ id: `a${i}`, rel: a.pred, s, o, polarity: a.neg ? "-" : "+", layer: a.hedged ? "reported" : "asserted", sense: senseOf(a), span: [a.start, a.end] });
     } else if (isHas(a.pred) && as.length === 2 && FIG(as[1])) {
       const s = anchor(as[0], "referent"), o = anchor(as[1], "quantity");
-      arrangements.push({ id: `a${i}`, rel: a.pred, s, o, polarity: a.neg ? "-" : "+", layer: a.hedged ? "reported" : "asserted", span: [a.start, a.end], measure: as[1].measure });
+      arrangements.push({ id: `a${i}`, rel: a.pred, s, o, polarity: a.neg ? "-" : "+", layer: a.hedged ? "reported" : "asserted", sense: senseOf(a), span: [a.start, a.end], measure: as[1].measure });
     } else if (isMost(a.pred) && as.length === 1) {
       const K = kindOf(C, as[0], M);
       if (!K) { gaps.push({ kind: "no_kind", atom: a.text }); continue; }       // a superlative without its kind cannot be read
       const k = anchor(K, "kind"), h = anchor(as[0], "referent");
-      arrangements.push({ id: `a${i}`, rel: a.pred, s: k, o: h, polarity: a.neg ? "-" : "+", layer: a.hedged ? "reported" : "asserted", span: [a.start, a.end] });
+      arrangements.push({ id: `a${i}`, rel: a.pred, s: k, o: h, polarity: a.neg ? "-" : "+", layer: a.hedged ? "reported" : "asserted", sense: senseOf(a), span: [a.start, a.end] });
     }
   }
   // READINGS: a functional arrangement (a measure, a superlative) has one reading, its ends are fixed by what they are. A binary relation
@@ -99,7 +116,7 @@ export function stageFromAtoms(atoms, { doc = "doc", hyperlexicon = defaultHyper
     if (broken.length) { licenses.push({ id: L.id, rel, giver: L.giver, standing: "refuted", by: broken.map(([k, rs]) => ({ subject: k, values: rs.map((r) => ({ o: r.o, span: r.span })) })) }); gaps.push({ kind: "license_refuted", license: L.id, rel }); continue; }
     declareFunctional(hl, rel, { giver: aff.giver }); licenses.push({ id: L.id, rel, giver: aff.giver, standing: "given", tier: ls.tier });
   }
-  return { schema: STAGE_SCHEMA, doc, anchors: [...anchors.values()], arrangements, licenses, gaps, hl, _anchors: anchors, _M: M, _C: C };
+  return { schema: STAGE_SCHEMA, doc, forWhom: frameOf(doc), anchors: [...anchors.values()], arrangements, licenses, gaps, hl, _anchors: anchors, _M: M, _C: C };
 }
 
 // INS: bind one claim end to a source anchor of the stage, or say it binds to nothing. Identity is BOUNDED by DMD (activation.js dmdWindow): the
@@ -136,6 +153,11 @@ function bindEnd(stage, end, kind, identity = null, except = null) {
   const candidates = []; for (let d = 1; d < near.length; d *= 2) candidates.push(d); candidates.push(near.length);
   const w = dmdWindow(near, derive, { candidates, restrict: (o, d) => o.slice(0, d) });
   if (w.gap) return { gap: w.gap };
+  // several anchors nominated by name: an injected identity that can CHOOSE (cancellation, the-fold/cancel-identity.js) picks the one the end cancels with; else the end stays unbound
+  if (whole.length > 1 && identity?.choose) {
+    const pick = identity.choose(end, whole.map((x) => stage._anchors.get(x.id).arg)); const hit = pick ? whole.find((x) => stage._anchors.get(x.id).arg === pick) : null;
+    if (hit) { const st = standOf(stage._anchors.get(hit.id)); return { id: hit.id, how: `${hit.how} [name nominated ${whole.length}; identity by cancellation chose it: ${st?.reason ?? ""}]`, identity: st ? { end: argText(end), ...st } : null, chosenAmong: whole.map((x) => x.id) }; }
+  }
   if (whole.length > 1) return { gap: "ambiguous_binding", among: whole.map((x) => x.id) };
   const st = standOf(stage._anchors.get(whole[0].id)), said = !st ? "" : st.kind === "same" ? "; holographic identity: the same being"
     : st.kind === "raised_difference" ? "; holographic identity: a difference of use is raised, nothing is convicted"
@@ -148,8 +170,14 @@ function bindEnd(stage, end, kind, identity = null, except = null) {
 //   { standing: "settled" }                  every referent the verdict rests on is holographically the same being as the source's
 //   { standing: "needs_deeper_reading", ends } at least one is bound by name and DMD only, and the reading is too thin to say more: the verdict
 //                                              stands, provisional, and `ends` names each end, the reason and how much reading is missing
+//
+// PERSPECTIVE: every result names the frame it was read FOR (`forWhom`, the stage's for-whom.js frame: whose reading, for what question). A committed
+// verdict also says `sense`: "shared" when each atom it rests on is held by the source in the same stated years as the claim, else "unstated"
+// (one side said nothing comparable; the verdict stands, said so). A source value in a DIFFERENT sense is a typed gap (different_sense), not a verdict.
 export function judgeClaim(stage, claimAtoms, opts = {}) {
-  const r = judgeInner(stage, claimAtoms, opts);
+  const trace = { senses: [] }, r = judgeInner(stage, claimAtoms, opts, trace);
+  r.forWhom = stage.forWhom;
+  if (r.verdict === "E" || r.verdict === "C") { const ss = r.verdict === "C" ? r.proofs.filter((p) => p.verdict === "contradicted").map((p) => p.sense) : trace.senses; r.sense = ss.length && ss.every((x) => x === "shared") ? "shared" : "unstated"; }
   if (opts.identity && (r.verdict === "E" || r.verdict === "C")) {
     // a contradiction rests on the proofs that name it; a support rests on every end the claim bound
     const open = (r.verdict === "C" ? r.proofs.filter((p) => p.verdict === "contradicted").flatMap((p) => p.identity ?? []) : r.stands ?? []).filter((s) => s.kind !== "same");
@@ -158,7 +186,7 @@ export function judgeClaim(stage, claimAtoms, opts = {}) {
   r.standings = r.stands ?? []; delete r.stands;      // every holographic standing the claim's binds drew, whatever the verdict
   return r;
 }
-function judgeInner(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id), identity = null } = {}) {
+function judgeInner(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id), identity = null } = {}, trace = { senses: [] }) {
   const C = canonical(claimAtoms), CM = meeters(C, C, {}), proofs = [], gaps = [], stands = [];
   const on = new Set(licenses), except = new Set(C.map((a) => a.pred));
   // a stage restricted to the licenses switched on (ablation): declarations are rebuilt, edges are shared
@@ -166,8 +194,14 @@ function judgeInner(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id), i
   for (const L of stage.licenses) if (on.has(L.id) && L.standing === "given") declareFunctional(hl, L.rel, { giver: L.giver });
   let verdict = UNBOUND, supported = 0;
   const hasEdge = (rel, s_, o_, pol = "+") => [...hl.edges.values()].some((e) => e.rel === rel && e.s === s_ && e.o === o_ && e.polarity === pol);
+  // the senses the source holds a thing in: the arrangement behind an edge, or those at (rel, s, o). A conflict or a support counts only in a shared sense.
+  const armOf = (e) => stage.arrangements.find((r) => r.layer === "asserted" && r.rel === e.rel && r.s === e.s && r.o === e.o && `${stage.doc}:${r.span[0]}-${r.span[1]}` === e.source[0]);
+  const armsAt = (rel_, s_, o_) => stage.arrangements.filter((r) => r.layer === "asserted" && r.polarity === "+" && r.rel === rel_ && r.s === s_ && r.o === o_);
+  const differs = (arms, cs_) => arms.length > 0 && arms.every((r) => senseStanding(cs_, r.sense ?? {}).standing === "differs");
+  const senseGap = (a_, cs_, arms) => ({ kind: "different_sense", atom: a_.text, claim: cs_, source: arms.map((r) => r.sense), why: senseStanding(cs_, arms[0].sense ?? {}).why });
+  const standingOf = (arms, cs_) => (arms.length && arms.every((r) => senseStanding(cs_, r.sense ?? {}).standing === "shared") ? "shared" : "unstated");
   for (const [i, a] of C.entries()) {
-    const as = a.args ?? [];
+    const as = a.args ?? [], cs = senseOf(a);
     let rel = a.pred, s, o, binds = [], bs = null, bk = null;
     // the holographic standing of every referent this atom binds travels with its proof; one that is not "same" is also a typed gap
     const cur = [], bind = (end, kind) => { const b = bindEnd(stage, end, kind, identity, except), st = b?.identity;
@@ -196,23 +230,29 @@ function judgeInner(stage, claimAtoms, { licenses = LICENSES.map((l) => l.id), i
       const b0 = bind(as[0], "referent"), b1 = as[1].entity != null ? bind(as[1], "referent") : bind(as[1], "value");
       if (b0?.gap || b1?.gap) { gaps.push({ kind: (b0?.gap ?? b1.gap), atom: a.text }); continue; }
       if (!b0 || !b1) continue;
-      if (hasEdge(rel, b0.id, b1.id)) { supported++; proofs.push({ atom: a.text, rel, binds: [`${argText(as[0])} ${b0.how}`, `${argText(as[1])} ${b1.how}`], lic: [], verdict: "bound", cites: [], identity: cur }); }
+      if (hasEdge(rel, b0.id, b1.id) && differs(armsAt(rel, b0.id, b1.id), cs)) gaps.push(senseGap(a, cs, armsAt(rel, b0.id, b1.id)));
+      else if (hasEdge(rel, b0.id, b1.id)) { supported++; trace.senses.push(standingOf(armsAt(rel, b0.id, b1.id), cs)); proofs.push({ atom: a.text, rel, binds: [`${argText(as[0])} ${b0.how}`, `${argText(as[1])} ${b1.how}`], lic: [], verdict: "bound", cites: [], identity: cur, sense: standingOf(armsAt(rel, b0.id, b1.id), cs) }); }
       else if (hasEdge(rel, b1.id, b0.id)) gaps.push({ kind: "direction_swap", atom: a.text });
       continue;
     } else continue;
-    if (!hl.functional.has(rel)) { if (hasEdge(rel, s, o)) supported++; continue; }   // no license: it can still be SAME, never different
+    if (!hl.functional.has(rel)) { if (hasEdge(rel, s, o)) { if (differs(armsAt(rel, s, o), cs)) gaps.push(senseGap(a, cs, armsAt(rel, s, o))); else { supported++; trace.senses.push(standingOf(armsAt(rel, s, o), cs)); } } continue; }   // no license: it can still be SAME, never different
     const v = read(hl, ["atom", rel, s, o]);
     const heldE = [...hl.edges.values()].filter((e) => e.rel === rel && e.s === s && e.o !== o);
     // HL reads a source's denial of this very arrangement ("Mercury is NOT the hottest planet") as contradicted. That needs no license and cites no held
     // value, so there is nothing for the independent checker to re-check: the license layer does not commit it (the atoms arm owns direct denial).
     if (v === CONTRADICTED && !heldE.length) { gaps.push({ kind: "denial_not_licensed", atom: a.text }); continue; }
-    const cites = heldE.map((e) => e.source).flat();
+    // a value the source holds in ANOTHER sense (another tense, other years) is not held against this claim: it neither contradicts nor supports it
+    const heldSame = heldE.filter((e) => { const r = armOf(e); return !r || senseStanding(cs, r.sense ?? {}).standing !== "differs"; });
+    if (v === CONTRADICTED && !heldSame.length) { gaps.push(senseGap(a, cs, heldE.map(armOf).filter(Boolean))); continue; }
+    if (v === BOUND && differs(armsAt(rel, s, o), cs)) { gaps.push(senseGap(a, cs, armsAt(rel, s, o))); continue; }
+    const sarms = v === CONTRADICTED ? heldSame.map(armOf).filter(Boolean) : armsAt(rel, s, o);
+    const cites = heldSame.map((e) => e.source).flat();
     const lab = (id) => stage._anchors.get(id)?.label ?? null, fg = (id) => stage._anchors.get(id)?.figure ?? null;
     const claimEnd = isHas(rel) ? { label: argText(as[1]), measure: as[1].measure, base: as[1].base } : { label: argText(as[0]) };
-    proofs.push({ atom: a.text, rel, binds, lic: [...hl.functional.entries()].filter(([r]) => r === rel).map(([r, d]) => `functional(${r}) giver "${d.giver}"`), verdict: v, cites, identity: cur,
-      record: { rel, subject: lab(s) ?? lab(bs?.id ?? bk?.id), giver: hl.functional.get(rel)?.giver ?? null, claim: claimEnd,
-        held: heldE.map((e) => ({ span: String(e.source[0]).replace(/^[^:]*:/, "").split("-").map(Number), label: lab(e.o), measure: fg(e.o)?.measure ?? null, base: fg(e.o)?.base ?? null })) } });
-    if (v === CONTRADICTED) verdict = CONTRADICTED; else if (v === BOUND) { supported++; if (verdict !== CONTRADICTED) verdict = BOUND; }
+    proofs.push({ atom: a.text, rel, binds, lic: [...hl.functional.entries()].filter(([r]) => r === rel).map(([r, d]) => `functional(${r}) giver "${d.giver}"`), verdict: v, cites, identity: cur, sense: standingOf(sarms, cs),
+      record: { rel, subject: lab(s) ?? lab(bs?.id ?? bk?.id), giver: hl.functional.get(rel)?.giver ?? null, claim: claimEnd, sense: { claim: cs.time || cs.tense ? { tense: cs.tense, time: cs.time } : null },
+        held: heldSame.map((e) => ({ span: String(e.source[0]).replace(/^[^:]*:/, "").split("-").map(Number), label: lab(e.o), measure: fg(e.o)?.measure ?? null, base: fg(e.o)?.base ?? null })) } });
+    if (v === CONTRADICTED) verdict = CONTRADICTED; else if (v === BOUND) { supported++; trace.senses.push(standingOf(sarms, cs)); if (verdict !== CONTRADICTED) verdict = BOUND; }
   }
   // a contradiction is committed only if every source arrangement it cites has a decided reading
   if (verdict === CONTRADICTED) {

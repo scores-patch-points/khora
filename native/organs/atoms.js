@@ -1,7 +1,9 @@
 // atoms.js — a sentence's EOTClaim@1 claims as ATOMS: one fact each, over the page's entities (coref.js), with the character span of the words
 // that state it. The atom is the unit the meaning check weighs (MEANING-ATOMS.md): a claim is supported atom by atom, so a paraphrase that
 // repackages the same facts meets, a misattachment damages one atom and not the claim, and what was not read is reported, atom by atom.
-//   atomize({ claims, rows, mentions, entities, text }) → [{ pred, args: [{ entity, name } | { value }], neg, hedged, approx, start, end, from }]
+//   atomize({ claims, rows, mentions, entities, text }) → [{ pred, args: [{ entity, name } | { value }], neg, hedged, approx, tense, start, end, from }]
+//   tense and time are the sense an atom is said in: the claim's tense ("past" | "present" | "future") and the years its own adjuncts name ("in
+//   1900"), or null. A figure takes its clause's (grammar-en.js claimsOf). Atoms of one claim share `from`.
 //   realize(atom) → "pred(arg, arg)" in plain words, for reading and judging
 // Atoms, and where they come from:
 //   is_a(x, kind)          a copula with a noun ("Lake Baikal is a rift lake")
@@ -18,27 +20,40 @@
 // adjective is the focus and the head noun's kind and the clause's frame (its obliques) are presupposed with it. A clause negated through a quantifier
 // ("no mountain is higher than Y") keeps every atom under its polarity: atom-support.js's canonical() rewrites them together.
 import { NO } from "../kernel/atom-support.js";
+import { RECIPIENT } from "../adapters/text/grammar-packs.js";
 const lc = (s) => String(s ?? "").toLowerCase();
 
-export function atomize({ claims, rows, mentions, entities, text }) {
+export function atomize({ claims, rows, mentions, entities, text, lang }) {
   const byId = (id) => rows.find((r) => r.id === id), E = new Map(entities.map((e) => [e.id, e]));
   const mentionOf = (hid) => mentions.find((m) => m.hid === hid) ?? mentions.find((m) => m.ids?.includes(hid)) ?? null;
   const textOfIds = (ids) => { const ws = ids.map(byId).filter(Boolean); if (!ws.length) return ""; return text.slice(Math.min(...ws.map((w) => w.start)), Math.max(...ws.map((w) => w.end))); };
   const arg = (end) => {
     if (!end) return null;
     const m = end.hid != null ? mentionOf(end.hid) : null;
-    if (m?.entity && E.get(m.entity)) return { entity: m.entity, name: E.get(m.entity).name, ids: end.ids ?? [] };
+    // a first-person mention ("we", "us", "our", "nos", "nous"; coref.js reads Person=1 Number=Plur) is one referent whatever its case: the atom carries
+    // that class so the meeting of two ends does not rest on the spelling (Frege: reference is an equivalence class, never a spelling). SCOPE, declared: it
+    // equates the speakers of a claim and its source (the claim is written about the filing in its voice, "Centessa paid us"). That convention already held
+    // for the string "we" meeting the string "we"; this extends it across case ("us", "our", "nos", "nous"), from evidence (UD Person/Number) and no word list.
+    if (m?.entity && E.get(m.entity)) return { entity: m.entity, name: E.get(m.entity).name, ids: end.ids ?? [], ...(m.how === "we" ? { person: "1pl" } : {}) };
     const ws = (end.ids ?? []).map(byId).filter((w) => w && !/^(DET|ADP|PUNCT)$/.test(w.upos));
     return { value: ws.length ? textOfIds(ws.map((w) => w.id)) : end.text, ids: end.ids ?? [] };
   };
   const dropped = (vid) => { const m = mentions.find((x) => x.how === "dropped" && x.hid === vid); return m?.entity && E.get(m.entity) ? { entity: m.entity, name: E.get(m.entity).name, ids: [] } : null; };
-  const caseOf = (end) => { const w = (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP"); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
+  const caseRow = (end) => (end?.ids ?? []).map(byId).find((r) => r && r.upos === "ADP") ?? null;
+  const caseOf = (end) => { const w = caseRow(end); return w ? lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form) : null; };
+  // THE RECIPIENT. UD marks it as the indirect object, as the dative case on the word itself (Case=Dat), or by the dative adposition; the first two carry no
+  // adposition to name the relation by, so they are written with the language's declared dative (grammar-packs RECIPIENT), else "dat" for a Case=Dat word.
+  const dative = (end) => { const h = end?.hid != null ? byId(end.hid) : null; return h && /(^|\|)Case=Dat(\||$)/.test(h.feats ?? "") ? (RECIPIENT[lang] ?? "dat") : null; };
   const out = [], seen = new Set();
-  const push = (pred, args, base, idsUsed) => {
-    const as = args.filter(Boolean); if (!pred || !as.length) return;
+  // head: the row id of the word that carries the predicate (the verb, the adjective, the case word), kept so a later reader (stage.js) can
+  // read its features; each argument keeps the row ids of its words
+  // SLOTS: the role position of each kept argument in the atom's full argument list (agent 0, patient 1, recipient 2). An argument absent from the sentence (a passive with
+  // no agent: "climbers are drawn to Hood") is dropped from `args`, and without the slots the patient would read as the first argument, the agent. `slots` keeps the role.
+  const push = (pred, args, base, idsUsed, head = base.head ?? null) => {
+    const slots = args.map((a, i) => (a ? i : null)).filter((i) => i != null), as = args.filter(Boolean); if (!pred || !as.length) return;
     const key = JSON.stringify([pred, as.map((a) => a.entity ?? lc(a.value)), base.neg]); if (seen.has(key)) return; seen.add(key);
     const ws = [...new Set(idsUsed.flat().filter((x) => x != null))].map(byId).filter(Boolean);
-    out.push({ pred, args: as.map(({ ids, ...a }) => a), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from });
+    out.push({ pred, args: as.map(({ ids, ...a }) => ({ ...a, ids: ids ?? [] })), ...(slots.some((x, i) => x !== i) ? { slots } : {}), neg: !!base.neg, hedged: !!base.hedged, approx: !!base.approx, tense: base.tense ?? null, time: base.time ?? null, start: ws.length ? Math.min(...ws.map((w) => w.start)) : null, end: ws.length ? Math.max(...ws.map((w) => w.end)) : null, from: base.from, head });
   };
   // an adjective keeps its degree: "the largest lake" is most:large, "más alto" more:tall (a "more" word or the Degree feature; with a
   // definite article on its noun, the comparative is a superlative)
@@ -52,7 +67,7 @@ export function atomize({ claims, rows, mentions, entities, text }) {
   const word = (w) => { const l = lc(w.lemma && w.lemma !== "_" ? w.lemma : w.form), f = lc(w.form); return l.slice(0, 3) === f.slice(0, 3) || /[^\x00-\x7f]/.test(f) ? l : f; };
   const adjAtoms = (end, owner, base) => {
     const head = end?.hid != null ? byId(end.hid) : null; if (!head || head.upos === "PROPN" || !owner) return;
-    for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []]);
+    for (const w of rows.filter((x) => x.head === head.id && x.upos === "ADJ" && /^(amod|acl)$/.test(x.deprel))) push(degreeOf(w) + word(w), [owner], base, [[w.id], owner?.ids ?? []], w.id);
   };
   // a modifier phrase is a relation between its owner and it; a coordinated word repeats the relation of the word it is coordinated with.
   // `inner` is the polarity of what sits inside a noun phrase (see WHERE A NEGATION LANDS); a repeated oblique relation keeps its parent's own
@@ -61,13 +76,13 @@ export function atomize({ claims, rows, mentions, entities, text }) {
       const a = arg(n);
       if (n.conj) { if (parent) push(parent.pred, [parent.owner, a], parent.base ?? inner, [parent.owner?.ids ?? [], n.ids ?? []]); adjAtoms(n, a, inner); modAtoms(n, a, inner, parent); continue; }
       const pred = caseOf(n) ?? "of";
-      if (!skipMod.has(n.hid)) push(pred, [owner, a], inner, [owner?.ids ?? [], n.ids ?? []]);
+      if (!skipMod.has(n.hid)) push(pred, [owner, a], inner, [owner?.ids ?? [], n.ids ?? []], caseRow(n)?.id ?? null);
       adjAtoms(n, a, inner); modAtoms(n, a, inner, { pred, owner });
     }
   };
   let skipMod = new Set();
   for (const c of claims) {
-    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id };
+    const base = { neg: c.polarity === "-", hedged: c.asserted === false, from: c.id, head: c.vid ?? null, tense: c.tense ?? null, time: c.time ?? null };
     const quantified = [c.ARG0, c.ARG1, c.ARG2].some((e) => NO.test(e?.text ?? ""));
     const pres = base.neg && !quantified ? { ...base, neg: false } : base;
     const predHead = c.rel === "be" && c.ARG1?.hid != null ? byId(c.ARG1.hid) : null;
@@ -82,7 +97,7 @@ export function atomize({ claims, rows, mentions, entities, text }) {
       if (f.measure === "date" || (inBr && outside) || !being?.entity || /^(PRON|DET|NUM)$/.test(byId(c.ARG0?.hid)?.upos ?? "")) continue;
       const pred = `has_${f.attribute ?? String(f.measure ?? "value").replace(/^count:/, "number_of_")}`;
       // the value keeps its measure in base units and its bracketed equivalents, so "281 metres" meets "923 ft (281 m)"
-      push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [], measure: f.measure ?? null, base: f.base ?? null, alts: f.alts ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
+      push(pred, [being, { value: textOfIds(c.ids ?? []), ids: c.ids ?? [], measure: f.measure ?? null, attribute: f.attribute ?? null, base: f.base ?? null, alts: f.alts ?? [] }], { ...base, approx: !!f.approx }, [c.ids ?? [], being?.ids ?? []]);
       continue;
     }
     const A0 = arg(c.ARG0) ?? (c.ARG1 && c.voice !== "passive" ? dropped(c.vid) : null) ?? (c.rel === "be" ? dropped(c.vid) : null);
@@ -97,8 +112,12 @@ export function atomize({ claims, rows, mentions, entities, text }) {
         push("is_a", [A0, { value: kind || c.ARG1?.text, ids: c.ARG1?.ids ?? [] }], frame, [V, A0?.ids ?? [], c.ARG1?.ids ?? []]);
         adjAtoms(c.ARG1, A0, base);
       }
+    } else if (A2 && RECIPIENT[lang]) {
+      // an indirect object is the recipient oblique said without its adposition: the same two atoms ("sold Sagard receivables" = "sold receivables to Sagard")
+      push(c.rel, [A0, A1], base, [V, A0?.ids ?? [], A1?.ids ?? []]);
+      push(`${c.rel}_${RECIPIENT[lang]}`, [A0 ?? A1, A2], base, [V, A2?.ids ?? []]);
     } else push(c.rel, [A0, A1, A2], base, [V, A0?.ids ?? [], A1?.ids ?? [], A2?.ids ?? []]);
-    for (const o of c.OBL ?? []) push(`${c.rel}_${caseOf(o) ?? "at"}`, [A0 ?? A1, arg(o)], frame, [V, o.ids ?? []]);
+    for (const o of c.OBL ?? []) push(`${c.rel}_${caseOf(o) ?? dative(o) ?? "at"}`, [A0 ?? A1, arg(o)], frame, [V, o.ids ?? []]);
     // an oblique already said as the claim's own place or time is not said again as a modifier of its predicate noun
     skipMod = new Set((c.OBL ?? []).map((o) => o.hid));
     for (const [end, a] of [[c.ARG0, A0], [c.ARG1, c.rel === "be" ? A0 : A1], [c.ARG2, A2], ...(c.OBL ?? []).map((o) => [o, arg(o)])]) {
@@ -107,7 +126,7 @@ export function atomize({ claims, rows, mentions, entities, text }) {
       if (c.rel !== "be" || end !== c.ARG1) adjAtoms(end, a, pres);
       // an oblique's coordinated words repeat its relation ("borders … Wisconsin, Iowa, Illinois"), under the clause's polarity; a modifier's do as before
       const isObl = (c.OBL ?? []).includes(end);
-      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, inner, isObl ? { pred: `${c.rel}_${caseOf(end) ?? "at"}`, owner: A0 ?? A1, base: frame } : null);
+      modAtoms(end, end === c.ARG1 && c.rel === "be" ? A0 : a, inner, isObl ? { pred: `${c.rel}_${caseOf(end) ?? dative(end) ?? "at"}`, owner: A0 ?? A1, base: frame } : null);
     }
   }
   // every other name the sentence gives an entity is a fact of the sentence (named), and a name joined to a common noun through "de" / "of"

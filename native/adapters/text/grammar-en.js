@@ -189,7 +189,10 @@ function propositionsOf(text, rows = rowsOf(text)) {
     if (/^acl/.test(v.deprel) && !/relcl/.test(v.deprel)) return byId(v.head);
     return null;
   };
-  const isMain = (r) => /^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(r.upos);
+  // MEMBERSHIP, a closed shape: "X is one of the Ys" has a NUM as the copula's head and the kind as its "of" dependent (UD: cop + nmod with case "of"). The claim it states is
+  // be(X, Ys), the same claim as "X is a Y"; without this the numeral head yields no claim at all and a stray count. The shape is the grammar's, not a word's.
+  const memberKind = (r) => (r.upos === "NUM" && kids(rows, r.id).some((k) => k.deprel === "cop") ? kids(rows, r.id).find((k) => k.deprel === "nmod" && /^(NOUN|PROPN)$/.test(k.upos) && kids(rows, k.id).some((c) => c.deprel === "case" && /^of$/i.test(c.form))) ?? null : null);
+  const isMain = (r) => /^(VERB|AUX|ADJ|NOUN|PROPN)$/.test(r.upos) || !!memberKind(r);
   for (const v of rows) {
     if (!isMain(v)) continue;
     const ks = kids(rows, v.id);
@@ -213,7 +216,7 @@ function propositionsOf(text, rows = rowsOf(text)) {
     const asserted = !reportedUnder(v) && ![...auxes, ...inherited].some((k) => /^(may|might|could|would)$/i.test(k.form));
     // a DISCOURSE connective ("In addition, …", "For example, …") frames the sentence and says nothing of its event (declared English closed class)
     const discourse = (k) => /^(in addition|in particular|for example|for instance|in fact|in turn|in short|in contrast|on the other hand|as a result|in summary|in conclusion)$/i.test(spanOf(rows, k.id).map((w) => w.form).join(" "));
-    const obls = ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && k !== agent && !discourse(k)).map((k) => ({ ...endOf(rows, k.id, text), than: kids(rows, k.id).some((c) => /^than$/i.test(c.form)), with: kids(rows, k.id).some((c) => /^with$/i.test(c.form)) }));
+    const obls = ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && k !== agent && k !== memberKind(v) && !discourse(k)).map((k) => ({ ...endOf(rows, k.id, text), than: kids(rows, k.id).some((c) => /^than$/i.test(c.form)), with: kids(rows, k.id).some((c) => /^with$/i.test(c.form)) }));
     for (const k of ks) if (/^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && discourse(k)) for (const w of spanOf(rows, k.id)) framed.add(w.id);
     const base = { vid: v.id, polarity: neg ? "-" : "+", tense, asserted, OBL: obls.filter((o) => !o.with), main: v.head === 0 || (v.deprel === "conj" && byId(v.head)?.head === 0) };
     const conjRoot = subj && subj.deprel === "conj" ? byId(subj.head) : subj;
@@ -224,7 +227,7 @@ function propositionsOf(text, rows = rowsOf(text)) {
       if (cop && S0) {
         const than = obls.find((o) => o.than);
         if (v.upos === "ADJ" && than) out.push({ ...base, rel: comparativeBase(v.form), ARG0: endOf(rows, S0.id, text), ARG1: than, asym: true });
-        else out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, v.id, text) });
+        else { const mk = memberKind(v); out.push({ ...base, rel: "be", ARG0: endOf(rows, S0.id, text), ARG1: endOf(rows, (mk ?? v).id, text), ...(mk ? { member: true } : {}) }); }
       } else if (/^(VERB|AUX|ADJ)$/.test(v.upos) && (S0 || obj)) {
         // a NAMING verb says the two are one ("X is called Y", "X, also known as Y", "X is named Y"): its subject (or, as a participle, the
         // noun it modifies) and each name it gives, as "be" claims (declared English closed class: call, name, dub, term, nickname; know
@@ -269,7 +272,32 @@ export function claimsOf(text, rows = undefined) {
   const R = rows ?? rowsOf(text), props = propositionsOf(text, R);
   // the sentence's content words no claim read (claim-coverage.js): carried on every claim, so the check never calls a partly read claim supported
   const unread = unreadWords(R.filter((r) => !props.framed.has(r.id)), props, bindFigures(R, FIGURE_LEX), { isUnit: (f) => !!FIGURE_LEX.unitOf(f), key: lem });
-  return [...propositionClaims(text, R, props), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
+  // every claim carries `time`: the year its own adjunct names AS A POINT ("in 1900"), never a year inside a participant's name (a figure's is its own, below)
+  const timeOf = (c) => { const ys = [...new Set((c.OBL ?? []).map((o) => pointYear(o?.text)).filter(Boolean))].sort(); return ys.length ? ys : null; };
+  return [...propositionClaims(text, R, props).map((c) => ({ ...c, time: timeOf(c) })), ...figureClaimsOf(text, R)].map((c) => ({ ...c, unread }));
+}
+// TIME, AS A READING STATES IT. A year is a time of the fact only when the whole adjunct is a bare POINT: "in 1900", "In May 2024", "on March 3, 2010",
+// "during 1999". Every other year-bearing phrase says something else, and is NOT read as a time: "since 2010" and "until 2010" open an interval,
+// "between 1950 and 2022" is an interval, "by 2020" is a deadline, "in the 1990s" is a decade, and "according to the 2008 report" dates the SAYING, not
+// the fact (a year is a point on some clock in some role; a set of years conflates them). Those stay unstated, and a verdict that needs them says so.
+const POINT_MONTHS = "january|february|march|april|may|june|july|august|september|october|november|december|jan|feb|mar|apr|jun|jul|aug|sept?|oct|nov|dec";
+const POINT = new RegExp(`^(?:in|on|during|at)\\s+(?:the\\s+year\\s+)?(?:\\d{1,2}(?:st|nd|rd|th)?\\s+)?(?:(?:${POINT_MONTHS})\\.?\\s+)?(?:\\d{1,2}(?:st|nd|rd|th)?,?\\s+)?(1[0-9]{3}|2[01][0-9]{2})$`, "i");
+const pointYear = (t) => POINT.exec(String(t ?? "").trim().replace(/[.;:,]+$/, ""))?.[1] ?? null;
+// THE SENSE A FIGURE IS SAID IN. It was read as a positive, asserted, present figure whatever its clause said ("the radius is NOT 6,000 km", "NASA says
+// the radius is 2,440 km", "the radius was 2,440 km in 1900"). A figure takes the sense of the predicate it sits in, read from that predicate's own
+// words and from the figure's own tokens (a parse may hang "not" on the number), the same tests the proposition claims use: a negator, past or future
+// auxiliaries and endings, a reporting verb above it, a modal, and the years its adjuncts name. A clause with no predicate keeps the default.
+const NEGATOR = /^(not|n't|never)$/i;
+function figureSense(rows, text, f) {
+  const p = f.predId != null ? rows.find((r) => r.id === f.predId) : null; if (!p) return { polarity: "+", tense: "present", asserted: true, time: null };
+  const ks = kids(rows, p.id), own = new Set(f.ids), auxes = ks.filter((k) => /^(aux|cop|aux:pass)$/.test(k.deprel));
+  const neg = [...ks, ...f.ids.flatMap((id) => kids(rows, id))].some((k) => !own.has(k.id) && NEGATOR.test(k.form));
+  const forms = [p, ...auxes].map((w) => w.form.toLowerCase()), passive = ks.some((k) => k.deprel === "aux:pass" || k.deprel === "nsubj:pass");
+  const tense = forms.some((x) => /^(was|were|had|did)$/.test(x)) || (/ed$/.test(p.form) && !auxes.some((k) => /^(is|are|am|has|have)$/i.test(k.form)) && !passive) ? "past" : forms.some((x) => /^(will|shall)$/.test(x)) ? "future" : "present";
+  const reported = (() => { let x = p; for (let i = 0; i < 6 && x; i++) { const h = rows.find((r) => r.id === x.head); if (!h) return false; if (/^(ccomp|parataxis)$/.test(x.deprel) && REPORT.has(lem(h))) return true; x = h; } return false; })();
+  const asserted = !reported && !auxes.some((k) => /^(may|might|could|would)$/i.test(k.form));
+  const ys = [...new Set(ks.filter((k) => /^(obl|obl:tmod|obl:npmod|nmod)$/.test(k.deprel) && !own.has(k.id)).map((k) => pointYear(endOf(rows, k.id, text)?.text)).filter(Boolean))].sort();
+  return { polarity: neg ? "-" : "+", tense, asserted, time: ys.length ? ys : null };
 }
 function propositionClaims(text, rows, props = propositionsOf(text, rows)) {
   return props.map((p, i) => ({ main: !!p.main, schema: "EOTClaim@1", id: `c${i + 1}`, lang: "en", by: "grammar-en", rel: p.rel, alias: !!p.alias, vid: p.vid ?? null, ARG0: keyEnd(p.ARG0), ARG1: keyEnd(p.ARG1), ARG2: keyEnd(p.ARG2 ?? null), OBL: (p.OBL || []).map(keyEnd), polarity: p.polarity, tense: p.tense, asserted: p.asserted, asym: !!p.asym }));
@@ -338,6 +366,8 @@ export const FIGURE_LEX = {
 };
 /** the figures of a sentence as EOT claims: rel "fig", ARG0 the being they describe, the binding on the claim */
 export function figureClaimsOf(text, rows = rowsOf(text)) {
-  return bindFigures(rows, FIGURE_LEX).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], polarity: "+", tense: "present", asserted: true, asym: false,
+  // a numeral that is a copula's head with an "of" kind ("one of the states") is membership, not a count of anything (claimsOf reads it as be(X, kind))
+  const kids = (id) => rows.filter((r) => r.head === id), member = new Set(rows.filter((r) => r.upos === "NUM" && kids(r.id).some((k) => k.deprel === "cop") && kids(r.id).some((k) => k.deprel === "nmod" && kids(k.id).some((c) => c.deprel === "case" && /^of$/i.test(c.form)))).map((r) => r.id));
+  return bindFigures(rows, FIGURE_LEX).filter((f) => !(f.ids ?? []).some((id) => member.has(id))).map((f, i) => ({ schema: "EOTClaim@1", id: `f${i + 1}`, lang: "en", by: "grammar-en", rel: "fig", main: false, ids: f.ids, ARG0: f.beingId ? keyEnd(endOf(rows, f.beingId, text)) : null, ARG1: null, OBL: [], ...figureSense(rows, text, f), asym: false,
     fig: { measure: f.measure, attribute: f.attribute, event: f.eventLemma, base: f.base, hiBase: f.hiBase, alts: f.alts, approx: f.approx } }));
 }

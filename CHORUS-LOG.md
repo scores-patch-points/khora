@@ -1233,3 +1233,144 @@ fast: 5 files · 53 affected tests pass · law: ok (WARN pre-existing S17 S96 du
 | Ostrom | — | native/the-fold/read-core.mjs:167 (`lexicon.log[last].gap`) | fixed | a read whose forms were all known inherited an earlier read's unanswered ask; the gap is now the consult's own asks, tested |
 | Kondo | — | native/adapters/text/wiktionary-pack.js | noted | unwired (reading.js was its one importer); stashed in place, not deleted |
 clean: Dijkstra (identity is the exact form, case kept — "as written"), Holmes (aliasOf returns the givers' own `of` targets, no surface merge), Frankfurt (standing is the door's, no placeholder)
+
+## 2026-10-26 — the recipient role has one shape in every language; object pronouns are disjoint from the subject (branch `reader-recipient`, stacked on #63)
+
+fast: 7 files · 3 affected test files, 17 pass + 1 todo (observed failing, kept as the record) · law: ok (pre-existing dup-header WARN S17/S96) · full native suite: 988 tests, 4 real failures (greekClauses x2, janus second maker, material-doorway), all in main's known set, none new
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Greenberg | greenberg.js scan, diff lines | atoms.js, grammar-packs.js, coref-learned.js | fixed | `atomize` had silently defaulted `lang` to "en"; removed, an unspecified language keeps the old shape. RECIPIENT is a declared per-language class (en es fr ja), a language not listed degrades, never guessed; UD Case=Dat is read first. The 3 scan hits are pre-existing lines (coref-learned.js:24, 25, 200), not this diff |
+| Holmes | atoms.js:33 | `person: "1pl"` | fixed | the first-person class merges on UD Person/Number (or the pack's declared words), never on spelling; the one assumption (claim and source speak in one voice) was undeclared, now stated at the line |
+| Frankfurt | recipient-role.test.mjs:42 | the `todo` test | noted | not a placeholder: a constructed pair observed failing (PP attachment to the noun after a determiner), kept as a `todo` with its giver named (the verb frame), lesson 70 |
+| Simon/Chekhov | atoms.js, coref-learned.js | no test imports them directly | noted | both are reached through read-atoms.js by coref-person.test.mjs and recipient-role.test.mjs |
+
+clean: none routed and silent.
+
+## 2026-10-26 — AttachPrior@1: a dative phrase attaches by the verb, induced from gold per language (branch `attach-prior`, stacked on #64)
+
+fast: 6 files · 1 affected test file, 5 pass · law: ok (pre-existing dup-header WARN S17/S96)
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Marshall | ATTACH-PRIOR-PREREG.md bars "P1-P4" | prereg, build script, kernel | fixed | the bars were named like the law's `P<n>` entries and so read as citations of entries that do not exist; renamed B1-B4 |
+| Feynman | build-attach-prior.mjs `devInst.length >= 30` | B3 floor | noted | a declared constant, giver = the pre-registration (fewer than 30 dev instances is reported "too few", never a pass); no constant tuned against its own result |
+| Dijkstra | attach-prior.js `toLowerCase()` on lemma and adposition | instancesOf | noted | the declared adpositions (to a à に) and lemmas are compared lowercased; scope is the languages in RECIPIENT, and a language outside it has no instances, not wrong ones |
+| Ostrom | RESULT 2 pooling | de row | disclosed | German pooled only GSD (the other German treebanks here lack a train or a dev split): stated in the table, not read as "German has no more data" |
+| Simon/Chekhov | attach-prior.js, the CLI scripts | no reader import | noted, real | the prior is NOT wired into the reader; Result 3 says so ("not yet measured, so not claimed"). Reached only by its test and the two scripts |
+| Greenberg | attach-stage2.mjs | no language default | clean | `RECIPIENT[CODE]` has no fallback; non-English reads through loadGrammar |
+
+clean: Holmes (the package.json hit is the test list).
+
+## 2026-10-26 — the meaning layer reads THE reader's entry: rows on the WeftEntry, atoms from the weft (branch `weft-rows`, stacked on #64)
+
+fast: 7 files · 5 affected test files, 52 pass · law: ok (pre-existing dup-header WARN S17/S96) · reading-pipeline + reader-speed guards 29/29 · full native suite 996 tests, 4 real failures (greekClauses x2, janus second maker, material-doorway), all in main's known set, none new
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Greenberg (self-review, found in the work) | reading.js universal-parse hook | `unknown` language | fixed | a declared language with no stem filed is read with the default priors (read-core's own typed gap); my hook then parsed it with the English parser. Now `no_parser`, no parse; tested |
+| Alexander | weft-atoms.js | the seam | clean | every miss is a typed gap (`no_rows`, `cut_disagrees`, `atoms_failed`); nothing defaults to "don't compose" or to a second parse |
+| Feynman | weft-parity.mjs:35 | `differ.length < 12` | noted | a display cap on printed differences; the counts are over all 664 texts |
+| Simon/Chekhov | weft-atoms.js | production | noted, real | tested and measured (parity, stage) but NOT called by any door or the reason-gate: the stage still runs only in evals |
+| Holmes | stage-run.mjs | `ATOMS_VIA=weft` | clean | the default path is unchanged; the flag is the only new branch |
+
+clean: none silent. Additive law: `readDocument(..., { rows: true })` equals the same read without it, byte for byte, but for `parse` and `parseBy` (tested).
+
+## 2026-10-26 — identity through THE reader's page: atomsOfPage, janus resolve and the holographic test wired as evals (branch `weft-rows`, #66)
+
+fast: 6 files · 3 affected test files · law: ok (pre-existing dup-header WARN S17/S96) · stage 108 pairs unchanged both ways · parity 655/664 unchanged · reading-pipeline + reader-speed 29/29
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Holmes | weft-atoms.test.mjs, the todo | one being or two | noted, real | the learned ranker opens a NEW entity for a repeated name ("Sagard" ... "Sagard"); an identity world on the page then holds two nodes for one being. A `todo` test observed failing; the fault is coref-learned.js's, not weft-atoms.js's |
+| Dijkstra | resolve-run.mjs:18 `tok` | a lowercased last token standing in for a name | disclosed | gold = the one page referent sharing the mention's last name token (atom-world.js keyOf's own rule); English pages only; mentions with none or several are not scored (54 of 82), stated in WEFT-IDENTITY.md |
+| Ostrom | WEFT-IDENTITY.md | scope of the null result | disclosed | "resolve never asserts" is under the default lens (the pool's chance floor, 0.977 at n=43) and an EMPTY neighbour graph; it is not a claim that resolve cannot assert. The stakes (`lens.assertAt`) are the user's to state and none was chosen |
+| Frankfurt | WEFT-IDENTITY.md | no number stands in for a missing prior | clean | no assertAt, no threshold, no tuned constant added |
+| Lévi-Strauss | stash vs the repeated-name problem | | none applies | 2 candidates read (an empty-connector fix, a loose results file); neither bears on coreference |
+| Simon/Chekhov | identity-run.mjs, resolve-run.mjs | evals no test imports | noted | CLI evals by design (like stage-run.mjs); their result is in WEFT-IDENTITY.md and the page module they stand on (`atomsOfPage`) is tested |
+
+clean: Alexander (not routed). The machine was at load average 80+ (other sessions' stage jobs), which made the grammar-loading tests take 4 minutes; all passed.
+
+## 2026-10-26 — identity as cancellation within a plateau [noise, DMD): kernel/identity-cancel.js and its measurement (branch `pipeline-atoms`)
+
+fast: 4 files · 9 tests pass (each refusal a constructed violation first) · law: ok (pre-existing dup-header WARN S17/S96) · production code changed: none (a new pure kernel module, wired into nothing)
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | identity-cancel-run.mjs, the fold-depth rule | the one-shot alternative | disclosed | the rule (shallowest radius with the fewest tied at the best residual) was written before it was run and run ONCE for its result; the script was then re-run to add diagnostics (the wrong-on-supported listing), deterministic, same numbers. It gave no clear gain at n = 28 and is NOT adopted. No constant exists in identity-cancel.js: the margin is read off the candidates' own residual levels |
+| Dijkstra | identity-cancel-run.mjs:16 `tok` | a lowercased last token standing in for a name | disclosed | same rule as atom-world.js keyOf, English pages only; WEFT-IDENTITY.md says some scored ends ("water", "river") are not beings the page names, so the gold is weak there |
+| Holmes | WEFT-IDENTITY.md experiment 4 | one entity or two | noted | the page's repeated names fragment into several referents (the `todo` in weft-atoms.test.mjs); a mention's gold is scored only when exactly one referent shares its name token |
+| Simon/Chekhov | identity-cancel.js | wired into nothing | noted, real | tested and measured, but the stage binder still uses name + DMD shells and the optional `identity` hook is still atomIdentity; wiring is the next step and needs the canonical atoms (see the doc) |
+
+clean: Alexander (not routed).
+
+## 2026-10-26 — all the way, steps 1-4: canonical features, the stage chooser, the second medium (code), the rewiring null as standing (branch `pipeline-atoms`)
+
+fast: 12 files · affected tests: native 65 pass + 1 pre-existing fail (janus second maker, in main's known set); root suite opencode-gather-reason 5 pass 5 fail — **pre-existing on main, verified by stash: identical without this diff** · law: WARN "S0" is the variable `S0` in the grammar-en.js lines edited, not a citation (false positive) · 92 tests of the touched organs pass (2 known todo) · stage 108: rules arm E 19 -> 20 (the membership fix), stage arm unchanged, 0 false-C
+
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Diaconis | identity-cancel.js standingOf | the null | fixed twice | the first null pooled carried SHARES (ceiling 1.00 everywhere: a one-feature mention is fully carried by some world every time); the second relabelled candidates (keeps every true set in the pool: ceiling 1.00 again); the one that binds REWIRES per feature kind (janus correspond's null), per mention, in counts, at the pool's chance floor. Each failure is recorded in WEFT-IDENTITY.md |
+| Feynman | arrangement-features.js `dir=` | withdrawn | fixed | built from the dative suffix, measured ("drawn TO Hood" read as a transfer out), withdrawn; direction is the position of the same canonical predicate |
+| Greenberg | grammar-en.js memberKind | "X is one of the Ys" | disclosed | an English shape (NUM cop + "of"); the same shape in grammar-ud (es "uno de los", fr "l'un des") is NOT done and is named in the code comment as the grammar's, not a word's |
+| Holmes | cancel-identity.js one-to-one | contest | fixed | two claim ends cancelling to one anchor ("Baleen whales", "toothed whales") contest it; neither is chosen |
+| Ostrom | WEFT-IDENTITY.md experiment 5 | scope | disclosed | code: 79 functions with no name in the older version (new or renamed) are not scored; text: 3 of 5 wrong calls are non-being ends (the gold's fault), said so |
+| Simon/Chekhov | cancel-identity.js | wired | real | wired into the stage binder behind the identity hook; `IDENTITY=cancel` in stage-run; not in any door |
+| Kondo | eval-side null versions | | noted | the eval-side rewiring code was replaced by the kernel's standingOf; nothing dead left in the tree |
+
+clean: Dijkstra (lowercase last-token key, same as before, disclosed), Lévi-Strauss (nothing in the stash bears on it), Marshall (no law edited).
+
+## 2026-10-27 — the weft's identity says which rung it reached: `weftReferents(weft, { identity: true })` (branch `weft-identity-rung`, additive, off by default)
+fast: 3 files · affected tests: 27 native pass; opencode-semantic.test.mjs S-f and S-j fail identically on main without this diff (verified by stash), 7 of its 10 pass either way · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff); WARN P3, see Marshall
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | native/the-fold/weft.js identityOf | `passes.length < 2`, `withCompany.length < 2` | false-positive | counts, not tuned constants: a merge needs two passes to compare and a comparison needs company in two of them; no threshold anywhere |
+| Holmes | native/the-fold/weft.js identityOf | the merge | clean | one entity or two: the record is NOT split and the merge rule (keyed by `ref`) is unchanged; the identity names the groups and says `against: false`; a difference of company convicts nothing |
+| Ostrom | eval on 30 UD English-GUM documents (unregistered sanity run) | scope | disclosed | 54 referents appear in 2+ passes: 36 `raised_difference`, 18 `needs_deeper_reading`, 0 reach rung 2 (united_states: 7 passes, 5 groups); company overlap needs more mass than a corpus of unrelated documents gives, so `raised_difference` there is not evidence of two beings and the standing says so |
+| Simon/Chekhov | weftReferents `identity` | unwired | disclosed | no consumer passes `identity: true` yet (janus kind induction, eval/law/identity-fold*.mjs); the option is tested and importable, and parity with the option off is held byte for byte |
+| Marshall | "P3" in the docstring | cited | false-positive | the `(P3)` is the weft's own property label (weft.js header, THE-HOLOGRAPH.md §1: the fold at a cursor), unchanged text, not a POLICIES.md entry |
+clean: Dijkstra (`refKey` untouched, the slug is not re-derived), Lévi-Strauss (nothing in the stash bears on it).
+
+## 2026-10-27 — stage 2 of a prose-against-structured check: the period and sign of each money figure, with its address (`adapters/text/figure-period.en.js`; branch `figure-period`, opt-in `features.figures`, off by default)
+fast: 4 files · affected tests: native 96 pass (6 files), the new file 19 pass; mutation check (pairing reversed, negative cue removed, English guard removed) fails 1, 2 and 1 tests as built · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | figure-period.en.js windows (90 chars / nine tokens back from "ended", heading ≤120 / >220 chars, 60 chars for "full year") | dev-tuned constants | disclosed | chosen while looking at two development filers (0000874238, 0001370053); named as such in the header; the held-out filer (0000879526) is the test of them and was not read while they were set |
+| Feynman | development result | 227 of 228 right, 1 wrong | disclosed | the one wrong (N053) pairs a full-year guidance sentence with a half-year record in the ground; the binder's twelve months is the sentence's own period, so it is the ground that is at fault, and the figure is flagged `forwardLooking`. Not edited to agree. A 100% known share on dev is a fit to dev, not a rate |
+| Greenberg | figure-period.en.js (ten ASCII `\b` word patterns; number words, ordinals, loss/income cues; "ended", "as of") | scope | disclosed | English by declaration in the file name (`.en.`), the header and the hook: `read-core` runs it only for `stem === "eng"` and any other language gets `figures: []` plus the typed gap `figures_english_only`; the test reads Japanese, Arabic and German and checks the gap. The Latin-capitalised month probe in the `no_time_prior` gap was replaced by `\p{L}+` |
+| Dijkstra | monthTable | lower-cased names, three-letter prefix | disclosed | month names come from TimePrior@1 (janus priors), not a list in the file; the lower-case key and 3-letter abbreviation are English-and-Latin conventions of the same declared scope; a clash (two months sharing three letters) names none, and the deranged-prior test shows the dates follow the prior |
+| Simon/Chekhov | `features.figures` | wired, not consumed | disclosed | new source with a test and a hook in `read-core`; no door passes `features.figures` yet. The consumer is the prose-against-structured verdict (pipeline log, entries G2-3/G2-4); byte parity of the entry with the feature off is tested |
+| Holmes | package.json (routed on the word "identity" in the test list) | | false-positive | no identity logic touched |
+clean: Alexander, Marshall (no law edited; no P/S citation in the diff), Kondo (nothing dead), Lévi-Strauss (nothing in the stash bears on it).
+
+## 2026-10-27 — five wrap fixes for the period binder, each a flag (`adapters/text/figure-period.en.js`; branch `figure-period-wrap` on top of #84's frozen commit, no PR)
+fast: 2 files · affected tests: 28 pass (19 + 9 new, each new case with a control: the same text with its flag off gives the wrong answer); mutation check: turning each flag off by default fails the test for that flag (wrap 3, yearless 1, ytd 1, qnotation 2, fromComparative 1) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | the five fixes | fitted | disclosed | named from the 19 wrong claims of the held-out pass (PIPELINE-LOG ladder-36); on that filer wrong 19 → 0, precision 73/73 — a FIT, said so in PREREG-G2-4W.md; the two original filers (not used to name them) are unchanged: 225/225, 18/20 planted, zero convictions, every bar registered before the flags-on numbers were computed |
+| Feynman | cost not in a bar | claimed share | disclosed | on the fitted filer the join of wrapped lines put the period before the second money figure of "reported net income of $X ... for the first quarter of 2011 on net sales of $Y", which the binder calls a detail with no period: 12 formerly right claims became unclaimed (9 detail, 2 none, 1 ambiguous); claimed share 0.806 → 0.709 (bar 0.70). Precision up, recall down, named |
+| Greenberg | wrap rule `FINAL` / `CONTINUES` | convention | disclosed | an English-like convention (a lowercase letter or a digit after an unfinished line continues it; sentence-final marks are ASCII); kept to a degree, not a rule; module stays English by declaration and the reader hook still gives other languages `figures: []` plus the typed gap |
+| Dijkstra | `\p{Ll}` / `\p{Nd}` | script | disclosed | caseless scripts have no lowercase, so the wrap join would not fire for them; unreachable through the hook (English only) |
+| Simon/Chekhov | `FIXES` export | wired, not consumed | disclosed | the flags are exercised by the tests and the scorer; no door passes `fixes` |
+clean: Holmes (not routed), Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
+
+## 2026-10-27 — the "detail" rule: sixth flag `continuation` for the period binder (`adapters/text/figure-period.en.js`; branch `figure-period-wrap`, no PR)
+fast: 2 files · affected tests: 29 pass (28 + 1 new, with its control: the same text with the flag off leaves the second figure a detail; the appositive "including a $60.0 million amendment payment" stays a detail; flag off by default fails the test) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | continuation | fitted | disclosed | the pattern ("on net sales of") was read from the third filer's unclaimed sentences (post-hoc diagnostic of ladder-40), so its numbers there are a fit: claimed 73 → 86 of 103, wrong 0, planted found 13 → 15 of 20, 3 formerly right claims still unclaimed; the original filers are unchanged (the flag is inert on them: 225/225) and every bar was registered (PREREG-G2-4X) before the flag's performance was computed |
+| Feynman | S2 | cost not in a bar | disclosed | the better period reader makes A1 convict more across measures: shuffled-concept records convicted 42 → 53 of 76 on the third filer. A1 has no measure identity (A3 does); until the join is made, wiring `features.figures` into a verdict without A3 would convict across measures |
+| Greenberg | CONTINUATION `on|with … of` | English | disclosed | an English preposition pattern; the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
+| Simon/Chekhov | `FIXES.continuation` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
+clean: Dijkstra (nothing new), Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
+
+## 2026-10-27 — three headline flags for the period binder: `ordinalDigits`, `fullYearClause`, `periodWords` (`adapters/text/figure-period.en.js`; branch `figure-period-wrap`, no PR)
+fast: 2 files · affected tests: 32 pass (29 + 3 new, each flag with a flag-off control); mutation check: each flag off by default fails a test (ordinalDigits 1, periodWords 2, fullYearClause 1 once a case under a heading naming only a quarter was added, because periodWords covers its two-period cases) · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | the three flags | fitted | disclosed | named from the 15 ambiguous pairs of the third filer (9 had a cue, 6 none); on that filer claimed 86 → 95 of 103, wrong 0, planted found 15 → 18 of 20, and exactly the six cue-less pairs stay ambiguous — a FIT; the original filers are unchanged (225/225, 18/20); every bar registered (PREREG-G2-4Y) before the flags' performance was computed |
+| Feynman | ablation | two flags unproven | disclosed | removing `ordinalDigits` or `fullYearClause` alone changes no count on either ground (`periodWords` reads the same cues); they are kept as generality for cases only the constructed tests show, and are the candidates to drop if a fresh filer shows them inert |
+| Feynman | the 60-character window | dev-tuned constant | fixed | the "full year" look-back of 60 characters, chosen on the first two filers, missed a cue 62 characters away; `fullYearClause` looks back to the clause start |
+| Greenberg | `Q_CUE` / `Y_CUE` | English | disclosed | closed English cue words (quarterly, <ordinal> quarter, full-year, annual, consecutive year, fiscal year); the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
+| Simon/Chekhov | `FIXES` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
+clean: Dijkstra, Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
