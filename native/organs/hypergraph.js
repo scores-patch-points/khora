@@ -361,8 +361,8 @@ const PRONOUN_MIN_MARGIN = 0.2;
 // weekdays from TimePrior@1, a head word the lexicon giver lists as a common noun and never as a name): the referent ids a personal
 // pronoun must not bind. resolvePronouns' own header names this input and the production call never filled it. Without a ruling, or
 // when the ruling throws or names nothing, the options are the two dials alone, byte for byte what this call was before.
-function pronounOptions(surfaceToReferent, nonPersonalOf) {
-  const dials = { minActivation: PRONOUN_MIN_ACTIVATION, minMargin: PRONOUN_MIN_MARGIN };
+function pronounOptions(surfaceToReferent, nonPersonalOf, trace = false) {
+  const dials = { minActivation: PRONOUN_MIN_ACTIVATION, minMargin: PRONOUN_MIN_MARGIN, ...(trace ? { trace: true } : {}) };
   if (typeof nonPersonalOf !== "function") return dials;
   let ids;
   try { ids = nonPersonalOf(surfaceToReferent); } catch { return dials; }
@@ -445,7 +445,7 @@ function pronounOptions(surfaceToReferent, nonPersonalOf) {
  * anything, ever. A sentence's address is `sentences[i]`, computed exactly
  * once, from the author's own bytes, for the whole life of this call.
  */
-function pronounBindingsFor(sentences, resolvePronouns, { extractSurfaces, discoverReferents, nonPersonalOf = null }) {
+function pronounBindingsFor(sentences, resolvePronouns, { extractSurfaces, discoverReferents, nonPersonalOf = null, pronounGaps = false }) {
   const empty = { bindings: [], bestSurface: new Map() };
   if (!resolvePronouns || !sentences?.length) return empty;
   let discovery;
@@ -455,7 +455,16 @@ function pronounBindingsFor(sentences, resolvePronouns, { extractSurfaces, disco
   } catch {
     return empty;
   }
-  if (!discovery?.events?.length) return empty;
+  if (!discovery?.events?.length) {
+    // `organs.pronounGaps`: a passage with no being for a pronoun to bind to is not silent either. The resolver is run against an empty map so its own
+    // matcher finds the hits; each is filed as `no_referent_discovered`. Off (the default), this branch is the early return it always was.
+    if (!pronounGaps) return empty;
+    try {
+      const r = resolvePronouns(sentences, new Map(), pronounOptions(new Map(), null, true));
+      const regime = r?.regime?.name ?? "none";
+      return { ...empty, gaps: (r?.gaps ?? []).filter((g) => g.pronoun != null).map((g) => ({ ...g, reason: "no_referent_discovered", regime, candidates: [] })) };
+    } catch { return { ...empty, gaps: [] }; }
+  }
   const surfaceToReferent = new Map(discovery.events.map((e) => [e.surface, e.referent_id]));
   // Same "most-individuated established surface represents" rule cast.js's
   // own `represent` uses (most glyphs wins) — re-derived here because this
@@ -467,11 +476,17 @@ function pronounBindingsFor(sentences, resolvePronouns, { extractSurfaces, disco
   }
   let resolved;
   try {
-    resolved = resolvePronouns(sentences, surfaceToReferent, pronounOptions(surfaceToReferent, nonPersonalOf));
+    resolved = resolvePronouns(sentences, surfaceToReferent, pronounOptions(surfaceToReferent, nonPersonalOf, pronounGaps));
   } catch {
-    return empty;
+    return pronounGaps ? { ...empty, gaps: [] } : empty;
   }
-  return { bindings: resolved?.bindings ?? [], bestSurface };
+  if (!pronounGaps) return { bindings: resolved?.bindings ?? [], bestSurface };
+  // every pronoun of the resolver's class the call did not bind: the gaps it filed and the frames it did not read, each with the regime that ran
+  const regime = resolved?.regime?.name ?? "none";
+  const gaps = [...(resolved?.gaps ?? []), ...(resolved?.unread ?? [])]
+    .filter((g) => g.pronoun != null)
+    .map((g) => ({ ...g, regime, candidates: g.candidates ?? (g.coPresent ?? []).map((ref) => ({ ref, score: null })) }));
+  return { bindings: resolved?.bindings ?? [], bestSurface, gaps };
 }
 
 /**
@@ -900,6 +915,9 @@ export function makeRelationReader(organs) {
     // `resolvePronouns` as its `nonPersonal` (adapters/text/non-personal.js builds it from TimePrior@1 and the lexicon giver). Omitted,
     // every pronoun call is byte-identical to before.
     nonPersonalOf = null,
+    // `organs.pronounGaps` — OPTIONAL boolean, default false: file every pronoun of the resolver's class that was not bound as a typed item on the report
+    // (`report.pronounGaps`, one list per passage). Off, the report and the read are byte for byte what they were.
+    pronounGaps = false,
     classifyConnector = null,
     minShare = undefined,
     extractLeadingSurfaces = null,
@@ -1141,7 +1159,7 @@ export function makeRelationReader(organs) {
     const passageToRaw = list.map((p, pi) =>
       passageBlanked[pi] != null && normaliseNewlines ? normaliseNewlines(String(p.text ?? "")).toRaw : null);
     const passageBindings = list.map((p, pi) =>
-      resolvePronouns ? pronounBindingsFor(passageSentences[pi], resolvePronouns, { extractSurfaces, discoverReferents, nonPersonalOf }) : { bindings: [], bestSurface: new Map() });
+      resolvePronouns ? pronounBindingsFor(passageSentences[pi], resolvePronouns, { extractSurfaces, discoverReferents, nonPersonalOf, pronounGaps }) : { bindings: [], bestSurface: new Map() });
 
     /**
      * This passage's sentence i, rewritten locally for extraction only.
@@ -2487,6 +2505,7 @@ export function makeRelationReader(organs) {
       index: { events: index.events ?? [], resolve: index.resolve, represent: index.represent },
       sentences: passageSentences,
       pronouns: passageBindings.map(({ bindings, bestSurface }) => (bindings ?? []).map((b) => ({ ...b, surface: bestSurface?.get(b.referentId) ?? null }))),
+      ...(pronounGaps ? { pronounGaps: passageBindings.map(({ gaps, bestSurface }) => (gaps ?? []).map((g) => ({ ...g, candidates: (g.candidates ?? []).map((c) => ({ ...c, surface: bestSurface?.get(c.ref) ?? null })) }))) } : {}),
     };
   };
 }

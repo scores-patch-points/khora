@@ -367,6 +367,10 @@ export const resolvePronouns = (
     completion = DEFAULT_COMPLETION,
     topEdges = DEFAULT_TOP_EDGES,
     edgeSlots = DEFAULT_EDGE_SLOTS,
+    // `trace` (default false): make every pronoun of the class the call did NOT bind answerable. The gaps then carry the referents the activation scored
+    // (`candidates`), and a pronoun in a frame the refused regime did not read, which files no gap of its own, is returned in `unread`. Off, the
+    // returned object is byte for byte what it was.
+    trace: traceGaps = false,   // bound to `traceGaps`: `trace` is already the name of each frame's code inside the loop below
     // Referent ids the CALLER already knows are not persons — an
     // organisation, a narrating apparatus, anything typed outside the range
     // a third-person-singular personal pronoun could ever legitimately
@@ -538,6 +542,7 @@ export const resolvePronouns = (
 
   const bindings = [];
   const gaps = [];
+  const unread = [];
   let framesWithPronouns = 0;
   let framesCoPresent = 0;
 
@@ -728,6 +733,7 @@ export const resolvePronouns = (
             coPresent: verdictOut.contested,
             barApplied: verdictOut.barApplied,
             detail: verdictOut.detail,
+            ...(traceGaps ? { candidates: [...referentScore].sort((a, b) => b[1] - a[1]).map(([ref, score]) => ({ ref, score })) } : {}),
           });
           continue;
         }
@@ -750,6 +756,20 @@ export const resolvePronouns = (
               ? "one-hop activation recall over the already-admitted cast, adjudicated against co-present names at the contested bar (kernel/contest.js)"
               : "one-hop activation recall over the already-admitted cast",
           },
+        });
+      }
+    }
+
+    else if (traceGaps && pronounHits.length > 0) {
+      for (const hit of pronounHits) {
+        unread.push({
+          reason: "frame_not_read",
+          tier: "engine",
+          sentenceOrder: sentence.order,
+          offset: (sentence.offset ?? 0) + hit.index,
+          pronoun: hit.token,
+          coPresent: [...named],
+          detail: "the refused regime does not read a frame that carries a name beside the pronoun; nothing was attempted, which is not the same fact as nothing being found",
         });
       }
     }
@@ -795,6 +815,7 @@ export const resolvePronouns = (
   return {
     bindings,
     gaps,
+    ...(traceGaps ? { unread } : {}),
     regime: {
       name: adjudicated ? "adjudicated" : "refused",
       criterion: nullTest ? { kind: "permutation-null", draws: nullTest.draws, alpha: nullTest.alpha, seed: nullTest.seed } : { kind: "constant-margin", minMargin },

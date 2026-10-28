@@ -243,6 +243,58 @@ the frame, the names with the giver of each fold, the appearances, the edges, th
 a **private map** from ordinal to fold address is a separate return value and never in the text (Archon Gary's no-address). Size follows the question and a stated window, and nothing is dropped silently (each omission is a count).
 `swap` produces the name-swap control. Off by default: `readWith(text, { referents: true, card: true })` attaches a non-enumerable `entry.renderCard`. `node eval/referents/folded-card-report.mjs` prints card sizes on the Russian excerpt. No model is called.
 
+# The pronouns the reader did not bind
+
+The pronoun golden counts what the reader bound. Most answerable pronouns are not bound, and nothing on the entry said why: `resolvePronouns` returns `{ bindings, gaps, regime }`, but `organs/hypergraph.js::pronounBindingsFor`
+kept only the bindings, so a gap the resolver filed never reached the entry; in the default **refused** regime a frame that carries a name beside the pronoun is not read at all and files no per-pronoun item; and a passage
+with no discovered being returned before the resolver ran. On the 30 documents of the GUM dev split, 255 of 272 answerable pronouns (93.8%) are unbound and none of them was typed.
+
+`readerOptions.pronounGaps: true` (default **off**; then nothing runs and the entry is what it was) makes the read file, on `entry.pronounGaps`, one typed item for every pronoun of the resolver's own class that it did not bind:
+`{ pronoun, at, sentence, reason, regime, candidates: [{ ref, surface, score }], detail }`, addressed like `entry.pronouns`. The reasons are the resolver's own (`pronoun_no_candidate`, `pronoun_below_floor`, `pronoun_no_margin`, the
+contested ones) plus two the option adds: `frame_not_read` (the refused regime did not read the frame; `candidates` are the names in it) and `no_referent_discovered` (the passage had no being to bind to). `regime` is the one that ran.
+The hits come from the resolver's own matcher, so no second reader is assembled. `resolvePronouns` gains an additive `trace` option (off: the returned object is byte for byte what it was; the test that caught a shadowed name here is
+in `pronoun-gaps.test.mjs`).
+
+```bash
+GUM_TRAIN=/path/to/en_gum-ud-train.conllu [GUM_DEV=/path/to/en_gum-ud-dev.conllu] node eval/referents/pronoun-gaps.mjs [--set G|B] [--json out.json]
+```
+
+## Pre-registration
+
+`PREREG-PRONOUN-GAPS.md` (sha256 in `PREREG-PRONOUN-GAPS.sha`, 2026-10-27T20:27:52Z) fixed the bars before the option was implemented. Development: the golden's slice B. Confirmation: all 30 documents of the GUM dev split (sha256
+`61d02ce2…7910`), not read by this session. The first confirmation run (started 20:40:46Z) was killed by an app quit before it printed any figure; it was restarted at 20:50:48Z with no code change, so no result was seen twice.
+
+## Result (G, the dev split, scored once)
+
+```
+answerable pronouns 272: bound right 7, bound wrong 10, UNBOUND 255 = 93.8%; of the unbound, 182 are in the resolver's class and 73 are out of it
+P1  held   182 of 182 unbound answerable in-class pronouns have an item = 100.0%
+P2  held   0 items on a bound pronoun, 0 items that cover no pronoun of the class
+P3  held   (a) the option-off entry of all 30 documents is byte-identical to main's (0287222); (b) option on minus pronounGaps equals option off on every document
+P4  held   0 of 276 items lack reason, regime, candidates or detail, or name a reason outside the five families
+room (descriptive): the gold antecedent is a being among the item's candidates for 77 of 182 = 42.3%
+reasons over all items: frame_not_read 203, pronoun_no_candidate 69, pronoun_no_margin 4
+unbound answerable OUT of class, no item: it 61, its 11, itself 1
+K1  the resolver's own gaps only: P1 FAILED, 34 of 182 = 18.7%, as built
+K2  an item for every pronoun, bound or not: P2 FAILED (22 items on a bound pronoun), as built
+```
+
+Development slice B, for comparison: 341 answerable, 17 bound right / 5 wrong (the golden's own figure), 319 unbound; P1 240 of 240, room 93 of 240 = 38.8%; frame_not_read 177, pronoun_no_candidate 88, pronoun_no_margin 9; out of class: it 55, its 22, itself 1, oneself 1.
+
+## What the items say
+
+- **Most unbound pronouns were never read.** `frame_not_read` is 203 of 276 items (74%): the default refused regime does not read a frame with a name beside the pronoun. The reader did not fail to bind these; it did not try.
+- **The room is under half.** For 42% of the typed unbound pronouns the gold antecedent is a being the item lists. For `frame_not_read` the candidates are only the names in that frame; for `pronoun_no_candidate` they are empty (the activation had nothing). That share is the room a rule or an opinion has with this
+  option's information alone; it is a ceiling for the items as filed, not for any resolver.
+- **29% of the unbound answerable pronouns are outside the class** ("it", "its", "itself": 73 of 255) and get no item by design: the resolver never looks at them.
+
+## Not shown
+
+- That any of these pronouns can be bound correctly: this binds nothing.
+- That the candidates of a `frame_not_read` item contain the antecedent (the room control says they mostly do not).
+- Anything about out-of-class forms, or a language other than English (no pronoun prior, no items; a test shows the entry unchanged).
+- G's freshness beyond what this session knows: the dev split was not read here; another session may have.
+
 # A presence rung beside the shipped pronoun resolver
 
 The shipped resolver's "activation" is associative recall of vocabulary with no recency term, no mention count and no grammatical role (`memory/activation.js`), and in the default refused regime it never reads a frame that carries a
