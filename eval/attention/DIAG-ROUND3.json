@@ -1,0 +1,834 @@
+[
+ {
+  "id": "w01",
+  "kind": "attended",
+  "surface": "Its",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "The Empire State Building",
+  "activation": 3,
+  "margin": 0.3333333333333333,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_empire_state_building",
+   "name": "The Empire State Building",
+   "prior": 1,
+   "isPerson": false,
+   "act": 1.83,
+   "lastDist": 2
+  },
+  "topReplay": {
+   "name": "Art Deco",
+   "act": 2
+  },
+  "sentIdx": 2
+ },
+ {
+  "id": "w02",
+  "kind": "attended",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_elsewhere",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:empire_state_building",
+   "name": "Empire State Building",
+   "prior": 3,
+   "isPerson": false,
+   "act": 2.64,
+   "lastDist": 7
+  },
+  "topReplay": {
+   "name": "New York City",
+   "act": 3.72
+  },
+  "sentIdx": 16
+ },
+ {
+  "id": "w09",
+  "kind": "attended",
+  "surface": "The building",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "The Empire State Building",
+  "activation": 4,
+  "margin": 1,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_empire_state_building",
+   "name": "The Empire State Building",
+   "prior": 1,
+   "isPerson": false,
+   "act": 1.68,
+   "lastDist": 3
+  },
+  "topReplay": {
+   "name": "Empire State",
+   "act": 2
+  },
+  "sentIdx": 3
+ },
+ {
+  "id": "w15",
+  "kind": "attended",
+  "surface": "The building",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "The Empire State Building",
+  "activation": 2,
+  "margin": 1,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_empire_state_building",
+   "name": "The Empire State Building",
+   "prior": 1,
+   "isPerson": false,
+   "act": 2,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "The Empire State Building",
+   "act": 2
+  },
+  "sentIdx": 1
+ },
+ {
+  "id": "w17",
+  "kind": "attended",
+  "surface": "The building",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "The Empire State Building",
+  "activation": 3.051271382044774,
+  "margin": 0.4951254521887513,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_empire_state_building",
+   "name": "The Empire State Building",
+   "prior": 7,
+   "isPerson": false,
+   "act": 0.96,
+   "lastDist": 18
+  },
+  "topReplay": {
+   "name": "Fifth Avenue Association",
+   "act": 2.31
+  },
+  "sentIdx": 61
+ },
+ {
+  "id": "t07",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "right_other",
+  "reason": null,
+  "boundTo": "New York Times",
+  "activation": 2,
+  "margin": 0.058999442723960384,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:new_york_times",
+   "name": "New York Times",
+   "prior": 1,
+   "isPerson": false,
+   "act": 2,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "Lamb",
+   "act": 4.12
+  },
+  "sentIdx": 237
+ },
+ {
+  "id": "t09",
+  "kind": "out_of_scope",
+  "trapKind": "expletive",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "expletive_or_cleft",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Empire State Building",
+   "act": 9.44
+  },
+  "sentIdx": 203
+ },
+ {
+  "id": "t16",
+  "kind": "elsewhere",
+  "trapKind": "definite-other",
+  "surface": "The site",
+  "verdict": "gap",
+  "reason": "description_unbound",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Empire State Building",
+   "act": 11.57
+  },
+  "sentIdx": 206
+ },
+ {
+  "id": "w03",
+  "kind": "attended",
+  "surface": "It",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "Hagia Sophia",
+  "activation": 2,
+  "margin": 0.5,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:hagia_sophia",
+   "name": "Hagia Sophia",
+   "prior": 1,
+   "isPerson": false,
+   "act": 2,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "Hagia Sophia",
+   "act": 2
+  },
+  "sentIdx": 1
+ },
+ {
+  "id": "w04",
+  "kind": "attended",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_elsewhere",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:hagia_sophia",
+   "name": "Hagia Sophia",
+   "prior": 1,
+   "isPerson": false,
+   "act": 1.68,
+   "lastDist": 3
+  },
+  "topReplay": {
+   "name": "Roman Greece",
+   "act": 2
+  },
+  "sentIdx": 3
+ },
+ {
+  "id": "w12",
+  "kind": "attended",
+  "surface": "The current structure",
+  "verdict": "gap",
+  "reason": "description_unbound",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:hagia_sophia",
+   "name": "Hagia Sophia",
+   "prior": 2,
+   "isPerson": false,
+   "act": 2.98,
+   "lastDist": 3
+  },
+  "topReplay": {
+   "name": "Hagia Sophia",
+   "act": 2.98
+  },
+  "sentIdx": 7
+ },
+ {
+  "id": "w13",
+  "kind": "attended",
+  "surface": "The church",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "Eastern Orthodox Church",
+  "activation": 2,
+  "margin": 1,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:hagia_sophia",
+   "name": "Hagia Sophia",
+   "prior": 5,
+   "isPerson": false,
+   "act": 6.68,
+   "lastDist": 2
+  },
+  "topReplay": {
+   "name": "Hagia Sophia",
+   "act": 6.68
+  },
+  "sentIdx": 13
+ },
+ {
+  "id": "t10",
+  "kind": "out_of_scope",
+  "trapKind": "expletive",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "expletive_or_cleft",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Justinian",
+   "act": 3.91
+  },
+  "sentIdx": 93
+ },
+ {
+  "id": "t13",
+  "kind": "elsewhere",
+  "trapKind": "definite-other",
+  "surface": "The first church",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "Eastern Orthodox Church",
+  "activation": 2.039441918476455,
+  "margin": 1,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Hagia Sophia",
+   "act": 4.89
+  },
+  "sentIdx": 23
+ },
+ {
+  "id": "w05",
+  "kind": "attended",
+  "surface": "It",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "The Hubble Space Telescope",
+  "activation": 2,
+  "margin": 0.5,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:hubble",
+   "name": "Hubble",
+   "prior": 1,
+   "isPerson": false,
+   "act": 1,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "The Hubble Space Telescope",
+   "act": 2
+  },
+  "sentIdx": 1
+ },
+ {
+  "id": "w06",
+  "kind": "attended",
+  "surface": "Its",
+  "verdict": "gap",
+  "reason": "center_elsewhere",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:hubble",
+   "name": "Hubble",
+   "prior": 5,
+   "isPerson": false,
+   "act": 6.74,
+   "lastDist": 2
+  },
+  "topReplay": {
+   "name": "Hubble",
+   "act": 6.74
+  },
+  "sentIdx": 9
+ },
+ {
+  "id": "t01",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_elsewhere",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Hubble",
+   "act": 3.97
+  },
+  "sentIdx": 35
+ },
+ {
+  "id": "t02",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "WF",
+  "activation": 5,
+  "margin": 0.3602195166853492,
+  "goldInCast": false,
+  "goldTruncatedInCast": true,
+  "gold": {
+   "ref": "ref:auto:wf",
+   "name": "WF",
+   "prior": 3,
+   "isPerson": false,
+   "act": 5,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "WF",
+   "act": 5
+  },
+  "sentIdx": 129
+ },
+ {
+  "id": "t03",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_not_carried",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:acs_high_resolution",
+   "name": "ACS High Resolution",
+   "prior": 2,
+   "isPerson": false,
+   "act": 2.59,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "WF",
+   "act": 4.45
+  },
+  "sentIdx": 134
+ },
+ {
+  "id": "t04",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "pronoun_no_margin",
+  "boundTo": null,
+  "activation": 3.932792776773481,
+  "margin": 0.08856787571737655,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:hsp",
+   "name": "HSP",
+   "prior": 2,
+   "isPerson": false,
+   "act": 2.38,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "FOC",
+   "act": 3.93
+  },
+  "sentIdx": 139
+ },
+ {
+  "id": "t14",
+  "kind": "elsewhere",
+  "trapKind": "definite-other",
+  "surface": "The spacecraft",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "Hubble",
+  "activation": 0.5605657584842717,
+  "margin": 1,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "OTA",
+   "act": 1.91
+  },
+  "sentIdx": 107
+ },
+ {
+  "id": "w07",
+  "kind": "attended",
+  "surface": "It",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "Voyager",
+  "activation": 7,
+  "margin": 0.869047619047619,
+  "goldInCast": false,
+  "goldTruncatedInCast": true,
+  "gold": {
+   "ref": "ref:auto:voyager",
+   "name": "Voyager",
+   "prior": 3,
+   "isPerson": false,
+   "act": 5,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "Voyager",
+   "act": 5
+  },
+  "sentIdx": 2
+ },
+ {
+  "id": "w14",
+  "kind": "attended",
+  "surface": "The probe",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "Voyager",
+  "activation": 8.722222222222221,
+  "margin": 1,
+  "goldInCast": false,
+  "goldTruncatedInCast": true,
+  "gold": {
+   "ref": "ref:auto:voyager",
+   "name": "Voyager",
+   "prior": 4,
+   "isPerson": false,
+   "act": 5.85,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "Voyager",
+   "act": 5.85
+  },
+  "sentIdx": 6
+ },
+ {
+  "id": "t05",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_elsewhere",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Voyager",
+   "act": 15.67
+  },
+  "sentIdx": 63
+ },
+ {
+  "id": "t06",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_elsewhere",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Earth",
+   "act": 5.45
+  },
+  "sentIdx": 233
+ },
+ {
+  "id": "w08",
+  "kind": "attended",
+  "surface": "It",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "The Taj Mahal",
+  "activation": 4.062446158138214,
+  "margin": 0.22200861277240844,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_taj_mahal",
+   "name": "The Taj Mahal",
+   "prior": 3,
+   "isPerson": false,
+   "act": 4.06,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "The Taj Mahal",
+   "act": 4.06
+  },
+  "sentIdx": 14
+ },
+ {
+  "id": "w11",
+  "kind": "attended",
+  "surface": "The building complex",
+  "verdict": "gap",
+  "reason": "description_unbound",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_taj_mahal",
+   "name": "The Taj Mahal",
+   "prior": 2,
+   "isPerson": false,
+   "act": 3.19,
+   "lastDist": 1
+  },
+  "topReplay": {
+   "name": "Shah Jahan",
+   "act": 3.37
+  },
+  "sentIdx": 8
+ },
+ {
+  "id": "w16",
+  "kind": "attended",
+  "surface": "The complex",
+  "verdict": "gap",
+  "reason": "description_unbound",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_taj_mahal",
+   "name": "The Taj Mahal",
+   "prior": 2,
+   "isPerson": false,
+   "act": 2.25,
+   "lastDist": 5
+  },
+  "topReplay": {
+   "name": "Mughal Empire",
+   "act": 3.76
+  },
+  "sentIdx": 12
+ },
+ {
+  "id": "w18",
+  "kind": "attended",
+  "surface": "The complex",
+  "verdict": "gap",
+  "reason": "description_unbound",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_taj_mahal",
+   "name": "The Taj Mahal",
+   "prior": 7,
+   "isPerson": false,
+   "act": 0.01,
+   "lastDist": 80
+  },
+  "topReplay": {
+   "name": "Shah Jahan",
+   "act": 7.79
+  },
+  "sentIdx": 108
+ },
+ {
+  "id": "t11",
+  "kind": "out_of_scope",
+  "trapKind": "expletive",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "expletive_or_cleft",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "China",
+   "act": 1.83
+  },
+  "sentIdx": 142
+ },
+ {
+  "id": "t15",
+  "kind": "elsewhere",
+  "trapKind": "definite-other",
+  "surface": "The tomb",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "Shah Jahan",
+  "activation": 2,
+  "margin": 1,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Shah Jahan",
+   "act": 2
+  },
+  "sentIdx": 4
+ },
+ {
+  "id": "w10",
+  "kind": "attended",
+  "surface": "The canal",
+  "verdict": "right",
+  "reason": null,
+  "boundTo": "The Suez Canal",
+  "activation": 5.3787903194837385,
+  "margin": 1,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:the_suez_canal",
+   "name": "The Suez Canal",
+   "prior": 1,
+   "isPerson": false,
+   "act": 0.77,
+   "lastDist": 12
+  },
+  "topReplay": {
+   "name": "Suez",
+   "act": 3.52
+  },
+  "sentIdx": 12
+ },
+ {
+  "id": "w19",
+  "kind": "attended",
+  "surface": "The canal",
+  "verdict": "wrong",
+  "reason": null,
+  "boundTo": "Suez Canal Company",
+  "activation": 2.5737690142997662,
+  "margin": 0.923850902172946,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:suez_canal",
+   "name": "Suez Canal",
+   "prior": 9,
+   "isPerson": false,
+   "act": 0.29,
+   "lastDist": 31
+  },
+  "topReplay": {
+   "name": "Port",
+   "act": 3.09
+  },
+  "sentIdx": 135
+ },
+ {
+  "id": "w20",
+  "kind": "attended",
+  "surface": "The canal",
+  "verdict": "gap",
+  "reason": "description_no_margin",
+  "boundTo": null,
+  "activation": 2,
+  "margin": 0.05240965086870586,
+  "goldInCast": true,
+  "goldTruncatedInCast": false,
+  "gold": {
+   "ref": "ref:auto:suez_canal",
+   "name": "Suez Canal",
+   "prior": 9,
+   "isPerson": false,
+   "act": 0.03,
+   "lastDist": 56
+  },
+  "topReplay": {
+   "name": "November",
+   "act": 2.01
+  },
+  "sentIdx": 160
+ },
+ {
+  "id": "t08",
+  "kind": "elsewhere",
+  "trapKind": "new-entity",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_not_carried",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Before August",
+   "act": 3.62
+  },
+  "sentIdx": 290
+ },
+ {
+  "id": "t12",
+  "kind": "out_of_scope",
+  "trapKind": "expletive",
+  "surface": "It",
+  "verdict": "gap",
+  "reason": "center_not_carried",
+  "boundTo": null,
+  "activation": null,
+  "margin": null,
+  "goldInCast": false,
+  "goldTruncatedInCast": false,
+  "gold": null,
+  "topReplay": {
+   "name": "Egypt",
+   "act": 2.83
+  },
+  "sentIdx": 238
+ }
+]
