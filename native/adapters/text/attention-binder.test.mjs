@@ -249,3 +249,62 @@ test("round-3 options absent: the call is the round-2 call", () => {
   assert.throws(() => run(texts, [], { lineStarts: 1 }), TypeError);
   assert.throws(() => run(texts, [], { contextMinUses: 0 }), TypeError);
 });
+
+// ---- round 4 (PREREG-ATTENTION-A4.md) ----
+const R4 = { bearerShare: 0.5, weakRouteCarry: true, centerRivalShare: 0.5, openerReset: true };
+const ALL4 = { ...ALL, ...R4 };
+
+test("bearer plausibility: a lone owner of the head word that is neither the topic, nor carried, nor nearly as present is a typed gap, not a binding", () => {
+  const T = ["Hagia Sophia is old.", "Hagia Sophia has a dome.", "Hagia Sophia has a nave.", "The Eastern Orthodox Church built it.", "Hagia Sophia is large.", "The church has a unique position."];
+  const specs = [[0, "H", "Hagia Sophia"], [1, "H", "Hagia Sophia"], [2, "H", "Hagia Sophia"], [3, "E", "Eastern Orthodox Church"], [4, "H", "Hagia Sophia"]];
+  const off = run(T, specs, { ...ALL, minWordShare: null });
+  assert.equal(off.bindings.find((b) => b.surface === "The church")?.referentId, "E", "round 3: the lone owner binds");
+  const on = run(T, specs, { ...ALL4, minWordShare: null });
+  assert.equal(on.bindings.find((b) => b.surface === "The church"), undefined);
+  const gap = on.gaps.find((g) => g.surface === "The church");
+  assert.equal(gap?.reason, "description_off_topic");
+  assert.equal(gap.topic, "H");
+  // an owner carrying a fair share of the document's weight is a plausible bearer
+  const heavy = run(["Hagia Sophia is old.", "The Eastern Orthodox Church built it.", "The Eastern Orthodox Church is old.", "The Eastern Orthodox Church is large.", "The church has a unique position."], [[0, "H", "Hagia Sophia"], [1, "E", "Eastern Orthodox Church"], [2, "E", "Eastern Orthodox Church"], [3, "E", "Eastern Orthodox Church"]], { ...ALL4, minWordShare: null });
+  assert.equal(heavy.bindings.find((b) => b.surface === "The church")?.referentId, "E");
+});
+
+test("the topic's own name word needs no continuity, a kind word does", () => {
+  const T = ["The Canal is an artificial waterway in the south.", "Boats pass daily.", "The expanded waterway opened in 2016.", "The canal is long."];
+  const specs = [[0, "C", "Canal"]];
+  const off = run(T, specs, { ...ALL, minWordShare: null });
+  assert.equal(off.bindings.find((b) => b.surface === "The expanded waterway")?.referentId, "C", "round 3 binds the kind word");
+  const on = run(T, specs, { ...ALL4, minWordShare: null });
+  assert.equal(on.gaps.find((g) => g.surface === "The expanded waterway")?.reason, "description_weak_route");
+  assert.equal(on.bindings.find((b) => b.surface === "The canal")?.referentId, "C", "its own name word, the topic: no continuity needed");
+});
+
+test("centre veto revisited: a previous subject that is far less present than the chosen being is no rival", () => {
+  const T = ["The Tower is old.", "The Tower has stairs.", "The Tower has a lift.", "Rome is new.", "It is tall."];
+  const specs = [[0, "T", "Tower"], [1, "T", "Tower"], [2, "T", "Tower"], [3, "B", "Rome"]];
+  const off = run(T, specs, { ...ALL, carryVeto: false });
+  assert.equal(off.gaps.find((g) => g.sentenceOrder === 4)?.reason, "center_elsewhere");
+  const rival = run(T, specs, { ...ALL4, carryVeto: false, centerRivalShare: 0.2 });
+  assert.equal(rival.gaps.find((g) => g.sentenceOrder === 4)?.reason, "center_elsewhere", "Rome is at least 20% as present as the tower: a rival");
+  const faint = run(T, specs, { ...ALL4, carryVeto: false, centerRivalShare: 0.9 });
+  assert.equal(faint.bindings.find((b) => b.sentenceOrder === 4)?.referentId, "T", "Rome is not 90% as present: no rival");
+});
+
+test("section opener: ranked by the undecayed count, and the previous sentence's vetoes do not apply", () => {
+  const filler = Array.from({ length: 30 }, (_, i) => `Visitors came in year ${i}.`);
+  const T = ["The Canal is old.", "The Canal is long.", "The Canal is wide.", ...filler, "== Opening ==\nThe canal opened in 1869."];
+  const specs = [[0, "C", "Canal"], [1, "C", "Canal"], [2, "C", "Canal"]];
+  const off = run(T, specs, { ...ALL, minWordShare: null });
+  assert.equal(off.gaps.find((g) => /canal/i.test(g.surface))?.reason, "description_below_floor", "round 3: presence has faded");
+  const on = run(T, specs, { ...ALL4, minWordShare: null });
+  assert.equal(on.bindings.find((b) => /canal/i.test(b.surface))?.referentId, "C");
+});
+
+test("round-4 options absent: the call is the round-3 call; types are checked", () => {
+  const texts = ["The Tower is old.", "The tower has a lift.", "It is tall."];
+  const a = run(texts, [[0, "T", "Tower"]], ALL);
+  const b = run(texts, [[0, "T", "Tower"]], { ...ALL, bearerShare: null, weakRouteCarry: false, centerRivalShare: null, openerReset: false });
+  assert.deepEqual(a, b);
+  assert.throws(() => run(texts, [], { bearerShare: 0 }), TypeError);
+  assert.throws(() => run(texts, [], { openerReset: "yes" }), TypeError);
+});

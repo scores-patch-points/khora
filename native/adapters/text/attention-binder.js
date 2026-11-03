@@ -66,6 +66,10 @@ export function bindAttended(sentences, mentions, options = {}) {
   const { minWordShare = null, carryVeto = false, expletiveVeto = false, demonstrativeSubject = false, causalWords = false } = options;
   // ROUND-3 options (PREREG-ATTENTION-A3.md). Absent, each is off.
   const { lineStarts = false, npHead = false, tieResolve = false, foldPlural = false, neverSilent = false, contextMinUses = null } = options;
+  // ROUND-4 options (PREREG-ATTENTION-A4.md). Absent, each is off and the call is the round-3 call, byte for byte.
+  const { bearerShare = null, weakRouteCarry = false, centerRivalShare = null, openerReset = false } = options;
+  for (const [k, v] of Object.entries({ bearerShare, centerRivalShare })) if (v !== null && (!Number.isFinite(v) || v <= 0 || v > 1)) throw new TypeError(`bindAttended: ${k} is null (off) or a declared share in (0, 1]`);
+  for (const [k, v] of Object.entries({ weakRouteCarry, openerReset })) if (typeof v !== "boolean") throw new TypeError(`bindAttended: ${k} is true or false`);
   if (contextMinUses !== null && (!Number.isInteger(contextMinUses) || contextMinUses < 1)) throw new TypeError("bindAttended: contextMinUses is null (off) or a declared count of at least 1");
   for (const [k, v] of Object.entries({ lineStarts, npHead, tieResolve, foldPlural, neverSilent })) if (typeof v !== "boolean") throw new TypeError(`bindAttended: ${k} is true or false`);
   if (minWordShare !== null && (!Number.isFinite(minWordShare) || minWordShare < 0 || minWordShare > 1)) throw new TypeError("bindAttended: minWordShare is null (off) or a declared share in [0, 1]");
@@ -81,13 +85,15 @@ export function bindAttended(sentences, mentions, options = {}) {
   // LINE STARTS: the extracted text keeps a section heading on the line before the sentence it heads ("== Description ==\nThe facility …"), and a table
   // row or list item is its own unit. Each line is a sentence of its own for the binder; a line that is only heading markup is not read at all.
   if (lineStarts) {
-    const split = []; let order = 0;
+    const split = []; let order = 0; let afterHeading = false;
     for (const s of sents) {
       let at = 0;
       for (const line of s.text.split("\n")) {
         const off = at; at += line.length + 1;
-        if (!/\S/.test(line) || /^\s*=+[^=]*=+\s*$/.test(line)) continue;
-        split.push({ ...s, text: line, offset: s.offset + off, order: order++ });
+        if (!/\S/.test(line)) continue;
+        if (/^\s*=+[^=]*=+\s*$/.test(line)) { afterHeading = true; continue; }
+        split.push({ ...s, text: line, offset: s.offset + off, order: order++, afterHeading });
+        afterHeading = false;
       }
     }
     sents = split;
@@ -119,6 +125,7 @@ export function bindAttended(sentences, mentions, options = {}) {
   }
 
   const activation = createActivation({ window });
+  const cum = createActivation({ window: null }); // the undecayed count: who the document has been about, read at a section opener (openerReset)
   const surfaceWords = new Map(); // ref → Set of lower-cased words of its own surfaces (filled from the mentions' bytes)
   const kindWords = new Map();    // ref → Set of predicate-kind words
   const mentionCount = new Map(); // ref → how many of its mentions were read so far
@@ -145,6 +152,11 @@ export function bindAttended(sentences, mentions, options = {}) {
 
   for (const s of sents) {
     const ms = mentionsIn(s);
+    // SECTION OPENER (openerReset): the sentence right after a heading. Presence has faded across the break and the previous sentence belongs to another section, so
+    // candidates are ranked by the undecayed count of the document and the centre and carry vetoes (which read the previous sentence) do not apply.
+    const opener = openerReset && s.afterHeading === true;
+    const actOf = (r) => (opener ? cum.activationOf(r) : activation.activationOf(r));
+    const rk = (refs) => (opener ? refs.map((r) => [r, cum.activationOf(r)]).sort((a, b) => b[1] - a[1]) : rank(refs));
     const register = () => {
     // the surface words of everything named here (the words of the bytes, from the cast's own spans)
       for (const m of ms) {
@@ -203,8 +215,23 @@ export function bindAttended(sentences, mentions, options = {}) {
           for (let k = t.heads.length - 1; k >= 0; k--) { const pk = poolOf(norm(t.heads[k].w)); if (pk.length) { word = norm(t.heads[k].w); pool = pk; base = { ...base, surface: s.text.slice(t.i, t.heads[k].i + bare(t.heads[k].w).length), at: [s.offset + t.i, s.offset + t.heads[k].i + bare(t.heads[k].w).length] }; break; } }
         }
         if (!pool.length) { gaps.push({ ...base, reason: "description_unbound", detail: `no candidate has "${word}" among the words the text gave it` }); continue; }
-        const d = decide(rank(pool));
+        const d = decide(rk(pool));
         if (d.gap) { gaps.push({ ...base, reason: `description_${d.gap}`, top: d.top ?? null, runnerUp: d.runnerUp ?? null, activation: d.activation ?? 0, margin: d.margin ?? null }); continue; }
+        // THE OWNER OF THE WORD MUST BE A PLAUSIBLE BEARER (bearerShare): a description is judged against the topic as well as against the word. The topic is who the DOCUMENT
+        // has been about so far (the undecayed count, which the cast's splits and a recent aside do not move); an owner of the word with less than a declared share of the
+        // topic's weight most likely names something the owner is not ("The church" in a text about Hagia Sophia is not "Eastern Orthodox Church"): a typed gap.
+        if (bearerShare !== null) {
+          const topDoc = [...candidates].map((r) => [r, cum.activationOf(r)]).sort((a, b) => b[1] - a[1])[0];
+          if (topDoc && topDoc[0] !== d.ref && cum.activationOf(d.ref) < bearerShare * topDoc[1]) {
+            gaps.push({ ...base, reason: "description_off_topic", top: d.ref, topic: topDoc[0], weight: cum.activationOf(d.ref), topicWeight: topDoc[1], detail: "the owner of the word carries less than the declared share of what the document has been about" });
+            continue;
+          }
+        }
+        // THE WEAKER ROUTES NEED CONTINUITY (weakRouteCarry): a kind or a context word is evidence about the being, but not that THIS sentence continues it.
+        if (weakRouteCarry && !opener && viaOf(d.ref, word) !== "surface-word" && !prevCarried.has(d.ref)) {
+          gaps.push({ ...base, reason: "description_weak_route", top: d.ref, via: viaOf(d.ref, word), detail: "the word is the being's kind or a habit of its sentences, and the previous sentence did not carry it" });
+          continue;
+        }
         // A POOL OF ONE IS NOT CONFIDENCE. Alone, a candidate has margin 1 by default; judged instead against the being's own naming: the share of
         // its mentions that carried the word (1 when the text predicated the word of it as its kind). "Middle Tennessee" had "river" in 1 of 8 mentions.
         if (minWordShare !== null && wordsOfRef(d.ref).has(word)) {
@@ -223,7 +250,7 @@ export function bindAttended(sentences, mentions, options = {}) {
         const verbAt = clause.slice(0, 2).findIndex((a) => COPULA_FORMS.has(a.w.toLowerCase()) || AUXILIARY_VERBS.has(a.w.toLowerCase()));
         if (verbAt >= 0 && clause.some((a, k) => k > verbAt && a.w.toLowerCase() === "that")) { gaps.push({ ...base, reason: "expletive_or_cleft", detail: "a copula and a complementizer follow in the same clause: the pronoun has no referent" }); continue; }
       }
-      const ranked = rank([...candidates]);
+      const ranked = rk([...candidates]);
       let d = decide(ranked);
       if (tieResolve && d.gap === "no_margin") {
         // TIED CANDIDATES are decided from the text before they are refused: first by the fuller name (one candidate's name is a part of the other's: "Panama" and
@@ -238,11 +265,13 @@ export function bindAttended(sentences, mentions, options = {}) {
         if (pick) d = { ref: pick, activation: ranked.find(([r]) => r === pick)[1], margin: d.margin, via: "attended-tie" };
       }
       if (d.gap) { gaps.push({ ...base, reason: `pronoun_${d.gap}`, top: d.top ?? null, runnerUp: d.runnerUp ?? null, activation: d.activation ?? 0, margin: d.margin ?? null }); continue; }
-      if (centerVeto && prevSubject && (prevSubject.kind === "unbound-description" || (prevSubject.kind === "ref" && prevSubject.ref !== d.ref))) {
+      // CENTRE VETO, REVISITED (centerRivalShare): the previous sentence's subject is a rival only if it is itself present enough: its presence a declared share of the chosen being's.
+      const rivalPresent = centerRivalShare === null || prevSubject?.kind !== "ref" || actOf(prevSubject.ref) >= centerRivalShare * d.activation;
+      if (centerVeto && !opener && prevSubject && (prevSubject.kind === "unbound-description" || (prevSubject.kind === "ref" && prevSubject.ref !== d.ref && rivalPresent))) {
         gaps.push({ ...base, reason: "center_elsewhere", top: d.ref, detail: prevSubject.kind === "ref" ? `the previous sentence began with ${prevSubject.ref}` : "the previous sentence began with a description the cast does not know" });
         continue;
       }
-      if (carryVeto && !prevCarried.has(d.ref)) {
+      if (carryVeto && !opener && !prevCarried.has(d.ref)) {
         gaps.push({ ...base, reason: "center_not_carried", top: d.ref, detail: "the previous sentence neither named nor referred to the attended being: the pronoun most likely continues something else" });
         continue;
       }
@@ -286,6 +315,7 @@ export function bindAttended(sentences, mentions, options = {}) {
     if (ms.length && candidates.has(ms[0].ref)) for (let k = 1; k < boost; k++) fired.push(ms[0].ref);
     if (feed) for (const b of bindings) if (b.sentenceOrder === s.order) fired.push(b.referentId);
     activation.observe(fired);
+    cum.observe(fired);
   }
   return { bindings, gaps, ruling };
 }
