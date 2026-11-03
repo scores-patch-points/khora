@@ -211,6 +211,17 @@ export const namesCorefer = (a, b, opts) => {
 const CAP_TOKEN = /^[\p{Lu}][\p{L}'’]*$/u;
 const LOWER_TOKEN = /^[\p{Ll}][\p{L}'’]*$/u;
 
+// A CAPTION CUE IS NOT A WORD. Auto-captions and transcripts interleave bracketed
+// cues with the speech: "[laughter]", "[music]", "[applause]", and a clock like
+// "[0:05:01]". A sentence that opens with one — "[laughter] >> Oh, it's easy." —
+// has its real first word at token 1, so that word read as a mid-sentence
+// capital and a bare opener ("Oh", "Getting", "With Oracle") was admitted as a
+// being (found 2026-11-03 reading a 148 KB Oracle summit transcript: 59 events,
+// openers among them). The cue is recognised by SHAPE alone, no list of cues:
+// square brackets around either a clock or lowercase words only. A bracketed
+// capitalised name ("[Pierre]", an editor's insertion) is not a cue and is kept.
+const CAPTION_CUE = /\[(?:\d{1,2}(?::\d{2}){1,2}|\p{Ll}[\p{Ll}\s,'’-]{0,40})\]/gu;
+
 // A one-sided 95% significance resolution — declared, the same standing as
 // this codebase's other Born-gate quantiles (e.g. nul-adjacent 0.95
 // thresholds elsewhere): a stated resolution for a statistical test, not a
@@ -599,7 +610,9 @@ export const accumulateSurfaceEvidence = (sentences, evidence, { abbreviations =
     // question for splitSentences), and the Война-и-мир side's LEADING
     // junk (an opening quote or dash leads the NEXT token — a boundary the
     // trailing-only check cannot see).
-    const rawToks = sent.text.split(/\s+/);
+    // The cue becomes a letterless token: it is no word (so it never holds token 0), and, like any
+    // letterless token below, it breaks a capitalised run rather than bridging the two names around it.
+    const rawToks = sent.text.replace(CAPTION_CUE, " — ").split(/\s+/).filter(Boolean);
     const toks = [];
     const breaksAfter = [];
     const leadingJunk = [];
