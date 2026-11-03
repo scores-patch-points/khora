@@ -189,3 +189,63 @@ test("a word in only a sliver of a being's mentions does not earn a confident de
   assert.equal(gap?.reason, "description_weak_word");
   assert.ok(gap.wordShare > 0 && gap.wordShare < 0.5, `1 mention of 7 carried the word (${gap.wordShare})`);
 });
+
+// ---- round 3 (PREREG-ATTENTION-A3.md) ----
+const R3 = { lineStarts: true, npHead: true, tieResolve: true, foldPlural: true, neverSilent: true, contextMinUses: 2 };
+const ALL = { ...R2, ...R3 };
+
+test("line starts: a sentence-initial description is found when its text line also carries a section heading", () => {
+  const texts = ["The Tower is old.", "== Description ==\nThe tower has a lift."];
+  const off = run(texts, [[0, "T", "Tower"]], R2);
+  assert.equal(off.bindings.length + off.gaps.length, 0, "round 2: the heading hides the target (silent)");
+  const on = run(texts, [[0, "T", "Tower"]], { ...R2, lineStarts: true });
+  assert.equal(on.bindings[0]?.referentId, "T");
+  assert.equal(on.bindings[0].surface, "The tower");
+});
+
+test("NP head: the head word of 'The expanded waterway' is found among the words some being owns; the address ends there", () => {
+  const texts = ["The Canal is an artificial waterway in the south.", "The expanded waterway opened in 2016."];
+  const off = run(texts, [[0, "C", "Canal"]], R2);
+  assert.equal(off.gaps[0].reason, "description_unbound");
+  const on = run(texts, [[0, "C", "Canal"]], { ...R2, npHead: true });
+  assert.equal(on.bindings[0]?.referentId, "C");
+  assert.equal(on.bindings[0].surface, "The expanded waterway");
+});
+
+test("tied candidates: the fuller name wins ('Panama' is a part of 'Panama Canal'); else the previous sentence's subject; else a typed gap", () => {
+  const split = run(["The Panama Canal is old, near Panama.", "It is wide."], [[0, "PC", "Panama Canal"], [0, "P", "Panama."]], { ...ALL, boost: 1, carryVeto: false, minMargin: 0.2 });
+  // the two namings fire alike (boost 1): a tie that round 2 refuses
+  const refused = run(["The Panama Canal is old, near Panama.", "It is wide."], [[0, "PC", "Panama Canal"], [0, "P", "Panama."]], { ...R2, boost: 1, carryVeto: false });
+  assert.equal(refused.gaps.find((g) => g.reason === "pronoun_no_margin") !== undefined, true);
+  assert.equal(split.bindings.find((b) => b.kind === "pronoun")?.referentId, "PC");
+  const subject = run(["The Tower and the Bridge are old.", "The Bridge is wide.", "It is long."], [[0, "T", "Tower"], [0, "B", "Bridge"], [1, "B", "Bridge"]], { ...ALL, boost: 1, minMargin: 0.9, carryVeto: false });
+  assert.equal(subject.bindings.find((b) => b.sentenceOrder === 2 && b.kind === "pronoun")?.referentId, "B", "the previous sentence began with the Bridge");
+  const undecided = run(["The Tower and the Bridge are old.", "It is long."], [[0, "T", "Tower"], [0, "B", "Bridge"]], { ...ALL, boost: 1, carryVeto: false });
+  assert.equal(undecided.gaps.find((g) => g.kind === "pronoun")?.reason, "pronoun_no_margin", "the text does not decide: still a gap");
+});
+
+test("never silent: a neuter pronoun inside a cast naming files a typed gap", () => {
+  const sents = build(["Its Only Rock is a song.", "The song is old."]);
+  const out = bindAttended(sents, [{ ref: "S", start: 0, end: 8 }], { ...DIALS, ...ALL });
+  assert.equal(out.gaps.some((g) => g.reason === "inside_cast_mention"), true);
+});
+
+test("context words: a noun used twice in sentences about a being, and mostly there, binds a description with no name or copula behind it", () => {
+  const T = ["The Opera is old.", "The Opera has a building and a pier.", "The Opera shows buildings on the point.", "Walkers like the pier.", "The building is wide."];
+  const specs = [[0, "O", "Opera"], [1, "O", "Opera"], [2, "O", "Opera"]];
+  assert.equal(run(T, specs, { ...R2 }).bindings.some((b) => b.surface === "The building"), false);
+  const on = run(T, specs, { ...ALL });
+  assert.equal(on.bindings.find((b) => b.surface === "The building")?.referentId, "O");
+  assert.equal(on.bindings.find((b) => b.surface === "The building")?.via, "context-word");
+  const rare = run(["The Opera is old.", "The Opera has a pier.", "The pier is wide."], [[0, "O", "Opera"], [1, "O", "Opera"]], { ...ALL, contextMinUses: 3 });
+  assert.equal(rare.gaps.find((g) => g.surface === "The pier")?.reason, "description_unbound", "one use is not a habit: a typed gap");
+});
+
+test("round-3 options absent: the call is the round-2 call", () => {
+  const texts = ["The Tower is old.", "The tower has a lift.", "It is tall."];
+  const a = run(texts, [[0, "T", "Tower"]], R2);
+  const b = run(texts, [[0, "T", "Tower"]], { ...R2, lineStarts: false, npHead: false, tieResolve: false, foldPlural: false, neverSilent: false, contextMinUses: null });
+  assert.deepEqual(a, b);
+  assert.throws(() => run(texts, [], { lineStarts: 1 }), TypeError);
+  assert.throws(() => run(texts, [], { contextMinUses: 0 }), TypeError);
+});

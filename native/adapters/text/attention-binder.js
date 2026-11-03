@@ -64,6 +64,10 @@ export function bindAttended(sentences, mentions, options = {}) {
   const { window, minActivation, minMargin, boost, nonPersonal = null, feed, centerVeto, clauseMateVeto } = options;
   // ROUND-2 options (PREREG-ATTENTION-A2.md). Absent, each is off and the call is byte for byte the round-1 call.
   const { minWordShare = null, carryVeto = false, expletiveVeto = false, demonstrativeSubject = false, causalWords = false } = options;
+  // ROUND-3 options (PREREG-ATTENTION-A3.md). Absent, each is off.
+  const { lineStarts = false, npHead = false, tieResolve = false, foldPlural = false, neverSilent = false, contextMinUses = null } = options;
+  if (contextMinUses !== null && (!Number.isInteger(contextMinUses) || contextMinUses < 1)) throw new TypeError("bindAttended: contextMinUses is null (off) or a declared count of at least 1");
+  for (const [k, v] of Object.entries({ lineStarts, npHead, tieResolve, foldPlural, neverSilent })) if (typeof v !== "boolean") throw new TypeError(`bindAttended: ${k} is true or false`);
   if (minWordShare !== null && (!Number.isFinite(minWordShare) || minWordShare < 0 || minWordShare > 1)) throw new TypeError("bindAttended: minWordShare is null (off) or a declared share in [0, 1]");
   for (const [k, v] of Object.entries({ carryVeto, expletiveVeto, demonstrativeSubject, causalWords })) if (typeof v !== "boolean") throw new TypeError(`bindAttended: ${k} is true or false`);
   if (window !== null && (!Number.isFinite(window) || window <= 1)) throw new TypeError("bindAttended: window is declared (a number above 1, or null for the undecayed control)");
@@ -73,7 +77,23 @@ export function bindAttended(sentences, mentions, options = {}) {
   if (typeof feed !== "boolean" || typeof centerVeto !== "boolean" || typeof clauseMateVeto !== "boolean")
     throw new TypeError("bindAttended: feed, centerVeto and clauseMateVeto are declared (true or false), never defaulted");
 
-  const sents = [...(sentences ?? [])];
+  let sents = [...(sentences ?? [])];
+  // LINE STARTS: the extracted text keeps a section heading on the line before the sentence it heads ("== Description ==\nThe facility …"), and a table
+  // row or list item is its own unit. Each line is a sentence of its own for the binder; a line that is only heading markup is not read at all.
+  if (lineStarts) {
+    const split = []; let order = 0;
+    for (const s of sents) {
+      let at = 0;
+      for (const line of s.text.split("\n")) {
+        const off = at; at += line.length + 1;
+        if (!/\S/.test(line) || /^\s*=+[^=]*=+\s*$/.test(line)) continue;
+        split.push({ ...s, text: line, offset: s.offset + off, order: order++ });
+      }
+    }
+    sents = split;
+  }
+  const F = (w) => (foldPlural && w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w);
+  const norm = (w) => F(bare(w).toLowerCase());
   // LONGEST NAMING CLAIMS ITS BYTES, as pronouns.js's matcher does: a mention that overlaps a longer mention of another being ("Hoover" inside
   // "Hoover Dam", "The Gateway" across "Gateway Arch") is not a second firing of that other being.
   const all = [...(mentions ?? [])];
@@ -103,8 +123,11 @@ export function bindAttended(sentences, mentions, options = {}) {
   const kindWords = new Map();    // ref → Set of predicate-kind words
   const mentionCount = new Map(); // ref → how many of its mentions were read so far
   const wordMentions = new Map(); // ref → Map word → how many of those mentions carried the word (its bytes or the noun phrase around them)
+  const nameWords = new Map();    // ref → words of its own cast surfaces, determiners left out (for "a part of another's name")
+  const ctxUses = new Map();      // word → { total, by: Map ref → uses in sentences that were about that being }
+  const ctxOK = (w, r) => { const u = ctxUses.get(w); return contextMinUses !== null && !!u && (u.by.get(r) ?? 0) >= contextMinUses && (u.by.get(r) ?? 0) / u.total >= 0.5; };
   const wordsOfRef = (r) => new Set([...(surfaceWords.get(r) ?? []), ...(kindWords.get(r) ?? [])]);
-  const viaOf = (r, w) => (surfaceWords.get(r)?.has(w) ? "surface-word" : "predicate-kind");
+  const viaOf = (r, w) => (surfaceWords.get(r)?.has(w) ? "surface-word" : kindWords.get(r)?.has(w) ? "predicate-kind" : "context-word");
 
   const bindings = []; const gaps = [];
   let prevCarried = new Set(); // the beings the previous sentence named or bound
@@ -127,17 +150,20 @@ export function bindAttended(sentences, mentions, options = {}) {
       for (const m of ms) {
         const set = surfaceWords.get(m.ref) ?? new Set();
         const here = new Set(); // the words THIS mention carries, for the word's share of the being's naming
-        for (const t of wordsOf(s.text.slice(m.start - s.offset, m.end - s.offset))) { set.add(bare(t.w).toLowerCase()); here.add(bare(t.w).toLowerCase()); }
+        for (const t of wordsOf(s.text.slice(m.start - s.offset, m.end - s.offset))) { set.add(norm(t.w)); here.add(norm(t.w)); }
         // the noun phrase that CONTAINS the name: the words between its determiner and the name ("the Statue of | Liberty" → statue, of)
         const left = wordsOf(s.text.slice(Math.max(0, m.start - s.offset - 40), m.start - s.offset)).map((t) => ({ ...t, i: t.i + Math.max(0, m.start - s.offset - 40), end: t.end + Math.max(0, m.start - s.offset - 40) }));
         const np = [];
         for (let k = left.length - 1; k >= 0 && np.length < 3; k--) {
           const gap = s.text.slice(left[k].end, k + 1 < left.length ? left[k + 1].i : m.start - s.offset);
           if (/[^\s]/.test(gap)) break;
-          if (DETERMINER(left[k].w)) { for (const t of np) { set.add(bare(t.w).toLowerCase()); here.add(bare(t.w).toLowerCase()); } break; }
+          if (DETERMINER(left[k].w)) { for (const t of np) { set.add(norm(t.w)); here.add(norm(t.w)); } break; }
           np.unshift(left[k]);
         }
         surfaceWords.set(m.ref, set);
+        const nw = nameWords.get(m.ref) ?? new Set();
+        for (const t of wordsOf(s.text.slice(m.start - s.offset, m.end - s.offset))) if (!DETERMINER(t.w)) nw.add(norm(t.w));
+        nameWords.set(m.ref, nw);
         mentionCount.set(m.ref, (mentionCount.get(m.ref) ?? 0) + 1);
         const wm = wordMentions.get(m.ref) ?? new Map();
         for (const w of here) wm.set(w, (wm.get(w) ?? 0) + 1);
@@ -150,23 +176,38 @@ export function bindAttended(sentences, mentions, options = {}) {
 
     // TARGETS: the neuter pronouns, and a sentence-initial definite description "The <w>"
     const targets = [];
-    for (const t of toks) if (NEUTER_THIRD_PERSON.has(t.w.toLowerCase()) && !inMention(t.i)) targets.push({ kind: "pronoun", w: t.w, i: t.i, end: t.end });
-    if (toks.length >= 2 && ARTICLE(toks[0].w) && !isCapital(toks[1].w) && s.text.slice(0, toks[0].i).replace(/[\s"“'‘(\[]/g, "") === "")
-      targets.push({ kind: "description", w: toks[1].w, i: toks[0].i, end: toks[1].i + bare(toks[1].w).length });
+    for (const t of toks) if (NEUTER_THIRD_PERSON.has(t.w.toLowerCase())) {
+      if (!inMention(t.i)) targets.push({ kind: "pronoun", w: t.w, i: t.i, end: t.end });
+      else if (neverSilent) gaps.push({ sentenceOrder: s.order, surface: t.w, at: [s.offset + t.i, s.offset + t.end], kind: "pronoun", reason: "inside_cast_mention", detail: "the pronoun's bytes are inside a cast naming: nothing was decided" });
+    }
+    if (toks.length >= 2 && ARTICLE(toks[0].w) && !isCapital(toks[1].w) && s.text.slice(0, toks[0].i).replace(/[\s"“'‘(\[]/g, "") === "") {
+      const heads = [toks[1]];
+      // NP HEAD: the words after the article up to three, ended by a closed class (copula, auxiliary, determiner, clause opener, coordinator) or a capital
+      if (npHead) for (let k = 2; k < Math.min(toks.length, 4); k++) {
+        const w = toks[k].w.toLowerCase();
+        if (isCapital(toks[k].w) || /[,;:.]/.test(s.text.slice(toks[k - 1].end, toks[k].i)) || COPULA_FORMS.has(w) || AUXILIARY_VERBS.has(w) || DETERMINER(w) || CLAUSE_OPENERS.has(w) || CLAUSE_COORDINATORS.has(w)) break;
+        heads.push(toks[k]);
+      }
+      targets.push({ kind: "description", w: toks[1].w, heads, i: toks[0].i, end: toks[1].i + bare(toks[1].w).length });
+    }
 
     // causal: the ranking below reads only what sentences BEFORE this one fired
     for (const t of targets) {
       const abs = [s.offset + t.i, s.offset + t.end];
-      const base = { sentenceOrder: s.order, surface: s.text.slice(t.i, t.end), at: abs, kind: t.kind };
+      let base = { sentenceOrder: s.order, surface: s.text.slice(t.i, t.end), at: abs, kind: t.kind };
       if (t.kind === "description") {
-        const word = bare(t.w).toLowerCase();
-        const pool = [...candidates].filter((r) => wordsOfRef(r).has(word));
+        let word = norm(t.w);
+        const poolOf = (w) => [...candidates].filter((r) => wordsOfRef(r).has(w) || ctxOK(w, r));
+        let pool = poolOf(word);
+        if (npHead && t.heads.length > 1) { // the rightmost word of the noun phrase that some candidate owns is its head; the address ends there
+          for (let k = t.heads.length - 1; k >= 0; k--) { const pk = poolOf(norm(t.heads[k].w)); if (pk.length) { word = norm(t.heads[k].w); pool = pk; base = { ...base, surface: s.text.slice(t.i, t.heads[k].i + bare(t.heads[k].w).length), at: [s.offset + t.i, s.offset + t.heads[k].i + bare(t.heads[k].w).length] }; break; } }
+        }
         if (!pool.length) { gaps.push({ ...base, reason: "description_unbound", detail: `no candidate has "${word}" among the words the text gave it` }); continue; }
         const d = decide(rank(pool));
         if (d.gap) { gaps.push({ ...base, reason: `description_${d.gap}`, top: d.top ?? null, runnerUp: d.runnerUp ?? null, activation: d.activation ?? 0, margin: d.margin ?? null }); continue; }
         // A POOL OF ONE IS NOT CONFIDENCE. Alone, a candidate has margin 1 by default; judged instead against the being's own naming: the share of
         // its mentions that carried the word (1 when the text predicated the word of it as its kind). "Middle Tennessee" had "river" in 1 of 8 mentions.
-        if (minWordShare !== null) {
+        if (minWordShare !== null && wordsOfRef(d.ref).has(word)) {
           const share = kindWords.get(d.ref)?.has(word) ? 1 : (wordMentions.get(d.ref)?.get(word) ?? 0) / (mentionCount.get(d.ref) || 1);
           if (share < minWordShare) { gaps.push({ ...base, reason: "description_weak_word", top: d.ref, wordShare: share, activation: d.activation, margin: d.margin, detail: `"${word}" is in ${(share * 100).toFixed(0)}% of ${d.ref}'s mentions` }); continue; }
         }
@@ -183,7 +224,19 @@ export function bindAttended(sentences, mentions, options = {}) {
         if (verbAt >= 0 && clause.some((a, k) => k > verbAt && a.w.toLowerCase() === "that")) { gaps.push({ ...base, reason: "expletive_or_cleft", detail: "a copula and a complementizer follow in the same clause: the pronoun has no referent" }); continue; }
       }
       const ranked = rank([...candidates]);
-      const d = decide(ranked);
+      let d = decide(ranked);
+      if (tieResolve && d.gap === "no_margin") {
+        // TIED CANDIDATES are decided from the text before they are refused: first by the fuller name (one candidate's name is a part of the other's: "Panama" and
+        // "The Panama Canal" are one thing the cast split), then by which candidate the previous sentence made its subject or bound
+        const topAct = ranked[0][1]; const T = ranked.filter(([, a]) => a >= topAct * (1 - minMargin)).map(([r]) => r);
+        const nw = (r) => nameWords.get(r) ?? new Set();
+        const full = T.filter((r) => nw(r).size && T.every((o) => o === r || [...nw(o)].every((w) => nw(r).has(w))));
+        let pick = null;
+        if (full.length >= 1) pick = full.sort((a, b) => (mentionCount.get(b) ?? 0) - (mentionCount.get(a) ?? 0))[0];
+        else if (prevSubject?.kind === "ref" && T.includes(prevSubject.ref)) pick = prevSubject.ref;
+        else { const carried = T.filter((r) => prevCarried.has(r)); if (carried.length === 1) pick = carried[0]; }
+        if (pick) d = { ref: pick, activation: ranked.find(([r]) => r === pick)[1], margin: d.margin, via: "attended-tie" };
+      }
       if (d.gap) { gaps.push({ ...base, reason: `pronoun_${d.gap}`, top: d.top ?? null, runnerUp: d.runnerUp ?? null, activation: d.activation ?? 0, margin: d.margin ?? null }); continue; }
       if (centerVeto && prevSubject && (prevSubject.kind === "unbound-description" || (prevSubject.kind === "ref" && prevSubject.ref !== d.ref))) {
         gaps.push({ ...base, reason: "center_elsewhere", top: d.ref, detail: prevSubject.kind === "ref" ? `the previous sentence began with ${prevSubject.ref}` : "the previous sentence began with a description the cast does not know" });
@@ -197,7 +250,7 @@ export function bindAttended(sentences, mentions, options = {}) {
         const mate = ms.find((m) => m.ref !== d.ref && candidates.has(m.ref) && m.end - s.offset <= t.i && sameClause(s.text, m.start - s.offset, t.i));
         if (mate) { gaps.push({ ...base, reason: "clause_mate", top: d.ref, detail: `${mate.ref} is named earlier in the pronoun's clause` }); continue; }
       }
-      bindings.push({ ...base, referentId: d.ref, activation: d.activation, margin: d.margin, via: "attended" });
+      bindings.push({ ...base, referentId: d.ref, activation: d.activation, margin: d.margin, via: d.via ?? "attended" });
     }
 
     if (causalWords) register(); // round 2: a target sees only what sentences BEFORE its own named (the tail of its own sentence is not evidence)
@@ -209,7 +262,7 @@ export function bindAttended(sentences, mentions, options = {}) {
     else if (targets.some((t) => t.kind === "description")) prevSubject = bound ? { kind: "ref", ref: bound.referentId } : { kind: "unbound-description" };
     else if (demonstrativeSubject && toks.length >= 2 && DETERMINER(toks[0].w) && !isCapital(toks[1].w) && s.text.slice(0, toks[0].i).replace(/[\s"“'‘(\[]/g, "") === "") {
       // a demonstrative or indefinite noun phrase opened the sentence ("These objections…"): about its own noun unless the cast gave a candidate that word
-      const w1 = bare(toks[1].w).toLowerCase(); const pool1 = [...candidates].filter((r) => wordsOfRef(r).has(w1));
+      const w1 = norm(toks[1].w); const pool1 = [...candidates].filter((r) => wordsOfRef(r).has(w1) || ctxOK(w1, r));
       prevSubject = pool1.length === 1 ? { kind: "ref", ref: pool1[0] } : { kind: "unbound-description" };
     } else prevSubject = null;
     prevCarried = new Set([...ms.filter((m) => candidates.has(m.ref)).map((m) => m.ref), ...bindings.filter((b) => b.sentenceOrder === s.order).map((b) => b.referentId)]);
@@ -217,10 +270,17 @@ export function bindAttended(sentences, mentions, options = {}) {
     // predicate kinds, from the sentence just read (available to LATER sentences only)
     for (const m of ms) {
       const kind = predicateKind(s.text.slice(m.end - s.offset));
-      if (kind.length) { const set = kindWords.get(m.ref) ?? new Set(); kind.forEach((k) => set.add(k)); kindWords.set(m.ref, set); }
+      if (kind.length) { const set = kindWords.get(m.ref) ?? new Set(); kind.forEach((k) => set.add(F(k))); kindWords.set(m.ref, set); }
       break; // the sentence's first naming only: its subject
     }
 
+    // context words: the lower-case words of a sentence are attributed to the being the sentence was about (its first naming, else what it bound)
+    if (contextMinUses !== null) {
+      const subj = (ms.length && candidates.has(ms[0].ref) ? ms[0].ref : null) ?? bindings.find((b) => b.sentenceOrder === s.order)?.referentId ?? null;
+      for (const w of new Set(toks.filter((t) => !isCapital(t.w) && !inMention(t.i)).map((t) => norm(t.w)))) {
+        const u = ctxUses.get(w) ?? { total: 0, by: new Map() }; u.total++; if (subj) u.by.set(subj, (u.by.get(subj) ?? 0) + 1); ctxUses.set(w, u);
+      }
+    }
     // the sentence's FIRST naming counts `boost` times: a position proxy for the grammatical subject (pronouns.js's presence rung), not a parse
     const fired = ms.filter((m) => candidates.has(m.ref)).map((m) => m.ref);
     if (ms.length && candidates.has(ms[0].ref)) for (let k = 1; k < boost; k++) fired.push(ms[0].ref);
