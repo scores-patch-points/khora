@@ -125,6 +125,7 @@ import { connect as matrixConnect } from "./fold-matrix.mjs";
 import { connect as driveConnect } from "./fold-gdrive.mjs";
 import { perceiveMedia, probeBackends, PERCEIVE_VERSION } from "./khora/perceive/local.mjs";
 import { perceiveMany as senseMany, huntOrgans, organStanding } from "./senses/registry.mjs";
+import { describeMedia, compose as composeMeasured, wantsNote, describableMime } from "./senses/describe.mjs";
 import { cube as cubeEvent, cubeMap } from "./opencode-cube.mjs";
 import * as cube from "./native/kernel/cube.js";
 import { makeStandingCube, cellForFlag } from "./native/the-fold/standing-cube.js";
@@ -1119,6 +1120,7 @@ const PERCEIVE_DEFAULTS = Object.freeze({
   pdf: "layer-then-ocr", // layer-then-ocr | layer-only
   ocrLang: "eng",
   replaceMedia: true, // splice transcription in place of the media part
+  describe: "when-no-text", // when-no-text | always | off — add a labelled MEASURED note from the ear/eye (senses/describe.mjs); never in place of the source's own text
 });
 const PERCEIVE_MAX_BYTES = 25 * 1024 * 1024;
 
@@ -1295,7 +1297,14 @@ async function onPerceive(body) {
     if (cfg.pdf === "layer-only" && out.via === "pdf-ocr") {
       return { ...out, text: "", chars: 0, via: "text-layer-only", gaps: [...out.gaps, { reason: "ocr_skipped_by_config", detail: "pdf mode is layer-only" }] };
     }
-    return { ...out, replaceMedia: cfg.replaceMedia };
+    const base = { ...out, replaceMedia: cfg.replaceMedia };
+    // The ear and the eye (senses/describe.mjs): foldcode carries only `text`, so a reading reaches the model as a labelled note,
+    // appended after the source's own characters, and when there are none the media is kept (replaceMedia:false).
+    if (describableMime(mime) && wantsNote(cfg.describe, out.text)) {
+      const d = await describeMedia(bytes, { mime, name }).catch(() => null);
+      if (d) return composeMeasured(base, d, cfg);
+    }
+    return base;
   } catch (e) {
     return { passthrough: true, gap: "perceive_failed", detail: String(e?.message ?? e).slice(0, 200) };
   }

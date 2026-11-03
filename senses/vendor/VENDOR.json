@@ -1,0 +1,19 @@
+{
+  "note": "Single-file UMD readers, byte-identical copies, loaded with createRequire (this package is type:module, so they carry the .cjs extension). Replace by re-copying from the source repo; the sha256 below says whether a copy drifted.",
+  "files": {
+    "alcmaeon.cjs": {
+      "repo": "scores-patch-points/Alcmaeon",
+      "file": "alcmaeon.js",
+      "commit": "926d556f006d248c3229676ea539cd132847fb54",
+      "sha256": "859c8597f5b87ca48929c291282d12beddb05449b3d03c1b54c2b367acbab9e1",
+      "role": "the ear: causal streaming features, attested tempo/key, sections, loudness, heard-rule index"
+    },
+    "alhazen.cjs": {
+      "repo": "scores-patch-points/Alhazen",
+      "file": "alhazen.js",
+      "commit": "2fe209bdc0909a768bdbcc10cdfdac2e98b8ee22 (per holodeck/vendor/alhazen/ALHAZEN-VENDOR.json; uncommittedAtSync: M alhazen.js)",
+      "sha256": "c7dca6bb9febaefb17dd4f98ef888f89e71ec179266a9d107e262d410a6389ea",
+      "role": "the eye: measured structure of a raster"
+    }
+  }
+}
