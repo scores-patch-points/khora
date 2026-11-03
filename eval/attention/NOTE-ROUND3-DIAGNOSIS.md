@@ -10,7 +10,7 @@ Asked by the parent session. Uses only the committed round-3 output (`V2-RAW.jso
 ## Attended misses and correct cases (20)
 | group | n | gold not in cast | gold a candidate, 1 or 2 prior mentions | gold a candidate, 3+ prior mentions |
 |---|---|---|---|---|
-| correct | 8 | 0 | **6** (w01, w03, w05, w09, w10, w15; five of them with exactly 1 prior mention) | 2 (w08, w17) |
+| correct | 8 | 0 | **6** (w01, w03, w05, w09, w10, w15; all six with exactly 1 prior mention) | 2 (w08, w17) |
 | wrong or gap | 12 | 0 (the Voyager pair is in the cast under the truncated name "Voyager": 3–4 prior mentions) | 4 (w04, w11, w12, w16) | **8** (w02, w06, w07, w13, w14, w18, w19, w20) |
 
 A referent soon after its first mention is where the binder does BEST (a "chick" case: w01 "Its" and w03/w05 "It" right after one mention bind correctly, activation 1–2, margin 0.5). Misses rise, not fall, with the number of prior mentions.
