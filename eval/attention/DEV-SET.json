@@ -1,0 +1,375 @@
+{
+ "schema": "AttentionDev@1",
+ "created": "2026-11-03",
+ "note": "development set; tuned on, never scored on",
+ "cases": [
+  {
+   "id": "d01",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 414,
+   "end": 459,
+   "text": "The statue was dedicated on October 28, 1886.",
+   "surface": "The statue",
+   "tokenStart": 414,
+   "tokenEnd": 424,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "definite description, head of the first sentence's own noun"
+  },
+  {
+   "id": "d02",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 1857,
+   "end": 1997,
+   "text": "The statue was built in France, shipped overseas in crates, and assembled on the completed pedestal on what was then called Bedloe's Island.",
+   "surface": "The statue",
+   "tokenStart": 1857,
+   "tokenEnd": 1867,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "definite description"
+  },
+  {
+   "id": "d03",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 2143,
+   "end": 2264,
+   "text": "The statue became an icon of freedom and of the United States, seen as a symbol of welcome to immigrants arriving by sea.",
+   "surface": "The statue",
+   "tokenStart": 2143,
+   "tokenEnd": 2153,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "definite description"
+  },
+  {
+   "id": "d04",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 2265,
+   "end": 2440,
+   "text": "The statue was administered by the United States Lighthouse Board until 1901 and then by the Department of War; since 1933, it has been maintained by the National Park Service",
+   "surface": "it",
+   "tokenStart": 2389,
+   "tokenEnd": 2391,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "pronoun in a later clause, other names in the sentence"
+  },
+  {
+   "id": "d05",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 5220,
+   "end": 5363,
+   "text": "This statue is believed to have been over 100 feet (30 m) high, and it similarly stood at a harbor entrance and carried a light to guide ships.",
+   "surface": "it",
+   "tokenStart": 5288,
+   "tokenEnd": 5290,
+   "kind": "elsewhere",
+   "accept": [
+    "Colossus of Rhodes"
+   ],
+   "note": "TRAP: refers to the ancient Colossus of Rhodes of the previous sentence"
+  },
+  {
+   "id": "d06",
+   "doc": "wiki-Gateway_Arch",
+   "start": 92,
+   "end": 242,
+   "text": "Clad in stainless steel and built in the form of a weighted catenary arch, it is the world's tallest arch and Missouri's tallest accessible structure.",
+   "surface": "it",
+   "tokenStart": 167,
+   "tokenEnd": 169,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "pronoun after a participial phrase"
+  },
+  {
+   "id": "d07",
+   "doc": "wiki-Gateway_Arch",
+   "start": 243,
+   "end": 326,
+   "text": "Some sources consider it the tallest human-made monument in the Western Hemisphere.",
+   "surface": "it",
+   "tokenStart": 265,
+   "tokenEnd": 267,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "object pronoun"
+  },
+  {
+   "id": "d08",
+   "doc": "wiki-Gateway_Arch",
+   "start": 907,
+   "end": 958,
+   "text": "The monument opened to the public on June 10, 1967.",
+   "surface": "The monument",
+   "tokenStart": 907,
+   "tokenEnd": 919,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "definite description with a head noun that is not in the name (earned from the first sentence's predicate)"
+  },
+  {
+   "id": "d09",
+   "doc": "wiki-Gateway_Arch",
+   "start": 959,
+   "end": 1012,
+   "text": "It is located at the 1764 site of the founding of St.",
+   "surface": "It",
+   "tokenStart": 959,
+   "tokenEnd": 961,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "pronoun, sentence cut at an abbreviation"
+  },
+  {
+   "id": "d10",
+   "doc": "wiki-Gateway_Arch",
+   "start": 2708,
+   "end": 2797,
+   "text": "It called upon the federal government to foot three-quarters of the bill ($22.5 million).",
+   "surface": "It",
+   "tokenStart": 2708,
+   "tokenEnd": 2710,
+   "kind": "elsewhere",
+   "accept": [
+    "association"
+   ],
+   "note": "TRAP: refers to the association of the previous sentence, not the arch"
+  },
+  {
+   "id": "d11",
+   "doc": "wiki-Gateway_Arch",
+   "start": 4389,
+   "end": 4428,
+   "text": "It first convened on December 19 in St.",
+   "surface": "It",
+   "tokenStart": 4389,
+   "tokenEnd": 4391,
+   "kind": "elsewhere",
+   "accept": [
+    "commission"
+   ],
+   "note": "TRAP: refers to the commission of the previous sentence"
+  },
+  {
+   "id": "d12",
+   "doc": "wiki-Hoover_Dam",
+   "start": 294,
+   "end": 401,
+   "text": "Its construction was the result of a massive effort involving thousands of workers, and cost over 96 lives.",
+   "surface": "Its",
+   "tokenStart": 294,
+   "tokenEnd": 297,
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam"
+   ],
+   "note": "possessive"
+  },
+  {
+   "id": "d13",
+   "doc": "wiki-Hoover_Dam",
+   "start": 1521,
+   "end": 1624,
+   "text": "The dam's generators provide power for public and private utilities in Nevada, Arizona, and California.",
+   "surface": "The dam",
+   "tokenStart": 1521,
+   "tokenEnd": 1528,
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam"
+   ],
+   "note": "definite description with a possessive clitic"
+  },
+  {
+   "id": "d14",
+   "doc": "wiki-Hoover_Dam",
+   "start": 402,
+   "end": 568,
+   "text": "Bills passed by Congress during its construction referred to it as Hoover Dam (after President Herbert Hoover), but the Roosevelt administration named it Boulder Dam.",
+   "surface": "its",
+   "tokenStart": 434,
+   "tokenEnd": 437,
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam"
+   ],
+   "note": "possessive, other names in the sentence"
+  },
+  {
+   "id": "d15",
+   "doc": "wiki-Hoover_Dam",
+   "start": 3252,
+   "end": 3371,
+   "text": "Edison allowed land options it held on the river to lapse—including an option for what became the site of Hoover Dam.",
+   "surface": "it",
+   "tokenStart": 3280,
+   "tokenEnd": 3282,
+   "kind": "elsewhere",
+   "accept": [
+    "Southern California Edison",
+    "Edison"
+   ],
+   "note": "TRAP: refers to the company Edison, in the sentence"
+  },
+  {
+   "id": "d16",
+   "doc": "wiki-Hoover_Dam",
+   "start": 3697,
+   "end": 3813,
+   "text": "The river would carry off the smaller pieces of debris, and a dam would be built incorporating the remaining rubble.",
+   "surface": "The river",
+   "tokenStart": 3697,
+   "tokenEnd": 3706,
+   "kind": "attended",
+   "accept": [
+    "Colorado River"
+   ],
+   "note": "definite description whose referent is a river of the surrounding passage; the dam is not the answer"
+  },
+  {
+   "id": "d17",
+   "doc": "wiki-Mississippi_River",
+   "start": 95,
+   "end": 157,
+   "text": "It is the second-longest river in the U.S. after the Missouri.",
+   "surface": "It",
+   "tokenStart": 95,
+   "tokenEnd": 97,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "pronoun"
+  },
+  {
+   "id": "d18",
+   "doc": "wiki-Mississippi_River",
+   "start": 158,
+   "end": 329,
+   "text": "From its traditional source of Lake Itasca in northern Minnesota, it flows generally south for 2,340 miles (3,770 km) to the Mississippi River Delta in the Gulf of Mexico.",
+   "surface": "it",
+   "tokenStart": 224,
+   "tokenEnd": 226,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "pronoun with other names in the sentence"
+  },
+  {
+   "id": "d19",
+   "doc": "wiki-Mississippi_River",
+   "start": 495,
+   "end": 658,
+   "text": "The river either borders or passes through the states of Minnesota, Wisconsin, Iowa, Illinois, Missouri, Kentucky, Tennessee, Arkansas, Mississippi, and Louisiana.",
+   "surface": "The river",
+   "tokenStart": 495,
+   "tokenEnd": 504,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "definite description, a state called Mississippi in the sentence"
+  },
+  {
+   "id": "d20",
+   "doc": "wiki-Mississippi_River",
+   "start": 1752,
+   "end": 1853,
+   "text": "The river also became the subject of American literature, particularly in the writings of Mark Twain.",
+   "surface": "The river",
+   "tokenStart": 1752,
+   "tokenEnd": 1761,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "definite description"
+  },
+  {
+   "id": "d21",
+   "doc": "wiki-Mississippi_River",
+   "start": 3215,
+   "end": 3372,
+   "text": "With the Louisiana Purchase and the country's westward expansion, it became a convenient boundary line between the western and eastern halves of the country.",
+   "surface": "it",
+   "tokenStart": 3281,
+   "tokenEnd": 3283,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "pronoun after a prepositional phrase"
+  },
+  {
+   "id": "d22",
+   "doc": "wiki-Apollo_11",
+   "start": 1878,
+   "end": 1931,
+   "text": "It fulfilled a national goal set by President John F.",
+   "surface": "It",
+   "tokenStart": 1878,
+   "tokenEnd": 1880,
+   "kind": "attended",
+   "accept": [
+    "Apollo 11"
+   ],
+   "note": "pronoun, sentence cut at an initial"
+  },
+  {
+   "id": "d23",
+   "doc": "wiki-Apollo_11",
+   "start": 153,
+   "end": 323,
+   "text": "The mission was crewed by Commander Neil Armstrong, Command Module Pilot Michael Collins, and Lunar Module Pilot Edwin \"Buzz\" Aldrin, all of whom were on their second and",
+   "surface": "The mission",
+   "tokenStart": 153,
+   "tokenEnd": 164,
+   "kind": "attended",
+   "accept": [
+    "Apollo 11"
+   ],
+   "note": "definite description with a head noun not in the name (the first sentence says 'the American spaceflight')"
+  },
+  {
+   "id": "d24",
+   "doc": "wiki-Apollo_11",
+   "start": 3589,
+   "end": 3701,
+   "text": "Its success demonstrated that the USSR could potentially deliver nuclear weapons over intercontinental distances",
+   "surface": "Its",
+   "tokenStart": 3589,
+   "tokenEnd": 3592,
+   "kind": "elsewhere",
+   "accept": [
+    "Sputnik 1"
+   ],
+   "note": "TRAP: refers to Sputnik 1 of the previous sentence"
+  }
+ ],
+ "texts": {
+  "wiki-Statue_of_Liberty": "7fa68cf0f4edbe21884d98684fff8f552d59534e6ea773580335596d3635e588",
+  "wiki-Gateway_Arch": "fbfa41f6f695aa148745f51758ace5842c67411fd8d3352a118a9f1f4abfb516",
+  "wiki-Hoover_Dam": "ed85f73be20f1b61c814fe18dd664eb0ec3d1fb96d2f522658f06e94bd05ef88",
+  "wiki-Mississippi_River": "aa8cfc8347df96665d4cc1c33740d6311dcb024e27bd75717ab158dc2ea6c3da",
+  "wiki-Apollo_11": "8d231da94502a54e0e45db2aa3b4210760b44f9e82e8c5ccd82c1db212937170"
+ }
+}
