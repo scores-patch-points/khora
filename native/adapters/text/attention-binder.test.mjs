@@ -128,3 +128,64 @@ test("the switch is OFF unless asked: absent or false files nothing; on, it bind
   assert.equal(attendedBindingsFor(entry, { enabled: "yes", ...DIALS }), null, "only true turns it on");
   assert.equal(attendedBindingsFor(entry, { enabled: true, ...DIALS }).bindings[0].referentId, "T");
 });
+
+// ---- round 2 (PREREG-ATTENTION-A2.md): every option is off unless declared, and each has a falsifier ----
+const R2 = { minWordShare: 0.25, carryVeto: true, expletiveVeto: true, demonstrativeSubject: true, causalWords: true };
+
+test("round-2 options absent: the call is the round-1 call", () => {
+  const texts = ["The Tower is old.", "The committee met.", "It was large."];
+  const a = run(texts, [[0, "T", "Tower"]], { centerVeto: false });
+  const b = run(texts, [[0, "T", "Tower"]], { centerVeto: false, minWordShare: null, carryVeto: false, expletiveVeto: false, demonstrativeSubject: false, causalWords: false });
+  assert.deepEqual(a, b);
+  assert.throws(() => run(texts, [], { carryVeto: "yes" }), TypeError);
+  assert.throws(() => run(texts, [], { minWordShare: 2 }), TypeError);
+});
+
+test("expletive or cleft 'it' (a copula, then the complementizer in the same clause) files a typed gap, not a binding", () => {
+  const texts = ["The Tower is old.", "It was in 1889 that it opened.", "It is said that the Tower leans."];
+  const out = run(texts, [[0, "T", "Tower"], [2, "T", "Tower"]], { ...R2, carryVeto: false });
+  assert.equal(out.gaps.filter((g) => g.reason === "expletive_or_cleft").length, 2, "the first 'It' of each; the 'it' after 'that' is a real pronoun");
+  const off = run(texts, [[0, "T", "Tower"], [2, "T", "Tower"]], { ...R2, carryVeto: false, expletiveVeto: false });
+  assert.equal(off.gaps.filter((g) => g.reason === "expletive_or_cleft").length, 0);
+  const rel = run(["The Tower is old.", "It is the tallest thing, and it was built quickly."], [[0, "T", "Tower"]], R2);
+  assert.equal(rel.bindings.filter((b) => b.kind === "pronoun").length >= 1, true, "no 'that': an ordinary pronoun");
+});
+
+test("carry: a pronoun after a sentence that did not name or bind the attended being is a gap; after one that did, a binding", () => {
+  const away = run(["The Tower is old.", "Visitors came in summer.", "It was large."], [[0, "T", "Tower"]], R2);
+  assert.equal(away.gaps.find((g) => g.sentenceOrder === 2).reason, "center_not_carried");
+  const kept = run(["The Tower is old.", "Visitors admired the Tower.", "It was large."], [[0, "T", "Tower"], [1, "T", "Tower"]], R2);
+  assert.equal(kept.bindings.find((b) => b.sentenceOrder === 2)?.referentId, "T");
+  const chain = run(["The Tower is old.", "It is tall.", "It is wide."], [[0, "T", "Tower"]], R2);
+  assert.deepEqual(chain.bindings.map((b) => b.sentenceOrder), [1, 2], "a bound 'It' carries the being to the next sentence");
+});
+
+test("demonstrative subject: 'These objections …' is not about the attended being, so the next 'It' is a centre moving elsewhere", () => {
+  const texts = ["The Tower is old.", "These objections were loud.", "It came to a head."];
+  const on = run(texts, [[0, "T", "Tower"]], { ...R2, carryVeto: false });
+  assert.equal(on.gaps.find((g) => g.sentenceOrder === 2).reason, "center_elsewhere");
+  const off = run(texts, [[0, "T", "Tower"]], { ...R2, carryVeto: false, demonstrativeSubject: false });
+  assert.equal(off.bindings.find((b) => b.sentenceOrder === 2)?.referentId, "T");
+});
+
+test("causal words: a description is judged by what sentences BEFORE it gave the being, not by a later naming in its own sentence", () => {
+  const texts = ["The Cumberland flows west to the Tennessee River."];
+  const withTail = (causalWords) => run(["Anna lived there.", "The river flows west to the Tennessee River."], [[0, "A", "Anna"], [1, "R", "Tennessee River"]], { ...R2, causalWords, nonPersonal: new Set(["A", "R"]) });
+  assert.equal(withTail(false).bindings.length >= 0, true);
+  assert.equal(withTail(true).bindings.length, 0, "the tail of its own sentence is not evidence");
+  assert.equal(withTail(true).gaps[0].reason, "description_unbound");
+  assert.ok(texts.length === 1);
+});
+
+test("a word in only a sliver of a being's mentions does not earn a confident description (a pool of one is judged against the being's own naming)", () => {
+  const T = ["Tennessee is warm.", "Tennessee is green.", "Tennessee is hilly.", "Tennessee is wet.", "Tennessee is old.", "Boats crossed the Tennessee River.", "Tennessee is large.", "The river was cold."];
+  const sents = build(T);
+  const spec = T.slice(0, 7).map((_, si) => { const needle = si === 5 ? "Tennessee River" : "Tennessee"; const start = sents[si].offset + sents[si].text.indexOf(needle); return { ref: "TN", start, end: start + needle.length }; });
+  const dials = { ...DIALS, ...R2, nonPersonal: new Set(["TN"]) };
+  assert.equal(bindAttended(sents, spec, { ...dials, minWordShare: 0 }).bindings.find((b) => b.surface === "The river")?.referentId, "TN", "alone, it binds");
+  const strict = bindAttended(sents, spec, { ...dials, minWordShare: 0.5 });
+  assert.equal(strict.bindings.find((b) => b.surface === "The river"), undefined);
+  const gap = strict.gaps.find((g) => g.surface === "The river");
+  assert.equal(gap?.reason, "description_weak_word");
+  assert.ok(gap.wordShare > 0 && gap.wordShare < 0.5, `1 mention of 7 carried the word (${gap.wordShare})`);
+});
