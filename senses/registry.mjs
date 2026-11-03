@@ -27,6 +27,8 @@ import {
   describeGray,
 } from "../khora/perceive/local.mjs";
 import { huntSidecar, perceiveOrgan, probeModules } from "../native/organs/cube-sidecar.mjs";
+import { earOrgan } from "./organs/ear.mjs";
+import { eyeOrgan } from "./organs/eye.mjs";
 
 export const SENSES_VERSION = "khora-senses@0.1";
 
@@ -137,6 +139,12 @@ const ORGAN_CANDIDATES = [
   { id: "pdftotext", kind: "text-layer", modality: "pdf", provider: "local", probe: ["pdftotext", ["-v"]], run: pdfLayerOrgan },
   { id: "pdf-ocr", kind: "ocr", modality: "pdf", provider: "local", probe: ["pdftoppm", ["-h"]], run: pdfOcrOrgan },
   { id: "whisper", kind: "asr", modality: "audio", provider: "local", probe: ["whisper", ["--help"]], run: whisperOrgan },
+  // THE EAR AND THE EYE (Alcmaeon, Alhazen). Descriptive organs: they return `text: ""` and put the reading in `meta`, like cv-khora
+  // and sips, so deltaOf() never scores a measurement against a transcript and a measurement is never the representative ground.
+  // The ear also hears a video's soundtrack (video had no organ at all).
+  { id: "alcmaeon", kind: "ear", modality: "audio", provider: "local", probe: ["ffmpeg", ["-version"]], run: earOrgan },
+  { id: "alcmaeon-soundtrack", kind: "ear", modality: "video", provider: "local", probe: ["ffmpeg", ["-version"]], run: earOrgan },
+  { id: "alhazen", kind: "eye", modality: "image", provider: "local", probe: ["ffmpeg", ["-version"]], run: eyeOrgan },
 ];
 
 // ── the python organs (the cube sidecar): the SAME fan-out, hunted the same way ──
