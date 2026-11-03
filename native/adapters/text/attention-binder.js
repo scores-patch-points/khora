@@ -68,6 +68,9 @@ export function bindAttended(sentences, mentions, options = {}) {
   const { lineStarts = false, npHead = false, tieResolve = false, foldPlural = false, neverSilent = false, contextMinUses = null } = options;
   // ROUND-4 options (PREREG-ATTENTION-A4.md). Absent, each is off and the call is the round-3 call, byte for byte.
   const { bearerShare = null, weakRouteCarry = false, centerRivalShare = null, openerReset = false } = options;
+  // ROUND-5 option (PREREG-ATTENTION-A5.md). Absent, off: the call is the round-4 call, byte for byte.
+  const { capitalTargets = false } = options;
+  if (typeof capitalTargets !== "boolean") throw new TypeError("bindAttended: capitalTargets is true or false");
   for (const [k, v] of Object.entries({ bearerShare, centerRivalShare })) if (v !== null && (!Number.isFinite(v) || v <= 0 || v > 1)) throw new TypeError(`bindAttended: ${k} is null (off) or a declared share in (0, 1]`);
   for (const [k, v] of Object.entries({ weakRouteCarry, openerReset })) if (typeof v !== "boolean") throw new TypeError(`bindAttended: ${k} is true or false`);
   if (contextMinUses !== null && (!Number.isInteger(contextMinUses) || contextMinUses < 1)) throw new TypeError("bindAttended: contextMinUses is null (off) or a declared count of at least 1");
@@ -203,10 +206,31 @@ export function bindAttended(sentences, mentions, options = {}) {
       targets.push({ kind: "description", w: toks[1].w, heads, i: toks[0].i, end: toks[1].i + bare(toks[1].w).length });
     }
 
+    // CAPITALISED TARGETS (capitalTargets): a sentence-initial article followed by a capitalised word is a name or an alias, not a lower-case description, and round 4 filed
+    // nothing for it ("The ISS", "The LHC Computing Grid", "The Mayflower crew" were silent). Now every such article ends as a binding or a typed gap, by construction.
+    if (capitalTargets && toks.length >= 1 && ARTICLE(toks[0].w) && s.text.slice(0, toks[0].i).replace(/[\s"“'‘(\[]/g, "") === "" && !(toks.length >= 2 && !isCapital(toks[1].w)))
+      targets.push({ kind: "capital", w: toks[0].w, i: toks[0].i, end: toks[0].end });
+
     // causal: the ranking below reads only what sentences BEFORE this one fired
     for (const t of targets) {
       const abs = [s.offset + t.i, s.offset + t.end];
       let base = { sentenceOrder: s.order, surface: s.text.slice(t.i, t.end), at: abs, kind: t.kind };
+      if (t.kind === "capital") {
+        if (toks.length < 2) { gaps.push({ ...base, reason: "article_alone", detail: "a sentence-initial article with nothing after it" }); continue; }
+        const nameAt = toks[1];
+        // read as a being when a cast mention covers the capitalised word (longest naming); the name ends where a closed class, punctuation or the end of the line follows it
+        const M = ms.filter((m) => m.start - s.offset <= nameAt.end && m.end - s.offset >= nameAt.i).sort((a, b) => (b.end - b.start) - (a.end - a.start))[0]; // the cast may begin the naming AT the article ("The ISS")
+        const span = (to) => ({ ...base, surface: s.text.slice(t.i, to), at: [s.offset + t.i, s.offset + to] });
+        if (!M) { gaps.push({ ...span(nameAt.end), reason: "capitalised_unknown_name", detail: `"${nameAt.w}" is capitalised and no cast being is named there` }); continue; }
+        const mEnd = M.end - s.offset;
+        const next = toks.find((x) => x.i >= mEnd);
+        const lw = next?.w.toLowerCase();
+        const closes = !next || /[,;:.)\]]/.test(s.text.slice(mEnd, next.i)) || COPULA_FORMS.has(lw) || AUXILIARY_VERBS.has(lw) || DETERMINER(lw) || CLAUSE_OPENERS.has(lw) || CLAUSE_COORDINATORS.has(lw);
+        if (!closes) { gaps.push({ ...span(next.end), reason: "capitalised_name_open_word", top: M.ref, detail: `"${s.text.slice(nameAt.i, mEnd)}" is followed by "${next.w}": a part of the being, or a verb; the binder cannot tell` }); continue; }
+        if (!candidates.has(M.ref)) { gaps.push({ ...span(mEnd), reason: "capitalised_name_not_candidate", top: M.ref, detail: "the name is a cast being the ruling does not allow for 'it'" }); continue; }
+        bindings.push({ ...span(mEnd), kind: "name", referentId: M.ref, activation: activation.activationOf(M.ref), margin: null, via: "cast-name" });
+        continue;
+      }
       if (t.kind === "description") {
         let word = norm(t.w);
         const poolOf = (w) => [...candidates].filter((r) => wordsOfRef(r).has(w) || ctxOK(w, r));
@@ -313,7 +337,7 @@ export function bindAttended(sentences, mentions, options = {}) {
     // the sentence's FIRST naming counts `boost` times: a position proxy for the grammatical subject (pronouns.js's presence rung), not a parse
     const fired = ms.filter((m) => candidates.has(m.ref)).map((m) => m.ref);
     if (ms.length && candidates.has(ms[0].ref)) for (let k = 1; k < boost; k++) fired.push(ms[0].ref);
-    if (feed) for (const b of bindings) if (b.sentenceOrder === s.order) fired.push(b.referentId);
+    if (feed) for (const b of bindings) if (b.sentenceOrder === s.order && b.kind !== "name") fired.push(b.referentId);
     activation.observe(fired);
     cum.observe(fired);
   }

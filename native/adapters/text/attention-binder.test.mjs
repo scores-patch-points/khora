@@ -308,3 +308,52 @@ test("round-4 options absent: the call is the round-3 call; types are checked", 
   assert.throws(() => run(texts, [], { bearerShare: 0 }), TypeError);
   assert.throws(() => run(texts, [], { openerReset: "yes" }), TypeError);
 });
+
+// ---- round 5 (PREREG-ATTENTION-A5.md) ----
+const ALL5 = { ...ALL, capitalTargets: true };
+
+test("capitalised target: 'The ISS was …' is read as the being named there; round 4 filed nothing", () => {
+  const T = ["The International Space Station orbits Earth, and ISS crews live there.", "The ISS was built by many nations."];
+  const specs = [[0, "S", "International Space Station"], [1, "S", "ISS was"]].map(([si, ref, n]) => [si, ref, n === "ISS was" ? "ISS" : n]);
+  const off = run(T, specs, ALL);
+  assert.equal(off.bindings.length + off.gaps.length, 0, "round 4: silent");
+  const on = run(T, specs, ALL5);
+  const b = on.bindings.find((x) => x.sentenceOrder === 1);
+  assert.equal(b?.referentId, "S");
+  assert.equal(b.kind, "name");
+  assert.equal(b.via, "cast-name");
+  assert.equal(b.surface, "The ISS");
+});
+
+test("capitalised name then an open-class word ('The Mayflower crew …') is a typed gap: a part of the being or a verb, undecided", () => {
+  const T = ["The Mayflower was a ship.", "The Mayflower crew numbered thirty."];
+  const out = run(T, [[0, "M", "Mayflower"], [1, "M", "Mayflower"]], ALL5);
+  const g = out.gaps.find((x) => x.sentenceOrder === 1);
+  assert.equal(g?.reason, "capitalised_name_open_word");
+  assert.equal(g.surface, "The Mayflower crew");
+  assert.equal(out.bindings.some((x) => x.sentenceOrder === 1), false);
+});
+
+test("a capitalised word no cast being is named at is a typed gap; so is a name the ruling does not allow for 'it'; an article alone too", () => {
+  const unknown = run(["The Tower is old.", "The Zeppelin was loud."], [[0, "T", "Tower"]], ALL5);
+  assert.equal(unknown.gaps.find((x) => x.sentenceOrder === 1)?.reason, "capitalised_unknown_name");
+  const person = run(["The Tower is old.", "The Anna was loud."], [[0, "T", "Tower"], [1, "A", "Anna"]], { ...ALL5, nonPersonal: new Set(["T"]) });
+  assert.equal(person.gaps.find((x) => x.sentenceOrder === 1)?.reason, "capitalised_name_not_candidate");
+  const alone = run(["The Tower is old.", "The"], [[0, "T", "Tower"]], ALL5);
+  assert.equal(alone.gaps.find((x) => x.sentenceOrder === 1)?.reason, "article_alone");
+});
+
+test("by construction: every sentence-initial 'The …' and every neuter pronoun ends as a binding or a gap", () => {
+  const T = ["The Tower is old.", "The tower has a lift.", "The ISS was big.", "The Zeppelin crew sang.", "The 1952 expedition left.", "It is tall.", "Its base is wide.", "The"];
+  const out = run(T, [[0, "T", "Tower"]], ALL5);
+  const seen = new Set([...out.bindings, ...out.gaps].map((x) => x.sentenceOrder));
+  for (const si of [1, 2, 3, 4, 5, 6, 7]) assert.ok(seen.has(si), `sentence ${si} has an outcome`);
+});
+
+test("round-5 option absent: the call is the round-4 call", () => {
+  const T = ["The Tower is old.", "The tower has a lift.", "It is tall."];
+  const a = run(T, [[0, "T", "Tower"]], ALL);
+  const b = run(T, [[0, "T", "Tower"]], { ...ALL, capitalTargets: false });
+  assert.deepEqual(a, b);
+  assert.throws(() => run(T, [], { capitalTargets: 1 }), TypeError);
+});

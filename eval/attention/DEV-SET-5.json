@@ -1,0 +1,2482 @@
+{
+ "schema": "AttentionDev@5",
+ "created": "2026-11-03",
+ "note": "round-5 development set; tuned on, never scored on; includes spent sets",
+ "sources": {
+  "DEV-SET-4.json": "61ff26d807feb17965899add2c240ddb62f83695a3bee25f628fa28e22c2d7e4",
+  "PARA-GOLD-BIND-V3.binder.json": "ddce67b57ad8f796e7c3aac9a18e3899a1bdbb1bf654981eb39fee4fceadbca1"
+ },
+ "cases": [
+  {
+   "id": "d01",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 414,
+   "end": 459,
+   "text": "The statue was dedicated on October 28, 1886.",
+   "surface": "The statue",
+   "tokenStart": 414,
+   "tokenEnd": 424,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "definite description, head of the first sentence's own noun",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d02",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 1857,
+   "end": 1997,
+   "text": "The statue was built in France, shipped overseas in crates, and assembled on the completed pedestal on what was then called Bedloe's Island.",
+   "surface": "The statue",
+   "tokenStart": 1857,
+   "tokenEnd": 1867,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "definite description",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d03",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 2143,
+   "end": 2264,
+   "text": "The statue became an icon of freedom and of the United States, seen as a symbol of welcome to immigrants arriving by sea.",
+   "surface": "The statue",
+   "tokenStart": 2143,
+   "tokenEnd": 2153,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "definite description",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d04",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 2265,
+   "end": 2440,
+   "text": "The statue was administered by the United States Lighthouse Board until 1901 and then by the Department of War; since 1933, it has been maintained by the National Park Service",
+   "surface": "it",
+   "tokenStart": 2389,
+   "tokenEnd": 2391,
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty"
+   ],
+   "note": "pronoun in a later clause, other names in the sentence",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d05",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 5220,
+   "end": 5363,
+   "text": "This statue is believed to have been over 100 feet (30 m) high, and it similarly stood at a harbor entrance and carried a light to guide ships.",
+   "surface": "it",
+   "tokenStart": 5288,
+   "tokenEnd": 5290,
+   "kind": "elsewhere",
+   "accept": [
+    "Colossus of Rhodes"
+   ],
+   "note": "TRAP: refers to the ancient Colossus of Rhodes of the previous sentence",
+   "trapKind": "entity",
+   "origin": "dev-1"
+  },
+  {
+   "id": "d06",
+   "doc": "wiki-Gateway_Arch",
+   "start": 92,
+   "end": 242,
+   "text": "Clad in stainless steel and built in the form of a weighted catenary arch, it is the world's tallest arch and Missouri's tallest accessible structure.",
+   "surface": "it",
+   "tokenStart": 167,
+   "tokenEnd": 169,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "pronoun after a participial phrase",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d07",
+   "doc": "wiki-Gateway_Arch",
+   "start": 243,
+   "end": 326,
+   "text": "Some sources consider it the tallest human-made monument in the Western Hemisphere.",
+   "surface": "it",
+   "tokenStart": 265,
+   "tokenEnd": 267,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "object pronoun",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d08",
+   "doc": "wiki-Gateway_Arch",
+   "start": 907,
+   "end": 958,
+   "text": "The monument opened to the public on June 10, 1967.",
+   "surface": "The monument",
+   "tokenStart": 907,
+   "tokenEnd": 919,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "definite description with a head noun that is not in the name (earned from the first sentence's predicate)",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d09",
+   "doc": "wiki-Gateway_Arch",
+   "start": 959,
+   "end": 1012,
+   "text": "It is located at the 1764 site of the founding of St.",
+   "surface": "It",
+   "tokenStart": 959,
+   "tokenEnd": 961,
+   "kind": "attended",
+   "accept": [
+    "Gateway Arch"
+   ],
+   "note": "pronoun, sentence cut at an abbreviation",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d10",
+   "doc": "wiki-Gateway_Arch",
+   "start": 2708,
+   "end": 2797,
+   "text": "It called upon the federal government to foot three-quarters of the bill ($22.5 million).",
+   "surface": "It",
+   "tokenStart": 2708,
+   "tokenEnd": 2710,
+   "kind": "elsewhere",
+   "accept": [
+    "association"
+   ],
+   "note": "TRAP: refers to the association of the previous sentence, not the arch",
+   "trapKind": "entity",
+   "origin": "dev-1"
+  },
+  {
+   "id": "d11",
+   "doc": "wiki-Gateway_Arch",
+   "start": 4389,
+   "end": 4428,
+   "text": "It first convened on December 19 in St.",
+   "surface": "It",
+   "tokenStart": 4389,
+   "tokenEnd": 4391,
+   "kind": "elsewhere",
+   "accept": [
+    "commission"
+   ],
+   "note": "TRAP: refers to the commission of the previous sentence",
+   "trapKind": "entity",
+   "origin": "dev-1"
+  },
+  {
+   "id": "d12",
+   "doc": "wiki-Hoover_Dam",
+   "start": 294,
+   "end": 401,
+   "text": "Its construction was the result of a massive effort involving thousands of workers, and cost over 96 lives.",
+   "surface": "Its",
+   "tokenStart": 294,
+   "tokenEnd": 297,
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam"
+   ],
+   "note": "possessive",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d13",
+   "doc": "wiki-Hoover_Dam",
+   "start": 1521,
+   "end": 1624,
+   "text": "The dam's generators provide power for public and private utilities in Nevada, Arizona, and California.",
+   "surface": "The dam",
+   "tokenStart": 1521,
+   "tokenEnd": 1528,
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam"
+   ],
+   "note": "definite description with a possessive clitic",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d14",
+   "doc": "wiki-Hoover_Dam",
+   "start": 402,
+   "end": 568,
+   "text": "Bills passed by Congress during its construction referred to it as Hoover Dam (after President Herbert Hoover), but the Roosevelt administration named it Boulder Dam.",
+   "surface": "its",
+   "tokenStart": 434,
+   "tokenEnd": 437,
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam"
+   ],
+   "note": "possessive, other names in the sentence",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d15",
+   "doc": "wiki-Hoover_Dam",
+   "start": 3252,
+   "end": 3371,
+   "text": "Edison allowed land options it held on the river to lapse—including an option for what became the site of Hoover Dam.",
+   "surface": "it",
+   "tokenStart": 3280,
+   "tokenEnd": 3282,
+   "kind": "elsewhere",
+   "accept": [
+    "Southern California Edison",
+    "Edison"
+   ],
+   "note": "TRAP: refers to the company Edison, in the sentence",
+   "trapKind": "competing",
+   "origin": "dev-1"
+  },
+  {
+   "id": "d16",
+   "doc": "wiki-Hoover_Dam",
+   "start": 3697,
+   "end": 3813,
+   "text": "The river would carry off the smaller pieces of debris, and a dam would be built incorporating the remaining rubble.",
+   "surface": "The river",
+   "tokenStart": 3697,
+   "tokenEnd": 3706,
+   "kind": "attended",
+   "accept": [
+    "Colorado River"
+   ],
+   "note": "definite description whose referent is a river of the surrounding passage; the dam is not the answer",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d17",
+   "doc": "wiki-Mississippi_River",
+   "start": 95,
+   "end": 157,
+   "text": "It is the second-longest river in the U.S. after the Missouri.",
+   "surface": "It",
+   "tokenStart": 95,
+   "tokenEnd": 97,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "pronoun",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d18",
+   "doc": "wiki-Mississippi_River",
+   "start": 158,
+   "end": 329,
+   "text": "From its traditional source of Lake Itasca in northern Minnesota, it flows generally south for 2,340 miles (3,770 km) to the Mississippi River Delta in the Gulf of Mexico.",
+   "surface": "it",
+   "tokenStart": 224,
+   "tokenEnd": 226,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "pronoun with other names in the sentence",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d19",
+   "doc": "wiki-Mississippi_River",
+   "start": 495,
+   "end": 658,
+   "text": "The river either borders or passes through the states of Minnesota, Wisconsin, Iowa, Illinois, Missouri, Kentucky, Tennessee, Arkansas, Mississippi, and Louisiana.",
+   "surface": "The river",
+   "tokenStart": 495,
+   "tokenEnd": 504,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "definite description, a state called Mississippi in the sentence",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d20",
+   "doc": "wiki-Mississippi_River",
+   "start": 1752,
+   "end": 1853,
+   "text": "The river also became the subject of American literature, particularly in the writings of Mark Twain.",
+   "surface": "The river",
+   "tokenStart": 1752,
+   "tokenEnd": 1761,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "definite description",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d21",
+   "doc": "wiki-Mississippi_River",
+   "start": 3215,
+   "end": 3372,
+   "text": "With the Louisiana Purchase and the country's westward expansion, it became a convenient boundary line between the western and eastern halves of the country.",
+   "surface": "it",
+   "tokenStart": 3281,
+   "tokenEnd": 3283,
+   "kind": "attended",
+   "accept": [
+    "Mississippi River"
+   ],
+   "note": "pronoun after a prepositional phrase",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d22",
+   "doc": "wiki-Apollo_11",
+   "start": 1878,
+   "end": 1931,
+   "text": "It fulfilled a national goal set by President John F.",
+   "surface": "It",
+   "tokenStart": 1878,
+   "tokenEnd": 1880,
+   "kind": "attended",
+   "accept": [
+    "Apollo 11"
+   ],
+   "note": "pronoun, sentence cut at an initial",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d23",
+   "doc": "wiki-Apollo_11",
+   "start": 153,
+   "end": 323,
+   "text": "The mission was crewed by Commander Neil Armstrong, Command Module Pilot Michael Collins, and Lunar Module Pilot Edwin \"Buzz\" Aldrin, all of whom were on their second and",
+   "surface": "The mission",
+   "tokenStart": 153,
+   "tokenEnd": 164,
+   "kind": "attended",
+   "accept": [
+    "Apollo 11"
+   ],
+   "note": "definite description with a head noun not in the name (the first sentence says 'the American spaceflight')",
+   "trapKind": null,
+   "origin": "dev-1"
+  },
+  {
+   "id": "d24",
+   "doc": "wiki-Apollo_11",
+   "start": 3589,
+   "end": 3701,
+   "text": "Its success demonstrated that the USSR could potentially deliver nuclear weapons over intercontinental distances",
+   "surface": "Its",
+   "tokenStart": 3589,
+   "tokenEnd": 3592,
+   "kind": "elsewhere",
+   "accept": [
+    "Sputnik 1"
+   ],
+   "note": "TRAP: refers to Sputnik 1 of the previous sentence",
+   "trapKind": "entity",
+   "origin": "dev-1"
+  },
+  {
+   "id": "b01",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 123,
+   "end": 231,
+   "text": "It is named after the engineer Gustave Eiffel, whose company designed and built the tower from 1887 to 1889.",
+   "surface": "It",
+   "tokenStart": 123,
+   "tokenEnd": 125,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "pronoun, with other names in the sentence",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b02",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 662,
+   "end": 708,
+   "text": "The tower received 5,889,000 visitors in 2022.",
+   "surface": "The tower",
+   "tokenStart": 662,
+   "tokenEnd": 671,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "definite description",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b03",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 831,
+   "end": 969,
+   "text": "It was designated a monument historique in 1964, and was named part of a UNESCO World Heritage Site (\"Paris, Banks of the Seine\") in 1991.",
+   "surface": "It",
+   "tokenStart": 831,
+   "tokenEnd": 833,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "pronoun",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b04",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 970,
+   "end": 1094,
+   "text": "The tower is 330 metres (1,083 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris.",
+   "surface": "The tower",
+   "tokenStart": 970,
+   "tokenEnd": 979,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "definite description",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b05",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 1395,
+   "end": 1494,
+   "text": "It was the first structure in the world to surpass both the 200-metre and 300-metre mark in height.",
+   "surface": "It",
+   "tokenStart": 1395,
+   "tokenEnd": 1397,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "pronoun",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b06",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 1762,
+   "end": 1851,
+   "text": "The tower has three levels for visitors, with restaurants on the first and second levels.",
+   "surface": "The tower",
+   "tokenStart": 1762,
+   "tokenEnd": 1771,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "definite description",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b07",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 2674,
+   "end": 2851,
+   "text": "It was envisaged after discussion about a suitable centrepiece for the proposed 1889 Exposition Universelle, a world's fair to celebrate the centennial of the French Revolution.",
+   "surface": "It",
+   "tokenStart": 2674,
+   "tokenEnd": 2676,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "pronoun",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b08",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 5467,
+   "end": 5574,
+   "text": "He later established a separate company to manage the tower, putting up half the necessary capital himself.",
+   "surface": "He",
+   "tokenStart": 5467,
+   "tokenEnd": 5469,
+   "kind": "out_of_scope",
+   "trapKind": null,
+   "accept": [
+    "Gustave Eiffel"
+   ],
+   "note": "personal pronoun; the center has shifted from the tower to its engineer",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b09",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 7098,
+   "end": 7443,
+   "text": "It came to a head as work began at the Champ de Mars: a \"Committee of Three Hundred\" (one member for each metre of the tower's height) was formed, led by the prominent architect Charles Garnier and including some of the most important figures of the arts, such as William-Adolphe Bouguereau, Guy de Maupassant, Charles Gounod and Jules Massenet.",
+   "surface": "It",
+   "tokenStart": 7098,
+   "tokenEnd": 7100,
+   "kind": "elsewhere",
+   "trapKind": "event",
+   "accept": [
+    "the debate about architecture and engineering (not the tower)"
+   ],
+   "note": "pronoun whose referent is the preceding sentence, not the attended topic",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b10",
+   "doc": "wiki-Concorde",
+   "start": 838,
+   "end": 997,
+   "text": "It is powered by four Rolls-Royce/Snecma Olympus 593 turbojets with variable engine intake ramps, and reheat for take-off and acceleration to supersonic speed.",
+   "surface": "It",
+   "tokenStart": 838,
+   "tokenEnd": 840,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Concorde"
+   ],
+   "note": "pronoun",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b11",
+   "doc": "wiki-Concorde",
+   "start": 998,
+   "end": 1097,
+   "text": "Constructed from aluminium, it was the first airliner to have analogue fly-by-wire flight controls.",
+   "surface": "it",
+   "tokenStart": 1026,
+   "tokenEnd": 1028,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Concorde"
+   ],
+   "note": "pronoun after a participial phrase",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b12",
+   "doc": "wiki-Concorde",
+   "start": 1098,
+   "end": 1207,
+   "text": "The airliner had transatlantic range while supercruising at twice the speed of sound for 75% of the distance.",
+   "surface": "The airliner",
+   "tokenStart": 1098,
+   "tokenEnd": 1110,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Concorde"
+   ],
+   "note": "definite description with a different head noun",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b13",
+   "doc": "wiki-Concorde",
+   "start": 1790,
+   "end": 1999,
+   "text": "Its only competitor was the Tupolev Tu-144, carrying passengers from November 1977 until a May 1978 crash, while a potential competitor, the Boeing 2707, was cancelled in 1971 before any prototypes were built.",
+   "surface": "Its",
+   "tokenStart": 1790,
+   "tokenEnd": 1793,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Concorde"
+   ],
+   "note": "possessive pronoun",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b14",
+   "doc": "wiki-Concorde",
+   "start": 544,
+   "end": 662,
+   "text": "On 9 October 1975, it received its French certificate of airworthiness, and was certified by the UK CAA on 5 December.",
+   "surface": "it",
+   "tokenStart": 563,
+   "tokenEnd": 565,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Concorde"
+   ],
+   "note": "pronoun",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "b15",
+   "doc": "wiki-Cumberland_River",
+   "start": 204,
+   "end": 377,
+   "text": "The river flows generally west from a source in the Appalachian Mountains to its confluence with the Ohio River near Paducah, Kentucky, and the mouth of the Tennessee River.",
+   "surface": "The river",
+   "tokenStart": 204,
+   "tokenEnd": 213,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Cumberland River"
+   ],
+   "note": "definite description",
+   "origin": "gold-v0-spent"
+  },
+  {
+   "id": "n01",
+   "doc": "wiki-Mount_Rushmore",
+   "start": 1158,
+   "end": 1233,
+   "text": "Its elevation at its highest point is 5,725 feet (1,745 m) above sea level.",
+   "surface": "Its",
+   "tokenStart": 1158,
+   "tokenEnd": 1161,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Mount Rushmore"
+   ],
+   "note": "possessive",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n02",
+   "doc": "wiki-Mount_Rushmore",
+   "start": 2281,
+   "end": 2381,
+   "text": "The sculpture at Mount Rushmore was built on land that was taken from the Sioux Nation in the 1870s.",
+   "surface": "The sculpture",
+   "tokenStart": 2281,
+   "tokenEnd": 2294,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Mount Rushmore"
+   ],
+   "note": "description with a head noun not in the name",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n03",
+   "doc": "wiki-Mount_Rushmore",
+   "start": 2639,
+   "end": 2720,
+   "text": "This conflict continues, leading some critics of the monument to refer to it as a",
+   "surface": "it",
+   "tokenStart": 2713,
+   "tokenEnd": 2715,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Mount Rushmore"
+   ],
+   "note": "object pronoun after a demonstrative subject",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n04",
+   "doc": "wiki-Mount_Rushmore",
+   "start": 15595,
+   "end": 15705,
+   "text": "It was conceived to commemorate the Native American leader while also serving as a response to Mount Rushmore.",
+   "surface": "It",
+   "tokenStart": 15595,
+   "tokenEnd": 15597,
+   "kind": "elsewhere",
+   "trapKind": "competing",
+   "accept": [
+    "Crazy Horse Memorial"
+   ],
+   "note": "the attended name is IN the sentence, the antecedent is another memorial",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n05",
+   "doc": "wiki-Mount_Rushmore",
+   "start": 18189,
+   "end": 18246,
+   "text": "It was kept intact after the 1941 opening of the memorial",
+   "surface": "It",
+   "tokenStart": 18189,
+   "tokenEnd": 18191,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "Sculptor's Studio"
+   ],
+   "note": "the studio of the previous sentence",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n06",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 1095,
+   "end": 1158,
+   "text": "Its base is square, measuring 125 metres (410 ft) on each side.",
+   "surface": "Its",
+   "tokenStart": 1095,
+   "tokenEnd": 1098,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "possessive",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n07",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 35049,
+   "end": 35102,
+   "text": "It was originally reddish brown; this changed in 1968",
+   "surface": "It",
+   "tokenStart": 35049,
+   "tokenEnd": 35051,
+   "kind": "attended",
+   "trapKind": null,
+   "accept": [
+    "Eiffel Tower"
+   ],
+   "note": "attended although the previous sentence is about engravings",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n08",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 30219,
+   "end": 30266,
+   "text": "It was removed due to structural considerations",
+   "surface": "It",
+   "tokenStart": 30219,
+   "tokenEnd": 30221,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "restaurant"
+   ],
+   "note": "the restaurant of the previous sentence",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n09",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 29591,
+   "end": 29647,
+   "text": "It was run by the multi-Michelin star chef Alain Ducasse",
+   "surface": "It",
+   "tokenStart": 29591,
+   "tokenEnd": 29593,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "restaurant"
+   ],
+   "note": "the restaurant of the previous sentence",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n10",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 10510,
+   "end": 10555,
+   "text": "It was originally to be crowned with a pileus",
+   "surface": "It",
+   "tokenStart": 10510,
+   "tokenEnd": 10512,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "Crawford's statue"
+   ],
+   "note": "another statue",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n11",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 7021,
+   "end": 7071,
+   "text": "It was thus, as he put it in a letter to Laboulaye",
+   "surface": "It",
+   "tokenStart": 7021,
+   "tokenEnd": 7023,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "island"
+   ],
+   "note": "the island of the previous sentence",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n12",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 4998,
+   "end": 5078,
+   "text": "Sketches and models were made of the proposed work, though it was never erected.",
+   "surface": "it",
+   "tokenStart": 5057,
+   "tokenEnd": 5059,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "proposed work"
+   ],
+   "note": "a noun of the same sentence",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n13",
+   "doc": "wiki-Gateway_Arch",
+   "start": 32762,
+   "end": 32815,
+   "text": "It was slated to be inserted at 10:00 a.m. local time",
+   "surface": "It",
+   "tokenStart": 32762,
+   "tokenEnd": 32764,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "keystone"
+   ],
+   "note": "the keystone",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n14",
+   "doc": "wiki-Gateway_Arch",
+   "start": 3941,
+   "end": 4051,
+   "text": "On March 28 the Senate bill was reported out, and on April 5 it was turned over to the House Library Committee",
+   "surface": "it",
+   "tokenStart": 4002,
+   "tokenEnd": 4004,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "Senate bill"
+   ],
+   "note": "the bill; the arch's association is not the subject",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n15",
+   "doc": "wiki-Concorde",
+   "start": 10723,
+   "end": 10774,
+   "text": "It was later revealed that the original STAC report",
+   "surface": "It",
+   "tokenStart": 10723,
+   "tokenEnd": 10725,
+   "kind": "elsewhere",
+   "trapKind": "expletive",
+   "accept": [
+    "none"
+   ],
+   "note": "extraposition with that",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n16",
+   "doc": "wiki-Concorde",
+   "start": 56961,
+   "end": 57020,
+   "text": "It has been pointed out that other, lower-flying, airliners",
+   "surface": "It",
+   "tokenStart": 56961,
+   "tokenEnd": 56963,
+   "kind": "elsewhere",
+   "trapKind": "expletive",
+   "accept": [
+    "none"
+   ],
+   "note": "extraposition with that",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n17",
+   "doc": "wiki-Mississippi_River",
+   "start": 37608,
+   "end": 37681,
+   "text": "It was thought that the river's velocity would scour off bottom sediments",
+   "surface": "It",
+   "tokenStart": 37608,
+   "tokenEnd": 37610,
+   "kind": "elsewhere",
+   "trapKind": "expletive",
+   "accept": [
+    "none"
+   ],
+   "note": "extraposition with that",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n18",
+   "doc": "hoover-project",
+   "start": 1785,
+   "end": 1880,
+   "text": "It took less than five years, in a harsh and barren land, to build the largest dam of its time.",
+   "surface": "It",
+   "tokenStart": 1785,
+   "tokenEnd": 1787,
+   "kind": "elsewhere",
+   "trapKind": "expletive",
+   "accept": [
+    "none"
+   ],
+   "note": "took … to: no complementizer 'that'; a known limit of the expletive rule",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n19",
+   "doc": "wiki-Hoover_Dam",
+   "start": 20677,
+   "end": 20774,
+   "text": "It took nine years (1938–47) under relative secrecy to complete the supplemental grout curtain.",
+   "surface": "It",
+   "tokenStart": 20677,
+   "tokenEnd": 20679,
+   "kind": "elsewhere",
+   "trapKind": "expletive",
+   "accept": [
+    "none"
+   ],
+   "note": "took … to: a known limit of the expletive rule",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n20",
+   "doc": "miss-nps",
+   "start": 4028,
+   "end": 4089,
+   "text": "It takes about three months for water that leaves Lake Itasca",
+   "surface": "It",
+   "tokenStart": 4028,
+   "tokenEnd": 4030,
+   "kind": "elsewhere",
+   "trapKind": "expletive",
+   "accept": [
+    "none"
+   ],
+   "note": "takes … for: a known limit of the expletive rule",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n21",
+   "doc": "wiki-Apollo_11",
+   "start": 2481,
+   "end": 2635,
+   "text": "Armstrong's moonwalk was broadcast live to an estimated 600 million viewers, roughly one-fifth of the world's population, making it among the most-watched",
+   "surface": "it",
+   "tokenStart": 2610,
+   "tokenEnd": 2612,
+   "kind": "elsewhere",
+   "trapKind": "event",
+   "accept": [
+    "moonwalk"
+   ],
+   "note": "the broadcast event",
+   "origin": "dev-2"
+  },
+  {
+   "id": "n22",
+   "doc": "wiki-Apollo_11",
+   "start": 61060,
+   "end": 61103,
+   "text": "It was then taken to Hickham Air Force Base",
+   "surface": "It",
+   "tokenStart": 61060,
+   "tokenEnd": 61062,
+   "kind": "elsewhere",
+   "trapKind": "entity",
+   "accept": [
+    "Columbia"
+   ],
+   "note": "the command module of the previous sentence",
+   "origin": "dev-2"
+  },
+  {
+   "id": "v01",
+   "doc": "wiki-Brooklyn_Bridge",
+   "start": 238,
+   "end": 398,
+   "text": "It was also the longest suspension bridge in the world when opened, with a main span of 1,595.5 feet (486.3 m) and a deck 127 ft (38.7 m) above mean high water.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Brooklyn Bridge",
+    "The Brooklyn Bridge"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v02",
+   "doc": "wiki-Brooklyn_Bridge",
+   "start": 2437,
+   "end": 2505,
+   "text": "Its stone towers are neo-Gothic, with characteristic pointed arches.",
+   "surface": "Its",
+   "kind": "attended",
+   "accept": [
+    "Brooklyn Bridge",
+    "The Brooklyn Bridge"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v03",
+   "doc": "wiki-Colosseum",
+   "start": 169,
+   "end": 274,
+   "text": "It is the largest ancient amphitheatre ever built, and is the largest standing amphitheatre in the world.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Colosseum",
+    "The Colosseum"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v04",
+   "doc": "wiki-Colosseum",
+   "start": 1692,
+   "end": 1876,
+   "text": "It is one of Rome's most popular tourist attractions and each Good Friday the Pope leads a torchlit Catholic \"Way of the Cross\" procession that starts in the area around the Colosseum.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Colosseum",
+    "The Colosseum"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v05",
+   "doc": "wiki-Golden_Gate_Bridge",
+   "start": 367,
+   "end": 448,
+   "text": "It also carries pedestrian and bicycle traffic, and is designated as part of U.S.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Golden Gate Bridge",
+    "The Golden Gate Bridge"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v06",
+   "doc": "wiki-Panama_Canal",
+   "start": 182,
+   "end": 327,
+   "text": "It cuts across the narrowest point of the Isthmus of Panama and is a conduit for maritime trade between the Atlantic Ocean and the Pacific Ocean.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Panama Canal",
+    "The Panama Canal"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v07",
+   "doc": "wiki-Panama_Canal",
+   "start": 2531,
+   "end": 2620,
+   "text": "It is now managed and operated by the Panamanian government-owned Panama Canal Authority.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Panama Canal",
+    "The Panama Canal"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v08",
+   "doc": "wiki-Sydney_Opera_House",
+   "start": 2595,
+   "end": 2678,
+   "text": "It is supported on 588 concrete piers sunk as much as 25 m (82 ft) below sea level.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Sydney Opera House",
+    "The Sydney Opera House"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v09",
+   "doc": "wiki-Panama_Canal",
+   "start": 1018,
+   "end": 1078,
+   "text": "The canal is threatened by low water levels during droughts.",
+   "surface": "The canal",
+   "kind": "attended",
+   "accept": [
+    "Panama Canal",
+    "The Panama Canal"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v10",
+   "doc": "wiki-Golden_Gate_Bridge",
+   "start": 1018,
+   "end": 1155,
+   "text": "The bridge opened to the public on May 27, 1937, and has undergone various retrofits and other improvement projects in the decades since.",
+   "surface": "The bridge",
+   "kind": "attended",
+   "accept": [
+    "Golden Gate Bridge",
+    "The Golden Gate Bridge"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v11",
+   "doc": "wiki-Brooklyn_Bridge",
+   "start": 399,
+   "end": 543,
+   "text": "The span was originally called the New York and Brooklyn Bridge or the East River Bridge but was officially renamed the Brooklyn Bridge in 1915.",
+   "surface": "The span",
+   "kind": "attended",
+   "accept": [
+    "Brooklyn Bridge",
+    "The Brooklyn Bridge"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v12",
+   "doc": "wiki-Sydney_Opera_House",
+   "start": 1122,
+   "end": 1269,
+   "text": "The building comprises multiple performance venues, which together host over 1,800 performances annually, attended by more than 1.4 million people.",
+   "surface": "The building",
+   "kind": "attended",
+   "accept": [
+    "Sydney Opera House",
+    "The Sydney Opera House"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v13",
+   "doc": "wiki-Colosseum",
+   "start": 1284,
+   "end": 1359,
+   "text": "The building ceased to be used for entertainment in the early medieval era.",
+   "surface": "The building",
+   "kind": "attended",
+   "accept": [
+    "Colosseum",
+    "The Colosseum"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v14",
+   "doc": "wiki-Panama_Canal",
+   "start": 776,
+   "end": 841,
+   "text": "The expanded waterway began commercial operation on 26 June 2016.",
+   "surface": "The expanded waterway",
+   "kind": "attended",
+   "accept": [
+    "Panama Canal",
+    "The Panama Canal"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v15",
+   "doc": "wiki-Sydney_Opera_House",
+   "start": 2226,
+   "end": 2469,
+   "text": "The facility features a modern expressionist design, with a series of large precast concrete \"shells\", each composed of sections of a sphere of 75.2 metres (246 ft 8.6 in) radius, forming the roofs of the structure, set on a monumental podium.",
+   "surface": "The facility",
+   "kind": "attended",
+   "accept": [
+    "Sydney Opera House",
+    "The Sydney Opera House"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v16",
+   "doc": "wiki-Golden_Gate_Bridge",
+   "start": 4453,
+   "end": 4522,
+   "text": "The bridge faced opposition, including litigation, from many sources.",
+   "surface": "The bridge",
+   "kind": "attended",
+   "accept": [
+    "Golden Gate Bridge",
+    "The Golden Gate Bridge"
+   ],
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v17",
+   "doc": "wiki-Brooklyn_Bridge",
+   "start": 5218,
+   "end": 5329,
+   "text": "It typically runs 4 feet (1.2 m) below the level of the crossbeams, except at the areas surrounding each tower.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v18",
+   "doc": "wiki-Panama_Canal",
+   "start": 6282,
+   "end": 6463,
+   "text": "It commissioned several naval officers, including Commander Thomas Oliver Selfridge Jr., to investigate the possible routes suggested by Humboldt for a canal across Central America.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Interoceanic Canal Commission"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v19",
+   "doc": "wiki-Sydney_Opera_House",
+   "start": 3993,
+   "end": 4122,
+   "text": "It contains the Sydney Opera House Grand Organ, the largest mechanical tracker action organ in the world, with over 10,000 pipes.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Concert Hall"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v20",
+   "doc": "wiki-Panama_Canal",
+   "start": 40055,
+   "end": 40147,
+   "text": "It is the summit canal stretch, fed by the Gatun River and emptied by basic lock operations.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Gatun Lake"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v21",
+   "doc": "wiki-Colosseum",
+   "start": 6222,
+   "end": 6351,
+   "text": "It was devastated by the Great Fire of Rome in 64 AD, following which Nero seized much of the area to add to his personal domain.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v22",
+   "doc": "wiki-Sydney_Opera_House",
+   "start": 34112,
+   "end": 34274,
+   "text": "It was an all-Wagner orchestral concert performed by the Sydney Symphony Orchestra, conducted by Charles Mackerras and with Birgit Nilsson as the soprano soloist.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v23",
+   "doc": "wiki-Colosseum",
+   "start": 7680,
+   "end": 7902,
+   "text": "It is often assumed, as it is with many other Roman projects at the time, that slaves and prisoners of war were brought back to Rome and contributed to the massive workforce needed for the construction of the amphitheater.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v24",
+   "doc": "wiki-Sydney_Opera_House",
+   "start": 5684,
+   "end": 5864,
+   "text": "It was also Goossens who insisted that Bennelong Point be the site: Cahill had wanted it to be on or near Wynyard railway station in the northwest of the central business district.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v25",
+   "doc": "wiki-Sydney_Opera_House",
+   "start": 26565,
+   "end": 26691,
+   "text": "It is frequently erroneously claimed that Utzon was not invited to the opening and his name was not mentioned at the ceremony.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v26",
+   "doc": "wiki-Panama_Canal",
+   "start": 59311,
+   "end": 59613,
+   "text": "It was announced in July 2009 that the Belgian dredging company Jan De Nul, together with a consortium of contractors consisting of the Spanish Sacyr Vallehermoso, the Italian Impregilo, and the Panamanian company Grupo Cusa, had been awarded the contract to build the six new locks for US$3.1 billion.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v27",
+   "doc": "wiki-Brooklyn_Bridge",
+   "start": 5465,
+   "end": 5521,
+   "text": "The path is generally 10 to 17 feet (3.0 to 5.2 m) wide.",
+   "surface": "The path",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v28",
+   "doc": "wiki-Panama_Canal",
+   "start": 605,
+   "end": 693,
+   "text": "The original locks are 33.5 meters (110 ft) wide and allow the passage of Panamax ships.",
+   "surface": "The original locks",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v29",
+   "doc": "wiki-Panama_Canal",
+   "start": 6059,
+   "end": 6120,
+   "text": "The railroad soon became immensely profitable for its owners.",
+   "surface": "The railroad",
+   "kind": "elsewhere",
+   "accept": [
+    "Panama Canal Railway"
+   ],
+   "trapKind": "definite-other",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "v30",
+   "doc": "wiki-Golden_Gate_Bridge",
+   "start": 10129,
+   "end": 10219,
+   "text": "The bonds were approved in November 1930, by votes in the counties affected by the bridge.",
+   "surface": "The bonds",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v1-spent"
+  },
+  {
+   "id": "w01",
+   "doc": "wiki-Empire_State_Building",
+   "start": 253,
+   "end": 325,
+   "text": "Its name is derived from \"Empire State\", the nickname of New York state.",
+   "surface": "Its",
+   "kind": "attended",
+   "accept": [
+    "Empire State Building",
+    "The Empire State Building"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w02",
+   "doc": "wiki-Empire_State_Building",
+   "start": 2334,
+   "end": 2443,
+   "text": "It was ranked first on the American Institute of Architects' list of America's Favorite Architecture in 2007.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Empire State Building",
+    "The Empire State Building"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w03",
+   "doc": "wiki-Hagia_Sophia",
+   "start": 130,
+   "end": 195,
+   "text": "It was formerly a church (360–1453) and a museum (1935–2020).",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Hagia Sophia"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w04",
+   "doc": "wiki-Hagia_Sophia",
+   "start": 426,
+   "end": 539,
+   "text": "It is considered the epitome of Byzantine architecture and is said to have \"changed the history of architecture\".",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Hagia Sophia"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w05",
+   "doc": "wiki-Hubble_Space_Telescope",
+   "start": 137,
+   "end": 303,
+   "text": "It was not the first space telescope, but it is one of the largest and most versatile, renowned as a vital research tool and as a public relations boon for astronomy.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Hubble Space Telescope",
+    "The Hubble Space Telescope",
+    "Hubble"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w06",
+   "doc": "wiki-Hubble_Space_Telescope",
+   "start": 1288,
+   "end": 1418,
+   "text": "Its intended launch was in 1983, but the project was beset by technical delays, budget problems, and the 1986 Challenger disaster.",
+   "surface": "Its",
+   "kind": "attended",
+   "accept": [
+    "Hubble Space Telescope",
+    "The Hubble Space Telescope",
+    "Hubble"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w07",
+   "doc": "wiki-Voyager_1",
+   "start": 238,
+   "end": 354,
+   "text": "It communicates through the NASA Deep Space Network (DSN) to receive routine commands and to transmit data to Earth.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Voyager 1"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w08",
+   "doc": "wiki-Taj_Mahal",
+   "start": 2145,
+   "end": 2242,
+   "text": "It is regarded as one of the best examples of Mughal architecture and a symbol of Indian history.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Taj Mahal",
+    "The Taj Mahal"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w09",
+   "doc": "wiki-Empire_State_Building",
+   "start": 326,
+   "end": 449,
+   "text": "The building has a roof height of 1,250 feet (380 m) and stands a total of 1,454 feet (443.2 m) tall including its antenna.",
+   "surface": "The building",
+   "kind": "attended",
+   "accept": [
+    "Empire State Building",
+    "The Empire State Building"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w10",
+   "doc": "wiki-Suez_Canal",
+   "start": 1856,
+   "end": 1942,
+   "text": "The canal is operated and maintained by the state-owned Suez Canal Authority of Egypt.",
+   "surface": "The canal",
+   "kind": "attended",
+   "accept": [
+    "Suez Canal",
+    "The Suez Canal"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w11",
+   "doc": "wiki-Taj_Mahal",
+   "start": 1075,
+   "end": 1171,
+   "text": "The building complex incorporates the design traditions of Indo-Islamic and Mughal architecture.",
+   "surface": "The building complex",
+   "kind": "attended",
+   "accept": [
+    "Taj Mahal",
+    "The Taj Mahal"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w12",
+   "doc": "wiki-Hagia_Sophia",
+   "start": 942,
+   "end": 1157,
+   "text": "The current structure was built by the Byzantine emperor Justinian I as the Christian basilica of Constantinople between 532–537 and was designed by the Greek geometers Isidore of Miletus and Anthemius of Tralles.",
+   "surface": "The current structure",
+   "kind": "attended",
+   "accept": [
+    "Hagia Sophia"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w13",
+   "doc": "wiki-Hagia_Sophia",
+   "start": 2232,
+   "end": 2408,
+   "text": "The church has been described as \"holding a unique position in the Christian world\", and as \"an architectural and cultural icon of Byzantine and Eastern Orthodox civilization\".",
+   "surface": "The church",
+   "kind": "attended",
+   "accept": [
+    "Hagia Sophia"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w14",
+   "doc": "wiki-Voyager_1",
+   "start": 650,
+   "end": 725,
+   "text": "The probe made flybys of Jupiter, Saturn, and Saturn's largest moon, Titan.",
+   "surface": "The probe",
+   "kind": "attended",
+   "accept": [
+    "Voyager 1"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w15",
+   "doc": "wiki-Empire_State_Building",
+   "start": 141,
+   "end": 252,
+   "text": "The building was designed in the Art Deco style by Shreve, Lamb & Harmon and constructed between 1930 and 1931.",
+   "surface": "The building",
+   "kind": "attended",
+   "accept": [
+    "Empire State Building",
+    "The Empire State Building"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w16",
+   "doc": "wiki-Taj_Mahal",
+   "start": 1618,
+   "end": 1957,
+   "text": "The complex was designed and executed by a multinational board of artisans and supervisors, including Ottoman dome designer Ismail Afandi; Persian architects Ustad Isa, Isa Muhammad Effendi, and Puru; chief calligrapher Amanat Khan Shirazi; finial caster Qazim Khan; and masonry supervisors Muhammad Hanif, Mir Abdul Karim, and Mukkarimat.",
+   "surface": "The complex",
+   "kind": "attended",
+   "accept": [
+    "Taj Mahal",
+    "The Taj Mahal"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w17",
+   "doc": "wiki-Empire_State_Building",
+   "start": 8843,
+   "end": 8915,
+   "text": "The building was originally equipped with white searchlights at the top.",
+   "surface": "The building",
+   "kind": "attended",
+   "accept": [
+    "Empire State Building",
+    "The Empire State Building"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w18",
+   "doc": "wiki-Taj_Mahal",
+   "start": 15202,
+   "end": 15262,
+   "text": "The complex is set around a large charbagh or Mughal garden.",
+   "surface": "The complex",
+   "kind": "attended",
+   "accept": [
+    "Taj Mahal",
+    "The Taj Mahal"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w19",
+   "doc": "wiki-Suez_Canal",
+   "start": 21343,
+   "end": 21398,
+   "text": "The canal opened under French control in November 1869.",
+   "surface": "The canal",
+   "kind": "attended",
+   "accept": [
+    "Suez Canal",
+    "The Suez Canal"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "w20",
+   "doc": "wiki-Suez_Canal",
+   "start": 25009,
+   "end": 25071,
+   "text": "The canal had an immediate and dramatic effect on world trade.",
+   "surface": "The canal",
+   "kind": "attended",
+   "accept": [
+    "Suez Canal",
+    "The Suez Canal"
+   ],
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t01",
+   "doc": "wiki-Hubble_Space_Telescope",
+   "start": 5439,
+   "end": 5658,
+   "text": "It was followed by Orbiting Astronomical Observatory 2 (OAO-2), which carried out ultraviolet observations of stars and galaxies from its launch in 1968 until 1972, well beyond its original planned lifetime of one year.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "OAO-1"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t02",
+   "doc": "wiki-Hubble_Space_Telescope",
+   "start": 18494,
+   "end": 18643,
+   "text": "It was built by NASA's Jet Propulsion Laboratory, and incorporated a set of 48 filters isolating spectral lines of particular astrophysical interest.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "WF/PC"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t03",
+   "doc": "wiki-Hubble_Space_Telescope",
+   "start": 19134,
+   "end": 19232,
+   "text": "It was built by the Goddard Space Flight Center and could achieve a spectral resolution of 90,000.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Goddard High Resolution Spectrograph",
+    "GHRS"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t04",
+   "doc": "wiki-Hubble_Space_Telescope",
+   "start": 19695,
+   "end": 19830,
+   "text": "It was optimized for visible and ultraviolet light observations of variable stars and other astronomical objects varying in brightness.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "HSP"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t05",
+   "doc": "wiki-Voyager_1",
+   "start": 7772,
+   "end": 7861,
+   "text": "It was the first time active volcanoes had been seen on another body in the Solar System.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t06",
+   "doc": "wiki-Voyager_1",
+   "start": 33044,
+   "end": 33281,
+   "text": "It includes the sounds of whales, a baby crying, waves breaking on a shore, and a collection of music spanning different cultures and eras including works by Wolfgang Amadeus Mozart, Blind Willie Johnson, Chuck Berry and Valya Balkanska.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t07",
+   "doc": "wiki-Empire_State_Building",
+   "start": 34287,
+   "end": 34414,
+   "text": "It also praised the 3,000,000 square feet (280,000 m2) of proposed floor space near \"one of the busiest sections in the world\".",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "The New York Times",
+    "New York Times"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t08",
+   "doc": "wiki-Suez_Canal",
+   "start": 44108,
+   "end": 44206,
+   "text": "It starts at 03:30 EET from Port Said and so passes the Northbound convoy in the two-lane section.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t09",
+   "doc": "wiki-Empire_State_Building",
+   "start": 29449,
+   "end": 29705,
+   "text": "It was expected that a taller broadcast tower in Bayonne, New Jersey, or Governors Island, would be built in the meantime with the Empire State Building being used as a \"backup\" since signal transmissions from the building were generally of poorer quality.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t10",
+   "doc": "wiki-Hagia_Sophia",
+   "start": 15216,
+   "end": 15383,
+   "text": "It is possible that both they and John the Lydian considered Hagia Sophia a great temple for the supreme Neoplatonist deity who manifestated through light and the sun.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t11",
+   "doc": "wiki-Taj_Mahal",
+   "start": 20448,
+   "end": 20576,
+   "text": "It is believed that more than 20,000 artisans, labourers, painters and others were involved in the construction of the building.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t12",
+   "doc": "wiki-Suez_Canal",
+   "start": 37521,
+   "end": 37603,
+   "text": "It was said the blockage would have an impact on cargo schedules around the world.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t13",
+   "doc": "wiki-Hagia_Sophia",
+   "start": 4024,
+   "end": 4239,
+   "text": "The first church on the site was known as the Magna Ecclesia (Μεγάλη Ἐκκλησία, Megálē Ekklēsíā, 'Great Church') because of its size compared to the sizes of the contemporary churches in the city.",
+   "surface": "The first church",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t14",
+   "doc": "wiki-Hubble_Space_Telescope",
+   "start": 14803,
+   "end": 14915,
+   "text": "The spacecraft in which the telescope and instruments were to be housed was another major engineering challenge.",
+   "surface": "The spacecraft",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t15",
+   "doc": "wiki-Taj_Mahal",
+   "start": 403,
+   "end": 583,
+   "text": "The tomb is the centrepiece of a 17-hectare (42-acre) complex, which includes a mosque and a guest house, and is set in formal gardens bounded on three sides by a crenellated wall.",
+   "surface": "The tomb",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "t16",
+   "doc": "wiki-Empire_State_Building",
+   "start": 30396,
+   "end": 30522,
+   "text": "The site was previously owned by John Jacob Astor of the prominent Astor family, which had owned the site since the mid-1820s.",
+   "surface": "The site",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v2-spent"
+  },
+  {
+   "id": "x01",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 324,
+   "end": 470,
+   "text": "It lies in a tunnel 27 kilometres (17 mi) in circumference and as deep as 175 metres (574 ft) beneath the France–Switzerland border near Geneva.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Large Hadron Collider",
+    "The Large Hadron Collider",
+    "LHC",
+    "The LHC"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x02",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 13195,
+   "end": 13547,
+   "text": "Its first run discoveries included the long-sought Higgs boson, several composite particles (hadrons) like the χb (3P) bottomonium state, the first creation of a quark–gluon plasma, and the first observations of the very rare decay of the Bs meson into two muons (Bs0 → μ+μ−), which challenged the validity of existing models of supersymmetry.",
+   "surface": "Its",
+   "kind": "attended",
+   "accept": [
+    "Large Hadron Collider",
+    "The Large Hadron Collider",
+    "LHC",
+    "The LHC"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x03",
+   "doc": "wiki-Rosetta_Stone",
+   "start": 590,
+   "end": 791,
+   "text": "It was probably moved in late antiquity or during the Mamluk period, and was eventually used as building material in the construction of Fort Julien near the town of Rashid (Rosetta) in the Nile Delta.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Rosetta Stone",
+    "The Rosetta Stone"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x04",
+   "doc": "wiki-Rosetta_Stone",
+   "start": 18386,
+   "end": 18607,
+   "text": "It was part of a collection of ancient Egyptian monuments captured from the French expedition, including a sarcophagus of Nectanebo II (EA 10), the statue of a high priest of Amun (EA 81), and a large granite fist (EA 9).",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Rosetta Stone",
+    "The Rosetta Stone"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x05",
+   "doc": "wiki-Stonehenge",
+   "start": 126,
+   "end": 427,
+   "text": "It consists of an outer ring of vertical sarsen standing stones, each around 13 feet (4.0 m) high, seven feet (2.1 m) wide, and weighing around 25 tons, topped by connecting horizontal lintel stones which are held in place with mortise and tenon joints—a feature unique among contemporary monuments.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Stonehenge"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x06",
+   "doc": "wiki-Stonehenge",
+   "start": 1463,
+   "end": 1573,
+   "text": "It has been a legally protected scheduled monument since the Ancient Monuments Protection Act 1882 was passed.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Stonehenge"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x07",
+   "doc": "wiki-Mount_Everest",
+   "start": 285,
+   "end": 427,
+   "text": "Its height was most recently measured in 2020 through a joint survey by Nepalese and Chinese authorities as 8,848.86 m (29,031 ft 8+1⁄2 in).",
+   "surface": "Its",
+   "kind": "attended",
+   "accept": [
+    "Mount Everest",
+    "Everest"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x08",
+   "doc": "wiki-Mount_Everest",
+   "start": 25033,
+   "end": 25150,
+   "text": "It may have been climbed in 1924, although this has never been confirmed, as neither man making the attempt returned.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Mount Everest",
+    "Everest"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x09",
+   "doc": "wiki-International_Space_Station",
+   "start": 83,
+   "end": 279,
+   "text": "It is the product of the International Space Station program and is operated by five partner space agencies: NASA (United States), Roscosmos (Russia), ESA (Europe), JAXA (Japan), and CSA (Canada).",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "International Space Station",
+    "The International Space Station",
+    "ISS",
+    "The ISS"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x10",
+   "doc": "wiki-International_Space_Station",
+   "start": 884,
+   "end": 998,
+   "text": "Its orbit takes it at 7.67 km/s (27,600 km/h; 17,200 mph) roughly every 93 minutes around Earth, 15.5 times a day.",
+   "surface": "Its",
+   "kind": "attended",
+   "accept": [
+    "International Space Station",
+    "The International Space Station",
+    "ISS",
+    "The ISS"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x11",
+   "doc": "wiki-Stonehenge",
+   "start": 1574,
+   "end": 1664,
+   "text": "The site and its surroundings were added to UNESCO's list of World Heritage Sites in 1986.",
+   "surface": "The site",
+   "kind": "attended",
+   "accept": [
+    "Stonehenge"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x12",
+   "doc": "wiki-Stonehenge",
+   "start": 22189,
+   "end": 22309,
+   "text": "The site was known to scholars during the Middle Ages and since then it has been studied and adopted by numerous groups.",
+   "surface": "The site",
+   "kind": "attended",
+   "accept": [
+    "Stonehenge"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x13",
+   "doc": "wiki-Rosetta_Stone",
+   "start": 454,
+   "end": 589,
+   "text": "The stone was carved during the Hellenistic period and is believed to have originally been displayed within a temple, possibly at Sais.",
+   "surface": "The stone",
+   "kind": "attended",
+   "accept": [
+    "Rosetta Stone",
+    "The Rosetta Stone"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x14",
+   "doc": "wiki-Rosetta_Stone",
+   "start": 5602,
+   "end": 5745,
+   "text": "The stele was erected after the coronation of King Ptolemy V and was inscribed with a decree that established the divine cult of the new ruler.",
+   "surface": "The stele",
+   "kind": "attended",
+   "accept": [
+    "Rosetta Stone",
+    "The Rosetta Stone"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x15",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 949,
+   "end": 1027,
+   "text": "The collider has four crossing points where the accelerated particles collide.",
+   "surface": "The collider",
+   "kind": "attended",
+   "accept": [
+    "Large Hadron Collider",
+    "The Large Hadron Collider",
+    "LHC",
+    "The LHC"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x16",
+   "doc": "wiki-International_Space_Station",
+   "start": 1220,
+   "end": 1419,
+   "text": "The station is a modular space station divided into two main sections: the Russian Orbital Segment (ROS), developed by Roscosmos, and the US Orbital Segment (USOS), built by NASA, ESA, JAXA, and CSA.",
+   "surface": "The station",
+   "kind": "attended",
+   "accept": [
+    "International Space Station",
+    "The International Space Station",
+    "ISS",
+    "The ISS"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x17",
+   "doc": "wiki-Mayflower",
+   "start": 7002,
+   "end": 7112,
+   "text": "The ship proceeded down the Thames to the south coast of England, where it anchored at Southampton, Hampshire.",
+   "surface": "The ship",
+   "kind": "attended",
+   "accept": [
+    "Mayflower",
+    "The Mayflower"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x18",
+   "doc": "wiki-Mayflower",
+   "start": 22029,
+   "end": 22096,
+   "text": "The vessel was valued at 128 pounds, eight shillings and fourpence.",
+   "surface": "The vessel",
+   "kind": "attended",
+   "accept": [
+    "Mayflower",
+    "The Mayflower"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x19",
+   "doc": "wiki-Mount_Everest",
+   "start": 48539,
+   "end": 48612,
+   "text": "The mountain remained closed on the Chinese side to all foreign climbers.",
+   "surface": "The mountain",
+   "kind": "attended",
+   "accept": [
+    "Mount Everest",
+    "Everest"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x20",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 5029,
+   "end": 5197,
+   "text": "The collider is contained in a circular tunnel, with a circumference of 26.7 kilometres (16.6 mi), at a depth ranging from 50 to 175 metres (164 to 574 ft) underground.",
+   "surface": "The collider",
+   "kind": "attended",
+   "accept": [
+    "Large Hadron Collider",
+    "The Large Hadron Collider",
+    "LHC",
+    "The LHC"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x21",
+   "doc": "wiki-International_Space_Station",
+   "start": 23797,
+   "end": 23933,
+   "text": "The ISS functions as a modular space station, enabling the addition or removal of modules from its structure for increased adaptability.",
+   "surface": "The ISS",
+   "kind": "attended",
+   "accept": [
+    "International Space Station",
+    "The International Space Station",
+    "ISS",
+    "The ISS"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "x22",
+   "doc": "wiki-International_Space_Station",
+   "start": 3252,
+   "end": 3471,
+   "text": "The ISS was originally intended to be a laboratory, observatory, and factory while providing transportation, maintenance, and a low Earth orbit staging base for possible future missions to the Moon, Mars, and asteroids.",
+   "surface": "The ISS",
+   "kind": "attended",
+   "accept": [
+    "International Space Station",
+    "The International Space Station",
+    "ISS",
+    "The ISS"
+   ],
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y01",
+   "doc": "wiki-International_Space_Station",
+   "start": 25195,
+   "end": 25277,
+   "text": "Its name symbolizes the beginning of a new era of international space cooperation.",
+   "surface": "Its",
+   "kind": "elsewhere",
+   "accept": [
+    "Zarya"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y02",
+   "doc": "wiki-International_Space_Station",
+   "start": 25790,
+   "end": 25919,
+   "text": "It was the first of three connecting nodes – Unity, Harmony, and Tranquility – that forms the structural backbone of the U.S.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Unity"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y03",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 11134,
+   "end": 11348,
+   "text": "It is an international collaborative project that consists of a grid-based computer network infrastructure initially connecting 140 computing centres in 35 countries (over 170 in more than 40 countries as of 2012).",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "LHC Computing Grid",
+    "The LHC Computing Grid"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y04",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 11349,
+   "end": 11626,
+   "text": "It was designed by CERN to handle the significant volume of data produced by LHC experiments, incorporating both private fibre optic cable links and existing high-speed portions of the public Internet to enable data transfer from CERN to academic institutions around the world.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "LHC Computing Grid",
+    "The LHC Computing Grid"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y05",
+   "doc": "wiki-Mount_Everest",
+   "start": 28995,
+   "end": 29114,
+   "text": "It established a route through the Khumbu icefall and ascended to the South Col at an elevation of 7,986 m (26,201 ft).",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y06",
+   "doc": "wiki-Mayflower",
+   "start": 25639,
+   "end": 25764,
+   "text": "It was a dangerous place if there was conflict, as it had gun ports from which cannon could be deployed to fire upon enemies.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y07",
+   "doc": "wiki-Rosetta_Stone",
+   "start": 9021,
+   "end": 9191,
+   "text": "It also records that there was particularly high flooding of the Nile in the eighth year of his reign, and he had the excess waters dammed for the benefit of the farmers.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y08",
+   "doc": "wiki-Stonehenge",
+   "start": 9271,
+   "end": 9365,
+   "text": "It had contained bluestones, one of which showed evidence of having been reused in Stonehenge.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Waun Mawn"
+   ],
+   "trapKind": "new-entity",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y09",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 3910,
+   "end": 4055,
+   "text": "It is already known that electromagnetism and the weak nuclear force are different manifestations of a single force called the electroweak force.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y10",
+   "doc": "wiki-Rosetta_Stone",
+   "start": 6739,
+   "end": 6921,
+   "text": "It is uncertain why this discrepancy exists, but it is clear that the decree was issued in 196 BC and that it was designed to re-establish the rule of the Ptolemaic kings over Egypt.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y11",
+   "doc": "wiki-Stonehenge",
+   "start": 12948,
+   "end": 13305,
+   "text": "It is not known whether the stones were taken directly from their quarries to Salisbury Plain or were the result of the removal of a venerated stone circle from Preseli to Salisbury Plain to \"merge two sacred centres into one, to unify two politically separate regions, or to legitimise the ancestral identity of migrants moving from one region to another\".",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y12",
+   "doc": "wiki-International_Space_Station",
+   "start": 7227,
+   "end": 7412,
+   "text": "It is anticipated that remotely guided ultrasound scans will have application on Earth in emergency and rural care situations where in-person access to a trained physician is difficult.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y13",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 5694,
+   "end": 5797,
+   "text": "The tunnel crosses the border between Switzerland and France at four points, with most of it in France.",
+   "surface": "The tunnel",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y14",
+   "doc": "wiki-Stonehenge",
+   "start": 691,
+   "end": 864,
+   "text": "The stones are set within earthworks in the middle of the densest complex of Neolithic and Bronze Age monuments in England, including several hundred tumuli (burial mounds).",
+   "surface": "The stones",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y15",
+   "doc": "wiki-Mount_Everest",
+   "start": 25218,
+   "end": 25283,
+   "text": "The summit is first known to have been reached by humans in 1953.",
+   "surface": "The summit",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y16",
+   "doc": "wiki-Rosetta_Stone",
+   "start": 323,
+   "end": 453,
+   "text": "The decree has only minor differences across the three versions, making the Rosetta Stone key to deciphering the Egyptian scripts.",
+   "surface": "The decree",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y17",
+   "doc": "wiki-Large_Hadron_Collider",
+   "start": 11627,
+   "end": 11726,
+   "text": "The LHC Computing Grid consists of global federations across Europe, Asia Pacific and the Americas.",
+   "surface": "The LHC Computing Grid",
+   "kind": "elsewhere",
+   "accept": [
+    "LHC Computing Grid",
+    "The LHC Computing Grid"
+   ],
+   "trapKind": "definite-other",
+   "origin": "bind-v3-spent"
+  },
+  {
+   "id": "y18",
+   "doc": "wiki-Mayflower",
+   "start": 8014,
+   "end": 8102,
+   "text": "The Mayflower crew waited for seven more days until the intensity of the wind increased.",
+   "surface": "The Mayflower crew",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other",
+   "origin": "bind-v3-spent"
+  }
+ ]
+}
