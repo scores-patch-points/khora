@@ -45,7 +45,8 @@ const accepts = (surfaces, accept) => surfaces.map(norm).some((s) => accept.map(
 function loadCases(which) {
   const file = arg("--file");
   const j = JSON.parse(fs.readFileSync(file ?? path.join(HERE, "DEV-SET-2.json"), "utf8"));
-  return j.cases.map((c) => ({ ...c, accept: c.accept ?? [c.referent], kind: c.kind }));
+  // the parent set marks expletive "it" as out_of_scope with trapKind "expletive": scored as a trap (any binding is wrong), as its pre-registration says
+  return j.cases.map((c) => ({ ...c, accept: c.accept ?? [c.referent], kind: c.trapKind === "expletive" ? "elsewhere" : c.kind }));
 }
 
 const lexicon = localLexicon("en");
@@ -95,7 +96,9 @@ for (const doc of [...new Set(cases.map((c) => c.doc))]) {
     if (c.kind === "out_of_scope") verdict = "out_of_scope";
     else if (hit) {
       const ok = c.kind === "attended" && accepts(surfacesOf.get(hit.referentId) ?? [], c.accept);
-      verdict = ok ? "right" : "wrong";
+      // a trap bound to the entity it really refers to (a named cast candidate the set lists in `accept`) is right; bound to anything else is wrong
+      const toStated = c.kind === "elsewhere" && c.trapKind !== "expletive" && c.accept?.length && accepts(surfacesOf.get(hit.referentId) ?? [], c.accept);
+      verdict = ok ? "right" : toStated ? "right_other" : "wrong";
     } else verdict = gap ? "gap" : "unseen";
     rows.push({ id: c.id, kind: c.kind, trapKind: c.trapKind ?? null, surface: c.surface, verdict, bound: hit ? (surfacesOf.get(hit.referentId) ?? [])[0] : null, reason: gap?.reason ?? null, activation: hit?.activation ?? gap?.activation ?? null, margin: hit?.margin ?? gap?.margin ?? null, via: hit?.via ?? null });
   }
@@ -133,6 +136,13 @@ if (process.argv.includes("--grid")) {
   process.exit(0);
 }
 const { summary, rows } = await scoreWith(dials);
+if (arg("--separate")) { // report named cases apart from the rest (the parent set's part-whole and bridging cases)
+  const ids = new Set(arg("--separate").split(","));
+  for (const [label, keep] of [["apart: " + [...ids].join(","), (r) => ids.has(r.id)], ["rest", (r) => !ids.has(r.id)]]) {
+    const rs = rows.filter(keep), a = rs.filter((r) => r.kind === "attended"), bd = a.filter((r) => r.verdict === "right" || r.verdict === "wrong"), tr = rs.filter((r) => r.kind === "elsewhere");
+    console.log(`${label}: attended ${a.length} bound ${bd.length} right ${bd.filter((r) => r.verdict === "right").length} | traps ${tr.length} wrong ${tr.filter((r) => r.verdict === "wrong").length} gapped ${tr.filter((r) => r.verdict === "gap").length} right_other ${tr.filter((r) => r.verdict === "right_other").length}`);
+  }
+}
 if (process.argv.includes("--json")) console.log(JSON.stringify({ summary, rows }, null, 1));
 else {
   for (const r of rows) console.log(`${r.id} ${(r.trapKind ?? r.kind).padEnd(9)} ${r.surface.padEnd(10)} ${r.verdict.padEnd(12)} ${String(r.bound ?? r.reason ?? "").slice(0, 28).padEnd(28)} act=${r.activation?.toFixed?.(2) ?? "-"} margin=${r.margin?.toFixed?.(2) ?? "-"} ${r.via ?? ""}`);
