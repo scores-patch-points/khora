@@ -330,6 +330,7 @@
    },
    "ignore": [
     "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Stonehenge [123]( [IV]+)?",
     "Chippindale's Stonehenge",
     "Stonehenge Complete",
     "Stonehenge Riverside",
@@ -549,6 +550,9 @@
    },
    "ignore": [
     "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "State Library of Queensland",
+    "Library of Queensland",
+    "Queensland Government",
     "Queensland National",
     "Great Barrier Reef Marine Park Act",
     "Great Barrier Reef Marine Park Authority",
@@ -559,7 +563,6 @@
     "Great Barrier Reef Committee",
     "Great Barrier Reef Province",
     "Queensland Wetland",
-    "Queensland Government",
     "Great Barrier Reef Works",
     "Great Barrier Reef UNESCO",
     "Great Barrier Reef Expedition"

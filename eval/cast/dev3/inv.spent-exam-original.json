@@ -1,0 +1,294 @@
+{
+ "schema": "CastInventory@1",
+ "note": "Hand-labelled by the parent session (not blind, no second reader). An entity is a thing the text names; forms are the exact strings the text uses as names of it. A mention is any occurrence of a form (longest form first across all entities of the document, no overlap) that is not part of a longer hyphen or slash joined token (747 inside 747-100) and not inside an ignore span. Definite descriptions and pronouns are not mentions here (layer 4). Ignore patterns are named things that contain a form but are not any listed entity (a title, a film, a variant); occurrences inside them are neither counted nor penalised. Revision v1.1 (2026-11-04, before any release): ignore every article's tail sections (See also, Notes, References, Bibliography, Further reading, External links, Sources); named things that contain a form added to the ignore patterns after a scan of mentions attached to a neighbouring capitalised word; the entity 'Channel Tunnel Group' dropped (its names are ambiguous between a British consortium and the Channel Tunnel Group/France-Manche); 'Boeing 747-400' and 'Boeing 747-8', 'Cathédrale Notre-Dame de Paris' and 'Valdez Terminal' added as forms.",
+ "docs": {
+  "wiki-Apollo_13": {
+   "entities": {
+    "Apollo 13": [
+     "Apollo 13"
+    ],
+    "Apollo 11": [
+     "Apollo 11"
+    ],
+    "Apollo 12": [
+     "Apollo 12"
+    ],
+    "Mission Control": [
+     "Mission Control"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Apollo 13 (Robbins|Mission Operations|Oxygen Tank)"
+   ]
+  },
+  "wiki-Boeing_747": {
+   "entities": {
+    "Boeing 747": [
+     "Boeing 747",
+     "747"
+    ],
+    "747-400": [
+     "Boeing 747-400",
+     "747-400"
+    ],
+    "747-8": [
+     "Boeing 747-8",
+     "747-8"
+    ],
+    "Pan Am": [
+     "Pan Am"
+    ]
+   },
+   "ignore": [
+    "747 Advanced",
+    "Boeing 747 LCF",
+    "747 LCF",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Pan Am Flight \\d+",
+    "Boeing 747 Classic",
+    "747 Classic"
+   ]
+  },
+  "wiki-Burj_Khalifa": {
+   "entities": {
+    "Burj Khalifa": [
+     "Burj Khalifa"
+    ],
+    "Emaar": [
+     "Emaar Properties",
+     "Emaar"
+    ],
+    "Taipei 101": [
+     "Taipei 101"
+    ],
+    "CN Tower": [
+     "CN Tower"
+    ]
+   },
+   "ignore": [
+    "Emaar New Year's Eve",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Burj Khalifa Lake"
+   ]
+  },
+  "wiki-Channel_Tunnel": {
+   "entities": {
+    "Channel Tunnel": [
+     "Channel Tunnel"
+    ],
+    "Eurotunnel": [
+     "Eurotunnel"
+    ],
+    "Eurostar": [
+     "Eurostar"
+    ],
+    "Channel Tunnel Safety Authority": [
+     "Channel Tunnel Safety Authority"
+    ]
+   },
+   "ignore": [
+    "Channel Tunnel Rail Link",
+    "Channel Tunnel Study Group",
+    "Channel Tunnel Co",
+    "Eurotunnel Class \\d+",
+    "Eurotunnel Fire",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "(British )?Channel Tunnel Group(/France–Manche)?",
+    "Channel Tunnel (Act|Bill|Negotiations)"
+   ]
+  },
+  "wiki-Notre-Dame_de_Paris": {
+   "entities": {
+    "Notre-Dame de Paris": [
+     "Cathédrale Notre-Dame de Paris",
+     "Notre-Dame de Paris",
+     "Notre-Dame"
+    ],
+    "Viollet-le-Duc": [
+     "Eugène Viollet-le-Duc",
+     "Viollet-le-Duc"
+    ],
+    "Virgin Mary": [
+     "Virgin Mary"
+    ],
+    "Emmanuel Macron": [
+     "Emmanuel Macron",
+     "Macron"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$"
+   ]
+  },
+  "wiki-Sagrada_Fam_lia": {
+   "entities": {
+    "Sagrada Família": [
+     "Sagrada Família"
+    ],
+    "Antoni Gaudí": [
+     "Antoni Gaudí",
+     "Gaudí"
+    ],
+    "Nativity Façade": [
+     "Nativity Façade"
+    ],
+    "Passion Façade": [
+     "Passion Façade"
+    ]
+   },
+   "ignore": [
+    "Works of Antoni Gaudí",
+    "Sagrada Família Schools",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$"
+   ]
+  },
+  "wiki-St__Peter_s_Basilica": {
+   "entities": {
+    "St. Peter's Basilica": [
+     "St. Peter's Basilica",
+     "St. Peter's"
+    ],
+    "Old St. Peter's Basilica": [
+     "Old St. Peter's Basilica",
+     "Old St. Peter's"
+    ],
+    "St. Peter's Square": [
+     "St. Peter's Square"
+    ],
+    "Michelangelo": [
+     "Michelangelo"
+    ],
+    "Bernini": [
+     "Gian Lorenzo Bernini",
+     "Lorenzo Bernini",
+     "Bernini"
+    ],
+    "Bramante": [
+     "Donato Bramante",
+     "Bramante"
+    ]
+   },
+   "ignore": [
+    "St. Peter's Piazza",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$"
+   ]
+  },
+  "wiki-Titanic": {
+   "entities": {
+    "Titanic": [
+     "RMS Titanic",
+     "Titanic"
+    ],
+    "Titanic Belfast": [
+     "Titanic Belfast"
+    ],
+    "Titanic Quarter": [
+     "Titanic Quarter"
+    ],
+    "Olympic": [
+     "RMS Olympic",
+     "Olympic"
+    ],
+    "White Star Line": [
+     "White Star Line",
+     "White Star"
+    ],
+    "Harland and Wolff": [
+     "Harland and Wolff"
+    ],
+    "Carpathia": [
+     "RMS Carpathia",
+     "Carpathia"
+    ]
+   },
+   "ignore": [
+    "Cameron's Titanic",
+    "Titanic Inc",
+    "Titanic Inquiry",
+    "Titanic Footage",
+    "White Star Dock",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Titanic (Canyon|Foundation|Historical)",
+    "RMS Titanic Inc"
+   ]
+  },
+  "wiki-Trans-Alaska_Pipeline_System": {
+   "entities": {
+    "Trans-Alaska Pipeline System": [
+     "Trans-Alaska Pipeline System",
+     "Trans-Alaska Pipeline",
+     "TAPS"
+    ],
+    "Trans-Alaska Pipeline Authorization Act": [
+     "Trans-Alaska Pipeline Authorization Act"
+    ],
+    "Alyeska": [
+     "Alyeska Pipeline Service Company",
+     "Alyeska Pipeline Service",
+     "Alyeska Pipeline",
+     "Alyeska"
+    ],
+    "Valdez": [
+     "Valdez"
+    ],
+    "Valdez Marine Terminal": [
+     "Valdez Marine Terminal",
+     "Valdez Terminal"
+    ],
+    "Exxon Valdez": [
+     "Exxon Valdez"
+    ],
+    "Fairbanks": [
+     "Fairbanks"
+    ]
+   },
+   "ignore": [
+    "Trans-Alaska Pipeline Controversy",
+    "Trans-Alaska Pipeline System Renewal",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Alyeska Corporation",
+    "Fairbanks (Gold Rush|Flood|McDonald's|Community|North|Police)( [A-Z][\\p{L}']*)*"
+   ]
+  },
+  "wiki-U_S__Route_66": {
+   "entities": {
+    "U.S. Route 66": [
+     "U.S. Route 66",
+     "U.S. Highway 66",
+     "US 66",
+     "Route 66"
+    ],
+    "Historic Route 66": [
+     "Historic Route 66"
+    ],
+    "Interstate 40": [
+     "Interstate 40"
+    ],
+    "US 60": [
+     "US 60"
+    ],
+    "Chicago": [
+     "Chicago"
+    ],
+    "Los Angeles": [
+     "Los Angeles"
+    ]
+   },
+   "ignore": [
+    "National Route 66",
+    "State Route 66",
+    "Route 66 (Preservation|Corridor|Museum|Association|List)",
+    "US 66 List",
+    "U.S. Route 66 List",
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Route 66 Association of Illinois Hall of Fame and Museum",
+    "Bicycle U.S. Route 66",
+    "U.S. Route 66 Association",
+    "U.S. Bicycle Route 66",
+    "U.S. Highway 66 Association",
+    "United States Bicycle Route System"
+   ]
+  }
+ }
+}

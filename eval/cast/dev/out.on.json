@@ -9,70 +9,327 @@
   "span_exact_rate": 1
  },
  "reader_gaps": {
-  "wiki-Brooklyn_Bridge": [],
-  "wiki-Colosseum": [],
-  "wiki-Golden_Gate_Bridge": [],
+  "wiki-Brooklyn_Bridge": [
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
+  ],
+  "wiki-Colosseum": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
+  ],
+  "wiki-Golden_Gate_Bridge": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open"
+  ],
   "wiki-Panama_Canal": [
    "cast_identity_initials_tie",
    "cast_identity_initials_tie",
-   "cast_identity_initials_tie"
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Sydney_Opera_House": [
-   "cast_identity_tie"
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Empire_State_Building": [
    "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie"
   ],
   "wiki-Hagia_Sophia": [
-   "cast_identity_initials_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Hubble_Space_Telescope": [
    "cast_identity_initials_tie",
-   "cast_identity_tie",
-   "cast_identity_tie",
-   "cast_identity_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Suez_Canal": [
-   "cast_identity_initials_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
-  "wiki-Taj_Mahal": [],
+  "wiki-Taj_Mahal": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
+  ],
   "wiki-Voyager_1": [
-   "cast_identity_tie"
+   "cast_identity_short_form_open"
   ],
   "wiki-Large_Hadron_Collider": [
-   "cast_identity_initials_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
-  "wiki-Rosetta_Stone": [],
+  "wiki-Rosetta_Stone": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
+  ],
   "wiki-Stonehenge": [
-   "cast_identity_tie"
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Mount_Everest": [
-   "cast_identity_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-International_Space_Station": [
-   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
    "cast_identity_tie",
-   "cast_identity_tie"
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
-  "wiki-Mayflower": [],
-  "wiki-Antikythera_mechanism": [],
+  "wiki-Mayflower": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
+  ],
+  "wiki-Antikythera_mechanism": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
+  ],
   "wiki-Great_Wall_of_China": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
-   "cast_identity_tie"
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-James_Webb_Space_Telescope": [
    "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
-   "cast_identity_tie"
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
-  "wiki-Machu_Picchu": [],
+  "wiki-Machu_Picchu": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
+  ],
   "wiki-Trans-Siberian_Railway": [
-   "cast_identity_initials_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
-  "wiki-Great_Barrier_Reef": []
+  "wiki-Great_Barrier_Reef": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie"
+  ]
  },
  "reader_options": {
   "castIdentity": true
@@ -350,7 +607,7 @@
     "merged_with": [],
     "span_exact": true,
     "exact_share": 1,
-    "main_surface": "Hubble Space Telescope",
+    "main_surface": "HST",
     "clean": true
    },
    "Wide Field Camera 3": {
@@ -548,9 +805,9 @@
   },
   "wiki-Stonehenge": {
    "Stonehenge": {
-    "mentions": 99,
+    "mentions": 90,
     "carriers": 1,
-    "main_covers": 99,
+    "main_covers": 90,
     "whole": true,
     "unique_carrier": true,
     "no_merge": true,
@@ -626,7 +883,7 @@
     "merged_with": [],
     "span_exact": true,
     "exact_share": 1,
-    "main_surface": "International Space Station",
+    "main_surface": "ISS",
     "clean": true
    },
    "Space Shuttle": {
@@ -751,7 +1008,7 @@
     "merged_with": [],
     "span_exact": true,
     "exact_share": 1,
-    "main_surface": "James Webb Space Telescope",
+    "main_surface": "JWST",
     "clean": true
    },
    "Hubble Space Telescope": {
@@ -764,7 +1021,7 @@
     "merged_with": [],
     "span_exact": true,
     "exact_share": 1,
-    "main_surface": "Hubble Space Telescope",
+    "main_surface": "HST",
     "clean": true
    }
   },

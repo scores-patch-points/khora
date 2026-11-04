@@ -190,7 +190,9 @@
      "Salisbury Plain"
     ]
    },
-   "ignore": []
+   "ignore": [
+    "Stonehenge [123]( [IV]+)?"
+   ]
   },
   "wiki-Mount_Everest": {
    "entities": {
@@ -307,7 +309,11 @@
      "Queensland"
     ]
    },
-   "ignore": []
+   "ignore": [
+    "State Library of Queensland",
+    "Library of Queensland",
+    "Queensland Government"
+   ]
   }
  }
 }

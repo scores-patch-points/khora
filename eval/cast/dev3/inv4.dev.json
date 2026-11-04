@@ -1,0 +1,113 @@
+{
+ "docs": {
+  "wiki-Apollo_11": {
+   "entities": {
+    "Apollo 11": [
+     "Apollo 11"
+    ],
+    "Apollo 8": [
+     "Apollo 8"
+    ],
+    "Apollo 10": [
+     "Apollo 10"
+    ],
+    "Luna 15": [
+     "Luna 15"
+    ],
+    "Buzz Aldrin": [
+     "Buzz Aldrin",
+     "Aldrin"
+    ],
+    "Neil Armstrong": [
+     "Neil Armstrong",
+     "Armstrong"
+    ],
+    "Mission Control": [
+     "Mission Control"
+    ],
+    "Kennedy Space Center": [
+     "Kennedy Space Center"
+    ],
+    "Saturn V": [
+     "Saturn V"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Commander Neil Armstrong",
+    "December Apollo 8",
+    "May Apollo 10",
+    "Mission Control Center",
+    "Saturn V AS-",
+    "Saturn V Instrument",
+    "Apollo 11 Mission",
+    "Apollo 11 Fiftieth",
+    "Apollo 11 Moon",
+    "Apollo 11 Press",
+    "Apollo 11 Partial",
+    "Apollo 11 Restored"
+   ]
+  },
+  "wiki-Mississippi_River": {
+   "entities": {
+    "Mississippi River": [
+     "Mississippi River"
+    ],
+    "Gulf of Mexico": [
+     "Gulf of Mexico"
+    ],
+    "Ohio River": [
+     "Ohio River"
+    ],
+    "Lake Itasca": [
+     "Lake Itasca"
+    ],
+    "Baton Rouge": [
+     "Baton Rouge"
+    ],
+    "Atchafalaya River": [
+     "Atchafalaya River"
+    ],
+    "St. Louis": [
+     "St. Louis"
+    ],
+    "Missouri River": [
+     "Missouri River"
+    ],
+    "Lake Pontchartrain": [
+     "Lake Pontchartrain"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Mississippi River Delta",
+    "Mighty Mississippi River",
+    "Upper Mississippi River",
+    "Middle Mississippi River",
+    "Lower Mississippi River",
+    "W Mississippi River",
+    "Mississippi River Bridge",
+    "East St\\. Louis",
+    "East Baton Rouge",
+    "West Baton Rouge",
+    "Baton Rouge Parishes",
+    "Lake Itasca Omashkoozo-zaaga'igan",
+    "Mississippi River Band",
+    "Mississippi River Campaign",
+    "Mississippi River Archived",
+    "Mississippi River Challenge",
+    "Mississippi River Field"
+   ]
+  },
+  "wiki-Cumberland_River": {
+   "entities": {
+    "Cumberland River": [
+     "Cumberland River"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$"
+   ]
+  }
+ }
+}

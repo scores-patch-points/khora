@@ -1,38 +1,123 @@
 {
  "summary": {
   "entities": 21,
-  "clean": 20,
-  "layer3": 0.9524,
-  "whole_rate": 0.9524,
-  "unique_carrier_rate": 0.9524,
+  "clean": 21,
+  "layer3": 1,
+  "whole_rate": 1,
+  "unique_carrier_rate": 1,
   "no_merge_rate": 1,
-  "span_exact_rate": 0.9524
+  "span_exact_rate": 1
  },
  "reader_gaps": {
   "wiki-Eiffel_Tower": [
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
-   "cast_identity_tie",
-   "cast_identity_tie"
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Hoover_Dam": [
-   "cast_identity_initials_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Mount_Rushmore": [
    "cast_identity_initials_tie",
    "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
-   "cast_identity_tie"
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Statue_of_Liberty": [
-   "cast_identity_initials_tie"
+   "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Gateway_Arch": [
-   "cast_identity_tie"
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open"
   ],
   "wiki-Concorde": [
    "cast_identity_initials_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
-   "cast_identity_tie"
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
+   "cast_identity_tie",
+   "cast_identity_short_form_open"
   ]
  },
  "reader_options": {
@@ -203,17 +288,17 @@
   },
   "wiki-Statue_of_Liberty": {
    "Statue of Liberty": {
-    "mentions": 22,
-    "carriers": 2,
+    "mentions": 19,
+    "carriers": 1,
     "main_covers": 19,
-    "whole": false,
-    "unique_carrier": false,
+    "whole": true,
+    "unique_carrier": true,
     "no_merge": true,
     "merged_with": [],
-    "span_exact": false,
-    "exact_share": 0.864,
+    "span_exact": true,
+    "exact_share": 1,
     "main_surface": "Statue of Liberty",
-    "clean": false
+    "clean": true
    },
    "Liberty Island": {
     "mentions": 12,

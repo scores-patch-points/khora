@@ -1,0 +1,743 @@
+{
+ "summary": {
+  "entities": 50,
+  "clean": 6,
+  "layer3": 0.12,
+  "whole_rate": 0.78,
+  "unique_carrier_rate": 0.46,
+  "no_merge_rate": 0.66,
+  "span_exact_rate": 0.24
+ },
+ "reader_gaps": {
+  "wiki-Apollo_13": [],
+  "wiki-Boeing_747": [],
+  "wiki-Burj_Khalifa": [],
+  "wiki-Channel_Tunnel": [],
+  "wiki-Notre-Dame_de_Paris": [],
+  "wiki-Sagrada_Fam_lia": [],
+  "wiki-St__Peter_s_Basilica": [],
+  "wiki-Titanic": [],
+  "wiki-Trans-Alaska_Pipeline_System": [],
+  "wiki-U_S__Route_66": []
+ },
+ "reader_options": {},
+ "perDoc": {
+  "wiki-Apollo_13": {
+   "Apollo 13": {
+    "mentions": 70,
+    "carriers": 1,
+    "main_covers": 70,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Apollo 11",
+     "Apollo 12"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Apollo",
+    "clean": false
+   },
+   "Apollo 11": {
+    "mentions": 15,
+    "carriers": 1,
+    "main_covers": 15,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Apollo 13",
+     "Apollo 12"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Apollo",
+    "clean": false
+   },
+   "Apollo 12": {
+    "mentions": 11,
+    "carriers": 1,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Apollo 13",
+     "Apollo 11"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Apollo",
+    "clean": false
+   },
+   "Mission Control": {
+    "mentions": 13,
+    "carriers": 1,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.923,
+    "main_surface": "Mission Control Center",
+    "clean": false
+   }
+  },
+  "wiki-Boeing_747": {
+   "Boeing 747": {
+    "mentions": 110,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "747-8"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Boeing",
+    "clean": false
+   },
+   "747-400": {
+    "mentions": 13,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "747-8": {
+    "mentions": 12,
+    "carriers": 1,
+    "main_covers": 1,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Boeing 747"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Boeing",
+    "clean": false
+   },
+   "Pan Am": {
+    "mentions": 19,
+    "carriers": 2,
+    "main_covers": 19,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Pan Am",
+    "clean": false
+   }
+  },
+  "wiki-Burj_Khalifa": {
+   "Burj Khalifa": {
+    "mentions": 51,
+    "carriers": 5,
+    "main_covers": 51,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.922,
+    "main_surface": "Burj Khalifa",
+    "clean": false
+   },
+   "Emaar": {
+    "mentions": 11,
+    "carriers": 2,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.545,
+    "main_surface": "Emaar",
+    "clean": false
+   },
+   "Taipei 101": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Surpasses Taipei",
+    "clean": false
+   },
+   "CN Tower": {
+    "mentions": 3,
+    "carriers": 2,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "CN Tower",
+    "clean": false
+   }
+  },
+  "wiki-Channel_Tunnel": {
+   "Channel Tunnel": {
+    "mentions": 12,
+    "carriers": 4,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Channel Tunnel Safety Authority"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Channel Tunnel",
+    "clean": false
+   },
+   "Eurotunnel": {
+    "mentions": 37,
+    "carriers": 1,
+    "main_covers": 37,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.973,
+    "main_surface": "Eurotunnel Class",
+    "clean": true
+   },
+   "Eurostar": {
+    "mentions": 26,
+    "carriers": 1,
+    "main_covers": 26,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.962,
+    "main_surface": "Eurostar",
+    "clean": true
+   },
+   "Channel Tunnel Safety Authority": {
+    "mentions": 3,
+    "carriers": 7,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Channel Tunnel"
+    ],
+    "span_exact": false,
+    "exact_share": 0.667,
+    "main_surface": "Channel Tunnel Safety Authority",
+    "clean": false
+   }
+  },
+  "wiki-Notre-Dame_de_Paris": {
+   "Notre-Dame de Paris": {
+    "mentions": 71,
+    "carriers": 4,
+    "main_covers": 71,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Notre Dame",
+    "clean": false
+   },
+   "Viollet-le-Duc": {
+    "mentions": 20,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Eugène",
+    "clean": false
+   },
+   "Virgin Mary": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.857,
+    "main_surface": "Virgin Mary",
+    "clean": false
+   },
+   "Emmanuel Macron": {
+    "mentions": 12,
+    "carriers": 1,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.917,
+    "main_surface": "President Emmanuel Macron",
+    "clean": false
+   }
+  },
+  "wiki-Sagrada_Fam_lia": {
+   "Sagrada Família": {
+    "mentions": 31,
+    "carriers": 3,
+    "main_covers": 31,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.968,
+    "main_surface": "Sagrada Família",
+    "clean": false
+   },
+   "Antoni Gaudí": {
+    "mentions": 42,
+    "carriers": 4,
+    "main_covers": 42,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.881,
+    "main_surface": "Gaudí",
+    "clean": false
+   },
+   "Nativity Façade": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Nativity Façade",
+    "clean": true
+   },
+   "Passion Façade": {
+    "mentions": 4,
+    "carriers": 1,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Passion Façade",
+    "clean": true
+   }
+  },
+  "wiki-St__Peter_s_Basilica": {
+   "St. Peter's Basilica": {
+    "mentions": 33,
+    "carriers": 3,
+    "main_covers": 33,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Old St. Peter's Basilica",
+     "St. Peter's Square"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "St Peter",
+    "clean": false
+   },
+   "Old St. Peter's Basilica": {
+    "mentions": 5,
+    "carriers": 4,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "St. Peter's Basilica",
+     "St. Peter's Square"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Old Pretender",
+    "clean": false
+   },
+   "St. Peter's Square": {
+    "mentions": 5,
+    "carriers": 3,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "St. Peter's Basilica",
+     "Old St. Peter's Basilica"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "St Peter",
+    "clean": false
+   },
+   "Michelangelo": {
+    "mentions": 41,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Bernini": {
+    "mentions": 39,
+    "carriers": 1,
+    "main_covers": 39,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.949,
+    "main_surface": "Gian Lorenzo Bernini",
+    "clean": false
+   },
+   "Bramante": {
+    "mentions": 24,
+    "carriers": 1,
+    "main_covers": 2,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.083,
+    "main_surface": "Donato Bramante",
+    "clean": false
+   }
+  },
+  "wiki-Titanic": {
+   "Titanic": {
+    "mentions": 178,
+    "carriers": 4,
+    "main_covers": 178,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Titanic Quarter",
+     "Titanic Belfast",
+     "Olympic",
+     "Carpathia"
+    ],
+    "span_exact": false,
+    "exact_share": 0.949,
+    "main_surface": "Titanic",
+    "clean": false
+   },
+   "Titanic Belfast": {
+    "mentions": 3,
+    "carriers": 3,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Titanic",
+     "Titanic Quarter"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Titanic Belfast",
+    "clean": false
+   },
+   "Titanic Quarter": {
+    "mentions": 2,
+    "carriers": 2,
+    "main_covers": 2,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Titanic",
+     "Titanic Belfast"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Titanic Quarter",
+    "clean": false
+   },
+   "Olympic": {
+    "mentions": 27,
+    "carriers": 2,
+    "main_covers": 27,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Titanic",
+     "Carpathia"
+    ],
+    "span_exact": false,
+    "exact_share": 0.926,
+    "main_surface": "RMS Olympic",
+    "clean": false
+   },
+   "White Star Line": {
+    "mentions": 40,
+    "carriers": 6,
+    "main_covers": 40,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.2,
+    "main_surface": "White Star",
+    "clean": false
+   },
+   "Harland and Wolff": {
+    "mentions": 16,
+    "carriers": 2,
+    "main_covers": 16,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Edward James Harland",
+    "clean": false
+   },
+   "Carpathia": {
+    "mentions": 12,
+    "carriers": 2,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Titanic",
+     "Olympic"
+    ],
+    "span_exact": false,
+    "exact_share": 0.917,
+    "main_surface": "Carpathia Harold Cottam",
+    "clean": false
+   }
+  },
+  "wiki-Trans-Alaska_Pipeline_System": {
+   "Trans-Alaska Pipeline System": {
+    "mentions": 30,
+    "carriers": 3,
+    "main_covers": 18,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Trans-Alaska Pipeline Authorization Act"
+    ],
+    "span_exact": false,
+    "exact_share": 0.567,
+    "main_surface": "TAPS",
+    "clean": false
+   },
+   "Trans-Alaska Pipeline Authorization Act": {
+    "mentions": 1,
+    "carriers": 3,
+    "main_covers": 1,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Trans-Alaska Pipeline System"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Pipeline Authorization Act",
+    "clean": false
+   },
+   "Alyeska": {
+    "mentions": 26,
+    "carriers": 3,
+    "main_covers": 26,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.885,
+    "main_surface": "Alyeska",
+    "clean": false
+   },
+   "Valdez": {
+    "mentions": 13,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Valdez Marine Terminal": {
+    "mentions": 4,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.5,
+    "main_surface": "Valdez Marine Terminal",
+    "clean": false
+   },
+   "Exxon Valdez": {
+    "mentions": 1,
+    "carriers": 1,
+    "main_covers": 1,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Exxon Valdez",
+    "clean": true
+   },
+   "Fairbanks": {
+    "mentions": 12,
+    "carriers": 1,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.917,
+    "main_surface": "Fairbanks",
+    "clean": false
+   }
+  },
+  "wiki-U_S__Route_66": {
+   "U.S. Route 66": {
+    "mentions": 69,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Historic Route 66": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Historic Places",
+    "clean": false
+   },
+   "Interstate 40": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "United States Highway System",
+    "clean": false
+   },
+   "US 60": {
+    "mentions": 3,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Chicago": {
+    "mentions": 13,
+    "carriers": 1,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.923,
+    "main_surface": "Chicago",
+    "clean": false
+   },
+   "Los Angeles": {
+    "mentions": 13,
+    "carriers": 1,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Los Angeles",
+    "clean": true
+   }
+  }
+ }
+}
