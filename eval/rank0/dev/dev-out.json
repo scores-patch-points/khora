@@ -1,0 +1,2217 @@
+{
+ "fusionArm": "S1g",
+ "seed": 20261103,
+ "median": 0.322414802405592,
+ "nQuestions": 27,
+ "nScored": 27,
+ "unmatchedGold": [],
+ "pool": "per question: all reader sentences of the named doc(s) of that question",
+ "readStats": {
+  "cumb-army-284227": {
+   "sentences": 95,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "cumb-army-286019": {
+   "sentences": 66,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "hoover-nps": {
+   "sentences": 36,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "hoover-project": {
+   "sentences": 9,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "jeff-fact": {
+   "sentences": 16,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "miss-nps": {
+   "sentences": 74,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "moru-heads": {
+   "sentences": 12,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "moru-student": {
+   "sentences": 92,
+   "bound": 0,
+   "gapped": 0,
+   "ruling": "text_evidence"
+  },
+  "wiki-Apollo_11": {
+   "sentences": 586,
+   "bound": 4,
+   "gapped": 4,
+   "ruling": "text_evidence"
+  },
+  "wiki-Concorde": {
+   "sentences": 498,
+   "bound": 6,
+   "gapped": 20,
+   "ruling": "text_evidence"
+  },
+  "wiki-Cumberland_River": {
+   "sentences": 51,
+   "bound": 9,
+   "gapped": 5,
+   "ruling": "text_evidence"
+  },
+  "wiki-Eiffel_Tower": {
+   "sentences": 351,
+   "bound": 8,
+   "gapped": 6,
+   "ruling": "text_evidence"
+  },
+  "wiki-Gateway_Arch": {
+   "sentences": 442,
+   "bound": 4,
+   "gapped": 1,
+   "ruling": "text_evidence"
+  },
+  "wiki-Hoover_Dam": {
+   "sentences": 419,
+   "bound": 10,
+   "gapped": 71,
+   "ruling": "text_evidence"
+  },
+  "wiki-Mississippi_River": {
+   "sentences": 411,
+   "bound": 7,
+   "gapped": 3,
+   "ruling": "text_evidence"
+  },
+  "wiki-Mount_Rushmore": {
+   "sentences": 329,
+   "bound": 11,
+   "gapped": 70,
+   "ruling": "text_evidence"
+  },
+  "wiki-Statue_of_Liberty": {
+   "sentences": 443,
+   "bound": 9,
+   "gapped": 8,
+   "ruling": "text_evidence"
+  }
+ },
+ "gapReasons": {
+  "description_unbound": 89,
+  "capitalised_name_open_word": 26,
+  "center_not_carried": 8,
+  "expletive_or_cleft": 2,
+  "description_weak_word": 19,
+  "description_below_floor": 16,
+  "center_elsewhere": 3,
+  "description_off_topic": 13,
+  "capitalised_unknown_name": 3,
+  "description_no_margin": 4,
+  "pronoun_no_margin": 4,
+  "capitalised_name_not_candidate": 1
+ },
+ "measures": {
+  "full": {
+   "L": {
+    "n": 27,
+    "mrr": 0.4784393433077644,
+    "r1": 8,
+    "r3": 17,
+    "r5": 19,
+    "r10": 21
+   },
+   "S0": {
+    "n": 27,
+    "mrr": 0.6362006477173348,
+    "r1": 14,
+    "r3": 20,
+    "r5": 20,
+    "r10": 23
+   },
+   "S0g": {
+    "n": 27,
+    "mrr": 0.7019238497086598,
+    "r1": 17,
+    "r3": 20,
+    "r5": 20,
+    "r10": 23
+   },
+   "S1": {
+    "n": 27,
+    "mrr": 0.6803557748170237,
+    "r1": 16,
+    "r3": 19,
+    "r5": 22,
+    "r10": 23
+   },
+   "S1g": {
+    "n": 27,
+    "mrr": 0.7621913580246913,
+    "r1": 19,
+    "r3": 21,
+    "r5": 22,
+    "r10": 25
+   },
+   "SH": {
+    "n": 27,
+    "mrr": 0.03351108144197656,
+    "r1": 0,
+    "r3": 0,
+    "r5": 1,
+    "r10": 3
+   },
+   "F": {
+    "n": 27,
+    "mrr": 0.7246234748922921,
+    "r1": 17,
+    "r3": 22,
+    "r5": 22,
+    "r10": 22
+   },
+   "FSH": {
+    "n": 27,
+    "mrr": 0.18877600537694175,
+    "r1": 2,
+    "r3": 7,
+    "r5": 7,
+    "r10": 8
+   }
+  },
+  "lowOverlap": {
+   "L": {
+    "n": 14,
+    "mrr": 0.33103778114116456,
+    "r1": 3,
+    "r3": 6,
+    "r5": 6,
+    "r10": 8
+   },
+   "S0": {
+    "n": 14,
+    "mrr": 0.4293393444072409,
+    "r1": 4,
+    "r3": 7,
+    "r5": 7,
+    "r10": 10
+   },
+   "S0g": {
+    "n": 14,
+    "mrr": 0.5084721863428915,
+    "r1": 6,
+    "r3": 7,
+    "r5": 7,
+    "r10": 10
+   },
+   "S1": {
+    "n": 14,
+    "mrr": 0.5954480419090219,
+    "r1": 7,
+    "r3": 9,
+    "r5": 9,
+    "r10": 10
+   },
+   "S1g": {
+    "n": 14,
+    "mrr": 0.6782738095238096,
+    "r1": 9,
+    "r3": 9,
+    "r5": 9,
+    "r10": 12
+   },
+   "SH": {
+    "n": 14,
+    "mrr": 0.018834859556836607,
+    "r1": 0,
+    "r3": 0,
+    "r5": 0,
+    "r10": 0
+   },
+   "F": {
+    "n": 14,
+    "mrr": 0.5403452730065633,
+    "r1": 6,
+    "r3": 9,
+    "r5": 9,
+    "r10": 9
+   },
+   "FSH": {
+    "n": 14,
+    "mrr": 0.10129269781564484,
+    "r1": 0,
+    "r3": 3,
+    "r5": 3,
+    "r10": 3
+   }
+  },
+  "stratum": {
+   "L": {
+    "n": 10,
+    "mrr": 0.4429015151515152,
+    "r1": 2,
+    "r3": 7,
+    "r5": 7,
+    "r10": 7
+   },
+   "S0": {
+    "n": 10,
+    "mrr": 0.6014279350229901,
+    "r1": 5,
+    "r3": 7,
+    "r5": 7,
+    "r10": 8
+   },
+   "S0g": {
+    "n": 10,
+    "mrr": 0.7188848704038577,
+    "r1": 7,
+    "r3": 7,
+    "r5": 7,
+    "r10": 8
+   },
+   "S1": {
+    "n": 10,
+    "mrr": 0.7916666666666667,
+    "r1": 7,
+    "r3": 8,
+    "r5": 9,
+    "r10": 10
+   },
+   "S1g": {
+    "n": 10,
+    "mrr": 0.9125,
+    "r1": 9,
+    "r3": 9,
+    "r5": 9,
+    "r10": 10
+   },
+   "SH": {
+    "n": 10,
+    "mrr": 0.036118167251551946,
+    "r1": 0,
+    "r3": 0,
+    "r5": 1,
+    "r10": 1
+   },
+   "F": {
+    "n": 10,
+    "mrr": 0.6901305683563748,
+    "r1": 6,
+    "r3": 8,
+    "r5": 8,
+    "r10": 8
+   },
+   "FSH": {
+    "n": 10,
+    "mrr": 0.21684927456760725,
+    "r1": 1,
+    "r3": 3,
+    "r5": 3,
+    "r10": 3
+   }
+  }
+ },
+ "perQuestion": [
+  {
+   "id": "n01",
+   "q": "How tall is the Eiffel Tower?",
+   "pool": 351,
+   "docs": [
+    "wiki-Eiffel_Tower"
+   ],
+   "gold": [
+    7
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.49617261220737513,
+   "stratum": true,
+   "ranks": {
+    "L": 2,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 20,
+    "F": 1,
+    "FSH": 1
+   },
+   "goldInfo": [
+    {
+     "text": "The tower is 330 metres (1,083 ft) tall, about the same height as an 81-storey building, a",
+     "first": "the",
+     "bound": "Eiffel Tower",
+     "gap": null,
+     "names": [
+      "Eiffel Tower"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "n02",
+   "q": "How wide is the base of the Eiffel Tower?",
+   "pool": 351,
+   "docs": [
+    "wiki-Eiffel_Tower"
+   ],
+   "gold": [
+    8
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.27699454664513995,
+   "stratum": true,
+   "ranks": {
+    "L": 2,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 163,
+    "F": 1,
+    "FSH": 11
+   },
+   "goldInfo": [
+    {
+     "text": "Its base is square, measuring 125 metres (410 ft) on each side.",
+     "first": "its",
+     "bound": "Eiffel Tower",
+     "gap": null,
+     "names": [
+      "Eiffel Tower"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n03",
+   "q": "How many steps does it take to climb the Eiffel Tower?",
+   "pool": 351,
+   "docs": [
+    "wiki-Eiffel_Tower"
+   ],
+   "gold": [
+    16
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.276582974793856,
+   "stratum": true,
+   "ranks": {
+    "L": 1,
+    "S0": 2,
+    "S0g": 1,
+    "S1": 2,
+    "S1g": 1,
+    "SH": 346,
+    "F": 1,
+    "FSH": 21
+   },
+   "goldInfo": [
+    {
+     "text": "The climb from ground level to the first level is over 300 steps, as is the climb from the",
+     "first": "the",
+     "bound": null,
+     "gap": "description_below_floor",
+     "names": []
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n04",
+   "q": "How many people visited the Eiffel Tower in 2022?",
+   "pool": 351,
+   "docs": [
+    "wiki-Eiffel_Tower"
+   ],
+   "gold": [
+    4
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.25949266558240586,
+   "stratum": true,
+   "ranks": {
+    "L": 3,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 102,
+    "F": 2,
+    "FSH": 12
+   },
+   "goldInfo": [
+    {
+     "text": "The tower received 5,889,000 visitors in 2022.",
+     "first": "the",
+     "bound": "Eiffel Tower",
+     "gap": null,
+     "names": [
+      "Eiffel Tower"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n05",
+   "q": "When was the Statue of Liberty dedicated?",
+   "pool": 443,
+   "docs": [
+    "wiki-Statue_of_Liberty"
+   ],
+   "gold": [
+    2
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.5815638468216583,
+   "stratum": true,
+   "ranks": {
+    "L": 1,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 361,
+    "F": 1,
+    "FSH": 17
+   },
+   "goldInfo": [
+    {
+     "text": "The statue was dedicated on October 28, 1886.",
+     "first": "the",
+     "bound": "Statue of Liberty",
+     "gap": null,
+     "names": [
+      "Statue of Liberty"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "n06",
+   "q": "What did the Gateway Arch cost to build?",
+   "pool": 442,
+   "docs": [
+    "wiki-Gateway_Arch"
+   ],
+   "gold": [
+    5
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.20821696293756717,
+   "stratum": false,
+   "ranks": {
+    "L": 38,
+    "S0": 9,
+    "S0g": 6,
+    "S1": 22,
+    "S1g": 10,
+    "SH": 173,
+    "F": 11,
+    "FSH": 66
+   },
+   "goldInfo": [
+    {
+     "text": "Construction began on February 12, 1963, and was completed on October 28, 1965, at an over",
+     "first": "construction",
+     "bound": null,
+     "gap": null,
+     "names": []
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n07",
+   "q": "When did the Gateway Arch open to the public?",
+   "pool": 442,
+   "docs": [
+    "wiki-Gateway_Arch"
+   ],
+   "gold": [
+    6
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.21917047138175394,
+   "stratum": true,
+   "ranks": {
+    "L": 12,
+    "S0": 7,
+    "S0g": 7,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 33,
+    "F": 3,
+    "FSH": 3
+   },
+   "goldInfo": [
+    {
+     "text": "The monument opened to the public on June 10, 1967.",
+     "first": "the",
+     "bound": "Gateway Arch",
+     "gap": null,
+     "names": [
+      "Gateway Arch"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n08",
+   "q": "How many tourists visit Hoover Dam each year?",
+   "pool": 419,
+   "docs": [
+    "wiki-Hoover_Dam"
+   ],
+   "gold": [
+    13
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.36771178000522536,
+   "stratum": false,
+   "ranks": {
+    "L": 1,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 135,
+    "F": 1,
+    "FSH": 12
+   },
+   "goldInfo": [
+    {
+     "text": "Hoover Dam is a major tourist attraction, with 7 million tourists a year.",
+     "first": "hoover",
+     "bound": null,
+     "gap": null,
+     "names": []
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "n09",
+   "q": "How many people died building Hoover Dam?",
+   "pool": 419,
+   "docs": [
+    "wiki-Hoover_Dam"
+   ],
+   "gold": [
+    2
+   ],
+   "unmatched": [],
+   "goldOverlap": 0,
+   "stratum": true,
+   "ranks": {
+    "L": 176,
+    "S0": 41,
+    "S0g": 30,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 418,
+    "F": 28,
+    "FSH": 326
+   },
+   "goldInfo": [
+    {
+     "text": "Its construction was the result of a massive effort involving thousands of workers, and co",
+     "first": "its",
+     "bound": "Hoover Dam",
+     "gap": null,
+     "names": [
+      "Hoover Dam"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n10",
+   "q": "How many passengers could Concorde carry?",
+   "pool": 498,
+   "docs": [
+    "wiki-Concorde"
+   ],
+   "gold": [
+    5
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.19316095366502692,
+   "stratum": false,
+   "ranks": {
+    "L": 8,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 128,
+    "F": 1,
+    "FSH": 17
+   },
+   "goldInfo": [
+    {
+     "text": "Concorde is an aircraft design with a narrow fuselage permitting four-abreast seating for ",
+     "first": "concorde",
+     "bound": null,
+     "gap": null,
+     "names": []
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n11",
+   "q": "How fast did Concorde fly?",
+   "pool": 498,
+   "docs": [
+    "wiki-Concorde"
+   ],
+   "gold": [
+    8
+   ],
+   "unmatched": [],
+   "goldOverlap": 0,
+   "stratum": true,
+   "ranks": {
+    "L": 150,
+    "S0": 73,
+    "S0g": 79,
+    "S1": 6,
+    "S1g": 8,
+    "SH": 296,
+    "F": 31,
+    "FSH": 264
+   },
+   "goldInfo": [
+    {
+     "text": "The airliner had transatlantic range while supercruising at twice the speed of sound for 7",
+     "first": "the",
+     "bound": "Concorde",
+     "gap": null,
+     "names": [
+      "Concorde"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n12",
+   "q": "When did Concorde enter service?",
+   "pool": 498,
+   "docs": [
+    "wiki-Concorde"
+   ],
+   "gold": [
+    10
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.2439052465533606,
+   "stratum": false,
+   "ranks": {
+    "L": 6,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 413,
+    "F": 1,
+    "FSH": 37
+   },
+   "goldInfo": [
+    {
+     "text": "Concorde entered service on 21 January 1976 with Air France from Paris-Roissy and British ",
+     "first": "concorde",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Air France Concorde"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n13",
+   "q": "How long did Armstrong and Aldrin spend walking on the Moon?",
+   "pool": 586,
+   "docs": [
+    "wiki-Apollo_11"
+   ],
+   "gold": [
+    5
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.21906486470780506,
+   "stratum": false,
+   "ranks": {
+    "L": 21,
+    "S0": 8,
+    "S0g": 8,
+    "S1": 27,
+    "S1g": 24,
+    "SH": 322,
+    "F": 21,
+    "FSH": 55
+   },
+   "goldInfo": [
+    {
+     "text": "Together they spent around two and a half hours walking on the surface, planting an Americ",
+     "first": "together",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Nixon White House Chief"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "n14",
+   "q": "How many people watched the Moon landing broadcast?",
+   "pool": 586,
+   "docs": [
+    "wiki-Apollo_11"
+   ],
+   "gold": [
+    11
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.3416245152934933,
+   "stratum": false,
+   "ranks": {
+    "L": 1,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 329,
+    "F": 1,
+    "FSH": 13
+   },
+   "goldInfo": [
+    {
+     "text": "Armstrong's moonwalk was broadcast live to an estimated 600 million viewers, roughly one-f",
+     "first": "armstrong's",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Commander Neil Armstrong"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "n15",
+   "q": "How large is the memorial park at Mount Rushmore?",
+   "pool": 329,
+   "docs": [
+    "wiki-Mount_Rushmore"
+   ],
+   "gold": [
+    3
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.33879748352656497,
+   "stratum": false,
+   "ranks": {
+    "L": 4,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 133,
+    "F": 1,
+    "FSH": 19
+   },
+   "goldInfo": [
+    {
+     "text": "Mount Rushmore attracts more than two million visitors annually to the memorial park which",
+     "first": "mount",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Mount Rushmore National Memorial"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "n16",
+   "q": "How long is the Mississippi River?",
+   "pool": 411,
+   "docs": [
+    "wiki-Mississippi_River"
+   ],
+   "gold": [
+    2
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.13082936079734692,
+   "stratum": false,
+   "ranks": {
+    "L": 152,
+    "S0": 15,
+    "S0g": 14,
+    "S1": 19,
+    "S1g": 16,
+    "SH": 15,
+    "F": 40,
+    "FSH": 28
+   },
+   "goldInfo": [
+    {
+     "text": "From its traditional source of Lake Itasca in northern Minnesota, it flows generally south",
+     "first": "from",
+     "bound": null,
+     "gap": null,
+     "names": []
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "v01",
+   "q": "How tall is the Gateway Arch?",
+   "pool": 458,
+   "docs": [
+    "jeff-fact",
+    "wiki-Gateway_Arch"
+   ],
+   "gold": [
+    3,
+    16
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.6276207980079431,
+   "stratum": false,
+   "ranks": {
+    "L": 1,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 4,
+    "S1g": 4,
+    "SH": 137,
+    "F": 1,
+    "FSH": 6
+   },
+   "goldInfo": [
+    {
+     "text": "Skip to global NPS navigation\nSkip to this park navigation\nSkip to the main content\nSkip t",
+     "first": "skip",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Gateway Arch National Park"
+     ]
+    },
+    {
+     "text": "The Gateway Arch is a 630-foot-tall (192 m) monument in St. Louis, Missouri, United States",
+     "first": "the",
+     "bound": "Gateway Arch",
+     "gap": null,
+     "names": [
+      "St Louis"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "v02",
+   "q": "How long is the Cumberland River?",
+   "pool": 212,
+   "docs": [
+    "cumb-army-284227",
+    "wiki-Cumberland_River",
+    "cumb-army-286019"
+   ],
+   "gold": [
+    7,
+    96,
+    182
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.3825412718633494,
+   "stratum": false,
+   "ranks": {
+    "L": 5,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 10,
+    "F": 1,
+    "FSH": 14
+   },
+   "goldInfo": [
+    {
+     "text": "The Scale of the Cumberland River System\nThe Cumberland River is an expansive waterway str",
+     "first": "the",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Ohio River Forecast Center"
+     ]
+    },
+    {
+     "text": "The 688-mile-long (1,107 km) river drains almost 18,000 square miles (47,000 km2) of south",
+     "first": "the",
+     "bound": null,
+     "gap": "description_unbound",
+     "names": []
+    },
+    {
+     "text": "For more than 100 years after achieving the nation’s independence, American pioneers had t",
+     "first": "for",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Engineers Nashville District"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "v03",
+   "q": "How high is Mount Rushmore above sea level?",
+   "pool": 421,
+   "docs": [
+    "moru-student",
+    "wiki-Mount_Rushmore"
+   ],
+   "gold": [
+    17,
+    98
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.5716251049684079,
+   "stratum": false,
+   "ranks": {
+    "L": 2,
+    "S0": 3,
+    "S0g": 3,
+    "S1": 5,
+    "S1g": 3,
+    "SH": 209,
+    "F": 2,
+    "FSH": 20
+   },
+   "goldInfo": [
+    {
+     "text": "Borglum liked the idea, and scouted out a broad wall of exposed granite on 5,725 foot Moun",
+     "first": "borglum",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Gutzon Borglum",
+      "Mount Rushmore National Memorial",
+      "Charles E Rushmore"
+     ]
+    },
+    {
+     "text": "Its elevation at its highest point is 5,725 feet (1,745 m) above sea level.",
+     "first": "its",
+     "bound": "Black Hills",
+     "gap": null,
+     "names": [
+      "Black Hills"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "v04",
+   "q": "How tall are the heads at Mount Rushmore?",
+   "pool": 341,
+   "docs": [
+    "moru-heads",
+    "wiki-Mount_Rushmore"
+   ],
+   "gold": [
+    5,
+    14
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.4078971217925162,
+   "stratum": false,
+   "ranks": {
+    "L": 3,
+    "S0": 2,
+    "S0g": 2,
+    "S1": 3,
+    "S1g": 2,
+    "SH": 11,
+    "F": 2,
+    "FSH": 1
+   },
+   "goldInfo": [
+    {
+     "text": "The head of George Washington is 60 feet (18.3 m) tall with a nose that is 21 feet (6.4 m)",
+     "first": "the",
+     "bound": null,
+     "gap": null,
+     "names": []
+    },
+    {
+     "text": "The sculpture features 60-foot-tall (18 m) depictions of the heads of four United States p",
+     "first": "the",
+     "bound": null,
+     "gap": "description_unbound",
+     "names": []
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "v05",
+   "q": "When did work on Mount Rushmore begin?",
+   "pool": 421,
+   "docs": [
+    "moru-student",
+    "wiki-Mount_Rushmore"
+   ],
+   "gold": [
+    8,
+    162
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.24652280279527256,
+   "stratum": false,
+   "ranks": {
+    "L": 3,
+    "S0": 37,
+    "S0g": 15,
+    "S1": 29,
+    "S1g": 6,
+    "SH": 135,
+    "F": 2,
+    "FSH": 29
+   },
+   "goldInfo": [
+    {
+     "text": "Work commenced officially on October 4, 1927.",
+     "first": "work",
+     "bound": null,
+     "gap": null,
+     "names": []
+    },
+    {
+     "text": "=== Construction ===\nBetween October 4, 1927, and October 31, 1941, Gutzon Borglum and 400",
+     "first": "construction",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "March 1941",
+      "American West"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "v06",
+   "q": "How wide is the widest part of the Mississippi River?",
+   "pool": 485,
+   "docs": [
+    "miss-nps",
+    "wiki-Mississippi_River"
+   ],
+   "gold": [
+    21,
+    121
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.5108273427036266,
+   "stratum": false,
+   "ranks": {
+    "L": 2,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 9,
+    "F": 1,
+    "FSH": 2
+   },
+   "goldInfo": [
+    {
+     "text": "The widest part of the Mississippi can be found at Lake Winnibigoshish near Bena, MN, wher",
+     "first": "the",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Mississippi River Facts"
+     ]
+    },
+    {
+     "text": "The Upper Mississippi has a number of natural and artificial lakes, with its widest point ",
+     "first": "the",
+     "bound": null,
+     "gap": null,
+     "names": []
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "v07",
+   "q": "How much concrete was used in total at Hoover Dam?",
+   "pool": 45,
+   "docs": [
+    "hoover-nps",
+    "hoover-project"
+   ],
+   "gold": [
+    11,
+    38
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.262761484340511,
+   "stratum": false,
+   "ranks": {
+    "L": 1,
+    "S0": 2,
+    "S0g": 1,
+    "S1": 2,
+    "S1g": 1,
+    "SH": 12,
+    "F": 1,
+    "FSH": 3
+   },
+   "goldInfo": [
+    {
+     "text": "Over the next five years, over 4.4 million cubic yards of concrete and 88 million pounds o",
+     "first": "over",
+     "bound": null,
+     "gap": null,
+     "names": []
+    },
+    {
+     "text": "The dam contains 3.25 million cubic yards of concrete; total concrete in the dam and appur",
+     "first": "the",
+     "bound": null,
+     "gap": null,
+     "names": []
+    }
+   ],
+   "lowOverlap": true
+  },
+  {
+   "id": "v08",
+   "q": "How many steps are in each leg of the Gateway Arch?",
+   "pool": 458,
+   "docs": [
+    "jeff-fact",
+    "wiki-Gateway_Arch"
+   ],
+   "gold": [
+    15,
+    333
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.39294502405674203,
+   "stratum": false,
+   "ranks": {
+    "L": 1,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 362,
+    "F": 1,
+    "FSH": 14
+   },
+   "goldInfo": [
+    {
+     "text": "Elevators (for stand-by emergency and maintenance service)\nNumber of Elevators\n2\nCapacity ",
+     "first": "elevators",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "Service Elevators Speed",
+      "Finish",
+      "Outside North Leg"
+     ]
+    },
+    {
+     "text": "==== Modes of ascent ====\nThere are three modes of transportation up the arch: two sets of",
+     "first": "modes",
+     "bound": null,
+     "gap": null,
+     "names": []
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "x01",
+   "q": "How long is the Cumberland River?",
+   "pool": 51,
+   "docs": [
+    "wiki-Cumberland_River"
+   ],
+   "gold": [
+    1
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.36846647860262915,
+   "stratum": true,
+   "ranks": {
+    "L": 2,
+    "S0": 3,
+    "S0g": 1,
+    "S1": 4,
+    "S1g": 1,
+    "SH": 4,
+    "F": 1,
+    "FSH": 2
+   },
+   "goldInfo": [
+    {
+     "text": "The 688-mile-long (1,107 km) river drains almost 18,000 square miles (47,000 km2) of south",
+     "first": "the",
+     "bound": null,
+     "gap": "description_unbound",
+     "names": []
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "x02",
+   "q": "How tall is the Eiffel Tower?",
+   "pool": 351,
+   "docs": [
+    "wiki-Eiffel_Tower"
+   ],
+   "gold": [
+    7
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.49617261220737513,
+   "stratum": true,
+   "ranks": {
+    "L": 2,
+    "S0": 1,
+    "S0g": 1,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 285,
+    "F": 1,
+    "FSH": 21
+   },
+   "goldInfo": [
+    {
+     "text": "The tower is 330 metres (1,083 ft) tall, about the same height as an 81-storey building, a",
+     "first": "the",
+     "bound": "Eiffel Tower",
+     "gap": null,
+     "names": [
+      "Eiffel Tower"
+     ]
+    }
+   ],
+   "lowOverlap": false
+  },
+  {
+   "id": "x03",
+   "q": "How much did the Concorde programme cost?",
+   "pool": 498,
+   "docs": [
+    "wiki-Concorde"
+   ],
+   "gold": [
+    1,
+    135,
+    136,
+    9
+   ],
+   "unmatched": [],
+   "goldOverlap": 0.322414802405592,
+   "stratum": false,
+   "ranks": {
+    "L": 1,
+    "S0": 2,
+    "S0g": 2,
+    "S1": 1,
+    "S1g": 1,
+    "SH": 31,
+    "F": 1,
+    "FSH": 3
+   },
+   "goldInfo": [
+    {
+     "text": "Studies began in 1954 and a UK–France treaty followed in 1962, as the programme cost was e",
+     "first": "studies",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "United Kingdom",
+      "Air France Concorde"
+     ]
+    },
+    {
+     "text": "=== Programme cost ===\nThe original programme cost estimate was £70 million in 1962, (£1.7",
+     "first": "programme",
+     "bound": null,
+     "gap": null,
+     "names": []
+    },
+    {
+     "text": "After cost overruns and delays the programme eventually cost between £1.5 and £2.1 billion",
+     "first": "after",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "January 1976"
+     ]
+    },
+    {
+     "text": "Delays and cost overruns pushed costs to £1.5–2.1 billion in 1976 (£12–16.7 billion in 202",
+     "first": "delays",
+     "bound": null,
+     "gap": null,
+     "names": [
+      "January 1976"
+     ]
+    }
+   ],
+   "lowOverlap": true
+  }
+ ],
+ "secondaryAllTexts": {
+  "fusionArm": "S1g",
+  "seed": 20261103,
+  "median": 0.3693437038260989,
+  "nQuestions": 27,
+  "nScored": 27,
+  "unmatchedGold": [],
+  "pool": "all reader sentences of every text in the texts dir",
+  "readStats": {
+   "apollo-nasa": {
+    "sentences": 62,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "cumb-army-284227": {
+    "sentences": 95,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "cumb-army-286019": {
+    "sentences": 66,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "hoover-kid": {
+    "sentences": 48,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "hoover-nps": {
+    "sentences": 36,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "hoover-project": {
+    "sentences": 9,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "jeff-fact": {
+    "sentences": 16,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "jeff-height": {
+    "sentences": 9,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "miss-nps": {
+    "sentences": 74,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "moru-heads": {
+    "sentences": 12,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "moru-student": {
+    "sentences": 92,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "stli-nps": {
+    "sentences": 19,
+    "bound": 0,
+    "gapped": 0,
+    "ruling": "text_evidence"
+   },
+   "wiki-Apollo_11": {
+    "sentences": 586,
+    "bound": 4,
+    "gapped": 4,
+    "ruling": "text_evidence"
+   },
+   "wiki-Concorde": {
+    "sentences": 498,
+    "bound": 6,
+    "gapped": 20,
+    "ruling": "text_evidence"
+   },
+   "wiki-Cumberland_River": {
+    "sentences": 51,
+    "bound": 9,
+    "gapped": 5,
+    "ruling": "text_evidence"
+   },
+   "wiki-Eiffel_Tower": {
+    "sentences": 351,
+    "bound": 8,
+    "gapped": 6,
+    "ruling": "text_evidence"
+   },
+   "wiki-Gateway_Arch": {
+    "sentences": 442,
+    "bound": 4,
+    "gapped": 1,
+    "ruling": "text_evidence"
+   },
+   "wiki-Hoover_Dam": {
+    "sentences": 419,
+    "bound": 10,
+    "gapped": 71,
+    "ruling": "text_evidence"
+   },
+   "wiki-Mississippi_River": {
+    "sentences": 411,
+    "bound": 7,
+    "gapped": 3,
+    "ruling": "text_evidence"
+   },
+   "wiki-Mount_Rushmore": {
+    "sentences": 329,
+    "bound": 11,
+    "gapped": 70,
+    "ruling": "text_evidence"
+   },
+   "wiki-Statue_of_Liberty": {
+    "sentences": 443,
+    "bound": 9,
+    "gapped": 8,
+    "ruling": "text_evidence"
+   }
+  },
+  "gapReasons": {
+   "description_unbound": 89,
+   "capitalised_name_open_word": 26,
+   "center_not_carried": 8,
+   "expletive_or_cleft": 2,
+   "description_weak_word": 19,
+   "description_below_floor": 16,
+   "center_elsewhere": 3,
+   "description_off_topic": 13,
+   "capitalised_unknown_name": 3,
+   "description_no_margin": 4,
+   "pronoun_no_margin": 4,
+   "capitalised_name_not_candidate": 1
+  },
+  "measures": {
+   "full": {
+    "L": {
+     "n": 27,
+     "mrr": 0.3489974213588997,
+     "r1": 6,
+     "r3": 10,
+     "r5": 13,
+     "r10": 17
+    },
+    "S0": {
+     "n": 27,
+     "mrr": 0.6066406822950475,
+     "r1": 14,
+     "r3": 17,
+     "r5": 19,
+     "r10": 22
+    },
+    "S0g": {
+     "n": 27,
+     "mrr": 0.5913905927080115,
+     "r1": 13,
+     "r3": 17,
+     "r5": 20,
+     "r10": 22
+    },
+    "S1": {
+     "n": 27,
+     "mrr": 0.6427198573031907,
+     "r1": 15,
+     "r3": 18,
+     "r5": 20,
+     "r10": 23
+    },
+    "S1g": {
+     "n": 27,
+     "mrr": 0.6566132189099668,
+     "r1": 15,
+     "r3": 18,
+     "r5": 22,
+     "r10": 23
+    },
+    "SH": {
+     "n": 27,
+     "mrr": 0.0028805985724061622,
+     "r1": 0,
+     "r3": 0,
+     "r5": 0,
+     "r10": 0
+    },
+    "F": {
+     "n": 27,
+     "mrr": 0.5939403960237294,
+     "r1": 14,
+     "r3": 17,
+     "r5": 19,
+     "r10": 20
+    },
+    "FSH": {
+     "n": 27,
+     "mrr": 0.16874419680888764,
+     "r1": 2,
+     "r3": 4,
+     "r5": 6,
+     "r10": 11
+    }
+   },
+   "lowOverlap": {
+    "L": {
+     "n": 14,
+     "mrr": 0.1866629467059482,
+     "r1": 2,
+     "r3": 2,
+     "r5": 3,
+     "r10": 5
+    },
+    "S0": {
+     "n": 14,
+     "mrr": 0.4318546491880681,
+     "r1": 5,
+     "r3": 6,
+     "r5": 6,
+     "r10": 9
+    },
+    "S0g": {
+     "n": 14,
+     "mrr": 0.40244376212735566,
+     "r1": 4,
+     "r3": 6,
+     "r5": 7,
+     "r10": 9
+    },
+    "S1": {
+     "n": 14,
+     "mrr": 0.5305175479282622,
+     "r1": 6,
+     "r3": 8,
+     "r5": 8,
+     "r10": 10
+    },
+    "S1g": {
+     "n": 14,
+     "mrr": 0.5341826364692218,
+     "r1": 6,
+     "r3": 8,
+     "r5": 9,
+     "r10": 10
+    },
+    "SH": {
+     "n": 14,
+     "mrr": 0.003221824325603611,
+     "r1": 0,
+     "r3": 0,
+     "r5": 0,
+     "r10": 0
+    },
+    "F": {
+     "n": 14,
+     "mrr": 0.3525993351886209,
+     "r1": 4,
+     "r3": 5,
+     "r5": 7,
+     "r10": 7
+    },
+    "FSH": {
+     "n": 14,
+     "mrr": 0.09720234480001212,
+     "r1": 1,
+     "r3": 1,
+     "r5": 1,
+     "r10": 2
+    }
+   },
+   "stratum": {
+    "L": {
+     "n": 10,
+     "mrr": 0.2606172581467424,
+     "r1": 2,
+     "r3": 2,
+     "r5": 3,
+     "r10": 5
+    },
+    "S0": {
+     "n": 10,
+     "mrr": 0.579794921561708,
+     "r1": 5,
+     "r3": 6,
+     "r5": 6,
+     "r10": 8
+    },
+    "S0g": {
+     "n": 10,
+     "mrr": 0.5370008124328434,
+     "r1": 4,
+     "r3": 6,
+     "r5": 7,
+     "r10": 8
+    },
+    "S1": {
+     "n": 10,
+     "mrr": 0.7291666666666667,
+     "r1": 6,
+     "r3": 8,
+     "r5": 8,
+     "r10": 10
+    },
+    "S1g": {
+     "n": 10,
+     "mrr": 0.7325,
+     "r1": 6,
+     "r3": 8,
+     "r5": 9,
+     "r10": 10
+    },
+    "SH": {
+     "n": 10,
+     "mrr": 0.002118972077071541,
+     "r1": 0,
+     "r3": 0,
+     "r5": 0,
+     "r10": 0
+    },
+    "F": {
+     "n": 10,
+     "mrr": 0.4838690476190477,
+     "r1": 4,
+     "r3": 5,
+     "r5": 7,
+     "r10": 7
+    },
+    "FSH": {
+     "n": 10,
+     "mrr": 0.14576437246360668,
+     "r1": 1,
+     "r3": 1,
+     "r5": 2,
+     "r10": 2
+    }
+   }
+  },
+  "perQuestion": [
+   {
+    "id": "n01",
+    "pool": 4068,
+    "ranks": {
+     "L": 6,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 1366,
+     "F": 1,
+     "FSH": 15
+    },
+    "stratum": true,
+    "lowOverlap": false
+   },
+   {
+    "id": "n02",
+    "pool": 4068,
+    "ranks": {
+     "L": 30,
+     "S0": 1,
+     "S0g": 2,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 3668,
+     "F": 5,
+     "FSH": 74
+    },
+    "stratum": true,
+    "lowOverlap": true
+   },
+   {
+    "id": "n03",
+    "pool": 4068,
+    "ranks": {
+     "L": 1,
+     "S0": 2,
+     "S0g": 2,
+     "S1": 2,
+     "S1g": 2,
+     "SH": 193,
+     "F": 1,
+     "FSH": 1
+    },
+    "stratum": true,
+    "lowOverlap": true
+   },
+   {
+    "id": "n04",
+    "pool": 4068,
+    "ranks": {
+     "L": 5,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 1038,
+     "F": 3,
+     "FSH": 14
+    },
+    "stratum": true,
+    "lowOverlap": true
+   },
+   {
+    "id": "n05",
+    "pool": 4068,
+    "ranks": {
+     "L": 1,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 602,
+     "F": 1,
+     "FSH": 5
+    },
+    "stratum": true,
+    "lowOverlap": false
+   },
+   {
+    "id": "n06",
+    "pool": 4068,
+    "ranks": {
+     "L": 111,
+     "S0": 9,
+     "S0g": 8,
+     "S1": 22,
+     "S1g": 16,
+     "SH": 99,
+     "F": 32,
+     "FSH": 64
+    },
+    "stratum": false,
+    "lowOverlap": true
+   },
+   {
+    "id": "n07",
+    "pool": 4068,
+    "ranks": {
+     "L": 48,
+     "S0": 7,
+     "S0g": 7,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 1304,
+     "F": 5,
+     "FSH": 102
+    },
+    "stratum": true,
+    "lowOverlap": true
+   },
+   {
+    "id": "n08",
+    "pool": 4068,
+    "ranks": {
+     "L": 1,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 151,
+     "F": 1,
+     "FSH": 1
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "n09",
+    "pool": 4068,
+    "ranks": {
+     "L": 2724,
+     "S0": 61,
+     "S0g": 69,
+     "S1": 2,
+     "S1g": 2,
+     "SH": 190,
+     "F": 56,
+     "FSH": 423
+    },
+    "stratum": true,
+    "lowOverlap": true
+   },
+   {
+    "id": "n10",
+    "pool": 4068,
+    "ranks": {
+     "L": 8,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 3998,
+     "F": 1,
+     "FSH": 24
+    },
+    "stratum": false,
+    "lowOverlap": true
+   },
+   {
+    "id": "n11",
+    "pool": 4068,
+    "ranks": {
+     "L": 1313,
+     "S0": 73,
+     "S0g": 79,
+     "S1": 6,
+     "S1g": 8,
+     "SH": 209,
+     "F": 48,
+     "FSH": 405
+    },
+    "stratum": true,
+    "lowOverlap": true
+   },
+   {
+    "id": "n12",
+    "pool": 4068,
+    "ranks": {
+     "L": 6,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 3926,
+     "F": 1,
+     "FSH": 20
+    },
+    "stratum": false,
+    "lowOverlap": true
+   },
+   {
+    "id": "n13",
+    "pool": 4068,
+    "ranks": {
+     "L": 54,
+     "S0": 14,
+     "S0g": 16,
+     "S1": 35,
+     "S1g": 41,
+     "SH": 705,
+     "F": 44,
+     "FSH": 100
+    },
+    "stratum": false,
+    "lowOverlap": true
+   },
+   {
+    "id": "n14",
+    "pool": 4068,
+    "ranks": {
+     "L": 1,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 3184,
+     "F": 1,
+     "FSH": 8
+    },
+    "stratum": false,
+    "lowOverlap": true
+   },
+   {
+    "id": "n15",
+    "pool": 4068,
+    "ranks": {
+     "L": 4,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 3284,
+     "F": 1,
+     "FSH": 11
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "n16",
+    "pool": 4068,
+    "ranks": {
+     "L": 206,
+     "S0": 24,
+     "S0g": 22,
+     "S1": 33,
+     "S1g": 30,
+     "SH": 625,
+     "F": 66,
+     "FSH": 312
+    },
+    "stratum": false,
+    "lowOverlap": true
+   },
+   {
+    "id": "v01",
+    "pool": 4068,
+    "ranks": {
+     "L": 2,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 4,
+     "S1g": 4,
+     "SH": 115,
+     "F": 1,
+     "FSH": 2
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "v02",
+    "pool": 4068,
+    "ranks": {
+     "L": 5,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 741,
+     "F": 1,
+     "FSH": 8
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "v03",
+    "pool": 4068,
+    "ranks": {
+     "L": 2,
+     "S0": 3,
+     "S0g": 3,
+     "S1": 7,
+     "S1g": 4,
+     "SH": 178,
+     "F": 2,
+     "FSH": 2
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "v04",
+    "pool": 4068,
+    "ranks": {
+     "L": 38,
+     "S0": 4,
+     "S0g": 4,
+     "S1": 5,
+     "S1g": 4,
+     "SH": 865,
+     "F": 10,
+     "FSH": 87
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "v05",
+    "pool": 4068,
+    "ranks": {
+     "L": 61,
+     "S0": 42,
+     "S0g": 32,
+     "S1": 32,
+     "S1g": 30,
+     "SH": 74,
+     "F": 35,
+     "FSH": 130
+    },
+    "stratum": false,
+    "lowOverlap": true
+   },
+   {
+    "id": "v06",
+    "pool": 4068,
+    "ranks": {
+     "L": 2,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 1587,
+     "F": 1,
+     "FSH": 8
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "v07",
+    "pool": 4068,
+    "ranks": {
+     "L": 2,
+     "S0": 4,
+     "S0g": 2,
+     "S1": 3,
+     "S1g": 2,
+     "SH": 3255,
+     "F": 2,
+     "FSH": 10
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "v08",
+    "pool": 4068,
+    "ranks": {
+     "L": 1,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 408,
+     "F": 1,
+     "FSH": 7
+    },
+    "stratum": false,
+    "lowOverlap": false
+   },
+   {
+    "id": "x01",
+    "pool": 4068,
+    "ranks": {
+     "L": 57,
+     "S0": 8,
+     "S0g": 5,
+     "S1": 8,
+     "S1g": 5,
+     "SH": 2372,
+     "F": 15,
+     "FSH": 124
+    },
+    "stratum": true,
+    "lowOverlap": true
+   },
+   {
+    "id": "x02",
+    "pool": 4068,
+    "ranks": {
+     "L": 6,
+     "S0": 1,
+     "S0g": 1,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 875,
+     "F": 1,
+     "FSH": 12
+    },
+    "stratum": true,
+    "lowOverlap": false
+   },
+   {
+    "id": "x03",
+    "pool": 4068,
+    "ranks": {
+     "L": 1,
+     "S0": 2,
+     "S0g": 4,
+     "S1": 1,
+     "S1g": 1,
+     "SH": 500,
+     "F": 1,
+     "FSH": 4
+    },
+    "stratum": false,
+    "lowOverlap": false
+   }
+  ]
+ },
+ "bars": {
+  "B1": true,
+  "B2": true,
+  "B3": true,
+  "B4": true,
+  "b1": {
+   "F": 22,
+   "L": 21
+  },
+  "b2": {
+   "lowOverlap": 3,
+   "stratum": 1
+  },
+  "b3": {
+   "lowOverlap": 2,
+   "stratum": 2
+  },
+  "b4": {
+   "full": -10,
+   "lowOverlap": -3,
+   "stratum": -4
+  },
+  "decision": "may feed the Ask's candidate ranking by rank fusion, as 'smelled', never as a verdict"
+ },
+ "questionsSha256": "43027cf9976d8f9cde2059fc2b2f7c30709ec358bc09b841cd01cddb4f13f5eb",
+ "modelDigest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f"
+}
