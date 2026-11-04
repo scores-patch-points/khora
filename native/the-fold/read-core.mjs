@@ -55,6 +55,7 @@ import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
 import { priorJson, priorGeneration } from "./prior-source.mjs";
 import { figuresOf } from "../adapters/text/figure-period.en.js";
+import { castIdentity as castIdentityPass } from "../organs/cast-identity.js";
 
 export const READ_CORE = Object.freeze({
   schema: "ReadCore@1",
@@ -281,7 +282,7 @@ const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 /** Every place a surface stands as a whole word, longest surface first, overlaps given to the longer. The index keeps a name in
  *  its folded form ("Mr Brown" for "Mr. Brown", a lower-cased "messrs"), so a token may carry its period in the text and a
  *  folded surface matches without case. */
-function mentionsOf(text, surfaces) {
+export function mentionsOf(text, surfaces) {
   const hits = [];
   for (const s of [...surfaces].sort((a, b) => b.length - a.length)) {
     if (!s) continue;
@@ -324,7 +325,7 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false, castIdentity = false } = {}) {
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
@@ -395,7 +396,8 @@ export function readWith(text, { address = null, category = null, language = nul
   // `mentionsOf` bounds a mention by \p{L} on both sides, so in a script written without spaces (a zh probe) every row gets zero spans and the cast
   // is empty. Not fixed here: it changes the cast's output for every language and needs its own registration. Suggested fix: take the mention
   // boundaries from the language's tokenizer adapter (Intl.Segmenter), not the regex.
-  let cast = [], heardRows = [], formUsageReport = null;
+  let cast = [], heardRows = [], formUsageReport = null, identity = null;
+  const identityRows = [];
   try {
     // A capital is a convention of the language (conventions.js): form-usage.js decides, per language, whether it has a ledgered convention to read by
     // (English). Another language, or no pos prior (a typed gap already: `no_pos_prior`), reads the capital tier exactly as it was.
@@ -418,13 +420,26 @@ export function readWith(text, { address = null, category = null, language = nul
     }
     for (const r of byRef.values()) {
       const surface = out.index.represent?.(r.ref) ?? [...r.surfaces].sort((a, b) => b.length - a.length)[0];
-      const spans = mentionsOf(norm, r.surfaces).map(([a, b]) => [raw(a), raw(b)]);
+      const spansN = mentionsOf(norm, r.surfaces);
+      const spans = spansN.map(([a, b]) => [raw(a), raw(b)]);
       // a word whose period is its own (this read's abbreviations: "Messrs.", "No.", "Ltd.") is a title, a unit or a suffix the
       // capital tier caught, not a being; standing alone it is kept with the heard rows
       const being = [...r.surfaces].some((x) => capital.has(x) && !isAbbreviationSurface(x, abbr.set));
       // mentionsAt: UTF-8 byte offsets, the weft's address unit; mentionSpans: [start, end) character spans into the text given
       const row = { ref: r.ref, surface, allSurfaces: [...r.surfaces], mentionsAt: spans.map(([a]) => bytes[a]), mentionSpans: spans, standing: being ? "referent" : "heard" };
       (being ? cast : heardRows).push(row);
+      if (castIdentity && being) identityRows.push({ ref: r.ref, surfaces: [...r.surfaces], spans: spansN, standing: "referent", represent: surface });
+    }
+    // ONE NAME, ONE BEING (opt-in, `castIdentity: true | { rescue, claims, lead, unmerge, fold, spans }`; off, none of this runs and the entry is byte-identical): the cast
+    // repaired by structural rules and the text's own evidence (organs/cast-identity.js). The rows are rebuilt the way they were built above.
+    if (castIdentity) {
+      const connectorOk = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); return !!c.found && c.total > 0 && c.candidates.filter((x) => ["ADP", "DET", "PART"].includes(x.upos)).reduce((n, x) => n + x.count, 0) * 2 >= c.total; };
+      identity = castIdentityPass({ text: norm, rows: identityRows, mentionsOf, abbreviations: abbr.set, connectorOk, nominalOk: (t) => { const u = formUsageOf(pr.posPrior)?.(String(t).toLowerCase()); return !u || !usedMostlyAsOther(u); }, options: castIdentity === true ? {} : castIdentity });
+      cast = identity.rows.map((r) => {
+        const keep = r.represent && r.surfaces.includes(r.represent) ? r.represent : [...r.surfaces].sort((a, b) => b.length - a.length)[0];
+        const spans = r.spans.map(([a, b]) => [raw(a), raw(b)]);
+        return { ref: r.ref, surface: keep, allSurfaces: [...r.surfaces], mentionsAt: spans.map(([a]) => bytes[a]), mentionSpans: spans, standing: "referent" };
+      });
     }
   } catch (e) { if (!err) err = `cast_failed: ${String(e?.message ?? e)}`; }
   // THE PRONOUNS — each binding the reader made, addressed in the document, naming the cast row it binds
@@ -436,6 +451,7 @@ export function readWith(text, { address = null, category = null, language = nul
       pronouns.push({ pronoun: b.pronoun, at: [raw(at), raw(at + String(b.pronoun ?? "").length)], sentence: sentenceAt(at), surface: b.surface ?? null, ref: b.surface ? refOf(b.surface) : null, margin: b.margin ?? null });
     }
   });
+  if (identity) for (const p of pronouns) if (p.ref && identity.refMap.has(p.ref)) p.ref = identity.refMap.get(p.ref);
   // THE PRESENCE RUNG (readerOptions.pronounPresence = { window, boost, feed, floor, margin, locality }; opt-in, every dial declared, off = absent and then
   // nothing below runs and the entry is what it was): the pronouns of the resolver's own class bound by decayed presence over the beings of THIS cast
   // (adapters/text/pronouns.js::resolvePronounsByPresence, PREREG-PRESENCE.md), beside the shipped resolver's `entry.pronouns`, which it does not touch.
@@ -532,6 +548,7 @@ export function readWith(text, { address = null, category = null, language = nul
     }
   }
   if (declension) entry.declension = declensionReport;
+  if (identity) { entry.castIdentity = identity.report; for (const g of identity.report.gaps) gaps.push(g); }
   return entry;
 }
 

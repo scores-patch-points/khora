@@ -8,7 +8,8 @@
     "test:code": "node --test native/the-fold/code-loop.test.mjs native/the-fold/void-loop.test.mjs native/the-fold/void-spec-falsify.test.mjs native/the-fold/tool-call-physics.test.mjs native/the-fold/direct-bridge.test.mjs",
     "sync": "node scripts/sync.mjs",
     "sync:check": "node scripts/sync.mjs --check",
-    "eval:meaning": "node eval/meaning/run.mjs"
+    "eval:meaning": "node eval/meaning/run.mjs",
+    "test:cast": "node --test native/organs/cast-identity.test.mjs"
   },
   "repository": {
     "type": "git",

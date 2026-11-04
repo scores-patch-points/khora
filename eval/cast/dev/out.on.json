@@ -1,0 +1,904 @@
+{
+ "summary": {
+  "entities": 60,
+  "clean": 30,
+  "layer3": 0.5,
+  "whole_rate": 0.8167,
+  "unique_carrier_rate": 0.5333,
+  "no_merge_rate": 0.95,
+  "span_exact_rate": 0.7667
+ },
+ "reader_gaps": {
+  "wiki-Brooklyn_Bridge": [],
+  "wiki-Colosseum": [],
+  "wiki-Golden_Gate_Bridge": [],
+  "wiki-Panama_Canal": [
+   "cast_identity_initials_tie",
+   "cast_identity_initials_tie",
+   "cast_identity_initials_tie"
+  ],
+  "wiki-Sydney_Opera_House": [
+   "cast_identity_tie",
+   "cast_identity_tie"
+  ],
+  "wiki-Empire_State_Building": [
+   "cast_identity_initials_tie",
+   "cast_identity_tie"
+  ],
+  "wiki-Hagia_Sophia": [
+   "cast_identity_initials_tie"
+  ],
+  "wiki-Hubble_Space_Telescope": [
+   "cast_identity_initials_tie",
+   "cast_identity_tie",
+   "cast_identity_tie"
+  ],
+  "wiki-Suez_Canal": [
+   "cast_identity_initials_tie"
+  ],
+  "wiki-Taj_Mahal": [],
+  "wiki-Voyager_1": [
+   "cast_identity_tie"
+  ],
+  "wiki-Large_Hadron_Collider": [
+   "cast_identity_initials_tie"
+  ],
+  "wiki-Rosetta_Stone": [],
+  "wiki-Stonehenge": [
+   "cast_identity_tie"
+  ],
+  "wiki-Mount_Everest": [
+   "cast_identity_tie"
+  ],
+  "wiki-International_Space_Station": [
+   "cast_identity_initials_tie",
+   "cast_identity_tie",
+   "cast_identity_tie",
+   "cast_identity_tie"
+  ],
+  "wiki-Mayflower": [],
+  "wiki-Antikythera_mechanism": [],
+  "wiki-Great_Wall_of_China": [
+   "cast_identity_tie",
+   "cast_identity_tie"
+  ],
+  "wiki-James_Webb_Space_Telescope": [
+   "cast_identity_initials_tie",
+   "cast_identity_tie",
+   "cast_identity_tie"
+  ],
+  "wiki-Machu_Picchu": [],
+  "wiki-Trans-Siberian_Railway": [
+   "cast_identity_initials_tie"
+  ],
+  "wiki-Great_Barrier_Reef": [
+   "cast_identity_tie"
+  ]
+ },
+ "reader_options": {
+  "castIdentity": true
+ },
+ "perDoc": {
+  "wiki-Brooklyn_Bridge": {
+   "Brooklyn Bridge": {
+    "mentions": 99,
+    "carriers": 2,
+    "main_covers": 98,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.99,
+    "main_surface": "Brooklyn Bridge",
+    "clean": false
+   },
+   "New York City": {
+    "mentions": 17,
+    "carriers": 3,
+    "main_covers": 13,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.765,
+    "main_surface": "New York City",
+    "clean": false
+   },
+   "John A. Roebling": {
+    "mentions": 18,
+    "carriers": 3,
+    "main_covers": 15,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.778,
+    "main_surface": "Roebling",
+    "clean": false
+   }
+  },
+  "wiki-Colosseum": {
+   "Colosseum": {
+    "mentions": 92,
+    "carriers": 1,
+    "main_covers": 92,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Colosseum",
+    "clean": true
+   },
+   "Domus Aurea": {
+    "mentions": 4,
+    "carriers": 1,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Domus Aurea",
+    "clean": true
+   },
+   "Pope Benedict": {
+    "mentions": 0,
+    "error": "no gold mention (inventory bug)"
+   }
+  },
+  "wiki-Golden_Gate_Bridge": {
+   "Golden Gate Bridge": {
+    "mentions": 38,
+    "carriers": 3,
+    "main_covers": 36,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.947,
+    "main_surface": "Golden Gate Bridge",
+    "clean": false
+   },
+   "Joseph Strauss": {
+    "mentions": 18,
+    "carriers": 1,
+    "main_covers": 18,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Joseph Strauss",
+    "clean": true
+   },
+   "San Francisco": {
+    "mentions": 25,
+    "carriers": 6,
+    "main_covers": 20,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.8,
+    "main_surface": "San Francisco Bay",
+    "clean": false
+   }
+  },
+  "wiki-Panama_Canal": {
+   "Panama Canal": {
+    "mentions": 56,
+    "carriers": 3,
+    "main_covers": 54,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.964,
+    "main_surface": "Panama Canal",
+    "clean": false
+   },
+   "Gatun Lake": {
+    "mentions": 24,
+    "carriers": 1,
+    "main_covers": 24,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Gatun Lake",
+    "clean": true
+   },
+   "United States": {
+    "mentions": 40,
+    "carriers": 1,
+    "main_covers": 40,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "United States",
+    "clean": true
+   }
+  },
+  "wiki-Sydney_Opera_House": {
+   "Sydney Opera House": {
+    "mentions": 56,
+    "carriers": 5,
+    "main_covers": 52,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.929,
+    "main_surface": "Sydney Opera House",
+    "clean": false
+   },
+   "New South Wales": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "New South Wales",
+    "clean": true
+   },
+   "Jørn Utzon": {
+    "mentions": 75,
+    "carriers": 1,
+    "main_covers": 75,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Jørn Utzon",
+    "clean": true
+   }
+  },
+  "wiki-Empire_State_Building": {
+   "Empire State Building": {
+    "mentions": 110,
+    "carriers": 2,
+    "main_covers": 109,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.991,
+    "main_surface": "Empire State Building",
+    "clean": false
+   },
+   "Wall Street": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.667,
+    "main_surface": "Wall Street Crash",
+    "clean": false
+   },
+   "New York City": {
+    "mentions": 23,
+    "carriers": 4,
+    "main_covers": 18,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.783,
+    "main_surface": "New York City",
+    "clean": false
+   }
+  },
+  "wiki-Hagia_Sophia": {
+   "Hagia Sophia": {
+    "mentions": 147,
+    "carriers": 5,
+    "main_covers": 142,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.966,
+    "main_surface": "Hagia Sophia",
+    "clean": false
+   },
+   "Pope Francis": {
+    "mentions": 2,
+    "carriers": 1,
+    "main_covers": 2,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "July Pope Francis",
+    "clean": true
+   }
+  },
+  "wiki-Hubble_Space_Telescope": {
+   "Hubble Space Telescope": {
+    "mentions": 54,
+    "carriers": 2,
+    "main_covers": 53,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.981,
+    "main_surface": "Hubble Space Telescope",
+    "clean": false
+   },
+   "Wide Field Camera": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.167,
+    "main_surface": "Wide Field Camera 3",
+    "clean": false
+   }
+  },
+  "wiki-Suez_Canal": {
+   "Suez Canal": {
+    "mentions": 58,
+    "carriers": 8,
+    "main_covers": 41,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.707,
+    "main_surface": "Suez Canal",
+    "clean": false
+   },
+   "Red Sea": {
+    "mentions": 41,
+    "carriers": 2,
+    "main_covers": 40,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.976,
+    "main_surface": "Receding Red Sea",
+    "clean": false
+   },
+   "Gamal Abdel Nasser": {
+    "mentions": 8,
+    "carriers": 1,
+    "main_covers": 8,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "President Gamal Abdel Nasser",
+    "clean": true
+   }
+  },
+  "wiki-Taj_Mahal": {
+   "Taj Mahal": {
+    "mentions": 39,
+    "carriers": 2,
+    "main_covers": 38,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.974,
+    "main_surface": "Taj Mahal",
+    "clean": false
+   },
+   "Shah Jahan": {
+    "mentions": 29,
+    "carriers": 1,
+    "main_covers": 29,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Shah Jahan",
+    "clean": true
+   },
+   "Mumtaz Mahal": {
+    "mentions": 12,
+    "carriers": 1,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Mumtaz Mahal",
+    "clean": true
+   }
+  },
+  "wiki-Voyager_1": {
+   "Voyager 1": {
+    "mentions": 76,
+    "carriers": 1,
+    "main_covers": 76,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Voyager 1",
+    "clean": true
+   },
+   "Solar System": {
+    "mentions": 20,
+    "carriers": 1,
+    "main_covers": 20,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Solar System",
+    "clean": true
+   }
+  },
+  "wiki-Large_Hadron_Collider": {
+   "Large Hadron Collider": {
+    "mentions": 89,
+    "carriers": 2,
+    "main_covers": 87,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.978,
+    "main_surface": "Large Hadron Collider",
+    "clean": false
+   },
+   "Super Proton Synchrotron": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Super Proton Synchrotron",
+    "clean": true
+   },
+   "LHC Computing Grid": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "LHC Computing Grid",
+    "clean": true
+   }
+  },
+  "wiki-Rosetta_Stone": {
+   "Rosetta Stone": {
+    "mentions": 37,
+    "carriers": 1,
+    "main_covers": 37,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Rosetta Stone",
+    "clean": true
+   },
+   "Ezana Stone": {
+    "mentions": 1,
+    "carriers": 1,
+    "main_covers": 1,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Ezana Stone",
+    "clean": true
+   },
+   "British Museum": {
+    "mentions": 13,
+    "carriers": 3,
+    "main_covers": 11,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.846,
+    "main_surface": "British Museum",
+    "clean": false
+   }
+  },
+  "wiki-Stonehenge": {
+   "Stonehenge": {
+    "mentions": 103,
+    "carriers": 4,
+    "main_covers": 98,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.951,
+    "main_surface": "Stonehenge",
+    "clean": false
+   },
+   "Mike Parker Pearson": {
+    "mentions": 11,
+    "carriers": 1,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Mike Parker Pearson",
+    "clean": true
+   },
+   "Salisbury Plain": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Salisbury Plain",
+    "clean": true
+   }
+  },
+  "wiki-Mount_Everest": {
+   "Mount Everest": {
+    "mentions": 182,
+    "carriers": 6,
+    "main_covers": 177,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.973,
+    "main_surface": "Mount Everest",
+    "clean": false
+   },
+   "South Col": {
+    "mentions": 17,
+    "carriers": 1,
+    "main_covers": 17,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "South Col",
+    "clean": true
+   }
+  },
+  "wiki-International_Space_Station": {
+   "International Space Station": {
+    "mentions": 248,
+    "carriers": 5,
+    "main_covers": 243,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.98,
+    "main_surface": "International Space Station",
+    "clean": false
+   },
+   "Space Shuttle": {
+    "mentions": 15,
+    "carriers": 1,
+    "main_covers": 15,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Space Shuttle",
+    "clean": true
+   }
+  },
+  "wiki-Mayflower": {
+   "Mayflower": {
+    "mentions": 74,
+    "carriers": 5,
+    "main_covers": 67,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.905,
+    "main_surface": "Mayflower",
+    "clean": false
+   },
+   "William Bradford": {
+    "mentions": 13,
+    "carriers": 1,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "William Bradford",
+    "clean": true
+   },
+   "Plymouth Colony": {
+    "mentions": 10,
+    "carriers": 1,
+    "main_covers": 10,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Plymouth Colony",
+    "clean": true
+   }
+  },
+  "wiki-Antikythera_mechanism": {
+   "Antikythera mechanism": {
+    "mentions": 31,
+    "carriers": 2,
+    "main_covers": 30,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.968,
+    "main_surface": "Antikythera Mechanism",
+    "clean": false
+   },
+   "Tony Freeth": {
+    "mentions": 13,
+    "carriers": 1,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Tony Freeth",
+    "clean": true
+   }
+  },
+  "wiki-Great_Wall_of_China": {
+   "Great Wall of China": {
+    "mentions": 44,
+    "carriers": 2,
+    "main_covers": 42,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.955,
+    "main_surface": "Great Wall of China",
+    "clean": false
+   },
+   "Inner Mongolia": {
+    "mentions": 2,
+    "carriers": 1,
+    "main_covers": 2,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Inner Mongolia",
+    "clean": true
+   }
+  },
+  "wiki-James_Webb_Space_Telescope": {
+   "James Webb Space Telescope": {
+    "mentions": 29,
+    "carriers": 2,
+    "main_covers": 28,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.966,
+    "main_surface": "James Webb Space Telescope",
+    "clean": false
+   },
+   "Hubble Space Telescope": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Hubble Space Telescope",
+    "clean": true
+   }
+  },
+  "wiki-Machu_Picchu": {
+   "Machu Picchu": {
+    "mentions": 82,
+    "carriers": 2,
+    "main_covers": 81,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.988,
+    "main_surface": "Machu Picchu",
+    "clean": false
+   },
+   "Huayna Picchu": {
+    "mentions": 12,
+    "carriers": 1,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Huayna Picchu",
+    "clean": true
+   },
+   "Urubamba River": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Urubamba River",
+    "clean": true
+   }
+  },
+  "wiki-Trans-Siberian_Railway": {
+   "Trans-Siberian Railway": {
+    "mentions": 22,
+    "carriers": 1,
+    "main_covers": 22,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Trans-Siberian Railway",
+    "clean": true
+   },
+   "Lake Baikal": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Lake Baikal",
+    "clean": true
+   }
+  },
+  "wiki-Great_Barrier_Reef": {
+   "Great Barrier Reef": {
+    "mentions": 82,
+    "carriers": 2,
+    "main_covers": 81,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Great Barrier Reef Marine Park"
+    ],
+    "span_exact": true,
+    "exact_share": 0.988,
+    "main_surface": "Great Barrier Reef",
+    "clean": false
+   },
+   "Great Barrier Reef Marine Park": {
+    "mentions": 7,
+    "carriers": 2,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Great Barrier Reef"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Great Barrier Reef Marine",
+    "clean": false
+   },
+   "Queensland": {
+    "mentions": 30,
+    "carriers": 4,
+    "main_covers": 22,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.733,
+    "main_surface": "Queensland",
+    "clean": false
+   }
+  }
+ }
+}
