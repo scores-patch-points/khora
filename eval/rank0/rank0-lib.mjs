@@ -229,8 +229,9 @@ export function bars(m, fusionArm = FUSION_SMELL_ARM) {
   const b2 = Object.fromEntries(subs.map((s) => [s, m[s].F.r3 - m[s].L.r3]));
   const b3 = Object.fromEntries(subs.map((s) => [s, m[s][ctx].r10 - m[s][bare].r10]));
   const b4 = Object.fromEntries(["full", ...subs].map((s) => [s, m[s].FSH.r3 - m[s].L.r3]));
-  const B2 = subs.some((s) => b2[s] >= 2), B3 = subs.some((s) => b3[s] >= 2), B4 = Object.values(b4).every((v) => v <= 1);
-  return { B1, B2, B3, B4, b1: { F: m.full.F.r10, L: m.full.L.r10 }, b2, b3, b4, decision: B1 && B2 && B4 ? "may feed the Ask's candidate ranking by rank fusion, as 'smelled', never as a verdict" : "do not feed the Ask" };
+  const testable = Object.fromEntries(subs.map((s) => [s, m[s].L.n >= 6])); // a subset of fewer than 6 questions is untestable, never a pass
+  const B2 = subs.some((s) => testable[s] && b2[s] >= 2), B3 = subs.some((s) => testable[s] && b3[s] >= 2), B4 = Object.values(b4).every((v) => v <= 1);
+  return { B1, B2, B3, B4, testable, b1: { F: m.full.F.r10, L: m.full.L.r10 }, b2, b3, b4, decision: B1 && B2 && B4 ? "may feed the Ask's candidate ranking by rank fusion, as 'smelled', never as a verdict" : "do not feed the Ask" };
 }
 
 export function table(m) {
