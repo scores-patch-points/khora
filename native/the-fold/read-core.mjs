@@ -433,8 +433,8 @@ export function readWith(text, { address = null, category = null, language = nul
     // ONE NAME, ONE BEING (opt-in, `castIdentity: true | { rescue, claims, lead, unmerge, fold, spans }`; off, none of this runs and the entry is byte-identical): the cast
     // repaired by structural rules and the text's own evidence (organs/cast-identity.js). The rows are rebuilt the way they were built above.
     if (castIdentity) {
-      const connectorOk = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); return !!c.found && c.total > 0 && c.candidates.filter((x) => ["ADP", "DET", "PART"].includes(x.upos)).reduce((n, x) => n + x.count, 0) * 2 >= c.total; };
-      identity = castIdentityPass({ text: norm, rows: identityRows, mentionsOf, abbreviations: abbr.set, connectorOk, nominalOk: (t) => { const u = formUsageOf(pr.posPrior)?.(String(t).toLowerCase()); return !u || !usedMostlyAsOther(u); }, options: castIdentity === true ? {} : castIdentity });
+      const connectorOk = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); if (!c.found || !(c.total > 0)) return null; const share = (tags) => c.candidates.filter((x) => tags.includes(x.upos)).reduce((n, x) => n + x.count, 0) * 2 >= c.total; return share(["CCONJ", "SCONJ"]) ? false : share(["ADP", "DET", "PART"]) ? true : null; };
+      identity = castIdentityPass({ text: norm, rows: identityRows, mentionsOf, abbreviations: abbr.set, connectorOk, commonNoun: (t) => { const c = classifyWord(String(t).toLowerCase(), { posPrior: pr.posPrior }); if (!c.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); }, nominalOk: (t) => { const u = formUsageOf(pr.posPrior)?.(String(t).toLowerCase()); return !u || !usedMostlyAsOther(u); }, options: castIdentity === true ? {} : castIdentity });
       cast = identity.rows.map((r) => {
         const keep = r.represent && r.surfaces.includes(r.represent) ? r.represent : [...r.surfaces].sort((a, b) => b.length - a.length)[0];
         const spans = r.spans.map(([a, b]) => [raw(a), raw(b)]);

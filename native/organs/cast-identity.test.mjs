@@ -8,7 +8,7 @@ import { r1Hashes } from "../../eval/cast/r1-hashes.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const rowsOf = (text, lists) => lists.map((surfaces, i) => ({ ref: `ref:auto:r${i}`, surfaces, spans: mentionsOf(text, surfaces), standing: "referent", represent: surfaces[0] }));
-const pass = (text, lists, abbreviations = new Set(), options = {}) => castIdentity({ text, rows: rowsOf(text, lists), mentionsOf, abbreviations, options });
+const pass = (text, lists, abbreviations = new Set(), options = {}, connectorOk = () => null) => castIdentity({ text, rows: rowsOf(text, lists), mentionsOf, abbreviations, connectorOk, options });
 const find = (res, s) => res.rows.find((r) => r.surfaces.includes(s));
 
 test("R1: with castIdentity absent or false the entry is JSON-identical to base (ms excluded)", async () => {
@@ -62,6 +62,27 @@ test("SPANS: a sentence's full stop is not the name's; an initial's period is", 
   for (const r of res.rows) for (const [a, b] of r.spans) assert.ok(!text.slice(a, b).endsWith("Act."), text.slice(a, b));
   assert.ok(res.rows.some((r) => r.spans.some(([a, b]) => text.slice(a, b) === "Clean Air Act")));
   assert.ok(res.rows.some((r) => r.spans.some(([a, b]) => text.slice(a, b) === "Robert F.")));
+});
+
+test("RESCUE: siblings that differ by a number are each a being; the bare stem does not absorb them", () => {
+  const text = "Apollo 13 flew in 1970. Apollo 13 was a near disaster. Apollo 11 landed first. Apollo 11 and Apollo 12 followed. Apollo 12 landed again. The Apollo program was large.";
+  const res = pass(text, [["Apollo"]], new Set(), { fold: false });
+  for (const k of ["Apollo 13", "Apollo 11", "Apollo 12"]) assert.ok(res.report.rescued.some((r) => r.surface === k), k);
+  const all = pass(text, [["Apollo"]]);
+  assert.ok(find(all, "Apollo 11") !== find(all, "Apollo 12") && find(all, "Apollo 11") !== find(all, "Apollo 13"));
+});
+
+test("RESCUE: a name joined by a coordinating word that its two sides almost never leave", () => {
+  const text = "Harland and Wolff built it. Harland and Wolff were paid. Ask Harland and Wolff about it. Then Harland and Wolff left.";
+  const res = pass(text, [["Harland"], ["Wolff"]], new Set(), {}, (t) => (t === "and" ? false : null));
+  assert.ok(res.report.rescued.some((r) => r.surface === "Harland and Wolff"));
+});
+
+test("LEAD: a possessive of a name is the name", () => {
+  const text = "Notre-Dame is old. Notre-Dame's spire burned. Notre-Dame's roof fell. Notre-Dame stands.";
+  const res = pass(text, [["Notre-Dame"], ["Notre-Dame's"]]);
+  assert.equal(res.rows.length, 1);
+  assert.ok(res.rows[0].spans.every(([a, b]) => text.slice(a, b) === "Notre-Dame"));
 });
 
 test("maximal keeps the longer of nested spans", () => { assert.deepEqual(maximal([[0, 5], [0, 12], [3, 6], [20, 25]]), [[0, 12], [20, 25]]); });

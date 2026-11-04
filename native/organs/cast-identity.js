@@ -23,10 +23,10 @@
 // Pure given its inputs. `mentionsOf` is read-core's own matcher, handed in so a mention is found the one way.
 
 const TOK = /[\p{L}\p{N}](?:[\p{L}\p{N}'’]|[-–/.](?=[\p{L}\p{N}]))*/gu;
-const CAP = /^\p{Lu}/u, LOW = /^\p{Ll}/u, NUM = /^\p{N}+(?:['’]s)?$/u;
+const CAP = /^\p{Lu}/u, LOW = /^\p{Ll}/u, NUM = /^\p{N}[\p{L}\p{N}'’]*(?:[-–/.][\p{L}\p{N}]+)*$/u;
 const JOINER = /[-–/]/;
 // the recurrence a joined unit must show: declared, and reported in PREREG-CAST-A1.md
-export const RECUR = { unit: 2, connector: 3 };
+export const RECUR = { unit: 2, connector: 3, share: 0.8 };
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const lc = (s) => s.toLocaleLowerCase();
 const refOfKey = (k) => `ref:auto:${k.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "_").replace(/^_|_$/g, "")}`;
@@ -56,9 +56,14 @@ export function scan(text) {
     if (LOW.test(t.t)) low.set(k, (low.get(k) ?? 0) + 1);
     else if (CAP.test(t.t) && !opensSentence(text, t.s)) mid.set(k, (mid.get(k) ?? 0) + 1);
   }
-  return { toks, positional: (w) => { const k = lc(bare(w)); const l = low.get(k) ?? 0; return l > 0 && l >= (mid.get(k) ?? 0); } };
+  // a period between two words that the text writes between the same two words again and again is the words' own ("St. Peter's"), not a sentence's end
+  const pairs = new Map();
+  for (let i = 0; i + 1 < toks.length; i++) if (/^\.[ \t]+$/.test(text.slice(toks[i].e, toks[i + 1].s))) { const k = `${toks[i].t}|${toks[i + 1].t}`; pairs.set(k, (pairs.get(k) ?? 0) + 1); }
+  return { toks, pairs, positional: (w) => { const k = lc(bare(w)); const l = low.get(k) ?? 0; return l > 0 && l >= (mid.get(k) ?? 0); } };
 }
 const sameLine = (text, a, b) => /^[ \t]+$/.test(text.slice(a.e, b.s));
+/** may a name run from token a to the next token b: a space, or a period that is an initial's, an abbreviation's or the pair's own (it recurs, and the word after it is not one a sentence opens with) */
+const gapOk = (text, a, b, sc, abbreviations) => sameLine(text, a, b) || (/^\.[ \t]+$/.test(text.slice(a.e, b.s)) && (/^\p{Lu}$/u.test(a.t) || abbreviations.has(a.t) || a.t.includes(".") || ((sc.pairs.get(`${a.t}|${b.t}`) ?? 0) >= RECUR.connector && !sc.positional(b.t))));
 
 /** a position that opens a sentence or a line (a quote or bracket in front of it does not count against that) */
 function opensSentence(text, i) {
@@ -97,38 +102,44 @@ function spansFor(text, surfaces, mentionsOf, casing, nominalOk) {
  * token the text never writes in lower case and whose mentions mostly open a sentence, while the remainder is already a being's surface.
  * A candidate wholly explained by a longer one with the same count is dropped.
  */
-export function rescue(text, { toks, positional }, surfaceSet, connectorOk = () => true) {
+export function rescue(text, sc, surfaceSet, connectorOk = () => true, abbreviations = new Set()) {
+  const { toks, positional } = sc;
   const found = new Map(); const MAXW = 8; const n = toks.length;
-  const initialGap = (a, b) => /^[ \t]+$/.test(text.slice(a.e, b.s)) || (/^\p{Lu}$/u.test(a.t) && /^\.[ \t]+$/.test(text.slice(a.e, b.s)));
+  const initialGap = (a, b) => gapOk(text, a, b, sc, abbreviations);
   const open = (a, b) => b >= 0 && b < n && initialGap(toks[Math.min(a, b)], toks[Math.max(a, b)]) && CAP.test(toks[b].t) && !positional(toks[b].t);
   for (let i = 0; i < n; i++) {
     // a window may open on a word the text also writes in lower case when this occurrence is capitalised away from a sentence's opening
     if (!CAP.test(toks[i].t) || (positional(toks[i].t) && opensSentence(text, toks[i].s))) continue;
-    let low = 0;
+    let low = 0, bad = false;
     for (let j = i; j < n && j - i < MAXW; j++) {
       if (j > i && !initialGap(toks[j - 1], toks[j])) break;
       const t = toks[j].t;
-      if (LOW.test(t)) { low++; if (low > 1 || !connectorOk(t)) break; continue; }
+      if (LOW.test(t)) { low++; if (low > 1) break; if (connectorOk(t) === false) bad = true; continue; }
       low = 0;
       if (!CAP.test(t) && !NUM.test(t)) break;
       if (NUM.test(t) && j === i) break;
       const w = toks.slice(i, j + 1);
-      const end = NUM.test(toks[j].t) ? toks[j].s + bare(toks[j].t).length : toks[j].e;
+      const end = toks[j].s + bare(toks[j].t).length;
       const k = text.slice(toks[i].s, end).replace(/\s+/g, " ");
       const hasConn = w.some((x, q) => q > 0 && q < w.length - 1 && LOW.test(x.t));
       const hasNum = w.some((x, q) => q > 0 && NUM.test(x.t));
       const hasJoin = w.some((x) => JOINER.test(x.t));
       const hasInit = w.some((x, q) => q > 0 && q < w.length - 1 && /^\p{Lu}$/u.test(x.t) && text[x.e] === ".");
+      const hasAbbr = w.some((x, q) => q < w.length - 1 && text[x.e] === "." && !/^\p{Lu}$/u.test(x.t));
+      const hasPoss = w.some((x, q) => q < w.length - 1 && /['’]s$/.test(x.t));
+      // an owner's possessive before a thing ("Burj Khalifa's Lake", "Eurotunnel's 1990") makes a different thing; only a name whose own period precedes it ("St. Peter's Basilica") keeps one
+      if (hasPoss && !hasAbbr) continue;
       if (hasConn && hasNum) continue;
       const caps = w.every((x) => CAP.test(x.t));
       const closed = caps && !hasJoin && !open(i, i - 1) && !open(j, j + 1);
-      const headed = j > i && caps && !hasJoin && surfaceSet.has(w.slice(1).map((x) => x.t).join(" ")) && !surfaceSet.has(k) && closed;
+      const headed = j > i && caps && !hasJoin && !positional(w[0].t) && (surfaceSet.has(w.slice(1).map((x) => x.t).join(" ")) || surfaceSet.has(w.slice(0, -1).map((x) => x.t).join(" "))) && !surfaceSet.has(k) && closed;
       const long = closed && w.length >= 5;
-      if (!hasConn && !hasNum && !hasJoin && !hasInit && !headed && !long) continue;
+      if (!hasConn && !hasNum && !hasJoin && !hasInit && !hasAbbr && !hasPoss && !headed && !long) continue;
       if (hasConn && NUM.test(w[w.length - 1].t)) continue;
-      const kind = hasConn ? "connector" : hasNum ? "number" : hasJoin ? "joiner" : hasInit ? "initial" : headed ? "headed" : "long";
+      if (hasJoin && !hasConn && open(j, j + 1)) continue;
+      const kind = hasConn ? "connector" : hasNum ? "number" : hasJoin ? "joiner" : hasInit ? "initial" : hasAbbr ? "abbr" : hasPoss ? "poss" : headed ? "headed" : "long";
       if ((kind === "headed" || kind === "long") && !closed) continue;
-      const e = found.get(k) ?? { key: k, kind, starts: [], spans: [], connAt: hasConn ? w.findIndex((x, q) => q > 0 && LOW.test(x.t)) : -1 };
+      const e = found.get(k) ?? { key: k, kind, coord: hasConn && bad, starts: [], spans: [], connAt: hasConn ? w.findIndex((x, q) => q > 0 && LOW.test(x.t)) : -1 };
       e.starts.push(toks[i].s); e.spans.push([toks[i].s, end]); found.set(k, e);
     }
   }
@@ -136,29 +147,84 @@ export function rescue(text, { toks, positional }, surfaceSet, connectorOk = () 
   for (const c of found.values()) {
     if (surfaceSet.has(c.key)) continue;
     // an initial with its period before a surname the cast already holds is evidence enough in one mention
-    const need = c.kind === "connector" ? RECUR.connector : c.kind === "initial" && surfaceSet.has(c.key.split(" ").slice(-1)[0]) ? 1 : RECUR.unit;
+    const lastTok = c.key.split(" ").pop();
+    const need = c.kind === "connector" ? RECUR.connector
+      : c.kind === "initial" && surfaceSet.has(lastTok) ? 1
+      // a model designation (digits with a joiner or a letter) the text writes at least twice is a name's own, so its first unit is evidence enough ("Boeing 747-400" beside the bare "747-400")
+      : c.kind === "number" && NUM.test(lastTok) && /\D/.test(lastTok) && toks.filter((x) => x.t === lastTok || bare(x.t) === lastTok).length >= RECUR.unit && ![...found.values()].some((u) => u !== c && u.kind === "number" && u.key.split(" ").pop() === lastTok) ? 1
+      : RECUR.unit;
     if (c.spans.length < need) continue;
     // written capitalised more often than not: the same string in this exact case is the majority of its case-blind occurrences
     const body = c.key.split(" ").map(esc).join("[ \\t]+");
     const count = (flags) => (text.match(new RegExp(`(?<![\\p{L}\\p{N}])${body}(?![\\p{L}\\p{N}])`, flags)) ?? []).length;
     if (count("gu") * 2 <= count("giu")) continue;
-    if (c.kind === "joiner" && !c.key.includes(" ") && c.spans.length < need) continue;
-    if (c.kind === "connector" || c.kind === "number") {
+    if (c.kind === "joiner") {
+      // a name's joiner joins parts that are not names alone ("Trans-Alaska"); two parts each written alone, capitalised, are a route or a pair ("Chicago–Los Angeles")
+      const seg = c.key.split(/[-–/]/).map((x) => x.trim());
+      if (!/^[\p{Lu}\p{N}]/u.test(seg[0]) || !/^[\p{Lu}\p{N}]/u.test(seg[seg.length - 1])) continue;
+      const alone = (x) => (text.match(new RegExp(`(?<![\\p{L}\\p{N}\\-–/])(?<!\\p{Lu}[\\p{L}'’]*[ \\t])${x.split(/\s+/).map(esc).join("[ \\t]+")}(?![\\p{L}\\p{N}\\-–/])(?![ \\t]\\p{Lu})`, "gu")) ?? []).length;
+      if (seg.length > 1 && seg.every((x) => alone(x) >= RECUR.connector)) continue;
+    }
+    if (c.coord) {
+      // a coordinating word joins a name only when the pair almost never occurs apart ("Harland and Wolff"): the unit accounts for RECUR.share of each side's mentions
+      const w = c.key.split(" "), L = w.slice(0, c.connAt).join(" "), R = w.slice(c.connAt + 1).join(" ");
+      const n = (x) => (text.match(new RegExp(`(?<![\\p{L}\\p{N}])${x.split(" ").map(esc).join("[ \\t]+")}(?![\\p{L}\\p{N}])`, "gu")) ?? []).length;
+      if (c.spans.length < RECUR.share * n(L) || c.spans.length < RECUR.share * n(R)) continue;
+    }
+    if (c.kind === "connector" && !c.coord) {
       // the unit is how the text first introduces its left side: the first mention of that run stands inside the unit's first mention
-      const w = c.key.split(" "), at = c.kind === "connector" ? c.connAt : w.findIndex((x, q) => q > 0 && NUM.test(x));
+      const w = c.key.split(" "), at = c.connAt;
       const L = w.slice(0, at).join(" ");
       const first = text.search(new RegExp(`(?<![\\p{L}\\p{N}])${L.split(" ").map(esc).join("[ \\t]+")}(?![\\p{L}\\p{N}])`, "u"));
       if (first < 0 || first !== Math.min(...c.starts)) continue;
     }
     out.push(c);
   }
+  // the number that ends a rescued unit ("747" of "Boeing 747") is also written alone: it is a short form of the unit when it recurs (three characters or more, so that "1" is not)
+  const seen = new Set(out.map((c) => c.key));
+  for (const c of [...out]) {
+    if (c.kind !== "number" && c.kind !== "joiner") continue;
+    const T = c.key.split(" ").pop();
+    if (!NUM.test(T) || T.length < 3 || seen.has(T) || surfaceSet.has(T)) continue;
+    const spans = toks.filter((x) => x.t === T).map((x) => [x.s, x.s + T.length]);
+    if (spans.length >= RECUR.unit) { seen.add(T); out.push({ key: T, kind: "tail", of: out.filter((u) => (u.kind === "number" || u.kind === "joiner") && u.key.split(" ").pop() === T).map((u) => u.key), starts: spans.map((x) => x[0]), spans }); }
+  }
+  // a sibling of such a number that the text writes only with a joiner ("747-400", "747-8" beside "747"): its stem before the joiner is a short form of a unit
+  for (const [T, spans] of toks.reduce((m, x) => (NUM.test(x.t) && /[-–/]/.test(x.t) ? m.set(x.t, [...(m.get(x.t) ?? []), [x.s, x.e]]) : m), new Map())) {
+    if (seen.has(T) || surfaceSet.has(T) || spans.length < RECUR.unit || !seen.has(T.split(/[-–/]/)[0])) continue;
+    seen.add(T); out.push({ key: T, kind: "tail", of: out.filter((u) => (u.kind === "number" || u.kind === "joiner") && u.key.split(" ").pop() === T).map((u) => u.key), starts: spans.map((x) => x[0]), spans });
+  }
   // a candidate wholly explained by a longer one with the same count is dropped
-  return out.filter((c) => c.kind === "long" || c.kind === "headed" || !out.some((d) => d !== c && d.key.length > c.key.length && d.key.includes(c.key) && c.spans.every((x) => d.spans.some((y) => inside(x, y)))));
+  return out.filter((c) => c.kind === "long" || c.kind === "headed" || c.kind === "tail" || !out.some((d) => d !== c && d.key.length > c.key.length && d.key.includes(c.key) && c.spans.every((x) => d.spans.some((y) => inside(x, y)))));
+}
+
+/**
+ * BARE — a capitalised word the text never writes in lower case, written away from a sentence's opening, that recurs outside every being
+ * the reader built: the reader dropped it as ambiguous among longer names ("Valdez" beside "Exxon Valdez" and "Valdez Marine Terminal"), but its
+ * mentions belong to some being. It becomes a being of its own; whether it is a part of a longer name is for FOLD to say, from the text.
+ */
+export function bareNames(text, { toks, positional }, rows, abbreviations = new Set()) {
+  const have = new Set(rows.flatMap((r) => r.surfaces));
+  const covered = rows.flatMap((r) => r.spans).sort((a, b) => a[0] - b[0]);
+  const isCovered = (x) => { let lo = 0, hi = covered.length - 1; while (lo <= hi) { const m = (lo + hi) >> 1; if (covered[m][0] <= x.s) { if (covered[m][1] > x.s) return true; lo = m + 1; } else hi = m - 1; } return covered.some((c) => c[0] <= x.s && c[1] > x.s); };
+  const by = new Map();
+  for (const x of toks) {
+    if (!CAP.test(x.t) || positional(x.t) || lettersOf(x.t).length < 2 || abbreviations.has(x.t) || have.has(bare(x.t)) || NUM.test(x.t)) continue;
+    if (isCovered(x)) continue;
+    const e = by.get(bare(x.t)) ?? { key: bare(x.t), kind: "bare", spans: [], mid: 0 };
+    e.spans.push([x.s, x.s + bare(x.t).length]); if (!opensSentence(text, x.s)) e.mid++;
+    by.set(e.key, e);
+  }
+  return [...by.values()].filter((e) => e.spans.length >= RECUR.unit && e.mid >= 1);
 }
 
 const lettersOf = (s) => s.replace(/[^\p{L}\p{N}]/gu, "");
 const initials = (name) => words(name).filter((w) => CAP.test(w)).map((w) => w[0]).join("");
 const shares = (a, b) => { const A = new Set(words(a).map((w) => lc(lettersOf(bare(w)))).filter((w) => w.length > 1)); return words(b).some((w) => A.has(lc(lettersOf(bare(w))))); };
+// a surface without its periods, possessives and case, for asking whether one name holds another
+const nz = (s) => words(s).map((w) => bare(w).replace(/\./g, "").replace(/[-–/]/g, " ").toLowerCase()).join(" ").replace(/\s+/g, " ");
+// is `short` found in `long` only after a lower-case word ("Paris" in "Notre-Dame de Paris"): the object of a connector is not the head of the name
+const afterConnector = (shortNz, x) => { const wx = words(x).flatMap((w) => nz(w).split(" ").map((z) => [z, /^\p{Ll}/u.test(w)])), n = shortNz.split(" ").length; for (let i = 0; i + n <= wx.length; i++) if (wx.slice(i, i + n).map((z) => z[0]).join(" ") === shortNz) return i > 0 && wx.slice(0, i).some((z) => z[1]); return false; };
 const subrun = (short, long) => (" " + long + " ").includes(" " + short + " ");
 
 /**
@@ -166,22 +232,30 @@ const subrun = (short, long) => (" " + long + " ").includes(" " + short + " ");
  * joining tokens; each capitalised run is a claimed form of the name when it is the name's initialism, or shares a token with it without
  * being a part of it. `name` is the longest tail of the capitalised run before "(" whose first token is not positional.
  */
-export function claims(text, { toks, positional }) {
-  const out = [];
+export function claims(text, sc, abbreviations = new Set()) {
+  const { toks } = sc; const out = [];
+  const runFrom = (q) => { let p = q; while (p > 0 && gapOk(text, toks[p - 1], toks[p], sc, abbreviations) && (CAP.test(toks[p - 1].t) || NUM.test(toks[p - 1].t))) p--; return p; };
+  const slice = (a, b) => text.slice(toks[a].s, toks[b].e).replace(/\s+/g, " ");
   for (const m of text.matchAll(/\(([^()\n]{2,100})\)/g)) {
     const open = m.index; if (text[open - 1] !== " ") continue;
     const q = toks.findIndex((x) => x.e === open - 1); if (q < 0) continue;
-    let p = q;
-    while (p > 0 && sameLine(text, toks[p - 1], toks[p]) && (CAP.test(toks[p - 1].t) || NUM.test(toks[p - 1].t))) p--;
+    const p = runFrom(q);
     if (q - p < 1) continue;
     if (m[1].replace(TOK, "").replace(/[\s,;]/g, "").length) continue;
     const forms = []; let cur = [];
     for (const w of m[1].split(/[\s,;]+/).filter(Boolean)) { if (LOW.test(w)) { if (cur.length) forms.push(cur.join(" ")); cur = []; } else cur.push(w); }
     if (cur.length) forms.push(cur.join(" "));
     for (let s = p; s < q; s++) {
-      const name = toks.slice(s, q + 1).map((x) => x.t).join(" ");
+      const name = slice(s, q);
       const claimed = forms.filter((f) => f !== name && !subrun(f, name) && !subrun(name, f) && ((lettersOf(f).length > 1 && lettersOf(f).toUpperCase() === initials(name).toUpperCase()) || shares(f, name)));
-      if (claimed.length) { for (const f of claimed) out.push({ name, form: f }); break; }
+      if (!claimed.length) continue;
+      const members = [name, ...claimed];
+      // "Name or Other Name (Short or Other Short)": the name before a lower-case joiner that shares a token with these is another of the same thing
+      if (p >= 2 && LOW.test(toks[p - 1].t) && sameLine(text, toks[p - 1], toks[p]) && sameLine(text, toks[p - 2], toks[p - 1]) && (CAP.test(toks[p - 2].t) || NUM.test(toks[p - 2].t))) {
+        const l = runFrom(p - 2), other = slice(l, p - 2);
+        if (!subrun(other, name) && !subrun(name, other) && members.some((x) => x !== other && shares(x, other))) members.unshift(other);
+      }
+      out.push(members); break;
     }
   }
   return out;
@@ -193,12 +267,13 @@ export function claims(text, { toks, positional }) {
  * @param {Array}  a.rows         [{ ref, surfaces, spans, standing, represent }] the base cast
  * @param {Function} a.mentionsOf (text, surfaces) → spans, the base's own matcher
  * @param {Set}    a.abbreviations this read's abbreviation set
+ * @param {Function} a.commonNoun  (token) → does the part-of-speech prior use it mostly as a common noun, not a name ("President")?
  * @param {Function} a.nominalOk   (token) → is it a noun, a name or an adjective by the part-of-speech prior (so a lower-case twin of it may continue a name)?
  * @param {Function} a.connectorOk (lower-case token) → may it join two capitalised runs of a name? (the read's own part-of-speech prior decides)
  * @param {object} a.options      { lead, rescue, claims, unmerge, fold, casing, spans } each on unless false
  * @returns {{ rows, refMap: Map<string,string>, report }}
  */
-export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set(), connectorOk = () => true, nominalOk = () => true, options = {} }) {
+export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set(), connectorOk = () => true, nominalOk = () => true, commonNoun = () => false, options = {} }) {
   const on = (k) => options[k] !== false;
   const report = { rescued: [], claimed: [], dropped: [], unmerged: [], folded: [], gaps: [], spansFixed: 0, recur: RECUR };
   const refMap = new Map();
@@ -213,11 +288,14 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
   if (on("lead")) {
     const own = owners();
     for (const r of work) for (const s of [...r.surfaces]) {
-      const w = words(s); if (w.length < 2) continue;
+      const w = words(s);
+      // a possessive of another surface ("Notre-Dame's"): the 's is the sentence's, not the name's
+      if (/['’]s$/.test(s) && own.has(bare(s)) && own.get(bare(s)) !== own.get(s)) { const r0 = own.get(s); r0.surfaces = r0.surfaces.filter((x) => x !== s); r0.dirty = true; r0.dest = own.get(bare(s)).ref; report.dropped.push({ surface: s, into: bare(s) }); continue; }
+      if (w.length < 2) continue;
       const sp = mentionsOf(text, [s]); if (!sp.length) continue;
       let rest = null;
-      // a lower-case-attested capital at the head, most mentions opening a sentence
-      if (CAP.test(w[0]) && sc.positional(w[0]) && own.has(w.slice(1).join(" ")) && sp.filter(([a]) => opensSentence(text, a)).length * 2 > sp.length) rest = w.slice(1).join(" ");
+      // a capital at the head that the text writes in lower case at least as often as capitalised away from a sentence's opening, on a surface that mostly opens a sentence ("The", "On")
+      if (CAP.test(w[0]) && sc.positional(w[0]) && own.has(w.slice(1).join(" ")) && sp.filter(([a]) => opensSentence(text, a)).length * 2 >= sp.length) rest = w.slice(1).join(" ");
       // a surface every mention of which runs across a line or a sentence's end: the name is what stands before the break
       else if (sp.every(([a, b]) => crossesBreak(text.slice(a, b), abbreviations))) { for (let k = w.length - 1; k >= 1 && !rest; k--) if (own.has(w.slice(0, k).join(" "))) rest = w.slice(0, k).join(" "); }
       if (rest === null || own.get(rest) === r && r.surfaces.length < 2) continue;
@@ -227,25 +305,95 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
     settle();
   }
 
+  // HAPAX — a surface written once that is another surface of this text plus tokens at either edge ("President Emmanuel Macron", "April White Star", "Mission Control Center"),
+  // while the rest stands alone RECUR.connector times or more: the edge tokens are the sentence's company, not a name of their own
+  if (on("hapax")) {
+    const own = owners();
+    for (const r of work) for (const s of [...r.surfaces]) {
+      const w = words(s); if (w.length < 2) continue;
+      const sp = mentionsOf(text, [s]); if (sp.length !== 1) continue;
+      let rest = null;
+      for (let k = 1; k < w.length && !rest; k++) for (const x of [w.slice(k).join(" "), w.slice(0, w.length - k).join(" ")]) {
+        const o = own.get(x); if (o && o !== undefined && mentionsOf(text, [x]).length - 1 >= RECUR.connector) { rest = x; break; }
+      }
+      if (rest === null) continue;
+      // the edge tokens must be the sentence's company: a word the text writes in lower case as often, or a word that stands alone and is not a prefix to names ("RMS" is: it comes before a name every time)
+      const edge = w.filter((x) => !words(rest).includes(x));
+      const lead = s.startsWith(edge[0] + " ") && !s.endsWith(" " + edge[edge.length - 1]) ? true : s.startsWith(edge[0] + " ");
+      const solo = (x) => { const hits = sc.toks.filter((t) => t.t === x && !(t.s >= sp[0][0] && t.e <= sp[0][1])); if (hits.length < RECUR.connector) return false; const nb = hits.filter((t) => { const q = sc.toks[lead ? sc.toks.indexOf(t) + 1 : sc.toks.indexOf(t) - 1]; return q && CAP.test(q.t); }).length; return nb * 2 < hits.length; };
+      if (!edge.length || !edge.every((x) => sc.positional(x) || commonNoun(x) || solo(x))) continue;
+      r.surfaces = r.surfaces.filter((q) => q !== s); r.dirty = true; r.dest = own.get(rest).ref; report.dropped.push({ surface: s, into: rest, by: "hapax" });
+    }
+    settle();
+  }
+
+  // VARIANTS — two beings holding the same name written with a hyphen, a period or a diacritic differently ("Trans-Alaska Pipeline System", "Trans Alaska Pipeline System") are one
+  const variants = () => {
+    const ck = (x) => words(x).map((w) => bare(w).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[-–/.]/g, " ").toLowerCase().trim()).join(" ").replace(/\s+/g, " ");
+    const by = new Map();
+    for (const r of work) for (const x of r.surfaces) { const k = ck(x); if (k.includes(" ")) (by.get(k) ?? by.set(k, new Set()).get(k)).add(r); }
+    for (const rs of by.values()) {
+      if (rs.size < 2) continue;
+      const [root, ...rest] = [...rs].filter((r) => r.surfaces.length).sort((a, b) => b.spans.length - a.spans.length);
+      for (const r of rest) { if (!r.surfaces.length) continue; root.surfaces.push(...r.surfaces); root.dirty = true; report.folded.push({ surface: longest(r.surfaces), into: longest(root.surfaces), by: "variant" }); r.surfaces = []; r.dest = root.ref; }
+    }
+    settle();
+  };
+  if (on("variants")) variants();
+
   // RESCUE
   if (on("rescue")) {
     const have = new Set(work.flatMap((r) => r.surfaces));
-    for (const c of rescue(text, sc, have, connectorOk)) {
+    const barely = bareNames(text, sc, work, abbreviations).filter((b) => !have.has(b.key));
+    const found = [...rescue(text, sc, new Set([...have, ...barely.map((b) => b.key)]), connectorOk, abbreviations), ...barely];
+    const made = new Map();
+    for (const c of found.filter((x) => x.kind !== "tail")) {
       const spans = mo([c.key]);
       if (spans.length < 1) continue;
-      work.push({ ref: refOfKey(c.key), surfaces: [c.key], spans, represent: c.key, dirty: false, dest: null });
+      const row = { ref: refOfKey(c.key), surfaces: [c.key], spans, represent: c.key, dirty: false, dest: null };
+      work.push(row); made.set(c.key, row);
       report.rescued.push({ surface: c.key, kind: c.kind, mentions: spans.length });
     }
+    // a number written alone that ends exactly one rescued unit is that unit's short form; one that ends several is left to FOLD
+    for (const c of found.filter((x) => x.kind === "tail")) {
+      const units = (c.of ?? []).map((k) => made.get(k)).filter(Boolean);
+      if (units.length === 1) { units[0].surfaces.push(c.key); units[0].dirty = true; report.rescued.push({ surface: c.key, kind: "tail", into: units[0].surfaces[0] }); continue; }
+      const spans = mo([c.key]);
+      if (!spans.length) continue;
+      work.push({ ref: refOfKey(c.key), surfaces: [c.key], spans, represent: c.key, dirty: false, dest: null });
+      report.rescued.push({ surface: c.key, kind: "tail", mentions: spans.length });
+    }
+    // a unit with a possessive inside ("St. Peter's Basilica") is also written up to the possessive ("St. Peter's"): the prefix goes to the unit that has most mentions
+    const prefixOf = new Map();
+    for (const [k, row] of made) {
+      const w = words(k), q = w.findIndex((x, i) => i < w.length - 1 && /['’]s$/.test(x));
+      if (q < 0 || !w.slice(0, q).some((x) => text.includes(x.replace(/\.$/, "") + ". "))) continue;
+      const pre = w.slice(0, q + 1).join(" "), cur = prefixOf.get(pre);
+      if (!cur || row.spans.length > cur.spans.length) prefixOf.set(pre, row);
+    }
+    for (const [pre, row] of prefixOf) if (!have.has(pre)) { row.surfaces.push(pre); row.dirty = true; }
+    for (const r of work) if (r.dirty) respan(r);
+    if (on("variants")) variants();
   }
 
   // CLAIMS
   if (on("claims")) {
-    for (const { name, form } of claims(text, sc)) {
-      const own = owners(); const to = own.get(name); if (!to) continue;
-      const from = own.get(form); if (from === to) continue;
-      if (from) { from.surfaces = from.surfaces.filter((x) => x !== form); from.dirty = true; if (!from.surfaces.length) from.dest = to.ref; }
-      to.surfaces.push(form); to.dirty = true;
-      report.claimed.push({ form, of: name, from: from?.surfaces?.[0] ?? null });
+    for (const raw of claims(text, sc, abbreviations)) {
+      const own = owners();
+      // a positional capital in front of a known name is not part of the claim ("The Burj Khalifa (Burj Dubai)")
+      const members = [...new Set(raw.map((x) => { const w = words(x); return w.length > 1 && sc.positional(w[0]) && own.has(w.slice(1).join(" ")) ? w.slice(1).join(" ") : x; }))];
+      // the being the group joins is one whose own longest name is a member (not a being that holds a member as part of a longer name: "LHC" of "LHC Computing Grid")
+      const owned = members.map((x) => own.get(x)).filter(Boolean);
+      const heads = owned.filter((r) => members.includes(longest(r.surfaces)));
+      const root = (heads.length ? heads : owned).sort((a, b) => b.spans.length - a.spans.length)[0];
+      if (!root) continue;
+      for (const x of members) {
+        const from = own.get(x); if (from === root) continue;
+        if (from) { from.surfaces = from.surfaces.filter((q) => q !== x); from.dirty = true; if (!from.surfaces.length) from.dest = root.ref; }
+        else if (!mentionsOf(text, [x]).length) continue;
+        root.surfaces.push(x); root.dirty = true;
+        report.claimed.push({ form: x, of: members[0], from: from?.surfaces?.[0] ?? null });
+      }
     }
     settle();
   }
@@ -320,7 +468,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
       if (!S.spans.length) continue;
       const cands = [];
       for (const P of work) {
-        if (P === S || !P.spans.length || lenOf(P) <= lenOf(S) || !subrun(longest(S.surfaces).toLowerCase(), longest(P.surfaces).toLowerCase())) continue;
+        if (P === S || !P.spans.length || lenOf(P) <= lenOf(S) || !P.surfaces.some((x) => x.length > longest(S.surfaces).length && subrun(nz(longest(S.surfaces)), nz(x)) && !afterConnector(nz(longest(S.surfaces)), x))) continue;
         cands.push({ P, k: insideCount(S.spans, P.spans) });
       }
       if (!cands.length) continue;
@@ -337,8 +485,10 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
       if (intro.length) {
         intro.sort((a, b) => lenOf(b.P) - lenOf(a.P));
         if (intro.length > 1 && lenOf(intro[0].P) === lenOf(intro[1].P) && intro[0].P.ref !== intro[1].P.ref) { report.gaps.push({ gap: "cast_identity_tie", surface: longest(S.surfaces), between: [longest(intro[0].P.surfaces), longest(intro[1].P.surfaces)] }); continue; }
-        parent.set(S, intro[0].P);
+        parent.set(S, intro[0].P); continue;
       }
+      // otherwise it stays a being of its own: whether it is the longer name's short form cannot be told from the text (a typed gap)
+      if (S.spans.length >= RECUR.connector && report.gaps.length < 40) report.gaps.push({ gap: "cast_identity_short_form_open", surface: longest(S.surfaces), containers: cands.slice(0, 3).map((c) => longest(c.P.surfaces)) });
     }
     const root = (r) => { let x = r, n = 0; while (parent.has(x) && n++ < 50) x = parent.get(x); return x; };
     const groups = new Map();
