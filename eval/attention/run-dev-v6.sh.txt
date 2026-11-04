@@ -1,0 +1,7 @@
+#!/bin/zsh
+# usage: run.sh <v> [extra args]  — BIND_TRAPS env selects the binder
+cd /Users/mlacy/Documents/khora-cast/khora/.claude/worktrees/binder-traps-9bacbb
+D=/private/tmp/claude-501/-Users-mlacy-Documents-claude-code/32866c18-a0cd-406b-951b-044c2008e7c1/scratchpad
+export KHORA_PRIORS_DIR=$HOME/Downloads/workspace/janus/priors ATTN_CACHE=/private/tmp/claude-501/-Users-mlacy-Documents-khora-cast-khora--claude-worktrees-binder-traps-9bacbb/247c50e8-7ea6-4125-aba0-910df1d43cc8/scratchpad/cache
+v=$1; shift
+node eval/attention/score6.mjs --file $D/bindgold$v/PARA-GOLD-BIND-V$v.binder.json --dir $D/bindgold$v "$@"

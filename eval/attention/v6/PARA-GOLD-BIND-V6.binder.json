@@ -1,0 +1,523 @@
+{
+ "cases": [
+  {
+   "id": "w01",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 124,
+   "end": 232,
+   "text": "It is named after the engineer Gustave Eiffel, whose company designed and built the tower from 1887 to 1889.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Eiffel Tower",
+    "The Eiffel Tower",
+    "Tour Eiffel"
+   ]
+  },
+  {
+   "id": "w02",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 1397,
+   "end": 1496,
+   "text": "It was the first structure in the world to surpass both the 200-metre and 300-metre mark in height.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Eiffel Tower",
+    "The Eiffel Tower",
+    "Tour Eiffel"
+   ]
+  },
+  {
+   "id": "w03",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 711,
+   "end": 832,
+   "text": "The Eiffel Tower is the most visited monument with an entrance fee in the world: 6.91 million people ascended it in 2015.",
+   "surface": "The Eiffel Tower",
+   "kind": "attended",
+   "accept": [
+    "Eiffel Tower",
+    "The Eiffel Tower",
+    "Tour Eiffel"
+   ]
+  },
+  {
+   "id": "w04",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 36630,
+   "end": 36725,
+   "text": "The tower has been used for making radio transmissions since the beginning of the 20th century.",
+   "surface": "The tower",
+   "kind": "attended",
+   "accept": [
+    "Eiffel Tower",
+    "The Eiffel Tower",
+    "Tour Eiffel"
+   ]
+  },
+  {
+   "id": "w05",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 41995,
+   "end": 42142,
+   "text": "It was lit briefly on December 31, 1943, and on D-Day, June 6, 1944, when its lights flashed \"dot-dot-dot-dash\", the Morse code for V, for victory.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty",
+    "The Statue of Liberty",
+    "Liberty Enlightening the World",
+    "Lady Liberty"
+   ]
+  },
+  {
+   "id": "w06",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 60302,
+   "end": 60408,
+   "text": "It is knocked over in the science-fiction film Independence Day and in Cloverfield the head is ripped off.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty",
+    "The Statue of Liberty",
+    "Liberty Enlightening the World",
+    "Lady Liberty"
+   ]
+  },
+  {
+   "id": "w07",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 2006,
+   "end": 2150,
+   "text": "The statue's completion was marked by New York's first ticker-tape parade and a dedication ceremony presided over by President Grover Cleveland.",
+   "surface": "The statue",
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty",
+    "The Statue of Liberty",
+    "Liberty Enlightening the World",
+    "Lady Liberty"
+   ]
+  },
+  {
+   "id": "w08",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 51208,
+   "end": 51326,
+   "text": "The Statue of Liberty has also been closed due to government shutdowns and protests, as well as for disease pandemics.",
+   "surface": "The Statue of Liberty",
+   "kind": "attended",
+   "accept": [
+    "Statue of Liberty",
+    "The Statue of Liberty",
+    "Liberty Enlightening the World",
+    "Lady Liberty"
+   ]
+  },
+  {
+   "id": "w09",
+   "doc": "wiki-Hoover_Dam",
+   "start": 46520,
+   "end": 46681,
+   "text": "It was listed on the National Register of Historic Places in 1981 and was designated a National Historic Landmark in 1985, cited for its engineering innovations.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam",
+    "The Hoover Dam"
+   ]
+  },
+  {
+   "id": "w10",
+   "doc": "wiki-Hoover_Dam",
+   "start": 1521,
+   "end": 1624,
+   "text": "The dam's generators provide power for public and private utilities in Nevada, Arizona, and California.",
+   "surface": "The dam",
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam",
+    "The Hoover Dam"
+   ]
+  },
+  {
+   "id": "w11",
+   "doc": "wiki-Hoover_Dam",
+   "start": 37395,
+   "end": 37454,
+   "text": "The dam is protected against over-topping by two spillways.",
+   "surface": "The dam",
+   "kind": "attended",
+   "accept": [
+    "Hoover Dam",
+    "The Hoover Dam"
+   ]
+  },
+  {
+   "id": "w12",
+   "doc": "wiki-Tower_Bridge",
+   "start": 234,
+   "end": 412,
+   "text": "It crosses the River Thames close to the Tower of London and is one of five London bridges owned and maintained by the City Bridge Foundation, a charitable trust founded in 1282.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Tower Bridge",
+    "The Tower Bridge"
+   ]
+  },
+  {
+   "id": "w13",
+   "doc": "wiki-Tower_Bridge",
+   "start": 1588,
+   "end": 1756,
+   "text": "It is sometimes confused with London Bridge, about 0.5 miles (800 m) upstream, which has led to a persistent urban legend about an American purchasing the wrong bridge.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Tower Bridge",
+    "The Tower Bridge"
+   ]
+  },
+  {
+   "id": "w14",
+   "doc": "wiki-Tower_Bridge",
+   "start": 707,
+   "end": 807,
+   "text": "The bridge was opened by Edward, Prince of Wales, and Alexandra, Princess of Wales, on 30 June 1894.",
+   "surface": "The bridge",
+   "kind": "attended",
+   "accept": [
+    "Tower Bridge",
+    "The Tower Bridge"
+   ]
+  },
+  {
+   "id": "w15",
+   "doc": "wiki-Tower_Bridge",
+   "start": 17198,
+   "end": 17322,
+   "text": "The structure was originally designed by Horace Jones but his design had an arch instead of the current high-level footways.",
+   "surface": "The structure",
+   "kind": "attended",
+   "accept": [
+    "Tower Bridge",
+    "The Tower Bridge"
+   ]
+  },
+  {
+   "id": "w16",
+   "doc": "wiki-Concorde",
+   "start": 838,
+   "end": 997,
+   "text": "It is powered by four Rolls-Royce/Snecma Olympus 593 turbojets with variable engine intake ramps, and reheat for take-off and acceleration to supersonic speed.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Concorde"
+   ]
+  },
+  {
+   "id": "w17",
+   "doc": "wiki-Concorde",
+   "start": 21257,
+   "end": 21352,
+   "text": "It has an unusual tailless configuration for a commercial aircraft, as does the Tupolev Tu-144.",
+   "surface": "It",
+   "kind": "attended",
+   "accept": [
+    "Concorde"
+   ]
+  },
+  {
+   "id": "w18",
+   "doc": "wiki-Concorde",
+   "start": 1099,
+   "end": 1208,
+   "text": "The airliner had transatlantic range while supercruising at twice the speed of sound for 75% of the distance.",
+   "surface": "The airliner",
+   "kind": "attended",
+   "accept": [
+    "Concorde"
+   ]
+  },
+  {
+   "id": "w19",
+   "doc": "wiki-Concorde",
+   "start": 59020,
+   "end": 59093,
+   "text": "The aircraft was usually referred to by the British as simply \"Concorde\".",
+   "surface": "The aircraft",
+   "kind": "attended",
+   "accept": [
+    "Concorde"
+   ]
+  },
+  {
+   "id": "w20",
+   "doc": "wiki-Mary_Rose",
+   "start": 11821,
+   "end": 11892,
+   "text": "The ship is an early example of this method of construction in England.",
+   "surface": "The ship",
+   "kind": "attended",
+   "accept": [
+    "Mary Rose",
+    "The Mary Rose"
+   ]
+  },
+  {
+   "id": "w21",
+   "doc": "wiki-Mary_Rose",
+   "start": 69037,
+   "end": 69173,
+   "text": "The ship carried several skilled craftsmen and was equipped for handling both routine maintenance and repairing extensive battle damage.",
+   "surface": "The ship",
+   "kind": "attended",
+   "accept": [
+    "Mary Rose",
+    "The Mary Rose"
+   ]
+  },
+  {
+   "id": "w22",
+   "doc": "wiki-Mary_Rose",
+   "start": 20595,
+   "end": 20848,
+   "text": "The ship went through several changes in her armament throughout her career, most significantly accompanying her \"rebuilding\" in 1536 (see below), when the number of anti-personnel guns was reduced and a second tier of carriage-mounted long guns fitted.",
+   "surface": "The ship",
+   "kind": "attended",
+   "accept": [
+    "Mary Rose",
+    "The Mary Rose"
+   ]
+  },
+  {
+   "id": "u01",
+   "doc": "wiki-Eiffel_Tower",
+   "start": 30268,
+   "end": 30392,
+   "text": "It was removed due to structural considerations; engineers had determined it was too heavy and was causing the tower to sag.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u02",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 10528,
+   "end": 10644,
+   "text": "It was originally to be crowned with a pileus or \"liberty cap\", the cap given to emancipated slaves in ancient Rome.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Statue of Freedom"
+   ],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u03",
+   "doc": "wiki-Hoover_Dam",
+   "start": 7442,
+   "end": 7540,
+   "text": "It also permitted the compact to go into effect when at least six of the seven states approved it.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Boulder Canyon Project Act",
+    "The Boulder Canyon Project Act"
+   ],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u04",
+   "doc": "wiki-Hoover_Dam",
+   "start": 17526,
+   "end": 17584,
+   "text": "It contained 650,000 cubic yards (500,000 m3) of material.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u05",
+   "doc": "wiki-Tower_Bridge",
+   "start": 19988,
+   "end": 20070,
+   "text": "It was connected to a fireplace in a guardroom located in one of the bridge piers.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u06",
+   "doc": "wiki-Tower_Bridge",
+   "start": 25882,
+   "end": 25976,
+   "text": "It uses films, photos, and interactive displays to explain why and how Tower Bridge was built.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Tower Bridge attraction",
+    "The Tower Bridge attraction"
+   ],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u07",
+   "doc": "wiki-Concorde",
+   "start": 32805,
+   "end": 32919,
+   "text": "It would have higher thrust engines with noise reducing features and no environmentally objectionable afterburner.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Concorde \"B\""
+   ],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u08",
+   "doc": "wiki-Mary_Rose",
+   "start": 44533,
+   "end": 44608,
+   "text": "It also reports that there were 700 men on board, an unusually high number.",
+   "surface": "It",
+   "kind": "elsewhere",
+   "accept": [
+    "Carew biography",
+    "The Carew biography"
+   ],
+   "trapKind": "new-entity"
+  },
+  {
+   "id": "u09",
+   "doc": "wiki-Tower_Bridge",
+   "start": 9597,
+   "end": 9816,
+   "text": "It was reported that \"few [pageants] have been more brilliant or will have a more abiding and historic interest\" than the opening of Tower Bridge in the history of the City of London, and it was a \"semi-State\" occasion.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive"
+  },
+  {
+   "id": "u10",
+   "doc": "wiki-Concorde",
+   "start": 10738,
+   "end": 10877,
+   "text": "It was later revealed that the original STAC report, marked \"For UK Eyes Only\", had secretly been passed to France to win political favour.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive"
+  },
+  {
+   "id": "u11",
+   "doc": "wiki-Concorde",
+   "start": 57057,
+   "end": 57235,
+   "text": "It has been pointed out that other, lower-flying, airliners produce ozone during their flights in the troposphere, but vertical transit of gases between the layers is restricted.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive"
+  },
+  {
+   "id": "u12",
+   "doc": "wiki-Mary_Rose",
+   "start": 61224,
+   "end": 61321,
+   "text": "It was also decided that the ship would be recovered before the end of the diving season in 1982.",
+   "surface": "It",
+   "kind": "out_of_scope",
+   "accept": [],
+   "trapKind": "expletive"
+  },
+  {
+   "id": "u13",
+   "doc": "wiki-Statue_of_Liberty",
+   "start": 56432,
+   "end": 56495,
+   "text": "The monument was expanded to also include Ellis Island in 1965.",
+   "surface": "The monument",
+   "kind": "elsewhere",
+   "accept": [
+    "Statue of Liberty National Monument"
+   ],
+   "trapKind": "definite-other"
+  },
+  {
+   "id": "u14",
+   "doc": "wiki-Hoover_Dam",
+   "start": 40266,
+   "end": 40325,
+   "text": "The four-lane Hoover Dam Bypass opened on October 19, 2010.",
+   "surface": "The four-lane Hoover Dam Bypass",
+   "kind": "elsewhere",
+   "accept": [
+    "Hoover Dam Bypass",
+    "The Hoover Dam Bypass"
+   ],
+   "trapKind": "definite-other"
+  },
+  {
+   "id": "u15",
+   "doc": "wiki-Tower_Bridge",
+   "start": 28726,
+   "end": 28820,
+   "text": "The replica differs from the original in having no lifting mechanism and four separate towers.",
+   "surface": "The replica",
+   "kind": "elsewhere",
+   "accept": [],
+   "trapKind": "definite-other"
+  },
+  {
+   "id": "u16",
+   "doc": "wiki-Concorde",
+   "start": 54053,
+   "end": 54130,
+   "text": "The aircraft had poor control at low speeds because of a simpler wing design.",
+   "surface": "The aircraft",
+   "kind": "elsewhere",
+   "accept": [
+    "Tu-144",
+    "Tupolev Tu-144"
+   ],
+   "trapKind": "definite-other"
+  },
+  {
+   "id": "u17",
+   "doc": "wiki-Mary_Rose",
+   "start": 30905,
+   "end": 30992,
+   "text": "The Breton flagship Cordelière put up a fight and was boarded by the 1,000-ton Regent.",
+   "surface": "The Breton flagship",
+   "kind": "elsewhere",
+   "accept": [
+    "Cordelière",
+    "The Breton flagship Cordelière"
+   ],
+   "trapKind": "definite-other"
+  },
+  {
+   "id": "u18",
+   "doc": "wiki-Mary_Rose",
+   "start": 58944,
+   "end": 59113,
+   "text": "The Mary Rose Trust, a limited charitable trust, with representatives from many organisations would handle the need for a larger operation and a large infusion of funds.",
+   "surface": "The Mary Rose Trust",
+   "kind": "elsewhere",
+   "accept": [
+    "Mary Rose Trust",
+    "The Mary Rose Trust"
+   ],
+   "trapKind": "definite-other"
+  }
+ ]
+}
