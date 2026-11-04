@@ -1,0 +1,16 @@
+b01 attended  It         right        The Eiffel Tower             act=2.00 margin=0.50 attended
+b02 attended  The tower  right        The Eiffel Tower             act=7.00 margin=1.00 surface-word
+b03 attended  It         right        The Eiffel Tower             act=11.00 margin=0.71 attended
+b04 attended  The tower  right        The Eiffel Tower             act=12.00 margin=1.00 surface-word
+b05 attended  It         right        The Eiffel Tower             act=16.00 margin=0.81 attended
+b06 attended  The tower  right        The Eiffel Tower             act=16.50 margin=0.78 surface-word
+b07 attended  It         right        The Eiffel Tower             act=12.24 margin=0.74 attended
+b08 out_of_scope He         out_of_scope                              act=- margin=- 
+b09 elsewhere It         wrong        The Eiffel Tower             act=10.10 margin=0.53 attended
+b10 attended  It         right        Concorde                     act=3.41 margin=0.28 attended
+b11 attended  it         right        Concorde                     act=4.41 margin=0.49 attended
+b12 attended  The airliner right        Concorde                     act=5.41 margin=1.00 predicate-kind
+b13 attended  Its        right        Concorde                     act=6.07 margin=0.49 attended
+b14 attended  it         gap          pronoun_no_margin            act=1.83 margin=0.08 
+b15 attended  The river  wrong        Middle Tennessee             act=2.00 margin=1.00 surface-word
+{"set":"gold","control":false,"dials":{"window":12,"minActivation":0.5,"minMargin":0.2,"boost":2,"feed":true,"centerVeto":true,"clauseMateVeto":false},"giver":null,"ruling":"text_evidence","attended":13,"bound":12,"right":11,"precision":0.9166666666666666,"coverage":0.9230769230769231,"traps":1,"trapsBoundWrong":1,"trapsGapped":0,"outOfScope":1}

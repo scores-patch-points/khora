@@ -1,0 +1,40 @@
+apart: v11,v14,v27,v28,v30: attended 2 bound 0 right 0 | traps 3 wrong 0 gapped 2 right_other 0
+rest: attended 14 bound 5 right 5 | traps 11 wrong 1 gapped 10 right_other 0
+v01 attended  It         gap          pronoun_no_margin            act=2.00 margin=0.00 
+v02 attended  Its        gap          pronoun_no_margin            act=6.20 margin=0.12 
+v11 attended  The span   gap          description_unbound          act=- margin=- 
+v17 new-entity It         gap          center_elsewhere             act=- margin=- 
+v27 definite-other The path   gap          description_unbound          act=- margin=- 
+v03 attended  It         right        Colosseum                    act=2.00 margin=0.50 attended
+v04 attended  It         right        Colosseum                    act=8.14 margin=0.76 attended
+v13 attended  The building gap          description_unbound          act=- margin=- 
+v21 new-entity It         gap          center_not_carried           act=- margin=- 
+v23 expletive It         gap          center_not_carried           act=- margin=- 
+v05 attended  It         gap          center_elsewhere             act=- margin=- 
+v10 attended  The bridge right        The Golden Gate Bridge       act=1.29 margin=1.00 surface-word
+v16 attended  The bridge right        The Golden Gate Bridge       act=0.63 margin=0.49 surface-word
+v30 definite-other The bonds  gap          description_unbound          act=- margin=- 
+v06 attended  It         gap          pronoun_no_margin            act=2.00 margin=0.00 
+v07 attended  It         gap          pronoun_no_margin            act=3.88 margin=0.06 
+v09 attended  The canal  right        The Panama Canal             act=1.00 margin=1.00 surface-word
+v14 attended  The expanded waterway unseen                                    act=- margin=- 
+v18 new-entity It         gap          center_not_carried           act=- margin=- 
+v20 new-entity It         gap          center_elsewhere             act=- margin=- 
+v26 expletive It         gap          expletive_or_cleft           act=- margin=- 
+v28 definite-other The original locks unseen                                    act=- margin=- 
+v29 definite-other The railroad gap          description_unbound          act=- margin=- 
+v08 attended  It         gap          pronoun_no_margin            act=2.57 margin=0.06 
+v12 attended  The building gap          description_unbound          act=- margin=- 
+v15 attended  The facility unseen                                    act=- margin=- 
+v19 new-entity It         gap          pronoun_no_margin            act=2.53 margin=0.16 
+v22 new-entity It         wrong        International Fleet Review   act=4.75 margin=0.39 attended
+v24 expletive It         gap          expletive_or_cleft           act=- margin=- 
+v25 expletive It         gap          expletive_or_cleft           act=- margin=- 
+{"set":"dev2","control":false,"dials":{"window":12,"minActivation":0.5,"minMargin":0.2,"boost":2,"feed":true,"centerVeto":true,"clauseMateVeto":false,"minWordShare":0.25,"carr
+control seed=20261103  bound 4 right 0 precision 0.00 trapsBoundWrong 2
+control seed=20261104  bound 5 right 0 precision 0.00 trapsBoundWrong 2
+control seed=20261105  bound 6 right 0 precision 0.00 trapsBoundWrong 1
+control seed=20261106  bound 3 right 0 precision 0.00 trapsBoundWrong 1
+control seed=20261107  bound 5 right 0 precision 0.00 trapsBoundWrong 1
+
+[exited with code 0]
