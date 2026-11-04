@@ -1,0 +1,75 @@
+{
+ "summary": {
+  "entities": 4,
+  "clean": 4,
+  "layer3": 1,
+  "whole_rate": 1,
+  "unique_carrier_rate": 1,
+  "no_merge_rate": 1,
+  "span_exact_rate": 1
+ },
+ "reader_gaps": {
+  "wiki-Statue_of_Liberty": [
+   "cast_identity_initials_tie"
+  ]
+ },
+ "reader_options": {
+  "castIdentity": true
+ },
+ "perDoc": {
+  "wiki-Statue_of_Liberty": {
+   "Statue of Liberty": {
+    "mentions": 19,
+    "carriers": 1,
+    "main_covers": 19,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Statue of Liberty",
+    "clean": true
+   },
+   "Liberty Island": {
+    "mentions": 12,
+    "carriers": 1,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Liberty Island",
+    "clean": true
+   },
+   "Ellis Island": {
+    "mentions": 11,
+    "carriers": 1,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Ellis Island",
+    "clean": true
+   },
+   "New York City": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "New York City",
+    "clean": true
+   }
+  }
+ }
+}

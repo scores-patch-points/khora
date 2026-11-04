@@ -1,0 +1,167 @@
+{
+ "docs": {
+  "wiki-Eiffel_Tower": {
+   "entities": {
+    "Eiffel Tower": [
+     "Eiffel Tower"
+    ],
+    "Gustave Eiffel": [
+     "Gustave Eiffel"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Gustave Eiffel Has",
+    "Eiffel Tower Brown"
+   ]
+  },
+  "wiki-Hoover_Dam": {
+   "entities": {
+    "Hoover Dam": [
+     "Hoover Dam"
+    ],
+    "Colorado River": [
+     "Colorado River"
+    ],
+    "Lake Mead": [
+     "Lake Mead"
+    ],
+    "Six Companies": [
+     "Six Companies"
+    ],
+    "Bureau of Reclamation": [
+     "Bureau of Reclamation"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Hoover Dam Bypass",
+    "Colorado River Compact",
+    "Colorado River Board",
+    "Colorado River Aqueduct",
+    "Colorado River Delta",
+    "Hoover Dam Police",
+    "ASCE Hoover Dam",
+    "Hoover Dam Mass",
+    "Colorado River Restoration",
+    "Using Hoover Dam",
+    "Hoover Dam Spillways",
+    "Lower Colorado River"
+   ]
+  },
+  "wiki-Mount_Rushmore": {
+   "entities": {
+    "Mount Rushmore": [
+     "Mount Rushmore"
+    ],
+    "Black Hills": [
+     "Black Hills"
+    ],
+    "South Dakota": [
+     "South Dakota"
+    ],
+    "Gutzon Borglum": [
+     "Gutzon Borglum"
+    ],
+    "Thomas Jefferson": [
+     "Thomas Jefferson"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Mount Rushmore National",
+    "Black Hills Pahá",
+    "Black Hills Expedition",
+    "Black Hills Gold",
+    "Black Hills National",
+    "South Dakota State",
+    "Black Hills Federation",
+    "South Dakota Governor",
+    "South Dakota Centennial",
+    "South Dakota Highway",
+    "Mount Rushmore Ranger",
+    "Black Hills Plateau",
+    "Mount Rushmore Memorial",
+    "Mount Rushmore State",
+    "Mount Rushmore History",
+    "Create Mount Rushmore"
+   ]
+  },
+  "wiki-Statue_of_Liberty": {
+   "entities": {
+    "Statue of Liberty": [
+     "Statue of Liberty"
+    ],
+    "Liberty Island": [
+     "Liberty Island"
+    ],
+    "Ellis Island": [
+     "Ellis Island"
+    ],
+    "New York City": [
+     "New York City"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Statue of Liberty–Ellis Island",
+    "Statue of Liberty National",
+    "Ellis Island Centennial",
+    "Ellis Island Foundation",
+    "Statue of Liberty Museum",
+    "New York City Designated",
+    "The Statue of Liberty",
+    "New York City County"
+   ]
+  },
+  "wiki-Gateway_Arch": {
+   "entities": {
+    "Gateway Arch": [
+     "Gateway Arch"
+    ],
+    "St. Louis": [
+     "St. Louis"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Gateway Arch National",
+    "St\\. Louis Board",
+    "Old St\\. Louis",
+    "St\\. Louis Post-Dispatch",
+    "St\\. Louis Community",
+    "Saarinen's Gateway Arch",
+    "St\\. Louis Symphony",
+    "St\\. Louis Danforth",
+    "St\\. Louis City",
+    "Gateway Arch Construction",
+    "St\\. Louis Gateway",
+    "Gateway Arch Grounds",
+    "Gateway Arch Taken",
+    "East St\\. Louis"
+   ]
+  },
+  "wiki-Concorde": {
+   "entities": {
+    "British Airways": [
+     "British Airways"
+    ],
+    "Air France": [
+     "Air France"
+    ],
+    "Sud Aviation": [
+     "Sud Aviation"
+    ]
+   },
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Air France Flight",
+    "Sud Aviation Super-Caravelle",
+    "British Airways Flight",
+    "Air France Concorde",
+    "British Airways Concorde",
+    "British Airways G-BOAD"
+   ]
+  }
+ }
+}

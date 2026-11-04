@@ -9,24 +9,26 @@
      "New York City"
     ],
     "John A. Roebling": [
-     "John A. Roebling",
-     "Roebling"
+     "John A. Roebling"
     ]
    },
    "ignore": [
-    "Washington Roebling",
-    "Warren Roebling",
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "John A\\. Roebling's Sons",
     "New York City Department",
     "Brooklyn Bridge Tan",
-    "John Roebling",
-    "Augustus Roebling",
+    "John A\\. Roebling Suspension",
     "Brooklyn Bridge Company",
     "Brooklyn Bridge Railway",
     "Manhattan-bound Brooklyn Bridge",
+    "New York City Police",
     "New York City Landmarks",
+    "Brooklyn Bridge Local",
+    "The Brooklyn Bridge",
     "New York City Municipal",
-    "Emily Roebling",
+    "Brooklyn Bridge Up",
     "Brooklyn Bridge Park",
+    "New York City Designated",
     "Brooklyn Bridge Archived"
    ]
   },
@@ -37,14 +39,10 @@
     ],
     "Domus Aurea": [
      "Domus Aurea"
-    ],
-    "Pope Benedict": [
-     "Pope Benedict"
     ]
    },
    "ignore": [
-    "Pope Benedict XIV",
-    "Pope Benedict XVI"
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$"
    ]
   },
   "wiki-Golden_Gate_Bridge": {
@@ -61,8 +59,10 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "San Francisco Bay",
     "San Francisco Peninsula",
+    "San Francisco Ferry",
     "San Francisco Bulletin",
     "San Francisco County",
     "Golden Gate Bridge District",
@@ -71,8 +71,13 @@
     "San Francisco Muni",
     "San Francisco International",
     "Golden Gate Bridge Welcome",
+    "San Francisco Marathon",
     "San Francisco Presidio",
+    "San Francisco Designated",
     "San Francisco Chronicle",
+    "Golden Gate Bridge Natural",
+    "San Francisco Public",
+    "San Francisco To",
     "Golden Gate Bridge Movie"
    ]
   },
@@ -90,19 +95,24 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Panama Canal Zone",
     "Panama Canal Authority",
+    "Panama Canal Railway",
     "Colombian Panama Canal",
     "United States Secretary",
+    "Panama Canal Project",
     "United States Army",
     "Pacific Panama Canal",
     "United States Jimmy",
     "United States Department",
     "United States Navy",
     "Panama Canal Honorary",
+    "Base Panama Canal",
+    "The United States",
     "Panama Canal Smithsonian",
-    "Nichols Panama Canal",
-    "Panama Canal Collection"
+    "Panama Canal Collection",
+    "Former Panama Canal"
    ]
   },
   "wiki-Sydney_Opera_House": {
@@ -120,19 +130,25 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Sydney Opera House Trust",
     "New South Wales State",
+    "Sydney Opera House Grand",
     "Utzon Room",
     "New South Wales Premier",
     "New South Wales Government",
     "Sydney Opera House Executive",
     "Mr Utzon",
     "Opera House Trust",
-    "Although Utzon",
+    "The Utzon",
     "Sydney Opera House Concerned",
     "New South Wales Enduring",
     "Opera House Committee",
+    "The Opera House",
+    "Opera House Project",
+    "Sydney Opera House At",
     "Sydney Opera House Archived",
+    "Sydney Opera House Opening",
     "Utzon's Opera House"
    ]
   },
@@ -149,9 +165,15 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "New York City Landmarks",
     "New York City Subway",
+    "Wall Street Crash",
     "Empire State Building Associates",
-    "Empire State Building Run-Up"
+    "Empire State Building Week",
+    "New York City Planning",
+    "Empire State Building Run-Up",
+    "New York City Designated"
    ]
   },
   "wiki-Hagia_Sophia": {
@@ -164,10 +186,14 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Hagia Sophia Grand",
     "Justinianic Hagia Sophia",
     "Theodosian Hagia Sophia",
-    "July Pope Francis"
+    "July Pope Francis",
+    "Hagia Sophia Mosque",
+    "Hagia Sophia Dome",
+    "Hagia Sophia Museum"
    ]
   },
   "wiki-Hubble_Space_Telescope": {
@@ -176,11 +202,15 @@
      "Hubble Space Telescope",
      "HST"
     ],
-    "Wide Field Camera": [
-     "Wide Field Camera"
+    "Wide Field Camera 3": [
+     "Wide Field Camera 3"
     ]
    },
-   "ignore": []
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "A Hubble Space Telescope",
+    "Hubble Space Telescope Study"
+   ]
   },
   "wiki-Suez_Canal": {
    "entities": {
@@ -196,12 +226,21 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "President Gamal Abdel Nasser",
     "Suez Canal Authority",
-    "Receding Red Sea",
+    "Suez Canal Company",
+    "Suez Canal Net",
     "Suez Canal Special",
+    "Suez Canal Zone",
+    "New Suez Canal",
+    "Suez Canal Bridge",
+    "Suez Canal Economic",
+    "Suez Canal Area",
     "Suez Canal Archived",
-    "Suez Canal BBC"
+    "Suez Canal Container",
+    "Suez Canal BBC",
+    "Of Suez Canal"
    ]
   },
   "wiki-Taj_Mahal": {
@@ -217,7 +256,8 @@
     ]
    },
    "ignore": [
-    "Upon Shah Jahan"
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Black Taj Mahal"
    ]
   },
   "wiki-Voyager_1": {
@@ -230,8 +270,11 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Voyager 1 Mission",
     "NASA's Solar System",
-    "Solar System Exploration"
+    "Solar System Exploration",
+    "Voyager 1 Has"
    ]
   },
   "wiki-Large_Hadron_Collider": {
@@ -249,6 +292,11 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "Luminosity Large Hadron Collider",
+    "LHC Portal",
+    "LHC Machine",
+    "The Large Hadron Collider",
     "Large Hadron Collider Breaks"
    ]
   },
@@ -257,14 +305,15 @@
     "Rosetta Stone": [
      "Rosetta Stone"
     ],
-    "Ezana Stone": [
-     "Ezana Stone"
-    ],
     "British Museum": [
      "British Museum"
     ]
    },
-   "ignore": []
+   "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "The British Museum",
+    "British Museum Object"
+   ]
   },
   "wiki-Stonehenge": {
    "entities": {
@@ -280,7 +329,9 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Chippindale's Stonehenge",
+    "Stonehenge Complete",
     "Stonehenge Riverside",
     "Stonehenge Cursus",
     "Stonehenge Avenue",
@@ -289,7 +340,9 @@
     "Stonehenge III",
     "Stonehenge Environs",
     "Stonehenge Hidden",
+    "Stonehenge Aerodrome",
     "Stonehenge Bottom",
+    "Stonehenge Landscape",
     "Stonehenge Free",
     "Stonehenge English"
    ]
@@ -305,19 +358,24 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "George Everest",
     "American Everest",
     "Houston Everest",
+    "Everest Flight",
     "Swiss Mount Everest",
     "American Mount Everest",
     "British Mount Everest",
     "Mount Everest Southwest",
-    "My Everest",
     "Everest Story",
+    "Everest Base",
+    "Ascents Everest",
+    "Everest Expedition",
     "Everest Scenic",
     "Bicentennial Everest",
     "Chinese Everest",
-    "Imaging Everest"
+    "Over Everest",
+    "Mount Everest Summit"
    ]
   },
   "wiki-International_Space_Station": {
@@ -331,21 +389,24 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "ISS National",
     "Space Shuttle Endeavour",
     "Space Shuttle Columbia",
     "Space Shuttle Atlantis",
     "Space Shuttle Discovery",
+    "ISS Assembly",
+    "ISS Propulsion",
     "ISS ECLSS",
     "NASA's Space Shuttle",
     "NASA Space Shuttle",
     "ISS Multilateral",
     "Russian ISS",
     "Building ISS",
-    "Agency ISS",
     "ISS Reports",
     "ISS Russian",
-    "HD ISS"
+    "HD ISS",
+    "ISS Location"
    ]
   },
   "wiki-Mayflower": {
@@ -362,14 +423,20 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Mayflower Compact",
     "Jones's Mayflower",
+    "Mayflower Barn",
     "Pilgrims' Mayflower",
     "Harwich Mayflower",
     "Mayflower Heritage",
+    "Mayflower Descendants",
     "Israeli Mayflower",
     "Mayflower II",
-    "Mayflower Steps"
+    "Mayflower Steps",
+    "Mayflower Voyage",
+    "The Mayflower",
+    "Mayflower And"
    ]
   },
   "wiki-Antikythera_mechanism": {
@@ -385,9 +452,11 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Antikythera Mechanism Research",
     "Antikythera Research",
-    "Monumental Antikythera Mechanism"
+    "Monumental Antikythera Mechanism",
+    "Antikythera Mechanism Exhibitions"
    ]
   },
   "wiki-Great_Wall_of_China": {
@@ -401,9 +470,10 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "China's Great Wall",
     "Ming Great Wall",
-    "Han Great Wall",
+    "Outer Great Wall",
     "Inner Great Wall",
     "Badaling Great Wall",
     "Mutianyu Great Wall",
@@ -423,6 +493,8 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
+    "JWST Advanced",
     "JWST NASA",
     "JWST Text",
     "JWST Video",
@@ -443,6 +515,7 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Machu Picchu Museum",
     "Machu Picchu Archived"
    ]
@@ -457,6 +530,7 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Trans-Siberian Railway Panorama",
     "Trans-Siberian Railway Encyclopedia"
    ]
@@ -474,6 +548,7 @@
     ]
    },
    "ignore": [
+    "\\n={2,}[ \\t]*(?:See also|Notes|Notes and references|References|Bibliography|Further reading|External links|Sources|Citations)[ \\t]*={2,}[\\s\\S]*$",
     "Queensland National",
     "Great Barrier Reef Marine Park Act",
     "Great Barrier Reef Marine Park Authority",
@@ -483,6 +558,8 @@
     "Queensland Museum",
     "Great Barrier Reef Committee",
     "Great Barrier Reef Province",
+    "Queensland Wetland",
+    "Queensland Government",
     "Great Barrier Reef Works",
     "Great Barrier Reef UNESCO",
     "Great Barrier Reef Expedition"

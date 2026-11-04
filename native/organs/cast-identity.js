@@ -82,7 +82,10 @@ function spansFor(text, surfaces, mentionsOf, casing, nominalOk) {
   for (const s of surfaces) {
     const w = words(s); if (w.length < 2 || !w.slice(1).some((x) => CAP.test(x) && lc(x) !== x) || !w.slice(1).every((x) => !CAP.test(x) || nominalOk(x))) continue;
     const body = w.map((x, q) => (q === 0 ? esc(x) : esc(x).replace(/^(\\?.)/u, (c) => (CAP.test(c) ? `[${c}${lc(c)}]` : c)))).join("\\.?\\s+");
-    for (const m of text.matchAll(new RegExp(`(?<![\\p{L}\\p{N}])${body}\\.?(?![\\p{L}\\p{N}])`, "gu"))) extra.push([m.index, m.index + m[0].length]);
+    const hits = [...text.matchAll(new RegExp(`(?<![\\p{L}\\p{N}])${body}\\.?(?![\\p{L}\\p{N}])`, "gu"))].map((m) => [m.index, m.index + m[0].length]);
+    // the variant counts only when it recurs (RECUR.connector times) as its own unit
+    const exact = hits.filter(([a, b]) => text.slice(a, b).replace(/\.$/, "") === s || text.slice(a, b).replace(/\.$/, "") === w.join(" ")).length;
+    if (hits.length - exact >= RECUR.connector) extra.push(...hits);
   }
   return extra.length ? maximal([...base, ...extra]) : base;
 }
@@ -99,7 +102,8 @@ export function rescue(text, { toks, positional }, surfaceSet, connectorOk = () 
   const initialGap = (a, b) => /^[ \t]+$/.test(text.slice(a.e, b.s)) || (/^\p{Lu}$/u.test(a.t) && /^\.[ \t]+$/.test(text.slice(a.e, b.s)));
   const open = (a, b) => b >= 0 && b < n && initialGap(toks[Math.min(a, b)], toks[Math.max(a, b)]) && CAP.test(toks[b].t) && !positional(toks[b].t);
   for (let i = 0; i < n; i++) {
-    if (!CAP.test(toks[i].t) || positional(toks[i].t)) continue;
+    // a window may open on a word the text also writes in lower case when this occurrence is capitalised away from a sentence's opening
+    if (!CAP.test(toks[i].t) || (positional(toks[i].t) && opensSentence(text, toks[i].s))) continue;
     let low = 0;
     for (let j = i; j < n && j - i < MAXW; j++) {
       if (j > i && !initialGap(toks[j - 1], toks[j])) break;
@@ -131,7 +135,8 @@ export function rescue(text, { toks, positional }, surfaceSet, connectorOk = () 
   const out = [];
   for (const c of found.values()) {
     if (surfaceSet.has(c.key)) continue;
-    const need = c.kind === "connector" ? RECUR.connector : RECUR.unit;
+    // an initial with its period before a surname the cast already holds is evidence enough in one mention
+    const need = c.kind === "connector" ? RECUR.connector : c.kind === "initial" && surfaceSet.has(c.key.split(" ").slice(-1)[0]) ? 1 : RECUR.unit;
     if (c.spans.length < need) continue;
     // written capitalised more often than not: the same string in this exact case is the majority of its case-blind occurrences
     const body = c.key.split(" ").map(esc).join("[ \\t]+");
@@ -148,7 +153,7 @@ export function rescue(text, { toks, positional }, surfaceSet, connectorOk = () 
     out.push(c);
   }
   // a candidate wholly explained by a longer one with the same count is dropped
-  return out.filter((c) => !out.some((d) => d !== c && d.key.length > c.key.length && d.key.includes(c.key) && d.spans.length >= c.spans.length));
+  return out.filter((c) => c.kind === "long" || c.kind === "headed" || !out.some((d) => d !== c && d.key.length > c.key.length && d.key.includes(c.key) && c.spans.every((x) => d.spans.some((y) => inside(x, y)))));
 }
 
 const lettersOf = (s) => s.replace(/[^\p{L}\p{N}]/gu, "");
@@ -227,7 +232,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
     const have = new Set(work.flatMap((r) => r.surfaces));
     for (const c of rescue(text, sc, have, connectorOk)) {
       const spans = mo([c.key]);
-      if (spans.length < RECUR.unit) continue;
+      if (spans.length < 1) continue;
       work.push({ ref: refOfKey(c.key), surfaces: [c.key], spans, represent: c.key, dirty: false, dest: null });
       report.rescued.push({ surface: c.key, kind: c.kind, mentions: spans.length });
     }
@@ -273,8 +278,8 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
         for (const S of r.surfaces) {
           if (S === L || !subrun(S, L) || L.endsWith(" " + S)) continue;
           const sSp = mentionsOf(text, [S]); const out = sSp.filter((x) => !lSp.some((y) => inside(x, y)));
-          // a short form mostly used before the long name was first written is not that name's later mention
-          if (out.length && out.filter((x) => x[0] < lSp[0][0]).length * 2 > out.length) leave.add(S);
+          // a short form mostly used before the long name was first written, or mostly used outside it, is not that name's mention
+          if (out.length && (out.filter((x) => x[0] < lSp[0][0]).length * 2 > out.length || out.length * 2 > sSp.length)) leave.add(S);
         }
       }
       // two full names neither of whose words the other holds are two beings: the one with fewer mentions leaves, with what only it holds

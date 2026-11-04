@@ -1,0 +1,319 @@
+{
+ "summary": {
+  "entities": 21,
+  "clean": 1,
+  "layer3": 0.0476,
+  "whole_rate": 1,
+  "unique_carrier_rate": 0.3333,
+  "no_merge_rate": 0.7143,
+  "span_exact_rate": 0.2857
+ },
+ "reader_gaps": {
+  "wiki-Eiffel_Tower": [],
+  "wiki-Hoover_Dam": [],
+  "wiki-Mount_Rushmore": [],
+  "wiki-Statue_of_Liberty": [],
+  "wiki-Gateway_Arch": [],
+  "wiki-Concorde": []
+ },
+ "reader_options": {},
+ "perDoc": {
+  "wiki-Eiffel_Tower": {
+   "Eiffel Tower": {
+    "mentions": 31,
+    "carriers": 4,
+    "main_covers": 31,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Gustave Eiffel"
+    ],
+    "span_exact": false,
+    "exact_share": 0.806,
+    "main_surface": "Eiffel Tower",
+    "clean": false
+   },
+   "Gustave Eiffel": {
+    "mentions": 7,
+    "carriers": 3,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Eiffel Tower"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Gustave Eiffel",
+    "clean": false
+   }
+  },
+  "wiki-Hoover_Dam": {
+   "Hoover Dam": {
+    "mentions": 28,
+    "carriers": 4,
+    "main_covers": 28,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.786,
+    "main_surface": "Hoover Dam",
+    "clean": false
+   },
+   "Colorado River": {
+    "mentions": 16,
+    "carriers": 2,
+    "main_covers": 16,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Colorado River",
+    "clean": false
+   },
+   "Lake Mead": {
+    "mentions": 10,
+    "carriers": 1,
+    "main_covers": 10,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Lake Mead",
+    "clean": true
+   },
+   "Six Companies": {
+    "mentions": 17,
+    "carriers": 1,
+    "main_covers": 17,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.941,
+    "main_surface": "Six Companies",
+    "clean": false
+   },
+   "Bureau of Reclamation": {
+    "mentions": 12,
+    "carriers": 2,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Reclamation Service",
+    "clean": false
+   }
+  },
+  "wiki-Mount_Rushmore": {
+   "Mount Rushmore": {
+    "mentions": 56,
+    "carriers": 5,
+    "main_covers": 56,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.893,
+    "main_surface": "Mount Rushmore",
+    "clean": false
+   },
+   "Black Hills": {
+    "mentions": 29,
+    "carriers": 4,
+    "main_covers": 29,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.759,
+    "main_surface": "Black Hills",
+    "clean": false
+   },
+   "South Dakota": {
+    "mentions": 18,
+    "carriers": 3,
+    "main_covers": 18,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.944,
+    "main_surface": "South Dakota",
+    "clean": false
+   },
+   "Gutzon Borglum": {
+    "mentions": 7,
+    "carriers": 2,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Gutzon Borglum",
+    "clean": false
+   },
+   "Thomas Jefferson": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.857,
+    "main_surface": "Thomas Jefferson List",
+    "clean": false
+   }
+  },
+  "wiki-Statue_of_Liberty": {
+   "Statue of Liberty": {
+    "mentions": 22,
+    "carriers": 1,
+    "main_covers": 22,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Liberty Island"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Liberty",
+    "clean": false
+   },
+   "Liberty Island": {
+    "mentions": 12,
+    "carriers": 2,
+    "main_covers": 12,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Statue of Liberty"
+    ],
+    "span_exact": false,
+    "exact_share": 0.833,
+    "main_surface": "Liberty Island",
+    "clean": false
+   },
+   "Ellis Island": {
+    "mentions": 11,
+    "carriers": 1,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.727,
+    "main_surface": "Ellis Islands",
+    "clean": false
+   },
+   "New York City": {
+    "mentions": 6,
+    "carriers": 4,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "New York City",
+    "clean": false
+   }
+  },
+  "wiki-Gateway_Arch": {
+   "Gateway Arch": {
+    "mentions": 13,
+    "carriers": 3,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.846,
+    "main_surface": "Gateway Arch",
+    "clean": false
+   },
+   "St. Louis": {
+    "mentions": 29,
+    "carriers": 2,
+    "main_covers": 29,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.897,
+    "main_surface": "St Louis",
+    "clean": false
+   }
+  },
+  "wiki-Concorde": {
+   "British Airways": {
+    "mentions": 13,
+    "carriers": 3,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Air France"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "British Airways",
+    "clean": false
+   },
+   "Air France": {
+    "mentions": 10,
+    "carriers": 1,
+    "main_covers": 10,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "British Airways"
+    ],
+    "span_exact": false,
+    "exact_share": 0.9,
+    "main_surface": "Air France British Airways",
+    "clean": false
+   },
+   "Sud Aviation": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.8,
+    "main_surface": "Sud Aviation",
+    "clean": false
+   }
+  }
+ }
+}
