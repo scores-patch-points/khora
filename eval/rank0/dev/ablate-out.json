@@ -1,0 +1,200 @@
+[
+ {
+  "id": "n07",
+  "q": "When did the Gateway Arch open to the public?",
+  "gold": "The monument opened to the public on June 10, 1967.",
+  "names": [
+   "Gateway Arch"
+  ],
+  "bound": "Gateway Arch",
+  "bareRank": 7,
+  "fullRank": 1,
+  "falls": [
+   {
+    "label": "drop bound referent: Gateway Arch",
+    "rank": 7
+   },
+   {
+    "label": "drop token 0: Gateway",
+    "rank": 2
+   },
+   {
+    "label": "drop token 1: Arch",
+    "rank": 2
+   },
+   {
+    "label": "drop token 5: opened",
+    "rank": 2
+   },
+   {
+    "label": "drop token 8: public",
+    "rank": 2
+   }
+  ],
+  "nTokenDrops": 13,
+  "worseCount": 5
+ },
+ {
+  "id": "n09",
+  "q": "How many people died building Hoover Dam?",
+  "gold": "Its construction was the result of a massive effort involving thousands of workers, and cost over 96",
+  "names": [
+   "Hoover Dam"
+  ],
+  "bound": "Hoover Dam",
+  "bareRank": 30,
+  "fullRank": 1,
+  "falls": [
+   {
+    "label": "drop bound referent: Hoover Dam",
+    "rank": 27
+   },
+   {
+    "label": "drop token 0: Hoover",
+    "rank": 8
+   },
+   {
+    "label": "drop token 19: 96",
+    "rank": 6
+   },
+   {
+    "label": "drop token 20: lives.",
+    "rank": 3
+   }
+  ],
+  "nTokenDrops": 21,
+  "worseCount": 4
+ },
+ {
+  "id": "n11",
+  "q": "How fast did Concorde fly?",
+  "gold": "The airliner had transatlantic range while supercruising at twice the speed of sound for 75% of the ",
+  "names": [
+   "Concorde"
+  ],
+  "bound": "Concorde",
+  "bareRank": 79,
+  "fullRank": 8,
+  "falls": [
+   {
+    "label": "drop token 0: Concorde",
+    "rank": 90
+   },
+   {
+    "label": "drop bound referent: Concorde",
+    "rank": 82
+   },
+   {
+    "label": "drop token 12: speed",
+    "rank": 18
+   },
+   {
+    "label": "drop token 13: of",
+    "rank": 13
+   },
+   {
+    "label": "drop token 4: had",
+    "rank": 11
+   },
+   {
+    "label": "drop token 2: The",
+    "rank": 10
+   },
+   {
+    "label": "drop token 10: twice",
+    "rank": 10
+   },
+   {
+    "label": "drop token 16: 75%",
+    "rank": 10
+   }
+  ],
+  "nTokenDrops": 20,
+  "worseCount": 9
+ },
+ {
+  "id": "v05",
+  "q": "When did work on Mount Rushmore begin?",
+  "gold": "Work commenced officially on October 4, 1927.",
+  "names": [],
+  "bound": null,
+  "bareRank": 15,
+  "fullRank": 6,
+  "falls": [
+   {
+    "label": "drop token 0: Work",
+    "rank": 44
+   },
+   {
+    "label": "drop token 6: 1927.",
+    "rank": 26
+   },
+   {
+    "label": "drop token 1: commenced",
+    "rank": 21
+   },
+   {
+    "label": "drop token 5: 4,",
+    "rank": 9
+   },
+   {
+    "label": "drop token 3: on",
+    "rank": 8
+   },
+   {
+    "label": "drop token 4: October",
+    "rank": 7
+   }
+  ],
+  "nTokenDrops": 7,
+  "worseCount": 6
+ },
+ {
+  "id": "x03",
+  "q": "How much did the Concorde programme cost?",
+  "gold": "Studies began in 1954 and a UK–France treaty followed in 1962, as the programme cost was estimated a",
+  "names": [
+   "United Kingdom",
+   "Air France Concorde"
+  ],
+  "bound": null,
+  "bareRank": 2,
+  "fullRank": 1,
+  "falls": [
+   {
+    "label": "drop mention being: Air France Concorde",
+    "rank": 3
+   },
+   {
+    "label": "drop token 4: Concorde",
+    "rank": 3
+   },
+   {
+    "label": "drop token 0: United",
+    "rank": 2
+   },
+   {
+    "label": "drop token 2: Air",
+    "rank": 2
+   },
+   {
+    "label": "drop token 6: Studies",
+    "rank": 2
+   },
+   {
+    "label": "drop token 9: 1954",
+    "rank": 2
+   },
+   {
+    "label": "drop token 10: and",
+    "rank": 2
+   },
+   {
+    "label": "drop token 14: followed",
+    "rank": 2
+   }
+  ],
+  "nTokenDrops": 30,
+  "worseCount": 17
+ }
+]
