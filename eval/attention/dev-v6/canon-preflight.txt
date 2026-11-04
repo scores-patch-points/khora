@@ -1,0 +1,39 @@
+{
+ "checkout": "/Users/mlacy/Documents/khora-cast/khora/.claude/worktrees/binder-traps-9bacbb",
+ "head": "fa769a7",
+ "branch": "claude/binder-traps-9bacbb",
+ "dirty_files": 0,
+ "vs_canon_main": {
+  "main": "15f82fcd",
+  "behind_ahead": "0/23"
+ },
+ "priors_home": {
+  "dir": "/Users/mlacy/Downloads/workspace/janus/priors",
+  "env_KHORA_PRIORS_DIR": "/Users/mlacy/Downloads/workspace/janus/priors"
+ },
+ "priors": {
+  "contractions-eng.json": "identical",
+  "dotted-eng.json": "identical",
+  "frame-eng.json": "identical",
+  "morphology-eng.json": "identical",
+  "parser-eng-ewt.json": "identical",
+  "pos-eng-lexicon.json": "identical",
+  "pos-eng.json": "identical",
+  "punctuation-eng.json": "identical",
+  "reading-rules.json": "identical",
+  "role-config-eng.json": "identical"
+ },
+ "probe": {
+  "gaps": [],
+  "clauses_present": true,
+  "cast": 3,
+  "mentions_with_trailing_punctuation": 1
+ },
+ "verdict": "CANON-OK",
+ "why": [],
+ "manifest": {
+  "source": "GitHub scores-patch-points/janus main b1cc37f1 (pushed 2026-10-29T01:40:00Z), blob shas from the git tree",
+  "written": "2026-11-03"
+ }
+}
+preflight sha256: 240e2ca7eb55c3a4009a5100f47d5370344da079ea334051f705fe8cff682c12
