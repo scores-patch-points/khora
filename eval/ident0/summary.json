@@ -1,0 +1,277 @@
+{
+ "counts": {
+  "pos": 64,
+  "neg": 132,
+  "articles": 28,
+  "seeds": 20
+ },
+ "configs": {
+  "A1/pos": {
+   "unmapped": 43,
+   "different": 21
+  },
+  "A1/neg": {
+   "unmapped": 88,
+   "different": 41,
+   "same": 3
+  },
+  "A1on/pos": {
+   "unmapped": 43,
+   "different": 21
+  },
+  "A1on/neg": {
+   "unmapped": 88,
+   "different": 41,
+   "same": 3
+  },
+  "A2/pos": {
+   "different": 64
+  },
+  "A2/neg": {
+   "different": 129,
+   "same": 3
+  },
+  "B1/pos": {
+   "unmapped": 43,
+   "different": 21
+  },
+  "B1/neg": {
+   "unmapped": 88,
+   "different": 44
+  },
+  "B1-U/pos": {
+   "unmapped": 43,
+   "different": 21
+  },
+  "B1-U/neg": {
+   "unmapped": 88,
+   "different": 44
+  }
+ },
+ "baselines": {
+  "string/pos": {
+   "same": 47,
+   "different": 17,
+   "correct": 47,
+   "n": 64
+  },
+  "string/neg": {
+   "different": 86,
+   "same": 46,
+   "correct": 86,
+   "n": 132
+  },
+  "castOn/pos": {
+   "same": 40,
+   "unseen": 15,
+   "different": 9,
+   "correct": 40,
+   "n": 64
+  },
+  "castOn/neg": {
+   "different": 108,
+   "unseen": 17,
+   "same": 7,
+   "correct": 108,
+   "n": 132
+  },
+  "castOff/pos": {
+   "unseen": 36,
+   "different": 19,
+   "same": 9,
+   "correct": 9,
+   "n": 64
+  },
+  "castOff/neg": {
+   "unseen": 73,
+   "different": 55,
+   "same": 4,
+   "correct": 55,
+   "n": 132
+  }
+ },
+ "bars": {
+  "B1_negSame_le_10pct": {
+   "value": 0.022727272727272728,
+   "pass": true
+  },
+  "B2_posDifferent_le_10pct": {
+   "value": 0.328125,
+   "pass": false
+  },
+  "B3_correct_ge_80pct_each_class": {
+   "pos": 0,
+   "neg": 0.3106060606060606,
+   "pass": false
+  },
+  "B4_control_breaks_it": {
+   "Jreal": -0.022727272727272728,
+   "shufJmax": 0.039299242424242424,
+   "shufJmean": 0.004285037878787879,
+   "pass": false
+  },
+  "B5_beyond_string_rule": {
+   "JwithinContainsTrue": -0.021739130434782608,
+   "shufJmax": 0.0425531914893617,
+   "pass": false
+  }
+ },
+ "control": {
+  "Jreal": -0.022727272727272728,
+  "shufJ": [
+   -0.022727272727272728,
+   0.015625,
+   -0.007575757575757576,
+   -0.007575757575757576,
+   0.016098484848484848,
+   0.008522727272727272,
+   0,
+   0.023674242424242424,
+   -0.007102272727272728,
+   0.039299242424242424,
+   0.023674242424242424,
+   0.023674242424242424,
+   -0.007575757575757576,
+   -0.030303030303030304,
+   0.015625,
+   0.00047348484848484806,
+   0.008049242424242424,
+   -0.007102272727272728,
+   -0.007102272727272728,
+   0.008049242424242424
+  ],
+  "shufJmax": 0.039299242424242424,
+  "shufJmean": 0.004285037878787879,
+  "Ureal": 0.0033143939393939365,
+  "shufU": [
+   -0.03551136363636363,
+   -0.013731060606060608,
+   -0.03645833333333333,
+   0.03314393939393939,
+   0.03314393939393939,
+   0.0023674242424242403,
+   0.04924242424242424,
+   0.048295454545454544,
+   0.0037878787878787845,
+   0.009943181818181823,
+   0.05587121212121212,
+   0.07244318181818182,
+   0.025094696969696968,
+   -0.02083333333333333,
+   0.0018939393939393923,
+   0.009943181818181823,
+   0.02462121212121212,
+   0.009469696969696968,
+   -0.012784090909090912,
+   0.009469696969696968
+  ],
+  "shufUmax": 0.07244318181818182,
+  "shufUmean": 0.013470643939393937
+ },
+ "strata": {
+  "containsTrue": {
+   "pos": 47,
+   "neg": 46,
+   "Janus": -0.021739130434782608,
+   "shufJmax": 0.0425531914893617,
+   "janusPos": {
+    "unmapped": 29,
+    "different": 18
+   },
+   "janusNeg": {
+    "unmapped": 30,
+    "different": 15,
+    "same": 1
+   }
+  },
+  "containsFalse": {
+   "pos": 17,
+   "neg": 86,
+   "janusPos": {
+    "unmapped": 14,
+    "different": 3
+   },
+   "janusNeg": {
+    "unmapped": 58,
+    "different": 26,
+    "same": 2
+   }
+  }
+ },
+ "size": {
+  "0/pos": {
+   "n": 43,
+   "unmapped": 43,
+   "Uclose": 0
+  },
+  "0/neg": {
+   "n": 88,
+   "unmapped": 88,
+   "Uclose": 0
+  },
+  "1-9/pos": {
+   "n": 5,
+   "different": 5,
+   "Uclose": 0
+  },
+  "1-9/neg": {
+   "n": 23,
+   "different": 22,
+   "same": 1,
+   "Uclose": 1
+  },
+  "10-49/pos": {
+   "n": 13,
+   "different": 13,
+   "Uclose": 6
+  },
+  "10-49/neg": {
+   "n": 18,
+   "different": 17,
+   "same": 1,
+   "Uclose": 12
+  },
+  ">=50/pos": {
+   "n": 3,
+   "different": 3,
+   "Uclose": 1
+  },
+  ">=50/neg": {
+   "n": 3,
+   "same": 1,
+   "different": 2,
+   "Uclose": 1
+  }
+ },
+ "formula": {
+  "pos": {
+   "n": 21,
+   "U": 7,
+   "D": 0,
+   "L": 21,
+   "all": 0
+  },
+  "neg": {
+   "n": 44,
+   "U": 14,
+   "D": 7,
+   "L": 43,
+   "all": 3
+  }
+ },
+ "failures": {
+  "A1": 67
+ },
+ "macro": {
+  "A1": 0.1553030303030303,
+  "A1on": 0.1553030303030303,
+  "A2": 0.48863636363636365,
+  "string": 0.6929450757575757,
+  "castOn": 0.7215909090909092,
+  "castOff": 0.27864583333333337
+ },
+ "overall": "PARTIAL",
+ "firstNode": {
+  "pairs": 1
+ }
+}
