@@ -85,6 +85,24 @@ test("LEAD: a possessive of a name is the name", () => {
   assert.ok(res.rows[0].spans.every(([a, b]) => text.slice(a, b) === "Notre-Dame"));
 });
 
+test("SPANS: a full stop after a roman numeral is the sentence's when the name recurs without it", () => {
+  const text = "Edward I ruled. Edward I built it. Edward I died. The tower was held by Edward I. Although old, it stood.";
+  const res = pass(text, [["Edward I"]]);
+  for (const [a, b] of res.rows[0].spans) assert.ok(!text.slice(a, b).endsWith("."), text.slice(a, b));
+});
+
+test("LEAD: a surface that runs across a sentence's end is dropped, not kept as a name", () => {
+  const text = "The Saturn V flew. The Saturn V is tall. A Saturn V waits. After the Saturn V. Consequently, it rose. The Saturn V ended.";
+  const res = pass(text, [["Saturn V"], ["Saturn V. Consequently"]]);
+  assert.ok(!res.rows.some((r) => r.surfaces.includes("Saturn V. Consequently")));
+});
+
+test("FOLD: a bare name beside the same name plus a common noun is a typed gap, not a join", () => {
+  const text = "Millau is a town. The Millau Viaduct crosses the Tarn near Millau. The viaduct is tall. Millau grew. A viaduct near Millau Viaduct signs. The Millau Viaduct. In Millau we saw the viaduct. Millau.";
+  const res = pass(text, [["Millau"], ["Millau Viaduct"]]);
+  assert.ok(find(res, "Millau") !== find(res, "Millau Viaduct"));
+});
+
 test("maximal keeps the longer of nested spans", () => { assert.deepEqual(maximal([[0, 5], [0, 12], [3, 6], [20, 25]]), [[0, 12], [20, 25]]); });
 
 test("G1: the gate finds a list and finds none in the new code", () => {

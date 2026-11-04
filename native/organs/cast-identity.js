@@ -28,6 +28,9 @@
 const TOK = /[\p{L}\p{N}](?:[\p{L}\p{N}'’]|[-–/.](?=[\p{L}\p{N}]))*/gu;
 const CAP = /^\p{Lu}/u, LOW = /^\p{Ll}/u, NUM = /^\p{N}[\p{L}\p{N}'’]*(?:[-–/.][\p{L}\p{N}]+)*$/u;
 const JOINER = /[-–/]/;
+// a designation: a token with a digit and a joiner ("F-1", "747-400")
+const DESIG = /\p{N}/u;
+const isDesig = (t) => JOINER.test(t) && DESIG.test(t);
 // the recurrence a joined unit must show: declared, and reported in PREREG-CAST-A1.md
 export const RECUR = { unit: 2, connector: 3, share: 0.8 };
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -53,7 +56,7 @@ const insideCount = (a, b) => { let k = 0; for (const x of a) if (b.some((y) => 
 export function scan(text) {
   const toks = []; const low = new Map(), mid = new Map();
   for (const m of text.matchAll(TOK)) {
-    const t = { t: m[0], s: m.index, e: m.index + m[0].length };
+    const t = { t: m[0], s: m.index, e: m.index + m[0].length, i: toks.length };
     toks.push(t);
     const k = lc(bare(t.t));
     if (LOW.test(t.t)) low.set(k, (low.get(k) ?? 0) + 1);
@@ -62,11 +65,17 @@ export function scan(text) {
   // a period between two words that the text writes between the same two words again and again is the words' own ("St. Peter's"), not a sentence's end
   const pairs = new Map();
   for (let i = 0; i + 1 < toks.length; i++) if (/^\.[ \t]+$/.test(text.slice(toks[i].e, toks[i + 1].s))) { const k = `${toks[i].t}|${toks[i + 1].t}`; pairs.set(k, (pairs.get(k) ?? 0) + 1); }
-  return { toks, pairs, positional: (w) => { const k = lc(bare(w)); const l = low.get(k) ?? 0; return l > 0 && l >= (mid.get(k) ?? 0); } };
+  return { toks, pairs, bare: new Map(), positional: (w) => { const k = lc(bare(w)); const l = low.get(k) ?? 0; return l > 0 && l >= (mid.get(k) ?? 0); } };
 }
 const sameLine = (text, a, b) => /^[ \t]+$/.test(text.slice(a.e, b.s));
 /** may a name run from token a to the next token b: a space, or a period that is an initial's, an abbreviation's or the pair's own (it recurs, and the word after it is not one a sentence opens with) */
-const gapOk = (text, a, b, sc, abbreviations) => sameLine(text, a, b) || (/^\.[ \t]+$/.test(text.slice(a.e, b.s)) && (/^\p{Lu}$/u.test(a.t) || abbreviations.has(a.t) || a.t.includes(".") || ((sc.pairs.get(`${a.t}|${b.t}`) ?? 0) >= RECUR.connector && !sc.positional(b.t))));
+const initialOwn = (text, a, sc) => {
+  // a single capital with its period is an initial unless the name before it recurs without the period ("Saturn V" is a name and the full stop the sentence's)
+  const p = sc.toks[a.i - 1]; if (!p || !sameLine(text, p, a)) return true;
+  const k = `${p.t} ${a.t}`; if (!sc.bare.has(k)) sc.bare.set(k, (text.match(new RegExp(`(?<![\\p{L}\\p{N}])${esc(p.t)}[ \\t]+${esc(a.t)}(?![.\\p{L}\\p{N}])`, "gu")) ?? []).length);
+  return sc.bare.get(k) < RECUR.connector;
+};
+const gapOk = (text, a, b, sc, abbreviations) => sameLine(text, a, b) || (/^\.[ \t]+$/.test(text.slice(a.e, b.s)) && ((/^\p{Lu}$/u.test(a.t) && initialOwn(text, a, sc)) || abbreviations.has(a.t) || a.t.includes(".") || ((sc.pairs.get(`${a.t}|${b.t}`) ?? 0) >= RECUR.connector && !sc.positional(b.t))));
 
 /** a position that opens a sentence or a line (a quote or bracket in front of it does not count against that) */
 function opensSentence(text, i) {
@@ -76,10 +85,11 @@ function opensSentence(text, i) {
 }
 
 /** does a mention's text cross a line, or a sentence's end — a period that is not an abbreviation's, an initial's or the token's own */
-function crossesBreak(span, abbreviations) {
+function crossesBreak(span, abbreviations, bareRecurs = () => false) {
   if (/\n/.test(span)) return true;
   const w = span.split(/\s+/);
-  return w.slice(0, -1).some((x) => { if (!x.endsWith(".")) return /[!?]$/.test(x); const t = x.slice(0, -1); return !(abbreviations.has(t) || t.includes(".") || /^\p{Lu}$/u.test(t)); });
+  // a period after a single capital is the name's own only when the name before it does not recur without the period ("Robert F. Kennedy", not "Saturn V. Consequently")
+  return w.slice(0, -1).some((x, i) => { if (!x.endsWith(".")) return /[!?]$/.test(x); const t = x.slice(0, -1); return !(abbreviations.has(t) || t.includes(".") || (/^\p{Lu}$/u.test(t) && !bareRecurs(w.slice(0, i + 1).join(" ").slice(0, -1)))); });
 }
 
 /** mentions of every surface; a later token of a name the text writes in lower case ("Antikythera mechanism") is the same name */
@@ -154,7 +164,7 @@ export function rescue(text, sc, surfaceSet, connectorOk = () => true, abbreviat
     const need = c.kind === "connector" ? RECUR.connector
       : c.kind === "initial" && surfaceSet.has(lastTok) ? 1
       // a model designation (digits with a joiner or a letter) the text writes at least twice is a name's own, so its first unit is evidence enough ("Boeing 747-400" beside the bare "747-400")
-      : c.kind === "number" && NUM.test(lastTok) && /\D/.test(lastTok) && toks.filter((x) => x.t === lastTok || bare(x.t) === lastTok).length >= RECUR.unit && ![...found.values()].some((u) => u !== c && u.kind === "number" && u.key.split(" ").pop() === lastTok) ? 1
+      : (c.kind === "number" || c.kind === "joiner") && (NUM.test(lastTok) || isDesig(lastTok)) && /\D/.test(lastTok) && toks.filter((x) => x.t === lastTok || bare(x.t) === lastTok).length >= RECUR.unit && ![...found.values()].some((u) => u !== c && (u.kind === "number" || u.kind === "joiner") && u.key.includes(" ") && u.key.split(" ").pop() === lastTok) ? 1
       : RECUR.unit;
     if (c.spans.length < need) continue;
     // written capitalised more often than not: the same string in this exact case is the majority of its case-blind occurrences
@@ -166,7 +176,8 @@ export function rescue(text, sc, surfaceSet, connectorOk = () => true, abbreviat
       const seg = c.key.split(/[-–/]/).map((x) => x.trim());
       if (!/^[\p{Lu}\p{N}]/u.test(seg[0]) || !/^[\p{Lu}\p{N}]/u.test(seg[seg.length - 1])) continue;
       const alone = (x) => (text.match(new RegExp(`(?<![\\p{L}\\p{N}\\-–/])(?<!\\p{Lu}[\\p{L}'’]*[ \\t])${x.split(/\s+/).map(esc).join("[ \\t]+")}(?![\\p{L}\\p{N}\\-–/])(?![ \\t]\\p{Lu})`, "gu")) ?? []).length;
-      if (seg.length > 1 && seg.every((x) => alone(x) >= RECUR.connector)) continue;
+      const named = seg.filter((x) => /^\p{L}/u.test(x));
+      if (named.length > 1 && named.every((x) => alone(x) >= RECUR.connector)) continue;
     }
     if (c.coord) {
       // a coordinating word joins a name only when the pair almost never occurs apart ("Harland and Wolff"): the unit accounts for RECUR.share of each side's mentions
@@ -188,7 +199,7 @@ export function rescue(text, sc, surfaceSet, connectorOk = () => true, abbreviat
   for (const c of [...out]) {
     if (c.kind !== "number" && c.kind !== "joiner") continue;
     const T = c.key.split(" ").pop();
-    if (!NUM.test(T) || T.length < 3 || seen.has(T) || surfaceSet.has(T)) continue;
+    if (!(NUM.test(T) || isDesig(T)) || T.length < 3 || seen.has(T) || surfaceSet.has(T)) continue;
     const spans = toks.filter((x) => x.t === T).map((x) => [x.s, x.s + T.length]);
     if (spans.length >= RECUR.unit) { seen.add(T); out.push({ key: T, kind: "tail", of: out.filter((u) => (u.kind === "number" || u.kind === "joiner") && u.key.split(" ").pop() === T).map((u) => u.key), starts: spans.map((x) => x[0]), spans }); }
   }
@@ -282,6 +293,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
   const refMap = new Map();
   let work = rows.map((r) => ({ ref: r.ref, surfaces: [...r.surfaces], spans: r.spans.map((s) => [...s]), represent: r.represent, dirty: false, dest: null }));
   const sc = scan(text);
+  const bareRecurs = (before) => before.length > 0 && (text.match(new RegExp(`(?<![\\p{L}\\p{N}])${before.split(/\s+/).map(esc).join("[ \\t]+")}(?![.\\p{L}\\p{N}])`, "gu")) ?? []).length >= RECUR.connector;
   const mo = (surfaces) => spansFor(text, surfaces, mentionsOf, on("casing"), nominalOk);
   const respan = (r) => { r.spans = r.surfaces.length ? mo(r.surfaces) : []; r.dirty = false; };
   const owners = () => { const m = new Map(); for (const r of work) for (const s of r.surfaces) if (!m.has(s)) m.set(s, r); return m; };
@@ -300,9 +312,9 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
       // a capital at the head that the text writes in lower case at least as often as capitalised away from a sentence's opening, on a surface that mostly opens a sentence ("The", "On")
       if (CAP.test(w[0]) && sc.positional(w[0]) && own.has(w.slice(1).join(" ")) && sp.filter(([a]) => opensSentence(text, a)).length * 2 >= sp.length) rest = w.slice(1).join(" ");
       // a surface every mention of which runs across a line or a sentence's end: the name is what stands before the break
-      else if (sp.every(([a, b]) => crossesBreak(text.slice(a, b), abbreviations))) { for (let k = w.length - 1; k >= 1 && !rest; k--) if (own.has(w.slice(0, k).join(" "))) rest = w.slice(0, k).join(" "); }
-      if (rest === null || own.get(rest) === r && r.surfaces.length < 2) continue;
-      r.surfaces = r.surfaces.filter((x) => x !== s); r.dirty = true; r.dest = own.get(rest).ref;
+      else if (sp.every(([a, b]) => crossesBreak(text.slice(a, b), abbreviations, bareRecurs))) { for (let k = w.length - 1; k >= 1 && !rest; k--) if (own.has(w.slice(0, k).join(" "))) rest = w.slice(0, k).join(" "); if (rest === null) rest = ""; }
+      if (rest === null || (rest !== "" && own.get(rest) === r && r.surfaces.length < 2)) continue;
+      r.surfaces = r.surfaces.filter((x) => x !== s); r.dirty = true; r.dest = rest === "" ? null : own.get(rest).ref;
       report.dropped.push({ surface: s, into: rest });
     }
     settle();
@@ -310,7 +322,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
 
   // HAPAX — a surface written once that is another surface of this text plus tokens at either edge ("President Emmanuel Macron", "April White Star", "Mission Control Center"),
   // while the rest stands alone RECUR.connector times or more: the edge tokens are the sentence's company, not a name of their own
-  if (on("hapax")) {
+  const hapax = () => {
     const own = owners();
     for (const r of work) for (const s of [...r.surfaces]) {
       const w = words(s); if (w.length < 2) continue;
@@ -328,7 +340,8 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
       r.surfaces = r.surfaces.filter((q) => q !== s); r.dirty = true; r.dest = own.get(rest).ref; report.dropped.push({ surface: s, into: rest, by: "hapax" });
     }
     settle();
-  }
+  };
+  if (on("hapax")) hapax();
 
   // VARIANTS — two beings holding the same name written with a hyphen, a period or a diacritic differently ("Trans-Alaska Pipeline System", "Trans Alaska Pipeline System") are one
   const variants = () => {
@@ -366,6 +379,13 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
       work.push({ ref: refOfKey(c.key), surfaces: [c.key], spans, represent: c.key, dirty: false, dest: null });
       report.rescued.push({ surface: c.key, kind: "tail", mentions: spans.length });
     }
+    // a unit that ends in a designation the reader already holds as a being ("Rocketdyne F-1" beside "F-1") is that being with a modifier
+    const own0 = owners();
+    for (const [k, row] of made) {
+      const T = k.split(" ").pop(); const o = own0.get(T);
+      if (isDesig(T) && o && o !== row) { o.surfaces.push(k); o.dirty = true; row.surfaces = []; row.dest = o.ref; report.rescued.push({ surface: k, kind: "modified", into: T }); }
+    }
+    work = work.filter((r) => r.surfaces.length);
     // a unit with a possessive inside ("St. Peter's Basilica") is also written up to the possessive ("St. Peter's"): the prefix goes to the unit that has most mentions
     const prefixOf = new Map();
     for (const [k, row] of made) {
@@ -377,6 +397,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
     for (const [pre, row] of prefixOf) if (!have.has(pre)) { row.surfaces.push(pre); row.dirty = true; }
     for (const r of work) if (r.dirty) respan(r);
     if (on("variants")) variants();
+    if (on("hapax")) hapax();
   }
 
   // CLAIMS
@@ -466,7 +487,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
   if (on("fold")) {
     for (const r of work) if (r.dirty || on("casing")) respan(r);
     const lenOf = (r) => longest(r.surfaces).length;
-    const parent = new Map();
+    const parent = new Map(), why = new Map();
     for (const S of work) {
       if (!S.spans.length) continue;
       const cands = [];
@@ -479,16 +500,18 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
       if (maj.length) {
         if (maj.length > 1 && maj[0].k === maj[1].k) {
           if (maj[0].P.spans.length === maj[1].P.spans.length) { report.gaps.push({ gap: "cast_identity_tie", surface: longest(S.surfaces), between: [longest(maj[0].P.surfaces), longest(maj[1].P.surfaces)] }); continue; }
-          parent.set(S, maj[0].P.spans.length < maj[1].P.spans.length ? maj[0].P : maj[1].P); continue;
+          parent.set(S, maj[0].P.spans.length < maj[1].P.spans.length ? maj[0].P : maj[1].P); why.set(S, "majority"); continue;
         }
-        parent.set(S, maj[0].P); continue;
+        parent.set(S, maj[0].P); why.set(S, "majority"); continue;
       }
       // a short form the text first writes inside a longer name was introduced by it ("Everest" in "Mount Everest")
-      const intro = cands.filter((c) => c.P.spans.some((y) => inside(S.spans[0], y)));
+      // but a bare name beside "Name + a common noun" (\"Millau\" and \"Millau Viaduct\") may be the place, not the thing: a typed gap, not a join
+      const kindHead = (P) => P.surfaces.some((x) => { const n = nz(x), m = nz(longest(S.surfaces)); if (!n.startsWith(m + " ")) return false; const w = words(x); const t = w[w.length - 1]; return (commonNoun(t) || sc.positional(t)) && words(x).length > words(longest(S.surfaces)).length; });
+      const intro = cands.filter((c) => c.P.spans.some((y) => inside(S.spans[0], y)) && !kindHead(c.P));
       if (intro.length) {
         intro.sort((a, b) => lenOf(b.P) - lenOf(a.P));
         if (intro.length > 1 && lenOf(intro[0].P) === lenOf(intro[1].P) && intro[0].P.ref !== intro[1].P.ref) { report.gaps.push({ gap: "cast_identity_tie", surface: longest(S.surfaces), between: [longest(intro[0].P.surfaces), longest(intro[1].P.surfaces)] }); continue; }
-        parent.set(S, intro[0].P); continue;
+        parent.set(S, intro[0].P); why.set(S, "introduced"); continue;
       }
       // otherwise it stays a being of its own: whether it is the longer name's short form cannot be told from the text (a typed gap)
       if (S.spans.length >= RECUR.connector && report.gaps.length < 40) report.gaps.push({ gap: "cast_identity_short_form_open", surface: longest(S.surfaces), containers: cands.slice(0, 3).map((c) => longest(c.P.surfaces)) });
@@ -499,7 +522,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
     const next = [];
     for (const [g, members] of groups) {
       if (members.length === 1) { next.push(g); continue; }
-      for (const m of members) if (m !== g) { refMap.set(m.ref, g.ref); report.folded.push({ surface: longest(m.surfaces), into: longest(g.surfaces) }); }
+      for (const m of members) if (m !== g) { refMap.set(m.ref, g.ref); report.folded.push({ surface: longest(m.surfaces), into: longest(g.surfaces), by: why.get(m) ?? "chain" }); }
       next.push({ ...g, surfaces: [...new Set([...g.surfaces, ...members.flatMap((m) => m.surfaces)])], spans: maximal(members.flatMap((m) => m.spans)) });
     }
     work = next;
@@ -518,7 +541,7 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
         while (b > a && text[b - 1] === ".") {
           const tok = text.slice(a, b - 1).match(/[\p{L}\p{N}][\p{L}\p{N}'’.]*$/u)?.[0] ?? "";
           const next = text.slice(b).match(/^[ \t]*(\S)/)?.[1] ?? "";
-          if (abbreviations.has(tok) || tok.includes(".") || (/^\p{Lu}$/u.test(tok) && /^\p{Lu}$/u.test(next))) break;
+          if (abbreviations.has(tok) || tok.includes(".") || (/^\p{Lu}$/u.test(tok) && /^\p{Lu}$/u.test(next) && !bareRecurs(text.slice(a, b - 1)))) break;
           b--; report.spansFixed++;
         }
         if (b > a) out.push([a, b]);
