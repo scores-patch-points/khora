@@ -20,9 +20,10 @@
 //   INITIALS an all-capital short form that is the capitals of exactly one multi-token name belongs to it.
 //   UNMERGE  a short form first used before the longer name it sits in, or mostly used outside it, leaves; two full names that share only a tail are two beings.
 //   FOLD     a being most of whose mentions lie inside ONE longer being is a part of it; so is one whose first mention lies inside a longer being's
-//            mention ("Everest" in "Mount Everest"), unless it stands after a connector ("Paris" in "Notre-Dame de Paris"). Otherwise it stays a being of
+//            mention ("Everest" in "Mount Everest"), unless it stands after a connector ("Paris" in "Notre-Dame de Paris") or is a one-word name beside that name plus one common noun ("Millau" and "Millau Viaduct": the place or the thing). Otherwise it stays a being of
 //            its own and a typed gap (`cast_identity_short_form_open`) says so.
-//   SPANS    no mention overlaps a longer mention of another being; a mention ends where the name ends (a line break, a sentence's full stop).
+//   SPANS    a full stop after a single capital is the name's only if the name before it does not recur without it ("Robert F. Kennedy" keeps it, "Edward I." does not);
+//            no mention overlaps a longer mention of another being; a mention ends where the name ends (a line break, a sentence's full stop).
 // Pure given its inputs. `mentionsOf` is read-core's own matcher, handed in so a mention is found the one way.
 
 const TOK = /[\p{L}\p{N}](?:[\p{L}\p{N}'’]|[-–/.](?=[\p{L}\p{N}]))*/gu;
@@ -505,8 +506,8 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
         parent.set(S, maj[0].P); why.set(S, "majority"); continue;
       }
       // a short form the text first writes inside a longer name was introduced by it ("Everest" in "Mount Everest")
-      // but a bare name beside "Name + a common noun" (\"Millau\" and \"Millau Viaduct\") may be the place, not the thing: a typed gap, not a join
-      const kindHead = (P) => P.surfaces.some((x) => { const n = nz(x), m = nz(longest(S.surfaces)); if (!n.startsWith(m + " ")) return false; const w = words(x); const t = w[w.length - 1]; return (commonNoun(t) || sc.positional(t)) && words(x).length > words(longest(S.surfaces)).length; });
+      // but a bare one-word name beside "Name + one common noun" (\"Millau\" and \"Millau Viaduct\") may be the place, not the thing: a typed gap, not a join
+      const kindHead = (P) => P.surfaces.some((x) => { const n = nz(x), m = nz(longest(S.surfaces)); if (!n.startsWith(m + " ")) return false; const w = words(x); const t = w[w.length - 1]; return (commonNoun(t) || sc.positional(t)) && words(longest(S.surfaces)).length === 1 && words(x).length === 2; });
       const intro = cands.filter((c) => c.P.spans.some((y) => inside(S.spans[0], y)) && !kindHead(c.P));
       if (intro.length) {
         intro.sort((a, b) => lenOf(b.P) - lenOf(a.P));
