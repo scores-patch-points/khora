@@ -1,25 +1,28 @@
-// cast-identity.js — ONE NAME, ONE BEING (opt-in: readWith({ castIdentity: true | { lead, rescue, claims, unmerge, fold, casing, spans } })).
+// cast-identity.js — ONE NAME, ONE BEING (opt-in: readWith({ castIdentity: true | { lead, hapax, variants, rescue, claims, initials, unmerge, fold, casing, spans } })).
 //
 // A pass over the cast the reader built, run before the entry is assembled; off, nothing here runs and the entry is JSON-identical to base.
-// It repairs the four defects the 2026-11-03 cast census found (CAST-CENSUS-2.md), each by a structural rule or by the text's own
-// evidence — there is no list of words in this file (eval/cast/cast-identity-gate.mjs scans for one). The steps, in order:
-//   LEAD    a surface the text itself shows is a name plus a sentence's edge: every mention of "The Colosseum" opens a sentence and the
-//           text also writes "the" in lower case; every mention of "Colosseum A" runs across a line or sentence break. The surface is
-//           dropped; its mentions are the name's own.
-//   RESCUE  a name the capital tier truncated: a joiner inside a token ("Trans-Siberian", "WF/PC"), a number that ends a name
-//           ("Voyager 1"), a lower-case connector ("Great Wall of China"), a sentence-initial head ("Machu Picchu"). A string is joined
-//           as a unit only when it recurs as that unit; a connector also needs the unit to be the common way one of its sides appears.
-//   CLAIMS  a parenthesis after a name that lists forms sharing the name's initials or tokens ("Large Hadron Collider (LHC)",
-//           "... (US 66 or Route 66)") says those forms belong to that name: no other being keeps them.
-//   UNMERGE a short form that the text uses BEFORE the longer name it sits inside (so it cannot be that name's later mention),
-//           e.g. "LHC" beside "LHC Computing Grid", leaves that name's being. Two full names that differ before a shared tail
-//           ("Ezana Stone", "Rosetta Stone") are two beings.
-//   FOLD    a being most of whose mentions lie inside the mentions of ONE longer being is a part of it ("Golden", "Golden Gate",
-//           "Gate" of "Golden Gate Bridge"); so is a short form whose one dominant container is first mentioned before it
-//           ("Everest" after "Mount Everest"). A tie between two longer beings is a typed gap, never a guess.
-//   SPANS   a being's mentions never overlap another's (the longer mention keeps the place); a mention ends where the name ends: a
-//           period that is not the name's own (not an abbreviation of this read's set, not inside the token, not an initial before
-//           another capital) is the sentence's; a name does not run across a line break.
+// It repairs the defects the cast census found (CAST-CENSUS-2.md) and the ones the first scored exam showed (RESULT-CAST-A2.md), each by a
+// structural rule, the text's own evidence, or the part-of-speech prior (data) — there is no list of words in this file
+// (eval/cast/cast-identity-gate.mjs scans for one). The steps, in order:
+//   LEAD     a surface the text shows is a name plus a sentence's edge: "The Colosseum" (a positional capital on a surface that mostly opens
+//            a sentence), "Colosseum A" (every mention runs across a break), "Notre-Dame's" (a possessive of another surface).
+//   HAPAX    a surface written once that is another surface plus edge words ("April White Star", "Mission Control Center") while the
+//            rest stands alone three times or more, and the edge words are the sentence's company, not a prefix to names.
+//   VARIANTS two beings holding one name written with a hyphen, a period or a diacritic differently are one.
+//   RESCUE   a name the capital tier truncated or dropped: a joiner inside a token ("Trans-Siberian"); a number or model designation
+//            ending a name ("Voyager 1", "Apollo 11", "Boeing 747-400"), and the bare number that ends it; an initial or an abbreviation with its
+//            period ("John A. Roebling", "St. Peter's Basilica"); a connector between capitalised runs ("Great Wall of China", "Notre-Dame de Paris":
+//            one the prior does not use as a conjunction, introduced with its left side) or a coordinating word the two sides almost never leave
+//            ("Harland and Wolff"); a run of five or more tokens; a closed run that extends a being by one capitalised word ("Cumberland River");
+//            and a capitalised word the reader dropped as ambiguous that recurs outside every being ("Valdez").
+//   CLAIMS   a parenthesis after a name lists forms of it ("Large Hadron Collider (LHC)", "U.S. Route 66 or U.S. Highway 66 (US 66 or Route 66)"):
+//            the names and forms are one being; no other being keeps them.
+//   INITIALS an all-capital short form that is the capitals of exactly one multi-token name belongs to it.
+//   UNMERGE  a short form first used before the longer name it sits in, or mostly used outside it, leaves; two full names that share only a tail are two beings.
+//   FOLD     a being most of whose mentions lie inside ONE longer being is a part of it; so is one whose first mention lies inside a longer being's
+//            mention ("Everest" in "Mount Everest"), unless it stands after a connector ("Paris" in "Notre-Dame de Paris"). Otherwise it stays a being of
+//            its own and a typed gap (`cast_identity_short_form_open`) says so.
+//   SPANS    no mention overlaps a longer mention of another being; a mention ends where the name ends (a line break, a sentence's full stop).
 // Pure given its inputs. `mentionsOf` is read-core's own matcher, handed in so a mention is found the one way.
 
 const TOK = /[\p{L}\p{N}](?:[\p{L}\p{N}'’]|[-–/.](?=[\p{L}\p{N}]))*/gu;
