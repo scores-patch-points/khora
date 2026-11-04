@@ -26,7 +26,7 @@
 //            no mention overlaps a longer mention of another being; a mention ends where the name ends (a line break, a sentence's full stop).
 // Pure given its inputs. `mentionsOf` is read-core's own matcher, handed in so a mention is found the one way.
 
-const TOK = /[\p{L}\p{N}](?:[\p{L}\p{N}'’]|[-–/.](?=[\p{L}\p{N}]))*/gu;
+const TOK = /[\p{L}\p{N}](?:[\p{L}\p{N}]|['’](?=[\p{L}\p{N}])|[-–/.](?=[\p{L}\p{N}]))*/gu;
 const CAP = /^\p{Lu}/u, LOW = /^\p{Ll}/u, NUM = /^\p{N}[\p{L}\p{N}'’]*(?:[-–/.][\p{L}\p{N}]+)*$/u;
 const JOINER = /[-–/]/;
 // a designation: a token with a digit and a joiner ("F-1", "747-400")
@@ -551,5 +551,8 @@ export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set()
     }
   }
 
-  return { rows: work.filter((r) => r.spans.length).map(({ dirty, dest, ...r }) => r), refMap, report };
+  // a surface is a name: it never begins or ends with a mark (an apostrophe or a quote that closes a quotation is not the name's)
+  const clean = (x) => x.replace(/^[^\p{L}\p{N}]+/u, "").replace(/[^\p{L}\p{N}]+$/u, (m) => (m === "." && abbreviations.has(x.slice(0, -1).split(/\s+/).pop()) ? m : ""));
+  for (const r of work) { const c = [...new Set(r.surfaces.map(clean).filter(Boolean))]; if (c.join("\u0000") !== r.surfaces.join("\u0000")) { r.surfaces = c; if (r.represent && !c.includes(r.represent)) r.represent = clean(r.represent) || c[0]; } }
+  return { rows: work.filter((r) => r.spans.length && r.surfaces.length).map(({ dirty, dest, ...r }) => r), refMap, report };
 }

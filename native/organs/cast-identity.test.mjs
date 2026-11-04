@@ -103,6 +103,12 @@ test("FOLD: a bare name beside the same name plus a common noun is a typed gap, 
   assert.ok(find(res, "Millau") !== find(res, "Millau Viaduct"));
 });
 
+test("a being's surfaces never end in a mark (a closing quote or apostrophe is not the name's)", () => {
+  const text = "Crowds called it the 'Sydney Harbour Bridge'. Later the 'Sydney Harbour Bridge' opened. The bridge's design is old. The Sydney Harbour Bridge' was lit. The Sydney Harbour Bridge stands.";
+  const res = pass(text, [["Sydney Harbour"]]);
+  for (const r of res.rows) for (const x of r.surfaces) assert.ok(!/[^\p{L}\p{N}]$/u.test(x), JSON.stringify(x));
+});
+
 test("maximal keeps the longer of nested spans", () => { assert.deepEqual(maximal([[0, 5], [0, 12], [3, 6], [20, 25]]), [[0, 12], [20, 25]]); });
 
 test("G1: the gate finds a list and finds none in the new code", () => {
