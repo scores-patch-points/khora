@@ -1,0 +1,888 @@
+{
+ "summary": {
+  "entities": 61,
+  "clean": 10,
+  "layer3": 0.1639,
+  "whole_rate": 0.7869,
+  "unique_carrier_rate": 0.5902,
+  "no_merge_rate": 0.6557,
+  "span_exact_rate": 0.3279
+ },
+ "reader_gaps": {
+  "wiki-_resund_Bridge": [],
+  "wiki-Gotthard_Base_Tunnel": [],
+  "wiki-Millau_Viaduct": [],
+  "wiki-Petronas_Towers": [],
+  "wiki-Saturn_V": [],
+  "wiki-Space_Needle": [],
+  "wiki-Sputnik_1": [],
+  "wiki-Three_Gorges_Dam": [],
+  "wiki-Tokyo_Skytree": [],
+  "wiki-Tower_of_London": []
+ },
+ "reader_options": {},
+ "perDoc": {
+  "wiki-_resund_Bridge": {
+   "Øresund Bridge": {
+    "mentions": 10,
+    "carriers": 2,
+    "main_covers": 10,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Øresund Link",
+     "Øresund Tunnel"
+    ],
+    "span_exact": false,
+    "exact_share": 0.8,
+    "main_surface": "Øresund Bridge",
+    "clean": false
+   },
+   "Øresund Link": {
+    "mentions": 11,
+    "carriers": 2,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Øresund Bridge",
+     "Øresund Tunnel"
+    ],
+    "span_exact": false,
+    "exact_share": 0.909,
+    "main_surface": "Øresund Link",
+    "clean": false
+   },
+   "Øresund Tunnel": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Øresund Bridge",
+     "Øresund Link"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Øresund",
+    "clean": false
+   },
+   "Malmö": {
+    "mentions": 22,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Malmö City Tunnel": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Malmö City Tunnel",
+    "clean": true
+   },
+   "Copenhagen": {
+    "mentions": 12,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Copenhagen Airport": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.667,
+    "main_surface": "Copenhagen Airport",
+    "clean": false
+   },
+   "Peberholm": {
+    "mentions": 13,
+    "carriers": 1,
+    "main_covers": 13,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Peberholm",
+    "clean": true
+   },
+   "Saltholm": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.857,
+    "main_surface": "Saltholm",
+    "clean": false
+   }
+  },
+  "wiki-Gotthard_Base_Tunnel": {
+   "Gotthard Base Tunnel": {
+    "mentions": 22,
+    "carriers": 6,
+    "main_covers": 13,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Gotthard Tunnel",
+     "Gotthard Road Tunnel",
+     "Ceneri Base Tunnel"
+    ],
+    "span_exact": false,
+    "exact_share": 0.545,
+    "main_surface": "GBT",
+    "clean": false
+   },
+   "Gotthard Road Tunnel": {
+    "mentions": 4,
+    "carriers": 2,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Gotthard Base Tunnel",
+     "Gotthard Tunnel"
+    ],
+    "span_exact": false,
+    "exact_share": 0.5,
+    "main_surface": "Gotthard Road Tunnel",
+    "clean": false
+   },
+   "Gotthard Tunnel": {
+    "mentions": 3,
+    "carriers": 2,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Gotthard Base Tunnel",
+     "Gotthard Road Tunnel"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Gotthard Tunnel",
+    "clean": false
+   },
+   "Ceneri Base Tunnel": {
+    "mentions": 4,
+    "carriers": 1,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Gotthard Base Tunnel"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Base Tunnel",
+    "clean": false
+   },
+   "Sedrun": {
+    "mentions": 16,
+    "carriers": 1,
+    "main_covers": 16,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.938,
+    "main_surface": "Sedrun",
+    "clean": false
+   },
+   "Erstfeld": {
+    "mentions": 11,
+    "carriers": 1,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Structurae AGN Erstfeld Amsteg",
+    "clean": true
+   }
+  },
+  "wiki-Millau_Viaduct": {
+   "Millau Viaduct": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Millau"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Millau Viaduct",
+    "clean": false
+   },
+   "Millau": {
+    "mentions": 15,
+    "carriers": 1,
+    "main_covers": 15,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Millau Viaduct"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Millau Viaduct",
+    "clean": false
+   },
+   "Tarn": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.857,
+    "main_surface": "Tarn Valley",
+    "clean": false
+   },
+   "Eiffage": {
+    "mentions": 6,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Causse Rouge": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.667,
+    "main_surface": "Causse Rouge",
+    "clean": false
+   }
+  },
+  "wiki-Petronas_Towers": {
+   "Petronas Towers": {
+    "mentions": 10,
+    "carriers": 7,
+    "main_covers": 10,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Petronas"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Petronas",
+    "clean": false
+   },
+   "Petronas": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Petronas Towers"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Petronas",
+    "clean": false
+   },
+   "Suria KLCC": {
+    "mentions": 6,
+    "carriers": 2,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Suria KLCC",
+    "clean": false
+   },
+   "Kuala Lumpur": {
+    "mentions": 4,
+    "carriers": 1,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Kuala Lumpur Tower",
+    "clean": true
+   },
+   "World Trade Center": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "World Trade Center",
+    "clean": true
+   }
+  },
+  "wiki-Saturn_V": {
+   "Saturn V": {
+    "mentions": 50,
+    "carriers": 1,
+    "main_covers": 1,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Saturn V Apollo",
+    "clean": false
+   },
+   "Saturn IB": {
+    "mentions": 6,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "S-IVB": {
+    "mentions": 32,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "S-II": {
+    "mentions": 28,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "S-IC": {
+    "mentions": 21,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "F-1": {
+    "mentions": 15,
+    "carriers": 1,
+    "main_covers": 1,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "J-2"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Rocketdyne J",
+    "clean": false
+   },
+   "J-2": {
+    "mentions": 17,
+    "carriers": 1,
+    "main_covers": 2,
+    "whole": false,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "F-1"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Rocketdyne J",
+    "clean": false
+   },
+   "Marshall Space Flight Center": {
+    "mentions": 17,
+    "carriers": 2,
+    "main_covers": 10,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.588,
+    "main_surface": "MSFC",
+    "clean": false
+   },
+   "Kennedy Space Center": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.833,
+    "main_surface": "Kennedy Space Center Visitor",
+    "clean": false
+   },
+   "Skylab": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.857,
+    "main_surface": "Skylab B",
+    "clean": false
+   }
+  },
+  "wiki-Space_Needle": {
+   "Space Needle": {
+    "mentions": 44,
+    "carriers": 3,
+    "main_covers": 44,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 0.955,
+    "main_surface": "Space Needle",
+    "clean": false
+   },
+   "Seattle": {
+    "mentions": 16,
+    "carriers": 1,
+    "main_covers": 16,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Seattle Center"
+    ],
+    "span_exact": false,
+    "exact_share": 0.75,
+    "main_surface": "Seattle",
+    "clean": false
+   },
+   "Seattle Center": {
+    "mentions": 4,
+    "carriers": 2,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Seattle"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Seattle Center",
+    "clean": false
+   }
+  },
+  "wiki-Sputnik_1": {
+   "Sputnik 1": {
+    "mentions": 27,
+    "carriers": 1,
+    "main_covers": 27,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Sputnik 2"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Sputnik",
+    "clean": false
+   },
+   "Sputnik 2": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Sputnik 1"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Sputnik",
+    "clean": false
+   },
+   "R-7": {
+    "mentions": 24,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Korolev": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Sergei Korolev",
+    "clean": true
+   },
+   "OKB-1": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "OKB",
+    "clean": false
+   },
+   "NII-4": {
+    "mentions": 4,
+    "carriers": 1,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "NII",
+    "clean": false
+   },
+   "Soviet Union": {
+    "mentions": 10,
+    "carriers": 1,
+    "main_covers": 10,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Soviet Union Timeline",
+    "clean": true
+   }
+  },
+  "wiki-Three_Gorges_Dam": {
+   "Three Gorges Dam": {
+    "mentions": 18,
+    "carriers": 3,
+    "main_covers": 18,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.889,
+    "main_surface": "Three Gorges Dam",
+    "clean": false
+   },
+   "Yangtze River": {
+    "mentions": 14,
+    "carriers": 2,
+    "main_covers": 14,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.357,
+    "main_surface": "Yangtze",
+    "clean": false
+   },
+   "Gezhouba Dam": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "HVDC Three Gorges",
+    "clean": true
+   },
+   "Itaipu Dam": {
+    "mentions": 3,
+    "carriers": 1,
+    "main_covers": 3,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.667,
+    "main_surface": "Itaipu Dam",
+    "clean": false
+   },
+   "Shanghai": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Shanghai",
+    "clean": true
+   }
+  },
+  "wiki-Tokyo_Skytree": {
+   "Tokyo Skytree": {
+    "mentions": 11,
+    "carriers": 3,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Tokyo Tower"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Tokyo Skytree",
+    "clean": false
+   },
+   "Tokyo Tower": {
+    "mentions": 4,
+    "carriers": 2,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Tokyo Skytree"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Tokyo Tower",
+    "clean": false
+   },
+   "Japan": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.5,
+    "main_surface": "Japan Catalyst",
+    "clean": false
+   }
+  },
+  "wiki-Tower_of_London": {
+   "Tower of London": {
+    "mentions": 52,
+    "carriers": 3,
+    "main_covers": 52,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "White Tower"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "London",
+    "clean": false
+   },
+   "White Tower": {
+    "mentions": 24,
+    "carriers": 2,
+    "main_covers": 24,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Tower of London"
+    ],
+    "span_exact": false,
+    "exact_share": 0.792,
+    "main_surface": "White Tower Mortar Room",
+    "clean": false
+   },
+   "Jewel House": {
+    "mentions": 10,
+    "carriers": 1,
+    "main_covers": 10,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.9,
+    "main_surface": "Jewel House",
+    "clean": false
+   },
+   "Crown Jewels": {
+    "mentions": 9,
+    "carriers": 2,
+    "main_covers": 9,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Crown Jewels",
+    "clean": false
+   },
+   "Royal Mint": {
+    "mentions": 4,
+    "carriers": 1,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Royal Mint",
+    "clean": true
+   },
+   "Edward I": {
+    "mentions": 16,
+    "carriers": 1,
+    "main_covers": 16,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "St Edward Crown",
+    "clean": false
+   },
+   "Henry III": {
+    "mentions": 17,
+    "carriers": 1,
+    "main_covers": 17,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Henry",
+    "clean": false
+   },
+   "Charles II": {
+    "mentions": 5,
+    "carriers": 1,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Charles",
+    "clean": false
+   }
+  }
+ }
+}

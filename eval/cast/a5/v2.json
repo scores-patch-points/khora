@@ -1,0 +1,630 @@
+{
+ "res": {
+  "off": {
+   "forms": 71,
+   "exact": 43,
+   "face": 21,
+   "none": 11,
+   "entities": 53,
+   "distinct": 114,
+   "edges": 1732,
+   "fEntities": 43,
+   "fDistinct": 63
+  },
+  "on": {
+   "forms": 71,
+   "exact": 58,
+   "face": 51,
+   "none": 10,
+   "entities": 53,
+   "distinct": 118,
+   "edges": 1748,
+   "fEntities": 53,
+   "fDistinct": 86
+  }
+ },
+ "per": {
+  "wiki-_resund_Bridge": {
+   "Øresund Bridge": {
+    "off": [
+     "øresund bridge",
+     "øresund"
+    ],
+    "on": [
+     "øresund bridge",
+     "øresund"
+    ]
+   },
+   "Øresund Link": {
+    "off": [
+     "øresund",
+     "øresund link"
+    ],
+    "on": [
+     "øresund",
+     "øresund link"
+    ]
+   },
+   "Øresund Tunnel": {
+    "off": [
+     "øresund"
+    ],
+    "on": [
+     "øresund",
+     "øresund tunnel"
+    ]
+   },
+   "Malmö": {
+    "off": [
+     "malmo city tunnel",
+     "malmo central station",
+     "malmo city"
+    ],
+    "on": [
+     "malmo city tunnel",
+     "malmo central station",
+     "malmo"
+    ]
+   },
+   "Malmö City Tunnel": {
+    "off": [
+     "malmo city tunnel",
+     "malmo city"
+    ],
+    "on": [
+     "malmo city tunnel",
+     "malmo"
+    ]
+   },
+   "Copenhagen": {
+    "off": [
+     "copenhagen airport",
+     "copenhagen central station",
+     "copenhagen metro"
+    ],
+    "on": [
+     "copenhagen airport",
+     "copenhagen central station",
+     "copenhagen metro"
+    ]
+   },
+   "Copenhagen Airport": {
+    "off": [
+     "copenhagen airport"
+    ],
+    "on": [
+     "copenhagen airport"
+    ]
+   },
+   "Peberholm": {
+    "off": [
+     "peberholm"
+    ],
+    "on": [
+     "peberholm"
+    ]
+   },
+   "Saltholm": {
+    "off": [
+     "saltholm"
+    ],
+    "on": [
+     "saltholm"
+    ]
+   }
+  },
+  "wiki-Gotthard_Base_Tunnel": {
+   "Gotthard Base Tunnel": {
+    "off": [
+     "the gotthard base tunnel",
+     "gotthard",
+     "base tunnel",
+     "gotthard base tunnel",
+     "gbt"
+    ],
+    "on": [
+     "gotthard base tunnel",
+     "gotthard",
+     "base tunnel",
+     "gbt"
+    ]
+   },
+   "Gotthard Road Tunnel": {
+    "off": [
+     "gotthard"
+    ],
+    "on": [
+     "gotthard",
+     "gotthard road tunnel"
+    ]
+   },
+   "Gotthard Tunnel": {
+    "off": [
+     "gotthard",
+     "gotthard tunnel experience"
+    ],
+    "on": [
+     "gotthard",
+     "gotthard tunnel"
+    ]
+   },
+   "Ceneri Base Tunnel": {
+    "off": [
+     "base tunnel"
+    ],
+    "on": [
+     "base tunnel",
+     "ceneri base",
+     "ceneri base tunnel"
+    ]
+   },
+   "Sedrun": {
+    "off": [
+     "sedrun"
+    ],
+    "on": [
+     "sedrun"
+    ]
+   },
+   "Erstfeld": {
+    "off": [
+     "erstfeld",
+     "structurae agn erstfeld amsteg"
+    ],
+    "on": [
+     "erstfeld",
+     "structurae agn erstfeld amsteg"
+    ]
+   }
+  },
+  "wiki-Millau_Viaduct": {
+   "Millau Viaduct": {
+    "off": [
+     "millau",
+     "millau viaduct"
+    ],
+    "on": [
+     "millau",
+     "millau viaduct"
+    ]
+   },
+   "Millau": {
+    "off": [
+     "millau",
+     "millau viaduct"
+    ],
+    "on": [
+     "millau",
+     "compagnie eiffage du viaduc de millau",
+     "viaduc de millau",
+     "millau viaduct"
+    ]
+   },
+   "Tarn": {
+    "off": [
+     "tarn valley",
+     "tarn"
+    ],
+    "on": [
+     "tarn"
+    ]
+   },
+   "Eiffage": {
+    "off": [
+     "compagnie eiffage"
+    ],
+    "on": [
+     "compagnie eiffage du viaduc de millau"
+    ]
+   },
+   "Causse Rouge": {
+    "off": [
+     "causse",
+     "causse rouge"
+    ],
+    "on": [
+     "causse",
+     "causse rouge"
+    ]
+   }
+  },
+  "wiki-Petronas_Towers": {
+   "Petronas Towers": {
+    "off": [
+     "petronas",
+     "menara berkembar petronas",
+     "the petronas towers"
+    ],
+    "on": [
+     "petronas",
+     "menara berkembar petronas",
+     "petronas towers"
+    ]
+   },
+   "Petronas": {
+    "off": [
+     "the petronas towers",
+     "menara berkembar petronas",
+     "the petronas",
+     "petronas",
+     "petronas philharmonic hall"
+    ],
+    "on": [
+     "petronas towers",
+     "menara berkembar petronas",
+     "petronas",
+     "petronas philharmonic hall"
+    ]
+   },
+   "Suria KLCC": {
+    "off": [
+     "suria klcc"
+    ],
+    "on": [
+     "suria klcc"
+    ]
+   },
+   "Kuala Lumpur": {
+    "off": [
+     "kuala lumpur",
+     "kuala lumpur tower"
+    ],
+    "on": [
+     "kuala lumpur"
+    ]
+   },
+   "World Trade Center": {
+    "off": [
+     "world trade center"
+    ],
+    "on": [
+     "world trade center"
+    ]
+   }
+  },
+  "wiki-Saturn_V": {
+   "Saturn V": {
+    "off": [],
+    "on": []
+   },
+   "Saturn IB": {
+    "off": [],
+    "on": []
+   },
+   "S-IVB": {
+    "off": [],
+    "on": []
+   },
+   "S-II": {
+    "off": [],
+    "on": []
+   },
+   "S-IC": {
+    "off": [],
+    "on": []
+   },
+   "F-1": {
+    "off": [],
+    "on": []
+   },
+   "J-2": {
+    "off": [],
+    "on": []
+   },
+   "Marshall Space Flight Center": {
+    "off": [
+     "marshall space flight center",
+     "msfc"
+    ],
+    "on": [
+     "marshall space flight center",
+     "space",
+     "msfc"
+    ]
+   },
+   "Kennedy Space Center": {
+    "off": [
+     "kennedy space center"
+    ],
+    "on": [
+     "kennedy space center",
+     "space"
+    ]
+   },
+   "Skylab": {
+    "off": [
+     "skylab",
+     "skylab b"
+    ],
+    "on": [
+     "skylab",
+     "skylab b"
+    ]
+   }
+  },
+  "wiki-Space_Needle": {
+   "Space Needle": {
+    "off": [
+     "space needle",
+     "needle",
+     "space",
+     "space needle construction"
+    ],
+    "on": [
+     "space needle",
+     "needle",
+     "space"
+    ]
+   },
+   "Seattle": {
+    "off": [
+     "seattle",
+     "seattle center",
+     "seattle supersonics national basketball",
+     "seattle supersonics",
+     "seattle mariners",
+     "seattle seahawks",
+     "seattle storm",
+     "seattle sounders fc",
+     "seattle kraken",
+     "seattle world"
+    ],
+    "on": [
+     "seattle",
+     "seattle center",
+     "seattle world",
+     "seattle supersonics national basketball",
+     "seattle supersonics",
+     "seattle mariners",
+     "seattle seahawks",
+     "seattle sounders fc",
+     "seattle kraken"
+    ]
+   },
+   "Seattle Center": {
+    "off": [
+     "seattle",
+     "seattle center"
+    ],
+    "on": [
+     "seattle",
+     "seattle center"
+    ]
+   }
+  },
+  "wiki-Sputnik_1": {
+   "Sputnik 1": {
+    "off": [
+     "sputnik"
+    ],
+    "on": [
+     "sputnik 1",
+     "sputnik",
+     "ps 1"
+    ]
+   },
+   "Sputnik 2": {
+    "off": [
+     "sputnik"
+    ],
+    "on": [
+     "sputnik",
+     "sputnik 2"
+    ]
+   },
+   "R-7": {
+    "off": [],
+    "on": []
+   },
+   "Korolev": {
+    "off": [
+     "sergei korolev",
+     "korolev"
+    ],
+    "on": [
+     "sergei korolev",
+     "korolev"
+    ]
+   },
+   "OKB-1": {
+    "off": [
+     "okb"
+    ],
+    "on": [
+     "okb 1",
+     "okb"
+    ]
+   },
+   "NII-4": {
+    "off": [
+     "nii"
+    ],
+    "on": [
+     "nii 4"
+    ]
+   },
+   "Soviet Union": {
+    "off": [
+     "soviet union",
+     "soviet",
+     "soviet union timeline",
+     "ussr",
+     "ussr academy"
+    ],
+    "on": [
+     "soviet union",
+     "soviet",
+     "ussr"
+    ]
+   }
+  },
+  "wiki-Three_Gorges_Dam": {
+   "Three Gorges Dam": {
+    "off": [
+     "three gorges dam",
+     "three gorges",
+     "three gorges dam construction",
+     "three"
+    ],
+    "on": [
+     "three gorges dam",
+     "three gorges",
+     "three"
+    ]
+   },
+   "Yangtze River": {
+    "off": [
+     "yangtze river three gorges",
+     "yangtze river",
+     "yangtze",
+     "china yangtze power"
+    ],
+    "on": [
+     "yangtze river three gorges",
+     "yangtze river",
+     "yangtze",
+     "china yangtze"
+    ]
+   },
+   "Gezhouba Dam": {
+    "off": [
+     "gezhouba dam"
+    ],
+    "on": [
+     "gezhouba dam"
+    ]
+   },
+   "Itaipu Dam": {
+    "off": [
+     "itaipu dam"
+    ],
+    "on": [
+     "itaipu dam",
+     "itaipu"
+    ]
+   },
+   "Shanghai": {
+    "off": [
+     "shanghai"
+    ],
+    "on": [
+     "shanghai"
+    ]
+   }
+  },
+  "wiki-Tokyo_Skytree": {
+   "Tokyo Skytree": {
+    "off": [
+     "tokyo skytree",
+     "tokyo",
+     "skytree",
+     "tokyo skytree station",
+     "tokyo skytree town",
+     "tokyo skytree tembo galleria"
+    ],
+    "on": [
+     "tokyo skytree",
+     "skytree",
+     "tokyo",
+     "tokyo skytree tembo galleria"
+    ]
+   },
+   "Tokyo Tower": {
+    "off": [
+     "tokyo",
+     "tokyo tower",
+     "new tokyo tower archived"
+    ],
+    "on": [
+     "tokyo",
+     "tokyo tower",
+     "new tokyo tower archived"
+    ]
+   },
+   "Japan": {
+    "off": [
+     "japan",
+     "japan catalyst"
+    ],
+    "on": [
+     "japan"
+    ]
+   }
+  },
+  "wiki-Tower_of_London": {
+   "Tower of London": {
+    "off": [
+     "london",
+     "tower"
+    ],
+    "on": [
+     "tower of london",
+     "london",
+     "tower"
+    ]
+   },
+   "White Tower": {
+    "off": [
+     "tower",
+     "white tower"
+    ],
+    "on": [
+     "tower",
+     "white tower"
+    ]
+   },
+   "Jewel House": {
+    "off": [
+     "jewel house"
+    ],
+    "on": [
+     "jewel house"
+    ]
+   },
+   "Crown Jewels": {
+    "off": [
+     "crown jewels",
+     "crown"
+    ],
+    "on": [
+     "crown jewels",
+     "crown"
+    ]
+   },
+   "Royal Mint": {
+    "off": [
+     "royal mint"
+    ],
+    "on": [
+     "royal mint"
+    ]
+   },
+   "Edward I": {
+    "off": [
+     "edward"
+    ],
+    "on": [
+     "edward i",
+     "edward"
+    ]
+   },
+   "Henry III": {
+    "off": [
+     "henry"
+    ],
+    "on": [
+     "henry iii",
+     "henry"
+    ]
+   },
+   "Charles II": {
+    "off": [
+     "charles"
+    ],
+    "on": [
+     "charles ii"
+    ]
+   }
+  }
+ }
+}

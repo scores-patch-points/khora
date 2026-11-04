@@ -1,0 +1,580 @@
+{
+ "res": {
+  "off": {
+   "forms": 77,
+   "exact": 41,
+   "face": 19,
+   "none": 11,
+   "entities": 47,
+   "distinct": 104,
+   "edges": 3205,
+   "fEntities": 33,
+   "fDistinct": 51
+  },
+  "on": {
+   "forms": 77,
+   "exact": 59,
+   "face": 47,
+   "none": 5,
+   "entities": 49,
+   "distinct": 132,
+   "edges": 3237,
+   "fEntities": 49,
+   "fDistinct": 97
+  }
+ },
+ "per": {
+  "wiki-Apollo_13": {
+   "Apollo 13": {
+    "off": [
+     "apollo"
+    ],
+    "on": [
+     "apollo 13",
+     "apollo"
+    ]
+   },
+   "Apollo 11": {
+    "off": [
+     "apollo"
+    ],
+    "on": [
+     "apollo",
+     "apollo 11"
+    ]
+   },
+   "Apollo 12": {
+    "off": [
+     "apollo"
+    ],
+    "on": [
+     "apollo",
+     "apollo 12"
+    ]
+   },
+   "Mission Control": {
+    "off": [
+     "mission control",
+     "mission control center"
+    ],
+    "on": [
+     "mission control",
+     "mission control center"
+    ]
+   }
+  },
+  "wiki-Boeing_747": {
+   "Boeing 747": {
+    "off": [
+     "boeing"
+    ],
+    "on": [
+     "boeing 747 100",
+     "boeing",
+     "boeing 747",
+     "boeing 747 8",
+     "el al 747 200c",
+     "qantas 747 238b"
+    ]
+   },
+   "747-400": {
+    "off": [
+     "boeing"
+    ],
+    "on": [
+     "boeing",
+     "boeing 747"
+    ]
+   },
+   "747-8": {
+    "off": [
+     "boeing"
+    ],
+    "on": [
+     "boeing",
+     "boeing 747",
+     "boeing 747 8"
+    ]
+   },
+   "Pan Am": {
+    "off": [
+     "pan am",
+     "pan am flight"
+    ],
+    "on": [
+     "pan am"
+    ]
+   }
+  },
+  "wiki-Burj_Khalifa": {
+   "Burj Khalifa": {
+    "off": [
+     "the burj khalifa",
+     "khalifa",
+     "burj khalifa"
+    ],
+    "on": [
+     "burj khalifa",
+     "khalifa"
+    ]
+   },
+   "Emaar": {
+    "off": [
+     "emaar properties",
+     "emaar",
+     "emaar new year"
+    ],
+    "on": [
+     "emaar properties",
+     "emaar",
+     "emaar new year"
+    ]
+   },
+   "Taipei 101": {
+    "off": [
+     "taipei"
+    ],
+    "on": [
+     "taipei 101"
+    ]
+   },
+   "CN Tower": {
+    "off": [
+     "cn tower"
+    ],
+    "on": [
+     "cn tower"
+    ]
+   }
+  },
+  "wiki-Channel_Tunnel": {
+   "Channel Tunnel": {
+    "off": [
+     "the channel tunnel",
+     "channel tunnel",
+     "channel",
+     "the channel tunnel safety"
+    ],
+    "on": [
+     "channel tunnel",
+     "channel",
+     "channel tunnel group france manche",
+     "channel tunnel bill",
+     "channel tunnel rail link",
+     "channel tunnel safety authority"
+    ]
+   },
+   "Eurotunnel": {
+    "off": [
+     "eurotunnel",
+     "eurotunnel class"
+    ],
+    "on": [
+     "eurotunnel",
+     "eurotunnel class",
+     "eurotunnel class 0001"
+    ]
+   },
+   "Eurostar": {
+    "off": [
+     "eurostar"
+    ],
+    "on": [
+     "eurostar"
+    ]
+   },
+   "Channel Tunnel Safety Authority": {
+    "off": [
+     "channel tunnel",
+     "channel",
+     "safety authority"
+    ],
+    "on": [
+     "channel tunnel",
+     "channel",
+     "safety authority",
+     "channel tunnel safety authority"
+    ]
+   }
+  },
+  "wiki-Notre-Dame_de_Paris": {
+   "Notre-Dame de Paris": {
+    "off": [
+     "notre dame",
+     "paris"
+    ],
+    "on": [
+     "notre dame de paris",
+     "notre dame",
+     "paris"
+    ]
+   },
+   "Viollet-le-Duc": {
+    "off": [
+     "eugene"
+    ],
+    "on": [
+     "eugene viollet le duc"
+    ]
+   },
+   "Virgin Mary": {
+    "off": [
+     "virgin mary",
+     "virgin"
+    ],
+    "on": [
+     "virgin mary",
+     "virgin"
+    ]
+   },
+   "Emmanuel Macron": {
+    "off": [
+     "president emmanuel macron",
+     "macron",
+     "emmanuel macron",
+     "emmanuel"
+    ],
+    "on": [
+     "emmanuel macron",
+     "macron",
+     "emmanuel"
+    ]
+   }
+  },
+  "wiki-Sagrada_Fam_lia": {
+   "Sagrada Família": {
+    "off": [
+     "sagrada familia",
+     "sagrada familia archived"
+    ],
+    "on": [
+     "sagrada familia",
+     "sagrada",
+     "sagrada familia archived"
+    ]
+   },
+   "Antoni Gaudí": {
+    "off": [
+     "antoni gaudi",
+     "gaudi",
+     "antoni gaudi unesco collection",
+     "culture gaudi"
+    ],
+    "on": [
+     "antoni gaudi",
+     "works of antoni gaudi",
+     "gaudi",
+     "antoni gaudi unesco collection",
+     "culture gaudi"
+    ]
+   },
+   "Nativity Façade": {
+    "off": [
+     "nativity facade",
+     "nativity"
+    ],
+    "on": [
+     "nativity facade",
+     "nativity"
+    ]
+   },
+   "Passion Façade": {
+    "off": [
+     "passion facade",
+     "passion"
+    ],
+    "on": [
+     "passion facade",
+     "passion"
+    ]
+   }
+  },
+  "wiki-St__Peter_s_Basilica": {
+   "St. Peter's Basilica": {
+    "off": [
+     "peter",
+     "st peter"
+    ],
+    "on": [
+     "st peter basilica",
+     "old st peter basilica",
+     "peter",
+     "st peter",
+     "st peter square"
+    ]
+   },
+   "Old St. Peter's Basilica": {
+    "off": [
+     "peter",
+     "old st",
+     "st peter"
+    ],
+    "on": [
+     "st peter basilica",
+     "old st peter basilica",
+     "peter",
+     "st peter"
+    ]
+   },
+   "St. Peter's Square": {
+    "off": [
+     "peter",
+     "st peter"
+    ],
+    "on": [
+     "st peter square",
+     "peter",
+     "st peter"
+    ]
+   },
+   "Michelangelo": {
+    "off": [],
+    "on": []
+   },
+   "Bernini": {
+    "off": [
+     "gian lorenzo bernini",
+     "bernini"
+    ],
+    "on": [
+     "gian lorenzo bernini",
+     "bernini"
+    ]
+   },
+   "Bramante": {
+    "off": [
+     "donato bramante"
+    ],
+    "on": [
+     "donato bramante"
+    ]
+   }
+  },
+  "wiki-Titanic": {
+   "Titanic": {
+    "off": [
+     "titanic",
+     "rms titanic",
+     "rms titanic inc",
+     "rms",
+     "the titanic",
+     "titanic canyon",
+     "titanic quarter",
+     "titanic belfast",
+     "titanic foundation limited",
+     "titanic inquiry project",
+     "titanic footage",
+     "youtube titanic footage"
+    ],
+    "on": [
+     "titanic",
+     "rms titanic",
+     "rms titanic inc",
+     "rms",
+     "titanic quarter",
+     "titanic canyon",
+     "titanic belfast",
+     "titanic foundation limited",
+     "titanic inquiry project",
+     "titanic footage"
+    ]
+   },
+   "Titanic Belfast": {
+    "off": [
+     "titanic",
+     "belfast",
+     "titanic belfast"
+    ],
+    "on": [
+     "titanic",
+     "belfast",
+     "titanic belfast"
+    ]
+   },
+   "Titanic Quarter": {
+    "off": [
+     "titanic",
+     "titanic quarter"
+    ],
+    "on": [
+     "titanic",
+     "titanic quarter"
+    ]
+   },
+   "Olympic": {
+    "off": [
+     "olympic",
+     "rms olympic",
+     "rms"
+    ],
+    "on": [
+     "olympic",
+     "rms olympic",
+     "rms"
+    ]
+   },
+   "White Star Line": {
+    "off": [
+     "white star line",
+     "white star",
+     "star",
+     "april white star"
+    ],
+    "on": [
+     "white star line",
+     "white star",
+     "star line",
+     "star"
+    ]
+   },
+   "Harland and Wolff": {
+    "off": [
+     "harland",
+     "wolff"
+    ],
+    "on": [
+     "harland and wolff",
+     "harland",
+     "wolff"
+    ]
+   },
+   "Carpathia": {
+    "off": [
+     "rms carpathia",
+     "carpathia",
+     "rms"
+    ],
+    "on": [
+     "rms carpathia",
+     "carpathia",
+     "rms"
+    ]
+   }
+  },
+  "wiki-Trans-Alaska_Pipeline_System": {
+   "Trans-Alaska Pipeline System": {
+    "off": [
+     "trans alaska pipeline system",
+     "alaska",
+     "alaska pipeline",
+     "taps"
+    ],
+    "on": [
+     "trans alaska pipeline system",
+     "alaska pipeline",
+     "trans alaska pipeline",
+     "alaska",
+     "trans alaska",
+     "taps"
+    ]
+   },
+   "Trans-Alaska Pipeline Authorization Act": {
+    "off": [
+     "alaska",
+     "alaska pipeline"
+    ],
+    "on": [
+     "alaska pipeline",
+     "trans alaska pipeline",
+     "alaska",
+     "trans alaska"
+    ]
+   },
+   "Alyeska": {
+    "off": [
+     "alyeska pipeline",
+     "alyeska pipeline service company",
+     "alyeska"
+    ],
+    "on": [
+     "alyeska",
+     "alyeska pipeline service company",
+     "alyeska pipeline"
+    ]
+   },
+   "Valdez": {
+    "off": [
+     "valdez marine terminal"
+    ],
+    "on": [
+     "valdez marine terminal"
+    ]
+   },
+   "Valdez Marine Terminal": {
+    "off": [
+     "valdez marine terminal"
+    ],
+    "on": [
+     "valdez marine terminal"
+    ]
+   },
+   "Exxon Valdez": {
+    "off": [
+     "exxon"
+    ],
+    "on": [
+     "exxon"
+    ]
+   },
+   "Fairbanks": {
+    "off": [
+     "fairbanks",
+     "fairbanks mcdonald"
+    ],
+    "on": [
+     "fairbanks",
+     "fairbanks mcdonald"
+    ]
+   }
+  },
+  "wiki-U_S__Route_66": {
+   "U.S. Route 66": {
+    "off": [],
+    "on": [
+     "us 66",
+     "historic route 66",
+     "national route 66"
+    ]
+   },
+   "Historic Route 66": {
+    "off": [
+     "historic route"
+    ],
+    "on": [
+     "historic route 66"
+    ]
+   },
+   "Interstate 40": {
+    "off": [
+     "interstate"
+    ],
+    "on": [
+     "interstate 40",
+     "interstate"
+    ]
+   },
+   "US 60": {
+    "off": [],
+    "on": [
+     "us 60"
+    ]
+   },
+   "Chicago": {
+    "off": [
+     "chicago"
+    ],
+    "on": [
+     "chicago"
+    ]
+   },
+   "Los Angeles": {
+    "off": [
+     "los angeles"
+    ],
+    "on": [
+     "los angeles"
+    ]
+   }
+  }
+ }
+}

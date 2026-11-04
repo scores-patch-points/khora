@@ -1,0 +1,875 @@
+{
+ "res": {
+  "off": {
+   "forms": 93,
+   "exact": 66,
+   "face": 36,
+   "none": 1,
+   "entities": 79,
+   "distinct": 177,
+   "edges": 2115,
+   "fEntities": 66,
+   "fDistinct": 104
+  },
+  "on": {
+   "forms": 93,
+   "exact": 81,
+   "face": 69,
+   "none": 1,
+   "entities": 79,
+   "distinct": 174,
+   "edges": 2129,
+   "fEntities": 78,
+   "fDistinct": 140
+  }
+ },
+ "per": {
+  "wiki-Alhambra": {
+   "Alhambra": {
+    "off": [
+     "alhambra",
+     "alhambra decree",
+     "alhambra park",
+     "alhambra mosque",
+     "alhambra woods",
+     "alhambra museum",
+     "villa alhambra"
+    ],
+    "on": [
+     "alhambra",
+     "alhambra decree",
+     "alhambra park",
+     "alhambra mosque",
+     "alhambra museum"
+    ]
+   },
+   "Granada": {
+    "off": [
+     "granada"
+    ],
+    "on": [
+     "granada",
+     "emirate of granada"
+    ]
+   },
+   "Comares Palace": {
+    "off": [
+     "comares palace"
+    ],
+    "on": [
+     "comares palace"
+    ]
+   },
+   "Partal Palace": {
+    "off": [
+     "partal palace",
+     "upper partal palace"
+    ],
+    "on": [
+     "partal palace",
+     "partal"
+    ]
+   },
+   "Alcazaba": {
+    "off": [
+     "alcazaba"
+    ],
+    "on": [
+     "alcazaba"
+    ]
+   },
+   "Generalife": {
+    "off": [
+     "generalife"
+    ],
+    "on": [
+     "generalife"
+    ]
+   },
+   "Muhammad II": {
+    "off": [
+     "muhammad"
+    ],
+    "on": [
+     "muhammad",
+     "muhammad ii"
+    ]
+   },
+   "Isma'il I": {
+    "off": [],
+    "on": []
+   },
+   "Charles V": {
+    "off": [
+     "charles"
+    ],
+    "on": [
+     "charles v"
+    ]
+   },
+   "Alhambra Museum": {
+    "off": [
+     "alhambra",
+     "alhambra museum"
+    ],
+    "on": [
+     "alhambra",
+     "alhambra museum"
+    ]
+   }
+  },
+  "wiki-Angkor_Wat": {
+   "Angkor Wat": {
+    "off": [
+     "angkor wat",
+     "angkor",
+     "angkor wat march"
+    ],
+    "on": [
+     "angkor wat",
+     "angkor",
+     "angkor wat march"
+    ]
+   },
+   "Angkor": {
+    "off": [
+     "angkor wat",
+     "angkor",
+     "angkor thom",
+     "angkor temples",
+     "angkor conservancy",
+     "angkor group",
+     "angkor wat march",
+     "pbs nova angkor"
+    ],
+    "on": [
+     "angkor wat",
+     "angkor",
+     "angkor thom",
+     "angkor conservancy",
+     "angkor wat march",
+     "pbs nova angkor"
+    ]
+   },
+   "Suryavarman II": {
+    "off": [
+     "suryavarman"
+    ],
+    "on": [
+     "suryavarman ii",
+     "suryavarman"
+    ]
+   },
+   "Siem Reap": {
+    "off": [
+     "siem reap"
+    ],
+    "on": [
+     "siem reap"
+    ]
+   },
+   "Mount Meru": {
+    "off": [
+     "mount meru"
+    ],
+    "on": [
+     "mount meru"
+    ]
+   },
+   "Vishnu": {
+    "off": [
+     "vishnu"
+    ],
+    "on": [
+     "vishnu"
+    ]
+   },
+   "Angkor Thom": {
+    "off": [
+     "angkor",
+     "angkor thom"
+    ],
+    "on": [
+     "angkor",
+     "angkor thom"
+    ]
+   }
+  },
+  "wiki-Big_Ben": {
+   "Big Ben": {
+    "off": [
+     "big ben",
+     "big ben aden",
+     "inside big ben",
+     "discovery big ben",
+     "british pathe big ben"
+    ],
+    "on": [
+     "big ben",
+     "big ben aden",
+     "british pathe big ben"
+    ]
+   },
+   "Elizabeth Tower": {
+    "off": [
+     "elizabeth tower"
+    ],
+    "on": [
+     "elizabeth tower"
+    ]
+   },
+   "Palace of Westminster": {
+    "off": [
+     "westminster"
+    ],
+    "on": [
+     "westminster",
+     "palace of westminster"
+    ]
+   },
+   "House of Commons": {
+    "off": [
+     "commons"
+    ],
+    "on": [
+     "house of commons",
+     "commons"
+    ]
+   },
+   "Queen Victoria": {
+    "off": [
+     "queen victoria"
+    ],
+    "on": [
+     "queen victoria"
+    ]
+   },
+   "BBC Radio 4": {
+    "off": [
+     "bbc radio"
+    ],
+    "on": [
+     "bbc radio 4"
+    ]
+   }
+  },
+  "wiki-Brandenburg_Gate": {
+   "Brandenburg Gate": {
+    "off": [
+     "brandenburg gate",
+     "brandenburg"
+    ],
+    "on": [
+     "brandenburg gate"
+    ]
+   },
+   "Berlin": {
+    "off": [
+     "berlin cathedral",
+     "berlin",
+     "berlin customs wall",
+     "west berlin",
+     "east berlin",
+     "berlin wall",
+     "berlin philharmonic",
+     "berlin puerta"
+    ],
+    "on": [
+     "berlin cathedral",
+     "berlin",
+     "berlin customs wall",
+     "west berlin",
+     "east berlin",
+     "berlin wall",
+     "berlin philharmonic"
+    ]
+   },
+   "Berlin Wall": {
+    "off": [
+     "berlin",
+     "berlin wall"
+    ],
+    "on": [
+     "berlin",
+     "berlin wall"
+    ]
+   },
+   "East Berlin": {
+    "off": [
+     "east",
+     "berlin",
+     "east berlin"
+    ],
+    "on": [
+     "east",
+     "berlin",
+     "east berlin"
+    ]
+   },
+   "Pariser Platz": {
+    "off": [
+     "pariser platz",
+     "platz"
+    ],
+    "on": [
+     "pariser platz",
+     "platz"
+    ]
+   },
+   "West Berlin": {
+    "off": [
+     "berlin",
+     "west berlin"
+    ],
+    "on": [
+     "berlin",
+     "west berlin"
+    ]
+   }
+  },
+  "wiki-Chrysler_Building": {
+   "Chrysler Building": {
+    "off": [
+     "the chrysler building",
+     "the chrysler",
+     "chrysler",
+     "chrysler building east"
+    ],
+    "on": [
+     "chrysler building",
+     "chrysler",
+     "the chrysler",
+     "chrysler building east"
+    ]
+   },
+   "Walter Chrysler": {
+    "off": [
+     "walter chrysler",
+     "chrysler"
+    ],
+    "on": [
+     "walter chrysler",
+     "chrysler"
+    ]
+   },
+   "Chrysler Corporation": {
+    "off": [
+     "chrysler"
+    ],
+    "on": [
+     "chrysler corporation",
+     "chrysler",
+     "chrysler corporation headquarters"
+    ]
+   },
+   "Van Alen": {
+    "off": [
+     "william van alen",
+     "van alen"
+    ],
+    "on": [
+     "william van alen",
+     "van alen"
+    ]
+   },
+   "Empire State Building": {
+    "off": [
+     "empire state building",
+     "empire state"
+    ],
+    "on": [
+     "empire state building",
+     "empire state"
+    ]
+   },
+   "Cooper Union": {
+    "off": [
+     "the cooper union"
+    ],
+    "on": [
+     "cooper union"
+    ]
+   },
+   "Tishman Speyer": {
+    "off": [
+     "tishman speyer"
+    ],
+    "on": [
+     "tishman speyer"
+    ]
+   },
+   "40 Wall Street": {
+    "off": [
+     "street",
+     "wall street",
+     "wall"
+    ],
+    "on": [
+     "street",
+     "wall street",
+     "wall"
+    ]
+   }
+  },
+  "wiki-Great_Pyramid_of_Giza": {
+   "Great Pyramid": {
+    "off": [
+     "great pyramid",
+     "giza",
+     "great"
+    ],
+    "on": [
+     "great pyramid of giza",
+     "giza",
+     "great pyramid",
+     "great"
+    ]
+   },
+   "Khufu": {
+    "off": [
+     "egyptian pharaoh khufu",
+     "khufu",
+     "lower egypt khufu",
+     "akhet khufu",
+     "khufu pyramid"
+    ],
+    "on": [
+     "egyptian pharaoh khufu",
+     "khufu",
+     "lower egypt khufu",
+     "akhet khufu"
+    ]
+   },
+   "Herodotus": {
+    "off": [
+     "herodotus",
+     "bc herodotus"
+    ],
+    "on": [
+     "herodotus",
+     "bc herodotus"
+    ]
+   },
+   "Giza": {
+    "off": [
+     "giza",
+     "the giza",
+     "the giza plateau",
+     "the giza plateau mapping"
+    ],
+    "on": [
+     "great pyramid of giza",
+     "giza",
+     "the giza plateau",
+     "the giza plateau mapping"
+    ]
+   },
+   "King's Chamber": {
+    "off": [
+     "king"
+    ],
+    "on": [
+     "king"
+    ]
+   },
+   "Queen's Chamber": {
+    "off": [
+     "queen"
+    ],
+    "on": [
+     "queen"
+    ]
+   },
+   "Subterranean Chamber": {
+    "off": [
+     "the subterranean chamber",
+     "subterranean chamber"
+    ],
+    "on": [
+     "subterranean",
+     "subterranean chamber"
+    ]
+   },
+   "Descending Passage": {
+    "off": [
+     "descending passage"
+    ],
+    "on": [
+     "descending passage"
+    ]
+   },
+   "Ascending Passage": {
+    "off": [
+     "ascending passage",
+     "ascending"
+    ],
+    "on": [
+     "ascending passage",
+     "ascending"
+    ]
+   },
+   "Grand Gallery": {
+    "off": [
+     "grand gallery"
+    ],
+    "on": [
+     "grand gallery"
+    ]
+   },
+   "Giza Plateau": {
+    "off": [
+     "giza",
+     "the giza plateau",
+     "the giza plateau mapping"
+    ],
+    "on": [
+     "giza",
+     "the giza plateau",
+     "the giza plateau mapping"
+    ]
+   }
+  },
+  "wiki-Neuschwanstein_Castle": {
+   "Neuschwanstein Castle": {
+    "off": [
+     "neuschwanstein",
+     "neuschwanstein castle"
+    ],
+    "on": [
+     "neuschwanstein",
+     "neuschwanstein castle"
+    ]
+   },
+   "Hohenschwangau": {
+    "off": [
+     "hohenschwangau",
+     "hohenschwangau castle",
+     "hohenschwangau castles"
+    ],
+    "on": [
+     "hohenschwangau",
+     "hohenschwangau castle"
+    ]
+   },
+   "Ludwig II": {
+    "off": [
+     "king ludwig",
+     "ludwig",
+     "king"
+    ],
+    "on": [
+     "king ludwig ii",
+     "king ludwig",
+     "ludwig",
+     "king",
+     "ludwig ii"
+    ]
+   },
+   "Richard Wagner": {
+    "off": [
+     "richard wagner"
+    ],
+    "on": [
+     "richard wagner"
+    ]
+   },
+   "Wartburg": {
+    "off": [
+     "wartburg"
+    ],
+    "on": [
+     "wartburg"
+    ]
+   },
+   "Linderhof": {
+    "off": [
+     "linderhof",
+     "linderhof palace"
+    ],
+    "on": [
+     "linderhof",
+     "linderhof palace"
+    ]
+   },
+   "Herrenchiemsee": {
+    "off": [
+     "herrenchiemsee"
+    ],
+    "on": [
+     "herrenchiemsee"
+    ]
+   },
+   "Throne Hall": {
+    "off": [
+     "throne hall"
+    ],
+    "on": [
+     "throne hall",
+     "hall"
+    ]
+   },
+   "Hohenschwangau Castle": {
+    "off": [
+     "hohenschwangau",
+     "hohenschwangau castle"
+    ],
+    "on": [
+     "hohenschwangau",
+     "hohenschwangau castle"
+    ]
+   },
+   "Linderhof Palace": {
+    "off": [
+     "linderhof",
+     "linderhof palace"
+    ],
+    "on": [
+     "linderhof",
+     "linderhof palace"
+    ]
+   }
+  },
+  "wiki-Parthenon": {
+   "Parthenon": {
+    "off": [
+     "the parthenon",
+     "parthenon",
+     "parthenon marbles",
+     "hekatompedos parthenon"
+    ],
+    "on": [
+     "parthenon",
+     "hekatompedos parthenon",
+     "parthenon i",
+     "parthenon ii",
+     "parthenon marbles"
+    ]
+   },
+   "Parthenon I": {
+    "off": [
+     "parthenon"
+    ],
+    "on": [
+     "parthenon",
+     "parthenon i"
+    ]
+   },
+   "Acropolis": {
+    "off": [
+     "athenian acropolis",
+     "acropolis",
+     "acropolis museum",
+     "acropolis monuments"
+    ],
+    "on": [
+     "athenian acropolis",
+     "acropolis",
+     "acropolis museum"
+    ]
+   },
+   "Acropolis Museum": {
+    "off": [
+     "acropolis",
+     "acropolis museum"
+    ],
+    "on": [
+     "acropolis",
+     "acropolis museum"
+    ]
+   },
+   "Athens": {
+    "off": [
+     "athens",
+     "athens measured"
+    ],
+    "on": [
+     "athens"
+    ]
+   },
+   "Athena": {
+    "off": [
+     "athena polias",
+     "athena parthenos",
+     "athena nike"
+    ],
+    "on": [
+     "athena polias",
+     "athena parthenos",
+     "athena nike"
+    ]
+   },
+   "Athena Parthenos": {
+    "off": [
+     "athena parthenos"
+    ],
+    "on": [
+     "athena parthenos"
+    ]
+   },
+   "Athena Polias": {
+    "off": [
+     "athena polias"
+    ],
+    "on": [
+     "athena polias"
+    ]
+   },
+   "Phidias": {
+    "off": [
+     "phidias"
+    ],
+    "on": [
+     "phidias"
+    ]
+   },
+   "Erechtheion": {
+    "off": [
+     "erechtheion"
+    ],
+    "on": [
+     "erechtheion"
+    ]
+   },
+   "Morosini": {
+    "off": [
+     "morosini",
+     "francesco morosini"
+    ],
+    "on": [
+     "morosini",
+     "francesco morosini"
+    ]
+   },
+   "British Museum": {
+    "off": [
+     "british museum"
+    ],
+    "on": [
+     "british museum"
+    ]
+   },
+   "Parthenon II": {
+    "off": [
+     "parthenon"
+    ],
+    "on": [
+     "parthenon",
+     "parthenon ii"
+    ]
+   },
+   "Parthenon Marbles": {
+    "off": [
+     "parthenon marbles",
+     "parthenon"
+    ],
+    "on": [
+     "parthenon",
+     "parthenon marbles"
+    ]
+   },
+   "Athena Nike": {
+    "off": [
+     "athena nike"
+    ],
+    "on": [
+     "athena nike"
+    ]
+   }
+  },
+  "wiki-Tacoma_Narrows_Bridge__1940_": {
+   "Tacoma Narrows Bridge": {
+    "off": [
+     "tacoma",
+     "narrows",
+     "the tacoma narrows bridge",
+     "tacoma narrows bridge",
+     "youtube tacoma narrows bridge",
+     "museum tacoma narrows bridge"
+    ],
+    "on": [
+     "tacoma narrows",
+     "tacoma narrows bridge",
+     "tacoma",
+     "narrows",
+     "tacoma narrows bridge collapse"
+    ]
+   },
+   "Tacoma Narrows": {
+    "off": [
+     "the tacoma narrows",
+     "tacoma",
+     "narrows",
+     "the tacoma narrows bridge",
+     "tacoma narrows bridge",
+     "youtube tacoma narrows bridge",
+     "museum tacoma narrows bridge"
+    ],
+    "on": [
+     "tacoma narrows",
+     "tacoma narrows bridge",
+     "tacoma",
+     "narrows",
+     "tacoma narrows bridge collapse"
+    ]
+   },
+   "Tacoma": {
+    "off": [
+     "the tacoma narrows",
+     "tacoma",
+     "the tacoma chamber",
+     "the tacoma",
+     "the tacoma narrows bridge",
+     "tacoma narrows bridge",
+     "youtube tacoma narrows bridge",
+     "museum tacoma narrows bridge"
+    ],
+    "on": [
+     "tacoma narrows",
+     "tacoma narrows bridge",
+     "tacoma",
+     "the tacoma chamber",
+     "tacoma news tribune",
+     "tacoma narrows bridge collapse"
+    ]
+   },
+   "Golden Gate Bridge": {
+    "off": [
+     "golden gate bridge"
+    ],
+    "on": [
+     "golden gate bridge"
+    ]
+   },
+   "Theodore von Kármán": {
+    "off": [
+     "von karman",
+     "theodore",
+     "karman"
+    ],
+    "on": [
+     "theodore von karman",
+     "karman"
+    ]
+   },
+   "PWA": {
+    "off": [
+     "pwa"
+    ],
+    "on": [
+     "pwa"
+    ]
+   },
+   "Washington State Toll Bridge Authority": {
+    "off": [
+     "washington",
+     "washington state toll bridge"
+    ],
+    "on": [
+     "washington",
+     "washington state toll bridge authority",
+     "washington state"
+    ]
+   }
+  }
+ }
+}

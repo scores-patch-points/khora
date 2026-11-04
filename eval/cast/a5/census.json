@@ -1,0 +1,939 @@
+{
+ "res": {
+  "off": {
+   "forms": 76,
+   "exact": 62,
+   "face": 18,
+   "none": 0,
+   "entities": 58,
+   "distinct": 251,
+   "edges": 7444,
+   "fEntities": 49,
+   "fDistinct": 152
+  },
+  "on": {
+   "forms": 76,
+   "exact": 75,
+   "face": 55,
+   "none": 0,
+   "entities": 58,
+   "distinct": 266,
+   "edges": 7509,
+   "fEntities": 57,
+   "fDistinct": 191
+  }
+ },
+ "per": {
+  "wiki-Brooklyn_Bridge": {
+   "Brooklyn Bridge": {
+    "off": [
+     "brooklyn",
+     "the brooklyn bridge",
+     "brooklyn bridge tan",
+     "brooklyn bridge company",
+     "brooklyn bridge",
+     "brooklyn bridge railway",
+     "the brooklyn bridge up",
+     "brooklyn bridge archived september"
+    ],
+    "on": [
+     "brooklyn",
+     "brooklyn bridge",
+     "brooklyn bridge tan",
+     "brooklyn bridge company",
+     "brooklyn bridge railway",
+     "the brooklyn bridge up",
+     "brooklyn bridge archived september"
+    ]
+   },
+   "New York City": {
+    "off": [
+     "new york city",
+     "new york",
+     "new",
+     "new york city designated"
+    ],
+    "on": [
+     "new york city",
+     "new york",
+     "new",
+     "new york city landmarks",
+     "new york city designated landmarks"
+    ]
+   },
+   "John A. Roebling": {
+    "off": [
+     "roebling"
+    ],
+    "on": [
+     "roebling",
+     "john a roebling"
+    ]
+   }
+  },
+  "wiki-Colosseum": {
+   "Colosseum": {
+    "off": [
+     "the colosseum",
+     "colosseum"
+    ],
+    "on": [
+     "colosseum",
+     "the colosseum"
+    ]
+   },
+   "Domus Aurea": {
+    "off": [
+     "domus aurea"
+    ],
+    "on": [
+     "domus aurea"
+    ]
+   }
+  },
+  "wiki-Golden_Gate_Bridge": {
+   "Golden Gate Bridge": {
+    "off": [
+     "the golden gate bridge",
+     "golden gate",
+     "gate"
+    ],
+    "on": [
+     "golden gate bridge",
+     "golden gate",
+     "golden gate bridge district",
+     "golden gate bridge highway",
+     "golden gate bridge welcome",
+     "the golden gate bridge",
+     "gate"
+    ]
+   },
+   "Joseph Strauss": {
+    "off": [
+     "strauss",
+     "joseph strauss"
+    ],
+    "on": [
+     "strauss",
+     "joseph strauss"
+    ]
+   },
+   "San Francisco": {
+    "off": [
+     "san francisco bay",
+     "san francisco",
+     "san francisco bulletin",
+     "san francisco junior college",
+     "san francisco international airport",
+     "san francisco presidio"
+    ],
+    "on": [
+     "san francisco bay",
+     "san francisco",
+     "san francisco junior college",
+     "san francisco international airport"
+    ]
+   }
+  },
+  "wiki-Panama_Canal": {
+   "Panama Canal": {
+    "off": [
+     "the panama canal",
+     "panama",
+     "panama canal zone",
+     "panama canal",
+     "colombian panama canal",
+     "pacific panama canal",
+     "panama canal honorary pilot",
+     "panama canal authority",
+     "b nichols panama canal",
+     "panama canal collection archived",
+     "former panama canal zone"
+    ],
+    "on": [
+     "panama canal",
+     "panama",
+     "panama canal zone",
+     "the panama canal",
+     "panama canal authority",
+     "panama canal honorary pilot",
+     "b nichols panama canal",
+     "panama canal collection"
+    ]
+   },
+   "Gatun Lake": {
+    "off": [
+     "gatun lake"
+    ],
+    "on": [
+     "gatun lake",
+     "gatun"
+    ]
+   },
+   "United States": {
+    "off": [
+     "the united states",
+     "united states",
+     "united states secretary"
+    ],
+    "on": [
+     "united states",
+     "united states secretary",
+     "united states army corps",
+     "united states jimmy carter"
+    ]
+   }
+  },
+  "wiki-Sydney_Opera_House": {
+   "Sydney Opera House": {
+    "off": [
+     "sydney",
+     "the sydney opera house",
+     "opera",
+     "sydney opera house executive",
+     "opera house",
+     "sydney opera house",
+     "sydney opera house at",
+     "sydney opera house archived",
+     "the opera house",
+     "the opera house project"
+    ],
+    "on": [
+     "sydney opera house",
+     "sydney opera house trust",
+     "opera house",
+     "sydney",
+     "sydney opera house executive committee",
+     "opera",
+     "the sydney opera house",
+     "sydney opera house archived",
+     "the opera house project",
+     "opera house trust",
+     "the opera house",
+     "opera house committee"
+    ]
+   },
+   "New South Wales": {
+    "off": [
+     "new south wales",
+     "new south wales state",
+     "new",
+     "new south wales premier",
+     "new south wales enduring"
+    ],
+    "on": [
+     "new south wales",
+     "new south wales state",
+     "new",
+     "new south wales premier",
+     "new south wales government",
+     "new south wales enduring",
+     "new south wales state heritage register"
+    ]
+   },
+   "Jørn Utzon": {
+    "off": [
+     "jørn utzon",
+     "utzon",
+     "the utzon room",
+     "the utzon"
+    ],
+    "on": [
+     "jørn utzon",
+     "utzon",
+     "the utzon room"
+    ]
+   }
+  },
+  "wiki-Empire_State_Building": {
+   "Empire State Building": {
+    "off": [
+     "empire state",
+     "the empire state building",
+     "empire state building week",
+     "empire state building associates",
+     "empire state building"
+    ],
+    "on": [
+     "empire state",
+     "empire state building",
+     "state building",
+     "empire state building associates",
+     "empire state building run up"
+    ]
+   },
+   "Wall Street": {
+    "off": [
+     "street",
+     "wall street crash",
+     "wall street"
+    ],
+    "on": [
+     "street",
+     "wall street crash",
+     "wall street"
+    ]
+   },
+   "New York City": {
+    "off": [
+     "new york city",
+     "new york city subway",
+     "new york",
+     "new",
+     "new york city designated"
+    ],
+    "on": [
+     "new york city",
+     "new york",
+     "new york city subway",
+     "new",
+     "new york city landmarks preservation commission"
+    ]
+   }
+  },
+  "wiki-Hagia_Sophia": {
+   "Hagia Sophia": {
+    "off": [
+     "hagia sophia",
+     "hagia sophia grand mosque",
+     "justinianic hagia sophia",
+     "theodosian hagia sophia",
+     "sophia",
+     "hagia sophia mosque",
+     "hagia sophia museum"
+    ],
+    "on": [
+     "hagia sophia",
+     "hagia sophia grand mosque",
+     "sophia",
+     "hagia sophia museum"
+    ]
+   },
+   "Pope Francis": {
+    "off": [
+     "pope francis",
+     "pope",
+     "july pope francis"
+    ],
+    "on": [
+     "pope francis",
+     "pope",
+     "july pope francis"
+    ]
+   }
+  },
+  "wiki-Hubble_Space_Telescope": {
+   "Hubble Space Telescope": {
+    "off": [
+     "hubble",
+     "the hubble space telescope",
+     "space telescope",
+     "a hubble space telescope",
+     "hubblesite hubble space telescope",
+     "hst"
+    ],
+    "on": [
+     "hubble",
+     "hubble space telescope",
+     "space telescope",
+     "space",
+     "hst"
+    ]
+   },
+   "Wide Field Camera 3": {
+    "off": [
+     "wide field",
+     "wide field camera",
+     "wide"
+    ],
+    "on": [
+     "wide field",
+     "wide field camera 3",
+     "wide field camera",
+     "wide"
+    ]
+   }
+  },
+  "wiki-Suez_Canal": {
+   "Suez Canal": {
+    "off": [
+     "suez",
+     "suez canal authority",
+     "the suez canal",
+     "suez canal bridge",
+     "suez canal",
+     "the suez canal economic",
+     "suez canal archived",
+     "suez canal container terminal",
+     "suez canal suez canal",
+     "suez canal bbc news"
+    ],
+    "on": [
+     "suez canal",
+     "suez",
+     "suez canal authority",
+     "suez canal company",
+     "suez canal bridge",
+     "suez canal economic zone",
+     "suez canal area development project",
+     "suez canal archived",
+     "suez canal container terminal",
+     "suez canal suez canal",
+     "suez canal bbc news"
+    ]
+   },
+   "Red Sea": {
+    "off": [
+     "the red sea",
+     "receding red sea",
+     "red sea"
+    ],
+    "on": [
+     "red sea",
+     "receding red sea",
+     "the red sea"
+    ]
+   },
+   "Gamal Abdel Nasser": {
+    "off": [
+     "nasser",
+     "president gamal abdel nasser"
+    ],
+    "on": [
+     "nasser",
+     "gamal abdel nasser"
+    ]
+   }
+  },
+  "wiki-Taj_Mahal": {
+   "Taj Mahal": {
+    "off": [
+     "the taj mahal",
+     "taj mahal",
+     "black taj mahal"
+    ],
+    "on": [
+     "taj mahal",
+     "taj"
+    ]
+   },
+   "Shah Jahan": {
+    "off": [
+     "shah jahan"
+    ],
+    "on": [
+     "shah jahan"
+    ]
+   },
+   "Mumtaz Mahal": {
+    "off": [
+     "mumtaz mahal"
+    ],
+    "on": [
+     "mumtaz mahal"
+    ]
+   }
+  },
+  "wiki-Voyager_1": {
+   "Voyager 1": {
+    "off": [
+     "voyager"
+    ],
+    "on": [
+     "voyager 1",
+     "voyager"
+    ]
+   },
+   "Solar System": {
+    "off": [
+     "solar system",
+     "solar"
+    ],
+    "on": [
+     "solar system",
+     "solar"
+    ]
+   }
+  },
+  "wiki-Large_Hadron_Collider": {
+   "Large Hadron Collider": {
+    "off": [
+     "the large hadron collider",
+     "lhc",
+     "lhc computing grid"
+    ],
+    "on": [
+     "high luminosity large hadron collider",
+     "large hadron collider",
+     "lhc",
+     "lhc computing grid",
+     "hl lhc"
+    ]
+   },
+   "Super Proton Synchrotron": {
+    "off": [
+     "super proton synchrotron",
+     "sps"
+    ],
+    "on": [
+     "super proton synchrotron",
+     "sps"
+    ]
+   },
+   "LHC Computing Grid": {
+    "off": [
+     "lhc",
+     "lhc computing grid"
+    ],
+    "on": [
+     "lhc",
+     "lhc computing grid"
+    ]
+   }
+  },
+  "wiki-Rosetta_Stone": {
+   "Rosetta Stone": {
+    "off": [
+     "the rosetta stone",
+     "rosetta",
+     "rosetta stone"
+    ],
+    "on": [
+     "rosetta stone",
+     "rosetta"
+    ]
+   },
+   "British Museum": {
+    "off": [
+     "british",
+     "the british museum"
+    ],
+    "on": [
+     "british",
+     "british museum"
+    ]
+   }
+  },
+  "wiki-Stonehenge": {
+   "Stonehenge": {
+    "off": [
+     "stonehenge",
+     "stonehenge riverside project",
+     "stonehenge archer",
+     "stonehenge environs project",
+     "stonehenge avenue",
+     "stonehenge aerodrome",
+     "stonehenge landscape",
+     "stonehenge free festival"
+    ],
+    "on": [
+     "stonehenge",
+     "stonehenge riverside project",
+     "stonehenge cursus",
+     "stonehenge 3",
+     "stonehenge archer",
+     "stonehenge 3 iii",
+     "stonehenge 3 iv",
+     "stonehenge i",
+     "stonehenge iii",
+     "stonehenge environs project",
+     "stonehenge avenue",
+     "stonehenge aerodrome",
+     "stonehenge landscape",
+     "stonehenge free festival"
+    ]
+   },
+   "Mike Parker Pearson": {
+    "off": [
+     "mike parker pearson",
+     "parker pearson"
+    ],
+    "on": [
+     "mike parker pearson",
+     "parker pearson"
+    ]
+   },
+   "Salisbury Plain": {
+    "off": [
+     "salisbury plain",
+     "salisbury"
+    ],
+    "on": [
+     "salisbury plain",
+     "salisbury"
+    ]
+   }
+  },
+  "wiki-Mount_Everest": {
+   "Mount Everest": {
+    "off": [
+     "mount everest",
+     "everest",
+     "british mount everest southwest",
+     "swiss mount everest",
+     "british mount everest",
+     "mount",
+     "mount everest nova",
+     "mount everest imaging everest",
+     "wayback machine mount everest",
+     "mount everest summit",
+     "sir george everest",
+     "american everest",
+     "houston everest flight",
+     "everest base camp",
+     "alpine ascents everest expedition",
+     "everest scenic area",
+     "summiting everest",
+     "chinese everest"
+    ],
+    "on": [
+     "mount everest",
+     "everest",
+     "american mount everest",
+     "british mount everest",
+     "swiss mount everest",
+     "mount",
+     "mount everest imaging everest",
+     "wayback machine mount everest",
+     "sir george everest",
+     "american everest",
+     "houston everest flight",
+     "alpine ascents everest expedition",
+     "everest scenic area",
+     "american bicentennial everest expedition",
+     "chinese everest"
+    ]
+   },
+   "South Col": {
+    "off": [
+     "south",
+     "south col"
+    ],
+    "on": [
+     "south",
+     "south col"
+    ]
+   }
+  },
+  "wiki-International_Space_Station": {
+   "International Space Station": {
+    "off": [
+     "space station",
+     "international",
+     "iss",
+     "the iss",
+     "iss assembly mission",
+     "iss propulsion module",
+     "russian iss",
+     "live iss",
+     "live hd iss"
+    ],
+    "on": [
+     "space station",
+     "international space station",
+     "international",
+     "space",
+     "iss",
+     "iss assembly mission",
+     "iss propulsion module",
+     "the iss",
+     "russian iss"
+    ]
+   },
+   "Space Shuttle": {
+    "off": [
+     "space shuttle",
+     "space shuttle endeavour",
+     "space shuttle atlantis",
+     "space shuttle discovery"
+    ],
+    "on": [
+     "space shuttle",
+     "space shuttle endeavour",
+     "space shuttle atlantis",
+     "space shuttle discovery",
+     "space"
+    ]
+   }
+  },
+  "wiki-Mayflower": {
+   "Mayflower": {
+    "off": [
+     "mayflower",
+     "the mayflower",
+     "mayflower and",
+     "mayflower compact",
+     "harwich mayflower heritage centre",
+     "mayflower descendants",
+     "israeli mayflower",
+     "massachusetts mayflower steps",
+     "plymouth history mayflower",
+     "bloosee the mayflower",
+     "mayflower steps arch"
+    ],
+    "on": [
+     "mayflower",
+     "mayflower compact",
+     "harwich mayflower heritage centre",
+     "mayflower descendants",
+     "israeli mayflower",
+     "mayflower steps",
+     "massachusetts mayflower steps",
+     "plymouth history mayflower",
+     "the mayflower",
+     "bloosee the mayflower",
+     "mayflower steps arch"
+    ]
+   },
+   "William Bradford": {
+    "off": [
+     "bradford",
+     "william bradford"
+    ],
+    "on": [
+     "bradford",
+     "william bradford"
+    ]
+   },
+   "Plymouth Colony": {
+    "off": [
+     "plymouth",
+     "plymouth colony"
+    ],
+    "on": [
+     "plymouth",
+     "plymouth colony"
+    ]
+   }
+  },
+  "wiki-Antikythera_mechanism": {
+   "Antikythera mechanism": {
+    "off": [
+     "antikythera",
+     "antikythera mechanism",
+     "monumental antikythera mechanism",
+     "the antikythera"
+    ],
+    "on": [
+     "antikythera",
+     "antikythera mechanism research project",
+     "antikythera mechanism",
+     "monumental antikythera mechanism"
+    ]
+   },
+   "Tony Freeth": {
+    "off": [
+     "freeth",
+     "tony freeth"
+    ],
+    "on": [
+     "freeth",
+     "tony freeth"
+    ]
+   }
+  },
+  "wiki-Great_Wall_of_China": {
+   "Great Wall of China": {
+    "off": [
+     "china",
+     "great",
+     "great wall",
+     "the great wall",
+     "ming great wall",
+     "outer great wall",
+     "inner great wall",
+     "badaling great wall",
+     "mutianyu great wall",
+     "jiaoshan great wall"
+    ],
+    "on": [
+     "great wall of china",
+     "china",
+     "great wall",
+     "great",
+     "the great wall",
+     "ming great wall",
+     "outer great wall",
+     "inner great wall",
+     "badaling great wall",
+     "mutianyu great wall",
+     "jiaoshan great wall"
+    ]
+   },
+   "Inner Mongolia": {
+    "off": [
+     "mongolia",
+     "inner mongolia"
+    ],
+    "on": [
+     "mongolia",
+     "inner mongolia"
+    ]
+   }
+  },
+  "wiki-James_Webb_Space_Telescope": {
+   "James Webb Space Telescope": {
+    "off": [
+     "space telescope",
+     "webb",
+     "james webb space telescope",
+     "james webb",
+     "jwst",
+     "the jwst",
+     "communicating jwst text",
+     "jwst video",
+     "jwst videos"
+    ],
+    "on": [
+     "james webb space telescope",
+     "space telescope",
+     "webb",
+     "space",
+     "james webb",
+     "jwst",
+     "jwst advanced deep extragalactic survey",
+     "communicating jwst text",
+     "jwst video"
+    ]
+   },
+   "Hubble Space Telescope": {
+    "off": [
+     "space telescope",
+     "hubble space telescope",
+     "hubble"
+    ],
+    "on": [
+     "space telescope",
+     "space",
+     "hubble space telescope",
+     "hubble"
+    ]
+   }
+  },
+  "wiki-Machu_Picchu": {
+   "Machu Picchu": {
+    "off": [
+     "picchu",
+     "machu picchu archived",
+     "machu picchu archive"
+    ],
+    "on": [
+     "machu picchu",
+     "picchu",
+     "machu picchu archived"
+    ]
+   },
+   "Huayna Picchu": {
+    "off": [
+     "picchu",
+     "huayna picchu",
+     "huayna"
+    ],
+    "on": [
+     "huayna picchu",
+     "picchu",
+     "huayna"
+    ]
+   },
+   "Urubamba River": {
+    "off": [
+     "urubamba river",
+     "urubamba"
+    ],
+    "on": [
+     "urubamba river",
+     "urubamba"
+    ]
+   }
+  },
+  "wiki-Trans-Siberian_Railway": {
+   "Trans-Siberian Railway": {
+    "off": [
+     "siberian"
+    ],
+    "on": [
+     "siberian",
+     "trans siberian railway",
+     "trans siberian",
+     "railway"
+    ]
+   },
+   "Lake Baikal": {
+    "off": [
+     "lake baikal",
+     "baikal"
+    ],
+    "on": [
+     "lake baikal",
+     "baikal"
+    ]
+   }
+  },
+  "wiki-Great_Barrier_Reef": {
+   "Great Barrier Reef": {
+    "off": [
+     "the great barrier reef",
+     "great",
+     "barrier reef",
+     "great barrier reef",
+     "great barrier reef province",
+     "great barrier reef marine",
+     "great barrier reef great",
+     "culture great barrier reef",
+     "great barrier reef foundation",
+     "queensland great barrier reef"
+    ],
+    "on": [
+     "great barrier reef",
+     "great barrier reef marine park",
+     "great barrier reef marine park act",
+     "reef",
+     "great",
+     "barrier reef",
+     "great barrier reef marine park authority",
+     "the great barrier reef",
+     "great barrier reef foundation",
+     "great barrier reef province",
+     "queensland great barrier reef"
+    ]
+   },
+   "Great Barrier Reef Marine Park": {
+    "off": [
+     "marine park",
+     "great",
+     "barrier reef",
+     "great barrier reef",
+     "great barrier reef marine"
+    ],
+    "on": [
+     "great barrier reef",
+     "great barrier reef marine park",
+     "great barrier reef marine park act",
+     "reef",
+     "great",
+     "barrier reef",
+     "great barrier reef marine park authority"
+    ]
+   },
+   "Queensland": {
+    "off": [
+     "queensland",
+     "queensland national trust",
+     "queensland nickel",
+     "queensland government",
+     "queensland museum",
+     "queensland great barrier reef",
+     "queensland memories"
+    ],
+    "on": [
+     "queensland",
+     "queensland national trust",
+     "queensland nickel",
+     "queensland museum",
+     "state library of queensland",
+     "queensland great barrier reef"
+    ]
+   }
+  }
+ }
+}

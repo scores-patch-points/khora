@@ -1,0 +1,285 @@
+{
+ "summary": {
+  "entities": 19,
+  "clean": 4,
+  "layer3": 0.2105,
+  "whole_rate": 0.7895,
+  "unique_carrier_rate": 0.5263,
+  "no_merge_rate": 0.7368,
+  "span_exact_rate": 0.3684
+ },
+ "reader_gaps": {
+  "wiki-Apollo_11": [],
+  "wiki-Mississippi_River": [],
+  "wiki-Cumberland_River": []
+ },
+ "reader_options": {},
+ "perDoc": {
+  "wiki-Apollo_11": {
+   "Apollo 11": {
+    "mentions": 61,
+    "carriers": 3,
+    "main_covers": 61,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Apollo 8",
+     "Apollo 10"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Apollo",
+    "clean": false
+   },
+   "Apollo 8": {
+    "mentions": 7,
+    "carriers": 1,
+    "main_covers": 7,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Apollo 11",
+     "Apollo 10"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Apollo",
+    "clean": false
+   },
+   "Apollo 10": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": false,
+    "merged_with": [
+     "Apollo 11",
+     "Apollo 8"
+    ],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Apollo",
+    "clean": false
+   },
+   "Luna 15": {
+    "mentions": 8,
+    "carriers": 1,
+    "main_covers": 8,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Luna",
+    "clean": false
+   },
+   "Buzz Aldrin": {
+    "mentions": 59,
+    "carriers": 1,
+    "main_covers": 59,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Buzz Aldrin",
+    "clean": true
+   },
+   "Neil Armstrong": {
+    "mentions": 77,
+    "carriers": 2,
+    "main_covers": 4,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.052,
+    "main_surface": "Commander Neil Armstrong",
+    "clean": false
+   },
+   "Mission Control": {
+    "mentions": 9,
+    "carriers": 1,
+    "main_covers": 9,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Mission Control Center",
+    "clean": true
+   },
+   "Kennedy Space Center": {
+    "mentions": 4,
+    "carriers": 2,
+    "main_covers": 4,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Kennedy Presidential Library",
+    "clean": false
+   },
+   "Saturn V": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Saturn V Instrument Unit",
+    "clean": false
+   }
+  },
+  "wiki-Mississippi_River": {
+   "Mississippi River": {
+    "mentions": 64,
+    "carriers": 4,
+    "main_covers": 64,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.875,
+    "main_surface": "Mississippi River",
+    "clean": false
+   },
+   "Gulf of Mexico": {
+    "mentions": 29,
+    "carriers": 1,
+    "main_covers": 29,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": "Mexico",
+    "clean": false
+   },
+   "Ohio River": {
+    "mentions": 11,
+    "carriers": 1,
+    "main_covers": 11,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Ohio River",
+    "clean": true
+   },
+   "Lake Itasca": {
+    "mentions": 9,
+    "carriers": 2,
+    "main_covers": 9,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Lake Pontchartrain"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Itasca State Park",
+    "clean": false
+   },
+   "Baton Rouge": {
+    "mentions": 9,
+    "carriers": 1,
+    "main_covers": 9,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0.889,
+    "main_surface": "West Baton Rouge Parishes",
+    "clean": false
+   },
+   "Atchafalaya River": {
+    "mentions": 10,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "St. Louis": {
+    "mentions": 21,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   },
+   "Missouri River": {
+    "mentions": 6,
+    "carriers": 1,
+    "main_covers": 6,
+    "whole": true,
+    "unique_carrier": true,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Missouri River",
+    "clean": true
+   },
+   "Lake Pontchartrain": {
+    "mentions": 5,
+    "carriers": 2,
+    "main_covers": 5,
+    "whole": true,
+    "unique_carrier": false,
+    "no_merge": false,
+    "merged_with": [
+     "Lake Itasca"
+    ],
+    "span_exact": true,
+    "exact_share": 1,
+    "main_surface": "Lake Pontchartrain",
+    "clean": false
+   }
+  },
+  "wiki-Cumberland_River": {
+   "Cumberland River": {
+    "mentions": 7,
+    "carriers": 0,
+    "main_covers": 0,
+    "whole": false,
+    "unique_carrier": false,
+    "no_merge": true,
+    "merged_with": [],
+    "span_exact": false,
+    "exact_share": 0,
+    "main_surface": null,
+    "clean": false
+   }
+  }
+ }
+}

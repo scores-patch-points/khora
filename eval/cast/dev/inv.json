@@ -1,0 +1,319 @@
+{
+ "docs": {
+  "wiki-Brooklyn_Bridge": {
+   "entities": {
+    "Brooklyn Bridge": [
+     "Brooklyn Bridge"
+    ],
+    "New York City": [
+     "New York City"
+    ],
+    "John A. Roebling": [
+     "John A. Roebling"
+    ]
+   },
+   "ignore": [
+    "John A\\. Roebling's Sons"
+   ]
+  },
+  "wiki-Colosseum": {
+   "entities": {
+    "Colosseum": [
+     "Colosseum"
+    ],
+    "Domus Aurea": [
+     "Domus Aurea"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Golden_Gate_Bridge": {
+   "entities": {
+    "Golden Gate Bridge": [
+     "Golden Gate Bridge"
+    ],
+    "Joseph Strauss": [
+     "Joseph Strauss",
+     "Strauss"
+    ],
+    "San Francisco": [
+     "San Francisco"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Panama_Canal": {
+   "entities": {
+    "Panama Canal": [
+     "Panama Canal"
+    ],
+    "Gatun Lake": [
+     "Gatun Lake",
+     "Gatún Lake"
+    ],
+    "United States": [
+     "United States"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Sydney_Opera_House": {
+   "entities": {
+    "Sydney Opera House": [
+     "Sydney Opera House",
+     "Opera House"
+    ],
+    "New South Wales": [
+     "New South Wales"
+    ],
+    "Jørn Utzon": [
+     "Jørn Utzon",
+     "Utzon"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Empire_State_Building": {
+   "entities": {
+    "Empire State Building": [
+     "Empire State Building"
+    ],
+    "Wall Street": [
+     "Wall Street"
+    ],
+    "New York City": [
+     "New York City"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Hagia_Sophia": {
+   "entities": {
+    "Hagia Sophia": [
+     "Hagia Sophia"
+    ],
+    "Pope Francis": [
+     "Pope Francis"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Hubble_Space_Telescope": {
+   "entities": {
+    "Hubble Space Telescope": [
+     "Hubble Space Telescope",
+     "HST"
+    ],
+    "Wide Field Camera 3": [
+     "Wide Field Camera 3"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Suez_Canal": {
+   "entities": {
+    "Suez Canal": [
+     "Suez Canal"
+    ],
+    "Red Sea": [
+     "Red Sea"
+    ],
+    "Gamal Abdel Nasser": [
+     "Gamal Abdel Nasser",
+     "Nasser"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Taj_Mahal": {
+   "entities": {
+    "Taj Mahal": [
+     "Taj Mahal"
+    ],
+    "Shah Jahan": [
+     "Shah Jahan"
+    ],
+    "Mumtaz Mahal": [
+     "Mumtaz Mahal"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Voyager_1": {
+   "entities": {
+    "Voyager 1": [
+     "Voyager 1"
+    ],
+    "Solar System": [
+     "Solar System"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Large_Hadron_Collider": {
+   "entities": {
+    "Large Hadron Collider": [
+     "Large Hadron Collider",
+     "LHC"
+    ],
+    "Super Proton Synchrotron": [
+     "Super Proton Synchrotron",
+     "SPS"
+    ],
+    "LHC Computing Grid": [
+     "LHC Computing Grid"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Rosetta_Stone": {
+   "entities": {
+    "Rosetta Stone": [
+     "Rosetta Stone"
+    ],
+    "British Museum": [
+     "British Museum"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Stonehenge": {
+   "entities": {
+    "Stonehenge": [
+     "Stonehenge"
+    ],
+    "Mike Parker Pearson": [
+     "Mike Parker Pearson",
+     "Parker Pearson"
+    ],
+    "Salisbury Plain": [
+     "Salisbury Plain"
+    ]
+   },
+   "ignore": [
+    "Stonehenge [123]( [IV]+)?"
+   ]
+  },
+  "wiki-Mount_Everest": {
+   "entities": {
+    "Mount Everest": [
+     "Mount Everest",
+     "Everest"
+    ],
+    "South Col": [
+     "South Col"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-International_Space_Station": {
+   "entities": {
+    "International Space Station": [
+     "International Space Station",
+     "ISS"
+    ],
+    "Space Shuttle": [
+     "Space Shuttle"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Mayflower": {
+   "entities": {
+    "Mayflower": [
+     "Mayflower"
+    ],
+    "William Bradford": [
+     "William Bradford",
+     "Bradford"
+    ],
+    "Plymouth Colony": [
+     "Plymouth Colony"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Antikythera_mechanism": {
+   "entities": {
+    "Antikythera mechanism": [
+     "Antikythera Mechanism",
+     "Antikythera mechanism",
+     "Antikythera"
+    ],
+    "Tony Freeth": [
+     "Tony Freeth",
+     "Freeth"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Great_Wall_of_China": {
+   "entities": {
+    "Great Wall of China": [
+     "Great Wall of China",
+     "Great Wall"
+    ],
+    "Inner Mongolia": [
+     "Inner Mongolia"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-James_Webb_Space_Telescope": {
+   "entities": {
+    "James Webb Space Telescope": [
+     "James Webb Space Telescope",
+     "Webb Space Telescope",
+     "JWST"
+    ],
+    "Hubble Space Telescope": [
+     "Hubble Space Telescope"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Machu_Picchu": {
+   "entities": {
+    "Machu Picchu": [
+     "Machu Picchu"
+    ],
+    "Huayna Picchu": [
+     "Huayna Picchu"
+    ],
+    "Urubamba River": [
+     "Urubamba River"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Trans-Siberian_Railway": {
+   "entities": {
+    "Trans-Siberian Railway": [
+     "Trans-Siberian Railway"
+    ],
+    "Lake Baikal": [
+     "Lake Baikal"
+    ]
+   },
+   "ignore": []
+  },
+  "wiki-Great_Barrier_Reef": {
+   "entities": {
+    "Great Barrier Reef": [
+     "Great Barrier Reef"
+    ],
+    "Great Barrier Reef Marine Park": [
+     "Great Barrier Reef Marine Park"
+    ],
+    "Queensland": [
+     "Queensland"
+    ]
+   },
+   "ignore": [
+    "State Library of Queensland",
+    "Library of Queensland",
+    "Queensland Government"
+   ]
+  }
+ }
+}
