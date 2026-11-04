@@ -55,7 +55,7 @@ import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
 import { priorJson, priorGeneration } from "./prior-source.mjs";
 import { figuresOf } from "../adapters/text/figure-period.en.js";
-import { castIdentity as castIdentityPass } from "../organs/cast-identity.js";
+import { castIdentity as castIdentityPass, repairEdges as repairEdgesPass } from "../organs/cast-identity.js";
 
 export const READ_CORE = Object.freeze({
   schema: "ReadCore@1",
@@ -434,12 +434,13 @@ export function readWith(text, { address = null, category = null, language = nul
     // repaired by structural rules and the text's own evidence (organs/cast-identity.js). The rows are rebuilt the way they were built above.
     if (castIdentity) {
       const connectorOk = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); if (!c.found || !(c.total > 0)) return null; const share = (tags) => c.candidates.filter((x) => tags.includes(x.upos)).reduce((n, x) => n + x.count, 0) * 2 >= c.total; return share(["CCONJ", "SCONJ"]) ? false : share(["ADP", "DET", "PART"]) ? true : null; };
-      identity = castIdentityPass({ text: norm, rows: identityRows, mentionsOf, abbreviations: abbr.set, connectorOk, commonNoun: (t) => { const c = classifyWord(String(t).toLowerCase(), { posPrior: pr.posPrior }); if (!c.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); }, nominalOk: (t) => { const u = formUsageOf(pr.posPrior)?.(String(t).toLowerCase()); return !u || !usedMostlyAsOther(u); }, options: castIdentity === true ? {} : castIdentity });
+      identity = castIdentityPass({ text: norm, rows: identityRows, mentionsOf, abbreviations: abbr.set, posPrior: (languageRead.source === "declared" || languageRead.source === "heard") && !(pr.gaps ?? []).some((g) => g.gap === "no_pos_prior"), connectorOk, commonNoun: (t) => { const c = classifyWord(String(t).toLowerCase(), { posPrior: pr.posPrior }); if (!c.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); }, nominalOk: (t) => { const u = formUsageOf(pr.posPrior)?.(String(t).toLowerCase()); return !u || !usedMostlyAsOther(u); }, options: castIdentity === true ? {} : castIdentity });
       cast = identity.rows.map((r) => {
         const keep = r.represent && r.surfaces.includes(r.represent) ? r.represent : [...r.surfaces].sort((a, b) => b.length - a.length)[0];
         const spans = r.spans.map(([a, b]) => [raw(a), raw(b)]);
         return { ref: r.ref, surface: keep, allSurfaces: [...r.surfaces], mentionsAt: spans.map(([a]) => bytes[a]), mentionSpans: spans, standing: "referent" };
       });
+      identity.named = identity.rows.map((r, i) => ({ ref: r.ref, surface: cast[i].surface, spans: r.spans }));
     }
   } catch (e) { if (!err) err = `cast_failed: ${String(e?.message ?? e)}`; }
   // THE PRONOUNS — each binding the reader made, addressed in the document, naming the cast row it binds
@@ -494,6 +495,8 @@ export function readWith(text, { address = null, category = null, language = nul
   try { surprise = surpriseCut(tokenEvents(str)); } catch (e) { if (!err) err = `surprise_failed: ${String(e?.message ?? e)}`; }
   // THE QUALITY LAYER — learned polarity scoped to the clause; the clause tree parsed inside the reader's own sentences
   let edges = (out?.edges ?? []).map(edgeOf);
+  // THE EDGES FOLLOW THE REPAIR (castIdentity, `edges` not false): each end is read again against the repaired cast, sentence by sentence (organs/cast-identity.js::repairEdges)
+  if (identity && (castIdentity === true || castIdentity.edges !== false)) { try { const rep = repairEdgesPass({ edges, text: norm, rows: identity.named }); edges = rep.edges; identity.report.edges = rep.report; } catch (e) { gaps.push({ gap: "cast_identity_edges_failed", detail: String(e?.message ?? e).slice(0, 120) }); } }
   let qualityReport = null, clauses = null;
   if (quality !== false) {
     const lang = languageRead.stem;

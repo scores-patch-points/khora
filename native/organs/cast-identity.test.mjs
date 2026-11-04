@@ -1,7 +1,7 @@
 // cast-identity.test.mjs — the opt-in cast pass (PREREG-CAST-A1.md): R1 byte identity with the option off, the rules on small texts, and the no-lists gate.
 //   KHORA_PRIORS_DIR=<ten English priors> node --test native/organs/cast-identity.test.mjs
 import test from "node:test"; import assert from "node:assert/strict"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
-import { castIdentity, maximal } from "./cast-identity.js";
+import { castIdentity, maximal, repairEdges } from "./cast-identity.js";
 import { mentionsOf } from "../the-fold/read-core.mjs";
 import { scanSource } from "../../eval/cast/cast-identity-gate.mjs";
 import { r1Hashes } from "../../eval/cast/r1-hashes.mjs";
@@ -107,6 +107,37 @@ test("a being's surfaces never end in a mark (a closing quote or apostrophe is n
   const text = "Crowds called it the 'Sydney Harbour Bridge'. Later the 'Sydney Harbour Bridge' opened. The bridge's design is old. The Sydney Harbour Bridge' was lit. The Sydney Harbour Bridge stands.";
   const res = pass(text, [["Sydney Harbour"]]);
   for (const r of res.rows) for (const x of r.surfaces) assert.ok(!/[^\p{L}\p{N}]$/u.test(x), JSON.stringify(x));
+});
+
+test("EDGES: an edge whose sentences name different beings splits, and each end is the being's own name", () => {
+  const text = "Apollo 11 landed first. Apollo 12 landed again. Apollo 13 never landed.";
+  const rows = (() => { const f = (s) => ({ ref: s, surface: s, spans: mentionsOf(text, [s]) }); return [f("Apollo 11"), f("Apollo 12"), f("Apollo 13")]; })();
+  const sent = (a, b) => ({ ref: "material#0-" + text.length, start: a, end: b, text: text.slice(a, b) });
+  const edge = { end1: "apollo", end1Face: null, label: "landed", end2: "moon", end2Face: null, polarity: "+", refs: ["material#0-" + text.length], spans: [sent(0, 23), sent(24, 46), sent(47, 70)], statements: 3, assertion: { standing: "multi-witness", statements: 3, verbSupport: 3 } };
+  const { edges, report } = repairEdges({ edges: [edge], text, rows });
+  assert.deepEqual(edges.map((e) => e.end1).sort(), ["apollo 11", "apollo 12", "apollo 13"]);
+  assert.equal(edges.reduce((n, e) => n + e.statements, 0), 3);
+  assert.equal(report.split, 1);
+});
+
+test("EDGES: an end that stands over mentions of two beings in a sentence is left as the reader built it", () => {
+  const text = "Apollo 11 and Apollo 12 landed.";
+  const f = (s) => ({ ref: s, surface: s, spans: mentionsOf(text, [s]) });
+  const edge = { end1: "apollo", end1Face: null, label: "landed", end2: "moon", end2Face: null, polarity: "+", refs: ["material#0-31"], spans: [{ ref: "material#0-31", start: 0, end: 31, text }], statements: 1 };
+  const { edges, report } = repairEdges({ edges: [edge], text, rows: [f("Apollo 11"), f("Apollo 12")] });
+  assert.equal(edges[0].end1, "apollo");
+  assert.equal(report.ambiguous, 1);
+});
+
+test("POS: without the read language's own part-of-speech prior the rules that read one are skipped, with a typed gap", () => {
+  const text = "The Antikythera Mechanism was found. The Antikythera Mechanism is old. An Antikythera Mechanism gear. The Antikythera mechanism is old. An Antikythera mechanism gear. Antikythera mechanism again.";
+  const run = (posPrior) => castIdentity({ text, rows: rowsOf(text, [["Antikythera Mechanism"]]), mentionsOf, abbreviations: new Set(), posPrior, connectorOk: () => null, nominalOk: () => true, commonNoun: () => false });
+  const lower = (res) => res.rows.flatMap((r) => r.spans).filter(([a, b]) => /mechanism/.test(text.slice(a, b))).length;
+  assert.ok(run(false).report.gaps.some((g) => g.gap === "cast_identity_no_pos_prior"));
+  assert.ok(!run(true).report.gaps.some((g) => g.gap === "cast_identity_no_pos_prior"));
+  // the lower-case variant rule needs "is the word a noun": skipped without the prior, run with it
+  assert.equal(lower(run(false)), 0);
+  assert.ok(lower(run(true)) >= 1);
 });
 
 test("maximal keeps the longer of nested spans", () => { assert.deepEqual(maximal([[0, 5], [0, 12], [3, 6], [20, 25]]), [[0, 12], [20, 25]]); });

@@ -26,6 +26,8 @@
 //            no mention overlaps a longer mention of another being; a mention ends where the name ends (a line break, a sentence's full stop).
 // Pure given its inputs. `mentionsOf` is read-core's own matcher, handed in so a mention is found the one way.
 
+import { standingOf } from "./asserted.js";
+
 const TOK = /[\p{L}\p{N}](?:[\p{L}\p{N}]|['’](?=[\p{L}\p{N}])|[-–/.](?=[\p{L}\p{N}]))*/gu;
 const CAP = /^\p{Lu}/u, LOW = /^\p{Ll}/u, NUM = /^\p{N}[\p{L}\p{N}'’]*(?:[-–/.][\p{L}\p{N}]+)*$/u;
 const JOINER = /[-–/]/;
@@ -276,21 +278,107 @@ export function claims(text, sc, abbreviations = new Set()) {
   return out;
 }
 
+
+/**
+ * EDGES — the relation reader builds an edge's ends from the sentence ("apollo" for "Apollo 11", "Apollo 12" and "Apollo 13" alike) before the cast is repaired, and
+ * merges the sentences that state the same pair. This reads each edge again against the repaired cast, one sentence at a time: an end that stands where exactly one
+ * repaired being's mention stands (the mention covering all of the end's words but one) is that being: its face is the being's name, and the end becomes the mention as the text wrote it; an end that stands over
+ * mentions of several beings, or over none, is left as the reader built it. An edge whose sentences now name different beings splits into one edge per pair, and
+ * edges that come to name the same pair of beings in the same relation merge, with their sentences and statements. Pure given its inputs.
+ * @param {object} a
+ * @param {Array} a.edges   the entry's edges (end1, end1Face, label, end2, end2Face, polarity, refs, spans, assertion …)
+ * @param {string} a.text   the newline-normalised text; a span's `ref` ends in "#<passage start>-<end>" and its start is relative to the passage
+ * @param {Array} a.rows    the repaired beings: { ref, surface, spans } with spans in that text
+ * @returns {{ edges, report }}
+ */
+export function repairEdges({ edges, text, rows }) {
+  const report = { rewritten: 0, split: 0, merged: 0, ambiguous: 0, unresolved: 0, samples: [] };
+  const ments = rows.flatMap((r, i) => r.spans.map(([a, b]) => ({ a, b, i }))).sort((x, y) => x.a - y.a);
+  const at = (s) => { const m = /#(\d+)-\d+$/.exec(s.ref ?? ""); const base = m ? +m[1] : 0; return [base + s.start, base + s.end]; };
+  const rx = new Map();
+  const find = (end, ds, de) => {
+    const toks = String(end ?? "").toLowerCase().split(/[^\p{L}\p{N}'’-]+/u).filter(Boolean);
+    if (!toks.length) return null;
+    const key = toks.join(" "); let re = rx.get(key);
+    if (!re) rx.set(key, (re = new RegExp(`(?<![\\p{L}\\p{N}])${toks.map(esc).join("[^\\p{L}\\p{N}]+")}(?![\\p{L}\\p{N}])`, "giu")));
+    const seen = new Set(), said = new Map(); let n = 0, unres = 0;
+    for (const m of text.slice(ds, de).matchAll(re)) {
+      const x = ds + m.index, y = x + m[0].length; n++;
+      const hit = ments.filter((q) => q.a < y && x < q.b);
+      // the mention must cover the end's words but one
+      const words0 = m[0].split(/[^\p{L}\p{N}]+/u).filter(Boolean).length;
+      const got = new Set();
+      for (const q of hit) { const inside = text.slice(Math.max(x, q.a), Math.min(y, q.b)).split(/[^\p{L}\p{N}]+/u).filter(Boolean).length; if (words0 - inside <= 1) { got.add(q.i); if (!said.has(q.i)) said.set(q.i, text.slice(q.a, q.b)); } }
+      if (!got.size) unres++; else for (const i of got) seen.add(i);
+    }
+    if (!n) return null;
+    // every place the end stands in the sentence must be the same being's mention; one that is nobody's makes it unsure
+    return seen.size === 1 && !unres ? { i: [...seen][0], said: said.get([...seen][0]) } : seen.size ? "amb" : null;
+  };
+  const same = (e, a, b) => e.end1 === a.end1 && e.end2 === a.end2 && e.end1Face === a.end1Face && e.end2Face === a.end2Face;
+  const out = [];
+  for (const e of edges) {
+    if (!e.spans?.length) { out.push(e); continue; }
+    const groups = new Map();
+    for (const sp of e.spans) {
+      const [ds, de] = at(sp);
+      const r1 = find(e.end1, ds, de), r2 = find(e.end2, ds, de);
+      // the identity is the being (its face); the end keeps the form the sentence used for it, as the mention wrote it ("Strauss" stays "strauss", "Apollo" over "Apollo 11" becomes "apollo 11")
+      const e1 = r1 && r1.i !== undefined ? rows[r1.i].surface : null, e2 = r2 && r2.i !== undefined ? rows[r2.i].surface : null;
+      const f1 = r1 && r1.i !== undefined ? r1.said.replace(/\s+/g, " ").toLowerCase() : null, f2 = r2 && r2.i !== undefined ? r2.said.replace(/\s+/g, " ").toLowerCase() : null;
+      if (r1 === "amb" || r2 === "amb") report.ambiguous++; else if (r1 === null || r2 === null) report.unresolved++;
+      const k = `${e1 ?? ""}\u0000${f1 ?? ""}\u0000${e2 ?? ""}\u0000${f2 ?? ""}`;
+      (groups.get(k) ?? groups.set(k, { e1, e2, f1, f2, spans: [] }).get(k)).spans.push(sp);
+    }
+    const gs = [...groups.values()];
+    if (gs.every((g) => g.e1 === null && g.e2 === null)) { out.push(e); continue; }
+    const total = e.statements ?? e.spans.length; let left = total;
+    gs.forEach((g, gi) => {
+      const n = gi === gs.length - 1 ? Math.max(1, left) : Math.max(1, Math.min(left - (gs.length - 1 - gi), g.spans.length));
+      left -= n;
+      const ne = { ...e, ...(g.e1 ? { end1: g.f1, end1Face: g.e1 } : {}), ...(g.e2 ? { end2: g.f2, end2Face: g.e2 } : {}), spans: g.spans, refs: [...new Set(g.spans.map((x) => x.ref).filter(Boolean))], statements: n };
+      if (e.assertion) ne.assertion = { ...e.assertion, statements: n, standing: standingOf(n) };
+      if (!same(e, ne)) { report.rewritten++; if (report.samples.length < 400) report.samples.push([e.end1, ne.end1, e.end2, ne.end2]); }
+      out.push(ne);
+    });
+    if (gs.length > 1) report.split++;
+  }
+  // edges that now name the same pair in the same relation are one edge
+  const byKey = new Map(); const merged = [];
+  for (const e of out) {
+    const k = [e.end1, e.label, e.end2, e.polarity ?? "", e.end1Face ?? "", e.end2Face ?? ""].join("\u0000");
+    const q = byKey.get(k);
+    if (!q) { byKey.set(k, e); merged.push(e); continue; }
+    report.merged++;
+    for (const sp of e.spans) if (!q.spans.some((x) => x.ref === sp.ref && x.start === sp.start)) q.spans.push(sp);
+    q.refs = [...new Set([...(q.refs ?? []), ...(e.refs ?? [])])];
+    q.statements = (q.statements ?? 0) + (e.statements ?? 0);
+    if (q.assertion) q.assertion = { ...q.assertion, statements: q.statements, standing: standingOf(q.statements) };
+  }
+  return { edges: merged, report };
+}
+
 /**
  * @param {object} a
  * @param {string} a.text         the newline-normalised text the rows' spans index
  * @param {Array}  a.rows         [{ ref, surfaces, spans, standing, represent }] the base cast
  * @param {Function} a.mentionsOf (text, surfaces) → spans, the base's own matcher
  * @param {Set}    a.abbreviations this read's abbreviation set
+ * @param {boolean}  a.posPrior    is the part-of-speech prior in use the read language's own? false skips the rules that read it (typed gap `cast_identity_no_pos_prior`)
  * @param {Function} a.commonNoun  (token) → does the part-of-speech prior use it mostly as a common noun, not a name ("President")?
  * @param {Function} a.nominalOk   (token) → is it a noun, a name or an adjective by the part-of-speech prior (so a lower-case twin of it may continue a name)?
  * @param {Function} a.connectorOk (lower-case token) → may it join two capitalised runs of a name? (the read's own part-of-speech prior decides)
  * @param {object} a.options      { lead, rescue, claims, unmerge, fold, casing, spans } each on unless false
  * @returns {{ rows, refMap: Map<string,string>, report }}
  */
-export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set(), connectorOk = () => true, nominalOk = () => true, commonNoun = () => false, options = {} }) {
-  const on = (k) => options[k] !== false;
+export function castIdentity({ text, rows, mentionsOf, abbreviations = new Set(), connectorOk: connectorOk0 = () => true, nominalOk = () => true, commonNoun: commonNoun0 = () => false, posPrior = true, options = {} }) {
+  // Without the read language's OWN part-of-speech prior the three rules that read one do not run (a missing prior is a gap, never English applied to another language):
+  // the lower-case variant of a name (needs "is it a noun"), the classification of a connector word (preposition or conjunction), and the common-noun test of an edge word.
+  // Every other rule reads only the text and runs.
+  const connectorOk = posPrior ? connectorOk0 : () => null, commonNoun = posPrior ? commonNoun0 : () => false;
+  const on = (k) => options[k] !== false && (k !== "casing" || posPrior);
   const report = { rescued: [], claimed: [], dropped: [], unmerged: [], folded: [], gaps: [], spansFixed: 0, recur: RECUR };
+  if (!posPrior) report.gaps.push({ gap: "cast_identity_no_pos_prior", detail: "the read language has no part-of-speech prior of its own: the lower-case-variant, connector-class and common-noun rules were skipped; the text-only rules ran" });
   const refMap = new Map();
   let work = rows.map((r) => ({ ref: r.ref, surfaces: [...r.surfaces], spans: r.spans.map((s) => [...s]), represent: r.represent, dirty: false, dest: null }));
   const sc = scan(text);
