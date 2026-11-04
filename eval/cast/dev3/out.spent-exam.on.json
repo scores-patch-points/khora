@@ -1,12 +1,12 @@
 {
  "summary": {
   "entities": 50,
-  "clean": 44,
-  "layer3": 0.88,
-  "whole_rate": 0.96,
-  "unique_carrier_rate": 0.94,
+  "clean": 43,
+  "layer3": 0.86,
+  "whole_rate": 0.94,
+  "unique_carrier_rate": 0.92,
   "no_merge_rate": 0.96,
-  "span_exact_rate": 0.92
+  "span_exact_rate": 0.9
  },
  "reader_gaps": {
   "wiki-Apollo_13": [
@@ -28,6 +28,7 @@
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_tie",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
@@ -40,6 +41,7 @@
    "cast_identity_short_form_open"
   ],
   "wiki-Burj_Khalifa": [
+   "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
@@ -68,10 +70,10 @@
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
+   "cast_identity_short_form_open",
    "cast_identity_short_form_open"
   ],
   "wiki-Notre-Dame_de_Paris": [
-   "cast_identity_initials_tie",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
@@ -94,7 +96,6 @@
    "cast_identity_short_form_open"
   ],
   "wiki-St__Peter_s_Basilica": [
-   "cast_identity_initials_tie",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
@@ -105,6 +106,7 @@
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_tie",
+   "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
@@ -254,7 +256,7 @@
     "merged_with": [],
     "span_exact": true,
     "exact_share": 1,
-    "main_surface": "Boeing 747-400",
+    "main_surface": "747-400",
     "clean": true
    },
    "747-8": {
@@ -300,16 +302,16 @@
    },
    "Emaar": {
     "mentions": 11,
-    "carriers": 1,
-    "main_covers": 11,
-    "whole": true,
-    "unique_carrier": true,
+    "carriers": 2,
+    "main_covers": 6,
+    "whole": false,
+    "unique_carrier": false,
     "no_merge": true,
     "merged_with": [],
-    "span_exact": true,
-    "exact_share": 1,
-    "main_surface": "Emaar Properties",
-    "clean": true
+    "span_exact": false,
+    "exact_share": 0.545,
+    "main_surface": "Emaar",
+    "clean": false
    },
    "Taipei 101": {
     "mentions": 5,

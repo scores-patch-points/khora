@@ -1,12 +1,12 @@
 {
  "summary": {
   "entities": 19,
-  "clean": 17,
-  "layer3": 0.8947,
+  "clean": 18,
+  "layer3": 0.9474,
   "whole_rate": 1,
   "unique_carrier_rate": 0.9474,
   "no_merge_rate": 1,
-  "span_exact_rate": 0.9474
+  "span_exact_rate": 1
  },
  "reader_gaps": {
   "wiki-Apollo_11": [
@@ -17,8 +17,6 @@
    "cast_identity_tie",
    "cast_identity_short_form_open",
    "cast_identity_tie",
-   "cast_identity_short_form_open",
-   "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
@@ -41,7 +39,6 @@
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_tie",
-   "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
    "cast_identity_short_form_open",
@@ -140,14 +137,14 @@
    },
    "Neil Armstrong": {
     "mentions": 77,
-    "carriers": 3,
-    "main_covers": 75,
+    "carriers": 2,
+    "main_covers": 76,
     "whole": true,
     "unique_carrier": false,
     "no_merge": true,
     "merged_with": [],
     "span_exact": true,
-    "exact_share": 0.974,
+    "exact_share": 0.987,
     "main_surface": "Commander Neil Armstrong",
     "clean": false
    },
@@ -185,10 +182,10 @@
     "unique_carrier": true,
     "no_merge": true,
     "merged_with": [],
-    "span_exact": false,
-    "exact_share": 0.833,
+    "span_exact": true,
+    "exact_share": 1,
     "main_surface": "Saturn V",
-    "clean": false
+    "clean": true
    }
   },
   "wiki-Mississippi_River": {

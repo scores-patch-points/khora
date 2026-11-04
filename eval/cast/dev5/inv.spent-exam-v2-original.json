@@ -1,0 +1,295 @@
+{
+ "schema": "CastInventory@1",
+ "note": "v2 exam (third round). Same conventions as CastInventory v1.1 (see the v1 note and erratum): a mention is an occurrence of a form (longest form first, no overlap), not inside a longer word, not part of a hyphen or slash joined token, not inside an ignore span; tail sections are ignored; named things that contain a form but are not any listed entity are ignored or listed.",
+ "docs": {
+  "wiki-_resund_Bridge": {
+   "entities": {
+    "Øresund Bridge": [
+     "Øresund Bridge"
+    ],
+    "Øresund Link": [
+     "Øresund Link"
+    ],
+    "Øresund Tunnel": [
+     "Øresund Tunnel"
+    ],
+    "Malmö": [
+     "Malmö"
+    ],
+    "Malmö City Tunnel": [
+     "Malmö City Tunnel"
+    ],
+    "Copenhagen": [
+     "Copenhagen"
+    ],
+    "Copenhagen Airport": [
+     "Copenhagen Airport"
+    ],
+    "Peberholm": [
+     "Peberholm"
+    ],
+    "Saltholm": [
+     "Saltholm"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Copenhagen Metro",
+    "Copenhagen Central",
+    "Malmö Central",
+    "Øresund Link Consultants"
+   ]
+  },
+  "wiki-Gotthard_Base_Tunnel": {
+   "entities": {
+    "Gotthard Base Tunnel": [
+     "Gotthard Base Tunnel",
+     "GBT"
+    ],
+    "Gotthard Road Tunnel": [
+     "Gotthard Road Tunnel"
+    ],
+    "Gotthard Tunnel": [
+     "Gotthard Tunnel"
+    ],
+    "Ceneri Base Tunnel": [
+     "Ceneri Base Tunnel"
+    ],
+    "Sedrun": [
+     "Sedrun"
+    ],
+    "Erstfeld": [
+     "Erstfeld"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$"
+   ]
+  },
+  "wiki-Millau_Viaduct": {
+   "entities": {
+    "Millau Viaduct": [
+     "Millau Viaduct"
+    ],
+    "Millau": [
+     "Millau"
+    ],
+    "Tarn": [
+     "Tarn"
+    ],
+    "Eiffage": [
+     "Eiffage"
+    ],
+    "Causse Rouge": [
+     "Causse Rouge"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Compagnie Eiffage du Viaduc de Millau",
+    "Eiffage (TP|Concessions)",
+    "Tarn Valley"
+   ]
+  },
+  "wiki-Petronas_Towers": {
+   "entities": {
+    "Petronas Towers": [
+     "Petronas Twin Towers",
+     "Menara Berkembar Petronas",
+     "Petronas Towers"
+    ],
+    "Petronas": [
+     "Petronas"
+    ],
+    "Suria KLCC": [
+     "Suria KLCC"
+    ],
+    "Kuala Lumpur": [
+     "Kuala Lumpur"
+    ],
+    "World Trade Center": [
+     "World Trade Center"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Petronas Philharmonic",
+    "Kuala Lumpur Tower"
+   ]
+  },
+  "wiki-Saturn_V": {
+   "entities": {
+    "Saturn V": [
+     "Saturn V"
+    ],
+    "Saturn IB": [
+     "Saturn IB"
+    ],
+    "S-IVB": [
+     "S-IVB"
+    ],
+    "S-II": [
+     "S-II"
+    ],
+    "S-IC": [
+     "S-IC"
+    ],
+    "F-1": [
+     "Rocketdyne F-1",
+     "F-1"
+    ],
+    "J-2": [
+     "Rocketdyne J-2",
+     "J-2"
+    ],
+    "Marshall Space Flight Center": [
+     "Marshall Space Flight Center",
+     "MSFC"
+    ],
+    "Kennedy Space Center": [
+     "Kennedy Space Center"
+    ],
+    "Skylab": [
+     "Skylab"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Saturn V ELV",
+    "Skylab B",
+    "Kennedy Space Center (Launch|Visitor) Complex"
+   ]
+  },
+  "wiki-Space_Needle": {
+   "entities": {
+    "Space Needle": [
+     "Space Needle"
+    ],
+    "Seattle": [
+     "Seattle"
+    ],
+    "Seattle Center": [
+     "Seattle Center"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Seattle (Kraken|Landmarks|Mariners|Seahawks|Sounders|Storm|SuperSonics|World's Fair)",
+    "Space Needle (Corporation|Restaurant)"
+   ]
+  },
+  "wiki-Sputnik_1": {
+   "entities": {
+    "Sputnik 1": [
+     "Sputnik 1",
+     "PS-1"
+    ],
+    "Sputnik 2": [
+     "Sputnik 2"
+    ],
+    "R-7": [
+     "R-7"
+    ],
+    "Korolev": [
+     "Sergei Korolev",
+     "Korolev"
+    ],
+    "OKB-1": [
+     "OKB-1"
+    ],
+    "NII-4": [
+     "NII-4"
+    ],
+    "Soviet Union": [
+     "Soviet Union",
+     "USSR"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Sputnik 1 EMC(/EMI)?",
+    "Soviet Union Academy",
+    "USSR Academy( of Sciences)?"
+   ]
+  },
+  "wiki-Three_Gorges_Dam": {
+   "entities": {
+    "Three Gorges Dam": [
+     "Three Gorges Dam"
+    ],
+    "Yangtze River": [
+     "Yangtze River",
+     "Yangtze"
+    ],
+    "Gezhouba Dam": [
+     "Gezhouba Dam"
+    ],
+    "Itaipu Dam": [
+     "Itaipu Dam"
+    ],
+    "Shanghai": [
+     "Shanghai"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Yangtze River (Three Gorges Water Conservancy Project|Project|Floods|Plain|Power)",
+    "Three Gorges Dam Construction Fund",
+    "Yangtze (Plain|Power)",
+    "China Yangtze Power",
+    "Shanghai Daily"
+   ]
+  },
+  "wiki-Tokyo_Skytree": {
+   "entities": {
+    "Tokyo Skytree": [
+     "Tokyo Skytree"
+    ],
+    "Tokyo Tower": [
+     "Tokyo Tower"
+    ],
+    "Japan": [
+     "Japan"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "Tokyo Skytree (Station|Town)",
+    "Tokyo Skytree Tembo [A-Z][a-z]+"
+   ]
+  },
+  "wiki-Tower_of_London": {
+   "entities": {
+    "Tower of London": [
+     "Tower of London"
+    ],
+    "White Tower": [
+     "White Tower"
+    ],
+    "Jewel House": [
+     "Jewel House"
+    ],
+    "Crown Jewels": [
+     "Crown Jewels"
+    ],
+    "Royal Mint": [
+     "Royal Mint"
+    ],
+    "Edward I": [
+     "Edward I"
+    ],
+    "Henry III": [
+     "Henry III"
+    ],
+    "Charles II": [
+     "Charles II"
+    ]
+   },
+   "ignore": [
+    "== (See also|Notes|References|Bibliography|Further reading|External links|Sources) ==[\\s\\S]*$",
+    "White Tower Mortar",
+    "Kings Henry III"
+   ]
+  }
+ }
+}
