@@ -10,7 +10,8 @@
     "sync:check": "node scripts/sync.mjs --check",
     "eval:meaning": "node eval/meaning/run.mjs",
     "test:cast": "node --test native/organs/cast-identity.test.mjs",
-    "test:same": "node --test native/adapters/text/same-for-text.test.mjs"
+    "test:same": "node --test native/adapters/text/same-for-text.test.mjs",
+    "test:full": "node --test native/tests/reading-full.test.mjs"
   },
   "repository": {
     "type": "git",
