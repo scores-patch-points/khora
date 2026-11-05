@@ -61,3 +61,25 @@ A difference in a cell the perspective does not care about is noise for it: **NU
 - The lemmatizer gives `nett` for "netted".
 - REC and NUL cells are **gap**: this reader keeps no ground forward and does not compare absences yet.
 - Whether every one of the 27 cells is a real respect is **untested**. Which cells actually separate pairs is to be measured, not assumed.
+
+## The kernel laws (`kernel/respects.js`)
+
+The cell model lives in the kernel. `organs/same-for.js` re-exports it, so no adapter can break the laws quietly. Each law is a typed refusal that turns a cell into a **gap**:
+
+- **L1. No verdict without a null.** A same or other names its warrant and the null it was measured against. An exact identity names its null as *exact identity*.
+- **L2. Nulls compose downward.** A cell declares the cells it rests on. If any of them is a gap, the cell is a gap, and the gap climbs every level above it. Only a gap propagates: a difference below does not force a difference above, because different parts can still be the same whole.
+- **L3. Levels are declared, in order.** A cell rests only on a lower level, or on the same level with an earlier operator in the helix (EVA on DEF at one holon).
+- **L4. Within a level,** Figure-same entails Pattern-same and Pattern-other entails Figure-other. Never the reverse, and never across levels.
+
+**Commitments know their cell.** `declare({ about: { op, grain, level } })`, and `differencesOf` reports each difference's `cell`.
+
+**The perspective is the ledger's frame.** Its cells are declared on `createNotes({ frame })` (DEF·Ground) and returned as `frame`.
+
+Tests: `native/tests/respects.test.js`, 8 tests with no priors needed, included in `npm test`.
+
+**Why these laws.** The image test (IMG-SAME-1, outside this repo) failed its object-level tie twice:
+
+1. It compared raw strings instead of the bonds between members.
+2. The members themselves were unearned: the recogniser invented items under re-encoding.
+
+L2 makes the second failure structural: a tie over an unearned member is a gap, never a same.

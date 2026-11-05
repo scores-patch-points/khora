@@ -107,7 +107,8 @@ export const PERSPECTIVES = Object.freeze({
 });
 const setEq = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
 function profileOf(R1, R2, arrs1, arrs2, { licence, contests }) {
-  const P = [], cell = (op, grain, level, outcome, warrant, because) => P.push({ op, grain, level, outcome, warrant, because });
+  // every cell names its NULL and the cells it RESTS ON (kernel/respects.js L1, L2): exact identity is named as such
+  const P = [], cell = (op, grain, level, outcome, warrant, because, { against = "exact identity (no tolerance)", rests = [] } = {}) => P.push({ op, grain, level, outcome, warrant, because, null: warrant ? against : null, rests });
   const tokens = (R) => (R.entry.parse ?? []).flatMap((p) => (p.rows ?? []).filter((r) => r.upos !== "PUNCT").map((r) => lc(r.lemma ?? r.form)));
   const t1 = tokens(R1), t2 = tokens(R2);
   cell("SEG", "Figure", "token", t1.join(" ") === t2.join(" ") ? OUTCOMES.SAME : OUTCOMES.OTHER, "the reader's rows", "the same tokens in the same order");
@@ -115,11 +116,11 @@ function profileOf(R1, R2, arrs1, arrs2, { licence, contests }) {
   cell("SIG", "Figure", "token", setEq(attended(R1), attended(R2)) ? OUTCOMES.SAME : OUTCOMES.OTHER, "the reader's claim parts", "the same tokens attended into acts and ends");
   const beings = (R) => new Set(R.claims.flatMap((c) => [c.ARG0, c.ARG1, ...(c.OBL ?? [])].filter(Boolean).map(face)).filter(Boolean));
   const b1 = beings(R1), b2 = beings(R2);
-  cell("INS", "Figure", "end", setEq(b1, b2) ? OUTCOMES.SAME : OUTCOMES.OTHER, "the reader's cast (minted beings) and faces", "the same beings, each instance by its mint");
-  cell("INS", "Ground", "text", [...b1].some((x) => b2.has(x)) ? OUTCOMES.SAME : OUTCOMES.OTHER, "shared beings", "the two texts stand in one field: at least one being in common");
+  cell("INS", "Figure", "end", setEq(b1, b2) ? OUTCOMES.SAME : OUTCOMES.OTHER, "the reader's cast (minted beings) and faces", "the same beings, each instance by its mint", { rests: ["SIG·Figure@token"] });
+  cell("INS", "Ground", "text", [...b1].some((x) => b2.has(x)) ? OUTCOMES.SAME : OUTCOMES.OTHER, "shared beings", "the two texts stand in one field: at least one being in common", { rests: ["INS·Figure@end"] });
   const key = (a, labelOf = (l) => l) => `${a.end1}|${labelOf(a.label)}|${a.end2}`;
   const acts1 = new Set(arrs1.map((a) => key(a))), acts2 = new Set(arrs2.map((a) => key(a)));
-  cell("CON", "Figure", "act", setEq(acts1, acts2) ? OUTCOMES.SAME : OUTCOMES.OTHER, "label identity", "the same ties, instance for instance (relation, ends, obliques, figures)");
+  cell("CON", "Figure", "act", setEq(acts1, acts2) ? OUTCOMES.SAME : OUTCOMES.OTHER, "label identity", "the same ties, instance for instance (relation, ends, obliques, figures)", { rests: ["INS·Figure@end"] });
   // ties as KINDS: two relations are one kind only where a giver licenses it (a converse crosses the ends); without a licence this cell can still be Same
   // (by entailment from Figure) or Other, never a guess
   const labels = [...new Set([...arrs1, ...arrs2].map((a) => String(a.label).split("·")[0]))];
@@ -127,14 +128,14 @@ function profileOf(R1, R2, arrs1, arrs2, { licence, contests }) {
   if (licence) for (const x of labels) for (const y of labels) if (x < y) { const v = licence(x, y), how = typeof v === "string" ? v : v?.how; if (how === "same") kindOf.set(y, kindOf.get(x)); if (how === "converse") { kindOf.set(y, kindOf.get(x)); converse.add(y); } }
   const kinded = (a) => { const [base, ...rest] = String(a.label).split("·"), k = [kindOf.get(base) ?? base, ...rest].join("·"); return converse.has(base) && !rest.length ? `${a.end2}|${k}|${a.end1}` : `${a.end1}|${k}|${a.end2}`; };
   const k1 = new Set(arrs1.map(kinded)), k2 = new Set(arrs2.map(kinded));
-  cell("CON", "Pattern", "act", setEq(k1, k2) ? OUTCOMES.SAME : setEq(acts1, acts2) ? OUTCOMES.SAME : OUTCOMES.OTHER, licence ? "the caller's licence (relation kinds)" : "label identity (no giver for relation kinds)", "the same ties, as kinds of tie");
+  cell("CON", "Pattern", "act", setEq(k1, k2) ? OUTCOMES.SAME : setEq(acts1, acts2) ? OUTCOMES.SAME : OUTCOMES.OTHER, licence ? "the caller's licence (relation kinds)" : "label identity (no giver for relation kinds)", "the same ties, as kinds of tie", { against: licence ? "the caller's licence (its own evidence and null)" : "exact identity (no tolerance)", rests: ["INS·Figure@end"] });
   // DEF: the commitment on each tie both texts make (matched by its kinded key): the same polarity, asserted or reported alike
   const stance = (arrs) => new Map(arrs.map((a) => [kinded({ ...a }), `${a.polarity}|${a.asserted}`]));
   const s1 = stance(arrs1), s2 = stance(arrs2), shared = [...s1.keys()].filter((k) => s2.has(k));
   // a denial is heard as a cut, so its tie keys still match: compare the stance on every tie both texts make, by kind
-  cell("DEF", "Figure", "claim", !shared.length ? OUTCOMES.GAP : shared.every((k) => s1.get(k) === s2.get(k)) ? OUTCOMES.SAME : OUTCOMES.OTHER, "the reader's polarity and assertion", shared.length ? `the same commitment on ${shared.length} shared tie(s)` : "no tie both texts make, so no commitment to compare");
+  cell("DEF", "Figure", "claim", !shared.length ? OUTCOMES.GAP : shared.every((k) => s1.get(k) === s2.get(k)) ? OUTCOMES.SAME : OUTCOMES.OTHER, "the reader's polarity and assertion", shared.length ? `the same commitment on ${shared.length} shared tie(s)` : "no tie both texts make, so no commitment to compare", { rests: ["CON·Pattern@act"] });
   const def = P.at(-1).outcome, con = P.find((c) => c.op === "CON" && c.grain === "Pattern").outcome;
-  cell("EVA", "Figure", "claim", contests ? OUTCOMES.OTHER : con === OUTCOMES.SAME && def === OUTCOMES.SAME ? OUTCOMES.SAME : def === OUTCOMES.OTHER ? OUTCOMES.OTHER : OUTCOMES.GAP, contests ? "a contest on the ledger" : "ties and commitment", contests ? "the second contests a link the first asserts" : "true together when the same ties carry the same commitment");
+  cell("EVA", "Figure", "claim", contests ? OUTCOMES.OTHER : con === OUTCOMES.SAME && def === OUTCOMES.SAME ? OUTCOMES.SAME : def === OUTCOMES.OTHER ? OUTCOMES.OTHER : OUTCOMES.GAP, contests ? "a contest on the ledger" : "ties and commitment", contests ? "the second contests a link the first asserts" : "true together when the same ties carry the same commitment", { rests: ["CON·Pattern@act", "DEF·Figure@claim"] });
   cell("SYN", "Ground", "text", OUTCOMES.NA, null, "the desert cell: no synthesis from pure ground");
   for (const g of ["Ground", "Figure", "Pattern"]) cell("REC", g, "ground", OUTCOMES.GAP, null, "this reader keeps no ground forward, so no change to it can be compared");
   cell("NUL", "Ground", "text", OUTCOMES.GAP, null, "absences are not compared by this reader yet");
@@ -154,7 +155,8 @@ export async function sameForText(first, second, { language = "en", questions = 
   const unread = [[R1, "first"], [R2, "second"]].filter(([R]) => !R.claims.length).map(([R, side]) => ({ side, parse: Array.isArray(R.entry.parse) ? R.entry.parse.length : 0, gaps: R.gaps.map((g) => g.gap ?? g) }));
   if (unread.length) return { verdict: "gap", readerGap: true, because: "the reader produced no claims", unread, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, standings: [], residue: [], SIG: [], NUL: [], profile: [], byCells: null };
   const perspective = await perspectiveFrom(questions, { language, licence });
-  let log = notes.createNotes({ frame: { reader: R1.parser, language, perspective: perspective.name, lexicon: lexicon || "none" } });
+  const wantedCells = Array.isArray(cells) ? cells : PERSPECTIVES[cells ?? "meaning"] ?? PERSPECTIVES.meaning;
+  let log = notes.createNotes({ frame: { reader: R1.parser, language, perspective: questions?.length ? perspective.name : (typeof cells === "string" ? cells : cells ? "cells" : "meaning"), cells: wantedCells, questions: questions ?? null, lexicon: lexicon || "none" } });   // the perspective IS what this reader stands on (DEF·Ground)
   log = hearAll(notes, log, arrangementsOf(R1.claims, "first"), "first").log;
   const h2 = hearAll(notes, log, arrangementsOf(R2.claims, "second"), "second"); log = h2.log;
   const nominate = (a, b) => {
@@ -173,7 +175,7 @@ export async function sameForText(first, second, { language = "en", questions = 
   // the profile by cell, and the verdict for the perspective's CELLS (a named perspective, a list of cell keys, or "meaning" by default);
   // with questions, the asking perspective's own verdict (judged above, by commitment) stands, and the cell verdict is reported beside it
   const profile = profileOf(R1, R2, arrangementsOf(R1.claims, "first"), arrangementsOf(R2.claims, "second"), { licence, contests: h2.contests });
-  const wanted = Array.isArray(cells) ? cells : PERSPECTIVES[cells ?? "meaning"] ?? PERSPECTIVES.meaning;
-  const byCells = verdictFor(profile, wanted);
-  return { ...judged, verdict: questions?.length ? judged.verdict : byCells.verdict, byQuestions: questions?.length ? judged.verdict : null, byCells, profile, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, perspectiveQuestions: perspective.questions ?? null };
+  const wanted = wantedCells;
+  const byCells = verdictFor(profile, wanted, { levels: LEVELS });
+  return { ...judged, frame: notes.frameOf(judged.log), verdict: questions?.length ? judged.verdict : byCells.verdict, byQuestions: questions?.length ? judged.verdict : null, byCells, profile, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, perspectiveQuestions: perspective.questions ?? null };
 }

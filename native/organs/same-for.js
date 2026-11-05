@@ -110,39 +110,10 @@ export function makeSameFor({ notes, commitments }) {
   return { judge, VERDICTS };
 }
 
-// ── SAMENESS BY CELL ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-// Same and Other are always IN SOME RESPECT (the Sophist's greatest kinds), and the respects are the cube's transformations. A judgment is addressed by
-// three coordinates, never by one:
-//   op     the transformation it is invariant under (NUL SIG INS SEG CON SYN DEF EVA REC)
-//   grain  WITHIN the level: Ground = the field the unit stands in, Figure = the unit itself, Pattern = the unit as a kind that recurs
-//   level  WHICH holon: the medium's own units, from smallest part to the reader's ground (the adapter declares them, in order)
-// and carries its outcome (same | other | gap | n/a) and its WARRANT (where the evidence came from) as separate fields — a warrant is never a grain.
-// Two nestings are kept explicit:
-//   within a level  Same at Figure entails Same at Pattern (one instance is one kind); Other at Pattern entails Other at Figure. Never the reverse.
-//   across levels   a cell at one level is computed from bonds at the level below (the adapter says which), and a level's Pattern seeds the next
-//                   level's Ground ("the pattern of a ring seeds the ground of the next").
-// A PERSPECTIVE is the set of cells it cares about. The pair's verdict for it is DERIVED, never stored: Other if any cared-for cell is Other,
-// else Gap if any cared-for cell is Gap, else Same. A difference in a cell the perspective does not care about is NUL (∅) for it.
-export const OUTCOMES = Object.freeze({ SAME: "same", OTHER: "other", GAP: "gap", NA: "n/a" });
-export const cellKey = ({ op, grain, level }) => `${op}·${grain}@${level}`;
-
-/** entail(profile) → the profile with the within-level entailments applied (Figure-same ⇒ Pattern-same; Pattern-other ⇒ Figure-other), each marked */
-export function entail(profile) {
-  const out = profile.map((c) => ({ ...c }));
-  const byKey = new Map(out.map((c) => [cellKey(c), c]));
-  for (const c of profile) {
-    if (c.grain === "Figure" && c.outcome === OUTCOMES.SAME) { const p = byKey.get(cellKey({ ...c, grain: "Pattern" })); if (p && p.outcome === OUTCOMES.GAP) Object.assign(p, { outcome: OUTCOMES.SAME, entailedBy: cellKey(c) }); }
-    if (c.grain === "Pattern" && c.outcome === OUTCOMES.OTHER) { const f = byKey.get(cellKey({ ...c, grain: "Figure" })); if (f && f.outcome === OUTCOMES.GAP) Object.assign(f, { outcome: OUTCOMES.OTHER, entailedBy: cellKey(c) }); }
-  }
-  return out;
-}
-
-/** verdictFor(profile, cells) → { verdict, cells: [the cared-for cells with outcomes], idle: [cells that are Other but not cared for: NUL ∅ for this perspective] } */
-export function verdictFor(profile, cells) {
-  const full = entail(profile), byKey = new Map(full.map((c) => [cellKey(c), c]));
-  const cared = cells.map((k) => byKey.get(k) ?? { key: k, outcome: OUTCOMES.GAP, warrant: null, because: "this reader produced no evidence at this cell" });
-  const live = cared.filter((c) => c.outcome !== OUTCOMES.NA);
-  const verdict = live.some((c) => c.outcome === OUTCOMES.OTHER) ? VERDICTS.OTHER : !live.length || live.some((c) => c.outcome === OUTCOMES.GAP) ? VERDICTS.GAP : VERDICTS.SAME;
-  const idle = full.filter((c) => c.outcome === OUTCOMES.OTHER && !cells.includes(cellKey(c))).map((c) => ({ key: cellKey(c), op: "NUL", glyph: "∅" }));
-  return { verdict, cells: cared.map((c) => ({ key: c.key ?? cellKey(c), outcome: c.outcome, warrant: c.warrant ?? null, because: c.because ?? null, entailedBy: c.entailedBy ?? null })), idle };
-}
+// ── SAMENESS BY CELL: the cell model and its laws live in the kernel (kernel/respects.js). This organ re-exports them so its callers keep one import.
+// verdictFor now requires the caller's DECLARED levels (respects.js L3): a profile is judged only against levels someone stood behind.
+import { makeRespects, OUTCOMES, cellKey, parseKey, REFUSALS as RESPECT_REFUSALS } from "../kernel/respects.js";
+export { OUTCOMES, cellKey, parseKey, RESPECT_REFUSALS };
+const respectsFor = (levels) => { if (!Array.isArray(levels) || !levels.length) throw new TypeError("verdictFor: declare the levels, part to whole — sameness by cell needs them (kernel/respects.js L3)"); return makeRespects({ levels }); };
+export const entail = (profile, { levels }) => respectsFor(levels).entail(profile);
+export const verdictFor = (profile, cells, { levels } = {}) => respectsFor(levels).verdictFor(profile, cells);
