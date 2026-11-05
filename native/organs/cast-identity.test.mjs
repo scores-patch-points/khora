@@ -1,5 +1,6 @@
 // cast-identity.test.mjs — the opt-in cast pass (PREREG-CAST-A1.md): R1 byte identity with the option off, the rules on small texts, and the no-lists gate.
-//   KHORA_PRIORS_DIR=<ten English priors> node --test native/organs/cast-identity.test.mjs
+//   node --test native/organs/cast-identity.test.mjs   (with canonical janus main priors beside khora, as CI clones them; R1's hashes are
+//   pinned against janus b1cc37f — the ten-prior English stand-in reads differently and fails R1: see PREREG-CAST-A1.md, Addendum 2026-11-05)
 import test from "node:test"; import assert from "node:assert/strict"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 import { castIdentity, maximal, repairEdges } from "./cast-identity.js";
 import { mentionsOf } from "../the-fold/read-core.mjs";
