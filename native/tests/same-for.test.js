@@ -98,34 +98,36 @@ test("organ: its body names no medium", () => {
 
 // ── sameness by cell: (op, grain, level), the verdict derived from the cells a perspective cares about
 import { verdictFor, entail, cellKey, OUTCOMES } from "../organs/same-for.js";
-const c = (op, grain, level, outcome) => ({ op, grain, level, outcome, warrant: "test" });
+const LV = { levels: ["token", "end", "act", "claim", "text", "ground"] };
+const c = (op, grain, level, outcome) => ({ op, grain, level, outcome, warrant: "test", null: "test null" });
+const V = (p, cells) => verdictFor(p, cells, LV), E = (p) => entail(p, LV);
 
 test("cells: one pair is Same for one perspective and Other for another", () => {
   const profile = [c("SEG", "Figure", "token", "other"), c("INS", "Figure", "end", "same"), c("CON", "Pattern", "act", "same"), c("DEF", "Figure", "claim", "same")];
-  assert.equal(verdictFor(profile, ["INS·Figure@end", "CON·Pattern@act", "DEF·Figure@claim"]).verdict, VERDICTS.SAME);
-  assert.equal(verdictFor(profile, ["SEG·Figure@token"]).verdict, VERDICTS.OTHER);
+  assert.equal(V(profile, ["INS·Figure@end", "CON·Pattern@act", "DEF·Figure@claim"]).verdict, VERDICTS.SAME);
+  assert.equal(V(profile, ["SEG·Figure@token"]).verdict, VERDICTS.OTHER);
 });
 
 test("cells: a difference the perspective does not care about is NUL for it", () => {
-  const r = verdictFor([c("SEG", "Figure", "token", "other"), c("INS", "Figure", "end", "same")], ["INS·Figure@end"]);
+  const r = V([c("SEG", "Figure", "token", "other"), c("INS", "Figure", "end", "same")], ["INS·Figure@end"]);
   assert.deepEqual(r.idle, [{ key: "SEG·Figure@token", op: "NUL", glyph: "∅" }]);
 });
 
 test("cells: within a level, Same at Figure entails Same at Pattern, and Other at Pattern entails Other at Figure — never the reverse", () => {
-  const up = entail([c("CON", "Figure", "act", "same"), c("CON", "Pattern", "act", "gap")]);
+  const up = E([c("CON", "Figure", "act", "same"), c("CON", "Pattern", "act", "gap")]);
   assert.equal(up.find((x) => x.grain === "Pattern").outcome, "same"); assert.equal(up.find((x) => x.grain === "Pattern").entailedBy, "CON·Figure@act");
-  const down = entail([c("CON", "Figure", "act", "gap"), c("CON", "Pattern", "act", "other")]);
+  const down = E([c("CON", "Figure", "act", "gap"), c("CON", "Pattern", "act", "other")]);
   assert.equal(down.find((x) => x.grain === "Figure").outcome, "other");
-  const none = entail([c("CON", "Figure", "act", "gap"), c("CON", "Pattern", "act", "same")]);
+  const none = E([c("CON", "Figure", "act", "gap"), c("CON", "Pattern", "act", "same")]);
   assert.equal(none.find((x) => x.grain === "Figure").outcome, "gap", "one kind is not one instance");
 });
 
 test("cells: a cared-for cell with no evidence is a Gap; a cell that cannot apply is skipped, not a Gap", () => {
-  assert.equal(verdictFor([c("INS", "Figure", "end", "same")], ["INS·Figure@end", "REC·Pattern@ground"]).verdict, VERDICTS.GAP);
-  assert.equal(verdictFor([c("INS", "Figure", "end", "same"), c("SYN", "Ground", "text", "n/a")], ["INS·Figure@end", "SYN·Ground@text"]).verdict, VERDICTS.SAME);
+  assert.equal(V([c("INS", "Figure", "end", "same")], ["INS·Figure@end", "REC·Pattern@ground"]).verdict, VERDICTS.GAP);
+  assert.equal(V([c("INS", "Figure", "end", "same"), c("SYN", "Ground", "text", "n/a")], ["INS·Figure@end", "SYN·Ground@text"]).verdict, VERDICTS.SAME);
   assert.equal(cellKey({ op: "CON", grain: "Pattern", level: "act" }), "CON·Pattern@act");
 });
 
 test("cells: Other anywhere a perspective cares wins over a Gap there", () => {
-  assert.equal(verdictFor([c("DEF", "Figure", "claim", "other"), c("REC", "Pattern", "ground", "gap")], ["DEF·Figure@claim", "REC·Pattern@ground"]).verdict, VERDICTS.OTHER);
+  assert.equal(V([c("DEF", "Figure", "claim", "other"), c("REC", "Pattern", "ground", "gap")], ["DEF·Figure@claim", "REC·Pattern@ground"]).verdict, VERDICTS.OTHER);
 });

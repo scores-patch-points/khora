@@ -199,7 +199,7 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
    * a Figure commitment reads terrain Lens and a Pattern one Paradigm
    * without this file restating either table.
    */
-  function declare(log, { kind, members, giver, purpose, grain = FIGURE, because = null } = {}) {
+  function declare(log, { kind, members, giver, purpose, grain = FIGURE, because = null, about = null } = {}) {   // about: the CELL it is about, { op, grain, level } (kernel/respects.js) — additive
     if (!Object.values(KINDS).includes(kind)) return { log, refused: { type: REFUSALS.UNKNOWN_KIND, detail: `not a declared kind: ${JSON.stringify(kind)}`, known: Object.values(KINDS) } };
     if (!norm(giver)) return { log, refused: { type: REFUSALS.NO_GIVER, detail: "a commitment names who is behind it — one that does not is a default, not a defeasible reading" } };
     if (!norm(purpose)) return { log, refused: { type: REFUSALS.NO_PURPOSE, detail: "a tolerance is a tolerance FOR something; nothing is insignificant simpliciter" } };
@@ -218,6 +218,7 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
       description: `declared: ${kind} over ${ms.length} member(s)`,
       commitment: kind, members: ms, giver: norm(giver), purpose: norm(purpose),
       ...(because != null ? { because } : {}),
+      ...(about && about.op && about.grain && about.level ? { about: { op: about.op, grain: about.grain, level: about.level } } : {}),
     });
     return { log: next, refused: null, id, legacy_id: legacy };
   }
@@ -329,7 +330,7 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
             : ev.verdict === "holds"
               ? STANDINGS.TESTIMONY
               : STANDINGS.REFUSED;
-        return { id: t.task_id, legacy_id: t.legacy_id ?? t.task_id, kind: t.commitment, members: t.members ?? [], giver: t.giver, purpose: t.purpose, grain: t.grain, standing, evaluated: ev ? { verdict: ev.verdict, ground: ev.ground, broken: ev.broken, evidence: ev.evidence ?? null } : null };
+        return { id: t.task_id, legacy_id: t.legacy_id ?? t.task_id, kind: t.commitment, members: t.members ?? [], giver: t.giver, purpose: t.purpose, grain: t.grain, about: t.about ?? null, standing, evaluated: ev ? { verdict: ev.verdict, ground: ev.ground, broken: ev.broken, evidence: ev.evidence ?? null } : null };
       });
   }
 
@@ -455,7 +456,7 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
     return standings(log).filter((c) => isNoiseKind(c.kind) || isSignalKind(c.kind)).map((c) => {
       const held = c.standing === STANDINGS.TESTIMONY, undone = c.standing === STANDINGS.REFUSED || c.standing === STANDINGS.CONCEDED;
       const d = c.standing === STANDINGS.WISH ? null : isNoiseKind(c.kind) ? (held ? DIFFERENCE.NOISE : undone ? DIFFERENCE.SIGNAL : null) : (held ? DIFFERENCE.SIGNAL : undone ? DIFFERENCE.NOISE : null);
-      return { id: c.id, members: c.members, purpose: c.purpose, giver: c.giver, standing: c.standing, ...(d ? { op: d.op, glyph: d.glyph } : { op: null, glyph: null, untested: true }) };
+      return { id: c.id, members: c.members, purpose: c.purpose, giver: c.giver, about: c.about ?? null, cell: c.about ? `${c.about.op}·${c.about.grain}@${c.about.level}` : null, standing: c.standing, ...(d ? { op: d.op, glyph: d.glyph } : { op: null, glyph: null, untested: true }) };
     });
   }
 
