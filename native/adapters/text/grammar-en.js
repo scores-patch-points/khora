@@ -9,17 +9,21 @@ import * as P from "./english-parser.js";
 import { bindFigures } from "./figure-binding.js";
 import { unreadWords } from "./claim-coverage.js";
 const K = new URL("../..", import.meta.url).pathname.replace(/\/$/, "");
-const MORPH = JSON.parse(fs.readFileSync(`${K}/priors/morphology-eng.json`, "utf8"));
-const model = P.loadModel(JSON.parse(fs.readFileSync(`${K}/priors/parser-eng-ewt.json`, "utf8")), { morphology: MORPH });
-const LEX = JSON.parse(fs.readFileSync(`${K}/priors/pos-eng-lexicon.json`, "utf8")).classes;
+// the priors home is the PRIOR DOOR's (the-fold/prior-source.mjs: KHORA_PRIORS_DIR overrides, else <root>/janus/priors, else native/priors), never a
+// path of this file's own — a clean checkout pointed at its priors by KHORA_PRIORS_DIR must read the same parser as one with janus beside it
+import { priorsHome } from "../../the-fold/prior-source.mjs";
+const PRIORS = (() => { const h = priorsHome(); return h?.dir ?? `${K}/priors`; })();
+const MORPH = JSON.parse(fs.readFileSync(`${PRIORS}/morphology-eng.json`, "utf8"));
+const model = P.loadModel(JSON.parse(fs.readFileSync(`${PRIORS}/parser-eng-ewt.json`, "utf8")), { morphology: MORPH });
+const LEX = JSON.parse(fs.readFileSync(`${PRIORS}/pos-eng-lexicon.json`, "utf8")).classes;
 export const VERB_FORMS = new Set(LEX.VERB.map((w) => String(w).toLowerCase()));
 const VERBISH = new Set([...LEX.VERB, ...LEX["NOUN|VERB"]].map((w) => String(w).toLowerCase()));
 export const CARDINAL = { zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, twenty: 20, thirty: 30, forty: 40, fifty: 50, hundred: 100, thousand: 1000, million: 1e6, billion: 1e9, dozen: 12 };
 // READER=ud: the language-neutral ud-parser.js model trained on the treebank (models/UD_English-EWT.json); else khora's english-parser.js
 // the reader: ud-parser.js with its English prior and the UniMorph lexicon it was trained with, when both are on disk; else english-parser.js
-const UD_MODEL = process.env.FOLD_UD_MODEL ?? `${K}/priors/ud-parser-eng-ewt.json.gz`, UD_LEX = process.env.FOLD_UD_LEX ?? `${K}/priors/unimorph-eng-pos.json.gz`;
+const UD_MODEL = process.env.FOLD_UD_MODEL ?? `${PRIORS}/ud-parser-eng-ewt.json.gz`, UD_LEX = process.env.FOLD_UD_LEX ?? `${PRIORS}/unimorph-eng-pos.json.gz`;
 const U = process.env.FOLD_READER !== "english-parser" && fs.existsSync(UD_MODEL) ? await import("./ud-parser.js") : null;
-const UD_CL = process.env.FOLD_UD_CLUSTERS ?? `${K}/priors/clusters-eng.json.gz`;
+const UD_CL = process.env.FOLD_UD_CLUSTERS ?? `${PRIORS}/clusters-eng.json.gz`;
 const UM0 = U ? await U.readJsonMaybeGz(UD_MODEL) : null;
 // the clusters file is read only when the model was trained with one (its meta names it)
 const UM = U ? U.loadModel(UM0, { lex: fs.existsSync(UD_LEX) ? await U.loadLexiconFile(UD_LEX) : null, clusters: UM0.meta?.clusters && fs.existsSync(UD_CL) ? await U.loadClustersFile(UD_CL) : null }) : null;

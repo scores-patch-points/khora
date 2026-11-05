@@ -1,7 +1,14 @@
 // same-for-text — the text adapter, read by the real pipeline (readDocument + the parser's claims). Needs the janus priors (see the-fold/prior-source.mjs).
-import { test } from "node:test";
+import { test as base } from "node:test";
 import assert from "node:assert/strict";
 import { sameFor } from "../../reading.js";
+
+// THE READER MUST BE PRESENT. These tests read through the real pipeline, so they need the English priors the claims path loads: parser-eng-ewt.json,
+// morphology-eng.json, pos-eng-lexicon.json (and, for the UD reader, ud-parser-eng-ewt.json.gz + unimorph-eng-pos.json.gz), all from janus main priors/,
+// found through the prior door (KHORA_PRIORS_DIR, else <root>/janus/priors). Without them every test is SKIPPED with the reader's own gap, never failed.
+const probe = await sameFor("Maria bought a car.", "Maria bought a car.");
+const skip = probe.readerGap ? `the reader produced no claims (gaps: ${JSON.stringify(probe.unread)}): point KHORA_PRIORS_DIR at janus main priors/` : false;
+const test = (name, fn) => base(name, { skip }, fn);
 
 const cases = [
   ["a passive paraphrase is Same", "The council approved the plan in May.", "The plan was approved by the council in May.", "same"],

@@ -150,6 +150,9 @@ function profileOf(R1, R2, arrs1, arrs2, { licence, contests }) {
 export async function sameForText(first, second, { language = "en", questions = null, cells = null, licence = null, seed = 0, redeals = 20, lexicon = false } = {}) {
   const notes = makeNotes(), commitments = makeCommitments(), organ = makeSameFor({ notes, commitments });
   const [R1, R2] = [await readClaims(first, { language, lexicon }), await readClaims(second, { language, lexicon })];
+  // a reading that produced no claims is the READER's gap, never a difference: say so, typed, with the reader's own gaps (no verdict from nothing)
+  const unread = [[R1, "first"], [R2, "second"]].filter(([R]) => !R.claims.length).map(([R, side]) => ({ side, parse: Array.isArray(R.entry.parse) ? R.entry.parse.length : 0, gaps: R.gaps.map((g) => g.gap ?? g) }));
+  if (unread.length) return { verdict: "gap", readerGap: true, because: "the reader produced no claims", unread, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, standings: [], residue: [], SIG: [], NUL: [], profile: [], byCells: null };
   const perspective = await perspectiveFrom(questions, { language, licence });
   let log = notes.createNotes({ frame: { reader: R1.parser, language, perspective: perspective.name, lexicon: lexicon || "none" } });
   log = hearAll(notes, log, arrangementsOf(R1.claims, "first"), "first").log;
