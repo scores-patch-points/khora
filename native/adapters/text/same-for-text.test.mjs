@@ -52,3 +52,8 @@ test("by cell: a role swap keeps the beings and changes the ties", async () => {
   const at = (k) => r.profile.find((x) => `${x.op}·${x.grain}@${x.level}` === k).outcome;
   assert.equal(at("INS·Figure@end"), "same"); assert.equal(at("CON·Figure@act"), "other");
 });
+
+test("the verdict carries the reader's own stage report (readFull's wiring)", async () => {
+  const r = await sameFor("The council approved the plan.", "The plan was approved by the council.");
+  for (const side of ["first", "second"]) { const claims = r.wiring[side].find((w) => w.stage === "claims"); assert.equal(claims.status, "ran"); assert.ok(claims.claims >= 1); }
+});
