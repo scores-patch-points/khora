@@ -47,7 +47,7 @@ test("every merge the reader emits names the cell (operator and grain) it claims
   for (const m of mergesOf(fx.graph)) assert.ok(namedCell(m), `merge ${m.id} claims no named cell (${JSON.stringify(cellOf(m))})`);
 });
 
-// GAP (confirmed failing on 2aa08b3): nothing refuses a merge. reading-log's fold unions every EOReferentMerge@1 it is handed whether or not it names a grain.
+// GAP (confirmed failing on 2aa08b3): nothing refuses a merge. reading-log's fold unions every EOReferentMerge@1 it is handed whether or not it names a cell.
 test("a merge with no named cell is refused by the record (not applied)", { todo: "reading-log.js::foldReading unions every EOReferentMerge@1; there is no cell to check and no refusal" }, () => {
   const noGrain = mapGraphEntry(fx.log, merge.id, (m) => ({ ...m, provenance: { ...m.provenance, cell: undefined } }));
   assert.equal(applied(noGrain), 0);
