@@ -1,7 +1,7 @@
 // same-for-text.js — the text adapter for organs/same-for.js: are two texts the same FOR a perspective?
 //
-// READ, NEVER SPLIT BY HAND. Each text goes through the master pipeline (reading.js::readDocument, the language declared, the parse kept), and
-// its acts are the parser's own claims (rowsOfFor(stem).claimsOf over each sentence's rows), the same reading every claim-level organ uses.
+// READ, NEVER SPLIT BY HAND. Each text goes through readFull (reading-full.js): readDocument with the language declared and the parse kept, then the
+// grammar's own claims over that parse, every stage reporting ran / skipped / gap. The reader's wiring comes back with the verdict.
 // An end is known by the being the reader's cast minted for it (cast mention spans over the end's head row) or, unminted, by its own face.
 //
 // HEARD AS ARRANGEMENTS, one ledger, two sources (`first`, `second`):
@@ -19,27 +19,18 @@
 //   questions given   each question is read by the same reader; its question word is found by the reader's own morphology (PronType=Int|Rel),
 //                     its gap by that word's role; it is answered from a note list by relation (or a licensed one) with its known ends bound
 //   none given        the reader's default perspective: every role of every act it heard (who did it, to what, and each oblique), keyed by relation
-import { readDocument, rowsOfFor } from "../../reading.js";
 import { makeNotes } from "../../kernel/notes.js";
 import { makeCommitments } from "../../kernel/commitments.js";
 import { makeSameFor, verdictFor, OUTCOMES } from "../../organs/same-for.js";
 
 const lc = (t) => String(t ?? "").toLowerCase();
-const PARSERS = new Map();
 async function readClaims(text, { language = "en", lexicon = false } = {}) {
-  const entry = await readDocument(text, { language, rows: true, lexicon, minCharacters: 0 });
-  const stem = entry.language?.stem ?? entry.language?.code ?? (language === "en" ? "eng" : language);
-  if (!PARSERS.has(stem)) PARSERS.set(stem, await rowsOfFor(stem === "en" ? "eng" : stem));
-  const P = PARSERS.get(stem);
-  const spans = (entry.cast ?? []).flatMap((c) => (c.mentionSpans ?? []).map(([s, t]) => ({ ref: c.ref, s, t })));
-  const refAt = (a, b) => spans.find((x) => x.s <= a && b <= x.t)?.ref ?? null;
-  const out = [];
-  for (const p of entry.parse ?? []) {
-    let cs = []; try { cs = P?.claimsOf ? P.claimsOf(p.text, p.rows) : []; } catch { cs = []; }
-    const mint = (e) => { if (!e) return e; const r = p.rows.find((x) => x.id === e.hid) ?? p.rows.find((x) => (e.ids ?? []).includes(x.id)); return { ...e, ref: r ? refAt(p.offset + r.start, p.offset + r.end) : null }; };
-    for (const c of cs) out.push({ ...c, at: p.offset, sentence: p.text, ARG0: mint(c.ARG0), ARG1: mint(c.ARG1), OBL: (c.OBL ?? []).map(mint) });
-  }
-  return { entry, claims: out, parser: P?.by ?? null, gaps: entry.gaps ?? [] };
+  // READ THROUGH readFull (reading-full.js): the one entry point that composes the stages in helix order and reports each as ran / skipped / gap.
+  // Its claims are the grammar's own (claimsOf over the reader's parse, ends minted from the cast); its wiring is the evidence the cells rest on.
+  const { readFull } = await import("../../reading-full.js");
+  const r = await readFull(text, { language, lexicon });
+  const stageGaps = r.wiring.filter((w) => w.status === "gap").map((w) => ({ gap: `${w.stage}: ${w.reason ?? "gap"}` }));
+  return { entry: r.entry, claims: r.claims, parser: r.entry.parseBy ?? r.wiring.find((w) => w.stage === "claims")?.grammar ?? null, gaps: [...(r.entry.gaps ?? []), ...stageGaps], wiring: r.wiring };
 }
 // a being's KEY is its normalised name, the same key the cast mints its ids from (ref:auto:<normalised surface>), so a being the cast minted in one
 // reading and not in the other is still one being by name; the mint itself is kept as the warrant where it exists
@@ -153,7 +144,7 @@ export async function sameForText(first, second, { language = "en", questions = 
   const [R1, R2] = [await readClaims(first, { language, lexicon }), await readClaims(second, { language, lexicon })];
   // a reading that produced no claims is the READER's gap, never a difference: say so, typed, with the reader's own gaps (no verdict from nothing)
   const unread = [[R1, "first"], [R2, "second"]].filter(([R]) => !R.claims.length).map(([R, side]) => ({ side, parse: Array.isArray(R.entry.parse) ? R.entry.parse.length : 0, gaps: R.gaps.map((g) => g.gap ?? g) }));
-  if (unread.length) return { verdict: "gap", readerGap: true, because: "the reader produced no claims", unread, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, standings: [], residue: [], SIG: [], NUL: [], profile: [], byCells: null };
+  if (unread.length) return { verdict: "gap", readerGap: true, because: "the reader produced no claims", unread, wiring: { first: R1.wiring, second: R2.wiring }, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, standings: [], residue: [], SIG: [], NUL: [], profile: [], byCells: null };
   const perspective = await perspectiveFrom(questions, { language, licence });
   const wantedCells = Array.isArray(cells) ? cells : PERSPECTIVES[cells ?? "meaning"] ?? PERSPECTIVES.meaning;
   let log = notes.createNotes({ frame: { reader: R1.parser, language, perspective: questions?.length ? perspective.name : (typeof cells === "string" ? cells : cells ? "cells" : "meaning"), cells: wantedCells, questions: questions ?? null, lexicon: lexicon || "none" } });   // the perspective IS what this reader stands on (DEF·Ground)
@@ -177,5 +168,5 @@ export async function sameForText(first, second, { language = "en", questions = 
   const profile = profileOf(R1, R2, arrangementsOf(R1.claims, "first"), arrangementsOf(R2.claims, "second"), { licence, contests: h2.contests });
   const wanted = wantedCells;
   const byCells = verdictFor(profile, wanted, { levels: LEVELS });
-  return { ...judged, frame: notes.frameOf(judged.log), verdict: questions?.length ? judged.verdict : byCells.verdict, byQuestions: questions?.length ? judged.verdict : null, byCells, profile, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, perspectiveQuestions: perspective.questions ?? null };
+  return { ...judged, wiring: { first: R1.wiring, second: R2.wiring }, frame: notes.frameOf(judged.log), verdict: questions?.length ? judged.verdict : byCells.verdict, byQuestions: questions?.length ? judged.verdict : null, byCells, profile, gaps: [...R1.gaps, ...R2.gaps], parser: R1.parser, perspectiveQuestions: perspective.questions ?? null };
 }
