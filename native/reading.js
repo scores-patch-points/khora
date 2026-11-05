@@ -99,3 +99,13 @@ export async function readForDoor(text, { language = null, lexicon = "hyperlexic
   const { aliases, report } = await aliasesFor(text, { language, lexicon });
   return readCanonical(text, { ...opts, language, aliases, aliasReport: report });
 }
+
+/** ARE TWO TEXTS THE SAME, FOR A PERSPECTIVE? Sameness as a defeasible commitment (kernel/commitments.js) read by organs/same-for.js: each text read
+ *  by readDocument, its acts heard onto one notes ledger, every correspondence a same-as from its giver, every unplaced part put forward as noise,
+ *  each tested against the perspective with a named null. Verdict "same" | "other" | "gap"; every residual difference is SIG (○) or NUL (∅).
+ *  questions: the asking perspective (strings), or none for the reader's default (every role of every act). licence(l1, l2) → "same" | "converse"
+ *  | null: a caller's giver for correspondences across two relations. Loaded lazily: the adapter itself reads through this file. */
+export async function sameFor(first, second, opts = {}) {
+  const { sameForText } = await import("./adapters/text/same-for-text.js");
+  return sameForText(first, second, opts);
+}

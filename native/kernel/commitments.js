@@ -99,11 +99,21 @@ import { lcg, shuffled } from "./continuation.js";
 export const KINDS = Object.freeze({
   /** these members are ONE — read them folded together */
   SAME_AS: "same-as",
-  /** these members do not bear on this purpose — read them withheld */
+  /** these members are NOISE for this purpose: a difference that makes no difference, NUL (∅) — read them withheld */
+  NOISE: "noise",
+  /** these members are SIGNAL for this purpose: a difference that makes a difference, SIG (○) — read them kept, whatever else would withhold them */
+  SIGNAL: "signal",
+  /** legacy name of NOISE (logs written before 2026-11-04 carry it; it folds exactly as NOISE) */
   DOES_NOT_MATTER: "does-not-matter",
-  /** these members bear on this purpose — read them kept, whatever else would withhold them */
+  /** legacy name of SIGNAL */
   MATTERS: "matters",
 });
+
+/** SIGNAL AND NOISE IN THE CUBE'S OWN OPERATORS. A difference that makes a difference to a purpose is SIG (○): registered as a difference.
+ *  One that makes none is NUL (∅): encountered and held, transforming nothing for that purpose. Neither is a fact in the bytes — each is FOR a purpose. */
+export const DIFFERENCE = Object.freeze({ SIGNAL: Object.freeze({ op: "SIG", glyph: "○" }), NOISE: Object.freeze({ op: "NUL", glyph: "∅" }) });
+const isNoiseKind = (k) => k === KINDS.NOISE || k === KINDS.DOES_NOT_MATTER;
+const isSignalKind = (k) => k === KINDS.SIGNAL || k === KINDS.MATTERS;
 
 /** Why a commitment was refused at the door — before it can stand as even a wish. */
 export const REFUSALS = Object.freeze({
@@ -372,8 +382,8 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
     const withheld = new Set();
     const kept = new Set();
     for (const c of live) {
-      if (c.kind === KINDS.DOES_NOT_MATTER) for (const m of c.members) withheld.add(m);
-      if (c.kind === KINDS.MATTERS) for (const m of c.members) kept.add(m);
+      if (isNoiseKind(c.kind)) for (const m of c.members) withheld.add(m);
+      if (isSignalKind(c.kind)) for (const m of c.members) kept.add(m);
     }
     const underOf = new Map();
     const noteUnder = (id, commitId) => { if (!underOf.has(id)) underOf.set(id, new Set()); underOf.get(id).add(commitId); };
@@ -436,5 +446,18 @@ export function makeCommitments({ taskLog = nativeTaskLog, cellOf = nativeCellOf
     return log;
   }
 
-  return { declare, evaluate, concede, resolve, standings, inForce, classesOf, readUnder, redeal, KINDS, STANDINGS, REFUSALS };
+  /**
+   * differencesOf(log) — what every declared difference IS, for its purpose, as of now: SIG (○, a difference that makes a difference) or
+   * NUL (∅, one that makes none), read off its standing. A noise commitment that held is NUL; refused or conceded, the difference turned out
+   * to matter, so it is SIG. A signal commitment that held is SIG; refused or conceded, NUL. A wish is neither yet, and says so.
+   */
+  function differencesOf(log) {
+    return standings(log).filter((c) => isNoiseKind(c.kind) || isSignalKind(c.kind)).map((c) => {
+      const held = c.standing === STANDINGS.TESTIMONY, undone = c.standing === STANDINGS.REFUSED || c.standing === STANDINGS.CONCEDED;
+      const d = c.standing === STANDINGS.WISH ? null : isNoiseKind(c.kind) ? (held ? DIFFERENCE.NOISE : undone ? DIFFERENCE.SIGNAL : null) : (held ? DIFFERENCE.SIGNAL : undone ? DIFFERENCE.NOISE : null);
+      return { id: c.id, members: c.members, purpose: c.purpose, giver: c.giver, standing: c.standing, ...(d ? { op: d.op, glyph: d.glyph } : { op: null, glyph: null, untested: true }) };
+    });
+  }
+
+  return { declare, evaluate, concede, resolve, standings, inForce, classesOf, readUnder, redeal, differencesOf, KINDS, STANDINGS, REFUSALS, DIFFERENCE };
 }
