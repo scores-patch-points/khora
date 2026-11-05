@@ -65,3 +65,10 @@ Fixed on dev by the pass (base to option): the n-gram duplicates ("Golden Gate B
 ## What this round does not change
 
 `attention-binder.js`, `attention-switch.js`, PR 95, the binder clone, `readToWeft`, the held-out set, the scorer.
+
+## Addendum 2026-11-05: R1 re-pinned against canonical priors
+
+R1 never passed in CI. Its hashes were pinned with `KHORA_PRIORS_DIR` set to the ten-prior English stand-in (see the canon check above). CI clones canonical janus main (`b1cc37f`, 1,956 priors) beside khora. There the reader also reads `morph-cues-en.json` and the part-of-speech priors of 26 other languages. Each of the two sets changes which mentions the cast collects. Added to the ten together, they reproduce the full-janus entry exactly (bisected on `Golden_Gate_Bridge.txt`).
+
+R1's claim is unchanged: the option absent, and the option `false`, give an entry JSON-identical to base `15f82fcd`. The hashes are now that base read under canonical janus `b1cc37f`. Base `15f82fcd` and HEAD `235d9f1` give identical hashes there, and `castIdentity: false` equals the option absent. Under the ten-prior stand-in, the old hashes still hold, so the reader did not drift. Only the priors environment of the pin changed.
+
