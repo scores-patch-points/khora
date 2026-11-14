@@ -8,7 +8,9 @@
 //
 // The colony knows no domain. Moves and judges live in er7py/swarm.py; this file is the ants, the trails, the ceiling and the report.
 // The evaluator is injected (evalBatch / ceilingOf) so the colony is testable without python and the notebook can run it on real data.
-import { deposit, routeOrderFor } from "../kernel/stigmergy.js";
+import { routeOrderFor } from "../kernel/stigmergy.js";
+import { depositLogged } from "./trail-weave.mjs";
+const deposit = (t, e) => depositLogged(t, e, "structure-swarm"); // the kernel deposit, also handed to Penelope to weave into pharos when her address is set
 
 export const TRANSFORMS = Object.freeze(["diff1", "diff8", "diff64", "fast4", "fast16", "slow16", "abs", "sq", "blk64", "blk512", "detrend"]);
 export const STATS = Object.freeze(["std", "skew", "kurt", "acf1", "acf8", "acf64", "slope", "peak", "trend"]);

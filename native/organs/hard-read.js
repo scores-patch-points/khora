@@ -32,7 +32,9 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { deposit, routeOrderFor } from "../kernel/stigmergy.js";
+import { routeOrderFor } from "../kernel/stigmergy.js";
+import { depositLogged } from "./trail-weave.mjs";
+const deposit = (t, e) => depositLogged(t, e, "hard-read"); // the kernel deposit, also handed to Penelope to weave into pharos when her address is set
 import { unreadMentions } from "./silence.js";
 import { readQuantities, ANCHOR_GENERIC } from "./quantities.js";
 
