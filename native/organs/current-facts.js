@@ -41,7 +41,9 @@ import {
   kindId, linkId, withTermStructure, kindNotes, ALIAS_VERB,
 } from "../kernel/hyperlexicon-routes.js";
 import { assertionId } from "./hyperlexicon.js";
-import { deposit as depositTrail, routeOrderFor } from "../kernel/stigmergy.js";
+import { routeOrderFor } from "../kernel/stigmergy.js";
+import { depositLogged } from "./trail-weave.mjs";
+const depositTrail = (t, e) => depositLogged(t, e, "current-facts"); // the kernel deposit, also handed to Penelope to weave into pharos when her address is set
 import { factShape } from "./fact-gate.js";
 
 const DAY_MS = 86400000;

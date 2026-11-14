@@ -1383,3 +1383,11 @@ fast: 1 file · 9 affected tests pass (new `native/kernel/stigmergy.test.js`; th
 | Simon/Chekhov | — | native/kernel/stigmergy.js:98 | noted, disclosed | DEFAULT ORDER CHANGES for four callers (hard-read, structure-swarm, hyperlexicon-routes, current-facts): a route with only failed deposits now sorts after never-tried routes, and a scout may probe a tried route. Old behaviour: `deadLast: false, scoutTried: false`. All four import clean; none has a test, so the effect on them is unmeasured |
 | Kondo | — | native/kernel/stigmergy.js:83 | false-positive-on-review | "DEAD" is the name of a band of routes, not dead code |
 clean: none routed beyond the above
+
+## 2026-11-14 — Wilson's deposits handed to Penelope to weave into pharos (branch `wilson-trails-to-pharos`, working diff, stacked on `wilson-trail-fixes`)
+fast: 3 changed + 2 new files · `native/organs/trail-weave.test.mjs` 5 pass, 1 typed skip without a Penelope checkout (6 of 6 with `PENELOPE_HOME` and `PENELOPE_PHAROS_TEST_JSON` set: deposit -> her door -> real pharos lib on a scratch log -> trails folded back equal) · law: ok (pre-existing dup-header WARN S17/S96)
+| lens | citation | file:line | verdict | one line |
+| Simon/Chekhov | — | native/organs/trail-weave.mjs:1 | noted, disclosed | wired into hard-read, structure-swarm and current-facts, but OFF unless `PENELOPE_WEAVE_URL` is set; nothing sets it, so no deposit reaches pharos yet. A first draft opened pharos from khora directly; the person ruled that the ants write through Penelope, so khora now knows only her address and there is no path around her. The three organs have no test of their own; they import clean |
+| Feynman | — | native/organs/trail-weave.mjs:16 | noted | the 60 s retry after an unreachable send is an unmeasured typed constant (`KHORA_WEAVE_RETRY_MS`); the cell `SIG·Ground` for `trail-deposit` is this file's proposal, not a measured assignment |
+| Ostrom | — | native/organs/trail-weave.mjs:14 | noted | a deposit refused or unsent is counted (status()), not retried and not written elsewhere: the organ's own trail file still has it, pharos does not, and that gap is visible only in the counters of the process that made it |
+clean: none routed beyond the above
