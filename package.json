@@ -11,7 +11,8 @@
     "eval:meaning": "node eval/meaning/run.mjs",
     "test:cast": "node --test native/organs/cast-identity.test.mjs",
     "test:same": "node --test native/adapters/text/same-for-text.test.mjs",
-    "test:full": "node --test native/tests/reading-full.test.mjs"
+    "test:full": "node --test native/tests/reading-full.test.mjs",
+    "test:finder": "node --test native/adapters/text/finder-reading.test.mjs native/organs/finder-witness.test.mjs"
   },
   "repository": {
     "type": "git",
