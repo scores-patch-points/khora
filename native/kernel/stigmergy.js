@@ -24,28 +24,31 @@
 // alarm trail: a claim found to CONFLICT with the environment demotes the
 // row itself, because a wrong answer is an active danger, not an absence.
 //
-// EVAPORATION. A deposit's weight decays as a POWER of its age (the default,
-// `law: "power"`): weight = max(1, ageSeconds) ** -0.5, the base-level rule of
-// Anderson & Schooler (1991) / ACT-R. A route's strength is the sum over its
-// successful deposits. This law was measured, not chosen: on 6,556 real
-// agent file touches (ledgers/sig-real-use, prereg stamped 2026-11-14; a
-// replication with independent code on the SAME transcripts in
-// ledgers/sig-pointer-log, so it checks the extraction, not the law's
-// generality), the chance a thing is
-// used again falls as a power of the gap (slope about -1.2 in seconds; power
-// R2 0.99 vs exponential 0.40-0.43), and the power sum pointed at the next
-// read better than recency, an exponential sum or frequency (hit@8 39.7 vs
-// 34.7, 33.6, 29.5). The exponent 0.5 is the pre-registered ACT-R value, not
-// fitted. A power law needs no half-life: it is scale-free, so the only
-// unit-dependence is the 1-second floor on age (a typed choice, disclosed).
-// NOT MEASURED HERE: the law comes from agents re-reading FILES, not from
-// hyperlexicon route resolutions. That it transfers to routes is an
-// assumption; `law: "exp"` stays available to test it against.
-// `law: "exp"` keeps exponential evaporation with a TRUE half-life:
-//   weight = 2 ** (-ageDays / halfLifeDays). Before 2026-11-14 this was
-//   exp(-ageDays / halfLifeDays), which left 0.37, not 0.5, after one
-//   "half-life".
-//
+// EVAPORATION. Two laws; the caller chooses with `law`.
+//   "exp" (default): weight = 2 ** (-ageDays / halfLifeDays), a TRUE half-life
+//     (default 7 days, a typed constant). Before 2026-11-14 this was
+//     exp(-ageDays / halfLifeDays), which left 0.37, not 0.5, after one
+//     "half-life".
+//   "power": weight = max(1, ageSeconds) ** -d, d = 0.5, summed over a route's
+//     successful deposits: the base-level rule of Anderson & Schooler (1991) /
+//     ACT-R. Measured on real agent FILE re-use (ledgers/sig-real-use, prereg
+//     stamped 2026-11-14, replicated with independent code on the same
+//     transcripts): re-use falls as a power of the gap, and the power sum at the
+//     pre-registered d = 0.5 IN POSITIONS pointed at the next read best (hit@8
+//     39.7 vs recency 34.7, exp sum 33.6, frequency 29.5). In SECONDS, as here,
+//     d = 0.5 gave 37.9 (exploratory, not pre-registered); d near 1.2 gave about
+//     35, no better than recency.
+// Why "exp" stays the default: the same study found recency beat the power
+// sum on the Premiere replay stream (hit@8 97.3 vs 64.8), so no single law is
+// earned across kinds of things, and none has been measured on route
+// resolutions. A caller should declare its law once it is measured on its own
+// traffic. Size of the difference: a day-old deposit weighs 0.91 under "exp"
+// and 0.0034 under "power"; under "power" one fresh deposit outweighs about
+// 290 day-old ones, so "power" behaves close to recency over days.
+// Deposits stamped in the future (clock skew) are treated as age 0 under both
+// laws (weight 1), as before. Callers that stamp every deposit with the `now`
+// they read at (age 0 for all) get a plain count under either law.
+
 // LEARNED ORDER. For a head, each route's strength is the sum of its
 // deposits' weights; ties are broken by mean latency (faster wins); routes
 // with no deposits keep the structural default order, tried after every
@@ -54,8 +57,8 @@
 // scouts the colony only ever exploits what it already knows).
 
 const DAY_MS = 86400000;
-export const EVAPORATION_LAW = "power";
-export const POWER_DECAY = 0.5; // ACT-R base-level decay d; pre-registered, not fitted
+export const EVAPORATION_LAW = "exp"; // default; "power" is opt-in (see EVAPORATION above)
+export const POWER_DECAY = 0.5; // ACT-R base-level decay d; the pre-registered value, not fitted
 export const TRAIL_HALF_LIFE_DAYS = 7;
 export const STIGMERGY_SCHEMA = "EOStigmergy@1";
 export const TRAIL_WINDOW = 128; // deposits kept per head — old ones evaporate out of the ledger
@@ -116,8 +119,8 @@ export function trailStats(trails, head, { now = Date.now(), routes = null, half
  * so once every route had a deposit exploration stopped for good: the army-ant
  * mill, a trail that reinforces itself with no exit. `scoutTried: false`
  * restores that. `explore: 0` turns scouts off. The rng is injectable.
- * `law` sets evaporation: "power" (default, measured) or "exp" (with
- * `halfLifeDays`); `halfLifeDays: Infinity` = none under either law.
+ * `law` sets evaporation: "exp" (default, with `halfLifeDays`) or "power"
+ * (measured on file re-use, not on routes); `halfLifeDays: Infinity` = none.
  */
 export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, law = EVAPORATION_LAW, deadLast = true, scoutTried = true } = {}) {
   const defaults = routes ?? [];

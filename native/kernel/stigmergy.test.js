@@ -77,10 +77,14 @@ test("routes outside the default list still order (callers filter them)", () => 
 // --- 2026-11-14: power-law evaporation, measured on real use (ledgers/sig-real-use + its replication) ---
 const S = 1000;
 
-test("power law is the default: weight = age_seconds ** -0.5, so 4x older weighs half", () => {
-  assert.equal(trailWeight(NOW - 100 * S, NOW), 0.1);
-  assert.equal(trailWeight(NOW - 400 * S, NOW) / trailWeight(NOW - 100 * S, NOW), 0.5);
-  assert.equal(trailWeight(NOW, NOW), 1); // 1-second floor: a deposit made now has weight 1, never infinity
+const P = { law: "power" };
+
+test("exp stays the default; power is opt-in: weight = age_seconds ** -0.5, so 4x older weighs half", () => {
+  assert.equal(trailWeight(NOW - 7 * DAY, NOW), 0.5); // default law is exp with a true half-life
+  assert.equal(trailWeight(NOW - 100 * S, NOW, P), 0.1);
+  assert.equal(trailWeight(NOW - 400 * S, NOW, P) / trailWeight(NOW - 100 * S, NOW, P), 0.5);
+  assert.equal(trailWeight(NOW, NOW, P), 1);
+  assert.equal(trailWeight(NOW + 60 * S, NOW, P), 1); // clock skew: a future deposit counts as age 0, weight 1 (as under exp) // 1-second floor: a deposit made now has weight 1, never infinity
 });
 
 test("strength is the ACT-R power sum: many older uses can outweigh one recent use (recency alone would not)", () => {
@@ -88,8 +92,8 @@ test("strength is the ACT-R power sum: many older uses can outweigh one recent u
     ...Array.from({ length: 5 }, () => ({ head: "h", route: "wiki", ok: true, ms: 100, at: NOW - 100 * S })), // 5 x 0.1 = 0.5
     { head: "h", route: "web", ok: true, ms: 100, at: NOW - 10 * S }, // 10 ** -0.5 = 0.316
   ]);
-  assert.equal(routeOrderFor(t, "h", { now: NOW, routes: R, rng: quiet })[0], "wiki");
-  const st = trailStats(t, "h", { now: NOW, routes: R });
+  assert.equal(routeOrderFor(t, "h", { now: NOW, routes: R, rng: quiet, ...P })[0], "wiki");
+  const st = trailStats(t, "h", { now: NOW, routes: R, ...P });
   assert.ok(Math.abs(st.find((s) => s.route === "wiki").strength - 0.5) < 1e-12);
 });
 
@@ -99,7 +103,7 @@ test("power law is scale-free: stretching every age by the same factor never cha
     { head: "h", route: "wiki", ok: true, ms: 100, at: NOW - 9 * 3600 * S * k },
     { head: "h", route: "web", ok: true, ms: 100, at: NOW - 1 * 3600 * S * k },
   ]);
-  const orders = [1, 24, 1000].map((k) => routeOrderFor(mk(k), "h", { now: NOW + 0, routes: R, rng: quiet }).join(","));
+  const orders = [1, 24, 1000].map((k) => routeOrderFor(mk(k), "h", { now: NOW + 0, routes: R, rng: quiet, ...P }).join(","));
   assert.equal(new Set(orders).size, 1);
   // the exponential law with a 7-day half-life does depend on scale: at the largest stretch the order flips
   const exp = [1, 1000].map((k) => routeOrderFor(mk(k), "h", { now: NOW, routes: R, rng: quiet, law: "exp" })[0]);
