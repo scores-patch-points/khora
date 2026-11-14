@@ -24,9 +24,31 @@
 // alarm trail: a claim found to CONFLICT with the environment demotes the
 // row itself, because a wrong answer is an active danger, not an absence.
 //
-// EVAPORATION. A deposit's weight decays exponentially from its own moment:
-//   weight = exp(-ageDays / halfLifeDays). Default half-life: 7 days.
-//
+// EVAPORATION. Two laws; the caller chooses with `law`.
+//   "exp" (default): weight = 2 ** (-ageDays / halfLifeDays), a TRUE half-life
+//     (default 7 days, a typed constant). Before 2026-11-14 this was
+//     exp(-ageDays / halfLifeDays), which left 0.37, not 0.5, after one
+//     "half-life".
+//   "power": weight = max(1, ageSeconds) ** -d, d = 0.5, summed over a route's
+//     successful deposits: the base-level rule of Anderson & Schooler (1991) /
+//     ACT-R. Measured on real agent FILE re-use (ledgers/sig-real-use, prereg
+//     stamped 2026-11-14, replicated with independent code on the same
+//     transcripts): re-use falls as a power of the gap, and the power sum at the
+//     pre-registered d = 0.5 IN POSITIONS pointed at the next read best (hit@8
+//     39.7 vs recency 34.7, exp sum 33.6, frequency 29.5). In SECONDS, as here,
+//     d = 0.5 gave 37.9 (exploratory, not pre-registered); d near 1.2 gave about
+//     35, no better than recency.
+// Why "exp" stays the default: the same study found recency beat the power
+// sum on the Premiere replay stream (hit@8 97.3 vs 64.8), so no single law is
+// earned across kinds of things, and none has been measured on route
+// resolutions. A caller should declare its law once it is measured on its own
+// traffic. Size of the difference: a day-old deposit weighs 0.91 under "exp"
+// and 0.0034 under "power"; under "power" one fresh deposit outweighs about
+// 290 day-old ones, so "power" behaves close to recency over days.
+// Deposits stamped in the future (clock skew) are treated as age 0 under both
+// laws (weight 1), as before. Callers that stamp every deposit with the `now`
+// they read at (age 0 for all) get a plain count under either law.
+
 // LEARNED ORDER. For a head, each route's strength is the sum of its
 // deposits' weights; ties are broken by mean latency (faster wins); routes
 // with no deposits keep the structural default order, tried after every
@@ -35,6 +57,8 @@
 // scouts the colony only ever exploits what it already knows).
 
 const DAY_MS = 86400000;
+export const EVAPORATION_LAW = "exp"; // default; "power" is opt-in (see EVAPORATION above)
+export const POWER_DECAY = 0.5; // ACT-R base-level decay d; the pre-registered value, not fitted
 export const TRAIL_HALF_LIFE_DAYS = 7;
 export const STIGMERGY_SCHEMA = "EOStigmergy@1";
 export const TRAIL_WINDOW = 128; // deposits kept per head — old ones evaporate out of the ledger
@@ -43,8 +67,10 @@ export const EXPLORE_EPSILON = 0.1; // chance a never-tried route is probed firs
 export const ageDays = (at, now) => Math.max(0, (now - at) / DAY_MS);
 
 /** Evaporation: how much of a deposit from `at` is still in the air at `now`. */
-export function trailWeight(at, now, { halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
-  return Math.exp(-ageDays(at, now) / halfLifeDays);
+export function trailWeight(at, now, { law = EVAPORATION_LAW, d = POWER_DECAY, halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
+  if (law === "power") return Math.max(1, (now - at) / 1000) ** -d;
+  if (law === "exp") return halfLifeDays === Infinity ? 1 : 2 ** (-ageDays(at, now) / halfLifeDays);
+  throw new Error(`unknown evaporation law: ${law}`);
 }
 
 /**
@@ -60,7 +86,7 @@ export function deposit(trails, entry) {
 }
 
 /** The per-route reading of one head's trails, compared for speed and efficiency. */
-export function trailStats(trails, head, { now = Date.now(), routes = null, halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
+export function trailStats(trails, head, { now = Date.now(), routes = null, halfLifeDays = TRAIL_HALF_LIFE_DAYS, law = EVAPORATION_LAW } = {}) {
   const list = trails?.[head] ?? [];
   const out = new Map();
   const blank = (r) => ({ route: r, strength: 0, deposits: 0, hits: 0, totalMs: 0, lastAt: -Infinity });
@@ -69,7 +95,7 @@ export function trailStats(trails, head, { now = Date.now(), routes = null, half
     const s = out.get(t.route) ?? blank(t.route);
     s.deposits += 1;
     s.lastAt = Math.max(s.lastAt, Number(t.at) || 0);
-    if (t.ok) { s.hits += 1; s.strength += halfLifeDays === Infinity ? 1 : trailWeight(t.at, now, { halfLifeDays }); s.totalMs += t.ms; }
+    if (t.ok) { s.hits += 1; s.strength += halfLifeDays === Infinity ? 1 : trailWeight(t.at, now, { halfLifeDays, law }); s.totalMs += t.ms; }
     out.set(t.route, s);
   }
   return [...out.values()].map((s) => ({ ...s, meanMs: s.hits ? s.totalMs / s.hits : null }));
@@ -93,12 +119,13 @@ export function trailStats(trails, head, { now = Date.now(), routes = null, half
  * so once every route had a deposit exploration stopped for good: the army-ant
  * mill, a trail that reinforces itself with no exit. `scoutTried: false`
  * restores that. `explore: 0` turns scouts off. The rng is injectable.
- * `halfLifeDays` sets evaporation (Infinity = none).
+ * `law` sets evaporation: "exp" (default, with `halfLifeDays`) or "power"
+ * (measured on file re-use, not on routes); `halfLifeDays: Infinity` = none.
  */
-export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, deadLast = true, scoutTried = true } = {}) {
+export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, law = EVAPORATION_LAW, deadLast = true, scoutTried = true } = {}) {
   const defaults = routes ?? [];
   const idx = (r) => { const i = defaults.indexOf(r); return i < 0 ? Infinity : i; };
-  const stats = trailStats(trails, head, { now, routes: defaults, halfLifeDays });
+  const stats = trailStats(trails, head, { now, routes: defaults, halfLifeDays, law });
   const byStrength = (a, b) => {
     if (b.strength !== a.strength) return b.strength - a.strength;
     if (a.meanMs !== null && b.meanMs !== null && a.meanMs !== b.meanMs) return a.meanMs - b.meanMs;

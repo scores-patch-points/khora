@@ -1383,3 +1383,18 @@ fast: 1 file · 9 affected tests pass (new `native/kernel/stigmergy.test.js`; th
 | Simon/Chekhov | — | native/kernel/stigmergy.js:98 | noted, disclosed | DEFAULT ORDER CHANGES for four callers (hard-read, structure-swarm, hyperlexicon-routes, current-facts): a route with only failed deposits now sorts after never-tried routes, and a scout may probe a tried route. Old behaviour: `deadLast: false, scoutTried: false`. All four import clean; none has a test, so the effect on them is unmeasured |
 | Kondo | — | native/kernel/stigmergy.js:83 | false-positive-on-review | "DEAD" is the name of a band of routes, not dead code |
 clean: none routed beyond the above
+
+## 2026-11-14 — kernel/stigmergy: power-law evaporation (ACT-R base level) as default; exp gets a true half-life (sig-power-law-evaporation, stacked on wilson-trail-fixes)
+fast: 3 files · stigmergy.test.js 14/14 · law: ok (0 citations) · affected suites: same failures with and without this diff (root 161 fail both, 1897 vs 1892 pass = the 5 new tests; native answer-ladder, pointer-match, conductor fail on the base too)
+| lens | citation | file:line | verdict | one line |
+| Pearl | — | native/kernel/stigmergy.js:32 | fixed | "independent replication" shared the same transcripts; reworded to code-independent, same data |
+| Diaconis | — | native/kernel/stigmergy.js:40 | fixed | law measured on file re-reads, not route resolutions; transfer disclosed as an assumption, 1 s floor disclosed as typed, exp kept to test against |
+| Simon/Chekhov | — | native/kernel/stigmergy.js:56 | noted, disclosed | DEFAULT STRENGTH CHANGES for five callers (hard-read, structure-swarm, hyperlexicon-routes, current-facts, escalation): power sum instead of exp(-t/7d). Old behaviour: `law: "exp"` (now with a true half-life, so not byte-identical to before). All five import clean; none has a test, so the effect on them is unmeasured |
+chorus-fast verdict FAIL is the pre-existing suite failures above, identical without this diff; nothing new fails.
+
+## 2026-11-14 — #109 revised after the ants session's review: exp stays default (true half-life), power opt-in (sig-power-law-evaporation)
+fast: 3 files · stigmergy.test.js 14/14 · law: ok
+| lens | citation | file:line | verdict | one line |
+| Feynman | — | native/kernel/stigmergy.js:27 | fixed | a single typed default was not earned: the cited study has recency beating the power sum on the Premiere stream (97.3 vs 64.8); power made opt-in |
+| Diaconis | — | native/kernel/stigmergy.js:33 | fixed | the 39.7 was d = 0.5 in POSITIONS; in seconds d = 0.5 gives 37.9 and d near 1.2 gives about 35 (exploratory), now stated |
+| Simon/Chekhov | — | native/kernel/stigmergy.js:47 | noted | callers that stamp every deposit at the `now` they read at get a plain count under either law; future-stamped deposits weigh 1 under both, as before |
