@@ -1374,3 +1374,12 @@ fast: 2 files · affected tests: 32 pass (29 + 3 new, each flag with a flag-off 
 | Greenberg | `Q_CUE` / `Y_CUE` | English | disclosed | closed English cue words (quarterly, <ordinal> quarter, full-year, annual, consecutive year, fiscal year); the module stays English by declaration and the reader hook gives other languages `figures: []` plus the typed gap |
 | Simon/Chekhov | `FIXES` | wired, not consumed | disclosed | exercised by tests and the scorer; no door passes `fixes` |
 clean: Dijkstra, Holmes, Alexander, Marshall (no law edited), Kondo, Lévi-Strauss.
+
+## 2026-11-14 — Wilson's kernel trails: dead routes after untried, scouts past the mill, switchable half-life (branch `wilson-trail-fixes`, working diff)
+fast: 1 file · 9 affected tests pass (new `native/kernel/stigmergy.test.js`; the kernel trails had no test before) · law: ok (pre-existing dup-header WARN S17/S96; no citations added)
+| lens | citation | file:line | verdict | one line |
+| Diaconis | — | native/kernel/stigmergy.js:98 | noted | rng and now are injected; every test pins them, no test reads Math.random |
+| Feynman | — | native/kernel/stigmergy.js:116 | noted | `explore > 0` and `order.length < 2` are guards, not tuned bars; EXPLORE_EPSILON 0.1 and the 7-day half-life remain unmeasured typed constants, now switchable so a caller can ablate them |
+| Simon/Chekhov | — | native/kernel/stigmergy.js:98 | noted, disclosed | DEFAULT ORDER CHANGES for four callers (hard-read, structure-swarm, hyperlexicon-routes, current-facts): a route with only failed deposits now sorts after never-tried routes, and a scout may probe a tried route. Old behaviour: `deadLast: false, scoutTried: false`. All four import clean; none has a test, so the effect on them is unmeasured |
+| Kondo | — | native/kernel/stigmergy.js:83 | false-positive-on-review | "DEAD" is the name of a band of routes, not dead code |
+clean: none routed beyond the above
