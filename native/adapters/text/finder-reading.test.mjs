@@ -36,14 +36,14 @@ test('the figure parser refuses what it cannot read one way: the language is the
 });
 
 test("readFull's parse becomes the finder's reading: tokens, tags and names are the reading's own", () => {
-  const t = 'Motorola did not deliver 1,200 cameras to Nashville.';
-  const R = readingFromFull(t, full(t, ['Motorola/PROPN//4/nsubj', 'did/AUX//4/aux', 'not/PART/Polarity=Neg/4/advmod', 'deliver/VERB//0/root', '1,200/NUM/NumType=Card/6/nummod', 'cameras/NOUN//4/obj', 'to/ADP//8/case', 'Nashville/PROPN//4/obl', './PUNCT//4/punct'], [{ surface: 'Nashville', mentionSpans: [[42, 52]] }]), { language: 'en', rev: 'test' });
+  const t = 'Acmecorp did not deliver 1,200 cameras to Riverdale.';
+  const R = readingFromFull(t, full(t, ['Acmecorp/PROPN//4/nsubj', 'did/AUX//4/aux', 'not/PART/Polarity=Neg/4/advmod', 'deliver/VERB//0/root', '1,200/NUM/NumType=Card/6/nummod', 'cameras/NOUN//4/obj', 'to/ADP//8/case', 'Riverdale/PROPN//4/obl', './PUNCT//4/punct'], [{ surface: 'Riverdale', mentionSpans: [[42, 52]] }]), { language: 'en', rev: 'test' });
   assert.equal(R.parsed, true); assert.equal(R.offersNames, true); assert.equal(R.by, 'khora readFull@test');
   assert.ok(R.tokens.every((x) => t.slice(x.start, x.end) === x.form));
   assert.equal(R.tokens.find((x) => x.form === 'not').feats, 'Polarity=Neg');
   assert.equal(R.tokens.find((x) => x.form === '.').word, false);
   assert.deepEqual(R.amounts.map((a) => [a.text, a.value]), [['1,200', 1200]]);
-  assert.deepEqual(R.names.map((n) => n.text).sort(), ['Motorola', 'Nashville'], 'the cast name loses its full stop; the proper noun the cast did not carry is added');
+  assert.deepEqual(R.names.map((n) => n.text).sort(), ['Acmecorp', 'Riverdale'], 'the cast name loses its full stop; the proper noun the cast did not carry is added');
 });
 
 test('a figure is a run that starts at a digit; a numeral written as a word is not offered as a figure', () => {
