@@ -60,39 +60,61 @@ export function deposit(trails, entry) {
 }
 
 /** The per-route reading of one head's trails, compared for speed and efficiency. */
-export function trailStats(trails, head, { now = Date.now(), routes = null } = {}) {
+export function trailStats(trails, head, { now = Date.now(), routes = null, halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
   const list = trails?.[head] ?? [];
   const out = new Map();
-  for (const r of routes ?? []) out.set(r, { route: r, strength: 0, deposits: 0, hits: 0, totalMs: 0 });
+  const blank = (r) => ({ route: r, strength: 0, deposits: 0, hits: 0, totalMs: 0, lastAt: -Infinity });
+  for (const r of routes ?? []) out.set(r, blank(r));
   for (const t of list) {
-    const s = out.get(t.route) ?? { route: t.route, strength: 0, deposits: 0, hits: 0, totalMs: 0 };
+    const s = out.get(t.route) ?? blank(t.route);
     s.deposits += 1;
-    if (t.ok) { s.hits += 1; s.strength += trailWeight(t.at, now); s.totalMs += t.ms; }
+    s.lastAt = Math.max(s.lastAt, Number(t.at) || 0);
+    if (t.ok) { s.hits += 1; s.strength += halfLifeDays === Infinity ? 1 : trailWeight(t.at, now, { halfLifeDays }); s.totalMs += t.ms; }
     out.set(t.route, s);
   }
   return [...out.values()].map((s) => ({ ...s, meanMs: s.hits ? s.totalMs / s.hits : null }));
 }
 
 /**
- * The learned order of routes for a head: strongest successful trail first,
- * equal strengths by mean latency (faster wins), and routes that have never
- * deposited trailing in the structural default order. With probability
- * `explore` a never-tried route is probed first — the scout. The epsilon is
- * injectable for deterministic tests.
+ * The learned order of routes for a head, in three bands:
+ *   1. EARNED   routes with a live successful trail (strength > 0): strongest
+ *               first, equal strengths by mean latency (faster wins).
+ *   2. UNTRIED  routes that have never deposited, in the structural default order.
+ *   3. DEAD     routes that were tried and hold no live success (every try
+ *               failed, or its successes have evaporated), least recently
+ *               tried first.
+ * Before 2026-11-14 band 3 sorted AHEAD of band 2, because any deposit counted
+ * as "tried": a route that only ever failed was walked before any route never
+ * tried. `deadLast: false` restores that order.
+ *
+ * SCOUTS. With probability `explore` one route is probed first: a never-tried
+ * route if any, else (`scoutTried`, default on) the least recently tried route
+ * not already first. Before 2026-11-14 scouts only probed never-tried routes,
+ * so once every route had a deposit exploration stopped for good: the army-ant
+ * mill, a trail that reinforces itself with no exit. `scoutTried: false`
+ * restores that. `explore: 0` turns scouts off. The rng is injectable.
+ * `halfLifeDays` sets evaporation (Infinity = none).
  */
-export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random } = {}) {
+export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, deadLast = true, scoutTried = true } = {}) {
   const defaults = routes ?? [];
-  const stats = trailStats(trails, head, { now, routes: defaults });
-  const tried = stats.filter((s) => s.deposits > 0);
-  const ordered = [...tried].sort((a, b) => {
+  const idx = (r) => { const i = defaults.indexOf(r); return i < 0 ? Infinity : i; };
+  const stats = trailStats(trails, head, { now, routes: defaults, halfLifeDays });
+  const byStrength = (a, b) => {
     if (b.strength !== a.strength) return b.strength - a.strength;
     if (a.meanMs !== null && b.meanMs !== null && a.meanMs !== b.meanMs) return a.meanMs - b.meanMs;
-    return defaults.indexOf(a.route) - defaults.indexOf(b.route);
-  });
-  const rank = new Map(ordered.map((s, i) => [s.route, i]));
-  const rest = defaults.filter((r) => !rank.has(r));
-  const neverTried = rest[0] ?? null;
-  const order = [...ordered.map((s) => s.route), ...rest];
-  if (neverTried && rng() < explore) return [neverTried, ...order.filter((r) => r !== neverTried)];
-  return order;
+    return idx(a.route) - idx(b.route);
+  };
+  const untried = stats.filter((s) => s.deposits === 0).sort((a, b) => idx(a.route) - idx(b.route));
+  let order;
+  if (deadLast) {
+    const earned = stats.filter((s) => s.deposits > 0 && s.strength > 0).sort(byStrength);
+    const dead = stats.filter((s) => s.deposits > 0 && !(s.strength > 0)).sort((a, b) => a.lastAt - b.lastAt || idx(a.route) - idx(b.route));
+    order = [...earned, ...untried, ...dead].map((s) => s.route);
+  } else {
+    order = [...stats.filter((s) => s.deposits > 0).sort(byStrength), ...untried].map((s) => s.route);
+  }
+  if (!(explore > 0) || order.length < 2 || !(rng() < explore)) return order;
+  const scout = untried[0]?.route
+    ?? (scoutTried ? stats.filter((s) => s.route !== order[0]).sort((a, b) => a.lastAt - b.lastAt || idx(a.route) - idx(b.route))[0]?.route : null);
+  return scout ? [scout, ...order.filter((r) => r !== scout)] : order;
 }
