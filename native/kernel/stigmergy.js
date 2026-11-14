@@ -24,8 +24,27 @@
 // alarm trail: a claim found to CONFLICT with the environment demotes the
 // row itself, because a wrong answer is an active danger, not an absence.
 //
-// EVAPORATION. A deposit's weight decays exponentially from its own moment:
-//   weight = exp(-ageDays / halfLifeDays). Default half-life: 7 days.
+// EVAPORATION. A deposit's weight decays as a POWER of its age (the default,
+// `law: "power"`): weight = max(1, ageSeconds) ** -0.5, the base-level rule of
+// Anderson & Schooler (1991) / ACT-R. A route's strength is the sum over its
+// successful deposits. This law was measured, not chosen: on 6,556 real
+// agent file touches (ledgers/sig-real-use, prereg stamped 2026-11-14; a
+// replication with independent code on the SAME transcripts in
+// ledgers/sig-pointer-log, so it checks the extraction, not the law's
+// generality), the chance a thing is
+// used again falls as a power of the gap (slope about -1.2 in seconds; power
+// R2 0.99 vs exponential 0.40-0.43), and the power sum pointed at the next
+// read better than recency, an exponential sum or frequency (hit@8 39.7 vs
+// 34.7, 33.6, 29.5). The exponent 0.5 is the pre-registered ACT-R value, not
+// fitted. A power law needs no half-life: it is scale-free, so the only
+// unit-dependence is the 1-second floor on age (a typed choice, disclosed).
+// NOT MEASURED HERE: the law comes from agents re-reading FILES, not from
+// hyperlexicon route resolutions. That it transfers to routes is an
+// assumption; `law: "exp"` stays available to test it against.
+// `law: "exp"` keeps exponential evaporation with a TRUE half-life:
+//   weight = 2 ** (-ageDays / halfLifeDays). Before 2026-11-14 this was
+//   exp(-ageDays / halfLifeDays), which left 0.37, not 0.5, after one
+//   "half-life".
 //
 // LEARNED ORDER. For a head, each route's strength is the sum of its
 // deposits' weights; ties are broken by mean latency (faster wins); routes
@@ -35,6 +54,8 @@
 // scouts the colony only ever exploits what it already knows).
 
 const DAY_MS = 86400000;
+export const EVAPORATION_LAW = "power";
+export const POWER_DECAY = 0.5; // ACT-R base-level decay d; pre-registered, not fitted
 export const TRAIL_HALF_LIFE_DAYS = 7;
 export const STIGMERGY_SCHEMA = "EOStigmergy@1";
 export const TRAIL_WINDOW = 128; // deposits kept per head — old ones evaporate out of the ledger
@@ -43,8 +64,10 @@ export const EXPLORE_EPSILON = 0.1; // chance a never-tried route is probed firs
 export const ageDays = (at, now) => Math.max(0, (now - at) / DAY_MS);
 
 /** Evaporation: how much of a deposit from `at` is still in the air at `now`. */
-export function trailWeight(at, now, { halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
-  return Math.exp(-ageDays(at, now) / halfLifeDays);
+export function trailWeight(at, now, { law = EVAPORATION_LAW, d = POWER_DECAY, halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
+  if (law === "power") return Math.max(1, (now - at) / 1000) ** -d;
+  if (law === "exp") return halfLifeDays === Infinity ? 1 : 2 ** (-ageDays(at, now) / halfLifeDays);
+  throw new Error(`unknown evaporation law: ${law}`);
 }
 
 /**
@@ -60,7 +83,7 @@ export function deposit(trails, entry) {
 }
 
 /** The per-route reading of one head's trails, compared for speed and efficiency. */
-export function trailStats(trails, head, { now = Date.now(), routes = null, halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
+export function trailStats(trails, head, { now = Date.now(), routes = null, halfLifeDays = TRAIL_HALF_LIFE_DAYS, law = EVAPORATION_LAW } = {}) {
   const list = trails?.[head] ?? [];
   const out = new Map();
   const blank = (r) => ({ route: r, strength: 0, deposits: 0, hits: 0, totalMs: 0, lastAt: -Infinity });
@@ -69,7 +92,7 @@ export function trailStats(trails, head, { now = Date.now(), routes = null, half
     const s = out.get(t.route) ?? blank(t.route);
     s.deposits += 1;
     s.lastAt = Math.max(s.lastAt, Number(t.at) || 0);
-    if (t.ok) { s.hits += 1; s.strength += halfLifeDays === Infinity ? 1 : trailWeight(t.at, now, { halfLifeDays }); s.totalMs += t.ms; }
+    if (t.ok) { s.hits += 1; s.strength += halfLifeDays === Infinity ? 1 : trailWeight(t.at, now, { halfLifeDays, law }); s.totalMs += t.ms; }
     out.set(t.route, s);
   }
   return [...out.values()].map((s) => ({ ...s, meanMs: s.hits ? s.totalMs / s.hits : null }));
@@ -93,12 +116,13 @@ export function trailStats(trails, head, { now = Date.now(), routes = null, half
  * so once every route had a deposit exploration stopped for good: the army-ant
  * mill, a trail that reinforces itself with no exit. `scoutTried: false`
  * restores that. `explore: 0` turns scouts off. The rng is injectable.
- * `halfLifeDays` sets evaporation (Infinity = none).
+ * `law` sets evaporation: "power" (default, measured) or "exp" (with
+ * `halfLifeDays`); `halfLifeDays: Infinity` = none under either law.
  */
-export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, deadLast = true, scoutTried = true } = {}) {
+export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, law = EVAPORATION_LAW, deadLast = true, scoutTried = true } = {}) {
   const defaults = routes ?? [];
   const idx = (r) => { const i = defaults.indexOf(r); return i < 0 ? Infinity : i; };
-  const stats = trailStats(trails, head, { now, routes: defaults, halfLifeDays });
+  const stats = trailStats(trails, head, { now, routes: defaults, halfLifeDays, law });
   const byStrength = (a, b) => {
     if (b.strength !== a.strength) return b.strength - a.strength;
     if (a.meanMs !== null && b.meanMs !== null && a.meanMs !== b.meanMs) return a.meanMs - b.meanMs;

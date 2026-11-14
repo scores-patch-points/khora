@@ -2,7 +2,7 @@
 // The two defects fixed 2026-11-14 are pinned both ways: the new default, and the old order behind its switch.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { deposit, routeOrderFor, trailStats } from "./stigmergy.js";
+import { deposit, routeOrderFor, trailStats, trailWeight } from "./stigmergy.js";
 
 const DAY = 86400000, NOW = 100 * DAY, R = ["wiki", "web", "local"];
 const quiet = () => 0.99; // rng that never scouts
@@ -72,4 +72,46 @@ test("state is a fold over the deposit log: same events, same order", () => {
 test("routes outside the default list still order (callers filter them)", () => {
   const t = fold([{ head: "h", route: "extra", ok: true, ms: 1, at: NOW }]);
   assert.equal(routeOrderFor(t, "h", { now: NOW, routes: R, rng: quiet })[0], "extra");
+});
+
+// --- 2026-11-14: power-law evaporation, measured on real use (ledgers/sig-real-use + its replication) ---
+const S = 1000;
+
+test("power law is the default: weight = age_seconds ** -0.5, so 4x older weighs half", () => {
+  assert.equal(trailWeight(NOW - 100 * S, NOW), 0.1);
+  assert.equal(trailWeight(NOW - 400 * S, NOW) / trailWeight(NOW - 100 * S, NOW), 0.5);
+  assert.equal(trailWeight(NOW, NOW), 1); // 1-second floor: a deposit made now has weight 1, never infinity
+});
+
+test("strength is the ACT-R power sum: many older uses can outweigh one recent use (recency alone would not)", () => {
+  const t = fold([
+    ...Array.from({ length: 5 }, () => ({ head: "h", route: "wiki", ok: true, ms: 100, at: NOW - 100 * S })), // 5 x 0.1 = 0.5
+    { head: "h", route: "web", ok: true, ms: 100, at: NOW - 10 * S }, // 10 ** -0.5 = 0.316
+  ]);
+  assert.equal(routeOrderFor(t, "h", { now: NOW, routes: R, rng: quiet })[0], "wiki");
+  const st = trailStats(t, "h", { now: NOW, routes: R });
+  assert.ok(Math.abs(st.find((s) => s.route === "wiki").strength - 0.5) < 1e-12);
+});
+
+test("power law is scale-free: stretching every age by the same factor never changes the order (no half-life to type)", () => {
+  const mk = (k) => fold([
+    { head: "h", route: "wiki", ok: true, ms: 100, at: NOW - 4 * 3600 * S * k },
+    { head: "h", route: "wiki", ok: true, ms: 100, at: NOW - 9 * 3600 * S * k },
+    { head: "h", route: "web", ok: true, ms: 100, at: NOW - 1 * 3600 * S * k },
+  ]);
+  const orders = [1, 24, 1000].map((k) => routeOrderFor(mk(k), "h", { now: NOW + 0, routes: R, rng: quiet }).join(","));
+  assert.equal(new Set(orders).size, 1);
+  // the exponential law with a 7-day half-life does depend on scale: at the largest stretch the order flips
+  const exp = [1, 1000].map((k) => routeOrderFor(mk(k), "h", { now: NOW, routes: R, rng: quiet, law: "exp" })[0]);
+  assert.deepEqual(exp, ["wiki", "web"]);
+});
+
+test("law: 'exp' has a TRUE half-life now (was exp(-t/h), which left 0.37 after one half-life)", () => {
+  assert.equal(trailWeight(NOW - 7 * DAY, NOW, { law: "exp" }), 0.5);
+  assert.equal(trailWeight(NOW - 14 * DAY, NOW, { law: "exp", halfLifeDays: 7 }), 0.25);
+  assert.equal(trailWeight(0, NOW, { law: "exp", halfLifeDays: Infinity }), 1);
+});
+
+test("an unknown evaporation law is refused, never silently defaulted", () => {
+  assert.throws(() => trailWeight(0, NOW, { law: "linear" }), /unknown evaporation law/);
 });
