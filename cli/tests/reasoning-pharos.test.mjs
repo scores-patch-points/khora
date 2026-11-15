@@ -54,6 +54,8 @@ test("a run and its claims are woven by writer khora; the unit is the address", 
   assert.ok([...runs, ...claims].every((e) => e.by === "khora" && e.cell === "INS·Figure"));
   assert.deepEqual(runs[0].body.denominators, { claims: 2, grounds: 2, units: 2, notes: 0 });
   assert.equal(runs[0].body.instrument, "eot-janus");
+  assert.equal(runs[0].body.errorFindings, 1);
+  assert.equal("ok" in runs[0].body, false);   // the verdict stays out of the log: it is not khora's to write
   assert.equal(claims[0].addr, unitAddr(claims[0].body.unit));
   assert.deepEqual(claims[0].of, [runs[0].id]);
   assert.deepEqual(claims.map((c) => c.body.ref), ["c1.0", "s1.0"]);

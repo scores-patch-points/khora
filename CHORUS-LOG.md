@@ -1409,3 +1409,13 @@ fast: khora 5 files, janus 5 files · janus 11/11 pass · khora new log tests 5/
 | Simon/Chekhov | unfinished siblings | native/organs/trail-weave.mjs · native/organs/eot-janus.js | deferred-with-reason | trail-weave still sends through Penelope's mark door and eot-janus still spawns reason.mjs; both break the 2026-11-14 ruling (each repo writes the log directly, none reports to another) and are left for their own change |
 | Feynman | cells | cli/reasoning-pharos.mjs | disclosed | INS·Figure for runs and claims, SEG·Figure / SEG·Pattern for arms are nominations, not earned from data; the log name "fold" is a default, not a ruling |
 clean: none other routed.
+
+## 2026-11-15 — verdicts that leave a holon are Penelope's: khora's pharos run entry drops `ok`; janus channel-fold writes counts only (branch `feat/seam-verdicts`, khora + janus + penelope)
+fast: khora 2 files · reasoning-pharos 5/5, ledger 6/6 · janus 5 files, 7/7 then 19/19 with run-arms · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | `errorFindings` | cli/reasoning-pharos.mjs | fixed | the run entry in the shared log carried `ok`, a bound (no error findings) applied to a count; it now carries the count and its denominators only, and penelope `organs/seam-verdicts.mjs` judges it under a declared bound. The file ledger, khora's own, keeps `ok` |
+| Holmes | `lemmaNodes` | janus native/organs/hyperlexicon/channel-fold.mjs | fixed | a word with its own lemma row was also read as a form of other words ("year" as a dialect form of "hear", "here"), merging three beings' translations into one ball; a lemma is now read as itself only |
+| Diaconis | step 1 rerun | ledgers/paraphrase-100/out/SCORE-after-lemma-fix.txt | disclosed | the registered result (SYN 69.7%) predates the lemma fix; the post-hoc rerun (68.7%, ANT 2.7%, RANDOM 0%) is reported beside it and is not the result of record |
+| Simon/Chekhov | `scripts/word-fold.mjs` | janus | noted | exercised end to end on a scratch log only; no unit test of the script itself, and no checkout has a pharos pointer, so nothing reaches a live log |
+clean: Dijkstra, Ostrom (the PHAROS_LIB skip is stated, as in the previous entry).

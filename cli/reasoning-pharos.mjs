@@ -8,15 +8,18 @@
 // chained) and never re-derives them, so the file ledger and the log say the
 // same thing. The file ledger stays as it was; this is a second, shared record.
 //
-//   reasoning-run    INS·Figure  addr run:<at>      body { at, session, instrument, ok, errors, denominators }
+//   reasoning-run    INS·Figure  addr run:<at>      body { at, session, instrument, errorFindings, denominators }
 //   reasoning-claim  INS·Figure  addr unit:<sha16>  body { unit, nth, ground, rel, roles, polarity, said, ref, ... }
 //                                of [ the run entry, the last entry stating the same unit (if any) ]
 //
 // THE UNIT IS THE ADDRESS. Every statement of one unit sits at one addr, so the
 // successor chain is the log's own `of`, and "stated N times" is a count of
 // entries at an address. Cells are nominations (INS: one more of what exists),
-// not earned from data. `ok`/`errors` on the run are reason.mjs's own report of
-// what it found, recorded as it happened; a verdict entry is Penelope's to write.
+// not earned from data. The run entry carries `errorFindings`, a COUNT of what
+// reason.mjs found, with its denominators. It does not carry `ok`: "no errors,
+// so the run stands" is a bound applied to that count, and a verdict that leaves
+// this holon is Penelope's to write (ruling 2026-11-15). The file ledger, which
+// is khora's own, keeps `ok` as before.
 import crypto from "node:crypto";
 import { openDoor } from "./pharos-door.mjs";
 import { unitKeyOf } from "./reasoning-ledger.mjs";
@@ -43,7 +46,7 @@ export async function weaveReasoning(records = [], opts = {}) {
   const at = String(run.title ?? "").replace(/^\/reason\//, "") || run.appendedAt;
   const runEntry = door.weave({
     cell: CELL, kind: RUN_KIND, addr: `run:${at}`,
-    body: { at, session: run.session ?? null, instrument: run.instrument ?? null, ok: run.ok ?? null, errors: run.errors ?? null, denominators: run.denominators ?? null },
+    body: { at, session: run.session ?? null, instrument: run.instrument ?? null, errorFindings: run.errors ?? null, denominators: run.denominators ?? null },
     basis: { giver: "khora cli/reason.mjs", ledgerId: run.id },
   });
   if (runEntry) {
