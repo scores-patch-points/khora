@@ -1399,3 +1399,13 @@ fast: khora 4 files, janus 3 files · janus 7/7 pass · khora affected: new ledg
 | Holmes | `unitKeyOf` | cli/reasoning-ledger.mjs | disclosed | the unit is the key as written; eot-janus mints b1, b2 per run, so one key may be two beings — disclosed, never merged |
 | Simon/Chekhov | `run-arms.js` | janus native/organs/run-arms.js | noted | tested 7/7; only `scripts/run-arms.mjs` calls it — nascent organ, not yet a door |
 clean: Kondo, Dijkstra.
+
+## 2026-11-14 — khora writes reasoning runs to pharos directly (`cli/pharos-door.mjs`, `cli/reasoning-pharos.mjs`); janus reads them from the log and weaves its arms (branch `feat/write-pharos-directly`, khora + janus)
+fast: khora 5 files, janus 5 files · janus 11/11 pass · khora new log tests 5/5, ledger 6/6, recall 5/5; the 8 failing affected tests are the same by name as the previous entry's (missing sibling `claude code/janus/` and tests already failing on main), not this diff · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Ostrom | the skip | cli/tests/reasoning-pharos.test.mjs:17 · janus run-arms-pharos.test.mjs:13 | disclosed | with no pharos library the log tests SKIP with a stated reason; a skip is "not checked here", never "passes" — janus has no sibling pharos, so its two log tests run only with PHAROS_LIB set |
+| Simon/Chekhov | the doors | cli/pharos-door.mjs · janus native/organs/pharos-door.mjs | disclosed | wired into reason.mjs and scripts/run-arms.mjs, but OFF until a checkout has a pharos pointer; no checkout has one yet, so nothing reaches the real log |
+| Simon/Chekhov | unfinished siblings | native/organs/trail-weave.mjs · native/organs/eot-janus.js | deferred-with-reason | trail-weave still sends through Penelope's mark door and eot-janus still spawns reason.mjs; both break the 2026-11-14 ruling (each repo writes the log directly, none reports to another) and are left for their own change |
+| Feynman | cells | cli/reasoning-pharos.mjs | disclosed | INS·Figure for runs and claims, SEG·Figure / SEG·Pattern for arms are nominations, not earned from data; the log name "fold" is a default, not a ruling |
+clean: none other routed.

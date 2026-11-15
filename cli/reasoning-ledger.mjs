@@ -126,9 +126,10 @@ function nextStart(file) {
   try { return fs.statSync(file).size; } catch { return 0; }
 }
 
-function appendLine(file, line) {
+function appendLine(file, line, records = null) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.appendFileSync(file, JSON.stringify(line) + "\n");
+  if (records) records.push(line);
 }
 
 /**
@@ -184,7 +185,7 @@ function appendLine(file, line) {
  * swallowed and reported back as {written: 0, error}, the same "additive,
  * never blocking" discipline cli/claude-code-ledger.mjs's own hook holds to
  * — a durable-feed failure must never break the reasoning check it rides on.
- * Returns {written, file, runId}.
+ * Returns {written, file, runId, records}.
  */
 export function appendReasoningLedger({ hl = null, log = null, declaredClaims = [], session = null, runAt = null, cwd = process.cwd(), grounds = [], ok = null, errors = null, instrument = null, dir = DOCS } = {}) {
   let notes = [];
@@ -193,6 +194,9 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
   }
   if (!notes.length && !declaredClaims.length) return { written: 0, error: null };
   let file;
+  // every line this call writes, as written (scrubbed): cli/reasoning-pharos.mjs
+  // weaves the same records into the shared log, never a re-derivation.
+  const records = [];
   try {
     const at = runAt ?? new Date().toISOString();
     file = ledgerFile(dir);
@@ -231,7 +235,7 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
         role: "run", kind: "reasoning-run", title: `/reason/${at}`,
         text: runText, supersedes: null, giver: "eoreader7-reason", basis: runBasis,
         session, instrument: inst, ok, errors, denominators, appendedAt: new Date().toISOString(),
-      });
+      }, records);
     }
 
     let written = 1;
@@ -292,7 +296,7 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
         ground, rel, roles, said, session, witness, polarity, verdict, fingerprint, source,
         ref, instrument: inst, runId,
         appendedAt: new Date().toISOString(),
-      });
+      }, records);
       written++;
     }
 
@@ -317,10 +321,10 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
         text: clean, supersedes: null, giver: "eoreader7-reason",
         basis: scrub(`reason:${at}@${spanAt} witnesses:${witnesses.length ? witnesses.join("+") : "none"}`),
         session, appendedAt: new Date().toISOString(),
-      });
+      }, records);
       written++;
     }
-    return { written, file, runId };
+    return { written, file, runId, records };
   } catch (e) {
     return { written: 0, error: `${e?.message ?? e}`, file };
   }

@@ -497,7 +497,15 @@ if (declared.length || (text && hl && hlLog)) {
     // caller declares it (input.instrument); null when unsaid. Counting
     // instruments instead of lines needs this on the record.
     const instrument = typeof input.instrument === "string" && input.instrument ? input.instrument : null;
-    appendReasoningLedger({ hl, log: hlLog, declaredClaims: declaredClaimsOut, session: sessionKey, runAt: new Date().toISOString(), cwd: process.cwd(), grounds, ok: out.ok, errors: out.errors, instrument });
+    const fed = appendReasoningLedger({ hl, log: hlLog, declaredClaims: declaredClaimsOut, session: sessionKey, runAt: new Date().toISOString(), cwd: process.cwd(), grounds, ok: out.ok, errors: out.errors, instrument });
+    // THE SHARED LOG (2026-11-14): the same records, woven into pharos directly
+    // by khora's own door (cli/pharos-door.mjs). Off, and silent, when this
+    // checkout has no pharos pointer. Additive like the feed above: it never
+    // touches `out` or the exit code.
+    if (fed?.records?.length) {
+      const { weaveReasoning } = await import("./reasoning-pharos.mjs");
+      await weaveReasoning(fed.records);
+    }
   } catch { /* additive only; the verdict and every field of `out` above stand without it */ }
 }
 
