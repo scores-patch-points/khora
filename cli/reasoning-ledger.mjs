@@ -85,6 +85,43 @@ export function ledgerFile(dir = DOCS) {
   return path.join(dir, `${DOC_ID}.jsonl`);
 }
 
+/**
+ * unitKeyOf(claim) — the UNIT a claim line states (2026-11-14, the
+ * arithmetic slice: "arithmetic presupposes the unit"). Ground, polarity
+ * (null read as "+", the same reading cli/claude-code-context.mjs gives an
+ * old line), rel, and EVERY role with its value, keys sorted so role order
+ * never splits one unit in two. This is the unit AS WRITTEN: when a caller
+ * mints its referent ids per run (eot-janus.js's b1, b2, ...), two lines with
+ * one key may still be two beings — that is an upstream identity question
+ * this key discloses, never settles.
+ */
+export function unitKeyOf(c) {
+  const roles = Object.entries(c?.roles ?? {}).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
+  const pol = c?.polarity === "-" ? "-" : "+";
+  return JSON.stringify([String(c?.ground ?? "/"), pol, String(c?.rel ?? "?"), roles]);
+}
+
+/**
+ * priorUnits(file) — the successor chain's tips: unit key → { id, nth } of
+ * the LAST claim line stating that unit already on the ledger. One read of
+ * the file per run; only claim lines are parsed. A missing or unreadable
+ * file is an empty ledger, never an error (additive, never blocking).
+ */
+export function priorUnits(file) {
+  const tips = new Map();
+  let raw = "";
+  try { raw = fs.readFileSync(file, "utf8"); } catch { return tips; }
+  for (const line of raw.split("\n")) {
+    if (!line.includes('"reasoning-claim"')) continue;
+    let o; try { o = JSON.parse(line); } catch { continue; }
+    if (o?.kind !== "reasoning-claim") continue;
+    const key = unitKeyOf(o);
+    const prev = tips.get(key);
+    tips.set(key, { id: o.id, nth: Number.isInteger(o.nth) ? o.nth : (prev ? prev.nth + 1 : 1) });
+  }
+  return tips;
+}
+
 function nextStart(file) {
   try { return fs.statSync(file).size; } catch { return 0; }
 }
@@ -149,7 +186,7 @@ function appendLine(file, line) {
  * — a durable-feed failure must never break the reasoning check it rides on.
  * Returns {written, file, runId}.
  */
-export function appendReasoningLedger({ hl = null, log = null, declaredClaims = [], session = null, runAt = null, cwd = process.cwd(), grounds = [], ok = null, errors = null, dir = DOCS } = {}) {
+export function appendReasoningLedger({ hl = null, log = null, declaredClaims = [], session = null, runAt = null, cwd = process.cwd(), grounds = [], ok = null, errors = null, instrument = null, dir = DOCS } = {}) {
   let notes = [];
   if (hl && log) {
     try { notes = hl.foldHyperlexicon(log); } catch (e) { return { written: 0, error: `fold failed: ${e?.message ?? e}` }; }
@@ -164,13 +201,36 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
     // ONE RUN LINE — the address every claim/note line below reads back through.
     const runText = scrub(excerpt(`eoreader7 reason run · ${declaredClaims.length} claim(s), ${notes.length} note(s) folded from the hyperlexicon · ok=${ok === null ? "?" : ok}${errors != null ? ` errors=${errors}` : ""}`));
     const runBasis = scrub(`cwd:${cwd} grounds:${JSON.stringify(grounds)}${session ? ` session:${session}` : ""}`);
+    const inst = typeof instrument === "string" && instrument ? scrub(instrument) : null;
+    // DENOMINATORS (2026-11-14): a run's `errors` is a count with no base
+    // unless the run says how much it read. Counted over the declared
+    // claims this call writes, never over anything inferred.
+    // Keyed on the values AS WRITTEN (scrubbed, excerpted), so a run's key
+    // and priorUnits' key for the same line are always the same string.
+    const unitKeys = declaredClaims.map((c) => unitKeyOf({
+      ground: String(c?.ground ?? "/"), polarity: c?.polarity, rel: scrub(String(c?.rel ?? "?")),
+      roles: Object.fromEntries(Object.entries(c?.roles ?? {}).map(([k, v]) => [k, scrub(excerpt(v))])),
+    }));
+    const denominators = {
+      claims: declaredClaims.length,
+      grounds: new Set(declaredClaims.map((c) => String(c?.ground ?? "/"))).size,
+      units: new Set(unitKeys).size,
+      notes: notes.length,
+    };
+    // SUCCESSOR CHAIN (2026-11-14): `supersedes` names the last line on the
+    // ledger that stated the same unit (unitKeyOf), `nth` how many times the
+    // unit has now been stated, this line included. A restatement inside one
+    // run chains to the earlier line of the same run. Null/1 for a first
+    // statement. A retraction ("-") is a different unit and starts its own
+    // chain: whether it defeats the "+" is a judgment, not a count.
+    const tips = declaredClaims.length ? priorUnits(file) : new Map();
     {
       const start = nextStart(file);
       appendLine(file, {
         schema: "EOTObservation@1", id: runId, at: [start, start + runText.length],
         role: "run", kind: "reasoning-run", title: `/reason/${at}`,
         text: runText, supersedes: null, giver: "eoreader7-reason", basis: runBasis,
-        session, appendedAt: new Date().toISOString(),
+        session, instrument: inst, ok, errors, denominators, appendedAt: new Date().toISOString(),
       });
     }
 
@@ -215,12 +275,22 @@ export function appendReasoningLedger({ hl = null, log = null, declaredClaims = 
       // is unaffected.
       const fingerprint = c?.fingerprint ?? null;
       const source = c?.source ?? "hand-authored";
+      // ref (2026-11-14): the caller's OWN id for this claim, verbatim (e.g.
+      // eot-janus.js's `c12.0` / `s12.1`, which carry the claim side and the
+      // source side). Without it a reader cannot tell whether two pieces of
+      // one reading are the two sides that never touch.
+      const ref = c?.ref == null ? null : scrub(String(c.ref));
+      const key = unitKeys[i];
+      const prev = tips.get(key) ?? null;
+      const nth = prev ? prev.nth + 1 : 1;
+      tips.set(key, { id: claimId, nth });
       appendLine(file, {
         schema: "EOTObservation@1", id: claimId, at: [start, start + said.length],
         role: "claim", kind: "reasoning-claim", title: `/reason/${at}/claim/${i}`,
-        text: said, supersedes: null, giver: "eoreader7-reason",
+        text: said, supersedes: prev ? prev.id : null, nth, giver: "eoreader7-reason",
         basis: scrub(`reason:${at}#${ground}`),
         ground, rel, roles, said, session, witness, polarity, verdict, fingerprint, source,
+        ref, instrument: inst, runId,
         appendedAt: new Date().toISOString(),
       });
       written++;

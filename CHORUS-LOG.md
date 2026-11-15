@@ -1391,3 +1391,11 @@ fast: 3 changed + 2 new files · `native/organs/trail-weave.test.mjs` 5 pass, 1 
 | Feynman | — | native/organs/trail-weave.mjs:16 | noted | the 60 s retry after an unreachable send is an unmeasured typed constant (`KHORA_WEAVE_RETRY_MS`); the cell `SIG·Ground` for `trail-deposit` is this file's proposal, not a measured assignment |
 | Ostrom | — | native/organs/trail-weave.mjs:14 | noted | a deposit refused or unsent is counted (status()), not retried and not written elsewhere: the organ's own trail file still has it, pharos does not, and that gap is visible only in the counters of the process that made it |
 clean: none routed beyond the above
+## 2026-11-14 — reasoning ledger: successor chain (`supersedes`/`nth`), run denominators, claim `ref`, `instrument`; janus `run-arms.js` (branch `feat/ledger-units-and-arms`, khora + janus)
+fast: khora 4 files, janus 3 files · janus 7/7 pass · khora affected: new ledger tests 6/6, recall 5/5, gather-reason 10/10, apprentice-trail 16/16; apprentice-replay 3 fail, claude-code-spiral and eot-claim-match fail to load — identical on the pre-change tree (missing sibling `claude code/janus/`, pre-existing), so not this diff · law: WARN pre-existing duplicate S17 S96 in READING-SPEC.md (not this diff)
+| lens | citation | file:line | verdict | one line |
+|---|---|---|---|---|
+| Feynman | `priorUnits` | cli/reasoning-ledger.mjs | disclosed | an unreadable ledger reads as empty, so a chain restarts at nth 1 silently; the additive, never-blocking discipline of the file, said in its header |
+| Holmes | `unitKeyOf` | cli/reasoning-ledger.mjs | disclosed | the unit is the key as written; eot-janus mints b1, b2 per run, so one key may be two beings — disclosed, never merged |
+| Simon/Chekhov | `run-arms.js` | janus native/organs/run-arms.js | noted | tested 7/7; only `scripts/run-arms.mjs` calls it — nascent organ, not yet a door |
+clean: Kondo, Dijkstra.

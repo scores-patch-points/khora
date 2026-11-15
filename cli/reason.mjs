@@ -489,8 +489,15 @@ if (declared.length || (text && hl && hlLog)) {
       // from an ungrounded one.
       polarity: c.polarity,
       verdict: sources[i]?.verdict ?? null,
+      // ref (2026-11-14): the caller's own claim id, kept so a reader can
+      // tell the sides a caller declared (eot-janus.js: c… claim, s… source).
+      ref: c.id ?? input.claims[i]?.id ?? null,
     }));
-    appendReasoningLedger({ hl, log: hlLog, declaredClaims: declaredClaimsOut, session: sessionKey, runAt: new Date().toISOString(), cwd: process.cwd(), grounds, ok: out.ok, errors: out.errors });
+    // instrument (2026-11-14): which harness made these claims, as the
+    // caller declares it (input.instrument); null when unsaid. Counting
+    // instruments instead of lines needs this on the record.
+    const instrument = typeof input.instrument === "string" && input.instrument ? input.instrument : null;
+    appendReasoningLedger({ hl, log: hlLog, declaredClaims: declaredClaimsOut, session: sessionKey, runAt: new Date().toISOString(), cwd: process.cwd(), grounds, ok: out.ok, errors: out.errors, instrument });
   } catch { /* additive only; the verdict and every field of `out` above stand without it */ }
 }
 

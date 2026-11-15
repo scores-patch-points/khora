@@ -29,7 +29,7 @@ export function janusContradictions(pairs) {
   }
   const most = [...new Set(claims.filter((c) => c.rel.startsWith("most:")).map((c) => c.rel))];
   const declare = { functional: [...most.map((rel) => ({ rel, role: "ARG0", giver: "declared: a superlative has one holder in its group" })), ...ONE_MAKER.map((rel) => ({ rel, role: "ARG0", giver: "declared: one maker per made thing" })), ...Object.keys(STATES).map((st) => ({ rel: `state:${st}`, role: "ARG1", giver: "declared: one value of a state at a time" }))] };
-  const r = spawnSync(process.execPath, [REASON, "--json"], { input: JSON.stringify({ claims, declare }), encoding: "utf8", maxBuffer: 1 << 26, timeout: 120000 });
+  const r = spawnSync(process.execPath, [REASON, "--json"], { input: JSON.stringify({ claims, declare, instrument: "eot-janus" }), encoding: "utf8", maxBuffer: 1 << 26, timeout: 120000 });
   const out = new Set();
   try { for (const f of JSON.parse(r.stdout).findings ?? []) if (f.kind === "standing_contradiction") { const ids = f.claims ?? []; if (ids.some((x) => x.startsWith("c")) && ids.some((x) => x.startsWith("s"))) out.add(ids[0].slice(1).split(".")[0]); } } catch { /* janus gave nothing readable: no contradiction is claimed */ }
   return out;
