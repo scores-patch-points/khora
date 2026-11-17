@@ -1,0 +1,26 @@
+// run-qa.mjs — Task 1 of PREREG-ROUND5(-NOTE-1): choosing the answer. LOBO over the 25 read books (+ learning curve). Uses attend.mjs unchanged.
+import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath } from 'node:url'; import { trainAttend, score, seeded } from './attend.mjs';
+const HERE = path.dirname(fileURLToPath(import.meta.url)); const IDS = fs.readdirSync(path.join(HERE, 'features')).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5)).sort();
+const D = IDS.map((id) => JSON.parse(fs.readFileSync(path.join(HERE, 'features', id + '.json'), 'utf8')));
+const NAMES = D[0].names; const chanOf = (n) => /\*/.test(n) ? 'typecross' : ['isref', 'role_subj', 'role_obj', 'role_cast', 'role_edge', 'cap', 'len', 'prep', 'digit', 'overlapsQ'].includes(n) ? 'candidate' : ['logfreq', 'logfreq_cut'].includes(n) ? 'frequency' : ['bm25_norm', 'rankpct', 'incut', 'hop0', 'inscene', 'ents'].includes(n) ? 'retrieval' : ['ov_n', 'ov_idf'].includes(n) ? 'overlap' : ['dist', 'before', 'after', 'first', 'ncand'].includes(n) ? 'position' : ['actother', 'actmatch'].includes(n) ? 'graph' : 'other';
+const CHAN = NAMES.map(chanOf);
+const b1 = (id) => JSON.parse(fs.readFileSync(path.join(HERE, 'answers', id + '.json'), 'utf8')).answers;
+const rowsOf = (d) => d.questions.flatMap((q, qi) => q.pool.map((c) => ({ x: c.x, y: c.y, g: d.book, qi })));
+function evalBook(model, d, B1) { return d.questions.map((q, qi) => { let best = null; for (const c of q.pool) { const z = score(model, c.x); if (!best || z > best.z) best = { z, c }; } const f = best ? best.c.f1 : 0, e = best ? best.c.em : 0; return { book: d.book, type: q.type, f, e, answered: !!best, oracle: q.pool.length ? Math.max(...q.pool.map((c) => c.f1)) : 0, poolMean: q.pool.length ? q.pool.reduce((a, c) => a + c.f1, 0) / q.pool.length : 0 }; }); }
+const normT = (s) => s.toLowerCase().replace(/[!-/:-@[-`{-~]/g, '').replace(/\b(a|an|the)\b/g, ' ').split(/\s+/).filter(Boolean);
+const f1t = (p, g) => { const a = normT(p), b = normT(g); if (!a.length || !b.length) return +(a.length === b.length); const c = new Map(); for (const t of b) c.set(t, (c.get(t) ?? 0) + 1); let o = 0; for (const t of a) if (c.get(t) > 0) { o++; c.set(t, c.get(t) - 1); } if (!o) return 0; const p_ = o / a.length, r_ = o / b.length; return 2 * p_ * r_ / (p_ + r_); };
+const b1score = (id) => b1(id).map((r) => { const t = r.B1?.text; return t == null ? [0, 0] : [Math.max(...r.answers.map((g) => f1t(t, g))), Math.max(...r.answers.map((g) => +(normT(t).join(' ') === normT(g).join(' '))))]; });
+const mean = (a) => a.length ? a.reduce((x, y) => x + y, 0) / a.length : NaN;
+const arms = { gated: { gated: true }, ungated: { gated: false } }; const res = {}; const kept = {}; const lams = {};
+for (const [name, opt] of Object.entries(arms)) { res[name] = []; kept[name] = {}; lams[name] = {};
+  for (const d of D) { const train = D.filter((x) => x !== d).flatMap(rowsOf); const model = trainAttend(train, CHAN, opt); lams[name][model.lam] = (lams[name][model.lam] ?? 0) + 1; for (const [c, g] of Object.entries(model.gate)) kept[name][c] = (kept[name][c] ?? 0) + g;
+    const B1 = b1score(d.book); const ev = evalBook(model, d, null); ev.forEach((r, i) => { r.b1f = B1[i][0]; r.b1e = B1[i][1]; }); res[name].push(...ev); console.error(name, d.book, 'done'); } }
+fs.writeFileSync(path.join(HERE, 'qa-lobo.json'), JSON.stringify({ res, kept, lams }));
+const rows = res.gated; console.log('questions', rows.length, 'books', D.length); console.log('POOL: mean oracle (best-in-pool F1)', mean(rows.map((r) => r.oracle)).toFixed(3), ' random-in-pool F1', mean(rows.map((r) => r.poolMean)).toFixed(3), ' B1 F1', mean(rows.map((r) => r.b1f)).toFixed(3), 'EM', mean(rows.map((r) => r.b1e)).toFixed(3));
+for (const n of ['ungated', 'gated']) console.log(n.padEnd(8), 'LOBO F1', mean(res[n].map((r) => r.f)).toFixed(3), 'EM', mean(res[n].map((r) => r.e)).toFixed(3), ' L2 chosen', JSON.stringify(lams[n]));
+console.log('channels kept in how many of', D.length, 'folds (gated):', JSON.stringify(kept.gated)); 
+for (const t of ['who', 'what', 'where', 'num']) { const s = (n) => mean(res[n].filter((r) => r.type === t).map((r) => r.f)).toFixed(3); console.log(' type', t.padEnd(5), 'n', res.gated.filter((r) => r.type === t).length, 'gated', s('gated'), 'ungated', s('ungated'), 'B1', mean(res.gated.filter((r) => r.type === t).map((r) => r.b1f)).toFixed(3)); }
+// book-cluster bootstrap
+const byBook = new Map(); res.gated.forEach((r, i) => { if (!byBook.has(r.book)) byBook.set(r.book, []); byBook.get(r.book).push({ g: r.f, u: res.ungated[i].f, b: r.b1f, ge: r.e, ue: res.ungated[i].e, be: r.b1e }); }); const books = [...byBook.keys()]; const R = seeded(31);
+const ci = (get) => { const ds = []; for (let k = 0; k < 10000; k++) { let s = 0, n = 0; for (let i = 0; i < books.length; i++) { const bk = byBook.get(books[Math.floor(R() * books.length)]); for (let j = 0; j < bk.length; j++) { s += get(bk[Math.floor(R() * bk.length)]); n++; } } ds.push(s / n); } ds.sort((a, b) => a - b); return `[${ds[250].toFixed(3)}, ${ds[9749].toFixed(3)}]`; };
+console.log('L1 F1 gated - B1   ', ci((x) => x.g - x.b)); console.log('   F1 ungated - B1 ', ci((x) => x.u - x.b)); console.log('A1 F1 gated - ungated', ci((x) => x.g - x.u)); console.log('   EM gated - B1   ', ci((x) => x.ge - x.be));

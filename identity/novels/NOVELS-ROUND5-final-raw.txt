@@ -1,0 +1,8 @@
+gated kept: frequency  L2 0.01 0.01
+final questions 80 books 8  pool oracle F1 0.340
+B1       F1 0.053 EM 0.013
+ungated  F1 0.113 EM 0.087
+gated    F1 0.067 EM 0.050
+L4 F1 ungated - B1 [-0.029, 0.167]
+   F1 gated - B1   [-0.059, 0.095]
+   EM ungated - B1 [-0.011, 0.169]

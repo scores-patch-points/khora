@@ -1,0 +1,15 @@
+// score.mjs <id8>... — SQuAD token F1 / EM, max over the two references; unanswered counts 0. Prints per-system means, answered counts, oracle ceilings, per-type. Book-cluster bootstrap (10,000) when >= 3 books.
+import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath } from 'node:url';
+const HERE = path.dirname(fileURLToPath(import.meta.url)); const ids = process.argv.slice(2);
+const norm = (s) => s.toLowerCase().replace(/[!-/:-@[-`{-~]/g, '').replace(/\b(a|an|the)\b/g, ' ').split(/\s+/).filter(Boolean);
+const f1 = (p, g) => { const a = norm(p), b = norm(g); if (!a.length || !b.length) return +(a.length === b.length); const c = new Map(); for (const t of b) c.set(t, (c.get(t) ?? 0) + 1); let o = 0; for (const t of a) if (c.get(t) > 0) { o++; c.set(t, c.get(t) - 1); } if (!o) return 0; const p_ = o / a.length, r_ = o / b.length; return 2 * p_ * r_ / (p_ + r_); };
+const em = (p, g) => +(norm(p).join(' ') === norm(g).join(' '));
+const SYS = ['B0', 'B1', 'B2', 'F', 'F1only', 'F2only', 'R', 'FL'];
+const books = ids.map((id) => JSON.parse(fs.readFileSync(path.join(HERE, 'answers', `${id}.json`), 'utf8')).answers.map((r) => { const o = { type: r.type, oracle: r.oracle }; for (const s of SYS) { const a = r[s]?.text; o[s] = a == null ? { f: 0, e: 0, ans: 0 } : { f: Math.max(...r.answers.map((g) => f1(a, g))), e: Math.max(...r.answers.map((g) => em(a, g))), ans: 1 }; } return o; }));
+const mean = (xs) => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : NaN;
+const flat = books.flat(); console.log(`questions: ${flat.length} over ${books.length} book(s)`);
+for (const s of SYS) { const a = flat.filter((x) => x[s].ans); console.log(s.padEnd(7), `F1 ${mean(flat.map((x) => x[s].f)).toFixed(3)}  EM ${mean(flat.map((x) => x[s].e)).toFixed(3)}  answered ${a.length}/${flat.length}  F1|answered ${mean(a.map((x) => x[s].f)).toFixed(3)}`); }
+console.log('oracle any-candidate F1', mean(flat.map((x) => x.oracle.any)).toFixed(3), ' typed-pool F1', mean(flat.map((x) => x.oracle.typed)).toFixed(3), ' exact-chunk share', mean(flat.map((x) => +x.oracle.exact)).toFixed(3));
+for (const t of ['who', 'what', 'where', 'num']) { const f = flat.filter((x) => x.type === t); if (f.length) console.log(' type', t.padEnd(5), `n=${f.length}`, SYS.map((s) => `${s} ${mean(f.map((x) => x[s].f)).toFixed(2)}`).join('  ')); }
+if (books.length >= 3) { const R = (seed => () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296)(12345); const diff = (a, b) => { const ds = []; for (let r = 0; r < 10000; r++) { let sa = 0, n = 0; for (let k = 0; k < books.length; k++) { const bk = books[Math.floor(R() * books.length)]; for (let j = 0; j < bk.length; j++) { const q = bk[Math.floor(R() * bk.length)]; sa += q[a].f - (b === 'oracle' ? 0 : q[b].f); n++; } } ds.push(sa / n); } ds.sort((x, y) => x - y); return [ds[250], ds[9749]]; };
+  for (const [a, b] of [['F', 'B2'], ['F', 'B1'], ['F', 'B0'], ['F', 'F1only'], ['F', 'F2only'], ['F', 'R'], ['FL', 'B2'], ['FL', 'F']]) console.log(`F1 diff ${a}-${b} 95% [${diff(a, b).map((v) => v.toFixed(3)).join(', ')}]`); }

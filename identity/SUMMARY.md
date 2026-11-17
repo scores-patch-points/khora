@@ -48,7 +48,12 @@ Pointers pinned to the old `pharos/lib/pharos.mjs` hash must be re-pinned (khora
    hot addresses read a median 4.76% of the bytes (bar 5%), cold 44%; one mutant needs a targeted test; the reader trusts the
    chained attestation. Four design changes after smoke runs are logged in PREREG-S2.md.notes.
 
-## What we learned about learning
+10. **Answering questions about novels with no model** (identity/novels/, rounds 1-7, NarrativeQA extractive subset, 25+ books read whole through khora's one reader). Best end to end: exact match 0-9%, F1 about 0.05-0.11; intervals include 0. A frame-fold answerer scored 0.000 (round 1); a paraphrase fold built from
+    co-occurrence did not help (round 2); the named characters place the answer's sentence in about 1.5% of a book, about 30x chance, and this replicated on three sets of unread books (rounds 3-4); a tracker (presence + speaker) raised the share of clause arguments attached to a character from about 7% to 8-40% but the graph's acts stayed too sparse to answer from (round 4);
+    one universal learner found the right evidence to attend on record identity (AUC 0.994) and a direction-only gain on answer choice (round 5); description wormholes were too rare to matter (round 6); the most-mentioned character is a real prior when no character is named (round 7, thin). Several early "leads" vanished on fresh books.
+11. **Pheromone to synapse** (identity/synapse/, a sub-agent's preregistered tests). Promoting a trail to a persistent edge by tag-and-capture works (held-out precision 0.79 vs 0.18); the expressway role failed (97% of promoted edges join referents already in one sentence); the induced-kind role is weakly supported and underpowered.
+
+## What we learned about learning (a fuller, dated ledger: LEARNING-ABOUT-LEARNING.md)
 - Learn distributions, not rules: "birth date is one-valued" is a rate (about 97% single, 3% ambiguous).
 - A relative unit needs a reference with spread; a near-zero unit is as bad as zero (it cost us F2 and I did not catch it).
 - Real records disagreed with every synthetic world; the real failures (inducer bug, sparse records, Swedish) were all found on real data.
@@ -72,7 +77,7 @@ only real sources; truth in split-half tests is "two halves of one item"; every 
 review (the omnilingual preregistration).
 
 ## Layout
-Top-level `*PREREG.md`/`*RESULTS.md` (+ `.sha256`/`.time` stamps) per experiment; `omni/`, `learned/`, `books/`, `curious/`,
+Top-level `*PREREG.md`/`*RESULTS.md` (+ `.sha256`/`.time` stamps) per experiment; `omni/`, `learned/`, `books/`, `novels/`, `synapse/`, `curious/`,
 `real-falsify/`, `rules-not-shipped/`, `stoprule*/`, `severity-not-shipped/`, `example/` hold scripts and small results. Raw data
 (Wikidata and Open Library snapshots, Zenodotus documents, logs) is not in this commit; the fetch scripts and hashes reproduce it.
 Six scripts had machine paths scrubbed before merging; see SCRUB-NOTE.md for what changed and the hash chain.

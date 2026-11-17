@@ -1,0 +1,13 @@
+# PREREG round 7: a referent is the company it keeps; answer no-name questions by company (2026-11-17, before any code)
+Sample of the 94 no-name questions (seen): many DESCRIBE the answer ("the outdoors-man who noticed the dogs being poorly treated" = John Thornton; "the ape-like troglodytes" = Morlocks) and many are about the whole book ("Who is the protagonist?", "Where does the story take place?").
+## Method (company.mjs)
+COMPANY of a cast referent r = the words of the sentences within +-1 of any of its mentions (cast mentions, tracker pronoun bindings, tracked clause arguments); a referent is the company it keeps. Query-likelihood with Dirichlet smoothing: score(r) = log prior(r) + sum over the question's content terms w of log( (tf(w,r) + mu * P(w|book)) / (|D_r| + mu) );
+prior(r) = r's share of all mention-sentences; mu = the mean company length (derived, not set); content terms = question words with surprisal >= the question's own median (as before). Terms that are the name of a referent excluded. The answer is the top referent's reader-canonical surface (cast.surface). Question words that name a referent are not used (this method is for questions naming none).
+Variants: C (full), PRIOR (prior only: the most-mentioned referent, the protagonist rule), LIK (likelihood only, uniform prior). Baselines: B1 (most frequent typed candidate, round 1 frozen), and the round-5 learned chooser is NOT used here (its features need a named referent).
+## Data
+DEVELOP: the no-name questions of the 34 books read before round 6 (94, seen). TEST: the 30 no-name questions of the 8 round-6 books (opened only for round 6's retrieval metric, never for this method; disclosed: the retrieval counts are seen).
+Only questions whose gold answer (<= 4 words) is a cast surface of the book are in the primary set ("referent answers"); the share is reported. Metrics: SQuAD F1/EM (max over refs), book-cluster bootstrap 95%.
+## Hypotheses (can fail)
+C1: on the test no-name referent-answer questions, C's F1 exceeds B1's (interval excludes 0). C2: C exceeds PRIOR and LIK each (the company and the prior both matter). C3: on the question-types asking about the whole book (question contains story / novel / play / book / protagonist / main character; a surface rule recorded in the report, not used by the method), PRIOR is as good as C (within 0.02 F1).
+Predictions so they can fail: C1 holds with F1 near 0.15-0.25 (test is small: interval may include 0); C2 fails (LIK alone does as well as C); C3 holds.
+Not tested: questions naming a character; answers that are not referents (places, objects); F1 for what/where about things.

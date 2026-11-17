@@ -1,0 +1,8 @@
+# RESULTS PREREG-SYNAPSE-2 (prereg sha256/time stamped 2026-11-17T18:37:11Z before kinds.mjs and synapse_exp2.py were written; logs run2.log, results2.json)
+Disclosure: synapse_exp2.py was edited once (sys.path line so `python3 -I` can import synapse_exp) after a failed import, before any result; the recorded hash is of the final file. Usable books 19 of 34 (typed gaps: <3 synapses, <10 test pairs).
+Kernel kinds (kinds.mjs, characteristicSetKinds over clause relation profiles, draws 50, alpha .05): only 5 of 34 books license any kind (1 kind each); profiled referents are about 45% of the cast.
+E1 expressway: share of test pairs shortened 0.013 (synapses) vs 0.057 (rewired null edges); 1 up, 18 down, p=0.0001. FAILS, opposite direction. E1b (non-edge pairs): 0.013 vs 0.078, 0 up / 17 down, FAILS. Cause measured: 97% of synapse edges join referents already adjacent in the same-sentence trail graph, so they shorten nothing; the null's random long-range edges shorten more. A synapse promoted from direct co-presence is a consolidated edge, not a shortcut.
+E2 cost: F1 per 1000 edge reads 11.7 (synapses) vs 0.11 (RAW), 16 up / 2 down, p=0.0013: HOLDS (RAW is dense and expensive). Extra: vs rewired null 5.7, 14 up / 3 down, p=0.013, so the real edges are also better placed than random ones at equal sparsity.
+K1 kind admission: share of basins admitted by the binding test 0.30 real vs 0.054 null; 9 up / 3 down (16 books), p=0.146: not significant at alpha, FAILS the prereg criterion; direction as hoped, underpowered.
+K2 homophily: usable in 1 book only (9 intra edges, 0 bridge): UNDERPOWERED, no verdict.
+Edge labels (kernel kinds): intra 9, bridge 0, untested 325 of 334 synapse edges.

@@ -1,0 +1,5 @@
+# ERRATUM 1 to PREREG-PARAPHRASE.md, 2026-11-17, before any holdout question is filtered or opened
+The diagnostic quoted in the prereg ("top-1 23, top-5 47 of 103, median rank 6") ranked tied scores optimistically (a sentence tied with many others counted as first). With pessimistic ties (every other sentence scoring >= it counts ahead) and the
+spent questions plus dev (n=117), plain BM25 reaches the answer's sentence top-1 6.0%, top-5 14.5%, top-25 33.3% (median rank 73); fold BM25 3.4% / 18.8% / 39.3% (median 50); the top-5 NON-OVERLAPPING windows (<= 25 sentences) reach 41.9%.
+So the prediction "top-5 from 0.47 to under 0.60" is void; it is replaced by: on the holdout, retrieval top-5 for plain BM25 will be near 0.15 and fold BM25 will not exceed 0.30. Same-coverage comparison added: window reach (<= 25 sentences) is compared with plain and fold top-25.
+Also: an oracle-retrieval run (gold sentences given to the unchanged answerer, spent questions) is reported with round 1: role-blind first typed candidate F1 0.280 / EM 0.165; the frame choice F1 0.009.

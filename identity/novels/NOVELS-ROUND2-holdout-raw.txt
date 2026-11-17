@@ -1,0 +1,6 @@
+questions 78  folds per question mean 133.8
+plain BM25                         top1 0.077 top5 0.218 top25 0.410 median rank 52
+fold BM25                          top1 0.051 top5 0.141 top25 0.397 median rank 47
+window+fold (pessimistic ties)     top1 0.000 top5 0.000 top25 0.090 median rank 886.5
+window top-5 windows reach (<=25 sentences): 0.321
+R5 subset (no exact content-lemma overlap with answer sentence) n= 26  plain top5 0.000  fold top5 0.000  win reach 0.154

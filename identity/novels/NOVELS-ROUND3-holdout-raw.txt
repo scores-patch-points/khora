@@ -1,0 +1,55 @@
+
+== all: 78 questions
+B0    F1 0.014 EM 0.000
+B1    F1 0.024 EM 0.000
+B2    F1 0.024 EM 0.013
+F     F1 0.006 EM 0.000
+R     F1 0.115 EM 0.064
+E     F1 0.078 EM 0.051
+Ef    F1 0.060 EM 0.051
+Ep    F1 0.078 EM 0.051
+Efp   F1 0.060 EM 0.051
+retrieval plain top5 0.192 top25 0.346
+retrieval E     top5 0.244 top25 0.500
+retrieval Ef    top5 0.218 top25 0.526
+
+== questions naming a cast entity: 59 questions
+B0    F1 0.011 EM 0.000
+B1    F1 0.025 EM 0.000
+B2    F1 0.020 EM 0.017
+F     F1 0.000 EM 0.000
+R     F1 0.129 EM 0.068
+E     F1 0.092 EM 0.068
+Ef    F1 0.079 EM 0.068
+Ep    F1 0.092 EM 0.068
+Efp   F1 0.079 EM 0.068
+retrieval plain top5 0.169 top25 0.305
+retrieval E     top5 0.237 top25 0.458
+retrieval Ef    top5 0.254 top25 0.508
+
+== questions naming none (E = plain BM25 there): 19 questions
+B0    F1 0.021 EM 0.000
+B1    F1 0.021 EM 0.000
+B2    F1 0.035 EM 0.000
+F     F1 0.026 EM 0.000
+R     F1 0.074 EM 0.053
+E     F1 0.035 EM 0.000
+Ef    F1 0.000 EM 0.000
+Ep    F1 0.035 EM 0.000
+Efp   F1 0.000 EM 0.000
+retrieval plain top5 0.263 top25 0.474
+retrieval E     top5 0.263 top25 0.632
+retrieval Ef    top5 0.105 top25 0.579
+
+book-cluster bootstrap 95% (difference):
+E1 retrieval top5 E - plain       [-0.077, 0.172]
+   retrieval top25 E - plain      [-0.072, 0.352]
+E3 retrieval top5 Ef - E          [-0.123, 0.086]
+E2 F1 E - B1                      [-0.054, 0.142]
+   F1 Ef - B1                     [-0.063, 0.117]
+   F1 E - R (round-1 role-blind)  [-0.151, 0.060]
+   F1 Ef - E                      [-0.064, 0.028]
+   F1 E - B2                      [0.007, 0.112]
+   F1 Ep - E                      [0.000, 0.000]
+   F1 Ep - B1                     [-0.051, 0.145]
+   F1 Efp - B1                    [-0.065, 0.120]

@@ -1,0 +1,22 @@
+questions: 103 over 8 book(s)
+B0      F1 0.028  EM 0.019  answered 103/103  F1|answered 0.028
+B1      F1 0.069  EM 0.029  answered 103/103  F1|answered 0.069
+B2      F1 0.021  EM 0.010  answered 66/103  F1|answered 0.033
+F       F1 0.000  EM 0.000  answered 24/103  F1|answered 0.000
+F1only  F1 0.000  EM 0.000  answered 19/103  F1|answered 0.000
+F2only  F1 0.000  EM 0.000  answered 6/103  F1|answered 0.000
+R       F1 0.048  EM 0.010  answered 92/103  F1|answered 0.054
+FL      F1 0.000  EM 0.000  answered 24/103  F1|answered 0.000
+oracle any-candidate F1 0.909  typed-pool F1 0.763  exact-chunk share 0.777
+ type who   n=36 B0 0.04  B1 0.10  B2 0.00  F 0.00  F1only 0.00  F2only 0.00  R 0.04  FL 0.00
+ type what  n=55 B0 0.01  B1 0.03  B2 0.04  F 0.00  F1only 0.00  F2only 0.00  R 0.06  FL 0.00
+ type where n=10 B0 0.10  B1 0.20  B2 0.00  F 0.00  F1only 0.00  F2only 0.00  R 0.00  FL 0.00
+ type num   n=2 B0 0.00  B1 0.00  B2 0.00  F 0.00  F1only 0.00  F2only 0.00  R 0.25  FL 0.00
+F1 diff F-B2 95% [-0.058, 0.000]
+F1 diff F-B1 95% [-0.132, -0.019]
+F1 diff F-B0 95% [-0.068, 0.000]
+F1 diff F-F1only 95% [0.000, 0.000]
+F1 diff F-F2only 95% [0.000, 0.000]
+F1 diff F-R 95% [-0.088, -0.011]
+F1 diff FL-B2 95% [-0.058, 0.000]
+F1 diff FL-F 95% [0.000, 0.000]

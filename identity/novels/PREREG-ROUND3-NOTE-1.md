@@ -1,0 +1,4 @@
+# NOTE 1 to PREREG-ROUND3, 2026-11-17 (before any holdout question is opened)
+The user's framing: the reader's situation model is a text-specific holograph informed by priors. Tested as such on SPENT questions (salience.mjs, salience-test.mjs): khora's holograph (bayes-surprise.js, unchanged) admits each clause of a book in reading order as slots
+{pred, polarity, subj, obj, pair}, preloaded with the other books' clauses as the prior; a sentence's salience = its Bayesian surprise. AUC of answer-bearing vs other sentences: with prior 0.532 (se 0.013, n=117), without 0.534 (se 0.014). Nearly uninformative, unnormalised for clause count.
+So salience is NOT used in E or Ef (the prereg already declared it not tested; now it is tested on spent questions and falls short). The entity -> scene index of round 3 is the working form of the holograph idea; a better slot design for the holograph is open.

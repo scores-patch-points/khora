@@ -1,0 +1,12 @@
+questions 87  referent basis: untracked 63  tracked 63
+H  (untracked) cut mean 25.4 median 32 share of book 0.0138  gold inside cut 0.476
+H4 (tracked)   cut mean 28.8 median 32 share of book 0.0167  gold inside cut 0.492
+retrieval plain top5 0.115 top25 0.333
+retrieval E     top5 0.218 top25 0.494
+retrieval H     top5 0.241 top25 0.483
+retrieval H4    top5 0.218 top25 0.471
+E   F1 0.013 EM 0.000 answered 71/87
+H   F1 0.004 EM 0.000 answered 17/87
+H4  F1 0.008 EM 0.000 answered 25/87
+H4 on the questions it answered: F1 0.027 EM 0.000 answered 25/25  | E on those same: F1 0.020 EM 0.000 answered 23/25
+H4 where the act matched a question lemma: F1 NaN EM NaN answered 0/0

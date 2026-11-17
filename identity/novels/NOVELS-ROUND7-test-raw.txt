@@ -1,0 +1,29 @@
+no-name questions 30  answer is a referent surface 11 (37%)
+
+== referent-answer questions (primary): 11 questions
+C      F1 0.045 EM 0.000
+PRIOR  F1 0.224 EM 0.091
+LIK    F1 0.000 EM 0.000
+B1     F1 0.073 EM 0.000
+
+==   of which about the whole book: 2 questions
+C      F1 0.000 EM 0.000
+PRIOR  F1 0.400 EM 0.000
+LIK    F1 0.000 EM 0.000
+B1     F1 0.400 EM 0.000
+
+==   of which describing the answer: 9 questions
+C      F1 0.056 EM 0.000
+PRIOR  F1 0.185 EM 0.111
+LIK    F1 0.000 EM 0.000
+B1     F1 0.000 EM 0.000
+
+== all no-name questions: 30 questions
+C      F1 0.017 EM 0.000
+PRIOR  F1 0.082 EM 0.033
+LIK    F1 0.000 EM 0.000
+B1     F1 0.027 EM 0.000
+
+C1 F1 C - B1 [-0.300, 0.155]
+C2 F1 C - PRIOR [-0.556, 0.125]
+   F1 C - LIK   [0.000, 0.167]
