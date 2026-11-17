@@ -20,6 +20,9 @@ export function finalVariants(form) {
   if (f.endsWith("aḥ")) for (const e of ["o", "a", "as", "aś", "aṣ", "ar"]) out.add(f.slice(0, -2) + e);
   else if (f.endsWith("āḥ")) for (const e of ["ā", "ās", "āś", "āṣ", "ār"]) out.add(f.slice(0, -2) + e);
   else if (/[iīuūṛṝeoai]ḥ$/.test(f)) for (const e of ["r", "s", "ś", "ṣ"]) out.add(f.slice(0, -1) + e);
+  // the same alternation read from the other side: a form the treebank spells with final -s (tatas) is -ah, -as, -as, -ar or -o in running text
+  if (f.endsWith("as")) for (const e of ["aḥ", "aś", "aṣ", "ar", "o", "a"]) out.add(f.slice(0, -2) + e);
+  else if (f.endsWith("ās")) for (const e of ["āḥ", "āś", "ā"]) out.add(f.slice(0, -2) + e);
   // a final dental stop assimilates to what follows (tad before a voiced sound, tac before c, taj before j, tal before l, tan before n)
   if (/[td]$/.test(f)) for (const e of ["t", "d", "c", "j", "l", "n"]) out.add(f.slice(0, -1) + e);
   // a final vowel glides before a vowel: api to apy, iti to ity, vadhu to vadhv, kartṛ to kartr
@@ -30,13 +33,19 @@ export function finalVariants(form) {
   return [...out];
 }
 
+/** The avagraha: an elided initial a is written ' ('pi for api, 'ham for aham). */
+const avagraha = (f) => (f.startsWith("a") && f.length > 2 ? ["'" + f.slice(1), "’" + f.slice(1)] : []);
+
 const closed = new WeakMap();
 /** A POSPrior@1 whose `forms` also hold, for each attested form, its unattested final-sound variants (same counts). Memoised per prior object. */
 export function withSandhiVariants(posPrior) {
   if (!posPrior?.forms) return posPrior;
   if (closed.has(posPrior)) return closed.get(posPrior);
   const forms = { ...posPrior.forms }; let added = 0;
-  for (const [f, c] of Object.entries(posPrior.forms)) for (const v of finalVariants(f)) if (!(v in forms)) { forms[v] = c; added++; }
+  for (const [f, c] of Object.entries(posPrior.forms)) {
+    const bases = [f, ...avagraha(f)];
+    for (const b of bases) for (const v of b === f ? finalVariants(b) : [b, ...finalVariants(b)]) if (!(v in forms)) { forms[v] = c; added++; }
+  }
   const out = { ...posPrior, forms, sandhiVariantsAdded: added };
   closed.set(posPrior, out); return out;
 }

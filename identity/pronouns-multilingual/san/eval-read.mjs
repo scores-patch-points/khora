@@ -4,7 +4,7 @@ import fs from "node:fs"; import path from "node:path";
 import { readToWeft } from "../../../native/the-fold/read-process.mjs";
 const [NAME, FILE, K, CH, OUT] = process.argv.slice(2); fs.mkdirSync(OUT, { recursive: true });
 const text = fs.readFileSync(FILE, "utf8"), n = +K, len = +CH;
-const chunks = []; for (let i = 0; i < n; i++) { let a = Math.floor(((i + 0.5) / n) * (text.length - len)); const nl = text.indexOf("\n", a); a = nl < 0 ? a : nl + 1; let b = a + len; const last = Math.max(text.lastIndexOf("|", b), text.lastIndexOf("\n", b)); if (last > a + len / 2) b = last + 1; chunks.push([a, b]); }
+const chunks = []; for (let i = 0; i < n; i++) { let a = Math.floor(((i + +(process.env.GRID_SHIFT ?? 0.5)) / n) * (text.length - len)); const nl = text.indexOf("\n", a); a = nl < 0 ? a : nl + 1; let b = a + len; const last = Math.max(text.lastIndexOf("|", b), text.lastIndexOf("\n", b)); if (last > a + len / 2) b = last + 1; chunks.push([a, b]); }
 for (const [i, [a, b]] of chunks.entries()) {
   const f = path.join(OUT, `${NAME}-${String(i).padStart(2, "0")}.json`); if (fs.existsSync(f)) continue;
   const t0 = Date.now(); const e = readToWeft(text.slice(a, b), { address: `${NAME}:${a}`, language: "san" });
