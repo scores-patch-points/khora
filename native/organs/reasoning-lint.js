@@ -838,11 +838,21 @@ export function lintGfp(claims = [], { functional = [], symmetric = [], acyclic 
   // Roll-up: every holon counts its own findings and its descendants'.
   const holonSet = new Set();
   for (const g of grounds) for (const h of ancestry(g)) holonSet.add(h);
+  // THE IDENTITY IN FORCE at a holon: which names the declared same-as claims merged there. A verdict at this holon is
+  // only as comparable as this partition: two runs with the same claims but different partitions looked at different
+  // things, and `ok` alone cannot say so. Only merged classes are listed (a name merged with nothing is not news).
+  const idNames = [...new Set(idClaims.flatMap((c) => [baseIdf(c.roles.ARG0), baseIdf(c.roles.ARG1)]))];
+  const identityIn = (h) => {
+    const f = identityAt(h), classes = new Map();
+    for (const n of idNames) { const r = f(n); if (!classes.has(r)) classes.set(r, []); classes.get(r).push(n); }
+    return [...classes.values()].filter((g) => g.length > 1).map((g) => g.sort()).sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : 0));
+  };
   const holons = [...holonSet].sort((x, y) => depthOf(x) - depthOf(y) || (x < y ? -1 : 1)).map((h) => ({
     at: h,
     own: visible.filter((f) => f.at === h).length,
     below: visible.filter((f) => f.at !== h && contains(h, f.at)).length,
     errors: visible.filter((f) => contains(h, f.at) && f.severity === SEVERITY.ERROR).length,
+    identity: identityIn(h),
   }));
   return Object.freeze({
     ok: !visible.some((f) => f.severity === SEVERITY.ERROR),
