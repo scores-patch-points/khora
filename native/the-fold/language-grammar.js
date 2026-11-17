@@ -28,6 +28,7 @@ import { makeEar } from "../adapters/text/ear.js";
 import { identifyLanguage } from "./langid.mjs";
 import { PRIORS_DIR } from "./priors-home.js";
 import { priorJson, priorNames } from "./prior-source.mjs";
+import { stemFromName } from "./language-names.js";
 
 // The one home for the priors (janus), resolved by priors-home.js. Re-exported
 // so the eval/organ callers that import PRIORS_DIR from this module keep working.
@@ -75,7 +76,8 @@ export function stemOf(name) {
   if (!low) return null;
   if (VARIANT[low]) return VARIANT[low];
   const primary = low.split("-")[0];
-  const stem = STEM[primary] ?? (availableStems().includes(low) ? low : availableStems().includes(primary) ? primary : null);
+  // a language's OWN name in its own script, an English name or an ISO code (language-names.js): any of them identifies it
+  const stem = STEM[primary] ?? (availableStems().includes(low) ? low : availableStems().includes(primary) ? primary : null) ?? stemFromName(name);
   return stem && cached(`pos-${stem}.json`) ? stem : null;
 }
 

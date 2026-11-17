@@ -1,0 +1,73 @@
+{
+ "schema": "ReadingBaseline@1",
+ "about": "What the canonical read was MEASURED at, and the reading code it was measured with. A reading change must re-record this (record.mjs --note) in the same commit; native/tests/reading-baseline.test.mjs fails otherwise.",
+ "metrics": {
+  "english_pronoun_binding": {
+   "evidence": "identity/novels/NOVELS-RESULTS-ROUND10.md; native/docs/PRONOUN-BINDING-STATUS.md; GUM master sha256 4672bc446b6f516877b023384d2e33952bb012aca052506b197c92ddba67b78e",
+   "dials": "PRONOUN_PRESENCE_DEFAULT (window 4, boost 2, feed 1, floor 2, margin 0.3), no non-personal ruling (no Wiktionary pack on the measuring machine)",
+   "slices": {
+    "E": {
+     "documents": 30,
+     "answerable": 329,
+     "right": 101,
+     "wrong": 40
+    },
+    "C": {
+     "documents": 30,
+     "answerable": 254,
+     "right": 95,
+     "wrong": 47
+    },
+    "D": {
+     "documents": 30,
+     "answerable": 369,
+     "right": 123,
+     "wrong": 52
+    },
+    "F": {
+     "documents": 35,
+     "answerable": 347,
+     "right": 124,
+     "wrong": 61
+    }
+   },
+   "pooled": {
+    "documents": 125,
+    "answerable": 1299,
+    "bound": 643,
+    "right": 443,
+    "wrong": 200,
+    "precision": 0.689,
+    "coverageOfAnswerable": 0.495,
+    "coverageOfHeShe": 0.6
+   },
+   "why_wrong": {
+    "evidence": "identity/novels/gum-errors.mjs on E, C, D, F (replica of the rung matched it on 1,350 of 1,350 pronouns)",
+    "nonPersonalBound": 137,
+    "rightAntecedentLostToMoreSalient": 50,
+    "rightAntecedentNotAvailable": 10,
+    "otherGenderPerson": 3,
+    "shareOfErrorsNonPersonal": 0.685,
+    "precisionIfNonPersonalRefused": 0.875,
+    "coverageIfNonPersonalRefused": 0.39
+   }
+  },
+  "languages_measured": {
+   "eng": "see english_pronoun_binding",
+   "note": "a language other than English binds pronouns only if its register carries its own evaluation (adapters/text/pronoun-registers.js: no unmeasured binding ships)"
+  }
+ },
+ "files": {
+  "native/the-fold/read-process.mjs": "c9fe18dc2514d775bd3c62135b770b881abbb1a82bdfd26fe0056fe614fa3f1c",
+  "native/the-fold/read-core.mjs": "102dbc69d51539dd2f2931f18fd1ca30e2081289ffdb9506df961bf8005308fd",
+  "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
+  "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
+  "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
+  "native/adapters/text/pronouns.js": "1ab35598256f60b2e3b9323b3bb1d2fe43deb1e8ab06c8f34645b467fb929cf8",
+  "native/adapters/text/pronoun-registers.js": "67d27218d1f3930874718103dfa1ef7b986e829f1dbbf40309b8a425b478bf91",
+  "native/adapters/text/pronoun-presence-chosen.js": "40a9648b7ddb573a9da51b40f410da458aa4f19a16e4cd34d1511cccd4f53a2a",
+  "native/adapters/text/clause-attach.js": "0450fdf6f38cc65b12735c2c60d9a631c8bf82ca10ff865379eebdad57d00035",
+  "native/adapters/text/non-personal.js": "707515503ceecb0cb69f250041a0f2759597819110fd9e66640a61f166120f95"
+ },
+ "recorded": "2026-11-17"
+}

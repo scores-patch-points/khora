@@ -13,3 +13,9 @@ test("a language with no register: no silent English binding; the typed gap pron
   const { readToWeft } = await import("./read-process.mjs"); const w = readToWeft(ES.repeat(2), { language: "spa" });
   assert.equal(w.pronounsPresence, undefined); assert.ok((w.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_register"), JSON.stringify(w.gaps));
 });
+
+test("a read without the non-personal ruling says so (a typed gap), so its pronoun bindings are not mistaken for ruled ones", { skip: !HAVE, timeout: 600000 }, async () => {
+  const { readToWeft } = await import("./read-process.mjs"); const w = readToWeft(EN.repeat(3), { language: "eng" });
+  assert.ok((w.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"), JSON.stringify(w.gaps));
+  const off = readToWeft(EN.repeat(3), { language: "eng", readerOptions: { pronounPresence: null } }); assert.ok(!(off.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"), "no rung, no gap");
+});

@@ -51,6 +51,7 @@ import { extractSurfacesHeard, languageContextFor } from "./language-context.js"
 import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
+import { autonymOf } from "./language-names.js";
 import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
 import { priorJson, priorGeneration } from "./prior-source.mjs";
@@ -335,7 +336,7 @@ export function readWith(text, { address = null, category = null, language = nul
   const gaps = [];
   const heard = language ? null : languageContextFor(str, {});
   const stem = (language ? stemOf(language) : null) ?? (heard?.language ? stemOf(heard.language) ?? heard.language : null) ?? "eng";
-  const languageRead = { declared: language ?? null, stem, source: language ? (stemOf(language) ? "declared" : "declared-unknown") : heard?.language ? "heard" : "default" };
+  const languageRead = { declared: language ?? null, stem, autonym: autonymOf(stem), source: language ? (stemOf(language) ? "declared" : "declared-unknown") : heard?.language ? "heard" : "default" };
   if (language && !stemOf(language)) gaps.push({ gap: "unknown_language", detail: `no prior stem is filed for ${language}: read with the ${stem} priors` });
   if (!language && !heard?.language) gaps.push({ gap: "language_default", detail: "no language was declared or heard: read as English, the repo's default" });
   const pr = priors ?? priorsFor(stem);

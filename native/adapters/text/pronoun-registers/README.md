@@ -5,3 +5,7 @@ third-person personal pronouns (UD PronType=Prs, Person=3, or the language's own
 Loaded by `adapters/text/pronoun-registers.js::registerFor(stem)`: this folder first, then the priors folder's `pronoun-<stem>.json`. English uses the resolver's built-in class (measured numbers in native/docs/PRONOUN-BINDING-STATUS.md).
 `grc.json` starts as a copy of the janus prior (UD_Ancient_Greek-PROIEL test file only, 509 third-person tokens, article forms included): it is the baseline to beat, not a finished register.
 Stems with no register get the typed gap `pronoun_presence_no_register` on the entry.
+
+## A register binds by default only if it carries its evaluation
+Top-level `evaluation: { documents, answerable, precision, coverage, nullPrecision, resultsFile, method }` (precision = right / (right + wrong) of the bindings on gold or, where no gold exists, one minus the gold-free contradiction rate with the method named; coverage = bound / answerable; nullPrecision = the same with the bound referents permuted over the same pronouns; resultsFile = the file in the repo that holds the run).
+Without it `presenceOptionsFor` returns the typed gap `pronoun_presence_unmeasured` and the read binds nothing. `grc.json` below is such a register today.
