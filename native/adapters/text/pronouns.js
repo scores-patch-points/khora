@@ -997,7 +997,7 @@ export const resolvePronounsByActivation = (
  * @returns {{bindings: Array<object>, gaps: Array<object>}}
  */
 export const resolvePronounsByPresence = (sentences, mentions, options = {}) => {
-  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false } = options;
+  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
   if (window !== null && (!Number.isFinite(window) || window <= 1)) throw new TypeError("resolvePronounsByPresence: window is declared (a number above 1, or null for the undecayed control)");
   if (!Number.isFinite(boost) || boost <= 0) throw new TypeError("resolvePronounsByPresence: boost is declared and positive (1 weighs every mention alike)");
   if (feed !== 0 && feed !== 1) throw new TypeError("resolvePronounsByPresence: feed is declared, 0 or 1");
@@ -1050,12 +1050,12 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
           if (a > 0) cands.push([ref, a, c.pos]);
         }
         cands.sort((x, y) => y[1] - x[1] || y[2] - x[2] || (x[0] < y[0] ? -1 : 1));
-        if (!cands.length) continue;
+        if (!cands.length) { if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: [...state.keys()].some((r) => !np.has(r) && presence(r, sent.i) > 0) ? "gender_veto" : "no_candidate" }); continue; }
         top = cands[0][1];
         const second = cands[1]?.[1] ?? 0;
-        if (top < floor) continue;
+        if (top < floor) { if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: "below_floor", activation: top }); continue; }
         margined = (top - second) / top;
-        if (margined < margin) continue;
+        if (margined < margin) { if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: "margin", activation: top, margin: margined }); continue; }
         chosen = cands[0][0]; mechanism = "presence";
       }
       bindings.push({ referentId: chosen, sentenceOrder: sent.i, offset: e.pos, pronoun: hit.token, gender: hit.gender, activation: top, margin: margined, mechanism });

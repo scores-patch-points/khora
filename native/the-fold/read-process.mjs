@@ -11,6 +11,7 @@
 // canonical call and its record of what the reading is.
 import { readWith } from "./read-core.mjs";
 import { presenceOptionsFor } from "../adapters/text/pronoun-registers.js";
+import { shippedDeclensionFor } from "../adapters/text/declension-shipped.js";
 
 export const READ_PROCESS = Object.freeze({
   schema: "ReadProcess@1",
@@ -28,7 +29,7 @@ export const READ_PROCESS = Object.freeze({
 /** Read a source into a `WeftEntry@4`. The ONE reading call. Whole text in, edges out; a short source is a typed skip, a reader
  *  failure is a typed error — never silent. `language` null means heard from the text. `aliases` (the dotted forms the
  *  hyperlexicon resolved), `abbreviations`, `priors` and `aliasReport` pass straight to the core. */
-export function readToWeft(text, { address, category = null, language = null, quality = true, aliases = [], abbreviations = null, priors = null, aliasReport = null, readerOptions = {} } = {}) {
+export function readToWeft(text, { address, category = null, language = null, quality = true, aliases = [], abbreviations = null, priors = null, aliasReport = null, readerOptions = {}, declension = shippedDeclensionFor } = {}) {
   // the canonical read binds pronouns by presence with the class of the language the reader settles on (a function of the stem); readerOptions.pronounPresence: null turns it off, an object or function overrides
-  return readWith(text, { address, category, language, quality, aliases, abbreviations, priors, aliasReport, readerOptions: { pronounPresence: (stem) => presenceOptionsFor(stem), ...readerOptions } });
+  return readWith(text, { declension, address, category, language, quality, aliases, abbreviations, priors, aliasReport, readerOptions: { pronounPresence: (stem) => presenceOptionsFor(stem), ...readerOptions } });
 }
