@@ -28,3 +28,26 @@ Append-only. One entry per lesson: what happened, why it matters, what to do nex
 
 ## Open
 Wormholes for wording, places and kinds untested. The tracker's attachment is 8-40% of subjects (no gold for the speaker rung). Question-answering at its best is still EM 0-9% zero-LLM.
+
+## Round 8 (added 2026-11-17)
+18. **Competence can be measured as surprise a thought removes, in hindsight and in foresight.** A thought the system wrote from the first two thirds of a book removed surprise in the last third on every book (dev 33/33, test 8/8; 8-11% of last-third surprise); random thoughts of the same kind increased it. The system recorded its thoughts into the pharos, retracted the ones that did not pay, and the state replayed exactly. Evidence: novels/NOVELS-RESULTS-ROUND8.md.
+19. **Check the baseline before celebrating a saving.** 83% of the total came from one thought (the pronoun rule) because the base reader has no pronoun model; without it the saving is 1.3-1.6%. Report both numbers.
+20. **The pharos refuses writes to cells it does not know, and the door fails silently.** Make the code throw on a refused write (REC·Paradigm was refused; REC·Pattern is the cell). Evidence: FREEZE-ROUND8.md.
+21. **Hindsight predicts foresight moderately (rho 0.43 on development) but not reliably on small tests.** Hindsight is the proposal, foresight is the test; never admit on hindsight alone.
+
+## Round 9 (added 2026-11-17)
+22. **Check which arm of a preregistration was the chosen one.** Rounds 4-8 used the control arm's pronoun dials; the chosen dials bind 97.6% of he/she pronouns vs 66% and doubled the pronoun rule's saving (499 -> 1,101 bits per book). Read the DIALS file, not the prose summary.
+23. **Look at what the repo says is solved before assuming.** Pronoun binding is not solved there either: the shipped resolver bound 7 of 272 right; the presence rung is the best (65% right, 84% precision on GUM); the attention binder (it, descriptions) failed 3 of 6 bars. Evidence: eval/referents/PRESENCE-DIALS-B.json, eval/attention/RESULT-ATTENTION-A5.md on branch attention-binder.
+24. **A meta-thought earns its place by cost, not by raw gain.** A learned admission policy over the system's own candidate thoughts kept the same surprise reduction while admitting 7.5 thoughts instead of 17.5 (precision 0.49 -> 0.83 on unread books). Kind-level statistics did nothing; the size of the hindsight saving carried the signal.
+25. **Circularity check on compression gains.** A thought that assigns labels by the same signal the reader predicts with makes those labels cheap by construction. Measure binding correctness against a gold set before trusting the saving.
+26. **Pass lists as arguments, not as filenames** (my shell mistake: `cat a b ids` dropped nine ids silently). Print the count of items before an expensive run.
+
+## Round 10 (added 2026-11-17)
+27. **Coverage is not correctness; always attack a headline rate with a falsifier.** "98% of pronouns bound" survived no test: a gold-free contradiction test (a referent bound to both he and she) showed at least 17% wrong on our books, and gold (GUM, three unseen slices) showed 61% precision overall, 49% on fiction and on the confirmation slice. Run the gold-free falsifier first; it needs no data.
+28. **A dial chosen on one slice by "max right subject to precision >= baseline" can fail out of sample.** 84% on the development slice, 49% on the confirmation slice. A development slice that is also the selection set tells you nothing about generalisation; choose on one slice, confirm on another, and prefer a rule that targets precision, not the baseline's.
+29. **Check whether a confidence signal is calibrated before using it as a knob.** The presence rung's margin does not separate right from wrong bindings (precision flat across margin quartiles), so no margin setting buys precision. The missing piece is evidence (agreement, binding constraints, role), not a threshold.
+
+## Round 11 (added 2026-11-17)
+30. **A preregistered confirmation can fail on its own while the direction holds; say both, and say when you deviate.** On 35 untouched documents control beat chosen 0.670 vs 0.362 but the document-cluster interval touched 0 (-0.037). The default was changed anyway on the user's instruction, with the deviation written down and the change labelled provisional and one line to revert. Small document counts have large between-document variance: size the confirmation by documents, not by pronouns.
+31. **A silent degradation is a defect.** The default read applied English pronoun dials to any language and filed nothing; a missing capability must show up as a typed gap in the entry (now `pronoun_presence_english_only`). Check non-English input before declaring a default.
+32. **Look for the regression where the claim was measured, not where it was felt.** The repo's best recorded pronoun-like numbers (sentence-set metric C1 about 75-82%, names 95-96%) are on a different, easier task than whole-document gold; no 98% exists in its history. Write down the numbers a change must beat (native/docs/PRONOUN-BINDING-STATUS.md) so the next regression is caught by a run, not a feeling.

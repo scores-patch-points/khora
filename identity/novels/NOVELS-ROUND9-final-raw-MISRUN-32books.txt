@@ -1,0 +1,12 @@
+== FINAL, unread books (policy trained on all development books): 8 books
+R8      gross foresight bits 943.3  net-of-cost bits 2701.3  admitted 17.5  precision 0.494  competence% (gross/last-third) 29.77
+M1      gross foresight bits 958.6  net-of-cost bits 2908.7  admitted 3.6  precision 0.785  competence% (gross/last-third) 30.22
+M2      gross foresight bits 960.6  net-of-cost bits 2856.7  admitted 7.5  precision 0.785  competence% (gross/last-third) 30.54
+ORACLE  gross foresight bits 942.6  net-of-cost bits 2654.6  admitted 19.0  precision 1.000  competence% (gross/last-third) 30.24
+M2-a precision M2 - R8 95% [0.18, 0.42]
+M2-b net-of-cost M2 - R8 95% [60.21, 281.61]
+     gross M2 - R8 95% [-1.63, 35.44]
+M2-c net-of-cost M2 - M1 95% [-163.95, 54.00]
+
+replay of the meta-thought from the pharos reproduced the admission decisions exactly on 40/40 folds
+OUT=meta-final.json node meta.mjs  --final $(cat r9-ids.txt | tr '\n' ' ') 2>  27.57s user 0.30s system 102% cpu 27.287 total

@@ -1,0 +1,18 @@
+# PREREG round 9: the best pronoun resolution, then what meta-thoughts add (2026-11-17, before any code of this round)
+## Pronouns: our best version
+The presence rung of khora main (PR #92, native/adapters/text/pronouns.js::resolvePronounsByPresence) with the dials the PREREG-PRESENCE.md procedure CHOSE on its development slice (eval/referents/PRESENCE-DIALS-B.json: window 3, boost 1, feed 1, floor 0, margin 0; 221 right / 41 wrong of 341 answerable on that slice). Rounds 4-8 used the control arm's dials (window 4, boost 2, floor 2, margin 0.3) by mistake; stated in the ledger.
+The attention binder (it, descriptions; branch attention-binder) is NOT used: its round 5 failed 3 of 6 bars (precision 0.67, coverage 0.27) and is off by default. he/she only; I/you/we/it/they stay unbound. Same overlap and speaker rungs as tracker.mjs.
+Competence reader and thoughts: round 8's (competence.mjs), unchanged except the tracked bindings come from the chosen dials (and the description presence binding keeps round 6's dials).
+## Meta-thoughts: a thought about the system's own thoughts
+Every CANDIDATE thought of a book (admitted by round 8's rule or not) has features known at proposal time: kind, hindsight bits, cost, net, net relative to the book's first-two-thirds bits, the net's percentile within its kind in that book, weight, window. Its outcome is known later: foresight saving on the last third.
+META-THOUGHT M2: a learner (attend.mjs, unchanged, ungated, declared constants) trained on the candidates of OTHER books, predicting whether a thought's foresight saving is above 0; policy: admit a candidate when its predicted probability is above 1/2 and its net hindsight is above 0. META-THOUGHT M1: kind-level only: admit a kind's candidates (by round 8's rule) only if that kind's foresight precision on other books is at least 1/2.
+It is written into the pharos (thought-meta, with its weights and the addresses of the thoughts it was learned from) and REPLAYED from the log: the held-out admission decisions must be reproduced exactly.
+## Data
+DEVELOP: the 41 read books (33 development + 8 round-6) with leave-one-BOOK-out. TEST: 8 never-read books from the NarrativeQA TRAIN split (Gutenberg, 12,000 <= story_word_count < 45,000, shuffled with Python random.Random('nqa-round9-20261117') over sorted document_ids, first 8 passing AMEND-1b's integrity rule); no questions are involved. The policy trained on all 41 books is frozen first.
+## Metrics
+Per book: GROSS foresight saving (bits, last third) of the admitted set; NET-OF-COST total = (hindsight + foresight savings of the admitted set) minus the sum of their costs; precision = share of admitted with foresight > 0; number admitted. Book-cluster bootstrap 95% (10,000).
+## Hypotheses (can fail)
+P1 (pronoun): the chosen dials bind more of the he/she pronouns than the control dials (share bound up from about 66% to about 100%) and the pronoun rule's foresight saving per book changes by an interval that excludes 0 (up).
+M2-a: on held-out books, M2's admitted set has higher precision than round 8's rule (interval of the difference excludes 0). M2-b: M2's NET-OF-COST total exceeds round 8's (interval excludes 0). M2-c: M2 exceeds M1 on net-of-cost. M2-d: the advantage survives on the 8 unread books (same two metrics, one run).
+Predictions so they can fail: P1 holds on share bound, and the rule's saving rises by under 20%; M2-a holds (59% -> about 65%); M2-b holds because round 8's rule admits many synapses that cost more than they save (a synapse's mean foresight is 2-5 bits against a cost of about 15 bits); M2-c holds; M2-d holds weaker. Exploratory: what M2 weighs most.
+Not tested: pronouns beyond he/she; any claim beyond measured surprise.

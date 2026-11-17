@@ -1,0 +1,9 @@
+books 8  admitted thoughts 66  by kind {"rule":7,"wormhole":3,"synapse":44,"expressway":12}
+K1 hindsight: joint hindsight bits per book mean 295  (net > 0 by construction)
+K2 foresight: joint foresight saving bits per book mean 109.7 95% [44.80, 194.74]  | competence (share of last-third bits) mean 8.06%  books positive 8/8
+   admitted thoughts with foresight > 0: 63.6%  by kind: {"rule":100,"wormhole":100,"synapse":47.7,"expressway":91.7}
+K4 total foresight bits by kind: {"rule":814,"wormhole":32,"synapse":119,"expressway":83}  mean per thought: {"rule":116.31,"wormhole":10.55,"synapse":2.71,"expressway":6.95}
+K3 Spearman(net hindsight, foresight) over 59 non-rule admitted thoughts: 0.417 95% book-cluster [-0.024, 0.808]
+K5 real (no rule) minus null foresight per book mean 23.5 95% [8.68, 42.82]  | real(no rule) mean 18.4  null mean -5.0
+K6 replay exact 8/8  retractions = negative-foresight thoughts 8/8
+rule alone: hindsight net mean 245  foresight mean 102 | joint mean foresight 110

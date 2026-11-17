@@ -1,0 +1,12 @@
+dev books:       41
+== FINAL, unread books (policy trained on all development books): 8 books
+R8      gross foresight bits 943.3  net-of-cost bits 2701.3  admitted 17.5  precision 0.494  competence% (gross/last-third) 29.77
+M1      gross foresight bits 943.3  net-of-cost bits 2701.3  admitted 17.5  precision 0.494  competence% (gross/last-third) 29.77
+M2      gross foresight bits 964.2  net-of-cost bits 2863.2  admitted 7.5  precision 0.833  competence% (gross/last-third) 30.66
+ORACLE  gross foresight bits 942.6  net-of-cost bits 2654.6  admitted 19.0  precision 1.000  competence% (gross/last-third) 30.24
+M2-a precision M2 - R8 95% [0.21, 0.46]
+M2-b net-of-cost M2 - R8 95% [65.01, 295.96]
+     gross M2 - R8 95% [-0.42, 43.44]
+M2-c net-of-cost M2 - M1 95% [64.69, 296.41]
+
+replay of the meta-thought from the pharos reproduced the admission decisions exactly on 49/49 folds

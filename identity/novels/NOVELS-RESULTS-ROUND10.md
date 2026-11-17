@@ -1,0 +1,16 @@
+# RESULTS round 10: trying to falsify that the canonical pronoun bindings are correct (English) (2026-11-17)
+Prereg PREREG-ROUND10.md (20:13:32Z). Scripts: pronoun-falsify.mjs (gold-free, our 48 books), gum-falsify.mjs / gum-falsify2.mjs (gold, UD English GUM). The multilingual part (Mandarin, Ancient Greek) is a separate agent's report (identity/pronouns-multilingual/).
+## Gold-free, our books: bindings are provably wrong at least 17% of the time
+A referent bound to both a masculine and a feminine pronoun has at least one wrong binding. Chosen (canonical) dials: lower-bound error 17.3% of bound pronouns (median book 16.8%, worst 41%), above 0 on 47 of 48 books; a random assignment of the same referents to the same pronouns gives 23.9% (null minus observed [0.047, 0.084], observed below null on 45 of 48 books: the bindings carry gender information). The control dials: 14.8% (null 20.6%); chosen minus control +1.3 to +3.5 points. F1 held, F2 held (and the lower bound is above my predicted 3-15%), F3 held.
+## Gold, English GUM (three slices never used to choose the dials: E the preregistered confirmation slice, C, D; 90 documents; 952 answerable pronouns). The file is the current GUM master (sha256 4672bc44...), NOT the file the repo's README numbers were measured on; this machine has no Wiktionary pack, so the repo's non-personal ruling was not applied
+| arm | right / wrong | precision | coverage of answerable |
+|---|---|---|---|
+| canonical read (chosen dials) | 473 / 297 | 0.614 | about 81% |
+| control dials (window 4, boost 2, floor 2, margin 0.3) | 319 / 139 | 0.697 | about 48% |
+| random assignment (same bound referents permuted over the same pronouns) | 381 / 389 | 0.495 | |
+Slice E (confirmation): canonical 127 / 131 = 0.49; slices C 0.80, D 0.61. The 84% in PRESENCE-DIALS-B.json is in-sample (slice B); it does not hold out of sample.
+By genre (canonical, precision): biography 0.90 (216), fiction 0.49 (206), conversation 0.49 (150), news 0.16 (38), letters 0.53, podcast 0.52. The extra bindings the chosen dials make over the control dials (154 right, 158 wrong) are right about half the time.
+The binding's own confidence does not tell right from wrong: precision by margin quartile 0.62 / 0.61 / 0.65 / 0.58; by activation it rises only at the top (0.58 at 1-2, 0.72 at 5 and above). Raising the margin or the floor does not buy precision (margin >= 0.7: 0.62 at 60% coverage). Precision depends on the genre: single-subject texts are easy, multi-character fiction, conversation and news are not.
+## What it says
+Binding about 98% of the he/she pronouns is coverage. On unseen English the canonical default is right about 61% of the time overall and about 49% on fiction and on the confirmation slice; the control dials trade half the coverage for about 70%. The presence rung is a "most recent and salient referent" rule: it works when one referent dominates and fails when several compete, and it has no evidence of its own for telling the two cases apart (gender and number agreement, binding constraints, syntactic role). That is the gap, not the dials.
+Consequence for earlier rounds: the pronoun rule's large saving in rounds 8-9 (24% competence) was computed on bindings that are about 40% wrong on fiction; the circularity caveat of round 9 was right.
