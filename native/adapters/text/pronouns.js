@@ -240,7 +240,7 @@ export const registerSummary = (normalized) => {
   return { clean, soft };
 };
 
-const findInClass = (text, pronounClass) => {
+const findInClass = (text, pronounClass, { unspaced = false } = {}) => {
   const tokens = [...pronounClass.keys()];
   if (!tokens.length) return [];
   const sorted = [...tokens].sort((a, b) => b.length - a.length);
@@ -251,7 +251,11 @@ const findInClass = (text, pronounClass) => {
   // register would load fine yet bind nothing. A Unicode-aware lookaround
   // boundary (\p{L}\p{N} either side) is byte-identical to `\b` for the
   // ASCII English closed class this file has always shipped with.
-  const re = new RegExp(`(?<![\\p{L}\\p{N}_])(?:${sorted.map(escapeRe).join("|")})(?![\\p{L}\\p{N}_])`, "giu");
+  // UNSPACED scripts (Chinese, Japanese, Thai ...) write no space between words: a pronoun sits flush against its neighbours (他的, 他说), so the letter boundary would never match.
+  // `unspaced: true` (declared per language in adapters/text/pronoun-registers.js) matches the longest register form wherever it stands.
+  const re = unspaced
+    ? new RegExp(`(?:${sorted.map(escapeRe).join("|")})`, "giu")
+    : new RegExp(`(?<![\\p{L}\\p{N}_])(?:${sorted.map(escapeRe).join("|")})(?![\\p{L}\\p{N}_])`, "giu");
   const hits = [];
   re.lastIndex = 0;
   let m;
@@ -993,7 +997,7 @@ export const resolvePronounsByActivation = (
  * @returns {{bindings: Array<object>, gaps: Array<object>}}
  */
 export const resolvePronounsByPresence = (sentences, mentions, options = {}) => {
-  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined } = options;
+  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false } = options;
   if (window !== null && (!Number.isFinite(window) || window <= 1)) throw new TypeError("resolvePronounsByPresence: window is declared (a number above 1, or null for the undecayed control)");
   if (!Number.isFinite(boost) || boost <= 0) throw new TypeError("resolvePronounsByPresence: boost is declared and positive (1 weighs every mention alike)");
   if (feed !== 0 && feed !== 1) throw new TypeError("resolvePronounsByPresence: feed is declared, 0 or 1");
@@ -1028,7 +1032,7 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
   const bindings = [];
   for (const sent of order) {
     const mentionsHere = bySent.get(sent.i) ?? [];
-    const hits = findInClass(sent.text, cls).map((h) => ({ kind: "p", pos: sent.offset + h.index, rel: h.index, hit: h }));
+    const hits = findInClass(sent.text, cls, { unspaced }).map((h) => ({ kind: "p", pos: sent.offset + h.index, rel: h.index, hit: h }));
     const events = [...mentionsHere, ...hits].sort((a, b) => a.pos - b.pos || (a.kind === "m" ? -1 : 1));
     for (const e of events) {
       if (e.kind === "m") { fire(e.ref, sent.i, e.first ? boost : 1, e.pos); continue; }

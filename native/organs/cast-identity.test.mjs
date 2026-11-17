@@ -148,8 +148,10 @@ test("G1: the gate finds a list and finds none in the new code", () => {
   assert.equal(scanSource(fs.readFileSync(path.join(root, "native/organs/cast-identity.js"), "utf8")).length, 0);
 });
 
+// read-process.mjs was removed from this guard on 2026-11-17: the canonical read's default now binds pronouns by presence per language (identity/novels PREREG-ROUND11, native/docs/PRONOUN-BINDING-STATUS.md),
+// a deliberate change to that file; this guard scoped the cast-identity change, which did not touch it. (R1 above also fails on a clean origin/main: its stored hashes are stale.)
 test("protected files are byte-identical to base", async () => {
   const { execFileSync } = await import("node:child_process");
-  const diff = execFileSync("git", ["-C", root, "diff", "--stat", "15f82fcd", "--", "native/the-fold/corpus-session.js", "native/kernel/eot-claim-match.js", "native/the-fold/read-process.mjs"], { encoding: "utf8" });
+  const diff = execFileSync("git", ["-C", root, "diff", "--stat", "15f82fcd", "--", "native/the-fold/corpus-session.js", "native/kernel/eot-claim-match.js"], { encoding: "utf8" });
   assert.equal(diff.trim(), "");
 });

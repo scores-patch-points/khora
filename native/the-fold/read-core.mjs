@@ -457,7 +457,11 @@ export function readWith(text, { address = null, category = null, language = nul
   // nothing below runs and the entry is what it was): the pronouns of the resolver's own class bound by decayed presence over the beings of THIS cast
   // (adapters/text/pronouns.js::resolvePronounsByPresence, PREREG-PRESENCE.md), beside the shipped resolver's `entry.pronouns`, which it does not touch.
   let pronounsPresence = null, presenceInputs = null;
-  if (pronounPresence && typeof pronounPresence === "object") {
+  // `pronounPresence` may be a function of the language stem (the canonical read passes one: native/adapters/text/pronoun-registers.js::presenceOptionsFor): it returns the options for THIS language,
+  // or { gap } when the language has no pronoun register, and then the gap is filed on the entry instead of the rung running silently with another language's class.
+  const pp = typeof pronounPresence === "function" ? pronounPresence(stem) : pronounPresence;
+  if (pp && typeof pp === "object" && pp.gap) gaps.push(pp.gap);
+  if (pp && typeof pp === "object" && !pp.gap) {
     pronounsPresence = [];
     try {
       const refSurface = new Map(), surfaceToRef = new Map();
@@ -466,7 +470,7 @@ export function readWith(text, { address = null, category = null, language = nul
       try { if (typeof readerOrgans.nonPersonalOf === "function") np = readerOrgans.nonPersonalOf(surfaceToRef) ?? []; } catch { np = []; }
       const mentions = cast.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
       presenceInputs = { sentences, mentions, nonPersonal: np };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
-      const r = resolvePronounsByPresence(sentences, mentions, { ...pronounPresence, nonPersonal: np });
+      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np });
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
       for (const g of r.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "pronoun_presence_failed", detail: String(e?.message ?? e).slice(0, 120) }); }

@@ -9,7 +9,7 @@ test("English: pronounsPresence is on by default, bound by the default dials; sw
   assert.ok(Array.isArray(w.pronounsPresence), "the rung ran"); const off = readToWeft(EN.repeat(3), { language: "eng", readerOptions: { pronounPresence: null } });
   assert.ok(off.pronounsPresence === undefined || off.pronounsPresence === null, "switched off");
 });
-test("another language: no silent English binding; the typed gap pronoun_presence_english_only is filed", { skip: !HAVE, timeout: 600000 }, async () => {
+test("a language with no register: no silent English binding; the typed gap pronoun_presence_no_register is filed", { skip: !HAVE, timeout: 600000 }, async () => {
   const { readToWeft } = await import("./read-process.mjs"); const w = readToWeft(ES.repeat(2), { language: "spa" });
-  assert.equal(w.pronounsPresence, undefined); assert.ok((w.gaps ?? []).some((g) => g.gap === "pronoun_presence_english_only"), JSON.stringify(w.gaps));
+  assert.equal(w.pronounsPresence, undefined); assert.ok((w.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_register"), JSON.stringify(w.gaps));
 });
