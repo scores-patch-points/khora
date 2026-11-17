@@ -18,7 +18,7 @@ REGFOLD minus NULL = 0.131 (95% over books 0.066-0.177). REG minus BASE = 0.408.
 Development book JOHN (seen while repairing, REG / REGFOLD hold-out / FULL): precision 0.670 / 0.315 / 0.741, coverage 0.694 / 0.684 / 0.769.
 
 Unbound reasons, REGFOLD, all 2116 gold pronouns: bound 1021, below_floor 633, margin 224, not_in_register 238 (11.2%), no_candidate 0. Among the 1180 answerable: bound 647, below_floor 235, margin 170, not_in_register 128.
-Cast: beings 584 (REG) to 450 (REGFOLD) to 420 (FULL); beings per answerable entity 1.258 to 1.131 to 1.093; case-fold merged 134 beings' worth of case forms. Beings that cover two different treebank name lemmas: 20 (3.4%) REG, 20 (4.4%) REGFOLD, 14 (3.3%) FULL.
+Cast: beings 584 (REG) to 450 (REGFOLD) to 420 (FULL); beings per answerable entity 1.258 to 1.131 to 1.093; the fold left 134 fewer beings (584 to 450). Beings that cover two different treebank name lemmas: 20 (3.4%) REG, 20 (4.4%) REGFOLD, 14 (3.3%) FULL.
 
 Gold-free falsifier (a referent bound to both a masculine and a feminine CLEAN pronoun has at least one wrong binding; lower-bound error rate, and the same bindings permuted):
 - NT test list (16 books), REGFOLD: 6 books have 20 or more gendered bindings (MATT, MARK, LUKE, JOHN, ACTS, REV), 9 too thin, 3JOHN too short. Pooled observed 14.2% against null 21.1% (529 gendered bindings); null minus observed 0.033-0.110 (95% over books), observed below null in 6 of 6 books. FULL: 14.7% against 20.0%, 5 of 6.
