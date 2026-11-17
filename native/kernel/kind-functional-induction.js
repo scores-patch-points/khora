@@ -204,6 +204,11 @@ export function induceKindsAndFunctions(referents, { assertionsOf, sameValue, wi
   //   many-valued     a witnessed SIMULTANEOUS disagreement (refuted as one-valued)
   //   time-unknown    disagreements exist but none is placed in time
   //   unexposed       never asserted twice for one member
+  // UNTESTED (2026-11-17, found on real Wikidata records): a member whose values DISAGREE, where every disagreeing pair
+  // has an unwitnessed side, has tested nothing — the disagreement is not evidence of many values, and it is not
+  // agreement either. It counts as exposed, never as agreed, never as refuting, and is reported as `untested`. Before
+  // this, such a member was counted AGREED, and relations that disagreed for every member (described-by-source,
+  // citizenship, given name, spouse) were induced `fixed` from unreferenced statements.
   const overlap = (x, y) => {
     if (!x.interval || !y.interval) return null;
     const lo = Math.max(x.interval.lo ?? -Infinity, y.interval.lo ?? -Infinity);
@@ -217,14 +222,14 @@ export function induceKindsAndFunctions(referents, { assertionsOf, sameValue, wi
       const byRel = new Map();
       for (const a of read(m)) { if (!byRel.has(a.rel)) byRel.set(a.rel, []); byRel.get(a.rel).push(a); }
       for (const [rel, vs] of byRel) {
-        const r = rels.get(rel) ?? { members: 0, exposed: 0, agreed: 0, changed: 0, simultaneous: 0, untimed: 0, refutedBy: [] };
+        const r = rels.get(rel) ?? { members: 0, exposed: 0, agreed: 0, untested: 0, changed: 0, simultaneous: 0, untimed: 0, refutedBy: [] };
         r.members += 1;
         if (vs.length > 1) {
           r.exposed += 1;
-          let sim = null, change = false, untimed = false, anyDisagree = false;
+          let sim = null, change = false, untimed = false, anyDisagree = false, unwitnessedDisagree = false;
           for (let i = 0; i < vs.length; i += 1) for (let j = i + 1; j < vs.length; j += 1) {
             if (sameValue(vs[i].value, vs[j].value, rel) !== false) continue;
-            if (witnessed && !(witnessed(vs[i]) && witnessed(vs[j]))) continue; // an unwitnessed disagreement is not evidence
+            if (witnessed && !(witnessed(vs[i]) && witnessed(vs[j]))) { unwitnessedDisagree = true; continue; } // not evidence of many values — nor of one
             anyDisagree = true;
             const o = overlap(vs[i], vs[j]);
             if (o === true) sim ??= [vs[i], vs[j]]; else if (o === false) change = true; else untimed = true;
@@ -232,6 +237,7 @@ export function induceKindsAndFunctions(referents, { assertionsOf, sameValue, wi
           if (sim) { r.simultaneous += 1; if (r.refutedBy.length < 3) r.refutedBy.push({ member: m, a: sim[0].id, b: sim[1].id }); }
           else if (change) r.changed += 1;
           else if (untimed) r.untimed += 1;
+          else if (unwitnessedDisagree) r.untested += 1; // tested nothing: never counted as agreement
           else if (!anyDisagree) r.agreed += 1;
         }
         rels.set(rel, r);
