@@ -1,0 +1,4141 @@
+{
+ "rows": [
+  {
+   "L": "Q11059",
+   "name": "Sanskrit",
+   "items": 105,
+   "ref": 0.39835728952772076,
+   "true": 0.06666666666666667,
+   "tc": 7,
+   "power": 0.4342948717948718,
+   "norules": 0.047115384615384615,
+   "flip": 0.3904761904761905,
+   "proofs": [
+    {
+     "item": "Q11020530",
+     "label": "Samuel Vedanayagam Pillai",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1826,
+        "m": 10,
+        "d": 11,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1826,
+        "m": 10,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1193180",
+     "label": "Jaishankar Prasad",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1937,
+        "m": 11,
+        "d": 15,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1937,
+        "m": 1,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1337877",
+     "label": "Theodor Althaus",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1822,
+        "m": 10,
+        "d": 11,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1822,
+        "m": 10,
+        "d": 26,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1356589",
+     "label": "Ernest Wood",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P3065",
+       "base": null,
+       "a": "A018948601",
+       "b": "A003984960",
+       "giver": "wikidata:P3065#P3065$9836120A-2A9C-4AB0-B861-1A5423A274D8",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q15662203",
+     "label": "Badari Narayan Chaudhari 'Premghan'",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1856,
+        "m": 8,
+        "d": 21,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1855,
+        "m": 9,
+        "d": 1,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1726411",
+     "label": "Prisdang of Siam",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P227",
+       "base": null,
+       "a": "123982820",
+       "b": "173193250",
+       "giver": "wikidata:P227#P227$42FD346B-AF33-4624-B88E-3643B28DF9FE",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q2066707",
+     "label": "Willem Caland",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1932,
+        "m": 3,
+        "d": 24,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1932,
+        "m": 3,
+        "d": 23,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 14,
+   "contradictedItems": [
+    "Q11020530",
+    "Q1193180",
+    "Q1337877",
+    "Q1356589",
+    "Q15662203",
+    "Q1726411",
+    "Q2066707"
+   ],
+   "n": 105,
+   "lo": 0.03170425463638892,
+   "hi": 0.12157028001035051
+  },
+  {
+   "L": "Q1321",
+   "name": "Spanish",
+   "items": 118,
+   "ref": 0.31547619047619047,
+   "true": 0.025423728813559324,
+   "tc": 3,
+   "power": 0.33083441981747064,
+   "norules": 0.04849340866290019,
+   "flip": 0.2966101694915254,
+   "proofs": [
+    {
+     "item": "Q100319995",
+     "label": "Julio de la Arena y Fern\u00e1ndez",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q826603",
+       "b": "Q14317",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100326566",
+     "label": "Rafael \u00c1lvarez Serrano",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1896,
+        "m": 1,
+        "d": 26,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1895,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100600695",
+     "label": "Llu\u00efsa Altisent Ceardi",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q669570",
+       "b": "Q1492",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 2,
+   "contradictedItems": [
+    "Q100319995",
+    "Q100326566",
+    "Q100600695"
+   ],
+   "n": 118,
+   "lo": 0.0069646543616258315,
+   "hi": 0.0643958518394566
+  },
+  {
+   "L": "Q13955",
+   "name": "Arabic",
+   "items": 111,
+   "ref": 0.324357034795764,
+   "true": 0.02702702702702703,
+   "tc": 3,
+   "power": 0.2997952497952498,
+   "norules": 0.062407862407862405,
+   "flip": 0.35135135135135137,
+   "proofs": [
+    {
+     "item": "Q102526935",
+     "label": "Yusuf Yasin",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1888,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1896,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q106844886",
+     "label": "Amin Suleiman al-Haddad",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1870,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1868,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q107000",
+     "label": "Mirza Ghalib",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P7029",
+       "base": null,
+       "a": "770160085",
+       "b": "770160082",
+       "giver": "wikidata:P7029#P7029$9DE3739C-B29E-4DB8-9124-25D3172700BD",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 8,
+   "contradictedItems": [
+    "Q102526935",
+    "Q106844886",
+    "Q107000"
+   ],
+   "n": 111,
+   "lo": 0.007406242878544438,
+   "hi": 0.06836955878063107
+  },
+  {
+   "L": "Q150",
+   "name": "French",
+   "items": 117,
+   "ref": 0.36635271191945434,
+   "true": 0.008547008547008548,
+   "tc": 1,
+   "power": 0.4138299440023578,
+   "norules": 0.0666445623342175,
+   "flip": 0.41025641025641024,
+   "proofs": [
+    {
+     "item": "Q1001731",
+     "label": "S\u00e1ndor Fischer",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1853,
+        "m": 4,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1854,
+        "m": 11,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q1001731"
+   ],
+   "n": 117,
+   "lo": 0.00043830814044398727,
+   "hi": 0.03990288212806163
+  },
+  {
+   "L": "Q1568",
+   "name": "Hindi",
+   "items": 115,
+   "ref": 0.36080047086521483,
+   "true": 0.034782608695652174,
+   "tc": 4,
+   "power": 0.32894736842105265,
+   "norules": 0.03592677345537757,
+   "flip": 0.34782608695652173,
+   "proofs": [
+    {
+     "item": "Q113722981",
+     "label": "Jv\u0101l\u0101pras\u0101da Mi\u015bra",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1973,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1916,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q16003990",
+     "label": "Badri Nath Prasad",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q526757",
+       "b": "Q31352765",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q174152",
+     "label": "Premchand",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P6394",
+       "base": null,
+       "a": "a11351743",
+       "b": "a11323346",
+       "giver": "wikidata:P6394#P6394$A2A27D74-3946-4828-9E48-235D7717F9E9",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q2510589",
+     "label": "Bhanubhakta Acharya",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P271",
+       "base": null,
+       "a": "DA17115969",
+       "b": "DA16643269",
+       "giver": "wikidata:P271#P271$7D327B34-F650-4A3D-BE36-1981226E2393",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 6,
+   "contradictedItems": [
+    "Q113722981",
+    "Q16003990",
+    "Q174152",
+    "Q2510589"
+   ],
+   "n": 115,
+   "lo": 0.011966614957587775,
+   "hi": 0.07782532393185912
+  },
+  {
+   "L": "Q1860",
+   "name": "English",
+   "items": 117,
+   "ref": 0.3433528836754643,
+   "true": 0.05128205128205128,
+   "tc": 6,
+   "power": 0.3958885941644562,
+   "norules": 0.04111405835543767,
+   "flip": 0.4358974358974359,
+   "proofs": [
+    {
+     "item": "Q100148045",
+     "label": "James Ewing",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1830",
+       "base": null,
+       "a": "Q64728062",
+       "b": "Q15130596",
+       "giver": "wikidata:P1830#P1830$47484855-4789-7f1f-ac65-060430e9c090",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100157363",
+     "label": "David Gardiner Tyler Jr.",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1993,
+        "m": 3,
+        "d": 29,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1983,
+        "m": 3,
+        "d": 29,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1001731",
+     "label": "S\u00e1ndor Fischer",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1854,
+        "m": 11,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1853,
+        "m": 4,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      },
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1888,
+        "m": 11,
+        "d": 25,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1889,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100268257",
+     "label": "Anna Martha Fullerton",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1938,
+        "m": 12,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1938,
+        "m": 9,
+        "d": 16,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q23",
+     "label": "George Washington",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P2048",
+       "base": null,
+       "a": "q:74",
+       "b": "q:188",
+       "giver": "wikidata:P2048#P2048$03d478b9-494e-c011-82a7-6fe9065649e2",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q91",
+     "label": "Abraham Lincoln",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q113363481",
+       "b": "Q547313",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q100148045",
+    "Q100157363",
+    "Q1001731",
+    "Q100268257",
+    "Q23",
+    "Q91"
+   ],
+   "n": 117,
+   "lo": 0.022566066512717656,
+   "hi": 0.09870290749702479
+  },
+  {
+   "L": "Q188",
+   "name": "German",
+   "items": 117,
+   "ref": 0.43273389483268837,
+   "true": 0.05982905982905983,
+   "tc": 7,
+   "power": 0.6234526967285589,
+   "norules": 0.11346890657235485,
+   "flip": 0.5555555555555556,
+   "proofs": [
+    {
+     "item": "Q1000323",
+     "label": "Heinrich Wilhelm Law\u00e4tz",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P10832",
+       "base": null,
+       "a": "E39PCjJxchFV4QWWDJMwVVTj4q",
+       "b": "E39PBJhhqjvDKvkRxwkPppvJXd",
+       "giver": "wikidata:P10832#P10832$460E5607-901C-456A-BE06-CCD55FBA7921",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100140",
+     "label": "Karl Theophil Fries",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1006",
+       "base": null,
+       "a": "274770903",
+       "b": "117781886",
+       "giver": "wikidata:P1006#P1006$6b22f8e6-42e0-fb85-52dd-9f33f6cc95e2",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1001731",
+     "label": "S\u00e1ndor Fischer",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1889,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1888,
+        "m": 11,
+        "d": 25,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q100174",
+     "label": "Robert Kosch",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q64",
+       "b": "Q651009",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1001979",
+     "label": "K\u00e1roly Fleischhacker",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1820,
+        "m": 7,
+        "d": 22,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1822,
+        "m": 7,
+        "d": 22,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100235207",
+     "label": "Ernst Gold",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q11299",
+       "b": "Q60",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q100239754",
+     "label": "Johann Adam Gottfried",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1726,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1727,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q1000323",
+    "Q100140",
+    "Q1001731",
+    "Q100174",
+    "Q1001979",
+    "Q100235207",
+    "Q100239754"
+   ],
+   "n": 117,
+   "lo": 0.028413345568184114,
+   "hi": 0.10943621399123526
+  },
+  {
+   "L": "Q256",
+   "name": "Turkish",
+   "items": 116,
+   "ref": 0.49801658853227554,
+   "true": 0.02586206896551724,
+   "tc": 3,
+   "power": 0.3442278860569715,
+   "norules": 0.07923538230884558,
+   "flip": 0.3275862068965517,
+   "proofs": [
+    {
+     "item": "Q1076524",
+     "label": "Abd\u00fclhalik Renda",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1881,
+        "m": 11,
+        "d": 29,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1881,
+        "m": 12,
+        "d": 11,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q113084897",
+     "label": "Suzi",
+     "by": "range",
+     "proof": [
+      {
+       "rel": "P1317",
+       "base": "P569",
+       "a": {
+        "t": true,
+        "y": 1498,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985786"
+       },
+       "b": {
+        "t": true,
+        "y": 1765,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P1317#P1317$fb49a2f8-48bb-551b-47b6-691b32d2983f",
+       "diff": -267
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q113398768",
+     "label": "Zeki \u015e\u00fckr\u00fc Efendi",
+     "by": "range",
+     "proof": [
+      {
+       "rel": "P2031",
+       "base": "P569",
+       "a": {
+        "t": true,
+        "y": 1800,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1853,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P2031#P2031$252A56F0-5C86-4F5A-9A4C-4774B3540ADC",
+       "diff": -53
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q1076524",
+    "Q113084897",
+    "Q113398768"
+   ],
+   "n": 116,
+   "lo": 0.007085355937954644,
+   "hi": 0.06548327985535113
+  },
+  {
+   "L": "Q28244",
+   "name": "Amharic",
+   "items": 39,
+   "ref": 0.4356379988757729,
+   "true": 0.10256410256410256,
+   "tc": 4,
+   "power": 0.5705128205128205,
+   "norules": 0.05668016194331984,
+   "flip": 0.358974358974359,
+   "proofs": [
+    {
+     "item": "Q113785032",
+     "label": "Dast\u0101 Takla Wald",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1900,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1901,
+        "m": 7,
+        "d": 26,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q117763",
+     "label": "Giuseppe Caspar Mezzofanti",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q220",
+       "b": "Q2634",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q137387250",
+     "label": "Tesemma Habte-Mika\u00e9l",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1970,
+        "m": 10,
+        "d": 7,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1969,
+        "m": 10,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1445784",
+     "label": "Jacques Faitlovitch",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1881,
+        "m": 2,
+        "d": 15,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1881,
+        "m": 2,
+        "d": 11,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q113785032",
+    "Q117763",
+    "Q137387250",
+    "Q1445784"
+   ]
+  },
+  {
+   "L": "Q36730",
+   "name": "Ottoman Turkish",
+   "items": 112,
+   "ref": 0.5336468885672938,
+   "true": 0.044642857142857144,
+   "tc": 5,
+   "power": 0.41344916344916344,
+   "norules": 0.13018822393822393,
+   "flip": 0.44642857142857145,
+   "proofs": [
+    {
+     "item": "Q109658347",
+     "label": "Celalettin \u00d6kten",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q45301",
+       "b": "Q406",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1103575",
+     "label": "Gy\u00f6rgy Kalm\u00e1r",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1782,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1781,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q113084897",
+     "label": "Suzi",
+     "by": "range",
+     "proof": [
+      {
+       "rel": "P1317",
+       "base": "P570",
+       "a": {
+        "t": true,
+        "y": 1498,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985786"
+       },
+       "b": {
+        "t": true,
+        "y": 1830,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P1317#P1317$00878453-40bb-0f7b-9e49-29c41e84485c",
+       "diff": -332
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q116615971",
+     "label": "Yusuf Ziyaeddin Efendi",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q131638",
+       "b": "Q3711",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q116616059",
+     "label": "Ahmed Avni Pa\u015fa",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1874,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1878,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 7,
+   "contradictedItems": [
+    "Q109658347",
+    "Q1103575",
+    "Q113084897",
+    "Q116615971",
+    "Q116616059"
+   ],
+   "n": 112,
+   "lo": 0.01775294353558919,
+   "hi": 0.09157112282126234
+  },
+  {
+   "L": "Q397",
+   "name": "Latin",
+   "items": 119,
+   "ref": 0.4986425339366516,
+   "true": 0.058823529411764705,
+   "tc": 7,
+   "power": 0.7130394530693633,
+   "norules": 0.19078478849166786,
+   "flip": 0.5798319327731093,
+   "proofs": [
+    {
+     "item": "Q1003013",
+     "label": "Jozef Fornet",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q1184596",
+       "b": "Q776533",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q101103301",
+     "label": "Samuel Ziervogel",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1730,
+        "m": 5,
+        "d": 8,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1736,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q102022",
+     "label": "Alwin Schultz",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1015",
+       "base": null,
+       "a": "90347272",
+       "b": "90726313",
+       "giver": "wikidata:P1015#P1015$FF8F4572-4C4C-470E-B821-5CB3BA8BD706",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q102363929",
+     "label": "Arnold Willem Alings",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P227",
+       "base": null,
+       "a": "1146639708",
+       "b": "115777220X",
+       "giver": "wikidata:P227#P227$42FD346B-AF33-4624-B88E-3643B28DF9FE",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q103594",
+     "label": "Walter Otto",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P3065",
+       "base": null,
+       "a": "A003662037",
+       "b": "A003662034",
+       "giver": "wikidata:P3065#P3065$9836120A-2A9C-4AB0-B861-1A5423A274D8",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q104178460",
+     "label": "\u00c9mile Lefranc",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P8179",
+       "base": null,
+       "a": "ncf10882599",
+       "b": "ncf11593823",
+       "giver": "wikidata:P8179#P8179$501dcfb7-471c-da45-04d8-206d7b2447e1",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q104348",
+     "label": "Tycho Mommsen",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1819,
+        "m": 6,
+        "d": 23,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1819,
+        "m": 5,
+        "d": 23,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 1,
+   "contradictedItems": [
+    "Q1003013",
+    "Q101103301",
+    "Q102022",
+    "Q102363929",
+    "Q103594",
+    "Q104178460",
+    "Q104348"
+   ],
+   "n": 119,
+   "lo": 0.027930162317661846,
+   "hi": 0.10764536318971035
+  },
+  {
+   "L": "Q5146",
+   "name": "Portuguese",
+   "items": 120,
+   "ref": 0.31158833063209074,
+   "true": 0.008333333333333333,
+   "tc": 1,
+   "power": 0.25857843137254904,
+   "norules": 0.025595238095238095,
+   "flip": 0.225,
+   "proofs": [
+    {
+     "item": "Q10263002",
+     "label": "C\u00e2ndido das Neves",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1953",
+       "base": null,
+       "a": "2960830",
+       "b": "3575864",
+       "giver": "wikidata:P1953#P1953$18e1e972-4db9-9f86-0e55-202948e94a8b",
+       "diff": null
+      },
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q8678",
+       "b": "Q155",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      },
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1934,
+        "m": 11,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1934,
+        "m": 11,
+        "d": 4,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 0,
+   "contradictedItems": [
+    "Q10263002"
+   ],
+   "n": 120,
+   "lo": 0.0004273527786733521,
+   "hi": 0.038920846860167946
+  },
+  {
+   "L": "Q5287",
+   "name": "Japanese",
+   "items": 119,
+   "ref": 0.31963001027749227,
+   "true": 0.01680672268907563,
+   "tc": 2,
+   "power": 0.3051203532260362,
+   "norules": 0.08659735080472868,
+   "flip": 0.40336134453781514,
+   "proofs": [
+    {
+     "item": "Q100454193",
+     "label": "Seitar\u014d Atsumi",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1892,
+        "m": 9,
+        "d": 9,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1892,
+        "m": 12,
+        "d": 15,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100454743",
+     "label": "Shinroku Mizutani",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q1131489",
+       "b": "Q496472",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 1,
+   "contradictedItems": [
+    "Q100454193",
+    "Q100454743"
+   ],
+   "n": 119,
+   "lo": 0.002994369078500712,
+   "hi": 0.05195894540588887
+  },
+  {
+   "L": "Q5885",
+   "name": "Tamil",
+   "items": 112,
+   "ref": 0.44594026083298277,
+   "true": 0.026785714285714284,
+   "tc": 3,
+   "power": 0.3440717503217503,
+   "norules": 0.032335907335907334,
+   "flip": 0.3125,
+   "proofs": [
+    {
+     "item": "Q13645482",
+     "label": "M. S. Purnalingam Pillai",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1866,
+        "m": 5,
+        "d": 24,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1866,
+        "m": 5,
+        "d": 25,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q2421722",
+     "label": "George Uglow Pope",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1871",
+       "base": null,
+       "a": "cnp01128183",
+       "b": "cnp01349497",
+       "giver": "wikidata:P1871#P1871$a8b495e7-4a76-148d-662c-c30f92f2c461",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q288441",
+     "label": "Ramana Maharshi",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1879,
+        "m": 12,
+        "d": 30,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1864,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 9,
+   "contradictedItems": [
+    "Q13645482",
+    "Q2421722",
+    "Q288441"
+   ],
+   "n": 112,
+   "lo": 0.007339761086509034,
+   "hi": 0.06777213193683251
+  },
+  {
+   "L": "Q652",
+   "name": "Italian",
+   "items": 116,
+   "ref": 0.4660734149054505,
+   "true": 0.0603448275862069,
+   "tc": 7,
+   "power": 0.5236131934032984,
+   "norules": 0.10142428785607197,
+   "flip": 0.4482758620689655,
+   "proofs": [
+    {
+     "item": "Q100066869",
+     "label": "Francesco Pezzoli",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1855,
+        "m": 3,
+        "d": 24,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1860,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100077502",
+     "label": null,
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1956,
+        "m": 12,
+        "d": 28,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1956,
+        "m": 12,
+        "d": 29,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1001731",
+     "label": "S\u00e1ndor Fischer",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1854,
+        "m": 11,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1853,
+        "m": 4,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100912849",
+     "label": "Giuseppe Enea",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1906,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1907,
+        "m": 4,
+        "d": 13,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q100989537",
+     "label": "Giuseppe Ricci",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1796,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1795,
+        "m": 7,
+        "d": 11,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q101247374",
+     "label": "Cletofonte Preti",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1843,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1842,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q101698",
+     "label": "Gaetano Donizetti",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P10227",
+       "base": null,
+       "a": "vtls000345743",
+       "b": "vtls000300029",
+       "giver": "wikidata:P10227#P10227$CA9BD1E1-3F24-4ED7-81E4-6C2403C083FE",
+       "diff": null
+      },
+      {
+       "rel": "P7029",
+       "base": null,
+       "a": "770220114",
+       "b": "7754723",
+       "giver": "wikidata:P7029#P7029$9DE3739C-B29E-4DB8-9124-25D3172700BD",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 4,
+   "contradictedItems": [
+    "Q100066869",
+    "Q100077502",
+    "Q1001731",
+    "Q100912849",
+    "Q100989537",
+    "Q101247374",
+    "Q101698"
+   ],
+   "n": 116,
+   "lo": 0.02866126205171936,
+   "hi": 0.11035415705713762
+  },
+  {
+   "L": "Q7737",
+   "name": "Russian",
+   "items": 113,
+   "ref": 0.4328767123287671,
+   "true": 0.061946902654867256,
+   "tc": 7,
+   "power": 0.4536583438685209,
+   "norules": 0.05258375474083439,
+   "flip": 0.39823008849557523,
+   "proofs": [
+    {
+     "item": "Q1046090",
+     "label": "Boris Grekov",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P6394",
+       "base": null,
+       "a": "a11209768",
+       "b": "a11214132",
+       "giver": "wikidata:P6394#P6394$A2A27D74-3946-4828-9E48-235D7717F9E9",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1047237",
+     "label": "Fedir Szczerbyna",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q1085",
+       "b": "Q12040652",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1047353",
+     "label": "Egor Kovalevsky",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1811,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1809,
+        "m": 2,
+        "d": 6,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985786"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1047771",
+     "label": "Baki Urmanche",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P7029",
+       "base": null,
+       "a": "7761962",
+       "b": "770254171",
+       "giver": "wikidata:P7029#P7029$9DE3739C-B29E-4DB8-9124-25D3172700BD",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q104889796",
+     "label": "Natalie Duddington",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q3426",
+       "b": "Q2288",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q105336453",
+     "label": "Boris Malkin",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1890,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1891,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q105505537",
+     "label": "Frieda Stock",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1869,
+        "m": 1,
+        "d": 9,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1869,
+        "m": 1,
+        "d": 1,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 10,
+   "contradictedItems": [
+    "Q1046090",
+    "Q1047237",
+    "Q1047353",
+    "Q1047771",
+    "Q104889796",
+    "Q105336453",
+    "Q105505537"
+   ],
+   "n": 113,
+   "lo": 0.02943167144621885,
+   "hi": 0.11320270040541547
+  },
+  {
+   "L": "Q7838",
+   "name": "Swahili",
+   "items": 31,
+   "ref": 0.5322793148880105,
+   "true": 0.06451612903225806,
+   "tc": 2,
+   "power": 0.460752688172043,
+   "norules": 0.046236559139784944,
+   "flip": 0.3548387096774194,
+   "proofs": [
+    {
+     "item": "Q4006760",
+     "label": "Mwana Kupona",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1810,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1820,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q705592",
+     "label": "Mkwavinyika Munyigumba Mwamuyinga",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q25618714",
+       "b": "Q924",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q4006760",
+    "Q705592"
+   ]
+  },
+  {
+   "L": "Q7850",
+   "name": "Chinese",
+   "items": 112,
+   "ref": 0.4735787628349612,
+   "true": 0.03571428571428571,
+   "tc": 4,
+   "power": 0.5273487773487774,
+   "norules": 0.0715492277992278,
+   "flip": 0.4017857142857143,
+   "proofs": [
+    {
+     "item": "Q1033183",
+     "label": "Lobsang Pelden Tenpe Dronme",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1890,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1892,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q107169098",
+     "label": "Yang Xingfo",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q197394",
+       "b": "Q24831157",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q10919212",
+     "label": "Kaisheng Wu",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1878,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1877,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q10919418",
+     "label": "Wu Zong-Lian",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1856,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1859,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 7,
+   "contradictedItems": [
+    "Q1033183",
+    "Q107169098",
+    "Q10919212",
+    "Q10919418"
+   ],
+   "n": 112,
+   "lo": 0.012289537503681142,
+   "hi": 0.07986159843498461
+  },
+  {
+   "L": "Q809",
+   "name": "Polish",
+   "items": 118,
+   "ref": 0.4400763358778626,
+   "true": 0.03389830508474576,
+   "tc": 4,
+   "power": 0.5176010430247718,
+   "norules": 0.042771258872953785,
+   "flip": 0.4576271186440678,
+   "proofs": [
+    {
+     "item": "Q100099972",
+     "label": "W\u0142adys\u0142aw Przedpe\u0142ski",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1896,
+        "m": 10,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1886,
+        "m": 10,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100122842",
+     "label": null,
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1835,
+        "m": 2,
+        "d": 17,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1830,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q100753489",
+     "label": "Joanna Dobrzy\u0144ska",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1813,
+        "m": 4,
+        "d": 29,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1812,
+        "m": 5,
+        "d": 24,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q101067263",
+     "label": "Antoni B\u0105dzkiewicz",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P7293",
+       "base": null,
+       "a": "9810594978405606",
+       "b": "9810582874105606",
+       "giver": "wikidata:P7293#P7293$EA2BDA64-DFFE-4222-99D9-EA11879B7095",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q100099972",
+    "Q100122842",
+    "Q100753489",
+    "Q101067263"
+   ],
+   "n": 118,
+   "lo": 0.011660229061981532,
+   "hi": 0.07589027256382179
+  },
+  {
+   "L": "Q8641",
+   "name": "Yiddish",
+   "items": 110,
+   "ref": 0.3031969749054658,
+   "true": 0.08181818181818182,
+   "tc": 9,
+   "power": 0.31722268557130945,
+   "norules": 0.020934111759799832,
+   "flip": 0.37272727272727274,
+   "proofs": [
+    {
+     "item": "Q101568902",
+     "label": "Moysheh Zeyfert",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1850,
+        "m": 4,
+        "d": 13,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1851,
+        "m": 5,
+        "d": 2,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q101579857",
+     "label": "Samuel Jakub Imber",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1942,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1941,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q108254237",
+     "label": "Nachman H. Ebin",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1884,
+        "m": 6,
+        "d": 21,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1883,
+        "m": 6,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q108468637",
+     "label": "Simeon Einhorn",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1883,
+        "m": 1,
+        "d": 20,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1883,
+        "m": 1,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q108830142",
+     "label": "Saul Barkali",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1897,
+        "m": 8,
+        "d": 21,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1900,
+        "m": 9,
+        "d": 20,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q110299172",
+     "label": "Meyer F\u00fcrth",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P10832",
+       "base": null,
+       "a": "E39PCjKBFFbvKJgGDqFHXfjt8C",
+       "b": "E39PCjJRBKV8JtTBwXrmvTCmV3",
+       "giver": "wikidata:P10832#P10832$460E5607-901C-456A-BE06-CCD55FBA7921",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q111077332",
+     "label": "Samuel H. Setzer",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1876,
+        "m": 10,
+        "d": 0,
+        "prec": 10,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1875,
+        "m": 12,
+        "d": 0,
+        "prec": 10,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q111462123",
+     "label": "Mordecai Strelisker",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1806,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1809,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q113820999",
+     "label": "Abraham Maurice Silbermann",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1006",
+       "base": null,
+       "a": "15613232X",
+       "b": "143854178",
+       "giver": "wikidata:P1006#P1006$6b22f8e6-42e0-fb85-52dd-9f33f6cc95e2",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 9,
+   "contradictedItems": [
+    "Q101568902",
+    "Q101579857",
+    "Q108254237",
+    "Q108468637",
+    "Q108830142",
+    "Q110299172",
+    "Q111077332",
+    "Q111462123",
+    "Q113820999"
+   ],
+   "n": 110,
+   "lo": 0.043346408273570315,
+   "hi": 0.1384298090210546
+  },
+  {
+   "L": "Q8798",
+   "name": "Ukrainian",
+   "items": 117,
+   "ref": 0.5665178571428572,
+   "true": 0.008547008547008548,
+   "tc": 1,
+   "power": 0.2850722074860006,
+   "norules": 0.015546713822575891,
+   "flip": 0.358974358974359,
+   "proofs": [
+    {
+     "item": "Q112428166",
+     "label": "Vasyl' Prochoda",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1891,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1890,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q112428166"
+   ],
+   "n": 117,
+   "lo": 0.00043830814044398727,
+   "hi": 0.03990288212806163
+  },
+  {
+   "L": "Q9027",
+   "name": "Swedish",
+   "items": 120,
+   "ref": 0.8188433550363845,
+   "true": 0.016666666666666666,
+   "tc": 2,
+   "power": 0.6903711484593837,
+   "norules": 0.04789915966386555,
+   "flip": 0.5833333333333334,
+   "proofs": [
+    {
+     "item": "Q101236930",
+     "label": "Maja Strandberg",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q1754",
+       "b": "Q3433770",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q101422001",
+     "label": "Anna Molin",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1864,
+        "m": 10,
+        "d": 21,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1864,
+        "m": 10,
+        "d": 24,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 0,
+   "contradictedItems": [
+    "Q101236930",
+    "Q101422001"
+   ],
+   "n": 120,
+   "lo": 0.0029693483439173452,
+   "hi": 0.05153371368637808
+  },
+  {
+   "L": "Q9043",
+   "name": "Norwegian",
+   "items": 118,
+   "ref": 0.4120251689582848,
+   "true": 0.03389830508474576,
+   "tc": 4,
+   "power": 0.542191800666377,
+   "norules": 0.09347385194842822,
+   "flip": 0.5338983050847458,
+   "proofs": [
+    {
+     "item": "Q104901332",
+     "label": "Finn Frolich",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q21711493",
+       "b": "Q585",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1078837",
+     "label": "Christian August Selmer",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1889,
+        "m": 9,
+        "d": 1,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1889,
+        "m": 11,
+        "d": 1,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q11036838",
+     "label": "Anders J\u00f8rgensen Reitan",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q484084",
+       "b": "Q1771217",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q111986459",
+     "label": "Bo\u017eena Houdkov\u00e1",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1976,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1975,
+        "m": 10,
+        "d": 7,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 2,
+   "contradictedItems": [
+    "Q104901332",
+    "Q1078837",
+    "Q11036838",
+    "Q111986459"
+   ],
+   "n": 118,
+   "lo": 0.011660229061981532,
+   "hi": 0.07589027256382179
+  },
+  {
+   "L": "Q9056",
+   "name": "Czech",
+   "items": 119,
+   "ref": 0.604494382022472,
+   "true": 0.06722689075630252,
+   "tc": 8,
+   "power": 0.5560817547357926,
+   "norules": 0.05978493092152115,
+   "flip": 0.46218487394957986,
+   "proofs": [
+    {
+     "item": "Q1000005",
+     "label": "Karel Mat\u011bj \u010capek-Chod",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q1085",
+       "b": "Q2638290",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q101576749",
+     "label": "Arno\u0161t Grund",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q753219",
+       "b": "Q1085",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      },
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q1624461",
+       "b": "Q1085",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q101582847",
+     "label": "Vincenc Dittrich",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q1085",
+       "b": "Q753289",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q10379548",
+     "label": "Achille Wolf",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1834,
+        "m": 1,
+        "d": 1,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1832,
+        "m": 7,
+        "d": 3,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q104117282",
+     "label": "Ladislav \u010capek",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q11882669",
+       "b": "Q1085",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q104521197",
+     "label": "Jind\u0159ich Entlicher",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q1085",
+       "b": "Q378120",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q105438064",
+     "label": "Josef \u0160tandera",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1801,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1811,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      },
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1863,
+        "m": 11,
+        "d": 28,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1863,
+        "m": 11,
+        "d": 18,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q105518638",
+     "label": "Elsa Katzov\u00e1",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q523489",
+       "b": "Q160175",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 1,
+   "contradictedItems": [
+    "Q1000005",
+    "Q101576749",
+    "Q101582847",
+    "Q10379548",
+    "Q104117282",
+    "Q104521197",
+    "Q105438064",
+    "Q105518638"
+   ],
+   "n": 119,
+   "lo": 0.03388826643510424,
+   "hi": 0.11802897454565628
+  },
+  {
+   "L": "Q9067",
+   "name": "Hungarian",
+   "items": 118,
+   "ref": 0.37155372326719915,
+   "true": 0.025423728813559324,
+   "tc": 3,
+   "power": 0.47729248152976966,
+   "norules": 0.09970302766912936,
+   "flip": 0.3813559322033898,
+   "proofs": [
+    {
+     "item": "Q1000935",
+     "label": "Gy\u00f6rgy Festetics",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1755,
+        "m": 1,
+        "d": 1,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1755,
+        "m": 12,
+        "d": 31,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1001731",
+     "label": "S\u00e1ndor Fischer",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1854,
+        "m": 11,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1853,
+        "m": 4,
+        "d": 14,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q1001979",
+     "label": "K\u00e1roly Fleischhacker",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1820,
+        "m": 7,
+        "d": 22,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1822,
+        "m": 7,
+        "d": 22,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 2,
+   "contradictedItems": [
+    "Q1000935",
+    "Q1001731",
+    "Q1001979"
+   ],
+   "n": 118,
+   "lo": 0.0069646543616258315,
+   "hi": 0.0643958518394566
+  },
+  {
+   "L": "Q9129",
+   "name": "Greek",
+   "items": 119,
+   "ref": 0.2945551919071705,
+   "true": 0.025210084033613446,
+   "tc": 3,
+   "power": 0.31053268765133174,
+   "norules": 0.07869249394673124,
+   "flip": 0.36134453781512604,
+   "proofs": [
+    {
+     "item": "Q113350641",
+     "label": "Yusuf Dagher",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1899,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1898,
+        "m": 7,
+        "d": 12,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q12027910",
+     "label": "Kamill Resler",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q36989",
+       "b": "Q662985",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q12272545",
+     "label": "Atanas Bogoridi",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q192926",
+       "b": "Q404822",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 1,
+   "contradictedItems": [
+    "Q113350641",
+    "Q12027910",
+    "Q12272545"
+   ],
+   "n": 119,
+   "lo": 0.0069058327329456545,
+   "hi": 0.06386556639427493
+  },
+  {
+   "L": "Q9168",
+   "name": "Persian",
+   "items": 115,
+   "ref": 0.5189026430244229,
+   "true": 0.043478260869565216,
+   "tc": 5,
+   "power": 0.34683447749809304,
+   "norules": 0.12284515636918383,
+   "flip": 0.33043478260869563,
+   "proofs": [
+    {
+     "item": "Q101054",
+     "label": "Bah\u00e1\u02bcu'll\u00e1h",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P396",
+       "base": null,
+       "a": "CFIV002039",
+       "b": "RL1V000658",
+       "giver": "wikidata:P396#P396$0A97E449-7C9A-41CA-9003-5AAFFEE58714",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q107000",
+     "label": "Mirza Ghalib",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q15816551",
+       "b": "Q1353",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q112220742",
+     "label": "Jean Baptiste Nicolas",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1006",
+       "base": null,
+       "a": "238894827",
+       "b": "195102762",
+       "giver": "wikidata:P1006#P1006$6b22f8e6-42e0-fb85-52dd-9f33f6cc95e2",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q113084897",
+     "label": "Suzi",
+     "by": "range",
+     "proof": [
+      {
+       "rel": "P1317",
+       "base": "P570",
+       "a": {
+        "t": true,
+        "y": 1498,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985786"
+       },
+       "b": {
+        "t": true,
+        "y": 1830,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P1317#P1317$00878453-40bb-0f7b-9e49-29c41e84485c",
+       "diff": -332
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q116615954",
+     "label": "\u00c7\u00f6telizade As\u0131m Bey",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q8195601",
+       "b": "Q174060",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 4,
+   "contradictedItems": [
+    "Q101054",
+    "Q107000",
+    "Q112220742",
+    "Q113084897",
+    "Q116615954"
+   ],
+   "n": 115,
+   "lo": 0.017285625389619252,
+   "hi": 0.08924026209763061
+  },
+  {
+   "L": "Q9176",
+   "name": "Korean",
+   "items": 117,
+   "ref": 0.398074745186863,
+   "true": 0.008547008547008548,
+   "tc": 1,
+   "power": 0.31281314470969646,
+   "norules": 0,
+   "flip": 0.4188034188034188,
+   "proofs": [
+    {
+     "item": "Q11096031",
+     "label": "Gwi-in Lee",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1885,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1887,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q11096031"
+   ],
+   "n": 117,
+   "lo": 0.00043830814044398727,
+   "hi": 0.03990288212806163
+  },
+  {
+   "L": "Q9199",
+   "name": "Vietnamese",
+   "items": 117,
+   "ref": 0.3448084397556913,
+   "true": 0.042735042735042736,
+   "tc": 5,
+   "power": 0.3510167992926614,
+   "norules": 0.07644414972001179,
+   "flip": 0.2905982905982906,
+   "proofs": [
+    {
+     "item": "Q126419149",
+     "label": "Andr\u00e9 Cr\u00e9mazy",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q47465",
+       "b": "Q33959",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q2381936",
+     "label": "Nguyen An Ninh",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1900,
+        "m": 9,
+        "d": 5,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1900,
+        "m": 9,
+        "d": 15,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q313322",
+     "label": "Nguy\u1ec5n Du",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1871",
+       "base": null,
+       "a": "cnp00546145",
+       "b": "cnp01321831",
+       "giver": "wikidata:P1871#P1871$a8b495e7-4a76-148d-662c-c30f92f2c461",
+       "diff": null
+      },
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1765,
+        "m": 1,
+        "d": 3,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1766,
+        "m": 1,
+        "d": 3,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      },
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1820,
+        "m": 8,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1820,
+        "m": 9,
+        "d": 16,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q365944",
+     "label": "Nguyen Van Tam",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q36608",
+       "b": "Q130391",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q379775",
+     "label": "Quang Trung",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1871",
+       "base": null,
+       "a": "cnp00574848",
+       "b": "cnp01339046",
+       "giver": "wikidata:P1871#P1871$a8b495e7-4a76-148d-662c-c30f92f2c461",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 3,
+   "contradictedItems": [
+    "Q126419149",
+    "Q2381936",
+    "Q313322",
+    "Q365944",
+    "Q379775"
+   ],
+   "n": 117,
+   "lo": 0.01698751349705234,
+   "hi": 0.08775114823666107
+  },
+  {
+   "L": "Q9217",
+   "name": "Thai",
+   "items": 96,
+   "ref": 0.2784837389618781,
+   "true": 0.03125,
+   "tc": 3,
+   "power": 0.39418859649122806,
+   "norules": 0.07746710526315789,
+   "flip": 0.3333333333333333,
+   "proofs": [
+    {
+     "item": "Q13023376",
+     "label": "Francis Chit",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P7831",
+       "base": null,
+       "a": "79477",
+       "b": "65547",
+       "giver": "wikidata:P7831#P7831$8DB99CC0-2E3F-48C8-A181-C3A97BB834EE",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q152777",
+     "label": "Plaek Phibunsongkhram",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q242932",
+       "b": "Q768864",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1726411",
+     "label": "Prisdang of Siam",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P227",
+       "base": null,
+       "a": "173193250",
+       "b": "123982820",
+       "giver": "wikidata:P227#P227$42FD346B-AF33-4624-B88E-3643B28DF9FE",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    }
+   ],
+   "multiBirth": 1,
+   "contradictedItems": [
+    "Q13023376",
+    "Q152777",
+    "Q1726411"
+   ],
+   "n": 96,
+   "lo": 0.008570721462513725,
+   "hi": 0.07878693308582688
+  },
+  {
+   "L": "Q9240",
+   "name": "Indonesian",
+   "items": 118,
+   "ref": 0.3501006036217304,
+   "true": 0.025423728813559324,
+   "tc": 3,
+   "power": 0.29831232797334495,
+   "norules": 0.015572939301752861,
+   "flip": 0.3474576271186441,
+   "proofs": [
+    {
+     "item": "Q118629",
+     "label": "Agus Salim",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P19",
+       "base": null,
+       "a": "Q7248",
+       "b": "Q2772",
+       "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q12472020",
+     "label": "Andi Mappanyukki",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P20",
+       "base": null,
+       "a": "Q19726980",
+       "b": "Q5078",
+       "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q12494808",
+     "label": "Liem Koen Hian",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1952,
+        "m": 11,
+        "d": 4,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1952,
+        "m": 11,
+        "d": 5,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 2,
+   "contradictedItems": [
+    "Q118629",
+    "Q12472020",
+    "Q12494808"
+   ],
+   "n": 118,
+   "lo": 0.0069646543616258315,
+   "hi": 0.0643958518394566
+  },
+  {
+   "L": "Q9288",
+   "name": "Hebrew",
+   "items": 112,
+   "ref": 0.30137434554973824,
+   "true": 0.0625,
+   "tc": 7,
+   "power": 0.2763030888030888,
+   "norules": 0.026182432432432432,
+   "flip": 0.2767857142857143,
+   "proofs": [
+    {
+     "item": "Q101568902",
+     "label": "Moysheh Zeyfert",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1851,
+        "m": 5,
+        "d": 2,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1850,
+        "m": 4,
+        "d": 13,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q105430440",
+     "label": "David Baer Tierkel",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1874,
+        "m": 12,
+        "d": 16,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1875,
+        "m": 10,
+        "d": 9,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q1058991",
+     "label": "Chaim Joseph David Azulai",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1871",
+       "base": null,
+       "a": "cnp01323383",
+       "b": "cnp00568665",
+       "giver": "wikidata:P1871#P1871$a8b495e7-4a76-148d-662c-c30f92f2c461",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q107281813",
+     "label": "Abraham Silverstone",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1951,
+        "m": 1,
+        "d": 9,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1951,
+        "m": 1,
+        "d": 27,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q107359352",
+     "label": "Yits\u1e25a\u1e33 Ma\u1e6disis",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P570",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1951,
+        "m": 1,
+        "d": 20,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1951,
+        "m": 1,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q108468637",
+     "label": "Simeon Einhorn",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1883,
+        "m": 1,
+        "d": 20,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1883,
+        "m": 1,
+        "d": 10,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    },
+    {
+     "item": "Q108491747",
+     "label": "Meir Kohn Bistritz",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P10832",
+       "base": null,
+       "a": "E39PCjv9hy9F678VhXy9FhkcHd",
+       "b": "E39PCjqG6GHmHrT9wwxgCg384q",
+       "giver": "wikidata:P10832#P10832$460E5607-901C-456A-BE06-CCD55FBA7921",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 8,
+   "contradictedItems": [
+    "Q101568902",
+    "Q105430440",
+    "Q1058991",
+    "Q107281813",
+    "Q107359352",
+    "Q108468637",
+    "Q108491747"
+   ],
+   "n": 112,
+   "lo": 0.02969776307414709,
+   "hi": 0.11418515428578198
+  },
+  {
+   "L": "Q9610",
+   "name": "Bangla",
+   "items": 119,
+   "ref": 0.15596846846846846,
+   "true": 0.01680672268907563,
+   "tc": 2,
+   "power": 0.05006409343398376,
+   "norules": 0.0014955134596211367,
+   "flip": 0.12605042016806722,
+   "proofs": [
+    {
+     "item": "Q108405721",
+     "label": "Biman Behari Majumdar",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P569",
+       "base": null,
+       "a": {
+        "t": true,
+        "y": 1899,
+        "m": 0,
+        "d": 0,
+        "prec": 9,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "b": {
+        "t": true,
+        "y": 1900,
+        "m": 1,
+        "d": 7,
+        "prec": 11,
+        "cal": "http://www.wikidata.org/entity/Q1985727"
+       },
+       "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+       "diff": null
+      }
+     ],
+     "class": "rank-permitted"
+    },
+    {
+     "item": "Q113802875",
+     "label": "Narendra Nath Law",
+     "by": "functional",
+     "proof": [
+      {
+       "rel": "P1006",
+       "base": null,
+       "a": "072073144",
+       "b": "091047420",
+       "giver": "wikidata:P1006#P1006$6b22f8e6-42e0-fb85-52dd-9f33f6cc95e2",
+       "diff": null
+      }
+     ],
+     "class": "record-disagreement"
+    }
+   ],
+   "multiBirth": 1,
+   "contradictedItems": [
+    "Q108405721",
+    "Q113802875"
+   ],
+   "n": 119,
+   "lo": 0.002994369078500712,
+   "hi": 0.05195894540588887
+  }
+ ],
+ "O1_fail": [],
+ "O1_cannot": [
+  "Sanskrit",
+  "Spanish",
+  "Arabic",
+  "Hindi",
+  "English",
+  "German",
+  "Turkish",
+  "Ottoman Turkish",
+  "Latin",
+  "Japanese",
+  "Tamil",
+  "Italian",
+  "Russian",
+  "Chinese",
+  "Polish",
+  "Yiddish",
+  "Swedish",
+  "Norwegian",
+  "Czech",
+  "Hungarian",
+  "Greek",
+  "Persian",
+  "Vietnamese",
+  "Thai",
+  "Indonesian",
+  "Hebrew",
+  "Bangla"
+ ],
+ "pooled": {
+  "k": 113,
+  "n": 3279,
+  "rate": 0.03446172613601708,
+  "lo": 0.02938003157635346,
+  "hi": 0.04017218469626782
+ },
+ "overlap": 293,
+ "classes": {
+  "record-disagreement": 87,
+  "rank-permitted": 43
+ },
+ "O2_share": 0.967741935483871,
+ "spearman": 0.6133064516129032,
+ "power": {
+  "norules": false,
+  "flip": 1.0
+ }
+}

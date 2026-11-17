@@ -1,0 +1,35 @@
+{
+ "mode": "noise",
+ "worlds": 40,
+ "types": {
+  "RICH": {
+   "pairs": 4106,
+   "trueSame": 190,
+   "merged": 147,
+   "falseMergeRate": 0.0272,
+   "recall": 0.7526,
+   "held": 162,
+   "heldTrue": 40,
+   "falseSplits": 7,
+   "falseSplitRate": 0.0368,
+   "fetchesPerPair": 4.97,
+   "trueRateMean": 0.0448
+  },
+  "SKEWED": {
+   "pairs": 3911,
+   "trueSame": 176,
+   "merged": 133,
+   "falseMergeRate": 0.0075,
+   "recall": 0.75,
+   "held": 104,
+   "heldTrue": 38,
+   "falseSplits": 6,
+   "falseSplitRate": 0.0341,
+   "fetchesPerPair": 4.53,
+   "trueRateMean": 0.0434
+  }
+ },
+ "verdict": {
+  "T5": false
+ }
+}

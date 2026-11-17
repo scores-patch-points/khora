@@ -1,0 +1,23 @@
+{
+ "trials": 3000,
+ "E1": {
+  "equalPartitions": 1649,
+  "equalPartitionsDifferentClaims": 1007,
+  "violations": 0
+ },
+ "E2": {
+  "differing": 1351,
+  "probed": 1351,
+  "violations": 0
+ },
+ "E3": {
+  "n": 200,
+  "mismatches": 0
+ },
+ "E4": {
+  "coincident": 1247,
+  "live": 1001,
+  "latent": 246
+ },
+ "examples": []
+}

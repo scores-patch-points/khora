@@ -1,0 +1,19 @@
+{
+ "mode": "noise",
+ "worlds": 40,
+ "types": {
+  "RICH": {
+   "pairs": 4148,
+   "trueSame": 194,
+   "merged": 10,
+   "falseMergeRate": 0,
+   "recall": 0.0515,
+   "held": 4,
+   "heldTrue": 4,
+   "falseSplits": 180,
+   "fetchesPerPair": 1.43,
+   "trueRateMean": 0.046
+  }
+ },
+ "verdict": "measured only"
+}

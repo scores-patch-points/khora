@@ -1,0 +1,925 @@
+{
+ "mutant": "flip",
+ "items": 145,
+ "rules": {
+  "oneValuedProperties": 364,
+  "ranges": [
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1636-P570 [-120,0]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1636-P570 [-120,0]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]"
+  ],
+  "unread": 0
+ },
+ "true": {
+  "pairs": 145,
+  "contradicted": 27,
+  "byRange": 26,
+  "rangeOnly": 25
+ },
+ "distinct": {
+  "pairs": 41760,
+  "contradicted": 4740,
+  "byRange": 2927,
+  "rangeOnly": 1056
+ },
+ "trueContradicted": [
+  {
+   "item": "Q100986800",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1868,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1800,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -68
+    }
+   ]
+  },
+  {
+   "item": "Q101218665",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1877,
+      "m": 3,
+      "d": 4,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1797,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -80
+    }
+   ]
+  },
+  {
+   "item": "Q101451",
+   "label": "Christoph Emanuel von Schimonsky-Schimoni",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1832,
+      "m": 12,
+      "d": 27,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1752,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -80
+    }
+   ]
+  },
+  {
+   "item": "Q101934119",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1869,
+      "m": 12,
+      "d": 14,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1800,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -69
+    }
+   ]
+  },
+  {
+   "item": "Q10357801",
+   "label": "Paul Martinovich Skavronsky",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1793,
+      "m": 11,
+      "d": 23,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "b": {
+      "t": true,
+      "y": 1757,
+      "m": 5,
+      "d": 17,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -36
+    }
+   ]
+  },
+  {
+   "item": "Q1037303",
+   "label": "Carl Christian Philipp Reichel",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P19",
+     "base": null,
+     "a": "Q656",
+     "b": "Q270",
+     "giver": "wikidata:P19#P19$8b93d9c4-49ef-9b68-923d-fa141269c443",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q1038159",
+   "label": "Carl Friedrich von der Borg",
+   "by": "functional+range",
+   "proof": [
+    {
+     "rel": "P10832",
+     "base": null,
+     "a": "E39PCjD77K9pK96xbddgfWD7Dy",
+     "b": "E39PBJr3wRy4H73xph69RQdRKd",
+     "giver": "wikidata:P10832#P10832$460E5607-901C-456A-BE06-CCD55FBA7921",
+     "diff": null
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1848,
+      "m": 8,
+      "d": 17,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1794,
+      "m": 2,
+      "d": 26,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -54
+    }
+   ]
+  },
+  {
+   "item": "Q10392240",
+   "label": "Vladimir Moshkov",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1839,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1792,
+      "m": 7,
+      "d": 16,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -47
+    }
+   ]
+  },
+  {
+   "item": "Q104925977",
+   "label": "Franciszek Koss",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1841,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1792,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -49
+    }
+   ]
+  },
+  {
+   "item": "Q104944286",
+   "label": "Vonifatij",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1871,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1785,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -86
+    }
+   ]
+  },
+  {
+   "item": "Q105083841",
+   "label": "Konstantin Bruni",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1834,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1800,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -34
+    }
+   ]
+  },
+  {
+   "item": "Q1051346",
+   "label": "Catterino Cavos",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1840,
+      "m": 5,
+      "d": 10,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1775,
+      "m": 10,
+      "d": 30,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -65
+    }
+   ]
+  },
+  {
+   "item": "Q105298420",
+   "label": "Dmitry Naryshkin",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1790,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1751,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -39
+    }
+   ]
+  },
+  {
+   "item": "Q106101709",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1839,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1783,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -56
+    }
+   ]
+  },
+  {
+   "item": "Q106357441",
+   "label": "Onufry Drucki-Lubecki",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1841,
+      "m": 7,
+      "d": 16,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1768,
+      "m": 8,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -73
+    }
+   ]
+  },
+  {
+   "item": "Q106431389",
+   "label": "Yekaterina Dolgorukova",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1811,
+      "m": 12,
+      "d": 0,
+      "prec": 10,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1750,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -61
+    }
+   ]
+  },
+  {
+   "item": "Q106675098",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1806,
+      "m": 3,
+      "d": 11,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1758,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -48
+    }
+   ]
+  },
+  {
+   "item": "Q106677047",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1846,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1787,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -59
+    }
+   ]
+  },
+  {
+   "item": "Q106725284",
+   "label": "Aleksandr Ivanovich Veĭdemeĭer",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1852,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1789,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -63
+    }
+   ]
+  },
+  {
+   "item": "Q106826845",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1853,
+      "m": 7,
+      "d": 3,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "b": {
+      "t": true,
+      "y": 1792,
+      "m": 12,
+      "d": 4,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -61
+    }
+   ]
+  },
+  {
+   "item": "Q106938294",
+   "label": "Christlieb Samuel Lithander",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1823,
+      "m": 12,
+      "d": 18,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1778,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -45
+    }
+   ]
+  },
+  {
+   "item": "Q107006410",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1855,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1790,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -65
+    }
+   ]
+  },
+  {
+   "item": "Q107063160",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1841,
+      "m": 3,
+      "d": 23,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "b": {
+      "t": true,
+      "y": 1799,
+      "m": 9,
+      "d": 26,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -42
+    }
+   ]
+  },
+  {
+   "item": "Q107069562",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1830,
+      "m": 2,
+      "d": 16,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "b": {
+      "t": true,
+      "y": 1789,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -41
+    }
+   ]
+  },
+  {
+   "item": "Q107086434",
+   "label": "Dmitriy Evgenievich Kashkin",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P2031",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1821,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1771,
+      "m": 11,
+      "d": 21,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "giver": "wikidata:P2031#P2031$252A56F0-5C86-4F5A-9A4C-4774B3540ADC",
+     "diff": -50
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1843,
+      "m": 9,
+      "d": 4,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "b": {
+      "t": true,
+      "y": 1771,
+      "m": 11,
+      "d": 21,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985786"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -72
+    }
+   ]
+  },
+  {
+   "item": "Q1071676",
+   "label": "Antony Pogorelsky",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P2031",
+     "base": "P570",
+     "a": {
+      "t": true,
+      "y": 1825,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1836,
+      "m": 7,
+      "d": 21,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2031#P2031$570B16A2-3A6B-4E65-AC0D-A98B7FC77139",
+     "diff": 11
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1836,
+      "m": 7,
+      "d": 21,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1787,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -49
+    }
+   ]
+  },
+  {
+   "item": "Q107507397",
+   "label": "Aleksandr Musin-Pushkin",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1813,
+      "m": 3,
+      "d": 23,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1788,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -25
+    }
+   ]
+  }
+ ],
+ "reasons": {
+  "unwitnessed_conflict": 21497,
+  "no_conflict": 15641
+ },
+ "rates": {
+  "trueContradicted": 0.18620689655172415,
+  "distinctContradicted": 0.11350574712643678,
+  "rangeOnlyDistinct": 0.02528735632183908,
+  "rangeOnlyTrue": 0.1724137931034483
+ }
+}

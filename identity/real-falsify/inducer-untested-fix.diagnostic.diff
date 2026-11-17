@@ -1,0 +1,24 @@
+--- native/kernel/kind-functional-induction.js	2026-11-16 21:43:45
++++ ../khora-order-fix/native/kernel/kind-functional-induction.js	2026-11-16 22:06:04
+@@ -221,10 +221,10 @@
+         r.members += 1;
+         if (vs.length > 1) {
+           r.exposed += 1;
+-          let sim = null, change = false, untimed = false, anyDisagree = false;
++          let sim = null, change = false, untimed = false, anyDisagree = false, untested = false;
+           for (let i = 0; i < vs.length; i += 1) for (let j = i + 1; j < vs.length; j += 1) {
+             if (sameValue(vs[i].value, vs[j].value, rel) !== false) continue;
+-            if (witnessed && !(witnessed(vs[i]) && witnessed(vs[j]))) continue; // an unwitnessed disagreement is not evidence
++            if (witnessed && !(witnessed(vs[i]) && witnessed(vs[j]))) { untested = true; continue; } // POST-HOC DIAGNOSTIC: not evidence either way
+             anyDisagree = true;
+             const o = overlap(vs[i], vs[j]);
+             if (o === true) sim ??= [vs[i], vs[j]]; else if (o === false) change = true; else untimed = true;
+@@ -232,7 +232,7 @@
+           if (sim) { r.simultaneous += 1; if (r.refutedBy.length < 3) r.refutedBy.push({ member: m, a: sim[0].id, b: sim[1].id }); }
+           else if (change) r.changed += 1;
+           else if (untimed) r.untimed += 1;
+-          else if (!anyDisagree) r.agreed += 1;
++          else if (!anyDisagree && !untested) r.agreed += 1; // POST-HOC DIAGNOSTIC: an untested member is not an agreeing one
+         }
+         rels.set(rel, r);
+       }

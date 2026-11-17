@@ -1,0 +1,417 @@
+diff -ruN native.orig/organs/identity-stoprule.test.mjs native/organs/identity-stoprule.test.mjs
+--- native.orig/organs/identity-stoprule.test.mjs	1969-12-31 18:00:00
++++ native/organs/identity-stoprule.test.mjs	2026-11-16 21:18:07
+@@ -0,0 +1,67 @@
++// identity-stoprule.test.mjs — the identity stop rule (STOPRULE3-PREREG.md, sha256 ac722c3c…; results STOPRULE3-RESULTS.md).
++// Seeded worlds with known truth. Written to fail on: merging on any agreement (N-any), weighing rarity over the in-scope
++// claims instead of the corpus (N-scoped), a flat prior estimate (N-flat), and an estimate that counts each pair's own
++// claims (N-emself).
++import test from "node:test";
++import assert from "node:assert/strict";
++import { gfpClaim } from "../kernel/gfp-claim.js";
++import { warrantIdentity, estimatePrior } from "./identity-warrant.js";
++
++function mulberry32(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
++
++/** Run every name pair of `worlds` seeded worlds to satiety; return false-merge rate, recall, and the prior estimates. */
++function run({ R, D, worlds, seed, estimate = false }) {
++  const rng = mulberry32(seed), int = (n) => Math.floor(rng() * n);
++  const F = Array.from({ length: R }, (_, i) => `f${i}`), functional = F.map((rel) => ({ rel, role: "ARG1" }));
++  let merged = 0, falseMerge = 0, trueSame = 0, mergedTrue = 0, falseSplit = 0; const ratios = [];
++  for (let w = 0; w < worlds; w++) {
++    const ents = Array.from({ length: 10 }, () => F.map(() => int(D)));
++    const names = []; ents.forEach((_, e) => { for (let k = 0, n = 1 + int(2); k < n; k++) names.push({ n: `n${names.length}`, e }); });
++    const ent = new Map(names.map((x) => [x.n, x.e])), N = names.map((x) => x.n);
++    let h = 0; const fact = (n, rel) => gfpClaim({ ground: "/", rel, roles: { ARG0: n, ARG1: `v${ents[ent.get(n)][F.indexOf(rel)]}` }, id: `h${h++}` });
++    const base = Array.from({ length: 15 }, () => fact(N[int(N.length)], F[int(R)]));
++    const corpus = [...base, ...Array.from({ length: 60 }, () => fact(N[int(N.length)], F[int(R)]))];
++    let tp = 0, ap = 0; for (let i = 0; i < N.length; i++) for (let j = i + 1; j < N.length; j++) { ap++; if (ent.get(N[i]) === ent.get(N[j])) tp++; }
++    let rate = tp / ap;
++    if (estimate) { const est = estimatePrior(corpus, N, { functional }).rate; ratios.push(est / rate); rate = est; }
++    for (let i = 0; i < N.length; i++) for (let j = i + 1; j < N.length; j++) {
++      const x = N[i], y = N[j], truth = ent.get(x) === ent.get(y); if (truth) trueSame++;
++      let claims = [...base], v;
++      for (let s = 0; s < 100; s++) {
++        v = warrantIdentity(claims, x, y, { functional, prior: { rate }, background: corpus });
++        if (v.verdict !== "unjudged") break;
++        const it = v.hunger.live[0];
++        if (it) claims.push(fact(it.missingFor, it.rel)); else { const c = v.hunger.cold[0]; claims.push(fact(x, c.rel), fact(y, c.rel)); }
++      }
++      if (v.verdict === "same") { merged++; if (truth) mergedTrue++; else falseMerge++; }
++      if (v.verdict === "different" && truth) falseSplit++;
++    }
++  }
++  const mean = (xs) => xs.reduce((a, b) => a + b, 0) / (xs.length || 1);
++  return { falseMergeRate: falseMerge / (merged || 1), recall: mergedTrue / trueSame, falseSplit, ratio: mean(ratios) };
++}
++
++test("noise is refused, not silently modelled", () => {
++  assert.throws(() => warrantIdentity([], "x", "y", { noise: 0.1 }), TypeError);
++  assert.throws(() => estimatePrior([], ["x", "y"], { noise: 0.1 }), TypeError);
++});
++
++test("declared prior, a world that can tell entities apart: few false merges, every true pair found", () => {
++  const r = run({ R: 12, D: 4, worlds: 20, seed: 7101 });
++  assert.ok(r.falseMergeRate <= 0.05, `false-merge rate ${r.falseMergeRate}`);
++  assert.ok(r.recall >= 0.9, `recall ${r.recall}`);
++  assert.equal(r.falseSplit, 0);
++});
++
++test("declared prior, a world that cannot: nothing merges wrongly", () => {
++  const r = run({ R: 4, D: 2, worlds: 10, seed: 7102 });
++  assert.ok(r.falseMergeRate <= 0.05, `false-merge rate ${r.falseMergeRate}`);
++  assert.equal(r.falseSplit, 0);
++});
++
++test("estimated prior (no truth): within 2x of the true rate, and still few false merges and high recall", () => {
++  const r = run({ R: 12, D: 4, worlds: 20, seed: 7103, estimate: true });
++  assert.ok(r.ratio >= 0.5 && r.ratio <= 2, `estimate / truth ${r.ratio}`);
++  assert.ok(r.falseMergeRate <= 0.05, `false-merge rate ${r.falseMergeRate}`);
++  assert.ok(r.recall >= 0.9, `recall ${r.recall}`);
++});
+diff -ruN native.orig/organs/identity-warrant.js native/organs/identity-warrant.js
+--- native.orig/organs/identity-warrant.js	1969-12-31 18:00:00
++++ native/organs/identity-warrant.js	2026-11-16 21:18:21
+@@ -0,0 +1,161 @@
++// organs/identity-warrant.js — IDENTITY DERIVED FROM GROUND, NOT DECLARED.
++//
++// lintGfp treats identity as a claim ("same-as") and merges two names only where that claim's ground reaches. But a
++// declared same-as claim has no ground of its own: nothing says WHY the two names are one. This organ derives it.
++//
++// Leibniz, used asymmetrically: identicals are indiscernible, so ONE witnessed discernment between x and y proves them
++// distinct (on true facts). Agreement never proves identity; it only supports it. Nothing in common is neither: it is a
++// typed gap, returned as a HUNGER LIST, the facts whose fetching could decide the pair, live first.
++//
++//   warrantIdentity(claims, x, y, { at, functional, identity, prior, target, background }) →
++//     { verdict: "same" | "different" | "unjudged" | "held", x, y, at, conflicts, agree, shared,
++//       strength, prior, posterior, target, hunger: { live, cold } }
++//   derivedIdentityClaim(w) → a same-as gfpClaim at w.at whose basis carries the verdict and the warrant, or null.
++//   estimatePrior(claims, names, { functional }) → { rate, pairs } — the coreference rate among name pairs, by EM.
++//
++// THE STOP RULE (STOPRULE3-PREREG.md): a sequential probability ratio test (Wald, 1945) over Fellegi–Sunter weights
++// (1969). Agreement is cheap when values are common and coreference is rare. With a DECLARED prior (`prior: { rate }`):
++//   strength   log10 likelihood ratio over DISTINCT compared one-valued keys: an agreement on value v adds
++//              log10(1 / p(v)). Any discernment is decisive: facts are taken as TRUE.
++//   p(v)       how common v is for that relation in the CORPUS (`background`, else the claims in scope).
++//   same       posterior >= target and at least one agreement (the upper boundary)
++//   different  a discernment (stable on true facts)
++//   unjudged   between the boundaries, and something is left to fetch: the hunger goes on (live first, then cold)
++//   held       between the boundaries, and every declared one-valued relation is known for both: indiscernible on
++//              every observable. A typed gap, never a merge.
++// NOISE IS NOT SUPPORTED. With wrong facts, one disagreement must be evidence, not proof (m < 1). Round three tested that
++// mode as a Wald boundary on the evidence: error rates held (false merges <= 0.027, false splits <= 0.037 at 10% noise)
++// but recall was 0.75, under the preregistered 0.80 (STOPRULE3-RESULTS.md), so it is not shipped. Passing `noise` throws.
++// The prior can be estimated without truth by EM (Winkler), leaving each pair's own claims out. Without a declared
++// prior, bare agreement yields a provisional "same" as before, so existing callers do not change meaning silently.
++//
++// The semantics are the kernel's own (kernel/gfp-claim.js, organs/reasoning-lint.js): a fact's KEY is its relation and
++// its roles with the name replaced by a placeholder; one-valued roles come from the giver's `functional` declaration;
++// "P and not-P" needs no declaration. Only claims whose ground overlaps `at` are read (siblings never meet).
++// PURE: no I/O, no model, no clock.
++import { gfpClaim, overlap, exactIdentity } from "../kernel/gfp-claim.js";
++
++export const IDENTITY_WARRANT = "identity-warrant@2";
++const SEP = "\u0001";
++
++const valueRoles = (functional, idf) => new Map((functional || []).map((f) => (typeof f === "string" ? [idf(f), "ARG1"] : [idf(f.rel), f.role ?? "ARG1"])));
++const usable = (c) => c && c.rel && c.rel !== "same-as";
++const naming = (idf, ...who) => { const W = new Set(who.map((w) => idf(w))); return (c) => Object.values(c.roles).some((v) => W.has(idf(v))); };
++
++/** Every fact about `who`: one per non-value role the name fills. */
++function factsOf(claims, who, idf, fn) {
++  const W = idf(who), out = [];
++  for (const c of claims) {
++    const rel = idf(c.rel), valueRole = fn.get(rel) ?? null;
++    const roles = Object.entries(c.roles);
++    for (const [slot, v] of roles) {
++      if (slot === valueRole || idf(v) !== W) continue;
++      const other = (omitValue) => roles.filter(([k]) => k !== slot && !(omitValue && k === valueRole)).map(([k, x]) => `${k}=${idf(x)}`).sort();
++      out.push({
++        rel, slot, valueRole, polarity: c.polarity, id: c.id ?? null,
++        fkey: [rel, `${slot}=§`, ...other(true)].join(SEP),   // the figure without the value: where a one-valued role is compared
++        pkey: [rel, `${slot}=§`, ...other(false)].join(SEP),  // the whole claim: where P and not-P are compared
++        value: valueRole && c.roles[valueRole] != null ? idf(c.roles[valueRole]) : null,
++      });
++    }
++  }
++  return out;
++}
++
++/** Value counts per one-valued relation over the + claims given. */
++function valueTable(claims, idf, fn) {
++  const by = new Map();
++  for (const c of claims) {
++    const rel = idf(c.rel), vr = fn.get(rel);
++    if (!vr || c.polarity !== "+" || c.roles[vr] == null) continue;
++    const m = by.get(rel) || by.set(rel, new Map()).get(rel), v = idf(c.roles[vr]);
++    m.set(v, (m.get(v) || 0) + 1);
++  }
++  return by;
++}
++const total = (m) => { let n = 0; for (const k of m.values()) n += k; return n; };
++/** Laplace-smoothed probability of value v for a relation (mass reserved for unseen values). */
++const probOf = (table, rel, v) => { const m = table.get(rel) || new Map(); return ((m.get(v) || 0) + 1) / (total(m) + m.size + 1); };
++
++const NO_NOISE = "identity-warrant: noise is not supported (STOPRULE3-RESULTS.md: recall 0.75 at 10% noise, under the preregistered 0.80); facts are taken as true";
++
++export function warrantIdentity(claims = [], x, y, { at = "/", functional = [], identity = exactIdentity, prior = null, target = 0.95, background = null, noise = 0 } = {}) {
++  if (noise) throw new TypeError(NO_NOISE);
++  const idf = identity, fn = valueRoles(functional, idf);
++  const scoped = claims.filter((c) => usable(c) && overlap(c.ground, at));
++  const fx = factsOf(scoped, x, idf, fn), fy = factsOf(scoped, y, idf, fn);
++  const conflicts = [], agree = [], shared = [];
++  for (const a of fx) for (const b of fy) {
++    if (a.pkey === b.pkey && a.polarity !== b.polarity) { conflicts.push({ why: "polarity", key: a.pkey, x: a.id, y: b.id }); continue; }
++    if (a.valueRole && a.fkey === b.fkey && a.polarity === "+" && b.polarity === "+" && a.value != null && b.value != null) {
++      if (a.value !== b.value) conflicts.push({ why: "one-valued", key: a.fkey, x: a.id, y: b.id, values: [a.value, b.value] });
++      else agree.push({ key: a.fkey, value: a.value, x: a.id, y: b.id });
++    } else if (!a.valueRole && a.pkey === b.pkey && a.polarity === b.polarity) shared.push({ key: a.pkey, x: a.id, y: b.id });
++  }
++
++  // THE CORPUS: how common each value is
++  const corpus = (background ?? scoped).filter(usable);
++  const table = valueTable(corpus, idf, fn);
++
++  // THE EVIDENCE: each distinct agreeing one-valued key once, weighed by how rare its value is; a discernment is decisive
++  const seen = new Map();
++  for (const a of agree) if (!seen.has(a.key)) seen.set(a.key, a.value);
++  let strength = conflicts.length ? -Infinity : 0;
++  if (!conflicts.length) for (const [key, value] of seen) strength += Math.log10(1 / probOf(table, key.split(SEP)[0], value));
++
++  const rate = prior && Number.isFinite(prior.rate) ? Math.min(Math.max(prior.rate, 1e-9), 1 - 1e-9) : null;
++  const odds = rate == null ? null : (rate / (1 - rate)) * 10 ** strength;
++  const posterior = odds == null ? null : Number.isFinite(odds) ? odds / (1 + odds) : 1;
++
++  // THE HUNGER: one-valued facts known for one name and not the other could decide the pair with ONE fetch (live);
++  // declared one-valued relations known for neither need two (cold).
++  const live = [], cold = [];
++  const known = (fs) => { const mk = new Map(); for (const f of fs) if (f.valueRole && f.polarity === "+" && f.value != null) (mk.get(f.fkey) || mk.set(f.fkey, { rel: f.rel, slot: f.slot, ids: [] }).get(f.fkey)).ids.push(f.id); return mk; };
++  const kx = known(fx), ky = known(fy);
++  for (const [key, k] of kx) if (!ky.has(key)) live.push({ rel: k.rel, slot: k.slot, key, knownFor: x, missingFor: y, claims: k.ids });
++  for (const [key, k] of ky) if (!kx.has(key)) live.push({ rel: k.rel, slot: k.slot, key, knownFor: y, missingFor: x, claims: k.ids });
++  const any = new Set([...kx.values(), ...ky.values()].map((k) => `${k.rel}${SEP}${k.slot}`));
++  for (const [rel] of fn) if (!any.has(`${rel}${SEP}ARG0`)) cold.push({ rel, slot: "ARG0" });
++
++  let verdict;
++  if (idf(x) === idf(y)) verdict = "same";
++  else if (rate == null) verdict = conflicts.length ? "different" : agree.length ? "same" : "unjudged"; // no declared prior: the shipped meaning
++  else if (conflicts.length) verdict = "different";
++  else if (agree.length && posterior >= target) verdict = "same";
++  else verdict = live.length || cold.length ? "unjudged" : "held";
++  const decided = verdict === "same" || verdict === "different";
++  return Object.freeze({ verdict, x, y, at, conflicts, agree, shared, strength, prior: rate, posterior, target: rate == null ? null : target,
++    hunger: decided ? { live: [], cold: [] } : { live, cold } });
++}
++
++/** The derived identity, as an ordinary claim the lint and the partition can read. Only "same" yields one. */
++export function derivedIdentityClaim(w, { rel = "same-as", id = null } = {}) {
++  if (!w || w.verdict !== "same" || !w.agree.length) return null;
++  const warrant = [...new Set(w.agree.flatMap((a) => [a.x, a.y]).filter(Boolean))].sort();
++  return gfpClaim({ ground: w.at, rel, roles: { ARG0: w.x, ARG1: w.y }, id, basis: { derived: IDENTITY_WARRANT, verdict: "same", provisional: w.prior == null, agree: w.agree.length,
++    strength: w.strength, prior: w.prior, posterior: w.posterior, warrant } });
++}
++
++/** The coreference rate among name pairs, estimated without truth: EM over pairs with at least one compared key, each
++ *  pair's likelihoods computed WITHOUT that pair's own claims (counting them biased the estimate 10-27x low: STOPRULE2).
++ *  P(obs | same) = prod (agree ? m : 1-m), m = (1-epsilon)^2 (a small slack, not a noise model);
++ *  P(obs | distinct) = prod (agree ? p : 1-p). */
++export function estimatePrior(claims = [], names = [], { functional = [], identity = exactIdentity, epsilon = 0.01, noise = 0, iters = 100 } = {}) {
++  if (noise) throw new TypeError(NO_NOISE);
++  const idf = identity, fn = valueRoles(functional, idf), all = claims.filter(usable);
++  const m = (1 - epsilon) ** 2;
++  const keysOf = new Map(names.map((n) => { const k = new Map(); for (const f of factsOf(all, n, idf, fn)) if (f.valueRole && f.polarity === "+" && f.value != null && !k.has(f.fkey)) k.set(f.fkey, { rel: f.rel, value: f.value }); return [n, k]; }));
++  const obs = [];
++  for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) {
++    const a = keysOf.get(names[i]), b = keysOf.get(names[j]);
++    const compared = [...a].filter(([key]) => b.has(key));
++    if (!compared.length) continue;
++    const table = valueTable(all.filter((c) => !naming(idf, names[i], names[j])(c)), idf, fn);
++    let l1 = 1, l0 = 1;
++    for (const [key, va] of compared) { const same = va.value === b.get(key).value, p = probOf(table, va.rel, va.value); l1 *= same ? m : 1 - m; l0 *= same ? p : 1 - p; }
++    obs.push([l1, l0]);
++  }
++  let pi = 0.1;
++  for (let t = 0; t < iters && obs.length; t++) { let s = 0; for (const [l1, l0] of obs) s += (pi * l1) / (pi * l1 + (1 - pi) * l0); pi = Math.min(Math.max(s / obs.length, 1e-6), 1 - 1e-6); }
++  return { rate: pi, pairs: obs.length };
++}
+diff -ruN native.orig/organs/identity-warrant.test.mjs native/organs/identity-warrant.test.mjs
+--- native.orig/organs/identity-warrant.test.mjs	1969-12-31 18:00:00
++++ native/organs/identity-warrant.test.mjs	2026-11-16 20:34:45
+@@ -0,0 +1,79 @@
++// identity-warrant.test.mjs — identity derived from ground (experiment: IDENTITY-PREREG.md, sha256 67648a5c…).
++// Written to fail on a decider that ignores polarity (W1) and on one that lets a plain relation discern (W2).
++import test from "node:test";
++import assert from "node:assert/strict";
++import { gfpClaim } from "../kernel/gfp-claim.js";
++import { lintGfp } from "./reasoning-lint.js";
++import { warrantIdentity, derivedIdentityClaim } from "./identity-warrant.js";
++
++const F = ["f0", "f1", "f2"], FUNCTIONAL = F.map((rel) => ({ rel, role: "ARG1", giver: "test" }));
++const OPTS = { functional: FUNCTIONAL, identityRels: ["same-as"] };
++const c = (rel, a, b, id, polarity = "+", ground = "/") => gfpClaim({ ground, rel, roles: { ARG0: a, ARG1: b }, polarity, id });
++
++test("one witnessed difference discerns; agreement supports; nothing in common is a hunger list", () => {
++  const claims = [c("died-in", "Twain", "1910", "k1"), c("died-in", "Clemens", "1910", "k2"), c("died-in", "Poe", "1849", "k3"), c("born-in", "Twain", "Florida MO", "k4")];
++  const opts = { functional: ["died-in", "born-in"] };
++  const same = warrantIdentity(claims, "Twain", "Clemens", opts);
++  assert.equal(same.verdict, "same");
++  assert.deepEqual(same.agree.map((a) => [a.x, a.y]), [["k1", "k2"]]);
++  assert.equal(warrantIdentity(claims, "Twain", "Poe", opts).verdict, "different");
++  const gap = warrantIdentity([c("born-in", "Twain", "Florida MO", "k4"), c("died-in", "Clemens", "1910", "k2")], "Twain", "Clemens", opts);
++  assert.equal(gap.verdict, "unjudged");
++  assert.deepEqual(gap.hunger.live.map((h) => [h.rel, h.missingFor]).sort(), [["born-in", "Clemens"], ["died-in", "Twain"]]);
++});
++
++test("a fact and its denial discern without any declaration; a plain relation never decides alone", () => {
++  const claims = [c("q", "x", "w1", "a1", "+"), c("q", "y", "w1", "a2", "-"), c("q", "y", "w2", "a3", "+")];
++  assert.equal(warrantIdentity(claims, "x", "y", { functional: [] }).verdict, "different");       // W1 fails here
++  const plain = [c("q", "x", "w1", "b1"), c("q", "y", "w2", "b2")];
++  assert.equal(warrantIdentity(plain, "x", "y", { functional: [] }).verdict, "unjudged");         // W2 fails here
++});
++
++test("siblings never meet: a fact in another holon does not discern", () => {
++  const claims = [c("died-in", "x", "1910", "s1", "+", "/p1"), c("died-in", "y", "1911", "s2", "+", "/p2")];
++  assert.equal(warrantIdentity(claims, "x", "y", { at: "/p1", functional: ["died-in"] }).verdict, "unjudged");
++});
++
++test("the derived same-as claim carries its warrant and is read by the lint like any identity claim", () => {
++  const claims = [c("f0", "x", "v1", "d1"), c("f0", "y", "v1", "d2"), c("f1", "x", "v0", "d3"), c("f1", "y", "v2", "d4", "+", "/p1")];
++  const w = warrantIdentity(claims, "x", "y", { at: "/", functional: FUNCTIONAL });
++  assert.equal(w.verdict, "different"); // f1 differs inside /p1, which overlaps "/"
++  const w2 = warrantIdentity(claims.slice(0, 2), "x", "y", { functional: FUNCTIONAL });
++  const id = derivedIdentityClaim(w2, { id: "sid" });
++  assert.deepEqual(id.basis.warrant, ["d1", "d2"]);
++  assert.equal(id.basis.provisional, true);
++  const r = lintGfp([...claims.slice(0, 2), id], OPTS);
++  assert.deepEqual(r.holons.find((h) => h.at === "/").identity, [["x", "y"]]);
++  assert.equal(derivedIdentityClaim(w), null); // a discerned pair yields no identity claim
++});
++
++// ---- seeded property, 60 worlds: sound discernment, closing hunger, agreement with the kernel ----------------
++function mulberry32(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
++test("seeded worlds: different is never wrong on true facts; the hunger closes; the kernel agrees", () => {
++  const rng = mulberry32(20261118), int = (n) => Math.floor(rng() * n);
++  const KINDS = new Set(["standing_contradiction", "polarity_contradiction", "overridden_in_scope", "refuted_in_scope"]);
++  let decided = 0, discerned = 0, closed = 0;
++  for (let w = 0; w < 60; w++) {
++    const D = [2, 3, 5][w % 3];
++    const ents = Array.from({ length: 6 }, () => ({ f: F.map(() => int(D)), q: [0, 1, 2, 3].filter(() => rng() < 0.5) }));
++    const names = []; ents.forEach((_, e) => { for (let k = 0, m = 1 + int(2); k < m; k++) names.push({ n: `n${names.length}`, e }); });
++    const ent = new Map(names.map((x) => [x.n, x.e]));
++    let h = 0;
++    const fact = (n, rel) => { const e = ents[ent.get(n)]; if (rel === "q") { const v = int(4); return c("q", n, `w${v}`, `h${h++}`, e.q.includes(v) ? "+" : "-"); } return c(rel, n, `v${e.f[F.indexOf(rel)]}`, `h${h++}`); };
++    const claims = Array.from({ length: 8 + int(10) }, () => fact(names[int(names.length)].n, rng() < 0.75 ? F[int(3)] : "q"));
++    const base = new Set(lintGfp(claims, OPTS).findings.map((f) => `${f.kind}|${(f.claims || []).join(",")}`));
++    for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) {
++      const x = names[i].n, y = names[j].n, v = warrantIdentity(claims, x, y, { functional: FUNCTIONAL });
++      if (ent.get(x) === ent.get(y)) assert.notEqual(v.verdict, "different", `${x},${y} are one entity: true facts cannot discern them`);
++      const about = new Set(claims.filter((k) => k.roles.ARG0 === x || k.roles.ARG0 === y).map((k) => k.id));
++      const raised = lintGfp([...claims, c("same-as", x, y, "sid")], OPTS).findings.some((f) => KINDS.has(f.kind) && (f.claims || []).some((id) => about.has(id)) && !base.has(`${f.kind}|${(f.claims || []).join(",")}`));
++      assert.equal(raised, v.verdict === "different", `kernel and warrant agree on ${x},${y}`);
++      if (v.verdict === "different") discerned++;
++      if (v.verdict !== "unjudged") { decided++; continue; }
++      const got = [...v.hunger.live.map((it) => fact(it.missingFor, it.rel)), ...v.hunger.cold.flatMap((it) => [fact(x, it.rel), fact(y, it.rel)])];
++      assert.notEqual(warrantIdentity([...claims, ...got], x, y, { functional: FUNCTIONAL }).verdict, "unjudged", "fetching the hunger list decides the pair");
++      closed++;
++    }
++  }
++  assert.ok(decided >= 50 && discerned >= 20 && closed >= 50, `non-vacuous (${decided} decided, ${discerned} discerned, ${closed} closed)`);
++});
+diff -ruN native.orig/organs/reasoning-lint-identity.test.mjs native/organs/reasoning-lint-identity.test.mjs
+--- native.orig/organs/reasoning-lint-identity.test.mjs	1969-12-31 18:00:00
++++ native/organs/reasoning-lint-identity.test.mjs	2026-11-16 20:18:16
+@@ -0,0 +1,69 @@
++// reasoning-lint-identity.test.mjs — the identity partition reported per holon is the whole of what identity
++// contributes to a lintGfp verdict. Seeded property test (experiment: PREREG.md, sha256 95ee5ece…, in the pharos
++// identity work). It is written to FAIL on a reporter that is scope-blind or that reports only a count, and on a
++// lint that reports no partition at all.
++import test from "node:test";
++import assert from "node:assert/strict";
++import { gfpClaim, ancestry, contains } from "../kernel/gfp-claim.js";
++import { lintGfp } from "./reasoning-lint.js";
++
++const OPTS = { functional: [{ rel: "p", role: "ARG1", giver: "test" }], identityRels: ["same-as"] };
++const claim = (ground, rel, a, b, id, polarity = "+") => gfpClaim({ ground, rel, roles: { ARG0: a, ARG1: b }, polarity, id });
++const identityOf = (r, at) => r.holons.find((h) => h.at === at)?.identity;
++
++test("identity is reported per holon, scoped to where the same-as claim reaches", () => {
++  const r = lintGfp([
++    claim("/p1", "died-in", "Twain", "1910", "k1"), claim("/p1/2", "died-in", "Clemens", "1911", "k2"), claim("/p2", "died-in", "Twain", "1910", "k3"),
++    claim("/p1", "same-as", "Twain", "Clemens", "i1"),
++  ], OPTS);
++  assert.deepEqual(identityOf(r, "/p1"), [["Clemens", "Twain"]]);
++  assert.deepEqual(identityOf(r, "/p1/2"), [["Clemens", "Twain"]]); // below the claim's ground: it reaches
++  assert.deepEqual(identityOf(r, "/p2"), []);                        // a sibling: an alias stated in /p1 does not merge there
++  assert.deepEqual(identityOf(r, "/"), []);                          // above it: it does not reach up either
++});
++
++// ---- seeded property: the partition is sufficient and necessary -----------------------------------------------
++function mulberry32(a) { return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
++const GROUNDS = ["/", "/1", "/2", "/1/1", "/1/2", "/2/1", "/1/1/1"], POOL = ["a", "b", "c", "d", "v0", "v1"];
++const verdict = (r) => JSON.stringify({ ok: r.ok, counts: r.counts, unjudged: r.unjudged, apart: r.apart, findings: r.findings.map((f) => `${f.kind}|${f.at}|${f.severity}|${(f.claims || []).join(",")}`).sort() });
++
++test("same content: partitions equal at every content holon <=> identical verdict (300 seeded trials)", () => {
++  const rng = mulberry32(20261117), int = (n) => Math.floor(rng() * n), pick = (xs) => xs[int(xs.length)];
++  const pair = () => { const a = pick(POOL); let b = pick(POOL); while (b === a) b = pick(POOL); return [a, b]; };
++  const ids = (xs, tag) => xs.map((x, i) => claim(x.g, "same-as", x.a, x.b, `${tag}${i}`));
++  let equalDiffClaims = 0, differing = 0;
++  for (let t = 0; t < 300; t++) {
++    const content = Array.from({ length: 4 + int(5) }, (_, i) => { const rel = rng() < 0.55 ? "p" : "q"; return claim(pick(GROUNDS), rel, pick(POOL), pick(POOL), `c${i}`, rel === "q" && rng() < 0.4 ? "-" : "+"); });
++    const one = Array.from({ length: int(6) }, () => { const [a, b] = pair(); return { a, b, g: pick(GROUNDS) }; });
++    let two = one.map((x) => ({ ...x }));
++    const r = rng();
++    if (r < 0.4) { // restate: swap roles, re-state one alias deeper, duplicate, reorder; the partition should not move
++      two = two.map((x) => (rng() < 0.5 ? { a: x.b, b: x.a, g: x.g } : x));
++      for (const x of one) { const kids = GROUNDS.filter((g) => g !== x.g && contains(x.g, g)); if (kids.length && rng() < 0.5) two.push({ ...x, g: pick(kids) }); if (rng() < 0.2) two.push({ ...x }); }
++      two.reverse();
++    } else if (r < 0.65 || !two.length) { const [a, b] = pair(); two.push({ a, b, g: pick(GROUNDS) });
++    } else if (r < 0.8) two.splice(int(two.length), 1);
++    else { const i = int(two.length), [a, b] = pair(); two[i] = { a, b, g: two[i].g }; }
++    const A = lintGfp([...content, ...ids(one, "iA")], OPTS), B = lintGfp([...content, ...ids(two, "iB")], OPTS);
++    const CH = new Set(content.flatMap((c) => ancestry(c.ground)));
++    for (const res of [A, B]) for (const h of CH) assert.ok(Array.isArray(identityOf(res, h)), `holon ${h} reports its identity partition`);
++    const diffH = [...CH].filter((h) => JSON.stringify(identityOf(A, h)) !== JSON.stringify(identityOf(B, h)));
++    if (!diffH.length) {
++      if (JSON.stringify(one) !== JSON.stringify(two)) equalDiffClaims++;
++      assert.equal(verdict(A), verdict(B), "equal partitions must give equal verdicts (sufficiency)");
++    } else { // necessity: a pair one system merges and the other does not is witnessed by a probe at that holon
++      differing++;
++      const h = diffH[0], ca = identityOf(A, h), cb = identityOf(B, h), names = [...new Set([...ca.flat(), ...cb.flat()])];
++      const merged = (cls, x, y) => cls.some((g) => g.includes(x) && g.includes(y));
++      let found = null;
++      for (const x of names) { for (const y of names) if (x < y && merged(ca, x, y) !== merged(cb, x, y)) { found = [x, y, merged(ca, x, y)]; break; } if (found) break; }
++      assert.ok(found, "a differing partition names a pair that one side merges and the other does not");
++      const probe = [claim(h, "pr", found[0], "o", "pr1"), claim(h, "pr", found[1], "o", "pr2", "-")];
++      const PA = lintGfp([...content, ...probe, ...ids(one, "iA")], OPTS), PB = lintGfp([...content, ...probe, ...ids(two, "iB")], OPTS);
++      const has = (r) => r.findings.some((f) => f.kind === "polarity_contradiction" && f.at === h && (f.claims || []).includes("pr1"));
++      assert.ok(found[2] ? has(PA) && !has(PB) : has(PB) && !has(PA), "only the system that merges the pair sees the contradiction (necessity)");
++    }
++  }
++  assert.ok(equalDiffClaims >= 20, `non-vacuous: equal partitions reached by different identity claims (${equalDiffClaims})`);
++  assert.ok(differing >= 20, `non-vacuous: differing partitions probed (${differing})`);
++});
+diff -ruN native.orig/organs/reasoning-lint.js native/organs/reasoning-lint.js
+--- native.orig/organs/reasoning-lint.js	2026-11-16 20:07:32
++++ native/organs/reasoning-lint.js	2026-11-16 20:07:33
+@@ -838,11 +838,21 @@
+   // Roll-up: every holon counts its own findings and its descendants'.
+   const holonSet = new Set();
+   for (const g of grounds) for (const h of ancestry(g)) holonSet.add(h);
++  // THE IDENTITY IN FORCE at a holon: which names the declared same-as claims merged there. A verdict at this holon is
++  // only as comparable as this partition: two runs with the same claims but different partitions looked at different
++  // things, and `ok` alone cannot say so. Only merged classes are listed (a name merged with nothing is not news).
++  const idNames = [...new Set(idClaims.flatMap((c) => [baseIdf(c.roles.ARG0), baseIdf(c.roles.ARG1)]))];
++  const identityIn = (h) => {
++    const f = identityAt(h), classes = new Map();
++    for (const n of idNames) { const r = f(n); if (!classes.has(r)) classes.set(r, []); classes.get(r).push(n); }
++    return [...classes.values()].filter((g) => g.length > 1).map((g) => g.sort()).sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : 0));
++  };
+   const holons = [...holonSet].sort((x, y) => depthOf(x) - depthOf(y) || (x < y ? -1 : 1)).map((h) => ({
+     at: h,
+     own: visible.filter((f) => f.at === h).length,
+     below: visible.filter((f) => f.at !== h && contains(h, f.at)).length,
+     errors: visible.filter((f) => contains(h, f.at) && f.severity === SEVERITY.ERROR).length,
++    identity: identityIn(h),
+   }));
+   return Object.freeze({
+     ok: !visible.some((f) => f.severity === SEVERITY.ERROR),

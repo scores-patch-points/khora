@@ -1,0 +1,194 @@
+{
+ "C0": {
+  "literature": {
+   "passages": 42,
+   "ownGenreBest": 0.21428571428571427,
+   "tied": 0.023809523809523808,
+   "median_cs": 0.08823529411764702
+  },
+  "government-legal": {
+   "passages": 25,
+   "ownGenreBest": 0.12,
+   "tied": 0,
+   "median_cs": 0.07692307692307693
+  },
+  "encyclopedic": {
+   "passages": 35,
+   "ownGenreBest": 0.9714285714285714,
+   "tied": 0,
+   "median_cs": -0.2666666666666666
+  },
+  "academic": {
+   "passages": 28,
+   "ownGenreBest": 0.9642857142857143,
+   "tied": 0,
+   "median_cs": -0.21249999999999997
+  }
+ },
+ "C0_shift": {
+  "passages": 28,
+  "fitsAnotherGenreBetter": 0.75,
+  "median_cs": 0.052631578947368446
+ },
+ "shares_median": {
+  "random@0.95": {
+   "literature": 0.169,
+   "government-legal": 0.177,
+   "encyclopedic": 0.146,
+   "academic": 0.162,
+   "noise": 0.162,
+   "constant": 0.177
+  },
+  "roundrobin@0.95": {
+   "literature": 0.162,
+   "government-legal": 0.162,
+   "encyclopedic": 0.169,
+   "academic": 0.169,
+   "noise": 0.169,
+   "constant": 0.169
+  },
+  "novelty@0.95": {
+   "literature": 0,
+   "government-legal": 0,
+   "encyclopedic": 0,
+   "academic": 0,
+   "noise": 0,
+   "constant": 0
+  },
+  "curious@0.99": {
+   "literature": 0.154,
+   "government-legal": 0.154,
+   "encyclopedic": 0.162,
+   "academic": 0.154,
+   "noise": 0.215,
+   "constant": 0.154
+  },
+  "curious@0.95": {
+   "literature": 0.154,
+   "government-legal": 0.162,
+   "encyclopedic": 0.169,
+   "academic": 0.169,
+   "noise": 0.215,
+   "constant": 0.138
+  },
+  "curious@0.9": {
+   "literature": 0.162,
+   "government-legal": 0.169,
+   "encyclopedic": 0.177,
+   "academic": 0.177,
+   "noise": 0.192,
+   "constant": 0.138
+  },
+  "curiousV1@0.95": {
+   "literature": 0.162,
+   "government-legal": 0.162,
+   "encyclopedic": 0.169,
+   "academic": 0.169,
+   "noise": 0.169,
+   "constant": 0.169
+  }
+ },
+ "C1_novelty_noise_share": 0,
+ "C2": {
+  "noise": 0.2153846153846154,
+  "constant": 0.13846153846153847
+ },
+ "C3": {
+  "curious": 0.04871794871794874,
+  "M1": 0.00512820512820511
+ },
+ "C4": {
+  "final_held_mean": {
+   "random@0.95": 7.3182,
+   "roundrobin@0.95": 7.324,
+   "novelty@0.95": 6.4014,
+   "curious@0.99": 7.3171,
+   "curious@0.95": 7.3215,
+   "curious@0.9": 7.3245,
+   "curiousV1@0.95": 7.324
+  },
+  "vs_random": {
+   "wins": 7,
+   "n": 20,
+   "p": 0.9423408508300781
+  },
+  "vs_roundrobin": {
+   "wins": 15,
+   "n": 20,
+   "p": 0.020694732666015625
+  }
+ },
+ "C5": {
+  "seeds": 20,
+  "revisitWithin30": 1,
+  "firstIsSurprise": 0.95,
+  "csPositive": 0.8,
+  "delays": [
+   2,
+   1,
+   2,
+   1,
+   4,
+   1,
+   6,
+   4,
+   2,
+   3,
+   3,
+   5,
+   8,
+   7,
+   1,
+   0,
+   1,
+   7,
+   2,
+   4
+  ]
+ },
+ "V1": {
+  "P_csPos_given_surprise": 0.3959469992205768,
+  "n_surprise": 1283,
+  "P_csPos_given_usual": 0.43603655054254714,
+  "n_usual": 3502
+ },
+ "calibration_spearman_E_vs_S": {
+  "literature": 0.737,
+  "government-legal": 0.725,
+  "encyclopedic": 0.625,
+  "academic": 0.615,
+  "noise": 0.23,
+  "constant": 1
+ },
+ "C6": {
+  "deterministic": true,
+  "outcomesInLog": 450,
+  "predictionsInLog": 450,
+  "checked": 450,
+  "mismatches": 0,
+  "first": [],
+  "logStatus": {
+   "entries": 1311,
+   "corrupt": 0
+  }
+ },
+ "verdict": {
+  "C0": {
+   "literature": false,
+   "government-legal": false,
+   "encyclopedic": true,
+   "academic": true
+  },
+  "C1": false,
+  "C2": false,
+  "C3": true,
+  "C4": false,
+  "C5": {
+   "revisit": true,
+   "surprise": true,
+   "cs": false
+  },
+  "C6": true,
+  "V1_predicted_direction": false
+ }
+}

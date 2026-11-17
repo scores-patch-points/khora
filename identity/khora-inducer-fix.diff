@@ -1,0 +1,89 @@
+diff -ruN native.orig/kernel/kind-functional-induction.js native/kernel/kind-functional-induction.js
+--- native.orig/kernel/kind-functional-induction.js	2026-11-16 22:25:23
++++ native/kernel/kind-functional-induction.js	2026-11-16 22:25:23
+@@ -204,6 +204,11 @@
+   //   many-valued     a witnessed SIMULTANEOUS disagreement (refuted as one-valued)
+   //   time-unknown    disagreements exist but none is placed in time
+   //   unexposed       never asserted twice for one member
++  // UNTESTED (2026-11-17, found on real Wikidata records): a member whose values DISAGREE, where every disagreeing pair
++  // has an unwitnessed side, has tested nothing — the disagreement is not evidence of many values, and it is not
++  // agreement either. It counts as exposed, never as agreed, never as refuting, and is reported as `untested`. Before
++  // this, such a member was counted AGREED, and relations that disagreed for every member (described-by-source,
++  // citizenship, given name, spouse) were induced `fixed` from unreferenced statements.
+   const overlap = (x, y) => {
+     if (!x.interval || !y.interval) return null;
+     const lo = Math.max(x.interval.lo ?? -Infinity, y.interval.lo ?? -Infinity);
+@@ -217,14 +222,14 @@
+       const byRel = new Map();
+       for (const a of read(m)) { if (!byRel.has(a.rel)) byRel.set(a.rel, []); byRel.get(a.rel).push(a); }
+       for (const [rel, vs] of byRel) {
+-        const r = rels.get(rel) ?? { members: 0, exposed: 0, agreed: 0, changed: 0, simultaneous: 0, untimed: 0, refutedBy: [] };
++        const r = rels.get(rel) ?? { members: 0, exposed: 0, agreed: 0, untested: 0, changed: 0, simultaneous: 0, untimed: 0, refutedBy: [] };
+         r.members += 1;
+         if (vs.length > 1) {
+           r.exposed += 1;
+-          let sim = null, change = false, untimed = false, anyDisagree = false;
++          let sim = null, change = false, untimed = false, anyDisagree = false, unwitnessedDisagree = false;
+           for (let i = 0; i < vs.length; i += 1) for (let j = i + 1; j < vs.length; j += 1) {
+             if (sameValue(vs[i].value, vs[j].value, rel) !== false) continue;
+-            if (witnessed && !(witnessed(vs[i]) && witnessed(vs[j]))) continue; // an unwitnessed disagreement is not evidence
++            if (witnessed && !(witnessed(vs[i]) && witnessed(vs[j]))) { unwitnessedDisagree = true; continue; } // not evidence of many values — nor of one
+             anyDisagree = true;
+             const o = overlap(vs[i], vs[j]);
+             if (o === true) sim ??= [vs[i], vs[j]]; else if (o === false) change = true; else untimed = true;
+@@ -232,6 +237,7 @@
+           if (sim) { r.simultaneous += 1; if (r.refutedBy.length < 3) r.refutedBy.push({ member: m, a: sim[0].id, b: sim[1].id }); }
+           else if (change) r.changed += 1;
+           else if (untimed) r.untimed += 1;
++          else if (unwitnessedDisagree) r.untested += 1; // tested nothing: never counted as agreement
+           else if (!anyDisagree) r.agreed += 1;
+         }
+         rels.set(rel, r);
+diff -ruN native.orig/kernel/kind-functional-induction.test.mjs native/kernel/kind-functional-induction.test.mjs
+--- native.orig/kernel/kind-functional-induction.test.mjs	1969-12-31 18:00:00
++++ native/kernel/kind-functional-induction.test.mjs	2026-11-16 22:25:23
+@@ -0,0 +1,44 @@
++// kind-functional-induction.test.mjs — an untested member is not an agreeing one (INDUCER-FIX-PREREG.md, sha256 b5ed9f33…).
++// khora's exclusion-falsify.mjs declares every assertion witnessed, so it cannot reach the unwitnessed-disagreement path;
++// these cases do. Found on real Wikidata records, where unreferenced statements made many-valued relations "fixed".
++import test from "node:test";
++import assert from "node:assert/strict";
++import { induceKindsAndFunctions } from "./kind-functional-induction.js";
++
++const sameValue = (a, b) => (a === b ? true : false);
++const witnessed = (a) => a.ref === true;
++function standings(rows) {
++  const A = new Map(); let n = 0;
++  for (const [m, rel, value, ref, interval] of rows) { if (!A.has(m)) A.set(m, []); A.get(m).push({ rel, value, ref, id: `a${n++}`, ...(interval ? { interval } : {}) }); }
++  const members = [...A.keys()];
++  const r = induceKindsAndFunctions(members, { assertionsOf: (m) => A.get(m) ?? [], sameValue, witnessed, exposureFloor: 3, declaredKinds: [{ kindKey: "k", memberRefs: members }] });
++  return { table: r.relations.get("k"), register: r.register.get("k") };
++}
++const four = (f) => ["m1", "m2", "m3", "m4"].flatMap(f);
++
++test("different values with an unreferenced side are untested, never agreed, and never make a relation fixed", () => {
++  const { table, register } = standings(four((m) => [[m, "source", `${m}-a`, true], [m, "source", `${m}-b`, false]]));
++  assert.equal(table.source.agreed, 0);
++  assert.equal(table.source.untested, 4);
++  assert.notEqual(table.source.standing, "fixed");
++  assert.equal(register.has("source"), false);
++});
++
++test("equal values still agree, witnessed or not, and a relation agreed by enough members is still fixed", () => {
++  const { table, register } = standings(four((m) => [[m, "born", `${m}-1800`, true], [m, "born", `${m}-1800`, false]]));
++  assert.equal(table.born.agreed, 4);
++  assert.equal(table.born.standing, "fixed");
++  assert.equal(register.get("born").temporal, "fixed");
++});
++
++test("different values both witnessed still refute: simultaneous -> many-valued, untimed -> time-unknown", () => {
++  const both = { lo: 0, hi: 10 };
++  assert.equal(standings(four((m) => [[m, "held", `${m}-a`, true, both], [m, "held", `${m}-b`, true, both]])).table.held.standing, "many-valued");
++  assert.equal(standings(four((m) => [[m, "tag", `${m}-a`, true], [m, "tag", `${m}-b`, true]])).table.tag.standing, "time-unknown");
++});
++
++test("a member with a witnessed disagreement AND an unwitnessed one still counts the witnessed refutation", () => {
++  const { table } = standings(four((m) => [[m, "x", `${m}-a`, true], [m, "x", `${m}-b`, true], [m, "x", `${m}-c`, false]]));
++  assert.equal(table.x.untimed, 4);
++  assert.equal(table.x.untested, 0);
++});

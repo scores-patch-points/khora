@@ -1,0 +1,52 @@
+{
+ "mode": "estimated",
+ "worlds": 40,
+ "types": {
+  "RICH": {
+   "pairs": 4208,
+   "trueSame": 197,
+   "merged": 14,
+   "falseMergeRate": 0,
+   "recall": 0.0711,
+   "held": 183,
+   "heldTrue": 183,
+   "falseSplits": 0,
+   "fetchesPerPair": 1.75,
+   "trueRateMean": 0.0456,
+   "estimateMean": 0.0048,
+   "estimateRatio": 0.105
+  },
+  "POOR": {
+   "pairs": 4497,
+   "trueSame": 217,
+   "merged": 0,
+   "falseMergeRate": 0,
+   "recall": 0,
+   "held": 484,
+   "heldTrue": 217,
+   "falseSplits": 0,
+   "fetchesPerPair": 1.79,
+   "trueRateMean": 0.0474,
+   "estimateMean": 0.0164,
+   "estimateRatio": 0.346
+  },
+  "SKEWED": {
+   "pairs": 4303,
+   "trueSame": 204,
+   "merged": 8,
+   "falseMergeRate": 0,
+   "recall": 0.0392,
+   "held": 196,
+   "heldTrue": 196,
+   "falseSplits": 0,
+   "fetchesPerPair": 1.77,
+   "trueRateMean": 0.0464,
+   "estimateMean": 0.0017,
+   "estimateRatio": 0.037
+  }
+ },
+ "verdict": {
+  "S3": true,
+  "S4": false
+ }
+}

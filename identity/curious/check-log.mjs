@@ -1,0 +1,11 @@
+import fs from 'node:fs'; import path from 'node:path'; import { fileURLToPath, pathToFileURL } from 'node:url';
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const P = await import(pathToFileURL(process.env.PHAROS_LIB ?? path.resolve(HERE, '..', '..', '..', 'pharos', 'lib', 'pharos.mjs')).href);
+const h = P.open('curious', { dir: path.join(HERE, 'log'), writer: 'checker', frame: false, format: 'phb' });
+const f = P.fold(h), st = P.status(h);
+const by = {}; for (const e of f.entries) by[e.kind] = (by[e.kind] ?? 0) + 1;
+console.log('entries', st.entries, 'live', st.live, 'corrupt', st.corrupt, 'writers', st.writers.map((w) => `${w.writer}:${w.entries}`).join(' '), '| by kind', JSON.stringify(by));
+const rd = f.entries.filter((e) => e.kind === 'text-reading');
+const rows = rd.map((e) => e.body.rows.length); rows.sort((a, b) => a - b);
+console.log('readings', rd.length, '| rows per reading: min', rows[0], 'median', rows[Math.floor(rows.length / 2)], 'max', rows.at(-1), '| zero-row readings', rows.filter((n) => n === 0).length);
+console.log('sample row:', JSON.stringify(rd[0].body.rows[1]));

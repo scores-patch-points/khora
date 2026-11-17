@@ -1,0 +1,5194 @@
+{
+ "P31": {
+  "n": 3349,
+  "single": 3349,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "instance of",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9989,
+   1.0
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P21": {
+  "n": 3315,
+  "single": 3314,
+  "dispute": 1,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.00030165912518853697,
+  "single_share": 0.9996983408748115,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "sex or gender",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9989,
+   1.0
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P569": {
+  "n": 3299,
+  "single": 3196,
+  "dispute": 102,
+  "plural": 1,
+  "S": 0.9996968778417702,
+  "epsilon": 0.030918460139436194,
+  "single_share": 0.9687784177023341,
+  "why": {
+   "a_preferred": 37,
+   "b_close_years": 102,
+   "c_own_sources": 72
+  },
+  "label": "date of birth",
+  "datatype": "time",
+  "S_ci": [
+   0.9983,
+   0.9999
+  ],
+  "median_random_year_gap": 29.0,
+  "stated": 1
+ },
+ "P570": {
+  "n": 3136,
+  "single": 3095,
+  "dispute": 41,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.013073979591836735,
+  "single_share": 0.9869260204081632,
+  "why": {
+   "a_preferred": 14,
+   "b_close_years": 40,
+   "c_own_sources": 28
+  },
+  "label": "date of death",
+  "datatype": "time",
+  "S_ci": [
+   0.9989,
+   1.0
+  ],
+  "median_random_year_gap": 39.0,
+  "stated": 1
+ },
+ "P735": {
+  "n": 2187,
+  "single": 1789,
+  "dispute": 18,
+  "plural": 380,
+  "S": 0.8262459990855052,
+  "epsilon": 0.00823045267489712,
+  "single_share": 0.8180155464106081,
+  "why": {
+   "a_preferred": 11,
+   "b_close_years": 0,
+   "c_own_sources": 7
+  },
+  "label": "given name",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8096,
+   0.8419
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P214": {
+  "n": 1823,
+  "single": 1750,
+  "dispute": 6,
+  "plural": 67,
+  "S": 0.9632473944048272,
+  "epsilon": 0.0032912781130005485,
+  "single_share": 0.9599561162918266,
+  "why": {
+   "a_preferred": 2,
+   "b_close_years": 0,
+   "c_own_sources": 4
+  },
+  "label": "VIAF cluster ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9537,
+   0.971
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P106": {
+  "n": 3137,
+  "single": 1314,
+  "dispute": 100,
+  "plural": 1723,
+  "S": 0.4507491233662735,
+  "epsilon": 0.031877590054191905,
+  "single_share": 0.4188715333120816,
+  "why": {
+   "a_preferred": 6,
+   "b_close_years": 0,
+   "c_own_sources": 94
+  },
+  "label": "occupation",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.4326,
+   0.4684
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P20": {
+  "n": 2094,
+  "single": 2039,
+  "dispute": 43,
+  "plural": 12,
+  "S": 0.994269340974212,
+  "epsilon": 0.020534861509073542,
+  "single_share": 0.9737344794651385,
+  "why": {
+   "a_preferred": 36,
+   "b_close_years": 0,
+   "c_own_sources": 36
+  },
+  "label": "place of death",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9901,
+   0.9967
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P19": {
+  "n": 2513,
+  "single": 2442,
+  "dispute": 51,
+  "plural": 20,
+  "S": 0.9920413847990449,
+  "epsilon": 0.020294468762435337,
+  "single_share": 0.9717469160366097,
+  "why": {
+   "a_preferred": 35,
+   "b_close_years": 0,
+   "c_own_sources": 38
+  },
+  "label": "place of birth",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9878,
+   0.9947
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P213": {
+  "n": 1171,
+  "single": 1148,
+  "dispute": 7,
+  "plural": 16,
+  "S": 0.986336464560205,
+  "epsilon": 0.005977796754910333,
+  "single_share": 0.9803586678052946,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 7
+  },
+  "label": "ISNI",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9781,
+   0.9914
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P5632": {
+  "n": 30,
+  "single": 30,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Persons of Indian Studies ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8863,
+   0.999
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P69": {
+  "n": 676,
+  "single": 489,
+  "dispute": 14,
+  "plural": 173,
+  "S": 0.7440828402366864,
+  "epsilon": 0.020710059171597635,
+  "single_share": 0.7233727810650887,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 14
+  },
+  "label": "educated at",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7103,
+   0.7749
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1412": {
+  "n": 3349,
+  "single": 2338,
+  "dispute": 30,
+  "plural": 981,
+  "S": 0.7070767393251717,
+  "epsilon": 0.008957897879964169,
+  "single_share": 0.6981188414452075,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 29
+  },
+  "label": "languages spoken, written or signed",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.6917,
+   0.7224
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P27": {
+  "n": 2789,
+  "single": 2104,
+  "dispute": 24,
+  "plural": 661,
+  "S": 0.7629974901398351,
+  "epsilon": 0.008605234851201148,
+  "single_share": 0.754392255288634,
+  "why": {
+   "a_preferred": 3,
+   "b_close_years": 0,
+   "c_own_sources": 21
+  },
+  "label": "country of citizenship",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7473,
+   0.7783
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P18": {
+  "n": 1175,
+  "single": 1134,
+  "dispute": 28,
+  "plural": 13,
+  "S": 0.9889361702127659,
+  "epsilon": 0.023829787234042554,
+  "single_share": 0.9651063829787234,
+  "why": {
+   "a_preferred": 28,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "image",
+  "datatype": "commonsMedia",
+  "S_ci": [
+   0.9809,
+   0.9937
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P373": {
+  "n": 929,
+  "single": 929,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Commons category",
+  "datatype": "string",
+  "S_ci": [
+   0.9958,
+   1.0
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P463": {
+  "n": 325,
+  "single": 242,
+  "dispute": 7,
+  "plural": 76,
+  "S": 0.7661538461538462,
+  "epsilon": 0.021538461538461538,
+  "single_share": 0.7446153846153846,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 7
+  },
+  "label": "member of",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7172,
+   0.8082
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P244": {
+  "n": 1024,
+  "single": 1016,
+  "dispute": 2,
+  "plural": 6,
+  "S": 0.994140625,
+  "epsilon": 0.001953125,
+  "single_share": 0.9921875,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 2
+  },
+  "label": "Library of Congress Authorities ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9874,
+   0.9973
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3973": {
+  "n": 155,
+  "single": 155,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "PIM authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9763,
+   0.9999
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P2671": {
+  "n": 1507,
+  "single": 1495,
+  "dispute": 0,
+  "plural": 12,
+  "S": 0.9920371599203716,
+  "epsilon": 0.0,
+  "single_share": 0.9920371599203716,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Google Knowledge Graph ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9862,
+   0.9954
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8998": {
+  "n": 94,
+  "single": 94,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Magyar életrajzi lexikon ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9612,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P10832": {
+  "n": 981,
+  "single": 974,
+  "dispute": 5,
+  "plural": 2,
+  "S": 0.9979612640163099,
+  "epsilon": 0.0050968399592252805,
+  "single_share": 0.9928644240570846,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 5
+  },
+  "label": "WorldCat Entities ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9927,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P734": {
+  "n": 1764,
+  "single": 1648,
+  "dispute": 16,
+  "plural": 100,
+  "S": 0.9433106575963719,
+  "epsilon": 0.009070294784580499,
+  "single_share": 0.9342403628117913,
+  "why": {
+   "a_preferred": 15,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "family name",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9315,
+   0.9531
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P691": {
+  "n": 529,
+  "single": 510,
+  "dispute": 6,
+  "plural": 13,
+  "S": 0.9754253308128544,
+  "epsilon": 0.011342155009451797,
+  "single_share": 0.9640831758034026,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 5
+  },
+  "label": "NL CR AUT ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.958,
+   0.9857
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P9160": {
+  "n": 42,
+  "single": 39,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9285714285714286,
+  "epsilon": 0.0,
+  "single_share": 0.9285714285714286,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Biographical Dictionary of the Czech Lands ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8132,
+   0.9725
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P227": {
+  "n": 993,
+  "single": 966,
+  "dispute": 24,
+  "plural": 3,
+  "S": 0.9969788519637462,
+  "epsilon": 0.02416918429003021,
+  "single_share": 0.972809667673716,
+  "why": {
+   "a_preferred": 24,
+   "b_close_years": 0,
+   "c_own_sources": 4
+  },
+  "label": "GND ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9912,
+   0.9989
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P101": {
+  "n": 570,
+  "single": 229,
+  "dispute": 4,
+  "plural": 337,
+  "S": 0.4087719298245614,
+  "epsilon": 0.007017543859649123,
+  "single_share": 0.4017543859649123,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 4
+  },
+  "label": "field of work",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.3668,
+   0.4495
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P10387": {
+  "n": 43,
+  "single": 43,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Databazeknih.cz author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9191,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P10400": {
+  "n": 34,
+  "single": 34,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "CBDB.cz author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9053,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P9322": {
+  "n": 62,
+  "single": 60,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.967741935483871,
+  "epsilon": 0.0,
+  "single_share": 0.967741935483871,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "SVKKL authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8875,
+   0.9898
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P646": {
+  "n": 496,
+  "single": 496,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Freebase ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9927,
+   1.0
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1871": {
+  "n": 274,
+  "single": 259,
+  "dispute": 1,
+  "plural": 14,
+  "S": 0.948905109489051,
+  "epsilon": 0.0036496350364963502,
+  "single_share": 0.9452554744525548,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "CERL Thesaurus ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9162,
+   0.9693
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P268": {
+  "n": 491,
+  "single": 481,
+  "dispute": 1,
+  "plural": 9,
+  "S": 0.9816700610997964,
+  "epsilon": 0.002036659877800407,
+  "single_share": 0.9796334012219959,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Bibliothèque nationale de France ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.966,
+   0.9903
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P269": {
+  "n": 676,
+  "single": 673,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9955621301775148,
+  "epsilon": 0.0,
+  "single_share": 0.9955621301775148,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "IdRef ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9873,
+   0.9984
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1006": {
+  "n": 565,
+  "single": 556,
+  "dispute": 2,
+  "plural": 7,
+  "S": 0.9876106194690265,
+  "epsilon": 0.0035398230088495575,
+  "single_share": 0.984070796460177,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 2
+  },
+  "label": "Nationale Thesaurus voor Auteursnamen ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9745,
+   0.9939
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P648": {
+  "n": 505,
+  "single": 423,
+  "dispute": 1,
+  "plural": 81,
+  "S": 0.8396039603960396,
+  "epsilon": 0.0019801980198019802,
+  "single_share": 0.8376237623762376,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Open Library ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8054,
+   0.8684
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P4629": {
+  "n": 35,
+  "single": 34,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9714285714285714,
+  "epsilon": 0.0,
+  "single_share": 0.9714285714285714,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Online Books Page author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8507,
+   0.9925
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8189": {
+  "n": 550,
+  "single": 548,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.9963636363636363,
+  "epsilon": 0.0,
+  "single_share": 0.9963636363636363,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "J9U entity ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9872,
+   0.9988
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P396": {
+  "n": 277,
+  "single": 263,
+  "dispute": 0,
+  "plural": 14,
+  "S": 0.9494584837545126,
+  "epsilon": 0.0,
+  "single_share": 0.9494584837545126,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "SBN author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9172,
+   0.9692
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1472": {
+  "n": 181,
+  "single": 180,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.994475138121547,
+  "epsilon": 0.0,
+  "single_share": 0.994475138121547,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Commons Creator page",
+  "datatype": "string",
+  "S_ci": [
+   0.9693,
+   0.9987
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P13591": {
+  "n": 517,
+  "single": 517,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "‎Yale LUX ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9928,
+   0.9999
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P2163": {
+  "n": 504,
+  "single": 503,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.998015873015873,
+  "epsilon": 0.0,
+  "single_share": 0.998015873015873,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "FAST ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9889,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P800": {
+  "n": 124,
+  "single": 87,
+  "dispute": 2,
+  "plural": 35,
+  "S": 0.717741935483871,
+  "epsilon": 0.016129032258064516,
+  "single_share": 0.7016129032258065,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 2
+  },
+  "label": "notable work",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.631,
+   0.7904
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P140": {
+  "n": 386,
+  "single": 336,
+  "dispute": 15,
+  "plural": 35,
+  "S": 0.9093264248704663,
+  "epsilon": 0.038860103626943004,
+  "single_share": 0.8704663212435233,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 15
+  },
+  "label": "religion or worldview",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8767,
+   0.934
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P3368": {
+  "n": 241,
+  "single": 236,
+  "dispute": 0,
+  "plural": 5,
+  "S": 0.979253112033195,
+  "epsilon": 0.0,
+  "single_share": 0.979253112033195,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Prabook ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9525,
+   0.9906
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1417": {
+  "n": 90,
+  "single": 87,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9666666666666667,
+  "epsilon": 0.0,
+  "single_share": 0.9666666666666667,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Encyclopædia Britannica Online ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9093,
+   0.9876
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1038": {
+  "n": 123,
+  "single": 76,
+  "dispute": 0,
+  "plural": 47,
+  "S": 0.6178861788617886,
+  "epsilon": 0.0,
+  "single_share": 0.6178861788617886,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "relative",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5331,
+   0.698
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1559": {
+  "n": 617,
+  "single": 584,
+  "dispute": 1,
+  "plural": 32,
+  "S": 0.9481361426256077,
+  "epsilon": 0.0016207455429497568,
+  "single_share": 0.946515397082658,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "name in native language",
+  "datatype": "monolingualtext",
+  "S_ci": [
+   0.9281,
+   0.9628
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P2031": {
+  "n": 64,
+  "single": 64,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "start of work period",
+  "datatype": "time",
+  "S_ci": [
+   0.9422,
+   0.9997
+  ],
+  "median_random_year_gap": 40.0,
+  "stated": 0
+ },
+ "P2032": {
+  "n": 42,
+  "single": 42,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "end of work period",
+  "datatype": "time",
+  "S_ci": [
+   0.9206,
+   0.9994
+  ],
+  "median_random_year_gap": 57.0,
+  "stated": 0
+ },
+ "P166": {
+  "n": 367,
+  "single": 192,
+  "dispute": 21,
+  "plural": 154,
+  "S": 0.5803814713896458,
+  "epsilon": 0.05722070844686648,
+  "single_share": 0.5231607629427792,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 20
+  },
+  "label": "award received",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5294,
+   0.6289
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P13951": {
+  "n": 124,
+  "single": 59,
+  "dispute": 0,
+  "plural": 65,
+  "S": 0.47580645161290325,
+  "epsilon": 0.0,
+  "single_share": 0.47580645161290325,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Virtual Library of India ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.3901,
+   0.5598
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P13204": {
+  "n": 69,
+  "single": 69,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Wellcome Collection concept ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9503,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P22": {
+  "n": 363,
+  "single": 363,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "father",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9906,
+   0.9999
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8034": {
+  "n": 207,
+  "single": 204,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9855072463768116,
+  "epsilon": 0.0,
+  "single_share": 0.9855072463768116,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Vatican Library VcBA ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9581,
+   0.9947
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3065": {
+  "n": 205,
+  "single": 199,
+  "dispute": 0,
+  "plural": 6,
+  "S": 0.9707317073170731,
+  "epsilon": 0.0,
+  "single_share": 0.9707317073170731,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "RERO ID (legacy)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9367,
+   0.986
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P2734": {
+  "n": 32,
+  "single": 32,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Unz Review author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.89,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P108": {
+  "n": 304,
+  "single": 188,
+  "dispute": 6,
+  "plural": 110,
+  "S": 0.6381578947368421,
+  "epsilon": 0.019736842105263157,
+  "single_share": 0.618421052631579,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 6
+  },
+  "label": "employer",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5855,
+   0.6909
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P9964": {
+  "n": 175,
+  "single": 175,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Kalliope-Verbund (GND) ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9794,
+   0.9999
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7902": {
+  "n": 291,
+  "single": 288,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9896907216494846,
+  "epsilon": 0.0,
+  "single_share": 0.9896907216494846,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Deutsche Biographie (GND) ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9706,
+   0.9963
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P6886": {
+  "n": 427,
+  "single": 378,
+  "dispute": 3,
+  "plural": 46,
+  "S": 0.892271662763466,
+  "epsilon": 0.00702576112412178,
+  "single_share": 0.8852459016393442,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 3
+  },
+  "label": "writing language",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8588,
+   0.9181
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P271": {
+  "n": 238,
+  "single": 234,
+  "dispute": 2,
+  "plural": 2,
+  "S": 0.9915966386554622,
+  "epsilon": 0.008403361344537815,
+  "single_share": 0.9831932773109243,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 2
+  },
+  "label": "NACSIS-CAT author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9697,
+   0.9973
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P11496": {
+  "n": 235,
+  "single": 232,
+  "dispute": 1,
+  "plural": 2,
+  "S": 0.9914893617021276,
+  "epsilon": 0.00425531914893617,
+  "single_share": 0.9872340425531915,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "CiNii Research ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.97,
+   0.9974
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P103": {
+  "n": 707,
+  "single": 703,
+  "dispute": 0,
+  "plural": 4,
+  "S": 0.9943422913719944,
+  "epsilon": 0.0,
+  "single_share": 0.9943422913719944,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "native language",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9856,
+   0.9977
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1066": {
+  "n": 112,
+  "single": 73,
+  "dispute": 1,
+  "plural": 38,
+  "S": 0.6607142857142857,
+  "epsilon": 0.008928571428571428,
+  "single_share": 0.6517857142857143,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "student of",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5673,
+   0.7387
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P511": {
+  "n": 68,
+  "single": 57,
+  "dispute": 0,
+  "plural": 11,
+  "S": 0.8382352941176471,
+  "epsilon": 0.0,
+  "single_share": 0.8382352941176471,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "honorific prefix",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7357,
+   0.9063
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P119": {
+  "n": 454,
+  "single": 430,
+  "dispute": 3,
+  "plural": 21,
+  "S": 0.9537444933920705,
+  "epsilon": 0.006607929515418502,
+  "single_share": 0.947136563876652,
+  "why": {
+   "a_preferred": 3,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "place of burial",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9305,
+   0.9694
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1315": {
+  "n": 195,
+  "single": 192,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9846153846153847,
+  "epsilon": 0.0,
+  "single_share": 0.9846153846153847,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NLA Trove people ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9549,
+   0.9942
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P949": {
+  "n": 186,
+  "single": 185,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9946236559139785,
+  "epsilon": 0.0,
+  "single_share": 0.9946236559139785,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Israel ID (old)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9705,
+   0.9987
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7704": {
+  "n": 53,
+  "single": 53,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Europeana entity",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9336,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1207": {
+  "n": 438,
+  "single": 433,
+  "dispute": 1,
+  "plural": 4,
+  "S": 0.9908675799086758,
+  "epsilon": 0.00228310502283105,
+  "single_share": 0.9885844748858448,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "NUKAT ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9767,
+   0.9963
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P6706": {
+  "n": 38,
+  "single": 38,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "De Agostini ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9069,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P4342": {
+  "n": 82,
+  "single": 82,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Great Norwegian Encyclopedia ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9577,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P5019": {
+  "n": 44,
+  "single": 43,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9772727272727273,
+  "epsilon": 0.0,
+  "single_share": 0.9772727272727273,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Brockhaus Enzyklopädie online ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8788,
+   0.9946
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P10553": {
+  "n": 153,
+  "single": 151,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.9869281045751634,
+  "epsilon": 0.0,
+  "single_share": 0.9869281045751634,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "IxTheo authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9538,
+   0.9961
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3222": {
+  "n": 49,
+  "single": 48,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9795918367346939,
+  "epsilon": 0.0,
+  "single_share": 0.9795918367346939,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NE.se ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.897,
+   0.9952
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P10565": {
+  "n": 65,
+  "single": 60,
+  "dispute": 0,
+  "plural": 5,
+  "S": 0.9230769230769231,
+  "epsilon": 0.0,
+  "single_share": 0.9230769230769231,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Encyclopedia of China (Third Edition) old ID (2021)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8328,
+   0.9663
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P12458": {
+  "n": 206,
+  "single": 194,
+  "dispute": 6,
+  "plural": 6,
+  "S": 0.970873786407767,
+  "epsilon": 0.02912621359223301,
+  "single_share": 0.941747572815534,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 5
+  },
+  "label": "Parsifal cluster ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9382,
+   0.9862
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P12582": {
+  "n": 46,
+  "single": 46,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Oxford Reference overview ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9212,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P13166": {
+  "n": 47,
+  "single": 47,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "PUG authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9225,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P135": {
+  "n": 39,
+  "single": 29,
+  "dispute": 0,
+  "plural": 10,
+  "S": 0.7435897435897436,
+  "epsilon": 0.0,
+  "single_share": 0.7435897435897436,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "movement",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5957,
+   0.8606
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P14541": {
+  "n": 64,
+  "single": 61,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.953125,
+  "epsilon": 0.0,
+  "single_share": 0.953125,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Encyclopedia of China (Third Edition) ID (2026)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8748,
+   0.983
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P7763": {
+  "n": 299,
+  "single": 299,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "copyright status as a creator",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9878,
+   0.9999
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P102": {
+  "n": 208,
+  "single": 179,
+  "dispute": 7,
+  "plural": 22,
+  "S": 0.8942307692307693,
+  "epsilon": 0.03365384615384615,
+  "single_share": 0.8605769230769231,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 7
+  },
+  "label": "member of political party",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8461,
+   0.9291
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1185": {
+  "n": 86,
+  "single": 85,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9883720930232558,
+  "epsilon": 0.0,
+  "single_share": 0.9883720930232558,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Rodovid ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9396,
+   0.9971
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7293": {
+  "n": 351,
+  "single": 337,
+  "dispute": 0,
+  "plural": 14,
+  "S": 0.9601139601139601,
+  "epsilon": 0.0,
+  "single_share": 0.9601139601139601,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Poland MMS ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9342,
+   0.9756
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P5008": {
+  "n": 73,
+  "single": 64,
+  "dispute": 0,
+  "plural": 9,
+  "S": 0.8767123287671232,
+  "epsilon": 0.0,
+  "single_share": 0.8767123287671232,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "on focus list of Wikimedia project",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7794,
+   0.9319
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P6844": {
+  "n": 60,
+  "single": 59,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9833333333333333,
+  "epsilon": 0.0,
+  "single_share": 0.9833333333333333,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "abART person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9127,
+   0.9959
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P9037": {
+  "n": 61,
+  "single": 58,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9508196721311475,
+  "epsilon": 0.0,
+  "single_share": 0.9508196721311475,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "BHCL UUID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8668,
+   0.982
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P7699": {
+  "n": 111,
+  "single": 111,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Lithuania ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9682,
+   0.9998
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P937": {
+  "n": 377,
+  "single": 262,
+  "dispute": 16,
+  "plural": 99,
+  "S": 0.7374005305039788,
+  "epsilon": 0.042440318302387266,
+  "single_share": 0.6949602122015915,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 16
+  },
+  "label": "work location",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.6916,
+   0.7788
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P14178": {
+  "n": 43,
+  "single": 43,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Obálky knih ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9197,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1477": {
+  "n": 211,
+  "single": 199,
+  "dispute": 3,
+  "plural": 9,
+  "S": 0.957345971563981,
+  "epsilon": 0.014218009478672985,
+  "single_share": 0.943127962085308,
+  "why": {
+   "a_preferred": 3,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "birth name",
+  "datatype": "monolingualtext",
+  "S_ci": [
+   0.9199,
+   0.9771
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P26": {
+  "n": 283,
+  "single": 244,
+  "dispute": 5,
+  "plural": 34,
+  "S": 0.8798586572438163,
+  "epsilon": 0.0176678445229682,
+  "single_share": 0.8621908127208481,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 5
+  },
+  "label": "spouse",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8369,
+   0.9134
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1015": {
+  "n": 170,
+  "single": 168,
+  "dispute": 1,
+  "plural": 1,
+  "S": 0.9941176470588236,
+  "epsilon": 0.0058823529411764705,
+  "single_share": 0.9882352941176471,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "BIBSYS ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9663,
+   0.9985
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3987": {
+  "n": 159,
+  "single": 154,
+  "dispute": 0,
+  "plural": 5,
+  "S": 0.9685534591194969,
+  "epsilon": 0.0,
+  "single_share": 0.9685534591194969,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "SHARE Catalogue author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9293,
+   0.986
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P40": {
+  "n": 402,
+  "single": 235,
+  "dispute": 6,
+  "plural": 161,
+  "S": 0.599502487562189,
+  "epsilon": 0.014925373134328358,
+  "single_share": 0.5845771144278606,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 6
+  },
+  "label": "child",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5515,
+   0.6461
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P551": {
+  "n": 181,
+  "single": 134,
+  "dispute": 6,
+  "plural": 41,
+  "S": 0.7734806629834254,
+  "epsilon": 0.03314917127071823,
+  "single_share": 0.7403314917127072,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 5
+  },
+  "label": "residence",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7075,
+   0.8284
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P136": {
+  "n": 58,
+  "single": 34,
+  "dispute": 2,
+  "plural": 22,
+  "S": 0.6206896551724138,
+  "epsilon": 0.034482758620689655,
+  "single_share": 0.5862068965517241,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 2
+  },
+  "label": "genre",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.4943,
+   0.7325
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P951": {
+  "n": 56,
+  "single": 56,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NSZL (VIAF) ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9399,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3133": {
+  "n": 55,
+  "single": 55,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NSZL name authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.938,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P910": {
+  "n": 71,
+  "single": 71,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "topic's main category",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9484,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P13049": {
+  "n": 312,
+  "single": 311,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9967948717948718,
+  "epsilon": 0.0,
+  "single_share": 0.9967948717948718,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "DDB person (GND) ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9825,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P409": {
+  "n": 149,
+  "single": 148,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9932885906040269,
+  "epsilon": 0.0,
+  "single_share": 0.9932885906040269,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Libraries Australia ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9632,
+   0.9985
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1017": {
+  "n": 82,
+  "single": 78,
+  "dispute": 0,
+  "plural": 4,
+  "S": 0.9512195121951219,
+  "epsilon": 0.0,
+  "single_share": 0.9512195121951219,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Vatican Library ID (former scheme)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8817,
+   0.98
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3430": {
+  "n": 70,
+  "single": 67,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9571428571428572,
+  "epsilon": 0.0,
+  "single_share": 0.9571428571428572,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "SNAC ARK ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8806,
+   0.9839
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1343": {
+  "n": 727,
+  "single": 444,
+  "dispute": 36,
+  "plural": 247,
+  "S": 0.6602475928473177,
+  "epsilon": 0.04951856946354883,
+  "single_share": 0.6107290233837689,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 36
+  },
+  "label": "described by source",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.6245,
+   0.6924
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P39": {
+  "n": 655,
+  "single": 401,
+  "dispute": 77,
+  "plural": 177,
+  "S": 0.7297709923664122,
+  "epsilon": 0.11755725190839694,
+  "single_share": 0.6122137404580152,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 77
+  },
+  "label": "position held",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.6941,
+   0.7616
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P512": {
+  "n": 80,
+  "single": 68,
+  "dispute": 1,
+  "plural": 11,
+  "S": 0.8625,
+  "epsilon": 0.0125,
+  "single_share": 0.85,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "academic degree",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7699,
+   0.9204
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1280": {
+  "n": 94,
+  "single": 94,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "CONOR.SI ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9621,
+   0.9998
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P2949": {
+  "n": 186,
+  "single": 186,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "WikiTree person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9804,
+   0.9999
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P11249": {
+  "n": 71,
+  "single": 71,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "KBR person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9491,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P14536": {
+  "n": 59,
+  "single": 59,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "FES digital collections entity ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9384,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3373": {
+  "n": 264,
+  "single": 145,
+  "dispute": 1,
+  "plural": 118,
+  "S": 0.553030303030303,
+  "epsilon": 0.003787878787878788,
+  "single_share": 0.5492424242424242,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "sibling",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.494,
+   0.6109
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P9918": {
+  "n": 61,
+  "single": 60,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9836065573770492,
+  "epsilon": 0.0,
+  "single_share": 0.9836065573770492,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Kallías ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9145,
+   0.9959
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P793": {
+  "n": 60,
+  "single": 44,
+  "dispute": 0,
+  "plural": 16,
+  "S": 0.7333333333333333,
+  "epsilon": 0.0,
+  "single_share": 0.7333333333333333,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "significant event",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.6096,
+   0.8276
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1801": {
+  "n": 47,
+  "single": 34,
+  "dispute": 4,
+  "plural": 9,
+  "S": 0.8085106382978723,
+  "epsilon": 0.0851063829787234,
+  "single_share": 0.723404255319149,
+  "why": {
+   "a_preferred": 4,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "plaque image",
+  "datatype": "commonsMedia",
+  "S_ci": [
+   0.6737,
+   0.8947
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P509": {
+  "n": 132,
+  "single": 128,
+  "dispute": 0,
+  "plural": 4,
+  "S": 0.9696969696969697,
+  "epsilon": 0.0,
+  "single_share": 0.9696969696969697,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "cause of death",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9253,
+   0.9879
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1196": {
+  "n": 169,
+  "single": 169,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "manner of death",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9783,
+   0.9999
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P2600": {
+  "n": 354,
+  "single": 353,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9971751412429378,
+  "epsilon": 0.0,
+  "single_share": 0.9971751412429378,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Geni profile ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9845,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P14585": {
+  "n": 31,
+  "single": 31,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "KSW person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8931,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P950": {
+  "n": 141,
+  "single": 134,
+  "dispute": 0,
+  "plural": 7,
+  "S": 0.950354609929078,
+  "epsilon": 0.0,
+  "single_share": 0.950354609929078,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Spain SpMaBN ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9027,
+   0.9749
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3348": {
+  "n": 99,
+  "single": 95,
+  "dispute": 0,
+  "plural": 4,
+  "S": 0.9595959595959596,
+  "epsilon": 0.0,
+  "single_share": 0.9595959595959596,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Greece ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9007,
+   0.9834
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P5034": {
+  "n": 75,
+  "single": 74,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9866666666666667,
+  "epsilon": 0.0,
+  "single_share": 0.9866666666666667,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Korea ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.93,
+   0.9963
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1368": {
+  "n": 66,
+  "single": 66,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Latvia ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.949,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7369": {
+  "n": 35,
+  "single": 35,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Chile ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9005,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8179": {
+  "n": 77,
+  "single": 75,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.974025974025974,
+  "epsilon": 0.0,
+  "single_share": 0.974025974025974,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Canadiana Name Authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9083,
+   0.9925
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P10227": {
+  "n": 41,
+  "single": 40,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.975609756097561,
+  "epsilon": 0.0,
+  "single_share": 0.975609756097561,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Ireland ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8745,
+   0.9942
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P349": {
+  "n": 112,
+  "single": 111,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9910714285714286,
+  "epsilon": 0.0,
+  "single_share": 0.9910714285714286,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NDL Authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9526,
+   0.998
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1375": {
+  "n": 58,
+  "single": 58,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NSK (VIAF) ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9385,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P9171": {
+  "n": 40,
+  "single": 40,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "RILM ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9155,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1005": {
+  "n": 74,
+  "single": 74,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Portugal ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9509,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P14225": {
+  "n": 53,
+  "single": 53,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NSK ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9312,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P9984": {
+  "n": 77,
+  "single": 77,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "CANTIC ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9552,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P2963": {
+  "n": 31,
+  "single": 31,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Goodreads author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8931,
+   0.9991
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P8750": {
+  "n": 37,
+  "single": 28,
+  "dispute": 0,
+  "plural": 9,
+  "S": 0.7567567567567568,
+  "epsilon": 0.0,
+  "single_share": 0.7567567567567568,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Unione Romana Biblioteche Scientifiche ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.5912,
+   0.8669
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P9097": {
+  "n": 47,
+  "single": 47,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "American Academy in Rome ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9298,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8168": {
+  "n": 110,
+  "single": 109,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.990909090909091,
+  "epsilon": 0.0,
+  "single_share": 0.990909090909091,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "FactGrid item ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9513,
+   0.9977
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P10141": {
+  "n": 37,
+  "single": 36,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.972972972972973,
+  "epsilon": 0.0,
+  "single_share": 0.972972972972973,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Academy of Athens authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8589,
+   0.9943
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P25": {
+  "n": 160,
+  "single": 160,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "mother",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9769,
+   0.9998
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P535": {
+  "n": 107,
+  "single": 101,
+  "dispute": 1,
+  "plural": 5,
+  "S": 0.9532710280373832,
+  "epsilon": 0.009345794392523364,
+  "single_share": 0.9439252336448598,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "Find a Grave memorial ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8978,
+   0.9796
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P973": {
+  "n": 133,
+  "single": 106,
+  "dispute": 0,
+  "plural": 27,
+  "S": 0.7969924812030075,
+  "epsilon": 0.0,
+  "single_share": 0.7969924812030075,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "described at URL",
+  "datatype": "url",
+  "S_ci": [
+   0.7203,
+   0.8564
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P906": {
+  "n": 90,
+  "single": 90,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "SELIBR ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9609,
+   0.9998
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1695": {
+  "n": 75,
+  "single": 73,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.9733333333333334,
+  "epsilon": 0.0,
+  "single_share": 0.9733333333333334,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "NLP ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9078,
+   0.9919
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P5587": {
+  "n": 99,
+  "single": 99,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Libris-URI",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9624,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P8795": {
+  "n": 40,
+  "single": 39,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.975,
+  "epsilon": 0.0,
+  "single_share": 0.975,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Diamond Catalog ID for persons and organisations",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8717,
+   0.994
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P8851": {
+  "n": 51,
+  "single": 51,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "CONOR.SR ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.931,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P12597": {
+  "n": 60,
+  "single": 57,
+  "dispute": 2,
+  "plural": 1,
+  "S": 0.9833333333333333,
+  "epsilon": 0.03333333333333333,
+  "single_share": 0.95,
+  "why": {
+   "a_preferred": 2,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "museum-digital person/organization ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9106,
+   0.9956
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P485": {
+  "n": 61,
+  "single": 43,
+  "dispute": 8,
+  "plural": 10,
+  "S": 0.8360655737704918,
+  "epsilon": 0.13114754098360656,
+  "single_share": 0.7049180327868853,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 7
+  },
+  "label": "archives at",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7295,
+   0.9091
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P172": {
+  "n": 97,
+  "single": 93,
+  "dispute": 1,
+  "plural": 3,
+  "S": 0.9690721649484536,
+  "epsilon": 0.010309278350515464,
+  "single_share": 0.9587628865979382,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "ethnic group",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9141,
+   0.9888
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P434": {
+  "n": 40,
+  "single": 40,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "MusicBrainz artist ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9127,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P742": {
+  "n": 69,
+  "single": 55,
+  "dispute": 1,
+  "plural": 13,
+  "S": 0.8115942028985508,
+  "epsilon": 0.014492753623188406,
+  "single_share": 0.7971014492753623,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "pseudonym",
+  "datatype": "string",
+  "S_ci": [
+   0.7033,
+   0.8872
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1971": {
+  "n": 62,
+  "single": 60,
+  "dispute": 2,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.03225806451612903,
+  "single_share": 0.967741935483871,
+  "why": {
+   "a_preferred": 2,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "number of children",
+  "datatype": "quantity",
+  "S_ci": [
+   0.9409,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P5731": {
+  "n": 34,
+  "single": 34,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Angelicum ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9022,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P802": {
+  "n": 70,
+  "single": 38,
+  "dispute": 0,
+  "plural": 32,
+  "S": 0.5428571428571428,
+  "epsilon": 0.0,
+  "single_share": 0.5428571428571428,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "student",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.4228,
+   0.6516
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P6821": {
+  "n": 49,
+  "single": 48,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9795918367346939,
+  "epsilon": 0.0,
+  "single_share": 0.9795918367346939,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Alvin ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8907,
+   0.9955
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P9371": {
+  "n": 33,
+  "single": 33,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "FranceArchives agent ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8994,
+   0.9991
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P109": {
+  "n": 70,
+  "single": 68,
+  "dispute": 2,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.02857142857142857,
+  "single_share": 0.9714285714285714,
+  "why": {
+   "a_preferred": 2,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "signature",
+  "datatype": "commonsMedia",
+  "S_ci": [
+   0.9515,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P97": {
+  "n": 95,
+  "single": 82,
+  "dispute": 0,
+  "plural": 13,
+  "S": 0.8631578947368421,
+  "epsilon": 0.0,
+  "single_share": 0.8631578947368421,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "noble title",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7789,
+   0.9171
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P53": {
+  "n": 130,
+  "single": 122,
+  "dispute": 1,
+  "plural": 7,
+  "S": 0.9461538461538461,
+  "epsilon": 0.007692307692307693,
+  "single_share": 0.9384615384615385,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "family",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8925,
+   0.9734
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P3716": {
+  "n": 57,
+  "single": 55,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.9649122807017544,
+  "epsilon": 0.0,
+  "single_share": 0.9649122807017544,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "social classification",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8819,
+   0.99
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P241": {
+  "n": 59,
+  "single": 49,
+  "dispute": 3,
+  "plural": 7,
+  "S": 0.8813559322033898,
+  "epsilon": 0.05084745762711865,
+  "single_share": 0.8305084745762712,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 3
+  },
+  "label": "military branch",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7749,
+   0.9386
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P410": {
+  "n": 111,
+  "single": 90,
+  "dispute": 3,
+  "plural": 18,
+  "S": 0.8378378378378378,
+  "epsilon": 0.02702702702702703,
+  "single_share": 0.8108108108108109,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 3
+  },
+  "label": "military, police or special rank",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7586,
+   0.8949
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1938": {
+  "n": 32,
+  "single": 32,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Project Gutenberg author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8956,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P245": {
+  "n": 42,
+  "single": 42,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Union List of Artist Names ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.918,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1814": {
+  "n": 90,
+  "single": 88,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.9777777777777777,
+  "epsilon": 0.0,
+  "single_share": 0.9777777777777777,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "name in kana",
+  "datatype": "string",
+  "S_ci": [
+   0.9223,
+   0.9932
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P2924": {
+  "n": 43,
+  "single": 43,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Great Russian Encyclopedia Online ID (2017)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9204,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1303": {
+  "n": 31,
+  "single": 24,
+  "dispute": 0,
+  "plural": 7,
+  "S": 0.7741935483870968,
+  "epsilon": 0.0,
+  "single_share": 0.7741935483870968,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "instrument",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5952,
+   0.8883
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1953": {
+  "n": 37,
+  "single": 34,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.918918918918919,
+  "epsilon": 0.0,
+  "single_share": 0.918918918918919,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Discogs artist ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.7925,
+   0.9688
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P611": {
+  "n": 36,
+  "single": 35,
+  "dispute": 1,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.027777777777777776,
+  "single_share": 0.9722222222222222,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "religious order",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9078,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P11818": {
+  "n": 58,
+  "single": 58,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Modern History Database person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9401,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1580": {
+  "n": 33,
+  "single": 33,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "University of Barcelona authority ID (former scheme)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8993,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P11686": {
+  "n": 49,
+  "single": 49,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "University of Barcelona authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9305,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7029": {
+  "n": 32,
+  "single": 21,
+  "dispute": 0,
+  "plural": 11,
+  "S": 0.65625,
+  "epsilon": 0.0,
+  "single_share": 0.65625,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "National Library of Russia ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.4823,
+   0.7926
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1296": {
+  "n": 32,
+  "single": 32,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Gran Enciclopèdia Catalana ID (former scheme)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8914,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7666": {
+  "n": 32,
+  "single": 32,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "article ID in the Lithuanian Universal Encyclopedia Online",
+  "datatype": "external-id",
+  "S_ci": [
+   0.896,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8313": {
+  "n": 47,
+  "single": 47,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Lex ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.924,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P12385": {
+  "n": 32,
+  "single": 32,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Gran Enciclopèdia Catalana ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8945,
+   0.9991
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P640": {
+  "n": 39,
+  "single": 39,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Léonore ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9124,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1889": {
+  "n": 73,
+  "single": 66,
+  "dispute": 0,
+  "plural": 7,
+  "S": 0.9041095890410958,
+  "epsilon": 0.0,
+  "single_share": 0.9041095890410958,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "different from",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8158,
+   0.9536
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P3365": {
+  "n": 63,
+  "single": 63,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Treccani ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9438,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8081": {
+  "n": 37,
+  "single": 32,
+  "dispute": 1,
+  "plural": 4,
+  "S": 0.8918918918918919,
+  "epsilon": 0.02702702702702703,
+  "single_share": 0.8648648648648649,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "WBIS ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.7512,
+   0.9559
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P4432": {
+  "n": 73,
+  "single": 73,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Artists of the World ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9527,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P6394": {
+  "n": 41,
+  "single": 33,
+  "dispute": 0,
+  "plural": 8,
+  "S": 0.8048780487804879,
+  "epsilon": 0.0,
+  "single_share": 0.8048780487804879,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "ELNET ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.6636,
+   0.8972
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P11152": {
+  "n": 39,
+  "single": 39,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Léonore Web ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9156,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1711": {
+  "n": 33,
+  "single": 33,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "British Museum person or institution ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8974,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P345": {
+  "n": 66,
+  "single": 66,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "IMDb ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9465,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1344": {
+  "n": 95,
+  "single": 85,
+  "dispute": 0,
+  "plural": 10,
+  "S": 0.8947368421052632,
+  "epsilon": 0.0,
+  "single_share": 0.8947368421052632,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "participant in",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8169,
+   0.9408
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P1442": {
+  "n": 133,
+  "single": 130,
+  "dispute": 1,
+  "plural": 2,
+  "S": 0.9849624060150376,
+  "epsilon": 0.007518796992481203,
+  "single_share": 0.9774436090225563,
+  "why": {
+   "a_preferred": 1,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "image of grave",
+  "datatype": "commonsMedia",
+  "S_ci": [
+   0.9485,
+   0.9954
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P7305": {
+  "n": 67,
+  "single": 67,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Online PWN Encyclopedia ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9476,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8445": {
+  "n": 39,
+  "single": 39,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Our Campaigns candidate ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9102,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P2843": {
+  "n": 48,
+  "single": 48,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Benezit ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9291,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3782": {
+  "n": 72,
+  "single": 71,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9861111111111112,
+  "epsilon": 0.0,
+  "single_share": 0.9861111111111112,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Artnet artist ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9262,
+   0.997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7545": {
+  "n": 50,
+  "single": 50,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "askArt person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9339,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1950": {
+  "n": 76,
+  "single": 76,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "second family name in Spanish name",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.9553,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P13851": {
+  "n": 51,
+  "single": 46,
+  "dispute": 0,
+  "plural": 5,
+  "S": 0.9019607843137255,
+  "epsilon": 0.0,
+  "single_share": 0.9019607843137255,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Biographical Dictionary of Almería ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.7887,
+   0.9558
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1819": {
+  "n": 66,
+  "single": 65,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9848484848484849,
+  "epsilon": 0.0,
+  "single_share": 0.9848484848484849,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "genealogics.org person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9199,
+   0.9963
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P607": {
+  "n": 120,
+  "single": 78,
+  "dispute": 1,
+  "plural": 41,
+  "S": 0.6583333333333333,
+  "epsilon": 0.008333333333333333,
+  "single_share": 0.65,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "participated in conflict",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.5695,
+   0.7348
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P2605": {
+  "n": 37,
+  "single": 37,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "ČSFD person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9102,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P14750": {
+  "n": 53,
+  "single": 53,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "‎HAND ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9329,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P6379": {
+  "n": 57,
+  "single": 39,
+  "dispute": 9,
+  "plural": 9,
+  "S": 0.8421052631578947,
+  "epsilon": 0.15789473684210525,
+  "single_share": 0.6842105263157895,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 9
+  },
+  "label": "has works in the collection",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7245,
+   0.9144
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P2632": {
+  "n": 47,
+  "single": 35,
+  "dispute": 6,
+  "plural": 6,
+  "S": 0.8723404255319149,
+  "epsilon": 0.1276595744680851,
+  "single_share": 0.7446808510638298,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 6
+  },
+  "label": "place of detention",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.7484,
+   0.937
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P2868": {
+  "n": 40,
+  "single": 38,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.95,
+  "epsilon": 0.0,
+  "single_share": 0.95,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "subject has role",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8391,
+   0.9844
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P2561": {
+  "n": 31,
+  "single": 28,
+  "dispute": 1,
+  "plural": 2,
+  "S": 0.9354838709677419,
+  "epsilon": 0.03225806451612903,
+  "single_share": 0.9032258064516129,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "name",
+  "datatype": "monolingualtext",
+  "S_ci": [
+   0.7876,
+   0.9802
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P7314": {
+  "n": 63,
+  "single": 63,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "TDV Encyclopedia of Islam ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9431,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3762": {
+  "n": 44,
+  "single": 38,
+  "dispute": 0,
+  "plural": 6,
+  "S": 0.8636363636363636,
+  "epsilon": 0.0,
+  "single_share": 0.8636363636363636,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "openMLOL author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.7283,
+   0.9337
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7982": {
+  "n": 39,
+  "single": 39,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Hrvatska enciklopedija ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9133,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P13183": {
+  "n": 41,
+  "single": 41,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "JudaicaLink person (GND) ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9192,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P11621": {
+  "n": 42,
+  "single": 42,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Hungarian National Namespace person ID (new)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9181,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P3154": {
+  "n": 38,
+  "single": 38,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Runeberg author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9091,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1986": {
+  "n": 33,
+  "single": 33,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Treccani's Biographical Dictionary of Italian People ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8976,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P66": {
+  "n": 46,
+  "single": 44,
+  "dispute": 0,
+  "plural": 2,
+  "S": 0.9565217391304348,
+  "epsilon": 0.0,
+  "single_share": 0.9565217391304348,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "ancestral home",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.8535,
+   0.9864
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P10608": {
+  "n": 34,
+  "single": 34,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "FID performing arts ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8977,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P4985": {
+  "n": 41,
+  "single": 41,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "TMDB person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9161,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P641": {
+  "n": 39,
+  "single": 38,
+  "dispute": 1,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.02564102564102564,
+  "single_share": 0.9743589743589743,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "sport",
+  "datatype": "wikibase-item",
+  "S_ci": [
+   0.909,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P5504": {
+  "n": 49,
+  "single": 49,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "RISM ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.928,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P4602": {
+  "n": 43,
+  "single": 43,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "date of burial or cremation",
+  "datatype": "time",
+  "S_ci": [
+   0.9184,
+   0.9994
+  ],
+  "median_random_year_gap": 39.0,
+  "stated": 1
+ },
+ "P6988": {
+  "n": 42,
+  "single": 42,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Hungarian National Namespace person ID (old)",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9191,
+   0.9996
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8172": {
+  "n": 92,
+  "single": 92,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Sejm-Wielki.pl profile ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.959,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1248": {
+  "n": 39,
+  "single": 35,
+  "dispute": 0,
+  "plural": 4,
+  "S": 0.8974358974358975,
+  "epsilon": 0.0,
+  "single_share": 0.8974358974358975,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "KulturNav-ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.765,
+   0.9589
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P12483": {
+  "n": 31,
+  "single": 31,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "PMB – Personen der Moderne Basis person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8927,
+   0.9992
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P8290": {
+  "n": 37,
+  "single": 36,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.972972972972973,
+  "epsilon": 0.0,
+  "single_share": 0.972972972972973,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Archivio Storico Ricordi person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8592,
+   0.9937
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7847": {
+  "n": 37,
+  "single": 32,
+  "dispute": 0,
+  "plural": 5,
+  "S": 0.8648648648648649,
+  "epsilon": 0.0,
+  "single_share": 0.8648648648648649,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "DigitaltMuseum ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.7204,
+   0.9391
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P6702": {
+  "n": 45,
+  "single": 42,
+  "dispute": 0,
+  "plural": 3,
+  "S": 0.9333333333333333,
+  "epsilon": 0.0,
+  "single_share": 0.9333333333333333,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Shanghai Library person ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8216,
+   0.9762
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P5909": {
+  "n": 77,
+  "single": 77,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "HKCAN ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9555,
+   0.9997
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P7507": {
+  "n": 54,
+  "single": 54,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Ben Yehuda author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9366,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P497": {
+  "n": 46,
+  "single": 46,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "CBDB ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9216,
+   0.9994
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1782": {
+  "n": 41,
+  "single": 22,
+  "dispute": 0,
+  "plural": 19,
+  "S": 0.5365853658536586,
+  "epsilon": 0.0,
+  "single_share": 0.5365853658536586,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "courtesy name",
+  "datatype": "string",
+  "S_ci": [
+   0.387,
+   0.6814
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P6705": {
+  "n": 31,
+  "single": 31,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Academia Sinica authority ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8942,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1787": {
+  "n": 30,
+  "single": 14,
+  "dispute": 0,
+  "plural": 16,
+  "S": 0.4666666666666667,
+  "epsilon": 0.0,
+  "single_share": 0.4666666666666667,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "art name",
+  "datatype": "string",
+  "S_ci": [
+   0.304,
+   0.6391
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P10404": {
+  "n": 51,
+  "single": 51,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "LMHL author ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9318,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P1980": {
+  "n": 33,
+  "single": 32,
+  "dispute": 0,
+  "plural": 1,
+  "S": 0.9696969696969697,
+  "epsilon": 0.0,
+  "single_share": 0.9696969696969697,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "PolSys ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8439,
+   0.9928
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P5080": {
+  "n": 34,
+  "single": 34,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Norsk biografisk leksikon ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8991,
+   0.9993
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P6520": {
+  "n": 30,
+  "single": 30,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Lokalhistoriewiki.no article ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.8909,
+   0.9991
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ },
+ "P4574": {
+  "n": 78,
+  "single": 75,
+  "dispute": 1,
+  "plural": 2,
+  "S": 0.9743589743589743,
+  "epsilon": 0.01282051282051282,
+  "single_share": 0.9615384615384616,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 1
+  },
+  "label": "Norwegian historical register of persons ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9124,
+   0.9921
+  ],
+  "median_random_year_gap": null,
+  "stated": 0
+ },
+ "P9475": {
+  "n": 48,
+  "single": 48,
+  "dispute": 0,
+  "plural": 0,
+  "S": 1.0,
+  "epsilon": 0.0,
+  "single_share": 1.0,
+  "why": {
+   "a_preferred": 0,
+   "b_close_years": 0,
+   "c_own_sources": 0
+  },
+  "label": "Encyclopedia of Korean Culture ID",
+  "datatype": "external-id",
+  "S_ci": [
+   0.9285,
+   0.9995
+  ],
+  "median_random_year_gap": null,
+  "stated": 1
+ }
+}

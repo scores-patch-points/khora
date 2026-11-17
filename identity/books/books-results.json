@@ -1,0 +1,324 @@
+{
+ "main": {
+  "fiction": {
+   "true": 60,
+   "true_surprise": 22,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1197,
+   "distinct_startle": 5,
+   "collapsed": false,
+   "u1": 6.839,
+   "ustra": 2.274
+  },
+  "poetry": {
+   "true": 60,
+   "true_surprise": 11,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1198,
+   "distinct_startle": 56,
+   "collapsed": false,
+   "u1": 6.649,
+   "ustra": 2.283
+  },
+  "history": {
+   "true": 60,
+   "true_surprise": 11,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1200,
+   "distinct_startle": 70,
+   "collapsed": false,
+   "u1": 7.059,
+   "ustra": 2.061
+  },
+  "science": {
+   "true": 60,
+   "true_surprise": 17,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1199,
+   "distinct_startle": 57,
+   "collapsed": false,
+   "u1": 6.696,
+   "ustra": 1.979
+  },
+  "philosophy": {
+   "true": 60,
+   "true_surprise": 9,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1200,
+   "distinct_startle": 83,
+   "collapsed": false,
+   "u1": 6.289,
+   "ustra": 2.315
+  },
+  "religion": {
+   "true": 60,
+   "true_surprise": 2,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1195,
+   "distinct_startle": 126,
+   "collapsed": false,
+   "u1": 7.12,
+   "ustra": 2.046
+  },
+  "children": {
+   "true": 60,
+   "true_surprise": 17,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1200,
+   "distinct_startle": 37,
+   "collapsed": false,
+   "u1": 6.514,
+   "ustra": 2.248
+  },
+  "biography": {
+   "true": 60,
+   "true_surprise": 6,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1200,
+   "distinct_startle": 61,
+   "collapsed": false,
+   "u1": 8.331,
+   "ustra": 2.209
+  },
+  "mathematics": {
+   "true": 60,
+   "true_surprise": 7,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1189,
+   "distinct_startle": 70,
+   "collapsed": false,
+   "u1": 6.936,
+   "ustra": 2.194
+  },
+  "art": {
+   "true": 60,
+   "true_surprise": 5,
+   "true_startle": 0,
+   "distinct": 1200,
+   "distinct_surprise": 1194,
+   "distinct_startle": 109,
+   "collapsed": false,
+   "u1": 7.175,
+   "ustra": 2.065
+  }
+ },
+ "pooled": {
+  "true": [
+   107,
+   600,
+   0.17833333333333334,
+   [
+    0.15301199697453727,
+    0.20603466272160353
+   ]
+  ],
+  "distinct": [
+   11972,
+   12000,
+   0.9976666666666667,
+   [
+    0.9968023100119041,
+    0.9983411224710883
+   ]
+  ]
+ },
+ "strata": {
+  "true:3": [
+   101,
+   590
+  ],
+  "true:2": [
+   3,
+   6
+  ],
+  "distinct:3": [
+   11795,
+   11823
+  ],
+  "distinct:2": [
+   128,
+   128
+  ],
+  "distinct:1": [
+   49,
+   49
+  ],
+  "true:1": [
+   3,
+   4
+  ]
+ },
+ "translation": {
+  "language_disjoint": [
+   34,
+   55
+  ],
+  "language_overlap": [
+   22,
+   372
+  ],
+  "language_unknown": [
+   51,
+   173
+  ]
+ },
+ "drops": {
+  "title_tok": [
+   0.16,
+   0.9939166666666667
+  ],
+  "author": [
+   0.1,
+   0.9680833333333333
+  ],
+  "language": [
+   0.175,
+   0.9975833333333334
+  ],
+  "translated_from": [
+   0.17833333333333334,
+   0.9976666666666667
+  ],
+  "publisher": [
+   0.19666666666666666,
+   0.9985
+  ],
+  "year": [
+   0.18166666666666667,
+   0.9979166666666667
+  ],
+  "pages": [
+   0.17666666666666667,
+   0.9976666666666667
+  ],
+  "format": [
+   0.18,
+   0.9976666666666667
+  ],
+  "class": [
+   0.18,
+   0.9976666666666667
+  ],
+  "subject": [
+   0.18833333333333332,
+   0.99875
+  ],
+  "series": [
+   0.17833333333333334,
+   0.9975833333333334
+  ]
+ },
+ "controls": {
+  "C1 truth scrambled": [
+   0.021666666666666667,
+   0.27016666666666667
+  ],
+  "C2 year categorical": [
+   0.16666666666666666,
+   0.9979166666666667
+  ],
+  "C3 reference learned from the test subject (leak)": [
+   0.19166666666666668,
+   0.999
+  ]
+ },
+ "register": {
+  "title_tok": {
+   "coverage": 1.0,
+   "all_agree": 0.442,
+   "all_share": 0.697,
+   "m": 0.103,
+   "c": 0.106,
+   "works_with_2plus": 600
+  },
+  "author": {
+   "coverage": 0.899,
+   "all_agree": 0.64,
+   "all_share": 0.87,
+   "m": 0.057,
+   "c": 0.002,
+   "works_with_2plus": 592
+  },
+  "language": {
+   "coverage": 0.814,
+   "all_agree": 0.629,
+   "all_share": 0.654,
+   "m": 0.131,
+   "c": 0.776,
+   "works_with_2plus": 595
+  },
+  "translated_from": {
+   "coverage": 0.027,
+   "all_agree": 0.971,
+   "all_share": 0.971,
+   "m": 0.2,
+   "c": 0.333,
+   "works_with_2plus": 35
+  },
+  "publisher": {
+   "coverage": 0.982,
+   "all_agree": 0.062,
+   "all_share": 0.075,
+   "m": 0.74,
+   "c": 0.004,
+   "works_with_2plus": 600
+  },
+  "year": {
+   "coverage": 0.975,
+   "all_agree": 0.043,
+   "all_share": 0.043,
+   "m": 0.74,
+   "c": 0.014,
+   "works_with_2plus": 600
+  },
+  "pages": {
+   "coverage": 0.66,
+   "all_agree": 0.105,
+   "all_share": 0.105,
+   "m": 0.685,
+   "c": 0.011,
+   "works_with_2plus": 561
+  },
+  "format": {
+   "coverage": 0.304,
+   "all_agree": 0.169,
+   "all_share": 0.169,
+   "m": 0.753,
+   "c": 0.339,
+   "works_with_2plus": 367
+  },
+  "class": {
+   "coverage": 0.408,
+   "all_agree": 0.018,
+   "all_share": 0.096,
+   "m": 0.689,
+   "c": 0.018,
+   "works_with_2plus": 509
+  },
+  "subject": {
+   "coverage": 0.515,
+   "all_agree": 0.068,
+   "all_share": 0.183,
+   "m": 0.468,
+   "c": 0.029,
+   "works_with_2plus": 526
+  },
+  "series": {
+   "coverage": 0.158,
+   "all_agree": 0.112,
+   "all_share": 0.127,
+   "m": 0.633,
+   "c": 0.043,
+   "works_with_2plus": 197
+  }
+ }
+}

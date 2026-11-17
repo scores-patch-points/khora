@@ -1,0 +1,309 @@
+{
+ "mutant": "none",
+ "items": 144,
+ "rules": {
+  "oneValuedProperties": 364,
+  "ranges": [
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1636-P570 [-120,0]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1636-P570 [-120,0]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]"
+  ],
+  "unread": 0
+ },
+ "true": {
+  "pairs": 144,
+  "contradicted": 7,
+  "byRange": 1,
+  "rangeOnly": 0
+ },
+ "distinct": {
+  "pairs": 41184,
+  "contradicted": 12229,
+  "byRange": 467,
+  "rangeOnly": 111
+ },
+ "trueContradicted": [
+  {
+   "item": "Q106541790",
+   "label": "Siméon Cardon",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P20",
+     "base": null,
+     "a": "Q833129",
+     "b": "Q42466",
+     "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q111008792",
+   "label": "Marie-Anne Reubell",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1759,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1752,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q2839900",
+   "label": "Alphonse Martainville",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P1871",
+     "base": null,
+     "a": "cnp01263634",
+     "b": "cnp01349080",
+     "giver": "wikidata:P1871#P1871$a8b495e7-4a76-148d-662c-c30f92f2c461",
+     "diff": null
+    },
+    {
+     "rel": "P7029",
+     "base": null,
+     "a": "770233224",
+     "b": "770233222",
+     "giver": "wikidata:P7029#P7029$9DE3739C-B29E-4DB8-9124-25D3172700BD",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q31039030",
+   "label": "Marie-Louise-Rose Pétigny de Saint-Romain",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1800,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1849,
+      "m": 5,
+      "d": 2,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q316736",
+   "label": "Pierre Louis Jean Casimir de Blacas",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1771,
+      "m": 1,
+      "d": 10,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1771,
+      "m": 1,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q6226844",
+   "label": "John Condé",
+   "by": "functional+range",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1765,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1767,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    },
+    {
+     "rel": "P2031",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1745,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1765,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2031#P2031$252A56F0-5C86-4F5A-9A4C-4774B3540ADC",
+     "diff": -20
+    }
+   ]
+  },
+  {
+   "item": "Q65929531",
+   "label": "J.-C.-M.-G. de Grimaud",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1752,
+      "m": 4,
+      "d": 15,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1750,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    }
+   ]
+  }
+ ],
+ "reasons": {
+  "no_conflict": 16795,
+  "unwitnessed_conflict": 12297
+ },
+ "rates": {
+  "trueContradicted": 0.04861111111111111,
+  "distinctContradicted": 0.29693570318570317,
+  "rangeOnlyDistinct": 0.002695221445221445,
+  "rangeOnlyTrue": 0
+ }
+}

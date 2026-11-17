@@ -1,0 +1,30 @@
+{
+ "order": "anti",
+ "worlds": 40,
+ "types": {
+  "RICH": {
+   "pairs": 4474,
+   "factsPerPair": 2.9931,
+   "falseMergeRate": 0.0314,
+   "recall": 1,
+   "held": 0,
+   "falseSplits": 0
+  },
+  "POOR": {
+   "pairs": 4145,
+   "factsPerPair": 3.2519,
+   "falseMergeRate": 0,
+   "recall": 0,
+   "held": 416,
+   "falseSplits": 0
+  },
+  "SKEWED": {
+   "pairs": 4332,
+   "factsPerPair": 3.097,
+   "falseMergeRate": 0,
+   "recall": 1,
+   "held": 0,
+   "falseSplits": 0
+  }
+ }
+}

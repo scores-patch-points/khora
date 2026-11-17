@@ -1,0 +1,52 @@
+MAIN (leave-subject-out), levels as preregistered:
+  fiction      true surprise 22/60  distinct surprise 0.998  startle 0.004  unit self 6.839 stranger 2.274
+  poetry       true surprise 11/60  distinct surprise 0.998  startle 0.047  unit self 6.649 stranger 2.283
+  history      true surprise 11/60  distinct surprise 1.000  startle 0.058  unit self 7.059 stranger 2.061
+  science      true surprise 17/60  distinct surprise 0.999  startle 0.048  unit self 6.696 stranger 1.979
+  philosophy   true surprise  9/60  distinct surprise 1.000  startle 0.069  unit self 6.289 stranger 2.315
+  religion     true surprise  2/60  distinct surprise 0.996  startle 0.105  unit self 7.12 stranger 2.046
+  children     true surprise 17/60  distinct surprise 1.000  startle 0.031  unit self 6.514 stranger 2.248
+  biography    true surprise  6/60  distinct surprise 1.000  startle 0.051  unit self 8.331 stranger 2.209
+  mathematics  true surprise  7/60  distinct surprise 0.991  startle 0.058  unit self 6.936 stranger 2.194
+  art          true surprise  5/60  distinct surprise 0.995  startle 0.091  unit self 7.175 stranger 2.065
+POOLED true pairs at SURPRISE+: 107/600 = 0.178  95% [0.153, 0.206]
+POOLED distinct pairs at SURPRISE+: 11972/12000 = 0.998  95% [0.997, 0.998]
+
+Q3 by number of comparable relations (surprise rate; n):
+  true      1: 0.750 (n=4)  2: 0.500 (n=6)  3+: 0.171 (n=590)
+  distinct  1: 1.000 (n=49)  2: 1.000 (n=128)  3+: 0.998 (n=11823)
+  distinct pairs with ZERO comparable relations: 0.000  (prediction 3: >= 0.20)
+Q4 true pairs at SURPRISE+ by language relation: {'language_disjoint': '34/55 = 0.618', 'language_overlap': '22/372 = 0.059', 'language_unknown': '51/173 = 0.295'}
+
+Q5 drop one relation: pooled true@SURPRISE+ / distinct@SURPRISE+ (baseline 0.178 / 0.998)
+  without title_tok        0.160 / 0.994   (true -0.018, distinct -0.004)
+  without author           0.100 / 0.968   (true -0.078, distinct -0.030)
+  without language         0.175 / 0.998   (true -0.003, distinct -0.000)
+  without translated_from  0.178 / 0.998   (true +0.000, distinct +0.000)
+  without publisher        0.197 / 0.999   (true +0.018, distinct +0.001)
+  without year             0.182 / 0.998   (true +0.003, distinct +0.000)
+  without pages            0.177 / 0.998   (true -0.002, distinct +0.000)
+  without format           0.180 / 0.998   (true +0.002, distinct +0.000)
+  without class            0.180 / 0.998   (true +0.002, distinct +0.000)
+  without subject          0.188 / 0.999   (true +0.010, distinct +0.001)
+  without series           0.178 / 0.998   (true +0.000, distinct -0.000)
+
+Controls (pooled true / distinct at SURPRISE+):
+  C1 truth scrambled                                 0.022 / 0.270
+  C2 year categorical                                0.167 / 0.998
+  C3 reference learned from the test subject (leak)  0.192 / 0.999
+
+Q6 learned register (all works): relation | coverage of editions | works whose editions ALL agree exactly | all share a value | m_r (a work disjoint from itself) | c_r (strangers overlap)
+  title_tok         1.00 |  0.44 |  0.70 | m 0.103 | c 0.106   (n works 600)
+  author            0.90 |  0.64 |  0.87 | m 0.057 | c 0.002   (n works 592)
+  language          0.81 |  0.63 |  0.65 | m 0.131 | c 0.776   (n works 595)
+  translated_from   0.03 |  0.97 |  0.97 | m 0.200 | c 0.333   (n works 35)
+  publisher         0.98 |  0.06 |  0.07 | m 0.740 | c 0.004   (n works 600)
+  year              0.97 |  0.04 |  0.04 | m 0.740 | c 0.014   (n works 600)
+  pages             0.66 |  0.11 |  0.11 | m 0.685 | c 0.011   (n works 561)
+  format            0.30 |  0.17 |  0.17 | m 0.753 | c 0.339   (n works 367)
+  class             0.41 |  0.02 |  0.10 | m 0.689 | c 0.018   (n works 509)
+  subject           0.52 |  0.07 |  0.18 | m 0.468 | c 0.029   (n works 526)
+  series            0.16 |  0.11 |  0.13 | m 0.633 | c 0.043   (n works 197)
+  year gap: median among one work's editions 4.0 | between strangers 21.0 | self n=574 stranger n=562
+  rule candidates (all editions of a work agree exactly in >= 0.9 of works): ['translated_from']

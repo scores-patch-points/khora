@@ -1,0 +1,41 @@
+unit = distinct item (ERRATUM-2); items = distinct items; multi-P569 = items with >= 2 truthy birth dates in 1700-1900
+language         items  refd multi-P569  true-contra  power norules   flip
+Latin              119  0.50          1    7 (0.059, 95% [0.028,0.108])  0.713   0.191  0.580 (cannot show <=5% at this n)
+Swedish            120  0.82          0    2 (0.017, 95% [0.003,0.052])  0.690   0.048  0.583 (cannot show <=5% at this n)
+German             117  0.43          3    7 (0.060, 95% [0.028,0.109])  0.623   0.113  0.556 (cannot show <=5% at this n)
+Czech              119  0.60          1    8 (0.067, 95% [0.034,0.118])  0.556   0.060  0.462 (cannot show <=5% at this n)
+Norwegian          118  0.41          2    4 (0.034, 95% [0.012,0.076])  0.542   0.093  0.534 (cannot show <=5% at this n)
+Chinese            112  0.47          7    4 (0.036, 95% [0.012,0.080])  0.527   0.072  0.402 (cannot show <=5% at this n)
+Italian            116  0.47          4    7 (0.060, 95% [0.029,0.110])  0.524   0.101  0.448 (cannot show <=5% at this n)
+Polish             118  0.44          3    4 (0.034, 95% [0.012,0.076])  0.518   0.043  0.458 (cannot show <=5% at this n)
+Hungarian          118  0.37          2    3 (0.025, 95% [0.007,0.064])  0.477   0.100  0.381 (cannot show <=5% at this n)
+Russian            113  0.43         10    7 (0.062, 95% [0.029,0.113])  0.454   0.053  0.398 (cannot show <=5% at this n)
+Sanskrit           105  0.40         14    7 (0.067, 95% [0.032,0.122])  0.434   0.047  0.390 (cannot show <=5% at this n)
+French             117  0.37          3    1 (0.009, 95% [0.000,0.040])  0.414   0.067  0.410
+Ottoman Turkish    112  0.53          7    5 (0.045, 95% [0.018,0.092])  0.413   0.130  0.446 (cannot show <=5% at this n)
+English            117  0.34          3    6 (0.051, 95% [0.023,0.099])  0.396   0.041  0.436 (cannot show <=5% at this n)
+Thai                96  0.28          1    3 (0.031, 95% [0.009,0.079])  0.394   0.077  0.333 (cannot show <=5% at this n)
+Vietnamese         117  0.34          3    5 (0.043, 95% [0.017,0.088])  0.351   0.076  0.291 (cannot show <=5% at this n)
+Persian            115  0.52          4    5 (0.043, 95% [0.017,0.089])  0.347   0.123  0.330 (cannot show <=5% at this n)
+Turkish            116  0.50          3    3 (0.026, 95% [0.007,0.065])  0.344   0.079  0.328 (cannot show <=5% at this n)
+Tamil              112  0.45          9    3 (0.027, 95% [0.007,0.068])  0.344   0.032  0.312 (cannot show <=5% at this n)
+Spanish            118  0.32          2    3 (0.025, 95% [0.007,0.064])  0.331   0.048  0.297 (cannot show <=5% at this n)
+Hindi              115  0.36          6    4 (0.035, 95% [0.012,0.078])  0.329   0.036  0.348 (cannot show <=5% at this n)
+Yiddish            110  0.30          9    9 (0.082, 95% [0.043,0.138])  0.317   0.021  0.373 (cannot show <=5% at this n)
+Korean             117  0.40          3    1 (0.009, 95% [0.000,0.040])  0.313   0.000  0.419
+Greek              119  0.29          1    3 (0.025, 95% [0.007,0.064])  0.311   0.079  0.361 (cannot show <=5% at this n)
+Japanese           119  0.32          1    2 (0.017, 95% [0.003,0.052])  0.305   0.087  0.403 (cannot show <=5% at this n)
+Arabic             111  0.32          8    3 (0.027, 95% [0.007,0.068])  0.300   0.062  0.351 (cannot show <=5% at this n)
+Indonesian         118  0.35          2    3 (0.025, 95% [0.007,0.064])  0.298   0.016  0.347 (cannot show <=5% at this n)
+Ukrainian          117  0.57          3    1 (0.009, 95% [0.000,0.040])  0.285   0.016  0.359
+Hebrew             112  0.30          8    7 (0.062, 95% [0.030,0.114])  0.276   0.026  0.277 (cannot show <=5% at this n)
+Portuguese         120  0.31          0    1 (0.008, 95% [0.000,0.039])  0.259   0.026  0.225
+Bangla             119  0.16          1    2 (0.017, 95% [0.003,0.052])  0.050   0.001  0.126 (cannot show <=5% at this n)
+too thin (< 40 distinct items): [('Amharic', 39), ('Swahili', 31)]
+
+O1 per language (falsified only if the 95% lower bound > 5%): no language falsified; 27 languages cannot show <= 5% at their n
+O1 pooled over 3279 unique people (293 repeat appearances dropped): 113 contradicted = 0.0345, 95% [0.0294, 0.0402] -> HOLDS (upper bound <= 5%)
+contradicted true pairs by class: {'record-disagreement': 87, 'rank-permitted': 43}
+O2 power >= 20% in >= 80% of languages: 97% -> HOLDS
+O3 Spearman(referenced share, power) = 0.61 over 31 languages
+power check: M-norules < 5% everywhere: False; M-flip > 5% in 100% of languages (need >= 50%): True

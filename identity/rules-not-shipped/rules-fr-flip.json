@@ -1,0 +1,1718 @@
+{
+ "mutant": "flip",
+ "items": 144,
+ "rules": {
+  "oneValuedProperties": 364,
+  "ranges": [
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1636-P570 [-120,0]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1636-P570 [-120,0]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P570-P569 [-1,150]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P1317-P569 [0,150]",
+   "P1317-P570 [-150,0]",
+   "P1317-P1317 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P2032-P569 [0,150]",
+   "P2032-P570 [-150,0]",
+   "P2032-P2031 [-100,100]",
+   "P2031-P569 [0,150]",
+   "P2031-P570 [-150,0]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]",
+   "P570-P569 [-1,150]"
+  ],
+  "unread": 0
+ },
+ "true": {
+  "pairs": 144,
+  "contradicted": 48,
+  "byRange": 46,
+  "rangeOnly": 41
+ },
+ "distinct": {
+  "pairs": 41184,
+  "contradicted": 14418,
+  "byRange": 8909,
+  "rangeOnly": 2300
+ },
+ "trueContradicted": [
+  {
+   "item": "Q10292719",
+   "label": "Guido Marlière",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1836,
+      "m": 6,
+      "d": 15,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1767,
+      "m": 12,
+      "d": 3,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -69
+    }
+   ]
+  },
+  {
+   "item": "Q105574331",
+   "label": "Pierre Etienne Martin",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1846,
+      "m": 7,
+      "d": 11,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1772,
+      "m": 3,
+      "d": 6,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -74
+    }
+   ]
+  },
+  {
+   "item": "Q1063339",
+   "label": "Charles Alexandre Lesueur",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1846,
+      "m": 12,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1778,
+      "m": 1,
+      "d": 1,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -68
+    }
+   ]
+  },
+  {
+   "item": "Q106541790",
+   "label": "Siméon Cardon",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P20",
+     "base": null,
+     "a": "Q833129",
+     "b": "Q42466",
+     "giver": "wikidata:P20#P20$7d969130-4dd4-3248-591c-338472caf791",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q111008792",
+   "label": "Marie-Anne Reubell",
+   "by": "functional+range",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1759,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1752,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1813,
+      "m": 2,
+      "d": 8,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1752,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -61
+    }
+   ]
+  },
+  {
+   "item": "Q112072414",
+   "label": "Urbain-Lézin Boreau de la Besnardière",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1823,
+      "m": 7,
+      "d": 7,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1760,
+      "m": 5,
+      "d": 27,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -63
+    }
+   ]
+  },
+  {
+   "item": "Q116909589",
+   "label": "Anne Catherine Caliste des Essarts",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1788,
+      "m": 11,
+      "d": 19,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1762,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -26
+    }
+   ]
+  },
+  {
+   "item": "Q121287334",
+   "label": "Barthélémy Sernin du Moulin",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1844,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1762,
+      "m": 12,
+      "d": 8,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -82
+    }
+   ]
+  },
+  {
+   "item": "Q124902721",
+   "label": "George de Montcloux de La Villeneuve",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1831,
+      "m": 5,
+      "d": 10,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1761,
+      "m": 2,
+      "d": 8,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -70
+    }
+   ]
+  },
+  {
+   "item": "Q131416474",
+   "label": "Pierre-Théodore Chalopin",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1832,
+      "m": 9,
+      "d": 30,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1800,
+      "m": 5,
+      "d": 8,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -32
+    }
+   ]
+  },
+  {
+   "item": "Q132795595",
+   "label": "Jean-René de Chappedelaine",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1830,
+      "m": 2,
+      "d": 17,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1766,
+      "m": 4,
+      "d": 23,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -64
+    }
+   ]
+  },
+  {
+   "item": "Q139369730",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1825,
+      "m": 2,
+      "d": 10,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1752,
+      "m": 6,
+      "d": 30,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -73
+    }
+   ]
+  },
+  {
+   "item": "Q142144767",
+   "label": null,
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1833,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1761,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -72
+    }
+   ]
+  },
+  {
+   "item": "Q154782",
+   "label": "Adelbert von Chamisso",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P2031",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1815,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1781,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2031#P2031$252A56F0-5C86-4F5A-9A4C-4774B3540ADC",
+     "diff": -34
+    },
+    {
+     "rel": "P2032",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1838,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1781,
+      "m": 1,
+      "d": 30,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2032#P2032$9AC95782-883A-4BFE-9D50-224B7C8C82AD",
+     "diff": -57
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1838,
+      "m": 8,
+      "d": 21,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1781,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -57
+    }
+   ]
+  },
+  {
+   "item": "Q18115305",
+   "label": "Casimir de La Motte de La Guyomarais",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1843,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1776,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -67
+    }
+   ]
+  },
+  {
+   "item": "Q18526887",
+   "label": "François Hüet Villiers",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1813,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1772,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -41
+    }
+   ]
+  },
+  {
+   "item": "Q19976417",
+   "label": "Louise-Emmanuelle de Châtillon",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1814,
+      "m": 7,
+      "d": 2,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1763,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -51
+    }
+   ]
+  },
+  {
+   "item": "Q20007466",
+   "label": "Joseph-Henri marquis de Costa de Beauregard",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1824,
+      "m": 11,
+      "d": 29,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1752,
+      "m": 4,
+      "d": 20,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -72
+    }
+   ]
+  },
+  {
+   "item": "Q24239743",
+   "label": "Joseph Hippolyte de Santo Domingo",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1832,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1785,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -47
+    }
+   ]
+  },
+  {
+   "item": "Q27430415",
+   "label": "Marie-Thérèse de Noireterre",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1823,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1760,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -63
+    }
+   ]
+  },
+  {
+   "item": "Q27669509",
+   "label": "Charles Albert",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1834,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1767,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -67
+    }
+   ]
+  },
+  {
+   "item": "Q2839900",
+   "label": "Alphonse Martainville",
+   "by": "functional",
+   "proof": [
+    {
+     "rel": "P1871",
+     "base": null,
+     "a": "cnp01263634",
+     "b": "cnp01349080",
+     "giver": "wikidata:P1871#P1871$a8b495e7-4a76-148d-662c-c30f92f2c461",
+     "diff": null
+    },
+    {
+     "rel": "P7029",
+     "base": null,
+     "a": "770233224",
+     "b": "770233222",
+     "giver": "wikidata:P7029#P7029$9DE3739C-B29E-4DB8-9124-25D3172700BD",
+     "diff": null
+    }
+   ]
+  },
+  {
+   "item": "Q28533071",
+   "label": "Denis Christophe Pasquier de Bois-Rouvraye",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1800,
+      "m": 3,
+      "d": 19,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1751,
+      "m": 4,
+      "d": 1,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -49
+    }
+   ]
+  },
+  {
+   "item": "Q3100702",
+   "label": "Geneviève de Gramont",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1794,
+      "m": 7,
+      "d": 26,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1751,
+      "m": 7,
+      "d": 0,
+      "prec": 10,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -43
+    }
+   ]
+  },
+  {
+   "item": "Q31039030",
+   "label": "Marie-Louise-Rose Pétigny de Saint-Romain",
+   "by": "functional+range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1800,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1849,
+      "m": 5,
+      "d": 2,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$bb816190-4e04-4546-13f9-403352be4113",
+     "diff": null
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1800,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1768,
+      "m": 11,
+      "d": 5,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -32
+    }
+   ]
+  },
+  {
+   "item": "Q316736",
+   "label": "Pierre Louis Jean Casimir de Blacas",
+   "by": "functional+range",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1771,
+      "m": 1,
+      "d": 10,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1771,
+      "m": 1,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    },
+    {
+     "rel": "P2031",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1790,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1771,
+      "m": 1,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2031#P2031$252A56F0-5C86-4F5A-9A4C-4774B3540ADC",
+     "diff": -19
+    },
+    {
+     "rel": "P2032",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1839,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1771,
+      "m": 1,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2032#P2032$9AC95782-883A-4BFE-9D50-224B7C8C82AD",
+     "diff": -68
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1839,
+      "m": 11,
+      "d": 17,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1771,
+      "m": 1,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -68
+    }
+   ]
+  },
+  {
+   "item": "Q3220014",
+   "label": "Lazare Rameau",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1794,
+      "m": 10,
+      "d": 11,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1757,
+      "m": 1,
+      "d": 29,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -37
+    }
+   ]
+  },
+  {
+   "item": "Q3220361",
+   "label": "Le Batteux",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1800,
+      "m": 12,
+      "d": 7,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1766,
+      "m": 1,
+      "d": 19,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -34
+    }
+   ]
+  },
+  {
+   "item": "Q33052449",
+   "label": "Simon-François de La Marche",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1793,
+      "m": 11,
+      "d": 8,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1754,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -39
+    }
+   ]
+  },
+  {
+   "item": "Q331227",
+   "label": "Stephen Girard",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1831,
+      "m": 12,
+      "d": 26,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1750,
+      "m": 5,
+      "d": 20,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -81
+    }
+   ]
+  },
+  {
+   "item": "Q3382780",
+   "label": "Pierre-Alexandre Lemare",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1835,
+      "m": 12,
+      "d": 18,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1766,
+      "m": 2,
+      "d": 2,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -69
+    }
+   ]
+  },
+  {
+   "item": "Q3382836",
+   "label": "Pierre-Antoine-Samuel-Joseph Plouvain",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1832,
+      "m": 11,
+      "d": 29,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1754,
+      "m": 9,
+      "d": 7,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -78
+    }
+   ]
+  },
+  {
+   "item": "Q3633248",
+   "label": "Baldassarre Audiberti",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1852,
+      "m": 7,
+      "d": 7,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1761,
+      "m": 1,
+      "d": 6,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -91
+    }
+   ]
+  },
+  {
+   "item": "Q3659514",
+   "label": "Carlo Lauberg",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1834,
+      "m": 11,
+      "d": 2,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1762,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -72
+    }
+   ]
+  },
+  {
+   "item": "Q38871610",
+   "label": "François-Joseph Genisset",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1837,
+      "m": 7,
+      "d": 21,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1769,
+      "m": 11,
+      "d": 24,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -68
+    }
+   ]
+  },
+  {
+   "item": "Q4383160",
+   "label": "Jean-Baptiste Poidebard",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1824,
+      "m": 3,
+      "d": 6,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1761,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -63
+    }
+   ]
+  },
+  {
+   "item": "Q446875",
+   "label": "Antoine François, comte de Fourcroy",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1809,
+      "m": 12,
+      "d": 16,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1755,
+      "m": 6,
+      "d": 15,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -54
+    }
+   ]
+  },
+  {
+   "item": "Q453723",
+   "label": "Jean-Louis Pons",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1831,
+      "m": 10,
+      "d": 14,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1761,
+      "m": 12,
+      "d": 24,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -70
+    }
+   ]
+  },
+  {
+   "item": "Q50942476",
+   "label": "Marie-Marguerite Brun",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1794,
+      "m": 7,
+      "d": 10,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1713,
+      "m": 6,
+      "d": 25,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -81
+    }
+   ]
+  },
+  {
+   "item": "Q53498797",
+   "label": "Pierre Jean-Baptiste Bradel",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P2031",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1768,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1750,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2031#P2031$252A56F0-5C86-4F5A-9A4C-4774B3540ADC",
+     "diff": -18
+    },
+    {
+     "rel": "P2032",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1785,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1750,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2032#P2032$9AC95782-883A-4BFE-9D50-224B7C8C82AD",
+     "diff": -35
+    }
+   ]
+  },
+  {
+   "item": "Q55676267",
+   "label": "Antoine Diannyère",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1802,
+      "m": 9,
+      "d": 5,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1762,
+      "m": 1,
+      "d": 29,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -40
+    }
+   ]
+  },
+  {
+   "item": "Q559806",
+   "label": "Marcellin Champagnat",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1840,
+      "m": 6,
+      "d": 6,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1789,
+      "m": 5,
+      "d": 20,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -51
+    }
+   ]
+  },
+  {
+   "item": "Q59458577",
+   "label": "Ursule Feydeau de Vaugien",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1847,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1776,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -71
+    }
+   ]
+  },
+  {
+   "item": "Q59590243",
+   "label": "Adolphe Antoine Richepanse",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1862,
+      "m": 9,
+      "d": 3,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1800,
+      "m": 7,
+      "d": 12,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -62
+    }
+   ]
+  },
+  {
+   "item": "Q6226844",
+   "label": "John Condé",
+   "by": "functional+range",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1765,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1767,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    },
+    {
+     "rel": "P2032",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1794,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1765,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P2032#P2032$9AC95782-883A-4BFE-9D50-224B7C8C82AD",
+     "diff": -29
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1794,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1765,
+      "m": 1,
+      "d": 17,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -29
+    }
+   ]
+  },
+  {
+   "item": "Q64486955",
+   "label": "Nicole d'Oliva",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1789,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1761,
+      "m": 0,
+      "d": 0,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -28
+    }
+   ]
+  },
+  {
+   "item": "Q65929531",
+   "label": "J.-C.-M.-G. de Grimaud",
+   "by": "functional+range",
+   "proof": [
+    {
+     "rel": "P569",
+     "base": null,
+     "a": {
+      "t": true,
+      "y": 1752,
+      "m": 4,
+      "d": 15,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1750,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P569#P569$1d3921a9-44ff-d2aa-af55-ecd3829020bb",
+     "diff": null
+    },
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1799,
+      "m": 8,
+      "d": 8,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1752,
+      "m": 4,
+      "d": 15,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -47
+    }
+   ]
+  },
+  {
+   "item": "Q72287360",
+   "label": "Pierre-Honoré Janet",
+   "by": "range",
+   "proof": [
+    {
+     "rel": "P570",
+     "base": "P569",
+     "a": {
+      "t": true,
+      "y": 1832,
+      "m": 9,
+      "d": 5,
+      "prec": 11,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "b": {
+      "t": true,
+      "y": 1779,
+      "m": 1,
+      "d": 1,
+      "prec": 9,
+      "cal": "http://www.wikidata.org/entity/Q1985727"
+     },
+     "giver": "wikidata:P570#P570$B43E0297-354F-4EC7-B514-22342A1FCDBA",
+     "diff": -53
+    }
+   ]
+  }
+ ],
+ "reasons": {
+  "no_conflict": 14450,
+  "unwitnessed_conflict": 12412
+ },
+ "rates": {
+  "trueContradicted": 0.3333333333333333,
+  "distinctContradicted": 0.3500874125874126,
+  "rangeOnlyDistinct": 0.05584693084693085,
+  "rangeOnlyTrue": 0.2847222222222222
+ }
+}

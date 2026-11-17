@@ -1,0 +1,103 @@
+{
+ "worldsPerD": 300,
+ "noise": 0,
+ "H1": {
+  "pairs": 94925,
+  "sameEntityPairs": 4450,
+  "violations": 53
+ },
+ "H2": {
+  "unjudged": 75888,
+  "closed": 75888,
+  "violations": 0,
+  "fetches": 382404,
+  "meanFetches": 5.04
+ },
+ "H3": {
+  "checked": 31453,
+  "violations": 361
+ },
+ "verdicts": {
+  "same": 6331,
+  "different": 12706,
+  "unjudged": 75888
+ },
+ "falseMerge": {
+  "D2:k1": {
+   "same": 2100,
+   "distinct": 1912,
+   "rate": 0.91
+  },
+  "D2:k2": {
+   "same": 644,
+   "distinct": 591,
+   "rate": 0.918
+  },
+  "D2:k3": {
+   "same": 154,
+   "distinct": 131,
+   "rate": 0.851
+  },
+  "D3:k2": {
+   "same": 487,
+   "distinct": 417,
+   "rate": 0.856
+  },
+  "D3:k1": {
+   "same": 1420,
+   "distinct": 1243,
+   "rate": 0.875
+  },
+  "D3:k3": {
+   "same": 147,
+   "distinct": 121,
+   "rate": 0.823
+  },
+  "D5:k3": {
+   "same": 73,
+   "distinct": 51,
+   "rate": 0.699
+  },
+  "D5:k1": {
+   "same": 1030,
+   "distinct": 807,
+   "rate": 0.783
+  },
+  "D5:k2": {
+   "same": 276,
+   "distinct": 234,
+   "rate": 0.848
+  }
+ },
+ "falseSplit": {
+  "sameEntity": 4450,
+  "saidDifferent": 53,
+  "rate": 0.012
+ },
+ "examples": [
+  {
+   "H": "H3",
+   "D": 2,
+   "x": "n5",
+   "y": "n1",
+   "verdict": "different",
+   "raised": false
+  },
+  {
+   "H": "H3",
+   "D": 2,
+   "x": "n3",
+   "y": "n1",
+   "verdict": "different",
+   "raised": false
+  },
+  {
+   "H": "H3",
+   "D": 2,
+   "x": "n3",
+   "y": "n8",
+   "verdict": "different",
+   "raised": false
+  }
+ ]
+}

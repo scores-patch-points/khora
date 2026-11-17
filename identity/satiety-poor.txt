@@ -1,0 +1,11 @@
+world R=4 D=2: 4285 pairs, 203 same-entity (0.047); distinct pairs identical on all 4 relations: 258/4082
+T(decades)  merges  false-merge  recall  held  mean-fetches-to-merge
+0           2213    0.908        1.000   0     0.8
+0.5         835     0.762        0.980   9     2.3
+1           199     0.528        0.463   278   3.5
+1.5         5       0.400        0.015   456   4.0
+2           0       0.000        0.000   461   0.0
+2.5         0       0.000        0.000   461   0.0
+3           0       0.000        0.000   461   0.0
+4           0       0.000        0.000   461   0.0
+5           0       0.000        0.000   461   0.0

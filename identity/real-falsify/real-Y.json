@@ -1,0 +1,1003 @@
+{
+ "arm": "Y",
+ "items": 145,
+ "statements": 2822,
+ "fixedRelations": [
+  {
+   "rel": "P1343",
+   "exposed": 20,
+   "agreed": 20
+  },
+  {
+   "rel": "P1412",
+   "exposed": 4,
+   "agreed": 4
+  },
+  {
+   "rel": "P26",
+   "exposed": 4,
+   "agreed": 4
+  },
+  {
+   "rel": "P27",
+   "exposed": 16,
+   "agreed": 16
+  },
+  {
+   "rel": "P53",
+   "exposed": 3,
+   "agreed": 3
+  },
+  {
+   "rel": "P570",
+   "exposed": 13,
+   "agreed": 13
+  },
+  {
+   "rel": "P735",
+   "exposed": 12,
+   "agreed": 12
+  }
+ ],
+ "standings": {
+  "P18": "unexposed",
+  "P20": "unexposed",
+  "P21": "unexposed",
+  "P22": "unexposed",
+  "P25": "unexposed",
+  "P26": "fixed",
+  "P27": "fixed",
+  "P31": "unexposed",
+  "P373": "unexposed",
+  "P40": "time-unknown",
+  "P569": "time-unknown",
+  "P570": "fixed",
+  "P734": "unexposed",
+  "P735": "fixed",
+  "P106": "time-unknown",
+  "P1343": "fixed",
+  "P166": "time-unknown",
+  "P241": "unexposed",
+  "P2600": "unexposed",
+  "P2671": "unexposed",
+  "P39": "time-unknown",
+  "P410": "time-unknown",
+  "P53": "fixed",
+  "P598": "time-unknown",
+  "P607": "time-unknown",
+  "P69": "unexposed",
+  "P945": "unexposed",
+  "P1038": "unexposed",
+  "P13371": "unexposed",
+  "P1412": "fixed",
+  "P1871": "unexposed",
+  "P19": "time-unknown",
+  "P214": "unexposed",
+  "P227": "unexposed",
+  "P4459": "unexposed",
+  "P8826": "unexposed",
+  "P937": "time-unknown",
+  "P94": "unexposed",
+  "P97": "unexposed",
+  "P12439": "unexposed",
+  "P10832": "time-unknown",
+  "P119": "unexposed",
+  "P1207": "unexposed",
+  "P213": "unexposed",
+  "P7293": "unexposed",
+  "P8130": "unexposed",
+  "P8172": "unexposed",
+  "P1185": "unexposed",
+  "P1819": "unexposed",
+  "P7929": "unexposed",
+  "P140": "unexposed",
+  "P237": "unexposed",
+  "P3373": "time-unknown",
+  "P1047": "unexposed",
+  "P13030": "unexposed",
+  "P13049": "unexposed",
+  "P14578": "unexposed",
+  "P14608": "unexposed",
+  "P14974": "unexposed",
+  "P1598": "unexposed",
+  "P1695": "unexposed",
+  "P5504": "unexposed",
+  "P6194": "unexposed",
+  "P708": "unexposed",
+  "P7902": "unexposed",
+  "P8168": "unexposed",
+  "P9441": "unexposed",
+  "P1477": "unexposed",
+  "P14258": "unexposed",
+  "P9964": "unexposed",
+  "P3716": "unexposed",
+  "P6878": "unexposed",
+  "P10033": "unexposed",
+  "P1299": "unexposed",
+  "P1802": "unexposed",
+  "P2949": "unexposed",
+  "P4159": "unexposed",
+  "P4638": "unexposed",
+  "P12890": "unexposed",
+  "P1368": "unexposed",
+  "P1442": "unexposed",
+  "P1066": "unexposed",
+  "P12716": "unexposed",
+  "P136": "unexposed",
+  "P1472": "unexposed",
+  "P244": "unexposed",
+  "P245": "unexposed",
+  "P2843": "unexposed",
+  "P4432": "unexposed",
+  "P6379": "time-unknown",
+  "P650": "unexposed",
+  "P7763": "unexposed",
+  "P101": "time-unknown",
+  "P269": "unexposed",
+  "P691": "unexposed",
+  "P8034": "unexposed",
+  "P9248": "unexposed",
+  "P9918": "unexposed",
+  "P108": "unexposed",
+  "P1559": "unexposed",
+  "P1889": "unexposed",
+  "P5587": "unexposed",
+  "P906": "unexposed",
+  "P535": "unexposed",
+  "P11496": "unexposed",
+  "P12614": "unexposed",
+  "P271": "unexposed",
+  "P396": "unexposed",
+  "P1006": "unexposed",
+  "P1150": "unexposed",
+  "P11695": "unexposed",
+  "P13591": "unexposed",
+  "P13627": "unexposed",
+  "P14536": "unexposed",
+  "P14585": "unexposed",
+  "P2163": "unexposed",
+  "P268": "unexposed",
+  "P3065": "unexposed",
+  "P463": "unexposed",
+  "P648": "unexposed",
+  "P6886": "unexposed",
+  "P902": "unexposed",
+  "P551": "unexposed",
+  "P103": "unexposed",
+  "P512": "unexposed",
+  "P5002": "unexposed",
+  "P172": "unexposed",
+  "P10608": "unexposed",
+  "P11514": "unexposed",
+  "P12582": "unexposed",
+  "P1986": "unexposed",
+  "P3365": "unexposed",
+  "P3430": "unexposed",
+  "P4223": "unexposed",
+  "P434": "unexposed",
+  "P646": "unexposed",
+  "P6925": "unexposed",
+  "P7704": "unexposed",
+  "P7982": "unexposed",
+  "P8349": "unexposed",
+  "P8591": "unexposed",
+  "P9686": "unexposed",
+  "P4970": "unexposed",
+  "P1830": "unexposed",
+  "P2031": "unexposed",
+  "P2533": "unexposed",
+  "P3390": "unexposed",
+  "P7699": "unexposed",
+  "P3368": "unexposed",
+  "P4607": "unexposed",
+  "P1005": "unexposed",
+  "P1015": "unexposed",
+  "P10387": "unexposed",
+  "P10400": "unexposed",
+  "P10565": "unexposed",
+  "P1196": "unexposed",
+  "P1233": "unexposed",
+  "P1315": "unexposed",
+  "P14178": "unexposed",
+  "P14541": "unexposed",
+  "P2191": "unexposed",
+  "P3348": "unexposed",
+  "P349": "unexposed",
+  "P3630": "unexposed",
+  "P3987": "unexposed",
+  "P5034": "unexposed",
+  "P509": "unexposed",
+  "P6385": "unexposed",
+  "P6844": "unexposed",
+  "P7305": "unexposed",
+  "P742": "time-unknown",
+  "P7433": "unexposed",
+  "P7666": "unexposed",
+  "P8081": "unexposed",
+  "P8189": "unexposed",
+  "P8849": "unexposed",
+  "P8896": "unexposed",
+  "P8980": "unexposed",
+  "P910": "unexposed",
+  "P9322": "unexposed",
+  "P950": "unexposed",
+  "P10553": "unexposed",
+  "P7545": "unexposed",
+  "P5056": "unexposed",
+  "P1344": "unexposed",
+  "P2032": "unexposed",
+  "P840": "unexposed",
+  "P8854": "unexposed",
+  "P9222": "unexposed"
+ },
+ "prior": {
+  "estimate": 0.0006640214659630548,
+  "truth": 0.0034602076124567475,
+  "ratio": 0.19190220366332283,
+  "pairsCompared": 23758
+ },
+ "verdicts": {
+  "true": {
+   "same": 0,
+   "different": 31,
+   "unjudged": 114,
+   "held": 0
+  },
+  "distinct": {
+   "same": 0,
+   "different": 17693,
+   "unjudged": 24067,
+   "held": 0
+  }
+ },
+ "falseSplits": [
+  {
+   "item": "Q1001870",
+   "label": "Fedor Panyutin",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q4091878",
+      "Q1960551"
+     ],
+     "x": "Q1001870$a3f4fdc7-4191-66eb-6c2e-a4f691349153",
+     "y": "Q1001870$DE07D911-CE87-4249-B563-9C2ADFBAE75C"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q4091878",
+      "Q602358"
+     ],
+     "x": "Q1001870$a3f4fdc7-4191-66eb-6c2e-a4f691349153",
+     "y": "Q1001870$83c6f8ca-4b2e-2828-d420-a22eaba0c71a"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q4091878",
+      "Q19180675"
+     ],
+     "x": "Q1001870$a3f4fdc7-4191-66eb-6c2e-a4f691349153",
+     "y": "Q1001870$1df7c3a4-4eef-6b18-1cba-f3ebc81d333d"
+    }
+   ]
+  },
+  {
+   "item": "Q100524",
+   "label": "Fürchtegott Leberecht von Nordenflycht",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q34266",
+      "Q183"
+     ],
+     "x": "Q100524$196280B9-ACCA-49BB-A117-E3187459616D",
+     "y": "q100524$36464B97-21E2-402A-9B53-1B3AE8E1E8B8"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P735",
+     "values": [
+      "Q1326129",
+      "Q1482633"
+     ],
+     "x": "Q100524$D4626F79-6A84-4090-8376-8B2A2AB613F0",
+     "y": "Q100524$3fd191e7-4f0f-d5cd-de8d-9a23955a7135"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P735",
+     "values": [
+      "Q1326129",
+      "Q21111729"
+     ],
+     "x": "Q100524$D4626F79-6A84-4090-8376-8B2A2AB613F0",
+     "y": "Q100524$ca125bc7-4eea-f0ae-a63e-5630c385a424"
+    }
+   ]
+  },
+  {
+   "item": "Q100943397",
+   "label": "Antoni Bader",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q152115",
+      "Q36"
+     ],
+     "x": "Q100943397$8B530169-CA52-4D41-9BE2-0342D107C857",
+     "y": "q100943397$2c4dcf7e-4cef-1224-53b5-2465031949b0"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q34266",
+      "Q36"
+     ],
+     "x": "q100943397$f2f62b62-4099-c916-fc01-7c2748fb0a7c",
+     "y": "q100943397$2c4dcf7e-4cef-1224-53b5-2465031949b0"
+    }
+   ]
+  },
+  {
+   "item": "Q101451",
+   "label": "Christoph Emanuel von Schimonsky-Schimoni",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q222784",
+      "Q590208"
+     ],
+     "x": "Q101451$190FF3EF-B3A1-4ED5-A437-4B24FBB0AF2C",
+     "y": "Q101451$7CDF537E-9E0C-419E-B8AA-DD87EA3A165A"
+    }
+   ]
+  },
+  {
+   "item": "Q101827",
+   "label": "Joseph Ambrosius Geritz",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q183",
+      "Q34266"
+     ],
+     "x": "q101827$38FCCFD8-E409-4607-9C71-0B69C772ECE4",
+     "y": "Q101827$0A747633-A26B-4D99-AFE1-A0C81DBEB181"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q183",
+      "Q172107"
+     ],
+     "x": "q101827$38FCCFD8-E409-4607-9C71-0B69C772ECE4",
+     "y": "Q101827$E1A5502C-3291-4C8B-9524-82F0F42E3B70"
+    }
+   ]
+  },
+  {
+   "item": "Q1028190",
+   "label": "Grigory Zass",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q602358",
+      "Q1960551"
+     ],
+     "x": "Q1028190$EE27FDEA-8CCD-4975-8C60-CCFFC10F8F6F",
+     "y": "Q1028190$272C6495-DDF4-455B-8514-91DBEEAAEBB8"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q602358",
+      "Q19180675"
+     ],
+     "x": "Q1028190$EE27FDEA-8CCD-4975-8C60-CCFFC10F8F6F",
+     "y": "Q1028190$8127fe3d-458c-cd35-40a6-c420b16bcbe1"
+    }
+   ]
+  },
+  {
+   "item": "Q102945698",
+   "label": null,
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P570",
+     "values": [
+      "+1781",
+      "+1784"
+     ],
+     "x": "Q102945698$eef327e1-48e3-37d6-2429-f404685ba74e",
+     "y": "Q102945698$91920f35-4195-4e09-98ae-721405b117a1"
+    }
+   ]
+  },
+  {
+   "item": "Q10357801",
+   "label": "Paul Martinovich Skavronsky",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q602358",
+      "Q1960551"
+     ],
+     "x": "Q10357801$566b3b74-4ae6-02cb-33da-e51fc0eb35ac",
+     "y": "Q10357801$447E20F8-36D7-459C-B0AA-BFD8DB62E331"
+    }
+   ]
+  },
+  {
+   "item": "Q1037303",
+   "label": "Carl Christian Philipp Reichel",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q172107",
+      "Q34266"
+     ],
+     "x": "Q1037303$78AD21FF-9A38-45F5-8EA0-60F0BDB73B98",
+     "y": "Q1037303$ACF1B685-AD3C-4B03-9E72-6885F9762263"
+    }
+   ]
+  },
+  {
+   "item": "Q1038159",
+   "label": "Carl Friedrich von der Borg",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q59995154",
+      "Q109321545"
+     ],
+     "x": "Q1038159$2525b321-4f2e-524f-908d-cecb4cd01354",
+     "y": "Q1038159$BEC84AC0-FDC6-4F67-AAA6-E2A2CBA606A2"
+    }
+   ]
+  },
+  {
+   "item": "Q104162681",
+   "label": "Ivan Ivanovich Arapetov",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P735",
+     "values": [
+      "Q20511197",
+      "Q21104340"
+     ],
+     "x": "Q104162681$39E2542F-D094-4B12-9329-D03B9221809E",
+     "y": "Q104162681$8dfc8cbd-44d7-38bd-3b65-1e3be7c5b6ae"
+    }
+   ]
+  },
+  {
+   "item": "Q1047010",
+   "label": "Filipp Yefremov",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q19180675",
+      "Q602358"
+     ],
+     "x": "Q1047010$049B3463-E90B-44D8-B5E4-C9D2542FCAE3",
+     "y": "Q1047010$D3655775-2ABA-4197-B3EE-81B7F772F644"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q109277663",
+      "Q602358"
+     ],
+     "x": "Q1047010$D6A053A2-A7CF-461E-B6DE-12A8ADD03CF0",
+     "y": "Q1047010$D3655775-2ABA-4197-B3EE-81B7F772F644"
+    }
+   ]
+  },
+  {
+   "item": "Q1047500",
+   "label": "Casimir Ulrich Boehlendorff",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q59995154",
+      "Q222784"
+     ],
+     "x": "Q1047500$ac51c76f-49d4-9985-3723-8afc419c6961",
+     "y": "Q1047500$FCCF9650-75A4-45F5-AE85-564C6506824E"
+    }
+   ]
+  },
+  {
+   "item": "Q104925977",
+   "label": "Franciszek Koss",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q172107",
+      "Q34266"
+     ],
+     "x": "Q104925977$24838f08-475e-74d2-1828-42fd8c4a10b0",
+     "y": "Q104925977$3f802ee4-432b-3069-a5ad-10bb7385e70c"
+    }
+   ]
+  },
+  {
+   "item": "Q104926841",
+   "label": "Wiktor Bosiacki",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P735",
+     "values": [
+      "Q16430022",
+      "Q17524157"
+     ],
+     "x": "Q104926841$a997e6d2-4004-0350-5b1c-8e14ffa2104a",
+     "y": "q104926841$0bf1f7ad-4bbf-eadd-8699-ace5bf78b5ae"
+    }
+   ]
+  },
+  {
+   "item": "Q105103246",
+   "label": "Friedrich August Hahn",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P735",
+     "values": [
+      "Q14038597",
+      "Q12765750"
+     ],
+     "x": "Q105103246$a56e4fb6-4af2-e1c3-7b6e-88ddfb2c6bee",
+     "y": "Q105103246$63167296-4985-34ea-d7be-2daeedca52c6"
+    }
+   ]
+  },
+  {
+   "item": "Q1051346",
+   "label": "Catterino Cavos",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q17378135",
+      "Q1960551"
+     ],
+     "x": "Q1051346$E28C5E07-6167-48D2-AB19-5BA5435F10B8",
+     "y": "Q1051346$740B40A1-3B6B-4D30-9E81-714077DBDEA6"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q602358",
+      "Q1960551"
+     ],
+     "x": "Q1051346$C6BDEBF9-130B-4178-9C1B-CD79571959AA",
+     "y": "Q1051346$740B40A1-3B6B-4D30-9E81-714077DBDEA6"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q27680201",
+      "Q1960551"
+     ],
+     "x": "Q1051346$D1B14129-A095-4DBA-9725-BD021D820C38",
+     "y": "Q1051346$740B40A1-3B6B-4D30-9E81-714077DBDEA6"
+    }
+   ]
+  },
+  {
+   "item": "Q105187084",
+   "label": "Marie Franziska Regina Freytag",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q602358",
+      "Q1960551"
+     ],
+     "x": "Q105187084$441E0227-4239-453B-BCFE-3DD95EB8AED3",
+     "y": "Q105187084$f202739a-48cb-1a20-1fca-f79ecef60e8c"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q602358",
+      "Q108123845"
+     ],
+     "x": "Q105187084$441E0227-4239-453B-BCFE-3DD95EB8AED3",
+     "y": "Q105187084$c9b059e0-4cac-e729-0b10-5dc0caab8ab5"
+    }
+   ]
+  },
+  {
+   "item": "Q105279546",
+   "label": null,
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q153136",
+      "Q34266"
+     ],
+     "x": "Q105279546$fd058e26-4f9e-e031-c0a5-371d11955c7e",
+     "y": "Q105279546$8d60f4bd-4bb1-9419-acb7-56fa33aef599"
+    }
+   ]
+  },
+  {
+   "item": "Q105322473",
+   "label": "Nikolay Vorontsov-Velyaminov",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P26",
+     "values": [
+      "Q105322616",
+      "Q105322712"
+     ],
+     "x": "Q105322473$92dfd52e-45fd-79ea-0fb9-9b0f5a6349e8",
+     "y": "Q105322473$be7f728c-4add-3239-09de-951d71e904f7"
+    }
+   ]
+  },
+  {
+   "item": "Q105332569",
+   "label": "Natalya Vyazemskaya",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P53",
+     "values": [
+      "Q134288",
+      "Q4125831"
+     ],
+     "x": "Q105332569$c35c5cd8-4e0b-4c2d-2261-007222068082",
+     "y": "Q105332569$300caa52-4ffc-a8e6-f789-dc263db6b71f"
+    }
+   ]
+  },
+  {
+   "item": "Q106143588",
+   "label": "Praskovya Dolgorukova",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P26",
+     "values": [
+      "Q108587412",
+      "Q108587403"
+     ],
+     "x": "Q106143588$a68c5c7e-4a75-d814-4b68-487b91a1ed59",
+     "y": "Q106143588$ec1c63fc-4111-091d-0e27-bfda705f378f"
+    }
+   ]
+  },
+  {
+   "item": "Q106629275",
+   "label": null,
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q106707729",
+      "Q602358"
+     ],
+     "x": "Q106629275$d6fbb3f8-4060-ad5d-9126-1d0747979196",
+     "y": "Q106629275$FC75A4E1-96DC-4D31-BF41-8E57F24C939E"
+    }
+   ]
+  },
+  {
+   "item": "Q106725284",
+   "label": "Aleksandr Ivanovich Veĭdemeĭer",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q19180675",
+      "Q602358"
+     ],
+     "x": "Q106725284$3abf5e29-432c-7aec-7586-74ab5d37113a",
+     "y": "Q106725284$618FBF30-FF19-4FB7-A6FB-33445B3DCAF6"
+    }
+   ]
+  },
+  {
+   "item": "Q10673026",
+   "label": "Sophie de Choiseul-Gouffier",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1412",
+     "values": [
+      "Q150",
+      "Q9083"
+     ],
+     "x": "Q10673026$B594380E-DEE4-4BDB-A24E-251E9BDF565F",
+     "y": "Q10673026$9DEAC522-7675-4C49-A520-C607A75B93D0"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1412",
+     "values": [
+      "Q188",
+      "Q9083"
+     ],
+     "x": "Q10673026$CD49274D-1057-415C-A3B9-01730F3FF6E3",
+     "y": "Q10673026$9DEAC522-7675-4C49-A520-C607A75B93D0"
+    }
+   ]
+  },
+  {
+   "item": "Q107063160",
+   "label": null,
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q1960551",
+      "Q106875336"
+     ],
+     "x": "Q107063160$6c11fa34-45ac-9bea-a25d-7d17a5bb84dd",
+     "y": "Q107063160$8bc0694a-4d7b-9a27-968f-a94c0a503c92"
+    }
+   ]
+  },
+  {
+   "item": "Q107069562",
+   "label": null,
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q602358",
+      "Q106707729"
+     ],
+     "x": "Q107069562$1B576D30-3BC1-4622-A92F-ECBC70D345B2",
+     "y": "Q107069562$7c560288-445f-824b-566f-0e51d1977ee5"
+    }
+   ]
+  },
+  {
+   "item": "Q1071676",
+   "label": "Antony Pogorelsky",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q4114391",
+      "Q19180675"
+     ],
+     "x": "Q1071676$4DE1F92F-8EA5-4691-949A-77D17566B13B",
+     "y": "Q1071676$66B02687-F598-4825-A773-A06F1405634E"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q4114391",
+      "Q602358"
+     ],
+     "x": "Q1071676$4DE1F92F-8EA5-4691-949A-77D17566B13B",
+     "y": "Q1071676$08534A5F-17DD-4663-AE7E-F5DC82A97AD8"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q4114391",
+      "Q2041543"
+     ],
+     "x": "Q1071676$4DE1F92F-8EA5-4691-949A-77D17566B13B",
+     "y": "Q1071676$8C95083D-4B43-42D6-AC42-2E4ED5548B6C"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q20078554",
+      "Q19180675"
+     ],
+     "x": "Q1071676$2673162F-A061-4F23-ABD2-CDF0D8645C8C",
+     "y": "Q1071676$66B02687-F598-4825-A773-A06F1405634E"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q20078554",
+      "Q602358"
+     ],
+     "x": "Q1071676$2673162F-A061-4F23-ABD2-CDF0D8645C8C",
+     "y": "Q1071676$08534A5F-17DD-4663-AE7E-F5DC82A97AD8"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q20078554",
+      "Q2041543"
+     ],
+     "x": "Q1071676$2673162F-A061-4F23-ABD2-CDF0D8645C8C",
+     "y": "Q1071676$8C95083D-4B43-42D6-AC42-2E4ED5548B6C"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q1960551",
+      "Q19180675"
+     ],
+     "x": "Q1071676$e06b7640-45f0-f60a-e76c-1b3700d3866e",
+     "y": "Q1071676$66B02687-F598-4825-A773-A06F1405634E"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q1960551",
+      "Q602358"
+     ],
+     "x": "Q1071676$e06b7640-45f0-f60a-e76c-1b3700d3866e",
+     "y": "Q1071676$08534A5F-17DD-4663-AE7E-F5DC82A97AD8"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q1960551",
+      "Q2041543"
+     ],
+     "x": "Q1071676$e06b7640-45f0-f60a-e76c-1b3700d3866e",
+     "y": "Q1071676$8C95083D-4B43-42D6-AC42-2E4ED5548B6C"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q124821483",
+      "Q19180675"
+     ],
+     "x": "Q1071676$55974A46-D21D-4125-97F5-F0E083C61E07",
+     "y": "Q1071676$66B02687-F598-4825-A773-A06F1405634E"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q124821483",
+      "Q602358"
+     ],
+     "x": "Q1071676$55974A46-D21D-4125-97F5-F0E083C61E07",
+     "y": "Q1071676$08534A5F-17DD-4663-AE7E-F5DC82A97AD8"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P1343",
+     "values": [
+      "Q124821483",
+      "Q2041543"
+     ],
+     "x": "Q1071676$55974A46-D21D-4125-97F5-F0E083C61E07",
+     "y": "Q1071676$8C95083D-4B43-42D6-AC42-2E4ED5548B6C"
+    },
+    {
+     "why": "one-valued",
+     "rel": "P735",
+     "values": [
+      "Q62054042",
+      "Q29014670"
+     ],
+     "x": "Q1071676$500AA49E-5CA7-4DF9-8DBF-3B29406FADE6",
+     "y": "Q1071676$B765F26A-5D73-4E6B-9344-C7846DA69FE5"
+    }
+   ]
+  },
+  {
+   "item": "Q10753076",
+   "label": "Georg Heinrich von Löwenstern",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q756617",
+      "Q34266"
+     ],
+     "x": "Q10753076$13bdf16f-48ae-2109-d922-6911da695388",
+     "y": "Q10753076$5BF15AF4-226E-492C-8541-9A4C19CDF0D4"
+    }
+   ]
+  },
+  {
+   "item": "Q107558636",
+   "label": null,
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P27",
+     "values": [
+      "Q34266",
+      "Q160440"
+     ],
+     "x": "Q107558636$c16fdafd-41a4-49ae-6634-c2940b4164d2",
+     "y": "Q107558636$4b323693-4f00-1c98-8a32-3e6a620f6a75"
+    }
+   ]
+  },
+  {
+   "item": "Q107568193",
+   "label": "Aleksey Golitsyn",
+   "conflicts": [
+    {
+     "why": "one-valued",
+     "rel": "P1412",
+     "values": [
+      "Q7737",
+      "Q150"
+     ],
+     "x": "Q107568193$4FCE47D6-6B32-4319-97C0-70993D22435B",
+     "y": "Q107568193$2FEBA8EB-1B3D-47D5-A716-DF7357A09D90"
+    }
+   ]
+  }
+ ],
+ "falseMerges": [],
+ "metrics": {
+  "falseSplitRate": 0.21379310344827587,
+  "falseMergeRate": 0,
+  "recall": 0
+ },
+ "falsifiers": {
+  "R1_discernment": true,
+  "R2_mergePrecision": false,
+  "R3_vacuous": true,
+  "R4_prior": true
+ }
+}

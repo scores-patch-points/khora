@@ -1,0 +1,252 @@
+--- khora-order/native/kernel/identity-exclusion.js	2026-11-16 21:43:45
++++ khora-ind/native/kernel/identity-exclusion.js	2026-11-16 22:33:21
+@@ -76,10 +76,20 @@
+  *                        1784-03-10 Gregorian, referenced) and two birth
+  *                        years (1715, 1703); split across two records they
+  *                        "proved" one man was two.
++ *   differences       Map<kind, [{ rel, base, min, max, giver | standing:"candidate"+evidence }]> — optional (STEP 4,
++ *                        2026-11-17): a stated range on the difference between two relations of one referent ("date of
++ *                        death minus date of birth lies in -1..150 years": you cannot be born after you are dead).
++ *                        For the MERGED pair, a's `rel` values are measured against b's `base` values and the reverse
++ *                        — cross pairs only: a record against itself is not evidence about two records. Out of range
++ *                        when EVERY decidable cross pair is out of range; a given rule on witnessed assertions convicts
++ *                        (by "range"), an induced one only raises. Without `differences` nothing here changes.
++ *   difference(u, v, rel, base) -> number | null — required with `differences`; null = incomparable, never a conflict.
+  */
+ export function makeIdentityExclusion(organs = {}) {
+   need(organs, ["kindsOf", "assertionsOf", "functional", "sameValue"]);
+-  const { kindsOf, assertionsOf, functional, sameValue, disjointKinds = new Map(), witnessed = null, registerAsOf = null } = organs;
++  const { kindsOf, assertionsOf, functional, sameValue, disjointKinds = new Map(), witnessed = null, registerAsOf = null, differences = new Map(), difference = null } = organs;
++  if (differences.size && typeof difference !== "function") throw new TypeError("identity-exclusion: 'difference' must be supplied with 'differences'");
++  for (const [kind, ds] of differences) for (const d of ds) if (!d?.giver && !(d?.standing === "candidate" && d?.evidence)) throw new TypeError(`identity-exclusion: range(${kind}, ${d?.rel}-${d?.base}) has no giver and no candidate evidence — a range is received or induced, never assumed`);
+   // An entry is either GIVEN (a named giver) or an induced CANDIDATE carrying
+   // its evidence (kernel/kind-functional-induction.js). Nothing else: a
+   // single-valued relation is never simply assumed.
+@@ -117,7 +127,9 @@
+     // 2 — the functional relations the shared kinds license
+     const rels = new Map();
+     for (const k of shared) for (const [rel, d] of functional.get(k) ?? []) if (!rels.has(rel) && (!relevant || relevant(rel))) rels.set(rel, { ...d, kind: k });
+-    if (!rels.size) { order.push({ step: "functional", licensed: [] }); return Object.freeze({ a, b, verdict: BEYOND_REACH, reason: "no_functional_relation_declared", frame, order }); }
++    const ranges = [];
++    for (const k of shared) for (const d of differences.get(k) ?? []) if ((!relevant || relevant(d.rel)) && !ranges.some((r) => r.rel === d.rel && r.base === d.base)) ranges.push({ ...d, kind: k });
++    if (!rels.size && !ranges.length) { order.push({ step: "functional", licensed: [] }); return Object.freeze({ a, b, verdict: BEYOND_REACH, reason: "no_functional_relation_declared", frame, order }); }
+     // 3 — values
+     const Aa = believed(assertionsOf(a) ?? []), Ab = believed(assertionsOf(b) ?? []);
+     const agreed = [], conflicts = [], incomparable = [], unasserted = [], changed = [];
+@@ -141,11 +153,28 @@
+       else conflicts.push({ rel, giver: d.giver ?? null, standing: d.giver ? "given" : "candidate", evidence: d.evidence ?? null, kind: d.kind, a: lastFalse[0], b: lastFalse[1] });
+     }
+     order.push({ step: "functional", licensed: [...rels.keys()] }, { step: "values", agreed: agreed.map((x) => x.rel), conflicts: conflicts.map((x) => x.rel), incomparable: incomparable.map((x) => x.rel), changed, unasserted });
++    // 4 — ranges between two relations, on the merged pair (cross pairs only)
++    const rangeConflicts = [], rangeIncomparable = [], rangeHeld = [];
++    for (const d of ranges) {
++      let decided = 0, out = null, inside = false, undecided = null;
++      for (const [X, Y] of [[Aa, Ab], [Ab, Aa]]) for (const u of X.filter((x) => x.rel === d.rel)) for (const v of Y.filter((y) => y.rel === d.base)) {
++        const diff = difference(u.value, v.value, d.rel, d.base);
++        if (diff == null) { undecided ??= [u, v]; continue; }
++        decided += 1;
++        if (diff < d.min || diff > d.max) out ??= [u, v, diff]; else inside = true;
++      }
++      if (!decided) { if (undecided) rangeIncomparable.push({ rel: d.rel, base: d.base }); continue; }
++      if (inside || !out) { rangeHeld.push({ rel: d.rel, base: d.base }); continue; }
++      rangeConflicts.push({ rel: d.rel, base: d.base, min: d.min, max: d.max, diff: out[2], giver: d.giver ?? null, standing: d.giver ? "given" : "candidate", evidence: d.evidence ?? null, kind: d.kind, a: out[0], b: out[1] });
++    }
++    if (ranges.length) order.push({ step: "range", licensed: ranges.map((d) => `${d.rel}-${d.base}`), conflicts: rangeConflicts.map((x) => `${x.rel}-${x.base}`), held: rangeHeld.map((x) => `${x.rel}-${x.base}`), incomparable: rangeIncomparable.map((x) => `${x.rel}-${x.base}`) });
+     // a conviction needs a GIVEN relation and witnessed assertions on both sides
+-    const convicting = conflicts.filter((c) => c.standing === "given" && (!witnessed || (witnessed(c.a) && witnessed(c.b))));
+-    const raised = conflicts.filter((c) => !convicting.includes(c)).map((c) => ({ ...c, raisedAs: c.standing !== "given" ? "candidate_conflict" : "unwitnessed_conflict" }));
++    const all = [...conflicts, ...rangeConflicts];
++    const convicting = all.filter((c) => c.standing === "given" && (!witnessed || (witnessed(c.a) && witnessed(c.b))));
++    const raised = all.filter((c) => !convicting.includes(c)).map((c) => ({ ...c, raisedAs: c.standing !== "given" ? "candidate_conflict" : "unwitnessed_conflict" }));
+     const believedCounts = { a: Aa.length, b: Ab.length };
+-    if (convicting.length) return Object.freeze({ a, b, verdict: CONTRADICTED, by: "functional", proof: convicting, raised, agreed, incomparable, changed, frame, believed: believedCounts, order });
++    const by = [convicting.some((c) => !("base" in c)) && "functional", convicting.some((c) => "base" in c) && "range"].filter(Boolean).join("+");
++    if (convicting.length) return Object.freeze({ a, b, verdict: CONTRADICTED, by, proof: convicting, raised, agreed, incomparable, changed, frame, believed: believedCounts, order });
+     return Object.freeze({ a, b, verdict: UNBOUND, reason: raised.length ? raised[0].raisedAs : "no_conflict", raised, agreed, incomparable, changed, frame, believed: believedCounts, order });
+   }
+   return Object.freeze({ judge });
+--- /dev/null
++++ native/kernel/identity-exclusion-range.test.mjs
+@@ -0,0 +1,50 @@
++// identity-exclusion-range.test.mjs — step 4: a stated range between two relations, judged on the merged pair (RULES-PREREG.md).
++import test from "node:test";
++import assert from "node:assert/strict";
++import { makeIdentityExclusion } from "./identity-exclusion.js";
++import { CONTRADICTED, UNBOUND } from "../interpretation/hl.js";
++
++const A = { a: [], b: [] };
++const make = (assert_, { given = true, difference = (u, v) => (typeof u === "number" && typeof v === "number" ? u - v : null), witnessed = null } = {}) => makeIdentityExclusion({
++  kindsOf: () => new Set(["person"]),
++  assertionsOf: (x) => assert_[x],
++  functional: new Map(),
++  sameValue: (u, v) => u === v,
++  differences: new Map([["person", [given ? { rel: "died", base: "born", min: -1, max: 150, giver: "test#lifespan" } : { rel: "died", base: "born", min: -1, max: 150, standing: "candidate", evidence: { exposed: 9 } }]]]),
++  difference, witnessed,
++});
++const rec = (rel, value, id, w = true) => ({ rel, value, id, w });
++
++test("born after the other record's death: a given range convicts, by range, with the two assertions as proof", () => {
++  const r = make({ a: [rec("born", 1850, "a1")], b: [rec("died", 1820, "b1")] }).judge("a", "b");
++  assert.equal(r.verdict, CONTRADICTED);
++  assert.equal(r.by, "range");
++  assert.deepEqual([r.proof[0].a.id, r.proof[0].b.id].sort(), ["a1", "b1"]);
++});
++
++test("in range, or no cross pair, or incomparable: never a conflict", () => {
++  assert.equal(make({ a: [rec("born", 1800, "a1")], b: [rec("died", 1850, "b1")] }).judge("a", "b").verdict, UNBOUND);
++  assert.equal(make({ a: [rec("born", 1800, "a1"), rec("died", 1700, "a2")], b: [] }).judge("a", "b").verdict, UNBOUND); // a record against itself
++  assert.equal(make({ a: [rec("born", "1800 (Julian)", "a1")], b: [rec("died", 1820, "b1")] }).judge("a", "b").verdict, UNBOUND);
++});
++
++test("too long a life is out of range too", () => {
++  assert.equal(make({ a: [rec("born", 1700, "a1")], b: [rec("died", 1900, "b1")] }).judge("a", "b").verdict, CONTRADICTED);
++});
++
++test("one cross pair in range holds the rule: only when every decidable pair is out does it conflict", () => {
++  const r = make({ a: [rec("born", 1850, "a1"), rec("born", 1790, "a2")], b: [rec("died", 1820, "b1")] }).judge("a", "b");
++  assert.equal(r.verdict, UNBOUND);
++});
++
++test("an induced range only raises; an unwitnessed side only raises", () => {
++  const r1 = make({ a: [rec("born", 1850, "a1")], b: [rec("died", 1820, "b1")] }, { given: false }).judge("a", "b");
++  assert.equal(r1.verdict, UNBOUND); assert.equal(r1.raised[0].raisedAs, "candidate_conflict");
++  const r2 = make({ a: [rec("born", 1850, "a1", false)], b: [rec("died", 1820, "b1")] }, { witnessed: (x) => x.w }).judge("a", "b");
++  assert.equal(r2.verdict, UNBOUND); assert.equal(r2.raised[0].raisedAs, "unwitnessed_conflict");
++});
++
++test("a range with no giver and no evidence is refused at construction; differences need a difference function", () => {
++  assert.throws(() => makeIdentityExclusion({ kindsOf: () => new Set(), assertionsOf: () => [], functional: new Map(), sameValue: () => null, differences: new Map([["k", [{ rel: "x", base: "y", min: 0, max: 1 }]]]), difference: () => 0 }), TypeError);
++  assert.throws(() => makeIdentityExclusion({ kindsOf: () => new Set(), assertionsOf: () => [], functional: new Map(), sameValue: () => null, differences: new Map([["k", [{ rel: "x", base: "y", min: 0, max: 1, giver: "g" }]]]) }), TypeError);
++});
+--- /dev/null
++++ native/adapters/wikidata/constraints.js
+@@ -0,0 +1,85 @@
++// native/adapters/wikidata/constraints.js — A KIND'S DEPENDENCY SEQUENCE FROM STATED RULES (2026-11-17). Adapter-level.
++// Standing: nomination until eval says otherwise (RULES-PREREG.md).
++//
++// WHY. kernel/kind-functional-induction.js learns one-valuedness from a member stating a relation TWICE; real records
++// almost never do (on two real Wikidata samples, the fixed inducer induced one relation and none), so the register is
++// starved. But the rules are often STATED, by a named giver, in machine-readable form: Wikidata's property constraints
++// (P2302). A stated rule is GIVEN (kernel/identity-exclusion.js may convict on it), never assumed, and never typed here:
++// every entry below is read from a property's own constraint statements and cites the statement it came from.
++//
++// THE SEQUENCE (identity-exclusion's order, each step licensing the next):
++//   1 KIND        subject-type constraint (Q21503250): the classes (P2308) a property's rules are about. A property with
++//                 no subject-type constraint is filed under "*" (any kind) and says so.
++//   2 ONE-VALUED  single-value (Q19474404) and single-best-value (Q52060874). Separators (P4155): statements carrying a
++//                 separator qualifier are distinguished alternatives, not rival values. Exceptions (P2303): items the
++//                 rule does not apply to.
++//   4 RANGE       difference-within-range (Q21510854): rel minus base (P2306) within [P2313, P2312], in the unit stated
++//                 (only years, Q577, are read; another unit is reported unread). "You can't be born after you are dead."
++//   read, not yet judged: distinct-values (Q21502410, keys), symmetric (Q21510862), contemporary (Q25796498),
++//                 conflicts-with (Q21502838). Reported in `other`.
++// Constraint status (P2316: mandatory / suggestion) is kept on each entry, never dropped.
++//
++// PURE: no I/O. The caller fetches property entities (wbgetentities) and hands them in.
++
++export const CONSTRAINT = Object.freeze({
++  SINGLE_VALUE: "Q19474404", SINGLE_BEST: "Q52060874", DIFF_RANGE: "Q21510854", DISTINCT: "Q21502410",
++  SUBJECT_TYPE: "Q21503250", SYMMETRIC: "Q21510862", CONTEMPORARY: "Q25796498", CONFLICTS_WITH: "Q21502838",
++});
++const Q = { CLASS: "P2308", PROPERTY: "P2306", MIN: "P2313", MAX: "P2312", SEPARATOR: "P4155", EXCEPTION: "P2303", STATUS: "P2316" };
++const YEAR = "Q577";
++
++const ids = (quals, p) => (quals?.[p] ?? []).map((s) => s.datavalue?.value?.id).filter(Boolean);
++const amount = (quals, p) => { const v = quals?.[p]?.[0]?.datavalue?.value; return v && v.amount != null ? { amount: +v.amount, unit: String(v.unit ?? "").split("/").pop() } : null; };
++const statusOf = (quals) => ids(quals, Q.STATUS)[0] ?? null;
++
++/** registerFromWikidataConstraints(propertyEntities) -> { functional, differences, kinds, other, unread }
++ *   functional   Map<kind, Map<property, { giver, constraint, status, separators, exceptions }>>
++ *   differences  Map<kind, [{ rel, base, min, max, unit, giver, status, exceptions }]>
++ *   kinds        Map<property, [kind]>   (the subject-type classes, or ["*"])
++ *   other        [{ property, constraint, giver }]   (read, not judged here)
++ *   unread       [{ property, constraint, reason }]  */
++export function registerFromWikidataConstraints(propertyEntities = {}) {
++  const functional = new Map(), differences = new Map(), kinds = new Map(), other = [], unread = [];
++  const put = (m, k) => m.get(k) ?? m.set(k, m === functional ? new Map() : []).get(k);
++  for (const [P, e] of Object.entries(propertyEntities)) {
++    const cs = e?.claims?.P2302 ?? [];
++    const subject = cs.filter((c) => c.mainsnak?.datavalue?.value?.id === CONSTRAINT.SUBJECT_TYPE).flatMap((c) => ids(c.qualifiers, Q.CLASS));
++    const ks = subject.length ? [...new Set(subject)] : ["*"];
++    kinds.set(P, ks);
++    for (const c of cs) {
++      const t = c.mainsnak?.datavalue?.value?.id; if (!t) continue;
++      const giver = `wikidata:${P}#${c.id}`, status = statusOf(c.qualifiers), exceptions = new Set(ids(c.qualifiers, Q.EXCEPTION));
++      if (t === CONSTRAINT.SINGLE_VALUE || t === CONSTRAINT.SINGLE_BEST) {
++        const entry = { giver, constraint: t, status, separators: [...new Set(ids(c.qualifiers, Q.SEPARATOR))], exceptions };
++        for (const k of ks) if (!put(functional, k).has(P)) put(functional, k).set(P, entry);
++      } else if (t === CONSTRAINT.DIFF_RANGE) {
++        const base = ids(c.qualifiers, Q.PROPERTY)[0], lo = amount(c.qualifiers, Q.MIN), hi = amount(c.qualifiers, Q.MAX);
++        if (!base || (!lo && !hi)) { unread.push({ property: P, constraint: t, reason: "no base property or no bound" }); continue; }
++        const unit = (lo ?? hi).unit;
++        if (unit !== YEAR) { unread.push({ property: P, constraint: t, reason: `unit ${unit || "none"} is not years` }); continue; }
++        for (const k of ks) put(differences, k).push({ rel: P, base, min: lo ? lo.amount : -Infinity, max: hi ? hi.amount : Infinity, unit: "year", giver, status, exceptions });
++      } else if ([CONSTRAINT.DISTINCT, CONSTRAINT.SYMMETRIC, CONSTRAINT.CONTEMPORARY, CONSTRAINT.CONFLICTS_WITH].includes(t)) {
++        other.push({ property: P, constraint: t, giver });
++      }
++    }
++  }
++  return Object.freeze({ functional, differences, kinds, other, unread });
++}
++
++/** Which of a referent's assertions a stated rule may read: an assertion carrying one of the rule's separator qualifiers
++ *  is a distinguished alternative, and an item the rule names as an exception is outside it. Conservative: an excepted
++ *  item's assertions of that property are withheld from judging altogether, so an exception can only remove a conviction. `itemOf(referent)` maps a
++ *  referent to the item the exceptions name; `qualifiersOf(assertion)` -> Set of qualifier properties. */
++export function ruleFilter(register, { itemOf = (x) => x, qualifiersOf = (a) => a.qualifiers ?? new Set() } = {}) {
++  const rules = new Map();
++  for (const m of register.functional.values()) for (const [P, e] of m) if (!rules.has(P)) rules.set(P, e);
++  const rangeExceptions = new Map();
++  for (const ds of register.differences.values()) for (const d of ds) for (const x of d.exceptions) (rangeExceptions.get(d.rel) ?? rangeExceptions.set(d.rel, new Set()).get(d.rel)).add(x);
++  return (referent, assertions) => assertions.filter((a) => {
++    const e = rules.get(a.rel);
++    if (e && e.exceptions.has(itemOf(referent))) return false;
++    if (e && e.separators.length && e.separators.some((s) => qualifiersOf(a).has(s))) return false;
++    if (rangeExceptions.get(a.rel)?.has(itemOf(referent))) return false;
++    return true;
++  });
++}
+--- /dev/null
++++ native/adapters/wikidata/constraints.test.mjs
+@@ -0,0 +1,41 @@
++// constraints.test.mjs — Wikidata property constraints read as a given register (RULES-PREREG.md).
++import test from "node:test";
++import assert from "node:assert/strict";
++import { registerFromWikidataConstraints, ruleFilter, CONSTRAINT } from "./constraints.js";
++
++const ent = (id) => ({ type: "wikibase-entityid", value: { id } });
++const snak = (p, dv) => ({ snaktype: "value", property: p, datavalue: dv });
++const qty = (amount, unit = "http://www.wikidata.org/entity/Q577") => ({ type: "quantity", value: { amount, unit } });
++const constraint = (id, type, quals = {}) => ({ id, mainsnak: snak("P2302", ent(type)), qualifiers: Object.fromEntries(Object.entries(quals).map(([p, vs]) => [p, vs.map((v) => snak(p, v))])) });
++// Shaped like the real P569/P570 statements fetched 2026-11-17 (ids shortened).
++const P = {
++  P569: { claims: { P2302: [constraint("s1", CONSTRAINT.SUBJECT_TYPE, { P2308: [ent("Q5"), ent("Q95074")] }), constraint("s2", CONSTRAINT.SINGLE_BEST, { P4155: [ent("P1480")] })] } },
++  P570: { claims: { P2302: [constraint("d1", CONSTRAINT.SUBJECT_TYPE, { P2308: [ent("Q5")] }), constraint("d2", CONSTRAINT.SINGLE_BEST, {}), constraint("d3", CONSTRAINT.DIFF_RANGE, { P2306: [ent("P569")], P2313: [qty("-1")], P2312: [qty("+150")], P2303: [ent("Q999")] })] } },
++  P27: { claims: { P2302: [constraint("c1", CONSTRAINT.SUBJECT_TYPE, { P2308: [ent("Q5")] }), constraint("c2", CONSTRAINT.CONTEMPORARY)] } },
++  P2048: { claims: { P2302: [constraint("h1", CONSTRAINT.DIFF_RANGE, { P2306: [ent("P569")], P2313: [qty("0", "http://www.wikidata.org/entity/Q11573")] })] } },
++};
++
++test("one-valued rules are read from single-(best-)value constraints, filed under the subject-type classes, citing their statement", () => {
++  const R = registerFromWikidataConstraints(P);
++  assert.equal(R.functional.get("Q5").get("P569").giver, "wikidata:P569#s2");
++  assert.ok(R.functional.get("Q95074").has("P569"));
++  assert.ok(R.functional.get("Q5").has("P570"));
++  assert.equal(R.functional.get("Q5").has("P27"), false, "citizenship states no single value: it is not one-valued");
++  assert.deepEqual(R.functional.get("Q5").get("P569").separators, ["P1480"]);
++});
++
++test("difference-within-range becomes a range rule in years; another unit is reported unread, never guessed", () => {
++  const R = registerFromWikidataConstraints(P);
++  const d = R.differences.get("Q5")[0];
++  assert.deepEqual([d.rel, d.base, d.min, d.max, d.giver], ["P570", "P569", -1, 150, "wikidata:P570#d3"]);
++  assert.equal(R.unread[0].property, "P2048");
++  assert.equal(R.other[0].constraint, CONSTRAINT.CONTEMPORARY);
++});
++
++test("a statement with a separator qualifier, or an excepted item, is withheld from the rule", () => {
++  const R = registerFromWikidataConstraints(P);
++  const keep = ruleFilter(R, { itemOf: (x) => x.split(":")[0], qualifiersOf: (a) => a.q });
++  const as = [{ rel: "P569", q: new Set(["P1480"]) }, { rel: "P569", q: new Set() }, { rel: "P570", q: new Set() }];
++  assert.equal(keep("Q1:A", as).length, 2);
++  assert.equal(keep("Q999:A", as).filter((a) => a.rel === "P570").length, 0);
++});
