@@ -76,10 +76,22 @@ const need = (o, keys) => { for (const k of keys) if (typeof o[k] !== "function"
  *                        1784-03-10 Gregorian, referenced) and two birth
  *                        years (1715, 1703); split across two records they
  *                        "proved" one man was two.
+ *   differences       EXPERIMENTAL (native/docs/IDENTITY-FROM-STATED-RULES.md: correct on real data, adds under 1% beyond
+ *                        step 3; no caller passes it yet).
+ *                     Map<kind, [{ rel, base, min, max, giver | standing:"candidate"+evidence }]> — optional (STEP 4,
+ *                        2026-11-17): a stated range on the difference between two relations of one referent ("date of
+ *                        death minus date of birth lies in -1..150 years": you cannot be born after you are dead).
+ *                        For the MERGED pair, a's `rel` values are measured against b's `base` values and the reverse
+ *                        — cross pairs only: a record against itself is not evidence about two records. Out of range
+ *                        when EVERY decidable cross pair is out of range; a given rule on witnessed assertions convicts
+ *                        (by "range"), an induced one only raises. Without `differences` nothing here changes.
+ *   difference(u, v, rel, base) -> number | null — required with `differences`; null = incomparable, never a conflict.
  */
 export function makeIdentityExclusion(organs = {}) {
   need(organs, ["kindsOf", "assertionsOf", "functional", "sameValue"]);
-  const { kindsOf, assertionsOf, functional, sameValue, disjointKinds = new Map(), witnessed = null, registerAsOf = null } = organs;
+  const { kindsOf, assertionsOf, functional, sameValue, disjointKinds = new Map(), witnessed = null, registerAsOf = null, differences = new Map(), difference = null } = organs;
+  if (differences.size && typeof difference !== "function") throw new TypeError("identity-exclusion: 'difference' must be supplied with 'differences'");
+  for (const [kind, ds] of differences) for (const d of ds) if (!d?.giver && !(d?.standing === "candidate" && d?.evidence)) throw new TypeError(`identity-exclusion: range(${kind}, ${d?.rel}-${d?.base}) has no giver and no candidate evidence — a range is received or induced, never assumed`);
   // An entry is either GIVEN (a named giver) or an induced CANDIDATE carrying
   // its evidence (kernel/kind-functional-induction.js). Nothing else: a
   // single-valued relation is never simply assumed.
@@ -117,7 +129,9 @@ export function makeIdentityExclusion(organs = {}) {
     // 2 — the functional relations the shared kinds license
     const rels = new Map();
     for (const k of shared) for (const [rel, d] of functional.get(k) ?? []) if (!rels.has(rel) && (!relevant || relevant(rel))) rels.set(rel, { ...d, kind: k });
-    if (!rels.size) { order.push({ step: "functional", licensed: [] }); return Object.freeze({ a, b, verdict: BEYOND_REACH, reason: "no_functional_relation_declared", frame, order }); }
+    const ranges = [];
+    for (const k of shared) for (const d of differences.get(k) ?? []) if ((!relevant || relevant(d.rel)) && !ranges.some((r) => r.rel === d.rel && r.base === d.base)) ranges.push({ ...d, kind: k });
+    if (!rels.size && !ranges.length) { order.push({ step: "functional", licensed: [] }); return Object.freeze({ a, b, verdict: BEYOND_REACH, reason: "no_functional_relation_declared", frame, order }); }
     // 3 — values
     const Aa = believed(assertionsOf(a) ?? []), Ab = believed(assertionsOf(b) ?? []);
     const agreed = [], conflicts = [], incomparable = [], unasserted = [], changed = [];
@@ -141,11 +155,28 @@ export function makeIdentityExclusion(organs = {}) {
       else conflicts.push({ rel, giver: d.giver ?? null, standing: d.giver ? "given" : "candidate", evidence: d.evidence ?? null, kind: d.kind, a: lastFalse[0], b: lastFalse[1] });
     }
     order.push({ step: "functional", licensed: [...rels.keys()] }, { step: "values", agreed: agreed.map((x) => x.rel), conflicts: conflicts.map((x) => x.rel), incomparable: incomparable.map((x) => x.rel), changed, unasserted });
+    // 4 — ranges between two relations, on the merged pair (cross pairs only)
+    const rangeConflicts = [], rangeIncomparable = [], rangeHeld = [];
+    for (const d of ranges) {
+      let decided = 0, out = null, inside = false, undecided = null;
+      for (const [X, Y] of [[Aa, Ab], [Ab, Aa]]) for (const u of X.filter((x) => x.rel === d.rel)) for (const v of Y.filter((y) => y.rel === d.base)) {
+        const diff = difference(u.value, v.value, d.rel, d.base);
+        if (diff == null) { undecided ??= [u, v]; continue; }
+        decided += 1;
+        if (diff < d.min || diff > d.max) out ??= [u, v, diff]; else inside = true;
+      }
+      if (!decided) { if (undecided) rangeIncomparable.push({ rel: d.rel, base: d.base }); continue; }
+      if (inside || !out) { rangeHeld.push({ rel: d.rel, base: d.base }); continue; }
+      rangeConflicts.push({ rel: d.rel, base: d.base, min: d.min, max: d.max, diff: out[2], giver: d.giver ?? null, standing: d.giver ? "given" : "candidate", evidence: d.evidence ?? null, kind: d.kind, a: out[0], b: out[1] });
+    }
+    if (ranges.length) order.push({ step: "range", licensed: ranges.map((d) => `${d.rel}-${d.base}`), conflicts: rangeConflicts.map((x) => `${x.rel}-${x.base}`), held: rangeHeld.map((x) => `${x.rel}-${x.base}`), incomparable: rangeIncomparable.map((x) => `${x.rel}-${x.base}`) });
     // a conviction needs a GIVEN relation and witnessed assertions on both sides
-    const convicting = conflicts.filter((c) => c.standing === "given" && (!witnessed || (witnessed(c.a) && witnessed(c.b))));
-    const raised = conflicts.filter((c) => !convicting.includes(c)).map((c) => ({ ...c, raisedAs: c.standing !== "given" ? "candidate_conflict" : "unwitnessed_conflict" }));
+    const all = [...conflicts, ...rangeConflicts];
+    const convicting = all.filter((c) => c.standing === "given" && (!witnessed || (witnessed(c.a) && witnessed(c.b))));
+    const raised = all.filter((c) => !convicting.includes(c)).map((c) => ({ ...c, raisedAs: c.standing !== "given" ? "candidate_conflict" : "unwitnessed_conflict" }));
     const believedCounts = { a: Aa.length, b: Ab.length };
-    if (convicting.length) return Object.freeze({ a, b, verdict: CONTRADICTED, by: "functional", proof: convicting, raised, agreed, incomparable, changed, frame, believed: believedCounts, order });
+    const by = [convicting.some((c) => !("base" in c)) && "functional", convicting.some((c) => "base" in c) && "range"].filter(Boolean).join("+");
+    if (convicting.length) return Object.freeze({ a, b, verdict: CONTRADICTED, by, proof: convicting, raised, agreed, incomparable, changed, frame, believed: believedCounts, order });
     return Object.freeze({ a, b, verdict: UNBOUND, reason: raised.length ? raised[0].raisedAs : "no_conflict", raised, agreed, incomparable, changed, frame, believed: believedCounts, order });
   }
   return Object.freeze({ judge });
