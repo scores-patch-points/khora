@@ -1,0 +1,293 @@
+{
+ "set": "test",
+ "books": [
+  "MATT",
+  "MARK",
+  "LUKE"
+ ],
+ "gold3sg": 2116,
+ "arms": {
+  "BASE": {
+   "answerable": 1181,
+   "right": 70,
+   "wrong": 1087,
+   "precision": 0.061,
+   "precisionCI": [
+    0.013,
+    0.133
+   ],
+   "coverage": 0.98,
+   "bindings": 7725,
+   "onNonGold": 5724,
+   "fracOnNonGold": 0.741,
+   "beings": 584
+  },
+  "REG": {
+   "answerable": 1181,
+   "right": 270,
+   "wrong": 306,
+   "precision": 0.469,
+   "precisionCI": [
+    0.368,
+    0.626
+   ],
+   "coverage": 0.488,
+   "bindings": 916,
+   "onNonGold": 1,
+   "fracOnNonGold": 0.001,
+   "beings": 584
+  },
+  "REGFOLD": {
+   "answerable": 1180,
+   "right": 382,
+   "wrong": 265,
+   "precision": 0.59,
+   "precisionCI": [
+    0.518,
+    0.705
+   ],
+   "coverage": 0.548,
+   "bindings": 1022,
+   "onNonGold": 1,
+   "fracOnNonGold": 0.001,
+   "beings": 450
+  },
+  "FULL": {
+   "answerable": 1181,
+   "right": 359,
+   "wrong": 318,
+   "precision": 0.53,
+   "precisionCI": [
+    0.348,
+    0.692
+   ],
+   "coverage": 0.573,
+   "bindings": 1111,
+   "onNonGold": 53,
+   "fracOnNonGold": 0.048,
+   "beings": 420
+  }
+ },
+ "null": {
+  "REGFOLD": 0.459,
+  "REG": 0.305,
+  "FULL": 0.402
+ },
+ "diff": {
+  "REGFOLD-NULL": {
+   "d": 0.131,
+   "ci": [
+    0.066,
+    0.177
+   ]
+  },
+  "REG-NULL": {
+   "d": 0.163,
+   "ci": [
+    0.115,
+    0.185
+   ]
+  },
+  "REG-BASE": {
+   "d": 0.408,
+   "ci": [
+    0.281,
+    0.613
+   ]
+  },
+  "REGFOLD-REG": {
+   "d": 0.122,
+   "ci": [
+    0.079,
+    0.17
+   ]
+  },
+  "FULL-REGFOLD": {
+   "d": -0.06,
+   "ci": [
+    -0.17,
+    -0.01
+   ]
+  }
+ },
+ "covDiff": {
+  "REGFOLD-REG": 0.061,
+  "FULL-REGFOLD": 0.025
+ },
+ "dilution": {
+  "REG": {
+   "beingsPerAnswerableEntity": 1.258,
+   "beings": 584,
+   "falseMergeEnt": 178,
+   "falseMergeLemma": 20,
+   "beingsPerLemma": 1.75,
+   "falseMergeEntShare": 0.3048,
+   "falseMergeLemmaShare": 0.0342
+  },
+  "REGFOLD": {
+   "beingsPerAnswerableEntity": 1.131,
+   "beings": 450,
+   "falseMergeEnt": 146,
+   "falseMergeLemma": 20,
+   "beingsPerLemma": 1.324,
+   "falseMergeEntShare": 0.3244,
+   "falseMergeLemmaShare": 0.0444
+  },
+  "FULL": {
+   "beingsPerAnswerableEntity": 1.093,
+   "beings": 420,
+   "falseMergeEnt": 134,
+   "falseMergeLemma": 14,
+   "beingsPerLemma": 1.21,
+   "falseMergeEntShare": 0.319,
+   "falseMergeLemmaShare": 0.0333
+  }
+ },
+ "auc": {
+  "REGFOLD": 0.645,
+  "REG": 0.575,
+  "FULL": 0.633
+ },
+ "meanMargin": {
+  "REGFOLD": {
+   "right": 0.732,
+   "wrong": 0.649
+  }
+ },
+ "reasons": {
+  "REGFOLD_all": {
+   "bound": 1021,
+   "margin": 224,
+   "below_floor": 633,
+   "not_in_register": 238
+  },
+  "REGFOLD_answerable": {
+   "bound": 647,
+   "margin": 170,
+   "below_floor": 235,
+   "not_in_register": 128
+  },
+  "REG_all": {
+   "margin": 231,
+   "bound": 915,
+   "below_floor": 732,
+   "not_in_register": 238
+  },
+  "FULL_all": {
+   "margin": 236,
+   "bound": 1058,
+   "below_floor": 638,
+   "not_in_register": 184
+  }
+ },
+ "perBook": [
+  {
+   "code": "MATT",
+   "gold3sg": 702,
+   "BASE": {
+    "ans": 400,
+    "right": 5,
+    "wrong": 394,
+    "prec": 0.013,
+    "cov": 0.998,
+    "null": 0.01
+   },
+   "REG": {
+    "ans": 400,
+    "right": 122,
+    "wrong": 73,
+    "prec": 0.626,
+    "cov": 0.487,
+    "null": 0.444
+   },
+   "REGFOLD": {
+    "ans": 400,
+    "right": 160,
+    "wrong": 67,
+    "prec": 0.705,
+    "cov": 0.568,
+    "null": 0.564
+   },
+   "FULL": {
+    "ans": 400,
+    "right": 157,
+    "wrong": 70,
+    "prec": 0.692,
+    "cov": 0.568,
+    "null": 0.56
+   }
+  },
+  {
+   "code": "MARK",
+   "gold3sg": 561,
+   "BASE": {
+    "ans": 339,
+    "right": 45,
+    "wrong": 294,
+    "prec": 0.133,
+    "cov": 1,
+    "null": 0.133
+   },
+   "REG": {
+    "ans": 339,
+    "right": 70,
+    "wrong": 99,
+    "prec": 0.414,
+    "cov": 0.499,
+    "null": 0.299
+   },
+   "REGFOLD": {
+    "ans": 338,
+    "right": 100,
+    "wrong": 93,
+    "prec": 0.518,
+    "cov": 0.571,
+    "null": 0.453
+   },
+   "FULL": {
+    "ans": 339,
+    "right": 69,
+    "wrong": 129,
+    "prec": 0.348,
+    "cov": 0.584,
+    "null": 0.263
+   }
+  },
+  {
+   "code": "LUKE",
+   "gold3sg": 853,
+   "BASE": {
+    "ans": 442,
+    "right": 20,
+    "wrong": 399,
+    "prec": 0.048,
+    "cov": 0.948,
+    "null": 0.028
+   },
+   "REG": {
+    "ans": 442,
+    "right": 78,
+    "wrong": 134,
+    "prec": 0.368,
+    "cov": 0.48,
+    "null": 0.183
+   },
+   "REGFOLD": {
+    "ans": 442,
+    "right": 122,
+    "wrong": 105,
+    "prec": 0.537,
+    "cov": 0.514,
+    "null": 0.36
+   },
+   "FULL": {
+    "ans": 442,
+    "right": 133,
+    "wrong": 119,
+    "prec": 0.528,
+    "cov": 0.57,
+    "null": 0.371
+   }
+  }
+ ]
+}

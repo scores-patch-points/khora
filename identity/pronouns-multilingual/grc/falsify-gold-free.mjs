@@ -10,7 +10,9 @@ const D = "/Users/mlacy/Documents/khora-cast/khora/identity/pronouns-multilingua
 const books = set === "hdt" ? parseProiel(D + "hdt.xml", { bookOf: hdtBookOf }) : parseProiel(D + "greek-nt.xml", { bookOf: ntBookOf }).filter((b) => (set === "nt-test" ? TEST : DEV).includes(b.code));
 const mulberry = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; const rnd = mulberry(20261118);
 const lower = (refs, gens) => { const c = new Map(); refs.forEach((r, i) => { if (!c.has(r)) c.set(r, [0, 0]); c.get(r)[gens[i]]++; }); let n = 0; for (const [, [m, f]] of c) n += Math.min(m, f); return n; };
-const out = { set, arms: {} };
+// PREREG: a book that takes over 5 minutes is cut to its first 60000 characters at a sentence end. HDT1 (168K) did not finish in 9 minutes, so every Herodotus chunk is cut the same way (DEVIATIONS D4).
+const CAP = set === "hdt" ? 60000 : Infinity; for (const bk of books) if (bk.text.length > CAP) { const cut = bk.text.slice(0, CAP); const e = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("· "), cut.lastIndexOf("; ")); bk.text = cut.slice(0, e + 1); }
+const out = { set, cap: CAP === Infinity ? null : CAP, arms: {} };
 for (const [arm, { reg, dec }] of Object.entries(ARMS)) {
   const cls = normalizePronounClass(reg); const rows = [];
   for (const bk of books) {
