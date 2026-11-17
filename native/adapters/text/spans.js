@@ -468,10 +468,10 @@ const isNameInitial = (s, i, rangeStart, rangeEnd) => {
   return afterCapitalised || afterInitial || beforeInitial;
 };
 
-const splitSentencesInRange = (s, rangeStart, rangeEnd, out, abbreviations) => {
+const splitSentencesInRange = (s, rangeStart, rangeEnd, out, abbreviations, extra = null) => {
   let start = rangeStart;
   for (let i = rangeStart; i < rangeEnd; i++) {
-    if (!SENTENCE_TERMINATORS.has(s[i])) continue;
+    if (!SENTENCE_TERMINATORS.has(s[i]) && !(extra && extra.has(s[i]))) continue;
     let end = i + 1;
     while (end < rangeEnd && CLOSING_QUOTES.has(s[end])) end += 1;
     if (end < rangeEnd && !/\s/.test(s[end]) && !UNSPACED_TERMINATORS.has(s[i])) continue; // a decimal point, not a stop (an unspaced script's own full stop is a stop)
@@ -490,7 +490,7 @@ const splitSentencesInRange = (s, rangeStart, rangeEnd, out, abbreviations) => {
  *   trailing period without ending a sentence. A LANGUAGE prior; pass one from
  *   bin/priors/lang/*.json. Omit to derive a weaker set from the text itself.
  */
-export const splitSentences = (text, { abbreviations = null } = {}) => {
+export const splitSentences = (text, { abbreviations = null, extraTerminators = null } = {}) => {
   const s = String(text ?? "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
   const abbrev = abbreviations ? new Set(abbreviations) : deriveAbbreviations(s);
   const paragraphs = [];
@@ -504,7 +504,7 @@ export const splitSentences = (text, { abbreviations = null } = {}) => {
   paragraphs.push({ start: paraStart, end: s.length });
 
   const sentences = [];
-  for (const para of paragraphs) splitSentencesInRange(s, para.start, para.end, sentences, abbrev);
+  for (const para of paragraphs) splitSentencesInRange(s, para.start, para.end, sentences, abbrev, extraTerminators);
   sentences.forEach((sent, i) => { sent.order = i; });
   return sentences;
 };

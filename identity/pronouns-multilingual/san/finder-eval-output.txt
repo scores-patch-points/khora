@@ -1,0 +1,6 @@
+H2 Vedic test (2709 sents): gold tokens 865, found 839, recall 0.970; finder hits 886, right 839, precision 0.947
+  missed forms: tena:15 tasmāt:7 etena:4
+  false-positive (form/upos/lemma): sa/ADV/sa:19 asya/PRON/idam:7 tasmin/PRON/tad:4 tasya/PRON/tad:3 asmāt/PRON/idam:2 etasmin/PRON/etad:2 asmin/PRON/idam:2 tām/NOUN/tā:2
+H3 UFAL (230 sents): gold singular m/f third-person pronoun tokens 51; inside a multiword token 8 (0.157); free-standing form NOT in the Vedic register 7 (0.137) bhavān:5 bhavantam:1 tena:1; free-standing and in it 36 (0.706)
+H4 UFAL: finite 3rd-person verbs 141: overt 3rd-person pronoun subject 17 (0.121), nominal subject 75 (0.532), other subject 16, no subject (dropped) 33 (0.234)
+H4 Vedic test: finite 3rd-person verbs 2249: overt 3rd-person pronoun subject 240 (0.107), nominal subject 510 (0.227), other subject 246, no subject (dropped) 1253 (0.557)

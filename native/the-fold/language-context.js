@@ -31,6 +31,8 @@ import { grammarFor, detectLanguage } from "./language-grammar.js";
 import { makeEar } from "../adapters/text/ear.js";
 import { createNominalIndex } from "../adapters/text/heard-nominals.js";
 import { extractSurfaces, diaNorm } from "../adapters/text/surfaces.js";
+import { withSandhiVariants, foldCaseForms } from "../adapters/text/sanskrit-sandhi.js";
+import { registerFor } from "../adapters/text/pronoun-registers.js";
 
 /** Fraction of word tokens that carry a cased letter — 0 for a caseless script. */
 export function casedFraction(text) {
@@ -74,9 +76,18 @@ export function extractSurfacesHeard(sentences, opts = {}) {
   const text = (sentences ?? []).map((s) => String(s?.text ?? s ?? "")).join("\n");
   const ctx = languageContextFor(text);
   if (!ctx.grammar?.framePrior) return capital;
-  const idx = createNominalIndex({ posPrior: ctx.grammar.posPrior, framePrior: ctx.grammar.framePrior, segment: ctx.ear.segment, peel: ctx.ear.peel, commonNouns: !ctx.casedScript });
+  const idx = createNominalIndex({ posPrior: ctx.language === "san" ? withSandhiVariants(ctx.grammar.posPrior) : ctx.grammar.posPrior, framePrior: ctx.grammar.framePrior, segment: ctx.ear.segment, peel: ctx.ear.peel, commonNouns: !ctx.casedScript });
   for (const s of sentences ?? []) idx.add(s);
   const have = new Set(capital.map((c) => diaNorm(c.surface)));
-  const heard = idx.beings({ minMentions: 2 }).filter((h) => !have.has(diaNorm(h.surface)));
+  let found = idx.beings({ minMentions: 2 });
+  if (ctx.language === "san") {
+    // Sanskrit inflects a name by case (hiranyakah, hiranyakam, hiranyakasya ...): each form alone rarely recurs, the stem does. Fold the forms of a stem BEFORE asking that it recur
+    // (adapters/text/sanskrit-sandhi.js::foldCaseForms, the endings the treebank attests: pronoun-registers/san.json), then keep the forms of every stem that recurs.
+    const all = idx.beings({ minMentions: 1, compounds: false }), endings = registerFor("san")?.register?.endings ?? [];
+    const { groups } = foldCaseForms(all, endings); const mass = new Map();
+    all.forEach((h, i) => mass.set(groups.get(i), (mass.get(groups.get(i)) ?? 0) + h.mentions));
+    found = all.filter((h, i) => mass.get(groups.get(i)) >= 2);
+  }
+  const heard = found.filter((h) => !have.has(diaNorm(h.surface)));
   return [...capital, ...heard];
 }

@@ -34,5 +34,5 @@ export function presenceOptionsFor(stem, dials = defaultPronounPresence()) {
   if (k === "eng" || k === "en") return { ...dials };
   const r = registerFor(k);
   if (!r) return { gap: { gap: "pronoun_presence_no_register", stem: k, detail: `no pronoun register for ${k || "this language"} (native/adapters/text/pronoun-registers/${k}.json or a pronoun-${k}.json prior): no pronoun was bound` } };
-  return { ...dials, language: k, pronounClass: r.register, unspaced: UNSPACED_STEMS.has(k), registerOrigin: r.origin };
+  return { ...dials, language: k, pronounClass: r.register, unspaced: UNSPACED_STEMS.has(k), registerOrigin: r.origin, ...(r.register.beings ? { beings: r.register.beings } : {}) };
 }
