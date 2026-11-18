@@ -46,7 +46,7 @@ import { aliasJunctions, resolveAliases, dottedIn } from "../organs/lexicon.js";
 import { consultNonPersonal } from "../adapters/text/non-personal.js";
 import { buildReferentLedger } from "../adapters/text/reading-referents.js";
 import { renderCard } from "../adapters/text/folded-card.js";
-import { createDeclensionFolder } from "../adapters/text/declension.js";
+import { createDeclensionFolder, createRunBreak } from "../adapters/text/declension.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
@@ -208,7 +208,7 @@ function dispatchFor(stem, classify, roleConfig) {
  * it. Any organ makeRelationReader takes may be passed to replace this assembly's (discoverRelationVocab …), and `closedClasses`
  * replaces the language's received set.
  */
-export function makeReader({ priors = null, language = "eng", abbreviations = null, features = {}, classifyWord: classify = classifyWord, roleConfig = null, sameAct = null, closedClasses = undefined, extendRelations = null, ...extra } = {}) {
+export function makeReader({ priors = null, language = "eng", abbreviations = null, features = {}, classifyWord: classify = classifyWord, roleConfig = null, sameAct = null, closedClasses = undefined, extendRelations = null, surfaceOptions = null, ...extra } = {}) {
   const stem = stemOf(language) ?? String(language);
   const pr = priors ?? priorsFor(stem);
   const split = abbreviations ? (t, o = {}) => splitSentences(t, { ...o, abbreviations: o.abbreviations ?? abbreviations }) : splitSentences;
@@ -219,7 +219,7 @@ export function makeReader({ priors = null, language = "eng", abbreviations = nu
   const same = (a, b) => (sameAct ? sameAct(a, b) ?? null : null) ?? (useMorph ? pr.lemmatizer.sameAct(a, b) : String(a).toLowerCase() === String(b).toLowerCase());
   return makeRelationReader({
     splitSentences: split,
-    extractSurfaces: extractSurfacesHeard,
+    extractSurfaces: surfaceOptions ? (sents, o = {}) => extractSurfacesHeard(sents, { ...o, ...surfaceOptions }) : extractSurfacesHeard,
     discoverReferents,
     namesCorefer,
     diaNorm,
@@ -310,6 +310,7 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
   if (folder.gap) { gaps.push({ gap: folder.gap.reason, stem, detail: folder.gap.detail }); report({ stem, folded: false, why: folder.gap.reason }); return {}; }
   const usage = formUsageOf(pr?.posPrior);
   if (!usage) { gaps.push({ gap: "declension_ungated", stem, detail: `no part-of-speech prior for ${stem}: the fold would join pronouns and verbs with the names, so it is not run` }); report({ stem, folded: false, why: "declension_ungated" }); return {}; }
+  const runBreak = createRunBreak(prior);   // a prior that carries `nameCases` also breaks a capitalised run between two names of different case (declension.js::createRunBreak)
   const memo = new Map();
   const functional = (t) => { let v = memo.get(t); if (v === undefined) { v = usedMostlyAsOther(usage(t)); memo.set(t, v); } return v; };
   const sameStem = (a, b) => !functional(a) && !functional(b) && folder.sameStem(a, b);
@@ -317,6 +318,7 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
   return {
     discoverReferents: (s, o = {}) => discover(s, { ...o, sameStem }),
     namesCorefer: (a, b, o = {}) => corefer(a, b, { ...(typeof o === "function" ? { sameStem: o } : o), sameStem }),
+    ...(runBreak ? { surfaceOptions: { runBreak } } : {}),
   };
 }
 
@@ -336,6 +338,8 @@ export function readWith(text, { address = null, category = null, language = nul
   const gaps = [];
   const heard = language ? null : languageContextFor(str, {});
   const stem = (language ? stemOf(language) : null) ?? (heard?.language ? stemOf(heard.language) ?? heard.language : null) ?? "eng";
+  // `declension` may be a function of the language stem (the canonical read passes one: adapters/text/declension-shipped.js); null/false for a stem it has no prior for, and then nothing below changes
+  if (typeof declension === "function") declension = declension(stem) ?? null;
   const languageRead = { declared: language ?? null, stem, autonym: autonymOf(stem), source: language ? (stemOf(language) ? "declared" : "declared-unknown") : heard?.language ? "heard" : "default" };
   if (language && !stemOf(language)) gaps.push({ gap: "unknown_language", detail: `no prior stem is filed for ${language}: read with the ${stem} priors` });
   if (!language && !heard?.language) gaps.push({ gap: "language_default", detail: "no language was declared or heard: read as English, the repo's default" });
@@ -350,7 +354,7 @@ export function readWith(text, { address = null, category = null, language = nul
     return { ...empty, sentences, skipped: "too_short" };
   }
   const t0 = Date.now();
-  let out = null, chunks = [], err = null, R = null, claims, declensionReport = null;
+  let out = null, chunks = [], err = null, R = null, claims, declensionReport = null, surfaceOptions = null;
   try {
     // a surface's own organs (readerOptions: classifyWord, extendRelations, sameAct, roleConfig …) join the one assembly; the
     // abbreviations are this read's, so a surface never builds a reader beside it
@@ -360,6 +364,7 @@ export function readWith(text, { address = null, category = null, language = nul
     // ("Он"/"Она", "Приехала"/"Приехал"), so a form the language's own part-of-speech prior uses more often as something other than a noun, a name or an adjective is refused:
     // the gate is that prior's count (form-usage.js), a form it has not seen is not refused, and with no part-of-speech prior the fold is not run, with a typed gap.
     const declensionOrgans = declensionOrgansFor(declension, { stem, pr, discoverReferents, namesCorefer, gaps, report: (r) => { declensionReport = r; } });
+    surfaceOptions = declensionOrgans.surfaceOptions ?? null;
     R = reader ?? makeReader({ priors: pr, language: stem, abbreviations: abbr.set, features, ...declensionOrgans, ...readerOrgans });
     ({ report: out, chunks } = relationsFor([{ text: str }], { reader: R, language: language ? stem : null }));
     // selfRead: the material read back as an answer against itself, so every claim carries the reader's verdict and its span
@@ -407,7 +412,7 @@ export function readWith(text, { address = null, category = null, language = nul
     const languageKnown = languageRead.source === "declared" || languageRead.source === "heard";
     const formUsage = callerUsage !== undefined ? callerUsage : languageKnown ? formUsageFor(stem, pr.posPrior) : null;
     const verdicts = formUsage ? { undecided: [], separated: [] } : null;
-    const capitalSurfaces = extractSurfaces(cuts, formUsage ? { formUsage, verdicts } : {});
+    const capitalSurfaces = extractSurfaces(cuts, { ...(formUsage ? { formUsage, verdicts } : {}), ...(surfaceOptions ?? {}) });
     const capital = new Set(capitalSurfaces.map((x) => x.surface));
     // what the treebank's use refused, kept beside the entry (not enumerable: the wire stays what it was) so the rule is auditable
     // the conventions this branch reads by, cited from their one home (janus priors/conventions-<stem>.json); a gap is typed here, not on the wire

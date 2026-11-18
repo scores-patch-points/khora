@@ -55,6 +55,33 @@ export const createDeclensionFolder = (prior, { minStem = MIN_STEM } = {}) => {
     }
     return false;
   };
+  // MODE "co-lemma" (a prior that says so, `mode: "co-lemma"`; Greek's accent shifts between cases make one form rarely reach another directly: Χριστόν and Χριστοῦ both reach Χριστός, not each other):
+  // two observed forms are one name when the forms each can reach under the rules, the form itself included, share a string. Still a pairwise question about two OBSERVED strings, never a lemma for one word alone.
+  if (prior.mode === "co-lemma") {
+    const reach = (x) => { const out = new Set([x]); for (const r of rules) { if (!x.endsWith(r.from)) continue; const stemLen = x.length - r.from.length; if (stemLen < minStem) continue; out.add(x.slice(0, stemLen) + r.to); } return out; };
+    const direct = sameStem;
+    const co = (a, b) => { if (!a || !b || a === b) return false; if (direct(a, b)) return true; const ra = reach(a), rb = reach(b); for (const c of ra) if (c !== a && rb.has(c)) return true; return false; };
+    co.gap = null;
+    return { sameStem: co, gap: null };
+  }
   sameStem.gap = null;
   return { sameStem, gap: null };
+};
+
+/**
+ * createRunBreak(prior) -> (prevToken, nextToken) => boolean | null
+ *
+ * In a case-marked language two capitalised words side by side are not always one name: "τῷ Ἰησοῦ Σίμων Πέτρος" is Jesus (dative) then Simon Peter (nominative), and read as one run it makes a being nobody is.
+ * The prior's `nameCases` (measured from a treebank's proper nouns: form -> the cases it takes, a case counted when it is at least half the form's most frequent case, so a form's own spread decides) answers
+ * pairwise: the run breaks between two tokens whose case sets are both known and share no case. A form the treebank never saw as a name breaks nothing. No `nameCases`, no function (null) and a run is as it always was.
+ */
+export const createRunBreak = (prior) => {
+  const table = prior?.nameCases;
+  if (!table || typeof table !== "object") return null;
+  const key = (t) => String(t).normalize("NFC").toLowerCase();
+  return (a, b) => {
+    const x = table[key(a)], y = table[key(b)];
+    if (!x || !y) return false;
+    return !x.some((c) => y.includes(c));
+  };
 };

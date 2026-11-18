@@ -579,7 +579,7 @@ export const createSurfaceEvidence = () => ({
   lowerSentenceIndex: new Map(), // lowercased form -> Set(sentence order) — the case-free path's reach
 });
 
-export const accumulateSurfaceEvidence = (sentences, evidence, { abbreviations = null } = {}) => {
+export const accumulateSurfaceEvidence = (sentences, evidence, { abbreviations = null, runBreak = null } = {}) => {   // runBreak(prevToken, nextToken) -> true: the two capitalised tokens are not one name (declension.js::createRunBreak); absent, a run is as it always was
   const { capCounts, lowerCounts, sentenceIndex, lowerSentenceIndex } = evidence;
   // ABBREVIATIONS DO NOT BREAK A RUN — a period is the one punctuation mark
   // with a genuine dual role (sentence end OR abbreviation marker), unlike
@@ -687,7 +687,7 @@ export const accumulateSurfaceEvidence = (sentences, evidence, { abbreviations =
       // AND nothing punctuated separated k from k+1 in the material's own
       // bytes (either side's junk — see the union above).
       let j = i + 1;
-      while (j < toks.length && CAP_TOKEN.test(toks[j]) && !NEVER_A_NAME.has(toks[j].toLowerCase()) && !hardBreakAfter[j - 1]) j++;
+      while (j < toks.length && CAP_TOKEN.test(toks[j]) && !NEVER_A_NAME.has(toks[j].toLowerCase()) && !hardBreakAfter[j - 1] && !(runBreak && runBreak(toks[j - 1], toks[j]))) j++;
       const run = toks.slice(i, j);
       // An all-caps run inside an otherwise mixed-case unit is the same
       // typography as an all-caps unit — a part title quoted mid-paragraph.
@@ -876,7 +876,7 @@ export const extractLeadingSurfaces = (sentences, { abbreviations } = {}) => {
 };
 
 export const extractSurfaces = (sentences, opts = {}) =>
-  surfacesFromEvidence(accumulateSurfaceEvidence(sentences, createSurfaceEvidence(), { abbreviations: opts.abbreviations }), opts);
+  surfacesFromEvidence(accumulateSurfaceEvidence(sentences, createSurfaceEvidence(), { abbreviations: opts.abbreviations, runBreak: opts.runBreak ?? null }), opts);
 
 // ---------------------------------------------------------------------------
 // WHETHER THIS MECHANISM CAN FIRE ON THIS MATERIAL AT ALL.
