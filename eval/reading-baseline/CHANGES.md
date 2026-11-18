@@ -23,3 +23,6 @@ files changed since the last record: (none)
 
 ## 2026-11-18: docs and result files only
 files changed since the last record: (none)
+
+## 2026-11-18: one priors-home rule (prior-source.mjs: KHORA_PRIORS_DIR, janus beside the workspace, ~/Documents/janus/priors, vendored); pronoun-registers reads the same door; overcomeable non-personal ruling is the default in the read (pp.nonPersonalSoft ?? true); rung options priorGender, genderModel (surprise-weighted gender, experimental, off) and roles
+files changed since the last record: native/the-fold/read-core.mjs, native/adapters/text/pronouns.js, native/adapters/text/pronoun-registers.js, native/the-fold/prior-source.mjs

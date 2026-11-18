@@ -1,0 +1,27 @@
+// gender-smell-eval.mjs — PREREG-ROUND20 NOTE-5 and NOTE-6. Dignaga's relative-centroid ground on the given names of the Wikidata snapshot; ablation arms against two baselines.
+import fs from 'node:fs'; import crypto from 'node:crypto'; import path from 'node:path'; import { pathToFileURL, fileURLToPath } from 'node:url';
+const KH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..'); const imp = (p) => import(pathToFileURL(path.join(KH, p)).href);
+const { makeEmbedder } = await imp('native/adapters/text/embed-personhood.js'); const { makeGround } = await imp('native/adapters/text/apoha.js');
+const j = JSON.parse(fs.readFileSync(path.join(KH, 'identity/givers/wikidata-given-names-en.json'), 'utf8')); const M = new Set(j.male), F = new Set(j.female), U = new Set(j.unisex);
+const names = [...new Set([...j.male, ...j.female])].filter((n) => !(M.has(n) && F.has(n)) && !U.has(n)).map((n) => ({ name: n, cls: M.has(n) ? 'masc' : 'fem' }));
+const held = (n) => ['0', '1', '2'].includes(crypto.createHash('sha256').update(n).digest('hex').slice(-1)); const train = names.filter((x) => !held(x.name)), test = names.filter((x) => held(x.name));
+console.log('names', names.length, 'train', train.length, 'held-out', test.length, 'majority class masc share', (names.filter((x) => x.cls === 'masc').length / names.length).toFixed(3));
+const emb = makeEmbedder(); const all = await emb.embed(names.map((x) => x.name)); const vec = new Map(names.map((x, i) => [x.name, all[i]]));
+const mk = (list, seed = 1) => makeGround({ kind: 'given-name:en', slice: 'wikidata-2026-11-18', members: list.map((x) => ({ id: x.name, vec: vec.get(x.name), cls: x.cls })), seed });
+const ground = mk(train); console.log('ground', JSON.stringify(ground.counts), 'spread', ground.spread.toFixed(4));
+// B2: suffix naive Bayes over the last 1-3 letters
+const suf = (n) => { const s = n.toLowerCase(); return [s.slice(-1), s.slice(-2), s.slice(-3)].map((x, i) => i + ':' + x); }; const cnt = { masc: new Map(), fem: new Map() }, tot = { masc: 0, fem: 0 }; for (const x of train) { tot[x.cls]++; for (const f of suf(x.name)) cnt[x.cls].set(f, (cnt[x.cls].get(f) ?? 0) + 1); }
+const nb = (n) => { let sm = Math.log(tot.masc / (tot.masc + tot.fem)), sf = Math.log(tot.fem / (tot.masc + tot.fem)); for (const f of suf(n)) { sm += Math.log(((cnt.masc.get(f) ?? 0) + 1) / (tot.masc + 2)); sf += Math.log(((cnt.fem.get(f) ?? 0) + 1) / (tot.fem + 2)); } return sm > sf ? 'masc' : 'fem'; };
+const arms = { 'P-full': {}, 'P-no-ground': { ground: false }, 'P-no-contrast': { contrast: false }, 'P-no-null': { null: false } };
+const rows = test.map((x) => { const v = vec.get(x.name); const r = { name: x.name, gold: x.cls, B1: 'masc', B2: nb(x.name) }; for (const [a, ab] of Object.entries(arms)) { const c = ground.claim(v, ab); r[a] = c.claimed ? c.cls : null; r[a + ':score'] = c.score; } return r; });
+const acc = (rs, k) => { const c = rs.filter((r) => r[k] != null); return { claimed: c.length / rs.length, accuracy: c.filter((r) => r[k] === r.gold).length / Math.max(1, c.length), n: c.length }; };
+console.log('held-out names', rows.length); for (const k of ['B1', 'B2', ...Object.keys(arms)]) { const a = acc(rows, k); console.log(k.padEnd(14), 'claimed', (100 * a.claimed).toFixed(1) + '%', 'accuracy among claimed', a.accuracy.toFixed(3), '(' + a.n + ')'); }
+// A1 / A2: on the names P-full claims, the same names for B2 and B1 and each ablation; bootstrap over names
+let seed = 20; const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32); const claimedNames = rows.filter((r) => r['P-full'] != null); const boot = (f) => { const v = []; for (let b = 0; b < 2000; b++) { const rs = []; for (let i = 0; i < claimedNames.length; i++) rs.push(claimedNames[Math.floor(rnd() * claimedNames.length)]); v.push(f(rs)); } v.sort((a, b) => a - b); return `[${v[Math.floor(v.length * .025)].toFixed(3)}, ${v[Math.floor(v.length * .975)].toFixed(3)}]`; };
+const A = (rs, k) => rs.filter((r) => r[k] === r.gold).length / rs.length; console.log('on the', claimedNames.length, 'names P-full claims: P-full', A(claimedNames, 'P-full').toFixed(3), 'B2', A(claimedNames, 'B2').toFixed(3), 'B1', A(claimedNames, 'B1').toFixed(3));
+console.log('A1 P-full - B2', boot((rs) => A(rs, 'P-full') - A(rs, 'B2')), ' P-full - B1', boot((rs) => A(rs, 'P-full') - A(rs, 'B1')));
+for (const k of ['P-no-ground', 'P-no-contrast', 'P-no-null']) { const c = claimedNames.filter((r) => r[k] != null); console.log('A2 on the same names,', k, 'accuracy', (c.filter((r) => r[k] === r.gold).length / Math.max(1, c.length)).toFixed(3), 'claimed', c.length, 'of', claimedNames.length); }
+// A4: shuffled labels
+const sh = []; for (let s = 1; s <= 20; s++) { let r = s >>> 0; const rr = () => ((r = (r * 1664525 + 1013904223) >>> 0) / 2 ** 32); const labs = train.map((x) => x.cls); for (let i = labs.length - 1; i > 0; i--) { const q = Math.floor(rr() * (i + 1)); [labs[i], labs[q]] = [labs[q], labs[i]]; } const g = mk(train.map((x, i) => ({ ...x, cls: labs[i] })), s); const c = test.map((x) => ({ gold: x.cls, p: g.claim(vec.get(x.name), { null: false }).cls })); sh.push(c.filter((z) => z.p === z.gold).length / c.length); }
+console.log('A4 shuffled-label grounds, accuracy mean', (sh.reduce((a, b) => a + b, 0) / sh.length).toFixed(3), 'max', Math.max(...sh).toFixed(3));
+fs.writeFileSync('/tmp/gum-data/gender-smell-rows.json', JSON.stringify(rows));

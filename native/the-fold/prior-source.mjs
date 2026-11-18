@@ -27,13 +27,17 @@ export const IS_NODE = typeof process !== "undefined" && !!process.versions?.nod
 const fs = IS_NODE ? (await import("node:fs")).default : null;
 const path = IS_NODE ? (await import("node:path")).default : null;
 const url = IS_NODE ? await import("node:url") : null;
+const os = IS_NODE ? (await import("node:os")).default : null;
 
 function nodeHome() {
   const here = path.dirname(url.fileURLToPath(import.meta.url));
   const root = path.join(here, "..", "..", "..");
   const janus = path.join(root, "janus", "priors");
   const vendored = path.join(here, "..", "priors");
-  const dir = process.env.KHORA_PRIORS_DIR || (fs.existsSync(janus) || !fs.existsSync(vendored) ? janus : vendored);
+  // ONE PRIORS-HOME RULE (found 2026-11-18: native/priors is a symlink that dangles in every checkout, so a read found 0 priors and every language read bare, Greek as English): KHORA_PRIORS_DIR, else janus beside the workspace root,
+  // else ~/Documents/janus/priors (where janus lives on this machine), else a vendored native/priors that exists, else the janus path (and the gaps say so).
+  const userJanus = os ? path.join(os.homedir(), "Documents", "janus", "priors") : null;
+  const dir = process.env.KHORA_PRIORS_DIR || (fs.existsSync(janus) ? janus : userJanus && fs.existsSync(userJanus) ? userJanus : fs.existsSync(vendored) ? vendored : janus);
   // a vendored tree may carry some priors beside janus and others in its own native/priors (EO-terminal does): a name the home
   // lacks is read from there. In khora itself native/priors is the janus home, so the two are one directory.
   const also = !process.env.KHORA_PRIORS_DIR && dir !== vendored && fs.existsSync(vendored) && fs.realpathSync(vendored) !== fs.realpathSync(dir) ? vendored : null;

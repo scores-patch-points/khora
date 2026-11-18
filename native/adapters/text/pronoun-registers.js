@@ -7,6 +7,7 @@
 // The canonical read (read-process.mjs) passes `presenceOptionsFor` as readerOptions.pronounPresence; read-core.mjs calls it with the language stem it settled on. A language with no register gets
 // { gap: { gap: "pronoun_presence_no_register" } }, filed on the entry: never the English class applied silently to another language. A register WITHOUT a recorded evaluation gets
 // { gap: { gap: "pronoun_presence_unmeasured" } }: no unmeasured binding ships. Status: EXPERIMENTAL.
+import { priorsHome } from "../../the-fold/prior-source.mjs";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -17,7 +18,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const SHIPPED_DIR = path.join(HERE, "pronoun-registers");
 export const UNSPACED_STEMS = Object.freeze(new Set(["cmn", "zho", "yue", "jpn", "tha", "khm", "lao", "mya"]));
 const stemKey = (stem) => String(stem ?? "").toLowerCase().replace(/[-_].*$/, "");
-const priorsDir = () => process.env.KHORA_PRIORS_DIR ?? path.join(os.homedir(), "Documents", "janus", "priors");
+const priorsDir = () => process.env.KHORA_PRIORS_DIR ?? priorsHome().dir ?? path.join(os.homedir(), "Documents", "janus", "priors"); // the one door's home (the-fold/prior-source.mjs)
 const cache = new Map();
 
 export function registerFor(stem) {
