@@ -62,6 +62,7 @@ import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-q
 import { priorJson, priorGeneration } from "./prior-source.mjs";
 import { figuresOf } from "../adapters/text/figure-period.en.js";
 import { rolesFor } from "../adapters/text/case-marked-clauses.js";
+import { competencyOf } from "../adapters/text/language-competency.js";
 import { castIdentity as castIdentityPass, repairEdges as repairEdgesPass } from "../organs/cast-identity.js";
 
 export const READ_CORE = Object.freeze({
@@ -560,6 +561,7 @@ export function readWith(text, { address = null, category = null, language = nul
     vocabulary: out?.vocabulary ?? null,
     cast, heard: heardRows, edges, clauses, quality: qualityReport, surprise,
     sentences, pronouns,
+    competency: competencyOf(stem),   // what this read can do in this language (adapters/text/language-competency.js): the pieces on disk, the clause reader, the pronoun evidence, what is missing
     ...(pronounsPresence ? { pronounsPresence } : {}),
     ...(pronounGaps ? { pronounGaps } : {}),
     // OPT-IN (features.figures): the money figures of the document with the period and sign each is about, as atoms with addresses (adapters/text/figure-period.en.js); absent, the entry is exactly what it was

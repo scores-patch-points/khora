@@ -93,7 +93,14 @@
       ]
      }
     },
-    "caveat": "the lower end of the precision interval is near zero; the table knows only words GUM has seen"
+    "caveat": "the lower end of the precision interval is near zero; the table knows only words GUM has seen",
+    "with_ruling_soft_in_canonical_read": {
+     "right": 321,
+     "wrong": 30,
+     "precision": 0.915,
+     "coverage": 0.636,
+     "note": "the overcomeable (soft) ruling is the default in the read (PREREG-ROUND20 NOTE-1); the hard ruling was 319/31"
+    }
    }
   },
   "languages_measured": {
@@ -156,11 +163,11 @@
  },
  "files": {
   "native/the-fold/read-process.mjs": "0665815a5d276de9b1bc415718675a0e8afb06dffdd643f0b13cf5b0b796feca",
-  "native/the-fold/read-core.mjs": "f107163e592249c9d7615a8cf024e257f624d6b0d979cb65b090552b1676a3b6",
+  "native/the-fold/read-core.mjs": "816e02e789e351b12a8f0b8f360523a969db173f196255e33f291834f129e358",
   "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
   "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
   "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
-  "native/adapters/text/pronouns.js": "0e697ff8610a8feb5ab45db9825df998e21c4484aeeca06fdd44a76416735489",
+  "native/adapters/text/pronouns.js": "384e7481458e9a4c94244ed2190e6f06a707715f9480db99dcfd71e266af5084",
   "native/adapters/text/pronoun-registers.js": "9b118b334976e4948fdab99ce9f48a4085c5eba66b95de031b204ead6b0f7d88",
   "native/adapters/text/pronoun-presence-chosen.js": "40a9648b7ddb573a9da51b40f410da458aa4f19a16e4cd34d1511cccd4f53a2a",
   "native/adapters/text/clause-attach.js": "0450fdf6f38cc65b12735c2c60d9a631c8bf82ca10ff865379eebdad57d00035",
@@ -172,7 +179,8 @@
   "native/the-fold/prior-source.mjs": "f08f51005d3a42860cdd88a979a71c19ce074426673391e39187c3655be51b60",
   "native/adapters/text/pronoun-registers/grc.json": "1bf7ac99690f99af7a3c864c4bd65f739e721a5117d15b05ffe0270e072de5ce",
   "native/adapters/text/pronoun-registers/san.json": "696e7f5347c1c8461940df140b493edce6cd5e3c8d053f18f1f154c379510ac5",
-  "native/priors-shipped/frame-san.json": "a77aa7301bd35fca3af3bb61b8ed32aa20590f1d38eadc7aa1074731fc5d83c0"
+  "native/priors-shipped/frame-san.json": "a77aa7301bd35fca3af3bb61b8ed32aa20590f1d38eadc7aa1074731fc5d83c0",
+  "native/adapters/text/language-competency.js": "a98b05ea8d1afd2dfd574bd003b73f8c6e760fe852600563ca682cc68901934a"
  },
  "recorded": "2026-11-18"
 }

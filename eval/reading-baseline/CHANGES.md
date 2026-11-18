@@ -26,3 +26,9 @@ files changed since the last record: (none)
 
 ## 2026-11-18: one priors-home rule (prior-source.mjs: KHORA_PRIORS_DIR, janus beside the workspace, ~/Documents/janus/priors, vendored); pronoun-registers reads the same door; overcomeable non-personal ruling is the default in the read (pp.nonPersonalSoft ?? true); rung options priorGender, genderModel (surprise-weighted gender, experimental, off) and roles
 files changed since the last record: native/the-fold/read-core.mjs, native/adapters/text/pronouns.js, native/adapters/text/pronoun-registers.js, native/the-fold/prior-source.mjs
+
+## 2026-11-18: per-language competency profile on the entry (language-competency.js); English evaluation recorded with the soft ruling
+files changed since the last record: native/the-fold/read-core.mjs, native/adapters/text/pronouns.js
+
+## 2026-11-18: language-competency.js is reading-critical
+files changed since the last record: native/adapters/text/language-competency.js

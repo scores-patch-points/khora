@@ -1,0 +1,6539 @@
+{
+ "schema": "LanguageCompetencyBoard@1",
+ "date": "2026-11-18",
+ "tally": {
+  "lexical": 222,
+  "reading+pronouns": 3
+ },
+ "languages": [
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "aar",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-aar.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for aar (forms, gender class) with its evaluation",
+    "punctuation-aar.json",
+    "dotted-aar.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "abk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-abk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for abk (forms, gender class) with its evaluation",
+    "punctuation-abk.json",
+    "dotted-abk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ace",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ace.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ace (forms, gender class) with its evaluation",
+    "punctuation-ace.json",
+    "dotted-ace.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ady",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ady.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ady (forms, gender class) with its evaluation",
+    "punctuation-ady.json",
+    "dotted-ady.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "afr",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-afr.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for afr (forms, gender class) with its evaluation",
+    "punctuation-afr.json",
+    "dotted-afr.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "aii",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-aii.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for aii (forms, gender class) with its evaluation",
+    "punctuation-aii.json",
+    "dotted-aii.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ajg",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ajg.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ajg (forms, gender class) with its evaluation",
+    "punctuation-ajg.json",
+    "dotted-ajg.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "aka",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-aka.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for aka (forms, gender class) with its evaluation",
+    "punctuation-aka.json",
+    "dotted-aka.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "als",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-als.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for als (forms, gender class) with its evaluation",
+    "punctuation-als.json",
+    "dotted-als.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "alt",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-alt.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for alt (forms, gender class) with its evaluation",
+    "punctuation-alt.json",
+    "dotted-alt.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ame",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ame.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ame (forms, gender class) with its evaluation",
+    "punctuation-ame.json",
+    "dotted-ame.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ami",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ami.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ami (forms, gender class) with its evaluation",
+    "punctuation-ami.json",
+    "dotted-ami.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "arb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-arb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for arb (forms, gender class) with its evaluation",
+    "punctuation-arb.json",
+    "dotted-arb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "arn",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-arn.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for arn (forms, gender class) with its evaluation",
+    "punctuation-arn.json",
+    "dotted-arn.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ast",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ast.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ast (forms, gender class) with its evaluation",
+    "punctuation-ast.json",
+    "dotted-ast.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "auv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-auv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for auv (forms, gender class) with its evaluation",
+    "punctuation-auv.json",
+    "dotted-auv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bam",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bam.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bam (forms, gender class) with its evaluation",
+    "punctuation-bam.json",
+    "dotted-bam.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ban",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ban.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ban (forms, gender class) with its evaluation",
+    "punctuation-ban.json",
+    "dotted-ban.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bcl",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bcl.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bcl (forms, gender class) with its evaluation",
+    "punctuation-bcl.json",
+    "dotted-bcl.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bel",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bel.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bel (forms, gender class) with its evaluation",
+    "punctuation-bel.json",
+    "dotted-bel.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ben",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ben.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ben (forms, gender class) with its evaluation",
+    "punctuation-ben.json",
+    "dotted-ben.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bho",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bho.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bho (forms, gender class) with its evaluation",
+    "punctuation-bho.json",
+    "dotted-bho.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bis",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bis.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bis (forms, gender class) with its evaluation",
+    "punctuation-bis.json",
+    "dotted-bis.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bos",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bos.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bos (forms, gender class) with its evaluation",
+    "punctuation-bos.json",
+    "dotted-bos.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bre",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bre.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bre (forms, gender class) with its evaluation",
+    "punctuation-bre.json",
+    "dotted-bre.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "buc",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-buc.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for buc (forms, gender class) with its evaluation",
+    "punctuation-buc.json",
+    "dotted-buc.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bug",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bug.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bug (forms, gender class) with its evaluation",
+    "punctuation-bug.json",
+    "dotted-bug.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "bul",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-bul.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for bul (forms, gender class) with its evaluation",
+    "punctuation-bul.json",
+    "dotted-bul.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cat",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cat.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cat (forms, gender class) with its evaluation",
+    "punctuation-cat.json",
+    "dotted-cat.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ceb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ceb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ceb (forms, gender class) with its evaluation",
+    "punctuation-ceb.json",
+    "dotted-ceb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ces",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ces.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ces (forms, gender class) with its evaluation",
+    "punctuation-ces.json",
+    "dotted-ces.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cha",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cha.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cha (forms, gender class) with its evaluation",
+    "punctuation-cha.json",
+    "dotted-cha.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "chk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-chk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for chk (forms, gender class) with its evaluation",
+    "punctuation-chk.json",
+    "dotted-chk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "chr",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-chr.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for chr (forms, gender class) with its evaluation",
+    "punctuation-chr.json",
+    "dotted-chr.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "chv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-chv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for chv (forms, gender class) with its evaluation",
+    "punctuation-chv.json",
+    "dotted-chv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cjk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cjk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cjk (forms, gender class) with its evaluation",
+    "punctuation-cjk.json",
+    "dotted-cjk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cjs",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cjs.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cjs (forms, gender class) with its evaluation",
+    "punctuation-cjs.json",
+    "dotted-cjs.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ckb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ckb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ckb (forms, gender class) with its evaluation",
+    "punctuation-ckb.json",
+    "dotted-ckb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cmn",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cmn.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cmn (forms, gender class) with its evaluation",
+    "punctuation-cmn.json",
+    "dotted-cmn.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cni",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cni.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cni (forms, gender class) with its evaluation",
+    "punctuation-cni.json",
+    "dotted-cni.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cnr",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cnr.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cnr (forms, gender class) with its evaluation",
+    "punctuation-cnr.json",
+    "dotted-cnr.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cos",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cos.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cos (forms, gender class) with its evaluation",
+    "punctuation-cos.json",
+    "dotted-cos.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "crh",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-crh.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for crh (forms, gender class) with its evaluation",
+    "punctuation-crh.json",
+    "dotted-crh.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "crs",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-crs.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for crs (forms, gender class) with its evaluation",
+    "punctuation-crs.json",
+    "dotted-crs.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "cym",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-cym.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for cym (forms, gender class) with its evaluation",
+    "punctuation-cym.json",
+    "dotted-cym.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "dan",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-dan.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for dan (forms, gender class) with its evaluation",
+    "punctuation-dan.json",
+    "dotted-dan.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "deu",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": true,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-deu.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for deu (forms, gender class) with its evaluation",
+    "dotted-deu.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "div",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-div.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for div (forms, gender class) with its evaluation",
+    "punctuation-div.json",
+    "dotted-div.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "dyu",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-dyu.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for dyu (forms, gender class) with its evaluation",
+    "punctuation-dyu.json",
+    "dotted-dyu.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ell",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ell.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ell (forms, gender class) with its evaluation",
+    "punctuation-ell.json",
+    "dotted-ell.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "emk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-emk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for emk (forms, gender class) with its evaluation",
+    "punctuation-emk.json",
+    "dotted-emk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "eml",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-eml.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for eml (forms, gender class) with its evaluation",
+    "punctuation-eml.json",
+    "dotted-eml.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "en",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "unmeasured",
+    "origin": "priors"
+   },
+   "next": [
+    "morphology-en.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "the register's evaluation (no unmeasured binding ships)",
+    "punctuation-en.json",
+    "dotted-en.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "eng",
+   "tier": "reading+pronouns",
+   "pieces": {
+    "pos": true,
+    "posLexicon": true,
+    "unimorph": false,
+    "morphology": true,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": true,
+    "dotted": true,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (English parser)",
+   "pronouns": {
+    "status": "bound",
+    "origin": "built-in",
+    "precision": 0.915,
+    "coverage": 0.636,
+    "nullPrecision": null,
+    "gold": true,
+    "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND20.md"
+   },
+   "next": []
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "epo",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-epo.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for epo (forms, gender class) with its evaluation",
+    "punctuation-epo.json",
+    "dotted-epo.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "est",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-est.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for est (forms, gender class) with its evaluation",
+    "punctuation-est.json",
+    "dotted-est.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "eus",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-eus.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for eus (forms, gender class) with its evaluation",
+    "punctuation-eus.json",
+    "dotted-eus.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "eve",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-eve.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for eve (forms, gender class) with its evaluation",
+    "punctuation-eve.json",
+    "dotted-eve.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "evn",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-evn.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for evn (forms, gender class) with its evaluation",
+    "punctuation-evn.json",
+    "dotted-evn.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ewe",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ewe.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ewe (forms, gender class) with its evaluation",
+    "punctuation-ewe.json",
+    "dotted-ewe.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fao",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-fao.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fao (forms, gender class) with its evaluation",
+    "punctuation-fao.json",
+    "dotted-fao.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fas",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": true,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "pos-fas-unimorph.json is on disk and the read does not load it",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fas (forms, gender class) with its evaluation",
+    "punctuation-fas.json",
+    "dotted-fas.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fij",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-fij.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fij (forms, gender class) with its evaluation",
+    "punctuation-fij.json",
+    "dotted-fij.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fin",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-fin.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fin (forms, gender class) with its evaluation",
+    "punctuation-fin.json",
+    "dotted-fin.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fkv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-fkv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fkv (forms, gender class) with its evaluation",
+    "punctuation-fkv.json",
+    "dotted-fkv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "flm",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-flm.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for flm (forms, gender class) with its evaluation",
+    "punctuation-flm.json",
+    "dotted-flm.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fra",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": true,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-fra.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fra (forms, gender class) with its evaluation",
+    "dotted-fra.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fri",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-fri.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fri (forms, gender class) with its evaluation",
+    "punctuation-fri.json",
+    "dotted-fri.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "fur",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-fur.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for fur (forms, gender class) with its evaluation",
+    "punctuation-fur.json",
+    "dotted-fur.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "gaa",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-gaa.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for gaa (forms, gender class) with its evaluation",
+    "punctuation-gaa.json",
+    "dotted-gaa.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "gag",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-gag.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for gag (forms, gender class) with its evaluation",
+    "punctuation-gag.json",
+    "dotted-gag.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "gla",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-gla.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for gla (forms, gender class) with its evaluation",
+    "punctuation-gla.json",
+    "dotted-gla.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "gld",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-gld.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for gld (forms, gender class) with its evaluation",
+    "punctuation-gld.json",
+    "dotted-gld.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "gle",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-gle.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for gle (forms, gender class) with its evaluation",
+    "punctuation-gle.json",
+    "dotted-gle.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "glg",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-glg.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for glg (forms, gender class) with its evaluation",
+    "punctuation-glg.json",
+    "dotted-glg.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "glv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-glv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for glv (forms, gender class) with its evaluation",
+    "punctuation-glv.json",
+    "dotted-glv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "grc",
+   "tier": "reading+pronouns",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": true,
+    "morphology": false,
+    "caseMarking": true,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "case-marked (the Chomsky seam: case and pro-drop)",
+   "pronouns": {
+    "status": "bound",
+    "origin": "shipped",
+    "precision": 0.53,
+    "coverage": 0.573,
+    "nullPrecision": 0.459,
+    "gold": true,
+    "resultsFile": "identity/pronouns-multilingual/grc/RESULTS-GRC.md"
+   },
+   "next": [
+    "pos-grc-unimorph.json is on disk and the read does not load it",
+    "punctuation-grc.json",
+    "dotted-grc.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "gsw1",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-gsw1.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for gsw1 (forms, gender class) with its evaluation",
+    "punctuation-gsw1.json",
+    "dotted-gsw1.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "gug",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-gug.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for gug (forms, gender class) with its evaluation",
+    "punctuation-gug.json",
+    "dotted-gug.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "guj",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-guj.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for guj (forms, gender class) with its evaluation",
+    "punctuation-guj.json",
+    "dotted-guj.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hat",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hat.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hat (forms, gender class) with its evaluation",
+    "punctuation-hat.json",
+    "dotted-hat.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hau",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hau.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hau (forms, gender class) with its evaluation",
+    "punctuation-hau.json",
+    "dotted-hau.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "haw",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-haw.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for haw (forms, gender class) with its evaluation",
+    "punctuation-haw.json",
+    "dotted-haw.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "heb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-heb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for heb (forms, gender class) with its evaluation",
+    "punctuation-heb.json",
+    "dotted-heb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hil",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hil.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hil (forms, gender class) with its evaluation",
+    "punctuation-hil.json",
+    "dotted-hil.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hin",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hin.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hin (forms, gender class) with its evaluation",
+    "punctuation-hin.json",
+    "dotted-hin.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hna",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hna.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hna (forms, gender class) with its evaluation",
+    "punctuation-hna.json",
+    "dotted-hna.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hrv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hrv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hrv (forms, gender class) with its evaluation",
+    "punctuation-hrv.json",
+    "dotted-hrv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hsb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hsb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hsb (forms, gender class) with its evaluation",
+    "punctuation-hsb.json",
+    "dotted-hsb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hun",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hun.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hun (forms, gender class) with its evaluation",
+    "punctuation-hun.json",
+    "dotted-hun.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "hye",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-hye.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for hye (forms, gender class) with its evaluation",
+    "punctuation-hye.json",
+    "dotted-hye.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ido",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ido.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ido (forms, gender class) with its evaluation",
+    "punctuation-ido.json",
+    "dotted-ido.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ilo",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ilo.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ilo (forms, gender class) with its evaluation",
+    "punctuation-ilo.json",
+    "dotted-ilo.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ina",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ina.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ina (forms, gender class) with its evaluation",
+    "punctuation-ina.json",
+    "dotted-ina.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ind",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ind.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ind (forms, gender class) with its evaluation",
+    "punctuation-ind.json",
+    "dotted-ind.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "isl",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-isl.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for isl (forms, gender class) with its evaluation",
+    "punctuation-isl.json",
+    "dotted-isl.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ita",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": true,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ita.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ita (forms, gender class) with its evaluation",
+    "dotted-ita.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "jav",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-jav.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for jav (forms, gender class) with its evaluation",
+    "punctuation-jav.json",
+    "dotted-jav.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "jpn",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": true,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "pos-jpn-unimorph.json is on disk and the read does not load it",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for jpn (forms, gender class) with its evaluation",
+    "punctuation-jpn.json",
+    "dotted-jpn.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kaa",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kaa.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kaa (forms, gender class) with its evaluation",
+    "punctuation-kaa.json",
+    "dotted-kaa.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kal",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kal.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kal (forms, gender class) with its evaluation",
+    "punctuation-kal.json",
+    "dotted-kal.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kan",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kan.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kan (forms, gender class) with its evaluation",
+    "punctuation-kan.json",
+    "dotted-kan.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kat",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kat.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kat (forms, gender class) with its evaluation",
+    "punctuation-kat.json",
+    "dotted-kat.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kaz",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kaz.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kaz (forms, gender class) with its evaluation",
+    "punctuation-kaz.json",
+    "dotted-kaz.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kbd",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kbd.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kbd (forms, gender class) with its evaluation",
+    "punctuation-kbd.json",
+    "dotted-kbd.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kea",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kea.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kea (forms, gender class) with its evaluation",
+    "punctuation-kea.json",
+    "dotted-kea.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "khk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-khk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for khk (forms, gender class) with its evaluation",
+    "punctuation-khk.json",
+    "dotted-khk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kir",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kir.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kir (forms, gender class) with its evaluation",
+    "punctuation-kir.json",
+    "dotted-kir.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kjh",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kjh.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kjh (forms, gender class) with its evaluation",
+    "punctuation-kjh.json",
+    "dotted-kjh.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kmb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kmb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kmb (forms, gender class) with its evaluation",
+    "punctuation-kmb.json",
+    "dotted-kmb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kmr",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kmr.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kmr (forms, gender class) with its evaluation",
+    "punctuation-kmr.json",
+    "dotted-kmr.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "koi",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-koi.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for koi (forms, gender class) with its evaluation",
+    "punctuation-koi.json",
+    "dotted-koi.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "kor",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-kor.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for kor (forms, gender class) with its evaluation",
+    "punctuation-kor.json",
+    "dotted-kor.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "krl",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-krl.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for krl (forms, gender class) with its evaluation",
+    "punctuation-krl.json",
+    "dotted-krl.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lad",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lad.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lad (forms, gender class) with its evaluation",
+    "punctuation-lad.json",
+    "dotted-lad.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lat",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": true,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lat.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lat (forms, gender class) with its evaluation",
+    "punctuation-lat.json",
+    "dotted-lat.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lav",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lav.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lav (forms, gender class) with its evaluation",
+    "punctuation-lav.json",
+    "dotted-lav.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lin",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lin.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lin (forms, gender class) with its evaluation",
+    "punctuation-lin.json",
+    "dotted-lin.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lit",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lit.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lit (forms, gender class) with its evaluation",
+    "punctuation-lit.json",
+    "dotted-lit.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lld",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lld.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lld (forms, gender class) with its evaluation",
+    "punctuation-lld.json",
+    "dotted-lld.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lnc",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lnc.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lnc (forms, gender class) with its evaluation",
+    "punctuation-lnc.json",
+    "dotted-lnc.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lot",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lot.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lot (forms, gender class) with its evaluation",
+    "punctuation-lot.json",
+    "dotted-lot.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ltz",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ltz.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ltz (forms, gender class) with its evaluation",
+    "punctuation-ltz.json",
+    "dotted-ltz.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lug",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lug.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lug (forms, gender class) with its evaluation",
+    "punctuation-lug.json",
+    "dotted-lug.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lus",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lus.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lus (forms, gender class) with its evaluation",
+    "punctuation-lus.json",
+    "dotted-lus.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "lzh",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-lzh.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for lzh (forms, gender class) with its evaluation",
+    "punctuation-lzh.json",
+    "dotted-lzh.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mad",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mad.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mad (forms, gender class) with its evaluation",
+    "punctuation-mad.json",
+    "dotted-mad.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mag",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mag.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mag (forms, gender class) with its evaluation",
+    "punctuation-mag.json",
+    "dotted-mag.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mah",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mah.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mah (forms, gender class) with its evaluation",
+    "punctuation-mah.json",
+    "dotted-mah.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mai",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mai.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mai (forms, gender class) with its evaluation",
+    "punctuation-mai.json",
+    "dotted-mai.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mal",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mal.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mal (forms, gender class) with its evaluation",
+    "punctuation-mal.json",
+    "dotted-mal.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mar",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mar.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mar (forms, gender class) with its evaluation",
+    "punctuation-mar.json",
+    "dotted-mar.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "min",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-min.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for min (forms, gender class) with its evaluation",
+    "punctuation-min.json",
+    "dotted-min.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mkd",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mkd.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mkd (forms, gender class) with its evaluation",
+    "punctuation-mkd.json",
+    "dotted-mkd.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mlt",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mlt.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mlt (forms, gender class) with its evaluation",
+    "punctuation-mlt.json",
+    "dotted-mlt.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mnw",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mnw.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mnw (forms, gender class) with its evaluation",
+    "punctuation-mnw.json",
+    "dotted-mnw.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mxi",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mxi.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mxi (forms, gender class) with its evaluation",
+    "punctuation-mxi.json",
+    "dotted-mxi.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "mya",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-mya.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for mya (forms, gender class) with its evaluation",
+    "punctuation-mya.json",
+    "dotted-mya.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nav",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nav.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nav (forms, gender class) with its evaluation",
+    "punctuation-nav.json",
+    "dotted-nav.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nba",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nba.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nba (forms, gender class) with its evaluation",
+    "punctuation-nba.json",
+    "dotted-nba.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nbl",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nbl.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nbl (forms, gender class) with its evaluation",
+    "punctuation-nbl.json",
+    "dotted-nbl.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nds",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nds.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nds (forms, gender class) with its evaluation",
+    "punctuation-nds.json",
+    "dotted-nds.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nep",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nep.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nep (forms, gender class) with its evaluation",
+    "punctuation-nep.json",
+    "dotted-nep.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nio",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nio.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nio (forms, gender class) with its evaluation",
+    "punctuation-nio.json",
+    "dotted-nio.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "niv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-niv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for niv (forms, gender class) with its evaluation",
+    "punctuation-niv.json",
+    "dotted-niv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nld",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nld.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nld (forms, gender class) with its evaluation",
+    "punctuation-nld.json",
+    "dotted-nld.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nno",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nno.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nno (forms, gender class) with its evaluation",
+    "punctuation-nno.json",
+    "dotted-nno.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nob",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nob.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nob (forms, gender class) with its evaluation",
+    "punctuation-nob.json",
+    "dotted-nob.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "nya",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-nya.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for nya (forms, gender class) with its evaluation",
+    "punctuation-nya.json",
+    "dotted-nya.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ote",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ote.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ote (forms, gender class) with its evaluation",
+    "punctuation-ote.json",
+    "dotted-ote.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pam",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pam.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pam (forms, gender class) with its evaluation",
+    "punctuation-pam.json",
+    "dotted-pam.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pan",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pan.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pan (forms, gender class) with its evaluation",
+    "punctuation-pan.json",
+    "dotted-pan.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pap",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pap.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pap (forms, gender class) with its evaluation",
+    "punctuation-pap.json",
+    "dotted-pap.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pcd",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pcd.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pcd (forms, gender class) with its evaluation",
+    "punctuation-pcd.json",
+    "dotted-pcd.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pcm",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pcm.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pcm (forms, gender class) with its evaluation",
+    "punctuation-pcm.json",
+    "dotted-pcm.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pes",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pes.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pes (forms, gender class) with its evaluation",
+    "punctuation-pes.json",
+    "dotted-pes.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pis",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pis.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pis (forms, gender class) with its evaluation",
+    "punctuation-pis.json",
+    "dotted-pis.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pnb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pnb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pnb (forms, gender class) with its evaluation",
+    "punctuation-pnb.json",
+    "dotted-pnb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pol",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pol.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pol (forms, gender class) with its evaluation",
+    "punctuation-pol.json",
+    "dotted-pol.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pon",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pon.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pon (forms, gender class) with its evaluation",
+    "punctuation-pon.json",
+    "dotted-pon.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "por",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": true,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-por.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for por (forms, gender class) with its evaluation",
+    "dotted-por.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "pov",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-pov.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for pov (forms, gender class) with its evaluation",
+    "punctuation-pov.json",
+    "dotted-pov.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "prv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-prv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for prv (forms, gender class) with its evaluation",
+    "punctuation-prv.json",
+    "dotted-prv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "quc",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-quc.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for quc (forms, gender class) with its evaluation",
+    "punctuation-quc.json",
+    "dotted-quc.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "quy",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-quy.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for quy (forms, gender class) with its evaluation",
+    "punctuation-quy.json",
+    "dotted-quy.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "quz",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-quz.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for quz (forms, gender class) with its evaluation",
+    "punctuation-quz.json",
+    "dotted-quz.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "qvm",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-qvm.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for qvm (forms, gender class) with its evaluation",
+    "punctuation-qvm.json",
+    "dotted-qvm.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "qxu",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-qxu.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for qxu (forms, gender class) with its evaluation",
+    "punctuation-qxu.json",
+    "dotted-qxu.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "rmy",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-rmy.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for rmy (forms, gender class) with its evaluation",
+    "punctuation-rmy.json",
+    "dotted-rmy.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "roh",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-roh.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for roh (forms, gender class) with its evaluation",
+    "punctuation-roh.json",
+    "dotted-roh.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ron",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ron.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ron (forms, gender class) with its evaluation",
+    "punctuation-ron.json",
+    "dotted-ron.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "rus",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": true,
+    "params": false,
+    "frame": true,
+    "punctuation": true,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-rus.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for rus (forms, gender class) with its evaluation",
+    "dotted-rus.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "sah",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-sah.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for sah (forms, gender class) with its evaluation",
+    "punctuation-sah.json",
+    "dotted-sah.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "san",
+   "tier": "reading+pronouns",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": true,
+    "morphology": false,
+    "caseMarking": true,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "case-marked (the Chomsky seam: case and pro-drop)",
+   "pronouns": {
+    "status": "bound",
+    "origin": "shipped",
+    "precision": 0.878,
+    "coverage": 0.154,
+    "nullPrecision": 0.817,
+    "gold": false,
+    "resultsFile": "identity/pronouns-multilingual/san/RESULTS-SAN.md"
+   },
+   "next": [
+    "pos-san-unimorph.json is on disk and the read does not load it",
+    "gold coreference for san (the recorded precision is gold-free)",
+    "punctuation-san.json",
+    "dotted-san.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "sco",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-sco.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for sco (forms, gender class) with its evaluation",
+    "punctuation-sco.json",
+    "dotted-sco.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "shn",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-shn.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for shn (forms, gender class) with its evaluation",
+    "punctuation-shn.json",
+    "dotted-shn.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "shp",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-shp.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for shp (forms, gender class) with its evaluation",
+    "punctuation-shp.json",
+    "dotted-shp.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "sin",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-sin.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for sin (forms, gender class) with its evaluation",
+    "punctuation-sin.json",
+    "dotted-sin.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "skr",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-skr.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for skr (forms, gender class) with its evaluation",
+    "punctuation-skr.json",
+    "dotted-skr.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "slk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-slk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for slk (forms, gender class) with its evaluation",
+    "punctuation-slk.json",
+    "dotted-slk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "slr",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-slr.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for slr (forms, gender class) with its evaluation",
+    "punctuation-slr.json",
+    "dotted-slr.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "slv",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-slv.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for slv (forms, gender class) with its evaluation",
+    "punctuation-slv.json",
+    "dotted-slv.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "sme",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-sme.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for sme (forms, gender class) with its evaluation",
+    "punctuation-sme.json",
+    "dotted-sme.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "smo",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-smo.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for smo (forms, gender class) with its evaluation",
+    "punctuation-smo.json",
+    "dotted-smo.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "sna",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-sna.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for sna (forms, gender class) with its evaluation",
+    "punctuation-sna.json",
+    "dotted-sna.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "som",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-som.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for som (forms, gender class) with its evaluation",
+    "punctuation-som.json",
+    "dotted-som.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "sot",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-sot.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for sot (forms, gender class) with its evaluation",
+    "punctuation-sot.json",
+    "dotted-sot.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "spa",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": true,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-spa.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for spa (forms, gender class) with its evaluation",
+    "dotted-spa.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "src",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-src.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for src (forms, gender class) with its evaluation",
+    "punctuation-src.json",
+    "dotted-src.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "srp",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-srp.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for srp (forms, gender class) with its evaluation",
+    "punctuation-srp.json",
+    "dotted-srp.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "sun",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-sun.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for sun (forms, gender class) with its evaluation",
+    "punctuation-sun.json",
+    "dotted-sun.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "swb",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-swb.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for swb (forms, gender class) with its evaluation",
+    "punctuation-swb.json",
+    "dotted-swb.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "swe",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-swe.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for swe (forms, gender class) with its evaluation",
+    "punctuation-swe.json",
+    "dotted-swe.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "swh",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-swh.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for swh (forms, gender class) with its evaluation",
+    "punctuation-swh.json",
+    "dotted-swh.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tam",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tam.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tam (forms, gender class) with its evaluation",
+    "punctuation-tam.json",
+    "dotted-tam.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tat",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tat.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tat (forms, gender class) with its evaluation",
+    "punctuation-tat.json",
+    "dotted-tat.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tel",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tel.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tel (forms, gender class) with its evaluation",
+    "punctuation-tel.json",
+    "dotted-tel.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tet",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tet.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tet (forms, gender class) with its evaluation",
+    "punctuation-tet.json",
+    "dotted-tet.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tgk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tgk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tgk (forms, gender class) with its evaluation",
+    "punctuation-tgk.json",
+    "dotted-tgk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tgl",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tgl.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tgl (forms, gender class) with its evaluation",
+    "punctuation-tgl.json",
+    "dotted-tgl.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tha",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tha.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tha (forms, gender class) with its evaluation",
+    "punctuation-tha.json",
+    "dotted-tha.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tly",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tly.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tly (forms, gender class) with its evaluation",
+    "punctuation-tly.json",
+    "dotted-tly.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tna",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tna.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tna (forms, gender class) with its evaluation",
+    "punctuation-tna.json",
+    "dotted-tna.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ton",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ton.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ton (forms, gender class) with its evaluation",
+    "punctuation-ton.json",
+    "dotted-ton.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tsn",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tsn.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tsn (forms, gender class) with its evaluation",
+    "punctuation-tsn.json",
+    "dotted-tsn.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tuk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tuk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tuk (forms, gender class) with its evaluation",
+    "punctuation-tuk.json",
+    "dotted-tuk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tur",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tur.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tur (forms, gender class) with its evaluation",
+    "punctuation-tur.json",
+    "dotted-tur.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "tzc",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-tzc.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for tzc (forms, gender class) with its evaluation",
+    "punctuation-tzc.json",
+    "dotted-tzc.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "uig",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-uig.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for uig (forms, gender class) with its evaluation",
+    "punctuation-uig.json",
+    "dotted-uig.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ukr",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": true,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ukr.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ukr (forms, gender class) with its evaluation",
+    "punctuation-ukr.json",
+    "dotted-ukr.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "ura",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-ura.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for ura (forms, gender class) with its evaluation",
+    "punctuation-ura.json",
+    "dotted-ura.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "urd",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-urd.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for urd (forms, gender class) with its evaluation",
+    "punctuation-urd.json",
+    "dotted-urd.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "vec",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-vec.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for vec (forms, gender class) with its evaluation",
+    "punctuation-vec.json",
+    "dotted-vec.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "vep",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-vep.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for vep (forms, gender class) with its evaluation",
+    "punctuation-vep.json",
+    "dotted-vep.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "vie",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-vie.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for vie (forms, gender class) with its evaluation",
+    "punctuation-vie.json",
+    "dotted-vie.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "vmw",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-vmw.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for vmw (forms, gender class) with its evaluation",
+    "punctuation-vmw.json",
+    "dotted-vmw.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "wln",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-wln.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for wln (forms, gender class) with its evaluation",
+    "punctuation-wln.json",
+    "dotted-wln.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "wol",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": true,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": true
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-wol.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for wol (forms, gender class) with its evaluation",
+    "punctuation-wol.json",
+    "dotted-wol.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "wuu",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-wuu.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for wuu (forms, gender class) with its evaluation",
+    "punctuation-wuu.json",
+    "dotted-wuu.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "xho",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-xho.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for xho (forms, gender class) with its evaluation",
+    "punctuation-xho.json",
+    "dotted-xho.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "yor",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-yor.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for yor (forms, gender class) with its evaluation",
+    "punctuation-yor.json",
+    "dotted-yor.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "yrk",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-yrk.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for yrk (forms, gender class) with its evaluation",
+    "punctuation-yrk.json",
+    "dotted-yrk.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "yue",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-yue.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for yue (forms, gender class) with its evaluation",
+    "punctuation-yue.json",
+    "dotted-yue.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "zdj",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-zdj.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for zdj (forms, gender class) with its evaluation",
+    "punctuation-zdj.json",
+    "dotted-zdj.json"
+   ]
+  },
+  {
+   "schema": "LanguageCompetency@1",
+   "stem": "zul",
+   "tier": "lexical",
+   "pieces": {
+    "pos": true,
+    "posLexicon": false,
+    "unimorph": false,
+    "morphology": false,
+    "caseMarking": false,
+    "params": false,
+    "frame": false,
+    "punctuation": false,
+    "dotted": false,
+    "personLexicon": false,
+    "roleConfig": false
+   },
+   "clauseReader": "positional (unvalidated for this language)",
+   "pronouns": {
+    "status": "no_register"
+   },
+   "next": [
+    "morphology-zul.json (verbs match exactly without it)",
+    "a clause reader validated for this language (the positional one is English-shaped)",
+    "a pronoun register for zul (forms, gender class) with its evaluation",
+    "punctuation-zul.json",
+    "dotted-zul.json"
+   ]
+  }
+ ]
+}
