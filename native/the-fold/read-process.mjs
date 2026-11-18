@@ -11,6 +11,7 @@
 // canonical call and its record of what the reading is.
 import { readWith } from "./read-core.mjs";
 import { presenceOptionsFor } from "../adapters/text/pronoun-registers.js";
+import { loadNamePrior, nonPersonalFromNames } from "../adapters/text/name-prior.js";
 
 export const READ_PROCESS = Object.freeze({
   schema: "ReadProcess@1",
@@ -28,12 +29,15 @@ export const READ_PROCESS = Object.freeze({
 /** Read a source into a `WeftEntry@4`. The ONE reading call. Whole text in, edges out; a short source is a typed skip, a reader
  *  failure is a typed error — never silent. `language` null means heard from the text. `aliases` (the dotted forms the
  *  hyperlexicon resolved), `abbreviations`, `priors` and `aliasReport` pass straight to the core. */
+// THE NAME RULING of the canonical read: a function of the language stem. English has the measured table (adapters/text/name-prior.js, built from UD English GUM train, identity/novels PREREG-ROUND14.md and
+// NOVELS-RESULTS-ROUND14.md: precision 0.874 -> 0.911 on 66 unseen documents, coverage unchanged). Any other language has no table: null, and the typed gap stays.
+const namePersonhoodFor = (stem) => { if (stem !== "eng") return null; const prior = loadNamePrior(); return prior ? ({ text, cast }) => nonPersonalFromNames({ text, cast, prior }) : null; };
 export function readToWeft(text, { address, category = null, language = null, quality = true, aliases = [], abbreviations = null, priors = null, aliasReport = null, readerOptions = {} } = {}) {
   // the canonical read binds pronouns by presence with the class of the language the reader settles on (a function of the stem); readerOptions.pronounPresence: null turns it off, an object or function overrides
-  const w = readWith(text, { address, category, language, quality, aliases, abbreviations, priors, aliasReport, readerOptions: { pronounPresence: (stem) => presenceOptionsFor(stem), ...readerOptions } });
+  const w = readWith(text, { address, category, language, quality, aliases, abbreviations, priors, aliasReport, readerOptions: { pronounPresence: (stem) => presenceOptionsFor(stem), namePersonhood: namePersonhoodFor, ...readerOptions } });
   // THE NON-PERSONAL RULING IS A GIVER'S (adapters/text/non-personal.js: the lexicon pack + the time prior), passed as readerOptions.nonPersonalOf. Without it "he" and "she" may bind a place, a topic, an organisation: on 92 GUM documents
   // 69% of the wrong bindings (21% of all bound) were exactly that (identity/novels NOVELS-RESULTS-ROUND10.md, the error diagnosis). A canonical read without the ruling says so, never runs silently without it.
-  if (w && Array.isArray(w.pronounsPresence) && typeof readerOptions?.nonPersonalOf !== "function")
+  if (w && Array.isArray(w.pronounsPresence) && typeof readerOptions?.nonPersonalOf !== "function" && !w.presenceInputs?.nameRuling)
     (w.gaps ??= []).push({ gap: "pronoun_presence_no_nonpersonal_ruling", detail: "no non-personal ruling was given to this read (no lexicon giver): the pronoun rung may bind he/she to a place, a topic or an organisation; measured, about a fifth of what it binds" });
   return w;
 }

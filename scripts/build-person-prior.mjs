@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+// scripts/build-person-prior.mjs <GUM conllu> — native/adapters/text/person-prior/eng.json: for each VERB lemma and role (subject, object), how often the argument is an entity the corpus's gold types as a PERSON versus anything else.
+// MEASURED, not listed: counted from UD English GUM TRAIN's gold entity types (CC BY-SA 4.0): the head token of every gold mention that is a nsubj / nsubj:pass / obj of a verb. A verb that takes people ("said", "smiled") and one that takes
+// topics and places ("occurs", "lies") fall out of the counts. The reader uses it as naive-Bayes evidence (adapters/text/person-prior.js): PersonPrior@1.
+import fs from "node:fs"; import path from "node:path"; import crypto from "node:crypto"; import { fileURLToPath } from "node:url";
+const HERE = path.dirname(fileURLToPath(import.meta.url)); const file = process.argv[2]; if (!file) { console.error("usage: node scripts/build-person-prior.mjs en_gum-ud-train.conllu"); process.exit(2); }
+const text = fs.readFileSync(file, "utf8"); const sha = crypto.createHash("sha256").update(text).digest("hex");
+const counts = { subj: new Map(), obj: new Map() }; let mentions = 0, scored = 0, docs = 0; const bump = (role, lemma, person) => { const m = counts[role]; const c = m.get(lemma) ?? [0, 0]; c[person ? 0 : 1]++; m.set(lemma, c); };
+let sent = []; const entType = new Map(); let docTypes = new Map();
+const flush = () => { if (!sent.length) return; const open = [], ms = []; const re = /\((\d+)-([^()]*)(\))?|(\d+)\)/g;
+  sent.forEach((t, i) => { let m; re.lastIndex = 0; while ((m = re.exec(t.entity))) { if (m[1] !== undefined) { if (!docTypes.has(m[1])) docTypes.set(m[1], (m[2] || "").split("-")[0]); if (m[3]) ms.push({ ent: m[1], start: i, end: i }); else open.push({ ent: m[1], start: i }); } else { const id = m[4]; for (let k = open.length - 1; k >= 0; k--) if (open[k].ent === id) { ms.push({ ent: id, start: open[k].start, end: i }); open.splice(k, 1); break; } } } });
+  for (const m of ms) { mentions++; const ids = new Set(sent.slice(m.start, m.end + 1).map((t) => t.id)); const head = sent.slice(m.start, m.end + 1).find((t) => !ids.has(t.head)) ?? sent[m.end]; const role = /^nsubj/.test(head.deprel) ? "subj" : head.deprel === "obj" ? "obj" : null; if (!role) continue; const v = sent.find((t) => t.id === head.head); if (!v || v.upos !== "VERB") continue; scored++; m.pendingType = true; bump(role, v.lemma.toLowerCase(), docTypes.get(m.ent) === "person"); }
+  sent = []; };
+for (const line of text.split("\n")) { if (line.startsWith("# newdoc id")) { flush(); docTypes = new Map(); docs++; continue; } if (line.startsWith("#")) continue; if (!line.trim()) { flush(); continue; } const f = line.split("\t"); if (!/^\d+$/.test(f[0])) continue; const misc = Object.fromEntries((f[9] ?? "").split("|").filter((x) => x.includes("=")).map((x) => [x.slice(0, x.indexOf("=")), x.slice(x.indexOf("=") + 1)])); sent.push({ id: +f[0], form: f[1], lemma: f[2], upos: f[3], head: +f[6], deprel: f[7], entity: misc.Entity ?? "" }); }
+flush();
+const toObj = (m) => Object.fromEntries([...m].sort((a, b) => a[0].localeCompare(b[0])));
+const out = { schema: "PersonPrior@1", language: "eng", provenance: { source: "UD_English-GUM train (gold entity types)", license: "CC BY-SA 4.0", sha256: sha, documents: docs, mentions, scoredArguments: scored, builtBy: "scripts/build-person-prior.mjs", note: "[person, non-person] counts of the gold entity type of a verb's subject / object" }, subj: toObj(counts.subj), obj: toObj(counts.obj) };
+fs.writeFileSync(path.join(HERE, "..", "native", "adapters", "text", "person-prior", "eng.json"), JSON.stringify(out) + "\n");
+const tot = (m) => [...m.values()].reduce((a, c) => [a[0] + c[0], a[1] + c[1]], [0, 0]); console.log(`docs ${docs}, mentions ${mentions}, scored verb arguments ${scored}; subj lemmas ${counts.subj.size} (person/non ${tot(counts.subj)}), obj lemmas ${counts.obj.size} (${tot(counts.obj)})`);
+const top = (m, p) => [...m].filter(([, c]) => c[0] + c[1] >= 15).map(([l, c]) => [l, c[0] / (c[0] + c[1])]).sort((a, b) => (p ? b[1] - a[1] : a[1] - b[1])).slice(0, 8).map(([l, r]) => `${l} ${r.toFixed(2)}`).join(", ");
+console.log("subject verbs most person-taking:", top(counts.subj, true)); console.log("subject verbs least person-taking:", top(counts.subj, false));

@@ -4,7 +4,7 @@
  "metrics": {
   "english_pronoun_binding": {
    "evidence": "identity/novels/NOVELS-RESULTS-ROUND10.md; native/docs/PRONOUN-BINDING-STATUS.md; GUM master sha256 4672bc446b6f516877b023384d2e33952bb012aca052506b197c92ddba67b78e",
-   "dials": "PRONOUN_PRESENCE_DEFAULT (window 4, boost 2, feed 1, floor 2, margin 0.3), no non-personal ruling (no Wiktionary pack on the measuring machine)",
+   "dials": "PRONOUN_PRESENCE_DEFAULT (window 4, boost 2, feed 1, floor 2, margin 0.3); the control line above is without any non-personal ruling; the canonical read now ALSO applies the name ruling (adapters/text/name-prior.js)",
    "slices": {
     "E": {
      "documents": 30,
@@ -50,6 +50,50 @@
     "shareOfErrorsNonPersonal": 0.685,
     "precisionIfNonPersonalRefused": 0.875,
     "coverageIfNonPersonalRefused": 0.39
+   },
+   "with_name_ruling": {
+    "evidence": "identity/novels/NOVELS-RESULTS-ROUND14.md (preregistered, frozen, one run; centroid-free word table built without these documents)",
+    "confirmatory_set": "66 GUM train documents in no slice (identity/novels/U-IDS-ROUND14.txt)",
+    "answerable": 552,
+    "default": {
+     "right": 305,
+     "wrong": 44,
+     "precision": 0.874,
+     "coverage": 0.632
+    },
+    "with_ruling": {
+     "right": 319,
+     "wrong": 31,
+     "precision": 0.911,
+     "coverage": 0.634
+    },
+    "precision_gain_95pct": [
+     0.002,
+     0.11
+    ],
+    "exploratory_sighted": {
+     "dev": {
+      "default": [
+       96,
+       27
+      ],
+      "ruling": [
+       119,
+       18
+      ]
+     },
+     "test": {
+      "default": [
+       130,
+       15
+      ],
+      "ruling": [
+       146,
+       15
+      ]
+     }
+    },
+    "caveat": "the lower end of the precision interval is near zero; the table knows only words GUM has seen"
    }
   },
   "languages_measured": {
@@ -58,8 +102,8 @@
   }
  },
  "files": {
-  "native/the-fold/read-process.mjs": "c9fe18dc2514d775bd3c62135b770b881abbb1a82bdfd26fe0056fe614fa3f1c",
-  "native/the-fold/read-core.mjs": "102dbc69d51539dd2f2931f18fd1ca30e2081289ffdb9506df961bf8005308fd",
+  "native/the-fold/read-process.mjs": "6ec3a43e05ed3bbc8362cc9a85542d2500130182019dc0cab5b788d6f67d9728",
+  "native/the-fold/read-core.mjs": "35d0084c6164ca88d74c6b23564764abb262736069b01b4d7621b6c57a652986",
   "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
   "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
   "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
@@ -67,7 +111,9 @@
   "native/adapters/text/pronoun-registers.js": "67d27218d1f3930874718103dfa1ef7b986e829f1dbbf40309b8a425b478bf91",
   "native/adapters/text/pronoun-presence-chosen.js": "40a9648b7ddb573a9da51b40f410da458aa4f19a16e4cd34d1511cccd4f53a2a",
   "native/adapters/text/clause-attach.js": "0450fdf6f38cc65b12735c2c60d9a631c8bf82ca10ff865379eebdad57d00035",
-  "native/adapters/text/non-personal.js": "707515503ceecb0cb69f250041a0f2759597819110fd9e66640a61f166120f95"
+  "native/adapters/text/non-personal.js": "707515503ceecb0cb69f250041a0f2759597819110fd9e66640a61f166120f95",
+  "native/adapters/text/name-prior.js": "65d4feaa58a23026bdfc65ac63afc1ce9f97d4f239a6ab31109f58300938e139",
+  "native/adapters/text/name-prior/eng.json": "da9749ec29c90e78119dd5208a3c643b5fa370a97ab6d8d731e0eb269b656621"
  },
- "recorded": "2026-11-17"
+ "recorded": "2026-11-18"
 }

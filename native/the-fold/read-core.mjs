@@ -330,7 +330,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, pronounPresence, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, namePersonhood, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -457,7 +457,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // THE PRESENCE RUNG (readerOptions.pronounPresence = { window, boost, feed, floor, margin, locality }; opt-in, every dial declared, off = absent and then
   // nothing below runs and the entry is what it was): the pronouns of the resolver's own class bound by decayed presence over the beings of THIS cast
   // (adapters/text/pronouns.js::resolvePronounsByPresence, PREREG-PRESENCE.md), beside the shipped resolver's `entry.pronouns`, which it does not touch.
-  let pronounsPresence = null, presenceInputs = null;
+  let pronounsPresence = null, presenceInputs = null, nameRuling = false;
   // `pronounPresence` may be a function of the language stem (the canonical read passes one: native/adapters/text/pronoun-registers.js::presenceOptionsFor): it returns the options for THIS language,
   // or { gap } when the language has no pronoun register, and then the gap is filed on the entry instead of the rung running silently with another language's class.
   const pp = typeof pronounPresence === "function" ? pronounPresence(stem) : pronounPresence;
@@ -469,8 +469,11 @@ export function readWith(text, { address = null, category = null, language = nul
       for (const c of cast) { refSurface.set(c.ref, c.surface); for (const x of c.allSurfaces) surfaceToRef.set(x, c.ref); }
       let np = [];
       try { if (typeof readerOrgans.nonPersonalOf === "function") np = readerOrgans.nonPersonalOf(surfaceToRef) ?? []; } catch { np = []; }
+      // THE NAME RULING (readerOptions.namePersonhood: a function of the language stem returning ({ text, cast }) -> the ids of the beings whose own mention words carry measured non-person evidence;
+      // adapters/text/name-prior.js, identity/novels PREREG-ROUND14.md). It adds to the lexicon giver's ruling; absent, or null for the stem, nothing is added.
+      try { const nf = typeof namePersonhood === "function" ? namePersonhood(stem) : namePersonhood; if (typeof nf === "function") { const extra = nf({ text: str, cast }); if (extra?.size || extra?.length) np = [...new Set([...(np ?? []), ...extra])]; nameRuling = true; } } catch { /* the ruling may be silent; the reader is not told a thing is not a person for lack of an answer */ }
       const mentions = cast.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
-      presenceInputs = { sentences, mentions, nonPersonal: np };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
+      presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
       const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np });
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
       for (const g of r.gaps) gaps.push(g);

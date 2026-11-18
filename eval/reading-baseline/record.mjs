@@ -6,7 +6,7 @@
 import fs from "node:fs"; import path from "node:path"; import crypto from "node:crypto"; import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", ".."); const FILE = path.join(ROOT, "eval/reading-baseline/BASELINE.json");
 export const READING_FILES = ["native/the-fold/read-process.mjs", "native/the-fold/read-core.mjs", "native/the-fold/language-grammar.js", "native/the-fold/language-names.js", "native/the-fold/language-names.data.js", "native/adapters/text/pronouns.js", "native/adapters/text/pronoun-registers.js",
-  "native/adapters/text/pronoun-presence-chosen.js", "native/adapters/text/clause-attach.js", "native/adapters/text/non-personal.js"];
+  "native/adapters/text/pronoun-presence-chosen.js", "native/adapters/text/clause-attach.js", "native/adapters/text/non-personal.js", "native/adapters/text/name-prior.js", "native/adapters/text/name-prior/eng.json"];
 export const sha = (f) => crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, f))).digest("hex");
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const i = process.argv.indexOf("--note"); const note = i > 0 ? process.argv[i + 1] : null; if (!note) { console.error('a note is required: --note "why the reading changed"'); process.exit(2); }

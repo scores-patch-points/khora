@@ -26,3 +26,8 @@ Of 200 wrong bindings on 92 GUM documents: **69% bound a non-person** (a topic, 
 
 ## Regression check
 `GUM_TRAIN=en_gum-ud-train.conllu KHORA_PRIORS_DIR=... node identity/novels/gum-falsify3.mjs F` (and E, C, D) should reproduce the table within sampling noise; a lower pooled precision at the same coverage is a regression. Mandarin and Ancient Greek: not working (the reader builds no cast in Chinese; the pronoun registry has English only); see `identity/pronouns-multilingual/` if present.
+
+
+## 2026-11-18: the name ruling is in the canonical English read
+The canonical English read now applies a measured name ruling (`adapters/text/name-prior.js`, table from UD English GUM train): a being whose mention words carry more not-person than person evidence (at least 2 observations) is not offered to he/she. On 66 unseen GUM documents (identity/novels PREREG-ROUND14, NOVELS-RESULTS-ROUND14): precision 0.874 -> 0.911 at unchanged coverage; the lower end of the 95% interval is +0.002. Other languages have no table and keep the typed gap `pronoun_presence_no_nonpersonal_ruling`.
+Tried and not adopted: the chase resolver (round 13), embedding-window rulings (rounds 15-16: they over-rule real people and lose 6-8 points of coverage). The static word-vector smell (`adapters/text/static-smell.js`) is a fast model-free alternative, not wired. The POS smell (`adapters/text/pos-smell.js`, Thrax handle, round 17) sniffs the class of words the POS prior does not hold: 0.626 against 0.186 for the most frequent class on 5,203 unseen tokens.
