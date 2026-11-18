@@ -28,7 +28,7 @@ for (const doc of docs) {
   };
   keyLines.push(doc.raw0); sysLines.push(doc.raw0);
   doc.sents.forEach((s, si) => { const ent = entFor(s, bySent[si]); nMent += bySent[si].length;
-    const emit = (src, kind) => { for (const ln of s.lines) { const tk = s.tokens.find((t) => s.lines[t.li] === ln); if (!tk || !/^\d+\t/.test(ln)) { src.push(ln); continue; } if (kind === "key") { src.push(ln); continue; } const f = ln.split("\t"); const misc = stripMisc(f[9]); const e = ent[s.tokens.indexOf(tk)]; if (e) misc.push("Entity=" + e); f[9] = misc.length ? misc.join("|") : "_"; src.push(f.join("\t")); } src.push(""); };
+    const emit = (src, kind) => { for (const ln of s.lines) { const tk = s.tokens.find((t) => s.lines[t.li] === ln); if (!tk || !/^\d+\t/.test(ln)) { if (kind === "sys" && /^\d+\.\d+\t/.test(ln)) { const f = ln.split("\t"); const misc = stripMisc(f[9]); f[9] = misc.length ? misc.join("|") : "_"; src.push(f.join("\t")); } else src.push(ln); continue; } if (kind === "key") { src.push(ln); continue; } const f = ln.split("\t"); const misc = stripMisc(f[9]); const e = ent[s.tokens.indexOf(tk)]; if (e) misc.push("Entity=" + e); f[9] = misc.length ? misc.join("|") : "_"; src.push(f.join("\t")); } src.push(""); };
     emit(keyLines, "key"); emit(sysLines, "sys"); });
 }
-fs.writeFileSync(path.join(OUT, "key.conllu"), keyLines.join("\n")); fs.writeFileSync(path.join(OUT, "sys.conllu"), sysLines.join("\n")); console.log(`${dsName} ${split} ${lang}${oracle ? " (oracle)" : ""}: docs ${docs.length}, system mentions ${nMent}, dropped (crossing, off-sentence) ${dropped} -> ${OUT}`);
+fs.writeFileSync(path.join(OUT, "key.conllu"), keyLines.join("\n") + "\n"); fs.writeFileSync(path.join(OUT, "sys.conllu"), sysLines.join("\n") + "\n"); console.log(`${dsName} ${split} ${lang}${oracle ? " (oracle)" : ""}: docs ${docs.length}, system mentions ${nMent}, dropped (crossing, off-sentence) ${dropped} -> ${OUT}`);

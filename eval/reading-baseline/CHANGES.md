@@ -50,3 +50,6 @@ files changed since the last record: native/the-fold/read-process.mjs, native/th
 
 ## 2026-11-18: docs: pooled English resolved 0.699
 files changed since the last record: (none)
+
+## 2026-11-18: round 24: competency measured by the official CorefUD scorer (the giver)
+files changed since the last record: native/adapters/text/language-competency.js
