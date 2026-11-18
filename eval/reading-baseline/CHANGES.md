@@ -44,3 +44,6 @@ files changed since the last record: native/adapters/text/language-competency.js
 
 ## 2026-11-18: tier pronouns: a measured register with an unvalidated clause reader (French)
 files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-18: ONE DOOR: canonicalReaderOptions/canonicalDeclension/noteMissingRuling/assertPrimed factored out of readToWeft (same behaviour); reading.js::readDocument now reads with the same canonical options (it skipped pronoun, name and case-marked options before); an unprimed read throws under Node (allowDegraded opts out); native/reading.js and the door allowlist are reading-critical; native/tests/one-door.test.mjs holds the two doors equal. No metric changed: readToWeft output is identical.
+files changed since the last record: native/reading.js, native/tests/door-allowlist.json, native/the-fold/read-process.mjs

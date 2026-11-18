@@ -15,7 +15,7 @@
 // the prior's) · or a lexicon organ a caller built (organs/lexicon.js::makeHyperlexicon over its own door, or makeLexicon over a giver).
 // HL_DOOR names the door (default http://127.0.0.1:11450).
 
-import { readToWeft } from "./the-fold/read-process.mjs";
+import { readToWeft, canonicalReaderOptions, canonicalDeclension, noteMissingRuling, assertPrimed } from "./the-fold/read-process.mjs";
 import { readCanonical } from "./the-fold/read-door-canonical.mjs";
 import { priorsFor, consultAliases, readDocument as readCore } from "./the-fold/read-core.mjs";
 import { languageContextFor } from "./the-fold/language-context.js";
@@ -87,7 +87,11 @@ export async function readDocument(text, { language = null, lexicon = "hyperlexi
       parser = st.held ? await rowsOfFor(st.code) : { gap: `no parser: ${language} has no stem filed${st.why ? `; ${st.why}` : ""}` };
     }
   }
-  const w = await readCore(text, { ...opts, language, lexicon: lex, ...(parser?.rowsOf ? { rowsOf: parser.rowsOf } : {}) });
+  // THE ONE DOOR (2026-11-18): this front door reads with the SAME canonical options as read-process.mjs::readToWeft (pronoun presence, name ruling, case-marked clauses, declension), so a caller who
+  // enters here gets the canonical read, not a weaker one. A caller's own readerOptions win; `readerOptions: { pronounPresence: null }` turns the rung off. native/tests/one-door.test.mjs holds the two doors equal.
+  const w = await readCore(text, { declension: canonicalDeclension, ...opts, language, lexicon: lex, readerOptions: { ...canonicalReaderOptions(), ...(opts.readerOptions ?? {}) }, ...(parser?.rowsOf ? { rowsOf: parser.rowsOf } : {}) });
+  assertPrimed(w, { allowDegraded: opts.allowDegraded === true });
+  if (!w.aliasReport?.nonPersonal) noteMissingRuling(w, opts.readerOptions ?? {});
   if (parser?.gap) (w.gaps ??= []).push({ gap: "no_parser", stem, detail: parser.gap });
   if (parser?.by && w.parse) w.parseBy = parser.by;
   if (!lex) w.aliasReport = { giver: null, rows: [], gap: lexicon === false ? "the caller read without the hyperlexicon" : `no hyperlexicon is filed for ${stem}` };
