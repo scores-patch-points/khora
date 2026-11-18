@@ -34,6 +34,11 @@
 import { makeRelationReader } from "../organs/hypergraph.js";
 import { chunkSource, tokenize, blankLabelRows } from "../organs/source.js";
 import { splitSentences, deriveAbbreviations } from "../adapters/text/spans.js";
+import { ASCII_DANDA_STEMS } from "../adapters/text/priors.js";
+import { foldCaseForms } from "../adapters/text/sanskrit-sandhi.js";
+// a stem whose Latin-script text writes the danda as | : the pipe is a sentence stop there and nowhere else (san; absent for every other stem, so their cuts are untouched)
+const DANDA_SET = new Set(["|"]);
+const extraTerminatorsFor = (stem) => (ASCII_DANDA_STEMS.has(stem) ? DANDA_SET : null);
 import { GRAMMAR_MIN_SHARE } from "../adapters/text/grain-typing.js";
 import { extractSurfaces, discoverReferents, namesCorefer, diaNorm } from "../adapters/text/surfaces.js";
 import { withEar } from "../adapters/text/active-ear.js";
@@ -211,7 +216,8 @@ function dispatchFor(stem, classify, roleConfig) {
 export function makeReader({ priors = null, language = "eng", abbreviations = null, features = {}, classifyWord: classify = classifyWord, roleConfig = null, sameAct = null, closedClasses = undefined, extendRelations = null, surfaceOptions = null, ...extra } = {}) {
   const stem = stemOf(language) ?? String(language);
   const pr = priors ?? priorsFor(stem);
-  const split = abbreviations ? (t, o = {}) => splitSentences(t, { ...o, abbreviations: o.abbreviations ?? abbreviations }) : splitSentences;
+  const extraT = extraTerminatorsFor(stem);
+  const split = (abbreviations || extraT) ? (t, o = {}) => splitSentences(t, { ...o, ...(abbreviations ? { abbreviations: o.abbreviations ?? abbreviations } : {}), ...(extraT ? { extraTerminators: extraT } : {}) }) : splitSentences;
   const closed = closedClasses === undefined ? closedClassesFor(stem) : closedClasses;
   const usePos = features.posPrior !== false;
   const useMorph = features.morphology !== false && !!pr.lemmatizer;
@@ -350,7 +356,7 @@ export function readWith(text, { address = null, category = null, language = nul
   if (str.trim().length < minCharacters) {
     // too short to read for relations, but its sentences are still cut the one way
     const raw0 = toRawOffsets(str);
-    const sentences = splitSentences(str, { abbreviations: abbr.set }).map((x, order) => ({ text: x.text, offset: raw0(x.offset), order }));
+    const sentences = splitSentences(str, { abbreviations: abbr.set, ...(extraTerminatorsFor(stem) ? { extraTerminators: extraTerminatorsFor(stem) } : {}) }).map((x, order) => ({ text: x.text, offset: raw0(x.offset), order }));
     return { ...empty, sentences, skipped: "too_short" };
   }
   const t0 = Date.now();
@@ -377,7 +383,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // THE SENTENCES are the one cut over the WHOLE document (the reader drops a passage under 20 characters, a heading, from what it
   // relates; the document's sentences keep it). Same splitter, same abbreviations as the reader's, so inside a passage they agree.
   // `cuts` are in the newline-normalised space the clause parser reads; `sentences` carry the caller's addresses.
-  const cuts = splitSentences(norm, { abbreviations: abbr.set }).map((x) => ({ text: x.text, offset: x.offset }));
+  const cuts = splitSentences(norm, { abbreviations: abbr.set, ...(extraTerminatorsFor(stem) ? { extraTerminators: extraTerminatorsFor(stem) } : {}) }).map((x) => ({ text: x.text, offset: x.offset }));
   const sentences = cuts.map((c, order) => ({ text: c.text, offset: raw(c.offset), order }));
   // THE PARSE, handed in by the surface (opt-in; nothing here loads a parser, so this module stays page-safe). `rowsOf(sentenceText)` returns that sentence's
   // dependency rows (UD: id, form, lemma, upos, feats, head, deprel) from whatever universal parser the surface holds (reading.js hands in grammar-en / grammar-ud
@@ -471,15 +477,25 @@ export function readWith(text, { address = null, category = null, language = nul
     pronounsPresence = [];
     try {
       const refSurface = new Map(), surfaceToRef = new Map();
-      for (const c of cast) { refSurface.set(c.ref, c.surface); for (const x of c.allSurfaces) surfaceToRef.set(x, c.ref); }
+      // BEINGS: the capital tier's cast; for a language whose register declares `beings: "heard-nominals"` (Sanskrit: no capital marks a name in Devanagari, and IAST names are written lower case)
+      // also the heard nominals (a recurring word the language's own grammar reads as a nominal), the case forms of one stem folded into one being (adapters/text/sanskrit-sandhi.js::foldCaseForms,
+      // the endings the treebank attests). Every other language: the cast, as before.
+      let beingRows = cast;
+      if (pp.beings === "heard-nominals") {
+        const hr = heardRows.filter((r) => (r.mentionSpans ?? []).length);
+        const { groups } = foldCaseForms(hr, pp.pronounClass?.endings ?? []);
+        const by = new Map(); hr.forEach((r, i) => { const g = groups.get(i); (by.get(g) ?? by.set(g, []).get(g)).push(r); });
+        const folded = [...by.values()].map((rs) => { const lead = [...rs].sort((a, b) => b.mentionSpans.length - a.mentionSpans.length)[0]; return { ref: lead.ref, surface: lead.surface, allSurfaces: rs.flatMap((r) => r.allSurfaces ?? [r.surface]), mentionSpans: rs.flatMap((r) => r.mentionSpans).sort((a, b) => a[0] - b[0]) }; });
+        beingRows = [...cast, ...folded];
+      }
+      for (const c of beingRows) { refSurface.set(c.ref, c.surface); for (const x of c.allSurfaces) surfaceToRef.set(x, c.ref); }
       let np = [];
       try { if (typeof readerOrgans.nonPersonalOf === "function") np = readerOrgans.nonPersonalOf(surfaceToRef) ?? []; } catch { np = []; }
       // THE NAME RULING (readerOptions.namePersonhood: a function of the language stem returning ({ text, cast }) -> the ids of the beings whose own mention words carry measured non-person evidence;
       // adapters/text/name-prior.js, identity/novels PREREG-ROUND14.md). It adds to the lexicon giver's ruling; absent, or null for the stem, nothing is added.
-      try { const nf = typeof namePersonhood === "function" ? namePersonhood(stem) : namePersonhood; if (typeof nf === "function") { const extra = nf({ text: str, cast }); if (extra?.size || extra?.length) np = [...new Set([...(np ?? []), ...extra])]; nameRuling = true; } } catch { /* the ruling may be silent; the reader is not told a thing is not a person for lack of an answer */ }
-      const mentions = cast.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
-      presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
-      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np });
+      try { const nf = typeof namePersonhood === "function" ? namePersonhood(stem) : namePersonhood; if (typeof nf === "function") { const extra = nf({ text: str, cast: beingRows }); if (extra?.size || extra?.length) np = [...new Set([...(np ?? []), ...extra])]; nameRuling = true; } } catch { /* the ruling may be silent; the reader is not told a thing is not a person for lack of an answer */ }
+      const mentions = beingRows.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
+      presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np });
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
       for (const g of r.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "pronoun_presence_failed", detail: String(e?.message ?? e).slice(0, 120) }); }

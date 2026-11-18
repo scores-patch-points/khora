@@ -278,6 +278,10 @@ export const SENTENCE_TERMINATORS = Object.freeze(new Set([
 ]));
 export const SENTENCE_TERMINATORS_META = Object.freeze({ giver: "script/latn + script/hani,jpan,arab,deva,armn,ethi (Unicode terminator characters)", scope: null });
 
+/** The ASCII pipe as the danda of Latin-script Sanskrit (GRETIL plain text writes the danda as | and the double danda as ||), per language STEM. It is a stop in these stems ONLY: in any other language | is not punctuation of the sentence. `splitSentences({ extraTerminators })` takes it; absent, nothing changes. */
+export const ASCII_DANDA_STEMS = Object.freeze(new Set(["san"]));
+export const ASCII_DANDA_META = Object.freeze({ giver: "GRETIL plain-text transformations (header: 'plain text transformation'; | and || are the danda and double danda), observed in sa_viSNuzarman-paJcatantra.txt", scope: "san, Latin script" });
+
 /** Terminators of scripts that write NO space after a sentence (CJK). Latin
  * `.` followed by a non-space is a decimal point or an abbreviation; an
  * ideographic full stop followed by the next sentence is a boundary. */

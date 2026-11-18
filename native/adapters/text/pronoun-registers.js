@@ -40,5 +40,5 @@ export function presenceOptionsFor(stem, dials = defaultPronounPresence()) {
   if (r && !(ev && ev.documents > 0 && Number.isFinite(ev.precision) && Number.isFinite(ev.coverage) && Number.isFinite(ev.nullPrecision) && typeof ev.resultsFile === "string"))
     return { gap: { gap: "pronoun_presence_unmeasured", stem: k, detail: `a pronoun register exists for ${k} (${r.origin}) but it carries no evaluation (documents, precision, coverage, nullPrecision, resultsFile): no pronoun was bound until it is measured on held-out gold or by the gold-free falsifier` } };
   if (!r) return { gap: { gap: "pronoun_presence_no_register", stem: k, detail: `no pronoun register for ${k || "this language"} (native/adapters/text/pronoun-registers/${k}.json or a pronoun-${k}.json prior): no pronoun was bound` } };
-  return { ...dials, language: k, pronounClass: r.register, unspaced: UNSPACED_STEMS.has(k), registerOrigin: r.origin };
+  return { ...dials, language: k, pronounClass: r.register, unspaced: UNSPACED_STEMS.has(k), registerOrigin: r.origin, ...(r.register.beings ? { beings: r.register.beings } : {}) };
 }

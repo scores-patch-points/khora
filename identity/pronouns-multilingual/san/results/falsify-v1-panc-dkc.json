@@ -1,0 +1,437 @@
+{
+ "panc": {
+  "chunks": 10,
+  "chars": 119621,
+  "sentences": 2144,
+  "castCapital": 0,
+  "shipped": {
+   "found": 525,
+   "bound": 105,
+   "unbound": 420,
+   "coverage": 0.2,
+   "reasons": {
+    "no_being_present": 8,
+    "below_floor": 389,
+    "margin": 22,
+    "gender_veto": 1
+   },
+   "boundForms": [
+    [
+     "sa",
+     32
+    ],
+    [
+     "tasya",
+     13
+    ],
+    [
+     "sā",
+     8
+    ],
+    [
+     "taṃ",
+     7
+    ],
+    [
+     "tāṃ",
+     5
+    ],
+    [
+     "tayā",
+     5
+    ],
+    [
+     "tasyāḥ",
+     4
+    ],
+    [
+     "so",
+     4
+    ],
+    [
+     "eṣa",
+     3
+    ],
+    [
+     "tasyā",
+     3
+    ]
+   ],
+   "mfBound": 89,
+   "mf": {
+    "n": 89,
+    "referents": 52,
+    "obs": 0.10112359550561797,
+    "nul": 0.1646629213483146
+   },
+   "threeClass": {
+    "n": 89,
+    "referents": 52,
+    "obs": 0.10112359550561797,
+    "nul": 0.16353932584269662
+   },
+   "nullMinusObsCI95": [
+    0.07963768115942027,
+    0.21213483146067413
+   ]
+  },
+  "with-neuter": {
+   "found": 1092,
+   "bound": 211,
+   "unbound": 881,
+   "coverage": 0.19322344322344323,
+   "reasons": {
+    "no_being_present": 17,
+    "below_floor": 821,
+    "margin": 42,
+    "gender_veto": 1
+   },
+   "boundForms": [
+    [
+     "sa",
+     39
+    ],
+    [
+     "tad",
+     31
+    ],
+    [
+     "tat",
+     19
+    ],
+    [
+     "tasya",
+     15
+    ],
+    [
+     "etat",
+     9
+    ],
+    [
+     "tan",
+     8
+    ],
+    [
+     "sā",
+     8
+    ],
+    [
+     "tac",
+     7
+    ],
+    [
+     "taṃ",
+     6
+    ],
+    [
+     "tena",
+     6
+    ]
+   ],
+   "mfBound": 99,
+   "mf": {
+    "n": 99,
+    "referents": 56,
+    "obs": 0.10101010101010101,
+    "nul": 0.166010101010101
+   },
+   "threeClass": {
+    "n": 182,
+    "referents": 75,
+    "obs": 0.25824175824175827,
+    "nul": 0.3143956043956044
+   },
+   "nullMinusObsCI95": [
+    0.06763999999999998,
+    0.20817647058823532
+   ]
+  },
+  "no-bhavat": {
+   "found": 524,
+   "bound": 104,
+   "unbound": 420,
+   "coverage": 0.1984732824427481,
+   "reasons": {
+    "no_being_present": 8,
+    "below_floor": 389,
+    "margin": 22,
+    "gender_veto": 1
+   },
+   "boundForms": [
+    [
+     "sa",
+     32
+    ],
+    [
+     "tasya",
+     13
+    ],
+    [
+     "sā",
+     8
+    ],
+    [
+     "taṃ",
+     7
+    ],
+    [
+     "tāṃ",
+     5
+    ],
+    [
+     "tayā",
+     5
+    ],
+    [
+     "tasyāḥ",
+     4
+    ],
+    [
+     "so",
+     4
+    ],
+    [
+     "eṣa",
+     3
+    ],
+    [
+     "tasyā",
+     3
+    ]
+   ],
+   "mfBound": 88,
+   "mf": {
+    "n": 88,
+    "referents": 52,
+    "obs": 0.10227272727272728,
+    "nul": 0.16085227272727273
+   },
+   "threeClass": {
+    "n": 88,
+    "referents": 52,
+    "obs": 0.10227272727272728,
+    "nul": 0.16375
+   },
+   "nullMinusObsCI95": [
+    0.07843434343434345,
+    0.21225490196078428
+   ]
+  }
+ },
+ "dkc": {
+  "chunks": 6,
+  "chars": 64984,
+  "sentences": 68,
+  "castCapital": 0,
+  "shipped": {
+   "found": 147,
+   "bound": 126,
+   "unbound": 21,
+   "coverage": 0.8571428571428571,
+   "reasons": {
+    "below_floor": 9,
+    "margin": 7,
+    "no_being_present": 5
+   },
+   "boundForms": [
+    [
+     "sa",
+     38
+    ],
+    [
+     "sā",
+     21
+    ],
+    [
+     "tasya",
+     14
+    ],
+    [
+     "eṣa",
+     9
+    ],
+    [
+     "so",
+     8
+    ],
+    [
+     "tayā",
+     6
+    ],
+    [
+     "tāṃ",
+     4
+    ],
+    [
+     "tasmai",
+     4
+    ],
+    [
+     "taṃ",
+     4
+    ],
+    [
+     "tasyā",
+     3
+    ]
+   ],
+   "mfBound": 104,
+   "mf": {
+    "n": 104,
+    "referents": 10,
+    "obs": 0.3269230769230769,
+    "nul": 0.34697115384615385
+   },
+   "threeClass": {
+    "n": 104,
+    "referents": 10,
+    "obs": 0.3269230769230769,
+    "nul": 0.34649038461538456
+   },
+   "nullMinusObsCI95": [
+    -0.00872727272727275,
+    0.09935643564356433
+   ]
+  },
+  "with-neuter": {
+   "found": 162,
+   "bound": 138,
+   "unbound": 24,
+   "coverage": 0.8518518518518519,
+   "reasons": {
+    "below_floor": 9,
+    "margin": 10,
+    "no_being_present": 5
+   },
+   "boundForms": [
+    [
+     "sa",
+     38
+    ],
+    [
+     "sā",
+     21
+    ],
+    [
+     "tasya",
+     14
+    ],
+    [
+     "tena",
+     11
+    ],
+    [
+     "eṣa",
+     9
+    ],
+    [
+     "so",
+     8
+    ],
+    [
+     "tayā",
+     6
+    ],
+    [
+     "tāṃ",
+     4
+    ],
+    [
+     "tasmai",
+     4
+    ],
+    [
+     "taṃ",
+     4
+    ]
+   ],
+   "mfBound": 104,
+   "mf": {
+    "n": 104,
+    "referents": 10,
+    "obs": 0.3269230769230769,
+    "nul": 0.3489903846153846
+   },
+   "threeClass": {
+    "n": 105,
+    "referents": 10,
+    "obs": 0.3333333333333333,
+    "nul": 0.3517142857142857
+   },
+   "nullMinusObsCI95": [
+    -0.00874999999999998,
+    0.1006521739130435
+   ]
+  },
+  "no-bhavat": {
+   "found": 147,
+   "bound": 126,
+   "unbound": 21,
+   "coverage": 0.8571428571428571,
+   "reasons": {
+    "below_floor": 9,
+    "margin": 7,
+    "no_being_present": 5
+   },
+   "boundForms": [
+    [
+     "sa",
+     38
+    ],
+    [
+     "sā",
+     21
+    ],
+    [
+     "tasya",
+     14
+    ],
+    [
+     "eṣa",
+     9
+    ],
+    [
+     "so",
+     8
+    ],
+    [
+     "tayā",
+     6
+    ],
+    [
+     "tāṃ",
+     4
+    ],
+    [
+     "tasmai",
+     4
+    ],
+    [
+     "taṃ",
+     4
+    ],
+    [
+     "tasyā",
+     3
+    ]
+   ],
+   "mfBound": 104,
+   "mf": {
+    "n": 104,
+    "referents": 10,
+    "obs": 0.3269230769230769,
+    "nul": 0.34673076923076923
+   },
+   "threeClass": {
+    "n": 104,
+    "referents": 10,
+    "obs": 0.3269230769230769,
+    "nul": 0.3515384615384616
+   },
+   "nullMinusObsCI95": [
+    -0.008712871287128776,
+    0.09981927710843369
+   ]
+  }
+ }
+}

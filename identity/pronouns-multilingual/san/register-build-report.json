@@ -1,0 +1,3179 @@
+{
+ "L3": [
+  "etad",
+  "tad",
+  "bhavat",
+  "idam",
+  "ena",
+  "adas"
+ ],
+ "lemmaTable": {
+  "etad": {
+   "Dem": 11,
+   "Prs3": 0,
+   "other": 0,
+   "n": 11
+  },
+  "tad": {
+   "Dem": 58,
+   "Prs3": 1,
+   "other": 0,
+   "n": 59
+  },
+  "bhavat": {
+   "Dem": 0,
+   "Prs3": 9,
+   "other": 0,
+   "n": 9
+  },
+  "asmad": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 9,
+   "n": 9
+  },
+  "aham": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 31,
+   "n": 31
+  },
+  "idam": {
+   "Dem": 7,
+   "Prs3": 0,
+   "other": 0,
+   "n": 7
+  },
+  "kim": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 10,
+   "n": 10
+  },
+  "yad": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 16,
+   "n": 16
+  },
+  "yuṣmad": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 2,
+   "n": 2
+  },
+  "tvad": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 11,
+   "n": 11
+  },
+  "ka": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 2,
+   "n": 2
+  },
+  "sarva": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 2,
+   "n": 2
+  },
+  "sva": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 1,
+   "n": 1
+  },
+  "ātman": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 2,
+   "n": 2
+  },
+  "ena": {
+   "Dem": 0,
+   "Prs3": 2,
+   "other": 0,
+   "n": 2
+  },
+  "adas": {
+   "Dem": 3,
+   "Prs3": 0,
+   "other": 0,
+   "n": 3
+  },
+  "kim-cid": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 1,
+   "n": 1
+  },
+  "bhava": {
+   "Dem": 0,
+   "Prs3": 0,
+   "other": 1,
+   "n": 1
+  }
+ },
+ "kept": {
+  "asmin": {
+   "gender": {
+    "Masc": 134,
+    "Neut": 35
+   },
+   "number": {
+    "Sing": 169
+   },
+   "src": {
+    "vedic-train": 169
+   }
+  },
+  "tam": {
+   "gender": {
+    "Masc": 662
+   },
+   "number": {
+    "Sing": 662
+   },
+   "src": {
+    "vedic-train": 661,
+    "ufal-iast": 1
+   }
+  },
+  "ayam": {
+   "gender": {
+    "Masc": 291
+   },
+   "number": {
+    "Sing": 291
+   },
+   "src": {
+    "vedic-train": 288,
+    "ufal-iast": 3
+   }
+  },
+  "enam": {
+   "gender": {
+    "Masc": 555
+   },
+   "number": {
+    "Sing": 555
+   },
+   "src": {
+    "vedic-train": 554,
+    "ufal-iast": 1
+   }
+  },
+  "iyam": {
+   "gender": {
+    "Fem": 95
+   },
+   "number": {
+    "Sing": 95
+   },
+   "src": {
+    "vedic-train": 95
+   }
+  },
+  "tasmin": {
+   "gender": {
+    "Masc": 55,
+    "Neut": 40
+   },
+   "number": {
+    "Sing": 95
+   },
+   "src": {
+    "vedic-train": 95
+   }
+  },
+  "asau": {
+   "gender": {
+    "Masc": 109,
+    "Fem": 12
+   },
+   "number": {
+    "Sing": 121
+   },
+   "src": {
+    "vedic-train": 118,
+    "ufal-iast": 3
+   }
+  },
+  "imam": {
+   "gender": {
+    "Masc": 149
+   },
+   "number": {
+    "Sing": 149
+   },
+   "src": {
+    "vedic-train": 148,
+    "ufal-iast": 1
+   }
+  },
+  "sā": {
+   "gender": {
+    "Fem": 350
+   },
+   "number": {
+    "Sing": 350
+   },
+   "src": {
+    "vedic-train": 347,
+    "ufal-iast": 3
+   }
+  },
+  "asya": {
+   "gender": {
+    "Masc": 536,
+    "Neut": 42
+   },
+   "number": {
+    "Sing": 578
+   },
+   "src": {
+    "vedic-train": 578
+   }
+  },
+  "saḥ": {
+   "gender": {
+    "Masc": 731
+   },
+   "number": {
+    "Sing": 731
+   },
+   "src": {
+    "vedic-train": 725,
+    "ufal-iast": 6
+   }
+  },
+  "eṣa": {
+   "gender": {
+    "Masc": 360
+   },
+   "number": {
+    "Sing": 360
+   },
+   "src": {
+    "vedic-train": 360
+   }
+  },
+  "tasmai": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 105
+   },
+   "number": {
+    "Sing": 109
+   },
+   "src": {
+    "vedic-train": 106,
+    "ufal-iast": 3
+   }
+  },
+  "tām": {
+   "gender": {
+    "Fem": 218
+   },
+   "number": {
+    "Sing": 218
+   },
+   "src": {
+    "vedic-train": 218
+   }
+  },
+  "etasya": {
+   "gender": {
+    "Neut": 27,
+    "Masc": 45
+   },
+   "number": {
+    "Sing": 72
+   },
+   "src": {
+    "vedic-train": 72
+   }
+  },
+  "tasyāḥ": {
+   "gender": {
+    "Fem": 50
+   },
+   "number": {
+    "Sing": 50
+   },
+   "src": {
+    "vedic-train": 49,
+    "ufal-iast": 1
+   }
+  },
+  "amum": {
+   "gender": {
+    "Masc": 43
+   },
+   "number": {
+    "Sing": 43
+   },
+   "src": {
+    "vedic-train": 43
+   }
+  },
+  "etayā": {
+   "gender": {
+    "Fem": 40
+   },
+   "number": {
+    "Sing": 40
+   },
+   "src": {
+    "vedic-train": 40
+   }
+  },
+  "asyai": {
+   "gender": {
+    "Fem": 22
+   },
+   "number": {
+    "Sing": 22
+   },
+   "src": {
+    "vedic-train": 22
+   }
+  },
+  "asmai": {
+   "gender": {
+    "Masc": 202
+   },
+   "number": {
+    "Sing": 202
+   },
+   "src": {
+    "vedic-train": 202
+   }
+  },
+  "etam": {
+   "gender": {
+    "Masc": 144
+   },
+   "number": {
+    "Sing": 144
+   },
+   "src": {
+    "vedic-train": 144
+   }
+  },
+  "etām": {
+   "gender": {
+    "Fem": 84
+   },
+   "number": {
+    "Sing": 84
+   },
+   "src": {
+    "vedic-train": 84
+   }
+  },
+  "enām": {
+   "gender": {
+    "Fem": 62
+   },
+   "number": {
+    "Sing": 62
+   },
+   "src": {
+    "vedic-train": 61,
+    "ufal-iast": 1
+   }
+  },
+  "eṣā": {
+   "gender": {
+    "Fem": 155
+   },
+   "number": {
+    "Sing": 155
+   },
+   "src": {
+    "vedic-train": 155
+   }
+  },
+  "tasya": {
+   "gender": {
+    "Masc": 297,
+    "Neut": 44
+   },
+   "number": {
+    "Sing": 341
+   },
+   "src": {
+    "vedic-train": 331,
+    "ufal-iast": 10
+   }
+  },
+  "imām": {
+   "gender": {
+    "Fem": 60
+   },
+   "number": {
+    "Sing": 60
+   },
+   "src": {
+    "vedic-train": 60
+   }
+  },
+  "amuṣya": {
+   "gender": {
+    "Masc": 15
+   },
+   "number": {
+    "Sing": 15
+   },
+   "src": {
+    "vedic-train": 15
+   }
+  },
+  "asmāt": {
+   "gender": {
+    "Masc": 48,
+    "Neut": 8
+   },
+   "number": {
+    "Sing": 56
+   },
+   "src": {
+    "vedic-train": 56
+   }
+  },
+  "tayā": {
+   "gender": {
+    "Fem": 59
+   },
+   "number": {
+    "Sing": 59
+   },
+   "src": {
+    "vedic-train": 57,
+    "ufal-iast": 2
+   }
+  },
+  "tasyām": {
+   "gender": {
+    "Fem": 24
+   },
+   "number": {
+    "Sing": 24
+   },
+   "src": {
+    "vedic-train": 24
+   }
+  },
+  "sa": {
+   "gender": {
+    "Masc": 721
+   },
+   "number": {
+    "Sing": 721
+   },
+   "src": {
+    "vedic-train": 715,
+    "ufal-iast": 6
+   }
+  },
+  "amuṣmai": {
+   "gender": {
+    "Masc": 17
+   },
+   "number": {
+    "Sing": 17
+   },
+   "src": {
+    "vedic-train": 17
+   }
+  },
+  "asyām": {
+   "gender": {
+    "Fem": 35
+   },
+   "number": {
+    "Sing": 35
+   },
+   "src": {
+    "vedic-train": 34,
+    "ufal-iast": 1
+   }
+  },
+  "etasmin": {
+   "gender": {
+    "Masc": 18,
+    "Neut": 10
+   },
+   "number": {
+    "Sing": 28
+   },
+   "src": {
+    "vedic-train": 28
+   }
+  },
+  "ayā": {
+   "gender": {
+    "Fem": 6
+   },
+   "number": {
+    "Sing": 6
+   },
+   "src": {
+    "vedic-train": 6
+   }
+  },
+  "eṣaḥ": {
+   "gender": {
+    "Masc": 77
+   },
+   "number": {
+    "Sing": 77
+   },
+   "src": {
+    "vedic-train": 77
+   }
+  },
+  "amuṣmāt": {
+   "gender": {
+    "Neut": 1,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 6
+   },
+   "src": {
+    "vedic-train": 6
+   }
+  },
+  "asyāḥ": {
+   "gender": {
+    "Fem": 38
+   },
+   "number": {
+    "Sing": 38
+   },
+   "src": {
+    "vedic-train": 38
+   }
+  },
+  "anena": {
+   "gender": {
+    "Masc": 25,
+    "Neut": 12
+   },
+   "number": {
+    "Sing": 37
+   },
+   "src": {
+    "vedic-train": 37
+   }
+  },
+  "tasyai": {
+   "gender": {
+    "Fem": 18
+   },
+   "number": {
+    "Sing": 18
+   },
+   "src": {
+    "vedic-train": 18
+   }
+  },
+  "amūm": {
+   "gender": {
+    "Fem": 8
+   },
+   "number": {
+    "Sing": 8
+   },
+   "src": {
+    "vedic-train": 8
+   }
+  },
+  "amuyā": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "src": {
+    "vedic-train": 3
+   }
+  },
+  "amuṣyai": {
+   "gender": {
+    "Fem": 4
+   },
+   "number": {
+    "Sing": 4
+   },
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "etasyām": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "src": {
+    "vedic-train": 10
+   }
+  },
+  "etasmāt": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 9
+   },
+   "number": {
+    "Sing": 13
+   },
+   "src": {
+    "vedic-train": 13
+   }
+  },
+  "amuṣmin": {
+   "gender": {
+    "Masc": 14
+   },
+   "number": {
+    "Sing": 14
+   },
+   "src": {
+    "vedic-train": 14
+   }
+  },
+  "enayā": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "src": {
+    "vedic-train": 3
+   }
+  },
+  "etasmai": {
+   "gender": {
+    "Neut": 3,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 8
+   },
+   "src": {
+    "vedic-train": 8
+   }
+  },
+  "etā": {
+   "gender": {
+    "Fem": 4,
+    "Neut": 1,
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 4,
+    "Plur": 1,
+    "Dual": 1
+   },
+   "src": {
+    "vedic-train": 6
+   }
+  },
+  "etasyāḥ": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "src": {
+    "vedic-train": 3
+   }
+  },
+  "etasyai": {
+   "gender": {
+    "Fem": 4
+   },
+   "number": {
+    "Sing": 4
+   },
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "ṭam": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "vedic-train": 1
+   }
+  },
+  "amuṣyāḥ": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "src": {
+    "vedic-train": 10
+   }
+  },
+  "anayā": {
+   "gender": {
+    "Fem": 5
+   },
+   "number": {
+    "Sing": 5
+   },
+   "src": {
+    "vedic-train": 5
+   }
+  },
+  "तस्य": {
+   "gender": {
+    "Masc": 9,
+    "Neut": 1
+   },
+   "number": {
+    "Sing": 10
+   },
+   "src": {
+    "ufal-deva": 10
+   }
+  },
+  "तस्मै": {
+   "gender": {
+    "Masc": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "src": {
+    "ufal-deva": 3
+   }
+  },
+  "स": {
+   "gender": {
+    "Masc": 6
+   },
+   "number": {
+    "Sing": 6
+   },
+   "src": {
+    "ufal-deva": 6
+   }
+  },
+  "सः": {
+   "gender": {
+    "Masc": 6
+   },
+   "number": {
+    "Sing": 6
+   },
+   "src": {
+    "ufal-deva": 6
+   }
+  },
+  "सह्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "sah": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-iast": 1
+   }
+  },
+  "भवान्": {
+   "gender": {
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 5
+   },
+   "src": {
+    "ufal-deva": 5
+   }
+  },
+  "bhavān": {
+   "gender": {
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 5
+   },
+   "src": {
+    "ufal-iast": 5
+   }
+  },
+  "एनम्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "अयम्": {
+   "gender": {
+    "Masc": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "src": {
+    "ufal-deva": 3
+   }
+  },
+  "भवन्तम्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "bhavantam": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-iast": 1
+   }
+  },
+  "असौ": {
+   "gender": {
+    "Masc": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "src": {
+    "ufal-deva": 3
+   }
+  },
+  "अस्याम्": {
+   "gender": {
+    "Fem": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तम्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तया": {
+   "gender": {
+    "Fem": 2
+   },
+   "number": {
+    "Sing": 2
+   },
+   "src": {
+    "ufal-deva": 2
+   }
+  },
+  "सा": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "src": {
+    "ufal-deva": 3
+   }
+  },
+  "तेन": {
+   "gender": {
+    "Masc": 2
+   },
+   "number": {
+    "Sing": 2
+   },
+   "src": {
+    "ufal-deva": 2
+   }
+  },
+  "एनाम्": {
+   "gender": {
+    "Fem": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तस्याः": {
+   "gender": {
+    "Fem": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "इमम्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "src": {
+    "ufal-deva": 1
+   }
+  }
+ },
+ "dropped": {
+  "etāni": {
+   "gender": {
+    "Neut": 68
+   },
+   "number": {
+    "Plur": 68
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 68
+   }
+  },
+  "tat": {
+   "gender": {
+    "Neut": 1094
+   },
+   "number": {
+    "Sing": 1094
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 1082,
+    "ufal-iast": 12
+   }
+  },
+  "adaḥ": {
+   "gender": {
+    "Neut": 7
+   },
+   "number": {
+    "Sing": 7
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 7
+   }
+  },
+  "amūḥ": {
+   "gender": {
+    "Fem": 7
+   },
+   "number": {
+    "Plur": 7
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 7
+   }
+  },
+  "te": {
+   "gender": {
+    "Masc": 375,
+    "Neut": 9,
+    "Fem": 10
+   },
+   "number": {
+    "Plur": 375,
+    "Dual": 19
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 393,
+    "ufal-iast": 1
+   }
+  },
+  "tau": {
+   "gender": {
+    "Masc": 67
+   },
+   "number": {
+    "Dual": 67
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 65,
+    "ufal-iast": 2
+   }
+  },
+  "etebhyaḥ": {
+   "gender": {
+    "Masc": 2
+   },
+   "number": {
+    "Plur": 2
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 2
+   }
+  },
+  "etat": {
+   "gender": {
+    "Neut": 523
+   },
+   "number": {
+    "Sing": 523
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 519,
+    "ufal-iast": 4
+   }
+  },
+  "tasmāt": {
+   "gender": {
+    "Neut": 22,
+    "Masc": 16
+   },
+   "number": {
+    "Sing": 38
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 35,
+    "ufal-iast": 3
+   }
+  },
+  "etena": {
+   "gender": {
+    "Neut": 44,
+    "Masc": 35
+   },
+   "number": {
+    "Sing": 79
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 79
+   }
+  },
+  "tena": {
+   "gender": {
+    "Neut": 101,
+    "Masc": 93
+   },
+   "number": {
+    "Sing": 194
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 192,
+    "ufal-iast": 2
+   }
+  },
+  "tāsām": {
+   "gender": {
+    "Fem": 33
+   },
+   "number": {
+    "Plur": 33
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 33
+   }
+  },
+  "idam": {
+   "gender": {
+    "Neut": 320
+   },
+   "number": {
+    "Sing": 320
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 318,
+    "ufal-iast": 2
+   }
+  },
+  "tebhyaḥ": {
+   "gender": {
+    "Masc": 45,
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 46
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 46
+   }
+  },
+  "teṣām": {
+   "gender": {
+    "Masc": 83,
+    "Neut": 15
+   },
+   "number": {
+    "Plur": 98
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 97,
+    "ufal-iast": 1
+   }
+  },
+  "enayoḥ": {
+   "gender": {
+    "Masc": 7,
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 7,
+    "Dual": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 8
+   }
+  },
+  "eṣām": {
+   "gender": {
+    "Masc": 99,
+    "Neut": 5
+   },
+   "number": {
+    "Plur": 104
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 104
+   }
+  },
+  "ete": {
+   "gender": {
+    "Masc": 99,
+    "Fem": 14,
+    "Neut": 14
+   },
+   "number": {
+    "Plur": 99,
+    "Dual": 28
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 126,
+    "ufal-iast": 1
+   }
+  },
+  "teṣu": {
+   "gender": {
+    "Masc": 22,
+    "Neut": 11
+   },
+   "number": {
+    "Plur": 33
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 33
+   }
+  },
+  "tāḥ": {
+   "gender": {
+    "Fem": 174
+   },
+   "number": {
+    "Plur": 174
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 174
+   }
+  },
+  "etābhyām": {
+   "gender": {
+    "Fem": 7,
+    "Masc": 3,
+    "Neut": 4
+   },
+   "number": {
+    "Dual": 14
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 14
+   }
+  },
+  "etābhyaḥ": {
+   "gender": {
+    "Fem": 4
+   },
+   "number": {
+    "Plur": 4
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "etāḥ": {
+   "gender": {
+    "Fem": 88
+   },
+   "number": {
+    "Plur": 88
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 88
+   }
+  },
+  "tān": {
+   "gender": {
+    "Masc": 123
+   },
+   "number": {
+    "Plur": 123
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 122,
+    "ufal-iast": 1
+   }
+  },
+  "tābhyām": {
+   "gender": {
+    "Masc": 9,
+    "Fem": 4,
+    "Neut": 4
+   },
+   "number": {
+    "Dual": 17
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 17
+   }
+  },
+  "taiḥ": {
+   "gender": {
+    "Masc": 27,
+    "Neut": 6
+   },
+   "number": {
+    "Plur": 33
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 33
+   }
+  },
+  "tāni": {
+   "gender": {
+    "Neut": 86
+   },
+   "number": {
+    "Plur": 86
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 85,
+    "ufal-iast": 1
+   }
+  },
+  "eteṣām": {
+   "gender": {
+    "Masc": 12,
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 13
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 12,
+    "ufal-iast": 1
+   }
+  },
+  "ime": {
+   "gender": {
+    "Masc": 96,
+    "Fem": 7,
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 96,
+    "Dual": 8
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 104
+   }
+  },
+  "imā": {
+   "gender": {
+    "Neut": 16
+   },
+   "number": {
+    "Plur": 16
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 16
+   }
+  },
+  "imān": {
+   "gender": {
+    "Masc": 36
+   },
+   "number": {
+    "Plur": 36
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 36
+   }
+  },
+  "enān": {
+   "gender": {
+    "Masc": 27
+   },
+   "number": {
+    "Plur": 27
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 27
+   }
+  },
+  "etāsām": {
+   "gender": {
+    "Fem": 7
+   },
+   "number": {
+    "Plur": 7
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 7
+   }
+  },
+  "etān": {
+   "gender": {
+    "Masc": 31
+   },
+   "number": {
+    "Plur": 31
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 28,
+    "ufal-iast": 3
+   }
+  },
+  "tayoḥ": {
+   "gender": {
+    "Masc": 13,
+    "Neut": 5,
+    "Fem": 1
+   },
+   "number": {
+    "Dual": 19
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 19
+   }
+  },
+  "enat": {
+   "gender": {
+    "Neut": 79
+   },
+   "number": {
+    "Sing": 79
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 79
+   }
+  },
+  "enau": {
+   "gender": {
+    "Masc": 12
+   },
+   "number": {
+    "Dual": 12
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 12
+   }
+  },
+  "tābhiḥ": {
+   "gender": {
+    "Fem": 33
+   },
+   "number": {
+    "Plur": 33
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 33
+   }
+  },
+  "ebhyaḥ": {
+   "gender": {
+    "Masc": 32
+   },
+   "number": {
+    "Plur": 32
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 32
+   }
+  },
+  "tābhyaḥ": {
+   "gender": {
+    "Fem": 5
+   },
+   "number": {
+    "Plur": 5
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 5
+   }
+  },
+  "etaiḥ": {
+   "gender": {
+    "Masc": 12,
+    "Neut": 12
+   },
+   "number": {
+    "Plur": 24
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 24
+   }
+  },
+  "eteṣu": {
+   "gender": {
+    "Neut": 2,
+    "Masc": 3
+   },
+   "number": {
+    "Plur": 5
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 5
+   }
+  },
+  "ebhiḥ": {
+   "gender": {
+    "Masc": 5,
+    "Neut": 4
+   },
+   "number": {
+    "Plur": 9
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 9
+   }
+  },
+  "tāsu": {
+   "gender": {
+    "Fem": 5
+   },
+   "number": {
+    "Plur": 5
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 5
+   }
+  },
+  "etayoḥ": {
+   "gender": {
+    "Neut": 1,
+    "Masc": 3
+   },
+   "number": {
+    "Dual": 4
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "imāni": {
+   "gender": {
+    "Neut": 9
+   },
+   "number": {
+    "Plur": 9
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 9
+   }
+  },
+  "imāḥ": {
+   "gender": {
+    "Fem": 49
+   },
+   "number": {
+    "Plur": 49
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 49
+   }
+  },
+  "etau": {
+   "gender": {
+    "Masc": 15
+   },
+   "number": {
+    "Dual": 15
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 15
+   }
+  },
+  "āsu": {
+   "gender": {
+    "Fem": 8
+   },
+   "number": {
+    "Plur": 8
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 8
+   }
+  },
+  "ābhyaḥ": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Plur": 3
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 3
+   }
+  },
+  "imau": {
+   "gender": {
+    "Masc": 14
+   },
+   "number": {
+    "Dual": 14
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 14
+   }
+  },
+  "ābhiḥ": {
+   "gender": {
+    "Fem": 13
+   },
+   "number": {
+    "Plur": 13
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 13
+   }
+  },
+  "etāsu": {
+   "gender": {
+    "Fem": 2
+   },
+   "number": {
+    "Plur": 2
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 2
+   }
+  },
+  "enena": {
+   "gender": {
+    "Masc": 2,
+    "Neut": 2
+   },
+   "number": {
+    "Sing": 4
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "etābhiḥ": {
+   "gender": {
+    "Fem": 19
+   },
+   "number": {
+    "Plur": 19
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 19
+   }
+  },
+  "eṣu": {
+   "gender": {
+    "Masc": 17
+   },
+   "number": {
+    "Plur": 17
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 17
+   }
+  },
+  "enāḥ": {
+   "gender": {
+    "Fem": 11
+   },
+   "number": {
+    "Plur": 11
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 11
+   }
+  },
+  "āsām": {
+   "gender": {
+    "Fem": 11
+   },
+   "number": {
+    "Plur": 11
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 11
+   }
+  },
+  "tā": {
+   "gender": {
+    "Neut": 13,
+    "Masc": 10
+   },
+   "number": {
+    "Plur": 13,
+    "Dual": 10
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 23
+   }
+  },
+  "tāṃ": {
+   "gender": {
+    "Masc": 8
+   },
+   "number": {
+    "Plur": 8
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 8
+   }
+  },
+  "amī": {
+   "gender": {
+    "Masc": 2
+   },
+   "number": {
+    "Plur": 2
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 2
+   }
+  },
+  "enā": {
+   "gender": {
+    "Masc": 3,
+    "Neut": 4
+   },
+   "number": {
+    "Sing": 6,
+    "Plur": 1
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 7
+   }
+  },
+  "sasmin": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 1
+   }
+  },
+  "tebhiḥ": {
+   "gender": {
+    "Masc": 7
+   },
+   "number": {
+    "Plur": 7
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 7
+   }
+  },
+  "ṭat": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 1
+   }
+  },
+  "tad": {
+   "gender": {
+    "Neut": 2
+   },
+   "number": {
+    "Sing": 2
+   },
+   "why": "neuter majority",
+   "src": {
+    "vedic-train": 1,
+    "ufal-iast": 1
+   }
+  },
+  "amīṣām": {
+   "gender": {
+    "Masc": 4
+   },
+   "number": {
+    "Plur": 4
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "amūn": {
+   "gender": {
+    "Masc": 2
+   },
+   "number": {
+    "Plur": 2
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 2
+   }
+  },
+  "ene": {
+   "gender": {
+    "Fem": 1,
+    "Neut": 3
+   },
+   "number": {
+    "Dual": 4
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "ābhyām": {
+   "gender": {
+    "Masc": 2,
+    "Fem": 2
+   },
+   "number": {
+    "Dual": 4
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 4
+   }
+  },
+  "enāni": {
+   "gender": {
+    "Neut": 8
+   },
+   "number": {
+    "Plur": 8
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 8
+   }
+  },
+  "anayoḥ": {
+   "gender": {
+    "Fem": 3,
+    "Masc": 4
+   },
+   "number": {
+    "Dual": 7
+   },
+   "why": "majority number not singular",
+   "src": {
+    "vedic-train": 7
+   }
+  },
+  "एतत्": {
+   "gender": {
+    "Neut": 4
+   },
+   "number": {
+    "Sing": 4
+   },
+   "why": "neuter majority",
+   "src": {
+    "ufal-deva": 4
+   }
+  },
+  "तान्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "एतद्": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "why": "neuter majority",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "etad": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "why": "neuter majority",
+   "src": {
+    "ufal-iast": 1
+   }
+  },
+  "भवद्भिः": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "bhavadbhiḥ": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-iast": 1
+   }
+  },
+  "एते": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "एतान्": {
+   "gender": {
+    "Masc": 3
+   },
+   "number": {
+    "Plur": 3
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 3
+   }
+  },
+  "इदम्": {
+   "gender": {
+    "Neut": 2
+   },
+   "number": {
+    "Sing": 2
+   },
+   "why": "neuter majority",
+   "src": {
+    "ufal-deva": 2
+   }
+  },
+  "तौ": {
+   "gender": {
+    "Masc": 2
+   },
+   "number": {
+    "Dual": 2
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 2
+   }
+  },
+  "एतेषां": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "eteṣāṃ": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-iast": 1
+   }
+  },
+  "एतेषाम्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तत्": {
+   "gender": {
+    "Neut": 12
+   },
+   "number": {
+    "Sing": 12
+   },
+   "why": "neuter majority",
+   "src": {
+    "ufal-deva": 12
+   }
+  },
+  "ते": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तानि": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तस्मात्": {
+   "gender": {
+    "Masc": 1,
+    "Neut": 2
+   },
+   "number": {
+    "Sing": 3
+   },
+   "why": "neuter majority",
+   "src": {
+    "ufal-deva": 3
+   }
+  },
+  "तेषाम्": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Plur": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तद्": {
+   "gender": {
+    "Neut": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "why": "neuter majority",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "तयोर्": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Dual": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "tayor": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Dual": 1
+   },
+   "why": "majority number not singular",
+   "src": {
+    "ufal-iast": 1
+   }
+  },
+  "भवतः": {
+   "gender": {},
+   "number": {
+    "Sing": 1
+   },
+   "why": "no gender attested",
+   "src": {
+    "ufal-deva": 1
+   }
+  },
+  "bhavataḥ": {
+   "gender": {},
+   "number": {
+    "Sing": 1
+   },
+   "why": "no gender attested",
+   "src": {
+    "ufal-iast": 1
+   }
+  }
+ },
+ "variants": {
+  "taṃ": {
+   "gender": {
+    "Masc": 662
+   },
+   "number": {
+    "Sing": 662
+   },
+   "from": "tam"
+  },
+  "ayaṃ": {
+   "gender": {
+    "Masc": 291
+   },
+   "number": {
+    "Sing": 291
+   },
+   "from": "ayam"
+  },
+  "enaṃ": {
+   "gender": {
+    "Masc": 555
+   },
+   "number": {
+    "Sing": 555
+   },
+   "from": "enam"
+  },
+  "iyaṃ": {
+   "gender": {
+    "Fem": 95
+   },
+   "number": {
+    "Sing": 95
+   },
+   "from": "iyam"
+  },
+  "asav": {
+   "gender": {
+    "Masc": 109,
+    "Fem": 12
+   },
+   "number": {
+    "Sing": 121
+   },
+   "from": "asau"
+  },
+  "imaṃ": {
+   "gender": {
+    "Masc": 149
+   },
+   "number": {
+    "Sing": 149
+   },
+   "from": "imam"
+  },
+  "so": {
+   "gender": {
+    "Masc": 731
+   },
+   "number": {
+    "Sing": 731
+   },
+   "from": "saḥ"
+  },
+  "sas": {
+   "gender": {
+    "Masc": 731
+   },
+   "number": {
+    "Sing": 731
+   },
+   "from": "saḥ"
+  },
+  "saś": {
+   "gender": {
+    "Masc": 731
+   },
+   "number": {
+    "Sing": 731
+   },
+   "from": "saḥ"
+  },
+  "saṣ": {
+   "gender": {
+    "Masc": 731
+   },
+   "number": {
+    "Sing": 731
+   },
+   "from": "saḥ"
+  },
+  "sar": {
+   "gender": {
+    "Masc": 731
+   },
+   "number": {
+    "Sing": 731
+   },
+   "from": "saḥ"
+  },
+  "tasmay": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 105
+   },
+   "number": {
+    "Sing": 109
+   },
+   "from": "tasmai"
+  },
+  "tāṃ": {
+   "gender": {
+    "Fem": 218
+   },
+   "number": {
+    "Sing": 218
+   },
+   "from": "tām"
+  },
+  "tasyā": {
+   "gender": {
+    "Fem": 50
+   },
+   "number": {
+    "Sing": 50
+   },
+   "from": "tasyāḥ"
+  },
+  "tasyās": {
+   "gender": {
+    "Fem": 50
+   },
+   "number": {
+    "Sing": 50
+   },
+   "from": "tasyāḥ"
+  },
+  "tasyāś": {
+   "gender": {
+    "Fem": 50
+   },
+   "number": {
+    "Sing": 50
+   },
+   "from": "tasyāḥ"
+  },
+  "tasyāṣ": {
+   "gender": {
+    "Fem": 50
+   },
+   "number": {
+    "Sing": 50
+   },
+   "from": "tasyāḥ"
+  },
+  "tasyār": {
+   "gender": {
+    "Fem": 50
+   },
+   "number": {
+    "Sing": 50
+   },
+   "from": "tasyāḥ"
+  },
+  "amuṃ": {
+   "gender": {
+    "Masc": 43
+   },
+   "number": {
+    "Sing": 43
+   },
+   "from": "amum"
+  },
+  "asyay": {
+   "gender": {
+    "Fem": 22
+   },
+   "number": {
+    "Sing": 22
+   },
+   "from": "asyai"
+  },
+  "asmay": {
+   "gender": {
+    "Masc": 202
+   },
+   "number": {
+    "Sing": 202
+   },
+   "from": "asmai"
+  },
+  "etaṃ": {
+   "gender": {
+    "Masc": 144
+   },
+   "number": {
+    "Sing": 144
+   },
+   "from": "etam"
+  },
+  "etāṃ": {
+   "gender": {
+    "Fem": 84
+   },
+   "number": {
+    "Sing": 84
+   },
+   "from": "etām"
+  },
+  "enāṃ": {
+   "gender": {
+    "Fem": 62
+   },
+   "number": {
+    "Sing": 62
+   },
+   "from": "enām"
+  },
+  "imāṃ": {
+   "gender": {
+    "Fem": 60
+   },
+   "number": {
+    "Sing": 60
+   },
+   "from": "imām"
+  },
+  "asmād": {
+   "gender": {
+    "Masc": 48,
+    "Neut": 8
+   },
+   "number": {
+    "Sing": 56
+   },
+   "from": "asmāt"
+  },
+  "asmāc": {
+   "gender": {
+    "Masc": 48,
+    "Neut": 8
+   },
+   "number": {
+    "Sing": 56
+   },
+   "from": "asmāt"
+  },
+  "asmāj": {
+   "gender": {
+    "Masc": 48,
+    "Neut": 8
+   },
+   "number": {
+    "Sing": 56
+   },
+   "from": "asmāt"
+  },
+  "asmāl": {
+   "gender": {
+    "Masc": 48,
+    "Neut": 8
+   },
+   "number": {
+    "Sing": 56
+   },
+   "from": "asmāt"
+  },
+  "asmān": {
+   "gender": {
+    "Masc": 48,
+    "Neut": 8
+   },
+   "number": {
+    "Sing": 56
+   },
+   "from": "asmāt"
+  },
+  "tasyāṃ": {
+   "gender": {
+    "Fem": 24
+   },
+   "number": {
+    "Sing": 24
+   },
+   "from": "tasyām"
+  },
+  "amuṣmay": {
+   "gender": {
+    "Masc": 17
+   },
+   "number": {
+    "Sing": 17
+   },
+   "from": "amuṣmai"
+  },
+  "asyāṃ": {
+   "gender": {
+    "Fem": 35
+   },
+   "number": {
+    "Sing": 35
+   },
+   "from": "asyām"
+  },
+  "eṣo": {
+   "gender": {
+    "Masc": 77
+   },
+   "number": {
+    "Sing": 77
+   },
+   "from": "eṣaḥ"
+  },
+  "eṣas": {
+   "gender": {
+    "Masc": 77
+   },
+   "number": {
+    "Sing": 77
+   },
+   "from": "eṣaḥ"
+  },
+  "eṣaś": {
+   "gender": {
+    "Masc": 77
+   },
+   "number": {
+    "Sing": 77
+   },
+   "from": "eṣaḥ"
+  },
+  "eṣaṣ": {
+   "gender": {
+    "Masc": 77
+   },
+   "number": {
+    "Sing": 77
+   },
+   "from": "eṣaḥ"
+  },
+  "eṣar": {
+   "gender": {
+    "Masc": 77
+   },
+   "number": {
+    "Sing": 77
+   },
+   "from": "eṣaḥ"
+  },
+  "amuṣmād": {
+   "gender": {
+    "Neut": 1,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 6
+   },
+   "from": "amuṣmāt"
+  },
+  "amuṣmāc": {
+   "gender": {
+    "Neut": 1,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 6
+   },
+   "from": "amuṣmāt"
+  },
+  "amuṣmāj": {
+   "gender": {
+    "Neut": 1,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 6
+   },
+   "from": "amuṣmāt"
+  },
+  "amuṣmāl": {
+   "gender": {
+    "Neut": 1,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 6
+   },
+   "from": "amuṣmāt"
+  },
+  "amuṣmān": {
+   "gender": {
+    "Neut": 1,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 6
+   },
+   "from": "amuṣmāt"
+  },
+  "asyā": {
+   "gender": {
+    "Fem": 38
+   },
+   "number": {
+    "Sing": 38
+   },
+   "from": "asyāḥ"
+  },
+  "asyās": {
+   "gender": {
+    "Fem": 38
+   },
+   "number": {
+    "Sing": 38
+   },
+   "from": "asyāḥ"
+  },
+  "asyāś": {
+   "gender": {
+    "Fem": 38
+   },
+   "number": {
+    "Sing": 38
+   },
+   "from": "asyāḥ"
+  },
+  "asyāṣ": {
+   "gender": {
+    "Fem": 38
+   },
+   "number": {
+    "Sing": 38
+   },
+   "from": "asyāḥ"
+  },
+  "asyār": {
+   "gender": {
+    "Fem": 38
+   },
+   "number": {
+    "Sing": 38
+   },
+   "from": "asyāḥ"
+  },
+  "tasyay": {
+   "gender": {
+    "Fem": 18
+   },
+   "number": {
+    "Sing": 18
+   },
+   "from": "tasyai"
+  },
+  "amūṃ": {
+   "gender": {
+    "Fem": 8
+   },
+   "number": {
+    "Sing": 8
+   },
+   "from": "amūm"
+  },
+  "amuṣyay": {
+   "gender": {
+    "Fem": 4
+   },
+   "number": {
+    "Sing": 4
+   },
+   "from": "amuṣyai"
+  },
+  "etasyāṃ": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "from": "etasyām"
+  },
+  "etasmād": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 9
+   },
+   "number": {
+    "Sing": 13
+   },
+   "from": "etasmāt"
+  },
+  "etasmāc": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 9
+   },
+   "number": {
+    "Sing": 13
+   },
+   "from": "etasmāt"
+  },
+  "etasmāj": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 9
+   },
+   "number": {
+    "Sing": 13
+   },
+   "from": "etasmāt"
+  },
+  "etasmāl": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 9
+   },
+   "number": {
+    "Sing": 13
+   },
+   "from": "etasmāt"
+  },
+  "etasmān": {
+   "gender": {
+    "Neut": 4,
+    "Masc": 9
+   },
+   "number": {
+    "Sing": 13
+   },
+   "from": "etasmāt"
+  },
+  "etasmay": {
+   "gender": {
+    "Neut": 3,
+    "Masc": 5
+   },
+   "number": {
+    "Sing": 8
+   },
+   "from": "etasmai"
+  },
+  "etasyā": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "from": "etasyāḥ"
+  },
+  "etasyās": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "from": "etasyāḥ"
+  },
+  "etasyāś": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "from": "etasyāḥ"
+  },
+  "etasyāṣ": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "from": "etasyāḥ"
+  },
+  "etasyār": {
+   "gender": {
+    "Fem": 3
+   },
+   "number": {
+    "Sing": 3
+   },
+   "from": "etasyāḥ"
+  },
+  "etasyay": {
+   "gender": {
+    "Fem": 4
+   },
+   "number": {
+    "Sing": 4
+   },
+   "from": "etasyai"
+  },
+  "ṭaṃ": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "from": "ṭam"
+  },
+  "amuṣyā": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "from": "amuṣyāḥ"
+  },
+  "amuṣyās": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "from": "amuṣyāḥ"
+  },
+  "amuṣyāś": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "from": "amuṣyāḥ"
+  },
+  "amuṣyāṣ": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "from": "amuṣyāḥ"
+  },
+  "amuṣyār": {
+   "gender": {
+    "Fem": 10
+   },
+   "number": {
+    "Sing": 10
+   },
+   "from": "amuṣyāḥ"
+  },
+  "bhavantaṃ": {
+   "gender": {
+    "Masc": 1
+   },
+   "number": {
+    "Sing": 1
+   },
+   "from": "bhavantam"
+  }
+ },
+ "endings": [
+  "a",
+  "air",
+  "ais",
+  "aiś",
+  "aiḥ",
+  "aiṣ",
+  "am",
+  "an",
+  "ani",
+  "any",
+  "ar",
+  "ara",
+  "aram",
+  "arar",
+  "aras",
+  "arau",
+  "arav",
+  "araś",
+  "araḥ",
+  "araṃ",
+  "araṣ",
+  "ari",
+  "aro",
+  "ary",
+  "arā",
+  "as",
+  "asya",
+  "ata",
+  "atar",
+  "atas",
+  "ataś",
+  "ataḥ",
+  "ataṣ",
+  "ato",
+  "au",
+  "av",
+  "ava",
+  "avar",
+  "avas",
+  "avaś",
+  "avaḥ",
+  "avaṣ",
+  "ave",
+  "avo",
+  "aya",
+  "ayar",
+  "ayas",
+  "ayaś",
+  "ayaḥ",
+  "ayaṣ",
+  "aye",
+  "ayo",
+  "ayor",
+  "ayos",
+  "ayoś",
+  "ayoḥ",
+  "ayoṣ",
+  "ayā",
+  "aś",
+  "aḥ",
+  "aṃ",
+  "aṣ",
+  "bhir",
+  "bhis",
+  "bhiś",
+  "bhiḥ",
+  "bhiṣ",
+  "e",
+  "ena",
+  "er",
+  "es",
+  "eś",
+  "eḥ",
+  "eṇa",
+  "eṣ",
+  "eṣu",
+  "eṣv",
+  "i",
+  "im",
+  "inā",
+  "ir",
+  "is",
+  "ita",
+  "itar",
+  "itas",
+  "itaś",
+  "itaḥ",
+  "itaṣ",
+  "ito",
+  "iya",
+  "iyai",
+  "iyam",
+  "iyar",
+  "iyas",
+  "iyay",
+  "iyaś",
+  "iyaḥ",
+  "iyaṃ",
+  "iyaṣ",
+  "iyo",
+  "iyā",
+  "iyām",
+  "iyār",
+  "iyās",
+  "iyāś",
+  "iyāḥ",
+  "iyāṃ",
+  "iyāṣ",
+  "iś",
+  "iḥ",
+  "iṃ",
+  "iṇi",
+  "iṇy",
+  "iṇā",
+  "iṇī",
+  "iṣ",
+  "iṣu",
+  "iṣv",
+  "na",
+  "nar",
+  "nas",
+  "naś",
+  "naḥ",
+  "naṣ",
+  "no",
+  "nā",
+  "o",
+  "or",
+  "os",
+  "oś",
+  "oḥ",
+  "oṣ",
+  "re",
+  "ror",
+  "ros",
+  "roś",
+  "roḥ",
+  "roṣ",
+  "ry",
+  "rā",
+  "rī",
+  "su",
+  "sv",
+  "u",
+  "um",
+  "una",
+  "unar",
+  "unas",
+  "unaś",
+  "unaḥ",
+  "unaṣ",
+  "uni",
+  "uno",
+  "uny",
+  "unā",
+  "ur",
+  "us",
+  "uva",
+  "uvam",
+  "uvar",
+  "uvas",
+  "uvaś",
+  "uvaḥ",
+  "uvaṃ",
+  "uvaṣ",
+  "uve",
+  "uvo",
+  "uvā",
+  "uś",
+  "uḥ",
+  "uṃ",
+  "uṇā",
+  "uṣ",
+  "uṣu",
+  "uṣv",
+  "v",
+  "va",
+  "vam",
+  "var",
+  "vas",
+  "vaś",
+  "vaḥ",
+  "vaṃ",
+  "vaṣ",
+  "ve",
+  "vo",
+  "vor",
+  "vos",
+  "voś",
+  "voḥ",
+  "voṣ",
+  "vā",
+  "vām",
+  "vāṃ",
+  "y",
+  "ya",
+  "yai",
+  "yam",
+  "yar",
+  "yas",
+  "yau",
+  "yav",
+  "yay",
+  "yaś",
+  "yaḥ",
+  "yaṃ",
+  "yaṣ",
+  "ye",
+  "yo",
+  "yor",
+  "yos",
+  "yoś",
+  "yoḥ",
+  "yoṣ",
+  "yur",
+  "yus",
+  "yuś",
+  "yuḥ",
+  "yuṣ",
+  "yā",
+  "yām",
+  "yār",
+  "yās",
+  "yāś",
+  "yāḥ",
+  "yāṃ",
+  "yāṣ",
+  "ā",
+  "āc",
+  "ād",
+  "āj",
+  "āl",
+  "ām",
+  "ān",
+  "ānc",
+  "ānd",
+  "āni",
+  "ānj",
+  "ānl",
+  "ānn",
+  "ānt",
+  "āny",
+  "ānām",
+  "ānāṃ",
+  "ār",
+  "āra",
+  "āram",
+  "ārar",
+  "āras",
+  "ārau",
+  "ārav",
+  "āraś",
+  "āraḥ",
+  "āraṃ",
+  "āraṣ",
+  "āro",
+  "ās",
+  "āsa",
+  "āsar",
+  "āsas",
+  "āsaś",
+  "āsaḥ",
+  "āsaṣ",
+  "āso",
+  "āsu",
+  "āsv",
+  "āt",
+  "āta",
+  "ātar",
+  "ātas",
+  "ātaś",
+  "ātaḥ",
+  "ātaṣ",
+  "āto",
+  "āya",
+  "āyai",
+  "āyam",
+  "āyar",
+  "āyas",
+  "āyay",
+  "āyaś",
+  "āyaḥ",
+  "āyaṃ",
+  "āyaṣ",
+  "āyo",
+  "āyā",
+  "āyām",
+  "āyār",
+  "āyās",
+  "āyāś",
+  "āyāḥ",
+  "āyāṃ",
+  "āyāṣ",
+  "āś",
+  "āḥ",
+  "āṃ",
+  "āṇi",
+  "āṇy",
+  "āṇām",
+  "āṇāṃ",
+  "āṣ",
+  "ī",
+  "īm",
+  "īn",
+  "īni",
+  "īny",
+  "īnām",
+  "īnāṃ",
+  "īr",
+  "īs",
+  "īś",
+  "īḥ",
+  "īṃ",
+  "īṃr",
+  "īṇām",
+  "īṇāṃ",
+  "īṣ",
+  "īṣu",
+  "īṣv",
+  "ū",
+  "ūm",
+  "ūn",
+  "ūni",
+  "ūny",
+  "ūnām",
+  "ūnāṃ",
+  "ūr",
+  "ūs",
+  "ūś",
+  "ūḥ",
+  "ūṃ",
+  "ūṇi",
+  "ūṇy",
+  "ūṇām",
+  "ūṇāṃ",
+  "ūṣ",
+  "ūṣu",
+  "ūṣv",
+  "ṛṣu",
+  "ṛṣv",
+  "ṝn",
+  "ṝr",
+  "ṝs",
+  "ṝś",
+  "ṝḥ",
+  "ṝṇām",
+  "ṝṇāṃ",
+  "ṝṣ"
+ ]
+}

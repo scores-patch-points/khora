@@ -1029,7 +1029,7 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
   const genderOf = (r) => { const e = evidence.get(r); if (!e) return "unknown"; if (e.m > 0 && e.f === 0) return "m"; if (e.f > 0 && e.m === 0) return "f"; return "unknown"; };
   const compatible = (r, hit) => !hit.clean || genderOf(r) === "unknown" || genderOf(r) === hit.gender;
 
-  const bindings = [];
+  const bindings = [], unbound = [];
   for (const sent of order) {
     const mentionsHere = bySent.get(sent.i) ?? [];
     const hits = findInClass(sent.text, cls, { unspaced }).map((h) => ({ kind: "p", pos: sent.offset + h.index, rel: h.index, hit: h }));
@@ -1043,20 +1043,23 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
         if (inClause.length === 1 && !np.has(inClause[0]) && compatible(inClause[0], hit)) { chosen = inClause[0]; mechanism = "locality"; }
       }
       if (!chosen) {
-        const cands = [];
+        const cands = []; let present = 0;
         for (const [ref, c] of state) {
-          if (np.has(ref) || !compatible(ref, hit)) continue;
+          if (np.has(ref)) continue;
           const a = presence(ref, sent.i);
+          if (a > 0) present++;
+          if (!compatible(ref, hit)) continue;
           if (a > 0) cands.push([ref, a, c.pos]);
         }
         cands.sort((x, y) => y[1] - x[1] || y[2] - x[2] || (x[0] < y[0] ? -1 : 1));
-        if (!cands.length) { if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: [...state.keys()].some((r) => !np.has(r) && presence(r, sent.i) > 0) ? "gender_veto" : "no_candidate" }); continue; }
+        // the reason a found pronoun is left unbound: `unbound` rides the result (no binding changes), and `trace` (when given) receives the same item with the rung's own label and numbers
+        const skip = (reason, traceReason = reason, extra = {}) => { unbound.push({ pronoun: hit.token, offset: e.pos, sentenceOrder: sent.i, reason }); if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: traceReason, ...extra }); };
+        if (!cands.length) { skip(present ? "gender_veto" : "no_being_present", present ? "gender_veto" : "no_candidate"); continue; }
         top = cands[0][1];
         const second = cands[1]?.[1] ?? 0;
-        if (top < floor) { if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: "below_floor", activation: top }); continue; }
+        if (top < floor) { skip("below_floor", "below_floor", { activation: top }); continue; }
         margined = (top - second) / top;
-        if (margined < margin) { if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: "margin", activation: top, margin: margined }); continue; }
-        chosen = cands[0][0]; mechanism = "presence";
+        if (margined < margin) { skip("margin", "margin", { activation: top, margin: margined }); continue; }        chosen = cands[0][0]; mechanism = "presence";
       }
       bindings.push({ referentId: chosen, sentenceOrder: sent.i, offset: e.pos, pronoun: hit.token, gender: hit.gender, activation: top, margin: margined, mechanism });
       if (feed) fire(chosen, sent.i, 1, e.pos);
@@ -1071,5 +1074,5 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
       evidence.set(only, ev);
     }
   }
-  return { bindings, gaps: [] };
+  return { bindings, gaps: [], unbound };
 };
