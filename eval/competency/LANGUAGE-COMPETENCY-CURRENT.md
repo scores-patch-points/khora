@@ -10,7 +10,7 @@ A language is COMPETENT when at least 94% of the answerable third-person pronoun
 
 | language | clause reader | precision | coverage | resolved correctly (precision x coverage) | the 94% bar | gold | next |
 |---|---|---|---|---|---|---|---|
-| `eng` | positional (English parser) | 0.915 | 0.636 | 0.582 | short by 0.358 | yes | 58% of answerable pronouns resolved correctly against the 94% bar |
+| `eng` | positional (English parser) | 0.915 | 0.636 | 0.699 | short by 0.241 | yes | 70% of answerable pronouns resolved correctly against the 94% bar |
 | `fra` | positional (unvalidated for this language) | 0.547 | 0.368 | 0.201 | short by 0.739 | yes | morphology-fra.json (verbs match exactly without it); a clause reader validated for this language (the positional one is English-shaped) |
 | `grc` | case-marked (the Chomsky seam: case and pro-drop) | 0.53 | 0.573 | 0.277 | short by 0.663 | yes | pos-grc-unimorph.json is on disk and the read does not load it; 28% of answerable pronouns resolved correctly against the 94% bar |
 | `san` | case-marked (the Chomsky seam: case and pro-drop) | 0.878 | 0.154 | 0.135 | short by 0.805 | no (gold-free) | pos-san-unimorph.json is on disk and the read does not load it; gold coreference for san (the recorded precision is gold-free) |

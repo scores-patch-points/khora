@@ -2099,20 +2099,33 @@
     "coverage": 0.636,
     "nullPrecision": null,
     "gold": true,
-    "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND20.md"
+    "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND20.md",
+    "guess": {
+     "resolvedCorrectly": 0.699,
+     "weakest": 0.653,
+     "fiction": 0.661,
+     "gum": {
+      "U": 0.73,
+      "dev": 0.653,
+      "test": 0.772
+     },
+     "precision": 0.69,
+     "coverage": 0.999,
+     "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND23.md"
+    }
    },
    "proDrop": {
     "status": "not_applicable"
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": 0.582,
+    "accuracy": 0.699,
     "gold": true,
     "competent": false,
-    "gap": 0.358
+    "gap": 0.241
    },
    "next": [
-    "58% of answerable pronouns resolved correctly against the 94% bar"
+    "70% of answerable pronouns resolved correctly against the 94% bar"
    ]
   },
   {
