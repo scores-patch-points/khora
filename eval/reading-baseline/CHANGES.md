@@ -47,3 +47,8 @@ files changed since the last record: native/adapters/text/language-competency.js
 
 ## 2026-11-18: pronoun-registers.js loads node:fs/os/path/url only under Node (as prior-source.mjs does), so the page's import graph reaches no node: specifier statically: this was the one failing test that kept CI red from 2026-11-04 (reading-pipeline.test.js, 'nothing in its import graph imports node: statically'). Behaviour under Node is unchanged; in a page registerFor returns null (the typed gap pronoun_presence_no_register). No metric changed.
 files changed since the last record: native/adapters/text/pronoun-registers.js
+## 2026-11-18: ONE DOOR: canonicalReaderOptions/canonicalDeclension/noteMissingRuling/assertPrimed factored out of readToWeft (same behaviour); reading.js::readDocument now reads with the same canonical options (it skipped pronoun, name and case-marked options before); an unprimed read throws under Node (allowDegraded opts out); native/reading.js and the door allowlist are reading-critical; native/tests/one-door.test.mjs holds the two doors equal. No metric changed: readToWeft output is identical.
+files changed since the last record: native/reading.js, native/tests/door-allowlist.json, native/the-fold/read-process.mjs
+
+## 2026-11-18: merge of the one-door and CI changes: baseline re-recorded over both (read-process.mjs, reading.js, pronoun-registers.js, door allowlist); no metric moved
+files changed since the last record: (none)

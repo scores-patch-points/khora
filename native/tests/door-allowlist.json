@@ -1,0 +1,8 @@
+{
+ "about": "Files that SHIP and take the raw reader (readWith / makeReader / readDocument) from native/the-fold/read-core.mjs. Everything else reads through read-process.mjs::readToWeft or reading.js::readDocument (the canonical options live in read-process.mjs::canonicalReaderOptions). eval/ and tests/ are exempt: a control arm needs the raw reader. Adding a line here is the decision to open a door; give the reason.",
+ "importers": {
+  "native/the-fold/read-process.mjs": "THE canonical door: readToWeft applies canonicalReaderOptions and declension around readWith.",
+  "native/reading.js": "The Node front door: readDocument applies the same canonicalReaderOptions around read-core's readDocument and re-exports the primitives for explicit control callers.",
+  "native/the-fold/reader-bundle.js": "The older Node loader (engineRelationsFor) for proxy-runner, swarm-server and cli/reason: it builds the relation reader only (makeReader), byte-identical to before, and does not read documents into the weft."
+ }
+}
