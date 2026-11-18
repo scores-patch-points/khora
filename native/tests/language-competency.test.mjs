@@ -1,6 +1,6 @@
 // The per-language competency profile on every read (adapters/text/language-competency.js).
 import test from "node:test"; import assert from "node:assert/strict"; import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
-import { competencyOf, ENGLISH_EVALUATION, ENGLISH_GUESS, GIVER, giverScoreOf } from "../adapters/text/language-competency.js"; import { readToWeft } from "../the-fold/read-process.mjs";
+import { DIAGRAMMER_GIVER, competencyOf, ENGLISH_EVALUATION, ENGLISH_GUESS, GIVER, giverScoreOf } from "../adapters/text/language-competency.js"; import { readToWeft } from "../the-fold/read-process.mjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", ".."); const B2 = JSON.parse(fs.readFileSync(path.join(ROOT, "eval/reading-baseline/BASELINE.json"), "utf8")).metrics.english_pronoun_binding.always_answering_guess; const B = JSON.parse(fs.readFileSync(path.join(ROOT, "eval/reading-baseline/BASELINE.json"), "utf8")).metrics.english_pronoun_binding.with_name_ruling.with_ruling_soft_in_canonical_read;
 test("English: reading with pronouns, and its recorded evaluation is the baseline's", () => { const c = competencyOf("eng"); assert.equal(c.tier, "reading+pronouns"); assert.equal(c.pronouns.precision, ENGLISH_EVALUATION.precision); assert.equal(B.precision, ENGLISH_EVALUATION.precision); assert.equal(B.coverage, ENGLISH_EVALUATION.coverage); });
 test("Greek and Sanskrit: the case-marked seam reads their clauses; Sanskrit's recorded precision is gold-free and says so", () => {
@@ -26,3 +26,4 @@ test("English answers every pronoun it finds (pronounsGuess), marks each confide
   const off = readToWeft(T, { language: "eng", address: "t:g", readerOptions: { pronounGuess: null } }); assert.equal(off.pronounsGuess, undefined); assert.equal(JSON.stringify(off.pronounsPresence), JSON.stringify(w.pronounsPresence), "the confident bindings do not move");
   assert.equal(readToWeft("Le roi marcha dans la forêt et il vit la reine. ".repeat(20), { language: "fra", address: "t:f" }).pronounsGuess, undefined);
 });
+test("the diagrammer's giver numbers ride the English profile and no other", () => { const e = competencyOf("eng"); assert.equal(e.diagrammer.sets["GUM dev (clean)"].las, 72.74); assert.equal(e.diagrammer.scorer, DIAGRAMMER_GIVER.scorer); assert.equal(competencyOf("fra").diagrammer, null); });
