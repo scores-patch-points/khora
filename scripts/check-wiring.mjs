@@ -20,7 +20,7 @@ for (const pj of ["package.json", "native/package.json"]) {
 const cliDir = path.join(ROOT, "cli");
 if (fs.existsSync(cliDir)) for (const e of fs.readdirSync(cliDir)) {
   if (!/\.m?js$/.test(e)) continue; const src = fs.readFileSync(path.join(cliDir, e), "utf8");
-  for (const m of src.matchAll(/^\s*(?:import|export)\s[^;]*?from\s*["'](\.[^"']+)["']/gm)) { const f = path.posix.normalize(path.posix.join("cli", m[1])); if (!exists(f)) gaps.push(`cli/${e} imports a missing file: ${f}`); }
+  for (const m of src.matchAll(/^\s*(?:import|export)\s[^;]*?from\s*["'](\.[^"']+)["']/gm)) { const f = path.posix.normalize(path.posix.join("cli", m[1])); if (f.startsWith("../")) continue; /* a sibling checkout beside this repo (janus): it exists or not by environment, so it is not a gap of THIS repo */ if (!exists(f)) gaps.push(`cli/${e} imports a missing file: ${f}`); }
 }
 const known = fs.existsSync(KNOWN) ? JSON.parse(fs.readFileSync(KNOWN, "utf8")).known : {};
 if (process.argv.includes("--list")) { for (const g of gaps) console.log((g in known ? "KNOWN  " : "NEW    ") + g); process.exit(0); }
