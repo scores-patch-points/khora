@@ -997,7 +997,7 @@ export const resolvePronounsByActivation = (
  * @returns {{bindings: Array<object>, gaps: Array<object>}}
  */
 export const resolvePronounsByPresence = (sentences, mentions, options = {}) => {
-  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null, roles = null, nonPersonalSoft = false, priorGender = null, genderModel = null } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
+  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null, roles = null, nonPersonalSoft = false, priorGender = null, genderModel = null, keepCandidates = false } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
   if (window !== null && (!Number.isFinite(window) || window <= 1)) throw new TypeError("resolvePronounsByPresence: window is declared (a number above 1, or null for the undecayed control)");
   if (!Number.isFinite(boost) || boost <= 0) throw new TypeError("resolvePronounsByPresence: boost is declared and positive (1 weighs every mention alike)");
   if (feed !== 0 && feed !== 1) throw new TypeError("resolvePronounsByPresence: feed is declared, 0 or 1");
@@ -1045,7 +1045,7 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
   const pMatch = (r, hit) => { if (!genderModel || !hit.clean || (hit.gender !== "m" && hit.gender !== "f")) return 1; const p = 1 / (1 + Math.exp(-loOf(r))); return (hit.gender === "m" ? p : 1 - p) / Math.max(p, 1 - p); /* relative to the being's own most likely gender: no information (p = 0.5) is no penalty */ };
   const compatible = (r, hit) => genderModel ? true : !hit.clean || genderOf(r) === "unknown" || genderOf(r) === hit.gender;
 
-  const bindings = [], unbound = [];
+  const bindings = [], unbound = [], candidateLog = [];
   for (const sent of order) {
     const mentionsHere = bySent.get(sent.i) ?? [];
     const hits = findInClass(sent.text, cls, { unspaced }).map((h) => ({ kind: "p", pos: sent.offset + h.index, rel: h.index, hit: h }));
@@ -1068,6 +1068,7 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
           const pm = pMatch(ref, hit); if (a * pm > 0) cands.push([ref, a * pm, c.pos]);
         }
         cands.sort((x, y) => y[1] - x[1] || y[2] - x[2] || (x[0] < y[0] ? -1 : 1));
+        if (keepCandidates) candidateLog.push({ offset: e.pos, pronoun: hit.token, cands: cands.map((c) => [c[0], c[1]]) });
         // the reason a found pronoun is left unbound: `unbound` rides the result (no binding changes), and `trace` (when given) receives the same item with the rung's own label and numbers
         const skip = (reason, traceReason = reason, extra = {}) => { unbound.push({ pronoun: hit.token, offset: e.pos, sentenceOrder: sent.i, reason }); if (trace) trace.push({ offset: e.pos, pronoun: hit.token, reason: traceReason, ...extra }); };
         if (!cands.length) { skip(present ? "gender_veto" : "no_being_present", present ? "gender_veto" : "no_candidate"); continue; }
@@ -1090,5 +1091,5 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
       evidence.set(only, ev);
     }
   }
-  return { bindings, gaps: [], unbound, genderEvidence: Object.fromEntries([...evidence].map(([r, e]) => [r, { m: e.m, f: e.f }])) };
+  return { bindings, gaps: [], unbound, ...(keepCandidates ? { candidateLog } : {}), genderEvidence: Object.fromEntries([...evidence].map(([r, e]) => [r, { m: e.m, f: e.f }])) };
 };
