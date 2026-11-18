@@ -56,3 +56,6 @@ files changed since the last record: native/adapters/text/language-competency.js
 
 ## 2026-11-18: round 26: diagrammer giver constants in the competency profile
 files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-18: scholia moved to its own repo
+files changed since the last record: (none)
