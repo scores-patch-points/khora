@@ -98,22 +98,81 @@
   },
   "languages_measured": {
    "eng": "see english_pronoun_binding",
-   "note": "a language other than English binds pronouns only if its register carries its own evaluation (adapters/text/pronoun-registers.js: no unmeasured binding ships)"
+   "note": "a language other than English binds pronouns only if its register carries its own evaluation (adapters/text/pronoun-registers.js: no unmeasured binding ships)",
+   "grc": {
+    "evidence": "identity/pronouns-multilingual/grc/RESULTS-GRC.md; identity/novels/PREREG-ROUND19.md",
+    "gold": "PROIEL gospels, held-out MATT MARK LUKE, 1181 answerable",
+    "shipped_register_and_fold": {
+     "precision": 0.53,
+     "coverage": 0.573,
+     "nullPrecision": 0.4
+    },
+    "case_roles_mode_default": "off",
+    "roles_arms_test": {
+     "off": [
+      0.53,
+      0.573
+     ],
+     "subject": [
+      0.573,
+      0.567
+     ],
+     "subject+coarg": [
+      0.555,
+      0.574
+     ]
+    },
+    "roles_arms_JOHN_dev": {
+     "off": [
+      0.741,
+      0.769
+     ],
+     "subject": [
+      0.729,
+      0.761
+     ],
+     "subject+coarg": [
+      0.775,
+      0.709
+     ]
+    },
+    "note": "the canonical read gives grc 64 clauses per 1,000 characters of sample text where it gave 0 (the Chomsky seam, case-marked-clauses.js); roles into the pronoun rung ship dark by the preregistered rule"
+   },
+   "san": {
+    "evidence": "identity/pronouns-multilingual/san/RESULTS-SAN.md; identity/novels/PREREG-ROUND19.md",
+    "gold": "none exists; gold-free falsifier only",
+    "shipped_register": {
+     "coverage_of_found": 0.154,
+     "falsifier": "12.2% against a 18.3% permuted null on the agent's fresh Pancatantra slices"
+    },
+    "local_texts_gita_upanishads": {
+     "bound": "424 of 1107 found (38.3%)",
+     "falsifier_beats_null": "only Brihadaranyaka"
+    },
+    "case_roles_mode_default": "off",
+    "note": "clauses now read by the case-marked seam (null subjects recorded); roles changed nothing measurable on these texts"
+   }
   }
  },
  "files": {
-  "native/the-fold/read-process.mjs": "6ec3a43e05ed3bbc8362cc9a85542d2500130182019dc0cab5b788d6f67d9728",
-  "native/the-fold/read-core.mjs": "35d0084c6164ca88d74c6b23564764abb262736069b01b4d7621b6c57a652986",
+  "native/the-fold/read-process.mjs": "0665815a5d276de9b1bc415718675a0e8afb06dffdd643f0b13cf5b0b796feca",
+  "native/the-fold/read-core.mjs": "6ed82ecc0d377cd5db81cbafc4912d9d8f90a36b0f77c9a4c90442438b26a63b",
   "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
   "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
   "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
-  "native/adapters/text/pronouns.js": "1ab35598256f60b2e3b9323b3bb1d2fe43deb1e8ab06c8f34645b467fb929cf8",
-  "native/adapters/text/pronoun-registers.js": "67d27218d1f3930874718103dfa1ef7b986e829f1dbbf40309b8a425b478bf91",
+  "native/adapters/text/pronouns.js": "1ab1695d19161dc5237010b1474fbac51c79ed873bab92d8f5cdad14b1f45080",
+  "native/adapters/text/pronoun-registers.js": "535e2c43206edbe088c9ee09128712952f0cd7e8ff2e94967131837a6809d0cd",
   "native/adapters/text/pronoun-presence-chosen.js": "40a9648b7ddb573a9da51b40f410da458aa4f19a16e4cd34d1511cccd4f53a2a",
   "native/adapters/text/clause-attach.js": "0450fdf6f38cc65b12735c2c60d9a631c8bf82ca10ff865379eebdad57d00035",
   "native/adapters/text/non-personal.js": "707515503ceecb0cb69f250041a0f2759597819110fd9e66640a61f166120f95",
   "native/adapters/text/name-prior.js": "65d4feaa58a23026bdfc65ac63afc1ce9f97d4f239a6ab31109f58300938e139",
-  "native/adapters/text/name-prior/eng.json": "da9749ec29c90e78119dd5208a3c643b5fa370a97ab6d8d731e0eb269b656621"
+  "native/adapters/text/name-prior/eng.json": "da9749ec29c90e78119dd5208a3c643b5fa370a97ab6d8d731e0eb269b656621",
+  "native/adapters/text/case-marked-clauses.js": "c8bc2d035f8dd6d9ffac96d03209e0b18bec9fed1aaa5fe42a95a8b3ed6b99a7",
+  "native/adapters/text/greek-seam.js": "116ba2d41011514e0e441e563cd8166d1e6a3a8e09149dcb83af3303baa89e1f",
+  "native/the-fold/prior-source.mjs": "1b8d73b7381f90f24e6945573b27f91897b7192302d18e4d9cd983d327bb32c3",
+  "native/adapters/text/pronoun-registers/grc.json": "1bf7ac99690f99af7a3c864c4bd65f739e721a5117d15b05ffe0270e072de5ce",
+  "native/adapters/text/pronoun-registers/san.json": "696e7f5347c1c8461940df140b493edce6cd5e3c8d053f18f1f154c379510ac5",
+  "native/priors-shipped/frame-san.json": "a77aa7301bd35fca3af3bb61b8ed32aa20590f1d38eadc7aa1074731fc5d83c0"
  },
  "recorded": "2026-11-18"
 }

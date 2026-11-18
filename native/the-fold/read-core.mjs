@@ -61,6 +61,7 @@ import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
 import { priorJson, priorGeneration } from "./prior-source.mjs";
 import { figuresOf } from "../adapters/text/figure-period.en.js";
+import { rolesFor } from "../adapters/text/case-marked-clauses.js";
 import { castIdentity as castIdentityPass, repairEdges as repairEdgesPass } from "../organs/cast-identity.js";
 
 export const READ_CORE = Object.freeze({
@@ -338,7 +339,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, pronounPresence, namePersonhood, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, namePersonhood, caseMarked, caseRoles, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -469,6 +470,12 @@ export function readWith(text, { address = null, category = null, language = nul
   // nothing below runs and the entry is what it was): the pronouns of the resolver's own class bound by decayed presence over the beings of THIS cast
   // (adapters/text/pronouns.js::resolvePronounsByPresence, PREREG-PRESENCE.md), beside the shipped resolver's `entry.pronouns`, which it does not touch.
   let pronounsPresence = null, presenceInputs = null, nameRuling = false;
+  // THE CASE-MARKED CLAUSE SOURCE (readerOptions.caseMarked: a function of the language stem returning { clausesOf(sentences) } or { gap }; the canonical read passes adapters/text/case-marked-clauses.js::caseMarkedReaderFor):
+  // for a language whose roles are carried by case (grc, san) the clauses are read off morphology and pro-drop by the Chomsky seam; every other stem gets null and the clauses are the ones the core always read.
+  let caseClauses = null;
+  { const cm = typeof caseMarked === "function" ? caseMarked(stem) : caseMarked; if (cm?.gap) gaps.push(cm.gap); else if (cm?.clausesOf) { try { caseClauses = cm.clausesOf(sentences); } catch (e) { gaps.push({ gap: "case_marked_clauses_failed", stem, detail: String(e?.message ?? e).slice(0, 120) }); } } }
+  // THE ROLE MODE (readerOptions.caseRoles: a function of the stem or a string): "off" keeps the rung's first-mention subject proxy; "subject" weighs the clause's case-read subject; "subject+coarg" also bars a pronoun's clause siblings as its referent.
+  const roleMode = (typeof caseRoles === "function" ? caseRoles(stem) : caseRoles) ?? "off";
   // `pronounPresence` may be a function of the language stem (the canonical read passes one: native/adapters/text/pronoun-registers.js::presenceOptionsFor): it returns the options for THIS language,
   // or { gap } when the language has no pronoun register, and then the gap is filed on the entry instead of the rung running silently with another language's class.
   const pp = typeof pronounPresence === "function" ? pronounPresence(stem) : pronounPresence;
@@ -495,8 +502,9 @@ export function readWith(text, { address = null, category = null, language = nul
       // adapters/text/name-prior.js, identity/novels PREREG-ROUND14.md). It adds to the lexicon giver's ruling; absent, or null for the stem, nothing is added.
       try { const nf = typeof namePersonhood === "function" ? namePersonhood(stem) : namePersonhood; if (typeof nf === "function") { const extra = nf({ text: str, cast: beingRows }); if (extra?.size || extra?.length) np = [...new Set([...(np ?? []), ...extra])]; nameRuling = true; } } catch { /* the ruling may be silent; the reader is not told a thing is not a person for lack of an answer */ }
       const mentions = beingRows.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
-      presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
-      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np });
+      const roles = caseClauses && caseClauses.length && roleMode !== "off" ? rolesFor(caseClauses, { coArgument: roleMode === "subject+coarg" }) : null;
+      presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling, roles };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
+      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np, ...(roles ? { roles } : {}) });
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
       for (const g of r.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "pronoun_presence_failed", detail: String(e?.message ?? e).slice(0, 120) }); }
@@ -540,6 +548,7 @@ export function readWith(text, { address = null, category = null, language = nul
       qualityReport.polarity = { ...applied.report, scoped: sc.report };
       qualityReport.clauses = { sentences: nested.sentences, clauses: nested.clauses.length, nested: nested.clauses.filter((c) => c.parent).length, skippedLong: nested.skippedLong };
     } else qualityReport.clauses = { gap: nested.gap };
+    if (caseClauses && caseClauses.length && !(clauses && clauses.length)) { clauses = caseClauses; qualityReport.clauses = { source: "case-marked", clauses: caseClauses.length, nullSubjects: caseClauses.filter((c) => c.nullSubject).length }; }
     qualityReport.gates = readGates({ edges, cast, text: str });
   }
   const entry = {

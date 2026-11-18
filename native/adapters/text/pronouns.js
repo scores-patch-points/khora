@@ -997,7 +997,7 @@ export const resolvePronounsByActivation = (
  * @returns {{bindings: Array<object>, gaps: Array<object>}}
  */
 export const resolvePronounsByPresence = (sentences, mentions, options = {}) => {
-  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
+  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null, roles = null } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
   if (window !== null && (!Number.isFinite(window) || window <= 1)) throw new TypeError("resolvePronounsByPresence: window is declared (a number above 1, or null for the undecayed control)");
   if (!Number.isFinite(boost) || boost <= 0) throw new TypeError("resolvePronounsByPresence: boost is declared and positive (1 weighs every mention alike)");
   if (feed !== 0 && feed !== 1) throw new TypeError("resolvePronounsByPresence: feed is declared, 0 or 1");
@@ -1018,9 +1018,17 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
   for (const m of mentions ?? []) {
     const si = sentOf(m.start);
     if (si < 0 || m.start >= order[si].offset + order[si].text.length) continue;
-    (bySent.get(si) ?? bySent.set(si, []).get(si)).push({ kind: "m", ref: m.ref, pos: m.start, rel: m.start - order[si].offset });
+    (bySent.get(si) ?? bySent.set(si, []).get(si)).push({ kind: "m", ref: m.ref, pos: m.start, end: m.end ?? m.start, rel: m.start - order[si].offset });
   }
   for (const [, list] of bySent) { list.sort((a, b) => a.pos - b.pos); if (list.length) list[0].first = true; }
+  // ROLES (optional; pronouns.js `roles`, adapters/text/case-marked-clauses.js::rolesFor): in a language whose clause roles are read off case (free word order), the SUBJECT mention is the one a clause subject span covers,
+  // not "the first mention of the sentence". A mention is a subject when it overlaps a subject span and reaches its head (its end is within 3 characters of the span's end). A sentence with no subject span keeps the first-mention rule.
+  // The co-argument rule (roles.coArgument): a non-reflexive pronoun is not coreferent with another argument of its own clause (disjoint reference), so refs with a mention on a sibling argument are not candidates.
+  const ovl = (a0, a1, b0, b1) => a0 < b1 && b0 < a1;
+  const isSubj = (m) => !!roles && roles.subjects.some(([a, b]) => ovl(m.pos, m.end, a, b) && m.end >= b - 3);
+  const sentHasSubj = new Map(); if (roles) for (const [si, list] of bySent) sentHasSubj.set(si, list.some(isSubj));
+  const weightOf = (m, si) => (roles && sentHasSubj.get(si) ? (isSubj(m) ? boost : 1) : (m.first ? boost : 1));
+  const blockedFor = (pos, end, list) => { if (!roles?.coArgument) return null; const cl = roles.clauses.find((c) => c.some(([a, b]) => ovl(pos, end, a, b))); if (!cl) return null; const sib = cl.filter(([a, b]) => !ovl(pos, end, a, b)); const refs = new Set(); for (const m of list) if (sib.some(([a, b]) => ovl(m.pos, m.end, a, b))) refs.add(m.ref); return refs.size ? refs : null; };
 
   const state = new Map(); // ref -> { v, t, pos }
   const presence = (ref, t) => { const c = state.get(ref); return c ? c.v * gamma ** (t - c.t) : 0; };
@@ -1035,7 +1043,7 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
     const hits = findInClass(sent.text, cls, { unspaced }).map((h) => ({ kind: "p", pos: sent.offset + h.index, rel: h.index, hit: h }));
     const events = [...mentionsHere, ...hits].sort((a, b) => a.pos - b.pos || (a.kind === "m" ? -1 : 1));
     for (const e of events) {
-      if (e.kind === "m") { fire(e.ref, sent.i, e.first ? boost : 1, e.pos); continue; }
+      if (e.kind === "m") { fire(e.ref, sent.i, weightOf(e, sent.i), e.pos); continue; }
       const hit = e.hit;
       let chosen = null, mechanism = null, top = null, margined = null;
       if (locality && mentionsHere.length) {
@@ -1043,9 +1051,9 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
         if (inClause.length === 1 && !np.has(inClause[0]) && compatible(inClause[0], hit)) { chosen = inClause[0]; mechanism = "locality"; }
       }
       if (!chosen) {
-        const cands = []; let present = 0;
+        const cands = []; let present = 0; const blocked = blockedFor(e.pos, e.pos + hit.token.length, mentionsHere);
         for (const [ref, c] of state) {
-          if (np.has(ref)) continue;
+          if (np.has(ref) || blocked?.has(ref)) continue;
           const a = presence(ref, sent.i);
           if (a > 0) present++;
           if (!compatible(ref, hit)) continue;

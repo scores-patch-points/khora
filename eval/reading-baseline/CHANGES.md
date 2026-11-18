@@ -14,3 +14,12 @@ files changed since the last record: native/the-fold/read-process.mjs, native/th
 
 ## 2026-11-18: docs only: status note
 files changed since the last record: (none)
+
+## 2026-11-18: Greek and Sanskrit read their clauses through the case-marked (Chomsky) seam: 0 clauses became 64 (grc sample) and 48 (san sample) with null subjects recorded; the pronoun rung takes an optional roles input (case-read subject, co-argument rule), default off by the preregistered rule (PREREG-ROUND19, NOVELS-RESULTS-ROUND19); greek.mjs moved to adapters/text/greek-seam.js; frame-san.json ships in native/priors-shipped; grc and san registers carry their evaluation
+files changed since the last record: native/the-fold/read-process.mjs, native/the-fold/read-core.mjs, native/adapters/text/pronouns.js, native/adapters/text/pronoun-registers.js, native/adapters/text/case-marked-clauses.js, native/adapters/text/greek-seam.js, native/the-fold/prior-source.mjs, native/adapters/text/pronoun-registers/grc.json, native/adapters/text/pronoun-registers/san.json, native/priors-shipped/frame-san.json
+
+## 2026-11-18: docs only: the Greek register's share table moved out of the registers directory (the guard reads every json there as a register)
+files changed since the last record: (none)
+
+## 2026-11-18: docs and result files only
+files changed since the last record: (none)

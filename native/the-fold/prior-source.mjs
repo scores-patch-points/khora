@@ -37,7 +37,9 @@ function nodeHome() {
   // a vendored tree may carry some priors beside janus and others in its own native/priors (EO-terminal does): a name the home
   // lacks is read from there. In khora itself native/priors is the janus home, so the two are one directory.
   const also = !process.env.KHORA_PRIORS_DIR && dir !== vendored && fs.existsSync(vendored) && fs.realpathSync(vendored) !== fs.realpathSync(dir) ? vendored : null;
-  return { kind: "fs", dir, also, base: null, root, janus: path.join(root, "janus") };
+  // priors khora itself SHIPS (derived by a script in this repo from a received treebank, with its giver and licence in the file): native/priors-shipped, read last, for a name no other home holds
+  const shipped = path.join(here, "..", "priors-shipped");
+  return { kind: "fs", dir, also, shipped: fs.existsSync(shipped) ? shipped : null, base: null, root, janus: path.join(root, "janus") };
 }
 
 const HOME = IS_NODE ? nodeHome() : { kind: "fetch", dir: null, base: new URL("../priors/", import.meta.url).href, root: null, janus: null };
@@ -49,8 +51,8 @@ export function readJsonAt(dir, name) {
 
 const listAt = (dir) => { try { return dir ? fs.readdirSync(dir) : []; } catch { return []; } };
 const fsSource = () => ({
-  read: (name) => readJsonAt(HOME.dir, name) ?? (HOME.also ? readJsonAt(HOME.also, name) : null),
-  list: () => [...new Set([...listAt(HOME.dir), ...listAt(HOME.also)])],
+  read: (name) => readJsonAt(HOME.dir, name) ?? (HOME.also ? readJsonAt(HOME.also, name) : null) ?? (HOME.shipped ? readJsonAt(HOME.shipped, name) : null),
+  list: () => [...new Set([...listAt(HOME.dir), ...listAt(HOME.also), ...listAt(HOME.shipped)])],
 });
 
 // the page's source: what was fetched, by name; a read of anything else is a recorded miss

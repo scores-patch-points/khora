@@ -12,6 +12,7 @@
 import { readWith } from "./read-core.mjs";
 import { presenceOptionsFor } from "../adapters/text/pronoun-registers.js";
 import { loadNamePrior, nonPersonalFromNames } from "../adapters/text/name-prior.js";
+import { caseMarkedReaderFor } from "../adapters/text/case-marked-clauses.js";
 import { shippedDeclensionFor } from "../adapters/text/declension-shipped.js";
 
 export const READ_PROCESS = Object.freeze({
@@ -35,7 +36,7 @@ export const READ_PROCESS = Object.freeze({
 const namePersonhoodFor = (stem) => { if (stem !== "eng") return null; const prior = loadNamePrior(); return prior ? ({ text, cast }) => nonPersonalFromNames({ text, cast, prior }) : null; };
 export function readToWeft(text, { address, category = null, language = null, quality = true, aliases = [], abbreviations = null, priors = null, aliasReport = null, readerOptions = {}, declension = shippedDeclensionFor } = {}) {
   // the canonical read binds pronouns by presence with the class of the language the reader settles on (a function of the stem); readerOptions.pronounPresence: null turns it off, an object or function overrides
-  const w = readWith(text, { declension, address, category, language, quality, aliases, abbreviations, priors, aliasReport, readerOptions: { pronounPresence: (stem) => presenceOptionsFor(stem), namePersonhood: namePersonhoodFor, ...readerOptions } });
+  const w = readWith(text, { declension, address, category, language, quality, aliases, abbreviations, priors, aliasReport, readerOptions: { pronounPresence: (stem) => presenceOptionsFor(stem), namePersonhood: namePersonhoodFor, caseMarked: caseMarkedReaderFor, ...readerOptions } });
   // THE NON-PERSONAL RULING IS A GIVER'S (adapters/text/non-personal.js: the lexicon pack + the time prior), passed as readerOptions.nonPersonalOf. Without it "he" and "she" may bind a place, a topic, an organisation: on 92 GUM documents
   // 69% of the wrong bindings (21% of all bound) were exactly that (identity/novels NOVELS-RESULTS-ROUND10.md, the error diagnosis). A canonical read without the ruling says so, never runs silently without it.
   if (w && Array.isArray(w.pronounsPresence) && typeof readerOptions?.nonPersonalOf !== "function" && !w.presenceInputs?.nameRuling)
