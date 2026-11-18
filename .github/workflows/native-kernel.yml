@@ -61,6 +61,12 @@ jobs:
       # text with tesseract. Without them those tests SKIP with a named reason — they do not pass — so the runner gets both.
       - name: Install the local binaries the screen pipeline reads with
         run: sudo apt-get update && sudo apt-get install -y ffmpeg tesseract-ocr
+      # THE GUARDS RUN FIRST (2026-11-18). From 2026-11-04 to 2026-11-18 this workflow failed on every push to main at ONE test in the step below, and every later step (including the root `npm test`,
+      # which holds reading-baseline) was skipped, so the guards that protect the reading never ran in CI and "red" stopped meaning anything. They run here, before the long gate, and each is its own step so a failure names itself.
+      - name: Guard - a named test file or CLI import must exist (scripts/check-wiring.mjs; the known gaps are listed with reasons and may only shrink)
+        run: node scripts/check-wiring.mjs
+      - name: Guard - the reading baseline and the canonical docs (a reading change must be re-recorded with a note)
+        run: node --test native/tests/reading-baseline.test.mjs native/tests/canonical-docs.test.mjs
       - name: Run native Fold parity gate
         working-directory: native
         run: npm test

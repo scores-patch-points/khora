@@ -7,22 +7,24 @@
 // The canonical read (read-process.mjs) passes `presenceOptionsFor` as readerOptions.pronounPresence; read-core.mjs calls it with the language stem it settled on. A language with no register gets
 // { gap: { gap: "pronoun_presence_no_register" } }, filed on the entry: never the English class applied silently to another language. A register WITHOUT a recorded evaluation gets
 // { gap: { gap: "pronoun_presence_unmeasured" } }: no unmeasured binding ships. Status: EXPERIMENTAL.
-import { priorsHome } from "../../the-fold/prior-source.mjs";
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { priorsHome, IS_NODE } from "../../the-fold/prior-source.mjs";
+// Node's modules are loaded only under Node, as prior-source.mjs does, so the page's import graph reaches no `node:` specifier statically (native/tests/reading-pipeline.test.js proves it; this file broke that on 2026-11-17 and CI
+// stayed red from then). In a page there is no file to read: registerFor returns null and the read files the typed gap pronoun_presence_no_register, never a silent English binding.
+const fs = IS_NODE ? (await import("node:fs")).default : null;
+const os = IS_NODE ? (await import("node:os")).default : null;
+const path = IS_NODE ? (await import("node:path")).default : null;
+const { fileURLToPath } = IS_NODE ? await import("node:url") : { fileURLToPath: null };
 import { defaultPronounPresence } from "./pronoun-presence-chosen.js";
 
-const HERE = path.dirname(fileURLToPath(import.meta.url));
-export const SHIPPED_DIR = path.join(HERE, "pronoun-registers");
+const HERE = IS_NODE ? path.dirname(fileURLToPath(import.meta.url)) : null;
+export const SHIPPED_DIR = IS_NODE ? path.join(HERE, "pronoun-registers") : null;
 export const UNSPACED_STEMS = Object.freeze(new Set(["cmn", "zho", "yue", "jpn", "tha", "khm", "lao", "mya"]));
 const stemKey = (stem) => String(stem ?? "").toLowerCase().replace(/[-_].*$/, "");
 const priorsDir = () => process.env.KHORA_PRIORS_DIR ?? priorsHome().dir ?? path.join(os.homedir(), "Documents", "janus", "priors"); // the one door's home (the-fold/prior-source.mjs)
 const cache = new Map();
 
 export function registerFor(stem) {
-  const k = stemKey(stem); if (!k) return null; if (cache.has(k)) return cache.get(k);
+  const k = stemKey(stem); if (!k) return null; if (!IS_NODE) return null; if (cache.has(k)) return cache.get(k);
   let out = null;
   for (const [origin, file] of [["shipped", path.join(SHIPPED_DIR, `${k}.json`)], ["priors", path.join(priorsDir(), `pronoun-${k}.json`)]]) {
     try { const r = JSON.parse(fs.readFileSync(file, "utf8")); if (r && r.forms && Object.keys(r.forms).length) { out = { register: r, origin, file }; break; } } catch { /* absent or unreadable: next */ }
