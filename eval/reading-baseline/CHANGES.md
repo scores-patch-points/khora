@@ -32,3 +32,6 @@ files changed since the last record: native/the-fold/read-core.mjs, native/adapt
 
 ## 2026-11-18: language-competency.js is reading-critical
 files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-18: Greek binds dropped (null) subjects by default (PREREG-ROUND21 / NOVELS-RESULTS-ROUND21: 0.551 precision at 43.3% coverage on 809 answerable gold dropped subjects, above the shuffled null; overt bindings unchanged); the competency profile states it
+files changed since the last record: native/the-fold/read-process.mjs, native/the-fold/read-core.mjs, native/adapters/text/pronouns.js, native/adapters/text/case-marked-clauses.js, native/adapters/text/language-competency.js

@@ -16,6 +16,8 @@ export function competencyOf(stem) {
     frame: has(`frame-${stem}.json`), punctuation: has(`punctuation-${stem}.json`), dotted: has(`dotted-${stem}.json`), personLexicon: has(`person-lexicon-${stem}.json`), roleConfig: has(`role-config-${stem}.json`) };
   const clauseReader = CASE_MARKED_STEMS.has(stem) ? "case-marked (the Chomsky seam: case and pro-drop)" : stem === "eng" ? "positional (English parser)" : "positional (unvalidated for this language)";
   const pronouns = stem === "eng" ? { status: "bound", origin: "built-in", ...ENGLISH_EVALUATION } : !reg ? { status: "no_register" } : !ev ? { status: "unmeasured", origin: reg.origin } : { status: "bound", origin: reg.origin, precision: ev.precision, coverage: ev.coverage, nullPrecision: ev.nullPrecision ?? null, gold: !/NO GOLD/i.test(String(ev.method ?? "")), resultsFile: ev.resultsFile ?? null };
+  // dropped (null) subjects: bound for Greek by default (identity/novels NOVELS-RESULTS-ROUND21.md: PROIEL empty-pronoun gold, 0.551 precision at 43.3% coverage on the test books, 0.705 at 46.6% on JOHN, above the shuffled null); other case-marked stems run it only when asked and have no measurement
+  const proDrop = stem === "grc" ? { status: "bound", precision: 0.551, coverage: 0.433, nullPrecision: 0.415, gold: true, resultsFile: "identity/novels/NOVELS-RESULTS-ROUND21.md" } : CASE_MARKED_STEMS.has(stem) ? { status: "unmeasured" } : { status: "not_applicable" };
   const next = []; if (!pieces.pos) next.push(`pos-${stem}.json (a part-of-speech prior from a treebank)`);
   if (pieces.unimorph) next.push(`pos-${stem}-unimorph.json is on disk and the read does not load it`);
   if (pieces.pos && !pieces.morphology && !pieces.unimorph) next.push(`morphology-${stem}.json (verbs match exactly without it)`);
@@ -24,6 +26,6 @@ export function competencyOf(stem) {
   if (pronouns.status === "bound" && !pronouns.gold) next.push(`gold coreference for ${stem} (the recorded precision is gold-free)`);
   if (!pieces.punctuation) next.push(`punctuation-${stem}.json`); if (!pieces.dotted) next.push(`dotted-${stem}.json`);
   const tier = !pieces.pos ? "bare" : (CASE_MARKED_STEMS.has(stem) || stem === "eng") && pronouns.status === "bound" ? "reading+pronouns" : CASE_MARKED_STEMS.has(stem) || stem === "eng" ? "reading" : "lexical";
-  const out = Object.freeze({ schema: COMPETENCY_SCHEMA, stem, tier, pieces: Object.freeze(pieces), clauseReader, pronouns: Object.freeze(pronouns), next: next.filter(Boolean) });
+  const out = Object.freeze({ schema: COMPETENCY_SCHEMA, stem, tier, pieces: Object.freeze(pieces), clauseReader, pronouns: Object.freeze(pronouns), proDrop: Object.freeze(proDrop), next: next.filter(Boolean) });
   if (cache.size > 64) cache.clear(); cache.set(key, out); return out;
 }

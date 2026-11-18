@@ -997,7 +997,7 @@ export const resolvePronounsByActivation = (
  * @returns {{bindings: Array<object>, gaps: Array<object>}}
  */
 export const resolvePronounsByPresence = (sentences, mentions, options = {}) => {
-  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null, roles = null, nonPersonalSoft = false, priorGender = null, genderModel = null, keepCandidates = false } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
+  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null, roles = null, nonPersonalSoft = false, priorGender = null, genderModel = null, keepCandidates = false, nullSubjects = null, nullFirst = false } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
   if (window !== null && (!Number.isFinite(window) || window <= 1)) throw new TypeError("resolvePronounsByPresence: window is declared (a number above 1, or null for the undecayed control)");
   if (!Number.isFinite(boost) || boost <= 0) throw new TypeError("resolvePronounsByPresence: boost is declared and positive (1 weighs every mention alike)");
   if (feed !== 0 && feed !== 1) throw new TypeError("resolvePronounsByPresence: feed is declared, 0 or 1");
@@ -1045,13 +1045,19 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
   const pMatch = (r, hit) => { if (!genderModel || !hit.clean || (hit.gender !== "m" && hit.gender !== "f")) return 1; const p = 1 / (1 + Math.exp(-loOf(r))); return (hit.gender === "m" ? p : 1 - p) / Math.max(p, 1 - p); /* relative to the being's own most likely gender: no information (p = 0.5) is no penalty */ };
   const compatible = (r, hit) => genderModel ? true : !hit.clean || genderOf(r) === "unknown" || genderOf(r) === hit.gender;
 
-  const bindings = [], unbound = [], candidateLog = [];
+  const bindings = [], unbound = [], candidateLog = [], proDrop = [], proDropUnbound = [];
   for (const sent of order) {
     const mentionsHere = bySent.get(sent.i) ?? [];
     const hits = findInClass(sent.text, cls, { unspaced }).map((h) => ({ kind: "p", pos: sent.offset + h.index, rel: h.index, hit: h }));
-    const events = [...mentionsHere, ...hits].sort((a, b) => a.pos - b.pos || (a.kind === "m" ? -1 : 1));
+    const overt = [...mentionsHere, ...hits].sort((a, b) => a.pos - b.pos || (a.kind === "m" ? -1 : 1));
+    // DROPPED SUBJECTS (identity/novels PREREG-ROUND21): a clause with no nominative and a third person singular verb is an event at the verb, decided by the same presence rule after the sentence's overt pronouns (nullFirst: the control, before them); recorded in `proDrop`, never in `bindings`, and it does not feed the presence state
+    const nulls = nullSubjects ? nullSubjects.filter((n) => n.start >= sent.offset && n.start < sent.offset + sent.text.length).map((n) => ({ kind: "n", pos: n.start, end: n.end, verb: n.verb })) : [];
+    const events = nullFirst ? [...nulls, ...overt] : [...overt, ...nulls];
     for (const e of events) {
       if (e.kind === "m") { fire(e.ref, sent.i, weightOf(e, sent.i), e.pos); continue; }
+      if (e.kind === "n") { const cs = []; for (const [ref, c] of state) { if (np.has(ref) && !nonPersonalSoft) continue; if (np.has(ref) && !hasOwn(ref)) continue; const a = presence(ref, sent.i); if (a > 0) cs.push([ref, a, c.pos]); } cs.sort((x, y) => y[1] - x[1] || y[2] - x[2] || (x[0] < y[0] ? -1 : 1));
+        if (!cs.length) { proDropUnbound.push({ offset: e.pos, sentenceOrder: sent.i, reason: "no_being_present" }); continue; } const t0 = cs[0][1], s0 = cs[1]?.[1] ?? 0; if (t0 < floor) { proDropUnbound.push({ offset: e.pos, sentenceOrder: sent.i, reason: "below_floor" }); continue; } const mg = (t0 - s0) / t0; if (mg < margin) { proDropUnbound.push({ offset: e.pos, sentenceOrder: sent.i, reason: "margin" }); continue; }
+        proDrop.push({ referentId: cs[0][0], sentenceOrder: sent.i, offset: e.pos, end: e.end, verb: e.verb, activation: t0, margin: mg }); continue; }
       const hit = e.hit;
       let chosen = null, mechanism = null, top = null, margined = null;
       if (locality && mentionsHere.length) {
@@ -1091,5 +1097,5 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
       evidence.set(only, ev);
     }
   }
-  return { bindings, gaps: [], unbound, ...(keepCandidates ? { candidateLog } : {}), genderEvidence: Object.fromEntries([...evidence].map(([r, e]) => [r, { m: e.m, f: e.f }])) };
+  return { bindings, gaps: [], unbound, ...(keepCandidates ? { candidateLog } : {}), ...(nullSubjects ? { proDrop, proDropUnbound } : {}), genderEvidence: Object.fromEntries([...evidence].map(([r, e]) => [r, { m: e.m, f: e.f }])) };
 };

@@ -21,9 +21,11 @@ export function caseMarkedReaderFor(stem) {
       const out = [];
       for (const s of sentences ?? []) {
         let cl = []; try { cl = greekClauses(String(s.text ?? ""), verbs, pos, cas, {}) ?? []; } catch { cl = []; }
+        let cursor = 0; const T = String(s.text ?? "");
         for (const c of cl) {
           const para = paradigmOf(c.verb, cas, {}) ?? null;
-          out.push({ sentence: s.order ?? 0, subject: arg(c.subject, s.offset ?? 0, "subj"), object: arg(c.object, s.offset ?? 0, "obj"), dative: arg(c.dative, s.offset ?? 0, "dat"), predicate: { lemma: String(c.verb ?? "").toLowerCase(), surface: c.verb }, nullSubject: !c.subject, person: para?.person ?? null, number: para?.number ?? null, source: "case-marked" });
+          let vi = c.verb ? T.indexOf(c.verb, cursor) : -1; if (vi < 0 && c.verb) vi = T.indexOf(c.verb); const vat = vi >= 0 ? [(s.offset ?? 0) + vi, (s.offset ?? 0) + vi + c.verb.length] : null; if (vi >= 0) cursor = vi + c.verb.length;
+          out.push({ sentence: s.order ?? 0, subject: arg(c.subject, s.offset ?? 0, "subj"), object: arg(c.object, s.offset ?? 0, "obj"), dative: arg(c.dative, s.offset ?? 0, "dat"), predicate: { lemma: String(c.verb ?? "").toLowerCase(), surface: c.verb, at: vat }, nullSubject: !c.subject, person: para?.person ?? null, number: para?.number ?? null, source: "case-marked" });
         }
       }
       return out;
@@ -36,4 +38,10 @@ export function rolesFor(clauses, { coArgument = false } = {}) {
   const subjects = [], args = [];
   for (const c of clauses ?? []) { if (c.subject) subjects.push([c.subject.start, c.subject.end]); const a = [c.subject, c.object, c.dative].filter(Boolean).map((x) => [x.start, x.end]); if (a.length) args.push(a); }
   return { subjects, clauses: args, coArgument };
+}
+
+/** nullSubjectsFor(clauses): the clauses with no nominative whose verb is third person singular, as events at the verb (the pronoun rung's `nullSubjects`): a null subject is read from the verb's own agreement */
+export function nullSubjectsFor(clauses) {
+  const out = []; for (const c of clauses ?? []) { if (!c.nullSubject || !c.predicate?.at) continue; const pn = String(c.person ?? ""), nb = String(c.number ?? ""); if (!/^(3|third)/i.test(pn) || !/^(s|sing)/i.test(nb)) continue; out.push({ start: c.predicate.at[0], end: c.predicate.at[1], sentence: c.sentence, verb: c.predicate.surface }); }
+  return out;
 }

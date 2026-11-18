@@ -25,7 +25,7 @@ export function parseProiel(file, { bookOf }) {
       sent = null; continue;
     }
     if (sent && ln.includes("<token ")) {
-      sent.toks.push({ id: attr(ln, "id"), form: attr(ln, "form") ?? "", lemma: attr(ln, "lemma"), pos: attr(ln, "part-of-speech"), morph: attr(ln, "morphology"), rel: attr(ln, "relation"), ante: attr(ln, "antecedent-id"), cit: attr(ln, "citation-part"), before: attr(ln, "presentation-before") ?? "", after: attr(ln, "presentation-after") ?? "", empty: attr(ln, "empty-token-sort") });
+      sent.toks.push({ id: attr(ln, "id"), form: attr(ln, "form") ?? "", lemma: attr(ln, "lemma"), pos: attr(ln, "part-of-speech"), morph: attr(ln, "morphology"), rel: attr(ln, "relation"), ante: attr(ln, "antecedent-id"), cit: attr(ln, "citation-part"), before: attr(ln, "presentation-before") ?? "", after: attr(ln, "presentation-after") ?? "", empty: attr(ln, "empty-token-sort"), head: attr(ln, "head-id") });
     }
   }
   return order.map((c) => books.get(c));

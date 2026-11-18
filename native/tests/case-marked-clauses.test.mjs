@@ -30,3 +30,8 @@ test("absent roles leave the rung byte-identical", () => {
   const S = [{ text: "Tom met Ann. She smiled.", offset: 0 }, { text: "He left.", offset: 25 }]; const M = [{ ref: "tom", start: 0, end: 3 }, { ref: "ann", start: 8, end: 11 }]; const D = { window: 4, boost: 2, feed: 1, floor: 1, margin: 0, language: "en" };
   assert.equal(JSON.stringify(resolvePronounsByPresence(S, M, D)), JSON.stringify(resolvePronounsByPresence(S, M, { ...D, roles: null })));
 });
+test("dropped subjects: Greek binds them by default (the read carries proDrop), English and other stems carry none, and the profile states the Greek measurement", { skip: !HAVE }, async () => {
+  const g = readToWeft(GRC.repeat(4), { language: "grc", address: "t:pd" }); assert.ok(Array.isArray(g.proDrop)); assert.ok(g.proDrop.every((b) => b.at[0] < b.at[1] && b.ref)); assert.equal(g.competency.proDrop.status, "bound"); assert.equal(g.competency.proDrop.precision, 0.551);
+  const off = readToWeft(GRC.repeat(4), { language: "grc", address: "t:pd", readerOptions: { caseProDrop: "off" } }); assert.equal(off.proDrop, undefined); assert.equal(JSON.stringify(off.pronounsPresence), JSON.stringify(g.pronounsPresence), "the overt bindings do not move");
+  const e = readToWeft("Bert walked into the room and he sat down. ".repeat(20), { language: "eng", address: "t:e2" }); assert.equal(e.proDrop, undefined); assert.equal(e.competency.proDrop.status, "not_applicable");
+});

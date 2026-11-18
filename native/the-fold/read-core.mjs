@@ -61,7 +61,7 @@ import { tokenEvents, surpriseCut } from "./surprise-gate.mjs";
 import { applyPolarity, readGates, nestedClauses, scopePolarity } from "./read-quality.mjs";
 import { priorJson, priorGeneration } from "./prior-source.mjs";
 import { figuresOf } from "../adapters/text/figure-period.en.js";
-import { rolesFor } from "../adapters/text/case-marked-clauses.js";
+import { rolesFor, nullSubjectsFor } from "../adapters/text/case-marked-clauses.js";
 import { competencyOf } from "../adapters/text/language-competency.js";
 import { castIdentity as castIdentityPass, repairEdges as repairEdgesPass } from "../organs/cast-identity.js";
 
@@ -340,7 +340,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, caseProDrop, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -470,7 +470,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // THE PRESENCE RUNG (readerOptions.pronounPresence = { window, boost, feed, floor, margin, locality }; opt-in, every dial declared, off = absent and then
   // nothing below runs and the entry is what it was): the pronouns of the resolver's own class bound by decayed presence over the beings of THIS cast
   // (adapters/text/pronouns.js::resolvePronounsByPresence, PREREG-PRESENCE.md), beside the shipped resolver's `entry.pronouns`, which it does not touch.
-  let pronounsPresence = null, presenceInputs = null, nameRuling = false;
+  let pronounsPresence = null, presenceInputs = null, nameRuling = false, proDropBindings = null;
   // THE CASE-MARKED CLAUSE SOURCE (readerOptions.caseMarked: a function of the language stem returning { clausesOf(sentences) } or { gap }; the canonical read passes adapters/text/case-marked-clauses.js::caseMarkedReaderFor):
   // for a language whose roles are carried by case (grc, san) the clauses are read off morphology and pro-drop by the Chomsky seam; every other stem gets null and the clauses are the ones the core always read.
   let caseClauses = null;
@@ -508,8 +508,9 @@ export function readWith(text, { address = null, category = null, language = nul
       // A GENDER GIVER (readerOptions.genderPrior: a function of the stem returning ({ text, cast }) -> Map ref -> "m" | "f"; adapters/text/name-gender.js asks a giver). It is a PRIOR the text's own clause-local evidence overrides.
       let priorGender = null; try { const gf = typeof genderPrior === "function" ? genderPrior(stem) : genderPrior; if (typeof gf === "function") { const g = gf({ text: str, cast: beingRows }); if (g?.size) priorGender = g; } } catch { priorGender = null; }
       // A non-personal ruling is overcomeable: a being the text itself uses he or she of is a person whatever the ruling says (identity/novels PREREG-ROUND20 NOTE-1: on 66 unseen documents 319/31 -> 321/30; dev and test unchanged).
-      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np, nonPersonalSoft: pp.nonPersonalSoft ?? true, ...(priorGender ? { priorGender } : {}), ...(roles ? { roles } : {}) });
+      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np, nonPersonalSoft: pp.nonPersonalSoft ?? true, ...(priorGender ? { priorGender } : {}), ...(roles ? { roles } : {}), ...((typeof caseProDrop === "function" ? caseProDrop(stem) : caseProDrop) === "on" && caseClauses?.length ? { nullSubjects: nullSubjectsFor(caseClauses) } : {}) });
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
+      if (r.proDrop) proDropBindings = r.proDrop.map((b) => ({ at: [b.offset, b.end], verb: b.verb, sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, activation: b.activation, margin: b.margin }));
       for (const g of r.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "pronoun_presence_failed", detail: String(e?.message ?? e).slice(0, 120) }); }
   }
@@ -563,6 +564,7 @@ export function readWith(text, { address = null, category = null, language = nul
     sentences, pronouns,
     competency: competencyOf(stem),   // what this read can do in this language (adapters/text/language-competency.js): the pieces on disk, the clause reader, the pronoun evidence, what is missing
     ...(pronounsPresence ? { pronounsPresence } : {}),
+    ...(proDropBindings ? { proDrop: proDropBindings } : {}),
     ...(pronounGaps ? { pronounGaps } : {}),
     // OPT-IN (features.figures): the money figures of the document with the period and sign each is about, as atoms with addresses (adapters/text/figure-period.en.js); absent, the entry is exactly what it was
     ...(features.figures ? { figures: stem === "eng" ? figuresOf(str, { sentences, timePrior: priorJson("time-prior.json") }) : { figures: [], gaps: [{ gap: "figures_english_only", detail: `the period binder reads English; this read is ${stem}` }] } } : {}),
