@@ -2,8 +2,9 @@
  "schema": "LanguageCompetencyBoard@1",
  "date": "2026-11-18",
  "tally": {
-  "lexical": 222,
-  "reading+pronouns": 3
+  "lexical": 221,
+  "reading+pronouns": 3,
+  "pronouns": 1
  },
  "languages": [
   {
@@ -29,6 +30,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-aar.json (verbs match exactly without it)",
@@ -62,6 +70,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-abk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -93,6 +108,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ace.json (verbs match exactly without it)",
@@ -126,6 +148,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ady.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -157,6 +186,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-afr.json (verbs match exactly without it)",
@@ -190,6 +226,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-aii.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -221,6 +264,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ajg.json (verbs match exactly without it)",
@@ -254,6 +304,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-aka.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -285,6 +342,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-als.json (verbs match exactly without it)",
@@ -318,6 +382,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-alt.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -349,6 +420,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ame.json (verbs match exactly without it)",
@@ -382,6 +460,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ami.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -413,6 +498,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-arb.json (verbs match exactly without it)",
@@ -446,6 +538,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-arn.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -477,6 +576,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ast.json (verbs match exactly without it)",
@@ -510,6 +616,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-auv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -541,6 +654,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-bam.json (verbs match exactly without it)",
@@ -574,6 +694,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ban.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -605,6 +732,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-bcl.json (verbs match exactly without it)",
@@ -638,6 +772,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-bel.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -669,6 +810,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ben.json (verbs match exactly without it)",
@@ -702,6 +850,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-bho.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -733,6 +888,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-bis.json (verbs match exactly without it)",
@@ -766,6 +928,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-bos.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -797,6 +966,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-bre.json (verbs match exactly without it)",
@@ -830,6 +1006,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-buc.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -861,6 +1044,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-bug.json (verbs match exactly without it)",
@@ -894,6 +1084,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-bul.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -925,6 +1122,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-cat.json (verbs match exactly without it)",
@@ -958,6 +1162,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ceb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -989,6 +1200,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ces.json (verbs match exactly without it)",
@@ -1022,6 +1240,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-cha.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1053,6 +1278,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-chk.json (verbs match exactly without it)",
@@ -1086,6 +1318,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-chr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1117,6 +1356,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-chv.json (verbs match exactly without it)",
@@ -1150,6 +1396,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-cjk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1181,6 +1434,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-cjs.json (verbs match exactly without it)",
@@ -1214,6 +1474,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ckb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1245,6 +1512,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-cmn.json (verbs match exactly without it)",
@@ -1278,6 +1552,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-cni.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1309,6 +1590,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-cnr.json (verbs match exactly without it)",
@@ -1342,6 +1630,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-cos.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1373,6 +1668,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-crh.json (verbs match exactly without it)",
@@ -1406,6 +1708,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-crs.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1437,6 +1746,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-cym.json (verbs match exactly without it)",
@@ -1470,6 +1786,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-dan.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1502,6 +1825,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-deu.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1532,6 +1862,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-div.json (verbs match exactly without it)",
@@ -1565,6 +1902,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-dyu.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1596,6 +1940,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ell.json (verbs match exactly without it)",
@@ -1629,6 +1980,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-emk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1660,6 +2018,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-eml.json (verbs match exactly without it)",
@@ -1693,6 +2058,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-en.json (verbs match exactly without it)",
@@ -1732,7 +2104,16 @@
    "proDrop": {
     "status": "not_applicable"
    },
-   "next": []
+   "competence": {
+    "bar": 0.94,
+    "accuracy": 0.582,
+    "gold": true,
+    "competent": false,
+    "gap": 0.358
+   },
+   "next": [
+    "58% of answerable pronouns resolved correctly against the 94% bar"
+   ]
   },
   {
    "schema": "LanguageCompetency@1",
@@ -1757,6 +2138,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-epo.json (verbs match exactly without it)",
@@ -1790,6 +2178,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-est.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1821,6 +2216,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-eus.json (verbs match exactly without it)",
@@ -1854,6 +2256,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-eve.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1885,6 +2294,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-evn.json (verbs match exactly without it)",
@@ -1918,6 +2334,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ewe.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -1949,6 +2372,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-fao.json (verbs match exactly without it)",
@@ -1982,6 +2412,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "pos-fas-unimorph.json is on disk and the read does not load it",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2013,6 +2450,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-fij.json (verbs match exactly without it)",
@@ -2046,6 +2490,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-fin.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2077,6 +2528,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-fkv.json (verbs match exactly without it)",
@@ -2110,6 +2568,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-flm.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2121,7 +2586,7 @@
   {
    "schema": "LanguageCompetency@1",
    "stem": "fra",
-   "tier": "lexical",
+   "tier": "pronouns",
    "pieces": {
     "pos": true,
     "posLexicon": false,
@@ -2137,15 +2602,28 @@
    },
    "clauseReader": "positional (unvalidated for this language)",
    "pronouns": {
-    "status": "no_register"
+    "status": "bound",
+    "origin": "shipped",
+    "precision": 0.547,
+    "coverage": 0.368,
+    "nullPrecision": 0.312,
+    "gold": true,
+    "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND22.md"
    },
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": 0.201,
+    "gold": true,
+    "competent": false,
+    "gap": 0.739
+   },
    "next": [
     "morphology-fra.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
-    "a pronoun register for fra (forms, gender class) with its evaluation",
+    "20% of answerable pronouns resolved correctly against the 94% bar",
     "dotted-fra.json"
    ]
   },
@@ -2172,6 +2650,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-fri.json (verbs match exactly without it)",
@@ -2205,6 +2690,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-fur.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2236,6 +2728,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-gaa.json (verbs match exactly without it)",
@@ -2269,6 +2768,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-gag.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2300,6 +2806,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-gla.json (verbs match exactly without it)",
@@ -2333,6 +2846,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-gld.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2364,6 +2884,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-gle.json (verbs match exactly without it)",
@@ -2397,6 +2924,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-glg.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2428,6 +2962,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-glv.json (verbs match exactly without it)",
@@ -2472,8 +3013,16 @@
     "gold": true,
     "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND21.md"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": 0.277,
+    "gold": true,
+    "competent": false,
+    "gap": 0.663
+   },
    "next": [
     "pos-grc-unimorph.json is on disk and the read does not load it",
+    "28% of answerable pronouns resolved correctly against the 94% bar",
     "punctuation-grc.json",
     "dotted-grc.json"
    ]
@@ -2501,6 +3050,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-gsw1.json (verbs match exactly without it)",
@@ -2534,6 +3090,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-gug.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2565,6 +3128,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-guj.json (verbs match exactly without it)",
@@ -2598,6 +3168,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-hat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2629,6 +3206,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-hau.json (verbs match exactly without it)",
@@ -2662,6 +3246,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-haw.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2693,6 +3284,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-heb.json (verbs match exactly without it)",
@@ -2726,6 +3324,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-hil.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2757,6 +3362,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-hin.json (verbs match exactly without it)",
@@ -2790,6 +3402,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-hna.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2821,6 +3440,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-hrv.json (verbs match exactly without it)",
@@ -2854,6 +3480,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-hsb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2885,6 +3518,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-hun.json (verbs match exactly without it)",
@@ -2918,6 +3558,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-hye.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -2949,6 +3596,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ido.json (verbs match exactly without it)",
@@ -2982,6 +3636,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ilo.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3013,6 +3674,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ina.json (verbs match exactly without it)",
@@ -3046,6 +3714,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ind.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3077,6 +3752,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-isl.json (verbs match exactly without it)",
@@ -3110,6 +3792,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ita.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3140,6 +3829,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-jav.json (verbs match exactly without it)",
@@ -3173,6 +3869,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "pos-jpn-unimorph.json is on disk and the read does not load it",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3204,6 +3907,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-kaa.json (verbs match exactly without it)",
@@ -3237,6 +3947,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-kal.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3268,6 +3985,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-kan.json (verbs match exactly without it)",
@@ -3301,6 +4025,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-kat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3332,6 +4063,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-kaz.json (verbs match exactly without it)",
@@ -3365,6 +4103,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-kbd.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3396,6 +4141,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-kea.json (verbs match exactly without it)",
@@ -3429,6 +4181,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-khk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3460,6 +4219,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-kir.json (verbs match exactly without it)",
@@ -3493,6 +4259,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-kjh.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3524,6 +4297,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-kmb.json (verbs match exactly without it)",
@@ -3557,6 +4337,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-kmr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3588,6 +4375,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-koi.json (verbs match exactly without it)",
@@ -3621,6 +4415,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-kor.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3652,6 +4453,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-krl.json (verbs match exactly without it)",
@@ -3685,6 +4493,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-lad.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3716,6 +4531,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-lat.json (verbs match exactly without it)",
@@ -3749,6 +4571,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-lav.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3780,6 +4609,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-lin.json (verbs match exactly without it)",
@@ -3813,6 +4649,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-lit.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3844,6 +4687,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-lld.json (verbs match exactly without it)",
@@ -3877,6 +4727,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-lnc.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3908,6 +4765,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-lot.json (verbs match exactly without it)",
@@ -3941,6 +4805,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ltz.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -3972,6 +4843,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-lug.json (verbs match exactly without it)",
@@ -4005,6 +4883,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-lus.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4036,6 +4921,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-lzh.json (verbs match exactly without it)",
@@ -4069,6 +4961,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-mad.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4100,6 +4999,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-mag.json (verbs match exactly without it)",
@@ -4133,6 +5039,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-mah.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4164,6 +5077,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-mai.json (verbs match exactly without it)",
@@ -4197,6 +5117,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-mal.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4228,6 +5155,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-mar.json (verbs match exactly without it)",
@@ -4261,6 +5195,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-min.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4292,6 +5233,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-mkd.json (verbs match exactly without it)",
@@ -4325,6 +5273,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-mlt.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4356,6 +5311,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-mnw.json (verbs match exactly without it)",
@@ -4389,6 +5351,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-mxi.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4420,6 +5389,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-mya.json (verbs match exactly without it)",
@@ -4453,6 +5429,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-nav.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4484,6 +5467,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-nba.json (verbs match exactly without it)",
@@ -4517,6 +5507,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-nbl.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4548,6 +5545,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-nds.json (verbs match exactly without it)",
@@ -4581,6 +5585,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-nep.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4612,6 +5623,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-nio.json (verbs match exactly without it)",
@@ -4645,6 +5663,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-niv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4676,6 +5701,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-nld.json (verbs match exactly without it)",
@@ -4709,6 +5741,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-nno.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4740,6 +5779,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-nob.json (verbs match exactly without it)",
@@ -4773,6 +5819,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-nya.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4804,6 +5857,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ote.json (verbs match exactly without it)",
@@ -4837,6 +5897,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-pam.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4868,6 +5935,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-pan.json (verbs match exactly without it)",
@@ -4901,6 +5975,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-pap.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4932,6 +6013,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-pcd.json (verbs match exactly without it)",
@@ -4965,6 +6053,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-pcm.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -4996,6 +6091,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-pes.json (verbs match exactly without it)",
@@ -5029,6 +6131,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-pis.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5060,6 +6169,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-pnb.json (verbs match exactly without it)",
@@ -5093,6 +6209,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-pol.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5124,6 +6247,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-pon.json (verbs match exactly without it)",
@@ -5157,6 +6287,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-por.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5187,6 +6324,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-pov.json (verbs match exactly without it)",
@@ -5220,6 +6364,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-prv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5251,6 +6402,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-quc.json (verbs match exactly without it)",
@@ -5284,6 +6442,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-quy.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5315,6 +6480,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-quz.json (verbs match exactly without it)",
@@ -5348,6 +6520,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-qvm.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5379,6 +6558,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-qxu.json (verbs match exactly without it)",
@@ -5412,6 +6598,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-rmy.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5443,6 +6636,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-roh.json (verbs match exactly without it)",
@@ -5476,6 +6676,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ron.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5508,6 +6715,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-rus.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5538,6 +6752,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-sah.json (verbs match exactly without it)",
@@ -5577,9 +6798,17 @@
    "proDrop": {
     "status": "unmeasured"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": 0.135,
+    "gold": false,
+    "competent": false,
+    "gap": 0.805
+   },
    "next": [
     "pos-san-unimorph.json is on disk and the read does not load it",
     "gold coreference for san (the recorded precision is gold-free)",
+    "14% of answerable pronouns resolved correctly against the 94% bar (and the figure is gold-free, so it cannot count)",
     "punctuation-san.json",
     "dotted-san.json"
    ]
@@ -5607,6 +6836,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-sco.json (verbs match exactly without it)",
@@ -5640,6 +6876,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-shn.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5671,6 +6914,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-shp.json (verbs match exactly without it)",
@@ -5704,6 +6954,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-sin.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5735,6 +6992,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-skr.json (verbs match exactly without it)",
@@ -5768,6 +7032,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-slk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5799,6 +7070,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-slr.json (verbs match exactly without it)",
@@ -5832,6 +7110,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-slv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5863,6 +7148,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-sme.json (verbs match exactly without it)",
@@ -5896,6 +7188,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-smo.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5927,6 +7226,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-sna.json (verbs match exactly without it)",
@@ -5960,6 +7266,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-som.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -5991,6 +7304,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-sot.json (verbs match exactly without it)",
@@ -6024,6 +7344,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-spa.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6054,6 +7381,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-src.json (verbs match exactly without it)",
@@ -6087,6 +7421,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-srp.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6118,6 +7459,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-sun.json (verbs match exactly without it)",
@@ -6151,6 +7499,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-swb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6182,6 +7537,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-swe.json (verbs match exactly without it)",
@@ -6215,6 +7577,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-swh.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6246,6 +7615,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-tam.json (verbs match exactly without it)",
@@ -6279,6 +7655,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-tat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6310,6 +7693,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-tel.json (verbs match exactly without it)",
@@ -6343,6 +7733,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-tet.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6374,6 +7771,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-tgk.json (verbs match exactly without it)",
@@ -6407,6 +7811,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-tgl.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6438,6 +7849,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-tha.json (verbs match exactly without it)",
@@ -6471,6 +7889,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-tly.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6502,6 +7927,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-tna.json (verbs match exactly without it)",
@@ -6535,6 +7967,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ton.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6566,6 +8005,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-tsn.json (verbs match exactly without it)",
@@ -6599,6 +8045,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-tuk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6630,6 +8083,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-tur.json (verbs match exactly without it)",
@@ -6663,6 +8123,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-tzc.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6694,6 +8161,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-uig.json (verbs match exactly without it)",
@@ -6727,6 +8201,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-ukr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6758,6 +8239,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-ura.json (verbs match exactly without it)",
@@ -6791,6 +8279,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-urd.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6822,6 +8317,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-vec.json (verbs match exactly without it)",
@@ -6855,6 +8357,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-vep.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6886,6 +8395,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-vie.json (verbs match exactly without it)",
@@ -6919,6 +8435,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-vmw.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -6950,6 +8473,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-wln.json (verbs match exactly without it)",
@@ -6983,6 +8513,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-wol.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -7014,6 +8551,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-wuu.json (verbs match exactly without it)",
@@ -7047,6 +8591,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-xho.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -7078,6 +8629,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-yor.json (verbs match exactly without it)",
@@ -7111,6 +8669,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-yrk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -7142,6 +8707,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-yue.json (verbs match exactly without it)",
@@ -7175,6 +8747,13 @@
    "proDrop": {
     "status": "not_applicable"
    },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
+   },
    "next": [
     "morphology-zdj.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
@@ -7206,6 +8785,13 @@
    },
    "proDrop": {
     "status": "not_applicable"
+   },
+   "competence": {
+    "bar": 0.94,
+    "accuracy": null,
+    "gold": false,
+    "competent": false,
+    "gap": null
    },
    "next": [
     "morphology-zul.json (verbs match exactly without it)",

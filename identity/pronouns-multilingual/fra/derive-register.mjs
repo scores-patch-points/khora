@@ -1,0 +1,14 @@
+// derive-register.mjs <out.json> — the French third-person register (PronounPrior@1), measured from UD French-GSD train+dev+test (PREREG-ROUND22.md). No hand list.
+import fs from "node:fs"; import path from "node:path";
+const DATA = process.env.FRA_DATA ?? "/Users/mlacy/Documents/khora-cast/khora/identity/pronouns-multilingual/data/fra"; const out = process.argv[2];
+const nf = (s) => s.normalize("NFC").toLowerCase(); const F = new Map(); let nTok = 0;
+for (const s of ["train", "dev", "test"]) for (const ln of fs.readFileSync(path.join(DATA, `fr_gsd-ud-${s}.conllu`), "utf8").split("\n")) {
+  if (!ln || ln[0] === "#") continue; const c = ln.split("\t"); if (c.length < 10 || /[-.]/.test(c[0])) continue; nTok++;
+  const f = nf(c[1]); const feats = c[5] === "_" ? {} : Object.fromEntries(c[5].split("|").map((x) => x.split("="))); const r = F.get(f) ?? F.set(f, { total: 0, pron: 0, p3: 0, gender: {}, number: {} }).get(f); r.total++; if (c[3] !== "PRON") continue; r.pron++;
+  if (!(feats.Person === "3" && feats.PronType === "Prs")) continue; r.p3++; r.gender[feats.Gender ?? "_"] = (r.gender[feats.Gender ?? "_"] ?? 0) + 1; r.number[feats.Number ?? "_"] = (r.number[feats.Number ?? "_"] ?? 0) + 1;
+}
+const forms = {}, side = {}, excluded = [];
+for (const [f, r] of [...F].sort((a, b) => b[1].p3 - a[1].p3)) { if (!r.p3) continue; const pronShare = r.pron / r.total, p3Share = r.p3 / r.pron, sing = r.number.Sing ?? 0, plur = r.number.Plur ?? 0; const gs = Object.entries(r.gender).filter(([k]) => k === "Masc" || k === "Fem").sort((a, b) => b[1] - a[1]); const major = gs[0]?.[0] ?? null;
+  const member = pronShare > 0.5 && p3Share > 0.5 && sing > plur && (major === "Masc" || major === "Fem"); side[f] = { total: r.total, pron: r.pron, p3: r.p3, pronShare: +pronShare.toFixed(3), p3Share: +p3Share.toFixed(3), sing, plur, major, member }; if (member) forms[f] = { gender: r.gender, number: r.number }; else excluded.push(f); }
+const reg = { schema: "PronounPrior@1", language: "fra", provenance: { source: "Universal Dependencies French-GSD (CC BY-SA 4.0): train+dev+test", built_by: "identity/pronouns-multilingual/fra/derive-register.mjs", tokens_read: nTok, filter: "a form is a member iff most of its tokens are UPOS PRON, most of its PRON tokens are third-person personal (Person=3, PronType=Prs), Sing outnumbers Plur among those, and the majority gender is Masc or Fem; no hand list", forms_in_register: Object.keys(forms).length, forms_third_person_excluded: excluded.length, note: "per-form shares: the sidecar *.shares.json; binds only with a recorded evaluation" }, forms };
+fs.writeFileSync(out, JSON.stringify(reg)); fs.writeFileSync(out.replace(/\.json$/, ".shares.json"), JSON.stringify(side)); console.log("members", Object.keys(forms).length, JSON.stringify(Object.fromEntries(Object.entries(forms).map(([k, v]) => [k, v.gender]))).slice(0, 500)); console.log("excluded 3rd-person forms:", excluded.slice(0, 20).join(" "));

@@ -35,3 +35,12 @@ files changed since the last record: native/adapters/text/language-competency.js
 
 ## 2026-11-18: Greek binds dropped (null) subjects by default (PREREG-ROUND21 / NOVELS-RESULTS-ROUND21: 0.551 precision at 43.3% coverage on 809 answerable gold dropped subjects, above the shuffled null; overt bindings unchanged); the competency profile states it
 files changed since the last record: native/the-fold/read-process.mjs, native/the-fold/read-core.mjs, native/adapters/text/pronouns.js, native/adapters/text/case-marked-clauses.js, native/adapters/text/language-competency.js
+
+## 2026-11-18: the user's 94% competency bar is declared in the competency profile (accuracy = precision x coverage on gold; gold-free cannot count); no language meets it
+files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-18: French binds on measured evidence: register from UD French-GSD, evaluation on CorefUD French-Democrat (0.547 precision at 36.8% coverage, 20% resolved correctly); Greek's bar measure pools overt and dropped subjects
+files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-18: tier pronouns: a measured register with an unvalidated clause reader (French)
+files changed since the last record: native/adapters/text/language-competency.js

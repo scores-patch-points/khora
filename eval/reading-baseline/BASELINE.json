@@ -158,6 +158,21 @@
     },
     "case_roles_mode_default": "off",
     "note": "clauses now read by the case-marked seam (null subjects recorded); roles changed nothing measurable on these texts"
+   },
+   "fra": {
+    "evidence": "identity/novels/NOVELS-RESULTS-ROUND22.md",
+    "gold": "CorefUD 1.3 French-Democrat dev, 204 answerable",
+    "test": {
+     "precision": 0.547,
+     "coverage": 0.368,
+     "nullPrecision": 0.312,
+     "resolved_correctly": 0.201
+    },
+    "development_8_train_docs": {
+     "precision": 0.703,
+     "coverage": 0.426
+    },
+    "note": "register from UD French-GSD; le and la not in the register; expletive il binds; no non-personal ruling, no morphology prior; the bar (94%) is not met"
    }
   }
  },
@@ -180,7 +195,7 @@
   "native/adapters/text/pronoun-registers/grc.json": "1bf7ac99690f99af7a3c864c4bd65f739e721a5117d15b05ffe0270e072de5ce",
   "native/adapters/text/pronoun-registers/san.json": "696e7f5347c1c8461940df140b493edce6cd5e3c8d053f18f1f154c379510ac5",
   "native/priors-shipped/frame-san.json": "a77aa7301bd35fca3af3bb61b8ed32aa20590f1d38eadc7aa1074731fc5d83c0",
-  "native/adapters/text/language-competency.js": "9b133ba6fb6acc43a45ee9d99da4a76ed3e9377b0984829940780314e88febf9"
+  "native/adapters/text/language-competency.js": "ee0d745aba89d727c04df61cc6ce25bd3899aa49dd02dd3dd0b5d926cb90b591"
  },
  "recorded": "2026-11-18"
 }
