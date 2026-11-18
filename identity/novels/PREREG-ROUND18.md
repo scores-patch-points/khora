@@ -1,0 +1,18 @@
+# PREREG-ROUND18 — pronoun basins from use, by period: do thou, thee, thy, thine form a basin, and does it thin?
+
+The user's framing: pronouns are stable basins for aliases that open activation channels that evolve in use over time (thee, thine, thou); the priors from time and place in Zenodotus are why dates and locations exist.
+
+## Data and dates (declared here, before any count)
+Zenodotus English originals (a translation's text date is its translator's, unknown here: Meditations, Divine Comedy, Republic, Prince, Les Mis, Crime and Punishment etc. are EXCLUDED and form no slice). Each text's year is OUR declaration of its first publication or composition (`date_basis: declared-by-us`, not read from a manifest, because the manifests carry none for these texts; Zenodotus fields date / date_basis / place_about are the intended home):
+henry-iv-part-1 1597; doctor-faustus-1604-quarto 1604; Leviathan 1651; Robinson Crusoe 1719; Gulliver's Travels 1726; Common Sense 1776; Federalist Papers 1787; Sense and Sensibility 1811; Pride and Prejudice 1813; Emma 1815; Frankenstein 1818; Wuthering Heights 1847; Moby Dick 1851; Leaves of Grass 1855; Tale of Two Cities 1859; Origin of Species 1859; Great Expectations 1861; Little Women 1868; Alice 1865; Through the Looking-Glass 1871; Middlemarch 1871; Tom Sawyer 1876; Treasure Island 1883; Dorian Gray 1890; Sherlock Holmes 1892; Jungle Book 1894; Time Machine 1895; Dracula 1897; War of the Worlds 1898; Heart of Darkness 1899; Wizard of Oz 1900; Call of the Wild 1903; Anne of Green Gables 1908; Ulysses 1922.
+Slices: the texts sorted by year and cut into four groups of equal text count (derived, not chosen); the group edges are then whatever the years give. The Gutenberg boilerplate header and footer are cut at the "*** START" / "*** END" markers where present.
+
+## Measure
+Forms (the English personal-pronoun paradigm, declared): second singular archaic {thou, thee, thy, thine, thyself}; second {ye, you, your, yours, yourself, yourselves}; third {he, him, his, himself, she, her, hers, herself, it, its, itself, they, them, their, theirs, themselves}; first {i, me, my, mine, we, us, our, ours}.
+Per slice, a form's context vector = positive PMI of the words within two positions on either side (stop at sentence ends marked by . ! ? ; the form itself and other paradigm forms are not counted as context, so a basin cannot form by sharing pronouns). A form is eligible in a slice with at least 20 occurrences. Similarity = cosine of the vectors.
+- B1 (basin): in the earliest slice, for each eligible thou-form, its nearest eligible neighbour is a thou-form more often than under a permutation of the form labels (10000 permutations, p < 0.05, one-sided).
+- B2 (thinning): the per-10,000-word rate of thou-forms is reported for every slice; the claim is that it falls from the first to the last slice.
+- B3 (neighbour): in the earliest slice, among thou-forms whose nearest neighbour is not a thou-form, the share whose nearest is a second-person form exceeds the permutation null.
+- B4 (loss): in the latest slice, B1 is evaluated the same way (or reported ineligible when fewer than two thou-forms reach 20 occurrences); the expectation is that no basin holds, reported either way.
+Reported without a bar: each slice's occurrences, the nearest-neighbour table for every eligible form, and the same analysis for {he/him/his} and {she/her/hers} as the known paradigms (a sanity control: these basins should hold in every slice).
+Failures reported. No thresholds tuned. The pharos entry for each slice carries a `basis`: the slice's text list and its sha256, the declared years and their basis, the date of the run.
