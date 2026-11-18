@@ -1,0 +1,108 @@
+{
+ "fit": {
+  "docs": 205,
+  "answerable": 6222,
+  "baseline": 0.5245901639344263
+ },
+ "cv": {
+  "1": 0.5309,
+  "10": 0.5289,
+  "0.01": 0.5477,
+  "0.1": 0.545
+ },
+ "cvBaseline": 0.5245901639344263,
+ "lambda": 0.01,
+ "weights": {
+  "schema": "PronounRanker@1",
+  "features": {
+   "log_activation": 0.3949,
+   "rung_top": 0.1553,
+   "rung_second": 0.3108,
+   "dist0": 0.3969,
+   "dist1": 0.0471,
+   "dist2": 0.0699,
+   "dist3plus": -0.5139,
+   "log_mentions": 1.1045,
+   "last_mention_opened_sentence": 0.2455,
+   "named_earlier_in_sentence": 0.3969,
+   "only_being_in_sentence": -0.0744,
+   "prev_pronoun_argmax": 0.2112,
+   "most_recent_mention": 0.557,
+   "named_earlier_in_sentence*subj": -0.0504,
+   "named_earlier_in_sentence*obj": 0.1291,
+   "named_earlier_in_sentence*poss": 0.3521,
+   "named_earlier_in_sentence*refl": -0.0338,
+   "last_mention_opened_sentence*subj": 0.2558,
+   "last_mention_opened_sentence*obj": -0.0482,
+   "last_mention_opened_sentence*poss": 0.0767,
+   "last_mention_opened_sentence*refl": -0.0388,
+   "prev_pronoun_argmax*subj": 0.0984,
+   "prev_pronoun_argmax*obj": 0.119,
+   "prev_pronoun_argmax*poss": 0.0019,
+   "prev_pronoun_argmax*refl": -0.0081
+  },
+  "lambda": 0.01,
+  "fit": [
+   "LitBank-train",
+   "GUM-E",
+   "GUM-C",
+   "GUM-D",
+   "GUM-F"
+  ]
+ },
+ "heldout": {
+  "LitBank-dev": {
+   "answerable": 604,
+   "guess": 0.6606,
+   "ranker": 0.6589,
+   "contested_only": 0.6639
+  },
+  "GUM-U": {
+   "answerable": 552,
+   "guess": 0.7283,
+   "ranker": 0.7373,
+   "contested_only": 0.7554
+  },
+  "GUM-dev": {
+   "answerable": 199,
+   "guess": 0.6533,
+   "ranker": 0.7085,
+   "contested_only": 0.6884
+  },
+  "GUM-test": {
+   "answerable": 219,
+   "guess": 0.7717,
+   "ranker": 0.8037,
+   "contested_only": 0.7808
+  },
+  "pooled": {
+   "answerable": 1574,
+   "guess": 0.6989,
+   "ranker": 0.7128,
+   "contested_only": 0.7154
+  }
+ },
+ "bootstrap": {
+  "ranker_minus_guess": [
+   -0.0119,
+   0.044
+  ],
+  "contested_minus_guess": [
+   0,
+   0.041
+  ]
+ },
+ "permuted": [
+  0.5184,
+  0.364,
+  0.474
+ ],
+ "ablation": {
+  "activation": 0.7058,
+  "distance": 0.7014,
+  "salience": 0.709,
+  "same_sentence": 0.7141,
+  "continuity": 0.716,
+  "kind_crossed": 0.7186
+ }
+}
