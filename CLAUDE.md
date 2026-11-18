@@ -1,0 +1,40 @@
+# khora: the canonical reading, and how we work on it
+
+Read this first. It exists so the reading, its guards and the way we add a language never have to be remembered again.
+
+## The one door
+- Everything that reads goes through `readToWeft` (`native/the-fold/read-process.mjs`, which calls `readWith` in `native/the-fold/read-core.mjs`). There is no second door that matters; `native/reading.js::readDocument` skips the pronoun, name and case-marked options.
+- Every read carries `entry.competency` (`native/adapters/text/language-competency.js`): which pieces exist for the language, which clause reader ran, the pronoun evidence (precision, coverage, null, gold or gold-free), and what is missing. `node eval/competency/readiness-board.mjs` writes the current board (`eval/competency/LANGUAGE-COMPETENCY-CURRENT.md`). Never describe a language's ability from clause counts: state the competency profile.
+- Priors come through one door, `native/the-fold/prior-source.mjs`: `KHORA_PRIORS_DIR`, else janus beside the workspace, else `~/Documents/janus/priors`, else a vendored copy, else a typed gap. Priors khora ships itself live in `native/priors-shipped/`. The symlink at native/priors may dangle; never rely on it. A read with no POS prior says `no_pos_prior`; it must never silently read another language's way (the test `native/tests/priors-home.test.mjs` guards this).
+- Greek and Sanskrit clauses are read off case and pro-drop by the Chomsky seam (`native/adapters/text/case-marked-clauses.js` over `native/adapters/text/greek-seam.js`). English and the other stems use the positional reader; its validity outside English is unmeasured and the profile says so.
+
+## The guards (these fail loudly on purpose)
+- `native/tests/reading-baseline.test.mjs`: the reading-critical files must hash to what `eval/reading-baseline/BASELINE.json` recorded. If it fails you changed the reading: measure it, then `node eval/reading-baseline/record.mjs --note "what changed and what the numbers did"` and commit both. A drop in precision or coverage at the same code is a regression: fix it, do not re-record it.
+- No unmeasured binding ships: a language's pronoun register (`native/adapters/text/pronoun-registers/<stem>.json`) binds only if it carries `evaluation` (documents, answerable, precision, coverage, nullPrecision, resultsFile, method). Without it the read files `pronoun_presence_unmeasured` and binds nothing. A register whose precision is gold-free must say `NO GOLD` in its method.
+- Typed gaps, never silent drops: `pronoun_presence_no_register`, `pronoun_presence_unmeasured`, `pronoun_presence_no_nonpersonal_ruling`, `no_pos_prior`, `no_morphology`, `no_case_marked_priors`, `language_default`.
+- `npm test` includes the guards and every test added for a canonical piece. A new canonical file is added to `READING_FILES` in `eval/reading-baseline/record.mjs`.
+
+## Adding or improving a language (the checklist)
+1. A POS prior (`pos-<stem>.json`, from a treebank) and, if it exists, the UniMorph prior (the read does not yet load UniMorph: wire it, then re-record).
+2. Roles: case-marked languages go through the case-marked seam (needs `case-marking-<stem>.json`); others need a clause reader VALIDATED for that language; the positional one is English-shaped.
+3. A pronoun register with its `evaluation` and, for any claim of precision, gold coreference for that language (held out, preregistered) or a gold-free falsifier named as such.
+4. Beings: capital names, or heard nominals for scripts without capitals (register `beings`); names the dictionary never heard are smelled (below), never guessed.
+5. Name and gender knowledge through givers with provenance (`identity/givers/`, `native/adapters/text/wikidata-name-giver.js`), as overcomeable priors; the text's own evidence overrides a prior only when it recurs.
+6. Tests, the competency profile (automatic), the baseline re-recorded, the board regenerated.
+
+## How we work (the user's standing rules)
+- Preregister, then stamp (sha256 and UTC), then freeze the code, then ONE run on data not yet read for that hypothesis; keep and report failures; a slip is logged as a deviation, never hidden (`identity/novels/PREREG-*.md`, `FREEZE-*.md`, `NOVELS-RESULTS-*.md`).
+- No hand-set thresholds: units of a reference's own spread, a shuffled null, a measured number, or a declared dial with its reason.
+- Falsify a good-sounding rate first (a gold-free falsifier, then held-out gold). Coverage is not correctness; a clause count is not a competency; a number measured with a bug is not a result.
+- No LLM in the loop. Embeddings are a frozen codec (`native/adapters/text/embed-personhood.js` over the binary vector library `native/organs/vector-library.js`, default `~/.khora/vectors`).
+- Use khora's own organs first (grep `native/`); do not reinvent: the semantic smell is janus `Smell@1` (`~/Documents/janus/native/organs/identity/smell.mjs`).
+- Never push, download a corpus, or modify the user's other repos without their word. Report only measurable behaviour, never claims about experience.
+
+## Known traps (each cost us a round)
+- GUM's `Entity=` annotation: use the greedy regex `/\((\d+)-([^()]*)(\))?|(\d+)\)/g`; a lazy form with a digit lookahead loses every single-token mention (round 20, NOTE-1).
+- Chosen dials looked better in sample and were worse out of sample; the default is the control dials (`PRONOUN_PRESENCE_DEFAULT`).
+- The rung's clause-local gender evidence takes the one named being in a clause as the referent of a gendered pronoun; with the real referent unadmitted it writes wrong gender. Open: admit real referents; a prior must be overturned by recurring evidence, not one clause.
+- Scripts that hard-code `/Users/mlacy/Documents/3.0` cannot run; the 2026-10-10 competency generators are kept, not runnable, in `eval/competency/recovered/`. Full history of the cut evals: `clovenbradshaw-ctrl/eoreader7-legacy` and `~/Documents/_archive/3.0-unpushed-bundles`.
+
+## The design we are building toward
+Two sides meet in SYN: the given (dictionaries, registers, Wikidata: lexicographic) and the learned (emergent from use). A line is where two colors meet: the contested band is reported with its width. The eoHelix (`native/docs/THE-MORAL-HELIX.md`): Ground, Figure, Pattern; a recurring figure compiles into a new ground, and we re-ground, never stream. Reading is causal; when clearer evidence arrives we revise, record the delta as learning and keep the earlier mistake. A pronoun collapses into a real referent or abstains. Centroids are relative to a ground (Dignaga's apoha: `native/adapters/text/apoha.js`), keyed by kind. Archons: Dignaga (relative centroids), Thrax (parts of speech), Sullivan (morphology), Vasana (compiled priors), Nagarjuna (a proposal stands by its consequences). The measured state: `eval/reading-baseline/BASELINE.json`, `identity/novels/NOVELS-RESULTS-ROUND20.md`, `identity/ESSAY-WHAT-WE-BUILT-AND-WHERE-IT-STANDS.md` (with its corrections).
