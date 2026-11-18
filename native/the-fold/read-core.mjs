@@ -495,7 +495,8 @@ export function readWith(text, { address = null, category = null, language = nul
       // adapters/text/name-prior.js, identity/novels PREREG-ROUND14.md). It adds to the lexicon giver's ruling; absent, or null for the stem, nothing is added.
       try { const nf = typeof namePersonhood === "function" ? namePersonhood(stem) : namePersonhood; if (typeof nf === "function") { const extra = nf({ text: str, cast: beingRows }); if (extra?.size || extra?.length) np = [...new Set([...(np ?? []), ...extra])]; nameRuling = true; } } catch { /* the ruling may be silent; the reader is not told a thing is not a person for lack of an answer */ }
       const mentions = beingRows.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
-      presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np });
+      presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
+      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np });
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
       for (const g of r.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "pronoun_presence_failed", detail: String(e?.message ?? e).slice(0, 120) }); }
