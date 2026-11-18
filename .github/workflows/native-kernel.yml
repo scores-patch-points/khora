@@ -32,6 +32,9 @@ jobs:
       # Check janus out next to this repo, exactly as penelope is above. janus is public.
       - name: Check out the sibling janus (the one home for the priors)
         run: git clone --depth 1 https://github.com/scores-patch-points/janus.git "${GITHUB_WORKSPACE}/../janus"
+      # khora works only through pharos (native/the-fold/pharos-gate.mjs): the rules are held there, every read is written into it, and khora refuses without it. Check it out beside this repo, as janus is above.
+      - name: Check out the sibling pharos (it holds the rules; khora refuses to read without it)
+        run: git clone --depth 1 https://github.com/scores-patch-points/pharos.git "${GITHUB_WORKSPACE}/../pharos"
       - uses: actions/setup-node@v4
         with:
           node-version: 22

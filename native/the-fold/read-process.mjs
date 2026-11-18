@@ -11,6 +11,7 @@
 // canonical call and its record of what the reading is.
 import { readWith } from "./read-core.mjs";
 import { IS_NODE, priorsHome } from "./prior-source.mjs";
+import { assertPharos, recordRead } from "./pharos-gate.mjs";
 import { presenceOptionsFor } from "../adapters/text/pronoun-registers.js";
 import { loadNamePrior, nonPersonalFromNames } from "../adapters/text/name-prior.js";
 import { caseMarkedReaderFor } from "../adapters/text/case-marked-clauses.js";
@@ -58,8 +59,10 @@ export function assertPrimed(w, { allowDegraded = false } = {}) {
   throw new Error(`khora read refused: the reader is not primed for language "${w.language?.stem ?? w.language ?? "?"}" (gaps: ${[...new Set(missing)].join(", ")}). Priors were looked for in ${home.dir ?? home.base ?? "(no directory)"}. Set KHORA_PRIORS_DIR to the janus priors folder (janus/priors), or pass { allowDegraded: true } / KHORA_ALLOW_DEGRADED=1 to read without them knowingly. See native/docs/THE-READING-PIPELINE.md.`);
 }
 export function readToWeft(text, { address, category = null, language = null, quality = true, aliases = [], abbreviations = null, priors = null, aliasReport = null, readerOptions = {}, declension = canonicalDeclension, allowDegraded = false } = {}) {
+  assertPharos(); // khora works only through pharos: its rules are held there (pharos-gate.mjs)
   // the canonical read binds pronouns by presence with the class of the language the reader settles on (a function of the stem); readerOptions.pronounPresence: null turns it off, an object or function overrides
   const w = readWith(text, { declension, address, category, language, quality, aliases, abbreviations, priors, aliasReport, readerOptions: { ...canonicalReaderOptions(), ...readerOptions } });
   assertPrimed(w, { allowDegraded });
-  return noteMissingRuling(w, readerOptions);
+  noteMissingRuling(w, readerOptions);
+  return recordRead(w, text, { door: "native/the-fold/read-process.mjs#readToWeft", allowDegraded }); // written into pharos, or refused (a capacity left out; pharos rules WRITES-TO-PHAROS, FULL-CAPACITY)
 }

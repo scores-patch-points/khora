@@ -6,7 +6,7 @@ const EN = "Anna walked to the market on Monday. Anna bought bread and apples th
 const ES = "Ana caminó al mercado el lunes por la mañana. Ana compró pan y manzanas en el mercado de la ciudad. Ella llevó todo a casa por el río. Boris encontró a Ana en la puerta de la casa. Boris le preguntó a Ana por el mercado y el pan. Ana le dijo que el pan estaba muy bueno. Ella sonrió a Boris y entró en la casa. La casa estaba caliente y el fuego estaba encendido.";
 test("English: pronounsPresence is on by default, bound by the default dials; switch-off removes it", { skip: !HAVE, timeout: 600000 }, async () => {
   const { readToWeft } = await import("./read-process.mjs"); const w = readToWeft(EN.repeat(3), { language: "eng" });
-  assert.ok(Array.isArray(w.pronounsPresence), "the rung ran"); const off = readToWeft(EN.repeat(3), { language: "eng", readerOptions: { pronounPresence: null } });
+  assert.ok(Array.isArray(w.pronounsPresence), "the rung ran"); const off = readToWeft(EN.repeat(3), { language: "eng", allowDegraded: true, readerOptions: { pronounPresence: null } });
   assert.ok(off.pronounsPresence === undefined || off.pronounsPresence === null, "switched off");
 });
 test("a language with no register: no silent English binding; the typed gap pronoun_presence_no_register is filed", { skip: !HAVE, timeout: 600000 }, async () => {
@@ -15,8 +15,8 @@ test("a language with no register: no silent English binding; the typed gap pron
 });
 
 test("a read without the non-personal ruling says so (a typed gap), so its pronoun bindings are not mistaken for ruled ones", { skip: !HAVE, timeout: 600000 }, async () => {
-  const { readToWeft } = await import("./read-process.mjs"); const w = readToWeft(EN.repeat(3), { language: "eng", readerOptions: { namePersonhood: null } }); // English now carries the measured name ruling by default (name-prior.js); a read without any ruling says so
+  const { readToWeft } = await import("./read-process.mjs"); const w = readToWeft(EN.repeat(3), { language: "eng", allowDegraded: true, readerOptions: { namePersonhood: null } }); // English now carries the measured name ruling by default (name-prior.js); a read without any ruling says so
   const ruled = readToWeft(EN.repeat(3), { language: "eng" }); assert.ok(!(ruled.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"), "the default English read has a ruling");
   assert.ok((w.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"), JSON.stringify(w.gaps));
-  const off = readToWeft(EN.repeat(3), { language: "eng", readerOptions: { pronounPresence: null } }); assert.ok(!(off.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"), "no rung, no gap");
+  const off = readToWeft(EN.repeat(3), { language: "eng", allowDegraded: true, readerOptions: { pronounPresence: null } }); assert.ok(!(off.gaps ?? []).some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"), "no rung, no gap");
 });

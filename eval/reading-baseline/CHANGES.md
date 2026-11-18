@@ -52,3 +52,6 @@ files changed since the last record: native/reading.js, native/tests/door-allowl
 
 ## 2026-11-18: merge of the one-door and CI changes: baseline re-recorded over both (read-process.mjs, reading.js, pronoun-registers.js, door allowlist); no metric moved
 files changed since the last record: (none)
+
+## 2026-11-18: khora works only through pharos: pharos-gate.mjs and holon.json are reading-critical; readToWeft and reading.js::readDocument run pharos' gate, write one entry per read into pharos, and refuse a read that left an available capacity unused (allowDegraded marks it). No metric moved.
+files changed since the last record: native/reading.js, native/the-fold/pharos-gate.mjs, holon.json, native/the-fold/read-process.mjs

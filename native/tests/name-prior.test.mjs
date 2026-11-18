@@ -20,7 +20,7 @@ test("the canonical English read applies the name ruling: it is recorded, and th
   assert.ok(!w.gaps.some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"));
 });
 test("turning the ruling off restores the typed gap, so a read without a ruling says so", () => {
-  const w = readToWeft(BERT.repeat(2), { address: "t:bert", language: "eng", readerOptions: { namePersonhood: null } });
+  const w = readToWeft(BERT.repeat(2), { address: "t:bert", language: "eng", allowDegraded: true, readerOptions: { namePersonhood: null } });
   assert.ok(w.gaps.some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"));
 });
 import { resolvePronounsByPresence } from "../adapters/text/pronouns.js";

@@ -15,6 +15,7 @@
 // the prior's) · or a lexicon organ a caller built (organs/lexicon.js::makeHyperlexicon over its own door, or makeLexicon over a giver).
 // HL_DOOR names the door (default http://127.0.0.1:11450).
 
+import { assertPharos, recordRead } from "./the-fold/pharos-gate.mjs";
 import { readToWeft, canonicalReaderOptions, canonicalDeclension, noteMissingRuling, assertPrimed } from "./the-fold/read-process.mjs";
 import { readCanonical } from "./the-fold/read-door-canonical.mjs";
 import { priorsFor, consultAliases, readDocument as readCore } from "./the-fold/read-core.mjs";
@@ -71,6 +72,7 @@ export async function rowsOfFor(stem) {
 /** THE MASTER PIPELINE under Node: read-core.mjs::readDocument asking the hyperlexicon through its door (lexicon: "hyperlexicon", the
  *  default), or a caller's own lexicon organ, or false to read without one. `rows: true` adds the universal parse (entry.parse). */
 export async function readDocument(text, { language = null, lexicon = "hyperlexicon", rows = false, ...opts } = {}) {
+  assertPharos(); // khora works only through pharos: its rules are held there (pharos-gate.mjs)
   const stem = (language ? stemOf(language) : null) ?? languageContextFor(String(text ?? ""), {}).language ?? "eng";
   const lex = isDefault(lexicon) ? lexiconFor(stem) : lexicon || null;
   // a language declared but with no stem filed is read with the default priors (a typed gap on the entry, read-core's own); its sentences are NOT parsed by the
@@ -95,7 +97,7 @@ export async function readDocument(text, { language = null, lexicon = "hyperlexi
   if (parser?.gap) (w.gaps ??= []).push({ gap: "no_parser", stem, detail: parser.gap });
   if (parser?.by && w.parse) w.parseBy = parser.by;
   if (!lex) w.aliasReport = { giver: null, rows: [], gap: lexicon === false ? "the caller read without the hyperlexicon" : `no hyperlexicon is filed for ${stem}` };
-  return w;
+  return recordRead(w, text, { door: "native/reading.js#readDocument", allowDegraded: opts.allowDegraded === true }); // written into pharos, or refused (pharos rules WRITES-TO-PHAROS, FULL-CAPACITY)
 }
 
 /** POST /v1/read's body, the hyperlexicon asked first. Throws the door's typed refusals (a malformed tag, a bad maxCharacters). */

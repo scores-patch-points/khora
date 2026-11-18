@@ -18,7 +18,7 @@ test("1. reading.js::readDocument and read-process.mjs::readToWeft give the same
   assert.equal(bound(b), bound(a), "the two front doors bind the same pronouns");
   assert.deepEqual(b.cast?.map?.((c) => c.id ?? c.name) ?? b.cast, a.cast?.map?.((c) => c.id ?? c.name) ?? a.cast, "and read the same cast");
   // falsifier: a door that drops the canonical options reads differently, so this test would notice
-  const weak = await readDocument(EN, { language: "eng", lexicon: false, readerOptions: { pronounPresence: null } });
+  const weak = await readDocument(EN, { language: "eng", lexicon: false, allowDegraded: true, readerOptions: { pronounPresence: null } });
   assert.notEqual(bound(weak), bound(a), "switching the rung off changes the read (the comparison has teeth)");
 });
 
@@ -33,7 +33,7 @@ test("2. a read with no priors is refused loudly under Node, and allowed only wh
     try { const w = readToWeft(T, { language: "eng", allowDegraded: true }); out.allowed = (w.gaps ?? []).map((g) => g.gap); } catch (e) { out.allowed = "threw: " + e.message; }
     console.log(JSON.stringify(out));`;
   const { spawnSync } = await import("node:child_process");
-  const r = spawnSync(process.execPath, ["--input-type=module", "-e", probe], { env: { ...process.env, KHORA_PRIORS_DIR: empty, KHORA_ALLOW_DEGRADED: "" }, encoding: "utf8", timeout: 580000, cwd: ROOT });
+  const r = spawnSync(process.execPath, ["--input-type=module", "-e", probe], { env: { ...process.env, KHORA_PRIORS_DIR: empty, KHORA_ALLOW_DEGRADED: "", KHORA_NO_PHAROS_GATE: "1" }, encoding: "utf8", timeout: 580000, cwd: ROOT });
   const out = JSON.parse(r.stdout.trim().split("\n").pop());
   for (const k of ["toWeft", "doc"]) { assert.match(out[k], /khora read refused/, `${k}: refused`); assert.match(out[k], /no_pos_prior/, `${k}: names the missing prior`); assert.ok(out[k].includes(empty), `${k}: names where it looked`); }
   assert.ok(Array.isArray(out.allowed) && out.allowed.includes("no_pos_prior"), "allowDegraded: true still reads, with the typed gaps, knowingly");

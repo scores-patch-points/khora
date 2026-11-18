@@ -1,0 +1,33 @@
+{
+  "name": "khora",
+  "ground": [],
+  "figure": [],
+  "pattern": [],
+  "out": [],
+  "door": "native/the-fold/read-process.mjs#readToWeft",
+  "needs": [
+    {
+      "name": "the English priors (janus/priors)",
+      "env": "KHORA_PRIORS_DIR",
+      "paths": [
+        "../janus/priors",
+        "~/Documents/janus/priors"
+      ],
+      "contains": [
+        "pos-eng.json"
+      ],
+      "how": "Clone janus beside khora: gh repo clone scores-patch-points/janus ../janus"
+    }
+  ],
+  "rules": "cb3522964cc3f4cd7fa72dea3e1a76a2f843d66eb8ae8ee7a874c3dd8bbfd949",
+  "capacities": [
+    "pos",
+    "morphology",
+    "punctuation",
+    "dotted",
+    "clause-reader",
+    "pronoun-binding",
+    "name-ruling",
+    "non-personal-ruling"
+  ]
+}
