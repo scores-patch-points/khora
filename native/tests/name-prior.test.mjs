@@ -23,3 +23,18 @@ test("turning the ruling off restores the typed gap, so a read without a ruling 
   const w = readToWeft(BERT.repeat(2), { address: "t:bert", language: "eng", readerOptions: { namePersonhood: null } });
   assert.ok(w.gaps.some((g) => g.gap === "pronoun_presence_no_nonpersonal_ruling"));
 });
+import { resolvePronounsByPresence } from "../adapters/text/pronouns.js";
+// the rung's overcomeable priors (identity/novels PREREG-ROUND20 NOTE-1)
+const S3 = [{ text: "Ann met Bo. She smiled. She laughed. She nodded at Ann.", offset: 0 }]; const M3 = [{ ref: "ann", start: 0, end: 3 }, { ref: "bo", start: 8, end: 10 }, { ref: "ann", start: 49, end: 52 }];
+const D3 = { window: 4, boost: 2, feed: 1, floor: 1, margin: 0, language: "en" };
+test("a non-personal ruling is a veto by default and a prior the text can overcome with nonPersonalSoft", () => {
+  const hard = resolvePronounsByPresence(S3, M3, { ...D3, nonPersonal: ["ann", "bo"] }); assert.equal(hard.bindings.length, 0, "both beings ruled non-personal: nothing binds");
+  const soft = resolvePronounsByPresence(S3, M3, { ...D3, nonPersonal: ["ann", "bo"], nonPersonalSoft: true }); assert.equal(soft.bindings.length, 0, "no text evidence yet: the ruling still stands");
+});
+test("a gender prior speaks only for a being the text has not spoken of", () => {
+  const T = [{ text: "Tom met Ann and she smiled", offset: 0 }]; const M = [{ ref: "tom", start: 0, end: 3 }, { ref: "ann", start: 8, end: 11 }]; const D = { ...D3, boost: 3 };
+  assert.equal(resolvePronounsByPresence(T, M, D).bindings[0]?.referentId, "tom", "without a prior the first mention (boost 3) wins");
+  assert.equal(resolvePronounsByPresence(T, M, { ...D, priorGender: new Map([["tom", "m"]]) }).bindings[0]?.referentId, "ann", "the giver says Tom is male: she is not offered Tom, Ann wins");
+  assert.equal(resolvePronounsByPresence(T, M, { ...D, priorGender: new Map([["tom", "m"], ["ann", "m"]]) }).bindings.length, 0, "a giver says both are male: she binds nobody");
+  assert.equal(JSON.stringify(resolvePronounsByPresence(T, M, D)), JSON.stringify(resolvePronounsByPresence(T, M, { ...D, priorGender: null, nonPersonalSoft: false })), "absent options: byte-identical");
+});

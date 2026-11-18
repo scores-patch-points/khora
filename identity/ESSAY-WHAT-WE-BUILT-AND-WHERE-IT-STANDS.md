@@ -196,3 +196,13 @@ The Pharos of Alexandria was a lighthouse that was also, according to the storie
 That is what we have been building, I think: not a reader that understands, which is a claim I will not make and cannot measure, but a reader that *marks the shore*. Here are the places where a *she* can fall. Here is how often it falls in the right one. Here is what it did when it was not sure, and here is the note that says so. And in the library behind it, the books and the catalogue and the keeper of the light, all of it written down so that the next reader, or the same reader a year from now, can check it.
 
 The sentence we started with still has a hole in it. *She* is Gloria. *It* is the eczema. The decoder now gets the first right more often than it did, because it knows that a place cannot scratch. It still does not know what the cold is for. Neither, quite, do we. That is the next stretch of coast.
+
+---
+
+## Corrections added 2026-11-18, after the first two research reports on the whole record
+
+- **The name table behind the 0.911 had a builder bug.** The regex that read GUM's entity annotation lost every single-token mention, so the shipped table was built from 19,737 mentions instead of 36,649. The measured 0.874 to 0.911 is real for the table as shipped, but the table is not the one it was meant to be. A corrected table was measured and was worse in coverage (304 right and 30 wrong, against 319 and 31); the overcomeable (soft) mode recovered it (319 and 29; shipped table with soft mode 321 and 30). The rounds 15-16 embedding centroids were built through the same bug. See identity/novels/PREREG-ROUND20-NOTE-1.md.
+- **"98% of pronouns bound" was coverage, not correctness.** Held-out precision was 0.61 overall, 0.49 on fiction.
+- **The "24%" competence figure was inflated** by chosen dials; the defensible figure is 8-11%, and most of that saving comes from the pronoun rule, whose bindings were 49% precise on fiction.
+- **Greek and Sanskrit "reads natively" rests on clause counts with no precision measure.** The roles into the pronoun rung did not help on Greek by the preregistered rule, and Sanskrit has no gold.
+- **Nothing the canonical read does updates anything at read time.** The learned parts (a coreference ranker, kind induction, identity induction) did not beat their baselines on real text; the surprise gate's result is stored and never read back. The "emergent learning" this essay leans on is, today, offline priors plus nominations.

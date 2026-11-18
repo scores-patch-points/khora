@@ -339,7 +339,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, pronounPresence, namePersonhood, caseMarked, caseRoles, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -504,7 +504,10 @@ export function readWith(text, { address = null, category = null, language = nul
       const mentions = beingRows.flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ ref: c.ref, start: a, end: b })));
       const roles = caseClauses && caseClauses.length && roleMode !== "off" ? rolesFor(caseClauses, { coArgument: roleMode === "subject+coarg" }) : null;
       presenceInputs = { sentences, mentions, nonPersonal: np, nameRuling, roles };   // kept beside the entry (not enumerable) so a caller can re-run the pure rung on the same inputs
-      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np, ...(roles ? { roles } : {}) });
+      // A GENDER GIVER (readerOptions.genderPrior: a function of the stem returning ({ text, cast }) -> Map ref -> "m" | "f"; adapters/text/name-gender.js asks a giver). It is a PRIOR the text's own clause-local evidence overrides.
+      let priorGender = null; try { const gf = typeof genderPrior === "function" ? genderPrior(stem) : genderPrior; if (typeof gf === "function") { const g = gf({ text: str, cast: beingRows }); if (g?.size) priorGender = g; } } catch { priorGender = null; }
+      // A non-personal ruling is overcomeable: a being the text itself uses he or she of is a person whatever the ruling says (identity/novels PREREG-ROUND20 NOTE-1: on 66 unseen documents 319/31 -> 321/30; dev and test unchanged).
+      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np, nonPersonalSoft: pp.nonPersonalSoft ?? true, ...(priorGender ? { priorGender } : {}), ...(roles ? { roles } : {}) });
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
       for (const g of r.gaps) gaps.push(g);
     } catch (e) { gaps.push({ gap: "pronoun_presence_failed", detail: String(e?.message ?? e).slice(0, 120) }); }

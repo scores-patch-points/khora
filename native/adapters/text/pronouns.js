@@ -997,7 +997,7 @@ export const resolvePronounsByActivation = (
  * @returns {{bindings: Array<object>, gaps: Array<object>}}
  */
 export const resolvePronounsByPresence = (sentences, mentions, options = {}) => {
-  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null, roles = null } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
+  const { window, boost, feed, floor, margin, locality = false, nonPersonal, language = "en", pronounClass = undefined, unspaced = false, trace = null, roles = null, nonPersonalSoft = false, priorGender = null, genderModel = null } = options;   // `trace`: an array that receives one { offset, pronoun, reason } per pronoun hit NOT bound (no_candidate | gender_veto | below_floor | margin); absent, nothing changes
   if (window !== null && (!Number.isFinite(window) || window <= 1)) throw new TypeError("resolvePronounsByPresence: window is declared (a number above 1, or null for the undecayed control)");
   if (!Number.isFinite(boost) || boost <= 0) throw new TypeError("resolvePronounsByPresence: boost is declared and positive (1 weighs every mention alike)");
   if (feed !== 0 && feed !== 1) throw new TypeError("resolvePronounsByPresence: feed is declared, 0 or 1");
@@ -1034,8 +1034,16 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
   const presence = (ref, t) => { const c = state.get(ref); return c ? c.v * gamma ** (t - c.t) : 0; };
   const fire = (ref, t, w, pos) => { state.set(ref, { v: presence(ref, t) + w, t, pos }); };
   const evidence = new Map(); // ref -> { m, f }: the resolver's own causal, clause-local gender evidence
-  const genderOf = (r) => { const e = evidence.get(r); if (!e) return "unknown"; if (e.m > 0 && e.f === 0) return "m"; if (e.f > 0 && e.m === 0) return "f"; return "unknown"; };
-  const compatible = (r, hit) => !hit.clean || genderOf(r) === "unknown" || genderOf(r) === hit.gender;
+  // OVERCOMEABLE PRIORS (identity/novels PREREG-ROUND20 NOTE-1): `priorGender` (Map ref -> "m" | "f", from a giver) speaks only for a being the text has said nothing about; the rung's own clause-local evidence overrides it.
+  // `nonPersonalSoft`: a being with the text's own gender evidence (the text used he or she of it) is a person whatever the non-personal ruling says. Both default off: the rung is then byte-identical.
+  const hasOwn = (r) => { const e = evidence.get(r); return !!e && (e.m > 0 || e.f > 0); };
+  const genderOf = (r) => { const e = evidence.get(r); if (!e || (e.m === 0 && e.f === 0)) return priorGender?.get(r) ?? "unknown"; if (e.m > 0 && e.f === 0) return "m"; if (e.f > 0 && e.m === 0) return "f"; return "unknown"; };
+  // SURPRISE IN THE READING (identity/novels PREREG-ROUND20 NOTE-4): `genderModel` = { prior: Map ref -> "m" | "f", priorNats: R, evidenceNats: E } (R and E MEASURED: the giver's reliability and one clause of evidence's reliability, as log-odds).
+  // A being's gender log-odds LO = the prior (+R for m, -R for f, 0 when no giver speaks) + the text's evidence counted ONCE per document (+E when the text used he of it alone, -E she). A clean he / she weighs each candidate's activation by P(gender matches) = sigmoid(+/- LO):
+  // nothing is vetoed by a typed rule; a being whose gender would be very surprising falls under the floor, and the pronoun abstains. The bits of surprise of the chosen being ride the binding.
+  const loOf = (r) => { if (!genderModel) return 0; const pr = genderModel.prior?.get(r); let lo = pr === "m" ? genderModel.priorNats : pr === "f" ? -genderModel.priorNats : 0; const e = evidence.get(r); if (e) { if (e.m > 0 && e.f === 0) lo += genderModel.evidenceNats; else if (e.f > 0 && e.m === 0) lo -= genderModel.evidenceNats; } return lo; };
+  const pMatch = (r, hit) => { if (!genderModel || !hit.clean || (hit.gender !== "m" && hit.gender !== "f")) return 1; const p = 1 / (1 + Math.exp(-loOf(r))); return (hit.gender === "m" ? p : 1 - p) / Math.max(p, 1 - p); /* relative to the being's own most likely gender: no information (p = 0.5) is no penalty */ };
+  const compatible = (r, hit) => genderModel ? true : !hit.clean || genderOf(r) === "unknown" || genderOf(r) === hit.gender;
 
   const bindings = [], unbound = [];
   for (const sent of order) {
@@ -1053,11 +1061,11 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
       if (!chosen) {
         const cands = []; let present = 0; const blocked = blockedFor(e.pos, e.pos + hit.token.length, mentionsHere);
         for (const [ref, c] of state) {
-          if (np.has(ref) || blocked?.has(ref)) continue;
+          if ((np.has(ref) && !(nonPersonalSoft && hasOwn(ref))) || blocked?.has(ref)) continue;
           const a = presence(ref, sent.i);
           if (a > 0) present++;
           if (!compatible(ref, hit)) continue;
-          if (a > 0) cands.push([ref, a, c.pos]);
+          const pm = pMatch(ref, hit); if (a * pm > 0) cands.push([ref, a * pm, c.pos]);
         }
         cands.sort((x, y) => y[1] - x[1] || y[2] - x[2] || (x[0] < y[0] ? -1 : 1));
         // the reason a found pronoun is left unbound: `unbound` rides the result (no binding changes), and `trace` (when given) receives the same item with the rung's own label and numbers
@@ -1069,7 +1077,7 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
         margined = (top - second) / top;
         if (margined < margin) { skip("margin", "margin", { activation: top, margin: margined }); continue; }        chosen = cands[0][0]; mechanism = "presence";
       }
-      bindings.push({ referentId: chosen, sentenceOrder: sent.i, offset: e.pos, pronoun: hit.token, gender: hit.gender, activation: top, margin: margined, mechanism });
+      bindings.push({ referentId: chosen, sentenceOrder: sent.i, offset: e.pos, pronoun: hit.token, gender: hit.gender, activation: top, margin: margined, mechanism, ...(genderModel ? { surpriseBits: -Math.log2(Math.max(1e-9, pMatch(chosen, hit))) } : {}) });
       if (feed) fire(chosen, sent.i, 1, e.pos);
     }
     // gender evidence from this sentence informs LATER sentences only, by the resolver's own rule (one being named beside the pronoun, in its own clause)
@@ -1082,5 +1090,5 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
       evidence.set(only, ev);
     }
   }
-  return { bindings, gaps: [], unbound };
+  return { bindings, gaps: [], unbound, genderEvidence: Object.fromEntries([...evidence].map(([r, e]) => [r, { m: e.m, f: e.f }])) };
 };

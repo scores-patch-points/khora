@@ -1,0 +1,15 @@
+# PREREG-ROUND20 NOTE 1 — a parsing bug found in my own table builders; givers; rulings the text can overcome (registered before the arms are scored)
+
+## D1. The bug (found 2026-11-18 while building the name-gender table)
+The regex my builders used to read GUM's Entity annotation, `/\((\d+)-([^()]*?)(\))?(?=\(|$|\d)|(\d+)\)/g`, treats a single-token mention such as "(19-person-...-ana)" as an OPEN multi-token mention (its lookahead accepts a digit inside the label), so single-token mentions, most names and most pronouns, were never closed and were lost. It was in scripts/build-name-prior.mjs (the table shipped in the canonical English read), build-embed-personhood.mjs, build-embed-windows.mjs and build-static-personhood.mjs (rounds 15-16 centroids), and build-name-gender.mjs. Corrected everywhere to the greedy form used by eval/referents/pronoun-golden.mjs. Measured effect on the table: the no-U table was built from 19,737 mentions and now 36,649 (words 5,930 to 7,188).
+First consequence, measured before any new hypothesis (U, 552 pronouns): the shipped hard ruling (old table) S6 319 right / 31 wrong; the same hard ruling from the corrected table 304 right / 30 wrong. The buggy table was accidentally the more conservative. Rounds 15-16 embedding results were computed with centroids built through the bug and are to be read as such (they were already not adopted).
+
+## D2. The user's direction: a name's gender needs a giver, and any prior must be overcomeable
+- A giver: a named source with its provenance, never a table inside the reader: (i) the GUM-measured table (giver UD GUM, local, 179 gendered named entities, 468 words: too thin to stand alone), (ii) a Wikidata given-name giver through the hyperlexicon door (instance of male / female / unisex given name), cached on disk with its query, replayable offline (built after this round's measurements if the network is reachable).
+- Overcomeable: a ruling is a prior, not a veto. In the rung, a being that has the TEXT's own clause-local gender evidence (the rung's causal rule) is not vetoed by a non-person prior, and a gender prior yields to that evidence. Implemented as the rung option `nonPersonalSoft` (default false: byte-identical).
+
+## Arms (U, 66 documents, tables built without them; all sighted for S0 and S6)
+S6old = shipped table, hard (319/31 above); S6new = corrected table, hard (304/30 above); S6newSoft = corrected table, overcomeable by the text; S6oldSoft = shipped table, overcomeable.
+- O1: S6newSoft right count and precision are not below S6new (the text recovers people the table wrongly ruled out): right count higher, wrong count not higher.
+- O2: S6newSoft against S6old (the shipped ruling): right and wrong counts and precision and coverage, bootstrap by document; reported either way. The canonical read changes to the corrected soft ruling only if it is at least as good as S6old on both precision and coverage on U and not worse on dev and test (sighted).
+Failures reported. No threshold tuned.

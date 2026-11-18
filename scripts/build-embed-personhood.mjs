@@ -10,7 +10,7 @@ const items = new Map(); // arm|frame|type -> [arm, frame, isPerson]
 let doc = null, skip = false, sent = null, docs = 0, mentions = 0;
 const flush = () => { if (!sent || skip || !sent.toks.length) { sent = null; return; }
   const toks = sent.toks; let p = 0; for (const t of toks) { const i = sent.text.indexOf(t.form, p); if (i >= 0) { t.s = i; t.e = i + t.form.length; p = t.e; } else { t.s = p; t.e = p; } }
-  const open = [], ms = []; const re = /\((\d+)-([^()]*?)(\))?(?=\(|$|\d)|(\d+)\)/g;
+  const open = [], ms = []; const re = /\((\d+)-([^()]*)(\))?|(\d+)\)/g;
   toks.forEach((t, i) => { let m; re.lastIndex = 0; while ((m = re.exec(t.ent))) { if (m[1] !== undefined) { const typ = m[2].split("-")[0]; if (m[3]) ms.push({ a: i, b: i, typ }); else open.push({ a: i, typ, id: m[1] }); } else { for (let k = open.length - 1; k >= 0; k--) if (open[k].id === m[4]) { ms.push({ a: open[k].a, b: i, typ: open[k].typ }); open.splice(k, 1); break; } } } });
   for (const m of ms) { const span = toks.slice(m.a, m.b + 1); const ids = new Set(span.map((t) => t.id)); const head = span.find((t) => !ids.has(t.head)) ?? span.at(-1); if (head.upos === "PRON") continue; mentions++;
     const a = span[0].s, b = span.at(-1).e; const str = sent.text.slice(a, b); const hv = toks.find((t) => t.id === head.head); const role = /^(nsubj|csubj)/.test(head.dep) ? "subj" : /^(obj|iobj)/.test(head.dep) ? "obj" : null; const lemma = hv && hv.upos === "VERB" ? hv.lemma.toLowerCase() : null; const person = m.typ === "person";

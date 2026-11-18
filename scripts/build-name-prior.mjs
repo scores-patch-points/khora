@@ -10,7 +10,7 @@ const text = fs.readFileSync(file, "utf8"); const sha = crypto.createHash("sha25
 const counts = new Map(); let docs = 0, mentions = 0, doc = null, sent = [], skip = false;
 const bump = (w, person) => { const c = counts.get(w) ?? [0, 0]; c[person ? 0 : 1]++; counts.set(w, c); };
 const flush = () => { if (!sent.length || skip) { sent = []; return; } const open = [];
-  sent.forEach((t, i) => { const re = /\((\d+)-([^()]*?)(\))?(?=\(|$|\d)|(\d+)\)/g; let m; while ((m = re.exec(t.ent))) { if (m[1] !== undefined) { const typ = m[2].split("-")[0]; if (m[3]) emit(i, i, typ); else open.push({ s: i, typ }); } else if (open.length) { const o = open.pop(); emit(o.s, i, o.typ); } } });
+  sent.forEach((t, i) => { const re = /\((\d+)-([^()]*)(\))?|(\d+)\)/g; let m; while ((m = re.exec(t.ent))) { if (m[1] !== undefined) { const typ = m[2].split("-")[0]; if (m[3]) emit(i, i, typ); else open.push({ s: i, typ }); } else if (open.length) { const o = open.pop(); emit(o.s, i, o.typ); } } });
   sent = []; };
 const emit = (a, b, typ) => { const toks = sent.slice(a, b + 1); const key = toks.filter((t) => t.upos === "PROPN"); const ks = key.length ? key : [toks[toks.length - 1]]; mentions++; for (const t of ks) bump(t.form.toLowerCase(), typ === "person"); };
 for (const line of text.split("\n")) {
