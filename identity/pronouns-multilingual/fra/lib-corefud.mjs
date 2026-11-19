@@ -11,7 +11,7 @@ export function parseCorefUD(file) {
     const f = ln.split("\t"); sent ??= { tokens: [], text: "", ents: [], lines: [] }; sent.lines.push(ln);
     if (/^\d+-\d+$/.test(f[0])) { sent.mwt = { from: +f[0].split("-")[0], to: +f[0].split("-")[1], form: f[1] }; continue; }
     if (!/^\d+$/.test(f[0])) continue; const e = /Entity=([^|]*)/.exec(f[9] ?? "");
-    sent.tokens.push({ li: sent.lines.length - 1, id: +f[0], form: f[1], upos: f[3], feats: f[5] === "_" ? "" : f[5], head: +f[6], mwt: sent.mwt && +f[0] >= sent.mwt.from && +f[0] <= sent.mwt.to ? { ...sent.mwt } : null }); sent.ents.push(e ? e[1] : "");
+    sent.tokens.push({ li: sent.lines.length - 1, id: +f[0], form: f[1], upos: f[3], feats: f[5] === "_" ? "" : f[5], head: +f[6], deprel: f[7], mwt: sent.mwt && +f[0] >= sent.mwt.from && +f[0] <= sent.mwt.to ? { ...sent.mwt } : null }); sent.ents.push(e ? e[1] : "");
   }
   close(); return docs;
 }
