@@ -23,3 +23,17 @@ test("the reading is written as a text entry and a text-reading entry the other 
 test("a language with no parser prior is a typed gap, never another language's parse; no pharos is a typed gap", { skip: g.gap ? skip : false }, async () => {
   const x = await writeReading("Bonjour.", { language: "zzz", log: "t", dir: dir() }); assert.equal(x.gap, hasPharos ? "no_parser_prior" : "no_pharos");
 });
+test("rows carry character offsets that point at the token in the text", { skip: g.gap ? skip : false }, () => {
+  const text = "Bell defeated Greene in 1912. Greene fled.", rows = readingRows(g, text);
+  for (const r of rows) if (r.at != null) assert.equal(text.slice(r.at, r.end), r.form);
+  assert.ok(rows.filter((r) => r.at != null).length >= rows.length - 1, "offsets are found for (nearly) every token");
+  assert.equal(rows.find((r) => r.form === "1912").at, text.indexOf("1912"));
+});
+test("referents are written only through the canonical door, injected; without it a typed gap", { skip }, async () => {
+  const d = dir(), text = "Bell defeated Greene. He fled.", weft = { referents: { referents: [{ id: "r1", face: "Bell", mentions: ["m1", "m2"] }, { id: "r2", face: "Greene", mentions: ["m3"] }], spans: [{ id: "m1", at: [0, 4] }, { id: "m2", at: [22, 24] }, { id: "m3", at: [14, 20] }] } };
+  const a = await writeReading(text, { log: "t", dir: d, referents: true }); assert.equal(a.gap, "no_door");
+  const b = await writeReading(text, { log: "t", dir: d, referents: true, readWeft: () => weft }); assert.ok(b.referents);
+  const P = await import(path.join(process.env.PHAROS_HOME, "lib", "pharos.mjs")), h = P.open("t", { dir: d, writer: "reader", frame: false }), e = P.fold(h, { kind: "text-referents" }).entries[0];
+  assert.deepEqual(e.body.referents.find((x) => x.face === "Bell").spans, [[0, 4], [22, 24]], "the pronoun's span is a mention of Bell"); assert.equal(e.cell, "INS·Figure");
+  const c = await writeReading(text, { log: "t", dir: d, referents: true, readWeft: () => weft }); assert.ok(c.skipped.includes("text-referents"));
+});

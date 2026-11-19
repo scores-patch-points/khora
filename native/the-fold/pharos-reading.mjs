@@ -2,6 +2,7 @@
 // counts). This writes what the reading SAID about the text, as the entries the other repos read by kind, so no repo has to import khora to use a reading:
 //   text          INS·Ground   addr text:<sha16(text)>     body { text, language }
 //   text-reading  INS·Figure   addr reading:<sha16(text)>  body { rows }   of [the text entry]    rows = the reader's dependency rows { s, id, form, lemma, upos, feats, head, deprel }, s = the sentence
+//   text-referents INS·Figure addr referents:<sha16(text)> body { referents: [{ ref, face, spans: [[at, end], ...] }] }  (only with { referents: true }: the canonical door's own cast, pronouns bound by presence)
 // The rows come from the UD parser prior the reader's own clause layer is built on (adapters/text/ud-parser.js, the prior read through the prior door), with the reader's one sentence cut and tokenizer.
 // It is a DERIVED write of the reading, not a second reading of meaning: no claims, no referents are decided here (khora reads; janus links; penelope judges). It is called with a text the canonical
 // door (readToWeft) has read; a language with no parser prior is a typed gap, never another language's parse. Idempotent: an entry already at the address with the same body is not written again.
@@ -17,7 +18,7 @@ import { priorsHome } from "./prior-source.mjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const sha16 = (s) => crypto.createHash("sha256").update(String(s), "utf8").digest("hex").slice(0, 16);
 const canon = (v) => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon(v[k])}`).join(",")}}` : JSON.stringify(v));   // pharos stores bodies with sorted keys
-export const TEXT_KIND = "text", READING_KIND = "text-reading";
+export const TEXT_KIND = "text", READING_KIND = "text-reading", REFERENTS_KIND = "text-referents";
 const MODELS = new Map();
 /** the parser (and tokenizer) prior for a language, from the prior door's home; a typed gap when absent */
 export async function grammarFor(code = "eng") {
@@ -29,8 +30,15 @@ export async function grammarFor(code = "eng") {
 }
 /** readingRows(g, text) -> rows with the sentence index: { s, id, form, lemma, upos, feats, head, deprel } (head 0 is the root) */
 export function readingRows(g, text) {
-  const rows = []; let s = 0;
-  for (const sent of sentences(text, "und", g.tokenizer)) { const forms = tokenize(sent, g.tokenizer); if (!forms.length) continue; for (const r of analyse(g.parser, forms)) rows.push({ s, id: r.id, form: r.form, lemma: r.lemma, upos: r.upos, feats: r.feats ?? "", head: r.head < 0 ? 0 : r.head, deprel: r.deprel }); s++; }
+  const rows = []; let s = 0, cur = 0;
+  for (const sent of sentences(text, "und", g.tokenizer)) {
+    const forms = tokenize(sent, g.tokenizer); if (!forms.length) continue;
+    const base = text.indexOf(sent, cur), b0 = base < 0 ? null : base; if (b0 != null) cur = b0 + sent.length;
+    let c = 0;                                                         // each token's UTF-16 offsets in the text (null if the tokenizer changed the form and it cannot be found)
+    const at = forms.map((f) => { const i = b0 == null ? -1 : sent.indexOf(f, c); if (i < 0) return null; c = i + f.length; return [b0 + i, b0 + c]; });
+    for (const r of analyse(g.parser, forms)) rows.push({ s, id: r.id, form: r.form, lemma: r.lemma, upos: r.upos, feats: r.feats ?? "", head: r.head < 0 ? 0 : r.head, deprel: r.deprel, ...(at[r.id - 1] ? { at: at[r.id - 1][0], end: at[r.id - 1][1] } : {}) });
+    s++;
+  }
   return rows;
 }
 // where pharos is: PHAROS_HOME, else a checkout beside this repo, else <repo>/pharos, else ~/Documents/pharos (the same places the gate looks)
@@ -39,7 +47,7 @@ const pharosLib = () => [process.env.PHAROS_HOME, path.join(ROOT, "..", "pharos"
  * writeReading(text, { language, log, dir, writer }) -> { text: id, reading: id, written: [kinds], skipped: [kinds] } or { gap, why }
  * log / dir name the pharos log (PHAROS_LOG, PHAROS as the other doors); the writer is "khora".
  */
-export async function writeReading(text, { language = "eng", log = process.env.PHAROS_LOG ?? "fold", dir = process.env.PHAROS ?? null, writer = "khora" } = {}) {
+export async function writeReading(text, { language = "eng", log = process.env.PHAROS_LOG ?? "fold", dir = process.env.PHAROS ?? null, writer = "khora", referents = false, readWeft = null } = {}) {
   const lib = pharosLib(); if (!lib) return { gap: "no_pharos", why: "pharos was not found (set PHAROS_HOME); khora writes readings only into the pharos" };
   const g = await grammarFor(language); if (g.gap) return g;
   const P = await import(pathToFileURL(lib).href), h = P.open(log, { writer, ...(dir ? { dir } : {}) });
@@ -48,5 +56,12 @@ export async function writeReading(text, { language = "eng", log = process.env.P
   const addrT = `text:${sha16(text)}`, addrR = `reading:${sha16(text)}`, rows = readingRows(g, text), out = { written: [], skipped: [], rows: rows.length };
   const put = (kind, cell, addr, body, of = []) => { const have = (P.fold(h, { kind, addr }).entries ?? []).find((e) => canon(e.body) === canon(body)); if (have) { out.skipped.push(kind); return have; } const e = P.weave(h, { cell, kind, addr, body, of }); out.written.push(kind); return e; };
   const t = put(TEXT_KIND, "INS·Ground", addrT, { text, language }), r = put(READING_KIND, "INS·Figure", addrR, { rows }, [t.id]);
-  return { ...out, text: t.id, reading: r.id, addr: { text: addrT, reading: addrR }, parser: g.prior };
+  const res = { ...out, text: t.id, reading: r.id, addr: { text: addrT, reading: addrR }, parser: g.prior };
+  if (referents) {                                                    // the canonical door's own cast: who each mention is, pronouns bound by presence. `readWeft` is the door (readToWeft), injected.
+    if (typeof readWeft !== "function") return { ...res, gap: "no_door", why: "referents need the canonical door: pass readWeft (the-fold/read-process.mjs readToWeft)" };
+    const w = readWeft(text, { language }), spans = new Map((w.referents?.spans ?? []).map((x) => [x.id, x.at])), list = (w.referents?.referents ?? []).map((r0) => ({ ref: r0.id, face: r0.face, spans: (r0.mentions ?? []).map((id) => spans.get(id)).filter(Boolean).map(([a, b]) => [a, b]) })).filter((r0) => r0.spans.length);
+    declare(REFERENTS_KIND, "INS·Figure", "the reader's referents for a text: each with its face and the spans of every mention, pronouns bound by presence");
+    const f = put(REFERENTS_KIND, "INS·Figure", `referents:${sha16(text)}`, { referents: list }, [t.id]); res.referents = f.id; res.addr.referents = `referents:${sha16(text)}`;
+  }
+  return res;
 }
