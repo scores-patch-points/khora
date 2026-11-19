@@ -1,0 +1,100 @@
+{
+ "prereg": "PREREG-ROUND29.md",
+ "split": "heldout",
+ "fetched": {
+  "giver": "2026-11-19T01:08:12.605324+00:00",
+  "leads": "2026-11-19T01:49:15.250320+00:00"
+ },
+ "population": {
+  "people": 432,
+  "withLead": 406,
+  "read": 339,
+  "skippedOrError": 67
+ },
+ "E1": {
+  "scored": 307,
+  "named": 41,
+  "placeLike": 24,
+  "shareNamed": 0.1336
+ },
+ "E2": {
+  "steps": 8,
+  "correct": 5,
+  "precision": 0.625,
+  "directionErrors": 0,
+  "unscored": 1
+ },
+ "E3": {
+  "leadsNamingTheBirthplaceWithAGoldParent": 41,
+  "reachesGoldParent": 0,
+  "reachesAnyGoldAncestor": 5,
+  "recallAnyAncestor": 0.122,
+  "reachesGoldRoot": 0,
+  "recallParent": 0,
+  "recallRoot": 0
+ },
+ "E4": {
+  "silentLeads": 34,
+  "ofWhichGoldHasAParent": 34
+ },
+ "wrongStepsSample": [
+  {
+   "q": "Q36767",
+   "child": "London",
+   "parent": "Douglas Thomas Pattinson",
+   "gold": [
+    "London",
+    "Greater London",
+    "Greater London",
+    "England",
+    "United Kingdom"
+   ]
+  },
+  {
+   "q": "Q40912",
+   "child": "New Jersey",
+   "parent": "Sinatra",
+   "gold": [
+    "Hoboken",
+    "Hudson County",
+    "New Jersey",
+    "United States"
+   ]
+  },
+  {
+   "q": "Q4465",
+   "child": "Wellington",
+   "parent": "April",
+   "gold": [
+    "Wellington",
+    "Wellington City",
+    "Wellington Region",
+    "New Zealand"
+   ]
+  }
+ ],
+ "E5_regex": {
+  "named": 15,
+  "steps": 5,
+  "precision": 0.6,
+  "reachesGoldParent": 0,
+  "ofLeadsWithGoldParent": 15,
+  "recallParent": 0
+ },
+ "E5_read": {
+  "recallParentOnSameLeads": 0,
+  "precision": 0.625
+ },
+ "E7_nullPrecision": {
+  "steps": 22,
+  "precision": 0
+ },
+ "E6": {
+  "items": 60,
+  "agreesWithWikidataJudge": 0.3,
+  "baselines": {
+   "equalityAtTheAskedLevelAgrees": 0.35,
+   "grainBlindAgrees": 0.35
+  }
+ }
+}
