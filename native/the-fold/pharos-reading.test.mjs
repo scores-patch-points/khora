@@ -13,12 +13,12 @@ test("rows carry the sentence, the token, the head and the relation; a root exis
 });
 test("the reading is written as a text entry and a text-reading entry the other repos read by kind; a second write adds nothing", { skip }, async () => {
   const d = dir(), text = "Bell defeated Greene in 1912.", a = await writeReading(text, { log: "t", dir: d });
-  assert.deepEqual(a.written, ["text", "text-reading"]); assert.equal(a.addr.text, `text:${sha16(text)}`); assert.equal(a.addr.reading, `reading:${sha16(text)}`);
+  assert.deepEqual(a.written, ["text", "text-cuts", "text-reading"]); assert.equal(a.addr.text, `text:${sha16(text)}`); assert.equal(a.addr.reading, `reading:${sha16(text)}`);
   const P = await import(path.join(process.env.PHAROS_HOME, "lib", "pharos.mjs")), h = P.open("t", { dir: d, writer: "reader", frame: false });
   const t = P.fold(h, { kind: "text" }).entries[0], r = P.fold(h, { kind: "text-reading" }).entries[0];
   assert.equal(t.cell, "INS·Ground"); assert.deepEqual(t.body, { text, language: "eng" }); assert.equal(r.cell, "INS·Figure"); assert.deepEqual(r.of, [t.id]); assert.ok(r.body.rows.length >= 5);
-  const b = await writeReading(text, { log: "t", dir: d }); assert.deepEqual(b.written, []); assert.deepEqual(b.skipped, ["text", "text-reading"]);
-  const c = await writeReading("Greene fled.", { log: "t", dir: d }); assert.deepEqual(c.written, ["text", "text-reading"]);
+  const b = await writeReading(text, { log: "t", dir: d }); assert.deepEqual(b.written, []); assert.deepEqual(b.skipped, ["text", "text-cuts", "text-reading"]);
+  const c = await writeReading("Greene fled.", { log: "t", dir: d }); assert.deepEqual(c.written, ["text", "text-cuts", "text-reading"]);
 });
 test("a language with no parser prior is a typed gap, never another language's parse; no pharos is a typed gap", { skip: g.gap ? skip : false }, async () => {
   const x = await writeReading("Bonjour.", { language: "zzz", log: "t", dir: dir() }); assert.equal(x.gap, hasPharos ? "no_parser_prior" : "no_pharos");
@@ -38,4 +38,13 @@ test("referents are written only through the canonical door, injected: the cast 
   assert.deepEqual(e.body.held, [{ pronoun: "he", at: [22, 24], cands: [["ref:auto:bell", 2.5], ["ref:auto:greene", 1.5]], bound: "ref:auto:bell" }], "the whole spectrum is kept beside the choice");
   assert.equal(e.body.faces["ref:auto:greene"], "Greene");
   const c = await writeReading(text, { log: "t", dir: d, referents: true, readWeft: () => weft }); assert.ok(c.skipped.includes("text-referents"));
+});
+test("the cut is an observation (SEG·Figure offsets), the rows are nominations (the basis says so), and every entry khora writes is Existence or Structure (the pharos writers audit, when beside the library)", { skip }, async () => {
+  const d = dir(), text = "Bell defeated Greene. Greene fled. He never returned.";
+  const a = await writeReading(text, { log: "t", dir: d }); const P = await import(path.join(process.env.PHAROS_HOME, "lib", "pharos.mjs")), h = P.open("t", { dir: d, writer: "reader", frame: false });
+  const cuts = P.fold(h, { kind: "text-cuts" }).entries[0]; assert.equal(cuts.cell, "SEG·Figure"); assert.deepEqual(cuts.of, [P.fold(h, { kind: "text" }).entries[0].id]);
+  assert.equal(cuts.body.cuts.length, 3); for (const [s, e] of cuts.body.cuts) assert.ok(text.slice(s, e).length > 0 && text.slice(s, e).endsWith("."));
+  assert.equal(text.slice(cuts.body.cuts[1][0], cuts.body.cuts[1][1]), "Greene fled.");
+  const r = P.fold(h, { kind: "text-reading" }).entries[0]; assert.equal(r.basis.nominated, g.prior); assert.match(r.basis.note, /nominations/);
+  const W = path.join(process.env.PHAROS_HOME, "lib", "writers.mjs"); if (fs.existsSync(W)) { const { audit } = await import(W), z = audit(P.entries(h).map((e) => ({ ...e, by: "khora" }))); assert.equal(z.ok, true, JSON.stringify(z.violations)); }
 });

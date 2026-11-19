@@ -2,6 +2,8 @@
 // counts). This writes what the reading SAID about the text, as the entries the other repos read by kind, so no repo has to import khora to use a reading:
 //   text          INS·Ground   addr text:<sha16(text)>     body { text, language }
 //   text-reading  INS·Figure   addr reading:<sha16(text)>  body { rows }   of [the text entry]    rows = the reader's dependency rows { s, id, form, lemma, upos, feats, head, deprel }, s = the sentence
+//   text-cuts     SEG·Figure   addr cuts:<sha16(text)>      body { cuts: [[start, end], ...] } of [the text entry]   the OBSERVATION "there is a cut here": the sentence cut offsets of khora's tokenizer. "This is a sentence" is a DEFINITION, and Penelope's.
+//   The sentence index `s` and the labels in the rows (upos, feats, deprel) are NOMINATIONS by the UD parser prior, not definitions: the reading says so in its basis.
 //   text-referents INS·Figure addr referents:<sha16(text)> body { referents: [{ ref, face, spans: [[at, end], ...] }] }  (only with { referents: true }: the canonical door's own cast, pronouns bound by presence)
 // The rows come from the UD parser prior the reader's own clause layer is built on (adapters/text/ud-parser.js, the prior read through the prior door), with the reader's one sentence cut and tokenizer.
 // It is a DERIVED write of the reading, not a second reading of meaning: no claims, no referents are decided here (khora reads; janus links; penelope judges). It is called with a text the canonical
@@ -18,7 +20,7 @@ import { priorsHome } from "./prior-source.mjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const sha16 = (s) => crypto.createHash("sha256").update(String(s), "utf8").digest("hex").slice(0, 16);
 const canon = (v) => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon(v[k])}`).join(",")}}` : JSON.stringify(v));   // pharos stores bodies with sorted keys
-export const TEXT_KIND = "text", READING_KIND = "text-reading", REFERENTS_KIND = "text-referents";
+export const TEXT_KIND = "text", READING_KIND = "text-reading", REFERENTS_KIND = "text-referents", CUTS_KIND = "text-cuts";
 const MODELS = new Map();
 /** the parser (and tokenizer) prior for a language, from the prior door's home; a typed gap when absent */
 export async function grammarFor(code = "eng") {
@@ -27,6 +29,12 @@ export async function grammarFor(code = "eng") {
   const pf = files.find((f) => f.startsWith(`ud-parser-${code}-`) && f.endsWith(".json.gz")), tf = files.find((f) => f === `ud-tokenizer-${code}.json.gz`);
   const g = !pf ? { code, gap: "no_parser_prior", why: `no ud-parser-${code}-*.json.gz in ${dir ?? "the prior home"}` } : { code, parser: loadModel(await readJsonMaybeGz(path.join(dir, pf))), tokenizer: tf ? await readJsonMaybeGz(path.join(dir, tf)) : null, prior: pf };
   MODELS.set(code, g); return g;
+}
+/** cutsOf(g, text) -> [[start, end], ...]: where khora's one sentence cut falls in the text (an observation: the offsets only) */
+export function cutsOf(g, text) {
+  const out = []; let cur = 0;
+  for (const sent of sentences(text, "und", g.tokenizer)) { const i = text.indexOf(sent, cur); if (i < 0) continue; out.push([i, i + sent.length]); cur = i + sent.length; }
+  return out;
 }
 /** readingRows(g, text) -> rows with the sentence index: { s, id, form, lemma, upos, feats, head, deprel } (head 0 is the root) */
 export function readingRows(g, text) {
@@ -52,11 +60,11 @@ export async function writeReading(text, { language = "eng", log = process.env.P
   const g = await grammarFor(language); if (g.gap) return g;
   const P = await import(pathToFileURL(lib).href), h = P.open(log, { writer, ...(dir ? { dir } : {}) });
   const declare = (kind, cell, why) => { if (!(P.fold(h, { kind: "kind" }).entries ?? []).some((e) => e.body?.name === kind)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell, why } }); };
-  declare(TEXT_KIND, "INS·Ground", "a text, whole, as read"); declare(READING_KIND, "INS·Figure", "the reader's dependency rows for a text: sentence, token, lemma, part of speech, features, head, relation");
+  declare(TEXT_KIND, "INS·Ground", "a text, whole, as read"); declare(CUTS_KIND, "SEG·Figure", "the sentence cut offsets of the reader's tokenizer: an observation, not a definition of a sentence"); declare(READING_KIND, "INS·Figure", "the reader's dependency rows for a text: sentence, token, lemma, part of speech, features, head, relation");
   const addrT = `text:${sha16(text)}`, addrR = `reading:${sha16(text)}`, rows = readingRows(g, text), out = { written: [], skipped: [], rows: rows.length };
-  const put = (kind, cell, addr, body, of = []) => { const have = (P.fold(h, { kind, addr }).entries ?? []).find((e) => canon(e.body) === canon(body)); if (have) { out.skipped.push(kind); return have; } const e = P.weave(h, { cell, kind, addr, body, of }); out.written.push(kind); return e; };
-  const t = put(TEXT_KIND, "INS·Ground", addrT, { text, language }), r = put(READING_KIND, "INS·Figure", addrR, { rows }, [t.id]);
-  const res = { ...out, text: t.id, reading: r.id, addr: { text: addrT, reading: addrR }, parser: g.prior };
+  const put = (kind, cell, addr, body, of = [], basis = undefined) => { const have = (P.fold(h, { kind, addr }).entries ?? []).find((e) => canon(e.body) === canon(body)); if (have) { out.skipped.push(kind); return have; } const e = P.weave(h, { cell, kind, addr, body, of, ...(basis ? { basis } : {}) }); out.written.push(kind); return e; };
+  const t = put(TEXT_KIND, "INS·Ground", addrT, { text, language }), c = put(CUTS_KIND, "SEG·Figure", `cuts:${sha16(text)}`, { cuts: cutsOf(g, text) }, [t.id]), r = put(READING_KIND, "INS·Figure", addrR, { rows }, [t.id], { nominated: g.prior, note: "the labels (upos, feats, deprel) and the sentence index s are nominations by the UD parser prior, not definitions: defining belongs to Penelope" });
+  const res = { ...out, text: t.id, cuts: c.id, reading: r.id, addr: { text: addrT, reading: addrR, cuts: `cuts:${sha16(text)}` }, parser: g.prior };
   if (referents) {                                                    // the canonical door's own cast: who each mention is, pronouns bound by presence. `readWeft` is the door (readToWeft), injected; it is asked for the held spectrum (readerOptions.pronounCandidates).
     if (typeof readWeft !== "function") return { ...res, gap: "no_door", why: "referents need the canonical door: pass readWeft (the-fold/read-process.mjs readToWeft)" };
     const w = readWeft(text, { language, readerOptions: { pronounCandidates: true } }), pron = new Map();      // the weft's own cast (ref, surface, mentionSpans) and its pronoun bindings by presence (pronoun, at, ref)
