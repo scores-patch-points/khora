@@ -3,10 +3,10 @@
 // --oracle writes the GOLD mentions as the system (a format self-test: the writer's output must parse back to the gold entities). Nothing is tuned: the score is whatever the official scorer says.
 import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url)); const W = path.resolve(HERE, "../../..");
-const { parseCorefUD } = await import("../fra/lib-corefud.mjs"); const { readToWeft } = await import(W + "/native/the-fold/read-process.mjs");
+const { parseCorefUD } = await import("../fra/lib-corefud.mjs"); const { readToWeft } = await import(W + "/native/the-fold/read-process.mjs"); const { speakerReferents } = await import(W + "/native/adapters/text/speakers.js");
 const [dsName, split, lang, nArg] = process.argv.slice(2).filter((x) => !x.startsWith("--")); const oracle = process.argv.includes("--oracle"); const DATA = `/Users/mlacy/Documents/khora-cast/khora/identity/pronouns-multilingual/data/fra/corefud/CorefUD-1.3-public/data/CorefUD_${dsName}`;
 const file = fs.readdirSync(DATA).find((f) => f.endsWith(`-${split}.conllu`)); let docs = parseCorefUD(path.join(DATA, file)); const header = docs.header ?? []; if (nArg) docs = docs.slice(0, +nArg);
-const OUT = path.join(HERE, "out", `${dsName}-${split}${oracle ? "-oracle" : ""}`); fs.mkdirSync(OUT, { recursive: true });
+const SPK = process.env.SPEAKERS ?? ""; const OUT = path.join(HERE, "out", `${dsName}-${split}${oracle ? "-oracle" : ""}${SPK ? "-spk" + SPK : ""}`); fs.mkdirSync(OUT, { recursive: true });
 const keyLines = [...header], sysLines = [...header]; let nMent = 0, nClus = 0, dropped = 0;
 const stripMisc = (misc) => (misc === "_" ? [] : misc.split("|").filter((x) => !/^(Entity|Bridge|SplitAnte)=/.test(x)));
 for (const doc of docs) {
@@ -14,7 +14,9 @@ for (const doc of docs) {
   // the system's mentions: { a, b, cl } in document characters
   let ments = [];
   if (oracle) { doc.sents.forEach((s, si) => s.mentions.forEach((m) => ments.push({ a: offs[si] + m.c0, b: offs[si] + m.c1, cl: m.ent }))); }
-  else { const w = readToWeft(text, { language: lang, address: `sc:${dsName}:${doc.id}` }); if (!w.error && !w.skipped) { for (const c of w.cast ?? []) for (const [a, b] of c.mentionSpans ?? []) ments.push({ a, b, cl: c.ref }); const pr = lang === "eng" ? (w.pronounsGuess ?? w.pronounsPresence ?? []) : (w.pronounsPresence ?? []); for (const p of pr) ments.push({ a: p.at[0], b: p.at[1], cl: p.ref }); } }
+  else { const w = readToWeft(text, { language: lang, address: `sc:${dsName}:${doc.id}` }); if (!w.error && !w.skipped) { for (const c of w.cast ?? []) for (const [a, b] of c.mentionSpans ?? []) ments.push({ a, b, cl: c.ref }); const pr = lang === "eng" ? (w.pronounsGuess ?? w.pronounsPresence ?? []) : (w.pronounsPresence ?? []); for (const p of pr) ments.push({ a: p.at[0], b: p.at[1], cl: p.ref });
+      // PREREG-ROUND30: speaker and addressee referents for I/you (SPEAKERS=1); SPEAKERS=null is the shuffled control: the same mentions, each assigned a random speaker referent of the same document
+      if (SPK && lang === "eng") { const sp = speakerReferents(text, w); const ids = [...new Set(sp.mentions.map((m) => m.cl))]; let seed = 30 + doc.id.length; const rnd = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }; for (const m of sp.mentions) ments.push({ a: m.a, b: m.b, cl: SPK === "null" ? ids[Math.floor(rnd() * ids.length)] : SPK === "one" ? (m.kind === "addressee" ? "one:addressee" : "one:speaker") : m.cl }); } } }
   // per sentence: the token ranges of the mentions, nested properly
   const bySent = doc.sents.map(() => []); const seen = new Set();
   for (const m of ments) { let si = -1; for (let i = doc.sents.length - 1; i >= 0; i--) if (offs[i] <= m.a) { si = i; break; } if (si < 0) { dropped++; continue; } const s = doc.sents[si]; const ra = m.a - offs[si], rb = m.b - offs[si]; if (rb > s.text.length + 1) { dropped++; continue; }

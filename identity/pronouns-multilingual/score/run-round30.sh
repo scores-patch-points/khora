@@ -1,0 +1,5 @@
+#!/bin/bash
+# run-round30.sh — PREREG-ROUND30: English-LitBank dev and English-GUM dev, each with SPEAKERS unset (control), 1, null; the official scorer, singletons ignored and included. One run each.
+cd "$(dirname "$0")/../../.." || exit 1; export KHORA_PRIORS_DIR=${KHORA_PRIORS_DIR:-$HOME/Documents/janus/priors}; PY=${COREFUD_PY:-/tmp/corefud-venv/bin/python}; S=identity/givers/corefud-scorer/corefud-scorer.py; R=identity/pronouns-multilingual/score/out/round30; mkdir -p $R
+for ds in English-LitBank English-GUM; do for sp in "" 1 null; do tag=${sp:-control}; SPEAKERS=$sp node identity/pronouns-multilingual/score/predict-corefud.mjs $ds dev eng > $R/$ds-$tag.write.txt 2>&1; O=identity/pronouns-multilingual/score/out/$ds-dev${sp:+-spk$sp}
+  { echo "== $ds dev SPEAKERS=$tag: singletons ignored"; $PY $S $O/key.conllu $O/sys.conllu -m muc bcub ceafe 2>&1 | grep -E "^(muc|bcub|ceafe)|Recall|CoNLL"; echo "== singletons INCLUDED"; $PY $S $O/key.conllu $O/sys.conllu -s -m muc bcub ceafe 2>&1 | grep -E "CoNLL"; } > $R/$ds-$tag.txt 2>&1; done; done; echo done > $R/DONE
