@@ -470,7 +470,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // THE PRESENCE RUNG (readerOptions.pronounPresence = { window, boost, feed, floor, margin, locality }; opt-in, every dial declared, off = absent and then
   // nothing below runs and the entry is what it was): the pronouns of the resolver's own class bound by decayed presence over the beings of THIS cast
   // (adapters/text/pronouns.js::resolvePronounsByPresence, PREREG-PRESENCE.md), beside the shipped resolver's `entry.pronouns`, which it does not touch.
-  let pronounsPresence = null, presenceInputs = null, nameRuling = false, proDropBindings = null, pronounsGuess = null;
+  let pronounsPresence = null, presenceInputs = null, nameRuling = false, proDropBindings = null, pronounsGuess = null, pronounsCandidates = null;
   // THE CASE-MARKED CLAUSE SOURCE (readerOptions.caseMarked: a function of the language stem returning { clausesOf(sentences) } or { gap }; the canonical read passes adapters/text/case-marked-clauses.js::caseMarkedReaderFor):
   // for a language whose roles are carried by case (grc, san) the clauses are read off morphology and pro-drop by the Chomsky seam; every other stem gets null and the clauses are the ones the core always read.
   let caseClauses = null;
@@ -508,7 +508,10 @@ export function readWith(text, { address = null, category = null, language = nul
       // A GENDER GIVER (readerOptions.genderPrior: a function of the stem returning ({ text, cast }) -> Map ref -> "m" | "f"; adapters/text/name-gender.js asks a giver). It is a PRIOR the text's own clause-local evidence overrides.
       let priorGender = null; try { const gf = typeof genderPrior === "function" ? genderPrior(stem) : genderPrior; if (typeof gf === "function") { const g = gf({ text: str, cast: beingRows }); if (g?.size) priorGender = g; } } catch { priorGender = null; }
       // A non-personal ruling is overcomeable: a being the text itself uses he or she of is a person whatever the ruling says (identity/novels PREREG-ROUND20 NOTE-1: on 66 unseen documents 319/31 -> 321/30; dev and test unchanged).
-      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, nonPersonal: np, nonPersonalSoft: pp.nonPersonalSoft ?? true, ...(priorGender ? { priorGender } : {}), ...(roles ? { roles } : {}), ...((typeof caseProDrop === "function" ? caseProDrop(stem) : caseProDrop) === "on" && caseClauses?.length ? { nullSubjects: nullSubjectsFor(caseClauses) } : {}) });
+      const r = resolvePronounsByPresence(sentences, mentions, { ...pp, ...(readerOrgans.pronounCandidates === true ? { keepCandidates: true } : {}), nonPersonal: np, nonPersonalSoft: pp.nonPersonalSoft ?? true, ...(priorGender ? { priorGender } : {}), ...(roles ? { roles } : {}), ...((typeof caseProDrop === "function" ? caseProDrop(stem) : caseProDrop) === "on" && caseClauses?.length ? { nullSubjects: nullSubjectsFor(caseClauses) } : {}) });
+      // THE HELD SPECTRUM (additive and OPT-IN, readerOptions.pronounCandidates === true; off, nothing below runs and the entry is what it was, 2026-11-19): every candidate the rung scored for each pronoun it considered, BEFORE the choice, as the rung's own activations. The rung binds the top candidate when it clears the dials; this keeps the
+      // whole spectrum beside it so a later reader can hold a pronoun as several candidates and commit only when the evidence allows. `bound` is what the rung chose (or null). Nothing here changes a binding: keepCandidates only records.
+      if (readerOrgans.pronounCandidates === true) { const chosen = new Map(r.bindings.map((b) => [b.offset, b.referentId])); pronounsCandidates = (r.candidateLog ?? []).map((c) => ({ pronoun: c.pronoun, at: [c.offset, c.offset + c.pronoun.length], cands: c.cands.map(([ref, a]) => ({ ref, surface: refSurface.get(ref) ?? null, activation: a })), bound: chosen.get(c.offset) ?? null })); }
       for (const b of r.bindings) pronounsPresence.push({ pronoun: b.pronoun, at: [b.offset, b.offset + b.pronoun.length], sentence: b.sentenceOrder, surface: refSurface.get(b.referentId) ?? null, ref: b.referentId, mechanism: b.mechanism, activation: b.activation, margin: b.margin });
       // THE GUESS (readerOptions.pronounGuess: a function of the stem returning dials or null; the canonical read passes PRONOUN_GUESS_DIALS for English, identity/novels PREREG-ROUND23): a rung that always answers (floor 0, margin 0), so every pronoun it found has a best guess;
       // each is marked `confident` when the default rung bound the same pronoun to the same being, else CONTESTED (the line). `pronounsPresence` is untouched.
@@ -568,6 +571,7 @@ export function readWith(text, { address = null, category = null, language = nul
     sentences, pronouns,
     competency: competencyOf(stem),   // what this read can do in this language (adapters/text/language-competency.js): the pieces on disk, the clause reader, the pronoun evidence, what is missing
     ...(pronounsPresence ? { pronounsPresence } : {}),
+    ...(pronounsCandidates ? { pronounsCandidates } : {}),
     ...(proDropBindings ? { proDrop: proDropBindings } : {}),
     ...(pronounsGuess ? { pronounsGuess } : {}),
     ...(pronounGaps ? { pronounGaps } : {}),

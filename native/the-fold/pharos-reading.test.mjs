@@ -30,10 +30,12 @@ test("rows carry character offsets that point at the token in the text", { skip:
   assert.equal(rows.find((r) => r.form === "1912").at, text.indexOf("1912"));
 });
 test("referents are written only through the canonical door, injected: the cast with its mention spans and the pronouns bound by presence; without it a typed gap", { skip }, async () => {
-  const d = dir(), text = "Bell defeated Greene. He fled.", weft = { cast: [{ ref: "ref:auto:bell", surface: "Bell", mentionSpans: [[0, 4]] }, { ref: "ref:auto:greene", surface: "Greene", mentionSpans: [[14, 20]] }], pronounsPresence: [{ pronoun: "he", at: [22, 24], ref: "ref:auto:bell", surface: "Bell" }] };
+  const d = dir(), text = "Bell defeated Greene. He fled.", weft = { cast: [{ ref: "ref:auto:bell", surface: "Bell", mentionSpans: [[0, 4]] }, { ref: "ref:auto:greene", surface: "Greene", mentionSpans: [[14, 20]] }], pronounsPresence: [{ pronoun: "he", at: [22, 24], ref: "ref:auto:bell", surface: "Bell" }], pronounsCandidates: [{ pronoun: "he", at: [22, 24], cands: [{ ref: "ref:auto:bell", surface: "Bell", activation: 2.5 }, { ref: "ref:auto:greene", surface: "Greene", activation: 1.5 }], bound: "ref:auto:bell" }] };
   const a = await writeReading(text, { log: "t", dir: d, referents: true }); assert.equal(a.gap, "no_door");
   const b = await writeReading(text, { log: "t", dir: d, referents: true, readWeft: () => weft }); assert.ok(b.referents);
   const P = await import(path.join(process.env.PHAROS_HOME, "lib", "pharos.mjs")), h = P.open("t", { dir: d, writer: "reader", frame: false }), e = P.fold(h, { kind: "text-referents" }).entries[0], bell = e.body.referents.find((x) => x.face === "Bell");
   assert.deepEqual(bell.spans, [[0, 4]]); assert.deepEqual(bell.pronouns, [[22, 24]], "the pronoun's span is bound to Bell by the reader's presence rung"); assert.equal(e.cell, "INS·Figure");
+  assert.deepEqual(e.body.held, [{ pronoun: "he", at: [22, 24], cands: [["ref:auto:bell", 2.5], ["ref:auto:greene", 1.5]], bound: "ref:auto:bell" }], "the whole spectrum is kept beside the choice");
+  assert.equal(e.body.faces["ref:auto:greene"], "Greene");
   const c = await writeReading(text, { log: "t", dir: d, referents: true, readWeft: () => weft }); assert.ok(c.skipped.includes("text-referents"));
 });

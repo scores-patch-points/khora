@@ -78,3 +78,9 @@ files changed since the last record: native/the-fold/read-process.mjs, native/th
 
 ## 2026-11-19: merge: metrics from both sides; files re-recorded
 files changed since the last record: (none)
+
+## 2026-11-19: additive output only: read-core.mjs passes keepCandidates:true to the presence rung and keeps its candidate log as weft.pronounsCandidates (every candidate the rung scored per pronoun, with its activation, and what it chose). No binding changes: pronounsPresence is byte-identical before and after on 6 DEV documents (91 bindings, same refs, activations and margins). The GUM gold check (precision 0.689, coverage ~0.51) was NOT re-run; the change cannot move it because keepCandidates only records.
+files changed since the last record: native/the-fold/read-core.mjs
+
+## 2026-11-19: the held pronoun spectrum is now OPT-IN (readerOptions.pronounCandidates === true; off, the entry is byte-identical, which khora's pronoun-presence wiring tests require: they failed with an always-on field and pass with the opt-in). Same note as before otherwise: no binding changes, pronounsPresence identical on 6 DEV documents; the GUM gold check was not re-run.
+files changed since the last record: native/the-fold/read-core.mjs

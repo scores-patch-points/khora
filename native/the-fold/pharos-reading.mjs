@@ -57,13 +57,15 @@ export async function writeReading(text, { language = "eng", log = process.env.P
   const put = (kind, cell, addr, body, of = []) => { const have = (P.fold(h, { kind, addr }).entries ?? []).find((e) => canon(e.body) === canon(body)); if (have) { out.skipped.push(kind); return have; } const e = P.weave(h, { cell, kind, addr, body, of }); out.written.push(kind); return e; };
   const t = put(TEXT_KIND, "INS·Ground", addrT, { text, language }), r = put(READING_KIND, "INS·Figure", addrR, { rows }, [t.id]);
   const res = { ...out, text: t.id, reading: r.id, addr: { text: addrT, reading: addrR }, parser: g.prior };
-  if (referents) {                                                    // the canonical door's own cast: who each mention is, pronouns bound by presence. `readWeft` is the door (readToWeft), injected.
+  if (referents) {                                                    // the canonical door's own cast: who each mention is, pronouns bound by presence. `readWeft` is the door (readToWeft), injected; it is asked for the held spectrum (readerOptions.pronounCandidates).
     if (typeof readWeft !== "function") return { ...res, gap: "no_door", why: "referents need the canonical door: pass readWeft (the-fold/read-process.mjs readToWeft)" };
-    const w = readWeft(text, { language }), pron = new Map();      // the weft's own cast (ref, surface, mentionSpans) and its pronoun bindings by presence (pronoun, at, ref)
+    const w = readWeft(text, { language, readerOptions: { pronounCandidates: true } }), pron = new Map();      // the weft's own cast (ref, surface, mentionSpans) and its pronoun bindings by presence (pronoun, at, ref)
     for (const x of w.pronounsPresence ?? []) if (x.ref && Array.isArray(x.at)) { if (!pron.has(x.ref)) pron.set(x.ref, []); pron.get(x.ref).push([x.at[0], x.at[1]]); }
     const list = (w.cast ?? []).map((c) => ({ ref: c.ref, face: c.surface, spans: (c.mentionSpans ?? []).map(([a, b]) => [a, b]), pronouns: pron.get(c.ref) ?? [] })).filter((c) => c.spans.length || c.pronouns.length);
     declare(REFERENTS_KIND, "INS·Figure", "the reader's referents for a text: each with its face and the spans of every mention, pronouns bound by presence");
-    const f = put(REFERENTS_KIND, "INS·Figure", `referents:${sha16(text)}`, { referents: list }, [t.id]); res.referents = f.id; res.addr.referents = `referents:${sha16(text)}`;
+    // THE HELD SPECTRUM: each pronoun the rung considered, with EVERY candidate it scored (the rung's own activations, before any choice) and what it chose (or null). Written as evidence, never collapsed here: committing is not khora's act.
+    const faceOf = new Map((w.cast ?? []).map((c) => [c.ref, c.surface])), held = (w.pronounsCandidates ?? []).map((c) => ({ pronoun: c.pronoun, at: [c.at[0], c.at[1]], cands: c.cands.map((x) => [x.ref, x.activation]), bound: c.bound ?? null }));
+    const f = put(REFERENTS_KIND, "INS·Figure", `referents:${sha16(text)}`, { referents: list, held, faces: Object.fromEntries(faceOf) }, [t.id]); res.referents = f.id; res.addr.referents = `referents:${sha16(text)}`;
   }
   return res;
 }
