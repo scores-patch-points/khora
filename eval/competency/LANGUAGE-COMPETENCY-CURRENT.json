@@ -33,15 +33,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-aar.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for aar (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-aar.json",
     "dotted-aar.json"
    ]
@@ -72,15 +78,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-abk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for abk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-abk.json",
     "dotted-abk.json"
    ]
@@ -111,15 +123,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ace.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ace (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ace.json",
     "dotted-ace.json"
    ]
@@ -150,15 +168,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ady.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ady (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ady.json",
     "dotted-ady.json"
    ]
@@ -189,15 +213,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-afr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for afr (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-afr.json",
     "dotted-afr.json"
    ]
@@ -228,15 +258,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-aii.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for aii (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-aii.json",
     "dotted-aii.json"
    ]
@@ -267,15 +303,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ajg.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ajg (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ajg.json",
     "dotted-ajg.json"
    ]
@@ -306,15 +348,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-aka.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for aka (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-aka.json",
     "dotted-aka.json"
    ]
@@ -345,15 +393,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-als.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for als (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-als.json",
     "dotted-als.json"
    ]
@@ -384,15 +438,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-alt.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for alt (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-alt.json",
     "dotted-alt.json"
    ]
@@ -423,15 +483,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ame.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ame (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ame.json",
     "dotted-ame.json"
    ]
@@ -462,15 +528,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ami.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ami (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ami.json",
     "dotted-ami.json"
    ]
@@ -501,15 +573,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-arb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for arb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-arb.json",
     "dotted-arb.json"
    ]
@@ -540,15 +618,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-arn.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for arn (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-arn.json",
     "dotted-arn.json"
    ]
@@ -579,15 +663,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ast.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ast (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ast.json",
     "dotted-ast.json"
    ]
@@ -618,15 +708,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-auv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for auv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-auv.json",
     "dotted-auv.json"
    ]
@@ -657,15 +753,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bam.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bam (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bam.json",
     "dotted-bam.json"
    ]
@@ -696,15 +798,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ban.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ban (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ban.json",
     "dotted-ban.json"
    ]
@@ -735,15 +843,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bcl.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bcl (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bcl.json",
     "dotted-bcl.json"
    ]
@@ -774,15 +888,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bel.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bel (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bel.json",
     "dotted-bel.json"
    ]
@@ -813,15 +933,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ben.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ben (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ben.json",
     "dotted-ben.json"
    ]
@@ -852,15 +978,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bho.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bho (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bho.json",
     "dotted-bho.json"
    ]
@@ -891,15 +1023,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bis.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bis (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bis.json",
     "dotted-bis.json"
    ]
@@ -930,15 +1068,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bos.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bos (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bos.json",
     "dotted-bos.json"
    ]
@@ -969,15 +1113,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bre.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bre (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bre.json",
     "dotted-bre.json"
    ]
@@ -1008,15 +1158,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-buc.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for buc (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-buc.json",
     "dotted-buc.json"
    ]
@@ -1047,15 +1203,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bug.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bug (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bug.json",
     "dotted-bug.json"
    ]
@@ -1086,15 +1248,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-bul.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for bul (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-bul.json",
     "dotted-bul.json"
    ]
@@ -1125,15 +1293,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cat (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cat.json",
     "dotted-cat.json"
    ]
@@ -1164,15 +1338,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ceb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ceb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ceb.json",
     "dotted-ceb.json"
    ]
@@ -1203,15 +1383,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ces.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ces (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ces.json",
     "dotted-ces.json"
    ]
@@ -1242,15 +1428,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cha.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cha (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cha.json",
     "dotted-cha.json"
    ]
@@ -1281,15 +1473,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-chk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for chk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-chk.json",
     "dotted-chk.json"
    ]
@@ -1320,15 +1518,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-chr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for chr (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-chr.json",
     "dotted-chr.json"
    ]
@@ -1359,15 +1563,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-chv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for chv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-chv.json",
     "dotted-chv.json"
    ]
@@ -1398,15 +1608,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cjk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cjk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cjk.json",
     "dotted-cjk.json"
    ]
@@ -1437,15 +1653,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cjs.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cjs (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cjs.json",
     "dotted-cjs.json"
    ]
@@ -1476,15 +1698,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ckb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ckb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ckb.json",
     "dotted-ckb.json"
    ]
@@ -1515,15 +1743,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cmn.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cmn (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cmn.json",
     "dotted-cmn.json"
    ]
@@ -1554,15 +1788,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cni.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cni (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cni.json",
     "dotted-cni.json"
    ]
@@ -1593,15 +1833,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cnr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cnr (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cnr.json",
     "dotted-cnr.json"
    ]
@@ -1632,15 +1878,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cos.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cos (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cos.json",
     "dotted-cos.json"
    ]
@@ -1671,15 +1923,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-crh.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for crh (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-crh.json",
     "dotted-crh.json"
    ]
@@ -1710,15 +1968,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-crs.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for crs (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-crs.json",
     "dotted-crs.json"
    ]
@@ -1749,15 +2013,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-cym.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for cym (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-cym.json",
     "dotted-cym.json"
    ]
@@ -1788,15 +2058,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-dan.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for dan (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-dan.json",
     "dotted-dan.json"
    ]
@@ -1827,15 +2103,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-deu.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for deu (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "dotted-deu.json"
    ]
   },
@@ -1865,15 +2147,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-div.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for div (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-div.json",
     "dotted-div.json"
    ]
@@ -1904,15 +2192,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-dyu.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for dyu (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-dyu.json",
     "dotted-dyu.json"
    ]
@@ -1943,15 +2237,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ell.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ell (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ell.json",
     "dotted-ell.json"
    ]
@@ -1982,15 +2282,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-emk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for emk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-emk.json",
     "dotted-emk.json"
    ]
@@ -2021,15 +2327,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-eml.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for eml (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-eml.json",
     "dotted-eml.json"
    ]
@@ -2061,15 +2373,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-en.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "the register's evaluation (no unmeasured binding ships)",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-en.json",
     "dotted-en.json"
    ]
@@ -2099,20 +2417,47 @@
     "coverage": 0.636,
     "nullPrecision": null,
     "gold": true,
-    "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND20.md"
+    "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND20.md",
+    "guess": {
+     "resolvedCorrectly": 0.699,
+     "weakest": 0.653,
+     "fiction": 0.661,
+     "gum": {
+      "U": 0.73,
+      "dev": 0.653,
+      "test": 0.772
+     },
+     "precision": 0.69,
+     "coverage": 0.999,
+     "resultsFile": "identity/novels/NOVELS-RESULTS-ROUND23.md"
+    }
    },
    "proDrop": {
     "status": "not_applicable"
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": 0.582,
-    "gold": true,
+    "giver": 0.2821,
+    "giverSets": [
+     {
+      "set": "English-LitBank dev",
+      "conll": 36.8
+     },
+     {
+      "set": "English-GUM dev",
+      "conll": 19.62
+     }
+    ],
     "competent": false,
-    "gap": 0.358
+    "gap": 0.658,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": 0.699,
+     "gold": true
+    }
    },
    "next": [
-    "58% of answerable pronouns resolved correctly against the 94% bar"
+    "28.2 CoNLL F1 on the official scorer (the fixed giver) against the 94 bar"
    ]
   },
   {
@@ -2141,15 +2486,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-epo.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for epo (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-epo.json",
     "dotted-epo.json"
    ]
@@ -2180,15 +2531,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-est.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for est (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-est.json",
     "dotted-est.json"
    ]
@@ -2219,15 +2576,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-eus.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for eus (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-eus.json",
     "dotted-eus.json"
    ]
@@ -2258,15 +2621,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-eve.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for eve (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-eve.json",
     "dotted-eve.json"
    ]
@@ -2297,15 +2666,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-evn.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for evn (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-evn.json",
     "dotted-evn.json"
    ]
@@ -2336,15 +2711,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ewe.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ewe (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ewe.json",
     "dotted-ewe.json"
    ]
@@ -2375,15 +2756,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-fao.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for fao (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-fao.json",
     "dotted-fao.json"
    ]
@@ -2414,15 +2801,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "pos-fas-unimorph.json is on disk and the read does not load it",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for fas (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-fas.json",
     "dotted-fas.json"
    ]
@@ -2453,15 +2846,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-fij.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for fij (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-fij.json",
     "dotted-fij.json"
    ]
@@ -2492,15 +2891,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-fin.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for fin (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-fin.json",
     "dotted-fin.json"
    ]
@@ -2531,15 +2936,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-fkv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for fkv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-fkv.json",
     "dotted-fkv.json"
    ]
@@ -2570,15 +2981,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-flm.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for flm (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-flm.json",
     "dotted-flm.json"
    ]
@@ -2615,15 +3032,25 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": 0.201,
-    "gold": true,
+    "giver": 0.1441,
+    "giverSets": [
+     {
+      "set": "French-Democrat dev",
+      "conll": 14.41
+     }
+    ],
     "competent": false,
-    "gap": 0.739
+    "gap": 0.796,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": 0.201,
+     "gold": true
+    }
    },
    "next": [
     "morphology-fra.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
-    "20% of answerable pronouns resolved correctly against the 94% bar",
+    "14.4 CoNLL F1 on the official scorer (the fixed giver) against the 94 bar",
     "dotted-fra.json"
    ]
   },
@@ -2653,15 +3080,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-fri.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for fri (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-fri.json",
     "dotted-fri.json"
    ]
@@ -2692,15 +3125,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-fur.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for fur (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-fur.json",
     "dotted-fur.json"
    ]
@@ -2731,15 +3170,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-gaa.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for gaa (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-gaa.json",
     "dotted-gaa.json"
    ]
@@ -2770,15 +3215,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-gag.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for gag (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-gag.json",
     "dotted-gag.json"
    ]
@@ -2809,15 +3260,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-gla.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for gla (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-gla.json",
     "dotted-gla.json"
    ]
@@ -2848,15 +3305,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-gld.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for gld (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-gld.json",
     "dotted-gld.json"
    ]
@@ -2887,15 +3350,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-gle.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for gle (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-gle.json",
     "dotted-gle.json"
    ]
@@ -2926,15 +3395,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-glg.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for glg (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-glg.json",
     "dotted-glg.json"
    ]
@@ -2965,15 +3440,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-glv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for glv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-glv.json",
     "dotted-glv.json"
    ]
@@ -3015,14 +3496,24 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": 0.277,
-    "gold": true,
+    "giver": 0.0995,
+    "giverSets": [
+     {
+      "set": "Ancient_Greek-PROIEL dev",
+      "conll": 9.95
+     }
+    ],
     "competent": false,
-    "gap": 0.663
+    "gap": 0.84,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": 0.277,
+     "gold": true
+    }
    },
    "next": [
     "pos-grc-unimorph.json is on disk and the read does not load it",
-    "28% of answerable pronouns resolved correctly against the 94% bar",
+    "10.0 CoNLL F1 on the official scorer (the fixed giver) against the 94 bar",
     "punctuation-grc.json",
     "dotted-grc.json"
    ]
@@ -3053,15 +3544,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-gsw1.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for gsw1 (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-gsw1.json",
     "dotted-gsw1.json"
    ]
@@ -3092,15 +3589,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-gug.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for gug (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-gug.json",
     "dotted-gug.json"
    ]
@@ -3131,15 +3634,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-guj.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for guj (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-guj.json",
     "dotted-guj.json"
    ]
@@ -3170,15 +3679,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hat (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hat.json",
     "dotted-hat.json"
    ]
@@ -3209,15 +3724,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hau.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hau (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hau.json",
     "dotted-hau.json"
    ]
@@ -3248,15 +3769,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-haw.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for haw (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-haw.json",
     "dotted-haw.json"
    ]
@@ -3287,15 +3814,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-heb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for heb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-heb.json",
     "dotted-heb.json"
    ]
@@ -3326,15 +3859,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hil.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hil (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hil.json",
     "dotted-hil.json"
    ]
@@ -3365,15 +3904,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hin.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hin (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hin.json",
     "dotted-hin.json"
    ]
@@ -3404,15 +3949,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hna.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hna (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hna.json",
     "dotted-hna.json"
    ]
@@ -3443,15 +3994,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hrv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hrv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hrv.json",
     "dotted-hrv.json"
    ]
@@ -3482,15 +4039,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hsb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hsb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hsb.json",
     "dotted-hsb.json"
    ]
@@ -3521,15 +4084,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hun.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hun (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hun.json",
     "dotted-hun.json"
    ]
@@ -3560,15 +4129,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-hye.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for hye (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-hye.json",
     "dotted-hye.json"
    ]
@@ -3599,15 +4174,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ido.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ido (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ido.json",
     "dotted-ido.json"
    ]
@@ -3638,15 +4219,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ilo.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ilo (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ilo.json",
     "dotted-ilo.json"
    ]
@@ -3677,15 +4264,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ina.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ina (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ina.json",
     "dotted-ina.json"
    ]
@@ -3716,15 +4309,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ind.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ind (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ind.json",
     "dotted-ind.json"
    ]
@@ -3755,15 +4354,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-isl.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for isl (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-isl.json",
     "dotted-isl.json"
    ]
@@ -3794,15 +4399,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ita.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ita (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "dotted-ita.json"
    ]
   },
@@ -3832,15 +4443,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-jav.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for jav (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-jav.json",
     "dotted-jav.json"
    ]
@@ -3871,15 +4488,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "pos-jpn-unimorph.json is on disk and the read does not load it",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for jpn (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-jpn.json",
     "dotted-jpn.json"
    ]
@@ -3910,15 +4533,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kaa.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kaa (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kaa.json",
     "dotted-kaa.json"
    ]
@@ -3949,15 +4578,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kal.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kal (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kal.json",
     "dotted-kal.json"
    ]
@@ -3988,15 +4623,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kan.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kan (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kan.json",
     "dotted-kan.json"
    ]
@@ -4027,15 +4668,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kat (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kat.json",
     "dotted-kat.json"
    ]
@@ -4066,15 +4713,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kaz.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kaz (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kaz.json",
     "dotted-kaz.json"
    ]
@@ -4105,15 +4758,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kbd.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kbd (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kbd.json",
     "dotted-kbd.json"
    ]
@@ -4144,15 +4803,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kea.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kea (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kea.json",
     "dotted-kea.json"
    ]
@@ -4183,15 +4848,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-khk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for khk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-khk.json",
     "dotted-khk.json"
    ]
@@ -4222,15 +4893,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kir.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kir (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kir.json",
     "dotted-kir.json"
    ]
@@ -4261,15 +4938,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kjh.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kjh (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kjh.json",
     "dotted-kjh.json"
    ]
@@ -4300,15 +4983,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kmb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kmb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kmb.json",
     "dotted-kmb.json"
    ]
@@ -4339,15 +5028,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kmr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kmr (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kmr.json",
     "dotted-kmr.json"
    ]
@@ -4378,15 +5073,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-koi.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for koi (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-koi.json",
     "dotted-koi.json"
    ]
@@ -4417,15 +5118,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-kor.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for kor (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-kor.json",
     "dotted-kor.json"
    ]
@@ -4456,15 +5163,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-krl.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for krl (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-krl.json",
     "dotted-krl.json"
    ]
@@ -4495,15 +5208,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lad.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lad (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lad.json",
     "dotted-lad.json"
    ]
@@ -4534,15 +5253,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lat (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lat.json",
     "dotted-lat.json"
    ]
@@ -4573,15 +5298,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lav.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lav (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lav.json",
     "dotted-lav.json"
    ]
@@ -4612,15 +5343,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lin.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lin (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lin.json",
     "dotted-lin.json"
    ]
@@ -4651,15 +5388,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lit.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lit (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lit.json",
     "dotted-lit.json"
    ]
@@ -4690,15 +5433,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lld.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lld (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lld.json",
     "dotted-lld.json"
    ]
@@ -4729,15 +5478,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lnc.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lnc (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lnc.json",
     "dotted-lnc.json"
    ]
@@ -4768,15 +5523,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lot.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lot (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lot.json",
     "dotted-lot.json"
    ]
@@ -4807,15 +5568,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ltz.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ltz (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ltz.json",
     "dotted-ltz.json"
    ]
@@ -4846,15 +5613,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lug.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lug (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lug.json",
     "dotted-lug.json"
    ]
@@ -4885,15 +5658,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lus.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lus (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lus.json",
     "dotted-lus.json"
    ]
@@ -4924,15 +5703,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-lzh.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for lzh (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-lzh.json",
     "dotted-lzh.json"
    ]
@@ -4963,15 +5748,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mad.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mad (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mad.json",
     "dotted-mad.json"
    ]
@@ -5002,15 +5793,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mag.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mag (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mag.json",
     "dotted-mag.json"
    ]
@@ -5041,15 +5838,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mah.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mah (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mah.json",
     "dotted-mah.json"
    ]
@@ -5080,15 +5883,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mai.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mai (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mai.json",
     "dotted-mai.json"
    ]
@@ -5119,15 +5928,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mal.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mal (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mal.json",
     "dotted-mal.json"
    ]
@@ -5158,15 +5973,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mar.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mar (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mar.json",
     "dotted-mar.json"
    ]
@@ -5197,15 +6018,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-min.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for min (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-min.json",
     "dotted-min.json"
    ]
@@ -5236,15 +6063,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mkd.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mkd (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mkd.json",
     "dotted-mkd.json"
    ]
@@ -5275,15 +6108,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mlt.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mlt (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mlt.json",
     "dotted-mlt.json"
    ]
@@ -5314,15 +6153,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mnw.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mnw (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mnw.json",
     "dotted-mnw.json"
    ]
@@ -5353,15 +6198,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mxi.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mxi (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mxi.json",
     "dotted-mxi.json"
    ]
@@ -5392,15 +6243,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-mya.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for mya (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-mya.json",
     "dotted-mya.json"
    ]
@@ -5431,15 +6288,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nav.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nav (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nav.json",
     "dotted-nav.json"
    ]
@@ -5470,15 +6333,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nba.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nba (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nba.json",
     "dotted-nba.json"
    ]
@@ -5509,15 +6378,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nbl.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nbl (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nbl.json",
     "dotted-nbl.json"
    ]
@@ -5548,15 +6423,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nds.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nds (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nds.json",
     "dotted-nds.json"
    ]
@@ -5587,15 +6468,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nep.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nep (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nep.json",
     "dotted-nep.json"
    ]
@@ -5626,15 +6513,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nio.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nio (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nio.json",
     "dotted-nio.json"
    ]
@@ -5665,15 +6558,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-niv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for niv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-niv.json",
     "dotted-niv.json"
    ]
@@ -5704,15 +6603,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nld.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nld (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nld.json",
     "dotted-nld.json"
    ]
@@ -5743,15 +6648,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nno.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nno (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nno.json",
     "dotted-nno.json"
    ]
@@ -5782,15 +6693,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nob.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nob (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nob.json",
     "dotted-nob.json"
    ]
@@ -5821,15 +6738,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-nya.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for nya (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-nya.json",
     "dotted-nya.json"
    ]
@@ -5860,15 +6783,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ote.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ote (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ote.json",
     "dotted-ote.json"
    ]
@@ -5899,15 +6828,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pam.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pam (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pam.json",
     "dotted-pam.json"
    ]
@@ -5938,15 +6873,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pan.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pan (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pan.json",
     "dotted-pan.json"
    ]
@@ -5977,15 +6918,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pap.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pap (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pap.json",
     "dotted-pap.json"
    ]
@@ -6016,15 +6963,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pcd.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pcd (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pcd.json",
     "dotted-pcd.json"
    ]
@@ -6055,15 +7008,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pcm.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pcm (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pcm.json",
     "dotted-pcm.json"
    ]
@@ -6094,15 +7053,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pes.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pes (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pes.json",
     "dotted-pes.json"
    ]
@@ -6133,15 +7098,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pis.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pis (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pis.json",
     "dotted-pis.json"
    ]
@@ -6172,15 +7143,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pnb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pnb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pnb.json",
     "dotted-pnb.json"
    ]
@@ -6211,15 +7188,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pol.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pol (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pol.json",
     "dotted-pol.json"
    ]
@@ -6250,15 +7233,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pon.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pon (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pon.json",
     "dotted-pon.json"
    ]
@@ -6289,15 +7278,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-por.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for por (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "dotted-por.json"
    ]
   },
@@ -6327,15 +7322,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-pov.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for pov (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-pov.json",
     "dotted-pov.json"
    ]
@@ -6366,15 +7367,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-prv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for prv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-prv.json",
     "dotted-prv.json"
    ]
@@ -6405,15 +7412,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-quc.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for quc (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-quc.json",
     "dotted-quc.json"
    ]
@@ -6444,15 +7457,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-quy.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for quy (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-quy.json",
     "dotted-quy.json"
    ]
@@ -6483,15 +7502,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-quz.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for quz (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-quz.json",
     "dotted-quz.json"
    ]
@@ -6522,15 +7547,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-qvm.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for qvm (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-qvm.json",
     "dotted-qvm.json"
    ]
@@ -6561,15 +7592,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-qxu.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for qxu (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-qxu.json",
     "dotted-qxu.json"
    ]
@@ -6600,15 +7637,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-rmy.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for rmy (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-rmy.json",
     "dotted-rmy.json"
    ]
@@ -6639,15 +7682,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-roh.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for roh (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-roh.json",
     "dotted-roh.json"
    ]
@@ -6678,15 +7727,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ron.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ron (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ron.json",
     "dotted-ron.json"
    ]
@@ -6717,15 +7772,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-rus.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for rus (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "dotted-rus.json"
    ]
   },
@@ -6755,15 +7816,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-sah.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for sah (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-sah.json",
     "dotted-sah.json"
    ]
@@ -6800,15 +7867,20 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": 0.135,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": 0.805
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": 0.135,
+     "gold": false
+    }
    },
    "next": [
     "pos-san-unimorph.json is on disk and the read does not load it",
     "gold coreference for san (the recorded precision is gold-free)",
-    "14% of answerable pronouns resolved correctly against the 94% bar (and the figure is gold-free, so it cannot count)",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-san.json",
     "dotted-san.json"
    ]
@@ -6839,15 +7911,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-sco.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for sco (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-sco.json",
     "dotted-sco.json"
    ]
@@ -6878,15 +7956,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-shn.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for shn (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-shn.json",
     "dotted-shn.json"
    ]
@@ -6917,15 +8001,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-shp.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for shp (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-shp.json",
     "dotted-shp.json"
    ]
@@ -6956,15 +8046,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-sin.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for sin (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-sin.json",
     "dotted-sin.json"
    ]
@@ -6995,15 +8091,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-skr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for skr (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-skr.json",
     "dotted-skr.json"
    ]
@@ -7034,15 +8136,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-slk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for slk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-slk.json",
     "dotted-slk.json"
    ]
@@ -7073,15 +8181,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-slr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for slr (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-slr.json",
     "dotted-slr.json"
    ]
@@ -7112,15 +8226,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-slv.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for slv (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-slv.json",
     "dotted-slv.json"
    ]
@@ -7151,15 +8271,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-sme.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for sme (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-sme.json",
     "dotted-sme.json"
    ]
@@ -7190,15 +8316,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-smo.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for smo (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-smo.json",
     "dotted-smo.json"
    ]
@@ -7229,15 +8361,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-sna.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for sna (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-sna.json",
     "dotted-sna.json"
    ]
@@ -7268,15 +8406,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-som.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for som (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-som.json",
     "dotted-som.json"
    ]
@@ -7307,15 +8451,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-sot.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for sot (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-sot.json",
     "dotted-sot.json"
    ]
@@ -7346,15 +8496,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-spa.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for spa (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "dotted-spa.json"
    ]
   },
@@ -7384,15 +8540,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-src.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for src (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-src.json",
     "dotted-src.json"
    ]
@@ -7423,15 +8585,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-srp.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for srp (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-srp.json",
     "dotted-srp.json"
    ]
@@ -7462,15 +8630,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-sun.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for sun (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-sun.json",
     "dotted-sun.json"
    ]
@@ -7501,15 +8675,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-swb.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for swb (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-swb.json",
     "dotted-swb.json"
    ]
@@ -7540,15 +8720,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-swe.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for swe (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-swe.json",
     "dotted-swe.json"
    ]
@@ -7579,15 +8765,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-swh.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for swh (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-swh.json",
     "dotted-swh.json"
    ]
@@ -7618,15 +8810,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tam.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tam (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tam.json",
     "dotted-tam.json"
    ]
@@ -7657,15 +8855,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tat.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tat (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tat.json",
     "dotted-tat.json"
    ]
@@ -7696,15 +8900,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tel.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tel (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tel.json",
     "dotted-tel.json"
    ]
@@ -7735,15 +8945,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tet.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tet (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tet.json",
     "dotted-tet.json"
    ]
@@ -7774,15 +8990,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tgk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tgk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tgk.json",
     "dotted-tgk.json"
    ]
@@ -7813,15 +9035,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tgl.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tgl (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tgl.json",
     "dotted-tgl.json"
    ]
@@ -7852,15 +9080,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tha.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tha (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tha.json",
     "dotted-tha.json"
    ]
@@ -7891,15 +9125,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tly.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tly (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tly.json",
     "dotted-tly.json"
    ]
@@ -7930,15 +9170,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tna.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tna (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tna.json",
     "dotted-tna.json"
    ]
@@ -7969,15 +9215,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ton.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ton (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ton.json",
     "dotted-ton.json"
    ]
@@ -8008,15 +9260,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tsn.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tsn (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tsn.json",
     "dotted-tsn.json"
    ]
@@ -8047,15 +9305,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tuk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tuk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tuk.json",
     "dotted-tuk.json"
    ]
@@ -8086,15 +9350,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tur.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tur (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tur.json",
     "dotted-tur.json"
    ]
@@ -8125,15 +9395,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-tzc.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for tzc (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-tzc.json",
     "dotted-tzc.json"
    ]
@@ -8164,15 +9440,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-uig.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for uig (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-uig.json",
     "dotted-uig.json"
    ]
@@ -8203,15 +9485,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ukr.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ukr (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ukr.json",
     "dotted-ukr.json"
    ]
@@ -8242,15 +9530,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-ura.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for ura (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-ura.json",
     "dotted-ura.json"
    ]
@@ -8281,15 +9575,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-urd.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for urd (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-urd.json",
     "dotted-urd.json"
    ]
@@ -8320,15 +9620,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-vec.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for vec (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-vec.json",
     "dotted-vec.json"
    ]
@@ -8359,15 +9665,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-vep.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for vep (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-vep.json",
     "dotted-vep.json"
    ]
@@ -8398,15 +9710,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-vie.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for vie (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-vie.json",
     "dotted-vie.json"
    ]
@@ -8437,15 +9755,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-vmw.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for vmw (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-vmw.json",
     "dotted-vmw.json"
    ]
@@ -8476,15 +9800,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-wln.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for wln (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-wln.json",
     "dotted-wln.json"
    ]
@@ -8515,15 +9845,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-wol.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for wol (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-wol.json",
     "dotted-wol.json"
    ]
@@ -8554,15 +9890,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-wuu.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for wuu (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-wuu.json",
     "dotted-wuu.json"
    ]
@@ -8593,15 +9935,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-xho.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for xho (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-xho.json",
     "dotted-xho.json"
    ]
@@ -8632,15 +9980,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-yor.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for yor (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-yor.json",
     "dotted-yor.json"
    ]
@@ -8671,15 +10025,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-yrk.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for yrk (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-yrk.json",
     "dotted-yrk.json"
    ]
@@ -8710,15 +10070,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-yue.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for yue (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-yue.json",
     "dotted-yue.json"
    ]
@@ -8749,15 +10115,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-zdj.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for zdj (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-zdj.json",
     "dotted-zdj.json"
    ]
@@ -8788,15 +10160,21 @@
    },
    "competence": {
     "bar": 0.94,
-    "accuracy": null,
-    "gold": false,
+    "giver": null,
+    "giverSets": null,
     "competent": false,
-    "gap": null
+    "gap": null,
+    "pronounMeasure": {
+     "note": "our own narrow measure (third-person singular gendered pronouns with a named referent; right / answerable); secondary, not the competency",
+     "accuracy": null,
+     "gold": false
+    }
    },
    "next": [
     "morphology-zul.json (verbs match exactly without it)",
     "a clause reader validated for this language (the positional one is English-shaped)",
     "a pronoun register for zul (forms, gender class) with its evaluation",
+    "no fixed-giver score: no CorefUD dev set for this language in the public edition",
     "punctuation-zul.json",
     "dotted-zul.json"
    ]

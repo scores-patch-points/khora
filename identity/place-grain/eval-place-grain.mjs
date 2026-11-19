@@ -1,0 +1,44 @@
+// eval-place-grain.mjs <wikidata-places.json> <out.json> — PREREG-ROUND27. Development split (even hash of the Wikidata id) only debugs phrasing coverage; the held-out (odd) is scored once.
+import fs from "node:fs"; import path from "node:path"; import crypto from "node:crypto"; import { pathToFileURL, fileURLToPath } from "node:url";
+const HERE = path.dirname(fileURLToPath(import.meta.url)); const KH = path.resolve(HERE, "../.."); const imp = (p) => import(pathToFileURL(path.join(KH, p)).href);
+const EP = await imp("native/adapters/text/english-parser.js"); const { priorJson } = await imp("native/the-fold/prior-source.mjs"); const PG = await imp("native/adapters/text/place-grain.js");
+const model = EP.loadModel(priorJson("parser-eng-ewt.json")); const D = JSON.parse(fs.readFileSync(process.argv[2], "utf8")); const SPLIT = process.argv[4] ?? "heldout";
+const parity = (id) => parseInt(crypto.createHash("sha256").update(id).digest("hex").slice(0, 8), 16) % 2; // 0 even = dev, 1 odd = held-out
+// FROZEN question phrasings (PREREG-ROUND27 C4)
+const PHR = { settlement: ["In which city was {N} born?", "Which city was {N} born in?", "What city is {N} from?", "Which town did {N} come from?", "In what city was {N} born?", "What was the city of {N}'s birth?", "Name the city where {N} was born.", "Which village is {N} from?", "Which city does {N} come from?", "Tell me which city {N} was born in.", "{N} was born in which city?", "What town was {N} born in?"],
+  admin1: ["In which state was {N} born?", "Which state is {N} from?", "What state was {N} born in?", "Which province was {N} born in?", "In what region was {N} born?", "Which US state did {N} come from?", "{N} was born in which state?", "Name the state where {N} was born.", "Which prefecture is {N} from?", "What was the state of {N}'s birth?", "Which state does {N} hail from?", "Tell me which province {N} was born in."],
+  country: ["In which country was {N} born?", "Which country is {N} from?", "What country was {N} born in?", "Which nation did {N} come from?", "In what country was {N} born?", "{N} was born in which country?", "Name the country where {N} was born.", "Which country does {N} come from?", "What nation is {N} from?", "Which country did {N} originate in?", "Tell me which country {N} was born in.", "What was the country of {N}'s birth?"],
+  open: ["Where was {N} born?", "Where is {N} from?", "Where did {N} grow up?", "Where does {N} come from?", "Where was {N} born, exactly?", "Where is {N} originally from?"] };
+const out = { prereg: "PREREG-ROUND27.md", split: SPLIT, fetched: D.fetched };
+// C4: the question parser, on every phrasing (the list is the held-out set for this claim)
+out.C4 = { total: 0, right: 0, misses: [] }; for (const [want, list] of Object.entries(PHR)) for (const t of list) { const g = PG.grainOfQuestion(model, t.replace("{N}", "Alex Hart")); out.C4.total++; if (g.grain === want) out.C4.right++; else out.C4.misses.push({ question: t, wanted: want, got: g.grain, why: g.why }); }
+// the giver: chains and levels
+const people = Object.entries(D.people).map(([id, p]) => ({ id, ...p })).filter((p) => parity(p.id) === (SPLIT === "dev" ? 0 : 1)); const lv = new Map(); const reasons = {};
+for (const p of people) { const L = PG.levelsOfChain(D.chain[p.place], p.place, p.placeLabel); if (L.settlement && L.admin1 && L.country) lv.set(p.id, L); else reasons[L.why] = (reasons[L.why] ?? 0) + 1; }
+out.C5 = { people: people.length, complete: lv.size, share: +(lv.size / Math.max(1, people.length)).toFixed(4), whyNot: reasons };
+const labelIds = new Map(); for (const ch of Object.values(D.chain)) for (const [id, v] of Object.entries(ch)) (labelIds.get(v.label) ?? labelIds.set(v.label, new Set()).get(v.label)).add(id); const homonyms = [...labelIds].filter(([, s]) => s.size > 1).length; out.C5.chainLabels = labelIds.size; out.C5.labelsNamingMoreThanOneEntity = homonyms;
+// items
+const rank = (L) => PG.LEVELS.indexOf(L); const HOLD = { none: [], c: ["country"], ca: ["country", "admin1"] }; const allLabels = [...labelIds.keys()].filter((s) => s.length >= 4).sort();
+const trapFor = (label, chainLabels) => allLabels.find((s) => s !== label && !chainLabels.has(s) && (s.includes(label) || label.includes(s)) && (s.length >= 4));
+const goldOf = (g, hit, hold) => { if (hit == null) return "other"; if (g === "open") { const f = hold.length ? Math.min(...hold.map(rank)) : 3; return rank(hit) < f ? "same" : "already_held"; } return hit === g ? "same" : rank(hit) < rank(g) ? "roll_up" : "too_coarse"; };
+const items = []; let seq = 0;
+for (const [pid, L] of lv) { const chainLabels = new Set(PG.LEVELS.map((x) => L[x].label)); const forms = [["settlement", "none"], ["admin1", "none"], ["country", "none"], ["open", "none"], ["open", "c"], ["open", "ca"]];
+  for (const [g, h] of forms) { const list = PHR[g]; const phr = list[parseInt(crypto.createHash("sha256").update(pid + g + h).digest("hex").slice(0, 6), 16) % list.length]; const q = phr.replace("{N}", "Alex Hart");
+    const asked = g === "open" ? "settlement" : g; const answers = [...PG.LEVELS.map((x) => ({ s: L[x].label, kind: "true", hit: x }))];
+    const other = [...labelIds.keys()].filter((s) => !chainLabels.has(s)).sort()[parseInt(crypto.createHash("sha256").update(pid + g + "o").digest("hex").slice(0, 6), 16) % Math.max(1, labelIds.size - chainLabels.size)]; if (other) answers.push({ s: other, kind: "distractor", hit: null });
+    const tl = trapFor(L[asked].label, chainLabels); if (tl) answers.push({ s: tl, kind: "trap", hit: null });
+    for (const a of answers) items.push({ amb: PG.LEVELS.filter((x) => L[x].label.toLowerCase() === a.s.toLowerCase()).length > 1, id: seq++, person: pid, q, grain: g, holdings: h, answer: a.s, kind: a.kind, gold: goldOf(g, a.hit, HOLD[h]), asked: L[asked].label }); } }
+// systems
+const judgeSys = (it) => PG.judge({ model, question: it.q, levels: lv.get(it.person), answer: it.answer, holdings: HOLD[it.holdings] }).verdict;
+const accept = (v) => v === "same" || v === "roll_up";
+const B1 = (it) => (it.answer.toLowerCase() === it.asked.toLowerCase() ? "same" : "other"); const B2 = (it) => { const a = it.answer.toLowerCase(), b = it.asked.toLowerCase(); return a.includes(b) || b.includes(a) ? "same" : "other"; };
+const B3 = (it) => { const L = lv.get(it.person); return PG.LEVELS.some((x) => L[x].label.toLowerCase() === it.answer.toLowerCase()) ? "same" : "other"; };
+const SYS = { JUDGE: judgeSys, B1_equality: B1, B2_containment: B2, B3_grain_blind: B3 }; out.items = items.length; out.itemsStringAmbiguous = items.filter((i) => i.amb).length; out.systems = {};
+for (const [name, f] of Object.entries(SYS)) { const byGold = {}, byKind = {}; let fourWay = 0, bin = 0; const preds = items.map((it) => f(it)); items.forEach((it, i) => { const v = preds[i]; if (v === it.gold) fourWay++; const ga = accept(it.gold), pa = accept(v); if (ga === pa) bin++; const k = (byGold[it.gold] ??= { n: 0, accepted: 0, exact: 0 }); k.n++; if (pa) k.accepted++; if (v === it.gold) k.exact++; const kk = (byKind[it.kind] ??= { n: 0, accepted: 0 }); kk.n++; if (pa) kk.accepted++; });
+  const un = items.filter((it) => !it.amb); const fwU = un.filter((it, k) => preds[items.indexOf(it)] === it.gold).length; out.systems[name] = { fourWayAccuracy: +(fourWay / items.length).toFixed(4), fourWayAccuracyWithoutStringAmbiguous: +(fwU / Math.max(1, un.length)).toFixed(4), acceptRejectAccuracy: +(bin / items.length).toFixed(4), byGold, byKind }; }
+// C1/C2/C3 numbers
+const T = items.filter((i) => i.kind === "trap"); out.C1 = { trapItems: T.length, falseAcceptRate: Object.fromEntries(Object.entries(SYS).map(([n, f]) => [n, +(T.filter((i) => accept(f(i))).length / Math.max(1, T.length)).toFixed(4)])) };
+const Gs = (gold) => items.filter((i) => i.gold === gold); out.C2 = Object.fromEntries(["too_coarse", "roll_up"].map((g) => [g, { items: Gs(g).length, correctAcceptReject: Object.fromEntries(Object.entries(SYS).map(([n, f]) => [n, +(Gs(g).filter((i) => accept(f(i)) === accept(i.gold)).length / Math.max(1, Gs(g).length)).toFixed(4)])) }]));
+const W = items.filter((i) => i.grain === "open" && i.kind === "true"); out.C3 = { items: W.length, correct: Object.fromEntries(Object.entries(SYS).map(([n, f]) => [n, +(W.filter((i) => accept(f(i)) === accept(i.gold)).length / Math.max(1, W.length)).toFixed(4)])), questionGrainUnread: items.filter((i) => judgeSys(i) === null).length };
+fs.writeFileSync(process.argv[3], JSON.stringify(out, null, 1)); console.log(JSON.stringify({ ...out, C4: { total: out.C4.total, right: out.C4.right, misses: out.C4.misses.length } }, null, 1));
+if (process.env.DEBUG_MISSES) { const miss = items.filter((it) => judgeSys(it) !== it.gold).slice(0, 14); for (const m of miss) console.error("MISS", JSON.stringify({ q: m.q, answer: m.answer, kind: m.kind, gold: m.gold, got: judgeSys(m), levels: Object.fromEntries(PG.LEVELS.map((x) => [x, lv.get(m.person)[x].label])) })); }

@@ -1,0 +1,264 @@
+{
+ "prereg": "PREREG-ROUND27.md",
+ "split": "heldout",
+ "fetched": "2026-11-19T00:21:10.550659+00:00",
+ "C4": {
+  "total": 42,
+  "right": 40,
+  "misses": [
+   {
+    "question": "Which US state did {N} come from?",
+    "wanted": "admin1",
+    "got": null,
+    "why": "no grain"
+   },
+   {
+    "question": "Which state does {N} hail from?",
+    "wanted": "admin1",
+    "got": null,
+    "why": "no grain"
+   }
+  ]
+ },
+ "C5": {
+  "people": 436,
+  "complete": 147,
+  "share": 0.3372,
+  "whyNot": {
+   "no first-level division in the chain": 248,
+   "more than one first-level division": 11,
+   "the birthplace is itself the division or the country": 9,
+   "more than one country": 6,
+   "no country in the chain": 15
+  },
+  "chainLabels": 197,
+  "labelsNamingMoreThanOneEntity": 1
+ },
+ "items": 3564,
+ "itemsStringAmbiguous": 60,
+ "systems": {
+  "JUDGE": {
+   "fourWayAccuracy": 0.9717,
+   "fourWayAccuracyWithoutStringAmbiguous": 0.9755,
+   "acceptRejectAccuracy": 0.9854,
+   "byGold": {
+    "same": {
+     "n": 1323,
+     "accepted": 1302,
+     "exact": 1297
+    },
+    "too_coarse": {
+     "n": 441,
+     "accepted": 5,
+     "exact": 415
+    },
+    "other": {
+     "n": 918,
+     "accepted": 0,
+     "exact": 895
+    },
+    "roll_up": {
+     "n": 441,
+     "accepted": 420,
+     "exact": 420
+    },
+    "already_held": {
+     "n": 441,
+     "accepted": 5,
+     "exact": 436
+    }
+   },
+   "byKind": {
+    "true": {
+     "n": 2646,
+     "accepted": 1732
+    },
+    "distractor": {
+     "n": 882,
+     "accepted": 0
+    },
+    "trap": {
+     "n": 36,
+     "accepted": 0
+    }
+   }
+  },
+  "B1_equality": {
+   "fourWayAccuracy": 0.5079,
+   "fourWayAccuracyWithoutStringAmbiguous": 0.5066,
+   "acceptRejectAccuracy": 0.7539,
+   "byGold": {
+    "same": {
+     "n": 1323,
+     "accepted": 892,
+     "exact": 892
+    },
+    "too_coarse": {
+     "n": 441,
+     "accepted": 5,
+     "exact": 0
+    },
+    "other": {
+     "n": 918,
+     "accepted": 0,
+     "exact": 918
+    },
+    "roll_up": {
+     "n": 441,
+     "accepted": 5,
+     "exact": 0
+    },
+    "already_held": {
+     "n": 441,
+     "accepted": 5,
+     "exact": 0
+    }
+   },
+   "byKind": {
+    "true": {
+     "n": 2646,
+     "accepted": 907
+    },
+    "distractor": {
+     "n": 882,
+     "accepted": 0
+    },
+    "trap": {
+     "n": 36,
+     "accepted": 0
+    }
+   }
+  },
+  "B2_containment": {
+   "fourWayAccuracy": 0.5,
+   "fourWayAccuracyWithoutStringAmbiguous": 0.4986,
+   "acceptRejectAccuracy": 0.7449,
+   "byGold": {
+    "same": {
+     "n": 1323,
+     "accepted": 900,
+     "exact": 900
+    },
+    "too_coarse": {
+     "n": 441,
+     "accepted": 11,
+     "exact": 0
+    },
+    "other": {
+     "n": 918,
+     "accepted": 36,
+     "exact": 882
+    },
+    "roll_up": {
+     "n": 441,
+     "accepted": 11,
+     "exact": 0
+    },
+    "already_held": {
+     "n": 441,
+     "accepted": 9,
+     "exact": 0
+    }
+   },
+   "byKind": {
+    "true": {
+     "n": 2646,
+     "accepted": 931
+    },
+    "distractor": {
+     "n": 882,
+     "accepted": 0
+    },
+    "trap": {
+     "n": 36,
+     "accepted": 36
+    }
+   }
+  },
+  "B3_grain_blind": {
+   "fourWayAccuracy": 0.6288,
+   "fourWayAccuracyWithoutStringAmbiguous": 0.6296,
+   "acceptRejectAccuracy": 0.7525,
+   "byGold": {
+    "same": {
+     "n": 1323,
+     "accepted": 1323,
+     "exact": 1323
+    },
+    "too_coarse": {
+     "n": 441,
+     "accepted": 441,
+     "exact": 0
+    },
+    "other": {
+     "n": 918,
+     "accepted": 0,
+     "exact": 918
+    },
+    "roll_up": {
+     "n": 441,
+     "accepted": 441,
+     "exact": 0
+    },
+    "already_held": {
+     "n": 441,
+     "accepted": 441,
+     "exact": 0
+    }
+   },
+   "byKind": {
+    "true": {
+     "n": 2646,
+     "accepted": 2646
+    },
+    "distractor": {
+     "n": 882,
+     "accepted": 0
+    },
+    "trap": {
+     "n": 36,
+     "accepted": 0
+    }
+   }
+  }
+ },
+ "C1": {
+  "trapItems": 36,
+  "falseAcceptRate": {
+   "JUDGE": 0,
+   "B1_equality": 0,
+   "B2_containment": 1,
+   "B3_grain_blind": 0
+  }
+ },
+ "C2": {
+  "too_coarse": {
+   "items": 441,
+   "correctAcceptReject": {
+    "JUDGE": 0.9887,
+    "B1_equality": 0.9887,
+    "B2_containment": 0.9751,
+    "B3_grain_blind": 0
+   }
+  },
+  "roll_up": {
+   "items": 441,
+   "correctAcceptReject": {
+    "JUDGE": 0.9524,
+    "B1_equality": 0.0113,
+    "B2_containment": 0.0249,
+    "B3_grain_blind": 1
+   }
+  }
+ },
+ "C3": {
+  "items": 1323,
+  "correct": {
+   "JUDGE": 0.9962,
+   "B1_equality": 0.6704,
+   "B2_containment": 0.6735,
+   "B3_grain_blind": 0.6667
+  },
+  "questionGrainUnread": 86
+ }
+}

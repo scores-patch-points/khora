@@ -101,6 +101,40 @@
      "coverage": 0.636,
      "note": "the overcomeable (soft) ruling is the default in the read (PREREG-ROUND20 NOTE-1); the hard ruling was 319/31"
     }
+   },
+   "always_answering_guess": {
+    "evidence": "identity/novels/NOVELS-RESULTS-ROUND23.md (PREREG-ROUND23, dials chosen on development data only: LitBank train + GUM E C D F)",
+    "dials": "PRONOUN_GUESS_DIALS window 12 boost 1 feed 0 floor 0 margin 0",
+    "LitBank_dev_fresh": {
+     "answerable": 604,
+     "right": 399,
+     "wrong": 204,
+     "resolved": 0.661,
+     "default_resolved": 0.518
+    },
+    "GUM": {
+     "U": {
+      "answerable": 552,
+      "right": 403,
+      "resolved": 0.73,
+      "default": 0.576
+     },
+     "dev": {
+      "answerable": 199,
+      "right": 130,
+      "resolved": 0.653,
+      "default": 0.538
+     },
+     "test": {
+      "answerable": 219,
+      "right": 169,
+      "resolved": 0.772,
+      "default": 0.667
+     }
+    },
+    "pooled_resolved": 0.699,
+    "bar": 0.94,
+    "note": "pronounsGuess rides the entry; pronounsPresence (the confident bindings) is unchanged"
    }
   },
   "languages_measured": {
@@ -181,14 +215,14 @@
   "native/the-fold/pharos-gate.mjs": "7b882253c474005a3009a608690673de1be0ceee35625d1856e0835099306bcf",
   "holon.json": "b6301d630971260919ead0246fcf6c5f8b9e77fce9c8f9709d6de640e731c767",
   "native/tests/door-allowlist.json": "6bd9ece610624f428e1485082f276aa56034c7cbab2b4f361f4a4d9a4baabfec",
-  "native/the-fold/read-process.mjs": "2aa63eb03981eca6a6f2613929e5686856cb4512cd8c916db0a6cab60f09dc7d",
-  "native/the-fold/read-core.mjs": "291976cb769189e3ebda7975099c5321d5e30bf0fd53203942c69ce008fb12ad",
+  "native/the-fold/read-process.mjs": "45c129d4475896284db6bd329b72bc21f3620c4caaf796603438ff4ff594b72c",
+  "native/the-fold/read-core.mjs": "4a2d64d0ed171a2689a68ba4057e978589f88787864a1435214508c272c4fe70",
   "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
   "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
   "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
   "native/adapters/text/pronouns.js": "38ee9600a49b97d3852f549b6e24532701adf0e1faa040d2e0c073a349fdecc5",
   "native/adapters/text/pronoun-registers.js": "968e9942dbd609e5ba2f065ad049ca325fcf8a6d6c96cc8a951545793f08b379",
-  "native/adapters/text/pronoun-presence-chosen.js": "40a9648b7ddb573a9da51b40f410da458aa4f19a16e4cd34d1511cccd4f53a2a",
+  "native/adapters/text/pronoun-presence-chosen.js": "bcaf349e381f705d30b6b6afa27c1fdcdda3450e45946f61855cd1201d6ce0e9",
   "native/adapters/text/clause-attach.js": "0450fdf6f38cc65b12735c2c60d9a631c8bf82ca10ff865379eebdad57d00035",
   "native/adapters/text/non-personal.js": "707515503ceecb0cb69f250041a0f2759597819110fd9e66640a61f166120f95",
   "native/adapters/text/name-prior.js": "65d4feaa58a23026bdfc65ac63afc1ce9f97d4f239a6ab31109f58300938e139",
@@ -199,7 +233,7 @@
   "native/adapters/text/pronoun-registers/grc.json": "1bf7ac99690f99af7a3c864c4bd65f739e721a5117d15b05ffe0270e072de5ce",
   "native/adapters/text/pronoun-registers/san.json": "696e7f5347c1c8461940df140b493edce6cd5e3c8d053f18f1f154c379510ac5",
   "native/priors-shipped/frame-san.json": "a77aa7301bd35fca3af3bb61b8ed32aa20590f1d38eadc7aa1074731fc5d83c0",
-  "native/adapters/text/language-competency.js": "ee0d745aba89d727c04df61cc6ce25bd3899aa49dd02dd3dd0b5d926cb90b591"
+  "native/adapters/text/language-competency.js": "7c386fb05d9ac901cd396a5a1c46a2c61a70a242beea5fe58b0cdf2d7cbb8d56"
  },
- "recorded": "2026-11-18"
+ "recorded": "2026-11-19"
 }

@@ -1,0 +1,9 @@
+== ewt-test
+prepositional phrases (case ADP under an obl/nmod): 1684; head class right 0.791; exact head right 0.712
+  gold head verbal: 968 phrases, ours puts the head in the right class 0.763
+  gold head nominal: 716 phrases, ours puts the head in the right class 0.828
+== ewt-dev
+prepositional phrases (case ADP under an obl/nmod): 1723; head class right 0.803; exact head right 0.710
+  gold head verbal: 937 phrases, ours puts the head in the right class 0.783
+  gold head nominal: 786 phrases, ours puts the head in the right class 0.826
+== gum-dev

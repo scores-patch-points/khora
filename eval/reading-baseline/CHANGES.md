@@ -55,3 +55,26 @@ files changed since the last record: (none)
 
 ## 2026-11-18: khora works only through pharos: pharos-gate.mjs and holon.json are reading-critical; readToWeft and reading.js::readDocument run pharos' gate, write one entry per read into pharos, and refuse a read that left an available capacity unused (allowDegraded marks it). No metric moved.
 files changed since the last record: native/reading.js, native/the-fold/pharos-gate.mjs, holon.json, native/the-fold/read-process.mjs
+## 2026-11-18: English answers every pronoun it finds (pronounsGuess, PRONOUN_GUESS_DIALS chosen on development data, confirmed on fresh LitBank fiction 0.518 -> 0.661 resolved correctly and GUM U 0.576 -> 0.730); the confident bindings are unchanged; the competency profile measures English by it (pooled 0.700)
+files changed since the last record: native/the-fold/read-process.mjs, native/the-fold/read-core.mjs, native/adapters/text/pronoun-presence-chosen.js, native/adapters/text/language-competency.js
+
+## 2026-11-18: docs: pooled English resolved 0.699
+files changed since the last record: (none)
+
+## 2026-11-18: round 24: competency measured by the official CorefUD scorer (the giver)
+files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-18: round 26: diagrammer giver constants in the competency profile
+files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-18: scholia moved to its own repo
+files changed since the last record: (none)
+
+## 2026-11-19: round 30: the referent rule in the competency profile
+files changed since the last record: native/adapters/text/language-competency.js
+
+## 2026-11-19: merge of rounds 24-30 over the pharos gate and the one-door refactor
+files changed since the last record: native/the-fold/read-process.mjs, native/the-fold/read-core.mjs, native/adapters/text/pronoun-presence-chosen.js, native/adapters/text/language-competency.js
+
+## 2026-11-19: merge: metrics from both sides; files re-recorded
+files changed since the last record: (none)

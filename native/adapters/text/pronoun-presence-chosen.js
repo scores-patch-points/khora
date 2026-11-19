@@ -32,3 +32,8 @@ export const PRONOUN_PRESENCE_DEFAULT_PROVENANCE = Object.freeze({
 });
 /** The dials of the canonical read: a fresh copy. */
 export const defaultPronounPresence = () => ({ ...PRONOUN_PRESENCE_DEFAULT });
+
+// THE GUESS DIALS (identity/novels PREREG-ROUND23): the dials of a rung that always answers (floor 0, margin 0: abstaining on the hard pronouns counts against the user's 94% bar, which measures right / answerable). Chosen by the rule registered before the confirmatory run:
+// the arm with the highest pooled resolved-correctly on DEVELOPMENT data only (CorefUD English-LitBank train, 80 documents, and the GUM training slices E, C, D, F), over window {2,4,6,8,12,16} x boost {1,2,3,4} x feed {0,1}: window 12, boost 1 (no subject boost: the parser's subjects made it worse), feed 0.
+// English only: no other language has a fit. The confident bindings keep PRONOUN_PRESENCE_DEFAULT; a pronoun answered only by these dials is CONTESTED.
+export const PRONOUN_GUESS_DIALS = Object.freeze({ window: 12, boost: 1, feed: 0, floor: 0, margin: 0, locality: false, language: "en" });

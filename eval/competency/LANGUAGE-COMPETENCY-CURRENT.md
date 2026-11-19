@@ -2,18 +2,18 @@
 
 *Generated 2026-11-18 by `node eval/competency/readiness-board.mjs` from the priors the door serves and the shipped registers. Deterministic. A tier is a statement about pieces on disk and recorded evaluation, not a score.*
 
-A language is COMPETENT when at least 94% of the answerable third-person pronouns of held-out gold coreference are resolved correctly (the bar is the user's, declared 2026-11-18).
+Competency is judged by a fixed external giver: the official CorefUD scorer (ufal/corefud-scorer 4fd7b0e) on the CorefUD 1.3 public dev sets, CoNLL F1 over every mention (macro-average per language). The bar (94) is the user's, declared 2026-11-18; it has not been restated for this scale.
 
 **225 languages with a part-of-speech prior:** lexical 221 · reading+pronouns 3 · pronouns 1
 
 ## Reading, with pronouns (a register with its recorded evaluation), against the bar
 
-| language | clause reader | precision | coverage | resolved correctly (precision x coverage) | the 94% bar | gold | next |
-|---|---|---|---|---|---|---|---|
-| `eng` | positional (English parser) | 0.915 | 0.636 | 0.582 | short by 0.358 | yes | 58% of answerable pronouns resolved correctly against the 94% bar |
-| `fra` | positional (unvalidated for this language) | 0.547 | 0.368 | 0.201 | short by 0.739 | yes | morphology-fra.json (verbs match exactly without it); a clause reader validated for this language (the positional one is English-shaped) |
-| `grc` | case-marked (the Chomsky seam: case and pro-drop) | 0.53 | 0.573 | 0.277 | short by 0.663 | yes | pos-grc-unimorph.json is on disk and the read does not load it; 28% of answerable pronouns resolved correctly against the 94% bar |
-| `san` | case-marked (the Chomsky seam: case and pro-drop) | 0.878 | 0.154 | 0.135 | short by 0.805 | no (gold-free) | pos-san-unimorph.json is on disk and the read does not load it; gold coreference for san (the recorded precision is gold-free) |
+| language | clause reader | precision | coverage | fixed giver (official scorer, CoNLL F1 macro over dev sets) | the 94 bar | our narrow pronoun measure | gold | next |
+|---|---|---|---|---|---|---|---|---|
+| `eng` | positional (English parser) | 0.915 | 0.636 | 28.2 | short by 65.8 | 0.699 | yes | 28.2 CoNLL F1 on the official scorer (the fixed giver) against the 94 bar |
+| `fra` | positional (unvalidated for this language) | 0.547 | 0.368 | 14.4 | short by 79.6 | 0.201 | yes | morphology-fra.json (verbs match exactly without it); a clause reader validated for this language (the positional one is English-shaped) |
+| `grc` | case-marked (the Chomsky seam: case and pro-drop) | 0.53 | 0.573 | 10.0 | short by 84.0 | 0.277 | yes | pos-grc-unimorph.json is on disk and the read does not load it; 10.0 CoNLL F1 on the official scorer (the fixed giver) against the 94 bar |
+| `san` | case-marked (the Chomsky seam: case and pro-drop) | 0.878 | 0.154 | no score | — | 0.135 | no (gold-free) | pos-san-unimorph.json is on disk and the read does not load it; gold coreference for san (the recorded precision is gold-free) |
 
 ## Lexical only (a POS prior and nothing the canonical read validates)
 
