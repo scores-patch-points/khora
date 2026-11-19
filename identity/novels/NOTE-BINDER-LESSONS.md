@@ -17,3 +17,10 @@ Mistakes to avoid (their list):
 6. Their sets were single-topic leads; fiction has several protagonists and no attended topic, so the topic and bearer tests do not carry over (the continuity and carry rules might).
 7. A non-person ruling matters more when it/they are bound to common nouns (their runs lacked the Wiktionary pack).
 8. Their sets were built to hit the last failure, so their numbers are pessimistic; score a set where the hardest kinds are rare if possible.
+
+---
+# Downstream need, from the Wikipedia fr/de claims session (2026-11-19, a peer's message, quoted as data)
+
+It needs two referent kinds the read does not produce: (a) definite descriptions and common noun phrases ("the province", "the capital", "the city", "the region") resolved to the article subject or to a different referent; (b) "it/its/they" bound to the article subject. Its failure mode when they are missing: a number extracted for the wrong referent. Population claims with a stated year are still disputed on true pairs at 5-7% on administrative divisions (fr 3/42, de 5/79; 3/35 on a third fresh set) because the province's lead gives its capital's figure: Groningen 231,299 (city) against 601,000 (province); Meghalaya 3.2M against 143,000 (Shillong). A text-window rule for which referent a number describes failed to generalise. On its 321-lead unprimed corpus: 796 referents, but only 262 of 6,435 subject-verb-object relations (4%) have both ends resolving to a referent. I/you/we do not occur in those leads.
+Independent gold it offers (not built from the read): land area agrees on true interlanguage-linked pairs 0.86-0.87 against 5-6% by chance among same-category impostors (fr 13/15, de 30/35), birth year (true pairs never rejected). Pair files `fresh*-.json` in its scratch folder `wikipedia/`, fr 306-363 pairs per set. It creates no referents and edits nothing in khora.
+So a noun-phrase and it/they referent round has a downstream test that is not the coreference scorer: whether "the capital" resolves away from the province, scored by whether the number then agrees across languages.
