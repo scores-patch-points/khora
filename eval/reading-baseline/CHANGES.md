@@ -59,3 +59,6 @@ files changed since the last record: native/adapters/text/language-competency.js
 
 ## 2026-11-18: scholia moved to its own repo
 files changed since the last record: (none)
+
+## 2026-11-19: round 30: the referent rule in the competency profile
+files changed since the last record: native/adapters/text/language-competency.js
