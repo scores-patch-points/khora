@@ -302,6 +302,7 @@ export function analyseK(model, forms, k = 3, givenTags = null) {
 export function tagWithPredicate(model, forms) {
   const base = tagWithMargins(model.tagger, forms, model.lex, model.clusters);
   if (!model.tagger.classes.includes("VERB") || base.tags.some((t) => t === "VERB" || t === "AUX")) return { tags: base.tags, repaired: null };
+  // regex-ok: the tagger's own digit mask on a token shape (the same as tagWithMargins), not language
   const L = forms.map((w) => (/^\d/.test(w) ? w.replace(/\d/g, "#") : w.toLowerCase())), V = model.tagger.classes.indexOf("VERB"); let best = null;
   for (let i = 1; i < forms.length; i++) {
     if (base.tags[i] !== "NOUN" || !["PROPN", "NOUN", "PRON"].includes(base.tags[i - 1])) continue;
