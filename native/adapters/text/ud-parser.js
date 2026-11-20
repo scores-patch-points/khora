@@ -61,6 +61,12 @@ function features(st, W, T, F, C = null) {
     add("s0num", fa(s0, "Number")); add("n0num", fa(n0, "Number")); add("s0gen", fa(s0, "Gender")); add("n0gen", fa(n0, "Gender"));
     add("s0pers", fa(s0, "Person")); add("n0pers", fa(n0, "Person")); add("s0case.s0ht", fa(s0, "Case"), t(s0h));
   }
+  { const su = (k, n) => w(k).slice(-n);
+    for (const [name, k] of [["s0", s0], ["n0", n0], ["n1", n1]]) {
+      add(name + "s1", su(k, 1)); add(name + "s2", su(k, 2)); add(name + "s3", su(k, 3)); add(name + "s4", su(k, 4));
+      add(name + "sh", shapeOf(w(k)));
+    }
+  }
   add("s0w.sr", w(s0), setR(s0)); add("s0t.sr", t(s0), setR(s0)); add("s0w.sl", w(s0), setL(s0)); add("s0t.sl", t(s0), setL(s0)); add("n0w.sl", w(n0), setL(n0)); add("n0t.sl", t(n0), setL(n0));
   return f;
 }
