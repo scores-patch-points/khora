@@ -13,7 +13,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
-import { loadModel, analyse, readJsonMaybeGz } from "../adapters/text/ud-parser.js";
+import { loadModel, analyse, tagWithPredicate, readJsonMaybeGz } from "../adapters/text/ud-parser.js";
 import { sentences, tokenize } from "../adapters/text/ud-tokenizer.js";
 import { priorsHome } from "./prior-source.mjs";
 
@@ -37,14 +37,15 @@ export function cutsOf(g, text) {
   return out;
 }
 /** readingRows(g, text) -> rows with the sentence index: { s, id, form, lemma, upos, feats, head, deprel } (head 0 is the root) */
-export function readingRows(g, text) {
+export function readingRows(g, text, { predicate = false } = {}) {   // predicate: opt-in repair, a clause with no verb gets the word the tagger finds closest to a verb (row.repaired = "predicate")
   const rows = []; let s = 0, cur = 0;
   for (const sent of sentences(text, "und", g.tokenizer)) {
     const forms = tokenize(sent, g.tokenizer); if (!forms.length) continue;
     const base = text.indexOf(sent, cur), b0 = base < 0 ? null : base; if (b0 != null) cur = b0 + sent.length;
     let c = 0;                                                         // each token's UTF-16 offsets in the text (null if the tokenizer changed the form and it cannot be found)
     const at = forms.map((f) => { const i = b0 == null ? -1 : sent.indexOf(f, c); if (i < 0) return null; c = i + f.length; return [b0 + i, b0 + c]; });
-    for (const r of analyse(g.parser, forms)) rows.push({ s, id: r.id, form: r.form, lemma: r.lemma, upos: r.upos, feats: r.feats ?? "", head: r.head < 0 ? 0 : r.head, deprel: r.deprel, ...(at[r.id - 1] ? { at: at[r.id - 1][0], end: at[r.id - 1][1] } : {}) });
+    const fix = predicate ? tagWithPredicate(g.parser, forms) : null;
+    for (const r of analyse(g.parser, forms, fix?.repaired ? fix.tags : null)) rows.push({ ...(fix?.repaired && r.id - 1 === fix.repaired.at ? { repaired: "predicate", repairGap: fix.repaired.gap } : {}), s, id: r.id, form: r.form, lemma: r.lemma, upos: r.upos, feats: r.feats ?? "", head: r.head < 0 ? 0 : r.head, deprel: r.deprel, ...(at[r.id - 1] ? { at: at[r.id - 1][0], end: at[r.id - 1][1] } : {}) });
     s++;
   }
   return rows;

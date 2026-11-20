@@ -296,6 +296,23 @@ export function analyseK(model, forms, k = 3, givenTags = null) {
   return out;
 }
 
+/** PREDICATE REPAIR (opt-in decoding constraint, 2026-11-20): a clause the tagger gave NO verb or auxiliary (the measured failure: "Anna works at Acme" tagged all-noun, "works" read as a plural noun) is re-tagged at the one word the tagger itself
+ *  finds closest to a verb: among the words it called NOUN that follow a nominal (a name, noun or pronoun: a subject candidate) and are followed by a word that is not punctuation (a predicate governs something), the smallest gap between its best class score and its VERB score. The rest is re-tagged left to right under that
+ *  restriction (the tagger's `allowed` seam) and the parse runs on those tags. Nothing is matched against a spelling; the tagger's own scores decide. Returns { tags, repaired: null | { at: index, gap } }; a sentence that has a predicate is untouched. */
+export function tagWithPredicate(model, forms) {
+  const base = tagWithMargins(model.tagger, forms, model.lex, model.clusters);
+  if (!model.tagger.classes.includes("VERB") || base.tags.some((t) => t === "VERB" || t === "AUX")) return { tags: base.tags, repaired: null };
+  const L = forms.map((w) => (/^\d/.test(w) ? w.replace(/\d/g, "#") : w.toLowerCase())), V = model.tagger.classes.indexOf("VERB"); let best = null;
+  for (let i = 1; i < forms.length; i++) {
+    if (base.tags[i] !== "NOUN" || !["PROPN", "NOUN", "PRON"].includes(base.tags[i - 1])) continue;
+    if (!base.tags.slice(i + 1).some((t) => t !== "PUNCT")) continue;                 // a predicate governs something: a headline or fragment ("Apple stock") ends on its last noun and is left as it is
+    const sc = model.tagger.scores(tagFeats(i, forms, L, base.tags[i - 1], i > 1 ? base.tags[i - 2] : "<s2>", model.lex, model.clusters)), b = model.tagger.classes.indexOf("NOUN"), gap = sc[b] - sc[V];
+    if (!best || gap < best.gap) best = { at: i, gap };
+  }
+  if (!best) return { tags: base.tags, repaired: null };
+  return { tags: tagWithMargins(model.tagger, forms, model.lex, model.clusters, new Map([[best.at, new Set(["VERB"])]])).tags, repaired: best };
+}
+
 /** analyse(model, forms, tags?) → UD rows (tags given: the parse runs on them, as when a repair has re-tagged a word) {id, form, lemma, upos, feats, head, deprel} */
 export function analyse(model, forms, givenTags = null) {
   const tags = givenTags ?? tagWith(model.tagger, forms, model.lex, model.clusters);
