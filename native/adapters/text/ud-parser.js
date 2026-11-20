@@ -256,9 +256,9 @@ export function train(sents, { iterations = 10, seed = "ud", folds = 4, explore 
     sents.forEach((s, i) => { if (i % folds === f) predicted[i] = tagWith(tg, s.tokens.map((t) => t.form), lex, clusters); });
     log(`jackknife fold ${f + 1}/${folds}`);
   }
-  const labels = [...new Set(sents.flatMap((s) => s.tokens.map((t) => t.deprel)))].sort();
+  const labels = [...new Set(sents.flatMap((s) => s.tokens.map((t) => t.deprel.split(":")[0])))].sort();
   const M = moveSet(labels), parser = new Perceptron(M.names);
-  const data = sents.map((s, i) => ({ W: ["ROOT", ...s.tokens.map((t) => norm(t.form))], T: ["ROOT", ...predicted[i]], F: ["_", ...s.tokens.map((t, k) => lemmaAndFeats(base.lexicon, t.form, predicted[i][k]).feats)], gh: [-1, ...s.tokens.map((t) => t.head)], gl: ["_", ...s.tokens.map((t) => t.deprel)], C: clusters ? ["ROOT", ...s.tokens.map((t) => clusters.get(norm(t.form)) ?? null)] : null }));
+  const data = sents.map((s, i) => ({ W: ["ROOT", ...s.tokens.map((t) => norm(t.form))], T: ["ROOT", ...predicted[i]], F: ["_", ...s.tokens.map((t, k) => lemmaAndFeats(base.lexicon, t.form, predicted[i][k]).feats)], gh: [-1, ...s.tokens.map((t) => t.head)], gl: ["_", ...s.tokens.map((t) => t.deprel.split(":")[0])], C: clusters ? ["ROOT", ...s.tokens.map((t) => clusters.get(norm(t.form)) ?? null)] : null }));
   for (let it = 0; it < iterations; it++) {
     let ok = 0, n = 0;
     for (const d of shuffle(data, rand)) {
