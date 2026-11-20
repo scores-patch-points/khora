@@ -24,7 +24,7 @@ function newState(n) {
 }
 const top = (st) => st.stack[st.stack.length - 1];
 
-function features(st, W, T, F, C = null) {
+function features(st, W, T, F, C = null, Lm = null) {
   const f = [];
   const add = (k, ...v) => f.push(k + "\u0001" + v.join("\u0002"));
   const s0 = st.stack.length ? top(st) : -1, n0 = st.i < st.n ? st.i : -1, n1 = st.i + 1 < st.n ? st.i + 1 : -1, n2 = st.i + 2 < st.n ? st.i + 2 : -1;
@@ -66,6 +66,11 @@ function features(st, W, T, F, C = null) {
       add(name + "s1", su(k, 1)); add(name + "s2", su(k, 2)); add(name + "s3", su(k, 3)); add(name + "s4", su(k, 4));
       add(name + "sh", shapeOf(w(k)));
     }
+  }
+  if (Lm) { const l = (k) => (k < 0 ? "∅" : Lm[k]);
+    add("s0l", l(s0)); add("n0l", l(n0)); add("n1l", l(n1)); add("n2l", l(n2));
+    add("s0l.n0l", l(s0), l(n0)); add("s0l.s0t", l(s0), t(s0)); add("n0l.n0t", l(n0), t(n0));
+    add("s0l.n0t", l(s0), t(n0)); add("n0l.s0t", l(n0), t(s0));
   }
   add("s0w.sr", w(s0), setR(s0)); add("s0t.sr", t(s0), setR(s0)); add("s0w.sl", w(s0), setL(s0)); add("s0t.sl", t(s0), setL(s0)); add("n0w.sl", w(n0), setL(n0)); add("n0t.sl", t(n0), setL(n0));
   return f;
@@ -114,21 +119,21 @@ function costs(st, gh, gl, M) {
 
 const clone = (st) => ({ n: st.n, i: st.i, stack: st.stack.slice(), head: st.head.slice(), label: st.label.slice(), left: st.left.map((x) => x.slice()), right: st.right.map((x) => x.slice()) });
 /** one beam step: every item expanded by every valid move, the `size` best by total score kept */
-function beamStep(items, parser, M, W, T, F, size, Cl = null) {
+function beamStep(items, parser, M, W, T, F, size, Cl = null, Lm = null) {
   const cand = [];
   for (const it of items) {
     if (it.st.i >= it.st.n) { cand.push({ ...it, done: true }); continue; }
-    const v = valid(it.st, M), f = features(it.st, W, T, F, Cl), s = parser.scores(f);
+    const v = valid(it.st, M), f = features(it.st, W, T, F, Cl, Lm), s = parser.scores(f);
     for (let a = 0; a < v.length; a++) if (v[a]) cand.push({ it, a, f, score: it.score + s[a] });
   }
   cand.sort((x, y) => y.score - x.score);
   return cand.slice(0, size).map((c) => { if (c.done) return c; const st = clone(c.it.st); apply(st, c.a, M); return { st, score: c.score, moves: [...c.it.moves, c.a], steps: [...c.it.steps, [c.f, c.a]] }; });
 }
-function parseWith(parser, M, W, T, F, beam = 1, Cl = null) {
+function parseWith(parser, M, W, T, F, beam = 1, Cl = null, Lm = null) {
   let st;
   if (beam > 1) {
     let items = [{ st: newState(W.length), score: 0, moves: [], steps: [] }], guard = 0;
-    while (items.some((x) => x.st.i < x.st.n) && guard++ < 4 * W.length + 10) items = beamStep(items, parser, M, W, T, F, beam, Cl);
+    while (items.some((x) => x.st.i < x.st.n) && guard++ < 4 * W.length + 10) items = beamStep(items, parser, M, W, T, F, beam, Cl, Lm);
     st = items[0].st;
   } else {
     st = newState(W.length);
@@ -136,7 +141,7 @@ function parseWith(parser, M, W, T, F, beam = 1, Cl = null) {
     while (st.i < st.n && guard++ < 4 * st.n + 10) {
       const v = valid(st, M);
       if (!v.some(Boolean)) break;
-      apply(st, parser.best(features(st, W, T, F, Cl), v), M);
+      apply(st, parser.best(features(st, W, T, F, Cl, Lm), v), M);
     }
   }
   return finish(st);
@@ -227,11 +232,11 @@ function beamSentence(parser, M, d, F, size) {
   let guard = 0, n = 0;
   while (gold.st.i < gold.st.n && guard++ < 4 * d.W.length + 10) {
     const v = valid(gold.st, M); if (!v.some(Boolean)) break;
-    const f = features(gold.st, d.W, d.T, F, d.C), s = parser.scores(f), c = costs(gold.st, d.gh, d.gl, M);
+    const f = features(gold.st, d.W, d.T, F, d.C, d.Lm), s = parser.scores(f), c = costs(gold.st, d.gh, d.gl, M);
     let g = -1; for (let a = 0; a < v.length; a++) if (v[a] && c[a] === 0 && (g < 0 || s[a] > s[g])) g = a;
     if (g < 0) { let m = Infinity; for (let a = 0; a < v.length; a++) if (v[a] && c[a] < m) { m = c[a]; g = a; } }
     apply(gold.st, g, M); gold.moves.push(g); gold.steps.push([f, g]);
-    items = beamStep(items, parser, M, d.W, d.T, F, size, d.C); n++;
+    items = beamStep(items, parser, M, d.W, d.T, F, size, d.C, d.Lm); n++;
     const key = gold.moves.join(",");
     if (!items.some((x) => x.moves.join(",") === key)) {
       parser.i++;
@@ -258,7 +263,7 @@ export function train(sents, { iterations = 10, seed = "ud", folds = 4, explore 
   }
   const labels = [...new Set(sents.flatMap((s) => s.tokens.map((t) => t.deprel.split(":")[0])))].sort();
   const M = moveSet(labels), parser = new Perceptron(M.names);
-  const data = sents.map((s, i) => ({ W: ["ROOT", ...s.tokens.map((t) => norm(t.form))], T: ["ROOT", ...predicted[i]], F: ["_", ...s.tokens.map((t, k) => lemmaAndFeats(base.lexicon, t.form, predicted[i][k]).feats)], gh: [-1, ...s.tokens.map((t) => t.head)], gl: ["_", ...s.tokens.map((t) => t.deprel.split(":")[0])], C: clusters ? ["ROOT", ...s.tokens.map((t) => clusters.get(norm(t.form)) ?? null)] : null }));
+  const data = sents.map((s, i) => ({ W: ["ROOT", ...s.tokens.map((t) => norm(t.form))], T: ["ROOT", ...predicted[i]], F: ["_", ...s.tokens.map((t, k) => lemmaAndFeats(base.lexicon, t.form, predicted[i][k]).feats)], Lm: ["ROOT", ...s.tokens.map((t) => norm(t.lemma))], gh: [-1, ...s.tokens.map((t) => t.head)], gl: ["_", ...s.tokens.map((t) => t.deprel.split(":")[0])], C: clusters ? ["ROOT", ...s.tokens.map((t) => clusters.get(norm(t.form)) ?? null)] : null }));
   for (let it = 0; it < iterations; it++) {
     let ok = 0, n = 0;
     for (const d of shuffle(data, rand)) {
@@ -268,7 +273,7 @@ export function train(sents, { iterations = 10, seed = "ud", folds = 4, explore 
       while (st.i < st.n && guard++ < 4 * st.n + 10) {
         const v = valid(st, M);
         if (!v.some(Boolean)) break;
-        const f = features(st, d.W, d.T, d.F, d.C), s = parser.scores(f), c = costs(st, d.gh, d.gl, M);
+        const f = features(st, d.W, d.T, d.F, d.C, d.Lm), s = parser.scores(f), c = costs(st, d.gh, d.gl, M);
         let pred = -1, bestZero = -1;
         for (let a = 0; a < v.length; a++) { if (!v[a]) continue; if (pred < 0 || s[a] > s[pred]) pred = a; if (c[a] === 0 && (bestZero < 0 || s[a] > s[bestZero])) bestZero = a; }
         if (bestZero < 0) { let m = Infinity; for (let a = 0; a < v.length; a++) if (v[a] && c[a] < m) { m = c[a]; bestZero = a; } }
@@ -298,8 +303,9 @@ export function analyseK(model, forms, k = 3, givenTags = null) {
   const C = model.clusters ? ["ROOT", ...forms.map((w) => model.clusters.get(norm(w)) ?? null)] : null;
   const W = ["ROOT", ...forms.map(norm)], T = ["ROOT", ...tags];
   const F = ["_", ...tags.map((t, j) => lemmaAndFeats(model.lexicon, forms[j], t).feats)];
+  const Lm = ["ROOT", ...tags.map((t, j) => norm(lemmaAndFeats(model.lexicon, forms[j], t).lemma))];
   let items = [{ st: newState(W.length), score: 0, moves: [], steps: [] }], guard = 0;
-  while (items.some((x) => x.st.i < x.st.n) && guard++ < 4 * W.length + 10) items = beamStep(items, model.parser, model.M, W, T, F, Math.max(k, model.beam ?? 1, 4), C);
+  while (items.some((x) => x.st.i < x.st.n) && guard++ < 4 * W.length + 10) items = beamStep(items, model.parser, model.M, W, T, F, Math.max(k, model.beam ?? 1, 4), C, Lm);
   const best = items[0]?.score ?? 0, seen = new Set(), out = [];
   for (const it of items) {
     const st = finish(it.st), key = Array.from(st.head).join(",") + "|" + st.label.join(",");
@@ -334,7 +340,8 @@ export function analyse(model, forms, givenTags = null) {
   const C = model.clusters ? ["ROOT", ...forms.map((w) => model.clusters.get(norm(w)) ?? null)] : null;
   const W = ["ROOT", ...forms.map(norm)], T = ["ROOT", ...tags];
   const F = ["_", ...tags.map((t, k) => lemmaAndFeats(model.lexicon, forms[k], t).feats)];
-  const st = parseWith(model.parser, model.M, W, T, F, model.beam, C);
+  const Lm = ["ROOT", ...tags.map((t, k) => norm(lemmaAndFeats(model.lexicon, forms[k], t).lemma))];
+  const st = parseWith(model.parser, model.M, W, T, F, model.beam, C, Lm);
   return forms.map((form, k) => { const { lemma, feats } = lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma, upos: tags[k], feats, head: st.head[k + 1], deprel: st.label[k + 1] ?? "dep" }; });
 }
 
