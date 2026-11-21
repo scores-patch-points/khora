@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { DISCOURSE_GROUND, markerRole, readDiscourseRole, paragraphRoles, sentenceReferents, sentenceSubjects, givenNewRole } from "./discourse-role.mjs";
+import { DISCOURSE_GROUND, markerRole, readDiscourseRole, paragraphRoles, sentenceReferents, sentenceSubjects, givenNewRole, clauseRole, sentenceDiscourse } from "./discourse-role.mjs";
 
 test("DISCOURSE_GROUND has 9 roles", () => {
   assert.equal(Object.keys(DISCOURSE_GROUND).length, 9);
@@ -66,4 +66,26 @@ test("givenNewRole: first is new, continuation is given", () => {
   assert.equal(givenNewRole(0, refs), "new");
   assert.equal(givenNewRole(1, refs), "given");
   assert.equal(givenNewRole(2, refs), "new");
+});
+
+test("clauseRole: maps relation to discourse role", () => {
+  assert.equal(clauseRole({ relation: "root" }), "kartṛ");
+  assert.equal(clauseRole({ relation: "adverbial" }), "hetu");
+  assert.equal(clauseRole({ relation: "complement" }), "karman");
+  assert.equal(clauseRole({ relation: "open-complement" }), "karaṇa");
+  assert.equal(clauseRole({ relation: "coordinate" }), "sampradāna");
+  assert.equal(clauseRole({ relation: "relative" }), "adhikaraṇa");
+  assert.equal(clauseRole({ relation: "unknown" }), null);
+});
+
+test("sentenceDiscourse: separates root from subordinate roles", () => {
+  const clauses = [
+    { relation: "root", marker: null, polarity: "+", predicate: { text: "said" } },
+    { relation: "adverbial", marker: "if", polarity: "-" },
+    { relation: "complement", marker: "that", polarity: "+" },
+  ];
+  const d = sentenceDiscourse(clauses);
+  assert.equal(d.root.predicate, "said");
+  assert.equal(d.subordinate.length, 2);
+  assert.deepEqual(d.subordinate.map((s) => s.role), ["hetu", "karman"]);
 });

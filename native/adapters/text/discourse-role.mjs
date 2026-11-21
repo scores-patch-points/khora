@@ -93,3 +93,39 @@ export function readDiscourseRoleFull(i, sentences, rowsOf) {
   }
   return { role: null, signal: null };
 }
+
+// ── Clause-relation → discourse role (the real signal, read from the parse's deprel,
+// not from regex markers). The UD clause relation IS the discourse relation: root = the
+// sentence's main claim (kartṛ); advcl/adverbial = premise/condition/time (hetu/kāla);
+// ccomp/complement = elaboration (karman); xcomp/open-complement = means (karaṇa);
+// acl/relative = frame (adhikaraṇa); conj/coordinate = parallel (sampradāna).
+
+export const CLAUSE_RELATION_ROLE = Object.freeze({
+  root: "kartṛ",
+  adverbial: "hetu",        // advcl — premise/condition/time
+  complement: "karman",     // ccomp — "that…" elaboration
+  "open-complement": "karaṇa", // xcomp — "to…" means
+  adnominal: "adhikaraṇa",  // acl — frame
+  relative: "adhikaraṇa",   // acl:relcl — "which…" frame
+  parataxis: "kartṛ",       // juxtaposed claim
+  coordinate: "sampradāna", // conj — parallel
+  nmod: "adhikaraṇa",       // locus
+  obl: "adhikaraṇa",        // locus
+});
+
+/** The discourse role of one clause, from its relation type. */
+export function clauseRole(clause) {
+  return CLAUSE_RELATION_ROLE[clause?.relation] ?? null;
+}
+
+/** A sentence's discourse structure: its main claim (root) plus its subordinate roles. */
+export function sentenceDiscourse(clauses) {
+  const roles = { root: null, subordinate: [] };
+  for (const c of clauses) {
+    const r = clauseRole(c);
+    if (!r) continue;
+    if (c.relation === "root") roles.root = { marker: c.marker, polarity: c.polarity, predicate: c.predicate?.text ?? null };
+    else roles.subordinate.push({ role: r, relation: c.relation, marker: c.marker ?? null, polarity: c.polarity });
+  }
+  return roles;
+}
