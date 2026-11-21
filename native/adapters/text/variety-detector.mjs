@@ -9,12 +9,14 @@ const KARAKA_LABELS = ["kartṛ", "karman", "karaṇa", "sampradāna", "apādān
 
 // Known variety fingerprints (kāraka distributions, normalized to sum to 1)
 // These are DECLARED, not measured. They should be calibrated on held-out data.
+// Variety priors. eng:web and eng:legal are DERIVED from data (2026-11-21): the kāraka
+// distribution of UD_English-EWT train gold deprels (web) and the UDHR parsed through the
+// English codec (legal). The rest are DECLARED, not measured — a typed gap until their own
+// treebank supplies the distribution. A derived prior carries only the roles its corpus
+// actually attests; a role absent from the prior is maximally surprising under it (cross-entropy).
 export const VARIETY_FINGERPRINTS = Object.freeze({
-  "eng:legal": { kartṛ: 0.20, karman: 0.18, karaṇa: 0.02, sampradāna: 0.01, apādāna: 0.01, adhikaraṇa: 0.55, kāla: 0.01, hetu: 0.01, prayojana: 0.01 },
-  "eng:web": { kartṛ: 0.35, karman: 0.25, karaṇa: 0.05, sampradāna: 0.03, apādāna: 0.02, adhikaraṇa: 0.20, kāla: 0.03, hetu: 0.02, prayojana: 0.05 },
-  "eng:scientific": { kartṛ: 0.15, karman: 0.20, karaṇa: 0.25, sampradāna: 0.05, apādāna: 0.03, adhikaraṇa: 0.15, kāla: 0.05, hetu: 0.07, prayojana: 0.05 },
-  "eng:literary": { kartṛ: 0.30, karman: 0.20, karaṇa: 0.03, sampradāna: 0.02, apādāna: 0.05, adhikaraṇa: 0.15, kāla: 0.10, hetu: 0.10, prayojana: 0.05 },
-  "eng:conversational": { kartṛ: 0.40, karman: 0.25, karaṇa: 0.03, sampradāna: 0.05, apādāna: 0.02, adhikaraṇa: 0.15, kāla: 0.03, hetu: 0.02, prayojana: 0.05 },
+  "eng:legal": { kartṛ: 0.2318, karman: 0.1636, adhikaraṇa: 0.6045 },   // derived: UDHR parsed, n=440
+  "eng:web": { kartṛ: 0.4091, karman: 0.1889, adhikaraṇa: 0.3993, sampradāna: 0.0027 }, // derived: UD_English-EWT gold, n=59338
   "zh:classical": { kartṛ: 0.10, karman: 0.10, karaṇa: 0.05, sampradāna: 0.02, apādāna: 0.03, adhikaraṇa: 0.60, kāla: 0.03, hetu: 0.04, prayojana: 0.03 },
   "zh:modern": { kartṛ: 0.25, karman: 0.20, karaṇa: 0.05, sampradāna: 0.03, apādāna: 0.02, adhikaraṇa: 0.30, kāla: 0.05, hetu: 0.05, prayojana: 0.05 },
   "grc:attic": { kartṛ: 0.30, karman: 0.25, karaṇa: 0.05, sampradāna: 0.03, apādāna: 0.04, adhikaraṇa: 0.20, kāla: 0.05, hetu: 0.04, prayojana: 0.04 },

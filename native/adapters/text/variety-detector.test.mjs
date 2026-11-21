@@ -2,9 +2,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { computeDistribution, detectVariety, VARIETY_FINGERPRINTS } from "./variety-detector.mjs";
 
-test("VARIETY_FINGERPRINTS has 5 English varieties", () => {
+test("VARIETY_FINGERPRINTS has 2 DERIVED English varieties (web + legal)", () => {
   const engKeys = Object.keys(VARIETY_FINGERPRINTS).filter((k) => k.startsWith("eng:"));
-  assert.equal(engKeys.length, 5);
+  assert.equal(engKeys.length, 2);
+  assert.deepEqual(engKeys.sort(), ["eng:legal", "eng:web"]);
 });
 
 test("computeDistribution: normalizes to sum to 1", () => {
@@ -26,8 +27,8 @@ test("detectVariety: web distribution detects web", () => {
   assert.equal(result.variety, "web");
 });
 
-test("detectVariety: conversational distribution detects conversational", () => {
-  const dist = VARIETY_FINGERPRINTS["eng:conversational"];
+test("detectVariety: web distribution detects web (derived prior)", () => {
+  const dist = VARIETY_FINGERPRINTS["eng:web"];
   const result = detectVariety(dist, "eng");
-  assert.equal(result.variety, "conversational");
+  assert.equal(result.variety, "web");
 });
