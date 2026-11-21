@@ -336,7 +336,7 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false, castIdentity = false } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false, castIdentity = false, admitNominals = false } = {}) {
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
@@ -438,7 +438,10 @@ export function readWith(text, { address = null, category = null, language = nul
       const spans = spansN.map(([a, b]) => [raw(a), raw(b)]);
       // a word whose period is its own (this read's abbreviations: "Messrs.", "No.", "Ltd.") is a title, a unit or a suffix the
       // capital tier caught, not a being; standing alone it is kept with the heard rows
-      const being = [...r.surfaces].some((x) => capital.has(x) && !isAbbreviationSurface(x, abbr.set));
+      // ADMIT NOMINALS (opt-in, `admitNominals: true`): the heard tier (a common noun) is also a referent, not just a capitalised name.
+      // This is the first rung of chasing the CorefUD competency bar: the fixed giver counts common noun phrases (19% of mentions on
+      // English-LitBank dev) which the capital tier refuses. Off, the cast is byte-identical to before (the weft's company stays between beings).
+      const being = [...r.surfaces].some((x) => (admitNominals || capital.has(x)) && !isAbbreviationSurface(x, abbr.set));
       // mentionsAt: UTF-8 byte offsets, the weft's address unit; mentionSpans: [start, end) character spans into the text given
       const row = { ref: r.ref, surface, allSurfaces: [...r.surfaces], mentionsAt: spans.map(([a]) => bytes[a]), mentionSpans: spans, standing: being ? "referent" : "heard" };
       (being ? cast : heardRows).push(row);

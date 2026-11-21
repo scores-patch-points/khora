@@ -96,6 +96,7 @@ export async function read(input, opts = {}) {
       readerOptions: { ...canonicalReaderOptions(), ...(readerOptions ?? {}) },
       declension: opts.declension ?? canonicalDeclension,
       allowDegraded: opts.allowDegraded === true,
+      admitNominals: opts.admitNominals === true,
       ...(parser?.rowsOf ? { rowsOf: parser.rowsOf } : {}),
     });
     if (!w.aliasReport?.nonPersonal) noteMissingRuling(w, opts.readerOptions ?? {});
