@@ -14,6 +14,7 @@ import { stemOf, iso1Of } from "./the-fold/language-grammar.js";
 import { languageContextFor } from "./the-fold/language-context.js";
 import { lexiconFor } from "./reading.js";
 import { rowsOfFor } from "./reading.js";
+import { detectVariety, computeDistribution } from "./adapters/text/variety-detector.mjs";
 import { consultNonPersonal } from "./adapters/text/non-personal.js";
 import fs from "node:fs";
 import path from "node:path";
@@ -51,6 +52,15 @@ export async function read(input, opts = {}) {
         cast: [], heard: [], edges: [], clauses: null, quality: null, surprise: null, pronouns: [],
         abbreviations: null, aliasReport: null, competency: null,
       };
+      try {
+        const karakas = [];
+        for (const s of (entry.parse ?? [])) for (const row of (s.rows ?? [])) if (row.karaka) karakas.push(row.karaka);
+        if (karakas.length > 0) {
+          const { computeDistribution, detectVariety } = await import("./adapters/text/variety-detector.mjs");
+          const dist = computeDistribution(karakas);
+          entry.variety = { detected: detectVariety(dist, "zh").variety, confidence: detectVariety(dist, "zh").confidence, declared: opts.variety ?? null };
+        }
+      } catch (e) { /* variety detection is optional */ }
       return recordRead(entry, text, { door: "native/reading-one.mjs#read", allowDegraded: opts.allowDegraded === true });
     }
 
@@ -84,6 +94,18 @@ export async function read(input, opts = {}) {
     });
     if (!w.aliasReport?.nonPersonal) noteMissingRuling(w, opts.readerOptions ?? {});
     if (parser?.gap) (w.gaps ??= []).push({ gap: "no_parser", stem, detail: parser.gap });
+    // VARIETY DETECTION: detect genre/variety from kāraka distribution (kind induction)
+    if (w.parse && opts.variety !== false) {
+      try {
+        const karakas = [];
+        for (const p of w.parse) for (const row of (p.rows ?? [])) if (row.karaka) karakas.push(row.karaka);
+        if (karakas.length > 0) {
+          const dist = computeDistribution(karakas);
+          const variety = detectVariety(dist, stem);
+          w.variety = { detected: variety.variety, confidence: variety.confidence, declared: opts.variety ?? null };
+        }
+      } catch (e) { /* variety detection is optional */ }
+    }
     if (parser?.by && w.parse) w.parseBy = parser.by;
     if (!lex) w.aliasReport = { giver: null, rows: [], gap: (opts.lexicon === false) ? "the caller read without the hyperlexicon" : `no hyperlexicon is filed for ${stem}` };
     return recordRead(w, text, { door: "native/reading-one.mjs#read", allowDegraded: opts.allowDegraded === true });

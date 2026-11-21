@@ -15,6 +15,10 @@ export const VARIETY_FINGERPRINTS = Object.freeze({
   "eng:scientific": { kartṛ: 0.15, karman: 0.20, karaṇa: 0.25, sampradāna: 0.05, apādāna: 0.03, adhikaraṇa: 0.15, kāla: 0.05, hetu: 0.07, prayojana: 0.05 },
   "eng:literary": { kartṛ: 0.30, karman: 0.20, karaṇa: 0.03, sampradāna: 0.02, apādāna: 0.05, adhikaraṇa: 0.15, kāla: 0.10, hetu: 0.10, prayojana: 0.05 },
   "eng:conversational": { kartṛ: 0.40, karman: 0.25, karaṇa: 0.03, sampradāna: 0.05, apādāna: 0.02, adhikaraṇa: 0.15, kāla: 0.03, hetu: 0.02, prayojana: 0.05 },
+  "zh:classical": { kartṛ: 0.10, karman: 0.10, karaṇa: 0.05, sampradāna: 0.02, apādāna: 0.03, adhikaraṇa: 0.60, kāla: 0.03, hetu: 0.04, prayojana: 0.03 },
+  "zh:modern": { kartṛ: 0.25, karman: 0.20, karaṇa: 0.05, sampradāna: 0.03, apādāna: 0.02, adhikaraṇa: 0.30, kāla: 0.05, hetu: 0.05, prayojana: 0.05 },
+  "grc:attic": { kartṛ: 0.30, karman: 0.25, karaṇa: 0.05, sampradāna: 0.03, apādāna: 0.04, adhikaraṇa: 0.20, kāla: 0.05, hetu: 0.04, prayojana: 0.04 },
+  "grc:koine": { kartṛ: 0.35, karman: 0.25, karaṇa: 0.04, sampradāna: 0.03, apādāna: 0.03, adhikaraṇa: 0.18, kāla: 0.04, hetu: 0.03, prayojana: 0.05 },
 });
 
 function cosineSim(a, b) {
