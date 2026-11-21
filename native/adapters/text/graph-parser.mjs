@@ -3,6 +3,8 @@
 import { parseConllu } from "../../kernel/eot-rich.js";
 const attr = (feats, key) => { if (!feats || feats === "_") return "_"; const p = feats.split("|").find((x) => x.startsWith(key + "=")); return p ? p.slice(key.length + 1) : "_"; };
 const norm = (w) => (w === "ROOT" ? w : /\d/.test(w) ? w.replace(/\d/g, "#").toLowerCase() : w.toLowerCase());
+const uniq = (a) => [...new Set(a)].sort().join(",");
+const between = (s, h, d) => { const lo = Math.min(h, d), hi = Math.max(h, d), out = []; for (let k = lo + 1; k < hi; k++) if (k >= 1) out.push(s.tokens[k - 1]); return out; };
 
 // ── Chu-Liu-Edmonds (non-projective maximum arborescence) ─────────────────────────────
 function findCycle(bestParent, root) {
@@ -52,9 +54,27 @@ const CODECS = {
     const hw = h === 0 ? "ROOT" : norm(H.form), dw = norm(D.form);
     const hp = h === 0 ? "ROOT" : H.upos, dp = D.upos;
     const dir = d > h ? "R" : "L", dist = Math.abs(d - h) <= 4 ? String(Math.abs(d - h)) : Math.abs(d - h) <= 7 ? "5-7" : "8+";
+    const CLOSED = ["DET", "AUX", "ADP", "PART", "PRON", "CCONJ", "SCONJ"];
     f.push("bias", `dp=${dp}`, `hp=${hp}`, `dp.hp=${dp}|${hp}`, `dir=${dir}`, `dist=${dist}`);
     f.push(`dw=${dw}`, `hw=${hw}`, `dw.hw=${dw}|${hw}`, `adj=${Math.abs(d - h) === 1}`);
-    if (h >= 1) { const li = h >= 2 ? norm(s.tokens[h - 2].form) : "∅", ri = h < s.tokens.length ? norm(s.tokens[h].form) : "∅"; f.push(`hl=${li}`, `hr=${ri}`); }
+    f.push(`dwt=${dw}|${dp}`, `hwt=${hw}|${hp}`);
+    // configurational anchors (the Figure signal: who can govern, who is closed)
+    f.push(`hverb=${h !== 0 && (H.upos === "VERB" || H.upos === "AUX")}`, `dclosed=${CLOSED.includes(dp)}`);
+    f.push(`dir.dist=${dir}|${dist}`, `dp.hp.dir=${dp}|${hp}|${dir}`, `dp.hp.dist=${dp}|${hp}|${dist}`);
+    // head context (the local phrase around the head)
+    const hlw = h >= 2 ? norm(s.tokens[h - 2].form) : "∅", hrw = h < s.tokens.length ? norm(s.tokens[h].form) : "∅";
+    const hlt = h >= 2 ? s.tokens[h - 2].upos : "∅", hrt = h < s.tokens.length ? s.tokens[h].upos : "∅";
+    f.push(`hl=${hlw}`, `hr=${hrw}`, `hlt=${hlt}`, `hrt=${hrt}`, `hrt.dp=${hrt}|${dp}`);
+    // dep context
+    const dlw = d >= 2 ? norm(s.tokens[d - 2].form) : "∅", drw = d < s.tokens.length ? norm(s.tokens[d].form) : "∅";
+    const dlt = d >= 2 ? s.tokens[d - 2].upos : "∅", drt = d < s.tokens.length ? s.tokens[d].upos : "∅";
+    f.push(`dl=${dlw}`, `dr=${drw}`, `dlt=${dlt}`, `drt=${drt}`, `drt.hp=${drt}|${hp}`);
+    // intervening tokens (the global Figure signal for PP attachment / coordination)
+    const bw = between(s, h, d);
+    if (bw.length) {
+      f.push(`btwn=${uniq(bw.map((t) => t.upos))}`, `btwnN=${Math.min(bw.length, 6)}`);
+      f.push(`btwnVerb=${bw.some((t) => t.upos === "VERB" || t.upos === "AUX")}`, `btwnAdp=${bw.some((t) => t.upos === "ADP")}`);
+    }
     return f;
   },
   san: (s, h, d) => {
@@ -80,24 +100,23 @@ class Perceptron {
   avg(f) { let s = 0; for (const k of f) s += (this.w.get(k) ?? 0) - ((this.aw.get(k) ?? 0) / this.steps); return s; }
 }
 
-export function trainGraph(sents, { lang = "eng", iterations = 5, log = () => {} } = {}) {
+export function trainGraph(sents, { lang = "eng", iterations = 10, log = () => {} } = {}) {
   const codec = CODECS[lang]; if (!codec) throw new Error("no codec for " + lang);
   const P = new Perceptron();
-  const mkScores = (s) => { const n = s.tokens.length + 1; const sc = Array.from({ length: n }, () => new Array(n).fill(-Infinity)); for (let h = 0; h < n; h++) for (let d = 1; d < n; d++) { if (h === d) continue; sc[h][d] = P.score(codec(s, h, d)); } return sc; };
+  const scores = (s) => { const n = s.tokens.length + 1; const sc = Array.from({ length: n }, () => new Array(n).fill(-Infinity)); for (let h = 0; h < n; h++) for (let d = 1; d < n; d++) if (h !== d) sc[h][d] = P.score(codec(s, h, d)); return sc; };
   for (let it = 0; it < iterations; it++) {
     let ok = 0, total = 0;
     for (const s of sents) {
       const n = s.tokens.length + 1;
+      const pred = cle(scores(s), 0);   // decode the FULL tree, then update on the global mistake
       for (let d = 1; d < n; d++) {
-        const g = s.tokens[d - 1].head === 0 ? 0 : s.tokens[d - 1].head; // gold head index (0=ROOT)
-        let bestH = -1, bestS = -Infinity;
-        for (let h = 0; h < n; h++) { if (h === d) continue; const sc = P.score(codec(s, h, d)); if (sc > bestS) { bestS = sc; bestH = h; } }
+        const g = s.tokens[d - 1].head === 0 ? 0 : s.tokens[d - 1].head;
         total++;
-        if (bestH === g) { ok++; continue; }
-        P.update(codec(s, g, d), codec(s, bestH, d));
+        if (pred[d] === g) { ok++; continue; }
+        P.update(codec(s, g, d), codec(s, pred[d], d));
       }
     }
-    log(`iter ${it + 1}/${iterations}: ${(100 * ok / total).toFixed(2)}% gold-head` );
+    log(`iter ${it + 1}/${iterations}: ${(100 * ok / total).toFixed(2)}% tree-head` );
   }
   return { P, codec, lang };
 }
