@@ -22,7 +22,6 @@ import { priorsFor, consultAliases, readDocument as readCore } from "./the-fold/
 import { languageContextFor } from "./the-fold/language-context.js";
 import { stemOf, iso1Of } from "./the-fold/language-grammar.js";
 import { karakaOf as karakaOfRow } from "./adapters/text/karaka-map.mjs";
-import { karakaOf as karakaOfRow } from "./adapters/text/karaka-map.mjs";
 import { makeHyperlexicon } from "./organs/lexicon.js";
 
 export { readToWeft } from "./the-fold/read-process.mjs";
