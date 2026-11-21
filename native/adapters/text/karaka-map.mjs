@@ -62,7 +62,7 @@ export const CASE_KARAKA = Object.freeze({
   "Voc": "vocative",   // NOT a kāraka
 });
 
-export const KARAKA_GIVER = "Panini, Aṣṭādhyāyī, ~5th century BCE (kāraka theory: semantic roles carried by surface forms; the core six are kartṛ, karman, karaṇa, sampradāna, apādāna, adhikaraṇa; the extended three are kāla (time), hetu (cause), prayojana (purpose); genitive and vocative are relations, not roles)";
+export const KARAKA_GIVER = "Panini, Aṣṭādhyāyī, ~5th century BCE (kāraka theory: semantic roles carried by surface forms; the NINE are kartṛ, karman, karaṇa, sampradāna, apādāna, adhikaraṇa, kāla, hetu, prayojana; the core six are present in all languages with clear surface signals; the extended three (kāla, hetu, prayojana) are there too but only surface as deprel subtypes in Pattern languages; genitive and vocative are relations, not roles)";
 
 /** Given a UD row (form, upos, feats, deprel, head), return the kāraka it carries, or null. */
 export function karakaOf(row) {
