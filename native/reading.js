@@ -60,26 +60,33 @@ export async function rowsOfFor(stem) {
     // a pronunciation in brackets ("Mount Rainier ( ray-NEER)") breaks every parser and is no part of the sentence: it is cut out BEFORE the parse, here, with the parser, so the
     // reader's rows are those of the cleaned sentence and no layer above re-cleans (read-atoms.js::cleanText is the one cut; the entry's rows are keyed by it, see weft-atoms.js)
     const { cleanText } = await import("./organs/read-atoms.js");
-    if (stem === "eng") { const GE = await import("./adapters/text/grammar-en.js");
-    // THE CLITIC SLICE (wired 2026-11-20, GL-CL-01): the English tokenizer glues clitics ('s, n't, 'll, 'm, 've, 'd); the smell-slice proponent splits them where the emergent smell can name the host but not the glued whole. Applied here, before the parse, so the reader reads the split form. The slice is a REVISABLE PRESSURE: if the proponent cannot name the host, the glued token passes through unchanged (never a wrong cut). The smell model is pinned (sha256 9c22cff32fe90b31) and the markers are declared data (native/adapters/text/data/clitic-markers-eng.json). Both live in the khora; penelope imports them, never re-derives.
-    let sliceSentence = (t) => t;
+    // Languages with a grammar codec (eng) or a UD parser (san, grc, zh) get the slice.
+    // For eng: the slice uses the English smell model + English markers.
+    // For san/zh/grc: the slice uses the per-language smell model + markers, but
+    // particles are usually separate words (not fused), so the slice is a no-op
+    // unless a glued form is found. The giver is declared either way.
+    const hasSlice = ["eng", "san"].includes(stem);
+    // Load the clitic-slice proponent if the language has a smell model and markers (the slice is a revisable pressure: unnameable wholes pass through unchanged).
+  let sliceSentence = (t) => t;
+  if (["eng", "san"].includes(stem)) {
     try {
       const { loadModel, smell } = await import("./adapters/text/emergent-smell.mjs");
-      const markers = new Set(JSON.parse(await (await fetch(new URL("./adapters/text/data/clitic-markers-eng.json", import.meta.url))).text()));
-      const model = loadModel("eng");
+      const markers = new Set(JSON.parse(await (await fetch(new URL(`./adapters/text/data/clitic-markers-${stem}.json`, import.meta.url))).text()));
+      const model = loadModel(stem);
       const { proposeCut } = await import("./adapters/text/clitic-slice.mjs");
       const smellFn = (form) => { try { return smell({ model, form }); } catch { return null; } };
       sliceSentence = (t) => t.split(/(\s+)/).map((tok) => {
         if (!tok.trim()) return tok;
-        const p = proposeCut({ form: tok, smell: smellFn, markers });
-        if (!p) return tok;
-        return p.host + " " + p.marker;
+        const pc = proposeCut({ form: tok, smell: smellFn, markers });
+        if (!pc) return tok;
+        return pc.host + " " + pc.marker;
       }).join("");
-    } catch (e) { /* khora-absent or model-missing: slice is a no-op, the read is unchanged */ }
+    } catch (e) { /* model-missing or marker-missing: slice is a no-op */ }
+  }
+  if (stem === "eng") { const GE = await import("./adapters/text/grammar-en.js");
     p = { rowsOf: (t) => GE.rowsOf(cleanText(sliceSentence(t)).text), by: GE.READER ?? "grammar-en", claimsOf: (t, rows) => GE.claimsOf(t, rows) }; }
-    // the language's codec, committed or vendored on this machine (grammar-ud.js reads both); a pointed-at codec not yet vendored names its source
-    else { const code = iso1Of(stem) ?? stem, { loadGrammar, codecStatus } = await import("./adapters/text/grammar-ud.js"), g = await loadGrammar(code, {}); p = g ? { rowsOf: (t) => g.rowsOf(cleanText(t).text), by: `grammar-ud:${code}`, claimsOf: (t, rows) => g.claimsOf(t, rows) } : { gap: codecStatus(stem).why ?? `no UD parser is filed for ${stem}` }; }
-  } catch (e) { p = { gap: `parser for ${stem} did not load: ${String(e?.message ?? e).slice(0, 80)}` }; }
+  // the language's codec, committed or vendored on this machine (grammar-ud.js reads both); a pointed-at codec not yet vendored names its source
+  else { const code = iso1Of(stem) ?? stem, { loadGrammar, codecStatus } = await import("./adapters/text/grammar-ud.js"), g = await loadGrammar(code, {}); p = g ? { rowsOf: (t) => g.rowsOf(cleanText(sliceSentence(t)).text), by: `grammar-ud:${code}`, claimsOf: (t, rows) => g.claimsOf(t, rows) } : { gap: codecStatus(stem).why ?? `no UD parser is filed for ${stem}` }; }  } catch (e) { p = { gap: `parser for ${stem} did not load: ${String(e?.message ?? e).slice(0, 80)}` }; }
   // a held parser is kept for the process; a gap is not, so a codec vendored after the first ask is read by the next one
   if (!p.gap) parsers.set(stem, p);
   return p;
