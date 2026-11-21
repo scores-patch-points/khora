@@ -15,6 +15,7 @@ import { languageContextFor } from "./the-fold/language-context.js";
 import { lexiconFor } from "./reading.js";
 import { rowsOfFor } from "./reading.js";
 import { detectVariety, computeDistribution } from "./adapters/text/variety-detector.mjs";
+import { treeOf } from "./adapters/text/dependency-tree.mjs";
 import { consultNonPersonal } from "./adapters/text/non-personal.js";
 import fs from "node:fs";
 import path from "node:path";
@@ -61,6 +62,11 @@ export async function read(input, opts = {}) {
           entry.variety = { detected: detectVariety(dist, "zh").variety, confidence: detectVariety(dist, "zh").confidence, declared: opts.variety ?? null };
         }
       } catch (e) { /* variety detection is optional */ }
+      if (entry.parse) {
+        for (const p of entry.parse) {
+          if (Array.isArray(p.rows)) p.tree = treeOf(p.rows);
+        }
+      }
       return recordRead(entry, text, { door: "native/reading-one.mjs#read", allowDegraded: opts.allowDegraded === true });
     }
 
@@ -105,6 +111,13 @@ export async function read(input, opts = {}) {
           w.variety = { detected: variety.variety, confidence: variety.confidence, declared: opts.variety ?? null };
         }
       } catch (e) { /* variety detection is optional */ }
+    }
+    // THE TREE: the full dependency tree is the reading (GL-TH-15). Every parse row's
+    // head/deprel folded into a nested tree, no word lost; every projection diffs against it.
+    if (w.parse) {
+      for (const p of w.parse) {
+        if (Array.isArray(p.rows)) p.tree = treeOf(p.rows);
+      }
     }
     if (parser?.by && w.parse) w.parseBy = parser.by;
     if (!lex) w.aliasReport = { giver: null, rows: [], gap: (opts.lexicon === false) ? "the caller read without the hyperlexicon" : `no hyperlexicon is filed for ${stem}` };
