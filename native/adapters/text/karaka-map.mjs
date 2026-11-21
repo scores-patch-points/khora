@@ -83,9 +83,14 @@ export function karakaOf(row) {
   // For Pattern languages: case ending carries the kāraka
   const c = CASE_KARAKA[caseVal];
   if (c && c !== "genitive" && c !== "vocative") return c;
+  // For Ground languages: particle carries the kāraka
+  const pk = GROUND_PARTICLE_KARAKA[String(row.form ?? "").trim()];
+  if (pk && pk !== "genitive" && pk !== "nominalizer") return pk;
   // For Figure/Ground languages: deprel carries the kāraka
   const k = KARAKA_MAP[row.deprel?.split(":")[0]];
-  if (k && k !== "genitive" && k !== "vocative") return k;
+  if (k && k !== "genitive" && k !== "vocative" && k !== "nominalizer") return k;
+  // Fallback: UPOS proxy (for Figure languages where kāraka is carried by word order)
+  if (row.upos === "PRON" || row.upos === "PROPN") return "kartṛ";
   return null;
 }
 
