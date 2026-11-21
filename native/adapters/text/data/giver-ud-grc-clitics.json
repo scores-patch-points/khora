@@ -1,0 +1,59 @@
+{
+  "schema": "GiverDeclaration@1",
+  "kind": "standard",
+  "name": "Universal Dependencies Ancient Greek PROIEL documentation (particles tagged ADV, no PART tag)",
+  "language": "grc",
+  "variety": "PROIEL",
+  "licence": "CC BY-SA 4.0",
+  "declaredBy": {
+    "kind": "corpus",
+    "name": "UD UD_Ancient_Greek-PROIEL treebank (PART forms, or ADV for Greek particles)",
+    "how": "treebank-attested, 2026-11-20: no UD documentation page declares these as clitics for UD_Ancient_Greek-PROIEL; the forms are attested in the treebank's own tagging. This is a CANDIDATE giver, not a 'given' giver (tokenizer-rule-def: a corpus alone is a candidate; a person or standard makes it 'given')."
+  },
+  "for": "tokenizer-rule",
+  "names": [
+    "τε",
+    "δέ",
+    "μέν",
+    "γε",
+    "καί",
+    "δή",
+    "ἄν",
+    "πως",
+    "που",
+    "πω",
+    "τοι",
+    "νυ",
+    "ρα",
+    "θην",
+    "περ",
+    "σφε",
+    "σφι",
+    "σφιν",
+    "σφω",
+    "σφωι",
+    "σφωιν"
+  ],
+  "notNamed": [
+    {
+      "form": "καί",
+      "why": "ambiguous: can be a conjunction (and) or a particle (even); treebank tags both as CCONJ and ADV"
+    },
+    {
+      "form": "δέ",
+      "why": "ambiguous: can be a particle (but) or a conjunction; treebank tags both as CCONJ and ADV"
+    }
+  ],
+  "pins": [
+    {
+      "url": "https://github.com/UniversalDependencies/UD_Ancient_Greek-PROIEL",
+      "says": "No UD documentation page declares these as clitics. Greek has NO PART tag in PROIEL (0 occurrences); particles are tagged ADV. Enclitic particles are separate words (no gluing), so the clitic-slice proponent does not fire on them. The treebank is a giver of CANDIDATES.",
+      "sha256": "42171e91a83d29e1d5686ec699b0576049095666e9da906bfc1354f283a0ded5",
+      "bytes": 21135121,
+      "retrieved": "2026-11-20"
+    }
+  ],
+  "caveats": [
+    "No UD documentation page declares these as clitics. Greek has NO PART tag in PROIEL (0 occurrences); particles are tagged ADV. Enclitic particles are separate words (no gluing), so the clitic-slice proponent does not fire on them. The treebank is a giver of CANDIDATES."
+  ]
+}

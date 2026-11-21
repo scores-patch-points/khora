@@ -1,0 +1,58 @@
+{
+  "schema": "GiverDeclaration@1",
+  "kind": "standard",
+  "name": "Universal Dependencies Sanskrit Vedic documentation (PART forms from UD_Sanskrit-Vedic)",
+  "language": "san",
+  "variety": "Vedic",
+  "licence": "CC BY-SA 4.0",
+  "declaredBy": {
+    "kind": "corpus",
+    "name": "UD UD_Sanskrit-Vedic treebank (PART forms, or ADV for Greek particles)",
+    "how": "treebank-attested, 2026-11-20: no UD documentation page declares these as clitics for UD_Sanskrit-Vedic; the forms are attested in the treebank's own tagging. This is a CANDIDATE giver, not a 'given' giver (tokenizer-rule-def: a corpus alone is a candidate; a person or standard makes it 'given')."
+  },
+  "for": "tokenizer-rule",
+  "names": [
+    "iti",
+    "eva",
+    "na",
+    "vai",
+    "ha",
+    "iva",
+    "hi",
+    "a",
+    "u",
+    "yathā",
+    "mā",
+    "api",
+    "tu",
+    "an",
+    "id",
+    "cit",
+    "nu",
+    "khalu",
+    "sma",
+    "vāva"
+  ],
+  "notNamed": [
+    {
+      "form": "iva",
+      "why": "ambiguous: can be a particle (iva 'like') or a verb form (iva 'go'); treebank tags both as PART and VERB"
+    },
+    {
+      "form": "a",
+      "why": "ambiguous: particle (a 'oh') or prefix; treebank has 606 occurrences, some are prefix forms"
+    }
+  ],
+  "pins": [
+    {
+      "url": "https://github.com/UniversalDependencies/UD_Sanskrit-Vedic",
+      "says": "No UD documentation page declares these as clitics. Forms are attested as PART in the treebank (16,413 PART tokens, 45 distinct forms). The treebank is a giver of CANDIDATES, not of given forms (tokenizer-rule-def: a corpus alone is a candidate, never 'given'). The sandhi codec (sanskrit-sandhi.js) is the more relevant tool for Sanskrit's actual fusion problem.",
+      "sha256": "05829c606047956b25aa6ebbd1fd2b11255ed04840fb90c3661f102b556c791d",
+      "bytes": 23873734,
+      "retrieved": "2026-11-20"
+    }
+  ],
+  "caveats": [
+    "No UD documentation page declares these as clitics. Forms are attested as PART in the treebank (16,413 PART tokens, 45 distinct forms). The treebank is a giver of CANDIDATES, not of given forms (tokenizer-rule-def: a corpus alone is a candidate, never 'given'). The sandhi codec (sanskrit-sandhi.js) is the more relevant tool for Sanskrit's actual fusion problem."
+  ]
+}

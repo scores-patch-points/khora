@@ -1,0 +1,52 @@
+{
+  "schema": "GiverDeclaration@1",
+  "kind": "standard",
+  "name": "Universal Dependencies Chinese GSD documentation (PART forms from UD_Chinese-GSD)",
+  "language": "zh",
+  "variety": "GSD",
+  "licence": "CC BY-SA 4.0",
+  "declaredBy": {
+    "kind": "corpus",
+    "name": "UD UD_Chinese-GSD treebank (PART forms, or ADV for Greek particles)",
+    "how": "treebank-attested, 2026-11-20: no UD documentation page declares these as clitics for UD_Chinese-GSD; the forms are attested in the treebank's own tagging. This is a CANDIDATE giver, not a 'given' giver (tokenizer-rule-def: a corpus alone is a candidate; a person or standard makes it 'given')."
+  },
+  "for": "tokenizer-rule",
+  "names": [
+    "的",
+    "之",
+    "了",
+    "着",
+    "吗",
+    "呢",
+    "吧",
+    "啊",
+    "嘛",
+    " lah"
+  ],
+  "notNamed": [
+    {
+      "form": "人",
+      "why": "treebank mislabels some forms as PART; 人 is a noun (person), not a particle"
+    },
+    {
+      "form": "大",
+      "why": "treebank mislabels some forms as PART; 大 is an adjective (big), not a particle"
+    },
+    {
+      "form": "之",
+      "why": "ambiguous: can be a particle (possessive/relativizer) or a pronoun (third person); treebank tags both as PART"
+    }
+  ],
+  "pins": [
+    {
+      "url": "https://github.com/UniversalDependencies/UD_Chinese-GSD",
+      "says": "No UD documentation page declares these as clitics. Forms are attested as PART in the treebank (7,041 PART tokens, 513 distinct, but only ~15 are real particles). The treebank is a giver of CANDIDATES. Mandarin particles are separate words (no gluing), so the clitic-slice proponent does not fire on them.",
+      "sha256": "4bd15b5b0a8a5a68f882ca3b94197e97b1e4dec1d1e1c5f9ddad4105c281a6ec",
+      "bytes": 9318344,
+      "retrieved": "2026-11-20"
+    }
+  ],
+  "caveats": [
+    "No UD documentation page declares these as clitics. Forms are attested as PART in the treebank (7,041 PART tokens, 513 distinct, but only ~15 are real particles). The treebank is a giver of CANDIDATES. Mandarin particles are separate words (no gluing), so the clitic-slice proponent does not fire on them."
+  ]
+}
