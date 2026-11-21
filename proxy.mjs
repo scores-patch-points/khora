@@ -1203,9 +1203,9 @@ async function handleRequest(req, res) {
         // serves the canonical reader: read-process.mjs::readToWeft. GREENBERG (chorus,
         // 2026-10-18): the language is never silently defaulted to English — undeclared is
         // null/unreported, and the reader's scope is disclosed.
-        const { readCanonical } = await import("./native/the-fold/read-door-canonical.mjs");
+        const { read } = await import("./native/reading-one.mjs");
         let out;
-        try { out = readCanonical(text, { name, language: parsed.language ?? null, category: parsed.category ?? null, maxCharacters }); }
+        try { out = await read(text, { name, language: parsed.language ?? null, category: parsed.category ?? null, maxCharacters, rows: true }); }
         catch (e) { res.writeHead(400, { "content-type": "application/json" }); res.end(JSON.stringify({ error: String(e.message ?? e) })); return; }
         log(`read → ${out.referents.length} referents (cast), ${out.relations.length} edges (canonical), primed ${out.primed}, language ${out.language} (${out.languageSource}), ${Date.now() - t0}ms`);
         res.writeHead(200, { "content-type": "application/json" });
