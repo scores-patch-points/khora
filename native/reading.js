@@ -22,6 +22,7 @@ import { priorsFor, consultAliases, readDocument as readCore } from "./the-fold/
 import { languageContextFor } from "./the-fold/language-context.js";
 import { stemOf, iso1Of } from "./the-fold/language-grammar.js";
 import { karakaOf as karakaOfRow } from "./adapters/text/karaka-map.mjs";
+import { karakaOf as karakaOfRow } from "./adapters/text/karaka-map.mjs";
 import { makeHyperlexicon } from "./organs/lexicon.js";
 
 export { readToWeft } from "./the-fold/read-process.mjs";
@@ -91,6 +92,15 @@ export async function rowsOfFor(stem) {
   // a held parser is kept for the process; a gap is not, so a codec vendored after the first ask is read by the next one
   // Wire kārakas into the parse rows: every row gets a `karaka` field (one of the 9 or null).
   // This makes the kāraka available to the reader and the equivalence judge without a separate pass.
+  if (p.rowsOf && !p.gap) {
+    const origRowsOf = p.rowsOf;
+    p.rowsOf = (t) => {
+      const rows = origRowsOf(t);
+      if (!Array.isArray(rows)) return rows;
+      return rows.map((row) => ({ ...row, karaka: karakaOfRow(row) }));
+    };
+  }
+  // Wire kārakas into the parse rows: every row gets a `karaka` field (one of the 9 or null).
   if (p.rowsOf && !p.gap) {
     const origRowsOf = p.rowsOf;
     p.rowsOf = (t) => {
