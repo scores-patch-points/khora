@@ -19,6 +19,22 @@ const norm = (w) => (w === "ROOT" ? w : /\d/.test(w) ? w.replace(/\d/g, "#").toL
 const dist = (d) => (d <= 4 ? String(d) : d <= 7 ? "5-7" : "8+");
 const attr = (feats, key) => { if (!feats || feats === "_") return "_"; const p = feats.split("|").find((x) => x.startsWith(key + "=")); return p ? p.slice(key.length + 1) : "_"; };
 
+// Kāraka: the semantic role a token carries, computed from surface form (not deprel, which is unknown at parse time).
+// Pattern languages: Case feat -> kāraka (CASE_KARAKA). Ground languages: particle form -> kāraka. Figure languages: UPOS proxy.
+const CASE_KARAKA = { Nom: "kartṛ", Acc: "karman", Ins: "karaṇa", Dat: "sampradāna", Abl: "apādāna", Loc: "adhikaraṇa" };
+const PARTICLE_KARAKA = { "把": "karman", "被": "karman", "給": "sampradāna", "向": "sampradāna", "從": "apādāna", "在": "adhikaraṇa", "於": "adhikaraṇa", "用": "karaṇa", "以": "karaṇa", "時": "kāla", "時候": "kāla", "因": "hetu", "因為": "hetu", "為": "prayojana", "為了": "prayojana" };
+const UPOS_KARAKA = { "NOUN": null, "PRON": "kartṛ", "VERB": null, "ADJ": null, "ADV": null, "ADP": "adhikaraṇa", "DET": null, "AUX": null, "CCONJ": null, "SCONJ": null, "PART": null, "NUM": null, "PROPN": "kartṛ" };
+function karakaOf(form, upos, feats) {
+  const caseVal = attr(feats, "Case");
+  if (caseVal !== "_" && CASE_KARAKA[caseVal]) return CASE_KARAKA[caseVal];
+  const pk = PARTICLE_KARAKA[String(form ?? "").trim()];
+  if (pk) return pk;
+  // Figure-language proxy: UPOS-based heuristic
+  if (upos === "PRON" || upos === "PROPN") return "kartṛ";
+  if (upos === "ADP") return "adhikaraṇa";
+  return null;
+}
+
 function newState(n) {
   return { n, i: 1, stack: [0], head: new Int32Array(n).fill(-1), label: new Array(n).fill(null), left: Array.from({ length: n }, () => []), right: Array.from({ length: n }, () => []) };
 }
@@ -58,6 +74,11 @@ function features(st, W, T, F, C = null, Lm = null) {
   if (F) { const fa = (k, key) => (k < 0 ? "_" : attr(F[k], key));
     add("s0case", fa(s0, "Case")); add("n0case", fa(n0, "Case")); add("n1case", fa(n1, "Case"));
     add("s0case.n0case", fa(s0, "Case"), fa(n0, "Case")); add("s0case.s0t", fa(s0, "Case"), t(s0)); add("n0case.n0t", fa(n0, "Case"), t(n0));
+    // Kāraka features (semantic role, computed from surface form — universal across grains)
+    const ka = (k) => (k < 0 ? "∅" : (karakaOf(W[k], T[k], F[k]) ?? "∅"));
+    add("s0k", ka(s0)); add("n0k", ka(n0)); add("n1k", ka(n1));
+    add("s0k.n0k", ka(s0), ka(n0)); add("s0k.s0t", ka(s0), t(s0)); add("n0k.n0t", ka(n0), t(n0));
+    add("s0k.n0t", ka(s0), t(n0)); add("n0k.s0t", ka(n0), t(s0));
     add("s0num", fa(s0, "Number")); add("n0num", fa(n0, "Number")); add("s0gen", fa(s0, "Gender")); add("n0gen", fa(n0, "Gender"));
     add("s0pers", fa(s0, "Person")); add("n0pers", fa(n0, "Person")); add("s0case.s0ht", fa(s0, "Case"), t(s0h));
   }
