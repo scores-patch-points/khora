@@ -36,10 +36,19 @@ export const KARAKA_MAP = Object.freeze({
   "obl:instr": "karaṇa",   // instrumental
   "obl:from": "apādāna",  // source/origin
   "obl:loc": "adhikaraṇa", // location
-  "obl:tmod": "adhikaraṇa", // temporal (a kind of locus)
+  "obl:tmod": "kāla",        // temporal (kāla, not a kind of locus)
+  "obl:cause": "hetu",       // causal (hetu)
+  "obl:purpose": "prayojana", // purposive (prayojana)
+  "obl:goal": "prayojana",   // purposive (prayojana)
   "nmod": "adhikaraṇa",    // nominal modifier (often locative/genitive)
   "nmod:poss": "genitive", // possessive (NOT a kāraka — a relation)
   "appos": "adhikaraṇa",   // apposition (same entity, different description)
+  "advcl": "adhikaraṇa",   // default: clausal modifier (often temporal/causal)
+  "advcl:tcl": "kāla",     // temporal clause
+  "advcl:caus": "hetu",    // causal clause
+  "advcl:cond": "hetu",    // conditional (causal)
+  "advcl:consec": "hetu",  // consequential (causal)
+  "advcl:fin": "prayojana", // final/purposive clause
   "vocative": "vocative",  // NOT a kāraka (sambodhana)
   "root": null,            // the verb itself; no kāraka
   "aux": null,             // auxiliary; no kāraka
@@ -58,6 +67,8 @@ export const CASE_KARAKA = Object.freeze({
   "Dat": "sampradāna",
   "Abl": "apādāna",
   "Loc": "adhikaraṇa",
+  // The extended 3 (kāla, hetu, prayojana) are carried by vibhakti compounds in Pattern langs,
+  // not by single case endings. They appear as obl:tmod, obl:cause, obl:purpose in UD.
   "Gen": "genitive",   // NOT a kāraka
   "Voc": "vocative",   // NOT a kāraka
 });
@@ -90,6 +101,13 @@ const GROUND_PARTICLE_KARAKA = Object.freeze({
   "用": "karaṇa",     // 用 marks the instrument
   "以": "karaṇa",     // 以 marks the instrument
   "的": "genitive",    // 的 marks genitive (NOT a kāraka — a relation)
+  // Extended 3 in Ground languages (particles + word order):
+  "時": "kāla",        // 時 marks time (when)
+  "時候": "kāla",      // 時候 marks time
+  "因": "hetu",        // 因 marks cause (why)
+  "因為": "hetu",      // 因為 marks cause
+  "為": "prayojana",   // 為 marks purpose (what for)
+  "為了": "prayojana", // 為了 marks purpose
 });
 export function particleKaraka(form, lang = "zh") {
   return GROUND_PARTICLE_KARAKA[String(form ?? "").trim()] ?? null;
