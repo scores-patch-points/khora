@@ -22,6 +22,7 @@ import { priorsFor, consultAliases, readDocument as readCore } from "./the-fold/
 import { languageContextFor } from "./the-fold/language-context.js";
 import { stemOf, iso1Of } from "./the-fold/language-grammar.js";
 import { karakaOf as karakaOfRow } from "./adapters/text/karaka-map.mjs";
+import { sniffByExemplar } from "./adapters/text/exemplar-pool.mjs";
 import { makeHyperlexicon } from "./organs/lexicon.js";
 
 export { readToWeft } from "./the-fold/read-process.mjs";
@@ -96,7 +97,7 @@ export async function rowsOfFor(stem) {
     p.rowsOf = (t) => {
       const rows = origRowsOf(t);
       if (!Array.isArray(rows)) return rows;
-      return rows.map((row) => ({ ...row, karaka: karakaOfRow(row) }));
+      return rows.map((row) => ({ ...row, karaka: karakaOfRow(row), phasepost: sniffByExemplar(row.form)?.cell ?? null }));
     };
   }
   // Wire kārakas into the parse rows: every row gets a `karaka` field (one of the 9 or null).
