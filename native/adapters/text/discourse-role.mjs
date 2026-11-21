@@ -50,3 +50,46 @@ export function readDiscourseRole(i, sentences) {
 export function paragraphRoles(sentences) {
   return sentences.map((_, i) => readDiscourseRole(i, sentences));
 }
+
+
+// ── Given/new coreference (embedding-free): does a sentence continue the previous
+// sentence's referents, or introduce new ones? This is the implicit-relation signal
+// that explicit markers miss (GL-TH-09). The role maps given→karman (elaboration on
+// an existing referent), new→kartṛ (initiation of a new referent). Read from the
+// kāraka field (lemma of kartṛ/karman tokens), no embedding, no marker.
+
+/** The referents a sentence's parse rows carry: lemmas of its kāraka-bearing tokens. */
+export function sentenceReferents(rows) {
+  const refs = new Set();
+  for (const r of rows) if (r.karaka && r.lemma) refs.add(String(r.lemma).toLowerCase());
+  return refs;
+}
+/** The subjects (kartṛ lemmas) only — who the sentence is about. */
+export function sentenceSubjects(rows) {
+  const refs = new Set();
+  for (const r of rows) if (r.karaka === "kartṛ" && r.lemma) refs.add(String(r.lemma).toLowerCase());
+  return refs;
+}
+
+/** Given/new role for sentence i: does its subject continue the previous sentence's referents? */
+export function givenNewRole(i, refsOf) {
+  if (i === 0) return "new";               // the first sentence introduces
+  const prev = refsOf[i - 1];
+  const cur = refsOf[i];
+  if (!cur || cur.size === 0) return null; // no referent to judge
+  for (const r of cur) if (prev.has(r)) return "given";
+  return "new";
+}
+
+/** Full role for sentence i: prefer the coreference read, fall back to the marker read. */
+export function readDiscourseRoleFull(i, sentences, rowsOf) {
+  // marker read (explicit connectives)
+  const mr = readDiscourseRole(i, sentences);
+  if (mr) return { role: mr, signal: "marker" };
+  // coreference read (implicit given/new), if rows are available
+  if (rowsOf) {
+    const gn = givenNewRole(i, rowsOf.map(sentenceReferents));
+    if (gn) return { role: gn === "given" ? "karman" : "kartṛ", signal: "coref" };
+  }
+  return { role: null, signal: null };
+}

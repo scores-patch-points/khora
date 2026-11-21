@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { DISCOURSE_GROUND, markerRole, readDiscourseRole, paragraphRoles } from "./discourse-role.mjs";
+import { DISCOURSE_GROUND, markerRole, readDiscourseRole, paragraphRoles, sentenceReferents, sentenceSubjects, givenNewRole } from "./discourse-role.mjs";
 
 test("DISCOURSE_GROUND has 9 roles", () => {
   assert.equal(Object.keys(DISCOURSE_GROUND).length, 9);
@@ -45,4 +45,25 @@ test("paragraphRoles: 100% on the falsification set (14 roles)", () => {
     roles.forEach((r, i) => { total++; if (r === gts[pi][i]) correct++; });
   });
   assert.equal(correct, 14, `${correct}/14`);
+});
+
+test("sentenceReferents/sentenceSubjects: lemma of kāraka tokens", () => {
+  const rows = [
+    { karaka: "kartṛ", lemma: "Prince" },
+    { karaka: "karman", lemma: "war" },
+    { karaka: null, lemma: "the" },
+  ];
+  assert.deepEqual([...sentenceReferents(rows)], ["prince", "war"]);
+  assert.deepEqual([...sentenceSubjects(rows)], ["prince"]);
+});
+
+test("givenNewRole: first is new, continuation is given", () => {
+  const refs = [
+    new Set(["prince"]),
+    new Set(["prince"]),      // continues prince → given
+    new Set(["anna"]),        // new referent → new
+  ];
+  assert.equal(givenNewRole(0, refs), "new");
+  assert.equal(givenNewRole(1, refs), "given");
+  assert.equal(givenNewRole(2, refs), "new");
 });
