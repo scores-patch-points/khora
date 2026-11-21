@@ -21,6 +21,7 @@ import { readCanonical } from "./the-fold/read-door-canonical.mjs";
 import { priorsFor, consultAliases, readDocument as readCore } from "./the-fold/read-core.mjs";
 import { languageContextFor } from "./the-fold/language-context.js";
 import { stemOf, iso1Of } from "./the-fold/language-grammar.js";
+import { karakaOf as karakaOfRow } from "./adapters/text/karaka-map.mjs";
 import { makeHyperlexicon } from "./organs/lexicon.js";
 
 export { readToWeft } from "./the-fold/read-process.mjs";
@@ -88,6 +89,16 @@ export async function rowsOfFor(stem) {
   // the language's codec, committed or vendored on this machine (grammar-ud.js reads both); a pointed-at codec not yet vendored names its source
   else { const code = iso1Of(stem) ?? stem, { loadGrammar, codecStatus } = await import("./adapters/text/grammar-ud.js"), g = await loadGrammar(code, {}); p = g ? { rowsOf: (t) => g.rowsOf(cleanText(sliceSentence(t)).text), by: `grammar-ud:${code}`, claimsOf: (t, rows) => g.claimsOf(t, rows) } : { gap: codecStatus(stem).why ?? `no UD parser is filed for ${stem}` }; }  } catch (e) { p = { gap: `parser for ${stem} did not load: ${String(e?.message ?? e).slice(0, 80)}` }; }
   // a held parser is kept for the process; a gap is not, so a codec vendored after the first ask is read by the next one
+  // Wire kārakas into the parse rows: every row gets a `karaka` field (one of the 9 or null).
+  // This makes the kāraka available to the reader and the equivalence judge without a separate pass.
+  if (p.rowsOf && !p.gap) {
+    const origRowsOf = p.rowsOf;
+    p.rowsOf = (t) => {
+      const rows = origRowsOf(t);
+      if (!Array.isArray(rows)) return rows;
+      return rows.map((row) => ({ ...row, karaka: karakaOfRow(row) }));
+    };
+  }
   if (!p.gap) parsers.set(stem, p);
   return p;
 }
