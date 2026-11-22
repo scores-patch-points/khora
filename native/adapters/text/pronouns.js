@@ -1033,11 +1033,11 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
   const state = new Map(); // ref -> { v, t, pos }
   const presence = (ref, t) => { const c = state.get(ref); return c ? c.v * gamma ** (t - c.t) : 0; };
   const fire = (ref, t, w, pos) => { state.set(ref, { v: presence(ref, t) + w, t, pos }); };
-  const evidence = new Map(); // ref -> { m, f }: the resolver's own causal, clause-local gender evidence
-  // OVERCOMEABLE PRIORS (identity/novels PREREG-ROUND20 NOTE-1): `priorGender` (Map ref -> "m" | "f", from a giver) speaks only for a being the text has said nothing about; the rung's own clause-local evidence overrides it.
+  const evidence = new Map(); // ref -> { m|f|n|x: count }: the resolver's own causal, clause-local gender evidence (open set, never a binary)
+  // OVERCOMEABLE PRIORS (identity/novels PREREG-ROUND20 NOTE-1): `priorGender` (Map ref -> class, from a giver) speaks only for a being the text has said nothing about; the rung's own clause-local evidence overrides it. The class is OPEN — m / f / n (neuter) / x (no gender) — matching normalizePronounClass, never collapsed to two.
   // `nonPersonalSoft`: a being with the text's own gender evidence (the text used he or she of it) is a person whatever the non-personal ruling says. Both default off: the rung is then byte-identical.
-  const hasOwn = (r) => { const e = evidence.get(r); return !!e && (e.m > 0 || e.f > 0); };
-  const genderOf = (r) => { const e = evidence.get(r); if (!e || (e.m === 0 && e.f === 0)) return priorGender?.get(r) ?? "unknown"; if (e.m > 0 && e.f === 0) return "m"; if (e.f > 0 && e.m === 0) return "f"; return "unknown"; };
+  const hasOwn = (r) => { const e = evidence.get(r); return !!e && Object.values(e).some((v) => v > 0); };
+  const genderOf = (r) => { const e = evidence.get(r); const own = e ? Object.entries(e).filter(([, v]) => v > 0) : []; if (own.length === 0) return priorGender?.get(r) ?? "unknown"; if (own.length === 1) return own[0][0]; return "unknown"; };
   // SURPRISE IN THE READING (identity/novels PREREG-ROUND20 NOTE-4): `genderModel` = { prior: Map ref -> "m" | "f", priorNats: R, evidenceNats: E } (R and E MEASURED: the giver's reliability and one clause of evidence's reliability, as log-odds).
   // A being's gender log-odds LO = the prior (+R for m, -R for f, 0 when no giver speaks) + the text's evidence counted ONCE per document (+E when the text used he of it alone, -E she). A clean he / she weighs each candidate's activation by P(gender matches) = sigmoid(+/- LO):
   // nothing is vetoed by a typed rule; a being whose gender would be very surprising falls under the floor, and the pronoun abstains. The bits of surprise of the chosen being ride the binding.
@@ -1092,10 +1092,10 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
     if (named.size === 1 && hits.length) {
       const [only] = named;
       const rels = mentionsHere.filter((m) => m.ref === only).map((m) => m.rel);
-      const ev = evidence.get(only) ?? { m: 0, f: 0 };
-      for (const h of hits) if (rels.some((r) => sameClause(sent.text, r, h.rel))) ev[h.hit.gender]++;
+      const ev = evidence.get(only) ?? {};
+      for (const h of hits) if (rels.some((r) => sameClause(sent.text, r, h.rel))) ev[h.hit.gender] = (ev[h.hit.gender] ?? 0) + 1;
       evidence.set(only, ev);
     }
   }
-  return { bindings, gaps: [], unbound, ...(keepCandidates ? { candidateLog } : {}), ...(nullSubjects ? { proDrop, proDropUnbound } : {}), genderEvidence: Object.fromEntries([...evidence].map(([r, e]) => [r, { m: e.m, f: e.f }])) };
+  return { bindings, gaps: [], unbound, ...(keepCandidates ? { candidateLog } : {}), ...(nullSubjects ? { proDrop, proDropUnbound } : {}), genderEvidence: Object.fromEntries([...evidence].map(([r, e]) => [r, { ...e }])) };
 };

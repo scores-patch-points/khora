@@ -87,3 +87,6 @@ files changed since the last record: native/the-fold/read-core.mjs
 
 ## 2026-11-22: wired speakers.js into the read as an opt-in (round-30 speaker/addressee kind admission); default read byte-identical
 files changed since the last record: native/reading.js, native/the-fold/read-process.mjs, native/the-fold/read-core.mjs
+
+## 2026-11-22: open the pronoun gender model from binary m/f to the open pro-form classes m/f/n/x (genderOf/evidence/priorGender); English received register is unchanged so the read is behavior-neutral
+files changed since the last record: native/adapters/text/pronouns.js
