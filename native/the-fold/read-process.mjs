@@ -16,6 +16,7 @@ import { presenceOptionsFor } from "../adapters/text/pronoun-registers.js";
 import { PRONOUN_GUESS_DIALS } from "../adapters/text/pronoun-presence-chosen.js";
 import { loadNamePrior, nonPersonalFromNames } from "../adapters/text/name-prior.js";
 import { caseMarkedReaderFor } from "../adapters/text/case-marked-clauses.js";
+import { genderPriorChainFor } from "../adapters/text/gender-chain.js";
 import { shippedDeclensionFor } from "../adapters/text/declension-shipped.js";
 
 export const READ_PROCESS = Object.freeze({
@@ -40,7 +41,7 @@ const namePersonhoodFor = (stem) => { if (stem !== "eng") return null; const pri
 // THE CANONICAL OPTIONS (2026-11-18): the readerOptions and the declension that make a read THE canonical read. They live in one place so that
 // no door can read without them: readToWeft applies them here and reading.js::readDocument applies the same ones, so the two front doors give the same
 // answer (native/tests/one-door.test.mjs proves it on a probe and fails when a door stops applying them). A caller's own readerOptions win.
-export const canonicalReaderOptions = () => ({ pronounPresence: (stem) => presenceOptionsFor(stem), namePersonhood: namePersonhoodFor, caseMarked: caseMarkedReaderFor, caseProDrop: (stem) => (stem === "grc" ? "on" : "off"), pronounGuess: (stem) => (stem === "eng" ? PRONOUN_GUESS_DIALS : null) });
+export const canonicalReaderOptions = () => ({ pronounPresence: (stem) => presenceOptionsFor(stem), namePersonhood: namePersonhoodFor, caseMarked: caseMarkedReaderFor, caseProDrop: (stem) => (stem === "grc" ? "on" : "off"), pronounGuess: (stem) => (stem === "eng" ? PRONOUN_GUESS_DIALS : null), genderPrior: genderPriorChainFor });
 export const canonicalDeclension = shippedDeclensionFor;
 // THE NON-PERSONAL RULING IS A GIVER'S (adapters/text/non-personal.js: the lexicon pack + the time prior), passed as readerOptions.nonPersonalOf. Without it "he" and "she" may bind a place, a topic, an organisation: on 92 GUM documents
 // 69% of the wrong bindings (21% of all bound) were exactly that (identity/novels NOVELS-RESULTS-ROUND10.md, the error diagnosis). A canonical read without the ruling says so, never runs silently without it.

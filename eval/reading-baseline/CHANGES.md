@@ -90,3 +90,6 @@ files changed since the last record: native/reading.js, native/the-fold/read-pro
 
 ## 2026-11-22: open the pronoun gender model from binary m/f to the open pro-form classes m/f/n/x (genderOf/evidence/priorGender); English received register is unchanged so the read is behavior-neutral
 files changed since the last record: native/adapters/text/pronouns.js
+
+## 2026-11-22: wire the gender-prior chain (corpus > wikidata > name table) as the canonical genderPrior
+files changed since the last record: native/the-fold/read-process.mjs
