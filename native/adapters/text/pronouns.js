@@ -173,13 +173,14 @@ const MIN_OBSERVATIONS = 2;
 // classification; a pronoun whose gender the treebank itself is unsure of
 // does not get to refuse a referent on the strength of that unsureness.
 export const normalizePronounClass = (pronounClass) => {
-  const out = new Map(); // token -> { gender: "m"|"f"|"n"|"x"|"unknown", clean: boolean }
+  const out = new Map(); // token -> { gender: "m"|"f"|"n"|"x"|"unknown", clean: boolean, person: "3", number: "sg"|"pl"|"x" } — the pro-form's AGREEMENT LABEL (person · number · gender), the bundle a binding carries so an identity edge in the holograph is explicit, not a bare pointer.
 
   // Default: THIS file's own received English closed class (priors.js,
   // giver lang/en) — every member clean, exactly the standing behaviour.
+  // The class is third-person singular by its own name: person 3, number sg.
   if (pronounClass === undefined || pronounClass === null) {
     for (const [token, gender] of Object.entries(THIRD_PERSON_SINGULAR)) {
-      out.set(token, { gender, clean: true });
+      out.set(token, { gender, clean: true, person: "3", number: "sg" });
     }
     return out;
   }
@@ -188,7 +189,7 @@ export const normalizePronounClass = (pronounClass) => {
   // the same shape THIRD_PERSON_SINGULAR has; every member hard-gated.
   if (typeof pronounClass === "object" && pronounClass.forms === undefined) {
     for (const [token, gender] of Object.entries(pronounClass)) {
-      out.set(token, { gender, clean: true });
+      out.set(token, { gender, clean: true, person: "3", number: "sg" });
     }
     return out;
   }
@@ -207,6 +208,8 @@ export const normalizePronounClass = (pronounClass) => {
     const onlyFem = attested.length === 1 && attested[0][0] === "Fem";
     const onlyNeut = attested.length === 1 && attested[0][0] === "Neut";
     const singularOnly = Object.keys(num).length === 1 && num.Sing !== undefined;
+    const allPlural = Object.keys(num).length === 1 && num.Plur !== undefined;
+    const number = singularOnly ? "sg" : allPlural ? "pl" : "x";
     const aboveFloor = (attested[0]?.[1] ?? 0) >= MIN_OBSERVATIONS;
 
     const clean =
@@ -223,11 +226,10 @@ export const normalizePronounClass = (pronounClass) => {
     else {
       // no non-"_" gender at all — plural/undefined forms (they, они) that
       // carry no gender, OR a form only ever attested "_".
-      const allPlural = Object.keys(num).length === 1 && num.Plur !== undefined;
       gender = allPlural ? "x" : "unknown";
     }
 
-    out.set(token, { gender, clean });
+    out.set(token, { gender, clean, person: "3", number });
   }
   return out;
 };
@@ -263,7 +265,7 @@ const findInClass = (text, pronounClass, { unspaced = false } = {}) => {
     const token = m[0].toLowerCase();
     const rec = pronounClass.get(token);
     if (!rec) continue;
-    hits.push({ token, gender: rec.gender, clean: rec.clean, index: m.index });
+    hits.push({ token, gender: rec.gender, clean: rec.clean, person: rec.person ?? null, number: rec.number ?? null, index: m.index });
   }
   return hits;
 };
@@ -1084,7 +1086,7 @@ export const resolvePronounsByPresence = (sentences, mentions, options = {}) => 
         margined = (top - second) / top;
         if (margined < margin) { skip("margin", "margin", { activation: top, margin: margined }); continue; }        chosen = cands[0][0]; mechanism = "presence";
       }
-      bindings.push({ referentId: chosen, sentenceOrder: sent.i, offset: e.pos, pronoun: hit.token, gender: hit.gender, activation: top, margin: margined, mechanism, ...(genderModel ? { surpriseBits: -Math.log2(Math.max(1e-9, pMatch(chosen, hit))) } : {}) });
+      bindings.push({ referentId: chosen, sentenceOrder: sent.i, offset: e.pos, pronoun: hit.token, gender: hit.gender, person: hit.person ?? null, number: hit.number ?? null, activation: top, margin: margined, mechanism, ...(genderModel ? { surpriseBits: -Math.log2(Math.max(1e-9, pMatch(chosen, hit))) } : {}) });
       if (feed) fire(chosen, sent.i, 1, e.pos);
     }
     // gender evidence from this sentence informs LATER sentences only, by the resolver's own rule (one being named beside the pronoun, in its own clause)

@@ -93,3 +93,6 @@ files changed since the last record: native/adapters/text/pronouns.js
 
 ## 2026-11-22: wire the gender-prior chain (corpus > wikidata > name table) as the canonical genderPrior
 files changed since the last record: native/the-fold/read-process.mjs
+
+## 2026-11-22: emit the pro-form agreement label (person/number/gender) on each pronoun binding and on the read's pronounsPresence/pronounsGuess; additive metadata, binding behavior unchanged
+files changed since the last record: native/the-fold/read-core.mjs, native/adapters/text/pronouns.js
