@@ -84,3 +84,6 @@ files changed since the last record: native/the-fold/read-core.mjs
 
 ## 2026-11-19: the held pronoun spectrum is now OPT-IN (readerOptions.pronounCandidates === true; off, the entry is byte-identical, which khora's pronoun-presence wiring tests require: they failed with an always-on field and pass with the opt-in). Same note as before otherwise: no binding changes, pronounsPresence identical on 6 DEV documents; the GUM gold check was not re-run.
 files changed since the last record: native/the-fold/read-core.mjs
+
+## 2026-11-22: wired speakers.js into the read as an opt-in (round-30 speaker/addressee kind admission); default read byte-identical
+files changed since the last record: native/reading.js, native/the-fold/read-process.mjs, native/the-fold/read-core.mjs

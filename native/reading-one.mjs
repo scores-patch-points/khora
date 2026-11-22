@@ -97,6 +97,7 @@ export async function read(input, opts = {}) {
       declension: opts.declension ?? canonicalDeclension,
       allowDegraded: opts.allowDegraded === true,
       admitNominals: opts.admitNominals === true,
+      speakers: opts.speakers === true,
       ...(parser?.rowsOf ? { rowsOf: parser.rowsOf } : {}),
     });
     if (!w.aliasReport?.nonPersonal) noteMissingRuling(w, opts.readerOptions ?? {});

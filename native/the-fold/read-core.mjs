@@ -63,6 +63,7 @@ import { priorJson, priorGeneration } from "./prior-source.mjs";
 import { figuresOf } from "../adapters/text/figure-period.en.js";
 import { rolesFor, nullSubjectsFor } from "../adapters/text/case-marked-clauses.js";
 import { competencyOf } from "../adapters/text/language-competency.js";
+import { speakerReferents } from "../adapters/text/speakers.js";
 import { castIdentity as castIdentityPass, repairEdges as repairEdgesPass } from "../organs/cast-identity.js";
 
 export const READ_CORE = Object.freeze({
@@ -336,7 +337,7 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false, castIdentity = false, admitNominals = false } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false, castIdentity = false, admitNominals = false, speakers = false } = {}) {
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
@@ -566,6 +567,16 @@ export function readWith(text, { address = null, category = null, language = nul
     if (caseClauses && caseClauses.length && !(clauses && clauses.length)) { clauses = caseClauses; qualityReport.clauses = { source: "case-marked", clauses: caseClauses.length, nullSubjects: caseClauses.filter((c) => c.nullSubject).length }; }
     qualityReport.gates = readGates({ edges, cast, text: str });
   }
+  // THE SPEAKER/ADDRESSEE RUNG (opt-in, `speakers: true`): first- and second-person mentions are bound to
+  // one speaker referent and one addressee referent per document (the round-30 kind admission, the gain is
+  // from admitting the KIND not the quotation structure). Off, the entry is byte-identical to before.
+  let speakerBindings = null;
+  if (speakers) {
+    try {
+      const sp = speakerReferents(str, { cast });
+      speakerBindings = sp.mentions.map((m) => ({ a: m.a, b: m.b, cl: m.kind === "addressee" ? "one:addressee" : "one:speaker", kind: m.kind, via: m.via }));
+    } catch (e) { speakerBindings = { gap: "speakers_failed", detail: String(e?.message ?? e).slice(0, 120) }; }
+  }
   const entry = {
     ...empty,
     readCharacters: str.length,
@@ -578,6 +589,7 @@ export function readWith(text, { address = null, category = null, language = nul
     ...(proDropBindings ? { proDrop: proDropBindings } : {}),
     ...(pronounsGuess ? { pronounsGuess } : {}),
     ...(pronounGaps ? { pronounGaps } : {}),
+    ...(speakerBindings ? { speakerBindings } : {}),
     // OPT-IN (features.figures): the money figures of the document with the period and sign each is about, as atoms with addresses (adapters/text/figure-period.en.js); absent, the entry is exactly what it was
     ...(features.figures ? { figures: stem === "eng" ? figuresOf(str, { sentences, timePrior: priorJson("time-prior.json") }) : { figures: [], gaps: [{ gap: "figures_english_only", detail: `the period binder reads English; this read is ${stem}` }] } } : {}),
     ...(parsed ? { parse: parsed } : {}),
