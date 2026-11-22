@@ -14,12 +14,14 @@
 // into the same tally; a language with NO gendered third-person pro-forms (Turkish, Finnish) yields
 // an empty table — the honest answer, never "male by default".
 //
-// PRO-DROP IS A GAP, NOT A SILENT DROP. This giver reads OVERT pro-forms only. In a pro-drop
-// language (Wikipedia: Pro-drop language) the pro-form is null and the same feature bundle rides
-// the verb's agreement morphology (Hindi `diyā` agrees with the object MASC.SG; Hebrew past verbs
-// inflect person+number+gender). That half is the resolver's existing null-subject machinery
-// (pronouns.js `nullSubjects`, PREREG-ROUND21; the case-marked seam for Greek/Sanskrit), not this
-// giver. A language that is pro-drop is stated as such, never read as if its pronouns were overt.
+// PRO-DROP: TWO HALVES, ONE BUILT. In a pro-drop language (Wikipedia: Pro-drop language) the
+// pro-form is null and the same feature bundle rides the verb's agreement morphology (Hindi `diyā`
+// agrees with the object MASC.SG; Hebrew past verbs inflect person+number+gender). This giver reads
+// OVERT pro-forms (genderEvidenceFromText); the null half is verbAgreementFromText below, which
+// extracts the dropped subject's agreement off the verb. Binding that dropped subject to a REFERENT
+// is the resolver's own nullSubjects presence rule (PREREG-ROUND21), not this giver — the two
+// halves meet at the same being in a language that drops its pro-forms. A language whose verb
+// paradigm is not yet registered is stated as such, never read as if its pronouns were overt.
 //
 // TIME AND PLACE. The evidence is this corpus, this language, this era — a table is never a
 // universal "Jonathan = male" constant. "Ashley" bound by he/him in one corpus and she/her in
@@ -131,6 +133,50 @@ export function genderPriorFromCorpus({ text, cast, corpusTable }) {
     if (total < MIN_EVIDENCE) continue;
     const ranked = [...tally.entries()].sort((a, b) => b[1] - a[1]);
     if (ranked.length === 1 || ranked[0][1] > ranked[1][1]) out.set(b.ref, ranked[0][0]);
+  }
+  return out;
+}
+
+// ————————————————————————————————————————————————————————————————
+// THE PRO-DROP HALF. In a pro-drop language the null pro-form's feature bundle rides the VERB's
+// agreement morphology, not an overt pronoun (Hindi `diyā` = MASC.SG agreeing with the object;
+// Hebrew past verbs inflect person+number+GENDER; Slavic past inflects gender+number, not person).
+// This reads the dropped subject's agreement off the verb, open-set and language-parameterised,
+// the same standing as the pronoun registers: the register is RECEIVED (per language), never guessed.
+//
+// verbAgreement is a register of the language's finite verb forms -> their agreement:
+//   { "<surface form>": { person: "1"|"2"|"3", number: "sg"|"pl", gender: "m"|"f"|"n"|"x"|null } }
+// A form whose gender is null carries person/number only (Greek/Sanskrit finite verbs). The
+// gender a verb attests is the dropped subject's own, OPEN — a three-gender verb paradigm yields
+// m/f/n, never collapsed to two.
+//
+// Binding that dropped subject to a REFERENT is the resolver's own job (pronouns.js `nullSubjects`,
+// the same presence rule, PREREG-ROUND21), NOT this giver: this only extracts the feature bundle
+// from the verb, exactly as genderEvidenceFromText extracts it from an overt pronoun. The two
+// streams answer the same question about the same being in a language that drops its pro-forms.
+// ————————————————————————————————————————————————————————————————
+export function verbAgreementFromText(text, { verbAgreement = null } = {}) {
+  const out = [];
+  const reg = verbAgreement instanceof Map ? verbAgreement : new Map(Object.entries(verbAgreement ?? {}));
+  if (!reg.size) return out;
+  for (const m of String(text ?? "").matchAll(WORD_RE)) {
+    const rec = reg.get(m[0].toLowerCase());
+    if (rec) out.push({ verb: m[0], index: m.index, person: rec.person ?? null, number: rec.number ?? null, gender: rec.gender ?? null });
+  }
+  return out;
+}
+
+// A verb-agreement register is built like a pronoun register, from a treebank's verb paradigm:
+// tally, per verb surface, its attested person/number/gender and admit only the clean forms (one
+// person, one number, one gender), the same MIN_OBSERVATIONS discipline normalizePronounClass uses.
+export function verbAgreementFromParadigm(forms, { minObservations = 2 } = {}) {
+  const GENDER_TREE = { Masc: "m", Fem: "f", Neut: "n" };
+  const out = new Map();
+  for (const [surface, stats] of Object.entries(forms ?? {})) {
+    const clean = (o) => { const e = Object.entries(o ?? {}).filter(([k, v]) => k !== "_" && v >= minObservations); return e.length === 1 ? e[0][0] : null; };
+    const person = clean(stats.person), number = clean(stats.number), genderRaw = clean(stats.gender);
+    const gender = genderRaw ? (GENDER_TREE[genderRaw] ?? genderRaw) : null;
+    if (person && number) out.set(surface.toLowerCase(), { person, number, gender });
   }
   return out;
 }
