@@ -11,6 +11,7 @@ import { loadModel } from "../adapters/text/english-parser.js";
 import { makeFold } from "./fold-store.mjs";
 import { makeKnowledge } from "./knowledge.mjs";
 import { voiceDefinition, voiceRelation, voiceSummary, voiceIdentity, reformat } from "./voice.mjs";
+import { threadOf } from "../adapters/text/coherence.js";
 import * as pharos from "../../../pharos/lib/pharos.mjs";
 import { weaveRead, weaveAsk, weaveBeing } from "./record.mjs";
 
@@ -84,10 +85,14 @@ async function respond(r) {
   else if (r.type === "reference") {
     const e = await know.person(r.target);
     r.entity = e;
-    if (e) fold.admit(r.target, e.label ?? r.target, e.description);
+    if (e?.id) fold.admit(r.target, e.label ?? r.target, e.description); // only a genuine being is admitted
     voiced = e?.description ? `${e.label ?? r.target} — ${e.description}.` : null;
     const cands = (e?.candidates ?? []).slice(0, 5).map((c) => `${c.label}${c.description ? ` — ${c.description}` : ""}`);
-    r.thought = thoughtOf(r, { candidates: cands.length ? `search "${r.target}" returned ${cands.join(" · ")}` : null, prior: { giver: "Wikidata (wbsearchentities + P31)", out: "filtered to instance-of-human" }, rule: "reference: resolve the name to the person, not the surname", release: e?.description ?? "no person found" });
+    r.thought = thoughtOf(r, { candidates: cands.length ? `search "${r.target}" returned ${cands.join(" · ")}` : null, prior: { giver: "Wikidata (wbsearchentities + P31)", out: "filtered to instance-of-human" }, rule: "reference: resolve the name to the person, not the surname or the title", release: e?.description ?? "no person found" });
+  }
+  else if (r.type === "current") {
+    voiced = `I don't know who the current ${r.target} is — that is time-dependent knowledge, and I have no giver for it.`;
+    r.thought = thoughtOf(r, { prior: { giver: "none", out: "the current officeholder is time-dependent" }, rule: "a title is not a person; never answer it with a random human", release: "not known (time-dependent)" });
   }
   else if (r.type === "kind") {
     const k = await know.kindOf(r.target);
@@ -138,7 +143,11 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { "content-type": "text/html; charset=utf-8" });
     return res.end(fs.readFileSync(path.join(HERE, "index.html"), "utf8"));
   }
-  if (req.method === "GET" && url.pathname === "/api/state") return json(res, 200, { modelPath, ...fold.state() });
+  if (req.method === "GET" && url.pathname === "/api/state") {
+    const st = fold.state();
+    const self = threadOf(st.triples, { predicate: "be", kartṛ: ["you"] });
+    return json(res, 200, { modelPath, ...st, self });
+  }
   if (req.method === "POST" && url.pathname === "/api/read") {
     let body = ""; req.on("data", (c) => (body += c)); req.on("end", () => {
       try { const { text } = JSON.parse(body); const r = fold.read(String(text ?? "")); for (const c of r.cast ?? []) weaveBeing(P, c); for (const t of r.triples ?? []) weaveRead(P, t, tripleKey(t)); return json(res, 200, { ...r, pharos: PHAROS_DIR }); }

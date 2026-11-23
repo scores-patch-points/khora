@@ -51,7 +51,10 @@
     </div>
   </section>
   <aside>
-    <h2>the fold (kāraka triples)</h2>
+    <h2>what it draws from (loaded instructions)</h2>
+    <div class="triple" id="instructions">no identity asserted yet — tell it what it is.</div>
+    <div class="kicker" id="rules">it reasons by: DEF the void → INS the thought (the middle ground) → EVA the narrowing → REC the release, over the kāraka DAG, scoped to coherence threads. nine operators, three tension layers.</div>
+    <h2 style="margin-top:18px">the fold (kāraka triples)</h2>
     <ul class="fold" id="fold"></ul>
     <div class="kicker" id="foldMeta"></div>
     <h2 style="margin-top:18px">last turn</h2>
@@ -164,6 +167,14 @@ function renderLastTurn(r) {
 async function refresh() {
   const s = await (await fetch("/api/state")).json();
   renderFold(s.triples);
+  renderInstructions(s.self);
+}
+
+function renderInstructions(self) {
+  const el = $("instructions");
+  const facts = (self ?? []).filter((t) => t.predicate === "be").flatMap((t) => t.karman ?? []).filter((k) => !["you", "system"].includes(k));
+  if (facts.length) el.innerHTML = `the system is <b>${facts.map((f) => escapeHtml(f)).join("</b> and <b>")}</b>.`;
+  else el.textContent = "no identity asserted yet — tell it what it is.";
 }
 
 async function send() {
