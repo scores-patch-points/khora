@@ -33,17 +33,21 @@ export function readQuestion(text, { model }) {
   // An interrogative: UD marks it PronType=Int. A wh-word that OPENS a question is interrogative whatever the tagger said (the EWT
   // tagger reads clause-initial "Who" as PronType=Rel); position decides, not the tag's guess.
   const wh = content.find((r, i) => INTERROGATIVES[r.lemma.toLowerCase()] && (/PronType=Int/.test(r.feats) || (i === 0 && isQuestion)));
+  // A wh-word that follows ITS OWN preposition ("To whom did he give it?", "From where...") opens the question too: that preposition is its
+  // case marker (a row whose head is the wh-word), so it is read off the rows and not matched on the surface.
+  const whPied = wh ? null : content.find((r, i) => i === 1 && isQuestion && INTERROGATIVES[r.lemma.toLowerCase()] && content[0].upos === "ADP" && content[0].head === r.id) ?? null;
+  const whRow = wh ?? whPied;
   let admits = null;
-  if (wh) {
-    admits = INTERROGATIVES[wh.lemma.toLowerCase()];
-    const next = content[content.indexOf(wh) + 1];
-    if (wh.lemma.toLowerCase() === "how" && next && QUANTITY_AFTER_HOW.has(next.lemma.toLowerCase())) admits = "quantity";
+  if (whRow) {
+    admits = INTERROGATIVES[whRow.lemma.toLowerCase()];
+    const next = content[content.indexOf(whRow) + 1];
+    if (whRow.lemma.toLowerCase() === "how" && next && QUANTITY_AFTER_HOW.has(next.lemma.toLowerCase())) admits = "quantity";
   }
   const modal = rows.find((r) => r.upos === "AUX" && (DEONTIC.has(r.lemma.toLowerCase()) || EPISTEMIC.has(r.lemma.toLowerCase())));
   const modality = modal ? (DEONTIC.has(modal.lemma.toLowerCase()) ? "deontic" : "epistemic") : "assertive";
   const auxFirst = content[0]?.upos === "AUX";
   let form = "statement";
-  if (wh) form = "wh";
+  if (whRow) form = "wh";
   else if (isQuestion && modality === "deontic") form = "deliberative";
   else if (isQuestion && auxFirst) form = "polar";
   else if (isQuestion) { form = "polar"; gaps.push({ field: "form", detail: "a question with no interrogative and no auxiliary opener; read as polar" }); }
