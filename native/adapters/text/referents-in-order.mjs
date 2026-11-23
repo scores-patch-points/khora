@@ -41,7 +41,7 @@ export function mergeBy(cast, types = []) {
 }
 
 /** referentsInOrder(parse, { commonNoun }) → { referents: [...], mentionOf: { "order.id": ref }, mentions, contested, titles } */
-export function referentsInOrder(parse, { commonNoun = () => false } = {}) {
+export function referentsInOrder(parse, { commonNoun = () => false, genderOf = null } = {}) {
   // the ground: the text's own lower-case common nouns, from every tree
   const lowerNoun = new Map();
   for (const p of parse ?? []) for (const r of p?.rows ?? []) if (r.upos === "NOUN") { const k = key(r.form); if (k === r.form) lowerNoun.set(k, (lowerNoun.get(k) ?? 0) + 1); }
@@ -117,7 +117,12 @@ export function referentsInOrder(parse, { commonNoun = () => false } = {}) {
   const titleBeings = new Map([...titleHist].map(([t, h]) => [t, new Set(h.map((x) => x[1])).size]));
   const carrierOf = (t, order) => { if ((titleBeings.get(t) ?? 0) < 2) return null; const h = titleHist.get(t); let lo = 0, hi = h.length - 1, best = null; while (lo <= hi) { const mid = (lo + hi) >> 1; if (h[mid][0] <= order) { best = h[mid]; lo = mid + 1; } else hi = mid - 1; } return best && order - best[0] <= horizon ? beings[best[1]].ref : null; };
   // a being's pro-form so far: the class its own clauses lean to (lean) and whether the sign test decides it (sure)
-  const classNow = (x) => { const d = proformOf({ classes: x.classes }); return d ? { lean: d.cls, sure: !d.contested } : { lean: null, sure: false }; };
+  // a being with no pronoun evidence of its own takes the given-name table's lean (genderOf(words) → "m" | "f" | null): an OVERCOMEABLE prior,
+  // never "sure"; the text's own evidence replaces it as soon as a clause binds a pronoun to the being
+  const priorOf = (x) => (genderOf && x.idents ? genderOf(x.idents.flat()) ?? null : null);
+  // ... and one that a pronoun was ASSUMED to point at (bound with no evidence either way): once "she" is taken to be Mina, "he" is not Mina
+  const assumedOf = (x) => { const a = Object.entries(x.assumed ?? {}).sort((p, q) => q[1] - p[1])[0]; return a ? a[0] : null; };
+  const classNow = (x) => { const d = proformOf({ classes: x.classes }); return d ? { lean: d.cls, sure: !d.contested } : { lean: x.kind === "nominal" ? null : priorOf(x) ?? assumedOf(x), sure: false }; };
   for (const b of beings) b.seen = -Infinity;
   for (const p of parse ?? []) {
     const rows = p?.rows; if (!Array.isArray(rows) || !rows.length) continue;
@@ -125,7 +130,8 @@ export function referentsInOrder(parse, { commonNoun = () => false } = {}) {
     for (const r of rows) { byId.set(r.id, r); const a = kids.get(r.head); if (a) a.push(r); else kids.set(r.head, [r]); }
     const at = (r) => mentionOf[`${p.order}.${r.id}`] ?? null;
     // the names of this sentence are present now (their recency is the presence a pronoun reads)
-    for (const r of rows) { const ref = at(r); if (ref && ref[0] === "r" && r.upos === "PROPN") touch(ref, p.order); }
+    // the SUBJECT is touched last, so it is the most salient of the sentence (what "she" most likely continues)
+    for (const subj of [false, true]) for (const r of rows) { const ref = at(r); if (ref && ref[0] === "r" && r.upos === "PROPN" && (r.deprel === "nsubj" || r.deprel === "nsubj:pass") === subj) touch(ref, p.order); }
     for (const r of rows) {
       // (1) A NOUN PHRASE is a mention: its head with its determiner, adjectives, compounds and numerals; the possessor is its own mention
       if (r.upos === "NOUN" && !NAME_PART.has(r.deprel) && r.deprel !== "fixed" && !at(r)) {
@@ -169,6 +175,7 @@ export function referentsInOrder(parse, { commonNoun = () => false } = {}) {
         const ref = match ?? fallback; if (!ref) continue;
         const doubt = !match || !sure || (second && all(second).seen === all(match).seen);
         mentionOf[`${p.order}.${r.id}`] = ref; const x = all(ref); const f = key(r.form); x.pronouns = x.pronouns ?? new Map(); x.pronouns.set(f, (x.pronouns.get(f) ?? 0) + 1);
+        if (!match) { x.assumed = x.assumed ?? {}; x.assumed[cls] = (x.assumed[cls] ?? 0) + 1; }   // bound with no evidence: an assumption, recorded as one
         pronounsBound++; if (doubt) pronounsContested++; touch(ref, p.order);
       }
       // (3) IDENTITY ACROSS REFERENTS is an edge, never a merge: an apposition ("Prince Andrew Bolkónski, the little princess’ husband")

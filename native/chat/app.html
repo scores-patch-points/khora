@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fold Chat</title>
+<style>
+:root { --bg:#f7f6f3; --panel:#fff; --ink:#1f2328; --muted:#6b7280; --line:#e4e1d8; --me:#2b5fd9; --meink:#fff; --bot:#efede6; --accent:#b45309; }
+@media (prefers-color-scheme: dark) { :root { --bg:#14161a; --panel:#1b1e23; --ink:#e8e6e1; --muted:#9aa0a6; --line:#2c3036; --me:#3b6fe0; --meink:#fff; --bot:#23272e; --accent:#f59e0b; } }
+* { box-sizing: border-box; }
+html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+body { display:flex; flex-direction:column; }
+header { flex:none; padding:12px 18px; border-bottom:1px solid var(--line); background:var(--panel); display:flex; gap:10px; align-items:baseline; }
+header b { font-size:16px; } header span { color:var(--muted); font-size:12.5px; }
+#log { flex:1 1 auto; overflow:auto; padding:18px 14px 8px; }
+.row { max-width:760px; margin:0 auto 12px; display:flex; }
+.row.me { justify-content:flex-end; }
+.msg { max-width:82%; padding:9px 13px; border-radius:16px; white-space:pre-wrap; word-wrap:break-word; }
+.me .msg { background:var(--me); color:var(--meink); border-bottom-right-radius:4px; }
+.bot .msg { background:var(--bot); border-bottom-left-radius:4px; }
+.msg q, .why q { quotes:"“" "”"; }
+details { margin-top:6px; font-size:12.5px; color:var(--muted); }
+details summary { cursor:pointer; user-select:none; } details summary:hover { color:var(--ink); }
+.why { margin-top:4px; padding-left:10px; border-left:2px solid var(--line); }
+.why div { margin:2px 0; } .tag { font:11px ui-monospace, Menlo, monospace; color:var(--accent); }
+form { flex:none; max-width:760px; width:100%; margin:0 auto; padding:8px 14px 16px; display:flex; gap:8px; }
+textarea { flex:1; resize:none; border:1px solid var(--line); border-radius:20px; padding:10px 14px; background:var(--panel); color:var(--ink); font:inherit; max-height:140px; }
+textarea:focus { outline:2px solid var(--accent); outline-offset:1px; }
+button { border:0; border-radius:20px; padding:0 18px; background:var(--me); color:var(--meink); font:inherit; cursor:pointer; }
+button:disabled { opacity:.5; cursor:default; }
+header select { margin-left:auto; max-width:230px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink); font:inherit; font-size:12.5px; padding:3px 6px; }
+.banner { padding:6px 18px; font-size:12.5px; background:var(--bot); color:var(--muted); border-bottom:1px solid var(--line); }
+.hint { max-width:760px; margin:40px auto; text-align:center; color:var(--muted); }
+.hint p { margin:6px 0; } .ex span { display:inline-block; margin:3px; padding:4px 11px; border:1px solid var(--line); border-radius:14px; cursor:pointer; background:var(--panel); color:var(--ink); }
+.ex span:hover { border-color:var(--accent); color:var(--accent); }
+</style>
+</head>
+<body>
+<header><b>Fold Chat</b><span>no model: every reply is read off what you told me, and says what it used</span><select id="p" title="take on a persona (read from its published prompt; a simulation)"><option value="">No persona</option></select></header>
+<div id="pb" class="banner" hidden></div>
+<div id="log"><div class="hint" id="hint">
+  <p><b>Tell me things, then ask.</b></p>
+  <p>Mina gave Jonathan a book. She lives in the village.</p>
+  <div class="ex"><span>Mina gave Jonathan a book. She lives in the village.</span><span>Who gave Jonathan a book?</span><span>Who is she?</span><span>What day is it?</span></div>
+</div></div>
+<form id="f"><textarea id="m" rows="1" placeholder="Say something, or ask a question" autofocus></textarea><button id="b">Send</button></form>
+<script>
+const $ = (id) => document.getElementById(id);
+const ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
+const esc = (s) => { let o = ""; for (const c of String(s ?? "")) o += ENT[c] ?? c; return o; };
+function add(who, html, extra = "") { $("hint")?.remove(); const r = document.createElement("div"); r.className = `row ${who}`; r.innerHTML = `<div class="msg">${html}${extra}</div>`; $("log").appendChild(r); $("log").scrollTop = $("log").scrollHeight; return r; }
+function why(r) {
+  const parts = [];
+  if (r.facts?.length) parts.push(...r.facts.map((f) => `<div><span class="tag">${esc(f.action)}</span> ${f.roles.map((x) => `${esc(x.role)}: ${esc(x.text)}`).join(" · ")}</div>`));
+  if (r.referents?.length) parts.push(`<div>I now know: ${r.referents.map((x) => esc(x.label)).join(", ")}</div>`);
+  if (r.evidence?.length) parts.push(...r.evidence.map((e) => `<div>from what you said: <q>${esc(e.text)}</q></div>`));
+  if (r.from) parts.push(`<div>I did not know this from you; it comes from ${esc(r.from)}.</div>`);
+  if (!r.handled && r.gap) parts.push(`<div>I could not answer because: ${esc(String(r.gap).split("_").join(" "))}.</div>`);
+  if (r.tools?.length) parts.push(...r.tools.map((t) => `<div><span class="tag">${esc(t.name)}</span>(${esc(Object.values(t.args ?? {}).join(", "))}) → ${esc(t.result)}</div>`));
+  if (r.trace?.length) parts.push(`<div>${r.trace.map((t) => `<span class="tag">${esc(t.step)}</span>`).join(" → ")}</div>`);
+  return parts.length ? `<details><summary>How I know</summary><div class="why">${parts.join("")}</div></details>` : "";
+}
+async function send(text) {
+  const t = text.trim(); if (!t) return; add("me", esc(t)); $("m").value = ""; $("b").disabled = true;
+  try {
+    const r = await (await fetch("/api/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: t }) })).json();
+    add("bot", esc(r.error ? "Something went wrong reading that." : r.text), r.error ? "" : why(r));
+  } catch { add("bot", "I could not reach the server."); }
+  $("b").disabled = false; $("m").focus();
+}
+$("f").addEventListener("submit", (e) => { e.preventDefault(); send($("m").value); });
+$("m").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send($("m").value); } });
+let listed = false;
+$("p").addEventListener("focus", async () => {   // the list is fetched when you first open the picker, not when the page loads
+  if (listed) return; listed = true;
+  try {
+    const items = (await (await fetch("/api/personas")).json()).items ?? [], by = {};
+    for (const x of items) (by[x.vendor] ??= []).push(x);
+    for (const [v, xs] of Object.entries(by)) { const g = document.createElement("optgroup"); g.label = v; for (const x of xs) { const o = document.createElement("option"); o.value = x.path; o.textContent = x.name; g.appendChild(o); } $("p").appendChild(g); }
+  } catch { listed = false; }
+});
+$("p").addEventListener("change", async () => {
+  const path = $("p").value;
+  const r = await (await fetch("/api/persona", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ path }) })).json();
+  if (!r.persona) { $("pb").hidden = true; add("bot", r.error ? `I couldn’t load that: ${esc(r.error)}` : "Back to plain."); return; }
+  $("pb").hidden = false; $("pb").textContent = `Simulated persona: ${r.persona.name} (${r.persona.vendor}), read from its published prompt. This is not that product, and there is no model in it.`;
+  add("bot", r.persona.identity ? `Now answering as: ${esc(r.persona.identity)}.` : "I couldn’t find an identity sentence in that prompt, so I’m answering as myself.");
+});
+document.querySelectorAll(".ex span").forEach((x) => x.addEventListener("click", () => send(x.textContent)));
+</script>
+</body>
+</html>

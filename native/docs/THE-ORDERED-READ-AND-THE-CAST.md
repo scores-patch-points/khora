@@ -30,6 +30,11 @@ Numbers, with their splits and stamps, are in `eval/reading-baseline/CHANGES.md`
 | The ordered read's log | `~/.pharos/khora/khora.jsonl` (kinds `act`, `referent`, `identity`) | local |
 | The PR #111 wiring plan (the fold chat's questions, and the organ that answers each) | PR #111 description | on GitHub |
 
+### Other agents' work this connects to (reported to the owner by those agents; not verified here)
+
+- **foldcode's plan (2026-11-23)**, for the thread chat: (1) resolve the WHOLE proper-noun mention ("Donald Trump" is one name, not `donald` + `trump`) and admit a resolved referent only when it is a genuine being, never a title or office; (2) time-aware knowledge (the *current* officeholder, like the clock and the timezone); (3) entity fallback ("what did he do" falls back to the person's description when the fold holds no relation); (4) generation (imperatives, register, structure shapes, the recursive void); (5) omnimodal, EOT-native (move the void detector off the text parser onto the EOT arcs). Items (1) and (3) are what the cast and `propositionsOf` already give (a name referent is the whole mention; a description such as "the president" is a separate `nominal` referent and is never a cast name); (2), (4) and (5) are not in the cast and stay with foldcode.
+- **eodb's deterministic chat** (`app/vendor/falsify.js`, `tools/bundle-falsify.mjs`, eodb commit `15196ab`): its judge `window.Falsify.falsifyAnswer`, called by the chat's `gradeAnswer`, now runs on the real 40-language Zenodotus priors. Open there: the bundle grew from 147 KB to 11.5 MB (the original design said the priors should load live, not bundled), and `restateClaimMessages` in the same file is an LLM prompt, which the zero-LLM direction removes.
+
 ## The owner's standing rules for this work
 
 - Everything writes to pharos, and pipelines merge to main so no work is lost.
