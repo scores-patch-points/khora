@@ -12,6 +12,8 @@ This is a proposal. Nothing here is in `CLAUDE.md` until the owner says so. The 
 
 English is not special. "English" is a reader parameter in exactly the way "image" is. A rule that would not make sense for a video shot is not a rule of the middle.
 
+**The chatbot is the first worked example, not the point** (the owner, 2026-11-23: "we do want to create a chatbot as first example, but it is just an example of what you can do, since natural-language codecs and characters are quite easy"). Natural language is the easiest reader to build, so the chat is where the middle gets exercised first. It is built so that swapping the reader, for another language now and another medium later, changes nothing in the middle.
+
 The nexus already says this. `native/organs/question-void.js`: a question is declared as a void, "medium-blind: it never sees a word of any language, only the reading an adapter produced". `native/organs/void-satisfaction.js` is written as "general, omnimodal, level-addressed". `native/reading-one.mjs` routes by modality (text, code and notation wired; image, video and audio return typed gaps). And a non-text source is already on the log: slate's observations of a video shot (banners, standees, a tote, with frame-range addresses) in `~/.pharos/default/slate-vfx-scale.jsonl`.
 
 ## What my chat violates (audited 2026-11-23)
