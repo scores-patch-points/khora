@@ -13,7 +13,8 @@ const { readAtoms } = await import(path.join(K, "native/organs/read-atoms.js"));
 const corefModel = JSON.parse(fs.readFileSync(path.join(K, "eval/meaning/atoms/coref-ranker.json"), "utf8"));
 const read = (t, o = {}) => readDocument(t, { language: "en", lexicon: false, minCharacters: 0, ...o });
 const P = await rowsOfFor("eng");
-const strip = (w) => { const { parse, parseBy, ms, ...r } = JSON.parse(JSON.stringify(w)); return JSON.stringify(r); };
+// proforms is read off the parse's rows (gender-from-corpus.js, the rows half), so it comes and goes with the parse
+const strip = (w) => { const { parse, parseBy, proforms, ms, ...r } = JSON.parse(JSON.stringify(w)); return JSON.stringify(r); };
 
 test("asking for rows is additive: the entry is the same bytes but for the parse", async () => {
   const t = "Sagard sold additional receivables to us. We sold additional receivables to Sagard.";
