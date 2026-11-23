@@ -123,3 +123,6 @@ files changed since the last record: native/the-fold/pharos-gate.mjs
 
 ## 2026-11-23: the case marker disambiguates the locus: 'to' is a recipient (sampradāna), 'from' a source (apādāna)
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: re-attach a recipient/source to the verb (climb one head past a noun the parser hung it on)
+files changed since the last record: native/the-fold/pharos-gate.mjs
