@@ -211,7 +211,7 @@
   }
  },
  "files": {
-  "native/reading.js": "58f46d5f083605814f0f84cefb8aa915755baff061bfb7e069891304be645a6f",
+  "native/reading.js": "5d33e9054ce69bcfa75e1006de5b99c2f74c329261685f3ff4a316753b638824",
   "native/the-fold/pharos-gate.mjs": "3878f7a1b18b6f98f1f74a297c0e2f7be9521fbd03d601e5a6fcd04bd632cc5e",
   "holon.json": "b6301d630971260919ead0246fcf6c5f8b9e77fce9c8f9709d6de640e731c767",
   "native/tests/door-allowlist.json": "6bd9ece610624f428e1485082f276aa56034c7cbab2b4f361f4a4d9a4baabfec",
@@ -233,7 +233,9 @@
   "native/adapters/text/pronoun-registers/grc.json": "1bf7ac99690f99af7a3c864c4bd65f739e721a5117d15b05ffe0270e072de5ce",
   "native/adapters/text/pronoun-registers/san.json": "696e7f5347c1c8461940df140b493edce6cd5e3c8d053f18f1f154c379510ac5",
   "native/priors-shipped/frame-san.json": "a77aa7301bd35fca3af3bb61b8ed32aa20590f1d38eadc7aa1074731fc5d83c0",
-  "native/adapters/text/language-competency.js": "7c386fb05d9ac901cd396a5a1c46a2c61a70a242beea5fe58b0cdf2d7cbb8d56"
+  "native/adapters/text/language-competency.js": "7c386fb05d9ac901cd396a5a1c46a2c61a70a242beea5fe58b0cdf2d7cbb8d56",
+  "native/adapters/text/karaka-total.mjs": "9632a30bfb63227dd9f74f465d8f191e637ee401f882250133940ba8e6c381f1",
+  "native/adapters/text/text-mereology.mjs": "e0aa2ef2b31ed2b9cb0e4da71530a4a37a000c85b60b4cf7ed79b63f75c7ecb5"
  },
  "recorded": "2026-11-23"
 }

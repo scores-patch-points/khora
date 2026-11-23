@@ -16,6 +16,7 @@ import { lexiconFor } from "./reading.js";
 import { rowsOfFor } from "./reading.js";
 import { detectVariety, computeDistribution } from "./adapters/text/variety-detector.mjs";
 import { treeOf } from "./adapters/text/dependency-tree.mjs";
+import { textMereology } from "./adapters/text/text-mereology.mjs";
 import { consultNonPersonal } from "./adapters/text/non-personal.js";
 import fs from "node:fs";
 import path from "node:path";
@@ -120,6 +121,11 @@ export async function read(input, opts = {}) {
       for (const p of w.parse) {
         if (Array.isArray(p.rows)) p.tree = treeOf(p.rows);
       }
+      // THE MEREOLOGY: the whole text as one tree of addressed parts (document > paragraph > sentence > phrase > token),
+      // each part addressed in the source by char and byte range, each phrase carrying its Pāṇinian relation, one
+      // kāraka frame per action, and the measured coverage (rows aligned, rows in the tree, characters read).
+      w.mereology = textMereology(text, w.parse, { address: opts.address ?? null });
+      for (const g of w.mereology.gaps) (w.gaps ??= []).push({ gap: `mereology_${g.gap}`, detail: g.count ?? g.chars ?? null });
     }
     if (parser?.by && w.parse) w.parseBy = parser.by;
     if (!lex) w.aliasReport = { giver: null, rows: [], gap: (opts.lexicon === false) ? "the caller read without the hyperlexicon" : `no hyperlexicon is filed for ${stem}` };
