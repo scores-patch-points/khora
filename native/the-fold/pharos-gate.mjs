@@ -6,7 +6,7 @@
 import { IS_NODE } from "./prior-source.mjs";
 import { loadNamePrior } from "../adapters/text/name-prior.js";
 import { genderPriorChainFor } from "../adapters/text/gender-chain.js";
-import { nestFromRead } from "../adapters/text/nest-from-read.js";
+import { nestFromRead, containmentFromKarakas } from "../adapters/text/nest-from-read.js";
 
 const N = IS_NODE ? { crypto: (await import("node:crypto")).default, fs: (await import("node:fs")).default, os: (await import("node:os")).default, path: (await import("node:path")).default, url: await import("node:url") } : null;
 const ROOT = IS_NODE ? N.path.resolve(N.path.dirname(N.url.fileURLToPath(import.meta.url)), "..", "..") : null;
@@ -107,11 +107,11 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
     const giver = genderPriorChainFor(w?.competency?.stem ?? w?.language?.stem ?? "en");
     if (giver) { const prior = giver({ text: String(text ?? ""), cast: w.cast ?? [] }); for (const [ref, cls] of prior ?? []) P.weave(h, { cell: "DEF·Figure", kind: "gender", addr: String(ref), body: { gender: cls } }); }
   } catch { /* a giver that throws on this cast is a gap, never a crash */ }
-  // the containment relations (a referent inside another) — the holarchy's part_of edges, from the read's own edges
+  // the containment relations (a referent inside another) — the holarchy's part_of edges, from the
+  // kāraka roles (subject kartṛ inside the locus adhikaraṇa, both proper nouns), not surface labels
   try {
-    const nest = nestFromRead(w);
-    for (const [child, n] of Object.entries(nest?.nodes ?? {})) for (const p of n.parents ?? []) P.weave(h, { cell: "SYN·Pattern", kind: "part_of", addr: `part_of:${child}:${p}`, body: { child, parent: p } });
-  } catch { /* nestFromRead throwing on this read is a gap, never a crash */ }
+    for (const { child, parent } of containmentFromKarakas(w)) P.weave(h, { cell: "SYN·Pattern", kind: "part_of", addr: `part_of:${child}:${parent}`, body: { child, parent } });
+  } catch { /* containmentFromKarakas throwing on this read is a gap, never a crash */ }
   // kāraka edges: the read's own relations, deduped (head|role|arg)
   const edges = new Map();
   for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id); for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) { const k = `${hd.lemma}|${row.karaka}|${row.lemma ?? row.form}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role: row.karaka, arg: row.lemma ?? row.form }); } } }

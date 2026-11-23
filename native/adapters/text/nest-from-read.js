@@ -26,3 +26,37 @@ export function nestFromRead(entry) {
 export const refOfLabel = (nest, label) => nest.refOf.get(String(label).toLowerCase()) ?? null;
 // grain by position on an extracted path (leaf to root), declared: city-like nouns = the subject's own place; country = the root-most; any other noun = the middle holon of a three-holon chain; else a gap
 export function askedByPosition(path, noun) { if (!path?.length) return null; if (["city", "town", "village", "municipality"].includes(noun)) return path[0]; if (noun === "country" || noun === "nation") return path.length >= 2 ? path[path.length - 1] : null; return path.length === 3 ? path[1] : null; }
+
+// containmentFromKarakas — containment from the kāraka roles, not surface labels (the fix for the
+// raw-label noise above). A predicate with a kartṛ (subject) AND an adhikaraṇa (locus) is a
+// containment: the subject is INSIDE the locus. Pāṇini's adhikaraṇa is the locus, so the role IS
+// the relation — no regex over "is in the". The place-kind is the proper-noun filter: both ends
+// PROPN (a named place), which the read's own UPOS gives and the hyperlexicon's `names` ask
+// confirms (name vs noun) — geographic nesting (Topeka ⊂ Kansas), not "book on table".
+export function containmentFromKarakas(entry) {
+  const byPred = new Map();
+  for (const p of entry?.parse ?? []) {
+    const headOf = (id) => p.rows.find((x) => x.id === id);
+    for (const row of p.rows ?? []) {
+      if (row.karaka !== "kartṛ" && row.karaka !== "adhikaraṇa") continue;
+      const hd = row.head ? headOf(row.head) : null;
+      const pred = (hd?.lemma ?? hd?.form ?? "").toLowerCase();
+      if (!pred) continue;
+      const g = byPred.get(pred) ?? { kartṛ: [], adhikaraṇa: [] };
+      g[row.karaka].push({ lemma: (row.lemma ?? row.form ?? "").toLowerCase(), upos: row.upos });
+      byPred.set(pred, g);
+    }
+  }
+  const refOf = new Map();
+  for (const c of entry?.cast ?? []) for (const s of [c.surface, ...(c.allSurfaces ?? [])]) if (!refOf.has(String(s).toLowerCase())) refOf.set(String(s).toLowerCase(), c.ref);
+  const parts = [];
+  for (const [, g] of byPred) {
+    if (!g.kartṛ.length || !g.adhikaraṇa.length) continue;
+    for (const a of g.kartṛ) for (const b of g.adhikaraṇa) {
+      if (a.upos !== "PROPN" || b.upos !== "PROPN") continue;
+      const ra = refOf.get(a.lemma), rb = refOf.get(b.lemma);
+      if (ra && rb && ra !== rb) parts.push({ child: ra, parent: rb });
+    }
+  }
+  return parts;
+}
