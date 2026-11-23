@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the fold — chat</title>
+<style>
+  :root { --ink:#1a1a1a; --paper:#faf9f5; --line:#e3e0d8; --accent:#c9402a; --mut:#7a7368; --cell:#f3f0e8; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,monospace; color:var(--ink); background:var(--paper); height:100vh; display:flex; flex-direction:column; }
+  header { padding:12px 20px; border-bottom:1px solid var(--line); display:flex; align-items:baseline; gap:12px; }
+  header h1 { font-size:16px; margin:0; letter-spacing:.4px; }
+  header .sub { color:var(--mut); font-size:12px; }
+  main { flex:1; display:grid; grid-template-columns: 1fr 340px; min-height:0; }
+  .chat { display:flex; flex-direction:column; min-height:0; border-right:1px solid var(--line); }
+  #messages { flex:1; overflow-y:auto; padding:16px 20px; display:flex; flex-direction:column; gap:10px; }
+  .msg { max-width:76%; padding:9px 13px; border-radius:12px; white-space:pre-wrap; word-break:break-word; }
+  .msg.user { align-self:flex-end; background:var(--ink); color:#fff; border-bottom-right-radius:3px; }
+  .msg.assistant { align-self:flex-start; background:var(--cell); border:1px solid var(--line); border-bottom-left-radius:3px; }
+  .msg .kind { display:block; font-size:10px; letter-spacing:.6px; text-transform:uppercase; opacity:.6; margin-bottom:2px; }
+  .composer { display:flex; gap:8px; padding:12px 20px; border-top:1px solid var(--line); }
+  .composer input { flex:1; font:inherit; padding:10px 12px; border:1px solid var(--line); border-radius:20px; background:#fff; }
+  .composer button { font:inherit; padding:8px 18px; border:1px solid var(--ink); background:var(--ink); color:#fff; border-radius:20px; cursor:pointer; }
+  aside { padding:14px 16px; overflow-y:auto; }
+  h2 { font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--mut); margin:0 0 8px; }
+  .fold { list-style:none; margin:0 0 6px; padding:0; }
+  .triple { border:1px solid var(--line); background:var(--cell); border-radius:6px; padding:6px 9px; margin:0 0 6px; font-size:12.5px; }
+  .triple .pred { font-weight:700; color:var(--accent); }
+  .triple .role { color:var(--mut); font-size:11px; }
+  .triple .val { font-weight:600; }
+  .kicker { font-size:11px; color:var(--mut); }
+  .void { border:1px dashed var(--accent); border-radius:8px; padding:8px 10px; margin-top:8px; background:#fff; font-size:13px; }
+  .void b { color:var(--accent); letter-spacing:.6px; font-size:10px; text-transform:uppercase; margin-right:6px; }
+  .trace { margin-top:8px; }
+  .trace .step { display:flex; gap:8px; padding:4px 0; border-top:1px dashed var(--line); font-size:12px; }
+  .trace .step b { min-width:80px; color:var(--mut); }
+  .cut { color:var(--accent); }
+</style>
+</head>
+<body>
+<header>
+  <h1>the fold</h1>
+  <span class="sub">chat — read facts, ask, and it voices from the growing fold · every turn writes to pharos</span>
+</header>
+<main>
+  <section class="chat">
+    <div id="messages"></div>
+    <div class="composer">
+      <input id="input" placeholder="tell it something, or ask a question…" autofocus />
+      <button id="send">send</button>
+    </div>
+  </section>
+  <aside>
+    <h2>the fold (kāraka triples)</h2>
+    <ul class="fold" id="fold"></ul>
+    <div class="kicker" id="foldMeta"></div>
+    <h2 style="margin-top:18px">last turn</h2>
+    <div id="voidBox"></div>
+    <div class="trace" id="trace"></div>
+    <div id="knowledge"></div>
+  </aside>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const msgs = $("messages"), input = $("input"), sendBtn = $("send"), foldEl = $("fold"), metaEl = $("foldMeta"), voidBox = $("voidBox"), traceEl = $("trace"), knowEl = $("knowledge");
+
+const ROLE_NAME = { predicate:"predicate", "kartṛ":"agent", "karman":"patient", "karaṇa":"instrument", "sampradāna":"recipient", "apādāna":"source", "adhikaraṇa":"locus", "kāla":"time", "hetu":"cause", "prayojana":"purpose" };
+const roleLabel = (k) => ROLE_NAME[k] ?? k;
+
+function addMsg(role, text, kind) {
+  const div = document.createElement("div");
+  div.className = "msg " + role;
+  if (kind) div.innerHTML = `<span class="kind">${kind}</span>${escapeHtml(text)}`;
+  else div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+const escapeHtml = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[c]));
+
+function describeVoid(v) {
+  if (!v) return "";
+  if (v.kind === "gap") {
+    const cons = Object.entries(v.constraints ?? {}).map(([k, val]) => `${roleLabel(k)}=${Array.isArray(val) ? val.join("/") : val}`).join(", ");
+    return `the ${roleLabel(v.role)} slot (a ${v.admits}) of the relation${cons ? ", given " + cons : ""}`;
+  }
+  if (v.kind === "definition") return `the meaning of “${v.target}”`;
+  if (v.kind === "identity") return `who “${v.target}” is in the fold`;
+  if (v.kind === "topic") return `the topic of what has been read`;
+  return "";
+}
+
+function renderFold(triples) {
+  foldEl.innerHTML = "";
+  if (!triples.length) { metaEl.textContent = "the fold is empty — tell it something first."; return; }
+  for (const t of triples) {
+    const li = document.createElement("li"); li.className = "triple";
+    let html = `<span class="pred">${t.predicate}</span>`;
+    for (const [k, v] of Object.entries(t)) {
+      if (k === "predicate" || k === "surface") continue;
+      html += ` <span class="role">· ${roleLabel(k)}</span> <span class="val">${Array.isArray(v) ? v.join(", ") : v}</span>`;
+    }
+    li.innerHTML = html; foldEl.appendChild(li);
+  }
+  metaEl.textContent = `${triples.length} triple${triples.length === 1 ? "" : "s"} in the fold`;
+}
+
+function renderLastTurn(r) {
+  voidBox.innerHTML = "";
+  traceEl.innerHTML = "";
+  knowEl.innerHTML = "";
+  if (!r) return;
+  const dv = describeVoid(r.void);
+  if (dv) voidBox.innerHTML = `<b>DEF’d void</b> ${escapeHtml(dv)}`;
+  else if (r.type === "topic") voidBox.innerHTML = `<b>DEF’d void</b> the topic of what has been read`;
+  if (r.dmd?.length) {
+    const h = document.createElement("h2"); h.style.marginTop = "10px"; h.textContent = "the narrowing"; traceEl.appendChild(h);
+    for (const s of r.dmd) {
+      const div = document.createElement("div"); div.className = "step";
+      let right = "";
+      if (s.step === "gap") right = `asked for the <b>${roleLabel(r.gap)}</b> slot · ${s.questions.length} filled roles as questions`;
+      else if (s.step === "match") {
+        right = `${s.matched}/${s.total} triple${s.total === 1 ? "" : "s"} survived`;
+        if (s.cut?.length) right += ` — cut: ` + s.cut.map((c) => {
+          if (c.missing?.length) return `missing ${c.missing.join(",")}`;
+          return c.disagree.map((d) => `${roleLabel(d.role)} ${Array.isArray(d.got) ? d.got.join(",") : d.got} ≠ ${d.want}`).join(", ");
+        }).join("; ");
+      } else right = JSON.stringify(s);
+      div.innerHTML = `<b>${s.step}</b><span>${right}</span>`;
+      traceEl.appendChild(div);
+    }
+  }
+  if (r.knowledge?.length || r.definition) {
+    const h = document.createElement("h2"); h.style.marginTop = "10px"; h.textContent = "what the givers and priors hold"; knowEl.appendChild(h);
+    const list = r.knowledge ?? [r.definition];
+    for (const k of list) {
+      const box = document.createElement("div"); box.className = "triple";
+      let html = `<span class="pred">${k.word}</span>`;
+      const bits = [];
+      if (k.upos) bits.push(`<span class="role">UPOS</span> <span class="val">${Object.entries(k.upos).map(([t]) => t).join("/")}</span>`);
+      if (k.ipa) bits.push(`<span class="role">sounds</span> <span class="val">/${k.ipa}/</span>`);
+      if (k.primary) bits.push(`<span class="role">means</span> <span class="val">${k.primary}</span>`);
+      box.innerHTML = html + (bits.length ? " " + bits.join(" ") : "");
+      knowEl.appendChild(box);
+    }
+  }
+}
+
+async function refresh() {
+  const s = await (await fetch("/api/state")).json();
+  renderFold(s.triples);
+}
+
+async function send() {
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = "";
+  addMsg("user", text);
+  const r = await (await fetch("/api/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: text }) })).json();
+  addMsg("assistant", r.text || r.error || "", r.kind);
+  renderLastTurn(r.kind === "ask" ? r : null);
+  await refresh();
+}
+
+sendBtn.onclick = send;
+input.addEventListener("keydown", (e) => { if (e.key === "Enter") send(); });
+
+addMsg("assistant", "The fold is empty. Tell it something — a fact, a sentence — then ask a question. It reads into the fold, and every turn is written to pharos.");
+refresh();
+</script>
+</body>
+</html>

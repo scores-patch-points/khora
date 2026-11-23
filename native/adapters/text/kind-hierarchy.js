@@ -48,6 +48,24 @@ export function makeKindGiver({ cacheFile = defaultCache(), fetchImpl = globalTh
     const exact = (j.search ?? []).filter((x) => String(x.label ?? "").toLowerCase() === word.toLowerCase());
     return (exact[0] ?? j.search?.[0])?.id ?? null;
   }
+  // the full entity the word points at: id + label + description, from the same search. This is the
+  // REFERENCE, not the gloss — "who is Tolstoy" resolves to the person, not the surname's etymology.
+  async function entityInfo(word) {
+    const u = SEARCH_API + "?" + new URLSearchParams({ action: "wbsearchentities", search: word, language: "en", uselang: "en", type: "item", limit: "5", format: "json" });
+    const j = await fetchJson(u);
+    const exact = (j.search ?? []).filter((x) => String(x.label ?? "").toLowerCase() === word.toLowerCase());
+    const r = exact[0] ?? j.search?.[0] ?? null;
+    return r ? { id: r.id, label: r.label ?? null, description: r.description ?? null } : null;
+  }
+  // the P279 chain WITH English labels, one SPARQL query — the human-readable kind, not raw Q-ids.
+  async function kindChain(word) {
+    const e = await entityInfo(word);
+    if (!e) return { ...e, ancestors: [] };
+    const q = `SELECT ?ancestorLabel WHERE { wd:${e.id} wdt:P279* ?ancestor . ?ancestor rdfs:label ?ancestorLabel . FILTER(lang(?ancestorLabel) = "en") }`;
+    const j = await fetchJson(SPARQL + "?format=json&query=" + encodeURIComponent(q), "application/sparql-results+json");
+    const ancestors = (j.results?.bindings ?? []).map((b) => String(b.ancestorLabel?.value ?? "")).filter(Boolean);
+    return { ...e, ancestors };
+  }
   // all P279 ancestors, one SPARQL query (the transitive subclass-of closure)
   async function ancestorsOf(id) {
     const q = `SELECT ?ancestor WHERE { wd:${id} wdt:P279* ?ancestor . }`;
