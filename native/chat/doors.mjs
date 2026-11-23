@@ -45,7 +45,7 @@ const claimIds = (claims, p) => (claims?.[p] ?? []).map((c) => c.mainsnak?.datav
 const q = (o) => new URLSearchParams(o).toString();
 
 /** makeDoors({ know, janus, now, getJson, calculate, rowsOf, sentences }) -> { list, get, fillers, call } */
-export function makeDoors({ know = null, janus = null, now = () => new Date(), getJson = fetchJson, calculate, rowsOf, sentences, threadId = "thread", log = null } = {}) {
+export function makeDoors({ know = null, janus = null, now = () => new Date(), getJson = fetchJson, calculate, rowsOf, sentences, threadId = "thread", log = null, reason = false } = {}) {
   const net = (why) => (know ? { on: true } : { on: false, why: why ?? "the givers are not available in this process" });
   const defs = [
     { name: "clock", about: "the date and the time now", usage: "/clock [day | time | date]", example: "What day is it?", fills: ["time_of_now"], needs: "none", status: () => ({ on: true }),
@@ -106,7 +106,8 @@ export function makeDoors({ know = null, janus = null, now = () => new Date(), g
       async run({ args }, host) { const [term, name] = String(args ?? "").split(" of ").map((x) => x.trim()); if (!term || !name) return { ok: false, gap: "needs_argument", text: "Use it as /kin wife of <name>." };
         const r = host.kin(term, name); if (r.gap) return { ok: false, gap: r.gap.kind, text: `The thread holds no fact that answers it (${r.gap.kind.split("_").join(" ")}).`, cites: [{ label: "janus kinship" }] };
         return { ok: true, text: `${r.answers.join(" and ")}.`, cites: [{ label: "janus kinship" }] }; } },
-    { name: "reason", about: "logic and epistemic puzzles (who knows what, in turn)", usage: "/reason <puzzle>", fills: [], needs: "reader for puzzles", status: () => ({ on: false, why: "the reasoner exists (organs/epistemic-core.js: possible worlds and public announcements); reading a puzzle's text into it is not wired yet" }), async run() { return { ok: false, gap: "not_wired", text: "Not wired yet." }; } },
+    { name: "reason", about: "logic and epistemic puzzles (who knows what, in turn): the readings of the text are listed, each is run, and the one that leaves a single answer holds", usage: "/reason <puzzle>", example: "A teacher writes six words on a board…", working: () => "Setting the puzzle up and running each reading…", fills: [], needs: "the puzzle reader (organs/puzzle-reader.js)", status: () => (reason ? { on: true } : { on: false, why: "the puzzle reader (native/organs/puzzle-reader.js) is not in this checkout" }),
+      async run({ args }, host) { return host.reason(args); } },
   ];
   const by = new Map(defs.map((d) => [d.name, d]));
 

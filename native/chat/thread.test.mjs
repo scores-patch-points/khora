@@ -32,3 +32,10 @@ test("a request is not a fact: about what is not known it is acted on, about the
   const w = await thread.turn("open the door"); assert.equal(w.gap, "act_not_possible"); assert.equal(thread.state().sentences, before);
   const g = await thread.turn("who is the president?"); assert.equal(g.handled, false); assert.equal(g.gap, "unknown_description");
 });
+test("statements and a closing question in one message: the statements are read into the fold, then the question is answered from them", T, async () => {
+  const before = thread.state().sentences;
+  const r = await thread.turn("Pavel gave Irina a map. Who gave Irina a map?");
+  assert.equal(r.handled, true); assert.match(r.text, /Pavel/);
+  assert.equal(thread.state().sentences, before + 1, "the statement was read; the question was not stored");
+  assert.equal(r.introduced[0].source, null, "what the user said is not attributed to a giver");
+});

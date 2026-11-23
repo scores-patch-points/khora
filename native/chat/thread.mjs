@@ -27,6 +27,8 @@ import { makeIdeation } from "./ideation.mjs";
 import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
 import { detok } from "./personas.mjs";
+// the puzzle reader is another session's organ (pure; imports only the reasoner): without it the door is off and says so
+const puzzleOrgan = await import("../organs/puzzle-reader.js").catch(() => null);
 
 const WH = new Set(["who", "whom", "what"]);
 const WH_ANY = new Set(["who", "whom", "what", "when", "where", "why", "how", "which"]);
@@ -91,7 +93,14 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // researched by the chat itself, and `pending` is the open gap "go research it" means.
   const qids = new Map();               // lower-cased name -> Wikidata id, set when a door found the person
   const setQid = (names, qid) => { for (const n of names) if (n && qid) qids.set(String(n).toLowerCase(), qid); };
-  const doors = makeDoors({ know, janus, now, ...(getJson ? { getJson } : {}), calculate, rowsOf: (s) => parser.rowsOf(s) ?? [], sentences: (t) => splitSentences(t, { abbreviations: abbr(t) }).map((c) => c.text), threadId: id, log });
+  const doors = makeDoors({ know, janus, now, reason: !!puzzleOrgan, ...(getJson ? { getJson } : {}), calculate, rowsOf: (s) => parser.rowsOf(s) ?? [], sentences: (t) => splitSentences(t, { abbreviations: abbr(t) }).map((c) => c.text), threadId: id, log });
+  const puzzleOf = (text) => {
+    if (!puzzleOrgan) return null;
+    const sents = splitSentences(String(text ?? ""), { abbreviations: abbr(String(text ?? "")) }).map((c, i) => ({ order: i, text: c.text, rows: parser.rowsOf(c.text) ?? [] }));
+    if (sents.length < 3) return null;
+    const r = puzzleOrgan.readPuzzle(sents, { reader: puzzleOrgan.READER });
+    return r?.read?.items?.items?.length >= 2 && r?.read?.agents?.length >= 2 ? r : null;   // a list of things and at least two people: the scene of a puzzle
+  };
   let pending = null;                   // { gap, args, question }: the last question no door has filled yet
   let chain = Promise.resolve();        // one message at a time: a slow lookup must not let the next message overtake it (found 2026-11-23)
   const serial = (fn) => (...args) => { const run = chain.then(() => fn(...args)); chain = run.catch(() => {}); return run; };
@@ -154,6 +163,29 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const host = {
       setQid, qidOf: (n) => qids.get(String(n).toLowerCase()) ?? null, call: (name, args) => callDoor(name, args),
       kin: (term, name) => { const ref = refByName(name); return ref ? kinAtom({ janus, term, of: ref, facts: kinFacts() }) : { gap: { kind: "unknown_referent" } }; },
+      reason: async (text) => { const p = puzzleOf(text); if (!p) return { ok: false, gap: "not_a_puzzle", text: "That doesn't read as a puzzle I can set up: I look for a list of things and at least two people." }; const o = puzzleThink(p, text); return { ok: o.handled, gap: o.gap, text: o.text, cites: [{ label: "the epistemic reasoner" }] }; },
+    };
+    // ---- PUZZLES: the reader lists the readings of the text, the reasoner runs each, the one that leaves a single answer holds (organs/puzzle-reader.js, epistemic-core.js).
+    // Each reading is put forward as a candidate and tested; the answer rests on the reading that holds, so janus's spiral suspends it if that reading falls.
+    const GAP_WORDS = { holding_not_read: "what each of them holds", compound_announcement_not_read: "what they said about each other's knowledge", no_question: "what is being asked", no_items: "the list of things", no_agents: "who the people are" };
+    const puzzleThink = (r, text) => {
+      const kind = r.read.items.kind ?? "thing", n = r.read.items.items.length, agents = r.read.agents, plural = (k, c) => (c === 1 ? k : `${k}s`);
+      trace.push({ step: "puzzle", items: n, agents, readings: r.candidates?.length ?? 0, resolved: r.resolved?.answer ?? null });
+      const witness = `${id}:message${order}#0-${Math.max(1, String(text).length)}`, ids = new Map();
+      if (ideation) for (const c of r.candidates ?? []) {
+        const cid = idea({ label: c.reading, relation: { subject: "the puzzle", verb: "is read as", object: c.reading }, door: "presented", witnesses: [witness] }); ids.set(c.id, cid);
+        const by = "the epistemic reasoner (possible worlds, public announcements)", left = c.answers?.length ?? 0;
+        ideation.assess(cid, c.standing === "holds" ? { verdict: "supported", method: "deduction", by, basis: `this reading leaves one answer: ${c.answers[0]}`, license: "a puzzle presupposes that its own question has exactly one answer" }
+          : c.standing === "refuted" ? { verdict: "refuted", method: "deduction", by, basis: "this reading leaves no answer" } : { verdict: "unresolved", method: "deduction", by, basis: `this reading leaves ${left} answers` });
+      }
+      if (r.resolved) {
+        const holder = (r.candidates ?? []).find((c) => c.id === r.resolved.candidate), steps = holder?.trace ?? [], turns = r.read.turns ?? [];
+        if (ideation && ids.has(r.resolved.candidate)) { const a = idea({ label: `the ${kind} is ${r.resolved.answer}`, relation: { subject: `the ${kind}`, verb: "is", object: String(r.resolved.answer) }, door: "induced", premises: [ids.get(r.resolved.candidate)] }); ideation.assess(a, { verdict: "supported", method: "deduction", by: "the epistemic reasoner", basis: "the one answer the supported reading leaves", license: "run over every possible world, not narrated" }); }
+        const path = steps.length && turns.length === steps.length ? ` After ${turns.map((t, i) => `${t.agent} said ${t.reply}, ${steps[i].answers} ${plural(kind, steps[i].answers)} ${steps[i].answers === 1 ? "was" : "were"} still possible`).join("; after ")}.` : "";
+        return { handled: true, gap: null, text: `${String(r.resolved.answer)[0].toUpperCase()}${String(r.resolved.answer).slice(1)}.${path}` };
+      }
+      const open = (r.candidates ?? []).filter((c) => c.standing === "open").length, what = r.gap ? `not ${GAP_WORDS[r.gap.kind] ?? r.gap.kind.split("_").join(" ")}` : (r.candidates ?? []).some((c) => c.standing === "holds") ? "but more than one reading holds" : open ? `but ${open} readings leave more than one answer` : "but no reading of it leaves an answer";
+      return { handled: false, gap: r.gap?.kind ?? "no_unique_reading", text: `I read ${n} ${plural(kind, n)} and ${agents.length} people (${agents.join(", ")}), ${r.gap ? "but" : ""} ${what}.`.split(" ,").join(",").split("  ").join(" ") };
     };
     const callDoor = async (name, args) => {
       const working = doors.get(name)?.working?.(args); if (working) opts.onStatus?.(working);   // what a chat app shows while it looks something up
@@ -223,6 +255,8 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       return null;
     };
 
+    // a message that is a whole puzzle goes to the reason door
+    if (opts.door) { const out = await callDoor(opts.door, q); return done({ type: "puzzle", handled: out.ok, gap: out.ok ? null : out.gap, text: out.text, cites: out.cites ?? [] }); }
     // slash: a door called by hand
     if (q.startsWith("/")) {
       const parts = q.slice(1).trim().split(" ").filter(Boolean), cmd = (parts[0] ?? "").toLowerCase(), rest = parts.slice(1).join(" ");
@@ -330,7 +364,8 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     // what the question is about, by part of speech (no word list): the content words, without the question word, the auxiliaries and the function words
     const topic = qRows.filter((r) => !["PRON", "AUX", "PUNCT", "DET", "ADP", "SCONJ", "CCONJ", "PART"].includes(r.upos)).map((r) => r.form).join(" ") || null;
     const looked = [];
-    if (!a.answers?.length && topic) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
+    const aboutUs = qRows.some((r) => r.upos === "PRON" && ["1", "2"].includes(featsOf(r.feats).Person));   // a question about you or me is about this chat, not about the world
+    if (!a.answers?.length && topic && !aboutUs) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
       const fill = doors.fillers("no_answer"); trace.push({ step: "research", gap: "no_answer", doors: fill, topic });
       for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q)); break; } looked.push(w.text.slice(0, -1)); }
     }
@@ -343,18 +378,32 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       last = out; return out;
     }
     const gap = a.gaps?.[0];
-    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: looked.length ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : "I haven't been told that.", detail: gap?.detail ?? null, ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
+    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: aboutUs && !a.answers?.length ? "That's about you or me, and I only know what's been said in this chat." : looked.length ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : "I haven't been told that.", detail: gap?.detail ?? null, ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
   }
 
   /** turn(message) → the reply to ONE message, whatever it is: small talk, a calculation, a question, or a statement to read into the fold */
   async function turn(message, opts = {}) {
     const t = String(message ?? "").trim(); if (!t) return null;
     const rows = parser.rowsOf(t) ?? [], ws = rows.filter((r) => r.upos !== "PUNCT").map((r) => String(r.lemma ?? r.form).toLowerCase());
+    // a whole puzzle (a list of things, at least two people, turns of who said what) is read by the puzzle reader and run by the reasoner; it is not stored as facts
+    if (puzzleOf(t)) return ask(t, { ...opts, door: "reason" });
     const small = ws.length <= 3 ? SMALL.find(([words]) => words.some((w) => ws.includes(w))) : null;
     if (small) return (last = { type: "smalltalk", handled: true, text: small[1], question: t, tools: [], trace: [{ step: "smalltalk" }] });
     if (t.startsWith("/")) return ask(t, opts);
     const root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT");
     if (isRequest(rows, root) && rows.filter((r) => r.head === 0 && r.upos !== "PUNCT").length === 1 && splitSentences(t, { abbreviations: abbr(t) }).length === 1) return ask(t, { ...opts, request: true });
+    // a fragment (no predicate at all: "Ok dear", "Yes.", "good morning") is a social act, not a fact: nothing is stored. A bare name is a topic.
+    if (rows.length && !rows.some((r) => r.upos === "VERB" || r.upos === "AUX") && !t.endsWith("?") && !WH_ANY.has(ws[0]) && !calculate(rows)) {
+      const content = rows.filter((r) => !["PUNCT", "INTJ"].includes(r.upos));
+      if (content.length && content.every((r) => r.upos === "PROPN")) return ask(`Who is ${content.map((r) => r.form).join(" ")}?`, opts);
+      return (last = { type: "social", handled: true, text: "Okay.", question: t, tools: [], trace: [{ step: "social", read: "no predicate: an acknowledgement, not a fact" }] });
+    }
+    // statements and then a question in one message ("Mina gave Jonathan a book. Who gave him a book?"): the statements are read into the fold, then the last sentence is answered
+    const cut = splitSentences(t, { abbreviations: abbr(t) });
+    if (cut.length > 1 && cut.at(-1).text.trim().endsWith("?") && !cut.slice(0, -1).some((c) => c.text.trim().endsWith("?"))) {
+      const head = t.slice(0, cut.at(-1).offset).trim(), read = await say(head), out = await ask(cut.at(-1).text, opts);
+      return { ...out, introduced: [{ text: head, source: null, read }, ...(out.introduced ?? [])] };
+    }
     if (t.endsWith("?") || WH_ANY.has(ws[0]) || calculate(rows)) return ask(t, opts);
     return say(t);
   }

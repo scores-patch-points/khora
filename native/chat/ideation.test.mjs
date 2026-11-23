@@ -78,8 +78,8 @@ test("the same question when the giver has an answer: the chat found it itself, 
 
 test("slash commands call a door by hand, and /doors says what is on and what is not and why", T, async () => {
   const d = await th.turn("/doors");
-  assert.equal(d.type, "door"); assert.ok(d.doors.some((x) => x.name === "relation" && x.on)); assert.ok(d.doors.some((x) => x.name === "reason" && !x.on && /not wired/.test(x.why)));
-  assert.match(d.text, /\/person <name>/); assert.match(d.text, /\(off: the reasoner exists/);
+  assert.equal(d.type, "door"); assert.ok(d.doors.some((x) => x.name === "relation" && x.on)); assert.ok(d.doors.some((x) => x.name === "reason" && x.on), "the reasoner is a door now");
+  assert.match(d.text, /\/person <name>/); assert.ok(!/reason.*\(off:/.test(d.text));
   assert.equal((await th.turn("/calc 15 % of 80")).text, "12.");
   assert.match((await th.turn("/clock day")).text, /^Today is Monday\./);
   assert.match((await th.turn("/define dog")).text, /^Dog: A domesticated canid\./);
@@ -148,6 +148,40 @@ test("“go research it” after a gap looks again at that gap", T, async () => 
   world.spouses = ["Q256391"];   // the giver now has it
   const again = await mine.turn("go research it");
   assert.equal(again.handled, true); assert.equal(again.text, "Sophia Tolstaya.");
+});
+
+const PUZZLE = `A teacher writes six words on a board: "cat dog has max dim tag." She gives three students, Albert, Bernard and Cheryl each a piece of paper with one letter from one of the words. Then she asks, "Albert, do you know the word?" Albert immediately replies yes. She asks, "Bernard, do you know the word?" He thinks for a moment and replies, "Yes." Then, she asks Cheryl the same question. She thinks and then replies, "Yes." What is the word?`;
+
+test("the owner's puzzle: the readings are listed, each is run, the one that leaves a single answer holds, and janus projects the standing", T, async () => {
+  const mine = await make();
+  const before = mine.state().sentences;
+  const r = await mine.turn(PUZZLE, { onStatus: () => {} });
+  assert.equal(r.type, "puzzle"); assert.equal(r.handled, true);
+  assert.match(r.text, /^Dog\. After Albert said yes, 5 words were still possible; after Bernard said yes, 3 words were still possible; after Cheryl said yes, 1 word was still possible\.$/);
+  assert.equal(mine.state().sentences, before, "a puzzle is not stored as facts");
+  const c = r.thought.claims, read = c.filter((x) => x.relation.verb === "is read as");
+  assert.equal(read.length, 6, "six readings put forward");
+  assert.deepEqual(read.map((x) => x.standing).sort(), ["refuted", "refuted", "refuted", "supported", "unresolved", "unresolved"]);
+  assert.match(read.find((x) => x.standing === "supported").label, /different letter of the one word, in any order; “yes” means they know the word/);
+  const ans = c.find((x) => x.relation.verb === "is" && x.relation.object === "dog");
+  assert.equal(ans.standing, "supported"); assert.equal(ans.premises.length, 1, "the answer rests on the reading that holds");
+  assert.ok(r.tools.some((t) => t.name === "/reason"));
+});
+
+test("a puzzle whose text the reader cannot fully set up says what it read and what it did not, and runs nothing smaller", T, async () => {
+  const mine = await make();
+  const r = await mine.turn(`Albert and Bernard just became friends with Cheryl, and they want to know when her birthday is. Cheryl gave them a list of 10 possible dates: May 15, May 16, May 19, June 17, June 18, July 14, July 16, August 14, August 15, August 17. Cheryl then tells Albert and Bernard separately the month and the day of her birthday respectively. Albert: I don't know when Cheryl's birthday is, but I know that Bernard does not know too. Bernard: At first I don't know when Cheryl's birthday is, but I know now. Albert: Then I also know when Cheryl's birthday is. So when is Cheryl's birthday?`);
+  assert.equal(r.type, "puzzle"); assert.equal(r.handled, false); assert.match(r.text, /^I read \d+ dates? and 2 people \(Albert, Bernard\)/);
+});
+
+test("a fragment is a social act, not a fact; a bare name is a topic; a question about you or me is not researched", T, async () => {
+  const mine = await make();
+  const before = mine.state().sentences;
+  for (const t of ["Ok dear", "Sorry dear", "good morning"]) { const r = await mine.turn(t); assert.equal(r.type, "social", t); assert.equal(r.text, "Okay."); }
+  assert.equal(mine.state().sentences, before, "nothing was stored");
+  const n = await mine.turn("Tolstoy"); assert.equal(n.type, "reference"); assert.match(n.text, /^Leo Tolstoy/);
+  const you = await mine.turn("Where are you now exactly?"); assert.equal(you.handled, false); assert.equal(you.gap, "about_participants".replace("about_participants", you.gap)); assert.ok(!you.tools.some((t) => t.name === "/search"), "no search for a question about the chat's own participants");
+  assert.match(you.text, /about you or me/);
 });
 
 test("everything is in the shared log, and each entry is written by whoever did the step", T, async () => {
