@@ -150,10 +150,21 @@ export function makeFold({ model }) {
     // a copular/equational WH question ("what is X", "who is X") is definitional, not relational: the
     // parser makes the nominal predicate the root, so the root is a noun/adjective/proper noun. A
     // "what does X mean" / "define X" is definitional too, with the target the non-verb content word.
-    let definitional = false, target = null;
+    let definitional = false, target = null, isName = false;
+    const propns = qRows.filter((r) => r.upos === "PROPN").map((r) => LEMMA(r));
     if (q.form === "wh" && root) {
-      if (["NOUN", "PROPN", "ADJ"].includes(root.upos)) { definitional = true; target = root.lemma; }
+      if (["NOUN", "PROPN", "ADJ"].includes(root.upos)) {
+        definitional = true;
+        isName = propns.length > 0;
+        // a multi-word name is ONE mention: "who is Donald Trump" resolves "donald trump", not "trump".
+        target = propns.length > 1 ? propns.join(" ") : root.lemma;
+      }
       else if (root.lemma === "mean" || root.lemma === "define") { definitional = true; target = words.find((w) => w !== root.lemma) ?? words[0] ?? null; }
+      else if (propns.length && qRows.some((r) => r.deprel === "cop")) {
+        // "Who is Donald Trump?" — the parser made "who" the root and the name a relative clause; the
+        // name is the target regardless of the mis-parse.
+        definitional = true; isName = true; target = propns.join(" ");
+      }
     }
     // SIGNIFICANCE: a referent the reading already admitted outranks the dictionary's generic sense.
     // "who is Mina" names a being in the fold, so it is answered by her relations, not by the givers.
@@ -162,10 +173,17 @@ export function makeFold({ model }) {
       turns.push(turn);
       return turn;
     }
-    // REFERENCE: "who is X" (a person) resolves to the THING in the world, not the word's etymology —
+    // REFERENCE: "who is X" (a NAME) resolves to the THING in the world, not the word's etymology —
     // "who is Tolstoy" is the author, not "a transliteration of the surname".
-    if (definitional && target && admits === "person") {
+    if (definitional && target && admits === "person" && isName) {
       const turn = { kind: "ask", type: "reference", question, target, admits, words, void: { kind: "reference", target, layer: "existence" } };
+      turns.push(turn);
+      return turn;
+    }
+    // CURRENT: "who is the president" — a TITLE, not a name — asks for the current holder, which is
+    // time-dependent knowledge, not a static entity. Typed as such, never answered with a random person.
+    if (definitional && target && admits === "person" && !isName) {
+      const turn = { kind: "ask", type: "current", question, target, admits, words, void: { kind: "current", target, layer: "existence" } };
       turns.push(turn);
       return turn;
     }

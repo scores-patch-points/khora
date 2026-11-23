@@ -83,8 +83,9 @@ export function makeKindGiver({ cacheFile = defaultCache(), fetchImpl = globalTh
     const results = j.search ?? [];
     const candidates = results.map((r) => ({ id: r.id, label: r.label ?? null, description: r.description ?? null }));
     for (const r of results) { try { const types = await instanceOf(r.id); if (types.includes("Q5")) return { id: r.id, label: r.label ?? null, description: r.description ?? null, candidates }; } catch { /* next */ } }
-    const f = results[0] ?? null;
-    return { id: f?.id ?? null, label: f?.label ?? null, description: f?.description ?? null, candidates };
+    // no human found: a title/office is not a person. Do not answer with the title; the candidates stay
+    // for the thought (the research trail), but there is no person to admit.
+    return { id: null, label: null, description: null, candidates };
   }
   // all P279 ancestors, one SPARQL query (the transitive subclass-of closure)
   async function ancestorsOf(id) {

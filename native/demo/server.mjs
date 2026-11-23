@@ -85,10 +85,14 @@ async function respond(r) {
   else if (r.type === "reference") {
     const e = await know.person(r.target);
     r.entity = e;
-    if (e) fold.admit(r.target, e.label ?? r.target, e.description);
+    if (e?.id) fold.admit(r.target, e.label ?? r.target, e.description); // only a genuine being is admitted
     voiced = e?.description ? `${e.label ?? r.target} — ${e.description}.` : null;
     const cands = (e?.candidates ?? []).slice(0, 5).map((c) => `${c.label}${c.description ? ` — ${c.description}` : ""}`);
-    r.thought = thoughtOf(r, { candidates: cands.length ? `search "${r.target}" returned ${cands.join(" · ")}` : null, prior: { giver: "Wikidata (wbsearchentities + P31)", out: "filtered to instance-of-human" }, rule: "reference: resolve the name to the person, not the surname", release: e?.description ?? "no person found" });
+    r.thought = thoughtOf(r, { candidates: cands.length ? `search "${r.target}" returned ${cands.join(" · ")}` : null, prior: { giver: "Wikidata (wbsearchentities + P31)", out: "filtered to instance-of-human" }, rule: "reference: resolve the name to the person, not the surname or the title", release: e?.description ?? "no person found" });
+  }
+  else if (r.type === "current") {
+    voiced = `I don't know who the current ${r.target} is — that is time-dependent knowledge, and I have no giver for it.`;
+    r.thought = thoughtOf(r, { prior: { giver: "none", out: "the current officeholder is time-dependent" }, rule: "a title is not a person; never answer it with a random human", release: "not known (time-dependent)" });
   }
   else if (r.type === "kind") {
     const k = await know.kindOf(r.target);
