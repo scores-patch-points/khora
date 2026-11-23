@@ -56,12 +56,12 @@ http.createServer(async (req, res) => {
       let payload;
       if (r.type === "read") {
         const n = weaveSay(log, thread.id, text, r, thread.engine.S.read?.cast);
-        payload = { role: "assistant", kind: "read", handled: true, text: r.text, facts: r.facts, referents: r.referents, wrote: n };
+        payload = { role: "assistant", kind: "read", handled: true, text: r.text, facts: r.facts, referents: r.referents, wrote: n, thought: r.thought ?? null, taken: r.taken ?? null, acts: r.acts ?? null };
       } else {
         weaveQuestion(log, r);
         // a sentence a giver supplied (Wikidata, Wikipedia) went into the thread as the giver's: it is written as such, never as the user's
         for (const g of r.introduced ?? []) weaveSay(log, thread.id, g.text, g.read, thread.engine.S.read?.cast, { given: g.source });
-        payload = { role: "assistant", kind: r.type, handled: r.handled, text: r.text, evidence: r.evidence ?? [], trace: r.trace ?? [], tools: r.tools ?? [], from: r.from ?? null, gap: r.gap ?? null, persona: r.persona ?? null, thought: r.thought ?? null, cites: r.cites ?? [], retry: !!r.research };
+        payload = { role: "assistant", kind: r.type, handled: r.handled, text: r.text, evidence: r.evidence ?? [], trace: r.trace ?? [], tools: r.tools ?? [], from: r.from ?? null, gap: r.gap ?? null, persona: r.persona ?? null, thought: r.thought ?? null, cites: r.cites ?? [], retry: !!r.research, taken: r.taken ?? null, acts: r.acts ?? null };
       }
       if (stream) { res.write(`${JSON.stringify({ reply: payload })}\n`); return res.end(); }
       return json(res, 200, payload);

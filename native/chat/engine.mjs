@@ -510,7 +510,7 @@ const address = (span) => (span ? { chars: span, bytes: [S.B[span[0]], S.B[span[
 const chapterAt = (pos) => { const c = S.chapters.find((x) => x.start <= pos && pos < x.end); return c ? (c.book === c.title ? c.title : `${c.book} · ${c.title}`) : null; };
 const clip = (span, n = 320) => (span ? S.text.slice(span[0], Math.min(span[1], span[0] + n)).split("\r\n").join(" ").split("\n").join(" ") : "");
 
-async function answer(q, { upTo = null, limit = 12, polarity = false, neg = false } = {}) {
+async function answer(q, { upTo = null, limit = 12, polarity = false, neg = false, skip = null } = {}) {
   const t0 = performance.now();
   const Q = await readQuestion(q);
   const out = { question: q, read: Q, answers: [], partial: [], synonyms: [], given: [], gaps: [], limits: ["participants are matched by their word (lemma or a proper name in the phrase), not by a referent: the in-order read has no cast yet", "the hyperlexicon store holds names and relations, no glosses"], scope: upTo ? { upTo, chapter: chapterAt(upTo) } : { whole: true } };
@@ -524,7 +524,7 @@ async function answer(q, { upTo = null, limit = 12, polarity = false, neg = fals
     const extra = new Set(); for (const id of syn) for (const w of S.nodeKriyas.get(id) ?? []) if (w !== Q.kriya) extra.add(w);
     out.synonyms = [...extra].slice(0, 20); kriyas = [Q.kriya, ...out.synonyms];
   }
-  const inScope = (f) => !upTo || (f.span && f.span[1] <= upTo);
+  const inScope = (f) => (!upTo || (f.span && f.span[1] <= upTo)) && !(skip && skip.has(f.order));   // `skip`: sentences the speaker took back
   let cands = kriyas.flatMap((k) => (S.byKriya.get(k) ?? []).map((f) => ({ f, viaSynonym: k !== Q.kriya }))).filter(({ f }) => inScope(f));
   // POLARITY (opt-in: the book panel keeps its old answers): "Mina did not give Jonathan a book" is not a frame that says who gave. A frame answers a question of its own
   // polarity only, and an affirmed frame is RETRACTED by a later negated one about the same event (same action, every role the negated clause names filled by the same participant).

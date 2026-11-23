@@ -26,6 +26,7 @@ import { loadNameGender, MIN_EVIDENCE } from "../adapters/text/name-gender.js";
 import { makeIdeation } from "./ideation.mjs";
 import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
+import { LABEL, MARK_TEXT, marksOf, candidates, judge, takenAs } from "./acts.mjs";
 import { detok } from "./personas.mjs";
 // the puzzle reader is another session's organ (pure; imports only the reasoner): without it the door is off and says so
 const puzzleOrgan = await import("../organs/puzzle-reader.js").catch(() => null);
@@ -57,7 +58,9 @@ export function calculate(rows) {
   return { expression: expr, value: Math.round(seq[0] * 1e9) / 1e9 };
 }
 // small talk: closed-class words only, and only when the whole message is short
-const SMALL = [[["hello", "hi", "hey", "greeting"], "Hello."], [["thank", "thanks"], "You're welcome."], [["bye", "goodbye"], "Goodbye."]];
+const HELP_TEXT = "I can tell you the date and the time, do arithmetic, define words, look up well-known people, and remember what you tell me and answer questions about it. I can't write, research or act on requests, and there's no language model in me.";
+// the English reader's small-talk table (a declared parameter of the English reader, one place): word -> the social reply. Authored chrome.
+const SMALL = [[["hello", "hi", "hey", "greeting"], "Hello."], [["thank", "thanks"], "You're welcome."], [["bye", "goodbye"], "Goodbye."], [["help"], HELP_TEXT]];
 const NOMINAL = new Set(["PROPN", "NOUN", "PRON"]);
 // a REQUEST (an imperative): the reader marks the root verb Mood=Imp, or as a bare infinitive (VerbForm=Inf), and it has no subject, no
 // auxiliary and no "to" of its own ("go research it", "tell me a joke"); such a sentence is not a fact and is not read into the fold
@@ -101,6 +104,9 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const r = puzzleOrgan.readPuzzle(sents, { reader: puzzleOrgan.READER });
     return r?.read?.items?.items?.length >= 2 && r?.read?.agents?.length >= 2 ? r : null;   // a list of things and at least two people: the scene of a puzzle
   };
+  let lastAct = null;                   // { claim, orders, dependents }: what the chat took the last message to be, and what was built on it
+  const withdrawn = new Set();          // orders of sentences the speaker took back: never an answer
+  let msgN = 0;
   let pending = null;                   // { gap, args, question }: the last question no door has filled yet
   let chain = Promise.resolve();        // one message at a time: a slow lookup must not let the next message overtake it (found 2026-11-23)
   const serial = (fn) => (...args) => { const run = chain.then(() => fn(...args)); chain = run.catch(() => {}); return run; };
@@ -155,9 +161,9 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const refOf = (r) => probe.mentionOf[`${order}.${r.id}`] ?? null;
     // IDEATION: what a reply could say is put forward as candidates, tested by an instrument (janus's organs where they apply), and the
     // standing of each is read back off the log (ideation.mjs). `thought` is that reading, shown with the reply.
-    const ideas = [], idea = (spec) => { const id = ideation.propose(spec); ideas.push(id); return id; };
+    const ideas = [...(opts.actIds ?? [])], idea = (spec) => { const id = ideation.propose(opts.actPremise && spec.door !== "given" ? { ...spec, premises: [...(spec.premises ?? []), opts.actPremise] } : spec); ideas.push(id); return id; };   // what rests on the reading of the message depends on it; a giver's word does not (it stays licensed by the giver)
     const done = (r) => { if (r.handled === false && r.research) pending = { ...r.research, question: q }; else if (r.handled && !["meta", "smalltalk", "door"].includes(r.type)) pending = null; return finish(r); };
-    const finish = (r) => ({ question: q, ...r, cites: r.cites ?? (r.from ? [{ label: r.from }] : cites), ...(introduced.length ? { introduced } : {}), trace, tools: calls, persona: persona ? { name: persona.name, source: persona.source } : null, thought: ideation && ideas.length ? ideation.view(ideas) : null });
+    const finish = (r) => ({ question: q, ...r, cites: r.cites ?? (r.from ? [{ label: r.from }] : cites), ...(introduced.length ? { introduced } : {}), ideaIds: ideas, trace, tools: calls, persona: persona ? { name: persona.name, source: persona.source } : null, thought: ideation && ideas.length ? ideation.view(ideas) : null });
     // ---- DOORS: called by hand (/name args) or by the chat itself, because not knowing is the signal (doors.mjs)
     const refByName = (name) => (cast?.referents ?? []).find((b) => (b.forms ?? []).some(([f]) => String(f).toLowerCase() === String(name).toLowerCase()))?.ref ?? null;
     const host = {
@@ -303,7 +309,8 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const wordsOf = qRows.filter((r) => r.upos !== "PUNCT").map(lemma), has = (...ws) => ws.some((w) => wordsOf.includes(w));
     const calc = calculate(qRows);
     if (calc) { await tool("calculate", { expression: calc.expression }, () => calc); return done({ type: "calculation", handled: true, text: calc.error ? `That's a ${calc.error}, so there is no answer.` : `${calc.value.toLocaleString("en-US", { maximumFractionDigits: 9 })}.`, from: "arithmetic" }); }
-    if (has("help") || (has("what") && has("can") && has("you", "u") && has("do"))) { trace.push({ step: "help" }); return done({ type: "help", handled: true, text: "I can tell you the date and the time, do arithmetic, define words, look up well-known people, and remember what you tell me and answer questions about it. I can't write, research or act on requests, and there's no language model in me." }); }
+    // "help", "help me": a longer message that merely contains the word is about something else
+    if ((has("help") && wordsOf.length <= 2) || (has("what") && has("can") && has("you", "u") && has("do"))) { trace.push({ step: "help" }); return done({ type: "help", handled: true, text: HELP_TEXT }); }
     if (has("how") && has("you", "u") && wordsOf.length <= 4) return done({ type: "smalltalk", handled: true, text: "I'm a program, so I don't have good days or bad ones, but I'm working." });
     if (wordsOf.length === 1 && WH_ANY.has(wordsOf[0])) return done({ type: "relational", handled: false, gap: "needs_more", text: `${cap(wordsOf[0])} what? Tell me a bit more and I'll try.` });
     // time and place: the clock, a code-giver
@@ -361,10 +368,10 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
     // relational: the engine's answer over the frames
     const qNeg = qRows.some((r) => String(r.feats ?? "").split("|").includes("Polarity=Neg"));   // the question's own polarity mark ("Who did not give ...?")
-    let a = await tool("recall", { question: q }, () => engine.answer(q, { polarity: true, neg: qNeg }));
+    let a = await tool("recall", { question: q }, () => engine.answer(q, { polarity: true, neg: qNeg, skip: withdrawn }));
     // the thread may hold the question's own participants in a NEGATED clause ("Mina did not give Jonathan a book"): then the answer is "not Mina", with the sentence
     if (!a.answers?.length && !qNeg) {
-      const n = await tool("recall", { question: q, polarity: "negated" }, () => engine.answer(q, { polarity: true, neg: true }));
+      const n = await tool("recall", { question: q, polarity: "negated" }, () => engine.answer(q, { polarity: true, neg: true, skip: withdrawn }));
       if (n.answers?.length) {
         const who = [...new Set(n.answers[0].answer.map((x) => x.text))];
         const ev = n.answers.slice(0, 2).map((x) => ({ order: x.order ?? null, text: x.sentence }));
@@ -383,7 +390,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     if (!a.answers?.length && topic && !aboutUs && allKnown) trace.push({ step: "no_research", why: "every name in the question is someone the thread already holds" });
     if (!a.answers?.length && topic && !aboutUs && !allKnown) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
       const fill = doors.fillers("no_answer"); trace.push({ step: "research", gap: "no_answer", doors: fill, topic });
-      for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { lookedOk = true; looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q, { polarity: true, neg: qNeg })); break; } looked.push(w.text); }
+      for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { lookedOk = true; looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q, { polarity: true, neg: qNeg, skip: withdrawn })); break; } looked.push(w.text); }
     }
     trace.push({ step: "relational", read: a.read ?? null, answers: a.answers?.length ?? 0 });
     if (a.answers?.length) {
@@ -403,40 +410,95 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   }
 
   /** turn(message) → the reply to ONE message, whatever it is: small talk, a calculation, a question, or a statement to read into the fold */
+  /** a message is READ before it is routed: claims about what it is, each resting on marks, judged by one rule (acts.mjs), put forward as candidates so janus's spiral projects their
+   *  standing and a later message can withdraw them. The routing below follows the standing act; nothing is decided in passing. */
   async function turn(message, opts = {}) {
     const t = String(message ?? "").trim(); if (!t) return null;
     const rows = parser.rowsOf(t) ?? [], ws = rows.filter((r) => r.upos !== "PUNCT").map((r) => String(r.lemma ?? r.form).toLowerCase());
-    // a whole puzzle (a list of things, at least two people, turns of who said what) is read by the puzzle reader and run by the reasoner; it is not stored as facts
-    if (puzzleOf(t)) return ask(t, { ...opts, door: "reason" });
-    // ADDRESSING (mechanic 10): a leading name and comma, before a question or a request, is who is being spoken to ("Fold, who is Marie Curie?"): a deixis, not a referent, so it is
-    // taken off before routing and nothing researches it. Structure only: the first row names, the second is a comma, and what follows is itself a question or an imperative.
-    {
-      const lead = rows[0]?.upos === "INTJ" ? 1 : 0, nm = rows[lead], cm = rows[lead + 1];
+    const n = ++msgN, witness = `${id}:m${n}#0-${Math.max(1, t.length)}`, root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT");
+    const cut = splitSentences(t, { abbreviations: abbr(t) });
+    // the facts only the English reader can give the acts (acts.mjs reads universal marks and is handed these as booleans)
+    const puzzle = !!puzzleOf(t), small = ws.length <= 3 ? SMALL.find(([words]) => words.some((w) => ws.includes(w))) : null, slash = t.startsWith("/");
+    const request = !slash && isRequest(rows, root) && rows.filter((r) => r.head === 0 && r.upos !== "PUNCT").length === 1 && cut.length === 1;
+    const composite = cut.length > 1 && cut.at(-1).text.trim().endsWith("?") && !cut.slice(0, -1).some((c) => c.text.trim().endsWith("?"));
+    // a leading name and comma before a question or a request is who is spoken to (mechanic 10): a deixis, not a referent
+    let address = null;
+    { const lead = rows[0]?.upos === "INTJ" ? 1 : 0, nm = rows[lead], cm = rows[lead + 1];
       if (nm?.upos === "PROPN" && cm?.form === "," && !rows.some((r) => r.deprel === "conj" && r.head === nm.id)) {
         const rest = t.slice(t.indexOf(",") + 1).trim(), rr = parser.rowsOf(rest) ?? [], rw = rr.filter((r) => r.upos !== "PUNCT").map((r) => String(r.lemma ?? r.form).toLowerCase());
-        const rroot = rr.find((r) => r.head === 0 && r.upos !== "PUNCT");
-        if (rest && (rest.endsWith("?") || WH_ANY.has(rw[0]) || isRequest(rr, rroot))) { const out = await turn(rest, opts); return out ? { ...out, addressed: nm.form, trace: [{ step: "addressed", to: nm.form }, ...(out.trace ?? [])] } : out; }
+        if (rest && (rest.endsWith("?") || WH_ANY.has(rw[0]) || isRequest(rr, rr.find((r) => r.head === 0 && r.upos !== "PUNCT")))) address = { name: nm.form, rest };
+      } }
+    const marks = marksOf(rows, { wh: WH_ANY.has(ws[0]), small: !!small, calc: !!calculate(rows), puzzle, slash, composite, request, address: !!address });
+    const propose = (label, relation, basisOk, assess) => { if (!ideation) return null; const cid = ideation.propose({ label, relation, door: "presented", witnesses: [witness] }); ideation.assess(cid, assess); return cid; };
+    const by = "the reader's marks and the act rule", words = (ks) => ks.map((k) => MARK_TEXT.eng[k] ?? k).join(", ");
+    const ids = [...(opts._ids ?? [])];
+
+    // ---- an address is a claim of its own, then the rest of the message is read as itself
+    if (address) {
+      ids.push(propose(`this message is addressed to ${address.name}`, { subject: "this message", verb: "is addressed to", object: address.name }, true, { verdict: "supported", method: "testimony", by, basis: `a name and a comma at the start, before ${address.rest.endsWith("?") ? "a question" : "a request"}`, witnesses: [witness] }));
+      const out = await turn(address.rest, { ...opts, _ids: ids });
+      return out ? { ...out, addressed: address.name, trace: [{ step: "addressed", to: address.name }, ...(out.trace ?? [])] } : out;
+    }
+
+    // ---- a correction takes the previous reading back, and whatever rests on it
+    if (marks.correction_mark) {
+      const cid = propose("this message corrects your previous one", { subject: "this message", verb: "corrects", object: "your previous message" }, true, lastAct
+        ? { verdict: "supported", method: "testimony", by, basis: `an opening “no”, and there is a previous message to correct`, witnesses: [witness] }
+        : { verdict: "refuted", method: "deduction", by, basis: "an opening “no”, but nothing was said before it to correct" });
+      if (cid && lastAct) {
+        ids.push(cid, lastAct.claim, ...lastAct.dependents);
+        ideation?.withdraw(lastAct.claim, "the next message corrects it");
+        for (const o of lastAct.orders) withdrawn.add(o);
+        const comma = t.indexOf(","), rest = comma >= 0 ? t.slice(comma + 1).trim() : "", gone = lastAct; lastAct = null;
+        const inner = rest && (parser.rowsOf(rest) ?? []).some((r) => r.upos === "VERB" || r.upos === "AUX") ? await turn(rest, { ...opts, _ids: ids }) : null;
+        const text = inner ? `Okay, I've set that aside. ${inner.text}` : "Okay, I've set that aside. What did you mean?";
+        return { question: t, ...(inner ?? { type: "correction", handled: true, tools: [], trace: [] }), type: "correction", handled: true, text, trace: [{ step: "correction", withdrew: gone.claim }, ...(inner?.trace ?? [])], thought: ideation ? ideation.view([...new Set(ids)]) : null, acts: { working: "correction", open: false } };
       }
+      if (cid) ids.push(cid);
     }
-    const small = ws.length <= 3 ? SMALL.find(([words]) => words.some((w) => ws.includes(w))) : null;
-    if (small) return (last = { type: "smalltalk", handled: true, text: small[1], question: t, tools: [], trace: [{ step: "smalltalk" }] });
-    if (t.startsWith("/")) return ask(t, opts);
-    const root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT");
-    if (isRequest(rows, root) && rows.filter((r) => r.head === 0 && r.upos !== "PUNCT").length === 1 && splitSentences(t, { abbreviations: abbr(t) }).length === 1) return ask(t, { ...opts, request: true });
-    // a fragment (no predicate at all: "Ok dear", "Yes.", "good morning") is a social act, not a fact: nothing is stored. A bare name is a topic.
-    if (rows.length && !rows.some((r) => r.upos === "VERB" || r.upos === "AUX") && !t.endsWith("?") && !WH_ANY.has(ws[0]) && !calculate(rows)) {
-      const content = rows.filter((r) => !["PUNCT", "INTJ"].includes(r.upos));
-      if (content.length && content.every((r) => r.upos === "PROPN")) return ask(`Who is ${content.map((r) => r.form).join(" ")}?`, opts);
-      return (last = { type: "social", handled: true, text: "Okay.", question: t, tools: [], trace: [{ step: "social", read: "no predicate: an acknowledgement, not a fact" }] });
+
+    // ---- the claims about what this message is
+    const j = judge(candidates(marks));
+    let workingClaim = null;
+    if (ideation) {
+      for (const c of j.claims) {
+        const label = LABEL.eng[c.act];
+        const claim = propose(`this message counts as ${label}`, { subject: "this message", verb: "counts as", object: label }, true,
+          c.standing === "holds" ? { verdict: "supported", method: "testimony", by, basis: `supported by ${words(c.for)}`, witnesses: [witness] }
+          : c.standing === "refuted" ? { verdict: "refuted", method: "deduction", by, basis: `supported by ${words(c.for)}, but ${words(c.against)} count${c.against.length > 1 ? "" : "s"} against it` }
+          : { verdict: "unresolved", method: "deduction", by, basis: `supported by ${words(c.for)}, but ${j.alternatives.concat(j.working).filter((a) => a !== c.act).map((a) => LABEL.eng[a]).join(" or ")} fits as well` });
+        ids.push(claim); if (c.act === j.working) workingClaim = claim;
+      }
+      if (j.working === "unread") { workingClaim = propose("this message counts as something I couldn't read", { subject: "this message", verb: "counts as", object: LABEL.eng.unread }, true, { verdict: "unresolved", method: "deduction", by, basis: "no mark supports any kind of message" }); ids.push(workingClaim); }
     }
-    // statements and then a question in one message ("Mina gave Jonathan a book. Who gave him a book?"): the statements are read into the fold, then the last sentence is answered
-    const cut = splitSentences(t, { abbreviations: abbr(t) });
-    if (cut.length > 1 && cut.at(-1).text.trim().endsWith("?") && !cut.slice(0, -1).some((c) => c.text.trim().endsWith("?"))) {
-      const head = t.slice(0, cut.at(-1).offset).trim(), read = await say(head), out = await ask(cut.at(-1).text, opts);
-      return { ...out, introduced: [{ text: head, source: null, read }, ...(out.introduced ?? [])] };
+    const premise = ideation && !j.open && j.working !== "unread" ? workingClaim : null;   // a claim that is only open cannot be a premise of an answer
+    const aOpts = { ...opts, actIds: ids, actPremise: premise };
+    const finish = (out, orders = []) => {
+      if (!out) return out;
+      // what a later "no" corrects is the last message that SAID something (a statement, a question, a sum), never a social remark or one that could not be read: "really?" does not take "Pierre loves Natasha" back
+      if (workingClaim && !["social", "unread"].includes(j.working)) lastAct = { claim: workingClaim, orders, dependents: out.ideaIds?.filter((x) => !ids.includes(x)) ?? [] };
+      return { question: t, ...out, acts: { working: j.working, open: j.open, alternatives: j.alternatives }, taken: takenAs(j), thought: ideation ? ideation.view([...new Set([...ids, ...(out.ideaIds ?? [])])]) : (out.thought ?? null) };
+    };
+
+    // ---- route by the standing act
+    switch (j.working) {
+      case "door": return finish(await ask(t, aOpts));
+      case "puzzle": return finish(await ask(t, { ...aOpts, door: "reason" }));
+      case "calculation": case "question": return finish(await ask(t, aOpts));
+      case "request": return finish(await ask(t, { ...aOpts, request: true }));
+      case "composite": {   // statements and then a question in one message: the statements are read into the fold, then the last sentence is answered
+        const head = t.slice(0, cut.at(-1).offset).trim(), before = parse.length, read = await say(head), out = await ask(cut.at(-1).text, aOpts);
+        return finish({ ...out, introduced: [{ text: head, source: null, read }, ...(out.introduced ?? [])] }, Array.from({ length: parse.length - before }, (_, i) => before + i));
+      }
+      case "statement": { const before = parse.length, out = await say(t); return finish({ ...out, ideaIds: [] }, Array.from({ length: parse.length - before }, (_, i) => before + i)); }
+      case "social": {
+        if (small) return finish(last = { type: "smalltalk", handled: true, text: small[1], question: t, tools: [], trace: [{ step: "smalltalk" }] });
+        const content = rows.filter((r) => !["PUNCT", "INTJ"].includes(r.upos));   // a bare name is a topic
+        if (content.length && content.every((r) => r.upos === "PROPN")) return finish(await ask(`Who is ${content.map((r) => r.form).join(" ")}?`, aOpts));
+        return finish(last = { type: "social", handled: true, text: "Okay.", question: t, tools: [], trace: [{ step: "social", read: "no predicate: an acknowledgement, not a fact" }] });
+      }
+      default: return finish({ type: "unread", handled: false, gap: "act_unread", text: "I couldn't tell what kind of message that was.", tools: [], trace: [{ step: "unread" }] });
     }
-    if (t.endsWith("?") || WH_ANY.has(ws[0]) || calculate(rows)) return ask(t, opts);
-    return say(t);
   }
 
   return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted") }) };

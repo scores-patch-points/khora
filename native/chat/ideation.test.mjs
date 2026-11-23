@@ -164,7 +164,7 @@ test("the owner's puzzle: the readings are listed, each is run, the one that lea
   assert.deepEqual(read.map((x) => x.standing).sort(), ["refuted", "refuted", "refuted", "supported", "unresolved", "unresolved"]);
   assert.match(read.find((x) => x.standing === "supported").label, /different letter of the one word, in any order; “yes” means they know the word/);
   const ans = c.find((x) => x.relation.verb === "is" && x.relation.object === "dog");
-  assert.equal(ans.standing, "supported"); assert.equal(ans.premises.length, 1, "the answer rests on the reading that holds");
+  assert.equal(ans.standing, "supported"); assert.ok(ans.premises.some((pid) => read.find((x) => x.id === pid)?.standing === "supported"), "the answer rests on the reading that holds"); assert.ok(ans.premises.length === 2, "and on the message having been read as a puzzle");
   assert.ok(r.tools.some((t) => t.name === "/reason"));
 });
 
@@ -198,7 +198,7 @@ test("with janus not mounted the old answer is not silently rebuilt, the relatio
   await bare.turn("who is Tolstoy?");
   const r = await bare.turn("who was his wife?");
   assert.ok(!/^That would be/.test(r.text), "the owner is never the answer to a possessed noun");
-  assert.equal(r.thought, null);
+  assert.equal(r.thought.on, false); assert.match(r.thought.why, /no janus checkout/, "the reply carries the reason nothing was tested");
   const d = await bare.turn("/doors"); assert.ok(d.doors.some((x) => x.name === "relation" && !x.on && /janus/.test(x.why)));
 });
 
@@ -229,4 +229,59 @@ test("a yes/no question about people the thread already holds is not researched:
   assert.equal(r.handled, false); assert.equal(r.text, "I haven't been told that."); assert.ok(!r.tools.some((t) => t.name === "/search"), "no search door call");
   assert.ok(r.trace.some((s) => s.step === "no_research"));
   assert.match((await mine.turn("Does Pierre love Natasha?")).text, /^Yes: you told me “Pierre loves Natasha\.”$/);
+});
+
+test("the chat says what it takes a message to be: claims on marks, ambiguity left open and said, and a correction withdraws the last reading", T, async () => {
+  const mine = await make();
+  const soc = await mine.turn("Sorry dear");
+  assert.equal(soc.type, "social"); assert.equal(soc.acts.working, "social"); assert.equal(soc.taken, null);
+  const c1 = soc.thought.claims.find((x) => x.relation.verb === "counts as");
+  assert.equal(c1.standing, "supported"); assert.equal(c1.relation.object, "a social remark"); assert.match(c1.assessed.basis, /no predicate at all/);
+
+  const amb = await mine.turn("really?");
+  assert.equal(amb.acts.open, true); assert.equal(amb.acts.working, "social"); assert.deepEqual(amb.acts.alternatives, ["question"]);
+  assert.match(amb.taken, /^I took that as a social remark; it could also be a question/);
+  assert.deepEqual(amb.thought.claims.filter((x) => x.relation.verb === "counts as").map((x) => x.standing), ["unresolved", "unresolved"]);
+
+  await mine.turn("Pierre loves Natasha.");
+  const q = await mine.turn("Pierre loves Natasha?");
+  assert.equal(q.acts.working, "question"); assert.match(q.text, /^Yes: you told me/);
+  const opp = q.thought.claims.find((x) => x.relation.object === "something you're telling me");
+  assert.equal(opp.standing, "refuted"); assert.match(opp.assessed.basis, /a final question mark.*count.* against/);
+
+  const un = await mine.turn("…"); assert.equal(un.handled, false); assert.equal(un.gap, "act_unread");
+});
+
+test("a correction withdraws what was taken from the previous message, and what it said is no longer an answer", T, async () => {
+  const mine = await make();
+  const told = await mine.turn("Mina gave Jonathan a book.");
+  const first = told.thought.claims.find((x) => x.relation.verb === "counts as");
+  assert.equal((await mine.turn("Who gave Jonathan a book?")).text, "Mina.");
+  await mine.turn("Mina gave Jonathan a book.");   // a second statement, so the correction has something to take back
+  const r = await mine.turn("no, Mina gave Jonathan a pen.");
+  assert.equal(r.type, "correction"); assert.match(r.text, /^Okay, I've set that aside\. /);
+  const was = r.thought.claims.find((x) => x.relation.verb === "counts as" && x.proposedBy && x.standing === "withdrawn");
+  assert.ok(was, "the earlier reading is shown as withdrawn"); assert.equal(r.thought.claims.find((x) => x.relation.verb === "corrects").standing, "supported");
+  assert.equal((await mine.turn("Who gave Jonathan a pen?")).text, "Mina.");
+  assert.equal((await mine.turn("Who gave Jonathan a book?")).text, "Mina.", "the first sentence still stands: only the one just before the correction was taken back");
+  const none = await make(); const bare = await none.turn("no");
+  assert.equal(bare.type, "social", "with nothing before it, “no” is only a remark");
+  assert.ok(bare.thought.claims.some((x) => x.relation.verb === "corrects" && x.standing === "refuted"));
+});
+
+test("every reply carries its question, so the server can weave it (a correction and an unread message had none, and the weave refused them)", T, async () => {
+  const mine = await make();
+  await mine.turn("Mina gave Jonathan a book.");
+  for (const m of ["no, Mina gave Jonathan a pen.", "…", "really?", "Sorry dear"]) { const r = await mine.turn(m); assert.equal(typeof r.question, "string", m); assert.ok(r.question.length > 0, m); }
+});
+
+test("a correction takes back the last message that said something, not a social remark in between", T, async () => {
+  const mine = await make();
+  await mine.turn("Pierre loves Natasha.");
+  await mine.turn("really?");
+  const r = await mine.turn("no, Pierre hates Natasha.");
+  assert.equal(r.type, "correction");
+  const gone = r.thought.claims.filter((x) => x.standing === "withdrawn"); assert.equal(gone.length, 1); assert.equal(gone[0].relation.object, "something you're telling me");
+  assert.equal((await mine.turn("Who loves Natasha?")).handled, false, "the taken-back sentence is no longer an answer");
+  assert.equal((await mine.turn("Who hates Natasha?")).text, "Pierre.");
 });

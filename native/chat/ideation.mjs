@@ -35,6 +35,12 @@ export function makeIdeation({ threadId, h, janus }) {
     return weaveOne(h, entry);
   }
 
+  /** take a candidate back (a later message corrects it): the spiral suspends everything that rests on it, and the log keeps both the claim and the withdrawal */
+  function withdraw(id, basis) {
+    if (!entryOf.has(id)) return null;
+    return weaveOne(h, { cell: "EVA·Figure", kind: "assessment", addr: `assessment:${id}:${++n}`, body: { thread: threadId, event: { kind: "withdraw", id, basis } }, of: [entryOf.get(id)] });
+  }
+
   /** the standing of the candidates in `ids`, projected by janus's spiral from what the LOG holds (every writer's entries) */
   function view(ids = null) {
     if (!canJudge) return { on: false, why: janus?.why ?? "janus is not mounted", claims: [], refused: [], openings: [] };
@@ -55,5 +61,5 @@ export function makeIdeation({ threadId, h, janus }) {
     return { on: true, claims, refused: fold.refused.filter((r) => !want || mine.has(r.id)), openings: fold.openings.filter((o) => mine.has(o.id)), entries: rows.length };
   }
 
-  return { propose, assess, view, canJudge };
+  return { propose, assess, withdraw, view, canJudge };
 }

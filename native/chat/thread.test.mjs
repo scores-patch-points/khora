@@ -56,3 +56,9 @@ test("negation is a mark carried per clause: a negated statement does not say wh
   const after = await th.turn("Who gave Jonathan a book?");
   assert.match(after.text, /^Not Mina: you told me “Mina did not give Jonathan a book\.”$/, "the later negation retracts the earlier affirmation");
 });
+test("the word “help” inside a longer message does not open the help screen", T, async () => {
+  const r = await thread.turn("Indha help kuda panna maataengura la?:-(");
+  assert.notEqual(r.type, "help");
+  assert.match((await thread.turn("help")).text, /^I can tell you the date and the time/);
+  assert.equal((await thread.turn("What can you do?")).type, "help");
+});

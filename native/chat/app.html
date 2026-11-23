@@ -27,6 +27,7 @@ header button:hover, header select:hover { border-color:var(--accent); }
 .bot .text { white-space:pre-wrap; word-wrap:break-word; }
 .bot .text q, .why q { quotes:"“" "”"; }
 .cite { color:var(--accent); font-size:11px; margin-left:1px; }
+.taken { margin-top:4px; font-size:13px; color:var(--muted); font-style:italic; }
 .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
 .chip { display:inline-flex; gap:6px; align-items:center; border:1px solid var(--line); background:var(--chip); color:var(--ink); border-radius:12px; padding:2px 10px; font-size:12.5px; text-decoration:none; }
 .chip b { color:var(--accent); font-weight:600; } .chip:hover { border-color:var(--accent); }
@@ -101,14 +102,14 @@ function considered(t) {
   if (!t.on) return `<h5>What I considered</h5><div>Nothing was tested: ${esc(t.why ?? "janus is not mounted")}.</div>`;
   if (!t.claims?.length) return "";
   const lines = t.claims.map((c) => { const a = c.assessed; return `<div class="cl ${esc(c.standing)}"><span class="tag">${esc(STANDING[c.standing] ?? c.standing)}</span> ${esc(c.label)} <span class="door">(${esc(c.door ?? "")})</span>${a ? `<div class="by">tested by ${esc(a.by)} · written by ${esc(WRITER[a.writer] ?? a.writer)} · ${esc(a.basis)}</div>` : `<div class="by">not tested</div>`}</div>`; });
-  const open = (t.openings ?? []).length ? `<div class="by">still open: ${t.openings.map((o) => esc(o.question)).join(" ")}</div>` : "";
+  const waiting = (t.openings ?? []).filter((o) => ["stale", "suspended", "unlicensed"].includes(o.standing)), open = waiting.length ? `<div class="by">${[...new Set(waiting.map((o) => esc(o.question)))].join(" ")}</div>` : "";   // an open claim is already shown as open; only what is waiting on something else is said here
   const ref = (t.refused ?? []).length ? `<div class="by">refused by janus's gates: ${t.refused.map((r) => esc(String(r.why).split("_").join(" "))).join(", ")}</div>` : "";
   return `<h5>What I considered</h5>${lines.join("")}${open}${ref}`;
 }
 function bot(r) {
   const text = r.error ? "Something went wrong reading that." : r.text;
   const inner = r.error ? "" : used(r) + considered(r.thought);
-  const t = turn("bot", `<div class="av">${esc(initial)}</div><div class="body"><div class="text">${esc(text)}${r.error ? "" : marks(r.cites)}</div>${r.error ? "" : chips(r.cites)}<div class="acts"><button data-a="copy">Copy</button>${r.retry && !r.handled ? `<button data-a="again">Try again</button>` : ""}</div>${inner ? `<details class="reason"><summary>Reasoning</summary><div class="why">${inner}</div></details>` : ""}</div>`);
+  const t = turn("bot", `<div class="av">${esc(initial)}</div><div class="body"><div class="text">${esc(text)}${r.error ? "" : marks(r.cites)}</div>${r.taken ? `<div class="taken">${esc(r.taken)}</div>` : ""}${r.error ? "" : chips(r.cites)}<div class="acts"><button data-a="copy">Copy</button>${r.retry && !r.handled ? `<button data-a="again">Try again</button>` : ""}</div>${inner ? `<details class="reason"><summary>Reasoning</summary><div class="why">${inner}</div></details>` : ""}</div>`);
   t.dataset.text = text; return t;
 }
 $("thread").addEventListener("click", (e) => {
