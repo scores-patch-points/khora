@@ -100,12 +100,15 @@ export function weaveReferents({ text, referents, edges = [] }) {
   const doc = N.crypto.createHash("sha256").update(String(text ?? "")).digest("hex").slice(0, 16);
   // every name; a description only when the text returns to it (a one-off "a chair" is a mention, not yet a referent worth a line)
   const kept = referents.filter((b) => b.kind !== "nominal" || b.mentions > 1);
-  for (const b of kept) P.weave(h, { cell: "INS·Figure", kind: "referent", addr: `${doc}:${b.ref}`, body: {
+  // ONE bulk write (pharos weaveMany, the path for a giver that writes many unrelated entries): one entry at a time took minutes
+  const batch = [];
+  for (const b of kept) batch.push({ cell: "INS·Figure", kind: "referent", addr: `${doc}:${b.ref}`, body: {
     kind: b.kind ?? "name", head: b.head ?? null, forms: (b.forms ?? []).slice(0, 24), mentions: b.mentions ?? 0, contested: b.contested ?? 0, first: b.first ?? null, last: b.last ?? null,
     proformForms: b.proformForms ?? [], pronouns: (b.pronouns ?? []).slice(0, 12), proform: b.proform ? { cls: b.proform.cls, contested: !!b.proform.contested, p: b.proform.p ?? null } : null, source: "reading-in-order.mjs (rows)" } });
   // identity edges (never merges): the kinds a perspective may collapse; same-head (the same description again past the horizon) stays in the read
-  let n = 0; for (const e of edges) if (e.type !== "same-head") { P.weave(h, { cell: "SYN·Pattern", kind: "identity", addr: `${doc}:${e.a}~${e.b}:${e.type}`, body: { a: `${doc}:${e.a}`, b: `${doc}:${e.b}`, type: e.type, n: e.n ?? 1, first: e.first ?? null } }); n++; }
-  return kept.length + n;
+  for (const e of edges) if (e.type !== "same-head") batch.push({ cell: "SYN·Pattern", kind: "identity", addr: `${doc}:${e.a}~${e.b}:${e.type}`, body: { a: `${doc}:${e.a}`, b: `${doc}:${e.b}`, type: e.type, n: e.n ?? 1, first: e.first ?? null } });
+  if (typeof P.weaveMany === "function") P.weaveMany(h, batch); else for (const x of batch) P.weave(h, x);
+  return batch.length;
 }
 
 // WRITES-TO-PHAROS + FULL-CAPACITY at the moment of acting: write ONE entry for this read into pharos (what was read by content hash, never the text; the capacities; the competency tier) and refuse when a capacity was left out.

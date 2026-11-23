@@ -155,3 +155,6 @@ files changed since the last record: native/adapters/text/referents-in-order.mjs
 
 ## 2026-11-23: weaveReferents: every field written explicitly (pharos refuses an undefined value: a noun-phrase referent has no 'contested', which failed the War and Peace read at the weave); weaves every name, every description the text returns to (mentions > 1), and the identity edges except same-head (kind 'identity'). Test native/tests/weave-referents.test.mjs weaves a fixture cast into the test pharos. Reading unchanged.
 files changed since the last record: native/the-fold/pharos-gate.mjs, native/reading-in-order.mjs
+
+## 2026-11-23: weaveReferents writes its batch in ONE pharos weaveMany call (one P.weave per entry took about 8 minutes for War and Peace's ~20,000 entries). Same entries.
+files changed since the last record: native/the-fold/pharos-gate.mjs
