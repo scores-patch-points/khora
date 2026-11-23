@@ -89,10 +89,12 @@ export function judge(cands) {
   const holds = cands.filter((c) => !c.against.length && !SPECIFIC.includes(c.act));
   const claims = cands.filter((c) => !SPECIFIC.includes(c.act)).map((c) => ({ ...c, standing: c.against.length ? "refuted" : holds.length > 1 ? "open" : "holds" }));
   if (!holds.length) return { working: "unread", open: false, alternatives: [], claims };
-  if (holds.length === 1) return { working: holds[0].act, open: false, alternatives: [], claims };
+  // a question that rests on the final "?" alone is fragile on purpose: measured on 600 real messages per source, the working act survives losing the mark only 61% of the time when "?" is
+  // its only support, against 95-98% when a question word, an auxiliary before the subject, or the shape of the clause also backs it (eval/chat-register, declarations.mjs, EXPLORATORY)
+  if (holds.length === 1) { const only = holds[0], fragile = only.act === "question" && only.for.length === 1 && only.for[0] === "final_question_mark"; return { working: only.act, open: false, fragile, alternatives: [], claims }; }
   const working = LEAST_HARM.find((a) => holds.some((c) => c.act === a));
   return { working, open: true, alternatives: holds.map((c) => c.act).filter((a) => a !== working), claims };
 }
 
 /** the plain sentence the page shows when the chat is not sure what it was told: what it took the message as, and how to correct it */
-export const takenAs = (j, lang = "eng") => (j.open ? `I took that as ${LABEL[lang][j.working]}; it could also be ${j.alternatives.map((a) => LABEL[lang][a]).join(" or ")}. Say “no” if I got it wrong.` : null);
+export const takenAs = (j, lang = "eng") => (j.open ? `I took that as ${LABEL[lang][j.working]}; it could also be ${j.alternatives.map((a) => LABEL[lang][a]).join(" or ")}. Say “no” if I got it wrong.` : j.fragile ? `I took that as a question because of the question mark. Say “no” if you meant it as something you're telling me.` : null);

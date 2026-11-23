@@ -36,6 +36,8 @@ const huntOrgan = await import("../organs/void-hunt.js").catch(() => null), hunt
 
 const WH = new Set(["who", "whom", "what"]);
 const WH_ANY = new Set(["who", "whom", "what", "when", "where", "why", "how", "which"]);
+// the English reader's verb that asks for a word's meaning ("what does X mean?"): the answer is in the LOCAL dictionary, so nothing leaves the machine
+const DEFINE_VERBS = new Set(["mean"]);
 const brief = (x) => { let t; try { t = typeof x === "string" ? x : JSON.stringify(x); } catch { t = String(x); } return t && t.length > 140 ? `${t.slice(0, 139)}…` : t; };
 
 // ARITHMETIC: a tool, not a guess. Tokens come from the reader's rows; a question is a calculation only if EVERY word in it is a number, an
@@ -342,6 +344,9 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       trace.push({ step: "self", giver: "the system's own description (code)" });
       return done({ type: "self", handled: true, from: "my own description", text: "I'm a program that reads what you tell me into a map of who did what to whom, and answers from it. There is no language model in me: I only know what you've said, plus the dictionary and Wikidata when I have to look something up, and I say when I do." });
     }
+    // "what does serendipity mean?": a word's meaning, from the dictionary on this machine (no outside call, and a rare word is what a definition is for)
+    { const rt = qRows.find((r) => r.head === 0 && r.upos !== "PUNCT"), subj = rt && DEFINE_VERBS.has(lemma(rt)) ? qRows.find((r) => r.head === rt.id && String(r.deprel).startsWith("nsubj") && !isYou(r) && r.upos !== "PRON") : null;
+      if (subj && know) { trace.push({ step: "define", word: lemma(subj) }); const out = await callDoor("define", lemma(subj)); return done({ type: "definition", handled: out.ok, gap: out.ok ? null : out.gap, text: out.text, cites: out.cites ?? [] }); } }
     // identity: who/what is X (X a name, a description, or a pronoun the cast binds)
     const copular = qRows.some((r) => r.deprel === "cop");
     if (wh && WH.has(lemma(wh)) && copular) {
@@ -380,7 +385,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
           const d = await tool("define", { word: lemma(tgt) }, () => know.lookup(lemma(tgt))); trace.push({ step: "definition", giver: "kaikki / the hyperlexicon" });
           if (d.primary) return done({ type: "definition", handled: true, text: `${cap(tgt.form)}: ${d.primary.replace(/[.]\s*$/, "")}.`, from: "the dictionary" });
         }
-        return done({ type: "identity", handled: false, gap: "unknown_referent", text: `I haven't been told about ${tgt.form}, and no giver I can reach knows it.` });
+        return done({ type: "identity", handled: false, gap: "unknown_referent", text: `I haven't been told about ${tgt.upos === "PROPN" ? nameChunk(tgt) : tgt.form}, and no giver I can reach knows it.` });
       }
     }
     // relational: the engine's answer over the frames

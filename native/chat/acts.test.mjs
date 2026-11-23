@@ -52,3 +52,13 @@ test("the tie-break and the specific acts are declared, in one place, each with 
   assert.deepEqual([...LEAST_HARM], ["social", "question", "request", "statement"]); assert.ok(SPECIFIC.includes("puzzle") && SPECIFIC.includes("calculation"));
   assert.ok(Object.keys(LABEL.eng).every((k) => typeof LABEL.eng[k] === "string"));
 });
+
+test("a question that rests on the final question mark alone is fragile, and says so; one backed by a question word or an auxiliary is not", () => {
+  const stm = verdict([row(1, "Mina", "PROPN", { deprel: "nsubj", head: 2 }), row(2, "sleeps", "VERB"), Q]);
+  assert.equal(stm.working, "question"); assert.equal(stm.fragile, true);
+  assert.match(takenAs(stm), /^I took that as a question because of the question mark\. Say “no” if you meant it as something you're telling me\.$/);
+  const wh = verdict([row(1, "who", "PRON", { deprel: "nsubj", head: 3 }), row(2, "sleeps", "VERB"), Q], { wh: true });
+  assert.equal(wh.working, "question"); assert.equal(!!wh.fragile, false); assert.equal(takenAs(wh), null);
+  const aux = verdict([row(1, "does", "AUX"), row(2, "Mina", "PROPN", { deprel: "nsubj", head: 3 }), row(3, "sleep", "VERB"), Q]);
+  assert.equal(!!aux.fragile, false);
+});

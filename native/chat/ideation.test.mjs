@@ -13,7 +13,7 @@ let make = null, why = null, janus = null, log = null, rec = null;
 const order = [];
 const know = {
   async person(w) { await new Promise((r) => setTimeout(r, 120)); return w === "tolstoy" ? { id: "Q7243", label: "Leo Tolstoy", description: "Russian author (1828–1910)" } : null; },
-  async lookup(w) { return { primary: w === "dog" ? "A domesticated canid." : null }; },
+  async lookup(w) { return { primary: w === "dog" ? "A domesticated canid." : w === "serendipity" ? "The occurrence of events by chance in a happy way." : null }; },
 };
 // what Wikidata and Wikipedia would say, as a function of the URL (so the doors run for real, against nothing)
 const world = { spouses: [] };
@@ -310,4 +310,18 @@ test("words the reader does not know never leave: no outside call for a message 
   assert.ok(r.trace.some((s) => s.step === "no_research" && s.unreadable >= 1));
   const typo = await mine.turn("wat is the captial of italy?"); assert.equal(sent.length, 0, "a misspelling is not sent out either");
   const fine = await mine.turn("Who wrote War and Peace?"); assert.ok(sent.length > 0, "a question made of words the reader knows still goes looking");
+});
+
+test("a word's meaning comes from the dictionary on this machine: a rare word is what a definition is for, and nothing is sent out", T, async () => {
+  const sent = [], mine = await make({ getJson: async (u) => { sent.push(u); return { query: { search: [] } }; } });
+  const r = await mine.turn("what does serendipity mean?");
+  assert.equal(r.type, "definition"); assert.equal(r.handled, true); assert.equal(r.text, "Serendipity: The occurrence of events by chance in a happy way.");
+  assert.equal(sent.length, 0, "the dictionary is local"); assert.deepEqual(r.cites.map((c) => c.label), ["the dictionary (kaikki)"]);
+  const none = await mine.turn("what does zzyzx mean?"); assert.equal(none.handled, false); assert.equal(none.gap, "no_definition"); assert.equal(sent.length, 0);
+});
+
+test("the thing asked about is the whole name, in what is looked up and in what is said", T, async () => {
+  const asked = [], mine = await make({ getJson: async () => ({ query: { pages: { "-1": { missing: "" } }, search: [] } }), know: { ...know, async person(w) { asked.push(w); return null; } } });
+  const r = await mine.turn("who is Marie Curie?");
+  assert.deepEqual(asked, ["marie curie"]); assert.equal(r.text, "I haven't been told about Marie Curie, and no giver I can reach knows it.");
 });
