@@ -1,6 +1,6 @@
 # Pins: defects to return to and find why the binding was wrong
 
-Found 2026-11-23 (exploratory, War and Peace). 14 pins; each is also one pharos entry (kind `pin`, status open) in `~/.pharos/fold-demo`. Re-run `pins.mjs` on a saved parse to regenerate the evidence. Close a pin by setting its status and the cause.
+Found 2026-11-23 (exploratory, War and Peace). 15 pins; each is also one pharos entry (kind `pin`, status open) in `~/.pharos/fold-demo`. Re-run `pins.mjs` on a saved parse to regenerate the evidence. Close a pin by setting its status and the cause.
 
 ## emperor-absorbed-by-rostov (binding, open)
 **The bare word 'Emperor' is bound to Rostóv**
@@ -147,6 +147,18 @@ Found 2026-11-23 (exploratory, War and Peace). 14 pins; each is also one pharos 
 - should be: own fold nearest
 - look first: hubs overlap everyone's partners (use PMI instead of tf-idf); twins need the edges family (role:verb:partner) as a tie-break by backoff
 - repro: `node eval/identity-reid/identity-reid.mjs <parse>`
+
+## surprising-episodes-are-binding-faults (binding, open)
+**Two of Prince Andrew and Natásha's most surprising episodes are not about Andrew**
+
+- node: Prince Andrew (1765) [Andrew | Prince | Bolkónski | Prince Bolkónski]
+- bound: a he / him in a sentence about someone else was bound to Prince Andrew, so the sentence became an event between him and Natásha
+- should be: sentence 27836 is Natásha and the monk; sentence 32187 is Pierre's feeling about Natásha
+- look first: relationship-episodes.mjs ranks episodes by surprise, and a wrongly bound event is surprising for the pair by construction: it is a useful detector. For each, which pronoun was bound to Andrew and which candidates (the monk, Pierre) it passed over; this is the pass B fallback (the most recent present being with no evidence leaning the other way)
+- repro: `node eval/identity-reid/relationship-episodes.mjs <parse>`
+- evidence:
+  - sentence 27836: Natásha went up to the monk for his blessing , and he advised her to pray for aid to God and His saint .
+  - sentence 32187: Natásha was less animated than she had been the day before ; but that day as he looked at her Pierre sometimes felt as if he was vanishing and that neither he nor she existed any longer , that nothing existed but happin…
 
 ## pronouns-contested-share (design, open)
 **64% of the pronouns bound across clauses are contested**
