@@ -120,3 +120,6 @@ files changed since the last record: (none)
 
 ## 2026-11-23: kāraka edges carry the ARG as a referent (a token inside a cast mention is its being), not a lemma string
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: the case marker disambiguates the locus: 'to' is a recipient (sampradāna), 'from' a source (apādāna)
+files changed since the last record: native/the-fold/pharos-gate.mjs

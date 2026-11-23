@@ -118,7 +118,16 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
   const refAt = new Map();
   for (const c of w.cast ?? []) for (const [a, b] of c.mentionSpans ?? []) for (let i = a; i < b; i++) if (!refAt.has(i)) refAt.set(i, c.ref);
   const edges = new Map();
-  for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id); for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) { const argRef = refAt.get((p.offset ?? 0) + (row.start ?? 0)) ?? (row.lemma ?? row.form); const k = `${hd.lemma}|${row.karaka}|${argRef}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role: row.karaka, arg: argRef }); } } }
+  for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id);
+    const caseMarker = (row) => p.rows.find((x) => x.head === row.id && x.deprel === "case")?.lemma;   // the preposition that marks the case
+    for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) {
+      // the case marker disambiguates a locus: "to" is a recipient (sampradāna), "from" a source (apādāna)
+      let role = row.karaka;
+      if (role === "adhikaraṇa") { const cm = caseMarker(row)?.toLowerCase(); if (cm === "to") role = "sampradāna"; else if (cm === "from") role = "apādāna"; }
+      const argRef = refAt.get((p.offset ?? 0) + (row.start ?? 0)) ?? (row.lemma ?? row.form);
+      const k = `${hd.lemma}|${role}|${argRef}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role, arg: argRef });
+    } }
+  }
   for (const [, e] of edges) P.weave(h, { cell: "SYN·Pattern", kind: "karaka", addr: `edge:${e.head}:${e.role}:${e.arg}`, body: e });
   // pronoun bindings: the identity edges, with their agreement label
   for (const b of [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])]) P.weave(h, { cell: "CON·Figure", kind: "binding", addr: `bind:${b.at?.[0] ?? ""}`, body: { pronoun: b.pronoun, ref: b.ref, agreement: b.agreement ?? {}, at: b.at ?? null } });
