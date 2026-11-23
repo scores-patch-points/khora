@@ -99,3 +99,6 @@ files changed since the last record: native/the-fold/read-core.mjs, native/adapt
 
 ## 2026-11-23: fix reading-one.mjs isFile heuristic: a text containing / or a trailing .xyz was misdetected as a file path; now a string is a file only when it has no newline AND (exists on disk OR carries a path prefix OR a trailing extension)
 files changed since the last record: (none)
+
+## 2026-11-23: recordRead writes the full read to pharos (beings INS·Figure, kāraka edges SYN·Pattern, pronoun bindings CON·Figure) so the fold and surfaces read off the pharos, not the reader; recordRead stays sync (the pharos lib open/weave are sync)
+files changed since the last record: native/the-fold/pharos-gate.mjs

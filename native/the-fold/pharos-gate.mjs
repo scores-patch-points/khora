@@ -22,6 +22,15 @@ if (IS_NODE) {
     try { GATE = await import(N.url.pathToFileURL(f).href); break; } catch (e) { loadError = `${f} did not load: ${String(e?.message ?? e).slice(0, 160)}`; }
   }
 }
+// the pharos lib itself, for weaving the FULL READ (the parse, not just the summary) — khora writes its own entries.
+let P = null;
+if (IS_NODE) {
+  for (const p of tried) {
+    const f = N.path.join(p, "lib", "pharos.mjs");
+    if (!N.fs.existsSync(f)) continue;
+    try { P = await import(N.url.pathToFileURL(f).href); break; } catch { /* the gate's loadError already names the path */ }
+  }
+}
 
 // where the log and the chatter go: PHAROS / PHAROS_CHATTER when set; under `node --test` a temp directory (tests never write to the real ~/.pharos); otherwise pharos' own default.
 const dirs = () => { const test = !!process.env.NODE_TEST_CONTEXT; return { pharosDir: process.env.PHAROS ? undefined : test ? N.path.join(N.os.tmpdir(), "khora-test-pharos") : undefined, chatterDir: process.env.PHAROS_CHATTER ? undefined : test ? N.path.join(N.os.tmpdir(), "khora-test-chatter") : undefined }; };
@@ -67,9 +76,29 @@ export function recordRead(w, text, { door, allowDegraded = false } = {}) {
   const { pharosDir, chatterDir } = dirs();
   const str = String(text ?? ""); const c = w?.competency;
   GATE.record(ROOT, {
-    door, addr: `sha256:${N.crypto.createHash("sha256").update(str).digest("hex")}`, degraded: allowDegraded, pharosDir, chatterDir,
+    door, addr: `sha256:${N.crypto.createHash("sha256").update(str).digest("hex")}`, degraded: allowDegraded, pharosDir, chatterDir, writer: "khora",
     capacities: capacitiesOf(w),
     body: { chars: str.length, language: c?.stem ?? w?.language?.stem ?? null, tier: c?.tier ?? null, skipped: w?.skipped ?? null, gaps: [...new Set((w?.gaps ?? []).map((g) => g?.gap ?? g))].slice(0, 20), pronounsBound: Array.isArray(w?.pronounsPresence) ? w.pronounsPresence.length : null },
   });
+  weaveFullRead(w, { door, pharosDir });
   return w;
+}
+
+// THE FULL READ, WOVEN AS ENTRIES (the parse, not the summary). The fold and the surfaces read THIS off the pharos;
+// they do not call the reader. Khora writes its own entries: beings (INS·Figure), kāraka edges (SYN·Pattern), and
+// pronoun bindings (CON·Figure) — each addressed, each the read's own claim, none special to the fold.
+export function weaveFullRead(w, { door, pharosDir } = {}) {
+  if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P) return;
+  const h = P.open("khora", { dir: pharosDir, writer: "khora" });
+  for (const [kind, cell] of [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"]]) {
+    if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
+  }
+  // beings: each cast referent is one node of the fold
+  for (const c of w.cast ?? []) P.weave(h, { cell: "INS·Figure", kind: "being", addr: `ref:${c.ref}`, body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
+  // kāraka edges: the read's own relations, deduped (head|role|arg)
+  const edges = new Map();
+  for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id); for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) { const k = `${hd.lemma}|${row.karaka}|${row.lemma ?? row.form}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role: row.karaka, arg: row.lemma ?? row.form }); } } }
+  for (const [, e] of edges) P.weave(h, { cell: "SYN·Pattern", kind: "karaka", addr: `edge:${e.head}:${e.role}:${e.arg}`, body: e });
+  // pronoun bindings: the identity edges, with their agreement label
+  for (const b of [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])]) P.weave(h, { cell: "CON·Figure", kind: "binding", addr: `bind:${b.at?.[0] ?? ""}`, body: { pronoun: b.pronoun, ref: b.ref, agreement: b.agreement ?? {}, at: b.at ?? null } });
 }
