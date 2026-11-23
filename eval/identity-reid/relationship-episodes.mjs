@@ -49,6 +49,9 @@ console.log(`INDUCED event kinds: ${ind.candidates.length} over ${pop.size} verb
 ind.candidates.slice(0, 8).forEach((c, i) => console.log(`  kind${i + 1} (${c.memberRefs.length}): ${[...c.memberRefs].sort((a, b) => (vcount.get(b) ?? 0) - (vcount.get(a) ?? 0)).slice(0, 14).join(", ")}`));
 const klass = new Map(), classMembers = new Map();
 for (const v of verbs) { const cands = [...anc.get(v)].filter((a) => members.get(a).size >= 3 && members.get(a).size <= 40).sort((x, y) => members.get(x).size - members.get(y).size); const c = inducedOf.get(v) ?? cands[0] ?? `self:${v}`; klass.set(v, c); let s = classMembers.get(c); if (!s) classMembers.set(c, (s = new Set())); s.add(v); }
+// classes built from the glosses (gloss-hypernyms.mjs writes them): when CLASSES points at that file they replace the raw verb as the event class
+const CL = process.env.CLASSES ? JSON.parse(fs.readFileSync(process.env.CLASSES, "utf8")) : null;
+if (CL) { klass.clear(); classMembers.clear(); for (const v of verbs) { const c = CL.klass[v] ?? `self:${v}`; klass.set(v, c); let m = classMembers.get(c); if (!m) classMembers.set(c, (m = new Set())); m.add(v); } console.log(`event classes from the glosses: ${new Set([...klass.values()].filter((c) => !c.startsWith("self:"))).size} classes over ${[...klass.values()].filter((c) => !c.startsWith("self:")).length} of ${verbs.length} verbs`); }
 const label = (c) => [...(classMembers.get(c) ?? [c])].sort((x, y) => (vcount.get(y) ?? 0) - (vcount.get(x) ?? 0)).slice(0, 3).join("/");
 const cls = [...classMembers].filter(([, s]) => s.size >= 3).sort((a, b) => [...b[1]].reduce((n, v) => n + vcount.get(v), 0) - [...a[1]].reduce((n, v) => n + vcount.get(v), 0));
 console.log(`verbs between two named people: ${verbs.length}; lifted into ${new Set(klass.values()).size} classes; ${cls.length} classes of 3 or more verbs. The biggest:`);
