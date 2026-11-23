@@ -48,6 +48,44 @@ export function makeKindGiver({ cacheFile = defaultCache(), fetchImpl = globalTh
     const exact = (j.search ?? []).filter((x) => String(x.label ?? "").toLowerCase() === word.toLowerCase());
     return (exact[0] ?? j.search?.[0])?.id ?? null;
   }
+  // the full entity the word points at: id + label + description, from the same search. This is the
+  // REFERENCE, not the gloss — "who is Tolstoy" resolves to the person, not the surname's etymology.
+  async function entityInfo(word) {
+    const u = SEARCH_API + "?" + new URLSearchParams({ action: "wbsearchentities", search: word, language: "en", uselang: "en", type: "item", limit: "5", format: "json" });
+    const j = await fetchJson(u);
+    const exact = (j.search ?? []).filter((x) => String(x.label ?? "").toLowerCase() === word.toLowerCase());
+    const r = exact[0] ?? j.search?.[0] ?? null;
+    return r ? { id: r.id, label: r.label ?? null, description: r.description ?? null } : null;
+  }
+  // the DIRECT P279 hypernyms with English labels — the answer to "what kind is X": a dog is a canid,
+  // a domesticated animal. One step, not the whole ontology (the transitive closure is for reachability
+  // checks like isPlaceType, not for saying a kind).
+  async function kindChain(word) {
+    const e = await entityInfo(word);
+    if (!e) return { ...e, ancestors: [] };
+    const q = `SELECT ?ancestorLabel WHERE { wd:${e.id} wdt:P279 ?ancestor . ?ancestor rdfs:label ?ancestorLabel . FILTER(lang(?ancestorLabel) = "en") }`;
+    const j = await fetchJson(SPARQL + "?format=json&query=" + encodeURIComponent(q), "application/sparql-results+json");
+    const ancestors = (j.results?.bindings ?? []).map((b) => String(b.ancestorLabel?.value ?? "")).filter(Boolean);
+    return { ...e, ancestors };
+  }
+  // the P31 "instance of" types of an entity (a human is Q5)
+  async function instanceOf(id) {
+    const q = `SELECT ?type WHERE { wd:${id} wdt:P31 ?type . }`;
+    const j = await fetchJson(SPARQL + "?format=json&query=" + encodeURIComponent(q), "application/sparql-results+json");
+    return (j.results?.bindings ?? []).map((b) => String(b.type?.value ?? "").split("/").pop()).filter(Boolean);
+  }
+  // the entity that IS a person (instance of human), for "who is X": resolves the name to the human,
+  // not the surname — "who is Tolstoy" is Leo Tolstoy, not the family name. Returns the candidates it
+  // considered, so the thinking can show the research.
+  async function personOf(word) {
+    const u = SEARCH_API + "?" + new URLSearchParams({ action: "wbsearchentities", search: word, language: "en", uselang: "en", type: "item", limit: "10", format: "json" });
+    const j = await fetchJson(u);
+    const results = j.search ?? [];
+    const candidates = results.map((r) => ({ id: r.id, label: r.label ?? null, description: r.description ?? null }));
+    for (const r of results) { try { const types = await instanceOf(r.id); if (types.includes("Q5")) return { id: r.id, label: r.label ?? null, description: r.description ?? null, candidates }; } catch { /* next */ } }
+    const f = results[0] ?? null;
+    return { id: f?.id ?? null, label: f?.label ?? null, description: f?.description ?? null, candidates };
+  }
   // all P279 ancestors, one SPARQL query (the transitive subclass-of closure)
   async function ancestorsOf(id) {
     const q = `SELECT ?ancestor WHERE { wd:${id} wdt:P279* ?ancestor . }`;
@@ -64,5 +102,5 @@ export function makeKindGiver({ cacheFile = defaultCache(), fetchImpl = globalTh
     append(rec); return rec;
   }
 
-  return { get: (word) => cache.get(word), get size() { return cache.size; }, entityOf, ancestorsOf, isPlaceType, async ask(words, { onProgress = null } = {}) { for (const w of words) { try { await isPlaceType(w); } catch (e) { if (onProgress) onProgress({ word: w, error: String(e.message) }); } } return { asked: words.length, size: cache.size }; } };
+  return { get: (word) => cache.get(word), get size() { return cache.size; }, entityOf, entityInfo, kindChain, personOf, ancestorsOf, isPlaceType, async ask(words, { onProgress = null } = {}) { for (const w of words) { try { await isPlaceType(w); } catch (e) { if (onProgress) onProgress({ word: w, error: String(e.message) }); } } return { asked: words.length, size: cache.size }; } };
 }
