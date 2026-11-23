@@ -212,3 +212,21 @@ test("when the user said the person, the binding is witnessed by a span of the t
   assert.equal(bind.standing, "supported"); assert.equal(bind.door, "presented"); assert.ok(bind.assessed.method === "testimony");
   assert.equal(r.thought.claims.find((x) => x.relation.verb === "is").standing, "refuted");
 });
+
+test("addressing: a leading name and comma is who is spoken to, not the thing asked about; nothing researches it", T, async () => {
+  const seen = [];
+  const mine = await make({ know: { ...know, async person(w) { seen.push(w); return w === "marie curie" ? { id: "Q7186", label: "Marie Curie", description: "Polish-French physicist and chemist" } : null; } } });
+  const r = await mine.turn("Fold, who is Marie Curie?");
+  assert.equal(r.type, "reference"); assert.match(r.text, /^Marie Curie: Polish-French physicist/); assert.equal(r.addressed, "Fold");
+  assert.deepEqual(seen, ["marie curie"], "the giver was asked about Marie Curie and never about Fold");
+  const list = await mine.turn("Pierre, Natasha and Mina went home."); assert.equal(list.type, "read", "a list that starts with a name is not an address");
+});
+
+test("a yes/no question about people the thread already holds is not researched: the world cannot say what was said in the thread", T, async () => {
+  const mine = await make();
+  await mine.turn("Pierre loves Natasha.");
+  const r = await mine.turn("Does Natasha love Pierre?");
+  assert.equal(r.handled, false); assert.equal(r.text, "I haven't been told that."); assert.ok(!r.tools.some((t) => t.name === "/search"), "no search door call");
+  assert.ok(r.trace.some((s) => s.step === "no_research"));
+  assert.match((await mine.turn("Does Pierre love Natasha?")).text, /^Yes: you told me “Pierre loves Natasha\.”$/);
+});

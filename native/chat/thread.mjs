@@ -377,7 +377,11 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const topic = qRows.filter((r) => !["PRON", "AUX", "PUNCT", "DET", "ADP", "SCONJ", "CCONJ", "PART"].includes(r.upos)).map((r) => r.form).join(" ") || null;
     const looked = []; let lookedOk = false;
     const aboutUs = qRows.some((r) => r.upos === "PRON" && ["1", "2"].includes(featsOf(r.feats).Person));   // a question about you or me is about this chat, not about the world
-    if (!a.answers?.length && topic && !aboutUs) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
+    // every name the question uses is a referent the thread already holds: the thread has been asked about its own people, and the world cannot say what was said in it
+    const names = qRows.filter((r) => r.upos === "PROPN" && r.deprel !== "vocative");
+    const allKnown = names.length > 0 && names.every((r) => { const ref = refOf(r); return ref && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order; });
+    if (!a.answers?.length && topic && !aboutUs && allKnown) trace.push({ step: "no_research", why: "every name in the question is someone the thread already holds" });
+    if (!a.answers?.length && topic && !aboutUs && !allKnown) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
       const fill = doors.fillers("no_answer"); trace.push({ step: "research", gap: "no_answer", doors: fill, topic });
       for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { lookedOk = true; looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q, { polarity: true, neg: qNeg })); break; } looked.push(w.text); }
     }
@@ -404,6 +408,16 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const rows = parser.rowsOf(t) ?? [], ws = rows.filter((r) => r.upos !== "PUNCT").map((r) => String(r.lemma ?? r.form).toLowerCase());
     // a whole puzzle (a list of things, at least two people, turns of who said what) is read by the puzzle reader and run by the reasoner; it is not stored as facts
     if (puzzleOf(t)) return ask(t, { ...opts, door: "reason" });
+    // ADDRESSING (mechanic 10): a leading name and comma, before a question or a request, is who is being spoken to ("Fold, who is Marie Curie?"): a deixis, not a referent, so it is
+    // taken off before routing and nothing researches it. Structure only: the first row names, the second is a comma, and what follows is itself a question or an imperative.
+    {
+      const lead = rows[0]?.upos === "INTJ" ? 1 : 0, nm = rows[lead], cm = rows[lead + 1];
+      if (nm?.upos === "PROPN" && cm?.form === "," && !rows.some((r) => r.deprel === "conj" && r.head === nm.id)) {
+        const rest = t.slice(t.indexOf(",") + 1).trim(), rr = parser.rowsOf(rest) ?? [], rw = rr.filter((r) => r.upos !== "PUNCT").map((r) => String(r.lemma ?? r.form).toLowerCase());
+        const rroot = rr.find((r) => r.head === 0 && r.upos !== "PUNCT");
+        if (rest && (rest.endsWith("?") || WH_ANY.has(rw[0]) || isRequest(rr, rroot))) { const out = await turn(rest, opts); return out ? { ...out, addressed: nm.form, trace: [{ step: "addressed", to: nm.form }, ...(out.trace ?? [])] } : out; }
+      }
+    }
     const small = ws.length <= 3 ? SMALL.find(([words]) => words.some((w) => ws.includes(w))) : null;
     if (small) return (last = { type: "smalltalk", handled: true, text: small[1], question: t, tools: [], trace: [{ step: "smalltalk" }] });
     if (t.startsWith("/")) return ask(t, opts);
