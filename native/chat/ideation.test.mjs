@@ -19,7 +19,8 @@ const know = {
 const world = { spouses: [] };
 const getJson = async (url) => {
   if (url.includes("list=search")) return { query: { search: [{ title: "Leo Tolstoy" }] } };
-  if (url.includes("wikipedia.org")) return { query: { pages: { 1: { title: "Leo Tolstoy", extract: "Leo Tolstoy wrote War and Peace. He was born in Russia." } } } };
+  if (url.includes("exintro")) return { query: { pages: { 1: { title: "Leo Tolstoy", extract: "Leo Tolstoy wrote War and Peace. He was born in Russia." } } } };   // the opening only (the wiki and search doors)
+  if (url.includes("wikipedia.org")) return { query: { pages: { 1: { title: "Leo Tolstoy", extract: "Leo Tolstoy was a Russian writer.\n\nCareer\nLeo Tolstoy wrote War and Peace. He was born in Russia." } } } };   // the whole text (the hunt)
   if (url.includes("labels")) return { entities: { Q256391: { labels: { en: { value: "Sophia Tolstaya" } }, claims: { P21: [{ mainsnak: { datavalue: { value: { id: "Q6581072" } } } }] } } } };
   return { entities: { Q7243: { claims: world.spouses.length ? { P26: world.spouses.map((id) => ({ mainsnak: { datavalue: { value: { id } } } })) } : {} } } };
 };
@@ -34,6 +35,9 @@ try {
 } catch (e) { why = String(e?.message ?? e).slice(0, 140); }
 const th = make ? await make() : null;
 const T = { skip: th ? false : `not available here: ${why}` };
+// tests that need another session's organs (not committed with this file) skip when those organs are absent, instead of failing
+const organ = (f) => ({ skip: T.skip || (fs.existsSync(new URL(`../organs/${f}`, import.meta.url)) ? false : `native/organs/${f} is not in this checkout`) });
+const TP = organ("puzzle-reader.js"), TH = organ("void-hunt.js");
 
 test("messages are answered one at a time, in the order they were sent", T, async () => {
   const a = th.turn("who is Tolstoy?").then((r) => { order.push("first"); return r; });
@@ -118,20 +122,32 @@ test("a door reads what it fetched into the thread as the giver's, so a question
   assert.ok(r.evidence.some((e) => e.given === "Wikipedia"), "the sentence is quoted back as Wikipedia's, not as something the user said");
 });
 
-test("not knowing sends the chat to search by itself, to read the best matches into the thread, and to ask again", T, async () => {
+test("not knowing sends the chat to HUNT: the void is declared, whole pages are read for what fills it, the answer is cited to its page and sentence, and janus calls it a giver's word", TH, async () => {
   const mine = await make();
   const statuses = [], r = await mine.turn("Who wrote War and Peace?", { onStatus: (t) => statuses.push(t) });
-  assert.ok(r.trace.some((s) => s.step === "research" && s.gap === "no_answer" && s.doors.includes("search")), "the gap no_answer is filled by the search door");
-  assert.ok(r.tools.some((t) => t.name === "/search"));
-  assert.deepEqual(statuses, ["Searching Wikipedia for “wrote War Peace”…"], "a chat app shows what it is doing while it looks");
-  assert.match(r.text, /Tolstoy/, "and the question is asked again of what it read");
-  assert.ok(r.evidence.some((e) => e.given === "Wikipedia")); assert.equal(r.cites[0].label, "Wikipedia");
+  assert.ok(r.trace.some((x) => x.step === "research" && x.gap === "no_answer" && x.doors[0] === "hunt" && x.doors.includes("search")), "by the gap's shape: the hunt first, the plain search behind it");
+  assert.ok(r.tools.some((t) => t.name === "/hunt")); assert.deepEqual(statuses, ["Looking through Wikipedia…"], "a chat app shows what it is doing while it looks");
+  assert.equal(r.handled, true); assert.equal(r.text, "Leo Tolstoy.");
+  assert.ok(r.evidence.some((e) => e.given === "Wikipedia" && /wrote War and Peace/.test(e.text)), "the sentence, verbatim, as Wikipedia's");
+  assert.equal(r.cites[0].label, "Wikipedia"); assert.match(r.cites[0].id, /^Leo Tolstoy/); assert.match(r.cites[0].url, /^https:\/\/en\.wikipedia\.org\/wiki\/Leo_Tolstoy/);
+  const claim = r.thought.claims.find((x) => x.door === "given" && x.relation.verb === "is" && x.relation.object === "Leo Tolstoy");
+  assert.equal(claim.standing, "licensed", "a named giver's text licenses the claim; nothing in the thread witnessed it");
 });
 
-test("when what it read does not answer, the reply says it looked and what it read", T, async () => {
+test("when the hunt finds nothing that says it, the reply says so and no other door is tried; a question it cannot hunt falls back to the plain search", TH, async () => {
   const mine = await make();
-  const r = await mine.turn("Who composed the opera Aida?");
-  assert.equal(r.handled, false); assert.match(r.text, /^I haven't been told that, and I went to look: I read the opening of Wikipedia's article “Leo Tolstoy”, but it doesn't answer it\.$/);
+  const none = await mine.turn("Who composed the opera Aida?");
+  assert.equal(none.handled, false); assert.equal(none.gap, "nothing_fills_the_void"); assert.equal(none.text, "I read what Wikipedia has on it and found nothing that says.");
+  assert.ok(!none.tools.some((t) => t.name === "/search"));
+  const fall = await mine.turn("How does war end?");   // no anchor to hunt
+  assert.ok(fall.tools.some((t) => t.name === "/hunt") && fall.tools.some((t) => t.name === "/search"), "tried the hunt, then the search");
+  assert.match(fall.text, /^I haven't been told that, and I went to look: I read the opening of Wikipedia's article “Leo Tolstoy”, but it doesn't answer it\.$/);
+});
+
+test("a throttled Wikipedia is said as throttled, with nothing read", TH, async () => {
+  const mine = await make({ getJson: async () => { throw new Error("HTTP 429 rate limit"); } });
+  const r = await mine.turn("Who wrote War and Peace?");
+  assert.equal(r.handled, false); assert.equal(r.gap, "source_rate_limited"); assert.match(r.text, /^Wikipedia asked me to slow down/);
 });
 
 test("a request about a name the thread has not met is acted on; one about the world is not", T, async () => {
@@ -152,7 +168,7 @@ test("“go research it” after a gap looks again at that gap", T, async () => 
 
 const PUZZLE = `A teacher writes six words on a board: "cat dog has max dim tag." She gives three students, Albert, Bernard and Cheryl each a piece of paper with one letter from one of the words. Then she asks, "Albert, do you know the word?" Albert immediately replies yes. She asks, "Bernard, do you know the word?" He thinks for a moment and replies, "Yes." Then, she asks Cheryl the same question. She thinks and then replies, "Yes." What is the word?`;
 
-test("the owner's puzzle: the readings are listed, each is run, the one that leaves a single answer holds, and janus projects the standing", T, async () => {
+test("the owner's puzzle: the readings are listed, each is run, the one that leaves a single answer holds, and janus projects the standing", TP, async () => {
   const mine = await make();
   const before = mine.state().sentences;
   const r = await mine.turn(PUZZLE, { onStatus: () => {} });
@@ -168,7 +184,7 @@ test("the owner's puzzle: the readings are listed, each is run, the one that lea
   assert.ok(r.tools.some((t) => t.name === "/reason"));
 });
 
-test("a puzzle whose text the reader cannot fully set up says what it read and what it did not, and runs nothing smaller", T, async () => {
+test("a puzzle whose text the reader cannot fully set up says what it read and what it did not, and runs nothing smaller", TP, async () => {
   const mine = await make();
   const r = await mine.turn(`Albert and Bernard just became friends with Cheryl, and they want to know when her birthday is. Cheryl gave them a list of 10 possible dates: May 15, May 16, May 19, June 17, June 18, July 14, July 16, August 14, August 15, August 17. Cheryl then tells Albert and Bernard separately the month and the day of her birthday respectively. Albert: I don't know when Cheryl's birthday is, but I know that Bernard does not know too. Bernard: At first I don't know when Cheryl's birthday is, but I know now. Albert: Then I also know when Cheryl's birthday is. So when is Cheryl's birthday?`);
   assert.equal(r.type, "puzzle"); assert.equal(r.handled, false); assert.match(r.text, /^I read \d+ dates? and 2 people \(Albert, Bernard\)/);

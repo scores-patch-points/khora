@@ -45,7 +45,7 @@ const claimIds = (claims, p) => (claims?.[p] ?? []).map((c) => c.mainsnak?.datav
 const q = (o) => new URLSearchParams(o).toString();
 
 /** makeDoors({ know, janus, now, getJson, calculate, rowsOf, sentences }) -> { list, get, fillers, call } */
-export function makeDoors({ know = null, janus = null, now = () => new Date(), getJson = fetchJson, calculate, rowsOf, sentences, threadId = "thread", log = null, reason = false } = {}) {
+export function makeDoors({ know = null, janus = null, now = () => new Date(), getJson = fetchJson, calculate, rowsOf, sentences, threadId = "thread", log = null, reason = false, hunt = false } = {}) {
   const net = (why) => (know ? { on: true } : { on: false, why: why ?? "the givers are not available in this process" });
   const defs = [
     { name: "clock", about: "the date and the time now", usage: "/clock [day | time | date]", example: "What day is it?", fills: ["time_of_now"], needs: "none", status: () => ({ on: true }),
@@ -74,6 +74,8 @@ export function makeDoors({ know = null, janus = null, now = () => new Date(), g
         const page = Object.values(j.query?.pages ?? {})[0], ex = page?.extract; if (!ex || page?.missing !== undefined) return { ok: false, gap: "no_article", text: `Wikipedia has no article called “${title}”.` };
         const take = sentences(ex).slice(0, 6).join(" ");
         return { ok: true, text: `I read the opening of Wikipedia's article “${page.title}” into the thread.`, introduce: { text: take, source: "Wikipedia" }, cites: [{ label: "Wikipedia", id: page.title, url: `https://en.wikipedia.org/wiki/${encodeURIComponent(String(page.title).split(" ").join("_"))}` }] }; } },
+    { name: "hunt", about: "declare what the question leaves missing, then read whole Wikipedia pages for the sentences that fill it; the answer is named only if one candidate stands alone, and every candidate is listed", usage: "/hunt <question>", example: "Who wrote War and Peace?", working: () => "Looking through Wikipedia…", fills: ["no_answer"], needs: "network and the void-hunt organ", status: () => (hunt ? net("the givers are not available in this process") : { on: false, why: "the void-hunt organ (native/organs/void-hunt.js) is not in this checkout" }),
+      async run({ args }, host) { return host.hunt(args); } },
     { name: "search", about: "search Wikipedia for what a question is about, and read the best matches into the thread", usage: "/search <words>", example: "Who did Mel Gibson play in Lethal Weapon?", working: (a) => `Searching Wikipedia for “${a}”…`, fills: ["no_answer"], needs: "network", status: () => ({ on: true }),
       async run({ args }, host) { const query = String(args ?? "").trim(); if (!query) return { ok: false, gap: "needs_argument", text: "Search for what?" };
         const j = await getJson(`https://en.wikipedia.org/w/api.php?${q({ action: "query", list: "search", srsearch: query, srlimit: "3", format: "json", origin: "*" })}`);

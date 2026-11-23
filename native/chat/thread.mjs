@@ -27,9 +27,12 @@ import { makeIdeation } from "./ideation.mjs";
 import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
 import { LABEL, MARK_TEXT, marksOf, candidates, judge, takenAs } from "./acts.mjs";
+import { settled } from "./hunt-check.mjs";
 import { detok } from "./personas.mjs";
 // the puzzle reader is another session's organ (pure; imports only the reasoner): without it the door is off and says so
 const puzzleOrgan = await import("../organs/puzzle-reader.js").catch(() => null);
+// the void hunt (declare what is missing, read whole pages for what fills it) is another session's pair of organs, imported the same way: absent, the door is off and the search door answers
+const huntOrgan = await import("../organs/void-hunt.js").catch(() => null), huntSources = await import("../organs/hunt-sources.js").catch(() => null);
 
 const WH = new Set(["who", "whom", "what"]);
 const WH_ANY = new Set(["who", "whom", "what", "when", "where", "why", "how", "which"]);
@@ -96,7 +99,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // researched by the chat itself, and `pending` is the open gap "go research it" means.
   const qids = new Map();               // lower-cased name -> Wikidata id, set when a door found the person
   const setQid = (names, qid) => { for (const n of names) if (n && qid) qids.set(String(n).toLowerCase(), qid); };
-  const doors = makeDoors({ know, janus, now, reason: !!puzzleOrgan, ...(getJson ? { getJson } : {}), calculate, rowsOf: (s) => parser.rowsOf(s) ?? [], sentences: (t) => splitSentences(t, { abbreviations: abbr(t) }).map((c) => c.text), threadId: id, log });
+  const doors = makeDoors({ know, janus, now, reason: !!puzzleOrgan, hunt: !!(huntOrgan && huntSources), ...(getJson ? { getJson } : {}), calculate, rowsOf: (s) => parser.rowsOf(s) ?? [], sentences: (t) => splitSentences(t, { abbreviations: abbr(t) }).map((c) => c.text), threadId: id, log });
   const puzzleOf = (text) => {
     if (!puzzleOrgan) return null;
     const sents = splitSentences(String(text ?? ""), { abbreviations: abbr(String(text ?? "")) }).map((c, i) => ({ order: i, text: c.text, rows: parser.rowsOf(c.text) ?? [] }));
@@ -169,6 +172,20 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const host = {
       setQid, qidOf: (n) => qids.get(String(n).toLowerCase()) ?? null, call: (name, args) => callDoor(name, args),
       kin: (term, name) => { const ref = refByName(name); return ref ? kinAtom({ janus, term, of: ref, facts: kinFacts() }) : { gap: { kind: "unknown_referent" } }; },
+      hunt: async () => {
+        const v = huntOrgan.voidOfQuestion(qRows);
+        if (!v.ok) return { ok: false, gap: v.gap?.kind ?? "no_void", text: "That isn't a question I can hunt an answer for.", cites: [] };
+        const src = huntSources.wikipediaSource({ ...(getJson ? { getJson } : {}), maxWait: 45000 });
+        const h = await huntOrgan.huntVoid(v, { sources: [src], read: (x) => parser.rowsOf(x) ?? [], split: (x) => splitSentences(x, { abbreviations: abbr(x) }).map((c) => c.text) });
+        const cite = (list) => { const seen = new Set(); return (list ?? []).map((e) => ({ label: "Wikipedia", id: e.section ? `${e.title} · ${e.section}` : e.title, url: e.url ?? null })).filter((c) => !seen.has(c.id) && seen.add(c.id)); };
+        const sure = settled(h);   // a careful reader checks that nobody else has more behind them before he says it
+        if (h.unique && !sure.ok) return { ok: false, gap: "several_fill_the_void", text: sure.text, cites: cite((h.candidates ?? []).flatMap((c) => c.evidence ?? [])), data: { hunt: h, rivals: sure.rivals } };
+        if (h.unique) return { ok: true, text: `${h.answer.answerText ?? h.answer.answer}.`, cites: cite(h.answer.evidence), data: { hunt: h }, evidence: (h.answer.evidence ?? []).map((e) => ({ order: null, text: e.sentence, given: "Wikipedia" })) };
+        const names = (h.candidates ?? []).slice(0, 3).map((c) => c.answer), listed = names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names.at(-1)}` : names[0];
+        const said = { several_fill_the_void: `More than one thing fits, and Wikipedia doesn't settle which: ${listed}.`, relation_not_attested: `Wikipedia has ${listed} next to those names, but no sentence says how they're related.`,
+          nothing_fills_the_void: "I read what Wikipedia has on it and found nothing that says.", source_rate_limited: "Wikipedia asked me to slow down, so I couldn't read it; try again in a minute." }[h.gap?.kind];
+        return { ok: false, gap: h.gap?.kind ?? "no_answer", text: said ?? "I couldn't find that out.", cites: cite((h.trail ?? []).filter((t) => t.title)), data: { hunt: h } };
+      },
       reason: async (text) => { const p = puzzleOf(text); if (!p) return { ok: false, gap: "not_a_puzzle", text: "That doesn't read as a puzzle I can set up: I look for a list of things and at least two people." }; const o = puzzleThink(p, text); return { ok: o.handled, gap: o.gap, text: o.text, cites: [{ label: "the epistemic reasoner" }] }; },
     };
     // ---- PUZZLES: the reader lists the readings of the text, the reasoner runs each, the one that leaves a single answer holds (organs/puzzle-reader.js, epistemic-core.js).
@@ -396,7 +413,18 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     if (!a.answers?.length && topic && !aboutUs && !allKnown && unreadable.length) trace.push({ step: "no_research", why: `words the reader does not know: ${unreadable.map((r) => r.form).join(", ")}`, unreadable: unreadable.length });
     if (!a.answers?.length && topic && !aboutUs && !allKnown && !unreadable.length) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
       const fill = doors.fillers("no_answer"); trace.push({ step: "research", gap: "no_answer", doors: fill, topic });
-      for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { lookedOk = true; looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q, { polarity: true, neg: qNeg, skip: withdrawn })); break; } looked.push(w.text); }
+      for (const dn of fill) {
+        if (dn === "hunt") {   // the hunt answers, or says exactly why it could not; only a question it cannot hunt at all falls through to the plain search
+          const w = await callDoor("hunt", topic);
+          if (w.ok) {
+            if (ideation) { const c = idea({ label: `${q.replace(/\?$/, "")}: ${w.text.slice(0, -1)}`, relation: { subject: "the answer", verb: "is", object: w.text.slice(0, -1) }, door: "given", giver: "wikipedia" }); ideation.assess(c, { verdict: "supported", method: "deduction", by: "the void hunt (sentences read from Wikipedia)", basis: `a sentence on ${w.cites[0]?.id ?? "Wikipedia"} says it`, license: "a named giver's own text: it licenses the claim, it is not witnessed in the thread" }); }
+            const out = done({ type: "answer", handled: true, text: w.text, evidence: w.evidence ?? [], cites: w.cites });
+            last = out; return out;
+          }
+          if (["several_fill_the_void", "relation_not_attested", "nothing_fills_the_void", "source_rate_limited"].includes(w.gap)) return done({ type: "relational", handled: false, gap: w.gap, text: w.text, cites: w.cites ?? [], research: { gap: "no_answer", args: topic } });
+          looked.push(w.text); continue;
+        }
+        const w = await callDoor(dn, topic); if (w.ok) { lookedOk = true; looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q, { polarity: true, neg: qNeg, skip: withdrawn })); break; } looked.push(w.text); }
     }
     trace.push({ step: "relational", read: a.read ?? null, answers: a.answers?.length ?? 0 });
     if (a.answers?.length) {
