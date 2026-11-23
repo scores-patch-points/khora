@@ -80,6 +80,7 @@ const sha = (s) => createHash("sha256").update(String(s)).digest("hex").slice(0,
 export async function makeThread({ hl, know = null, now = () => new Date(), janus = null, log = null, getJson = undefined } = {}) {
   const parser = await rowsOfFor("eng"), pr = priorsFor("eng"), engine = await makeEngine({ hl });
   const commonNoun = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); if (!c?.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); };
+  const wordKnown = (r) => { const c = classifyWord(String(r.form).toLowerCase(), { posPrior: pr.posPrior }); return !!c?.found && c.total > 0; };   // a word the reader's part-of-speech prior holds
   // the given-name table (a giver, with its provenance inside the file): a name's lean for he / she until the thread's own pronouns say otherwise
   const table = loadNameGender();
   const genderOf = (words) => { let m = 0, f = 0; for (const w of words ?? []) { const c = table?.words?.[String(w).toLowerCase()]; if (c) { m += c[0]; f += c[1]; } } return m + f >= MIN_EVIDENCE && m !== f ? (m > f ? "m" : "f") : null; };
@@ -516,16 +517,6 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       }
       if (j.working === "unread") { workingClaim = propose("this message counts as something I couldn't read", { subject: "this message", verb: "counts as", object: LABEL.eng.unread }, true, { verdict: "unresolved", method: "deduction", by, basis: "no mark supports any kind of message" }); ids.push(workingClaim); }
     }
-    // ---- MECHANIC 7: a question the chat put to the user is answered by the next fragment, which is read as that answer instead of being stored or left unplaced. A man who asked
-    // "what does it stand for?" and is told "the course" says "is the course worth doing?" back to himself. Anything that is not a fragment drops the question: he moves on.
-    if (asked && j.working === "fragment" && asked.kind === "antecedent") {
-      let end = rows.length; while (end > 0 && rows[end - 1].upos === "PUNCT") end--;   // the answer, without the punctuation it ended with (from the reader's rows)
-      const fill = detok(rows.slice(0, end).map((r) => r.form)), pending = asked; asked = null;
-      const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? fill : r.form)));
-      const cid = propose(`this message answers your question about ${quote(pending.rows.find((r) => r.id === pending.row).form)}`, { subject: "this message", verb: "answers", object: "the question about the pronoun" }, true, { verdict: "supported", method: "testimony", by, basis: `a fragment, straight after I asked what “${pending.rows.find((r) => r.id === pending.row).form}” stood for`, witnesses: [witness] });
-      const inner = await turn(rebuilt, { ...opts, _ids: [...ids, cid].filter(Boolean) });
-      return inner ? { ...inner, paired: { question: pending.question, answer: fill, rebuilt }, trace: [{ step: "paired", asked: pending.question, answer: fill, rebuilt }, ...(inner.trace ?? [])] } : inner;
-    }
     if (asked && j.working !== "fragment") asked = null;
     const premise = ideation && !j.open && j.working !== "unread" ? workingClaim : null;   // a claim that is only open cannot be a premise of an answer
     const aOpts = { ...opts, actIds: ids, actPremise: premise };
@@ -535,6 +526,30 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       if (workingClaim && !["social", "unread", "fragment"].includes(j.working)) lastAct = { claim: workingClaim, orders, dependents: out.ideaIds?.filter((x) => !ids.includes(x)) ?? [] };
       return { question: t, ...out, acts: { working: j.working, open: j.open, alternatives: j.alternatives }, taken: takenAs(j), thought: ideation ? ideation.view([...new Set([...ids, ...(out.ideaIds ?? [])])]) : (out.thought ?? null) };
     };
+
+    // ---- MECHANIC 7: a question the chat put to the user is answered by the next fragment, IF the fragment fits what was asked. A man who asked "what does it stand for?" and is told
+    // "the course" says "is the course worth doing?" back to himself; told "Natasha" for "is it open?", or "Hahaha", or "!pt", he asks again. The fit is read from the reader's own
+    // marks: the gap is a pronoun with a gender and number, the answer must be a noun phrase of the right kind (a name for he or she, whose lean the given-name table must not contradict;
+    // a noun the reader knows, or a thing the thread already holds, for it); anything else is not an answer. The rebuilt question then goes through the same guards as any question.
+    if (asked && j.working === "fragment" && asked.kind === "antecedent") {
+      const pending = asked, pron = pending.rows.find((r) => r.id === pending.row), pf = featsOf(pron.feats);
+      let end = rows.length; while (end > 0 && rows[end - 1].upos === "PUNCT") end--;   // the answer, without the punctuation it ended with (from the reader's rows)
+      const body = rows.slice(0, end), fill = detok(body.map((r) => r.form));
+      const heads = body.filter((r) => r.upos === "NOUN" || r.upos === "PROPN"), names = body.filter((r) => r.upos === "PROPN");
+      const shapeOk = body.length > 0 && heads.length > 0 && body.every((r) => ["DET", "ADJ", "NOUN", "PROPN", "NUM", "ADP", "PART"].includes(r.upos));
+      const held = names.length > 0 && names.every((r) => (cast?.referents ?? []).some((b) => (b.forms ?? []).some(([f]) => String(f).toLowerCase() === String(r.form).toLowerCase())));
+      const gendered = pf.Gender === "Masc" || pf.Gender === "Fem", lean = names.length ? genderOf(names.map((r) => r.form)) : null;
+      const why = !shapeOk ? "it is not a name or a thing" : gendered ? (!names.length ? `“${pron.form}” is a person and “${fill}” is not a name` : lean && lean !== (pf.Gender === "Masc" ? "m" : "f") ? `“${fill}” is usually ${lean === "m" ? "a man's" : "a woman's"} name, and “${pron.form}” is ${pf.Gender === "Masc" ? "a man" : "a woman"}` : null)
+        : names.length ? (held ? null : `I don't know “${fill}”, so I can't tell whether it is the thing you mean`) : (heads.every((r) => wordKnown(r)) ? null : `I can't read “${fill}”`);
+      const cid = propose(`this message answers your question about ${quote(pron.form)}`, { subject: "this message", verb: "answers", object: "the question about the pronoun" }, true, why
+        ? { verdict: "refuted", method: "deduction", by, basis: `it came straight after my question about “${pron.form}”, but ${why}` }
+        : { verdict: "supported", method: "testimony", by, basis: `a ${names.length ? "name" : "noun phrase"} that fits “${pron.form}”, straight after I asked what it stood for`, witnesses: [witness] });
+      if (why) return finish({ type: "relational", handled: false, gap: "answer_does_not_fit", text: `I can't use ${quote(fill || t)} for ${quote(pron.form)}: ${why}. Who or what do you mean?`, question: t, tools: [], trace: [{ step: "pairing_refused", why }], ideaIds: [cid].filter(Boolean) });   // the question stays open
+      asked = null;
+      const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? fill : r.form)));
+      const inner = await turn(rebuilt, { ...opts, _ids: [...ids, cid].filter(Boolean) });
+      return inner ? { ...inner, paired: { question: pending.question, answer: fill, rebuilt }, trace: [{ step: "paired", asked: pending.question, answer: fill, rebuilt }, ...(inner.trace ?? [])] } : inner;
+    }
 
     // ---- route by the standing act
     switch (j.working) {

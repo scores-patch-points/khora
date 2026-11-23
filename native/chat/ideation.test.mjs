@@ -350,3 +350,19 @@ test("mechanic 7: a question the chat put to the user is answered by the next fr
   // and a fragment with nothing asked is unchanged
   const fresh = await make(); const d = await fresh.turn("the course"); assert.equal(d.paired, undefined); assert.equal(d.gap, "fragment_unclear");
 });
+
+test("mechanic 7, over-pairing closed: an answer is used only if it fits what was asked, else the chat asks again and the question stays open", T, async () => {
+  const sent = [], mk = () => make({ getJson: async (u) => { sent.push(decodeURIComponent(u)); return { query: { search: [] } }; } });
+  const tryPair = async (q, a) => { const th = await mk(); await th.turn(q); sent.length = 0; const r = await th.turn(a); return { r, th, sent: sent.length }; };
+  for (const [q, a, want] of [["is it open?", "the shop", "is the shop open?"], ["did he arrive?", "Pierre", "did Pierre arrive?"], ["does she live here?", "Sonya", "does Sonya live here?"], ["is it far?", "the station", "is the station far?"]]) {
+    const { r } = await tryPair(q, a); assert.equal(r.paired?.rebuilt, want, `${q} / ${a}`);
+  }
+  const no = [["did he arrive?", "the course", /“he” is a person and “the course” is not a name/], ["where is she?", "the station", /is not a name/], ["is it open?", "Natasha", /I don't know “Natasha”/], ["is it far?", "Hahaha", /I don't know “Hahaha”/], ["is it far?", "!pt", /not a name or a thing/]];
+  for (const [q, a, why] of no) {
+    const { r, sent: n } = await tryPair(q, a);
+    assert.equal(r.paired, undefined, `${q} / ${a}`); assert.equal(r.gap, "answer_does_not_fit"); assert.match(r.text, why); assert.match(r.text, /Who or what do you mean\?$/); assert.equal(n, 0, "nothing was sent out");
+    assert.ok(r.thought.claims.some((x) => x.relation.verb === "answers" && x.standing === "refuted"), "the refused pairing is a ruled-out claim, shown");
+  }
+  // the question stays open after a bad answer, and a good one then pairs
+  const th = await mk(); await th.turn("is it open?"); await th.turn("Hahaha"); const good = await th.turn("the shop"); assert.equal(good.paired?.rebuilt, "is the shop open?");
+});
