@@ -381,14 +381,20 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       }
     }
     // what the question is about, by part of speech (no word list): the content words, without the question word, the auxiliaries and the function words
-    const topic = qRows.filter((r) => !["PRON", "AUX", "PUNCT", "DET", "ADP", "SCONJ", "CCONJ", "PART"].includes(r.upos)).map((r) => r.form).join(" ") || null;
+    const topicRows = qRows.filter((r) => !["PRON", "AUX", "PUNCT", "DET", "ADP", "SCONJ", "CCONJ", "PART"].includes(r.upos));
+    const topic = topicRows.map((r) => r.form).join(" ") || null;
+    // READABLE before anything leaves: the user's words go to an outside service only if the reader knows them (a name, a number, or a word its part-of-speech prior holds). A message in
+    // another language or a spelling the reader has never seen is not a question about the world the chat can research: it stays here (and it is a privacy line, not only a quality one).
+    const known = (r) => { const c = classifyWord(String(r.form).toLowerCase(), { posPrior: pr.posPrior }); return !!c?.found && c.total > 0; };
+    const unreadable = topicRows.filter((r) => r.upos !== "PROPN" && r.upos !== "NUM" && !known(r));
     const looked = []; let lookedOk = false;
     const aboutUs = qRows.some((r) => r.upos === "PRON" && ["1", "2"].includes(featsOf(r.feats).Person));   // a question about you or me is about this chat, not about the world
     // every name the question uses is a referent the thread already holds: the thread has been asked about its own people, and the world cannot say what was said in it
     const names = qRows.filter((r) => r.upos === "PROPN" && r.deprel !== "vocative");
     const allKnown = names.length > 0 && names.every((r) => { const ref = refOf(r); return ref && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order; });
     if (!a.answers?.length && topic && !aboutUs && allKnown) trace.push({ step: "no_research", why: "every name in the question is someone the thread already holds" });
-    if (!a.answers?.length && topic && !aboutUs && !allKnown) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
+    if (!a.answers?.length && topic && !aboutUs && !allKnown && unreadable.length) trace.push({ step: "no_research", why: `words the reader does not know: ${unreadable.map((r) => r.form).join(", ")}`, unreadable: unreadable.length });
+    if (!a.answers?.length && topic && !aboutUs && !allKnown && !unreadable.length) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
       const fill = doors.fillers("no_answer"); trace.push({ step: "research", gap: "no_answer", doors: fill, topic });
       for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { lookedOk = true; looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q, { polarity: true, neg: qNeg, skip: withdrawn })); break; } looked.push(w.text); }
     }
@@ -406,7 +412,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       last = out; return out;
     }
     const gap = a.gaps?.[0];
-    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: aboutUs && !a.answers?.length ? "That's about you or me, and I only know what's been said in this chat." : looked.length ? (lookedOk ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : `I haven't been told that, and I couldn't look it up: ${looked.at(-1)}`) : "I haven't been told that.", detail: gap?.detail ?? null, ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
+    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: aboutUs && !a.answers?.length ? "That's about you or me, and I only know what's been said in this chat." : unreadable.length && !a.answers?.length ? "I couldn't read some of those words, so I didn't look anything up." : looked.length ? (lookedOk ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : `I haven't been told that, and I couldn't look it up: ${looked.at(-1)}`) : "I haven't been told that.", detail: gap?.detail ?? null, ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
   }
 
   /** turn(message) → the reply to ONE message, whatever it is: small talk, a calculation, a question, or a statement to read into the fold */
