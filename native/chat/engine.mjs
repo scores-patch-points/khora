@@ -292,8 +292,12 @@ function egoGraph(being, { per = 6 } = {}) {
     for (const g of f.roles) {
       if (!KARAKAS.includes(g.label) || g === null) continue;
       const t = tokOf(g.node); const r = t ? mOf[`${t.order}.${t.id}`] : null; if (!r || r === being.ref || !known(r)) continue;
+      // its own body and belongings are not a relation to someone else ("opened his eyes"): a partner possessed by the referent is skipped
+      if ((S.edgesOf.get(r) ?? []).some((e) => e.type === "possessor" && e.ref === being.ref)) continue;
+      // the preposition is the book's own word where the participant carries one ("looked AT his sister"), else a fixed fallback
+      const prow = t ? S.rowsOf.get(t.order)?.rows : null, hd = prow?.find((x) => x.id === t.id), cw = hd ? prow.find((x) => x.head === hd.id && x.deprel === "case") : null, own = cw ? String(cw.form).toLowerCase() : null;
       let from, to, lab;
-      if (mine === "kartṛ" && g.label !== "kartṛ" && ["karman", "sampradāna", "apādāna", "adhikaraṇa", "karaṇa"].includes(g.label)) { from = being.ref; to = r; lab = `${vfOf(f.kriya, "past")}${PREP[g.label] ? " " + PREP[g.label] : ""}`; }
+      if (mine === "kartṛ" && g.label !== "kartṛ" && ["karman", "sampradāna", "apādāna", "adhikaraṇa", "karaṇa"].includes(g.label)) { from = being.ref; to = r; lab = `${vfOf(f.kriya, "past")}${own ? " " + own : PREP[g.label] ? " " + PREP[g.label] : ""}`; }
       else if (g.label === "kartṛ" && mine !== "kartṛ" && ["karman", "sampradāna", "apādāna", "adhikaraṇa", "karaṇa"].includes(mine)) { from = r; to = being.ref; lab = `${vfOf(f.kriya, "past")}${PREP[mine] ? " " + PREP[mine] : ""}`; }
       else continue;
       const k = `${from}|${to}|${lab}`; let e = edges.get(k); if (!e) edges.set(k, (e = { from, to, label: lab, orders: new Set() })); e.orders.add(f.order);
@@ -305,7 +309,9 @@ function egoGraph(being, { per = 6 } = {}) {
   const node = (r) => { const b = S.refByRef.get(r); return { ref: r, label: b?.forms?.[0]?.[0] ?? r, kind: b?.kind ?? "name", mentions: b?.mentions ?? 0 }; };
   const arrow = (e, other) => ({ ...node(other), verb: e.label, n: e.orders.size, orders: [...e.orders].sort((a, b) => a - b).slice(0, 3).map((o) => ({ order: o, at: S.sentenceStart.get(o) ?? null })) });
   const incoming = take(false).map((e) => arrow(e, e.from)), outgoing = take(true).map((e) => arrow(e, e.to));
-  const same = (S.edgesOf.get(being.ref) ?? []).filter((e) => SAME_WORD[e.type] && known(e.ref)).sort((a, b) => b.n - a.n).slice(0, 4).map((e) => ({ ...node(e.ref), how: SAME_WORD[e.type], n: e.n }));
+  const sameBy = new Map();
+  for (const e of (S.edgesOf.get(being.ref) ?? []).filter((e) => SAME_WORD[e.type] && known(e.ref)).sort((a, b) => b.n - a.n)) { const nd = node(e.ref), k = `${nd.label.toLowerCase()}|${SAME_WORD[e.type]}`; const o = sameBy.get(k); if (o) o.n += e.n; else sameBy.set(k, { ...nd, how: SAME_WORD[e.type], n: e.n }); }
+  const same = [...sameBy.values()].sort((a, b) => b.n - a.n).slice(0, 4);
   return { center: node(being.ref), in: incoming, out: outgoing, same };
 }
 

@@ -158,3 +158,6 @@ files changed since the last record: native/the-fold/pharos-gate.mjs, native/rea
 
 ## 2026-11-23: weaveReferents writes its batch in ONE pharos weaveMany call (one P.weave per entry took about 8 minutes for War and Peace's ~20,000 entries). Same entries.
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: referents-in-order, pronoun salience for short texts: the subject is touched last, so it is the most salient name of its sentence; an optional genderOf(words) (the given-name table, name-gender/eng.json, an overcomeable prior that never counts as sure) is the first lean of a name with no pronoun evidence of its own; a pronoun bound with no evidence is recorded as an ASSUMPTION about that being (assumed), so a she taken to be Mina keeps a later he from being Mina. Needed by the chat (native/chat/thread.mjs): 'Mina gave Jonathan a book. She lives in the village.' then 'Who is she?' answered Jonathan before, Mina now (native/chat/thread.test.mjs asserts it). War and Peace, exploratory, 2026-11-23, saved parse, genderOf off: participants that are a referent 70.0% (108,204 of 154,587, unchanged), pronouns bound across clauses 38,507 (unchanged), contested 64.6% -> 64.3%: neutral on the book. No gold scored; not canonical.
+files changed since the last record: native/adapters/text/referents-in-order.mjs

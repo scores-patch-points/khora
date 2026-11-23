@@ -15,7 +15,7 @@ const P = await import(pathToFileURL(path.join(pharosHome, "lib", "pharos.mjs"))
 export const LOG_DIR = process.env.CHAT_PHAROS_DIR || path.join(os.homedir(), ".pharos", "fold-demo");   // the same log foldcode's demo writes to
 export function openLog() {
   const h = P.open("fold-demo", { dir: LOG_DIR, writer: "khora-chat" });
-  for (const [name, cell] of [["utterance", "REC·Figure"], ["statement", "INS·Figure"], ["referent", "INS·Figure"], ["identity", "SYN·Pattern"], ["frame", "SYN·Pattern"], ["void", "DEF·Ground"], ["thought", "INS·Figure"], ["candidate", "SEG·Pattern"], ["binding", "CON·Figure"], ["verdict", "EVA·Figure"], ["empty", "NUL·Figure"]]) {
+  for (const [name, cell] of [["utterance", "REC·Figure"], ["statement", "INS·Figure"], ["referent", "INS·Figure"], ["identity", "SYN·Pattern"], ["frame", "SYN·Pattern"], ["void", "DEF·Ground"], ["thought", "INS·Figure"], ["candidate", "SEG·Pattern"], ["binding", "CON·Figure"], ["verdict", "EVA·Figure"], ["empty", "NUL·Figure"], ["pin", "EVA·Figure"]]) {
     try { P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${name}`, body: { name, cell } }); } catch { /* already declared */ }
   }
   return h;
@@ -39,4 +39,12 @@ export function weaveQuestion(h, r) {
     ...(r.ref ? { binding: { pronoun: null, ref: r.ref } } : {}),
   };
   return weaveAsk(h, turn, r.handled ? r.text : null);
+}
+
+/** pins: a defect put aside to return to ("why was this binding wrong?"). One pharos entry each, kind `pin`, status open; the body names the
+ *  node, what was bound wrongly, the evidence (sentences with their order in the text), and where to look first. Re-weaving the same id
+ *  updates it; a pin is closed by weaving it again with status "closed" and what the cause was. */
+export function weavePins(h, pins) {
+  const batch = pins.map((x) => ({ cell: "EVA·Figure", kind: "pin", addr: `pin:${x.id}`, body: { id: x.id, status: x.status ?? "open", class: x.class, title: x.title, node: x.node ?? null, bound: x.bound ?? null, shouldBe: x.shouldBe ?? null, evidence: (x.evidence ?? []).slice(0, 4), lookFirst: x.lookFirst, repro: x.repro ?? null, found: x.found ?? "2026-11-23" } }));
+  P.weaveMany(h, batch); return batch.length;
 }
