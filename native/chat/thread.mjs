@@ -414,6 +414,9 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     // every name the question uses is a referent the thread already holds: the thread has been asked about its own people, and the world cannot say what was said in it
     const names = qRows.filter((r) => r.upos === "PROPN" && r.deprel !== "vocative");
     const allKnown = names.length > 0 && names.every((r) => { const ref = refOf(r); return ref && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order; });
+    // a pronoun nothing in the notebook gives someone to point to ("is it worth doing?", "could that be the problem"): a man asks what it stands for; he does not look the rest up
+    const dangling = qRows.filter((r) => r.upos === "PRON" && (featsOf(r.feats).Person === "3" || featsOf(r.feats).PronType === "Dem") && !(refOf(r) && (probe.referents.find((x) => x.ref === refOf(r))?.first ?? order) < order));
+    if (!a.answers?.length && topic && !aboutUs && dangling.length) { trace.push({ step: "no_research", why: `“${dangling[0].form}” has nothing in the thread to point to` }); return done({ type: "relational", handled: false, gap: "no_antecedent", text: `I don't know what ${quote(dangling[0].form)} stands for: nothing said so far gives it anything to point to.` }); }
     if (!a.answers?.length && topic && !aboutUs && allKnown) trace.push({ step: "no_research", why: "every name in the question is someone the thread already holds" });
     if (!a.answers?.length && topic && !aboutUs && !allKnown && unreadable.length) trace.push({ step: "no_research", why: `words the reader does not know: ${unreadable.map((r) => r.form).join(", ")}`, unreadable: unreadable.length });
     if (!a.answers?.length && topic && !aboutUs && !allKnown && !unreadable.length) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
@@ -515,7 +518,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const finish = (out, orders = []) => {
       if (!out) return out;
       // what a later "no" corrects is the last message that SAID something (a statement, a question, a sum), never a social remark or one that could not be read: "really?" does not take "Pierre loves Natasha" back
-      if (workingClaim && !["social", "unread"].includes(j.working)) lastAct = { claim: workingClaim, orders, dependents: out.ideaIds?.filter((x) => !ids.includes(x)) ?? [] };
+      if (workingClaim && !["social", "unread", "fragment"].includes(j.working)) lastAct = { claim: workingClaim, orders, dependents: out.ideaIds?.filter((x) => !ids.includes(x)) ?? [] };
       return { question: t, ...out, acts: { working: j.working, open: j.open, alternatives: j.alternatives }, taken: takenAs(j), thought: ideation ? ideation.view([...new Set([...ids, ...(out.ideaIds ?? [])])]) : (out.thought ?? null) };
     };
 
@@ -530,11 +533,15 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         return finish({ ...out, introduced: [{ text: head, source: null, read }, ...(out.introduced ?? [])] }, Array.from({ length: parse.length - before }, (_, i) => before + i));
       }
       case "statement": { const before = parse.length, out = await say(t); return finish({ ...out, ideaIds: [] }, Array.from({ length: parse.length - before }, (_, i) => before + i)); }
-      case "social": {
+      case "social": {   // positive evidence only: an opening interjection, or a known greeting or thanks
         if (small) return finish(last = { type: "smalltalk", handled: true, text: small[1], question: t, tools: [], trace: [{ step: "smalltalk" }] });
-        const content = rows.filter((r) => !["PUNCT", "INTJ"].includes(r.upos));   // a bare name is a topic
-        if (content.length && content.every((r) => r.upos === "PROPN")) return finish(await ask(`Who is ${content.map((r) => r.form).join(" ")}?`, aOpts));
-        return finish(last = { type: "social", handled: true, text: "Okay.", question: t, tools: [], trace: [{ step: "social", read: "no predicate: an acknowledgement, not a fact" }] });
+        return finish(last = { type: "social", handled: true, text: "Okay.", question: t, tools: [], trace: [{ step: "social", read: "an opening interjection and nothing else: an acknowledgement, not a fact" }] });
+      }
+      case "fragment": {   // a bare word or phrase with no predicate and nothing that marks it as a remark: a man does not guess, and does not phone the library with it
+        const content = rows.filter((r) => !["PUNCT", "INTJ"].includes(r.upos));
+        const heldName = content.length && content.every((r) => r.upos === "PROPN") && (cast?.referents ?? []).some((b) => (b.forms ?? []).some(([f]) => String(f).toLowerCase() === content.map((r) => r.form).join(" ").toLowerCase()));
+        if (heldName) return finish(await ask(`Who is ${content.map((r) => r.form).join(" ")}?`, aOpts));   // someone the notebook already holds: say what it says
+        return finish({ type: "fragment", handled: false, gap: "fragment_unclear", text: `I'm not sure what you mean by ${quote(t)}.`, question: t, tools: [], trace: [{ step: "fragment", read: "no predicate, and nothing marks it as a remark, a name I hold or a question" }] });
       }
       default: return finish({ type: "unread", handled: false, gap: "act_unread", text: "I couldn't tell what kind of message that was.", tools: [], trace: [{ step: "unread" }] });
     }

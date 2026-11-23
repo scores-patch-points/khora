@@ -190,16 +190,18 @@ test("a puzzle whose text the reader cannot fully set up says what it read and w
   assert.equal(r.type, "puzzle"); assert.equal(r.handled, false); assert.match(r.text, /^I read \d+ dates? and 2 people \(Albert, Bernard\)/);
 });
 
-test("a fragment is a social act, not a fact; a bare name is a topic; a question about you or me is not researched", T, async () => {
-  const mine = await make();
+test("a remark is social only on positive evidence; a bare fragment or name is not looked up and is not stored; a held name is answered from the notebook; a question about you or me is not researched", T, async () => {
+  const sent = [], asked = [], mine = await make({ getJson: async (u) => { sent.push(u); return { query: { search: [] } }; }, know: { ...know, async person(w) { asked.push(w); return null; } } });
   const before = mine.state().sentences;
-  for (const t of ["Ok dear", "Sorry dear", "good morning"]) { const r = await mine.turn(t); assert.equal(r.type, "social", t); assert.equal(r.text, "Okay."); }
+  const ok = await mine.turn("Ok dear"); assert.equal(ok.type, "social"); assert.equal(ok.text, "Okay.");
+  for (const t of ["Sorry dear", "good morning", "Bangalore", "Der"]) { const r = await mine.turn(t); assert.equal(r.type, "fragment", t); assert.equal(r.gap, "fragment_unclear"); assert.equal(r.text, `I'm not sure what you mean by “${t}”.`); }
   assert.equal(mine.state().sentences, before, "nothing was stored");
-  const n = await mine.turn("Tolstoy"); assert.equal(n.type, "reference"); assert.match(n.text, /^Leo Tolstoy/);
-  const you = await mine.turn("Where are you now exactly?"); assert.equal(you.handled, false); assert.equal(you.gap, "about_participants".replace("about_participants", you.gap)); assert.ok(!you.tools.some((t) => t.name === "/search"), "no search for a question about the chat's own participants");
+  assert.deepEqual([sent.length, asked.length], [0, 0], "nothing was sent out for a word the chat took for a name, nor for any other fragment");
+  await mine.turn("Pierre loves Natasha.");
+  const held = await mine.turn("Pierre"); assert.equal(held.type, "identity", "a name the notebook holds is answered from it"); assert.match(held.text, /Pierre loves Natasha/);
+  const you = await mine.turn("Where are you now exactly?"); assert.equal(you.handled, false); assert.ok(!you.tools.some((t) => t.name === "/search"), "no search for a question about the chat's own participants");
   assert.match(you.text, /about you or me/);
 });
-
 test("everything is in the shared log, and each entry is written by whoever did the step", T, async () => {
   const fold = rec.readKinds(log, ["candidate", "assessment", "tool"]).map((e) => ({ kind: e.kind, by: e.by, ev: e.body.event?.kind ?? null, door: e.body.door ?? null }));
   assert.ok(fold.some((e) => e.kind === "candidate" && e.by === "khora-chat" && e.ev === "propose"));
@@ -249,14 +251,15 @@ test("a yes/no question about people the thread already holds is not researched:
 
 test("the chat says what it takes a message to be: claims on marks, ambiguity left open and said, and a correction withdraws the last reading", T, async () => {
   const mine = await make();
-  const soc = await mine.turn("Sorry dear");
+  const soc = await mine.turn("ok");
   assert.equal(soc.type, "social"); assert.equal(soc.acts.working, "social"); assert.equal(soc.taken, null);
-  const c1 = soc.thought.claims.find((x) => x.relation.verb === "counts as");
-  assert.equal(c1.standing, "supported"); assert.equal(c1.relation.object, "a social remark"); assert.match(c1.assessed.basis, /no predicate at all/);
+  const c1 = soc.thought.claims.find((x) => x.relation.verb === "counts as" && x.standing === "supported");
+  assert.equal(c1.relation.object, "a social remark"); assert.match(c1.assessed.basis, /an opening interjection and nothing else/);
+  assert.equal(soc.thought.claims.find((x) => x.relation.object === "something I can't place").standing, "refuted", "the unplaceable reading is shown as ruled out");
 
   const amb = await mine.turn("really?");
-  assert.equal(amb.acts.open, true); assert.equal(amb.acts.working, "social"); assert.deepEqual(amb.acts.alternatives, ["question"]);
-  assert.match(amb.taken, /^I took that as a social remark; it could also be a question/);
+  assert.equal(amb.acts.open, true); assert.equal(amb.acts.working, "fragment"); assert.deepEqual(amb.acts.alternatives, ["question"]);
+  assert.match(amb.taken, /^I took that as something I can't place; it could also be a question/); assert.equal(amb.text, "I'm not sure what you mean by “really?”.");
   assert.deepEqual(amb.thought.claims.filter((x) => x.relation.verb === "counts as").map((x) => x.standing), ["unresolved", "unresolved"]);
 
   await mine.turn("Pierre loves Natasha.");
@@ -288,7 +291,7 @@ test("a correction withdraws what was taken from the previous message, and what 
 test("every reply carries its question, so the server can weave it (a correction and an unread message had none, and the weave refused them)", T, async () => {
   const mine = await make();
   await mine.turn("Mina gave Jonathan a book.");
-  for (const m of ["no, Mina gave Jonathan a pen.", "…", "really?", "Sorry dear"]) { const r = await mine.turn(m); assert.equal(typeof r.question, "string", m); assert.ok(r.question.length > 0, m); }
+  for (const m of ["no, Mina gave Jonathan a pen.", "…", "really?", "Sorry dear", "ok"]) { const r = await mine.turn(m); assert.equal(typeof r.question, "string", m); assert.ok(r.question.length > 0, m); }
 });
 
 test("a correction takes back the last message that said something, not a social remark in between", T, async () => {
@@ -324,4 +327,11 @@ test("the thing asked about is the whole name, in what is looked up and in what 
   const asked = [], mine = await make({ getJson: async () => ({ query: { pages: { "-1": { missing: "" } }, search: [] } }), know: { ...know, async person(w) { asked.push(w); return null; } } });
   const r = await mine.turn("who is Marie Curie?");
   assert.deepEqual(asked, ["marie curie"]); assert.equal(r.text, "I haven't been told about Marie Curie, and no giver I can reach knows it.");
+});
+
+test("a pronoun with nothing in the thread to point to is asked about, not researched around: “is it worth doing?” sends nothing", T, async () => {
+  const sent = [], mine = await make({ getJson: async (u) => { sent.push(u); return { query: { search: [] } }; } });
+  const r = await mine.turn("is it worth doing?");
+  assert.equal(r.handled, false); assert.equal(r.gap, "no_antecedent"); assert.equal(r.text, "I don't know what “it” stands for: nothing said so far gives it anything to point to."); assert.equal(sent.length, 0);
+  await mine.turn("Mina gave Jonathan a book."); const bound = await mine.turn("Who did she give it to?"); assert.notEqual(bound.gap, "no_antecedent", "a pronoun the thread does hold is not dangling");
 });

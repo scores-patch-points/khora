@@ -15,12 +15,12 @@
 
 /** the acts a message can be, with the plain words the page uses for them: authored chrome, one table per language (rule 4), keyed by the act */
 export const LABEL = Object.freeze({
-  eng: Object.freeze({ question: "a question", statement: "something you're telling me", request: "a request", social: "a social remark", calculation: "arithmetic", puzzle: "a puzzle", door: "a command", composite: "something you're telling me, then a question", unread: "something I couldn't read" }),
+  eng: Object.freeze({ question: "a question", statement: "something you're telling me", request: "a request", social: "a social remark", calculation: "arithmetic", puzzle: "a puzzle", door: "a command", fragment: "something I can't place", composite: "something you're telling me, then a question", unread: "something I couldn't read" }),
 });
 
 /** the plain words for a mark, as the page shows them (authored chrome, keyed by the mark) */
 export const MARK_TEXT = Object.freeze({ eng: Object.freeze({
-  final_question_mark: "a final question mark", wh_word: "a question word", aux_first: "an auxiliary before the subject", imperative_form: "the form of a command", no_predicate: "no predicate at all",
+  final_question_mark: "a final question mark", wh_word: "a question word", aux_first: "an auxiliary before the subject", imperative_form: "the form of a command", no_predicate: "no predicate at all", interjection_led: "an opening interjection and nothing else",
   subject_predicate: "a subject with a predicate", small_talk: "a known greeting or thanks", arithmetic: "numbers and an operator", puzzle_scene: "a list of things and people taking turns",
   slash_command: "a slash", statements_then_question: "statements followed by a question", leading_address: "a name and a comma at the start", correction_mark: "an opening “no”",
 }) });
@@ -29,7 +29,7 @@ export const MARK_TEXT = Object.freeze({ eng: Object.freeze({
 export const SPECIFIC = Object.freeze(["door", "puzzle", "calculation", "composite"]);
 /** among acts that all hold, the one to route to: the one that changes the thread least if the chat is wrong. A social remark stores nothing and looks nothing up; a question may
  *  look something up but stores nothing; a request is refused or read as a question about the world; a statement is stored as a fact. Declared, with this reason. */
-export const LEAST_HARM = Object.freeze(["social", "question", "request", "statement"]);
+export const LEAST_HARM = Object.freeze(["social", "fragment", "question", "request", "statement"]);
 
 const feats = (r) => String(r?.feats ?? "").split("|");
 
@@ -43,6 +43,9 @@ export function marksOf(rows, ctx = {}) {
   m.imperative_form = !!ctx.request;
   const predicate = real.some((r) => r.upos === "VERB" || r.upos === "AUX" || r.deprel === "cop");
   m.no_predicate = real.length > 0 && !predicate;
+  // POSITIVE evidence of a social remark: the message opens with an interjection (the reader's own tag) and has no predicate. A bare fragment is not social by having nothing else in it:
+  // of 618 messages declared social from "no predicate" alone, 10% were interjection-only; the rest were names, bot output, commands, answers to someone, questions (eval/chat-register, EXPLORATORY).
+  m.interjection_led = real.length > 0 && !predicate && firstReal.upos === "INTJ";
   m.subject_predicate = real.some((r) => r.deprel?.startsWith("nsubj")) && predicate;
   m.small_talk = !!ctx.small;
   m.arithmetic = !!ctx.calc;
@@ -63,7 +66,8 @@ const RULES = Object.freeze({
   question:    { for: ["final_question_mark", "wh_word", "aux_first"], against: [] },
   request:     { for: ["imperative_form"], against: ["final_question_mark"] },
   statement:   { for: ["subject_predicate"], against: ["final_question_mark", "imperative_form", "wh_word"] },
-  social:      { for: ["no_predicate", "small_talk"], against: ["wh_word"] },
+  social:      { for: ["interjection_led", "small_talk"], against: ["wh_word"] },
+  fragment:    { for: ["no_predicate"], against: ["interjection_led", "small_talk", "wh_word"] },
 });
 
 /** candidates(marks): every act some mark supports, with what supports it and what opposes it. An act no mark supports is not proposed (nothing to say about it). */
