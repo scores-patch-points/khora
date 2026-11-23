@@ -101,3 +101,18 @@ War and Peace chapters 1 to 3, English against Russian: 100 aligned paragraph pa
 ## Pins
 
 Fourteen defects found along the way are pinned in `PINS.md` (and as pharos entries of kind `pin`, status open), each with the node, what was bound wrongly, evidence sentences from the book, and where to look first. Several name their cause from the evidence (a cannot-link would have vetoed Emperor / Rostóv; grandfather and grandson share a name and patronymic).
+
+## 9. Is the cross-language role disagreement our binding? (`translation-roles.mjs`, exploratory)
+
+Question from the owner, after the reported translation test found roles the worst witness (section 8): is that our bad binding, or something else? War and Peace chapters 1 to 3, Zenodotus aligned files (English, Russian). Paragraphs aligned by cumulative length (mutual nearest: 86 pairs); only the 44 pairs with the same number of sentences are kept, so sentence k matches sentence k. For hand-picked names that occur exactly once in both aligned sentences (gold: the author's reading; 18 mentions), the role of the name's **phrase head** is compared at three levels (a first version compared the matched token, which gave a flat or compound part of a multiword name and overstated the disagreement).
+
+| level | agrees |
+|---|---|
+| UD relation base (parser) | 14 of 18 (78%) |
+| kāraka label (our mapping, `karakaRows` / `panini`) | 14 of 18 (78%) |
+| agent vs not | 15 of 18 (83%) |
+| base agrees, kāraka differs (**our mapping**) | **0** |
+
+The four base disagreements: three are the **English parser on speech tags after a quotation** ("replied Anna Pávlovna" gets conj, "whispered Anna Pávlovna to one" gets obj, "said Prince Hippolyte" gets root), and one is a Russian parse (Hélène, in apposition to "Дочь", labelled the subject). So on this sample the disagreement is **the parser**, not the kāraka mapping, which adds none. This matches the "Parsing fixes" session's hand audit of 30 disagreements (about 26 reading or map faults: English inversions of "said Prince Vasíli", English appositions, Russian case errors; 3 real divergences), though that audit used the older `karaka-map.mjs` mapping. The first test's 7 of 16 for roles therefore most likely measures those parser faults and the older mapping, not role evidence as such.
+
+Limits: 18 mentions; gold is the author's own; the equal-sentence-count filter keeps 44 of 86 paragraph pairs and biases toward simple ones; speech tags after quotations are common in this text, so this chapter range is a hard case for the English parser. Not run: the other session's matching test itself with `karakaRows` roles in place of the older mapping, which is the direct re-test.
