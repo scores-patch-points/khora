@@ -26,8 +26,9 @@ test("small talk and who-are-you are answered by rule, and say so", T, async () 
   assert.equal((await thread.turn("hello")).text, "Hello.");
   const s = await thread.turn("who are you?"); assert.equal(s.type, "self"); assert.match(s.text, /no language model/);
 });
-test("a request is not a fact, and a description nobody tied to a name is a typed gap", T, async () => {
+test("a request is not a fact: about what is not known it is acted on, about the world it is refused; a description nobody tied to a name is a typed gap", T, async () => {
   const before = thread.state().sentences, r = await thread.turn("go research it");
-  assert.match(r.text, /request/); assert.equal(thread.state().sentences, before, "nothing was read into the fold");
+  assert.match(r.text, /nothing I'm missing/, "no gap is open, so there is nothing to look for, and it says so"); assert.equal(thread.state().sentences, before, "nothing was read into the fold");
+  const w = await thread.turn("open the door"); assert.equal(w.gap, "act_not_possible"); assert.equal(thread.state().sentences, before);
   const g = await thread.turn("who is the president?"); assert.equal(g.handled, false); assert.equal(g.gap, "unknown_description");
 });

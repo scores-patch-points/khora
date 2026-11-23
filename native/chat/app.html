@@ -5,88 +5,167 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fold Chat</title>
 <style>
-:root { --bg:#f7f6f3; --panel:#fff; --ink:#1f2328; --muted:#6b7280; --line:#e4e1d8; --me:#2b5fd9; --meink:#fff; --bot:#efede6; --accent:#b45309; }
-@media (prefers-color-scheme: dark) { :root { --bg:#14161a; --panel:#1b1e23; --ink:#e8e6e1; --muted:#9aa0a6; --line:#2c3036; --me:#3b6fe0; --meink:#fff; --bot:#23272e; --accent:#f59e0b; } }
+:root { --bg:#faf9f6; --panel:#ffffff; --ink:#1f2328; --muted:#6b7280; --line:#e6e3da; --me:#ece9e0; --meink:#1f2328; --accent:#b45309; --chip:#f1efe8; --send:#1f2328; --sendink:#fff; }
+@media (prefers-color-scheme: dark) { :root { --bg:#17181b; --panel:#1f2125; --ink:#e8e6e1; --muted:#9aa0a6; --line:#2e3238; --me:#2a2d33; --meink:#e8e6e1; --accent:#f59e0b; --chip:#272a30; --send:#e8e6e1; --sendink:#17181b; } }
 * { box-sizing: border-box; }
-html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
 body { display:flex; flex-direction:column; }
-header { flex:none; padding:12px 18px; border-bottom:1px solid var(--line); background:var(--panel); display:flex; gap:10px; align-items:baseline; }
-header b { font-size:16px; } header span { color:var(--muted); font-size:12.5px; }
-#log { flex:1 1 auto; overflow:auto; padding:18px 14px 8px; }
-.row { max-width:760px; margin:0 auto 12px; display:flex; }
-.row.me { justify-content:flex-end; }
-.msg { max-width:82%; padding:9px 13px; border-radius:16px; white-space:pre-wrap; word-wrap:break-word; }
-.me .msg { background:var(--me); color:var(--meink); border-bottom-right-radius:4px; }
-.bot .msg { background:var(--bot); border-bottom-left-radius:4px; }
-.msg q, .why q { quotes:"“" "”"; }
-details { margin-top:6px; font-size:12.5px; color:var(--muted); }
-details summary { cursor:pointer; user-select:none; } details summary:hover { color:var(--ink); }
-.why { margin-top:4px; padding-left:10px; border-left:2px solid var(--line); }
+header { flex:none; display:flex; align-items:center; gap:10px; padding:10px 16px; border-bottom:1px solid var(--line); background:var(--bg); }
+header .title { font-weight:600; font-size:15px; }
+header .who { color:var(--muted); font-size:13px; }
+header .grow { flex:1; }
+header button, header select { border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink); font:inherit; font-size:13px; padding:5px 10px; cursor:pointer; max-width:240px; }
+header button:hover, header select:hover { border-color:var(--accent); }
+#pb { padding:6px 16px; font-size:12.5px; color:var(--muted); background:var(--chip); border-bottom:1px solid var(--line); }
+#log { flex:1 1 auto; overflow:auto; scroll-behavior:smooth; }
+#thread { max-width:720px; margin:0 auto; padding:24px 16px 12px; }
+.turn { margin:0 0 22px; display:flex; gap:12px; }
+.turn.me { justify-content:flex-end; }
+.me .bubble { background:var(--me); color:var(--meink); padding:8px 14px; border-radius:18px; max-width:80%; white-space:pre-wrap; word-wrap:break-word; }
+.av { flex:none; width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; display:grid; place-items:center; font-size:13px; font-weight:600; margin-top:2px; }
+.bot .body { flex:1; min-width:0; }
+.bot .text { white-space:pre-wrap; word-wrap:break-word; }
+.bot .text q, .why q { quotes:"“" "”"; }
+.cite { color:var(--accent); font-size:11px; margin-left:1px; }
+.chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.chip { display:inline-flex; gap:6px; align-items:center; border:1px solid var(--line); background:var(--chip); color:var(--ink); border-radius:12px; padding:2px 10px; font-size:12.5px; text-decoration:none; }
+.chip b { color:var(--accent); font-weight:600; } .chip:hover { border-color:var(--accent); }
+.acts { display:flex; gap:4px; margin-top:6px; opacity:0; transition:opacity .15s; } .turn:hover .acts, .acts:focus-within { opacity:1; }
+.acts button { border:0; background:transparent; color:var(--muted); font:inherit; font-size:12.5px; padding:2px 8px; border-radius:6px; cursor:pointer; } .acts button:hover { background:var(--chip); color:var(--ink); }
+details.reason { margin-top:8px; font-size:13px; color:var(--muted); }
+details.reason > summary { cursor:pointer; user-select:none; width:max-content; } details.reason > summary:hover { color:var(--ink); }
+.why { margin:6px 0 0; padding-left:12px; border-left:2px solid var(--line); }
+.why h5 { margin:8px 0 2px; font-size:11.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
 .why div { margin:2px 0; } .tag { font:11px ui-monospace, Menlo, monospace; color:var(--accent); }
-form { flex:none; max-width:760px; width:100%; margin:0 auto; padding:8px 14px 16px; display:flex; gap:8px; }
-textarea { flex:1; resize:none; border:1px solid var(--line); border-radius:20px; padding:10px 14px; background:var(--panel); color:var(--ink); font:inherit; max-height:140px; }
-textarea:focus { outline:2px solid var(--accent); outline-offset:1px; }
-button { border:0; border-radius:20px; padding:0 18px; background:var(--me); color:var(--meink); font:inherit; cursor:pointer; }
-button:disabled { opacity:.5; cursor:default; }
-header select { margin-left:auto; max-width:230px; border:1px solid var(--line); border-radius:8px; background:var(--panel); color:var(--ink); font:inherit; font-size:12.5px; padding:3px 6px; }
-.banner { padding:6px 18px; font-size:12.5px; background:var(--bot); color:var(--muted); border-bottom:1px solid var(--line); }
-.hint { max-width:760px; margin:40px auto; text-align:center; color:var(--muted); }
-.hint p { margin:6px 0; } .ex span { display:inline-block; margin:3px; padding:4px 11px; border:1px solid var(--line); border-radius:14px; cursor:pointer; background:var(--panel); color:var(--ink); }
-.ex span:hover { border-color:var(--accent); color:var(--accent); }
+.cl { margin:5px 0; } .cl .door { color:var(--muted); } .cl .by { font-size:12px; color:var(--muted); }
+.cl.refuted .tag { color:#b91c1c; } .cl.supported .tag { color:#15803d; } .cl.unresolved .tag, .cl.suspended .tag { color:#a16207; }
+.typing { display:flex; align-items:center; gap:10px; color:var(--muted); font-size:14px; }
+.dots span { display:inline-block; width:6px; height:6px; margin-right:3px; border-radius:50%; background:var(--muted); animation:b 1.2s infinite ease-in-out; }
+.dots span:nth-child(2) { animation-delay:.15s; } .dots span:nth-child(3) { animation-delay:.3s; }
+@keyframes b { 0%, 80%, 100% { opacity:.25; transform:translateY(0); } 40% { opacity:1; transform:translateY(-3px); } }
+#empty { max-width:720px; margin:12vh auto 0; padding:0 16px; text-align:center; }
+#empty h1 { font-size:26px; font-weight:600; margin:0 0 6px; } #empty p { color:var(--muted); margin:0 0 18px; }
+.starters { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.starters button { border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:14px; padding:7px 14px; font:inherit; font-size:14px; cursor:pointer; } .starters button:hover { border-color:var(--accent); color:var(--accent); }
+form { flex:none; max-width:720px; width:100%; margin:0 auto; padding:6px 16px 18px; }
+.box { display:flex; align-items:flex-end; gap:8px; border:1px solid var(--line); background:var(--panel); border-radius:24px; padding:6px 6px 6px 16px; box-shadow:0 1px 2px rgba(0,0,0,.04); }
+.box:focus-within { border-color:var(--accent); }
+textarea { flex:1; resize:none; border:0; outline:0; background:transparent; color:var(--ink); font:inherit; padding:7px 0; max-height:180px; line-height:1.5; }
+#b { flex:none; width:36px; height:36px; border:0; border-radius:50%; background:var(--send); color:var(--sendink); font-size:18px; cursor:pointer; display:grid; place-items:center; } #b:disabled { opacity:.3; cursor:default; }
+.fine { text-align:center; color:var(--muted); font-size:12px; margin-top:8px; }
 </style>
 </head>
 <body>
-<header><b>Fold Chat</b><span>no model: every reply is read off what you told me, and says what it used</span><select id="p" title="take on a persona (read from its published prompt; a simulation)"><option value="">No persona</option></select></header>
-<div id="pb" class="banner" hidden></div>
-<div id="log"><div class="hint" id="hint">
-  <p><b>Tell me things, then ask.</b></p>
-  <p>Mina gave Jonathan a book. She lives in the village.</p>
-  <div class="ex"><span>Mina gave Jonathan a book. She lives in the village.</span><span>Who gave Jonathan a book?</span><span>Who is she?</span><span>What day is it?</span></div>
+<header>
+  <span class="title">Fold Chat</span><span class="who" id="who"></span><span class="grow"></span>
+  <button id="nw" type="button" title="Start a new conversation">New chat</button>
+  <select id="p" title="Take on a persona, read from its published prompt (a simulation, no model)"><option value="">No persona</option></select>
+</header>
+<div id="pb" hidden></div>
+<div id="log"><div id="thread">
+  <div id="empty">
+    <h1>What shall we talk about?</h1>
+    <p>Tell me things and ask about them, or ask me anything. When I don't know, I look it up and say where it came from.</p>
+    <div class="starters">
+      <button>Who is Leo Tolstoy?</button><button>Mina gave Jonathan a book. She lives in the village.</button><button>What is 15% of 80?</button><button>What day is it?</button><button>What can you do?</button>
+    </div>
+  </div>
 </div></div>
-<form id="f"><textarea id="m" rows="1" placeholder="Say something, or ask a question" autofocus></textarea><button id="b">Send</button></form>
+<form id="f"><div class="box"><textarea id="m" rows="1" placeholder="Message Fold Chat" autofocus></textarea><button id="b" type="submit" title="Send" aria-label="Send">↑</button></div><div class="fine">No language model: every reply is read off what you told me or looked up, and cites its source.</div></form>
 <script>
 const $ = (id) => document.getElementById(id);
 const ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" };
 const esc = (s) => { let o = ""; for (const c of String(s ?? "")) o += ENT[c] ?? c; return o; };
-function add(who, html, extra = "") { $("hint")?.remove(); const r = document.createElement("div"); r.className = `row ${who}`; r.innerHTML = `<div class="msg">${html}${extra}</div>`; $("log").appendChild(r); $("log").scrollTop = $("log").scrollHeight; return r; }
-function why(r) {
+let who = "Fold Chat", initial = "F";
+const scroll = () => { const l = $("log"); l.scrollTop = l.scrollHeight; };
+function turn(kind, inner) { $("empty")?.remove(); const t = document.createElement("div"); t.className = `turn ${kind}`; t.innerHTML = inner; $("thread").appendChild(t); scroll(); return t; }
+const user = (text) => turn("me", `<div class="bubble">${esc(text)}</div>`);
+
+// ---- what a reply shows: the text, its sources as numbered chips, and one collapsed "Reasoning" with everything behind it
+const STANDING = { supported: "holds", licensed: "rests on a giver's word", refuted: "ruled out", unresolved: "open", suspended: "on hold", candidate: "not tested", unlicensed: "has no ground", stale: "needs re-checking", withdrawn: "withdrawn" };
+const WRITER = { janus: "janus", "khora-chat": "chat" };
+const marks = (cs) => (cs ?? []).map((_, i) => `<sup class="cite">[${i + 1}]</sup>`).join("");
+const chips = (cs) => (cs?.length ? `<div class="chips">${cs.map((c, i) => { const inner = `<b>${i + 1}</b> ${esc(c.label)}${c.id ? ` · ${esc(c.id)}` : ""}`; return c.url ? `<a class="chip" href="${esc(c.url)}" target="_blank" rel="noopener">${inner}</a>` : `<span class="chip">${inner}</span>`; }).join("")}</div>` : "");
+function used(r) {
   const parts = [];
   if (r.facts?.length) parts.push(...r.facts.map((f) => `<div><span class="tag">${esc(f.action)}</span> ${f.roles.map((x) => `${esc(x.role)}: ${esc(x.text)}`).join(" · ")}</div>`));
   if (r.referents?.length) parts.push(`<div>I now know: ${r.referents.map((x) => esc(x.label)).join(", ")}</div>`);
-  if (r.evidence?.length) parts.push(...r.evidence.map((e) => `<div>from what you said: <q>${esc(e.text)}</q></div>`));
-  if (r.from) parts.push(`<div>I did not know this from you; it comes from ${esc(r.from)}.</div>`);
+  if (r.evidence?.length) parts.push(...r.evidence.map((e) => `<div>${e.given ? `${esc(e.given)} says` : "you said"}: <q>${esc(e.text)}</q></div>`));
   if (!r.handled && r.gap) parts.push(`<div>I could not answer because: ${esc(String(r.gap).split("_").join(" "))}.</div>`);
   if (r.tools?.length) parts.push(...r.tools.map((t) => `<div><span class="tag">${esc(t.name)}</span>(${esc(Object.values(t.args ?? {}).join(", "))}) → ${esc(t.result)}</div>`));
   if (r.trace?.length) parts.push(`<div>${r.trace.map((t) => `<span class="tag">${esc(t.step)}</span>`).join(" → ")}</div>`);
-  return parts.length ? `<details><summary>How I know</summary><div class="why">${parts.join("")}</div></details>` : "";
+  return parts.length ? `<h5>What I used</h5>${parts.join("")}` : "";
 }
-async function send(text) {
-  const t = text.trim(); if (!t) return; add("me", esc(t)); $("m").value = ""; $("b").disabled = true;
+function considered(t) {
+  if (!t) return "";
+  if (!t.on) return `<h5>What I considered</h5><div>Nothing was tested: ${esc(t.why ?? "janus is not mounted")}.</div>`;
+  if (!t.claims?.length) return "";
+  const lines = t.claims.map((c) => { const a = c.assessed; return `<div class="cl ${esc(c.standing)}"><span class="tag">${esc(STANDING[c.standing] ?? c.standing)}</span> ${esc(c.label)} <span class="door">(${esc(c.door ?? "")})</span>${a ? `<div class="by">tested by ${esc(a.by)} · written by ${esc(WRITER[a.writer] ?? a.writer)} · ${esc(a.basis)}</div>` : `<div class="by">not tested</div>`}</div>`; });
+  const open = (t.openings ?? []).length ? `<div class="by">still open: ${t.openings.map((o) => esc(o.question)).join(" ")}</div>` : "";
+  const ref = (t.refused ?? []).length ? `<div class="by">refused by janus's gates: ${t.refused.map((r) => esc(String(r.why).split("_").join(" "))).join(", ")}</div>` : "";
+  return `<h5>What I considered</h5>${lines.join("")}${open}${ref}`;
+}
+function bot(r) {
+  const text = r.error ? "Something went wrong reading that." : r.text;
+  const inner = r.error ? "" : used(r) + considered(r.thought);
+  const t = turn("bot", `<div class="av">${esc(initial)}</div><div class="body"><div class="text">${esc(text)}${r.error ? "" : marks(r.cites)}</div>${r.error ? "" : chips(r.cites)}<div class="acts"><button data-a="copy">Copy</button>${r.retry && !r.handled ? `<button data-a="again">Try again</button>` : ""}</div>${inner ? `<details class="reason"><summary>Reasoning</summary><div class="why">${inner}</div></details>` : ""}</div>`);
+  t.dataset.text = text; return t;
+}
+$("thread").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.a === "copy") { navigator.clipboard?.writeText(b.closest(".turn").dataset.text ?? ""); b.textContent = "Copied"; setTimeout(() => { b.textContent = "Copy"; }, 1200); }
+  if (b.dataset.a === "again") send("try again");
+  if (b.closest(".starters")) send(b.textContent);
+});
+
+// ---- sending: one message at a time (a slow lookup must never let the next reply land above it), with a typing line that says what it is doing
+let chain = Promise.resolve();
+function send(text) { const t = String(text ?? "").trim(); if (!t) return; user(t); $("m").value = ""; grow(); chain = chain.then(() => ask(t)); }
+async function ask(t) {
+  $("b").disabled = true;
+  const typing = turn("bot", `<div class="av">${esc(initial)}</div><div class="body"><div class="typing"><span class="dots"><span></span><span></span><span></span></span><span id="st"></span></div></div>`);
   try {
-    const r = await (await fetch("/api/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: t }) })).json();
-    add("bot", esc(r.error ? "Something went wrong reading that." : r.text), r.error ? "" : why(r));
-  } catch { add("bot", "I could not reach the server."); }
+    const res = await fetch("/api/chat", { method: "POST", headers: { "content-type": "application/json", accept: "application/x-ndjson" }, body: JSON.stringify({ message: t }) });
+    let reply = null;
+    if ((res.headers.get("content-type") ?? "").includes("ndjson")) {
+      const rd = res.body.getReader(), dec = new TextDecoder(); let buf = "";
+      for (;;) {
+        const { value, done } = await rd.read(); if (done) break; buf += dec.decode(value, { stream: true });
+        for (let i = buf.indexOf("\n"); i >= 0; i = buf.indexOf("\n")) { const line = buf.slice(0, i); buf = buf.slice(i + 1); if (!line) continue; const m = JSON.parse(line); if (m.status) { const s = typing.querySelector("#st"); if (s) s.textContent = m.status; } if (m.reply) reply = m.reply; }
+      }
+    } else reply = await res.json();
+    typing.remove(); bot(reply ?? { error: "no reply" });
+  } catch { typing.remove(); bot({ error: "unreachable", text: "I could not reach the server." }); }
   $("b").disabled = false; $("m").focus();
 }
+function grow() { const m = $("m"); m.style.height = "auto"; m.style.height = `${Math.min(m.scrollHeight, 180)}px`; }
 $("f").addEventListener("submit", (e) => { e.preventDefault(); send($("m").value); });
-$("m").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send($("m").value); } });
+$("m").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); send($("m").value); } });
+$("m").addEventListener("input", grow);
+const EMPTY = $("empty").outerHTML;
+$("nw").addEventListener("click", async () => { chain = chain.then(async () => { await fetch("/api/new", { method: "POST" }); $("thread").innerHTML = EMPTY; $("m").focus(); }); });
+
+// ---- personas: the list is fetched when the picker is first opened; each is labelled by what it is, grouped by who made it
 let listed = false;
-$("p").addEventListener("focus", async () => {   // the list is fetched when you first open the picker, not when the page loads
+$("p").addEventListener("focus", async () => {
   if (listed) return; listed = true;
   try {
-    const items = (await (await fetch("/api/personas")).json()).items ?? [], by = {};
-    for (const x of items) (by[x.vendor] ??= []).push(x);
-    for (const [v, xs] of Object.entries(by)) { const g = document.createElement("optgroup"); g.label = v; for (const x of xs) { const o = document.createElement("option"); o.value = x.path; o.textContent = x.name; g.appendChild(o); } $("p").appendChild(g); }
+    const items = (await (await fetch("/api/personas")).json()).items ?? [], by = new Map();
+    for (const x of items) { const k = x.group ? `${x.vendor} · ${x.group}` : x.vendor; if (!by.has(k)) by.set(k, []); by.get(k).push(x); }
+    for (const [k, xs] of by) { const g = document.createElement("optgroup"); g.label = k; for (const x of xs) { const o = document.createElement("option"); o.value = x.path; o.textContent = x.label ?? x.name; g.appendChild(o); } $("p").appendChild(g); }
   } catch { listed = false; }
 });
 $("p").addEventListener("change", async () => {
   const path = $("p").value;
+  const typing = turn("bot", `<div class="av">${esc(initial)}</div><div class="body"><div class="typing"><span class="dots"><span></span><span></span><span></span></span><span>Reading its prompt…</span></div></div>`);
   const r = await (await fetch("/api/persona", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ path }) })).json();
-  if (!r.persona) { $("pb").hidden = true; add("bot", r.error ? `I couldn’t load that: ${esc(r.error)}` : "Back to plain."); return; }
-  $("pb").hidden = false; $("pb").textContent = `Simulated persona: ${r.persona.name} (${r.persona.vendor}), read from its published prompt. This is not that product, and there is no model in it.`;
-  add("bot", r.persona.identity ? `Now answering as: ${esc(r.persona.identity)}.` : "I couldn’t find an identity sentence in that prompt, so I’m answering as myself.");
+  typing.remove();
+  if (!r.persona) { who = "Fold Chat"; initial = "F"; $("who").textContent = ""; $("pb").hidden = true; $("m").placeholder = "Message Fold Chat"; bot({ handled: true, text: r.error ? `I couldn’t load that: ${r.error}` : "Back to plain." }); return; }
+  who = r.persona.label ?? r.persona.name; initial = (r.persona.name ?? who)[0]?.toUpperCase() ?? "?";
+  $("who").textContent = `· ${who}`; $("m").placeholder = `Message ${r.persona.name ?? who}`;
+  $("pb").hidden = false; $("pb").textContent = `Simulated: ${who} (${r.persona.vendor}), read from its published prompt. This is not that product, and there is no model in it.`;
+  bot({ handled: true, text: r.persona.identity ? `I'm ${r.persona.identity}.` : "I couldn’t find an identity sentence in that prompt, so I’m answering as myself.", cites: [{ label: `${who}'s prompt` }] });
 });
-document.querySelectorAll(".ex span").forEach((x) => x.addEventListener("click", () => send(x.textContent)));
 </script>
 </body>
 </html>
