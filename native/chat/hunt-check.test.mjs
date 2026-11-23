@@ -3,7 +3,7 @@
 import test from "node:test"; import assert from "node:assert/strict";
 import { settled } from "./hunt-check.mjs";
 
-const suetonius = { answer: "Suetonius", tier: "role", documents: 1, support: 1 }, tolstoy = { answer: "Leo Tolstoy", tier: "comention", documents: 2, support: 3 }, bbc = { answer: "BBC", tier: "comention", documents: 1, support: 2 };
+const suetonius = { answer: "Suetonius", tier: "role", documents: 1, support: 1 }, tolstoy = { answer: "Leo Tolstoy", tier: "byline", documents: 2, support: 3 }, bbc = { answer: "BBC", tier: "comention", documents: 1, support: 2 };
 
 test("a unique answer that another candidate out-supports is not stated: what was found is listed, with the pages behind each", () => {
   const r = settled({ unique: true, answer: suetonius, candidates: [suetonius, tolstoy, bbc] });
@@ -20,4 +20,9 @@ test("names said together are one answer, not rivals of each other; a hunt that 
   const gates = { answer: "Bill Gates", tier: "role", documents: 2, support: 2, set: ["Bill Gates", "Paul Allen"], answerText: "Bill Gates and Paul Allen" }, allen = { answer: "Paul Allen", tier: "role", documents: 2, support: 2 };
   assert.equal(settled({ unique: true, answer: gates, candidates: [gates, allen] }).ok, true);
   assert.equal(settled({ unique: false, answer: null, candidates: [suetonius, tolstoy] }).ok, true);
+});
+
+test("a name seen next to the anchors with no sentence that says the relation never blocks an answer, however many pages it has", () => {
+  const founders = { answer: "Bill Gates", tier: "role", documents: 2, support: 2 }, windows = { answer: "Windows", tier: "comention", documents: 3, support: 3 };
+  assert.equal(settled({ unique: true, answer: founders, candidates: [founders, windows] }).ok, true);
 });

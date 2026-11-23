@@ -178,7 +178,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         const v = huntOrgan.voidOfQuestion(qRows);
         if (!v.ok) return { ok: false, gap: v.gap?.kind ?? "no_void", text: "That isn't a question I can hunt an answer for.", cites: [] };
         const src = huntSources.wikipediaSource({ ...(getJson ? { getJson } : {}), maxWait: 45000 });
-        const h = await huntOrgan.huntVoid(v, { sources: [src], read: (x) => parser.rowsOf(x) ?? [], split: (x) => splitSentences(x, { abbreviations: abbr(x) }).map((c) => c.text) });
+        const h = await huntOrgan.huntVoid(v, { sources: [src], budgetMs: 60000, read: (x) => parser.rowsOf(x) ?? [], split: (x) => splitSentences(x, { abbreviations: abbr(x) }).map((c) => c.text) });
         const cite = (list) => { const seen = new Set(); return (list ?? []).map((e) => ({ label: "Wikipedia", id: e.section ? `${e.title} · ${e.section}` : e.title, url: e.url ?? null })).filter((c) => !seen.has(c.id) && seen.add(c.id)); };
         const sure = settled(h);   // a careful reader checks that nobody else has more behind them before he says it
         if (h.unique && !sure.ok) return { ok: false, gap: "several_fill_the_void", text: sure.text, cites: cite((h.candidates ?? []).flatMap((c) => c.evidence ?? [])), data: { hunt: h, rivals: sure.rivals } };
