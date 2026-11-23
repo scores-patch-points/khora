@@ -108,3 +108,6 @@ files changed since the last record: native/the-fold/pharos-gate.mjs
 
 ## 2026-11-23: weaveFullRead also writes the gender prior (DEF·Figure) and the speaker/addressee beings (INS·Figure)
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: weaveFullRead also writes the containment part_of edges (SYN·Pattern) from nest-from-read, so the holarchy has a layering to climb
+files changed since the last record: native/the-fold/pharos-gate.mjs
