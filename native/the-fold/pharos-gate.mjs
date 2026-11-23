@@ -94,7 +94,7 @@ export function weaveFullRead(w, { door, pharosDir } = {}) {
     if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
   }
   // beings: each cast referent is one node of the fold
-  for (const c of w.cast ?? []) P.weave(h, { cell: "INS·Figure", kind: "being", addr: `ref:${c.ref}`, body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
+  for (const c of w.cast ?? []) P.weave(h, { cell: "INS·Figure", kind: "being", addr: String(c.ref), body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
   // kāraka edges: the read's own relations, deduped (head|role|arg)
   const edges = new Map();
   for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id); for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) { const k = `${hd.lemma}|${row.karaka}|${row.lemma ?? row.form}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role: row.karaka, arg: row.lemma ?? row.form }); } } }

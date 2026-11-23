@@ -102,3 +102,6 @@ files changed since the last record: (none)
 
 ## 2026-11-23: recordRead writes the full read to pharos (beings INS·Figure, kāraka edges SYN·Pattern, pronoun bindings CON·Figure) so the fold and surfaces read off the pharos, not the reader; recordRead stays sync (the pharos lib open/weave are sync)
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: being entry addr is the raw cast ref (not ref:ref:...), so the fold connects a being to its pronoun bindings
+files changed since the last record: native/the-fold/pharos-gate.mjs

@@ -16,6 +16,8 @@
 //   const p = makePolarity(); await p.polarity(["gentle","brutal","day","night"]) -> [{word, z, sign, claimed, null}]
 import { makeEmbedder } from "./embed-personhood.js";
 import { makeGround } from "./apoha.js";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 export const OSGOOD_POS = Object.freeze(["good", "love", "happy", "dear", "kind", "pleasure", "hope"]);
 export const OSGOOD_NEG = Object.freeze(["bad", "hate", "sad", "fear", "cruel", "evil", "danger"]);
@@ -48,4 +50,26 @@ export function makePolarity({ pos = OSGOOD_POS, neg = OSGOOD_NEG, seed = 1 } = 
     },
     save: () => embedder.save(),
   };
+}
+
+// ————— WRITE TO PHAROS ————— the sign becomes a woven fact, not a return value. Khora writes its own
+// EVA·Figure entries (addr lemma:<word>, body {z, sign, claimed, null}), so a surface can project a word's
+// polarity off the log without calling the giver.
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+let P = null;
+async function pharosLib() {
+  if (P) return P;
+  const roots = [process.env.PHAROS_HOME, path.join(ROOT, "..", "pharos")].filter(Boolean);
+  for (const r of roots) { try { P = await import(pathToFileURL(path.join(r, "lib", "pharos.mjs")).href); return P; } catch { /* next */ } }
+  return null;
+}
+
+export async function recordPolarity(words, { pos = OSGOOD_POS, neg = OSGOOD_NEG, pharosDir = null, writer = "khora" } = {}) {
+  const lib = await pharosLib();
+  if (!lib) return null;
+  const res = await makePolarity({ pos, neg }).polarity(words);
+  const h = lib.open("khora", { dir: pharosDir, writer });
+  if (!lib.entries(h).some((e) => e.kind === "kind" && e.addr === "kind:polarity")) lib.weave(h, { cell: "DEF·Figure", kind: "kind", addr: "kind:polarity", body: { name: "polarity", cell: "EVA·Figure" } });
+  for (const r of res) lib.weave(h, { cell: "EVA·Figure", kind: "polarity", addr: `lemma:${r.word}`, body: { z: r.z, sign: r.sign, claimed: r.claimed, null: r.null } });
+  return res;
 }
