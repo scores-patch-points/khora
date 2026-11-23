@@ -77,8 +77,21 @@ export function allExemplars(lang = "English") {
   return result;
 }
 
+// Both lookups are pure functions of (word, language) over a fixed pool, and the read asks them for EVERY row: memoised per
+// distinct word (a novel repeats its words; measured 2026-11-23: nearestCellByString was 48% of a 300k-char read's CPU).
+// The pool is rebuilt only when the language changes, and the memo with it.
+const _memo = { lang: null, sniff: new Map(), nearest: new Map() };
+const memoFor = (lang) => { if (_memo.lang !== lang || _memo.pool !== getExemplarPool(lang)) { _memo.lang = lang; _memo.pool = getExemplarPool(lang); _memo.sniff = new Map(); _memo.nearest = new Map(); } return _memo; };
+
 // Sniff a word by checking if it's in the exemplar pool (exact match)
 export function sniffByExemplar(word, lang = "English") {
+  const M = memoFor(lang), key = String(word ?? "").toLowerCase().trim();
+  if (M.sniff.has(key)) return M.sniff.get(key);
+  const out = sniffByExemplarUncached(key, lang);
+  M.sniff.set(key, out);
+  return out;
+}
+function sniffByExemplarUncached(word, lang) {
   const { pool } = getExemplarPool(lang);
   const w = String(word ?? "").toLowerCase().trim();
   for (const [cell, exemplars] of Object.entries(pool ?? {})) {
@@ -93,6 +106,13 @@ export function sniffByExemplar(word, lang = "English") {
 
 // Nearest cell by string similarity (fallback when no embedding available)
 export function nearestCellByString(word, lang = "English") {
+  const M = memoFor(lang), key = String(word ?? "").toLowerCase().trim();
+  if (M.nearest.has(key)) return M.nearest.get(key);
+  const out = nearestCellByStringUncached(key, lang);
+  M.nearest.set(key, out);
+  return out;
+}
+function nearestCellByStringUncached(word, lang) {
   const { pool } = getExemplarPool(lang);
   const w = String(word ?? "").toLowerCase().trim();
   let bestCell = null, bestSim = -1;
@@ -114,18 +134,22 @@ function stringSimilarity(a, b) {
   return 1 - dist / maxLen;
 }
 
+// two rows instead of an (m+1)x(n+1) matrix: the same distance, no per-call matrix allocation
 function levenshtein(a, b) {
   const m = a.length, n = b.length;
-  const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
-  for (let i = 0; i <= m; i++) dp[i][0] = i;
-  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  let prev = new Uint16Array(n + 1), cur = new Uint16Array(n + 1);
+  for (let j = 0; j <= n; j++) prev[j] = j;
   for (let i = 1; i <= m; i++) {
+    cur[0] = i;
+    const ai = a.charCodeAt(i - 1);
     for (let j = 1; j <= n; j++) {
-      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost);
+      const cost = ai === b.charCodeAt(j - 1) ? 0 : 1;
+      const del = prev[j] + 1, ins = cur[j - 1] + 1, sub = prev[j - 1] + cost;
+      cur[j] = del < ins ? (del < sub ? del : sub) : (ins < sub ? ins : sub);
     }
+    const t = prev; prev = cur; cur = t;
   }
-  return dp[m][n];
+  return prev[n];
 }
 
 // Full-dimensional nearest centroid (using the 3072-dim centroids)

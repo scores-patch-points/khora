@@ -1401,11 +1401,43 @@ export function makeRelationReader(organs) {
       // every Apollo passage and UD attests "buzz" as a verb, so the widening
       // read `Armstrong and —buzz→ Aldrin` (measured 2026-09-02, S50). The
       // passage's own casing decides, no name list.
+      // ONE pass, memoised (2026-11-23): two whole-text regexes per candidate form — and per TOKEN in the attestedVerbs pass —
+      // made this quadratic in the text (War and Peace: minutes). The counts are the same read off the text's maximal ASCII
+      // word runs, because a RegExp's \\b (no `v` flag) is ASCII: `\\bw\\b` matches exactly where a run equals w, and the
+      // capitalised count excludes a run at the text's start or after [.!?] and whitespace, as the look-behind does. A form
+      // with any character outside [A-Za-z0-9_] keeps the original regexes, so the answer is identical for every form.
+      let wordRuns = null;
+      const runsOfText = () => {
+        if (wordRuns) return wordRuns;
+        const all = new Map(), cappedRuns = new Map();
+        const isW = (c) => (c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c === 95;
+        const isS = (c) => c === 32 || (c >= 9 && c <= 13) || c === 0xa0 || c === 0x1680 || (c >= 0x2000 && c <= 0x200a) || c === 0x2028 || c === 0x2029 || c === 0x202f || c === 0x205f || c === 0x3000 || c === 0xfeff;
+        const n = text.length; let i = 0;
+        while (i < n) {
+          if (!isW(text.charCodeAt(i))) { i++; continue; }
+          let j = i; while (j < n && isW(text.charCodeAt(j))) j++;
+          const run = text.slice(i, j);
+          all.set(run, (all.get(run) ?? 0) + 1);
+          let k = i - 1; while (k >= 0 && isS(text.charCodeAt(k))) k--;
+          const sentenceStart = i === 0 || (k < i - 1 && k >= 0 && (text[k] === "." || text[k] === "!" || text[k] === "?"));
+          if (!sentenceStart) cappedRuns.set(run, (cappedRuns.get(run) ?? 0) + 1);
+          i = j;
+        }
+        return (wordRuns = { all, cappedRuns });
+      };
+      const notActMemo = new Map();
       const surfaceNotAct = (w) => {
+        if (notActMemo.has(w)) return notActMemo.get(w);
         const cap = w[0].toUpperCase() + w.slice(1);
-        const capped = (text.match(new RegExp(`(?<!^|[.!?]\\s+)\\b${cap}\\b`, "gu")) ?? []).length;
-        const lower = (text.match(new RegExp(`\\b${w}\\b`, "gu")) ?? []).length;
-        return capped > lower;
+        let capped, lower;
+        if (/^[A-Za-z0-9_]+$/.test(w)) { const R = runsOfText(); capped = R.cappedRuns.get(cap) ?? 0; lower = R.all.get(w) ?? 0; } // regex-ok: tests a form's own characters (is it ASCII-word), not language
+        else {
+          capped = (text.match(new RegExp(`(?<!^|[.!?]\\s+)\\b${cap}\\b`, "gu")) ?? []).length;
+          lower = (text.match(new RegExp(`\\b${w}\\b`, "gu")) ?? []).length;
+        }
+        const v = capped > lower;
+        notActMemo.set(w, v);
+        return v;
       };
       for (const w of forms) if (verbForms.has(w) && !nonverbDominant(w) && !surfaceNotAct(w)) verbs.add(w);
       // `organs.attestedVerbs` (declared, default off — byte-identical
@@ -1480,7 +1512,15 @@ export function makeRelationReader(organs) {
     // never unconditionally true): without a lemmatizer, extending forms to
     // objects would reintroduce the exact regression this paragraph
     // describes, so it doesn't happen without one.
+    // memoised per token for this call (forms is fixed above): every endpoint token used to scan every form with sameAct
+    const formIdMemo = new Map();
     function formIdOf(t) {
+      if (formIdMemo.has(t)) return formIdMemo.get(t);
+      const v = formIdOfUncached(t);
+      formIdMemo.set(t, v);
+      return v;
+    }
+    function formIdOfUncached(t) {
       if (!createLemmatizer) return forms.has(t) ? t : null;
       let best = null;
       for (const w of forms) {
@@ -1490,7 +1530,16 @@ export function makeRelationReader(organs) {
       return best;
     }
 
+    // memoised per (string, useForms) for this call — the index, the surface patterns and the forms are fixed above; every
+    // caller gets its own fresh Sets, so nothing a caller does to its copy reaches another
+    const endpointMemo = new Map();
     function endpoint(str, useForms = false) {
+      const key = `${useForms ? 1 : 0}\u0000${String(str ?? "")}`;
+      let m = endpointMemo.get(key);
+      if (!m) { const e = endpointUncached(str, useForms); m = { text: e.text, referents: [...e.referents], tokens: [...e.tokens], formOnly: e.formOnly }; endpointMemo.set(key, m); }
+      return { text: m.text, referents: new Set(m.referents), tokens: new Set(m.tokens), formOnly: m.formOnly };
+    }
+    function endpointUncached(str, useForms = false) {
       const referents = new Set(index.resolve(str));
       const folded = diaNorm(String(str ?? ""));
       for (const { surface, re } of surfacePatterns) {
