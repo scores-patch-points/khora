@@ -138,3 +138,14 @@ files changed since the last record: native/adapters/text/referents-in-order.mjs
 
 ## 2026-11-23: referents-in-order: a short form goes without doubt to the ONE being already called by exactly that name in an uncontested link (calledBy), else the last read, contested; each referent lists the names it is known by. War and Peace (exploratory, 2026-11-23, M3 Air, same parse): contested links 2,263 -> 440 of 23,714 name mentions (1.9%); Princess Mary 186 -> 635 mentions (bare Mary 496 no longer handed to Mary Ivanovna, Mary Abramovna, Mary Viktorovna by recency); Prince Andrew 1,765; the fold 480 ms.
 files changed since the last record: native/adapters/text/referents-in-order.mjs
+## 2026-11-23: kāraka edges carry the ARG as a referent (a token inside a cast mention is its being), not a lemma string
+files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: the case marker disambiguates the locus: 'to' is a recipient (sampradāna), 'from' a source (apādāna)
+files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: re-attach a recipient/source to the verb (climb one head past a noun the parser hung it on)
+files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: Merge origin/main (9522e00 kāraka edges carry the ARG as a referent; 4476101 the case marker disambiguates the locus, 'to' a recipient, 'from' a source; c061faf re-attach the recipient/source to the verb) into karaka-total. Only the baseline files conflicted (both sides re-recorded); metrics were identical on both sides. The merged reading is re-hashed here; the gate below must pass on the merged tree.
+files changed since the last record: native/the-fold/pharos-gate.mjs
