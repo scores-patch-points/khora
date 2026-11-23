@@ -24,6 +24,22 @@
 // The surface signal differs; the kāraka is the same. This is the "one river" principle:
 // all tributaries carry the same kārakas to the same EOT marks.
 
+// The English aliases — the same nine roles, readable. kartṛ is the AGENT, karman the PATIENT,
+// adhikaraṇa the LOCUS (the place a thing sits in). The Sanskrit name is the role's name; the
+// English alias is the role's meaning. Consumers speak either; the alias is a translation, never a
+// second scheme.
+export const KARAKA_EN = Object.freeze({
+  "kartṛ": "agent",
+  "karman": "patient",
+  "karaṇa": "instrument",
+  "sampradāna": "recipient",
+  "apādāna": "source",
+  "adhikaraṇa": "locus",
+  "kāla": "time",
+  "hetu": "cause",
+  "prayojana": "purpose",
+});
+
 export const KARAKA_MAP = Object.freeze({
   // UD deprel -> kāraka (the relation carries the role)
   "nsubj": "kartṛ",

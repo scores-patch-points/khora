@@ -114,3 +114,6 @@ files changed since the last record: native/the-fold/pharos-gate.mjs
 
 ## 2026-11-23: containment from the kāraka roles (kartṛ subject inside adhikaraṇa locus, both PROPN) replaces the raw-label nestFromRead
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: English aliases for the kārakas (KARAKA_EN); containment is pure kāraka (agent in locus), no PROPN/isPlaceType filter
+files changed since the last record: (none)

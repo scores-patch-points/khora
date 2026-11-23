@@ -27,23 +27,26 @@ export const refOfLabel = (nest, label) => nest.refOf.get(String(label).toLowerC
 // grain by position on an extracted path (leaf to root), declared: city-like nouns = the subject's own place; country = the root-most; any other noun = the middle holon of a three-holon chain; else a gap
 export function askedByPosition(path, noun) { if (!path?.length) return null; if (["city", "town", "village", "municipality"].includes(noun)) return path[0]; if (noun === "country" || noun === "nation") return path.length >= 2 ? path[path.length - 1] : null; return path.length === 3 ? path[1] : null; }
 
-// containmentFromKarakas — containment from the kāraka roles, not surface labels (the fix for the
-// raw-label noise above). A predicate with a kartṛ (subject) AND an adhikaraṇa (locus) is a
-// containment: the subject is INSIDE the locus. Pāṇini's adhikaraṇa is the locus, so the role IS
-// the relation — no regex over "is in the". The place-kind is the proper-noun filter: both ends
-// PROPN (a named place), which the read's own UPOS gives and the hyperlexicon's `names` ask
-// confirms (name vs noun) — geographic nesting (Topeka ⊂ Kansas), not "book on table".
+// containmentFromKarakas — containment from the kāraka roles, not surface labels and not a loose
+// "is this a place" lookup. A predicate with a kartṛ (AGENT) AND an adhikaraṇa (LOCUS) is a
+// containment: the agent is INSIDE the locus. Pāṇini's adhikaraṇa IS the locus — the role is the
+// relation, no regex over "is in the", no POS filter, no Wikidata kind lookup. The place is the
+// locus by definition; whether the locus is a geographic place rather than a physical one is a KIND
+// question (kind-hierarchy.js), a separate giver, never bolted on here.
+import { KARAKA_EN } from "./karaka-map.mjs";
+
 export function containmentFromKarakas(entry) {
+  const AGENT = "kartṛ", LOCUS = "adhikaraṇa";
   const byPred = new Map();
   for (const p of entry?.parse ?? []) {
     const headOf = (id) => p.rows.find((x) => x.id === id);
     for (const row of p.rows ?? []) {
-      if (row.karaka !== "kartṛ" && row.karaka !== "adhikaraṇa") continue;
+      if (row.karaka !== AGENT && row.karaka !== LOCUS) continue;
       const hd = row.head ? headOf(row.head) : null;
       const pred = (hd?.lemma ?? hd?.form ?? "").toLowerCase();
       if (!pred) continue;
-      const g = byPred.get(pred) ?? { kartṛ: [], adhikaraṇa: [] };
-      g[row.karaka].push({ lemma: (row.lemma ?? row.form ?? "").toLowerCase(), upos: row.upos });
+      const g = byPred.get(pred) ?? { [AGENT]: [], [LOCUS]: [] };
+      g[row.karaka].push((row.lemma ?? row.form ?? "").toLowerCase());
       byPred.set(pred, g);
     }
   }
@@ -51,11 +54,10 @@ export function containmentFromKarakas(entry) {
   for (const c of entry?.cast ?? []) for (const s of [c.surface, ...(c.allSurfaces ?? [])]) if (!refOf.has(String(s).toLowerCase())) refOf.set(String(s).toLowerCase(), c.ref);
   const parts = [];
   for (const [, g] of byPred) {
-    if (!g.kartṛ.length || !g.adhikaraṇa.length) continue;
-    for (const a of g.kartṛ) for (const b of g.adhikaraṇa) {
-      if (a.upos !== "PROPN" || b.upos !== "PROPN") continue;
-      const ra = refOf.get(a.lemma), rb = refOf.get(b.lemma);
-      if (ra && rb && ra !== rb) parts.push({ child: ra, parent: rb });
+    if (!g[AGENT].length || !g[LOCUS].length) continue;
+    for (const a of g[AGENT]) for (const b of g[LOCUS]) {
+      const ra = refOf.get(a), rb = refOf.get(b);
+      if (ra && rb && ra !== rb) parts.push({ child: ra, parent: rb, role: KARAKA_EN[LOCUS] });
     }
   }
   return parts;
