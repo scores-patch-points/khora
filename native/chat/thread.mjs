@@ -70,6 +70,8 @@ const NOMINAL = new Set(["PROPN", "NOUN", "PRON"]);
 // a REQUEST (an imperative): the reader marks the root verb Mood=Imp, or as a bare infinitive (VerbForm=Inf), and it has no subject, no
 // auxiliary and no "to" of its own ("go research it", "tell me a joke"); such a sentence is not a fact and is not read into the fold
 const isRequest = (rows, root) => { if (!root || root.upos !== "VERB") return false; const f = featsOf(root.feats); if (f.Mood !== "Imp" && f.VerbForm !== "Inf") return false; return !rows.some((r) => r.head === root.id && ["nsubj", "csubj", "nsubj:pass", "aux", "aux:pass", "mark", "expl"].includes(r.deprel)); };
+// trailing characters off a string, without a pattern (the project counts regex applications, and a pattern on text is not how language is read)
+const trimEnd = (s, chars) => { let e = String(s).length; while (e > 0 && chars.includes(String(s)[e - 1])) e--; return String(s).slice(0, e); };
 const quote = (s) => `“${String(s).trim()}”`;
 const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 const sha = (s) => createHash("sha256").update(String(s)).digest("hex").slice(0, 16);
@@ -109,6 +111,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const r = puzzleOrgan.readPuzzle(sents, { reader: puzzleOrgan.READER });
     return r?.read?.items?.items?.length >= 2 && r?.read?.agents?.length >= 2 ? r : null;   // a list of things and at least two people: the scene of a puzzle
   };
+  let asked = null;                     // a question the chat put to the user and is waiting on (mechanic 7): { kind, question, rows, row } — the next fragment is its answer
   let lastAct = null;                   // { claim, orders, dependents }: what the chat took the last message to be, and what was built on it
   const withdrawn = new Set();          // orders of sentences the speaker took back: never an answer
   let msgN = 0;
@@ -383,7 +386,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         }
         if (know && tgt.upos === "NOUN") {
           const d = await tool("define", { word: lemma(tgt) }, () => know.lookup(lemma(tgt))); trace.push({ step: "definition", giver: "kaikki / the hyperlexicon" });
-          if (d.primary) return done({ type: "definition", handled: true, text: `${cap(tgt.form)}: ${d.primary.replace(/[.]\s*$/, "")}.`, from: "the dictionary" });
+          if (d.primary) return done({ type: "definition", handled: true, text: `${cap(tgt.form)}: ${trimEnd(d.primary, ". \t\n")}.`, from: "the dictionary" });
         }
         return done({ type: "identity", handled: false, gap: "unknown_referent", text: `I haven't been told about ${tgt.upos === "PROPN" ? nameChunk(tgt) : tgt.form}, and no giver I can reach knows it.` });
       }
@@ -416,7 +419,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const allKnown = names.length > 0 && names.every((r) => { const ref = refOf(r); return ref && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order; });
     // a pronoun nothing in the notebook gives someone to point to ("is it worth doing?", "could that be the problem"): a man asks what it stands for; he does not look the rest up
     const dangling = qRows.filter((r) => r.upos === "PRON" && (featsOf(r.feats).Person === "3" || featsOf(r.feats).PronType === "Dem") && !(refOf(r) && (probe.referents.find((x) => x.ref === refOf(r))?.first ?? order) < order));
-    if (!a.answers?.length && topic && !aboutUs && dangling.length) { trace.push({ step: "no_research", why: `“${dangling[0].form}” has nothing in the thread to point to` }); return done({ type: "relational", handled: false, gap: "no_antecedent", text: `I don't know what ${quote(dangling[0].form)} stands for: nothing said so far gives it anything to point to.` }); }
+    if (!a.answers?.length && topic && !aboutUs && dangling.length) { trace.push({ step: "no_research", why: `“${dangling[0].form}” has nothing in the thread to point to` }); asked = { kind: "antecedent", question: q, rows: qRows, row: dangling[0].id }; return done({ type: "relational", handled: false, gap: "no_antecedent", text: `I don't know what ${quote(dangling[0].form)} stands for: nothing said so far gives it anything to point to. Who or what do you mean?` }); }
     if (!a.answers?.length && topic && !aboutUs && allKnown) trace.push({ step: "no_research", why: "every name in the question is someone the thread already holds" });
     if (!a.answers?.length && topic && !aboutUs && !allKnown && unreadable.length) trace.push({ step: "no_research", why: `words the reader does not know: ${unreadable.map((r) => r.form).join(", ")}`, unreadable: unreadable.length });
     if (!a.answers?.length && topic && !aboutUs && !allKnown && !unreadable.length) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
@@ -425,7 +428,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         if (dn === "hunt") {   // the hunt answers, or says exactly why it could not; only a question it cannot hunt at all falls through to the plain search
           const w = await callDoor("hunt", topic);
           if (w.ok) {
-            if (ideation) { const c = idea({ label: `${q.replace(/\?$/, "")}: ${w.text.slice(0, -1)}`, relation: { subject: "the answer", verb: "is", object: w.text.slice(0, -1) }, door: "given", giver: "wikipedia" }); ideation.assess(c, { verdict: "supported", method: "deduction", by: "the void hunt (sentences read from Wikipedia)", basis: `a sentence on ${w.cites[0]?.id ?? "Wikipedia"} says it`, license: "a named giver's own text: it licenses the claim, it is not witnessed in the thread" }); }
+            if (ideation) { const c = idea({ label: `${trimEnd(q, "?")}: ${w.text.slice(0, -1)}`, relation: { subject: "the answer", verb: "is", object: w.text.slice(0, -1) }, door: "given", giver: "wikipedia" }); ideation.assess(c, { verdict: "supported", method: "deduction", by: "the void hunt (sentences read from Wikipedia)", basis: `a sentence on ${w.cites[0]?.id ?? "Wikipedia"} says it`, license: "a named giver's own text: it licenses the claim, it is not witnessed in the thread" }); }
             const out = done({ type: "answer", handled: true, text: w.text, evidence: w.evidence ?? [], cites: w.cites });
             last = out; return out;
           }
@@ -513,6 +516,17 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       }
       if (j.working === "unread") { workingClaim = propose("this message counts as something I couldn't read", { subject: "this message", verb: "counts as", object: LABEL.eng.unread }, true, { verdict: "unresolved", method: "deduction", by, basis: "no mark supports any kind of message" }); ids.push(workingClaim); }
     }
+    // ---- MECHANIC 7: a question the chat put to the user is answered by the next fragment, which is read as that answer instead of being stored or left unplaced. A man who asked
+    // "what does it stand for?" and is told "the course" says "is the course worth doing?" back to himself. Anything that is not a fragment drops the question: he moves on.
+    if (asked && j.working === "fragment" && asked.kind === "antecedent") {
+      let end = rows.length; while (end > 0 && rows[end - 1].upos === "PUNCT") end--;   // the answer, without the punctuation it ended with (from the reader's rows)
+      const fill = detok(rows.slice(0, end).map((r) => r.form)), pending = asked; asked = null;
+      const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? fill : r.form)));
+      const cid = propose(`this message answers your question about ${quote(pending.rows.find((r) => r.id === pending.row).form)}`, { subject: "this message", verb: "answers", object: "the question about the pronoun" }, true, { verdict: "supported", method: "testimony", by, basis: `a fragment, straight after I asked what “${pending.rows.find((r) => r.id === pending.row).form}” stood for`, witnesses: [witness] });
+      const inner = await turn(rebuilt, { ...opts, _ids: [...ids, cid].filter(Boolean) });
+      return inner ? { ...inner, paired: { question: pending.question, answer: fill, rebuilt }, trace: [{ step: "paired", asked: pending.question, answer: fill, rebuilt }, ...(inner.trace ?? [])] } : inner;
+    }
+    if (asked && j.working !== "fragment") asked = null;
     const premise = ideation && !j.open && j.working !== "unread" ? workingClaim : null;   // a claim that is only open cannot be a premise of an answer
     const aOpts = { ...opts, actIds: ids, actPremise: premise };
     const finish = (out, orders = []) => {

@@ -332,6 +332,21 @@ test("the thing asked about is the whole name, in what is looked up and in what 
 test("a pronoun with nothing in the thread to point to is asked about, not researched around: “is it worth doing?” sends nothing", T, async () => {
   const sent = [], mine = await make({ getJson: async (u) => { sent.push(u); return { query: { search: [] } }; } });
   const r = await mine.turn("is it worth doing?");
-  assert.equal(r.handled, false); assert.equal(r.gap, "no_antecedent"); assert.equal(r.text, "I don't know what “it” stands for: nothing said so far gives it anything to point to."); assert.equal(sent.length, 0);
+  assert.equal(r.handled, false); assert.equal(r.gap, "no_antecedent"); assert.equal(r.text, "I don't know what “it” stands for: nothing said so far gives it anything to point to. Who or what do you mean?"); assert.equal(sent.length, 0);
   await mine.turn("Mina gave Jonathan a book."); const bound = await mine.turn("Who did she give it to?"); assert.notEqual(bound.gap, "no_antecedent", "a pronoun the thread does hold is not dangling");
+});
+
+test("mechanic 7: a question the chat put to the user is answered by the next fragment, which is read as that answer; anything else drops the question", T, async () => {
+  const sent = [], mine = await make({ getJson: async (u) => { sent.push(decodeURIComponent(u)); return { query: { search: [] } }; } });
+  await mine.turn("is it worth doing?");   // the chat asks who or what “it” is
+  const b = await mine.turn("the course");
+  assert.deepEqual(b.paired, { question: "is it worth doing?", answer: "the course", rebuilt: "is the course worth doing?" });
+  assert.equal(b.question, "is the course worth doing?", "the original question was asked again with the answer in its place");
+  assert.ok(b.trace.some((x) => x.step === "paired")); assert.ok(b.thought.claims.some((x) => x.relation.verb === "answers" && x.standing === "supported"));
+  assert.ok(sent.every((u) => !u.includes("worth doing?") || u.includes("course")), "what was looked up, if anything, is about the course");
+  // a message that is not a fragment drops the open question: the fragment that follows is just a fragment
+  const other = await make(); await other.turn("is it worth doing?"); await other.turn("Mina gave Jonathan a book.");
+  const c = await other.turn("the course"); assert.equal(c.paired, undefined); assert.equal(c.gap, "fragment_unclear");
+  // and a fragment with nothing asked is unchanged
+  const fresh = await make(); const d = await fresh.turn("the course"); assert.equal(d.paired, undefined); assert.equal(d.gap, "fragment_unclear");
 });

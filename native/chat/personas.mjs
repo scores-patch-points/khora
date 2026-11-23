@@ -115,6 +115,6 @@ export async function readPersona(promptText, { source = null } = {}) {
   // the prompt as the persona's own fold: the sentences about it, in order, up to the cap (what it can answer "you" questions from)
   let text = "", n = 0; for (const c of about) { if (n + c.text.length > 12000) break; text += (text ? " " : "") + c.text; n += c.text.length; }
   const lines = String(promptText ?? "").split("\n"), tools = [];
-  lines.forEach((ln, i) => { const t = ln.trim(); if (t.startsWith("#") && /tool|function/i.test(t)) for (const nx of lines.slice(i + 1, i + 40)) { const m = nx.trim(); if (m.startsWith("#")) break; if (m.startsWith("## ") || m.startsWith("- `") || m.startsWith("* `")) tools.push(m.replace(/[#*`-]/g, "").trim().split(/[\s:(]/)[0]); } });   // regex-ok: tool names in a markdown file's headings and bullets, a file format and not language
+  lines.forEach((ln, i) => { const t = ln.trim(); if (t.startsWith("#") && ["tool", "function"].some((w) => t.toLowerCase().includes(w))) for (const nx of lines.slice(i + 1, i + 40)) { const m = nx.trim(); if (m.startsWith("#")) break; if (m.startsWith("## ") || m.startsWith("- `") || m.startsWith("* `")) tools.push(m.replace(/[#*`-]/g, "").trim().split(/[\s:(]/)[0]); } });   // regex-ok: tool names in a markdown file's headings and bullets, a file format and not language
   return { identity, name, source, declaredTools: [...new Set(tools.filter(Boolean))].slice(0, 30), text };
 }
