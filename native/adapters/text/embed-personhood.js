@@ -11,12 +11,13 @@ const sha = (s) => crypto.createHash("sha256").update(s).digest("hex");
  *  `legacyJson` (an old { sha256(prefix+text): base64 } cache) is read for texts the library lacks, so the 92 MB JSON cache migrates without being recomputed. */
 export function makeEmbedder(opts = {}) {
   const legacyFile = typeof opts === "string" ? opts : opts.legacyJson ?? null; let lib = null, legacy = null;
-  const open = async () => { if (lib) return lib; const r = await fetch(`${OLLAMA}/api/tags`); const tags = await r.json(); const m = (tags.models ?? []).find((x) => x.name === MODEL || x.model === MODEL); if (!m) throw new Error("ollama does not hold " + MODEL); const probe = await (await fetch(`${OLLAMA}/api/embed`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ model: MODEL, input: [PREFIX + "x"] }) })).json();
-    lib = openLibrary({ file: path.join(vectorsDir(), MODEL.replace(/[^\w.-]+/g, "_") + ".vec"), digest: m.digest, prefix: PREFIX, dim: probe.embeddings[0].length }); return lib; };
-  const ollama = async (texts) => { const r = await fetch(`${OLLAMA}/api/embed`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ model: MODEL, input: texts.map((t) => PREFIX + t) }) }); if (!r.ok) throw new Error("ollama embed " + r.status); return (await r.json()).embeddings; };
+  const prefix = typeof opts === "object" && opts.prefix != null ? opts.prefix : PREFIX;
+  const open = async () => { if (lib) return lib; const r = await fetch(`${OLLAMA}/api/tags`); const tags = await r.json(); const m = (tags.models ?? []).find((x) => x.name === MODEL || x.model === MODEL); if (!m) throw new Error("ollama does not hold " + MODEL); const probe = await (await fetch(`${OLLAMA}/api/embed`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ model: MODEL, input: [prefix + "x"] }) })).json();
+    lib = openLibrary({ file: path.join(vectorsDir(), MODEL.replace(/[^\w.-]+/g, "_") + ".vec"), digest: m.digest, prefix, dim: probe.embeddings[0].length }); return lib; };
+  const ollama = async (texts) => { const r = await fetch(`${OLLAMA}/api/embed`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ model: MODEL, input: texts.map((t) => prefix + t) }) }); if (!r.ok) throw new Error("ollama embed " + r.status); return (await r.json()).embeddings; };
   async function embed(texts) { const L = await open();
     if (legacyFile && !legacy && fs.existsSync(legacyFile)) { legacy = new Map(); for (const [k, v] of Object.entries(JSON.parse(fs.readFileSync(legacyFile, "utf8")))) { const b = Buffer.from(v, "base64"); legacy.set(k, new Float32Array(b.buffer.slice(b.byteOffset, b.byteOffset + b.length))); } }
-    if (legacy) for (const t of texts) if (!L.has(t)) { const v = legacy.get(sha(PREFIX + t)); if (v) L.put(t, v); }
+    if (legacy) for (const t of texts) if (!L.has(t)) { const v = legacy.get(sha(prefix + t)); if (v) L.put(t, v); }
     return L.embedAll(texts, { embedder: ollama, batch: 64, concurrency: 3 }); }
   return { embed, save: () => lib?.flush() };
 }
