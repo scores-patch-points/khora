@@ -129,7 +129,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     if (parse.length === first) { text = base ? text.slice(0, base - 2) : ""; return (last = { type: "read", handled: true, text: `That reads as a request (${quote(requests[0] ?? t)}), and I can't act on requests: I only read what you tell me and answer questions from it.`, facts: [], referents: [], sentences: 0, requests }); }
     await refold();
     const S = engine.S, EN = engine.EN;
-    const facts = S.frames.filter((f) => f.order >= first).map((f) => ({ action: f.form, order: f.order, roles: f.roles.filter((g) => engine.KARAKAS.includes(g.label)).map((g) => ({ role: EN[g.label] ?? g.label, text: S.rowsOf.get(f.order) ? phrase(f.order, g) : g.head })) }));
+    const facts = S.frames.filter((f) => f.order >= first).map((f) => ({ action: f.form, neg: !!f.neg, order: f.order, roles: f.roles.filter((g) => engine.KARAKAS.includes(g.label)).map((g) => ({ role: EN[g.label] ?? g.label, text: S.rowsOf.get(f.order) ? phrase(f.order, g) : g.head })) }));
     const referents = [...new Set(parse.slice(first).flatMap((p) => p.rows.map((r) => cast.mentionOf[`${p.order}.${r.id}`]).filter(Boolean)))].map((ref) => ({ ref, label: S.refByRef.get(ref)?.forms?.[0]?.[0] ?? ref, kind: S.refByRef.get(ref)?.kind ?? "name" }));
     const asked = requests.length ? `That reads as a request (${quote(requests[0])}), and I can't act on requests: I only read what you tell me and answer questions from it.` : null;
     const heard = parse.length - first;
@@ -360,25 +360,42 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       }
     }
     // relational: the engine's answer over the frames
-    let a = await tool("recall", { question: q }, () => engine.answer(q));
+    const qNeg = qRows.some((r) => String(r.feats ?? "").split("|").includes("Polarity=Neg"));   // the question's own polarity mark ("Who did not give ...?")
+    let a = await tool("recall", { question: q }, () => engine.answer(q, { polarity: true, neg: qNeg }));
+    // the thread may hold the question's own participants in a NEGATED clause ("Mina did not give Jonathan a book"): then the answer is "not Mina", with the sentence
+    if (!a.answers?.length && !qNeg) {
+      const n = await tool("recall", { question: q, polarity: "negated" }, () => engine.answer(q, { polarity: true, neg: true }));
+      if (n.answers?.length) {
+        const who = [...new Set(n.answers[0].answer.map((x) => x.text))];
+        const ev = n.answers.slice(0, 2).map((x) => ({ order: x.order ?? null, text: x.sentence }));
+        trace.push({ step: "negated", frames: n.answers.length });
+        const out = done({ type: "answer", handled: true, text: who.length ? `Not ${who.join(" or ")}: you told me ${quote(ev[0].text)}` : `No: you told me ${quote(ev[0].text)}`, evidence: ev });
+        last = out; return out;
+      }
+    }
     // what the question is about, by part of speech (no word list): the content words, without the question word, the auxiliaries and the function words
     const topic = qRows.filter((r) => !["PRON", "AUX", "PUNCT", "DET", "ADP", "SCONJ", "CCONJ", "PART"].includes(r.upos)).map((r) => r.form).join(" ") || null;
-    const looked = [];
+    const looked = []; let lookedOk = false;
     const aboutUs = qRows.some((r) => r.upos === "PRON" && ["1", "2"].includes(featsOf(r.feats).Person));   // a question about you or me is about this chat, not about the world
     if (!a.answers?.length && topic && !aboutUs) {   // NOT KNOWING: the doors that declare this gap's shape go and read, and the question is asked again
       const fill = doors.fillers("no_answer"); trace.push({ step: "research", gap: "no_answer", doors: fill, topic });
-      for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q)); break; } looked.push(w.text.slice(0, -1)); }
+      for (const dn of fill) { const w = await callDoor(dn, topic); if (w.ok) { lookedOk = true; looked.push(w.text.slice(0, -1)); a = await tool("recall", { question: q, after: dn }, () => engine.answer(q, { polarity: true, neg: qNeg })); break; } looked.push(w.text); }
     }
     trace.push({ step: "relational", read: a.read ?? null, answers: a.answers?.length ?? 0 });
     if (a.answers?.length) {
       const top = a.answers[0];
+      if (top.confirms) {   // a yes/no question: the thread holds the very event asked about
+        const ev = a.answers.slice(0, 2).map((x) => ({ order: x.order ?? null, text: x.sentence }));
+        const out = done({ type: "answer", handled: true, text: `Yes: you told me ${quote(ev[0].text)}`, evidence: ev });
+        last = out; return out;
+      }
       const phraseOf = top.answer.map((x) => x.text).join(" and ");
       const ev = a.answers.slice(0, 3).map((x) => { const pp = parse.find((y) => y.text === x.sentence); return { order: pp?.order ?? null, text: x.sentence, ...(pp && givenAt.has(pp.order) ? { given: givenAt.get(pp.order) } : {}) }; });
       const out = done({ type: "answer", handled: true, text: `${cap(phraseOf)}.`, evidence: ev, answers: a.answers.slice(0, 3).map((x) => x.answer) });
       last = out; return out;
     }
     const gap = a.gaps?.[0];
-    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: aboutUs && !a.answers?.length ? "That's about you or me, and I only know what's been said in this chat." : looked.length ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : "I haven't been told that.", detail: gap?.detail ?? null, ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
+    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: aboutUs && !a.answers?.length ? "That's about you or me, and I only know what's been said in this chat." : looked.length ? (lookedOk ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : `I haven't been told that, and I couldn't look it up: ${looked.at(-1)}`) : "I haven't been told that.", detail: gap?.detail ?? null, ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
   }
 
   /** turn(message) → the reply to ONE message, whatever it is: small talk, a calculation, a question, or a statement to read into the fold */

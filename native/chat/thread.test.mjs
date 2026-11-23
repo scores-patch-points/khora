@@ -39,3 +39,20 @@ test("statements and a closing question in one message: the statements are read 
   assert.equal(thread.state().sentences, before + 1, "the statement was read; the question was not stored");
   assert.equal(r.introduced[0].source, null, "what the user said is not attributed to a giver");
 });
+test("negation is a mark carried per clause: a negated statement does not say who did it, and a later negation retracts an earlier affirmation", T, async () => {
+  const { makeThread } = await import("./thread.mjs");
+  const mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  let th = await mk();
+  const said = await th.turn("Mina did not give Jonathan a book.");
+  assert.equal(said.facts[0].neg, true, "the fact carries the reader's Polarity=Neg mark");
+  const who = await th.turn("Who gave Jonathan a book?");
+  assert.equal(who.handled, true); assert.equal(who.text, "Not Mina: you told me “Mina did not give Jonathan a book.”", "the negated clause is not an answer, it is the reason for “not Mina”");
+  const yn = await th.turn("Did Mina give Jonathan a book?"); assert.match(yn.text, /^No: you told me “Mina did not give Jonathan a book\.”$/);
+  th = await mk();
+  await th.turn("Mina gave Jonathan a book.");
+  assert.equal((await th.turn("Who gave Jonathan a book?")).text, "Mina.");
+  assert.match((await th.turn("Did Mina give Jonathan a book?")).text, /^Yes: you told me “Mina gave Jonathan a book\.”$/);
+  await th.turn("Mina did not give Jonathan a book.");
+  const after = await th.turn("Who gave Jonathan a book?");
+  assert.match(after.text, /^Not Mina: you told me “Mina did not give Jonathan a book\.”$/, "the later negation retracts the earlier affirmation");
+});

@@ -80,7 +80,9 @@ async function ingest(text, read, { chapters = [], timing = {} } = {}) {
       const finite = (kids.get(k.row.id) ?? []).some((c) => c.deprel === "nsubj" || c.deprel === "nsubj:pass") && !(kids.get(k.row.id) ?? []).some((c) => c.upos === "AUX");
       const fm = S.verbForms.get(kriya) ?? S.verbForms.set(kriya, new Map()).get(kriya); if (finite && k.row.form.toLowerCase() !== kriya) fm.set(k.row.form, (fm.get(k.row.form) ?? 0) + 1);
     }
-    const frame = { kriya, form: k.row.form, order: k.p.order, node: f.node, voice: f.voice ?? null, span: S.nodeSpan.get(`s${k.p.order}`) ?? null, roles };
+    // the clause's polarity: a dependent of the verb the reader marks Polarity=Neg ("not", "n't"): a mark, not a word list. Negation is no more subordinate than affirmation (29bb87: 28.2% vs 28.4% adjunct clauses in 22 languages), so the mark is carried per clause.
+    const neg = (kids.get(k.row.id) ?? []).some((c) => String(c.feats ?? "").split("|").includes("Polarity=Neg"));
+    const frame = { kriya, form: k.row.form, neg, order: k.p.order, node: f.node, voice: f.voice ?? null, span: S.nodeSpan.get(`s${k.p.order}`) ?? null, roles };
     S.frames.push(frame);
     if (!S.byKriya.has(kriya)) S.byKriya.set(kriya, []); S.byKriya.get(kriya).push(frame);
   }
@@ -508,7 +510,7 @@ const address = (span) => (span ? { chars: span, bytes: [S.B[span[0]], S.B[span[
 const chapterAt = (pos) => { const c = S.chapters.find((x) => x.start <= pos && pos < x.end); return c ? (c.book === c.title ? c.title : `${c.book} · ${c.title}`) : null; };
 const clip = (span, n = 320) => (span ? S.text.slice(span[0], Math.min(span[1], span[0] + n)).split("\r\n").join(" ").split("\n").join(" ") : "");
 
-async function answer(q, { upTo = null, limit = 12 } = {}) {
+async function answer(q, { upTo = null, limit = 12, polarity = false, neg = false } = {}) {
   const t0 = performance.now();
   const Q = await readQuestion(q);
   const out = { question: q, read: Q, answers: [], partial: [], synonyms: [], given: [], gaps: [], limits: ["participants are matched by their word (lemma or a proper name in the phrase), not by a referent: the in-order read has no cast yet", "the hyperlexicon store holds names and relations, no glosses"], scope: upTo ? { upTo, chapter: chapterAt(upTo) } : { whole: true } };
@@ -523,7 +525,19 @@ async function answer(q, { upTo = null, limit = 12 } = {}) {
     out.synonyms = [...extra].slice(0, 20); kriyas = [Q.kriya, ...out.synonyms];
   }
   const inScope = (f) => !upTo || (f.span && f.span[1] <= upTo);
-  const cands = kriyas.flatMap((k) => (S.byKriya.get(k) ?? []).map((f) => ({ f, viaSynonym: k !== Q.kriya }))).filter(({ f }) => inScope(f));
+  let cands = kriyas.flatMap((k) => (S.byKriya.get(k) ?? []).map((f) => ({ f, viaSynonym: k !== Q.kriya }))).filter(({ f }) => inScope(f));
+  // POLARITY (opt-in: the book panel keeps its old answers): "Mina did not give Jonathan a book" is not a frame that says who gave. A frame answers a question of its own
+  // polarity only, and an affirmed frame is RETRACTED by a later negated one about the same event (same action, every role the negated clause names filled by the same participant).
+  out.retracted = [];
+  if (polarity) {
+    const sameThing = (g, f) => g.roles.every((w) => !KARAKAS.includes(w.label) || f.roles.some((x) => x.label === w.label && fillerMatches(w, x)));
+    const retractedBy = (f) => (S.byKriya.get(f.kriya) ?? []).find((g) => g.neg && g.order > f.order && sameThing(g, f));
+    cands = cands.filter(({ f }) => {
+      if (!!f.neg !== !!neg) return false;
+      const r = !neg && retractedBy(f); if (r) { out.retracted.push({ order: f.order, by: r.order }); return false; }
+      return true;
+    });
+  }
   const gapSet = Q.gap ? new Set(Q.gap) : null;
   // a participant the question names must fill the SAME role in the frame; across voices (one passive, one active) agent and
   // patient swap. Only if no frame answers that way are frames that hold the participant in another role offered, marked loose.
