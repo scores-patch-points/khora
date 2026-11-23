@@ -5,6 +5,16 @@
 const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 const trim = (s) => String(s ?? "").replace(/[:;,]\s*$/, "").replace(/\s+/g, " ").trim();
 
+// reformat(text) -> join the parser's split contractions and fix spacing, so the mouth does not speak a
+// ransom note of cut-out fragments: "you 're" -> "you're", "do n't" -> "don't", "word ." -> "word."
+export function reformat(text) {
+  return String(text ?? "")
+    .replace(/\s+(?=[’'](?:re|s|m|d|ll|ve|t)\b)/g, "")
+    .replace(/\s+(?=n't\b)/g, "")
+    .replace(/\s+([.,;:!?])/g, "$1")
+    .replace(/\s+/g, " ").trim();
+}
+
 export function voiceDefinition(word, primary) {
   const g = trim(primary);
   const article = /^[aeiou]/i.test(String(word)) ? "An" : "A";

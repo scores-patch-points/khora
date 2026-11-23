@@ -111,6 +111,20 @@ function renderLastTurn(r) {
   traceEl.innerHTML = "";
   knowEl.innerHTML = "";
   if (!r) return;
+  // the THINKING: the middle ground between the tension and the release — the model's deliberation
+  // about what the person means, named step by step.
+  if (r.thought?.steps?.length) {
+    const h = document.createElement("h2"); h.style.marginTop = "10px"; h.textContent = "the thinking"; traceEl.appendChild(h);
+    for (const s of r.thought.steps) {
+      const div = document.createElement("div"); div.className = "step";
+      let right = "";
+      if (s.step === "tension") right = `<span class="role">${escapeHtml(s.layer ?? "?")}</span> ${escapeHtml(describeVoid(s.void))}`;
+      else if (s.step === "prior") right = `<span class="role">${escapeHtml(s.giver ?? "giver")}</span> ${escapeHtml(s.out)}`;
+      else right = escapeHtml(s.out ?? "");
+      div.innerHTML = `<b>${s.step}</b><span>${right}</span>`;
+      traceEl.appendChild(div);
+    }
+  }
   const dv = describeVoid(r.void);
   if (dv) voidBox.innerHTML = `<b>DEF’d void</b> ${escapeHtml(dv)}`;
   else if (r.type === "topic") voidBox.innerHTML = `<b>DEF’d void</b> the topic of what has been read`;

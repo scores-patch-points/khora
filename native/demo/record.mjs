@@ -38,6 +38,8 @@ export function weaveAsk(h, turn, voiced = null) {
     cell: "DEF·Ground", kind: "void", addr: `void:${id}`,
     body: { question: turn.question, type: turn.type, void: turn.void ?? null, admits: turn.admits ?? null },
   });
+  // the THOUGHT — the middle ground between the tension and the release: the derivation trace.
+  if (turn.thought) weave(h, { cell: "INS·Figure", kind: "thought", addr: `thought:${id}`, body: turn.thought, of: [v.id] });
   if (turn.matched) weave(h, {
     cell: "SEG·Pattern", kind: "candidate", addr: `candidate:${id}`,
     body: { predicate: turn.matched.predicate, roles: Object.fromEntries(Object.entries(turn.matched).filter(([k]) => k !== "surface" && k !== "neg")) },

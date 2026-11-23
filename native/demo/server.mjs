@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { loadModel } from "../adapters/text/english-parser.js";
 import { makeFold } from "./fold-store.mjs";
 import { makeKnowledge } from "./knowledge.mjs";
-import { voiceDefinition, voiceRelation, voiceSummary, voiceIdentity } from "./voice.mjs";
+import { voiceDefinition, voiceRelation, voiceSummary, voiceIdentity, reformat } from "./voice.mjs";
 import * as pharos from "../../../pharos/lib/pharos.mjs";
 import { weaveRead, weaveAsk, weaveBeing } from "./record.mjs";
 
@@ -35,7 +35,7 @@ const P = pharos.open("fold-demo", { dir: PHAROS_DIR, writer: "khora-demo" });
 // declare the kinds the demo weaves, once (re-declaring at the same cell is a no-op). The nine operators.
 for (const [name, cell] of [
   ["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["sign", "SIG·Figure"],
-  ["void", "DEF·Ground"], ["candidate", "SEG·Pattern"], ["binding", "CON·Figure"],
+  ["void", "DEF·Ground"], ["thought", "INS·Figure"], ["candidate", "SEG·Pattern"], ["binding", "CON·Figure"],
   ["verdict", "EVA·Figure"], ["utterance", "REC·Figure"], ["empty", "NUL·Figure"],
 ]) {
   try { pharos.weave(P, { cell: "DEF·Figure", kind: "kind", addr: `kind:${name}`, body: { name, cell } }); } catch { /* already declared */ }
@@ -43,18 +43,92 @@ for (const [name, cell] of [
 
 const tripleKey = (t) => JSON.stringify(Object.fromEntries(Object.entries(t).filter(([k]) => k !== "surface").map(([k, v]) => [k, Array.isArray(v) ? [...v].sort() : v]).sort(([a], [b]) => (a[0] < b[0] ? -1 : 1))));
 
-// respond(turn) -> the turn with its voiced sentence, for every intent.
+// the THOUGHT: the middle ground between the tension and the release — the derivation trace of one
+// turn. layer names which depth the tension lives at; the steps name what was read, which prior (with
+// its giver), which rule, and what released the tension.
+function thoughtOf(r, { prior = null, rule = null, release = null, candidates = null } = {}) {
+  const steps = [];
+  steps.push({ step: "tension", layer: r.void?.layer ?? null, void: r.void ?? null });
+  if (candidates != null) steps.push({ step: "candidates", out: candidates });
+  if (prior) steps.push({ step: "prior", giver: prior.giver ?? null, out: prior.out });
+  if (rule) steps.push({ step: "rule", out: rule });
+  if (release != null) steps.push({ step: "release", out: release });
+  return { layer: r.void?.layer ?? null, steps };
+}
+
+// respond(turn) -> the turn with its voiced sentence and its thought, for every intent.
 async function respond(r) {
   let voiced = null;
-  if (r.type === "identity") voiced = voiceIdentity(r.target, r.relations);
-  else if (r.type === "definitional") { const def = await know.lookup(r.target); r.definition = def; voiced = voiceDefinition(r.target, def.primary); }
-  else if (r.type === "topic") { voiced = voiceSummary(fold.state().triples); r.summary = fold.state().triples.length; }
-  else if (r.type === "polar") voiced = r.answer === "yes" ? "Yes." : (r.answer === "no" && r.matched?.surface ? "No — " + voiceRelation(r.matched.surface).replace(/[.]\s*$/, "") + "." : null);
-  else if (r.type === "meta") voiced = r.answer === "yes" ? (r.lastVoiced ? "Yes — " + r.lastVoiced.replace(/[.]\s*$/, "") + "." : "Yes.") : "No — I couldn't ground that.";
-  else { const knowledge = []; for (const w of new Set(r.words ?? [])) knowledge.push(await know.lookup(w)); r.knowledge = knowledge; voiced = r.matched?.surface ? voiceRelation(r.matched.surface) : null; }
-  r.voiced = voiced;
+  if (r.type === "time") {
+    const now = new Date();
+    const day = now.toLocaleDateString("en-US", { weekday: "long" });
+    const date = now.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    const time = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+    voiced = r.timeWord === "day" ? `Today is ${day}.` : r.timeWord === "time" ? `It is ${time}.` : `The date is ${date}.`;
+    r.thought = thoughtOf(r, { prior: { giver: "the clock (Date)", out: "regional time" }, rule: "the present moment is grounded in code, not read from the fold", release: `${day}, ${time}` });
+  }
+  else if (r.type === "location") {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    voiced = `You are in the ${tz.replace(/_/g, " ")} timezone.`;
+    r.thought = thoughtOf(r, { prior: { giver: "the clock (Intl)", out: "the system's timezone" }, rule: "location is grounded in code, not read from the fold", release: tz });
+  }
+  else if (r.type === "self") {
+    const traits = (r.identity ?? []).filter((t) => t.predicate === "be").flatMap((t) => t.karman ?? []).filter((k) => !["you", "system"].includes(k));
+    voiced = traits.length ? `I am ${traits.map((t) => /^[aeiou]/i.test(t) ? "an " + t : "a " + t).join(" and ")}.` : null;
+    r.thought = thoughtOf(r, { prior: { giver: "the identity thread", out: "what the system is and does" }, rule: "self-reference: `you` is the system, and the identity assertions cohere on it", release: traits.join(", ") || "nothing asserted" });
+  }
+  else if (r.type === "identity") {
+    voiced = voiceIdentity(r.target, r.relations);
+    r.thought = thoughtOf(r, { prior: { giver: "the reader", out: "the cast" }, rule: "significance: an admitted referent outranks the dictionary", release: r.relations.length + " relation(s) in the fold" });
+  }
+  else if (r.type === "reference") {
+    const e = await know.person(r.target);
+    r.entity = e;
+    if (e) fold.admit(r.target, e.label ?? r.target, e.description);
+    voiced = e?.description ? `${e.label ?? r.target} — ${e.description}.` : null;
+    const cands = (e?.candidates ?? []).slice(0, 5).map((c) => `${c.label}${c.description ? ` — ${c.description}` : ""}`);
+    r.thought = thoughtOf(r, { candidates: cands.length ? `search "${r.target}" returned ${cands.join(" · ")}` : null, prior: { giver: "Wikidata (wbsearchentities + P31)", out: "filtered to instance-of-human" }, rule: "reference: resolve the name to the person, not the surname", release: e?.description ?? "no person found" });
+  }
+  else if (r.type === "kind") {
+    const k = await know.kindOf(r.target);
+    r.kind = k;
+    const ancestors = (k?.ancestors ?? []).filter((a) => a.toLowerCase() !== String(r.target).toLowerCase());
+    voiced = ancestors.length ? `${cap(r.target)} is a ${ancestors.join(", a ")}.` : null;
+    r.thought = thoughtOf(r, { prior: { giver: "Wikidata P279", out: "transitive subclass-of closure" }, rule: "the kind hierarchy, one SPARQL query", release: ancestors.join(" > ") || "no kind" });
+  }
+  else if (r.type === "definitional") {
+    const def = await know.lookup(r.target);
+    r.definition = def;
+    voiced = voiceDefinition(r.target, def.primary);
+    r.thought = thoughtOf(r, { prior: { giver: "the kaikki dictionary", out: "definitions (glosses)" }, rule: "a cross-reference gloss is not a definition", release: def.primary ?? "no definition" });
+  }
+  else if (r.type === "topic") {
+    voiced = voiceSummary(fold.state().triples);
+    r.summary = fold.state().triples.length;
+    r.thought = thoughtOf(r, { prior: { giver: "the reader", out: "the fold" }, rule: "the whole fold, spoken", release: fold.state().triples.length + " relation(s)" });
+  }
+  else if (r.type === "polar") {
+    voiced = r.answer === "yes" ? "Yes." : (r.answer === "no" && r.matched?.surface ? "No — " + voiceRelation(r.matched.surface).replace(/[.]\s*$/, "") + "." : null);
+    r.thought = thoughtOf(r, { prior: { giver: "the reader", out: "the fold" }, rule: "does the fold hold the proposition?", release: r.answer ?? "unknown" });
+  }
+  else if (r.type === "meta") {
+    voiced = r.answer === "yes" ? (r.lastVoiced ? "Yes — " + r.lastVoiced.replace(/[.]\s*$/, "") + "." : "Yes.") : "No — I couldn't ground that.";
+    r.thought = thoughtOf(r, { prior: { giver: "the interpreter", out: "the turns" }, rule: "was the last answer grounded?", release: r.answer ?? "no" });
+  }
+  else {
+    const knowledge = [];
+    for (const w of new Set(r.words ?? [])) knowledge.push(await know.lookup(w));
+    r.knowledge = knowledge;
+    voiced = r.matched?.surface ? voiceRelation(r.matched.surface) : null;
+    const candidates = fold.state().triples.length;
+    const cut = r.dmd?.find((s) => s.step === "match");
+    r.thought = thoughtOf(r, { candidates: candidates + " relation(s) in the fold", prior: { giver: "the reader", out: "the kāraka DAG" }, rule: cut ? `the DMD: ${cut.matched}/${cut.total} survived` : "the DMD over the fold", release: r.answer ?? (r.reason ?? "nothing") });
+  }
+  r.voiced = voiced ? reformat(voiced) : voiced;
   return r;
 }
+
+const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 
 const json = (res, code, body) => { res.writeHead(code, { "content-type": "application/json" }); res.end(JSON.stringify(body)); };
 

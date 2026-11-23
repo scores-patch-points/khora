@@ -13,6 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
 import { openHyperlexiconBin } from "/Users/mlacy/janus-main/native/organs/hyperlexicon/bin.mjs";
+import { makeKindGiver } from "../adapters/text/kind-hierarchy.js";
 
 const HL_DIR = process.env.HYPERLEXICON_DIR || "/Users/mlacy/hyperlexicon/v2";
 const PRIORS_DIR = process.env.KHORA_PRIORS_DIR || "/Users/mlacy/janus-main/priors";
@@ -26,6 +27,8 @@ export function makeKnowledge({ hlDir = HL_DIR, priorsDir = PRIORS_DIR, kaikki =
   const posPrior = (() => { try { return JSON.parse(fs.readFileSync(path.join(priorsDir, "pos-eng.json"), "utf8")).forms; } catch { return null; } })();
   const pron = (() => { try { return JSON.parse(fs.readFileSync(path.join(priorsDir, "pronunciation-eng.json"), "utf8")).words; } catch { return null; } })();
   const glossCache = new Map();
+  const entityCache = new Map();
+  const kindGiver = makeKindGiver({});
 
   const hlNames = (word) => {
     if (!hl) return null;
@@ -51,14 +54,29 @@ export function makeKnowledge({ hlDir = HL_DIR, priorsDir = PRIORS_DIR, kaikki =
     return out;
   };
 
+  const entity = async (word) => {
+    if (entityCache.has(word)) return entityCache.get(word);
+    let e = null;
+    try { e = await kindGiver.entityInfo(word); } catch { e = null; }
+    entityCache.set(word, e);
+    return e;
+  };
+  const kind = async (word) => {
+    try { return await kindGiver.kindChain(word); } catch { return null; }
+  };
+
   return {
     hasHyperlexicon: !!hl,
     async lookup(word) {
       const w = String(word ?? "").toLowerCase();
-      if (!w) return { word: w, hyperlexicon: null, upos: null, ipa: null, glosses: [], primary: null };
+      if (!w) return { word: w, hyperlexicon: null, upos: null, ipa: null, glosses: [], primary: null, entity: null };
       const gs = await glosses(w);
-      return { word: w, hyperlexicon: hlNames(w), upos: posPrior?.[w] ?? null, ipa: pron?.[w]?.ipa ?? null, glosses: gs, primary: primaryGloss(gs) };
+      const e = await entity(w);
+      return { word: w, hyperlexicon: hlNames(w), upos: posPrior?.[w] ?? null, ipa: pron?.[w]?.ipa ?? null, glosses: gs, primary: primaryGloss(gs), entity: e };
     },
+    async reference(word) { const e = await entity(String(word ?? "").toLowerCase()); return e; },
+    async person(word) { try { return await kindGiver.personOf(String(word ?? "").toLowerCase()); } catch { return null; } },
+    async kindOf(word) { return kind(String(word ?? "").toLowerCase()); },
   };
 }
 
