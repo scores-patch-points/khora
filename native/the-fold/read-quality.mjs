@@ -168,6 +168,22 @@ export function scopePolarity(edges, clauses, language = "en", opts) {
   const bySent = new Map(); for (const c of clauses) { (bySent.get(c.sentence) ?? bySent.set(c.sentence, []).get(c.sentence)).push(c); }
   const norm = (x) => String(x ?? "").toLowerCase().replace(/\s+/g, " ").trim();
   let scoped = 0, fallback = 0, negative = 0, changed = 0;
+  // Every clause is normalised ONCE, in the original iteration order, and found through an index of the exact test the loop
+  // applies (its first min(25, length) characters occur in the edge's sentence). Before (measured 2026-11-23) each edge
+  // re-normalised every clause of the document with a regex: quadratic, a third of a 1M-character read. Candidates are scored
+  // in the original order, so ties break exactly as before and the output is identical.
+  const pre = []; for (const list of bySent.values()) for (const c of list) { const own = norm(c.own.text); pre.push({ c, i: pre.length, own, key: own ? own.slice(0, Math.min(25, own.length)) : "", whole: own ? own + " " + norm(c.subject?.text) + " " + norm(c.object?.text) : "", ownWords: own ? own.split(" ") : [] }); }
+  const byKey = new Map(); for (const q of pre) if (q.own) { if (!byKey.has(q.key)) byKey.set(q.key, []); byKey.get(q.key).push(q); }
+  const keyLens = [...new Set(pre.filter((q) => q.own).map((q) => q.key.length))];
+  const candMemo = new Map();
+  const candidatesIn = (sentN) => {
+    if (candMemo.has(sentN)) return candMemo.get(sentN);
+    const hit = new Set();
+    for (const L of keyLens) for (let i = 0; i + L <= sentN.length; i++) { const list = byKey.get(sentN.slice(i, i + L)); if (list) for (const q of list) hit.add(q); }
+    const out = [...hit].sort((x, y) => x.i - y.i);
+    candMemo.set(sentN, out);
+    return out;
+  };
   const out = (edges ?? []).map((e) => {
     const sentText = e?.spans?.[0]?.text; if (!sentText) return e;
     const a = norm(e.end1Face ?? e.end1), b = norm(e.end2Face ?? e.end2);
@@ -177,10 +193,9 @@ export function scopePolarity(edges, clauses, language = "en", opts) {
     // is one clause's verb, and negation is a property of that clause.
     const sentN = norm(sentText);
     let pick = null, best = 0;
-    for (const list of bySent.values()) for (const c of list) {
-      const own = norm(c.own.text); if (!own || !sentN.includes(own.slice(0, Math.min(25, own.length)))) continue;
-      const whole = own + " " + norm(c.subject?.text) + " " + norm(c.object?.text);
-      const lab = labelWords.filter((w) => own.split(" ").includes(w)).length;
+    for (const q of candidatesIn(sentN)) {
+      const c = q.c, own = q.own, whole = q.whole;
+      const lab = labelWords.filter((w) => q.ownWords.includes(w)).length;
       const ends = (a && whole.includes(a) ? 1 : 0) + (b && whole.includes(b) ? 1 : 0);
       const score = lab * 2 + ends;
       if (lab > 0 && ends > 0 && score > best) { best = score; pick = c; }

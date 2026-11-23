@@ -180,3 +180,91 @@ export function verbAgreementFromParadigm(forms, { minObservations = 2 } = {}) {
   }
   return out;
 }
+
+// ————————————————————————————————————————————————————————————————
+// THE ROWS HALF. The same tally read off the reader's dependency rows (its UD codec) instead of the surface, so no pattern
+// touches the language: a pro-form counts for a being only where the GRAMMAR binds it to that being, a reflexive
+// (Reflex=Yes) or a possessive (nmod:poss) inside the clause whose subject is the being's name. The clause is the verb with
+// its dependents, entering a dependent verb only when it has no subject of its own (control, a coordinated verb sharing the
+// subject), never the subject's own phrase ("her mother said" says nothing about the mother). The class is the pro-form's own
+// features (open, as above): Gender=Masc m, Fem f, Neut n; no gender with Number=Plur x; first and second person never.
+// A possessive in a clause that names another being is evidence for neither (the text half's rule); a reflexive is bound by
+// its clause and always counts. Recurring evidence only: the caller tallies a whole text, and proformOf says when the
+// tally does not decide.
+// ————————————————————————————————————————————————————————————————
+/** "Case=Acc|Gender=Fem" → { Case: "Acc", Gender: "Fem" } (the CoNLL-U FEATS column) */
+export const featsOf = (f) => { const o = {}; if (!f || f === "_") return o; for (const kv of String(f).split("|")) { const i = kv.indexOf("="); if (i > 0) o[kv.slice(0, i)] = kv.slice(i + 1); } return o; };
+/** a pro-form's agreement class from its features: m | f | n | x, or null (first/second person, or no agreement carried) */
+export const proformClass = (feats) => {
+  const F = typeof feats === "string" ? featsOf(feats) : (feats ?? {});
+  if (F.Person && F.Person !== "3") return null;
+  if (F.Gender === "Masc") return "m"; if (F.Gender === "Fem") return "f"; if (F.Gender === "Neut") return "n";
+  return F.Number === "Plur" ? "x" : null;
+};
+const OWN_SUBJECT = new Set(["nsubj", "nsubj:pass", "csubj", "csubj:pass", "expl"]);
+const NAME_PART = new Set(["flat", "flat:name", "compound"]);
+/**
+ * genderEvidenceFromRows(sentences, { keyOf }) → Map key → { classes: { m, f, n, x }, reflexive, possessive }
+ *   sentences: arrays of reader rows ({ id, head, deprel, upos, feats, form, lemma }); keyOf(row) names the being a subject
+ *   word stands for (the caller's fold); a name's flat parts ("Prince Andrew") each get the evidence.
+ */
+export function genderEvidenceFromRows(sentences, { keyOf = (r) => r.form } = {}) {
+  const out = new Map();
+  const add = (key, cls, kind) => { let e = out.get(key); if (!e) out.set(key, (e = { classes: {}, reflexive: 0, possessive: 0 })); e.classes[cls] = (e.classes[cls] ?? 0) + 1; e[kind]++; };
+  for (const rows of sentences ?? []) {
+    if (!Array.isArray(rows) || !rows.length) continue;
+    const kids = new Map(); for (const r of rows) { const a = kids.get(r.head); if (a) a.push(r); else kids.set(r.head, [r]); }
+    for (const v of rows) {
+      const subj = (kids.get(v.id) ?? []).find((c) => c.deprel === "nsubj" || c.deprel === "nsubj:pass");
+      if (!subj || (subj.upos !== "PROPN" && subj.upos !== "NOUN")) continue;
+      const beings = [subj, ...(kids.get(subj.id) ?? []).filter((c) => NAME_PART.has(c.deprel) && c.upos === subj.upos)];
+      for (const { cls, kind } of boundProforms(kids, v, subj)) for (const b of beings) add(keyOf(b), cls, kind);
+    }
+  }
+  return out;
+}
+/** the pro-forms the clause of verb `v` binds to its subject `subj` (kids: head id → rows): [{ row, cls, kind }] */
+export function boundProforms(kids, v, subj) {
+  const scope = [], st = (kids.get(v.id) ?? []).filter((c) => c !== subj), out = [];
+  while (st.length) {
+    const x = st.pop();
+    if ((kids.get(x.id) ?? []).some((c) => OWN_SUBJECT.has(c.deprel))) continue; // a clause with its own subject is its own
+    scope.push(x); for (const y of kids.get(x.id) ?? []) st.push(y);
+  }
+  const another = scope.some((x) => x.upos === "PROPN");
+  for (const x of scope) {
+    if (x.upos !== "PRON") continue;
+    const F = featsOf(x.feats), cls = proformClass(F); if (!cls) continue;
+    const kind = F.Reflex === "Yes" ? "reflexive" : x.deprel === "nmod:poss" ? "possessive" : null;
+    if (!kind || (kind === "possessive" && another)) continue;
+    out.push({ row: x, cls, kind });
+  }
+  return out;
+}
+/** two-sided exact sign test: k successes of n at p = 1/2 */
+export const signTest = (k, n) => { if (!n) return 1; const lg = [0]; for (let i = 1; i <= n; i++) lg.push(lg[i - 1] + Math.log(n - i + 1) - Math.log(i)); let s = 0; for (let i = Math.max(k, n - k); i <= n; i++) s += Math.exp(lg[i] - n * Math.LN2); return Math.min(1, 2 * s); };
+/**
+ * proformOf(evidence, { alpha }) → { cls, n, of, runnerUp, p, contested } | null
+ * The class the grammar binds most often; CONTESTED when it does not beat the runner-up by an exact sign test at alpha
+ * (a declared dial: 0.05, the conventional level, stated rather than tuned). No evidence → null, never a default.
+ */
+export function proformOf(evidence, { alpha = 0.05 } = {}) {
+  const ranked = Object.entries(evidence?.classes ?? {}).sort((a, b) => b[1] - a[1]);
+  if (!ranked.length) return null;
+  const [cls, n] = ranked[0], second = ranked[1]?.[1] ?? 0, p = signTest(n, n + second);
+  return { cls, n, of: ranked.reduce((a, x) => a + x[1], 0), runnerUp: ranked[1]?.[0] ?? null, p, contested: p >= alpha };
+}
+/**
+ * proformsOfParse(parse, { keyOf }) → { key: { classes, reflexive, possessive, cls, n, of, runnerUp, p, contested } }
+ * The whole read's tally (parse = the reader's [{ rows }]), each key with its decision: what a read carries as
+ * entry.proforms, and what the door weaves into pharos per being (kind `proform`). keyOf: a name by its written form,
+ * a common noun by its lemma, lower-cased.
+ */
+export const proformKey = (r) => String(r.upos === "PROPN" ? r.form : (r.lemma ?? r.form)).normalize("NFC").toLowerCase();
+export function proformsOfParse(parse, { keyOf = proformKey } = {}) {
+  const out = {};
+  for (const [k, e] of genderEvidenceFromRows((parse ?? []).map((p) => p?.rows), { keyOf })) out[k] = { ...e, ...proformOf(e) };
+  return out;
+}
+/** whether a reader's rows carry the features the tally reads (a parser that emits FEATS) */
+export const rowsCarryFeats = (parse) => Array.isArray(parse) && parse.some((p) => p?.rows?.some((r) => r.feats && r.feats !== "_"));

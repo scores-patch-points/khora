@@ -37,6 +37,9 @@ import { KARAKA_EN } from "./karaka-map.mjs";
 
 export function containmentFromKarakas(entry) {
   const AGENT = "kartṛ", LOCUS = "adhikaraṇa";
+  // grouped by CLAUSE (the sentence and the head row), never by the predicate's lemma: grouping by lemma paired the
+  // agent of one "live" with the locus of every other "live" in the document ("Alice lives in Paris ... Bob lives in
+  // London" put Alice inside London).
   const byPred = new Map();
   for (const p of entry?.parse ?? []) {
     const headOf = (id) => p.rows.find((x) => x.id === id);
@@ -45,9 +48,10 @@ export function containmentFromKarakas(entry) {
       const hd = row.head ? headOf(row.head) : null;
       const pred = (hd?.lemma ?? hd?.form ?? "").toLowerCase();
       if (!pred) continue;
-      const g = byPred.get(pred) ?? { [AGENT]: [], [LOCUS]: [] };
+      const clause = `${p.order ?? ""}:${hd.id}`;
+      const g = byPred.get(clause) ?? { [AGENT]: [], [LOCUS]: [] };
       g[row.karaka].push((row.lemma ?? row.form ?? "").toLowerCase());
-      byPred.set(pred, g);
+      byPred.set(clause, g);
     }
   }
   const refOf = new Map();

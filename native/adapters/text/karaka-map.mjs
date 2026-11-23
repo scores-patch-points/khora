@@ -43,7 +43,7 @@ export const KARAKA_EN = Object.freeze({
 export const KARAKA_MAP = Object.freeze({
   // UD deprel -> kāraka (the relation carries the role)
   "nsubj": "kartṛ",
-  "nsubj:pass": "kartṛ",  // passive agent (still kartṛ, marked passive)
+  "nsubj:pass": "karman",  // the passive SUBJECT is the patient (karmaṇi prayoga: expressed in the nominative, still karman); the agent is obl:agent
   "obj": "karman",
   "iobj": "sampradāna",
   "obl": "adhikaraṇa",     // default: locative (the most common oblique role)
@@ -102,11 +102,15 @@ export function karakaOf(row) {
   // For Ground languages: particle carries the kāraka
   const pk = GROUND_PARTICLE_KARAKA[String(row.form ?? "").trim()];
   if (pk && pk !== "genitive" && pk !== "nominalizer") return pk;
-  // For Figure/Ground languages: deprel carries the kāraka
-  const k = KARAKA_MAP[row.deprel?.split(":")[0]];
+  // For Figure/Ground languages: deprel carries the kāraka. The FULL relation first (obl:instr, obl:tmod, advcl:cond,
+  // nmod:poss ...), then its base: looking up only the base made every subtype entry above unreachable (all obl:* read
+  // as adhikaraṇa; measured 2026-11-23 on hand rows and a real read).
+  const d = String(row.deprel ?? "");
+  const k = Object.hasOwn(KARAKA_MAP, d) ? KARAKA_MAP[d] : KARAKA_MAP[d.split(":")[0]];
   if (k && k !== "genitive" && k !== "vocative" && k !== "nominalizer") return k;
-  // Fallback: UPOS proxy (for Figure languages where kāraka is carried by word order)
-  if (row.upos === "PRON" || row.upos === "PROPN") return "kartṛ";
+  // No UPOS fallback: a proper noun or pronoun under flat/conj/appos is not an agent because of its part of speech
+  // ("John Smith": Smith is part of one name, not a second kartṛ). The sentence-level reading with the marker and
+  // voice evidence is karaka-total.mjs::karakaRows, which the read uses.
   return null;
 }
 

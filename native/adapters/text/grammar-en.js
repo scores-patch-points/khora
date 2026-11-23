@@ -14,7 +14,11 @@ const K = new URL("../..", import.meta.url).pathname.replace(/\/$/, "");
 import { priorsHome } from "../../the-fold/prior-source.mjs";
 const PRIORS = (() => { const h = priorsHome(); return h?.dir ?? `${K}/priors`; })();
 const MORPH = JSON.parse(fs.readFileSync(`${PRIORS}/morphology-eng.json`, "utf8"));
-const model = P.loadModel(JSON.parse(fs.readFileSync(`${PRIORS}/parser-eng-ewt.json`, "utf8")), { morphology: MORPH });
+// khora's own English parser: read at load as before (a missing file is the same refusal), PARSED only when the UD codec is absent
+// and this reader is the one that parses (2026-11-23: it was 335 ms of every start, unused whenever the UD codec is on disk)
+const EN_PARSER_JSON = fs.readFileSync(`${PRIORS}/parser-eng-ewt.json`, "utf8");
+let _enModel = null;
+const enModel = () => (_enModel ??= P.loadModel(JSON.parse(EN_PARSER_JSON), { morphology: MORPH }));
 const LEX = JSON.parse(fs.readFileSync(`${PRIORS}/pos-eng-lexicon.json`, "utf8")).classes;
 export const VERB_FORMS = new Set(LEX.VERB.map((w) => String(w).toLowerCase()));
 const VERBISH = new Set([...LEX.VERB, ...LEX["NOUN|VERB"]].map((w) => String(w).toLowerCase()));
@@ -24,9 +28,9 @@ export const CARDINAL = { zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, s
 const UD_MODEL = process.env.FOLD_UD_MODEL ?? `${PRIORS}/ud-parser-eng-ewt.json.gz`, UD_LEX = process.env.FOLD_UD_LEX ?? `${PRIORS}/unimorph-eng-pos.json.gz`;
 const U = process.env.FOLD_READER !== "english-parser" && fs.existsSync(UD_MODEL) ? await import("./ud-parser.js") : null;
 const UD_CL = process.env.FOLD_UD_CLUSTERS ?? `${PRIORS}/clusters-eng.json.gz`;
-const UM0 = U ? await U.readJsonMaybeGz(UD_MODEL) : null;
+const UMF = U ? await U.openModelFile(UD_MODEL) : null; // the compiled feature index when cached (ud-parser.js openModelFile)
 // the clusters file is read only when the model was trained with one (its meta names it)
-const UM = U ? U.loadModel(UM0, { lex: fs.existsSync(UD_LEX) ? await U.loadLexiconFile(UD_LEX) : null, clusters: UM0.meta?.clusters && fs.existsSync(UD_CL) ? await U.loadClustersFile(UD_CL) : null }) : null;
+const UM = U ? UMF.load({ lex: fs.existsSync(UD_LEX) ? await U.loadLexiconFile(UD_LEX) : null, clusters: UMF.meta?.clusters && fs.existsSync(UD_CL) ? await U.loadClustersFile(UD_CL) : null }) : null;
 export const READER = UM ? "ud-parser" : "english-parser";
 // A SUPERLATIVE THE TREEBANK NEVER SAW ("hottest", "saddest", "happiest") comes back from the UD reader as a positive adjective that is its own
 // lemma, so "the hottest planet" was atomised as hottest(planet) and never met most:hot. The english-parser path already asks the morphology
@@ -44,8 +48,8 @@ const build = (forms, tags) => {
   // a number and a name are their own lemma ("Jan" is not "January")
   if (UM) return U.analyse(UM, forms, tags).map((r) => (r.upos === "NUM" ? { ...r, lemma: r.form.toLowerCase() } : r.upos === "PROPN" ? { ...r, lemma: r.form } : superlativeLemma(r)));
   const words = ["ROOT", ...forms], T = ["ROOT", ...tags];
-  const heads = P.parseSentence(model.parser, words, T), labels = P.labelSentence(model.labeller, heads, words, T);
-  return forms.map((form, k) => { const { lemma, feats } = P.lemmaAndFeats(model.lexicon, form, tags[k]); return { id: k + 1, form, lemma: tags[k] === "NUM" ? form.toLowerCase() : lemma, upos: tags[k], feats, head: heads[k + 1], deprel: labels[k + 1] }; });
+  const heads = P.parseSentence(enModel().parser, words, T), labels = P.labelSentence(enModel().labeller, heads, words, T);
+  return forms.map((form, k) => { const { lemma, feats } = P.lemmaAndFeats(enModel().lexicon, form, tags[k]); return { id: k + 1, form, lemma: tags[k] === "NUM" ? form.toLowerCase() : lemma, upos: tags[k], feats, head: heads[k + 1], deprel: labels[k + 1] }; });
 };
 export const repairs = { cardinal: 0, verb: 0 };
 // 2b. a hyphenated word coordinated right after a verb ("discovered and out-licensed"), whose last part the lexicon allows as a verb, is a verb
@@ -58,7 +62,7 @@ export function rowsOf(text) { return rowsOfK(text, 1)[0] ?? []; }
 export function rowsOfK(text, k = 1) {
   const tk = P.tokenize(text); if (!tk.length) return [];
   const forms = tk.map((t) => t.form);
-  const tags = UM ? (U.tagWith ? (UM.meta?.lexicon !== undefined ? U.tagWith(UM.tagger, forms, UM.lex, UM.clusters) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(model.tagger, forms);
+  const tags = UM ? (U.tagWith ? (UM.meta?.lexicon !== undefined ? U.tagWith(UM.tagger, forms, UM.lex, UM.clusters) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(UM.tagger, forms)) : P.tagSentence(enModel().tagger, forms);
   let fixed = false;
   tags.forEach((t, i) => { if (t !== "NUM" && CARDINAL[forms[i].toLowerCase()] != null && /^(VERB|ADJ|NOUN)$/.test(t) && i + 1 < forms.length && /^\p{L}/u.test(forms[i + 1])) { tags[i] = "NUM"; fixed = true; repairs.cardinal++; } });
   // 3. "have/has/had" tagged as an auxiliary with no verb after it in the clause is the main verb ("spiders have eight legs")
@@ -74,7 +78,7 @@ export function rowsOfK(text, k = 1) {
   return readings.map((rs) => repairRelcl(rs, tk));
 }
 // a hyphenated verb the lexicon does not know keeps its prefix and takes its last part's lemma ("out-licensed" → "out-license")
-const lemmaHyphen = (rows) => { for (const r of rows) if (r.upos === "VERB" && /\p{L}-\p{L}/u.test(r.form) && r.lemma.toLowerCase() === r.form.toLowerCase()) { const i = r.form.lastIndexOf("-"), tail = r.form.slice(i + 1); const t = UM ? U.analyse(UM, [tail], ["VERB"])[0]?.lemma : P.lemmaAndFeats(model.lexicon, tail, "VERB").lemma; if (t) r.lemma = `${r.form.slice(0, i + 1).toLowerCase()}${String(t).toLowerCase()}`; } return rows; };
+const lemmaHyphen = (rows) => { for (const r of rows) if (r.upos === "VERB" && /\p{L}-\p{L}/u.test(r.form) && r.lemma.toLowerCase() === r.form.toLowerCase()) { const i = r.form.lastIndexOf("-"), tail = r.form.slice(i + 1); const t = UM ? U.analyse(UM, [tail], ["VERB"])[0]?.lemma : P.lemmaAndFeats(enModel().lexicon, tail, "VERB").lemma; if (t) r.lemma = `${r.form.slice(0, i + 1).toLowerCase()}${String(t).toLowerCase()}`; } return rows; };
 function repairRelcl(rows, tk) {
   lemmaHyphen(rows);
   // 4. a verb with its own auxiliary hung as a relative clause under a nominal root ("Marie Curie was born in 1867" parsed as a name modified
