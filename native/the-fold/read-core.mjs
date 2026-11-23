@@ -63,6 +63,7 @@ import { priorJson, priorGeneration } from "./prior-source.mjs";
 import { figuresOf } from "../adapters/text/figure-period.en.js";
 import { rolesFor, nullSubjectsFor } from "../adapters/text/case-marked-clauses.js";
 import { competencyOf } from "../adapters/text/language-competency.js";
+import { proformsOfParse } from "../adapters/text/gender-from-corpus.js";
 import { speakerReferents } from "../adapters/text/speakers.js";
 import { castIdentity as castIdentityPass, repairEdges as repairEdgesPass } from "../organs/cast-identity.js";
 
@@ -593,6 +594,9 @@ export function readWith(text, { address = null, category = null, language = nul
     // OPT-IN (features.figures): the money figures of the document with the period and sign each is about, as atoms with addresses (adapters/text/figure-period.en.js); absent, the entry is exactly what it was
     ...(features.figures ? { figures: stem === "eng" ? figuresOf(str, { sentences, timePrior: priorJson("time-prior.json") }) : { figures: [], gaps: [{ gap: "figures_english_only", detail: `the period binder reads English; this read is ${stem}` }] } } : {}),
     ...(parsed ? { parse: parsed } : {}),
+    // the pro-forms the GRAMMAR binds to each name in its own clause (reflexives, possessives), read off the rows' FEATS
+    // (gender-from-corpus.js, the rows half): capacity `proform-agreement`, woven per being as kind `proform`
+    ...(parsed ? { proforms: proformsOfParse(parsed) } : {}),
     ...(selfRead ? { claims: claims ?? [] } : {}),
     error: err, ms: Date.now() - t0,
   };

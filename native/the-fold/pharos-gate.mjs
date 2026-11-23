@@ -7,6 +7,8 @@ import { IS_NODE } from "./prior-source.mjs";
 import { loadNamePrior } from "../adapters/text/name-prior.js";
 import { genderPriorChainFor } from "../adapters/text/gender-chain.js";
 import { nestFromRead, containmentFromKarakas } from "../adapters/text/nest-from-read.js";
+import { proformOf, rowsCarryFeats } from "../adapters/text/gender-from-corpus.js";
+import { competencyOf } from "../adapters/text/language-competency.js";
 
 const N = IS_NODE ? { crypto: (await import("node:crypto")).default, fs: (await import("node:fs")).default, os: (await import("node:os")).default, path: (await import("node:path")).default, url: await import("node:url") } : null;
 const ROOT = IS_NODE ? N.path.resolve(N.path.dirname(N.url.fileURLToPath(import.meta.url)), "..", "..") : null;
@@ -66,8 +68,38 @@ export function capacitiesOf(w) {
     ["pronoun-binding", c.pronouns?.status === "bound", Array.isArray(w.pronounsPresence)],
     ["name-ruling", eng && !!loadNamePrior(), w.presenceInputs?.nameRuling === true],
     ["non-personal-ruling", eng, !gaps.has("pronoun_presence_no_nonpersonal_ruling")],
+    ["proform-agreement", rowsCarryFeats(w.parse), w.proforms != null],   // a name's pro-form from the reflexives and possessives its own clause binds to it (the rows' FEATS), wherever the parser emits FEATS
   ];
   return { available: caps.filter((x) => x[1]).map((x) => x[0]), used: caps.filter((x) => x[1] && x[2]).map((x) => x[0]) };
+}
+
+// A READER BESIDE THE DOOR (reading-in-order.mjs) acts under the same two rules: the capacities the LANGUAGE has (the competency
+// profile, as capacitiesOf reads it) against the ones this act uses. capacitiesFor is the up-front half (refuse before reading,
+// not after); recordAct writes the one entry, by content hash, never the text.
+export function capacitiesFor(stem, parse = null) { return capacitiesOf({ competency: competencyOf(stem), parse }).available; }
+export function refuseUnlessFull({ door, stem, used, allowDegraded = false }) {
+  if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1") return;
+  assertPharos();
+  const missing = capacitiesFor(stem).filter((c) => !used.includes(c));
+  if (missing.length && !allowDegraded) { const { chatterDir } = dirs(); GATE.record(ROOT, { door, addr: "refused", degraded: false, chatterDir, writer: "khora", capacities: { available: capacitiesFor(stem), used } }); }
+}
+export function recordAct({ door, text, stem, parse = null, used, body = {}, allowDegraded = false }) {
+  if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1") return null;
+  assertPharos();
+  const { pharosDir, chatterDir } = dirs(); const str = String(text ?? "");
+  return GATE.record(ROOT, { door, addr: `sha256:${N.crypto.createHash("sha256").update(str).digest("hex")}`, degraded: allowDegraded, pharosDir, chatterDir, writer: "khora", capacities: { available: capacitiesFor(stem, parse), used }, body: { chars: str.length, language: stem, ...body } });
+}
+
+// THE CAST OF AN ORDERED READ, WOVEN (kind `referent`, INS·Figure): each being by the text's hash and its ref, with every written form,
+// the pro-forms its own clauses bind to it and its decided pro-form, so a later surface reads the referent off the pharos the
+// same way instead of re-deriving it. Returns how many were woven.
+export function weaveReferents({ text, referents }) {
+  if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P || !referents?.length) return 0;
+  const { pharosDir } = dirs(); const h = P.open("khora", { dir: pharosDir, writer: "khora" });
+  if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === "kind:referent")) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: "kind:referent", body: { name: "referent", cell: "INS·Figure" } });
+  const doc = N.crypto.createHash("sha256").update(String(text ?? "")).digest("hex").slice(0, 16);
+  for (const b of referents) P.weave(h, { cell: "INS·Figure", kind: "referent", addr: `${doc}:${b.ref}`, body: { forms: b.forms.slice(0, 24), mentions: b.mentions, contested: b.contested, first: b.first, last: b.last, proformForms: b.proformForms, proform: b.proform ? { cls: b.proform.cls, contested: b.proform.contested, p: b.proform.p } : null, source: "reading-in-order.mjs (rows)" } });
+  return referents.length;
 }
 
 // WRITES-TO-PHAROS + FULL-CAPACITY at the moment of acting: write ONE entry for this read into pharos (what was read by content hash, never the text; the capacities; the competency tier) and refuse when a capacity was left out.
@@ -93,7 +125,7 @@ export function recordRead(w, text, { door, allowDegraded = false } = {}) {
 export function weaveFullRead(w, text, { door, pharosDir } = {}) {
   if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P) return;
   const h = P.open("khora", { dir: pharosDir, writer: "khora" });
-  for (const [kind, cell] of [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"], ["gender", "DEF·Figure"], ["part_of", "SYN·Pattern"]]) {
+  for (const [kind, cell] of [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"], ["gender", "DEF·Figure"], ["proform", "DEF·Figure"], ["part_of", "SYN·Pattern"]]) {
     if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
   }
   // beings: each cast referent is one node of the fold
@@ -107,6 +139,14 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
     const giver = genderPriorChainFor(w?.competency?.stem ?? w?.language?.stem ?? "en");
     if (giver) { const prior = giver({ text: String(text ?? ""), cast: w.cast ?? [] }); for (const [ref, cls] of prior ?? []) P.weave(h, { cell: "DEF·Figure", kind: "gender", addr: String(ref), body: { gender: cls } }); }
   } catch { /* a giver that throws on this cast is a gap, never a crash */ }
+  // the pro-form the TEXT'S OWN GRAMMAR binds to each being (its reflexives and possessives, entry.proforms): above the
+  // givers in the chain (the text's own evidence, recurring), contested when the sign test does not decide, absent without evidence
+  for (const c of w.cast ?? []) {
+    const classes = {}; let reflexive = 0, possessive = 0;
+    const keys = new Set(); for (const s of [c.surface, ...(c.allSurfaces ?? [])]) for (const k of String(s ?? "").normalize("NFC").toLowerCase().split(" ")) if (k) keys.add(k);
+    for (const k of keys) { const e = w.proforms?.[k]; if (!e) continue; reflexive += e.reflexive; possessive += e.possessive; for (const [cl, n] of Object.entries(e.classes)) classes[cl] = (classes[cl] ?? 0) + n; }
+    const d = proformOf({ classes }); if (d) P.weave(h, { cell: "DEF·Figure", kind: "proform", addr: String(c.ref), body: { proform: d.cls, contested: d.contested, p: d.p, evidence: classes, reflexive, possessive, source: "grammar" } });
+  }
   // the containment relations (a referent inside another) — the holarchy's part_of edges, from the
   // kāraka roles (subject kartṛ inside the locus adhikaraṇa, both proper nouns), not surface labels
   try {

@@ -212,11 +212,11 @@
  },
  "files": {
   "native/reading.js": "5d33e9054ce69bcfa75e1006de5b99c2f74c329261685f3ff4a316753b638824",
-  "native/the-fold/pharos-gate.mjs": "3878f7a1b18b6f98f1f74a297c0e2f7be9521fbd03d601e5a6fcd04bd632cc5e",
-  "holon.json": "b6301d630971260919ead0246fcf6c5f8b9e77fce9c8f9709d6de640e731c767",
+  "native/the-fold/pharos-gate.mjs": "adca12ea10694fede05463b72f88a3590ec0ccf96e7d3db7b771bb8b96f42b52",
+  "holon.json": "298357fb1047105d96c6fde9dbe51c81a1d69cb92e04731431479246a1d8032f",
   "native/tests/door-allowlist.json": "6bd9ece610624f428e1485082f276aa56034c7cbab2b4f361f4a4d9a4baabfec",
   "native/the-fold/read-process.mjs": "1c0f31fd4e8b6da3b7a4f5ea6c7b6db48e8564ed52c8fe4e2e8f4b4f2b70c24e",
-  "native/the-fold/read-core.mjs": "91c17cc37886dc072dc5afc742ae77e821d65351529c6bc08ecdbdcf8f3f9253",
+  "native/the-fold/read-core.mjs": "6d4088036f660aefc3514aca9763e605478fbe2e74161d079705222a06e1b7fb",
   "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
   "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
   "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
@@ -236,8 +236,10 @@
   "native/adapters/text/language-competency.js": "7c386fb05d9ac901cd396a5a1c46a2c61a70a242beea5fe58b0cdf2d7cbb8d56",
   "native/adapters/text/karaka-total.mjs": "9632a30bfb63227dd9f74f465d8f191e637ee401f882250133940ba8e6c381f1",
   "native/adapters/text/text-mereology.mjs": "ec7a865099d4d2b07b689feec1be485045b447fba507d26a25cbce4756dac3d9",
-  "native/reading-in-order.mjs": "f872b8a2ca7254804ddfad4d512773b28778d1d3a646471eb1a3b5cd61707a58",
-  "native/reading-in-order.worker.mjs": "677b222d7fa847d77eeb9c910033115725ff627b49db2eefb85b96ea0ce8fb21"
+  "native/reading-in-order.mjs": "7f92d8b972cec9ed7294f3917e38b8035ba0bfcaede215f4f615d227b56a7ec5",
+  "native/reading-in-order.worker.mjs": "677b222d7fa847d77eeb9c910033115725ff627b49db2eefb85b96ea0ce8fb21",
+  "native/adapters/text/referents-in-order.mjs": "f6242f249c2d9faeeff458941dc7620c38f42b5fed3b9bb0f48dbe759920c374",
+  "native/adapters/text/gender-from-corpus.js": "bf500d233236e19b8c0dea838c620b438dafec2b2aa7b9e176842e21b49d1c0f"
  },
  "recorded": "2026-11-23"
 }

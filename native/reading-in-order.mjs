@@ -16,8 +16,10 @@
 // compiled index, and the whole folded as the trees arrive, 9.1–9.6 s on 4 workers. Trees identical to the string path
 // (whole-book sha256 264f90615b09c6dc); the whole identical to text-mereology over the same parse (09cc903184ba0d96).
 //
-// NOT YET IN THIS READ (typed gaps, never silent): the cast and its referents, pronoun bindings, the gender prior, polarity,
-// containment edges and the competency profile — the canonical door's other passes. They belong on top of these trees, in
+// THE CAST, in reading order off the trees (referents-in-order.mjs): every name mention joins the one being it can be, with every
+// written form and the pro-forms its own clauses bind to it; each being woven into pharos (kind `referent`).
+// NOT YET IN THIS READ (typed gaps, never silent): referents that are not names (noun phrases), pronouns bound across clauses,
+// the gender prior, polarity, containment edges and the competency profile — the canonical door's other passes. They belong on top of these trees, in
 // reading order (each clause against what was read before it), not beside them.
 import os from "node:os";
 import { Worker } from "node:worker_threads";
@@ -25,6 +27,10 @@ import { execFileSync } from "node:child_process";
 import { splitSentences } from "./adapters/text/spans.js";
 import { priorsFor, abbreviationsFor } from "./the-fold/read-core.mjs";
 import { mereologyBuilder } from "./adapters/text/text-mereology.mjs";
+import { proformsOfParse } from "./adapters/text/gender-from-corpus.js";
+import { referentsInOrder } from "./adapters/text/referents-in-order.mjs";
+import { classifyWord } from "./adapters/text/wordclass.js";
+import { refuseUnlessFull, recordAct, weaveReferents } from "./the-fold/pharos-gate.mjs";
 
 // How many eyes: the PERFORMANCE cores. Measured 2026-11-23 on an Apple M3 (4 performance + 4 efficiency cores), War and Peace:
 // 4 workers 40.8 s, 7 workers 63.7 s — efficiency cores and seven model loads contend more than they parse. Where the
@@ -34,10 +40,17 @@ export function defaultWorkers() {
   return Math.max(1, (os.availableParallelism?.() ?? os.cpus().length) - 1);
 }
 
-export const NOT_YET = Object.freeze(["cast", "pronoun_bindings", "gender_prior", "polarity", "containment", "competency"]);
+export const NOT_YET = Object.freeze(["nominal_referents", "pronoun_bindings", "gender_prior", "polarity", "containment", "competency"]);
 
-/** readInOrder(text, { stem, workers, block }) → { schema, stem, parseBy, sentences, parse, mereology, gaps, timing } */
-export async function readInOrder(text, { stem = "eng", workers = defaultWorkers(), block = 120 } = {}) {
+// WRITES TO PHAROS like the door (rules WRITES-TO-PHAROS, FULL-CAPACITY): what this read USES is the trees (clause-reader)
+// and the pro-forms they bind (proform-agreement); the language's other capacities (pronoun binding, the name and
+// non-personal rulings, the priors) are not in it yet, so a caller must say allowDegraded: true, and the entry is marked
+// degraded with what was left out. Refused BEFORE reading, never after.
+const DOOR = "native/reading-in-order.mjs#readInOrder", USED = Object.freeze(["clause-reader", "proform-agreement"]);
+
+/** readInOrder(text, { stem, workers, block, allowDegraded }) → { schema, stem, parseBy, sentences, parse, mereology, proforms, gaps, timing } */
+export async function readInOrder(text, { stem = "eng", workers = defaultWorkers(), block = 120, allowDegraded = false } = {}) {
+  refuseUnlessFull({ door: DOOR, stem, used: [...USED], allowDegraded });
   const T = {}; let t = performance.now(); const lap = (k) => { const n = performance.now(); T[k] = Math.round(n - t); t = n; };
   const src = String(text ?? "");
   const gaps = NOT_YET.map((x) => ({ gap: `not_in_ordered_read:${x}` }));
@@ -87,5 +100,13 @@ export async function readInOrder(text, { stem = "eng", workers = defaultWorkers
   // 3. the whole: closed once every sentence is in (coverage, unread characters, gaps)
   const mereology = whole.finish();
   lap("whole");
-  return { schema: "OrderedRead@1", stem, parseBy, workers, sentences, parse, mereology, gaps, timing: { ...T, totalMs: Object.values(T).reduce((a, b) => a + b, 0), workerParseMs: Math.round(workerParseMs) } };
+  const proforms = proformsOfParse(parse);
+  // a title is a word the POS prior says is mostly a common noun (the door's own test for the cast, read-core castIdentity)
+  const commonNoun = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); if (!c?.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); };
+  const cast = referentsInOrder(parse, { commonNoun });
+  lap("proforms and cast");
+  const timing = { ...T, totalMs: Object.values(T).reduce((a, b) => a + b, 0), workerParseMs: Math.round(workerParseMs) };
+  const act = recordAct({ door: DOOR, text: src, stem, parse, used: [...USED], allowDegraded, body: { sentences: sentences.length, parsed: parse.length, parseBy, proforms: Object.keys(proforms).length, referents: cast.referents.length, nameMentions: cast.mentions, contestedLinks: cast.contested, gaps: [...new Set(gaps.map((g) => g.gap))].slice(0, 20), totalMs: timing.totalMs } });
+  const woven = act ? weaveReferents({ text: src, referents: cast.referents }) : 0;
+  return { schema: "OrderedRead@1", stem, parseBy, workers, sentences, parse, mereology, proforms, cast, gaps, timing, pharos: act ? { addr: act.addr ?? null, degraded: allowDegraded, referentsWoven: woven } : null };
 }
