@@ -112,9 +112,13 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
   try {
     for (const { child, parent } of containmentFromKarakas(w)) P.weave(h, { cell: "SYN·Pattern", kind: "part_of", addr: `part_of:${child}:${parent}`, body: { child, parent } });
   } catch { /* containmentFromKarakas throwing on this read is a gap, never a crash */ }
-  // kāraka edges: the read's own relations, deduped (head|role|arg)
+  // kāraka edges: the read's own relations, deduped (head|role|arg). The ARG is a REFERENT, not a
+  // string: a token inside a cast mention span is that referent, so "Mina?" and "the book" resolve to
+  // their beings — the edge is between referents, the "everything is a referent" rule made literal.
+  const refAt = new Map();
+  for (const c of w.cast ?? []) for (const [a, b] of c.mentionSpans ?? []) for (let i = a; i < b; i++) if (!refAt.has(i)) refAt.set(i, c.ref);
   const edges = new Map();
-  for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id); for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) { const k = `${hd.lemma}|${row.karaka}|${row.lemma ?? row.form}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role: row.karaka, arg: row.lemma ?? row.form }); } } }
+  for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id); for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) { const argRef = refAt.get((p.offset ?? 0) + (row.start ?? 0)) ?? (row.lemma ?? row.form); const k = `${hd.lemma}|${row.karaka}|${argRef}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role: row.karaka, arg: argRef }); } } }
   for (const [, e] of edges) P.weave(h, { cell: "SYN·Pattern", kind: "karaka", addr: `edge:${e.head}:${e.role}:${e.arg}`, body: e });
   // pronoun bindings: the identity edges, with their agreement label
   for (const b of [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])]) P.weave(h, { cell: "CON·Figure", kind: "binding", addr: `bind:${b.at?.[0] ?? ""}`, body: { pronoun: b.pronoun, ref: b.ref, agreement: b.agreement ?? {}, at: b.at ?? null } });
