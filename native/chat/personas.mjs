@@ -63,7 +63,7 @@ export async function readPersona(promptText, { source = null } = {}) {
     const root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT");
     if (!root || !rows.some((r) => r.head === root.id && r.deprel === "cop") || !rows.some((r) => r.head === root.id && r.deprel === "nsubj" && String(r.lemma ?? r.form).toLowerCase() === "you")) continue;
     const kids = new Map(); for (const r of rows) { const a = kids.get(r.head); if (a) a.push(r); else kids.set(r.head, [r]); }
-    const keep = new Set(), st = [root.id]; while (st.length) { const x = st.pop(); keep.add(x); for (const k of kids.get(x) ?? []) if (!(x === root.id && (k.deprel === "nsubj" || k.deprel === "cop"))) st.push(k.id); }
+    const keep = new Set(), st = [root.id]; while (st.length) { const x = st.pop(); keep.add(x); for (const k of kids.get(x) ?? []) { if (x === root.id && (k.deprel === "nsubj" || k.deprel === "cop")) continue; if (["parataxis", "dep", "list", "discourse", "vocative"].includes(k.deprel.split(":")[0]) || (k.upos === "VERB" && (kids.get(k.id) ?? []).some((c) => c.deprel.split(":")[0] === "nsubj"))) continue; st.push(k.id); } }   // a separate clause with its own subject ("... Example Corp. You help ...") is not part of the identity
     const body = rows.filter((r) => keep.has(r.id) && r.upos !== "PUNCT").map((r) => r.id), lo = Math.min(...body), hi = Math.max(...body);
     const forms = rows.filter((r) => r.id >= lo && r.id <= hi && (keep.has(r.id) || r.upos === "PUNCT")).map((r) => r.form);   // the predicate as written, commas and all
     identity = forms.length ? detok(forms) : null; if (identity) break;
