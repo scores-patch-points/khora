@@ -83,33 +83,35 @@ function matchAt(text, i, f) {
  */
 export function alignRows(text, parse) {
   const spans = new Map(), unaligned = [], sentenceSpans = new Map();
-  const n = text.length;
   let cursor = 0;
-  for (const p of parse ?? []) {
-    const rows = [...(p.rows ?? [])].sort((a, b) => a.id - b.id);
-    let cur = Number.isInteger(p.offset) && p.offset >= cursor && p.offset < n ? p.offset : cursor;
-    let first = -1, last = -1;
-    for (const r of rows) {
-      const f = foldForm(r.form);
-      if (!f) { unaligned.push({ order: p.order, id: r.id, form: r.form, why: "empty_form" }); continue; }
-      let i = cur;
-      while (i < n && isWs(text.charCodeAt(i))) i++;
-      let s = -1, e = matchAt(text, i, f);
-      if (e >= 0) s = i;
-      else {
-        // the reader may have dropped or re-cut a few characters: look a short, declared distance ahead
-        const window = 64 + 4 * f.length;
-        for (let q = i + 1; q < n && q <= i + window; q++) { const ee = matchAt(text, q, f); if (ee >= 0) { s = q; e = ee; break; } }
-      }
-      if (s < 0) { unaligned.push({ order: p.order, id: r.id, form: r.form, why: "not_found_near", at: i }); continue; }
-      spans.set(`${p.order}:${r.id}`, [s, e]);
-      cur = e;
-      if (first < 0) first = s;
-      last = e;
-    }
-    if (first >= 0) { sentenceSpans.set(p.order, [first, last]); cursor = last; }
-  }
+  for (const p of parse ?? []) { const a = alignSentence(text, p, cursor, spans, unaligned); if (a.first >= 0) { sentenceSpans.set(p.order, [a.first, a.last]); cursor = a.last; } }
   return { spans, unaligned, sentenceSpans };
+}
+/** One sentence's rows found in the source, from `cursor` on (the reading order): spans and unaligned rows are added to the maps given. */
+function alignSentence(text, p, cursor, spans, unaligned) {
+  const n = text.length;
+  const rows = [...(p.rows ?? [])].sort((a, b) => a.id - b.id);
+  let cur = Number.isInteger(p.offset) && p.offset >= cursor && p.offset < n ? p.offset : cursor;
+  let first = -1, last = -1;
+  for (const r of rows) {
+    const f = foldForm(r.form);
+    if (!f) { unaligned.push({ order: p.order, id: r.id, form: r.form, why: "empty_form" }); continue; }
+    let i = cur;
+    while (i < n && isWs(text.charCodeAt(i))) i++;
+    let s = -1, e = matchAt(text, i, f);
+    if (e >= 0) s = i;
+    else {
+      // the reader may have dropped or re-cut a few characters: look a short, declared distance ahead
+      const window = 64 + 4 * f.length;
+      for (let q = i + 1; q < n && q <= i + window; q++) { const ee = matchAt(text, q, f); if (ee >= 0) { s = q; e = ee; break; } }
+    }
+    if (s < 0) { unaligned.push({ order: p.order, id: r.id, form: r.form, why: "not_found_near", at: i }); continue; }
+    spans.set(`${p.order}:${r.id}`, [s, e]);
+    cur = e;
+    if (first < 0) first = s;
+    last = e;
+  }
+  return { first, last };
 }
 
 /** Paragraph spans: maximal runs of text between blank lines (a newline, optional blanks, another newline). */
@@ -135,10 +137,22 @@ export function paragraphSpans(text) {
  * `parse` is the read's entry.parse (rows labelled by karaka-total.mjs). Returns TextMereology@1:
  *   { schema, address, nodes, frames, coverage, gaps }
  */
-export function textMereology(text, parse, { address = null } = {}) {
+export function textMereology(text, parse, opts = {}) {
+  const b = mereologyBuilder(text, opts);
+  for (const p of parse ?? []) b.add(p);
+  return b.finish();
+}
+
+/**
+ * mereologyBuilder(text, { address }) — the same whole, folded IN READING ORDER: `add(sentence)` as each parsed sentence arrives
+ * (in order), `finish()` once. textMereology is exactly this builder run over a finished parse, so the two cannot disagree; a
+ * reader that parses ahead (reading-in-order.mjs) folds each sentence into the whole while the next ones are still being read.
+ */
+export function mereologyBuilder(text, { address = null } = {}) {
   const src = String(text ?? "");
   const B = byteOffsets(src);
-  const { spans, unaligned, sentenceSpans } = alignRows(src, parse);
+  const spans = new Map(), unaligned = [], sentenceSpans = new Map(), covered = new Uint8Array(src.length);
+  let cursor = 0, sentencesSeen = 0;
   const nodes = [], byId = new Map();
   const add = (node) => { nodes.push(node); byId.set(node.id, node); return node; };
   const addr = (span) => (span ? { span, bytes: [B[span[0]], B[span[1]]] } : { span: null, bytes: null });
@@ -155,7 +169,10 @@ export function textMereology(text, parse, { address = null } = {}) {
 
   const frames = [];
   let rowsTotal = 0, rowsInTree = 0, orphans = 0, discontinuous = 0, crossing = 0, multiRoot = 0, noRoot = 0;
-  for (const p of parse ?? []) {
+  function addSentence(p) {
+    sentencesSeen++;
+    { const a = alignSentence(src, p, cursor, spans, unaligned); if (a.first >= 0) { sentenceSpans.set(p.order, [a.first, a.last]); cursor = a.last; } }
+    for (const r of p.rows ?? []) { const sp = spans.get(`${p.order}:${r.id}`); if (sp) for (let i = sp[0]; i < sp[1]; i++) covered[i] = 1; }
     const rows = [...(p.rows ?? [])].sort((a, b) => a.id - b.id);
     rowsTotal += rows.length;
     const k = p.order;
@@ -236,9 +253,8 @@ export function textMereology(text, parse, { address = null } = {}) {
     }
   }
 
-  // character coverage: non-whitespace source characters inside an aligned token
-  const covered = new Uint8Array(src.length);
-  for (const [, [s, e]] of spans) for (let i = s; i < e; i++) covered[i] = 1;
+  function finish() {
+  // character coverage: non-whitespace source characters inside an aligned token (marked sentence by sentence in add)
   let nonWs = 0, coveredNonWs = 0; const unread = [];
   for (let i = 0; i < src.length; i++) {
     if (isWs(src.charCodeAt(i))) continue;
@@ -254,7 +270,7 @@ export function textMereology(text, parse, { address = null } = {}) {
 
   const tokens = nodes.filter((x) => x.level === "token").length;
   const coverage = {
-    sentences: (parse ?? []).length, singleRoot: (parse ?? []).length - multiRoot - noRoot, multiRoot, noRoot,
+    sentences: sentencesSeen, singleRoot: sentencesSeen - multiRoot - noRoot, multiRoot, noRoot,
     rows: rowsTotal, rowsInTree, orphans, rowsAligned: rowsTotal - unaligned.length, unaligned: unaligned.length,
     tokens, phrases: nodes.filter((x) => x.level === "phrase").length, paragraphs: paras.length, discontinuous, crossesParagraph: crossing,
     nonWhitespaceChars: nonWs, coveredChars: coveredNonWs, unreadRuns: unread.length,
@@ -262,6 +278,8 @@ export function textMereology(text, parse, { address = null } = {}) {
     charRate: nonWs ? coveredNonWs / nonWs : null, frames: frames.length,
   };
   return { schema: MEREOLOGY_SCHEMA, address, nodes, frames, coverage, gaps };
+  }
+  return { add: addSentence, finish };
 }
 
 /** Index of children per node id. */

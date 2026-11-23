@@ -7,7 +7,8 @@ import fs from "node:fs"; import path from "node:path"; import crypto from "node
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", ".."); const FILE = path.join(ROOT, "eval/reading-baseline/BASELINE.json");
 export const READING_FILES = ["native/reading.js", "native/the-fold/pharos-gate.mjs", "holon.json", "native/tests/door-allowlist.json", "native/the-fold/read-process.mjs", "native/the-fold/read-core.mjs", "native/the-fold/language-grammar.js", "native/the-fold/language-names.js", "native/the-fold/language-names.data.js", "native/adapters/text/pronouns.js", "native/adapters/text/pronoun-registers.js",
   "native/adapters/text/pronoun-presence-chosen.js", "native/adapters/text/clause-attach.js", "native/adapters/text/non-personal.js", "native/adapters/text/name-prior.js", "native/adapters/text/name-prior/eng.json", "native/adapters/text/case-marked-clauses.js", "native/adapters/text/greek-seam.js", "native/the-fold/prior-source.mjs", "native/adapters/text/pronoun-registers/grc.json", "native/adapters/text/pronoun-registers/san.json", "native/priors-shipped/frame-san.json", "native/adapters/text/language-competency.js",
-  "native/adapters/text/karaka-total.mjs", "native/adapters/text/text-mereology.mjs"];
+  "native/adapters/text/karaka-total.mjs", "native/adapters/text/text-mereology.mjs",
+  "native/reading-in-order.mjs", "native/reading-in-order.worker.mjs"];
 export const sha = (f) => crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, f))).digest("hex");
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const i = process.argv.indexOf("--note"); const note = i > 0 ? process.argv[i + 1] : null; if (!note) { console.error('a note is required: --note "why the reading changed"'); process.exit(2); }
