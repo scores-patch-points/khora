@@ -107,6 +107,6 @@ export async function readInOrder(text, { stem = "eng", workers = defaultWorkers
   lap("proforms and cast");
   const timing = { ...T, totalMs: Object.values(T).reduce((a, b) => a + b, 0), workerParseMs: Math.round(workerParseMs) };
   const act = recordAct({ door: DOOR, text: src, stem, parse, used: [...USED], allowDegraded, body: { sentences: sentences.length, parsed: parse.length, parseBy, proforms: Object.keys(proforms).length, referents: cast.referents.length, nameMentions: cast.mentions, contestedLinks: cast.contested, gaps: [...new Set(gaps.map((g) => g.gap))].slice(0, 20), totalMs: timing.totalMs } });
-  const woven = act ? weaveReferents({ text: src, referents: cast.referents }) : 0;
+  const woven = act ? weaveReferents({ text: src, referents: cast.referents, edges: cast.edges }) : 0;
   return { schema: "OrderedRead@1", stem, parseBy, workers, sentences, parse, mereology, proforms, cast, gaps, timing, pharos: act ? { addr: act.addr ?? null, degraded: allowDegraded, referentsWoven: woven } : null };
 }

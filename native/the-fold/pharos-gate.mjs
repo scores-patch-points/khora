@@ -93,13 +93,19 @@ export function recordAct({ door, text, stem, parse = null, used, body = {}, all
 // THE CAST OF AN ORDERED READ, WOVEN (kind `referent`, INS·Figure): each being by the text's hash and its ref, with every written form,
 // the pro-forms its own clauses bind to it and its decided pro-form, so a later surface reads the referent off the pharos the
 // same way instead of re-deriving it. Returns how many were woven.
-export function weaveReferents({ text, referents }) {
+export function weaveReferents({ text, referents, edges = [] }) {
   if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P || !referents?.length) return 0;
   const { pharosDir } = dirs(); const h = P.open("khora", { dir: pharosDir, writer: "khora" });
-  if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === "kind:referent")) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: "kind:referent", body: { name: "referent", cell: "INS·Figure" } });
+  for (const [kind, cell] of [["referent", "INS·Figure"], ["identity", "SYN·Pattern"]]) if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
   const doc = N.crypto.createHash("sha256").update(String(text ?? "")).digest("hex").slice(0, 16);
-  for (const b of referents) P.weave(h, { cell: "INS·Figure", kind: "referent", addr: `${doc}:${b.ref}`, body: { forms: b.forms.slice(0, 24), mentions: b.mentions, contested: b.contested, first: b.first, last: b.last, proformForms: b.proformForms, proform: b.proform ? { cls: b.proform.cls, contested: b.proform.contested, p: b.proform.p } : null, source: "reading-in-order.mjs (rows)" } });
-  return referents.length;
+  // every name; a description only when the text returns to it (a one-off "a chair" is a mention, not yet a referent worth a line)
+  const kept = referents.filter((b) => b.kind !== "nominal" || b.mentions > 1);
+  for (const b of kept) P.weave(h, { cell: "INS·Figure", kind: "referent", addr: `${doc}:${b.ref}`, body: {
+    kind: b.kind ?? "name", head: b.head ?? null, forms: (b.forms ?? []).slice(0, 24), mentions: b.mentions ?? 0, contested: b.contested ?? 0, first: b.first ?? null, last: b.last ?? null,
+    proformForms: b.proformForms ?? [], pronouns: (b.pronouns ?? []).slice(0, 12), proform: b.proform ? { cls: b.proform.cls, contested: !!b.proform.contested, p: b.proform.p ?? null } : null, source: "reading-in-order.mjs (rows)" } });
+  // identity edges (never merges): the kinds a perspective may collapse; same-head (the same description again past the horizon) stays in the read
+  let n = 0; for (const e of edges) if (e.type !== "same-head") { P.weave(h, { cell: "SYN·Pattern", kind: "identity", addr: `${doc}:${e.a}~${e.b}:${e.type}`, body: { a: `${doc}:${e.a}`, b: `${doc}:${e.b}`, type: e.type, n: e.n ?? 1, first: e.first ?? null } }); n++; }
+  return kept.length + n;
 }
 
 // WRITES-TO-PHAROS + FULL-CAPACITY at the moment of acting: write ONE entry for this read into pharos (what was read by content hash, never the text; the capacities; the competency tier) and refuse when a capacity was left out.
