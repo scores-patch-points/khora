@@ -96,3 +96,6 @@ files changed since the last record: native/the-fold/read-process.mjs
 
 ## 2026-11-22: emit the pro-form agreement label (person/number/gender) on each pronoun binding and on the read's pronounsPresence/pronounsGuess; additive metadata, binding behavior unchanged
 files changed since the last record: native/the-fold/read-core.mjs, native/adapters/text/pronouns.js
+
+## 2026-11-23: fix reading-one.mjs isFile heuristic: a text containing / or a trailing .xyz was misdetected as a file path; now a string is a file only when it has no newline AND (exists on disk OR carries a path prefix OR a trailing extension)
+files changed since the last record: (none)

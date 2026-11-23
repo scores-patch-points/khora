@@ -34,7 +34,7 @@ const EXT_MOD = {
 
 export async function read(input, opts = {}) {
   assertPharos();
-  const isFile = typeof input === "string" && (input.includes("/") || input.includes("\\") || /\.[a-z0-9]{2,5}$/i.test(input));
+  const isFile = typeof input === "string" && !input.includes("\n") && (fs.existsSync(input) || /^(\/|~\/|[A-Za-z]:[\\/]|\.\.?\/)/.test(input) || /\.[a-z0-9]{2,5}$/i.test(input));
   const isBuffer = Buffer.isBuffer(input);
 
   if (!isFile && !isBuffer) {
