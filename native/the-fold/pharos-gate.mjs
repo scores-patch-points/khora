@@ -5,6 +5,7 @@
 //   Off (for a test or a one-off run that knows what it is doing): KHORA_NO_PHAROS_GATE=1. A page has no pharos and no gate: it is not a door.
 import { IS_NODE } from "./prior-source.mjs";
 import { loadNamePrior } from "../adapters/text/name-prior.js";
+import { genderPriorChainFor } from "../adapters/text/gender-chain.js";
 
 const N = IS_NODE ? { crypto: (await import("node:crypto")).default, fs: (await import("node:fs")).default, os: (await import("node:os")).default, path: (await import("node:path")).default, url: await import("node:url") } : null;
 const ROOT = IS_NODE ? N.path.resolve(N.path.dirname(N.url.fileURLToPath(import.meta.url)), "..", "..") : null;
@@ -80,21 +81,31 @@ export function recordRead(w, text, { door, allowDegraded = false } = {}) {
     capacities: capacitiesOf(w),
     body: { chars: str.length, language: c?.stem ?? w?.language?.stem ?? null, tier: c?.tier ?? null, skipped: w?.skipped ?? null, gaps: [...new Set((w?.gaps ?? []).map((g) => g?.gap ?? g))].slice(0, 20), pronounsBound: Array.isArray(w?.pronounsPresence) ? w.pronounsPresence.length : null },
   });
-  weaveFullRead(w, { door, pharosDir });
+  weaveFullRead(w, str, { door, pharosDir });
   return w;
 }
 
 // THE FULL READ, WOVEN AS ENTRIES (the parse, not the summary). The fold and the surfaces read THIS off the pharos;
-// they do not call the reader. Khora writes its own entries: beings (INS·Figure), kāraka edges (SYN·Pattern), and
-// pronoun bindings (CON·Figure) — each addressed, each the read's own claim, none special to the fold.
-export function weaveFullRead(w, { door, pharosDir } = {}) {
+// they do not call the reader. Khora writes its own entries: beings (INS·Figure), kāraka edges (SYN·Pattern),
+// pronoun bindings (CON·Figure), the gender prior (DEF·Figure), and the speaker/addressee beings — each addressed,
+// each the read's own claim, none special to the fold.
+export function weaveFullRead(w, text, { door, pharosDir } = {}) {
   if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P) return;
   const h = P.open("khora", { dir: pharosDir, writer: "khora" });
-  for (const [kind, cell] of [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"]]) {
+  for (const [kind, cell] of [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"], ["gender", "DEF·Figure"]]) {
     if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
   }
   // beings: each cast referent is one node of the fold
   for (const c of w.cast ?? []) P.weave(h, { cell: "INS·Figure", kind: "being", addr: String(c.ref), body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
+  // the speaker/addressee referents (I/you) — beings too, one per document
+  const spk = new Map();
+  for (const sb of w.speakerBindings ?? []) if (sb && typeof sb === "object" && sb.cl) spk.set(String(sb.cl), sb.kind ?? "speaker");
+  for (const [cl, kind] of spk) P.weave(h, { cell: "INS·Figure", kind: "being", addr: cl, body: { surface: kind === "addressee" ? "you" : "I", surfaces: [kind === "addressee" ? "you" : "I"], spans: [], kind } });
+  // the gender prior: each being's attested class from the ingested-material chain (the corpus/Wikidata)
+  try {
+    const giver = genderPriorChainFor(w?.competency?.stem ?? w?.language?.stem ?? "en");
+    if (giver) { const prior = giver({ text: String(text ?? ""), cast: w.cast ?? [] }); for (const [ref, cls] of prior ?? []) P.weave(h, { cell: "DEF·Figure", kind: "gender", addr: String(ref), body: { gender: cls } }); }
+  } catch { /* a giver that throws on this cast is a gap, never a crash */ }
   // kāraka edges: the read's own relations, deduped (head|role|arg)
   const edges = new Map();
   for (const p of w.parse ?? []) { const headOf = (id) => p.rows.find((x) => x.id === id); for (const row of p.rows ?? []) if (row.karaka && row.head) { const hd = headOf(row.head); if (hd?.lemma) { const k = `${hd.lemma}|${row.karaka}|${row.lemma ?? row.form}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role: row.karaka, arg: row.lemma ?? row.form }); } } }

@@ -105,3 +105,6 @@ files changed since the last record: native/the-fold/pharos-gate.mjs
 
 ## 2026-11-23: being entry addr is the raw cast ref (not ref:ref:...), so the fold connects a being to its pronoun bindings
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-23: weaveFullRead also writes the gender prior (DEF·Figure) and the speaker/addressee beings (INS·Figure)
+files changed since the last record: native/the-fold/pharos-gate.mjs
