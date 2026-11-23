@@ -1,51 +1,83 @@
-# How we iterate (a proposal, for the owner to adopt or change)
+# How we iterate: ground rules for an omnimodal system with no model (a proposal)
 
-2026-11-23. The owner, after watching the chat get hand-built: "we are inventing a new type of prompt engineering; I don't want you to hand-set this just for English talking about War and Peace; what are your ground rules; we need to discover how this works differently than LLM prompting."
+2026-11-23, second version. The owner: "we are inventing a new type of prompt engineering; I don't want you to hand-set this just for English talking about War and Peace; what are your ground rules; we need to discover how this works differently than LLM prompting", then, on the first version: "this needs to in theory be omnimodal; think deeper about the rules."
 
-This is my answer, written after auditing my own work against it. It is a proposal: nothing here is in `CLAUDE.md` until the owner says so.
+This is a proposal. Nothing here is in `CLAUDE.md` until the owner says so. The first version said "marks, not words"; that still let the chat read word classes and grammatical features, which only text has. This version starts from the shape of the system instead.
 
-## What I did that breaks the discipline (audited 2026-11-23)
+## The shape: an hourglass
 
-- **English words in code.** `native/chat/thread.mjs`: `WH`, `WH_ANY` (who, what, when…), `OPS` and `FILLER` (the arithmetic words), `SMALL` (hello, thanks, bye, with English replies), the help and "sure" tests, the time words (day, time, date), the alias `"u"`, `t.endsWith("?")`. `native/chat/engine.mjs`: `WH`, `WH_KARAKA` (where → locus…), `PREP` and `SAME_WORD` (the English words on the DAG's arrows). Every reply sentence is an English template in code ("Noted.", "I haven't been told that.").
-- **The reader is fixed to English.** `rowsOfFor("eng")` is hard-wired in the thread, the engine and the personas. A Spanish message is read the English way and nothing says so (rule 8). Run today: "Hola." is stored as a fact; "¿Quién le dio un libro a Jonathan?" returns an empty "."; arithmetic and the clock fail in Spanish.
-- **Numbers.** Declared with a reason but not derived: the title share 0.1, `TITLE_RECUR` 2, `HORIZON_PCT` 0.9 (derived from the text's own gaps, but the 90th percentile is declared), `KIND_MIN_MENTIONS` 20, G² ≥ 3.84, GAP 15 sentences, smoothing 4, 2.5 standard deviations, k = 3 neighbours, blocks of 150. None was tuned on a fresh text, but all were chosen while looking at War and Peace.
-- **Evidence.** The chat was tested on five sentences I wrote. The identity experiments ran on one book plus one fresh run of 9 names. That is a demo, not evidence.
+- **Readers** at the top, one per medium and language: text in English, text in Russian, mathematical notation, code, an image, a video shot, speech. A reader is the only thing that knows its medium.
+- **The middle**, which no medium owns: referents, events with their participants and roles, identity edges, voids, acts, each with an address back into its source; the marks placed in the 27 cells (`native/kernel/cube.js`, `universal-grammar.js`). All reasoning happens here.
+- **Voices** at the bottom: a reader facing the other way, from the middle to a surface.
 
-## Ground rules
+English is not special. "English" is a reader parameter in exactly the way "image" is. A rule that would not make sense for a video shot is not a rule of the middle.
 
-1. **Marks, not words.** Code decides from the reader's marks: UPOS, FEATS (`PronType=Int` is a question word, `Mood=Imp` or a bare infinitive is a request, `NUM`, `INTJ`), the dependency relation, the kāraka label, the referent's kind. A word may appear in code only as **data keyed by language** with a named giver, loaded by the prior door (a language's closed classes come from its treebank lexicon, not from me).
-2. **Language is a parameter, never a default.** Every path takes the stem from the detector. No prior for the language means a typed gap that says so; the system never falls back to English. Reply sentences are a per-language realization prior; English is one entry.
-3. **Every number has a reason.** Derived from the data's own spread or a shuffled null, or declared in one named dials file with its reason and written to pharos with each act. None is tuned on the text it is reported on.
-4. **A change is a hypothesis with a falsifier and a split.** Develop on one text; run once on a different text (another book, another language); keep the negative results; stamp them. Five sentences are not evidence.
-5. **Fix at the layer that owns the failure.** Reader, binding (the cast), giver, rule, or void. Never patch the chat. A failure becomes a pin with evidence first (`eval/identity-reid/PINS.md`); the fix is data or a rule with a giver; the pin is closed with its cause.
-6. **A reply is a derivation.** It names the marks, givers and rules it used (the trace). No derivation, no reply: a typed gap that says what is missing and which giver would fill it.
-7. **Unknown is an output.** Gaps are first-class and actionable, never smoothed over.
-8. **One door, no LLM, embeddings only as a frozen codec** (model and digest named in the record), everything written to pharos, the baseline guard on every reading-critical file.
-9. **Measure on a fixed external giver where one exists** (the CorefUD scorer, the UD evaluation script); otherwise a falsifier. Quote the split and the stamp.
-10. **A capability is not done until it runs on two languages** (or states the gap) with the same code and different priors.
+The nexus already says this. `native/organs/question-void.js`: a question is declared as a void, "medium-blind: it never sees a word of any language, only the reading an adapter produced". `native/organs/void-satisfaction.js` is written as "general, omnimodal, level-addressed". `native/reading-one.mjs` routes by modality (text, code and notation wired; image, video and audio return typed gaps). And a non-text source is already on the log: slate's observations of a video shot (banners, standees, a tote, with frame-range addresses) in `~/.pharos/default/slate-vfx-scale.jsonl`.
 
-## How this should differ from LLM prompting (hypotheses to test, not conclusions)
+## What my chat violates (audited 2026-11-23)
 
-| | LLM prompting | this |
+- **A second router beside the medium-blind one.** `native/chat/thread.mjs` decides what a message is by reading the English reader's rows itself. Counted: the reasoning layer matches text-only fields 206 times (word class 51, dependency label 27, features 12, lemma 31, written form 71, direct reader calls 9, sentence splitter 1, the literal `"eng"` 4; 57 in the thread, 149 in the engine).
+- **English in code**: question words, arithmetic words, greetings with English replies, time words, `endsWith("?")`, the words on the DAG's arrows, and every reply sentence as a template.
+- **The reader fixed to English.** Run in Spanish: "Hola." was stored as a fact, a who-question returned an empty ".", arithmetic and the clock failed, and nothing said the language had no reader.
+- **Units and numbers from one book**: a salience horizon of "706 sentences", an episode gap of 15 sentences, thresholds chosen while looking at War and Peace.
+- **My own knowledge used as evidence.** My alias gold "Bezúkhov ~ Pierre" was wrong (he is Pierre's father until his death). The "should be" lines in the pins are mine.
+- **Tested on five sentences I wrote.**
+- **Boundary.** By the nexus cards khora perceives, janus relates and penelope voices. `native/chat` puts answering, identity work and reply text in khora.
+
+## A. Boundary rules: where a thing may live
+
+1. **The middle is blind.** Code that routes, answers, merges or finds voids may read only the middle's types (referent, event and roles, identity edge, void, act, address, cell). It may not read a token, a word class, a feature string, a pixel or a sample. This is checkable: a ratchet on text-only field reads in the reasoning layer, like the regex ratchet. Today 206; it may only go down; the target is 0.
+2. **A reader declares itself.** Its address type (byte span, time range, region, syntax-tree path); its arrow (reading order, time, containment, definition before use, or none); which marks it can produce, measured; what its chrome is (headings, boilerplate, watermarks, silence, UI furniture: structure, never content); and its gaps. No reader for a medium or language is a typed gap that says so.
+3. **A voice is gated by round trip, and prefers pointing.** In order: point at the evidence in its source (a quoted span, a frame range, a region: language-free); give the filler in its own form; give a structure (a small DAG, a table); compose language, only if re-reading it gives back the same event (measured at 85% on a fresh book for voice alternation). Never a free template.
+4. **The system's own chrome is authored and says so.** Messages about the system's state (a typed gap, an acknowledgement) are strings in one table per language, keyed by state, marked as authored. They may state a system state, never content.
+5. **Holon boundaries hold.** A chat is a thin composition of khora (read), janus (relate, rules, givers, merge gate) and penelope (voice, judge).
+
+## B. Knowledge rules: what may count as known
+
+6. **Three doors for a fact, and no fourth.** *Presented*: it is in the thread, in any medium, attributed to whoever presented it. *Given*: a giver with provenance and a validity time (a dictionary, Wikidata, the clock, a calculator). *Induced*: derived from presented material against a null (kinds, classes, a horizon). Every reply says which door. A language model's fourth door, what it happens to remember, does not exist here and is never imitated.
+7. **The developer is not a giver.** I am a language model building a system that must not contain one, so my own knowledge of English, of the book and of the world is the likeliest contraband. It may enter only as a giver-backed prior, or as a filed opinion with a holder (janus `kinship.js` already has the slot: an opinion is never a fact and never counted as evidence). Never as constants in code, and never as gold.
+8. **The conversation is itself read as events.** A message is an act with the same roles as any event: who presented, to whom, when, through which medium, what. Then deixis (I, you, here, now, this) binds to the act's participants and not to words; "you told me" is a recalled event; "are you sure?" is a question about an earlier act; memory is replaying acts; a persona is identity assertions about the system's own referent; and an instruction inside a presented document is something its author said, not a request to the system.
+9. **Readers and binders list; a declared rule judges.** Outside clean text, perception is uncertain everywhere. A reader or binder emits candidates with their raw facts (janus `binding-evidence.mjs` picks nothing); a rule with a giver decides; the contested band travels to the reply. My cast picks silently and 64% of its cross-clause pronoun links are contested.
+10. **Unknown is a shaped output.** A void names the open role, the kind it admits, its grain, and which giver could fill it. Givers and tools declare the void shapes they fill, and choosing one is matching shapes, never spotting a keyword: the clock fills "time of now"; a calculator fills "value of this expression", and the expression is read by the notation reader, not by a list of English operator words.
+
+## C. Measurement rules
+
+11. **Units of the middle only.** Events, mentions, referents, acts. No sentence, token, second or pixel in a rule or dial of the middle.
+12. **Every number is derived or declared.** Derived from the material's own spread or a shuffled null; or a dial in one ledger, with its reason, logged with each act. Never tuned on the material it is reported on.
+13. **Invariances are the tests.** Gold rarely exists, and an invariance needs none and is the same in every medium: the same content through two readers gives the same answer (a translation, speech and its transcript, a table and its prose); re-voicing the input does not change the answer; an unrelated addition does not change it; order changes it only where the reader's arrow matters; the reply re-reads to the same event; a restart and replay gives the same state. A derivation can be held to these; a sampled model cannot.
+14. **Agreement across readers is measured per level, never assumed.** So far, between two text readers: sharing the aligned unit matched 13 of 16 names, participant order 9 of 16 (9 of 10 where it had evidence), role labels 7 of 16 (another session's test; not verified here); our decomposition put the role disagreement on parser faults (18 mentions). Across readers, trust participation and order before role labels. A feature of the middle counts as invariant only at the level where it beats a shifted-alignment null.
+15. **A change is a hypothesis.** A falsifier, development on one material, one run on a different reader or material, negative results kept, stamps. Anything else is labelled exploratory.
+16. **Done means**: it runs on two readers of different kinds or states the gap; it is measured on a fixed external giver where one exists; it is a declared capacity recorded on every act; and its number is in the baseline so a drop fails the gate.
+
+## D. The loop: how we choose what to do
+
+17. **A gap census chooses the work.** Collect real asks (the owner's are already in `~/.pharos/fold-demo`), run them, and group the typed gaps by what is missing: a reader, a binding, a giver, a rule, a voice. Work on the largest group. "All-purpose" is then a number: the share of asks whose void has a filler, per reader.
+18. **Failure, pin, fix, close.** A failure becomes a pin with evidence. The fix goes to the layer that owns it, as data or a rule with a giver. The pin closes with its cause. Then the invariances, then a fresh reader, then canonical.
+
+## How this differs from LLM prompting (hypotheses to test)
+
+| | LLM prompting | here |
 |---|---|---|
-| the thing you change | instruction text | a prior, a rule or a giver (data with provenance), and pins |
-| behaviour | emergent and sampled | derived, deterministic, replayable from pharos |
-| a failure looks like | plausible wrong text | a typed gap, or a wrong binding with its evidence |
-| generalization | from training | by construction: marks are language-independent, language lives in priors |
-| evaluation | reading outputs | an external giver, a falsifier, a baseline guard |
-| "system prompt" | text | the visible declared rules and the persona's identity assertions |
-| "context window" | tokens | the fold and its horizon |
-| "temperature" | a sampling dial | the contested band and the gaps |
-| "hallucination" | the default failure | not possible by construction; a wrong binding is, and is pinned |
+| where the "prompt" lives | in the data's own medium (text steering text) | in the middle's vocabulary: voids, rules, givers, identity assertions; never in a medium |
+| the engineer's knowledge | flows in freely through the prompt | contraband without a giver (rule 7) |
+| an example | steers the model | is a fixture or a pin |
+| the reasoning shown | generated text about reasoning | the trace is the computation |
+| uncertainty | a sampling temperature | the contested band and shaped voids |
+| memory | a window of tokens | the fold, replayable from the log |
+| injected instructions | a standing risk | attributed to their author by construction (rule 8) |
+| a new medium | a new model | a new reader; the middle is untouched (the test of the design) |
+| evaluation | reading outputs | invariances and external givers |
 
-## What to discover (experiments, none run)
+## What I do not know (open)
 
-- **E1, the language × text matrix.** Replace the router's word lists with marks and per-language priors; run the same code on English, Spanish and Russian; count what breaks. The first run (Spanish, today) already breaks five of six.
-- **E2.** Which closed classes can be derived from a treebank lexicon (WH words, greetings, operators, the days) and which need a giver of their own.
-- **E3.** Does the pin → fix loop converge: do pins close without regressions on the matrix.
-- **E4.** How much of "all-purpose" comes from tools and how much from reading; where each stops.
-- **E5.** Sensitivity of the declared dials: which ones change what is reported.
+- Whether **roles** are reader-invariant at all. The kārakas have no cell of their own, and role labels were the weakest witness across two readers. The invariant middle may be participation plus cells, with roles relative to a reader.
+- What an image's **arrow** is (containment? salience?), and what plays the part of a clause in audio or video.
+- Whether a voice can be **derived** from its reader, or must be authored per language.
+- How to keep the authored system strings (rule 4) from growing into templated content.
 
-## Proposed first step
+## First experiments under these rules (none run)
 
-Do E1 before any new feature: marks for the router, a per-language prior file for the closed classes and the reply templates, the stem from the detector, and a test that runs the chat on at least two languages. Then continue the features (yes/no questions, follow-ups, memory across restarts) under these rules.
+- **X1.** Add no features. Put the chat behind the existing medium-blind void (`question-void.js`, `void-shape.js`) and drive the ratchet from 206 toward 0.
+- **X2.** A reader matrix with what exists today: English text, Russian or Spanish text, mathematical notation (`native/adapters/math`), and slate's video observations already in pharos (answer "what is in the shot?" by pointing at frame ranges). Count the gaps by kind.
+- **X3.** The invariance suite (rule 13) on the chat.
+- **X4.** The gap census (rule 17) over the asks already in the fold-demo log.
