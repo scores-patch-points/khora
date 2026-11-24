@@ -1,31 +1,35 @@
 {
  "stamp": {
-  "when": "2026-11-24T04:51:38.437Z",
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:36:18.760Z",
   "split": "EXPLORATORY",
   "perSource": 130,
   "commit": "unspecified"
  },
  "crosstab": {
-  "statement -> read": 133,
-  "fragment -> fragment(gap)": 101,
-  "social -> social": 24,
-  "question -> relational(gap)": 34,
-  "unread -> unread(gap)": 54,
+  "statement -> read": 141,
+  "fragment -> fragment(gap)": 109,
+  "social -> social": 15,
+  "question -> relational(gap)": 35,
+  "request -> request(gap)": 13,
+  "unread -> unread(gap)": 45,
   "composite -> smalltalk": 1,
   "fragment -> clarify(gap)": 8,
-  "social -> smalltalk": 4,
-  "request -> request(gap)": 13,
+  "social -> smalltalk": 6,
   "composite -> relational(gap)": 7,
-  "question -> clarify(gap)": 5,
-  "social -> clarify(gap)": 2,
+  "question -> clarify(gap)": 6,
   "question -> identity(gap)": 1,
-  "request -> request": 1,
-  "composite -> help": 1,
-  "question -> self": 1
+  "request -> request": 2,
+  "composite -> help": 1
  },
- "mismatches": 7,
+ "mismatches": 6,
  "total": 390,
- "sentWordsOut": 4,
+ "sentWordsOut": 6,
  "rows": [
   {
    "source": "sms",
@@ -165,10 +169,10 @@
   {
    "source": "sms",
    "said": "Come",
-   "declared": "fragment",
+   "declared": "request",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "request",
+   "gap": "no_topic",
    "sentOut": false
   },
   {
@@ -264,19 +268,19 @@
   {
    "source": "sms",
    "said": "Bhai &lt;#&gt; ka hi kara paya tha s0ry",
-   "declared": "statement",
+   "declared": "fragment",
    "open": false,
-   "did": "read",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
    "source": "sms",
    "said": "Crowd undu huge crowd....but not like season crowd...",
-   "declared": "fragment",
+   "declared": "request",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "request",
+   "gap": "act_not_possible",
    "sentOut": false
   },
   {
@@ -327,9 +331,9 @@
   {
    "source": "sms",
    "said": "O ya nvr plyd that.",
-   "declared": "social",
+   "declared": "statement",
    "open": false,
-   "did": "social",
+   "did": "read",
    "gap": null,
    "sentOut": false
   },
@@ -354,10 +358,10 @@
   {
    "source": "sms",
    "said": "Helo krish ji.. H0w areu?.. Sory me us time away tha.. So aur sunao:-)",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -372,10 +376,10 @@
   {
    "source": "sms",
    "said": "RC &lt;#&gt; = &lt;#&gt; Loc SMS free. Know fun and positive facts about Urself ",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -529,7 +533,7 @@
    "open": false,
    "did": "relational",
    "gap": "action_not_in_text",
-   "sentOut": false
+   "sentOut": true
   },
   {
    "source": "sms",
@@ -561,19 +565,19 @@
   {
    "source": "sms",
    "said": "Aftr &lt;#&gt; mins",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
    "source": "sms",
    "said": "Shal i cal",
-   "declared": "fragment",
+   "declared": "statement",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -615,10 +619,10 @@
   {
    "source": "sms",
    "said": "Sweta bechari ka ek v prnt nahi nikla,mai uski hlp krta hun-hunhh..rehna uske st",
-   "declared": "fragment",
+   "declared": "statement",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -642,10 +646,10 @@
   {
    "source": "sms",
    "said": "Warden avala apudi dhaan chellama kupiduvanga!",
-   "declared": "fragment",
+   "declared": "statement",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -696,28 +700,28 @@
   {
    "source": "sms",
    "said": "Goin 2 study..",
-   "declared": "request",
+   "declared": "fragment",
    "open": false,
-   "did": "request",
-   "gap": "act_not_possible",
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
    "source": "sms",
    "said": "Nai re niklna hai , room saf ker raha tha.",
-   "declared": "statement",
+   "declared": "fragment",
    "open": false,
-   "did": "read",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
    "source": "sms",
    "said": "Bro aap aaye nai m0rng me 0nlne..",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -732,10 +736,10 @@
   {
    "source": "sms",
    "said": "&lt;#&gt; th mari tcs lo join authava",
-   "declared": "fragment",
+   "declared": "statement",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -804,11 +808,11 @@
   {
    "source": "sms",
    "said": "Check mail.i have mailed varma and kept copy to you regarding membership.take ca",
-   "declared": "request",
+   "declared": "statement",
    "open": false,
-   "did": "request",
-   "gap": "no_article",
-   "sentOut": true
+   "did": "read",
+   "gap": null,
+   "sentOut": false
   },
   {
    "source": "sms",
@@ -858,10 +862,10 @@
   {
    "source": "sms",
    "said": "Say dear, abhi yad aa rahi hai.",
-   "declared": "request",
+   "declared": "unread",
    "open": false,
-   "did": "request",
-   "gap": "act_not_possible",
+   "did": "unread",
+   "gap": "act_unread",
    "sentOut": false
   },
   {
@@ -957,10 +961,10 @@
   {
    "source": "sms",
    "said": "Water logging in desert. Geoenvironmental implications.",
-   "declared": "statement",
+   "declared": "unread",
    "open": false,
-   "did": "read",
-   "gap": null,
+   "did": "unread",
+   "gap": "act_unread",
    "sentOut": false
   },
   {
@@ -1029,10 +1033,10 @@
   {
    "source": "sms",
    "said": "Tats gud..",
-   "declared": "fragment",
+   "declared": "unread",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "unread",
+   "gap": "act_unread",
    "sentOut": false
   },
   {
@@ -1101,10 +1105,10 @@
   {
    "source": "sms",
    "said": "Legal VOTING age for BOYS is &lt;#&gt; , but legal MARRIAGE age for BOYS is &lt;",
-   "declared": "statement",
+   "declared": "unread",
    "open": false,
-   "did": "read",
-   "gap": null,
+   "did": "unread",
+   "gap": "act_unread",
    "sentOut": false
   },
   {
@@ -1159,7 +1163,7 @@
    "open": false,
    "did": "relational",
    "gap": "action_not_in_text",
-   "sentOut": false
+   "sentOut": true
   },
   {
    "source": "sms",
@@ -1371,10 +1375,10 @@
   {
    "source": "cosem",
    "said": "HAHHA",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -1425,10 +1429,10 @@
   {
    "source": "cosem",
    "said": "HAHHA",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -1470,10 +1474,10 @@
   {
    "source": "cosem",
    "said": "LOLOL",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -1515,19 +1519,19 @@
   {
    "source": "cosem",
    "said": "HUHHH",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
    "source": "cosem",
    "said": "Thank you ????",
    "declared": "social",
-   "open": true,
-   "did": "clarify",
-   "gap": "act_open",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -1623,10 +1627,10 @@
   {
    "source": "cosem",
    "said": "HAHHAHAHA",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -1652,8 +1656,8 @@
    "said": "what does the rpa do ah",
    "declared": "question",
    "open": false,
-   "did": "identity",
-   "gap": "unknown_referent",
+   "did": "relational",
+   "gap": "action_not_in_text",
    "sentOut": false
   },
   {
@@ -1713,19 +1717,19 @@
   {
    "source": "cosem",
    "said": "HAHAHA",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
    "source": "cosem",
    "said": "HAHA EH CAN FOODPANDA TGT",
-   "declared": "unread",
+   "declared": "fragment",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -1803,10 +1807,10 @@
   {
    "source": "cosem",
    "said": "omoooo",
-   "declared": "fragment",
+   "declared": "social",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "social",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -1986,7 +1990,7 @@
    "declared": "question",
    "open": false,
    "did": "relational",
-   "gap": "action_not_in_text",
+   "gap": "nothing_fills_the_void",
    "sentOut": true
   },
   {
@@ -2064,10 +2068,10 @@
   {
    "source": "cosem",
    "said": "Honoured",
-   "declared": "unread",
+   "declared": "fragment",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -2085,8 +2089,8 @@
    "declared": "request",
    "open": false,
    "did": "request",
-   "gap": "no_article",
-   "sentOut": true
+   "gap": "act_not_possible",
+   "sentOut": false
   },
   {
    "source": "cosem",
@@ -2111,8 +2115,8 @@
    "said": "What is ug",
    "declared": "question",
    "open": false,
-   "did": "relational",
-   "gap": "action_not_in_text",
+   "did": "identity",
+   "gap": "unknown_referent",
    "sentOut": false
   },
   {
@@ -2127,10 +2131,10 @@
   {
    "source": "cosem",
    "said": "but idk what color is that",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -2208,10 +2212,10 @@
   {
    "source": "cosem",
    "said": "HAHAHAHA so nicee",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -2271,19 +2275,19 @@
   {
    "source": "cosem",
    "said": "THERES A CEMETERY NEAR YOU",
-   "declared": "unread",
+   "declared": "fragment",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
    "source": "cosem",
    "said": "End lecture le!!!!!",
-   "declared": "request",
+   "declared": "fragment",
    "open": false,
-   "did": "request",
-   "gap": "act_not_possible",
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -2298,10 +2302,10 @@
   {
    "source": "cosem",
    "said": "no im not",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -2364,7 +2368,7 @@
    "declared": "request",
    "open": false,
    "did": "request",
-   "gap": "act_not_possible",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -2388,10 +2392,10 @@
   {
    "source": "irc",
    "said": "aaas: you cluld use cut maybe",
-   "declared": "statement",
-   "open": false,
-   "did": "read",
-   "gap": null,
+   "declared": "question",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -2622,10 +2626,10 @@
   {
    "source": "irc",
    "said": "tmdx120: sudo dpkg -i *.deb",
-   "declared": "statement",
+   "declared": "fragment",
    "open": false,
-   "did": "read",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -2685,10 +2689,10 @@
   {
    "source": "irc",
    "said": "!skype > bob3213243",
-   "declared": "fragment",
+   "declared": "unread",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "unread",
+   "gap": "act_unread",
    "sentOut": false
   },
   {
@@ -2731,9 +2735,9 @@
    "source": "irc",
    "said": "any help?",
    "declared": "social",
-   "open": true,
-   "did": "clarify",
-   "gap": "act_open",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -2775,10 +2779,10 @@
   {
    "source": "irc",
    "said": "Cannon: right click the file type, the properties",
-   "declared": "unread",
+   "declared": "request",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "request",
+   "gap": "act_not_possible",
    "sentOut": false
   },
   {
@@ -2802,10 +2806,10 @@
   {
    "source": "irc",
    "said": "bullgard-I see ok only 2 max in future then ha ha ha",
-   "declared": "statement",
+   "declared": "unread",
    "open": false,
-   "did": "read",
-   "gap": null,
+   "did": "unread",
+   "gap": "act_unread",
    "sentOut": false
   },
   {
@@ -2820,10 +2824,10 @@
   {
    "source": "irc",
    "said": "!virus > gumbo    (gumbo, see the private message from ubottu)",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -2883,10 +2887,10 @@
   {
    "source": "irc",
    "said": "[nih0] nice to meet you",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -2923,15 +2927,15 @@
    "open": false,
    "did": "relational",
    "gap": "action_not_in_text",
-   "sentOut": false
+   "sentOut": true
   },
   {
    "source": "irc",
    "said": "所以我把他卸了。",
-   "declared": "unread",
+   "declared": "fragment",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
@@ -2946,19 +2950,19 @@
   {
    "source": "irc",
    "said": "hm...",
-   "declared": "social",
+   "declared": "fragment",
    "open": false,
-   "did": "social",
-   "gap": null,
+   "did": "fragment",
+   "gap": "fragment_unclear",
    "sentOut": false
   },
   {
    "source": "irc",
    "said": "fusionxtc, just copy and paste it in your termina",
-   "declared": "unread",
+   "declared": "request",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "request",
+   "gap": "act_not_possible",
    "sentOut": false
   },
   {
@@ -2973,10 +2977,10 @@
   {
    "source": "irc",
    "said": "Factoid search of 'mergefb' by value returned no results.",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -3045,10 +3049,10 @@
   {
    "source": "irc",
    "said": "RiverGirl_, is from australia :P",
-   "declared": "unread",
+   "declared": "statement",
    "open": false,
-   "did": "unread",
-   "gap": "act_unread",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -3063,11 +3067,11 @@
   {
    "source": "irc",
    "said": "cna't even watch Hulu shows",
-   "declared": "statement",
+   "declared": "request",
    "open": false,
-   "did": "read",
-   "gap": null,
-   "sentOut": false
+   "did": "request",
+   "gap": "no_article",
+   "sentOut": true
   },
   {
    "source": "irc",
@@ -3297,10 +3301,10 @@
   {
    "source": "irc",
    "said": "crshman: sudo dpkg-reconfigure xserver-xorg",
-   "declared": "fragment",
+   "declared": "statement",
    "open": false,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "read",
+   "gap": null,
    "sentOut": false
   },
   {
@@ -3405,9 +3409,9 @@
   {
    "source": "irc",
    "said": "bullgard4, what the heck are you talking about.  \"beep\" is not a command.",
-   "declared": "question",
+   "declared": "statement",
    "open": false,
-   "did": "self",
+   "did": "read",
    "gap": null,
    "sentOut": false
   },
@@ -3513,10 +3517,10 @@
   {
    "source": "irc",
    "said": "conorkirkpatrick: The fact that you can connect? o.O",
-   "declared": "statement",
+   "declared": "question",
    "open": false,
-   "did": "read",
-   "gap": null,
+   "did": "relational",
+   "gap": "action_not_in_text",
    "sentOut": false
   },
   {
@@ -3541,10 +3545,17 @@
  "sent": [
   {
    "source": "sms",
-   "declared": "request",
-   "did": "request",
-   "said": "Check mail.i have mailed varma and kept copy to you regarding membership.take ca",
-   "query": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=mail.i&format=json&origin=*"
+   "declared": "question",
+   "did": "relational",
+   "said": "Hi Andreu, have v 2 get down at piliyandala town?",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=have+v+2+get+down+piliyandala+town&srlimit=3&format=json&origin=*"
+  },
+  {
+   "source": "sms",
+   "declared": "composite",
+   "did": "relational",
+   "said": "great! u r starting on sunday right?",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=u+starting+sunday+right&srlimit=3&format=json&origin=*"
   },
   {
    "source": "cosem",
@@ -3558,14 +3569,21 @@
    "declared": "question",
    "did": "relational",
    "said": "What? Haha help what?",
-   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Haha+help&srlimit=3&format=json&origin=*"
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Haha&srlimit=4&format=json&origin=*"
   },
   {
-   "source": "cosem",
+   "source": "irc",
+   "declared": "question",
+   "did": "relational",
+   "said": "mercurus, er, is the windows remote desktop a VNC client?",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=er+windows+remote+VNC+client&srlimit=3&format=json&origin=*"
+  },
+  {
+   "source": "irc",
    "declared": "request",
    "did": "request",
-   "said": "Have to take the stalker MP",
-   "query": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=MP&format=json&origin=*"
+   "said": "cna't even watch Hulu shows",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=Hulu+shows&format=json&origin=*"
   }
  ],
  "examples": [
@@ -3592,9 +3610,9 @@
    "urls": []
   },
   {
-   "k": "cosem",
-   "t": "Thank you ????",
-   "working": "social",
+   "k": "irc",
+   "t": "aaas: you cluld use cut maybe",
+   "working": "question",
    "open": true,
    "type": "clarify",
    "handled": false,
@@ -3606,17 +3624,6 @@
    "k": "irc",
    "t": "stefano:could that be the problem",
    "working": "question",
-   "open": true,
-   "type": "clarify",
-   "handled": false,
-   "gap": "act_open",
-   "calls": 0,
-   "urls": []
-  },
-  {
-   "k": "irc",
-   "t": "any help?",
-   "working": "social",
    "open": true,
    "type": "clarify",
    "handled": false,

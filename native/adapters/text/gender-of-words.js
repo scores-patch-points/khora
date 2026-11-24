@@ -73,7 +73,15 @@ export function makeNameGenderPrior({ dictionary = null, snapshot = null, snapsh
     if (snapshot && snapshotIds) { const r = snapshot.get(String(ws[0]).replace(/[.,;:!?'’“”"]+$/u, "")); const p = r?.exact?.[0]?.p31 ?? [], m = p.includes(snapshotIds.male), f = p.includes(snapshotIds.female), u = p.includes(snapshotIds.unisex); if (!u && m !== f) return withWho({ gender: m ? "m" : "f", source: "snapshot", word: first, reliability: reliabilityOf(dictionary, "wikidata"), open: null }); }
     return open("nothing in the words says");
   }
-  return { explain, genderOf: (words) => explain(words).gender, classOf: (words) => explain(words).class, missing };
+  /** isGivenName(word) -> { is, source: "name" | "snapshot" | null }: is this ONE word a given name, whatever its gender (even one with both senses)? A name CANDIDATE for the reader (a sentence-initial "Riley" the part-of-speech prior tags as an adjective), never a ruling: "Rose" and "Mark" are also words. */
+  function isGivenName(word) {
+    const w = norm(word); if (!w) return { is: false, source: null };
+    const c = names[w]; if (c && (c[0] > 0 || c[1] > 0)) return { is: true, source: "name" };
+    if (snapshot && snapshotIds) { const r = snapshot.get(String(word).replace(/[.,;:!?'’“”"]+$/u, "")), p = r?.exact?.[0]?.p31 ?? []; if (p.includes(snapshotIds.male) || p.includes(snapshotIds.female) || p.includes(snapshotIds.unisex)) return { is: true, source: "snapshot" }; }
+    return { is: false, source: null };
+  }
+  const layers = { told: corrections ? `${corrections.size} remembered` : "absent: no corrections were supplied", title: `${Object.keys(titles).length} title words`, dictionary: dictionary ? `${Object.keys(names).length} given-name words` : "absent: name-gender/dictionary-en.json has not been built", snapshot: snapshot ? "loaded" : "absent: identity/givers/wikidata-given-names-en.json not loaded" };
+  return { explain, genderOf: (words) => explain(words).gender, classOf: (words) => explain(words).class, isGivenName, layers, missing };
 }
 
 /**
@@ -94,8 +102,25 @@ export function pronounsFor(gender, { language = "en", decided = null } = {}) {
   return { cls, ...EN_PRONOUNS[cls], decided: decided ?? cls !== "x" };   // decided: true for a person who told us they go by "they"
 }
 
+
+/**
+ * genderPriorFromWords({ text, cast, prior, sources }) -> Map ref -> "m" | "f" | "x": the SAME SHAPE as the canonical chain's other sources (gender-chain.js: name table, Wikidata giver, corpus), so the
+ * prior can be a layer of genderPriorChainFor. For each being of the cast, each distinct surface of its own mentions (`mentionSpans` into the text) is asked of the prior; the being's class is the one
+ * the STRONGEST source gives (told, then title, then the name's dictionary sense, then the Wikidata snapshot), and where that source's surfaces disagree (the same being as "Mrs Bennet" and as a
+ * different word) it says nothing. `sources` limits the layer: the chain asks for ["title", "name", "snapshot"] BELOW the corpus and ["told"] ABOVE it ("the text's own recurring evidence overrides a prior").
+ */
+export function genderPriorFromWords({ text, cast, prior, sources = ["told", "title", "name", "snapshot"] }) {
+  const out = new Map(); if (!prior || prior.missing && !sources.includes("told")) return out; const T = String(text ?? ""), ORDER = ["told", "title", "name", "snapshot"].filter((x) => sources.includes(x));
+  for (const b of cast ?? []) {
+    const surfaces = [...new Set((b.mentionSpans ?? []).map(([s, e]) => T.slice(s, e).trim()).filter(Boolean))], found = {};
+    for (const surf of surfaces) { const words = surf.split(/\s+/).filter(Boolean), r = prior.explain(words); if (r.source && ORDER.includes(r.source) && r.class) (found[r.source] ??= new Set()).add(r.class); }   // regex-ok: whitespace between the words of a name
+    const best = ORDER.find((x) => found[x]); if (best && found[best].size === 1) out.set(b.ref, [...found[best]][0]);
+  }
+  return out;
+}
+
 /** the prior as the chat uses it: the dictionary table (title, then the name) and the Wikidata given-name snapshot as the third layer. A missing table is `missing` (said, not skipped); a missing snapshot only loses the third layer. */
-export function makeDefaultNameGenderPrior({ isPerson = null, corrections = null } = {}) {
+export function makeDefaultNameGenderPrior({ isPerson = null, corrections = null } = {}) {   // the prior the chat uses, and the layers of the canonical chain (gender-chain.js)
   const dictionary = loadNameGenderDictionary(); let snapshot = null; try { snapshot = snapshotGiverFrom(SNAPSHOT_FILE); } catch { snapshot = null; }
   return makeNameGenderPrior({ dictionary, snapshot, snapshotIds: snapshot ? { male: Q.male, female: Q.female, unisex: Q.unisex } : null, isPerson, corrections });
 }

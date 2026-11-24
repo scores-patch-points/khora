@@ -1,0 +1,111 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:59:45.977Z",
+  "split": "EXPLORATORY (developer-written)",
+  "commit": "5c3b357"
+ },
+ "passed": 5,
+ "of": 6,
+ "rows": [
+  {
+   "text": "who wrote Hamlet?",
+   "why": "no address: the baseline",
+   "expect": "researched",
+   "got": "researched",
+   "ok": true,
+   "calls": 1,
+   "urls": [
+    "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Hamlet&srlimit=4&format=json&origin=*"
+   ],
+   "reply": "I read what Wikipedia has on it and found nothing that says."
+  },
+  {
+   "text": "The Fold, who wrote Hamlet?",
+   "why": "addressed by its own name",
+   "expect": "researched",
+   "got": "researched",
+   "ok": true,
+   "calls": 1,
+   "urls": [
+    "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Hamlet&srlimit=4&format=json&origin=*"
+   ],
+   "reply": "I read what Wikipedia has on it and found nothing that says."
+  },
+  {
+   "text": "Fold, who wrote Hamlet?",
+   "why": "addressed by its own name, short",
+   "expect": "researched",
+   "got": "researched",
+   "ok": true,
+   "calls": 1,
+   "urls": [
+    "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Hamlet&srlimit=4&format=json&origin=*"
+   ],
+   "reply": "I read what Wikipedia has on it and found nothing that says."
+  },
+  {
+   "text": "Hey Fold, who wrote Hamlet?",
+   "why": "a greeting then its own name",
+   "expect": "researched",
+   "got": "researched",
+   "ok": true,
+   "calls": 1,
+   "urls": [
+    "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Hamlet&srlimit=4&format=json&origin=*"
+   ],
+   "reply": "I read what Wikipedia has on it and found nothing that says."
+  },
+  {
+   "text": "Hi Andreu, have v 2 get down at piliyandala town?",
+   "why": "another person's name: a message for someone else (a real SMS from the sample)",
+   "expect": "not researched",
+   "got": "researched",
+   "ok": false,
+   "calls": 1,
+   "urls": [
+    "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=have+v+2+get+down+piliyandala+town&srlimit=3&format=json&origin=*"
+   ],
+   "reply": "I haven't been told that, and I couldn't look it up: Wikipedia has nothing that matches “h"
+  },
+  {
+   "text": "Hi Andreu, who wrote Hamlet?",
+   "why": "another name, then a question about the world: not scored (the owner's design)",
+   "expect": null,
+   "got": "researched",
+   "ok": null,
+   "calls": 1,
+   "urls": [
+    "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Hamlet&srlimit=4&format=json&origin=*"
+   ],
+   "reply": "I read what Wikipedia has on it and found nothing that says."
+  },
+  {
+   "text": "Priya, are you coming on sunday?",
+   "why": "another name, a question about her",
+   "expect": "not researched",
+   "got": "not researched",
+   "ok": true,
+   "calls": 0,
+   "urls": [],
+   "reply": "That's about you or me, and I only know what's been said in this chat."
+  },
+  {
+   "text": "Claude, who wrote Hamlet?",
+   "why": "a name that is also a name for an AI: not scored (the chat session says it must still be researched)",
+   "expect": null,
+   "got": "researched",
+   "ok": null,
+   "calls": 1,
+   "urls": [
+    "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Hamlet&srlimit=4&format=json&origin=*"
+   ],
+   "reply": "I read what Wikipedia has on it and found nothing that says."
+  }
+ ]
+}

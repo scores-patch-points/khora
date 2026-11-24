@@ -1,0 +1,329 @@
+{
+ "schema": "SaliencePrior@1",
+ "window": 3,
+ "features": "per anaphor role (S, O, X): 3 slots (this sentence so far, the sentence before, the one before that) x {S, O, X, absent} = 12 weights, plus the weight of log(1 + mentions in the window)",
+ "softmax": "the stated confidence is the softmax of the best candidate among the caller's candidates",
+ "weights": {
+  "S": [
+   1.4078,
+   0.4076,
+   -0.2223,
+   -1.5931,
+   0.6749,
+   -0.1636,
+   -0.3118,
+   -0.1995,
+   0.4211,
+   -0.2337,
+   -0.3246,
+   0.1371,
+   0.4895
+  ],
+  "O": [
+   0.574,
+   1.0384,
+   0.3456,
+   -1.958,
+   0.9773,
+   0.1178,
+   -0.263,
+   -0.8321,
+   -0.1047,
+   0.2715,
+   0.3366,
+   -0.5033,
+   -1.3239
+  ],
+  "X": [
+   1.2826,
+   1.0942,
+   0.0986,
+   -2.4754,
+   0.7632,
+   0.089,
+   -0.2096,
+   -0.6426,
+   0.2911,
+   0.1187,
+   -0.2499,
+   -0.1599,
+   0.0975
+  ]
+ },
+ "optimiser": {
+  "passes": 300,
+  "step": 0.5,
+  "l2": 0.001,
+  "note": "fixed, not tuned"
+ },
+ "provenance": {
+  "builtBy": "scripts/build-salience-prior.mjs",
+  "when": "2026-11-24T15:48:44.119Z",
+  "commit": "92d428f",
+  "allowNoncommercial": false,
+  "trainedOn": [
+   {
+    "name": "LitBank (English)",
+    "licence": "CC BY 4.0",
+    "file": "en_litbank-corefud-train.conllu",
+    "sha256": "90864786c8412f4175f523b16d4fdfa4acffca1eb696fb7d3fcbb9869e5bd710",
+    "kind": "person"
+   },
+   {
+    "name": "AnCora (Spanish)",
+    "licence": "CC BY 4.0",
+    "file": "es_ancora-corefud-train.conllu",
+    "sha256": "2accb8cb0a9fb62261e1efda99602e48277e643719a0511990580a077eebfcc5",
+    "kind": "zero"
+   },
+   {
+    "name": "AnCora (Catalan)",
+    "licence": "CC BY 4.0",
+    "file": "ca_ancora-corefud-train.conllu",
+    "sha256": "8c0268ddecd7d87336fb813fc761ff1956470d4465e527ab8ab3234a67f335a4",
+    "kind": "zero"
+   }
+  ],
+  "trainedCases": {
+   "persons": 1162,
+   "zero": 10868
+  },
+  "notTrainedOn": [
+   {
+    "name": "GUM (English)",
+    "licence": "CC BY-NC-SA 4.0",
+    "reason": "evaluation only by default"
+   },
+   {
+    "name": "PDT (Czech)",
+    "licence": "CC BY-NC-SA 4.0",
+    "reason": "evaluation only by default"
+   }
+  ],
+  "credit": "CorefUD 1.3 (Nedoluzhko et al., LINDAT/CLARIAH-CZ); LitBank (Bamman et al.); AnCora (Taulé, Martí, Recasens); each under the licence recorded above"
+ },
+ "measured": {
+  "split": "EXPLORATORY (CorefUD 1.3 DEV; window of three sentences and the one-half level declared before the first run; trained on the sets listed in trainedOn)",
+  "persons": {
+   "cases": 232,
+   "right": 177,
+   "rate": 0.763,
+   "wilson": [
+    0.7,
+    0.81
+   ],
+   "answeredAboveHalf": 217,
+   "answeredRight": 168,
+   "answeredWilson": [
+    0.71,
+    0.82
+   ],
+   "asked": 15,
+   "bins": [
+    {
+     "lo": 0,
+     "hi": 0.2,
+     "n": 1,
+     "right": 0
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.4,
+     "n": 2,
+     "right": 0
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.6,
+     "n": 32,
+     "right": 24
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.8,
+     "n": 56,
+     "right": 38
+    },
+    {
+     "lo": 0.8,
+     "hi": 1,
+     "n": 141,
+     "right": 115
+    }
+   ]
+  },
+  "zero": {
+   "cases": 3208,
+   "right": 1748,
+   "rate": 0.545,
+   "wilson": [
+    0.53,
+    0.56
+   ],
+   "answeredAboveHalf": 1769,
+   "answeredRight": 1135,
+   "answeredWilson": [
+    0.62,
+    0.66
+   ],
+   "asked": 1439,
+   "bins": [
+    {
+     "lo": 0,
+     "hi": 0.2,
+     "n": 53,
+     "right": 17
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.4,
+     "n": 835,
+     "right": 331
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.6,
+     "n": 1053,
+     "right": 534
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.8,
+     "n": 842,
+     "right": 525
+    },
+    {
+     "lo": 0.8,
+     "hi": 1,
+     "n": 425,
+     "right": 341
+    }
+   ]
+  },
+  "it": {
+   "cases": 280,
+   "right": 100,
+   "rate": 0.357,
+   "wilson": [
+    0.3,
+    0.41
+   ],
+   "answeredAboveHalf": 132,
+   "answeredRight": 46,
+   "answeredWilson": [
+    0.27,
+    0.43
+   ],
+   "asked": 148,
+   "bins": [
+    {
+     "lo": 0,
+     "hi": 0.2,
+     "n": 14,
+     "right": 3
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.4,
+     "n": 81,
+     "right": 29
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.6,
+     "n": 95,
+     "right": 37
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.8,
+     "n": 57,
+     "right": 21
+    },
+    {
+     "lo": 0.8,
+     "hi": 1,
+     "n": 33,
+     "right": 10
+    }
+   ],
+   "note": "NOT calibrated: do not state a confidence for it"
+  },
+  "transfer": {
+   "zeroDev": {
+    "weights trained on the zero subjects": 0.546,
+    "weights trained on English persons": 0.531
+   },
+   "englishSubjectDev": {
+    "weights trained on English persons": 0.736,
+    "weights trained on the zero subjects": 0.77
+   }
+  },
+  "calibration": {
+   "persons": [
+    {
+     "lo": 0,
+     "hi": 0.2,
+     "n": 1,
+     "right": 0
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.4,
+     "n": 2,
+     "right": 0
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.6,
+     "n": 32,
+     "right": 24
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.8,
+     "n": 56,
+     "right": 38
+    },
+    {
+     "lo": 0.8,
+     "hi": 1,
+     "n": 141,
+     "right": 115
+    }
+   ],
+   "zero": [
+    {
+     "lo": 0,
+     "hi": 0.2,
+     "n": 53,
+     "right": 17
+    },
+    {
+     "lo": 0.2,
+     "hi": 0.4,
+     "n": 835,
+     "right": 331
+    },
+    {
+     "lo": 0.4,
+     "hi": 0.6,
+     "n": 1053,
+     "right": 534
+    },
+    {
+     "lo": 0.6,
+     "hi": 0.8,
+     "n": 842,
+     "right": 525
+    },
+    {
+     "lo": 0.8,
+     "hi": 1,
+     "n": 425,
+     "right": 341
+    }
+   ]
+  }
+ }
+}

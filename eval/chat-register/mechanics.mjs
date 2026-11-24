@@ -8,6 +8,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { readerStamp } from "./reader-stamp.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..");
@@ -53,7 +54,7 @@ function read(text) {
   return { rows, act, person, addressed: rows.some((r) => r.deprel === "vocative"), neg: rows.some((r) => feats(r).Polarity === "Neg"), propn: toks.filter((r) => r.upos === "PROPN").length, lowerPropn: toks.filter((r) => r.upos === "PROPN" && r.form === r.form.toLowerCase()).length,
     words: words.length, oov: words.filter((r) => !known(r.form)).length, nonword: toks.filter((r) => r.upos === "SYM" || r.upos === "X").length, startsLower: /^[a-z]/.test(text), endsPunct: /[.!?]$/.test(text) };   // regex-ok: a character-class test of the message's surface (register), not its meaning
 }
-const out = { stamp: { when: new Date().toISOString(), split: "EXPLORATORY", n: N, zenodotus: ZEN, files: Object.fromEntries(Object.entries(sources).map(([k, s]) => [k, new Set(s.items.map((x) => x.f)).size])), messages: Object.fromEntries(Object.entries(sources).map(([k, s]) => [k, s.items.length])) }, register: {}, mechanics: {}, conversation: {}, examples: {} };
+const out = { stamp: { reader: await readerStamp(), when: new Date().toISOString(), split: "EXPLORATORY", n: N, zenodotus: ZEN, files: Object.fromEntries(Object.entries(sources).map(([k, s]) => [k, new Set(s.items.map((x) => x.f)).size])), messages: Object.fromEntries(Object.entries(sources).map(([k, s]) => [k, s.items.length])) }, register: {}, mechanics: {}, conversation: {}, examples: {} };
 const sig = (m) => `${m.act}${m.person !== "-" ? `/${m.person === "1" ? "I" : m.person === "2" ? "you" : m.person === "3" ? "it" : m.person}` : ""}${m.addressed ? "+addressed" : ""}${m.neg ? "+neg" : ""}`;
 const picked = {};
 for (const [k, s] of Object.entries(sources)) {

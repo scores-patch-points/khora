@@ -6,6 +6,7 @@
 import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url"; import { execSync } from "node:child_process";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, "..", "..");
 import os from "node:os";
+import { readerStamp } from "./reader-stamp.mjs";
 process.env.CHAT_PHAROS_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "correction-probe-pharos-"));   // a log of its own: the probe writes nowhere else
 const { makeThread } = await import("file://" + ROOT + "/native/chat/thread.mjs"), { openLog } = await import("file://" + ROOT + "/native/chat/record.mjs");
 const commit = (() => { try { return execSync("git rev-parse --short HEAD", { cwd: ROOT }).toString().trim(); } catch { return "unknown"; } })();
@@ -37,5 +38,5 @@ for (const [what, first, second, want] of across) {
 }
 const passed = rows.filter((r) => r.ok).length, noted = rows.filter((r) => !r.ok && /^Noted\.?$/.test(r.ack.trim())).length;   // regex-ok: the system's own acknowledgement string in a probe
 console.log(`corrections that changed the answer, in the thread and in the next one: ${passed} of ${rows.length}; "Noted." said and nothing changed: ${noted}`);
-fs.writeFileSync(path.join(HERE, "correction-probe.json"), JSON.stringify({ stamp: { when: new Date().toISOString(), split: "EXPLORATORY (developer-written conversations)", commit }, passed, of: rows.length, notedAndNothingChanged: noted, rows }, null, 1) + "\n");
+fs.writeFileSync(path.join(HERE, "correction-probe.json"), JSON.stringify({ stamp: { reader: await readerStamp(), when: new Date().toISOString(), split: "EXPLORATORY (developer-written conversations)", commit }, passed, of: rows.length, notedAndNothingChanged: noted, rows }, null, 1) + "\n");
 process.exit(0);

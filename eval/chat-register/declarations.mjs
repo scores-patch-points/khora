@@ -13,6 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { readerStamp } from "./reader-stamp.mjs";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, "..", "..");
 const ZEN = process.env.ZENODOTUS || path.resolve(ROOT, "..", "Zenodotus"), ORG = path.join(ZEN, "19-organic-community");
 const N = Number(process.argv[2] || 600), K = pathToFileURL(path.join(ROOT, "native") + "/").href;
@@ -46,7 +47,7 @@ const variants = {
   nopunct: (t) => t.replace(/[.?!]+$/, ""),   // regex-ok: final punctuation of the message (surface)
   typo: (t) => { const ws = [...t.matchAll(/[A-Za-z]{4,}/g)].sort((a, b) => b[0].length - a[0].length || (sha(t + a.index) < sha(t + b.index) ? -1 : 1)); if (!ws.length) return t; const m = ws[0], w = m[0], i = parseInt(sha(t).slice(0, 4), 16) % (w.length - 3) + 1, sw = w.slice(0, i) + w[i + 1] + w[i] + w.slice(i + 2); return t.slice(0, m.index) + sw + t.slice(m.index + w.length); },   // regex-ok: picks the word to perturb
 };
-const out = { stamp: { when: new Date().toISOString(), split: "EXPLORATORY", n: N, note: "declaration from the reader's universal marks only; the thread's English-supplied booleans (small talk, arithmetic, slash, address) are not given" }, profile: {}, stability: {}, bySupport: {}, ledger: {} };
+const out = { stamp: { reader: await readerStamp(), when: new Date().toISOString(), split: "EXPLORATORY", n: N, note: "declaration from the reader's universal marks only; the thread's English-supplied booleans (small talk, arithmetic, slash, address) are not given" }, profile: {}, stability: {}, bySupport: {}, ledger: {} };
 const pooled = []; const t0 = Date.now();
 for (const [k, items] of Object.entries(sources)) {
   const sample = pick(items, N), rs = sample.map((x) => ({ x, d: declare(x.text) })), n = rs.length, share = (f) => +(rs.filter(f).length / n).toFixed(3);

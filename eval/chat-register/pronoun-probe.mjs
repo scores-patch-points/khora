@@ -4,6 +4,7 @@
 // Scored on the NAME in "That would be X." (not on the quoted sentence after it). Also records how "Who smiled?" is answered.
 //   node eval/chat-register/pronoun-probe.mjs
 import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
+import { readerStamp } from "./reader-stamp.mjs";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, "..", "..");
 const { makeThread } = await import("file://" + ROOT + "/native/chat/thread.mjs");
 const mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, janus: null, log: null, getJson: async () => ({}) });
@@ -41,5 +42,5 @@ for (const [name, steps] of Object.entries(dialogues)) { const th = await mk(), 
   for (const [msg, want] of steps) { const r = await th.turn(msg), text = String(r?.text ?? ""); trail.push(`${msg} => ${text.slice(0, 48)}`); if (want === "?") { if (!text.includes("?")) ok = false; } else if (want?.startsWith("both:")) { if (!want.slice(5).split(",").every((n) => text.includes(n))) ok = false; } else if (want && !text.startsWith(want)) ok = false; }
   if (ok) dOk++; dRows.push({ name, ok, trail }); console.log(`${ok ? "PASS" : "FAIL"} ${name}${ok ? "" : "\n      " + trail.join("\n      ")}`); }
 console.log(`ask-back conversations: ${dOk} of ${Object.keys(dialogues).length}`);
-fs.writeFileSync(path.join(HERE, "pronoun-probe.json"), JSON.stringify({ stamp: { when: new Date().toISOString(), split: "EXPLORATORY (developer-written probes)", commit: process.env.CHAT_COMMIT ?? "working tree" }, probes: cases.length, priorState, outcomes: out3, openNames: { probes: openCases.length, ...open3, rows: openRows }, wrongBindings: out3.wrong, dialogues: { passed: dOk, of: Object.keys(dialogues).length, rows: dRows }, byPlace, whoAnsweredWithBarePronoun: who.filter((t) => /^(She|He)\.$/.test(t)).length }, null, 1));
+fs.writeFileSync(path.join(HERE, "pronoun-probe.json"), JSON.stringify({ stamp: { reader: await readerStamp(), when: new Date().toISOString(), split: "EXPLORATORY (developer-written probes)", commit: process.env.CHAT_COMMIT ?? "working tree" }, probes: cases.length, priorState, outcomes: out3, openNames: { probes: openCases.length, ...open3, rows: openRows }, wrongBindings: out3.wrong, dialogues: { passed: dOk, of: Object.keys(dialogues).length, rows: dRows }, byPlace, whoAnsweredWithBarePronoun: who.filter((t) => /^(She|He)\.$/.test(t)).length }, null, 1));
 process.exit(0);

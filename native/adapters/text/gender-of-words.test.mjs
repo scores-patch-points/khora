@@ -2,7 +2,7 @@
 // A small table stands in for the dictionary-built one, so the tests do not depend on a build; the last test reads the real table if it has been built.
 import test from "node:test"; import assert from "node:assert/strict";
 import fs from "node:fs";
-import { makeNameGenderPrior, makeDefaultNameGenderPrior, loadNameGenderDictionary, reliabilityOf, pronounsFor, readCorrections, SNAPSHOT_FILE } from "./gender-of-words.js";
+import { makeNameGenderPrior, makeDefaultNameGenderPrior, loadNameGenderDictionary, reliabilityOf, pronounsFor, readCorrections, genderPriorFromWords, SNAPSHOT_FILE } from "./gender-of-words.js";
 const dict = { schema: "NameGenderDictionary@1", provenance: { measured: { dev: { title: [14, 13], dictionary: [29, 28], wikidata: [26, 23] }, fresh: { title: [12, 10], dictionary: [15, 13], wikidata: [19, 15] } } },
   words: { natasha: [0, 2], pierre: [2, 0], dana: [0, 2], lucas: [2, 0], laurie: [2, 2], tom: [2, 0], mary: [0, 2], john: [2, 0] }, titles: { mrs: "f", miss: "f", mr: "m", madame: "f", aunt: "f", uncle: "m", holmes: "m" } };
 const P = makeNameGenderPrior({ dictionary: dict });
@@ -60,6 +60,23 @@ test("what the user told outranks every other source, is read in log order, and 
   const j = T.explain(["Jordan"]); assert.deepEqual([j.gender, j.class, j.source, j.pronouns.nom, j.pronouns.decided], [null, "x", "told", "they", true], "told 'they': voiced they, decided, not the default"); assert.equal(T.genderOf(["Jordan"]), null, "he/she consumers still see no he/she"); assert.equal(T.classOf(["Jordan"]), "x");
   assert.deepEqual([T.explain(["Laurie"]).class, T.explain(["Laurie"]).pronouns.nom, T.explain(["Laurie"]).pronouns.decided], [null, "they", false], "unsure and untold: the they default, not decided");
   assert.equal(makeNameGenderPrior({ dictionary: null, corrections: C }).explain(["Casey"]).gender, "m", "told works with no table");
+});
+test("isGivenName: a candidate for the reader, whatever the gender, from the table or the snapshot; a common word is not one", () => {
+  const ids = { male: "M", female: "F", unisex: "U" }, snap = { get: (w) => ({ Wilhelmina: { exact: [{ p31: ["F"] }] }, Sam: { exact: [{ p31: ["U"] }] } })[w] };
+  const S = makeNameGenderPrior({ dictionary: dict, snapshot: snap, snapshotIds: ids });
+  assert.deepEqual(S.isGivenName("Natasha"), { is: true, source: "name" }); assert.equal(S.isGivenName("Laurie").is, true, "a name with both kinds of sense is still a name");
+  assert.deepEqual(S.isGivenName("Wilhelmina"), { is: true, source: "snapshot" }); assert.equal(S.isGivenName("Sam").is, true, "a unisex snapshot name is a name");
+  assert.deepEqual(S.isGivenName("table"), { is: false, source: null }); assert.deepEqual(S.isGivenName(""), { is: false, source: null });
+  assert.equal(makeNameGenderPrior({ dictionary: null }).isGivenName("Natasha").is, false, "no table: not claimed");
+});
+test("as a source of the canonical gender chain: the being's own mention surfaces are asked of the prior, the strongest source wins, a conflict says nothing, and the layers can be limited", () => {
+  const text = "Mrs. Bennet spoke. Natasha smiled. Laurie left. Casey waved.", at = (w) => { const s = text.indexOf(w); return [s, s + w.length]; };
+  const cast = [{ ref: "r1", mentionSpans: [at("Mrs. Bennet")] }, { ref: "r2", mentionSpans: [at("Natasha")] }, { ref: "r3", mentionSpans: [at("Laurie")] }, { ref: "r4", mentionSpans: [at("Casey")] }, { ref: "r5", mentionSpans: [at("Mrs. Bennet"), at("Natasha")] }];
+  const C = readCorrections([{ kind: "correction", at: "2026-11-24T00:00:00Z", body: { key: "casey", class: "x", said: "they means Casey" } }]), P2 = makeNameGenderPrior({ dictionary: dict, corrections: C });
+  const all = genderPriorFromWords({ text, cast, prior: P2 }); assert.equal(all.get("r1"), "f", "a title"); assert.equal(all.get("r2"), "f", "the dictionary"); assert.equal(all.has("r3"), false, "both kinds of sense: nothing"); assert.equal(all.get("r4"), "x", "what the user told, a they");
+  assert.equal(all.get("r5"), "f", "the strongest source (title) decides when the surfaces disagree in strength");
+  assert.equal(genderPriorFromWords({ text, cast, prior: P2, sources: ["title", "name", "snapshot"] }).has("r4"), false, "below the corpus layer: no told"); assert.deepEqual([...genderPriorFromWords({ text, cast, prior: P2, sources: ["told"] })], [["r4", "x"]], "above it: only what was told");
+  assert.equal(P2.layers.told, "1 remembered"); assert.match(P2.layers.dictionary, /given-name words/); assert.match(P2.layers.snapshot, /absent/); assert.equal(genderPriorFromWords({ text, cast, prior: null }).size, 0);
 });
 const real = loadNameGenderDictionary();
 test("the table built from the dictionary (skipped if it has not been built)", { skip: real ? false : "run scripts/build-name-gender-dictionary.mjs" }, () => {

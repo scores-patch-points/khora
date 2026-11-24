@@ -1,0 +1,218 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:53:20.264Z",
+  "split": "EXPLORATORY (developer-written after 47b7561, run once as written)",
+  "commit": "df181e3"
+ },
+ "taken": {
+  "right": 5,
+  "of": 10
+ },
+ "traps": {
+  "right": 4,
+  "of": 4
+ },
+ "rows": [
+  {
+   "what": "'actually she is X'",
+   "ok": true,
+   "last": "Priya.",
+   "want": "is Priya.",
+   "ack": "Right: she is Priya, not Dana.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "Actually she is Priya. => Right: she is Priya, not Dana.",
+    "Who smiled? => Priya."
+   ]
+  },
+  {
+   "what": "a man, 'no, he is X'",
+   "ok": true,
+   "last": "Leo.",
+   "want": "is Leo.",
+   "ack": "Right: he is Leo, not Omar.",
+   "trail": [
+    "Leo met Omar. He left. => Noted.",
+    "Who is he? => Do you mean Leo or Omar?",
+    "Omar => You told me “Leo met Omar.”",
+    "No, he is Leo. => Right: he is Leo, not Omar.",
+    "Who left? => Leo."
+   ]
+  },
+  {
+   "what": "'no, it was X'",
+   "ok": false,
+   "last": "Dana.",
+   "want": "is Priya.",
+   "ack": "Okay, I've set that aside. Noted.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "No, it was Priya. => Okay, I've set that aside. Noted.",
+    "Who smiled? => Dana."
+   ]
+  },
+  {
+   "what": "'not X, Y'",
+   "ok": false,
+   "last": "Dana.",
+   "want": "is Priya.",
+   "ack": "I'm not sure what you mean by “Not Dana, Priya.”.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "Not Dana, Priya. => I'm not sure what you mean by “Not Dana, Priya.”.",
+    "Who smiled? => Dana."
+   ]
+  },
+  {
+   "what": "lower case, no punctuation",
+   "ok": false,
+   "last": "Dana.",
+   "want": "is Priya.",
+   "ack": "Noted.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "no she is priya => Noted.",
+    "Who smiled? => Dana."
+   ]
+  },
+  {
+   "what": "'by they I mean X'",
+   "ok": false,
+   "last": "They.",
+   "want": "is Mina.",
+   "ack": "Noted.",
+   "trail": [
+    "Mina smiled. They waved. => Noted.",
+    "By they I mean Mina. => Noted.",
+    "Who waved? => They."
+   ]
+  },
+  {
+   "what": "a gender stated settles the ask-back",
+   "ok": true,
+   "last": "That would be Taylor. You told me “Taylor met Riley.” and “She smiled.”",
+   "want": "is That would be Taylor.",
+   "ack": "Right: Riley is a man.",
+   "trail": [
+    "Taylor met Riley. She smiled. => Noted.",
+    "Riley is a man. => Right: Riley is a man.",
+    "Who is she? => That would be Taylor. You told me “Taylor met Riley.” and “She smiled."
+   ]
+  },
+  {
+   "what": "corrected twice, the last one stands",
+   "ok": true,
+   "last": "Taylor.",
+   "want": "is Taylor.",
+   "ack": "Right: she is Taylor.",
+   "trail": [
+    "Taylor met Riley. She smiled. => Noted.",
+    "Who is she? => Do you mean Taylor or Riley?",
+    "Taylor => You told me “Taylor met Riley.” and “She smiled.”",
+    "No, she is Riley. => Okay, I've set that aside. Noted.",
+    "Sorry, she is Taylor. => Right: she is Taylor.",
+    "Who smiled? => Taylor."
+   ]
+  },
+  {
+   "what": "across threads, an unrelated order of names",
+   "ok": false,
+   "last": "Taylor.",
+   "want": "is Riley.",
+   "ack": "Okay, I've set that aside. Noted.",
+   "trail": [
+    "Taylor met Riley. She smiled. => Noted.",
+    "Who is she? => Do you mean Taylor or Riley?",
+    "Taylor => You told me “Taylor met Riley.” and “She smiled.”",
+    "No, she is Riley. => Okay, I've set that aside. Noted.",
+    "— new thread —",
+    "Riley met Taylor. She smiled. => Noted.",
+    "Who smiled? => Taylor."
+   ]
+  },
+  {
+   "what": "TRAP a question: 'Is she Priya?'",
+   "ok": true,
+   "last": "Dana.",
+   "want": "not Priya.",
+   "ack": "I haven't been told that.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "Is she Priya? => I haven't been told that.",
+    "Who smiled? => Dana."
+   ]
+  },
+  {
+   "what": "TRAP a negation: 'She is not Priya.'",
+   "ok": true,
+   "last": "Dana.",
+   "want": "not Priya.",
+   "ack": "Noted.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "She is not Priya. => Noted.",
+    "Who smiled? => Dana."
+   ]
+  },
+  {
+   "what": "TRAP another subject: 'My sister is Priya.'",
+   "ok": true,
+   "last": "Dana.",
+   "want": "not Priya.",
+   "ack": "Noted.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "My sister is Priya. => Noted.",
+    "Who smiled? => Dana."
+   ]
+  },
+  {
+   "what": "TRAP a name the thread does not hold: 'No, she is Zoltan.'",
+   "ok": true,
+   "last": "Dana.",
+   "want": "not Zoltan.",
+   "ack": "Okay, I've set that aside. Noted.",
+   "trail": [
+    "Dana met Priya. She smiled. => Noted.",
+    "Who is she? => Do you mean Dana or Priya?",
+    "Dana => You told me “Dana met Priya.” and “She smiled.”",
+    "No, she is Zoltan. => Okay, I've set that aside. Noted.",
+    "Who smiled? => Dana."
+   ]
+  },
+  {
+   "what": "TRAP the earlier pick is not wiped by a correction of someone else",
+   "ok": true,
+   "last": "Omar.",
+   "want": "is Omar.",
+   "ack": "Right: she is Priya.",
+   "trail": [
+    "Dana met Priya. Leo met Omar. He left. => Noted.",
+    "Who is he? => Do you mean Leo or Omar?",
+    "Omar => You told me “Leo met Omar.”",
+    "No, she is Priya. => Right: she is Priya.",
+    "Who left? => Omar."
+   ]
+  }
+ ]
+}

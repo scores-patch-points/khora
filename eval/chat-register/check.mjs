@@ -8,11 +8,16 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), J = (f) => JSON.parse(fs.readFileSync(path.join(HERE, f), "utf8"));
 const iB = J("invariance.before.json").results, iN = J("invariance.json").results, mB = J("mechanics.before.json"), mN = J("mechanics.json");
 let bad = 0;
+// WHICH READER MADE THESE NUMBERS (2026-11-24: the prior door takes the FIRST existing home, and ../janus/priors is a 20-file stand-in that shadows the real janus; every run before today used it). A number from one
+// reader against a number from another is not a regression or a gain, it is a different instrument: the comparison is printed and not counted.
+const rdr = (j) => j.stamp?.reader ?? { parser: "english-parser", priorsFiles: 20, note: "not recorded: a run before 2026-11-24 used the stand-in home" };
+const rb = rdr(J("invariance.before.json")), rn = rdr(J("invariance.json")), comparable = rb.parser === rn.parser && rb.priorsFiles === rn.priorsFiles;
+console.log(`READERS: baseline ${rb.parser} over ${rb.priorsFiles} priors files${rb.note ? ` (${rb.note})` : ""}; now ${rn.parser} over ${rn.priorsFiles} priors files${comparable ? "" : "  -> NOT COMPARABLE: differences below are not scored (re-baseline under one reader)"}\n`);
 console.log("READER INVARIANCE (higher is better; the 56 developer-written asks, EXPLORATORY)");
 console.log("variant".padEnd(9), "same".padStart(12), "propn".padStart(12), "rels".padStart(12));
 for (const v of ["lower", "nopunct", "typo"]) {
   const row = [v.padEnd(9)];
-  for (const k of ["same", "propn", "rels"]) { const a = iB[v][k], b = iN[v][k]; const worse = b != null && a != null && b < a - 1e-9; if (worse) bad++; row.push(`${a} → ${b}${worse ? " WORSE" : ""}`.padStart(12)); }
+  for (const k of ["same", "propn", "rels"]) { const a = iB[v][k], b = iN[v][k]; const worse = comparable && b != null && a != null && b < a - 1e-9; if (worse) bad++; row.push(`${a} → ${b}${worse ? " WORSE" : ""}`.padStart(12)); }
   console.log(row.join(" "));
 }
 if (iN.control.rels !== 1) { bad++; console.log("CONTROL BROKEN: the same message read twice gave different relations (the instrument is not stable)"); } else console.log("control: 1 (the instrument is stable)");

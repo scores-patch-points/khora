@@ -5,6 +5,7 @@
 // a pronoun that HAS an antecedent (nothing was asked back). One observation not scored (not built yet): a "yes" answering a question the chat asked.
 //   node eval/chat-register/pairing-probe.mjs   -> pairing-probe.json
 import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
+import { readerStamp } from "./reader-stamp.mjs";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, "..", ".."), K = "file://" + ROOT + "/native/";
 const { makeThread } = await import(K + "chat/thread.mjs");
 let calls = 0;   // outside calls made (the network is a counting stub)
@@ -17,7 +18,7 @@ const controls = {
   "a second question between": positives.slice(0, 3).map(([q, a]) => [q, "who is Pierre?", a]),
   "a pronoun that has an antecedent (nothing is asked back)": [["Pierre loves Natasha.", "does he love her?", "the course"], ["Mina gave Jonathan a book.", "did she give it?", "the shop"]],
 };
-const res = { stamp: { when: new Date().toISOString(), split: "EXPLORATORY (developer-written probes)", commit: process.env.CHAT_COMMIT ?? "unspecified" }, positives: [], controls: {} };
+const res = { stamp: { reader: await readerStamp(), when: new Date().toISOString(), split: "EXPLORATORY (developer-written probes)", commit: process.env.CHAT_COMMIT ?? "unspecified" }, positives: [], controls: {} };
 let pass = 0; for (const [q, a] of positives) { const r = await run([q, a]), last = r.at(-1), ok = !!last.paired && String(last.paired.rebuilt ?? "").toLowerCase().includes(a.toLowerCase().replace(/^the /, "")) && last.gap !== "fragment_unclear" && last.stored === 0; if (ok) pass++; res.positives.push({ q, a, ok, paired: last.paired, gap: last.gap, stored: last.stored }); console.log(`${ok ? "PASS" : "FAIL"} ${JSON.stringify(q)} -> ${JSON.stringify(a)}: ${last.paired ? JSON.stringify(last.paired.rebuilt) : `not paired (${last.gap ?? last.type})`}${last.stored ? `, stored ${last.stored}` : ""}`); }
 console.log(`positives: ${pass} of ${positives.length} paired`); res.positivePass = pass;
 for (const [name, seqs] of Object.entries(controls)) { let held = 0; const rows = []; for (const seq of seqs) { const r = await run(seq), last = r.at(-1), ok = !last.paired; if (ok) held++; rows.push({ seq, ok, paired: last.paired, gap: last.gap }); } res.controls[name] = { held, of: seqs.length, rows }; console.log(`control (${name}): ${held} of ${seqs.length} correctly not paired${rows.filter((x) => !x.ok).map((x) => `  [paired: ${JSON.stringify(x.seq)}]`).join("")}`); }

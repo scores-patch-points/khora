@@ -1,6 +1,12 @@
 {
  "stamp": {
-  "when": "2026-11-24T05:06:45.023Z",
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:34:09.777Z",
   "split": "EXPLORATORY (developer-written probes)",
   "commit": "working tree"
  },
@@ -13,8 +19,8 @@
  },
  "openNames": {
   "probes": 4,
-  "asked": 4,
-  "guessed": 0,
+  "asked": 3,
+  "guessed": 1,
   "other": 0,
   "rows": [
    {
@@ -34,8 +40,8 @@
    },
    {
     "say": "Riley called Taylor. He answered.",
-    "outcome": "asked",
-    "text": "Do you mean Riley or Taylor?"
+    "outcome": "guessed",
+    "text": "That would be Taylor. You told me “Riley called Taylor.” and “He answered.”"
    }
   ]
  },

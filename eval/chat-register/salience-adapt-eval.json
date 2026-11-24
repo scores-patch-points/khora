@@ -1,0 +1,716 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Downloads/workspace/janus/priors",
+   "priorsFiles": 20,
+   "KHORA_PRIORS_DIR": null,
+   "parser": "english-parser"
+  },
+  "when": "2026-11-24T16:03:39.751Z",
+  "split": "EXPLORATORY, REUSED (DEV: the switch was redesigned after its first design failed on these same sets; the first design's result is kept)",
+  "defaults": {
+   "lr": 0.1,
+   "z": 1.645,
+   "minDiscordant": 10
+  },
+  "commit": "d0ac15d"
+ },
+ "summary": {
+  "datasets": 15,
+  "overall": {
+   "frozen": 46.2,
+   "always": 48.5,
+   "switched": 47.6,
+   "switchedHalf": 47.1,
+   "explicit": 47.7,
+   "explicitHalf": 47.4
+  },
+  "lastThird": {
+   "frozen": 46.8,
+   "always": 47.9,
+   "switched": 48.4,
+   "switchedHalf": 48,
+   "explicit": 48.3,
+   "explicitHalf": 48.2
+  },
+  "switchedOn": [
+   "Ancient_Greek-PROIEL (at 205)",
+   "Ancient_Hebrew-PTNK (at 217)",
+   "Czech-PDT (at 1700)",
+   "English-GUM (at 95)",
+   "French-ANCOR (at 301)",
+   "French-Democrat (at 105)",
+   "Norwegian-BokmaalNARC (at 122)",
+   "Norwegian-NynorskNARC (at 172)",
+   "Turkish-ITCC (at 173)"
+  ],
+  "neverSwitched": [
+   "Czech-PCEDT",
+   "Hindi-HDTB",
+   "Hungarian-SzegedKoref",
+   "Old_Church_Slavonic-PROIEL",
+   "Polish-PCC",
+   "Russian-RuCor"
+  ],
+  "worstLossVsFrozen": [
+   {
+    "d": "Ancient_Hebrew-PTNK",
+    "loss": -0.2
+   },
+   {
+    "d": "Czech-PCEDT",
+    "loss": 0
+   },
+   {
+    "d": "English-GUM",
+    "loss": 0
+   }
+  ],
+  "alwaysWorstLoss": [
+   {
+    "d": "Russian-RuCor",
+    "loss": -2.2
+   },
+   {
+    "d": "English-GUM",
+    "loss": -0.2
+   },
+   {
+    "d": "Czech-PCEDT",
+    "loss": -0.1
+   }
+  ]
+ },
+ "rows": [
+  {
+   "dataset": "Ancient_Greek-PROIEL",
+   "trainedOn": false,
+   "cases": 495,
+   "frozen": {
+    "overall": 0.485,
+    "last": 0.497,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.505,
+    "last": 0.503,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.487,
+    "last": 0.497,
+    "onAt": 205
+   },
+   "switchedHalf": {
+    "overall": 0.485,
+    "last": 0.497,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.475,
+    "last": 0.491,
+    "onAt": 251
+   },
+   "explicitHalf": {
+    "overall": 0.485,
+    "last": 0.497,
+    "onAt": null
+   }
+  },
+  {
+   "dataset": "Ancient_Hebrew-PTNK",
+   "trainedOn": false,
+   "cases": 409,
+   "frozen": {
+    "overall": 0.43,
+    "last": 0.409,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.462,
+    "last": 0.438,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.428,
+    "last": 0.416,
+    "onAt": 217
+   },
+   "switchedHalf": {
+    "overall": 0.43,
+    "last": 0.409,
+    "onAt": 328
+   },
+   "explicit": {
+    "overall": 0.447,
+    "last": 0.453,
+    "onAt": 98
+   },
+   "explicitHalf": {
+    "overall": 0.435,
+    "last": 0.438,
+    "onAt": 191
+   }
+  },
+  {
+   "dataset": "Catalan-AnCora",
+   "trainedOn": true,
+   "cases": 1053,
+   "frozen": {
+    "overall": 0.52,
+    "last": 0.59,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.516,
+    "last": 0.601,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.52,
+    "last": 0.59,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.52,
+    "last": 0.59,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.517,
+    "last": 0.59,
+    "onAt": 218
+   },
+   "explicitHalf": {
+    "overall": 0.52,
+    "last": 0.59,
+    "onAt": null
+   }
+  },
+  {
+   "dataset": "Czech-PCEDT",
+   "trainedOn": false,
+   "cases": 4475,
+   "frozen": {
+    "overall": 0.523,
+    "last": 0.557,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.522,
+    "last": 0.559,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.523,
+    "last": 0.557,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.523,
+    "last": 0.557,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.524,
+    "last": 0.551,
+    "onAt": 552
+   },
+   "explicitHalf": {
+    "overall": 0.523,
+    "last": 0.555,
+    "onAt": 2936
+   }
+  },
+  {
+   "dataset": "Czech-PDT",
+   "trainedOn": false,
+   "cases": 1946,
+   "frozen": {
+    "overall": 0.496,
+    "last": 0.506,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.51,
+    "last": 0.532,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.499,
+    "last": 0.517,
+    "onAt": 1700
+   },
+   "switchedHalf": {
+    "overall": 0.496,
+    "last": 0.506,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.496,
+    "last": 0.506,
+    "onAt": 1827
+   },
+   "explicitHalf": {
+    "overall": 0.501,
+    "last": 0.522,
+    "onAt": 1136
+   }
+  },
+  {
+   "dataset": "English-GUM",
+   "trainedOn": false,
+   "cases": 737,
+   "frozen": {
+    "overall": 0.455,
+    "last": 0.457,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.453,
+    "last": 0.425,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.455,
+    "last": 0.457,
+    "onAt": 95
+   },
+   "switchedHalf": {
+    "overall": 0.446,
+    "last": 0.437,
+    "onAt": 95
+   },
+   "explicit": {
+    "overall": 0.456,
+    "last": 0.457,
+    "onAt": 96
+   },
+   "explicitHalf": {
+    "overall": 0.453,
+    "last": 0.457,
+    "onAt": 96
+   }
+  },
+  {
+   "dataset": "English-LitBank",
+   "trainedOn": true,
+   "cases": 892,
+   "frozen": {
+    "overall": 0.632,
+    "last": 0.591,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.632,
+    "last": 0.594,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.632,
+    "last": 0.591,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.632,
+    "last": 0.591,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.635,
+    "last": 0.591,
+    "onAt": 258
+   },
+   "explicitHalf": {
+    "overall": 0.631,
+    "last": 0.591,
+    "onAt": 345
+   }
+  },
+  {
+   "dataset": "French-ANCOR",
+   "trainedOn": false,
+   "cases": 1172,
+   "frozen": {
+    "overall": 0.402,
+    "last": 0.357,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.497,
+    "last": 0.5,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.488,
+    "last": 0.5,
+    "onAt": 301
+   },
+   "switchedHalf": {
+    "overall": 0.486,
+    "last": 0.49,
+    "onAt": 295
+   },
+   "explicit": {
+    "overall": 0.488,
+    "last": 0.503,
+    "onAt": 300
+   },
+   "explicitHalf": {
+    "overall": 0.485,
+    "last": 0.485,
+    "onAt": 295
+   }
+  },
+  {
+   "dataset": "French-Democrat",
+   "trainedOn": false,
+   "cases": 644,
+   "frozen": {
+    "overall": 0.458,
+    "last": 0.454,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.525,
+    "last": 0.519,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.514,
+    "last": 0.519,
+    "onAt": 105
+   },
+   "switchedHalf": {
+    "overall": 0.502,
+    "last": 0.523,
+    "onAt": 160
+   },
+   "explicit": {
+    "overall": 0.514,
+    "last": 0.509,
+    "onAt": 105
+   },
+   "explicitHalf": {
+    "overall": 0.495,
+    "last": 0.514,
+    "onAt": 160
+   }
+  },
+  {
+   "dataset": "Hindi-HDTB",
+   "trainedOn": false,
+   "cases": 187,
+   "frozen": {
+    "overall": 0.39,
+    "last": 0.397,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.406,
+    "last": 0.381,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.39,
+    "last": 0.397,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.39,
+    "last": 0.397,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.39,
+    "last": 0.397,
+    "onAt": 143
+   },
+   "explicitHalf": {
+    "overall": 0.374,
+    "last": 0.349,
+    "onAt": 159
+   }
+  },
+  {
+   "dataset": "Hungarian-SzegedKoref",
+   "trainedOn": false,
+   "cases": 109,
+   "frozen": {
+    "overall": 0.615,
+    "last": 0.622,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.633,
+    "last": 0.595,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.615,
+    "last": 0.622,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.615,
+    "last": 0.622,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.615,
+    "last": 0.622,
+    "onAt": null
+   },
+   "explicitHalf": {
+    "overall": 0.615,
+    "last": 0.622,
+    "onAt": null
+   }
+  },
+  {
+   "dataset": "Norwegian-BokmaalNARC",
+   "trainedOn": false,
+   "cases": 321,
+   "frozen": {
+    "overall": 0.517,
+    "last": 0.561,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.539,
+    "last": 0.533,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.523,
+    "last": 0.542,
+    "onAt": 122
+   },
+   "switchedHalf": {
+    "overall": 0.523,
+    "last": 0.561,
+    "onAt": 169
+   },
+   "explicit": {
+    "overall": 0.536,
+    "last": 0.551,
+    "onAt": 110
+   },
+   "explicitHalf": {
+    "overall": 0.539,
+    "last": 0.561,
+    "onAt": 110
+   }
+  },
+  {
+   "dataset": "Norwegian-NynorskNARC",
+   "trainedOn": false,
+   "cases": 347,
+   "frozen": {
+    "overall": 0.47,
+    "last": 0.479,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.493,
+    "last": 0.487,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.476,
+    "last": 0.487,
+    "onAt": 172
+   },
+   "switchedHalf": {
+    "overall": 0.47,
+    "last": 0.479,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.481,
+    "last": 0.504,
+    "onAt": 157
+   },
+   "explicitHalf": {
+    "overall": 0.476,
+    "last": 0.487,
+    "onAt": 197
+   }
+  },
+  {
+   "dataset": "Old_Church_Slavonic-PROIEL",
+   "trainedOn": false,
+   "cases": 1057,
+   "frozen": {
+    "overall": 0.413,
+    "last": 0.408,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.415,
+    "last": 0.399,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.413,
+    "last": 0.408,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.413,
+    "last": 0.408,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.405,
+    "last": 0.394,
+    "onAt": 184
+   },
+   "explicitHalf": {
+    "overall": 0.408,
+    "last": 0.408,
+    "onAt": 248
+   }
+  },
+  {
+   "dataset": "Polish-PCC",
+   "trainedOn": false,
+   "cases": 544,
+   "frozen": {
+    "overall": 0.318,
+    "last": 0.341,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.318,
+    "last": 0.335,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.318,
+    "last": 0.341,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.318,
+    "last": 0.341,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.314,
+    "last": 0.341,
+    "onAt": 66
+   },
+   "explicitHalf": {
+    "overall": 0.318,
+    "last": 0.341,
+    "onAt": null
+   }
+  },
+  {
+   "dataset": "Russian-RuCor",
+   "trainedOn": false,
+   "cases": 269,
+   "frozen": {
+    "overall": 0.565,
+    "last": 0.582,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.543,
+    "last": 0.56,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.565,
+    "last": 0.582,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.565,
+    "last": 0.582,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.565,
+    "last": 0.582,
+    "onAt": null
+   },
+   "explicitHalf": {
+    "overall": 0.565,
+    "last": 0.582,
+    "onAt": null
+   }
+  },
+  {
+   "dataset": "Spanish-AnCora",
+   "trainedOn": true,
+   "cases": 937,
+   "frozen": {
+    "overall": 0.544,
+    "last": 0.565,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.538,
+    "last": 0.543,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.544,
+    "last": 0.565,
+    "onAt": null
+   },
+   "switchedHalf": {
+    "overall": 0.544,
+    "last": 0.565,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.544,
+    "last": 0.565,
+    "onAt": null
+   },
+   "explicitHalf": {
+    "overall": 0.544,
+    "last": 0.565,
+    "onAt": null
+   }
+  },
+  {
+   "dataset": "Turkish-ITCC",
+   "trainedOn": false,
+   "cases": 947,
+   "frozen": {
+    "overall": 0.399,
+    "last": 0.394,
+    "onAt": null
+   },
+   "always": {
+    "overall": 0.459,
+    "last": 0.42,
+    "onAt": null
+   },
+   "switched": {
+    "overall": 0.45,
+    "last": 0.42,
+    "onAt": 173
+   },
+   "switchedHalf": {
+    "overall": 0.399,
+    "last": 0.394,
+    "onAt": null
+   },
+   "explicit": {
+    "overall": 0.442,
+    "last": 0.382,
+    "onAt": 55
+   },
+   "explicitHalf": {
+    "overall": 0.431,
+    "last": 0.407,
+    "onAt": 69
+   }
+  }
+ ]
+}

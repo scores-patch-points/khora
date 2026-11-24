@@ -14,6 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { readerStamp } from "./reader-stamp.mjs";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, "..", "..");
 const { rowsOfFor } = await import(pathToFileURL(path.join(ROOT, "native")).href + "/reading.js");
 const parser = await rowsOfFor("eng");
@@ -50,5 +51,5 @@ for (const [name, make] of Object.entries(variants)) {
 }
 // control: the same measurement on a variant that changes nothing must give 1 everywhere (the instrument is stable)
 const ctl = asks.map((t) => { const a = read(t), b = read(t); return jac(triples(a), triples(b)); }); res.control = { messages: asks.length, rels: +(ctl.reduce((a, b) => a + b, 0) / ctl.length).toFixed(3) }; console.log("control ", JSON.stringify(res.control));
-fs.writeFileSync(path.join(HERE, "invariance.json"), JSON.stringify({ stamp: { when: new Date().toISOString(), split: "EXPLORATORY", asks: asks.length, source: path.basename(src) }, results: res, worst: ex }, null, 1));
+fs.writeFileSync(path.join(HERE, "invariance.json"), JSON.stringify({ stamp: { reader: await readerStamp(), when: new Date().toISOString(), split: "EXPLORATORY", asks: asks.length, source: path.basename(src) }, results: res, worst: ex }, null, 1));
 process.exit(0);
