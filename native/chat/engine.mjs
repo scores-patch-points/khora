@@ -209,7 +209,7 @@ const actsAsAgent = (being) => (S.framesOfRef?.get(being.ref) ?? []).some((u) =>
 const theyFor = (being) => {
   if (!being || being.kind === "nominal" || !actsAsAgent(being) || notAPerson(being)) return null;
   const c = classOf?.(being);
-  if (c?.cls === "m" || c?.cls === "f") return { ...(c.cls === "m" ? HE : SHE), source: c.source ?? "thread", decided: true, ...(c.text ? { note: c.text } : {}) };
+  if (c?.cls === "m" || c?.cls === "f" || c?.cls === "x") return { ...(c.cls === "m" ? HE : c.cls === "f" ? SHE : THEY), source: c.source ?? "thread", decided: true, ...(c.text ? { note: c.text } : {}) };   // "x" is a they the user told us: said as decided
   if (being.proform && !being.proform.contested) return null;   // the read decided a class whose forms nothing showed, and the caller gave none: unvoiced, as before, not overruled with "they"
   return { ...THEY, source: "they-default", decided: false, note: "gender not settled, so “they”" };
 };
