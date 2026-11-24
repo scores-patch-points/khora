@@ -7,7 +7,7 @@
 import fs from "node:fs"; import path from "node:path"; import readline from "node:readline";
 const HERE = path.dirname(new URL(import.meta.url).pathname), K = new URL("../../native/", import.meta.url).href;
 const SHARDS = process.env.YLIR_SHARDS ?? "/Users/mlacy/Downloads/workspace/ingest/Ýlir-One/shards", CLONE = process.env.YLIR_CLONE ?? "/Users/mlacy/Downloads/workspace/zenodotus-gh";
-const Q = JSON.parse(fs.readFileSync(path.join(HERE, "questions.json"), "utf8"));
+const QFILE = process.env.QUESTIONS ?? "questions.json", Q = JSON.parse(fs.readFileSync(path.join(HERE, QFILE), "utf8"));   // QUESTIONS=questions-fresh.json scores the fresh set (once, after the declared change); results go beside it
 // ---- the index
 const t0 = Date.now(), docs = [], post = new Map(); let nPost = 0;
 for (const sh of fs.readdirSync(SHARDS).filter((f) => /^eng-\d+\.jsonl\.lex$/.test(f)).sort()) {
@@ -38,7 +38,7 @@ for (const g of Q.gold) {
 }
 out.found = { atK: Object.fromEntries(ks.map((k) => [k, `${hit[k]} of ${Q.gold.length}`])), chanceAtK: Object.fromEntries(ks.map((k) => [k, +(k / N).toFixed(5)])) };
 out.controls = Q.controls.map((q) => { const lemmas = lemmasOf(q), s = score(lemmas), r = top(s, 3); return { q, lemmas, top3: r.map((i) => ({ file: path.basename(docs[i].file), score: +s[i].toFixed(2) })) }; });
-const f = path.join(HERE, "results.json"); fs.writeFileSync(f, JSON.stringify(out, null, 1));
+const f = path.join(HERE, QFILE === "questions.json" ? "results.json" : `results-${QFILE.replace(/\.json$/, "")}.json`); fs.writeFileSync(f, JSON.stringify(out, null, 1));
 for (const x of out.questions) console.log(`${String(x.rank ?? "-").padStart(5)}  ${x.q}\n       lemmas ${x.lemmas.join(" ")} | rarest ${x.rarest?.lemma} (in ${x.rarest?.docFreq} docs) | top ${x.top3.map((t) => `${t.file} ${t.score}`).join(" · ")}\n       ${x.sentenceFromTop1 ? `“${x.sentenceFromTop1.text.slice(0, 160)}”` : ""}`);
 console.log("\nFOUND", JSON.stringify(out.found)); for (const c of out.controls) console.log("control:", c.q, "->", c.top3.map((t) => `${t.file} ${t.score}`).join(" · "));
 console.log("written", f); process.exit(0);

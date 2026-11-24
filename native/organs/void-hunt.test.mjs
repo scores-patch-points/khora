@@ -9,7 +9,7 @@ import fs from "node:fs"; import os from "node:os"; import path from "node:path"
 
 let read = null, split = null, why = null;
 try {
-  const K = new URL("../", import.meta.url).href;
+  const K = process.env.KHORA_NATIVE ? new URL(`file://${process.env.KHORA_NATIVE.replace(/\/?$/, "/")}`).href : new URL("../", import.meta.url).href;   // KHORA_NATIVE=<another checkout's native/> runs this hunt against that checkout's reader (to test a reader fix before it is merged)
   const { rowsOfFor } = await import(K + "reading.js"), { splitSentences } = await import(K + "adapters/text/spans.js"), { priorsFor, abbreviationsFor } = await import(K + "the-fold/read-core.mjs");
   const P = await rowsOfFor("eng"), pr = priorsFor("eng"), cache = new Map();
   read = (s) => { if (!cache.has(s)) cache.set(s, P.rowsOf(s) ?? []); return cache.get(s); };

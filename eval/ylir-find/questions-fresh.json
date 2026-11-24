@@ -1,0 +1,28 @@
+{
+  "written": "2026-11-24, after the first probe and after the ingestion session's measurements of the index (sizes, headers, duplicates) and BEFORE any change to the catalog, the score or the probe's settings; unread and unscored when stamped: a FRESH set, to be scored ONCE, after the first change the first set suggested (document-frequency floor, deduplicating catalog, document kind, works table)",
+  "why": "The ingestion session said any cutoff chosen after seeing the first 20 questions is a post-hoc change that needs a fresh question set. These are it. Each question is answerable from one document of Ýlir-One (English); gold = the file(s) whose text answers it, chosen by me from the documents' topics, not from any score. Three controls have no gold.",
+  "gold": [
+    { "q": "Who is Captain Ahab?", "files": ["01-literature-books/gutenberg/pg2701_Moby_Dick.txt"] },
+    { "q": "Who is Pip?", "files": ["01-literature-books/gitenberg/pg1400_Great-Expectations.txt", "01-literature-books/gutenberg/pg2701_Moby_Dick.txt"] },
+    { "q": "Who is Raskolnikov?", "files": ["01-literature-books/gitenberg/pg2554_Crime-and-Punishment.txt"] },
+    { "q": "Who is Heathcliff?", "files": ["01-literature-books/gitenberg/pg768_Wuthering-Heights.txt"] },
+    { "q": "Who is Victor Frankenstein?", "files": ["01-literature-books/gutenberg/pg84_Frankenstein.txt"] },
+    { "q": "Who is Dorothy?", "files": ["01-literature-books/gitenberg/pg55_The-Wonderful-Wizard-of-Oz.txt"] },
+    { "q": "Who is Marlow?", "files": ["01-literature-books/gitenberg/pg219_Heart-of-Darkness.txt"] },
+    { "q": "Who is Sydney Carton?", "files": ["01-literature-books/gutenberg/pg98_A_Tale_of_Two_Cities.txt"] },
+    { "q": "Who is Elizabeth Bennet?", "files": ["01-literature-books/gutenberg/pg1342_Pride_and_Prejudice.txt"] },
+    { "q": "Who is Dorothea Brooke?", "files": ["01-literature-books/gutenberg/pg145_Middlemarch-George-Eliot.txt"] },
+    { "q": "Who is Leopold Bloom?", "files": ["01-literature-books/gutenberg/pg4300_Ulysses.txt"] },
+    { "q": "Who is Lemuel Gulliver?", "files": ["01-literature-books/gitenberg/pg829_Gulliver-s-Travels.txt"] },
+    { "q": "Who is Anne Shirley?", "files": ["01-literature-books/gitenberg/pg45_Anne-of-Green-Gables.txt"] },
+    { "q": "What does the Second Amendment say?", "files": ["01-literature-books/wikisource/Constitution_of_the_United_States_of_America.txt"] },
+    { "q": "What did Lincoln say about malice toward none?", "files": ["01-literature-books/wikisource/Abraham_Lincoln_s_Second_Inaugural_Address.txt"] },
+    { "q": "What is natural selection?", "files": ["01-literature-books/gutenberg/pg62168_The_Origin_of_Species_by_Darwin.txt"] },
+    { "q": "What was the capital of the Byzantine Empire?", "files": ["02-encyclopedic/wikipedia/Byzantine_Empire.txt"] },
+    { "q": "What caused the Cold War?", "files": ["02-encyclopedic/wikipedia/Cold_War.txt"] },
+    { "q": "What is an epic poem?", "files": ["02-encyclopedic/wikipedia/Epic_poetry.txt"] },
+    { "q": "What was the Enlightenment?", "files": ["02-encyclopedic/wikipedia/Enlightenment.txt"] }
+  ],
+  "controls": ["Who is the president of Brazil?", "What is the boiling point of tungsten?", "Who won the 1998 World Cup?"],
+  "rule": "the same as questions.json: FOUND at k if a gold file is among the top k documents by the score; the score is the sum over the question's content lemmas (NOUN, PROPN, VERB, ADJ by the reader) of log(1 + count in the document) x log(N / document frequency). Whatever changes in the score or the catalog is declared before this set is scored; this set is scored once."
+}
