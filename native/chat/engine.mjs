@@ -193,6 +193,12 @@ const sentenceOf = (order) => { const p = S.rowsOf.get(order); const sp = S.node
 const nameWordOf = (b) => { if (b.kind === "nominal") return b.head; for (const [f] of b.forms) for (const w of f.split(" ")) if (!S.titles.has(w.toLowerCase())) return w; return b.forms[0]?.[0] ?? ""; };
 // a pro-form as the book writes it, or null when the read did not decide one (contested, or no evidence)
 const pronounOf = (d, source) => (d && !d.contested && S.pro[d.cls]?.nom ? { cls: d.cls, nom: S.pro[d.cls].nom, poss: S.pro[d.cls].poss, was: S.be.past[d.cls === "x" ? "Plur" : "Sing"], is: S.be.pres[d.cls === "x" ? "Plur" : "Sing"], n: d.n, of: d.of, source } : null);
+// WHEN THE GENDER IS NOT SETTLED THE VOICE SAYS "THEY" (the owner, 2026-11-23: default to "they" when you're not sure). A person (a being that acts: it fills an agent role at least once, so a place
+// like Paris stays "Paris") whose pro-form the read did not decide, or decided only as a contested guess, is told with they / them / their and the plural verb ("they were"), never with a guess and never
+// with the bare name where a pronoun belongs. The book's own forms are kept whenever it decided; a decided class whose forms the thread never showed (no "she" yet) is left unvoiced, not overruled with "they". Same forms as native/adapters/text/gender-of-words.js pronounsFor(null) (the English reader's declared table),
+// kept here so the engine does not depend on a file that may be absent.
+const THEY = Object.freeze({ cls: "x", nom: "they", acc: "them", poss: "their", refl: "themself", is: "are", was: "were" });
+const theyFor = (being) => (being && being.kind !== "nominal" && !(being.proform && !being.proform.contested) && (S.framesOfRef?.get(being.ref) ?? []).some((u) => u.label === "kartṛ") ? { ...THEY, source: "they-default", decided: false, note: "gender not settled, so “they”" } : null);
 const cap = (w) => (w ? w[0].toUpperCase() + w.slice(1) : w);
 const listed = (xs) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
 // ── WHAT THE BOOK SAYS ABOUT A REFERENT: its most meaningful PROPOSITIONS, not a summary stitched from counts.
@@ -258,7 +264,7 @@ function propositionsOf(being, { limit = 8 } = {}) {
   //    is the subject of every clause. Genus: the title it carries in its own names ("Prince Andrew": a prince), else a character.
   //    Differentia: its strongest significant propositions (G² order). As agent, the book's own predicate (pronouns named); as patient or
   //    recipient, the frame turned to the passive with the book's own participle and "by" (khora's marker table): "was wounded by …".
-  const pr = pronounOf(being.proform, "referent") ?? null, display = being.forms[0][0], namesOf = (r) => S.refByRef.get(r)?.forms[0]?.[0] ?? r;
+  const pr = pronounOf(being.proform, "referent") ?? theyFor(being), display = being.forms[0][0], namesOf = (r) => S.refByRef.get(r)?.forms[0]?.[0] ?? r;
   // the title leads a name ("Prince Andrew"); it is the genus only when it is a real share (a tenth, declared) of the mentions
   const titleCount = new Map(); for (const [f, n] of being.forms) { const w = f.split(" "); if (w.length > 1 && S.titles.has(w[0].toLowerCase())) titleCount.set(w[0].toLowerCase(), (titleCount.get(w[0].toLowerCase()) ?? 0) + n); }
   const top = [...titleCount].sort((a, b) => b[1] - a[1])[0];
@@ -348,7 +354,7 @@ async function wordProfile(word0, { ref = null, perspective = "as read" } = {}) 
   const being = pinned ?? (isName ? (S.beingsOfWord.get(key) ?? [])[0] ?? null : null);
   const display = pinned ? pinned.forms[0][0] : isName ? show(key) : word;
   // the pro-form: the referent's own (its clauses' reflexives and possessives), else the word's, else none
-  const pron = pronounOf(being?.proform, "referent") ?? pronounOf(S.read.proforms?.[String(word).normalize("NFC").toLowerCase()], "word");
+  const pron = pronounOf(being?.proform, "referent") ?? pronounOf(S.read.proforms?.[String(word).normalize("NFC").toLowerCase()], "word") ?? theyFor(being);
   const others = being && being.kind !== "nominal" ? (S.beingsOfWord.get(key) ?? []).filter((b) => b !== being).slice(0, 6) : [];   // a description has no namesakes
   const labelOf = (r) => { const x = S.refByRef.get(r); return x ? x.forms[0]?.[0] ?? r : r; };
   const P = S.groups[perspective] ? perspective : "as read", group = being ? (S.groups[P].members.get(S.groups[P].of.get(being.ref)) ?? [being.ref]) : [];

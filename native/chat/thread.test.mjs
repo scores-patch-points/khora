@@ -94,3 +94,16 @@ test("the word “help” inside a longer message does not open the help screen"
   assert.match((await thread.turn("help")).text, /^I can tell you the date and the time/);
   assert.equal((await thread.turn("What can you do?")).type, "help");
 });
+test("a person whose gender is not settled is told with “they” (plural verb); one the book decided keeps its own forms; a place is never “they”", T, async () => {
+  const { makeThread } = await import("./thread.mjs");
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  await th.turn("Casey wrote a letter. Casey was tired. Jordan read the letter in Paris. Casey waved to Jordan. Mina kissed her son. She hugged herself. Mina lost her hat. Mina washed herself. Mina opened her door. Mina saw herself. Mina sold her house.");
+  const profile = async (name) => th.engine.wordProfile("", { ref: th.engine.S.read.cast.referents.find((b) => b.forms[0][0] === name).ref });
+  const casey = await profile("Casey");
+  assert.equal(casey.pronoun.source, "they-default"); assert.equal(casey.pronoun.decided, false); assert.equal(casey.pronoun.nom, "they"); assert.equal(casey.pronoun.was, "were"); assert.equal(casey.pronoun.poss, "their");
+  assert.match(casey.summary, /They wrote/);
+  const mina = await profile("Mina");
+  assert.equal(mina.pronoun.source, "referent"); assert.equal(mina.pronoun.nom, "she"); assert.match(mina.summary, /She /);
+  const paris = await profile("Paris");
+  assert.equal(paris.pronoun, null); assert.doesNotMatch(paris.summary, /They /);
+});
