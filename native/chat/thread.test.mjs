@@ -3,7 +3,7 @@
 // description with no tie is a typed gap. Needs the reader's priors (KHORA_PRIORS_DIR); skips without them.
 import test from "node:test"; import assert from "node:assert/strict";
 let thread = null, why = null;
-try { const { makeThread } = await import("./thread.mjs"); thread = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") }); } catch (e) { why = String(e?.message ?? e).slice(0, 100); }
+try { const { makeThread } = await import("./thread.mjs"); thread = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00") }); } catch (e) { why = String(e?.message ?? e).slice(0, 100); }
 // the given-name prior (title, dictionary given-name sense, Wikidata snapshot) is another session's module: the tests that depend on it say so, and hold either way
 const prior = (await import("../adapters/text/gender-of-words.js").catch(() => null))?.makeDefaultNameGenderPrior?.({}), HAVE = !!prior && !prior.missing;
 const T = { skip: thread ? false : `no reader here: ${why}` };
@@ -25,7 +25,7 @@ test("a pronoun is settled by what the thread or a prior says about the names; w
 });
 test("two names nothing knows leave the pronoun open: it asks, a wrong answer is refused, and the user's answer is evidence from then on", T, async () => {
   const { makeThread } = await import("./thread.mjs");
-  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00") });
   await th.turn("Zelko met Brannoc. She smiled.");
   const w = await th.turn("Who smiled?"); assert.equal(w.text, "“She”, but I can't tell whether that is Zelko or Brannoc.");
   const a = await th.turn("Who is she?"); assert.equal(a.gap, "pronoun_open"); assert.equal(a.text, "Do you mean Zelko or Brannoc?");
@@ -35,7 +35,7 @@ test("two names nothing knows leave the pronoun open: it asks, a wrong answer is
 });
 test("who a pronoun means: with the name prior the probe's pronouns are settled by the names; without it each is open; a place is never a candidate; a pro-form the thread attached settles it", T, async () => {
   const { makeThread } = await import("./thread.mjs");
-  const mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  const mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00") });
   for (const [said, q, settled, open] of [["Pierre met Natasha. She smiled.", "Who smiled?", "Natasha.", "Pierre or Natasha"], ["Tom met Dana. She smiled.", "Who smiled?", "Dana.", "Tom or Dana"], ["Mary called John. He answered.", "Who answered?", "John.", "Mary or John"]]) {
     const th = await mk(); await th.turn(said); const r = await th.turn(q);
     if (HAVE) assert.equal(r.text, settled, said); else assert.match(r.text, new RegExp(`^“(She|He)”, but I can't tell whether that is ${open}\\.$`), said);
@@ -57,7 +57,7 @@ test("small talk and who-are-you are answered by rule, and say so", T, async () 
 });
 test("a request is not a fact: about what is not known it is acted on, about the world it is refused; a description nobody tied to a name is a typed gap", T, async () => {
   const { makeThread } = await import("./thread.mjs");
-  const fresh = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  const fresh = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00") });
   const r = await fresh.turn("go research it");
   assert.match(r.text, /nothing I'm missing/, "no gap is open and nothing was just told, so there is nothing to look for, and it says so"); assert.equal(fresh.state().sentences, 0, "nothing was read into the fold");
   const before = thread.state().sentences;
@@ -73,7 +73,7 @@ test("statements and a closing question in one message: the statements are read 
 });
 test("negation is a mark carried per clause: a negated statement does not say who did it, and a later negation retracts an earlier affirmation", T, async () => {
   const { makeThread } = await import("./thread.mjs");
-  const mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  const mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00") });
   let th = await mk();
   const said = await th.turn("Mina did not give Jonathan a book.");
   assert.equal(said.facts[0].neg, true, "the fact carries the reader's Polarity=Neg mark");
@@ -96,7 +96,7 @@ test("the word “help” inside a longer message does not open the help screen"
 });
 test("a person whose gender is not settled is told with “they” (plural verb); one the book decided keeps its own forms; a place is never “they”", T, async () => {
   const { makeThread } = await import("./thread.mjs");
-  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00") });
   await th.turn("Casey wrote a letter. Casey was tired. Jordan read the letter in Paris. Casey waved to Jordan. Mina kissed her son. She hugged herself. Mina lost her hat. Mina washed herself. Mina opened her door. Mina saw herself. Mina sold her house.");
   const profile = async (name) => th.engine.wordProfile("", { ref: th.engine.S.read.cast.referents.find((b) => b.forms[0][0] === name).ref });
   const casey = await profile("Casey");
@@ -115,7 +115,7 @@ const D = 24, dir = (i, ...o) => { const v = new Array(D).fill(0); v[i] = 1; o.f
 const VEC = { make: dir(0, [10, 0.1]), create: dir(0, [10, 0.2]), build: dir(0, [11, 0.3]), give: dir(1, [0, 0.4]) }, NEAR_MISS = { ...VEC, build: dir(0, [11, 2.0]) };   // build at 0.44 against a bar of 0.51: a near miss
 const rnd = (key) => { let a = 0; for (const c of key) a = (a * 31 + c.charCodeAt(0)) >>> 0; return Array.from({ length: D }, () => { a = (a * 1664525 + 1013904223) >>> 0; return a / 4294967296 - 0.5; }); };
 const embedOf = (table) => async (ts) => ts.map((t) => table[t.replace(/^to /, "")] ?? rnd(t)), verbEmbed = embedOf(VEC);
-const mkThread = async (extra = {}) => { const { makeThread } = await import("./thread.mjs"); return makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00"), ...extra }); };
+const mkThread = async (extra = {}) => { const { makeThread } = await import("./thread.mjs"); return makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00"), ...extra }); };
 test("a near verb stands in when the exact verb finds nothing and the near verbs agree: “Who made Claude?” against “created”, and the reply says what it read", NEEDS_VERB, async () => {
   const th = await mkThread({ verbEmbed }); await th.turn("Claude was created by Anthropic.");
   const r = await th.turn("Who made Claude?");
@@ -137,7 +137,7 @@ test("the exact verb is never replaced: when it answers, no stand-in runs; with 
 });
 test("“they” is for what the whole thread does not settle: a name or title the prior settles is he or she, four pronouns settle it for the thread, a place that acts keeps its name, a predicate adjective is not something done", T, async () => {
   const { makeThread } = await import("./thread.mjs");
-  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-23T14:51:00") });
   await th.turn("Casey wrote a letter. Casey was tired. Casey waved. Pierre wrote a letter. Pierre lost the hat. Pierre waved. Mrs Bennet wrote a letter. Mrs Bennet lost the hat. Mrs Bennet waved. Paris sent a letter. Paris lost the hat. Paris waved. Mina kissed her son. She hugged herself. Mina lost her hat. Mina washed herself. Mina opened her door.");
   const profile = async (name) => th.engine.wordProfile("", { ref: th.engine.S.read.cast.referents.find((b) => b.forms[0][0] === name).ref });
   const casey = await profile("Casey"); assert.equal(casey.pronoun.source, "they-default"); assert.match(casey.summary, /They wrote and waved\./, "the adjective “tired” is a state, not an act");

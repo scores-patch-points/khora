@@ -43,6 +43,11 @@ const huntOrgan = await import("../organs/void-hunt.js").catch(() => null), hunt
 // statement of gender in it is read as any statement). "x" is "they".
 const GENDER_WORDS = Object.freeze({ man: "m", boy: "m", gentleman: "m", male: "m", woman: "f", girl: "f", lady: "f", female: "f", nonbinary: "x" });
 const verbOrgan = await import("../organs/verb-equivalents.js").catch(() => null), embedMod = await import("../adapters/text/embed-personhood.js").catch(() => null);
+// THE CODE OFFER (the code session's measured mark, eval/route-mark): a request the chat would refuse is checked for closeness to what functions on this machine say they do. It measures TOPIC, not intent (63% of plain
+// requests hit; 3.7% of ordinary chat and 8.3% of non-data imperatives like "open the door" are flagged too: FRESH, developer-written stress set), so it is a WEAK hint: the chat only OFFERS, quotes the nearest function's own
+// words so a wrong offer looks wrong, and runs nothing until the user says yes. T = 0.673, the 97.5th percentile of the closeness of 300 NUS SMS messages (DEV), from eval/route-mark/RESULTS.md.
+const CODE_ROUTE_T = 0.673;
+const codeRoute = await import("./code-route.mjs").catch(() => null), codeMeaning = await import("./code-meaning.mjs").catch(() => null);
 let sharedEmbedder = null;   // one vector library per process, shared by every thread (the persona fold is a thread too)
 
 const WH = new Set(["who", "whom", "what"]);
@@ -88,7 +93,7 @@ const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 const sha = (s) => createHash("sha256").update(String(s)).digest("hex").slice(0, 16);
 
 /** makeThread({ hl, know, now }) → { say, ask, state }.  know: the givers (demo/knowledge.mjs makeKnowledge) or null (typed gaps). */
-export async function makeThread({ hl, know = null, now = () => new Date(), janus = null, log = null, getJson = undefined, verbEmbed = null } = {}) {
+export async function makeThread({ hl, know = null, now = () => new Date(), janus = null, log = null, getJson = undefined, verbEmbed = null, codeRouter = undefined } = {}) {
   const parser = await rowsOfFor("eng"), pr = priorsFor("eng"), engine = await makeEngine({ hl });
   const commonNoun = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); if (!c?.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); };
   const wordKnown = (r) => { const c = classifyWord(String(r.form).toLowerCase(), { posPrior: pr.posPrior }); return !!c?.found && c.total > 0; };   // a word the reader's part-of-speech prior holds
@@ -243,6 +248,16 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     if (!embed) return { gap: "no embedder (native/adapters/text/embed-personhood.js is not in this checkout)" };
     try { return { E: verbOrgan.makeVerbEquivalence({ embed, reference: verbOrgan.referenceVerbs(pr.posPrior) }) }; } catch (e) { return { gap: String(e?.message ?? e).slice(0, 120) }; }
   })());
+  let codeRouterP = null;
+  const codeHint = async (text) => {
+    try {
+      codeRouterP ??= Promise.resolve(codeRouter !== undefined ? codeRouter : codeRoute?.makeRouter ? codeRoute.makeRouter({}) : null);
+      const router = await codeRouterP; if (!router?.score) return null;
+      const sc = await router.score(String(text ?? "")); if (!(sc.unitSim >= CODE_ROUTE_T)) return { data: false, score: +sc.unitSim.toFixed(3) };
+      let words = null; try { words = router.describe ? router.describe(sc.nearest.name) : null; if (words == null && codeMeaning?.INDEX_DIR) { const file = `${codeMeaning.INDEX_DIR}/units.jsonl`; const row = (await import("node:fs")).readFileSync(file, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)).find((r) => r.name === sc.nearest.name); words = row ? codeMeaning.textOfUnit(row) : null; } } catch { words = null; }
+      return { data: true, mark: "code-request", score: +sc.unitSim.toFixed(3), nearest: sc.nearest, words: words ? trimEnd(String(words).split("\n")[0], " \t.:") .slice(0, 110) : null };
+    } catch { return null; }   // no index, no embedder: no offer, the refusal stands
+  };
   async function standInFor(q, qv, qNeg) {
     const veq = await verbEq(); if (veq.gap) return { step: { step: "verb_stand_in", ran: false, gap: veq.gap } };
     const pool = [...(engine.S.verbs ?? [])].filter((v) => v && v !== qv);
@@ -463,6 +478,11 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       if (!nominal.length && !pronounObj) return goOn();
       if (!nominal.length && pronounObj) { if (pending) return ask(pending.question, { onStatus: opts.onStatus }); if (lastTopic) return goOn(); return done({ type: "request", handled: true, text: "There's nothing I'm missing right now. When I can't answer something I go and look for it myself, so ask me something and I will." }); }
       if (propn && know) { const r = await reference(nameChunk(propn)); return r ?? done({ type: "request", handled: false, gap: lastOut?.gap ?? "no_door", text: lastOut?.text ?? "I could not find out." }); }
+      const hint = await codeHint(q);
+      if (hint?.data) {   // OFFER, never run: the user's yes is the consent
+        asked = { kind: "code", sentence: q }; trace.push({ step: "code_offer", mark: hint.mark, score: hint.score, nearest: hint.nearest?.name ?? null });
+        return done({ type: "request", handled: false, gap: "code_offered", text: `I can't do that myself, but I can look for code on this machine that might. The nearest thing I know is ${quote(hint.nearest.name)}${hint.words ? ` (${quote(hint.words)})` : ""}. I'd check any code by running it under python3, and I'll ask you for an example first. Want me to look?` });
+      }
       return done({ type: "request", handled: false, gap: "act_not_possible", text: `I can look things up and answer from what I'm told, but I can't do that.` });
     }
     // a persona: a question about "you" is answered by the persona's prompt, before any other route (help, small talk, the clock)
@@ -725,7 +745,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
 
     // ---- a correction takes the previous reading back, and whatever rests on it
     // a bare "no" straight after the chat asked "did you mean that as a question?" is the answer to THAT, not a correction of what was said before; "no, Pierre hates Natasha." has a clause of its own and is a correction
-    if (marks.correction_mark && !(asked?.kind === "act" && !rows.some((r) => r.upos === "VERB" || r.upos === "AUX"))) {
+    if (marks.correction_mark && !((asked?.kind === "act" || asked?.kind === "code") && !rows.some((r) => r.upos === "VERB" || r.upos === "AUX"))) {
       const cid = propose("this message corrects your previous one", { subject: "this message", verb: "corrects", object: "your previous message" }, true, lastAct
         ? { verdict: "supported", method: "testimony", by, basis: `an opening “no”, and there is a previous message to correct`, witnesses: [witness] }
         : { verdict: "refuted", method: "deduction", by, basis: "an opening “no”, but nothing was said before it to correct" });
@@ -756,7 +776,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       }
       if (j.working === "unread") { workingClaim = propose("this message counts as something I couldn't read", { subject: "this message", verb: "counts as", object: LABEL.eng.unread }, true, { verdict: "unresolved", method: "deduction", by, basis: "no mark supports any kind of message" }); ids.push(workingClaim); }
     }
-    if (asked && asked.kind !== "act" && j.working !== "fragment") asked = null;
+    if (asked && asked.kind !== "act" && asked.kind !== "code" && j.working !== "fragment") asked = null;
     const premise = ideation && !j.open && j.working !== "unread" ? workingClaim : null;   // a claim that is only open cannot be a premise of an answer
     const aOpts = { ...opts, actIds: ids, actPremise: premise };
     const finish = (out, orders = []) => {
@@ -801,6 +821,15 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? fill : r.form)));
       const inner = await turn(rebuilt, { ...opts, _ids: [...ids, cid].filter(Boolean) });
       return inner ? { ...inner, paired: { question: pending.question, answer: fill, rebuilt }, trace: [{ step: "paired", asked: pending.question, answer: fill, rebuilt }, ...(inner.trace ?? [])] } : inner;
+    }
+
+    // ---- THE CODE OFFER is answered by the next message: a yes (an interjection without negative polarity, the reader's own marks) calls the code door with the sentence that was asked; a no drops it; anything else drops it
+    // and is read as itself. Nothing ran before the yes.
+    if (asked?.kind === "code") {
+      const pending = asked; asked = null;
+      const first = rows.find((r) => r.upos !== "PUNCT"), isInterj = first?.upos === "INTJ" && !rows.some((r) => r.upos === "VERB" || r.upos === "AUX"), negative = isInterj && String(first.feats ?? "").split("|").includes("Polarity=Neg");
+      if (isInterj && negative) return finish({ type: "social", handled: true, text: "Okay.", question: t, tools: [], trace: [{ step: "code_offer_declined" }] });
+      if (isInterj) { const inner = await turn(`/code ${pending.sentence}`, { ...opts, _ids: ids }); return inner ? { ...inner, trace: [{ step: "code_offer_accepted", sentence: pending.sentence }, ...(inner.trace ?? [])] } : inner; }
     }
 
     // ---- AN OPEN ACT IS ASKED ABOUT, NOT ROUTED TO THE LEAST HARMFUL READING (a man who cannot tell whether "really?" is a question asks "did you mean that as a question?").

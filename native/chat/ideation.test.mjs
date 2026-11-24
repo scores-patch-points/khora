@@ -31,7 +31,7 @@ try {
   log = rec.openLog();
   janus = await mountJanus({ dir: rec.LOG_DIR });
   if (!janus.on) why = janus.why;
-  else make = (over = {}) => makeThread({ hl: "http://127.0.0.1:1", know, now: () => new Date("2026-11-23T14:51:00"), janus, log, getJson, ...over });
+  else make = (over = {}) => makeThread({ hl: "http://127.0.0.1:1", know, now: () => new Date("2026-11-23T14:51:00"), janus, log, getJson, codeRouter: null, ...over });
 } catch (e) { why = String(e?.message ?? e).slice(0, 140); }
 const th = make ? await make() : null;
 const T = { skip: th ? false : `not available here: ${why}` };
