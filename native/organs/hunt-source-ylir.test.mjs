@@ -11,7 +11,7 @@ const voidOf = { anchors: [{ text: "Alexander", tokens: ["alexander"], forms: ["
 
 test("the documents the void's words point to, best first, each with the sentences that carry the rarest anchor, labelled with their byte addresses", async () => {
   const s = ylirSource({ ...io, k: 2 }), docs = await s.find(voidOf);
-  assert.deepEqual(docs.map((d) => d.title), ["Aristotle", "pg100_Complete_Works"], "the document that has both words most often leads (the score is the sum of log(1 + count) x idf)");
+  assert.deepEqual(docs.map((d) => d.title), ["Aristotle", "pg100 Complete Works"], "the document that has both words most often leads (the score is the sum of log(1 + count) x idf)");
   assert.deepEqual(docs[0].passages.map((p) => p.text), ["He tutored Alexander the Great."]); assert.match(docs[0].passages[0].section, /^bytes \d+-\d+$/);
   assert.equal(docs[0].url, "ylir-one:02-encyclopedic/wikipedia/Aristotle.txt"); assert.equal(docs[0].address.sha256, "aa");
   assert.equal(s.lastRun().docs.length, 2); assert.ok(s.lastRun().docs[0].score > s.lastRun().docs[1].score);

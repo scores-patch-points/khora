@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask the corpus</title>
+<style>
+:root { --bg:#f7f6f3; --panel:#fff; --ink:#1f2328; --muted:#5b6370; --line:#ddd9cd; --me:#2b5fd9; --accent:#b45309; --ok:#15803d; --bad:#b91c1c; --mark:#fde68a; --soft:#faf9f6; }
+@media (prefers-color-scheme: dark) { :root { --bg:#14161a; --panel:#1b1e23; --ink:#ebe9e4; --muted:#a4aab2; --line:#33383f; --me:#3b6fe0; --accent:#e9954a; --ok:#4ade80; --bad:#f87171; --mark:#5b4a12; --soft:#20242a; } }
+* { box-sizing:border-box; } html, body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+header { padding:12px 20px; border-bottom:1px solid var(--line); background:var(--panel); } header b { font-size:17px; } .k { color:var(--muted); }
+.banner { margin:0; padding:10px 20px; background:var(--mark); font-size:14px; }
+main { max-width:960px; margin:0 auto; padding:14px 20px 60px; }
+form { display:flex; gap:8px; } input[type=text] { flex:1; border:1px solid var(--line); border-radius:10px; padding:10px 12px; background:var(--panel); color:var(--ink); font:inherit; font-size:16px; }
+button { border:0; background:var(--me); color:#fff; border-radius:12px; padding:8px 18px; font:inherit; cursor:pointer; } button:disabled { opacity:.5; cursor:default; }
+h2 { margin:26px 0 6px; font-size:18px; } h4 { margin:0 0 6px; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
+.card { margin:12px 0 18px; border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:2px 16px 6px; } .card > section { padding:12px 0; border-top:1px solid var(--line); } .card > section:first-child { border-top:0; }
+.ans { font-size:20px; font-weight:600; margin:4px 0; } .gapv { font-size:17px; font-weight:600; color:var(--accent); }
+blockquote { margin:6px 0; padding:9px 13px; border-left:4px solid var(--accent); background:var(--soft); border-radius:0 8px 8px 0; font-size:14.5px; }
+mark { background:var(--mark); color:inherit; padding:1px 2px; border-radius:3px; outline:1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+dl { display:grid; grid-template-columns:9.5em 1fr; gap:5px 12px; margin:0; } dt { color:var(--muted); } dd { margin:0; min-width:0; } code { font:12.5px ui-monospace, Menlo, monospace; word-break:break-all; }
+table { border-collapse:collapse; width:100%; font-size:13.5px; } th, td { border:1px solid var(--line); padding:5px 8px; vertical-align:top; text-align:left; } th { color:var(--muted); background:var(--soft); font-weight:600; }
+.right { color:var(--ok); font-weight:600; } .wrong { color:var(--bad); font-weight:600; } .gap { color:var(--muted); }
+details { margin:6px 0; } summary { cursor:pointer; color:var(--muted); font-size:13.5px; } summary:hover { color:var(--ink); }
+.row { display:flex; margin:14px 0 4px; justify-content:flex-end; } .me { background:var(--me); color:#fff; padding:8px 14px; border-radius:14px; }
+@media (max-width:700px) { dl { grid-template-columns:1fr; } dt { margin-top:4px; } }
+</style>
+</head>
+<body>
+<header><b>Ask the corpus</b> <span class="k">the chat's hunt reading passages from Ýlir-One; every answer shows its sentence, its document and its byte address</span></header>
+<p class="banner">No language model runs here, and nothing is written anywhere. The ground is the source files; each answer is a sentence cut from its file by byte address, read by the reader. When the corpus does not say, the answer is a gap, said as one.</p>
+<main>
+  <form id="f"><input type="text" id="q" placeholder="Ask a question about the documents; follow-ups can say he, she, it" autocomplete="off" autofocus><button id="go">Ask</button><button id="new" type="button" style="background:var(--soft); color:var(--ink); border:1px solid var(--line)">New conversation</button></form>
+  <div id="log"></div>
+  <h2>How it did on 31 questions it was tested on <span class="k" style="font-size:13px; font-weight:400" id="stamp"></span></h2>
+  <div id="facts" class="k">loading…</div>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }; const esc = (s) => { let o = ""; for (const c of String(s ?? "")) o += ENT[c] ?? c; return o; };
+const stem = (f) => String(f).split("/").pop().replace(".txt", "");
+const TIER = { role: "the sentence has the question's relation as its verb and the answer fills the open role", byline: "a credit line (“a novel by X”)", copular: "said as “the … of X is Y”", linked: "the sentence has the relation and every anchor, with an answer of the right kind", identity: "the sentence says what the thing is", comention: "a name stands next to the anchors; no sentence says the relation, so it is a lead and not an answer" };
+function evidence(e) {
+  const a = e.address, c = a?.context;
+  return `<blockquote>${c ? `…${esc(c.before.slice(-160))}<mark>${esc(c.sentence)}</mark>${esc(c.after.slice(0, 160))}…` : esc(e.sentence)}</blockquote>
+  <div class="k" style="font-size:13px">${esc(stem(a?.file ?? e.title))}${a ? ` · bytes ${a.from}–${a.to} of <code>${esc(a.file)}</code>` : ""}</div>`;
+}
+function card(r) {
+  const v = r.void, ans = r.answer;
+  const asked = !v.ok ? `The question declares nothing to look for, so nothing was searched.` : `It asks for ${esc(v.admits === "person" ? "a person" : v.admits === "place" ? "a place" : v.admits === "time" ? "a time" : "a thing")}${v.relation ? `, tied to the anchor by “${esc(v.relation.lemma)}”` : ""}, about ${v.anchors.map((x) => `“${esc(x)}”`).join(" and ")}.`;
+  return `<article class="card">
+    <section><h4>The answer</h4>${ans ? `<div class="ans">${esc(ans.text)}</div>${r.readAs ? `<div class="k">read “${esc(r.void.relation?.lemma)}” as “${esc(r.readAs)}”, which says the same here (the near-verb stand-in)</div>` : ""}${ans.evidence.map(evidence).join("")}<div class="k" style="font-size:13px">${esc(TIER[ans.tier] ?? ans.tier)}</div>`
+      : `<div class="gapv">I can't say.</div><div>${esc(r.gap?.detail ?? "")}</div><div class="k" style="font-size:13px">kind of gap: ${esc(r.gap?.kind ?? "none")}</div>${r.candidates?.length ? `<h4 style="margin-top:10px">What it found but would not call an answer</h4>${r.candidates.slice(0, 3).map((c) => `<div><b>${esc(c.answer)}</b> <span class="k">(${esc(c.tier)}, in ${c.sentences ?? c.support} sentence${(c.sentences ?? c.support) === 1 ? "" : "s"})</span>${c.evidence[0] ? evidence(c.evidence[0]) : ""}</div>`).join("")}` : ""}`}</section>
+    <section><h4>How it read the question</h4>${r.conversation?.bindings?.length ? `<div>${r.conversation.bindings.map((b) => `“${esc(b.pronoun)}” means <b>${esc(b.referent)}</b> <span class="k">(${esc(b.why)}${b.alternatives.length ? `; it could also be ${esc(b.alternatives.join(", "))}` : ""})</span>`).join("<br>")}</div>` : ""}${r.conversation?.unresolved?.length ? `<div class="gapv" style="font-size:15px">${r.conversation.unresolved.map((u) => `I don't know who “${esc(u.pronoun)}” is: ${esc(u.why)}.`).join("<br>")}</div>` : ""}<div>${asked}</div>${r.conversation?.tracking?.length ? `<div class="k" style="font-size:13px; margin-top:4px">Keeping track of: ${r.conversation.tracking.map((t) => `${esc(t.text)} (${esc(t.kind)}${t.gender ? ", " + esc(t.gender) : ""})`).join(" · ")}</div>` : ""}</section>
+    <section><h4>Where it looked</h4>${r.documents.length ? `<table><tr><th>document</th><th>score</th><th>sentences in it</th><th>passages handed to the reader</th></tr>${r.documents.map((d) => `<tr><td>${esc(stem(d.file))}</td><td>${d.score}</td><td>${d.sentences}</td><td>${d.passages}</td></tr>`).join("")}</table><div class="k" style="font-size:13px; margin-top:4px">The top three documents by how rare each word of the question is in them, from the Ýlir-One index; the reader then read ${r.sentencesRead} sentence${r.sentencesRead === 1 ? "" : "s"}.</div>` : `<div class="k">no document was found${r.sourceGaps?.length ? `: ${esc(r.sourceGaps.map((g) => g.kind).join(", "))}` : ""}</div>`}</section>
+    <section><h4>The record</h4><dl><dt>Model</dt><dd><b>none</b></dd><dt>Near-verb stand-in</dt><dd>${esc(r.equivalents)}${r.standIn ? ` · tried “${esc(r.standIn.asked)}” as ${esc(r.standIn.near.map((n) => n.verb).join(", "))}: ${esc(r.standIn.verdict ?? "no verdict")}` : ""}</dd><dt>Time</dt><dd>${r.ms} ms</dd></dl></section>
+  </article>`;
+}
+async function ask(q) {
+  q = q.trim(); if (!q) return; $("q").value = ""; $("go").disabled = true;
+  const me = document.createElement("div"); me.className = "row"; me.innerHTML = `<div class="me">${esc(q)}</div>`; $("log").prepend(me);
+  const box = document.createElement("div"); box.innerHTML = '<div class="k">reading the question and the documents…</div>'; me.after(box);
+  try { const r = await (await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ question: q }) })).json(); box.innerHTML = r.error ? `<div>${esc(r.error)}</div>` : card(r); } catch (e) { box.innerHTML = `<div>${esc(e)}</div>`; }
+  $("go").disabled = false;
+}
+$("f").onsubmit = (e) => { e.preventDefault(); ask($("q").value); };
+$("new").onclick = async () => { await fetch("/api/reset", { method: "POST" }); $("log").innerHTML = ""; $("q").focus(); };
+fetch("/api/state").then((r) => r.json()).then((s) => {
+  const f = s.facts; if (!f) { $("facts").textContent = "no results file"; return; }
+  $("stamp").textContent = `(questions and accepted answers stamped before any answer was read: ${f.stamp})`;
+  const n = (v) => f.rows.filter((r) => r.verdict === v).length;
+  $("facts").innerHTML = `<p>Out of ${f.rows.length}: <span class="right">${n("right")} right</span>, <span class="wrong">${n("wrong")} wrong</span>, <span class="gap">${n("gap")} said “I can't say”</span>. The three questions with no answer in the corpus were all left as gaps. Exploratory; it is the first real result, not a score to be proud of.</p>
+  <details><summary>every question, and what it said</summary><table><tr><th>question</th><th>result</th><th>what it said</th></tr>${f.rows.map((r) => `<tr><td>${esc(r.q)}</td><td class="${r.verdict}">${r.verdict === "gap" ? "can't say" : r.verdict}</td><td>${esc(r.answer ?? r.gap ?? "")}</td></tr>`).join("")}</table></details>
+  <p class="k" style="font-size:13px">Why most are gaps: the question is misread (an anchor lost), the wrong documents are retrieved when the words are common, or the answer is not in a sentence the hunt can read (“Kant (1724–1804)”). Written up in eval/ylir-find/RESULTS-ANSWER.md.</p>`;
+});
+</script>
+</body>
+</html>

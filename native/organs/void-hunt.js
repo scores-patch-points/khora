@@ -15,6 +15,7 @@
 //
 // BASIS TIERS, best first, each one a different thing the reading can attest:
 //   role      the sentence has the question's relation as a verb and the filler sits in a role the question left open
+//   lifespan  (a question of when X was born or died) the lead's own structure: “X (22 April 1724 – 12 February 1804) was …”: the date before the dash is the birth, the one after it the death
 //   copular   "the capital of X is Y" / "Y is the capital of X": the relation noun, the anchor under it, the filler on the other side
 //   linked    the sentence has the relation and every anchor, and a filler of the right kind, but the parse does not give it the open role
 //   identity  (a question with no relation, “Who is X?”) the sentence says what the anchor IS: a predicate noun (“X was a solicitor”), an apposition (“my friend and master, Professor X, of Amsterdam”)
@@ -28,7 +29,7 @@ import { INTERROGATIVE_ADMITS, ADMITS_KARAKA } from "../adapters/text/wh-narrow.
 export const HUNT_SCHEMA = "VoidHunt@1";
 const lem = (r) => String(r?.lemma ?? r?.form ?? "").toLowerCase();
 const low = (s) => String(s ?? "").toLowerCase();
-const TIERS = Object.freeze(["role", "byline", "copular", "linked", "identity", "comention"]);
+const TIERS = Object.freeze(["role", "byline", "lifespan", "copular", "linked", "identity", "comention"]);
 /** An identity description (“a solicitor”, “Professor”) is an answer only when at least this many DIFFERENT sentences say it: one sentence of a novel, a play or a heading can be a misparse, a quotation or a label, and a description said once is a lead.
  *  A declared dial, the least that "corroborated" can mean (more than one); the hunt's other tiers are judged by documents, which one document of a book cannot supply for a character. */
 export const IDENTITY_MIN_SUPPORT = 2;
@@ -90,7 +91,7 @@ const hops = (rows, a, b) => { const byId = new Map(rows.map((r) => [r.id, r])),
 const under = (rows, node, root) => { const byId = new Map(rows.map((r) => [r.id, r])); let c = node, n = 0; while (c && n++ < 40) { if (c.id === root.id) return true; c = byId.get(c.head); } return false; };
 
 /** the words of a phrase: the node and everything under it (case markers and punctuation left off), as the block of rows it covers */
-const DASHES = new Set(["–", "—", "-"]);
+const DASHES = new Set(["–", "—", "-", "‒", "−"]);   // typographic dash characters (the date phrases and the lifespan parenthetical)
 const phraseOf = (rows, node) => {   // a date or a name phrase: the node and what is under it, cut at a verb, at a dash, and where the words stop touching (a “in Ajaccio” after “1769” is another phrase)
   const cut = rows.find((r) => DASHES.has(r.form) && r.id > node.id)?.id ?? Infinity;
   const sealed = (r) => { let c = r, n = 0; while (c && c.id !== node.id && n++ < 40) { if (c.upos === "VERB" || ["acl", "acl:relcl", "advcl", "parataxis"].includes(c.deprel)) return true; c = rows.find((x) => x.id === c.head); } return false; };
@@ -101,6 +102,8 @@ const phraseOf = (rows, node) => {   // a date or a name phrase: the node and wh
 };
 
 /** matchSentence(void, rows, title) -> [{ answer, tier, why }] : what in this sentence could fill the void, and by which tier */
+/** is a document, by its title, NAMED FOR this anchor? the whole name, “The …”, or a one-word anchor that is the last word of a page named with more of the name (a page “Johann Wolfgang von Goethe” is named for “Goethe”) */
+export const namedFor = (title, anchor) => { const bare = low(title).split(" (")[0], t = (anchor.tokens ?? []).join(" "); return !!bare && !!t && (bare === t || (bare.startsWith("the ") && bare.slice(4) === t) || (!t.includes(" ") && bare.endsWith(` ${t}`))); };   // a bare surname only: “Starry Starry Night” is not named for “Starry Night”
 // ---------------------------------------------------------------------------------------------------------------- what the anchor IS
 const IDENT_OK = new Set(["det", "det:poss", "amod", "compound", "nmod", "nmod:poss", "nmod:desc", "case", "nummod", "appos", "conj", "cc", "flat", "fixed"]);   // what a noun phrase is made of; a relative clause, an adverbial or a verb under it is not a description
 // (the copula and the subject belong to the sentence, not to the description, so they are skipped; anything else outside the noun-phrase deprels makes the description unclean)
@@ -125,13 +128,25 @@ export function identityOf(rows, f) {
   return out;
 }
 
+/** lifespanOf(rows, span) -> { born, died } | null: right after the anchor, “( DATE – DATE )”, read from the rows' own punctuation: the segment before the dash is the birth and the one after it the death (an en dash may sit inside one number token: “384–322”, with a unit after it: “BC”) */
+export function lifespanOf(rows, span) {
+  const last = span?.at(-1); if (!last) return null; const open = rows.find((r) => r.id === last.id + 1); if (!open || open.form !== "(") return null;
+  const inside = []; for (const r of rows) { if (r.id <= open.id) continue; if (r.form === ")") break; inside.push(r); } if (!inside.length) return null;
+  const at = inside.findIndex((r) => DASHES.has(r.form)), text = (rs) => rs.map((r) => r.form).join(" ").trim();
+  if (at >= 0) { const a = inside.slice(0, at), b = inside.slice(at + 1); return a.length && b.length ? { born: text(a), died: text(b) } : null; }
+  const j = inside.findIndex((r) => r.upos === "NUM" && [...String(r.form)].some((c) => DASHES.has(c)));   // “384–322 BC”
+  if (j < 0) return null; const ch = [...String(inside[j].form)], k = ch.findIndex((c) => DASHES.has(c)), unit = text(inside.slice(j + 1));
+  return { born: `${ch.slice(0, k).join("")}${unit ? ` ${unit}` : ""}`, died: `${ch.slice(k + 1).join("")}${unit ? ` ${unit}` : ""}` };
+}
+
 export function matchSentence(v, rows, title = "", { aliases = new Set(), collect = null } = {}) {
   const titleLow = low(title), out = [];
   // every anchor must be carried by the sentence or be the document's own subject
-  const found = v.anchors.map((a) => { const bare = titleLow.split(" (")[0], isTitle = !!titleLow && (bare === a.tokens.join(" ") || (bare.startsWith("the ") && bare.slice(4) === a.tokens.join(" "))); return { a, span: spanOf(rows, a.tokens, { surnameOk: isTitle, fn: a.fn, forms: a.forms }), isTitle }; });
+  const found = v.anchors.map((a) => { const bare = titleLow.split(" (")[0], isTitle = !!titleLow && namedFor(titleLow, a); return { a, span: spanOf(rows, a.tokens, { surnameOk: isTitle, fn: a.fn, forms: a.forms }), isTitle }; });
   if (found.some((f) => !f.span && !f.isTitle)) return out;
   collect?.(rows);   // the sentence carries every anchor: what verbs it has is what the relation may be said as (the relation stand-in in huntVoid)
   const inAnchor = new Set(found.flatMap((f) => (f.span ?? []).map((r) => r.id)));
+  if (v.admits === "time" && ["bear", "die"].includes(v.relation?.lemma) && v.anchors.length === 1 && found[0].span) { const ls = lifespanOf(rows, found[0].span); if (ls) { const d = v.relation.lemma === "bear" ? ls.born : ls.died; out.push({ answer: d, peers: [], tier: "lifespan", why: `the lead gives the lifespan “( ${ls.born} – ${ls.died} )” after the name: the date before the dash is the birth, after it the death` }); return out; } }
   if (!v.relation && v.admits === "person" && v.anchors.length === 1 && found[0].span) { for (const d of identityOf(rows, found[0])) out.push({ answer: d.text, peers: [], tier: "identity", why: d.why }); return out; }   // “Who is X?”: names beside X are not what is asked; what X is, is
   const kinds = KIND_OK[v.admits] ?? [], fillers = v.admits === "time"
     ? rows.filter((r) => rows.find((h) => h.id === r.head)?.upos === "VERB" && !inAnchor.has(r.id) && r.upos !== "PUNCT" && r.deprel !== "case" && !["nsubj", "nsubj:pass", "obj", "iobj", "csubj", "xcomp", "ccomp", "parataxis", "conj"].includes(r.deprel) && rows.some((c) => c.upos === "NUM" && under(rows, c, r))).map((r) => [r])   // the phrase under the verb that holds the date
@@ -142,7 +157,7 @@ export function matchSentence(v, rows, title = "", { aliases = new Set(), collec
   // the anchors must stand in the sentence as they stand in the question: under the same verb, in the same role. A passive lead (“X is a film directed by Y”) puts X under “directed”
   // through the noun the participle modifies.
   // a sentence about the page's subject that names neither the anchor nor a “he/she/it” for it is about someone else (“Eddie Lincoln, born in 1846”, on Lincoln's page)
-  const present = found.every((f) => f.span || (f.isTitle && rows.some((r) => r.upos === "PRON" && ["3", null].includes(featOf(r, "Person")) && ["nsubj", "nsubj:pass", "obj", "nmod:poss"].includes(r.deprel))));
+  const present = found.every((f) => f.span || (f.isTitle && rows.some((r) => r.upos === "PRON" && ["3", null].includes(featOf(r, "Person")) && [null, "Sing"].includes(featOf(r, "Number")) && ["nsubj", "nsubj:pass", "obj", "nmod:poss"].includes(r.deprel))));
   const holdsAnchorsUnder = (verb) => found.every(({ a, span, isTitle }) => {
     if (!a.fn) return true;
     const own = rows.filter((r) => verbAbove(rows, r) === verb && functionOf(rows, r) === a.fn);
@@ -150,7 +165,7 @@ export function matchSentence(v, rows, title = "", { aliases = new Set(), collec
     // “Founded in 1975 by A and B, Microsoft rose”, “Born in a cabin on 12 February 1809, Lincoln was raised”: a verb with no subject of its own is said of the subject of the clause it is joined to, whichever of the two the parser made the root
     const joined = hasSubject ? [] : rows.filter((vb) => vb.upos === "VERB" && vb !== verb && (verb.head === vb.id || (vb.head === verb.id && ["parataxis", "advcl", "conj", "ccomp", "xcomp"].includes(vb.deprel))));
     const holder = own.length || !joined.length ? own : rows.filter((r) => joined.some((vb) => verbAbove(rows, r) === vb) && ["nsubj", "nsubj:pass"].includes(r.deprel));
-    if (holder.some((r) => (span ?? []).some((x) => x.id === r.id) || (isTitle && r.upos === "PRON"))) return true;
+    if (holder.some((r) => (span ?? []).some((x) => x.id === r.id) || (isTitle && r.upos === "PRON" && ["nsubj", "nsubj:pass", "obj", "iobj", "obl:agent"].includes(r.deprel) && [null, "Sing"].includes(featOf(r, "Number"))))) return true;
     const N = verb.deprel?.startsWith("acl") ? rows.find((r) => r.id === verb.head) : null;   // a film directed by Y: the film is the anchor, and it is what was directed
     return !!N && a.fn === "patient" && ((span ?? []).some((x) => x.id === N.id || x.head === N.id || N.head === x.id) || (isTitle && rows.some((c) => c.head === N.id && c.deprel === "nsubj")));
   });
@@ -164,7 +179,9 @@ export function matchSentence(v, rows, title = "", { aliases = new Set(), collec
   const isAnchorName = (run) => { const t = low(textOf(run)); return anchorText.some((a) => t === a || t.includes(a) || (t.includes(" ") && a.includes(t))); };   // a bare “Vinci” inside “Leonardo da Vinci” is a place; “Starry Night” inside “The Starry Night” is the thing itself
   const nextTo = (run, upos) => rows.some((r) => r.upos === upos && (r.id === run[0].id - 1 || r.id === run.at(-1).id + 1));
   const caseOf = (run) => rows.filter((c) => c.deprel === "case" && run.some((r) => r.id === c.head)).map((c) => low(c.form));
-  const answerText = (run) => (v.admits === "time" ? phraseOf(rows, run[0]).map((r) => r.form).join(" ") : textOf(run));
+  const placed = (run) => caseOf(run).some((c) => PLACE_CASE.includes(c)) || PLACE_CASE.includes(low(rows.find((x) => x.id === run[0].id - 1)?.form));   // marked as a place: a locative preposition on it, or right before it whatever the parser tagged it
+  const unfused = (t) => { const c = [...t]; for (let i = 1; i + 1 < c.length; i++) if (c[i] === "." && c[i - 1] !== c[i - 1].toUpperCase() && c[i + 1] === c[i + 1].toUpperCase() && c[i + 1] !== c[i + 1].toLowerCase()) return c.slice(0, i).join(""); return t; };   // a lower-case letter, a full stop, a capital with no space: two sentences run together by the extraction
+  const answerText = (run) => (v.admits === "time" ? unfused(phraseOf(rows, run[0]).map((r) => r.form).join(" ")) : textOf(run));
   const anchorHeads = found.filter((f) => f.span).map((f) => f.span.at(-1));
   const depthTo = (run, verb) => { const byId = new Map(rows.map((r) => [r.id, r])); let c = run.find((r) => !run.some((x) => x.id === r.head)) ?? run[0], d = 0, n = 0; while (c && c.id !== verb.id && n++ < 40) { if (!["conj", "flat", "compound", "case"].includes(c.deprel)) d++; c = byId.get(c.head); } return c ? d : 99; };
   for (const run of fillers) {
@@ -186,7 +203,7 @@ export function matchSentence(v, rows, title = "", { aliases = new Set(), collec
       const subjectIsAnchor = pred && (found.every((f) => f.span ? rows.some((k) => k.head === pred.id && k.deprel === "nsubj" && (f.span.some((s) => s.id === k.id) || under(rows, k, rows.find((z) => z.id === f.span.at(-1).id) ?? k))) : (f.isTitle && rows.some((k) => k.head === pred.id && k.deprel === "nsubj" && (k.upos === "PRON" || aliases.has(lem(k)))))));   // on a page named for the anchor, only “it” or the page's own word for its subject (“the novel”) stands for it: “the libretto” or “a musical adaptation” is another thing
       if (subjectIsAnchor && !isAnchorName(run)) { out.push({ answer: answerText(run), peers: peersOf(run), tier: "byline", why: `“${textOf(run)}” is credited as the maker in “${pred.form} by …”, said of the anchor, and the question's “${v.relation.lemma}” is a verb of making` }); continue; }
     }
-    if (verb && role && present && holdsAnchorsUnder(verb)) { out.push({ _d: depthTo(run, verb), answer: answerText(run), peers: peersOf(run), tier: "role", why: `${run.map((r) => r.form).join(" ")} is the ${role} of “${lem(verb)}”, with every anchor in the sentence` }); continue; }
+    if (verb && role && present && holdsAnchorsUnder(verb) && (v.admits !== "place" || placed(run))) { out.push({ _d: depthTo(run, verb), answer: answerText(run), peers: peersOf(run), tier: "role", why: `${run.map((r) => r.form).join(" ")} is the ${role} of “${lem(verb)}”, with every anchor in the sentence` }); continue; }
     const noun = nouns.find((n) => anchorHeads.some((h) => under(rows, h, n) && h !== n) || (found.some((f) => f.isTitle) && rows.some((c) => c.head === n.id && c.deprel === "nmod:poss" && (c.upos === "PRON" || aliases.has(lem(c))))));
     if (noun) {
       const cop = rows.some((r) => r.deprel === "cop" && r.head === noun.id), subj = rows.find((r) => r.head === noun.id && r.deprel === "nsubj"), onNoun = under(rows, run[0], noun) && run[0].id !== noun.id && !run.some((r) => r.deprel === "nsubj" && r.head === noun.id) && !anchorHeads.some((h) => under(rows, run[0], h));
@@ -196,7 +213,7 @@ export function matchSentence(v, rows, title = "", { aliases = new Set(), collec
       if (appos && run.some((r) => r.id === appos.id)) { out.push({ answer: answerText(run), peers: peersOf(run), tier: "copular", why: `“${run.map((r) => r.form).join(" ")}, the ${v.relation.lemma} of the anchor”` }); continue; }
       if (sideB && (!onNoun || predicate)) { out.push({ answer: answerText(run), peers: peersOf(run), tier: "copular", why: `the ${v.relation.lemma} of the anchor, said as “${run.map((r) => r.form).join(" ")}” on the other side of “is”` }); continue; }
     }
-    if (present && verbs.some((vb) => run.some((r) => verbAbove(rows, r) === vb || (v.admits === "time" && r.head === vb.id)) && holdsAnchorsUnder(vb))) { out.push({ answer: answerText(run), peers: peersOf(run), tier: "linked", why: `the sentence has “${v.relation.lemma}” and every anchor, and ${run.map((r) => r.form).join(" ")} is of the kind asked for, but the parse gives it no open role` }); continue; }
+    if (present && (v.admits !== "place" || placed(run)) && verbs.some((vb) => run.some((r) => verbAbove(rows, r) === vb || (v.admits === "time" && r.head === vb.id)) && holdsAnchorsUnder(vb))) { out.push({ answer: answerText(run), peers: peersOf(run), tier: "linked", why: `the sentence has “${v.relation.lemma}” and every anchor, and ${run.map((r) => r.form).join(" ")} is of the kind asked for, but the parse gives it no open role` }); continue; }
     // a name coordinated with an anchor ("Gibson and Glover") is its peer, not something it is related to
     const partOfAnchor = run.some((r) => ["compound", "flat", "amod"].includes(r.deprel) && found.some((f) => f.span?.some((a) => a.id === r.head)));
     const peer = partOfAnchor || run.some((r) => r.deprel === "conj" && found.some((f) => f.span?.some((a) => a.id === r.head))) || found.some((f) => f.span?.some((a) => a.deprel === "conj" && run.some((r) => r.id === a.head)));
@@ -261,10 +278,10 @@ async function huntCore0(v, { sources = [], read, split, maxSentences = 600, bud
   // “Shakespeare” and “William Shakespeare” are one candidate: the shorter is folded into the longer that contains it, with its support
   const all = [...found.values()].sort((a, b) => b.answer.split(" ").length - a.answer.split(" ").length);
   for (const c of all) { const longer = all.filter((d) => d !== c && c.answer.split(" ").length === 1 && d.answer.split(" ").length > 1 && low(d.answer).split(" ").at(-1) === low(c.answer) && found.has(low(d.answer))), big = longer.length === 1 ? longer[0] : null; if (big && found.has(low(c.answer))) { big.support.push(...c.support); c.docs.forEach((x) => big.docs.add(x)); c.sources.forEach((x) => big.sources.add(x)); if (TIERS.indexOf(c.tier) < TIERS.indexOf(big.tier)) { big.tier = c.tier; big.why = c.why; } found.delete(low(c.answer)); } }
-  const candidates = [...found.values()].map((c) => ({ answer: c.answer, tier: c.tier, why: c.why, support: c.support.length, sentences: new Set(c.support.map((x) => x.sentence)).size, documents: c.docs.size, sources: [...c.sources], evidence: [...c.support].sort((x, y) => Number(!v.anchors.some((an) => low(String(x.title)).split(" (")[0] === an.tokens.join(" "))) - Number(!v.anchors.some((an) => low(String(y.title)).split(" (")[0] === an.tokens.join(" ")))).slice(0, 4), corroborated: c.docs.size > 1 }))
+  const candidates = [...found.values()].map((c) => ({ answer: c.answer, tier: c.tier, why: c.why, support: c.support.length, sentences: new Set(c.support.map((x) => x.sentence)).size, documents: c.docs.size, sources: [...c.sources], evidence: [...c.support].sort((x, y) => Number(!v.anchors.some((an) => namedFor(x.title, an))) - Number(!v.anchors.some((an) => namedFor(y.title, an)))).slice(0, 4), inOwnPage: c.support.some((x) => v.anchors.some((an) => namedFor(x.title, an))), corroborated: c.docs.size > 1 }))
     .sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier) || Number(b.tier === "identity" && b.sentences >= IDENTITY_MIN_SUPPORT) - Number(a.tier === "identity" && a.sentences >= IDENTITY_MIN_SUPPORT) || b.documents - a.documents || b.support - a.support);
   const peerKey = (c) => new Set([low(c.answer), ...[...(found.get(low(c.answer))?.peers ?? [])].map(low)]);
-  const best = candidates.filter((c) => c.tier === candidates[0]?.tier);
+  const sameTier = candidates.filter((c) => c.tier === candidates[0]?.tier), best = sameTier.some((c) => c.inOwnPage) && sameTier.some((c) => !c.inOwnPage) ? sameTier.filter((c) => c.inOwnPage) : sameTier;   // what the page named for the subject says about the subject outranks what another document says in the same tier
   const containersEarly = new Set([...found.values()].flatMap((c) => [...c.contexts])), top = best.find((c) => !containersEarly.has(low(c.answer))) ?? best[0];
   // names that were said together in a sentence (“founded by Bill Gates and Paul Allen”) answer together: they are one set, not rivals
   // a place that another candidate sits inside (“Ulm … in the German Empire”) is that candidate's container: the more specific answer leads
@@ -307,7 +324,7 @@ async function huntVoidBase(v, opts = {}) {
   if (!trails || !v?.ok) return huntCore(v, opts);
   const head = huntHead(v), t0 = now();
   // the remembered pages, the one named for the thing asked about first: a trail that reinforces itself drifts toward whatever it already follows (the army-ant mill), so the page that is the subject leads
-  const named = (x) => Number(!(v.anchors ?? []).some((an) => low(String(x[1])).split(" (")[0] === an.tokens.join(" ")));
+  const named = (x) => Number(!(v.anchors ?? []).some((an) => namedFor(x[1], an)));
   const remembered = trails.known(head).map((r) => r.split("|")).filter((x) => x.length >= 2).sort((a, b) => named(a) - named(b)).slice(0, 2);
   if (remembered.length) {
     const pseudo = sources.filter((src) => typeof src.page === "function" && remembered.some(([n]) => n === src.name)).map((src) => ({ name: src.name, exists: src.exists, find: async (_v, o) => (await Promise.all(remembered.filter(([n]) => n === src.name).map(([, title]) => src.page(title, o)))).filter(Boolean) }));

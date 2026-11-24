@@ -40,7 +40,7 @@ export function ylirSource({ lookup, catalog, sentences, total, k = 3, maxPassag
         const ss = await sentences(doc); if (!ss) { gap({ kind: "sentences_unavailable", doc, file: cat.file, why: "the file's bytes do not match the catalog, or the file is missing" }); continue; }
         const picked = needle ? ss.filter((x) => low(x.text).includes(needle)).slice(0, maxPassages) : [];
         last.docs.push({ doc, file: cat.file, score: +s.toFixed(2), sentences: ss.length, passages: picked.length });
-        out.push({ title: stemOf(cat.file), url: `ylir-one:${cat.file}`, address: { file: cat.file, sha256: cat.sha256 ?? null }, passages: picked.map((x) => ({ section: `bytes ${x.from}-${x.to}`, text: x.text })) });
+        out.push({ title: stemOf(cat.file).split("_").join(" "), url: `ylir-one:${cat.file}`, address: { file: cat.file, sha256: cat.sha256 ?? null }, passages: picked.map((x) => ({ section: `bytes ${x.from}-${x.to}`, text: x.text })) });
       }
       return out;
     },

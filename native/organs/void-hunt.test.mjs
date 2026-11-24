@@ -281,3 +281,17 @@ test("identity needs corroboration: a description said by one sentence is a lead
   const same = await ask("Who is Jonathan Harker?", "Jonathan Harker is a young solicitor. Jonathan Harker is a young solicitor."); assert.equal(same.answer, null, "the same sentence twice is one sentence");
   const twice = await ask("Who is Jonathan Harker?", "Jonathan Harker is a young solicitor. Jonathan Harker was a young solicitor."); assert.equal(twice.answer.answerText, "a young solicitor"); assert.equal(twice.candidates[0].sentences, 2);
 });
+
+test("lifespan: “X (22 April 1724 – 12 February 1804) was …” answers when X was born and when X died from the parenthetical, and “384–322 BC” is read the same way; the page named for a fuller name still counts as the subject's own page", T, async () => {
+  const ask = async (q, text, title = "t") => huntVoid(voidOf(q), { sources: [source({ title, passages: [{ section: null, text }] })], read, split });
+  const kant = "Immanuel Kant (22 April 1724 – 12 February 1804) was a German philosopher.";
+  assert.equal((await ask("When was Immanuel Kant born?", kant)).answer?.answer, "22 April 1724"); assert.equal((await ask("When did Immanuel Kant die?", kant)).answer?.answer, "12 February 1804");
+  const plato = "Plato (428–348 BC) was an Athenian philosopher."; assert.equal((await ask("When was Plato born?", plato)).answer?.answer, "428 BC"); assert.equal((await ask("When did Plato die?", plato)).answer?.answer, "348 BC");
+  const h = await ask("When did Goethe die?", "Johann Wolfgang von Goethe (28 August 1749 – 22 March 1832) was a German writer."); assert.equal(h.answer?.answer, "22 March 1832", "“Johann Wolfgang von Goethe (…)” is Goethe himself; “Hans Albert Einstein (…)” is not Albert Einstein (the span guard)");
+  const titled = await ask("When did Kant die?", "Kant died in Königsberg in 1804.", "Immanuel Kant"); assert.equal(titled.answer?.answer, "1804", "a page named with more of the name is the subject's own: the bare surname counts");
+});
+
+test("the page named for the subject outranks another document in the same tier, and a page named with more of a name is the subject's own", T, async () => {
+  const own = { title: "Plato", passages: [{ section: null, text: "Plato was born in Athens." }] }, other = { title: "Epimenides", passages: [{ section: null, text: "Plato was born in Aegina, they say." }] };
+  const h = await huntVoid(voidOf("Where was Plato born?"), { sources: [source(other, own)], read, split }); assert.equal(h.answer?.answer, "Athens", JSON.stringify(h.candidates.map((c) => [c.answer, c.tier, c.inOwnPage])));
+});
