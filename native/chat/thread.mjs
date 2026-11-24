@@ -23,6 +23,8 @@ import { referentsInOrder } from "../adapters/text/referents-in-order.mjs";
 import { proformsOfParse, featsOf } from "../adapters/text/gender-from-corpus.js";
 import { classifyWord } from "../adapters/text/wordclass.js";
 import { loadNameGender, MIN_EVIDENCE } from "../adapters/text/name-gender.js";
+// the given-name prior (another session's module): a title before a name, then the name's dictionary given-name sense, then the Wikidata given-name snapshot, each saying where it came from and how often that source was right on held-out novels. Absent, the older table below is used if there is one, and the gap is said.
+const genderMod = await import("../adapters/text/gender-of-words.js").catch(() => null);
 import { makeIdeation } from "./ideation.mjs";
 import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
@@ -86,8 +88,11 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   const table = loadNameGender();
   // a missing prior is a gap said, never a silent degrade (nexus rule 2): without this table no name's gender is known, so no pronoun is steered by a name's lean and the fit of a name
   // to "he" or "she" cannot be checked. It was missing from this checkout for the whole session (found by the other session, 2026-11-23); the state and the pairing say so.
-  const nameGenderGap = table ? null : "no table of given names (native/adapters/text/name-gender/eng.json is not in this checkout): a name's gender cannot be checked";
-  const genderOf = (words) => { let m = 0, f = 0; for (const w of words ?? []) { const c = table?.words?.[String(w).toLowerCase()]; if (c) { m += c[0]; f += c[1]; } } return m + f >= MIN_EVIDENCE && m !== f ? (m > f ? "m" : "f") : null; };
+  const nameGender = genderMod?.makeDefaultNameGenderPrior ? genderMod.makeDefaultNameGenderPrior({}) : null;
+  const legacyGender = (words) => { let m = 0, f = 0; for (const w of words ?? []) { const c = table?.words?.[String(w).toLowerCase()]; if (c) { m += c[0]; f += c[1]; } } return m + f >= MIN_EVIDENCE && m !== f ? (m > f ? "m" : "f") : null; };
+  const nameGenderGap = nameGender && !nameGender.missing ? null : table ? null : nameGender ? "no table of given names (native/adapters/text/name-gender/dictionary-en.json has not been built; scripts/build-name-gender-dictionary.mjs builds it): a name's gender cannot be checked" : "no table of given names (native/adapters/text/gender-of-words.js and name-gender/ are not in this checkout): a name's gender cannot be checked";
+  const genderOf = (words) => (nameGender && !nameGender.missing ? nameGender.genderOf(words) : legacyGender(words));
+  const genderWhy = (words) => (nameGender && !nameGender.missing ? nameGender.explain(words) : null);   // { gender, source, word, reliability: { text }, open }
   const abbr = (t) => abbreviationsFor(t, { priors: pr, aliases: [], abbreviations: null }).set;
   const id = `thread:${sha(now().toISOString() + Math.random())}`;
   let text = "", parse = [], folded = "", cast = null, last = null, persona = null;
@@ -149,9 +154,11 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const known = fits.filter((b) => givenPersons.has(b.ref));
     if (!sure.length && known.length === 1) return { cls, open: false, ref: known[0].ref, candidates: [{ ref: known[0].ref, label: known[0].forms[0][0] }] };
     const cand = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] }));
-    if (sure.length === 1) return { cls, open: false, ref: sure[0].ref, candidates: cand(sure) };
+    // what the decision rested on, for the reply to show: what the user settled, a pro-form the thread attached, or the name prior with its source and its measured reliability
+    const viaOf = (b) => { if (told.has(b.ref)) return { source: "you told me" }; const wd = (b.forms ?? []).flatMap(([f]) => String(f).split(" ")); const e = genderWhy(wd); return e?.gender ? { source: e.source, word: e.word, text: e.reliability?.text ?? null } : { source: "the thread's own pronouns" }; };
+    if (sure.length === 1) return { cls, open: false, ref: sure[0].ref, candidates: cand(sure), via: viaOf(sure[0]) };
     if (sure.length > 1) return { cls, open: true, ref: null, candidates: cand(sure) };
-    if (fits.length === 1) return { cls, open: false, ref: fits[0].ref, candidates: cand(fits) };
+    if (fits.length === 1) return { cls, open: false, ref: fits[0].ref, candidates: cand(fits), via: { source: "the only one it could be" } };
     if (!fits.length) return { cls, open: false, ref: null, candidates: [] };
     return { cls, open: true, ref: null, candidates: cand(fits) };
   };
@@ -448,6 +455,12 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
           trace.push({ step: "identity", target: tgt.form, open: pinfo.candidates.map((c) => c.label) });
           return done({ type: "identity", handled: false, gap: "pronoun_open", text: `Do you mean ${listOr(pinfo.candidates.map((c) => c.label))}?` });
         }
+        if (pinfo?.ref && ["title", "name", "snapshot"].includes(pinfo.via?.source)) {   // the pronoun was settled by a name prior: it is a claim, with its source and how often that source is right
+          const nm = S.refByRef.get(pinfo.ref)?.forms?.[0]?.[0] ?? pinfo.ref;
+          if (ideation) { const c = idea({ label: `${quote(tgt.form)} stands for ${nm}`, relation: { subject: tgt.form, verb: "stands for", object: nm }, door: "induced", giver: `name prior:${pinfo.via.source}` });
+          ideation.assess(c, { verdict: "supported", method: "deduction", by: `the name prior (${pinfo.via.source})`, basis: `${quote(nm)} reads as ${pinfo.cls === "f" ? "a woman's" : "a man's"} name (${pinfo.via.source}; ${pinfo.via.text ?? "reliability not recorded"})`, license: "a prior that records how often each source has been right on held-out text" }); }
+          trace.push({ step: "gender", of: nm, source: pinfo.via.source, reliability: pinfo.via.text });
+        }
         const ref = pinfo?.ref ?? refOf(tgt), being = ref ? S.refByRef.get(ref) : null, known = !!being && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order;
         trace.push({ step: "identity", target: tgt.form, bound: tgt.upos === "PRON" ? ref : null, known });
         if (known && S.sentencesOfRef.has(ref)) {
@@ -530,7 +543,15 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         if (!x.pron || !x.node) return x.text;
         const dot = x.node.indexOf("."), o = Number(x.node.slice(1, dot < 0 ? undefined : dot)), row = dot < 0 ? null : S.rowsOf.get(o)?.rows?.find((r) => r.id === Number(x.node.slice(dot + 2)));
         const info = row ? pronounInfo(featsOf(row.feats), o) : null;
-        if (info?.ref) return S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? x.text;
+        if (info?.ref) {
+          const nm = S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? x.text;
+          if (["title", "name", "snapshot"].includes(info.via?.source)) {   // settled by the name prior: said, with its source and how often that source is right
+            if (ideation) { const c = idea({ label: `${quote(x.text)} stands for ${nm}`, relation: { subject: x.text, verb: "stands for", object: nm }, door: "induced", giver: `name prior:${info.via.source}` });
+            ideation.assess(c, { verdict: "supported", method: "deduction", by: `the name prior (${info.via.source})`, basis: `${quote(nm)} reads as ${info.cls === "f" ? "a woman's" : "a man's"} name (${info.via.source}; ${info.via.text ?? "reliability not recorded"})`, license: "a prior that records how often each source has been right on held-out text" }); }
+            trace.push({ step: "gender", of: nm, source: info.via.source, reliability: info.via.text });
+          }
+          return nm;
+        }
         return info?.open ? `${quote(x.text)}, but I can't tell whether that is ${listOr(info.candidates.map((c) => c.label))}` : x.text;
       };
       const fillers = top.answer.filter((x, i, all) => !all.some((y, j) => j !== i && y.label === x.label && y.text.length > x.text.length && y.text.includes(x.text)));   // "rum and treasure" and its own part "and treasure" are one answer
@@ -646,7 +667,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         : names.length ? (held ? null : `I don't know “${fill}”, so I can't tell whether it is the thing you mean`) : (heads.every((r) => wordKnown(r)) ? null : `I can't read “${fill}”`);
       const cid = propose(`this message answers your question about ${quote(pron.form)}`, { subject: "this message", verb: "answers", object: "the question about the pronoun" }, true, why
         ? { verdict: "refuted", method: "deduction", by, basis: `it came straight after my question about “${pron.form}”, but ${why}` }
-        : { verdict: "supported", method: "testimony", by, basis: `a ${names.length ? "name" : "noun phrase"} that fits “${pron.form}”, straight after I asked what it stood for${gendered && names.length && nameGenderGap ? " (I have no table of given names, so I could not check that the name suits “" + pron.form + "”)" : ""}`, witnesses: [witness] });
+        : { verdict: "supported", method: "testimony", by, basis: `a ${names.length ? "name" : "noun phrase"} that fits “${pron.form}”, straight after I asked what it stood for${gendered && names.length ? (nameGenderGap ? " (I have no table of given names, so I could not check that the name suits “" + pron.form + "”)" : (() => { const e = genderWhy(names.map((r) => r.form)); return e?.gender ? ` (${quote(names[0]?.form ?? e.word ?? fill)} reads as ${e.gender === "f" ? "a woman's" : "a man's"} name: ${e.source}, ${e.reliability?.text ?? "reliability not recorded"})` : " (nothing in the name says whether it is a man's or a woman's)"; })()) : ""}`, witnesses: [witness] });
       if (why) return finish({ type: "relational", handled: false, gap: "answer_does_not_fit", text: `I can't use ${quote(fill || t)} for ${quote(pron.form)}: ${why}. Who or what do you mean?`, question: t, tools: [], trace: [{ step: "pairing_refused", why }], ideaIds: [cid].filter(Boolean) });   // the question stays open
       asked = null;
       const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? fill : r.form)));
@@ -697,5 +718,5 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
   }
 
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? "loaded" } }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded") } }) };
 }

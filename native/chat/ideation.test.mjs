@@ -367,16 +367,21 @@ test("mechanic 7, over-pairing closed: an answer is used only if it fits what wa
   const th = await mk(); await th.turn("is it open?"); await th.turn("Hahaha"); const good = await th.turn("the shop"); assert.equal(good.paired?.rebuilt, "is the shop open?");
 });
 
-test("a missing prior is said, not silently skipped: without the given-name table the state says so, and a pairing of a name to he or she says it could not check the name", T, async () => {
-  const { loadNameGender } = await import("../adapters/text/name-gender.js");
-  const mine = await make(); const have = !!loadNameGender();
-  assert.equal(mine.state().priors.nameGender === "loaded", have);
-  if (have) return;   // with the table present there is nothing to say
-  assert.match(mine.state().priors.nameGender, /^no table of given names \(native\/adapters\/text\/name-gender\/eng\.json is not in this checkout\)/);
+test("a prior that is missing is said, not silently skipped; when it is there the reply shows its source and how often that source was right", T, async () => {
+  const prior = (await import("../adapters/text/gender-of-words.js").catch(() => null))?.makeDefaultNameGenderPrior?.({}), have = !!prior && !prior.missing;
+  const mine = await make();
+  assert.equal(mine.state().priors.nameGender.startsWith("loaded"), have);
   await mine.turn("did he arrive?"); const r = await mine.turn("Pierre");
   assert.equal(r.paired?.rebuilt, "did Pierre arrive?");
   const claim = r.thought.claims.find((x) => x.relation.verb === "answers");
-  assert.match(claim.assessed.basis, /I have no table of given names, so I could not check that the name suits “he”/);
+  if (have) {
+    assert.match(claim.assessed.basis, /“Pierre” reads as a man's name: name, right \d+% \(\d+ of \d+\) on held-out novels/);
+    const wrong = await make(); await wrong.turn("did he arrive?"); const w = await wrong.turn("Natasha");
+    assert.equal(w.gap, "answer_does_not_fit"); assert.match(w.text, /“Natasha” is usually a woman's name/);
+  } else {
+    assert.match(mine.state().priors.nameGender, /^no table of given names/);
+    assert.match(claim.assessed.basis, /I have no table of given names, so I could not check that the name suits “he”/);
+  }
 });
 
 test("“say more” goes on about what the chat was just telling: the article is read, two sentences at a time, as Wikipedia's words, until there is no more", T, async () => {
