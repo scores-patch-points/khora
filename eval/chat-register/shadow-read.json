@@ -1,0 +1,989 @@
+{
+ "stamp": {
+  "when": "2026-11-24T18:02:43.117Z",
+  "split": "EXPLORATORY (developer-written conversations, three prose passages)",
+  "commit": "85de2ae",
+  "priorsHome": "/Users/mlacy/Documents/janus/priors"
+ },
+ "totals": {
+  "agree": 4,
+  "conflict": 11,
+  "chat_open": 82,
+  "chat_none": 2,
+  "canon_none": 22,
+  "both_none": 23
+ },
+ "rows": [
+  {
+   "label": "open names, she",
+   "chars": 30,
+   "pronouns": 1,
+   "aligned": 1,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 1,
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "chat_open",
+     "pronoun": "She",
+     "at": 19,
+     "context": "Zelko met Brannoc. She smiled.",
+     "chat": null,
+     "open": [
+      "Zelko",
+      "Brannoc"
+     ],
+     "via": null,
+     "canonical": "Brannoc",
+     "confident": false
+    }
+   ]
+  },
+  {
+   "label": "open names, she (Casey, Jordan)",
+   "chars": 29,
+   "pronouns": 1,
+   "aligned": 1,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 1,
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "chat_open",
+     "pronoun": "She",
+     "at": 18,
+     "context": "Casey met Jordan. She smiled.",
+     "chat": null,
+     "open": [
+      "Casey",
+      "Jordan"
+     ],
+     "via": null,
+     "canonical": "Jordan",
+     "confident": false
+    }
+   ]
+  },
+  {
+   "label": "open names, he (Riley, Taylor)",
+   "chars": 33,
+   "pronouns": 1,
+   "aligned": 1,
+   "counts": {
+    "agree": 1,
+    "conflict": 0,
+    "chat_open": 0,
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": []
+  },
+  {
+   "label": "names the prior settles, she",
+   "chars": 31,
+   "pronouns": 1,
+   "aligned": 1,
+   "counts": {
+    "agree": 1,
+    "conflict": 0,
+    "chat_open": 0,
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": []
+  },
+  {
+   "label": "names the prior settles, he",
+   "chars": 30,
+   "pronouns": 1,
+   "aligned": 0,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 0,
+    "chat_none": 0,
+    "canon_none": 1,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "canon_none",
+     "pronoun": "He",
+     "at": 20,
+     "context": "Pierre met Natasha. He smiled.",
+     "chat": "Pierre",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "a village and a book",
+   "chars": 52,
+   "pronouns": 1,
+   "aligned": 0,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 0,
+    "chat_none": 0,
+    "canon_none": 1,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "canon_none",
+     "pronoun": "She",
+     "at": 27,
+     "context": "Mina gave Jonathan a book. She lives in the village.",
+     "chat": "Mina",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "titles",
+   "chars": 73,
+   "pronouns": 2,
+   "aligned": 1,
+   "counts": {
+    "agree": 1,
+    "conflict": 0,
+    "chat_open": 0,
+    "chat_none": 0,
+    "canon_none": 1,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "canon_none",
+     "pronoun": "She",
+     "at": 27,
+     "context": "Mrs Bennet wrote a letter. She lost the hat. Mr Darcy rea",
+     "chat": "Mrs Bennet",
+     "open": null,
+     "via": "title",
+     "canonical": null,
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "possessives and reflexives",
+   "chars": 102,
+   "pronouns": 6,
+   "aligned": 0,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 0,
+    "chat_none": 0,
+    "canon_none": 5,
+    "both_none": 1
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "canon_none",
+     "pronoun": "her",
+     "at": 12,
+     "context": "Mina kissed her son. She hugged herself. M",
+     "chat": "Mina",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "She",
+     "at": 21,
+     "context": "Mina kissed her son. She hugged herself. Mina lost ",
+     "chat": "Mina",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "herself",
+     "at": 32,
+     "context": "Mina kissed her son. She hugged herself. Mina lost her hat. Mi",
+     "chat": "Mina",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "her",
+     "at": 51,
+     "context": " her son. She hugged herself. Mina lost her hat. Mina washed herself. ",
+     "chat": "Mina",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "her",
+     "at": 93,
+     "context": "r hat. Mina washed herself. Mina opened her door.",
+     "chat": "Mina",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "his hat",
+   "chars": 61,
+   "pronouns": 4,
+   "aligned": 0,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 0,
+    "chat_none": 0,
+    "canon_none": 4,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "canon_none",
+     "pronoun": "his",
+     "at": 12,
+     "context": "Pierre took his hat. He put on his coat. N",
+     "chat": "Pierre",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "He",
+     "at": 21,
+     "context": "Pierre took his hat. He put on his coat. Natasha wa",
+     "chat": "Pierre",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "his",
+     "at": 31,
+     "context": "Pierre took his hat. He put on his coat. Natasha watched him.",
+     "chat": "Pierre",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "him",
+     "at": 57,
+     "context": "at. He put on his coat. Natasha watched him.",
+     "chat": "Pierre",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "the 25-message chain's statements",
+   "chars": 273,
+   "pronouns": 2,
+   "aligned": 2,
+   "counts": {
+    "agree": 1,
+    "conflict": 0,
+    "chat_open": 1,
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "chat_open",
+     "pronoun": "He",
+     "at": 214,
+     "context": "age. Pierre brought a basket of apples. He gave the apples to Jonathan",
+     "chat": null,
+     "open": [
+      "Jonathan",
+      "Pierre"
+     ],
+     "via": null,
+     "canonical": "Mina",
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "three people",
+   "chars": 64,
+   "pronouns": 3,
+   "aligned": 1,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 1,
+    "chat_none": 0,
+    "canon_none": 2,
+    "both_none": 0
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "canon_none",
+     "pronoun": "She",
+     "at": 25,
+     "context": "Priya met Omar and Liam. She smiled. He waved. Liam tha",
+     "chat": "Priya",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "He",
+     "at": 37,
+     "context": "Priya met Omar and Liam. She smiled. He waved. Liam thanked her.",
+     "chat": null,
+     "open": [
+      "Omar",
+      "Liam"
+     ],
+     "via": null,
+     "canonical": "Liam",
+     "confident": false
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "her",
+     "at": 60,
+     "context": "iam. She smiled. He waved. Liam thanked her.",
+     "chat": "Priya",
+     "open": null,
+     "via": "name",
+     "canonical": null,
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "prose: Dracula, 9,000 characters",
+   "chars": 9000,
+   "pronouns": 28,
+   "aligned": 14,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 14,
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 14
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "chat_open",
+     "pronoun": "he",
+     "at": 1419,
+     "context": "cipe for Mina.) I asked the waiter, and he said it was called \"paprika",
+     "chat": null,
+     "open": [
+      "Dracula",
+      "Mem"
+     ],
+     "via": null,
+     "canonical": "Mina",
+     "confident": null
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "he",
+     "at": 2002,
+     "context": " that country. I find that the district he named is in the extreme eas",
+     "chat": null,
+     "open": [
+      "Dracula",
+      "Mem"
+     ],
+     "via": null,
+     "canonical": "Mina",
+     "confident": false
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "she",
+     "at": 6883,
+     "context": "oo tight for modesty. When I came close she bowed and said, \"The Herr ",
+     "chat": null,
+     "open": [
+      "Van Helsing",
+      "Mina",
+      "May",
+      "Europe",
+      "China"
+     ],
+     "via": null,
+     "canonical": "Bukovina",
+     "confident": false
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "She",
+     "at": 6960,
+     "context": "man?\" \"Yes,\" I said, \"Jonathan Harker.\" She smiled, and gave some mess",
+     "chat": null,
+     "open": [
+      "Van Helsing",
+      "Mina",
+      "May",
+      "Europe",
+      "China"
+     ],
+     "via": null,
+     "canonical": "The Herr Englishman",
+     "confident": false
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "her",
+     "at": 7053,
+     "context": "n white shirt-sleeves, who had followed her to the door. He went, but ",
+     "chat": null,
+     "open": [
+      "Van Helsing",
+      "Mina",
+      "May",
+      "Europe",
+      "China"
+     ],
+     "via": null,
+     "canonical": "The Herr Englishman",
+     "confident": false
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "He",
+     "at": 7070,
+     "context": "eves, who had followed her to the door. He went, but immediately retur",
+     "chat": null,
+     "open": [
+      "Dracula",
+      "Mem",
+      "Attila"
+     ],
+     "via": null,
+     "canonical": "Jonathan Harker",
+     "confident": false
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "he",
+     "at": 7841,
+     "context": "s could not be true, because up to then he had understood it perfectly",
+     "chat": null,
+     "open": [
+      "Dracula",
+      "Mem",
+      "Attila"
+     ],
+     "via": null,
+     "canonical": "Bukovina",
+     "confident": false
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "he",
+     "at": 7883,
+     "context": " had understood it perfectly; at least, he answered my questions exact",
+     "chat": null,
+     "open": [
+      "Dracula",
+      "Mem",
+      "Attila"
+     ],
+     "via": null,
+     "canonical": "Bukovina",
+     "confident": false
+    }
+   ]
+  },
+  {
+   "label": "prose: Emma, 6,000 characters",
+   "chars": 5999,
+   "pronouns": 84,
+   "aligned": 76,
+   "counts": {
+    "agree": 0,
+    "conflict": 11,
+    "chat_open": 63,
+    "chat_none": 2,
+    "canon_none": 8,
+    "both_none": 0
+   },
+   "conflicts": [
+    {
+     "kind": "conflict",
+     "pronoun": "his",
+     "at": 1181,
+     "context": "oftening claim of a lingering illness of his\r mother's, been the means",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Enscombe",
+     "confident": null
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "he",
+     "at": 1648,
+     "context": "are and\r the wealth of the Churchills, and he had only his own comfort",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Enscombe",
+     "confident": null
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "his",
+     "at": 1660,
+     "context": " wealth of the Churchills, and he had only his own comfort to seek,\r a",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Enscombe",
+     "confident": null
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "his",
+     "at": 1689,
+     "context": "d he had only his own comfort to seek,\r and his own situation to impro",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Churchills",
+     "confident": false
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "he",
+     "at": 1721,
+     "context": " seek,\r and his own situation to improve as he could.\r \r A complete ch",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Churchills",
+     "confident": false
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "He",
+     "at": 1782,
+     "context": "mplete change of life became desirable. He quitted the militia and\r en",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Enscombe",
+     "confident": null
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "him",
+     "at": 1903,
+     "context": " in a good way in\r London, which afforded him a favourable opening. It",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Enscombe",
+     "confident": null
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "He",
+     "at": 1987,
+     "context": " which\r brought just employment enough. He had still a small house in ",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Enscombe",
+     "confident": null
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "his",
+     "at": 2041,
+     "context": " small house in Highbury,\r where most of his leisure days were spent; ",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Enscombe",
+     "confident": null
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "his",
+     "at": 2167,
+     "context": "ety, the next eighteen or twenty years of his\r life passed cheerfully ",
+     "chat": "Frank",
+     "open": null,
+     "via": "name",
+     "canonical": "Churchills",
+     "confident": false
+    },
+    {
+     "kind": "conflict",
+     "pronoun": "his",
+     "at": 3462,
+     "context": "o please in his choice: his fortune was his own;\r for as to Frank, it ",
+     "chat": "Miss Taylor",
+     "open": null,
+     "via": "title",
+     "canonical": "Enscombe",
+     "confident": null
+    }
+   ],
+   "items": [
+    {
+     "kind": "canon_none",
+     "pronoun": "she",
+     "at": 110,
+     "context": "ton ought to have found more in it, for she had a\r husband whose warm ",
+     "chat": "Mrs. Weston",
+     "open": null,
+     "via": "title",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "chat_none",
+     "pronoun": "him",
+     "at": 167,
+     "context": "d whose warm heart and sweet temper made him think every thing due\r to",
+     "chat": null,
+     "open": null,
+     "via": null,
+     "canonical": "Mrs Weston",
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "her",
+     "at": 196,
+     "context": "temper made him think every thing due\r to her in return for the great ",
+     "chat": "Mrs. Weston",
+     "open": null,
+     "via": "title",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "chat_none",
+     "pronoun": "him",
+     "at": 255,
+     "context": " the great goodness of being in love with him;\r but though she had one",
+     "chat": null,
+     "open": null,
+     "via": null,
+     "canonical": "Mrs Weston",
+     "confident": true
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "she",
+     "at": 271,
+     "context": "ess of being in love with him;\r but though she had one sort of spirit,",
+     "chat": "Mrs. Weston",
+     "open": null,
+     "via": "title",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "she",
+     "at": 299,
+     "context": "m;\r but though she had one sort of spirit, she had not the best. She h",
+     "chat": "Mrs. Weston",
+     "open": null,
+     "via": "title",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "She",
+     "at": 324,
+     "context": "e sort of spirit, she had not the best. She had\r resolution enough to ",
+     "chat": "Mrs. Weston",
+     "open": null,
+     "via": "title",
+     "canonical": null,
+     "confident": null
+    },
+    {
+     "kind": "canon_none",
+     "pronoun": "her",
+     "at": 360,
+     "context": "st. She had\r resolution enough to pursue her own will in spite of her ",
+     "chat": "Mrs. Weston",
+     "open": null,
+     "via": "title",
+     "canonical": null,
+     "confident": null
+    }
+   ]
+  },
+  {
+   "label": "prose: Lincoln's Second Inaugural",
+   "chars": 4840,
+   "pronouns": 9,
+   "aligned": 1,
+   "counts": {
+    "agree": 0,
+    "conflict": 0,
+    "chat_open": 1,
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 8
+   },
+   "conflicts": [],
+   "items": [
+    {
+     "kind": "chat_open",
+     "pronoun": "his",
+     "at": 531,
+     "context": "aham Lincoln Abraham Lincoln delivering his second inaugural address a",
+     "chat": null,
+     "open": [
+      "Abraham Lincoln",
+      "Lincoln Ulysses S",
+      "Grant"
+     ],
+     "via": null,
+     "canonical": "Lincoln",
+     "confident": false
+    }
+   ]
+  }
+ ],
+ "castDiffs": [
+  {
+   "label": "open names, she",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 1,
+   "chatOnlyNames": [
+    "zelko"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "open names, she (Casey, Jordan)",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 1,
+   "chatOnlyNames": [
+    "casey"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "open names, he (Riley, Taylor)",
+   "chatOnly": 0,
+   "canonOnly": 0,
+   "both": 1,
+   "chatOnlyNames": [],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "names the prior settles, she",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 1,
+   "chatOnlyNames": [
+    "pierre"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "names the prior settles, he",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 1,
+   "chatOnlyNames": [
+    "pierre"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "a village and a book",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 1,
+   "chatOnlyNames": [
+    "mina"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "titles",
+   "chatOnly": 1,
+   "canonOnly": 1,
+   "both": 1,
+   "chatOnlyNames": [
+    "mrs bennet"
+   ],
+   "canonOnlyNames": [
+    "bennet"
+   ]
+  },
+  {
+   "label": "possessives and reflexives",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 0,
+   "chatOnlyNames": [
+    "mina"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "his hat",
+   "chatOnly": 2,
+   "canonOnly": 0,
+   "both": 0,
+   "chatOnlyNames": [
+    "pierre",
+    "natasha"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "the 25-message chain's statements",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 2,
+   "chatOnlyNames": [
+    "pierre"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "three people",
+   "chatOnly": 1,
+   "canonOnly": 0,
+   "both": 2,
+   "chatOnlyNames": [
+    "priya"
+   ],
+   "canonOnlyNames": []
+  },
+  {
+   "label": "prose: Dracula, 9,000 characters",
+   "chatOnly": 24,
+   "canonOnly": 13,
+   "both": 29,
+   "chatOnlyNames": [
+    "seward",
+    "diary",
+    "chapter xxiv",
+    "dr.",
+    "chapter xxv",
+    "chapter xxvi"
+   ],
+   "canonOnlyNames": [
+    "golden krone hotel",
+    "seward phonograph diary",
+    "the herr englishman",
+    "count dracula",
+    "british museum",
+    "castle dracula"
+   ]
+  },
+  {
+   "label": "prose: Emma, 6,000 characters",
+   "chatOnly": 5,
+   "canonOnly": 4,
+   "both": 10,
+   "chatOnlyNames": [
+    "mrs. weston",
+    "mr.",
+    "churchill",
+    "frank",
+    "mrs."
+   ],
+   "canonOnlyNames": [
+    "mr frank churchill",
+    "mrs weston",
+    "mrs churchill",
+    "mrs perry"
+   ]
+  },
+  {
+   "label": "prose: Lincoln's Second Inaugural",
+   "chatOnly": 13,
+   "canonOnly": 13,
+   "both": 10,
+   "chatOnlyNames": [
+    "abraham lincoln",
+    "address",
+    "lincoln ulysses s",
+    "grant",
+    "states",
+    "presidents"
+   ],
+   "canonOnlyNames": [
+    "united states capitol building",
+    "lincoln first inaugural address",
+    "lincoln second inaugural address",
+    "united states presidents",
+    "abraham lincoln abraham lincoln",
+    "inaugural speeches"
+   ]
+  }
+ ]
+}
