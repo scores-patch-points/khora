@@ -557,7 +557,7 @@ async function answer(q, { upTo = null, limit = 12, polarity = false, neg = fals
     const used = new Set(fillers.map((g) => g.node));
     const hit = { order: f.order, kriya: f.kriya, viaSynonym, voice: f.voice, sameRole, chapter: f.span ? chapterAt(f.span[0]) : null, sentence: clip(f.span), address: address(f.span), at: f.span?.[0] ?? null,
       roles: f.roles.map((g) => ({ label: g.label, en: EN[g.label] ?? g.label, text: clip(g.span, 120), contested: g.contested, answer: used.has(g.node) })) };
-    if (fillers.length) out.answers.push({ ...hit, pronounOnly, answer: fillers.map((g) => ({ text: clip(g.span, 160), label: g.label, contested: g.contested ?? null, address: address(g.span), at: g.span?.[0] ?? null, ...(g.pron ? { note: "a pronoun: its referent is not resolved (no cast in this read yet)" } : {}) })) });
+    if (fillers.length) out.answers.push({ ...hit, pronounOnly, answer: fillers.map((g) => ({ text: clip(g.span, 160), label: g.label, contested: g.contested ?? null, node: g.node, pron: !!g.pron, address: address(g.span), at: g.span?.[0] ?? null, ...(g.pron ? { note: "a pronoun: its referent is not resolved (no cast in this read yet)" } : {}) })) });
     else if (!Q.gap) out.answers.push({ ...hit, answer: [], confirms: true });
     else out.partial.push(hit);
   }

@@ -115,6 +115,28 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const r = puzzleOrgan.readPuzzle(sents, { reader: puzzleOrgan.READER });
     return r?.read?.items?.items?.length >= 2 && r?.read?.agents?.length >= 2 ? r : null;   // a list of things and at least two people: the scene of a puzzle
   };
+  const told = new Map();               // ref -> "m" | "f": a class the user settled, by answering "Do you mean ...?" (presented evidence, never a guess)
+  // WHO A PRONOUN MEANS. A being's class (m / f) is known from what the user settled, from the pro-forms the thread attached to it, or from the given-name table if there is one. A man with
+  // no evidence about two people does not pick the first: "Pierre met Natasha. She smiled." leaves "she" OPEN between them, and he asks (the other session's probe: with no table the chat bound
+  // the pronoun to the first-named person whatever its gender, 3 of 8 right). A being that only ever fills a place (a locus) is not a candidate for he or she.
+  // the class a pronoun FORM carries is read off the thread's own rows (the reader's Gender feature on a third-person pronoun), never listed here; a pro-form the clause attached to a being
+  // ("Pierre took HIS hat") is evidence even when it is the only one: a sign test needs several, a man needs one
+  const proformEvidence = (b) => { const cls = new Map(); for (const p of parse) for (const r of p.rows) if (r.upos === "PRON") { const F = featsOf(r.feats); if (F.Person === "3" && (F.Gender === "Masc" || F.Gender === "Fem")) cls.set(String(r.form).toLowerCase(), F.Gender === "Masc" ? "m" : "f"); }
+    let m = 0, f = 0; for (const [form, n] of b.proformForms ?? []) { const c = cls.get(String(form).toLowerCase()); if (c === "m") m += n; else if (c === "f") f += n; } return m > f ? "m" : f > m ? "f" : null; };
+  const classOfBeing = (b) => told.get(b.ref) ?? (b.proform && !b.proform.contested ? b.proform.cls : null) ?? proformEvidence(b) ?? genderOf((b.forms ?? []).flatMap(([f]) => String(f).split(" ")));
+  const placeOnly = (ref) => { const uses = engine.S.framesOfRef?.get(ref) ?? []; return uses.length > 0 && uses.every((u) => u.label === "adhikaraṇa"); };
+  const listOr = (xs) => (xs.length < 2 ? xs[0] ?? "" : `${xs.slice(0, -1).join(", ")} or ${xs.at(-1)}`);
+  const pronounInfo = (F, order) => {
+    const cls = F.Gender === "Masc" ? "m" : F.Gender === "Fem" ? "f" : null; if (!cls || F.Person !== "3" || F.PronType !== "Prs") return null;
+    const names = (cast?.referents ?? []).filter((b) => b.kind === "name" && b.first <= order && !placeOnly(b.ref));
+    const fits = names.filter((b) => { const c = classOfBeing(b); return c == null || c === cls; }), sure = fits.filter((b) => classOfBeing(b) === cls);
+    const cand = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] }));
+    if (sure.length === 1) return { cls, open: false, ref: sure[0].ref, candidates: cand(sure) };
+    if (sure.length > 1) return { cls, open: true, ref: null, candidates: cand(sure) };
+    if (fits.length === 1) return { cls, open: false, ref: fits[0].ref, candidates: cand(fits) };
+    if (!fits.length) return { cls, open: false, ref: null, candidates: [] };
+    return { cls, open: true, ref: null, candidates: cand(fits) };
+  };
   let asked = null;                     // a question the chat put to the user and is waiting on (mechanic 7): { kind, question, rows, row } — the next fragment is its answer
   let lastAct = null;                   // { claim, orders, dependents }: what the chat took the last message to be, and what was built on it
   const withdrawn = new Set();          // orders of sentences the speaker took back: never an answer
@@ -373,7 +395,13 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         return done({ type: "identity", handled: false, gap: "unknown_description", text: `I haven't been told who the ${head} is. If you mean the current one, that changes over time, and I have no source for it.` });
       }
       if (tgt) {
-        const ref = refOf(tgt), being = ref ? S.refByRef.get(ref) : null, known = !!being && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order;
+        const pinfo = tgt.upos === "PRON" ? pronounInfo(featsOf(tgt.feats), order) : null;
+        if (pinfo?.open) {   // two people it could be, and nothing in the thread says either one's gender: he asks, and uses the answer
+          asked = { kind: "which", question: q, rows: qRows, row: tgt.id, cls: pinfo.cls, options: pinfo.candidates };
+          trace.push({ step: "identity", target: tgt.form, open: pinfo.candidates.map((c) => c.label) });
+          return done({ type: "identity", handled: false, gap: "pronoun_open", text: `Do you mean ${listOr(pinfo.candidates.map((c) => c.label))}?` });
+        }
+        const ref = pinfo?.ref ?? refOf(tgt), being = ref ? S.refByRef.get(ref) : null, known = !!being && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order;
         trace.push({ step: "identity", target: tgt.form, bound: tgt.upos === "PRON" ? ref : null, known });
         if (known && S.sentencesOfRef.has(ref)) {
           const p = await engine.wordProfile("", { ref });
@@ -449,7 +477,15 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         const out = done({ type: "answer", handled: true, text: `Yes: you told me ${quote(ev[0].text)}`, evidence: ev });
         last = out; return out;
       }
-      const phraseOf = top.answer.map((x) => x.text).join(" and ");
+      // an answer that is a pronoun is not "She.": the referent it stands for, or an honest "I can't tell which"
+      const sayFiller = (x) => {
+        if (!x.pron || !x.node) return x.text;
+        const dot = x.node.indexOf("."), o = Number(x.node.slice(1, dot < 0 ? undefined : dot)), row = dot < 0 ? null : S.rowsOf.get(o)?.rows?.find((r) => r.id === Number(x.node.slice(dot + 2)));
+        const info = row ? pronounInfo(featsOf(row.feats), o) : null;
+        if (info?.ref) return S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? x.text;
+        return info?.open ? `${quote(x.text)}, but I can't tell whether that is ${listOr(info.candidates.map((c) => c.label))}` : x.text;
+      };
+      const phraseOf = top.answer.map(sayFiller).join(" and ");
       const ev = a.answers.slice(0, 3).map((x) => { const pp = parse.find((y) => y.text === x.sentence); return { order: pp?.order ?? null, text: x.sentence, ...(pp && givenAt.has(pp.order) ? { given: givenAt.get(pp.order) } : {}) }; });
       const out = done({ type: "answer", handled: true, text: `${cap(phraseOf)}.`, evidence: ev, answers: a.answers.slice(0, 3).map((x) => x.answer) });
       last = out; return out;
@@ -534,6 +570,19 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     // "the course" says "is the course worth doing?" back to himself; told "Natasha" for "is it open?", or "Hahaha", or "!pt", he asks again. The fit is read from the reader's own
     // marks: the gap is a pronoun with a gender and number, the answer must be a noun phrase of the right kind (a name for he or she, whose lean the given-name table must not contradict;
     // a noun the reader knows, or a thing the thread already holds, for it); anything else is not an answer. The rebuilt question then goes through the same guards as any question.
+    if (asked && j.working === "fragment" && asked.kind === "which") {
+      const pending = asked, pron = pending.rows.find((r) => r.id === pending.row);
+      let end = rows.length; while (end > 0 && rows[end - 1].upos === "PUNCT") end--;
+      const fill = detok(rows.slice(0, end).map((r) => r.form)), pick = pending.options.find((c) => c.label.toLowerCase() === fill.toLowerCase() || c.label.toLowerCase().split(" ").includes(fill.toLowerCase()));
+      const cid = propose(`this message settles who ${quote(pron.form)} is`, { subject: "this message", verb: "answers", object: "the question about the pronoun" }, true, pick
+        ? { verdict: "supported", method: "testimony", by, basis: `${quote(fill)} is one of the two I asked about, and you said it`, witnesses: [witness] }
+        : { verdict: "refuted", method: "deduction", by, basis: `${quote(fill)} is neither of the two I asked about` });
+      if (!pick) return finish({ type: "identity", handled: false, gap: "answer_does_not_fit", text: `I can't use ${quote(fill || t)}: I asked whether you mean ${listOr(pending.options.map((c) => c.label))}.`, question: t, tools: [], trace: [{ step: "pairing_refused", why: "not one of the options" }], ideaIds: [cid].filter(Boolean) });   // the question stays open
+      asked = null; told.set(pick.ref, pending.cls);   // what the user settled is evidence from here on: this being is "she", so "he" is someone else
+      const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? pick.label : r.form)));
+      const inner = await turn(rebuilt, { ...opts, _ids: [...ids, cid].filter(Boolean) });
+      return inner ? { ...inner, paired: { question: pending.question, answer: pick.label, rebuilt }, trace: [{ step: "paired", asked: pending.question, answer: pick.label, rebuilt }, ...(inner.trace ?? [])] } : inner;
+    }
     if (asked && j.working === "fragment" && asked.kind === "antecedent") {
       const pending = asked, pron = pending.rows.find((r) => r.id === pending.row), pf = featsOf(pron.feats);
       let end = rows.length; while (end > 0 && rows[end - 1].upos === "PUNCT") end--;   // the answer, without the punctuation it ended with (from the reader's rows)
