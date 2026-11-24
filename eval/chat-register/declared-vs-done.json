@@ -1,28 +1,31 @@
 {
  "stamp": {
-  "when": "2026-11-23T23:50:51.978Z",
+  "when": "2026-11-24T04:51:38.437Z",
   "split": "EXPLORATORY",
   "perSource": 130,
-  "commit": "56d7e56"
+  "commit": "unspecified"
  },
  "crosstab": {
   "statement -> read": 133,
-  "fragment -> fragment(gap)": 109,
+  "fragment -> fragment(gap)": 101,
   "social -> social": 24,
-  "question -> relational(gap)": 39,
+  "question -> relational(gap)": 34,
   "unread -> unread(gap)": 54,
   "composite -> smalltalk": 1,
-  "social -> smalltalk": 6,
-  "request -> request(gap)": 11,
+  "fragment -> clarify(gap)": 8,
+  "social -> smalltalk": 4,
+  "request -> request(gap)": 13,
   "composite -> relational(gap)": 7,
+  "question -> clarify(gap)": 5,
+  "social -> clarify(gap)": 2,
   "question -> identity(gap)": 1,
-  "request -> request": 3,
+  "request -> request": 1,
   "composite -> help": 1,
   "question -> self": 1
  },
- "mismatches": 0,
+ "mismatches": 7,
  "total": 390,
- "sentWordsOut": 3,
+ "sentWordsOut": 4,
  "rows": [
   {
    "source": "sms",
@@ -443,8 +446,8 @@
    "said": "Ya sure?",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -461,8 +464,8 @@
    "said": "0hk tx hv u gt trckng numbr fr dtdc?..",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -1055,8 +1058,8 @@
    "said": "Are me ajmer me.. Bhai tjse ek jaruri kam tha",
    "declared": "question",
    "open": true,
-   "did": "relational",
-   "gap": "action_not_in_text",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -1109,8 +1112,8 @@
    "said": "Dnt knw?",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -1235,8 +1238,8 @@
    "said": "Hahah project meeting ah ??",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -1289,8 +1292,8 @@
    "said": "Must quickly choose before ur eyes get confused",
    "declared": "question",
    "open": true,
-   "did": "relational",
-   "gap": "action_not_in_text",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -1523,8 +1526,8 @@
    "said": "Thank you ????",
    "declared": "social",
    "open": true,
-   "did": "smalltalk",
-   "gap": null,
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -1596,8 +1599,8 @@
    "declared": "request",
    "open": false,
    "did": "request",
-   "gap": "act_not_possible",
-   "sentOut": false
+   "gap": "no_article",
+   "sentOut": true
   },
   {
    "source": "cosem",
@@ -2045,8 +2048,8 @@
    "said": "Hahaha ??",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -2082,8 +2085,8 @@
    "declared": "request",
    "open": false,
    "did": "request",
-   "gap": "act_not_possible",
-   "sentOut": false
+   "gap": "no_article",
+   "sentOut": true
   },
   {
    "source": "cosem",
@@ -2118,7 +2121,7 @@
    "declared": "request",
    "open": false,
    "did": "request",
-   "gap": null,
+   "gap": "act_not_possible",
    "sentOut": false
   },
   {
@@ -2361,7 +2364,7 @@
    "declared": "request",
    "open": false,
    "did": "request",
-   "gap": null,
+   "gap": "act_not_possible",
    "sentOut": false
   },
   {
@@ -2423,9 +2426,9 @@
    "said": "stefano:could that be the problem",
    "declared": "question",
    "open": true,
-   "did": "relational",
-   "gap": "action_not_in_text",
-   "sentOut": true
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
   },
   {
    "source": "irc",
@@ -2729,8 +2732,8 @@
    "said": "any help?",
    "declared": "social",
    "open": true,
-   "did": "smalltalk",
-   "gap": null,
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -2909,8 +2912,8 @@
    "said": "staticRails: hi any luck?",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -2981,8 +2984,8 @@
    "said": "is anyone in here using xchat? I just have a question about joining another netw",
    "declared": "question",
    "open": true,
-   "did": "relational",
-   "gap": "action_not_in_text",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -3008,8 +3011,8 @@
    "said": "Eh?",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -3449,8 +3452,8 @@
    "said": "does anyone have amule",
    "declared": "question",
    "open": true,
-   "did": "relational",
-   "gap": "action_not_in_text",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   },
   {
@@ -3530,8 +3533,8 @@
    "said": "dev, router or no?",
    "declared": "fragment",
    "open": true,
-   "did": "fragment",
-   "gap": "fragment_unclear",
+   "did": "clarify",
+   "gap": "act_open",
    "sentOut": false
   }
  ],
@@ -3545,18 +3548,103 @@
   },
   {
    "source": "cosem",
+   "declared": "request",
+   "did": "request",
+   "said": "plot the graph on the GC HAHA",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=GC+HAHA&format=json&origin=*"
+  },
+  {
+   "source": "cosem",
    "declared": "question",
    "did": "relational",
    "said": "What? Haha help what?",
    "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Haha+help&srlimit=3&format=json&origin=*"
   },
   {
-   "source": "irc",
-   "declared": "question",
-   "did": "relational",
-   "said": "stefano:could that be the problem",
-   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=problem&srlimit=3&format=json&origin=*"
+   "source": "cosem",
+   "declared": "request",
+   "did": "request",
+   "said": "Have to take the stalker MP",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=MP&format=json&origin=*"
   }
  ],
- "examples": []
+ "examples": [
+  {
+   "k": "sms",
+   "t": "Are me ajmer me.. Bhai tjse ek jaruri kam tha",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "cosem",
+   "t": "Must quickly choose before ur eyes get confused",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "cosem",
+   "t": "Thank you ????",
+   "working": "social",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "stefano:could that be the problem",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "any help?",
+   "working": "social",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "is anyone in here using xchat? I just have a question about joining another netw",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "does anyone have amule",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  }
+ ]
 }

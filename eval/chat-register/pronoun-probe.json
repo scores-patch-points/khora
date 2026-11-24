@@ -1,28 +1,95 @@
 {
  "stamp": {
-  "when": "2026-11-24T04:03:53.190Z",
+  "when": "2026-11-24T05:06:45.023Z",
   "split": "EXPLORATORY (developer-written probes)",
-  "commit": "1e14abe"
+  "commit": "working tree"
  },
- "probes": 8,
+ "probes": 10,
+ "priorState": "title + dictionary table + Wikidata snapshot",
  "outcomes": {
-  "right": 0,
-  "asked": 8,
+  "right": 10,
+  "asked": 0,
   "wrong": 0
+ },
+ "openNames": {
+  "probes": 4,
+  "asked": 4,
+  "guessed": 0,
+  "other": 0,
+  "rows": [
+   {
+    "say": "Casey met Jordan. She smiled.",
+    "outcome": "asked",
+    "text": "Do you mean Casey or Jordan?"
+   },
+   {
+    "say": "Jordan met Casey. He smiled.",
+    "outcome": "asked",
+    "text": "Do you mean Jordan or Casey?"
+   },
+   {
+    "say": "Laurie met Avery. She smiled.",
+    "outcome": "asked",
+    "text": "Do you mean Laurie or Avery?"
+   },
+   {
+    "say": "Riley called Taylor. He answered.",
+    "outcome": "asked",
+    "text": "Do you mean Riley or Taylor?"
+   }
+  ]
  },
  "wrongBindings": 0,
  "dialogues": {
-  "passed": 6,
-  "of": 6,
+  "passed": 8,
+  "of": 8,
   "rows": [
    {
-    "name": "ask which, take the name, answer with it",
+    "name": "names the prior settles: no question, the pronoun binds",
     "ok": true,
     "trail": [
      "Pierre met Natasha. She smiled. => Noted.",
-     "Who is she? => Do you mean Pierre or Natasha?",
-     "Natasha => You told me “Pierre met Natasha.”",
+     "Who is she? => That would be Natasha. You told me “Pierre met N",
      "Who smiled? => Natasha."
+    ]
+   },
+   {
+    "name": "a title gives it away: Mrs",
+    "ok": true,
+    "trail": [
+     "Mr Pierre met Mrs Natasha. She smiled. => Noted.",
+     "Who is she? => That would be Mrs Natasha. You told me “Mr Pierr"
+    ]
+   },
+   {
+    "name": "open names: ask which, take the name, answer with it",
+    "ok": true,
+    "trail": [
+     "Casey met Jordan. She smiled. => Noted.",
+     "Who is she? => Do you mean Casey or Jordan?",
+     "Casey => You told me “Casey met Jordan.” and “She smiled.",
+     "Who smiled? => Casey."
+    ]
+   },
+   {
+    "name": "open names: a settled she makes he someone else",
+    "ok": true,
+    "trail": [
+     "Casey met Jordan. She smiled. He left. => Noted.",
+     "Who is she? => Do you mean Casey or Jordan?",
+     "Casey => You told me “Casey met Jordan.” and “She smiled.",
+     "Who is he? => That would be Jordan. You told me “Casey met Jor"
+    ]
+   },
+   {
+    "name": "open names: a wrong answer is refused and the question stays open",
+    "ok": true,
+    "trail": [
+     "Casey met Jordan. She smiled. => Noted.",
+     "Who is she? => Do you mean Casey or Jordan?",
+     "the course => I can't use “the course”: I asked whether you me",
+     "Casey => You told me “Casey met Jordan.” and “She smiled.",
+     "Who smiled? => Casey."
     ]
    },
    {
@@ -42,45 +109,24 @@
     ]
    },
    {
-    "name": "a settled she makes he someone else",
-    "ok": true,
-    "trail": [
-     "Pierre met Natasha. She smiled. He left. => Noted.",
-     "Who is she? => Do you mean Pierre or Natasha?",
-     "Natasha => You told me “Pierre met Natasha.” and “He left.”",
-     "Who is he? => That would be Pierre. You told me “Pierre met Na"
-    ]
-   },
-   {
     "name": "one person only, no ambiguity (no question needed)",
     "ok": true,
     "trail": [
      "Natasha smiled. She waved. => Noted.",
      "Who waved? => Natasha."
     ]
-   },
-   {
-    "name": "a wrong answer is refused and the question stays open",
-    "ok": true,
-    "trail": [
-     "Pierre met Natasha. She smiled. => Noted.",
-     "Who is she? => Do you mean Pierre or Natasha?",
-     "the course => I can't use “the course”: I asked whether you me",
-     "Natasha => You told me “Pierre met Natasha.”",
-     "Who smiled? => Natasha."
-    ]
    }
   ]
  },
  "byPlace": {
   "first": {
-   "right": 0,
-   "asked": 3,
+   "right": 3,
+   "asked": 0,
    "wrong": 0
   },
   "second": {
-   "right": 0,
-   "asked": 5,
+   "right": 7,
+   "asked": 0,
    "wrong": 0
   }
  },

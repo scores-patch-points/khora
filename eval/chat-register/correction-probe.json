@@ -1,0 +1,96 @@
+{
+ "stamp": {
+  "when": "2026-11-24T05:22:36.526Z",
+  "split": "EXPLORATORY (developer-written conversations)",
+  "commit": "ea8dc63"
+ },
+ "passed": 0,
+ "of": 6,
+ "notedAndNothingChanged": 4,
+ "rows": [
+  {
+   "what": "an asked-back pick, corrected with 'that's not right'",
+   "ok": false,
+   "ack": "Noted.",
+   "last": "Casey.",
+   "want": "Jordan.",
+   "trail": [
+    "Casey met Jordan. She smiled. => Noted.",
+    "Who is she? => Do you mean Casey or Jordan?",
+    "Casey => You told me “Casey met Jordan.” and “She smiled.”",
+    "Who smiled? => Casey.",
+    "That's not right, she is Jordan. => Noted.",
+    "Who smiled? => Casey."
+   ]
+  },
+  {
+   "what": "an asked-back pick, corrected with 'no, I meant'",
+   "ok": false,
+   "ack": "Noted.",
+   "last": "Casey.",
+   "want": "Jordan.",
+   "trail": [
+    "Casey met Jordan. She smiled. => Noted.",
+    "Who is she? => Do you mean Casey or Jordan?",
+    "Casey => You told me “Casey met Jordan.” and “She smiled.”",
+    "No, I meant Jordan. => Noted.",
+    "Who smiled? => Casey."
+   ]
+  },
+  {
+   "what": "a they with no one bound, told who it is",
+   "ok": false,
+   "ack": "Noted.",
+   "last": "They.",
+   "want": "Casey.",
+   "trail": [
+    "Casey smiled. They waved. => Noted.",
+    "Who waved? => They.",
+    "No, they means Casey. => Noted.",
+    "Who waved? => They."
+   ]
+  },
+  {
+   "what": "a name's gender stated, then asked",
+   "ok": false,
+   "ack": "Noted.",
+   "last": "That would be Pierre. You told me “Pierre met Natasha.” and ",
+   "want": "That would be Natasha.",
+   "trail": [
+    "Pierre met Natasha. She smiled. => Noted.",
+    "No, Natasha is a man. He smiled. => Noted.",
+    "Who is he? => That would be Pierre. You told me “Pierre met Natasha.” and "
+   ]
+  },
+  {
+   "what": "a corrected pick is there in the next thread (no question asked again)",
+   "ok": false,
+   "ack": "",
+   "last": "“She”, but I can't tell whether that is Jordan or Casey.",
+   "want": "Jordan.",
+   "trail": [
+    "Casey met Jordan. She smiled.",
+    "Who is she?",
+    "Casey",
+    "No, I meant Jordan.",
+    "— new thread —",
+    "Jordan met Casey. She smiled.",
+    "Who smiled?"
+   ]
+  },
+  {
+   "what": "a told they is there in the next thread",
+   "ok": false,
+   "ack": "",
+   "last": "they (they-default)",
+   "want": "they",
+   "trail": [
+    "Casey smiled. They waved.",
+    "No, they means Casey.",
+    "— new thread —",
+    "Casey wrote a letter. Casey waved.",
+    "Casey"
+   ]
+  }
+ ]
+}

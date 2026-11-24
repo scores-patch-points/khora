@@ -34,7 +34,7 @@ if (fs.existsSync(path.join(HERE, "pairing-probe.json"))) { const P = J("pairing
   console.log(`\nMECHANIC 7 (pairing probe, developer-written, ${P.stamp.commit}): positives ${P.positivePass} of ${P.positives.length} paired; controls ${held} of ${of} correctly not paired; refusals ${R.passed} of ${R.of} (not an answer: said why, nothing sent); bad then good ${G.passed} of ${G.of}`);
   if (P.positivePass < P.positives.length || held < of || R.passed < R.of || G.passed < G.of) bad++; }
 if (fs.existsSync(path.join(HERE, "pronoun-probe.json"))) { const R = J("pronoun-probe.json"), o = R.outcomes, d = R.dialogues ?? { passed: 0, of: 0 };
-  console.log(`\nPRONOUNS (two names then he/she, no table of given names, developer-written, ${R.stamp.commit}): ${o.right} right, ${o.asked} asked which, ${o.wrong} wrong of ${R.probes}; ask-back conversations ${d.passed} of ${d.of}; "Who smiled?" answered with the bare pronoun: ${R.whoAnsweredWithBarePronoun}`);
-  if (o.wrong > 0 || d.passed < d.of) bad++; }
+  console.log(`\nPRONOUNS (two names then he/she, prior: ${R.priorState ?? "not recorded"}, developer-written, ${R.stamp.commit}): names it settles ${o.right} right, ${o.asked} asked which, ${o.wrong} wrong of ${R.probes}; names it cannot settle ${R.openNames ? `${R.openNames.asked} asked which, ${R.openNames.guessed} guessed of ${R.openNames.probes}` : "not recorded"}; ask-back conversations ${d.passed} of ${d.of}; "Who smiled?" answered with the bare pronoun: ${R.whoAnsweredWithBarePronoun}`);
+  if (o.wrong > 0 || d.passed < d.of || (R.openNames?.guessed ?? 0) > 0) bad++; }   // a name nothing settles must be asked about, never guessed
 console.log(bad ? `\n${bad} regression(s)` : "\nno invariant broken, no reader number dropped");
 process.exit(bad ? 1 : 0);
