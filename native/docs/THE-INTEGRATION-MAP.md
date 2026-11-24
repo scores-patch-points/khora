@@ -1,0 +1,34 @@
+# Getting the agents' work into the real reading pipeline (2026-11-24)
+
+The owner: "work with all other agents so their work is in the real reading pipeline and not just in toys."
+
+## What "the real pipeline" is
+One call reads a document: `readToWeft` (`native/the-fold/read-process.mjs`), the same as `readDocument` (`native/reading.js`), held equal by `native/tests/one-door.test.mjs`. It reads whole and in order through the language's priors (`prior-source.mjs`) and the canonical options (`canonicalReaderOptions`: pronoun presence, name personhood, case-marked clauses, a **gender prior chain**), and emits a `WeftEntry@4` (cast with every mention's address, edges, vocabulary, pronouns, the SEG+EVA cut, gaps). Every read writes one entry to pharos and a read with a missing capacity is refused unless it says it is degraded. The guards are `native/tests/reading-baseline.test.mjs` (the reading-critical files hash to the recorded baseline; re-record only after measuring), `one-door.test.mjs`, and the typed gaps. No model. (`native/docs/THE-READING-PIPELINE.md`, `CLAUDE.md`.)
+
+## What a toy is, here
+A piece of work that runs only in the chat, a probe, a demo or an eval, beside the canonical read and not through it. By that test, today:
+
+| piece | who | where it lives today | where it belongs | what it has to pass | state |
+|---|---|---|---|---|---|
+| given-name prior: titles, a dictionary of given names, the Wikidata given-name snapshot, and what the user told the chat (`gender-of-words.js`, `name-gender/dictionary-en.json`) | gender/ingestion session | read only by the chat. The canonical read has its own gender chain (`gender-chain.js`: corpus > Wikidata giver > word table) whose word-table file `name-gender/eng.json` is **missing from this checkout**, so that layer is silently absent | a layer of `genderPriorChainFor`, the `genderPrior` option the canonical read already takes (user-told on top, then corpus, title, dictionary, snapshot) | the pronoun score on the fixed external giver (CoNLL F1, `identity/pronouns-multilingual/score/run-giver.sh`) before and after, with split labels; then `reading-baseline` re-recorded | not started |
+| corrections ("No, I meant Jordan") written to the log as kind `correction` and read back | chat + gender session | the chat reads them at thread start | the same prior's "told" layer, read from pharos when a read starts | as above | the chat half is done and pushed |
+| `readerFor` (language gate, no-codec gap) and the recaser | Parsing fixes | branch `reader-chat-register`, commit 68bde80 in worktree `khora-register`, not pushed; baseline re-recorded there | `reading.js` (it is already canonical code) | `one-door`, baseline reconciled with the chat-engine base (`BASELINE.json`, `CHANGES.md`: re-run `record.mjs` after merging) | built, unmerged |
+| sentence-initial capital hides the word's class ("No." as the abbreviation for "number", "Sort this list.", "Riley smiled.", "Madame Defarge wrote…") | Parsing fixes | proposal only (nominate/judge the first word: read a decapitalised variant, keep the parse that makes a well-formed clause, mark it so a later read can overturn it) | the reader | the owner has not approved a fourth reader item | blocked on the owner |
+| the chat's own reading: per sentence `rowsOfFor` + `referentsInOrder` + its own pronoun binding (told, pro-forms, prior), cast, frames and answers (`native/chat/engine.mjs`, `thread.mjs`) | chat | never calls `readToWeft`; a second cast and a second pronoun binder beside the canonical ones (nexus rule 4) | the chat consumes the canonical weft (cast, pronouns, polarity) and keeps only what is conversation: acts, asking back, corrections, doors | agreement with the canonical read on the same sentences, measured; then switched on | not started. First step is a SHADOW read: run `readToWeft` beside the chat's own, log disagreements, change no behaviour |
+| verb equivalents (a near verb stands in within a DMD), prompt policy, the audit page | fork 2 | organs under `native/organs/`, imported by the chat on demand; `eval/prompted/` | question-time, not read-time: they belong behind the fold's ask door and write pharos entries (to confirm which door is canonical: the chat's `weaveQuestion` is the foldcode turn) | the organ's tests plus the chat's; the embedder absent is a typed gap | in the chat only |
+| void hunt, hunt sources, trail store, train, expression library | fork 2 | organs; the chat calls the hunt | as above, with Ýlir-One as a second, local source beside Wikipedia | as above | in the chat only |
+| code index (3,013 function descriptions), `/code`, the plain-words route and its mark | code session | `native/chat/code-*.mjs`, vectors under `~/.khora` | a read of source files through the code door of the canonical pipeline, with units as pharos entries (to confirm with the owner: where code is read today) | the route's measured rates stay as the code session reported them | in the chat only |
+| Ýlir-One: the full Zenodotus ingest through the canonical read into pharos, and `find` over it (10 of 20 first, 16 of 20 in the top 10, exploratory) | ingestion session | pharos log + `eval/ylir-find` | already the real pipeline. What is missing is a door the chat's hunt can use as a source | its own prereg | running |
+| author voice (do the ingested priors carry an author?) | fork 2 | `eval/author-voice`, a results page | the priors (lexicon) the canonical read already loads | its own prereg | exploratory result |
+
+## Order, because the reading-critical files are hashed
+1. Parsing fixes' commit 68bde80 lands on the chat-engine base first (baseline reconciled once, not twice).
+2. The gender prior goes into the canonical chain (touches `gender-chain.js` and the options the read takes): measured on the fixed giver, baseline re-recorded in the same commit.
+3. The chat's shadow read (no behaviour change, disagreements logged), then the pieces of the chat's own cast and pronoun binder it can retire, one at a time, each with its disagreement count.
+4. The organs and the code door move behind the ask door and write pharos entries; Ýlir-One becomes a hunt source.
+Nothing is pushed or merged without the owner's yes, and nobody edits `read-core.mjs`, `read-process.mjs` or the files listed in `eval/reading-baseline/record.mjs` without telling the others first.
+
+## What is not known (to confirm, not to assume)
+- Which door is the canonical ASK path for the organs (the chat writes questions through foldcode's `weaveAsk`).
+- Where code is read today in the pipeline, and whether code units belong in pharos.
+- Whether the owner wants the chat to read through `readToWeft` whole-text per turn (simple, and the real parser is fast enough for short threads) or through the in-order reader (`native/reading-in-order.mjs`, which the owner's design points to: causal, per clause).
