@@ -40,3 +40,15 @@ test("a persona answers “who are you?” in the first person from its prompt, 
   await thread.setPersona(null);
   const plain = await thread.turn("who are you?"); assert.match(plain.text, /^I'm a program/);
 });
+
+test("what a prompt asks of its protagonist is read from the rows' marks and kept as written: behaviours with a modal or a present-tense verb, with their conditions and negations; nothing follows them", T, async () => {
+  const pz = await P.readPersona("Claude is curious. If the person is upset, Claude should not give long lists. Claude can discuss any topic. Claude should answer directly. The weather is fine. This iteration of Claude is Claude Sonnet 5.5.");
+  const b = pz.behaviours;
+  assert.equal(b.total, 3, `behaviours found: ${b.total}`);
+  const bad = b.sample.find((x) => /long lists/.test(x.text)); assert.equal(bad.negative, true); assert.equal(bad.conditional, true); assert.equal(bad.modal, true);
+  assert.ok(b.sample.some((x) => /discuss any topic/.test(x.text) && !x.negative && !x.conditional));
+  assert.ok(!b.sample.some((x) => /weather/.test(x.text)), "a sentence about something else is not a behaviour of the protagonist");
+  assert.ok(!b.sample.some((x) => /iteration of Claude is/.test(x.text) || /is curious/.test(x.text)), "an identity or a description is not a behaviour");
+  assert.deepEqual([b.conditional, b.negative, b.modal], [1, 1, 3]);
+  // a limit, stated: the reader tags a present-tense verb after a bare name unreliably ("Claude uses a warm tone"), so present-tense behaviours are undercounted
+});

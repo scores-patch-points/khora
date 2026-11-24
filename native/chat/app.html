@@ -106,10 +106,16 @@ function considered(t) {
   const ref = (t.refused ?? []).length ? `<div class="by">refused by janus's gates: ${t.refused.map((r) => esc(String(r.why).split("_").join(" "))).join(", ")}</div>` : "";
   return `<h5>What I considered</h5>${lines.join("")}${open}${ref}`;
 }
+// what a persona's prompt asks of it: the sentences that say what it does or should do, each kept as written with its marks
+function asks(b) {
+  if (!b?.total) return "";
+  const items = b.sample.map((x) => `<div class="cl"><span class="tag">${x.negative ? "should not" : x.modal ? "can / should" : "does"}</span>${x.conditional ? ` <span class="tag">only if</span>` : ""} ${esc(x.text)}</div>`).join("");
+  return `<details class="reason"><summary>What this prompt asks of me (${b.total})</summary><div class="why">${items}${b.total > b.sample.length ? `<div class="by">and ${b.total - b.sample.length} more in the prompt</div>` : ""}</div></details>`;
+}
 function bot(r) {
   const text = r.error ? "Something went wrong reading that." : r.text;
   const inner = r.error ? "" : used(r) + considered(r.thought);
-  const t = turn("bot", `<div class="av">${esc(initial)}</div><div class="body"><div class="text">${esc(text)}${r.error ? "" : marks(r.cites)}</div>${r.taken ? `<div class="taken">${esc(r.taken)}</div>` : ""}${r.error ? "" : chips(r.cites)}<div class="acts"><button data-a="copy">Copy</button>${r.retry && !r.handled ? `<button data-a="again">Try again</button>` : ""}</div>${inner ? `<details class="reason"><summary>Reasoning</summary><div class="why">${inner}</div></details>` : ""}</div>`);
+  const t = turn("bot", `<div class="av">${esc(initial)}</div><div class="body"><div class="text">${esc(text)}${r.error ? "" : marks(r.cites)}</div>${r.taken ? `<div class="taken">${esc(r.taken)}</div>` : ""}${r.error ? "" : chips(r.cites)}<div class="acts"><button data-a="copy">Copy</button>${r.retry && !r.handled ? `<button data-a="again">Try again</button>` : ""}</div>${inner ? `<details class="reason"><summary>Reasoning</summary><div class="why">${inner}</div></details>` : ""}${asks(r.behaviours)}</div>`);
   t.dataset.text = text; return t;
 }
 $("thread").addEventListener("click", (e) => {
@@ -165,7 +171,9 @@ $("p").addEventListener("change", async () => {
   who = r.persona.label ?? r.persona.name; initial = (r.persona.name ?? who)[0]?.toUpperCase() ?? "?";
   $("who").textContent = `· ${who}`; $("m").placeholder = `Message ${r.persona.name ?? who}`;
   $("pb").hidden = false; $("pb").textContent = `Simulated: ${who} (${r.persona.vendor}), read from its published prompt. This is not that product, and there is no model in it.`;
-  bot({ handled: true, text: r.persona.identity ? `I'm ${r.persona.identity}.` : "I couldn’t find an identity sentence in that prompt, so I’m answering as myself.", cites: [{ label: `${who}'s prompt` }] });
+  const b = r.persona.behaviours, said = r.persona.identity ? `I'm ${r.persona.identity}.` : "I couldn’t find an identity sentence in that prompt, so I’m answering as myself.";
+  const impact = b?.total ? ` This prompt describes ${b.total} things it does or should do (${b.conditional} only in some situations, ${b.negative} of them things it should not do). None of them changes how I answer: they ask for judgment and style that I have no model for. What the persona changes is who I say I am, and what I can say about myself from its prompt.` : "";
+  bot({ handled: true, text: said + impact, cites: [{ label: `${who}'s prompt` }], behaviours: b });
 });
 </script>
 </body>
