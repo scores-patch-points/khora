@@ -16,6 +16,7 @@
 import { createHash } from "node:crypto";
 import { makeEngine } from "./engine.mjs";
 import { rowsOfFor } from "../reading.js";
+import * as READING from "../reading.js";   // readerFor (the language gate and the recaser: Parsing fixes) is optional here: a namespace import does not fail where it is not there yet
 import { splitSentences } from "../adapters/text/spans.js";
 import { priorsFor, abbreviationsFor } from "../the-fold/read-core.mjs";
 import { mereologyBuilder } from "../adapters/text/text-mereology.mjs";
@@ -94,7 +95,10 @@ const sha = (s) => createHash("sha256").update(String(s)).digest("hex").slice(0,
 
 /** makeThread({ hl, know, now }) → { say, ask, state }.  know: the givers (demo/knowledge.mjs makeKnowledge) or null (typed gaps). */
 export async function makeThread({ hl, know = null, now = () => new Date(), janus = null, log = null, getJson = undefined, verbEmbed = null, codeRouter = undefined } = {}) {
-  const parser = await rowsOfFor("eng"), pr = priorsFor("eng"), engine = await makeEngine({ hl });
+  const parser0 = await rowsOfFor("eng"), pr = priorsFor("eng"), engine = await makeEngine({ hl });
+  // THE REAL READER'S OWN DOOR FOR A MESSAGE (reading.js readerFor, Parsing fixes): the English reader is handed the names this thread was told, so a name typed without a capital is read as a name (the recaser); and which
+  // language a message is in is asked before it is read (below, in turn()). Without readerFor the chat reads as it did.
+  const parser = { ...parser0, rowsOf: (t, o) => parser0.rowsOf(t, { known: [...new Set((cast?.referents ?? []).filter((b) => b.kind === "name").map((b) => b.forms?.[0]?.[0]).filter(Boolean))], ...(o ?? {}) }) };
   const commonNoun = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); if (!c?.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); };
   const wordKnown = (r) => { const c = classifyWord(String(r.form).toLowerCase(), { posPrior: pr.posPrior }); return !!c?.found && c.total > 0; };   // a word the reader's part-of-speech prior holds
   // the given-name table (a giver, with its provenance inside the file): a name's lean for he / she until the thread's own pronouns say otherwise
@@ -690,6 +694,22 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
    *  standing and a later message can withdraw them. The routing below follows the standing act; nothing is decided in passing. */
   async function turn(message, opts = {}) {
     const t = String(message ?? "").trim(); if (!t) return null;
+    // WHICH LANGUAGE IS IT, before it is read (mechanic 5, nexus rule 8: the reader never defaults to English). This chat reads English: its thread is declared English (`thread: "eng"`), and the gate is asked what the
+    // MESSAGE is. A message it positively places elsewhere (a language no codec reads, or one it names that is not English) or whose script no prior holds is a typed gap and nothing is read into the thread. A message it
+    // cannot place by its words (a laugh, "hmm", one unknown word: the detector did not decide) is read as the thread's declared English, and the trace says it was undecided; refusing "Who smiled?" because the
+    // identifier is unsure would be the chat failing at its own language. A slash is a door called by hand; an inner turn is not asked again.
+    if (!opts._gated && !t.startsWith("/") && READING.readerFor) {
+      let g = null; try { g = await READING.readerFor(t, { thread: "eng", known: [...new Set((cast?.referents ?? []).filter((b) => b.kind === "name").map((b) => b.forms?.[0]?.[0]).filter(Boolean))] }); } catch { g = null; }   // the gate itself unavailable: the old reading stands, and state() says so
+      const name = (stem) => { try { return stem ? new Intl.DisplayNames(["en"], { type: "language" }).of(stem) : null; } catch { return null; } };
+      const placedElsewhere = g && !g.gap && g.language && g.language !== "eng", noCodec = g?.gap?.gap === "no_codec", foreignScript = g?.gap?.gap === "no_language" && g.gap.evidence === "script";
+      if (placedElsewhere || noCodec || foreignScript) {
+        const lang = name(g.language ?? g.gap?.language);
+        const text = foreignScript ? "That is in a script I have no reader for, so I haven't read it." : noCodec ? `That looks like ${lang ?? "a language I have no name for"}, and I have no reader for it yet, so I haven't read it.` : `That looks like ${lang ?? "another language"}. I read English here, so I haven't read it.`;
+        return { question: t, type: "unread", handled: false, gap: noCodec ? "no_codec" : foreignScript ? "no_language" : "language_not_english", text, tools: [], trace: [{ step: "language", language: g.language ?? g.gap?.language ?? null, evidence: g.evidence ?? g.gap?.evidence ?? null, gap: g.gap?.gap ?? "not_english", detail: g.gap?.detail ?? null }], acts: { working: "unread", open: false, alternatives: [] } };
+      }
+      if (g?.gap) opts = { ...opts, _langTrace: { step: "language", language: null, evidence: g.gap.evidence ?? null, gap: g.gap.gap, detail: `${g.gap.detail ?? ""}${g.gap.candidate ? " (candidate: " + JSON.stringify(g.gap.candidate) + ")" : ""}`.trim(), read_as: "english (the thread's declared language)" } };
+      opts = { ...opts, _gated: true };
+    }
     const rows = parser.rowsOf(t) ?? [], ws = rows.filter((r) => r.upos !== "PUNCT").map((r) => String(r.lemma ?? r.form).toLowerCase());
     const n = ++msgN, witness = `${id}:m${n}#0-${Math.max(1, t.length)}`, root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT");
     const cut = splitSentences(t, { abbreviations: abbr(t) });
@@ -785,7 +805,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       if (!out) return out;
       // what a later "no" corrects is the last message that SAID something (a statement, a question, a sum), never a social remark or one that could not be read: "really?" does not take "Pierre loves Natasha" back
       if (workingClaim && !["social", "unread", "fragment"].includes(j.working)) lastAct = { claim: workingClaim, orders, dependents: out.ideaIds?.filter((x) => !ids.includes(x)) ?? [] };
-      return { question: t, ...out, acts: { working: j.working, open: j.open, alternatives: j.alternatives }, taken: j.open ? null : takenAs(j), thought: ideation ? ideation.view([...new Set([...ids, ...(out.ideaIds ?? [])])]) : (out.thought ?? null) };
+      return { question: t, ...out, ...(opts._langTrace ? { trace: [opts._langTrace, ...(out.trace ?? [])] } : {}), acts: { working: j.working, open: j.open, alternatives: j.alternatives }, taken: j.open ? null : takenAs(j), thought: ideation ? ideation.view([...new Set([...ids, ...(out.ideaIds ?? [])])]) : (out.thought ?? null) };
     };
 
     // ---- MECHANIC 7: a question the chat put to the user is answered by the next fragment, IF the fragment fits what was asked. A man who asked "what does it stand for?" and is told
@@ -877,5 +897,5 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
   }
 
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), language: READING.readerFor ? "asked before a message is read (reading.js readerFor): a language it places that is not English, a language no codec reads, or a script no prior holds is a typed gap and nothing is read; a message it cannot place is read as this thread's declared English and the trace says so" : "not asked: readerFor is not in this checkout, so every message is read as English as before", corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
 }
