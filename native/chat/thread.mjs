@@ -604,7 +604,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const known = (r) => { const c = classifyWord(String(r.form).toLowerCase(), { posPrior: pr.posPrior }); return !!c?.found && c.total > 0; };
     const unreadable = topicRows.filter((r) => r.upos !== "PROPN" && r.upos !== "NUM" && !known(r));
     const looked = []; let lookedOk = false;
-    const aboutUs = qRows.some((r) => r.upos === "PRON" && ["1", "2"].includes(featsOf(r.feats).Person));   // a question about you or me is about this chat, not about the world
+    const aboutUs = qRows.some((r) => (r.upos === "PRON" && ["1", "2"].includes(featsOf(r.feats).Person)) || isYou(r));   // “u” is “you” (isYou, the same test the persona path uses): "great! u r starting on sunday right?" is about the user and me, never a search   // a question about you or me is about this chat, not about the world
     // every name the question uses is a referent the thread already holds: the thread has been asked about its own people, and the world cannot say what was said in it
     const names = qRows.filter((r) => r.upos === "PROPN" && r.deprel !== "vocative");
     const allKnown = names.length > 0 && names.every((r) => { const ref = refOf(r); return ref && (probe.referents.find((x) => x.ref === ref)?.first ?? order) < order; });
