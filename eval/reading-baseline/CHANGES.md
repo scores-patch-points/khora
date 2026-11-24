@@ -173,3 +173,6 @@ files changed since the last record: native/adapters/text/recase.mjs
 
 ## 2026-11-24: recase.mjs: the notebook never copies a capital onto a lowercase word inside a noun phrase (a determiner before it, walking back over modifiers), and markRecased marks the changed row, not the first row wearing the same form. A peer found 'You are Captain Salt, a weathered pirate captain.' lost its appositive. Applying the guard to the shelves too cost 4-5 points of held-out recall, so it is the notebook's only; EWT dev/test recall 0.315/0.300 and precision 0.746/0.711 unchanged; invariance unchanged. EXPLORATORY; eval/chat-register/RESULTS-READER.md.
 files changed since the last record: native/adapters/text/recase.mjs
+
+## 2026-11-24: readerFor's gap gains two structured counts, readable and knownToEnglish (the chat owner asked: a one-word fragment is the thread's language, several words English does not know are a typed gap). No decision changes; the gate numbers in eval/chat-register/RESULTS-READER.md stand.
+files changed since the last record: native/reading.js, native/adapters/text/language-gate.mjs

@@ -47,6 +47,10 @@ test("where the identifier did not decide, English must be a strict majority of 
   assert.deepEqual([gate("ok thanks man", { first, english: en }).language, gate("ok thanks man", { first, english: en }).evidence], ["eng", "english-words"]);
   assert.equal(gate("kal milte hai yaar", { first, english: { hai: 2 } }).language, null, "foreign words the prior met once or twice are no anchor");
   assert.equal(gate("dei where", { first, english: { where: 300 } }).language, null, "one known word of two is not a majority");
+  const hindi = gate("kal milte hai yaar", { first, english: { hai: 2 } });
+  assert.deepEqual([hindi.readable, hindi.knownToEnglish], [4, 1], "a caller can tell several foreign words from one fragment: readable words, and how many English knows");
+  const hmm = gate("Hmm", { first, english: { hmm: 3 } });
+  assert.deepEqual([hmm.language, hmm.readable, hmm.knownToEnglish], [null, 1, 1], "one word with nothing to read");
   const surname = gate("Madame Defarge wrote a letter.", { first, english: { wrote: 80, letter: 60 } });
   assert.equal(surname.language, "eng", "a capitalised mid-sentence word the English prior does not know is a name, and a name tells nothing about the language (found by a peer session, 2026-11-23)");
   assert.equal(gate("Mikrofonu at.", { first, english: { at: 300 } }).language, null, "a capital that starts a sentence is no evidence of a name: it counts as an unknown word");
@@ -110,7 +114,8 @@ test("readerFor: English is read, a language with a codec is read as itself, and
 });
 test("readerFor: romanised Hindi is never read as English: no rows and a typed gap (no_language: it is none the identifier holds); the English recaser never sees it", { skip: !HAVE }, async () => {
   const { readerFor } = await import("../reading.js");
-  for (const t of ["kal milte hai yaar", "yaar kya kar raha hai tu", "mujhe pata nahi"]) { const r = await readerFor(t); assert.notEqual(r.language, "eng", t); assert.deepEqual(r.rows, [], t); assert.equal(r.gap.gap, "no_language", t); }
+  for (const t of ["kal milte hai yaar", "yaar kya kar raha hai tu", "mujhe pata nahi"]) { const r = await readerFor(t); assert.notEqual(r.language, "eng", t); assert.deepEqual(r.rows, [], t); assert.equal(r.gap.gap, "no_language", t); assert.ok(r.gap.readable >= 3 && r.gap.knownToEnglish < r.gap.readable, `${t}: several readable words, English knows few`); }
+  const hmm = await readerFor("Hmm"); assert.equal(hmm.gap.readable, 1, "a one-word fragment says so: the caller decides what to do with it");
 });
 test("readerFor: a lowercase English chat line is read as English, with its names nominated, not invented", { skip: !HAVE }, async () => {
   const { readerFor } = await import("../reading.js");

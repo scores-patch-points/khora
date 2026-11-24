@@ -18,7 +18,8 @@
 //   2. whether the words of the message are ones the reader's own English prior knows, used only where the identifier did not decide. Names are set aside (a given name the giver knows, or a word the writer capitalised in mid-sentence that the English prior does not know: the same in every
 //      language, so no evidence), a lone letter and a number tell nothing, the share must be a STRICT majority and at least one of the words an anchor the prior has met ANCHOR_COUNT times.
 // Otherwise the answer is undetected, with the identifier's guess attached as `candidate` for whoever phrases the reply.
-//   languageOf(text, { thread, countOf, isName, identify }) -> { language: <stem>|null, evidence, detail, candidate? }
+//   languageOf(text, { thread, countOf, knownIn, isName, identify }) -> { language: <stem>|null, evidence, detail, candidate?, readable, knownToEnglish }
+//   readable = the message's words of two or more letters with no digit; knownToEnglish = how many of them the English POS prior has met (lets a caller tell "Hmm" from several foreign words)
 //   evidence: "detector" | "english-words" | "script" | "thread" | "none"
 //   identify(text, { stems }) is the language identifier (reading.js passes langid.mjs::identifyLanguage); the duel passes it stems: ["eng", candidate].
 // It does not parse and does not load a codec: reading.js::readerFor does both and turns a missing codec into the gap { gap: "no_codec", language, evidence, detail } and an unestablished language into { gap: "no_language", language: null, evidence, detail, candidate? }.
@@ -53,32 +54,35 @@ export function languageOf(text, { thread = null, countOf, knownIn = () => null,
     const capitalised = !initial && raw !== f && raw !== raw.toUpperCase() && isLetter([...raw][0]);
     if (n > 0) { known++; if (n >= ANCHOR_COUNT) anchor++; } else if (isName(f) || capitalised) names++; else unknown++;
   }
+  // the numbers the caller may need to tell a one-word fragment ("Hmm", "Noted.": nothing to read) from several words English does not know ("kal milte hai yaar"): words of two or more letters with no digit,
+  // and how many of those the English prior has met
+  const counts = { readable: words.length, knownToEnglish: known };
   const readable = known + unknown + names, share = known + unknown ? known / (known + unknown) : 0;
   const english = anchor > 0 && share > 0.5;
   const englishDetail = `${known} of ${known + unknown} readable words are known to the English prior`;
   const about = (x) => `${x.language} (${script}; margin ${(x.margin ?? 0).toFixed(1)}, ${x.hits ?? 0} function-word hits)`;
   if (d.confident && d.language) {
-    if (d.language === "eng") return { language: "eng", evidence: "detector", detail: `the language identifier is confident (eng, ${script})` };
+    if (d.language === "eng") return { ...counts, language: "eng", evidence: "detector", detail: `the language identifier is confident (eng, ${script})` };
     const scriptDecides = script !== "Latin" && script !== "Other", viaThread = !!thread && d.language === thread;
-    if (scriptDecides || viaThread) return { language: d.language, evidence: viaThread ? "thread" : "detector", detail: `the identifier says ${about(d)}${viaThread ? ", the thread's language" : ""}` };
+    if (scriptDecides || viaThread) return { ...counts, language: d.language, evidence: viaThread ? "thread" : "detector", detail: `the identifier says ${about(d)}${viaThread ? ", the thread's language" : ""}` };
     const duel = identify(T, { stems: ["eng", d.language] });                                                   // English against its candidate, nobody else
-    if (duel.confident && duel.language === "eng") return { language: "eng", evidence: "detector", detail: `the identifier first said ${d.language}, but asked to choose between English and ${d.language} it chooses English (margin ${(duel.margin ?? 0).toFixed(1)})` };
+    if (duel.confident && duel.language === "eng") return { ...counts, language: "eng", evidence: "detector", detail: `the identifier first said ${d.language}, but asked to choose between English and ${d.language} it chooses English (margin ${(duel.margin ?? 0).toFixed(1)})` };
     let own = 0, ownKnown = true; for (const w of words) { const c = knownIn(w, d.language); if (c == null) { ownKnown = false; break; } if (c > 0) own++; }
     const vocab = words.length && ownKnown ? own / words.length : null;                                        // the share of the words that are words of the candidate language
     const why = [];
     if (words.length < MIN_WORDS) why.push(`${words.length} readable word${words.length === 1 ? "" : "s"} (< ${MIN_WORDS})`);
     if ((d.margin ?? 0) < LATIN_MARGIN_FLOOR) why.push(`margin ${(d.margin ?? 0).toFixed(1)} < ${LATIN_MARGIN_FLOOR}`);
     if (vocab == null) why.push(`no ${d.language} lexicon to check its words against`); else if (vocab < VOCABULARY_FLOOR) why.push(`only ${own} of ${words.length} words known to the ${d.language} prior (${vocab.toFixed(2)} < ${VOCABULARY_FLOOR})`);
-    if (!why.length) return { language: d.language, evidence: "detector", detail: `the identifier says ${about(d)}; ${own} of ${words.length} words known to the ${d.language} prior` };
-    if (english) return { language: "eng", evidence: "english-words", detail: `${englishDetail}; the identifier's ${d.language} does not stand: ${why.join("; ")}` };
-    return { language: null, evidence: "detector", candidate: d.language, detail: `the identifier guessed ${about(d)} but it does not stand: ${why.join("; ")}; ${englishDetail}: not read` };
+    if (!why.length) return { ...counts, language: d.language, evidence: "detector", detail: `the identifier says ${about(d)}; ${own} of ${words.length} words known to the ${d.language} prior` };
+    if (english) return { ...counts, language: "eng", evidence: "english-words", detail: `${englishDetail}; the identifier's ${d.language} does not stand: ${why.join("; ")}` };
+    return { ...counts, language: null, evidence: "detector", candidate: d.language, detail: `the identifier guessed ${about(d)} but it does not stand: ${why.join("; ")}; ${englishDetail}: not read` };
   }
   // the identifier did not decide
-  if (script !== "Latin" && script !== "Other") return { language: null, evidence: "script", detail: `${script} script, and no language identified: ${d.gap ?? "undetected"}` };
+  if (script !== "Latin" && script !== "Other") return { ...counts, language: null, evidence: "script", detail: `${script} script, and no language identified: ${d.gap ?? "undetected"}` };
   if (known + unknown > 0) {
-    if (english) return { language: "eng", evidence: "english-words", detail: `${englishDetail}; the identifier did not decide (${d.gap ?? "not confident"})` };
-    return { language: null, evidence: "detector", detail: `${englishDetail}${anchor ? "" : " and none of them an anchor it has met " + ANCHOR_COUNT + " times"}, and the identifier did not decide (${d.gap ?? "not confident"})` };
+    if (english) return { ...counts, language: "eng", evidence: "english-words", detail: `${englishDetail}; the identifier did not decide (${d.gap ?? "not confident"})` };
+    return { ...counts, language: null, evidence: "detector", detail: `${englishDetail}${anchor ? "" : " and none of them an anchor it has met " + ANCHOR_COUNT + " times"}, and the identifier did not decide (${d.gap ?? "not confident"})` };
   }
-  if (thread) return { language: thread, evidence: "thread", detail: "nothing in the message can be read for a language; it is taken as the thread's" };
-  return { language: null, evidence: "none", detail: `nothing in the message can be read for a language (${d.gap ?? "no letters"})` };
+  if (thread) return { ...counts, language: thread, evidence: "thread", detail: "nothing in the message can be read for a language; it is taken as the thread's" };
+  return { ...counts, language: null, evidence: "none", detail: `nothing in the message can be read for a language (${d.gap ?? "no letters"})` };
 }

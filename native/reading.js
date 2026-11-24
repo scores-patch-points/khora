@@ -113,7 +113,8 @@ export async function rowsOfFor(stem) {
 
 /** READ ONE MESSAGE (mechanic 5): which language is it, then its rows; when no codec can read it, a typed gap and no rows. NEVER English by default (nexus rule 8).
  *  The man in the box asks what language a line is before he reads it (adapters/text/language-gate.mjs: the language identifier, then how much of it is English the reader knows).
- *    readerFor(text, { thread, known }) -> { rows, language, evidence, parseBy?, gap: null | { gap: "no_codec" | "no_language", language: <stem>|null, evidence: "script" | "detector", detail, candidate? } }
+ *    readerFor(text, { thread, known }) -> { rows, language, evidence, parseBy?, gap: null | { gap: "no_codec" | "no_language", language: <stem>|null, evidence: "script" | "detector", detail, candidate?, readable, knownToEnglish } }
+ *  `readable` = the message's words of two or more letters with no digit; `knownToEnglish` = how many of them the English POS prior has met (so a caller can tell "Hmm" from "kal milte hai yaar").
  *  gap "no_codec": the language is known and no codec reads it (language says which); gap "no_language": the message's language could not be established (language is null; evidence says whether
  *  it is a script no prior holds or the identifier did not decide). `candidate` is the identifier's weak guess when it did not stand ("it might be Welsh"): for the words of the reply, never an assertion.
  *  per message, never per thread (a thread can code-switch). `thread` is the thread's language, used only when the message has nothing in it to read; `known` is the names the thread was
@@ -126,9 +127,9 @@ export async function readerFor(text, { thread = null, known = null } = {}) {
   const lexicons = new Map(), knownIn = (w, stem) => { if (!lexicons.has(stem)) { let p = null; try { p = priorsFor(stem)?.posPrior ?? null; } catch { /* no prior for that stem: null says so */ } lexicons.set(stem, p); } const p = lexicons.get(stem); if (!p) return null; const c = classifyWord(w, { posPrior: p }); return c?.found ? c.total : 0; };
   const lang = languageOf(text, { thread, countOf, knownIn, isName: (w) => !!names?.has(w), identify: (t, o) => identifyLanguage(t, o) });
   const gapEvidence = lang.evidence === "script" ? "script" : "detector";
-  if (!lang.language) return { rows: [], language: null, evidence: lang.evidence, gap: { gap: "no_language", language: null, evidence: gapEvidence, detail: lang.detail, ...(lang.candidate ? { candidate: lang.candidate } : {}) } };
+  if (!lang.language) return { rows: [], language: null, evidence: lang.evidence, gap: { gap: "no_language", language: null, evidence: gapEvidence, detail: lang.detail, ...(lang.candidate ? { candidate: lang.candidate } : {}), readable: lang.readable, knownToEnglish: lang.knownToEnglish } };
   const p = await rowsOfFor(lang.language);
-  if (p.gap) return { rows: [], language: lang.language, evidence: lang.evidence, gap: { gap: "no_codec", language: lang.language, evidence: gapEvidence, detail: p.gap } };
+  if (p.gap) return { rows: [], language: lang.language, evidence: lang.evidence, gap: { gap: "no_codec", language: lang.language, evidence: gapEvidence, detail: p.gap, readable: lang.readable, knownToEnglish: lang.knownToEnglish } };
   return { rows: p.rowsOf(text, { known }) ?? [], language: lang.language, evidence: lang.evidence, parseBy: p.by, gap: null };
 }
 

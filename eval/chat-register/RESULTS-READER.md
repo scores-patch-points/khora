@@ -29,6 +29,8 @@ How a non-English LATIN answer stands (script-decided and thread answers need no
 
 **History of the design, kept because it is a finding:** the first gate was tuned on real chat (SMS: ~6% confident wrong labels). A support rule of two function-word hits cut chat errors to 1.8% and looked good, but held out on UD PUD it threw away a third of short Polish, Czech, Finnish and Turkish sentences (their function words are not the signal) and let the English-word witness call French and Turkish "English". It was replaced by the duel plus the two measured floors. Without the gold run that over-fit would have shipped.
 
+**The gap carries two counts (added at the chat owner's request, 2026-11-24):** `gap.readable` (the message's words of two or more letters with no digit) and `gap.knownToEnglish` (how many of them the English POS prior has met), so a caller can tell a one-word fragment ("Hmm", "Noted.": nothing to read) from several words English does not know ("kal milte hai yaar": 4 readable, 1 known) without parsing `detail`. The decisions and every number below are unchanged.
+
 ### Gold: UD PUD (the floors are read from it) and a second treebank per language (VAL, held out from the floors). N = 40 per language and length class, hash-ordered. "right" = read as that language, or a gap that names it; "unnamed" = a gap with no language; "wrong" = read or named as another language. raw = the identifier alone.
 
 | set | n | gate right | gate unnamed | gate wrong | raw right | raw unnamed | raw wrong |
