@@ -53,7 +53,10 @@ export function readJsonAt(dir, name) {
   try { return JSON.parse(fs.readFileSync(path.join(dir, name), "utf8")); } catch { return null; }
 }
 
-const listAt = (dir) => { try { return dir ? fs.readdirSync(dir) : []; } catch { return []; } };
+// A directory's listing, remembered while the directory itself is unchanged (its mtime moves when a file is added or removed). Every grammarFor / stemOf / languageContextFor asked which stems have priors,
+// and each ask listed the whole priors directory (1,957 files on the real home): 1.15 s of a 12 s read (cpu profile, EXPLORATORY).
+const LISTED = new Map();
+const listAt = (dir) => { try { if (!dir) return []; const m = fs.statSync(dir).mtimeMs, c = LISTED.get(dir); if (c && c.m === m) return c.names; const names = fs.readdirSync(dir); LISTED.set(dir, { m, names }); return names; } catch { return []; } };
 const fsSource = () => ({
   read: (name) => readJsonAt(HOME.dir, name) ?? (HOME.also ? readJsonAt(HOME.also, name) : null) ?? (HOME.shipped ? readJsonAt(HOME.shipped, name) : null),
   list: () => [...new Set([...listAt(HOME.dir), ...listAt(HOME.also), ...listAt(HOME.shipped)])],
