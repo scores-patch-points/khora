@@ -4,7 +4,7 @@ import test from "node:test"; import assert from "node:assert/strict";
 import { makeVerbEquivalence, referenceVerbs, standsIn } from "./verb-equivalents.js";
 
 const D = 24, dir = (i, ...o) => { const v = new Array(D).fill(0); v[i] = 1; o.forEach(([j, x]) => { v[j] = x; }); return v; };
-const VEC = { make: dir(0, [10, 0.1]), create: dir(0, [10, 0.2]), build: dir(0, [11, 0.3]), give: dir(1, [0, 0.4]), love: dir(2), like: dir(2, [12, 0.5]), hate: dir(2, [13, 0.5]) };
+const VEC = { make: dir(0, [10, 0.1]), create: dir(0, [10, 0.2]), build: dir(0, [11, 0.3]), give: dir(1, [0, 0.4]), love: dir(2), like: dir(2, [12, 0.5]), hate: dir(2, [13, 0.5]), craft: dir(0, [14, 2.3]) };
 const rnd = (key) => { let a = 0; for (const c of key) a = (a * 31 + c.charCodeAt(0)) >>> 0; return Array.from({ length: D }, () => { a = (a * 1664525 + 1013904223) >>> 0; return a / 4294967296 - 0.5; }); };
 const embed = async (ts) => ts.map((t) => VEC[t.replace(/^to /, "")] ?? rnd(t));
 const reference = Array.from({ length: 80 }, (_, i) => `ref${String.fromCharCode(97 + (i % 26))}${String.fromCharCode(97 + Math.floor(i / 26))}`);
@@ -55,4 +55,19 @@ test("DMD guard: a rival answer under a verb that is not near enough is said bes
   const r = await standsIn([{ verb: "created", similarity: 0.93, mutual: true }], ask, { rivals: ["built", "made", "sang"] });
   assert.equal(r.verdict, "same"); assert.equal(r.chosen.verb, "created"); assert.deepEqual(r.alsoSays, [{ verb: "built", answer: ["Acme"] }], "the verb that agrees is not a rival, one with no answer is not a rival");
   assert.deepEqual((await standsIn([{ verb: "created", similarity: 0.93, mutual: true }], ask)).alsoSays, []);
+});
+
+test("near misses: with a band, verbs just below the bar come back after the ones that clear it, flagged; without a band they do not; the bar and its spread are exposed", async () => {
+  const E = makeVerbEquivalence({ embed, reference }), pool = ["create", "build", "craft", "love"], sp = await E.spread();
+  assert.deepEqual((await E.equivalents("make", pool)).map((x) => x.verb), ["create", "build"], "default: unchanged, no near misses");
+  const b = await E.equivalents("make", pool, { band: 1 });
+  assert.deepEqual(b.map((x) => [x.verb, x.near_miss]), [["create", false], ["build", false], ["craft", true]], "the near miss comes last and is flagged; the unrelated verb is not offered");
+  assert.ok(sp.sd > 0 && b[2].similarity < sp.bar && b[2].similarity >= sp.nearMissFloor && sp.nearMissFloor < sp.bar, JSON.stringify({ sp, sim: b[2].similarity }));
+});
+test("near misses in the list are rivals for standsIn: they never become the answer and never block it, but a different answer under one is said beside it", async () => {
+  const list = [{ verb: "created", similarity: 0.93, mutual: true, near_miss: false }, { verb: "built", similarity: 0.85, mutual: true, near_miss: true }];
+  const r = await standsIn(list, async (v) => ({ created: ["Anthropic"], built: ["Acme"] })[v]);
+  assert.equal(r.verdict, "same"); assert.equal(r.chosen.verb, "created"); assert.deepEqual(r.agreeing, ["created"]); assert.deepEqual(r.alsoSays, [{ verb: "built", answer: ["Acme"] }]); assert.deepEqual(r.tried, ["created"]);
+  assert.deepEqual((await standsIn(list, async (v) => ({ created: ["Anthropic"], built: ["Anthropic"] })[v])).alsoSays, [], "a near miss that agrees is not a rival");
+  assert.equal((await standsIn([list[1]], async () => ["Acme"])).verdict, "none", "a near miss alone is not a candidate");
 });
