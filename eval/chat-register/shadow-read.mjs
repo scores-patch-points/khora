@@ -5,7 +5,7 @@
 //   chat_open      the chat asks (two candidates), the canonical read binds     chat_none  the chat has nobody for it, the canonical read binds
 //   canon_none     the chat binds, the canonical read has no binding           both_none  neither binds
 // and the names each side admits as beings are compared. Nothing is written to any log (the canonical read runs with the gate off).
-//   KHORA_PRIORS_DIR=$HOME/Documents/janus/priors node eval/chat-register/shadow-read.mjs
+//   KHORA_PRIORS_DIR=$HOME/Documents/janus/priors node eval/chat-register/shadow-read.mjs [out-file name, default shadow-read.json: give each arm its own]
 import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url"; import { execSync } from "node:child_process";
 process.env.KHORA_NO_PHAROS_GATE = "1";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, "..", "..");
@@ -32,7 +32,7 @@ const convs = [
 const norm = (s) => String(s ?? "").toLowerCase();
 const totals = { agree: 0, conflict: 0, chat_open: 0, chat_none: 0, canon_none: 0, both_none: 0 }, rows = [], castDiffs = [];
 for (const [label, msgs] of convs) {
-  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-24T12:00:00") });
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, crispr: null, now: () => new Date("2026-11-24T12:00:00") });   // crispr off: the measurement is of the reading, not of a capacity
   for (const m of msgs) { if (m.length > 600) await th.say(m, { given: "shadow-read" }); else await th.turn(m); }   // a passage is read into the thread as it stands; a short message goes through the chat as a user message
   const text = th.engine.S.text ?? th.state().text, chat = th.bindings();   // the engine's own text: sentenceStart indexes into it
   const w = await readDocument(text, { language: "eng", rows: true, minCharacters: 1 });
@@ -49,5 +49,5 @@ const n = Object.values(totals).reduce((a, b) => a + b, 0), bound = totals.agree
 console.log(`\nALL ${n} gendered pronouns: agree ${totals.agree}, conflict ${totals.conflict}, chat_open ${totals.chat_open}, chat_none ${totals.chat_none}, canon_none ${totals.canon_none}, both_none ${totals.both_none}`);
 if (bound) console.log(`where both bind: ${totals.agree} of ${bound} the same (${Math.round(100 * totals.agree / bound)}%)`);
 for (const r of rows) for (const it of (r.conflicts ?? []).slice(0, 6)) console.log(`  conflict in "${r.label}": …${it.context}… chat ${it.chat} (${it.via ?? "?"}) vs canonical ${it.canonical}`);
-fs.writeFileSync(path.join(HERE, "shadow-read.json"), JSON.stringify({ stamp: { when: new Date().toISOString(), split: "EXPLORATORY (developer-written conversations, three prose passages)", commit, priorsHome: home }, totals, rows, castDiffs }, null, 1) + "\n");
+fs.writeFileSync(path.join(HERE, process.argv[2] ?? "shadow-read.json"), JSON.stringify({ stamp: { when: new Date().toISOString(), split: "EXPLORATORY (developer-written conversations, three prose passages)", commit, priorsHome: home }, totals, rows, castDiffs }, null, 1) + "\n");
 process.exit(0);
