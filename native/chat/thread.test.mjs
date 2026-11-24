@@ -160,3 +160,10 @@ test("without the verb-equivalents organ nothing is substituted: the question's 
   const st = r.trace.find((t) => t.step === "verb_stand_in"); assert.equal(st.ran, false); assert.match(st.gap, /verb-equivalents organ .* is not in this checkout/);
   assert.match(th.state().priors.verbEquivalence, /not in this checkout/);
 });
+test("recall is by referent: a frame a pronoun fills answers the name's question, a pronoun is not another argument of its own verb, and a stranded preposition is not a participant", T, async () => {
+  const th = await mkThread(); for (const m of ["Mina gave Jonathan a book.", "She lives in the village.", "Pierre visited Mina in the village.", "Pierre brought a basket of apples.", "He gave the apples to Jonathan."]) await th.turn(m);
+  const where = await th.turn("Where does Mina live?"); assert.equal(where.handled, true); assert.match(where.text, /village/);
+  if (HAVE) { const who = await th.turn("Who gave the apples to Jonathan?"); assert.match(who.text, /^Pierre\./, "“He” is not Jonathan: Jonathan is the other argument of the same verb"); }
+  const eng = th.engine, partial = await eng.answer("Who did Pierre give the apples to?", { polarity: true });
+  assert.ok(!partial.read.filled.some((w) => w.head === "to"), "the stranded “to” is the gap's role, not something the question names");
+});

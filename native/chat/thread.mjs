@@ -197,11 +197,19 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     return { cls: null };
   };
   engine.setClassOf(classWhy);
+  // a role the thread filled with a pronoun ("She lives in the village") is matched to the question's name by the referent the pronoun settles to, not by the word "she" (the referent rule); an open pronoun matches no one
+  engine.setPronounResolver((node) => {
+    const dot = node.indexOf("."), o = Number(node.slice(1, dot < 0 ? undefined : dot)), row = dot < 0 ? null : engine.S.rowsOf.get(o)?.rows?.find((r) => r.id === Number(node.slice(dot + 2)));
+    const info = row ? pronounInfo(featsOf(row.feats), o, row) : null;
+    return info && !info.open && info.ref ? (engine.S.refByRef.get(info.ref)?.forms ?? []).map(([f]) => f) : [];
+  });
   const placeOnly = (ref) => { const uses = engine.S.framesOfRef?.get(ref) ?? []; return uses.length > 0 && uses.every((u) => u.label === "adhikaraṇa"); };
   const listOr = (xs) => (xs.length < 2 ? xs[0] ?? "" : `${xs.slice(0, -1).join(", ")} or ${xs.at(-1)}`);
-  const pronounInfo = (F, order) => {
+  const pronounInfo = (F, order, row = null) => {
     const cls = F.Gender === "Masc" ? "m" : F.Gender === "Fem" ? "f" : F.Number === "Plur" && !F.Gender ? "x" : null; if (!cls || F.Person !== "3" || F.PronType !== "Prs") return null;
-    const names = (cast?.referents ?? []).filter((b) => b.kind === "name" && b.first <= order && !placeOnly(b.ref));
+    // a personal pronoun is never another argument of its own verb ("He gave the apples to Jonathan": he is not Jonathan): the names its clause already holds are not candidates (read from the rows, the clause's own head)
+    const coArgs = new Set(row ? (engine.S.rowsOf.get(order)?.rows ?? []).filter((r) => r !== row && r.head === row.head && r.upos === "PROPN").map((r) => cast?.mentionOf?.[`${order}.${r.id}`]).filter(Boolean) : []);
+    const names = (cast?.referents ?? []).filter((b) => b.kind === "name" && b.first <= order && !placeOnly(b.ref) && !coArgs.has(b.ref));
     // "they" is mostly a group or a thing (16% and 13% of the time it is the one named person in the window, CorefUD gold): it is bound only to a being the user TOLD is "they", never guessed, and left unbound otherwise
     if (cls === "x") { const sure = names.filter((b) => classOfBeing(b) === "x"), c = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] })); return sure.length === 1 ? { cls, open: false, ref: sure[0].ref, candidates: c(sure), via: told.has(sure[0].ref) ? { source: "you told me" } : { source: "told", text: genderWhy((sure[0].forms ?? []).flatMap(([f]) => String(f).split(" ")))?.reliability?.text ?? null } } : sure.length > 1 ? { cls, open: true, ref: null, candidates: c(sure) } : null; }
     const fits = names.filter((b) => { const c = classOfBeing(b); return c == null || c === cls; }), sure = fits.filter((b) => classOfBeing(b) === cls);
@@ -632,7 +640,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       const sayFiller = (x) => {
         if (!x.pron || !x.node) return x.text;
         const dot = x.node.indexOf("."), o = Number(x.node.slice(1, dot < 0 ? undefined : dot)), row = dot < 0 ? null : S.rowsOf.get(o)?.rows?.find((r) => r.id === Number(x.node.slice(dot + 2)));
-        const info = row ? pronounInfo(featsOf(row.feats), o) : null;
+        const info = row ? pronounInfo(featsOf(row.feats), o, row) : null;
         if (info?.ref) {
           const nm = S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? x.text;
           if (["title", "name", "snapshot", "told"].includes(info.via?.source)) {   // settled by the name prior: said, with its source and how often that source is right

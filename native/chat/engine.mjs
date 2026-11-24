@@ -517,6 +517,7 @@ async function readQuestion(q) {
   const filled = [];
   if (kriya) for (const c of kids.get(kriya.id) ?? []) {
     if (c === wh || (wh && c.id === wh.head && wh.deprel === "det")) continue;
+    if (c.upos === "ADP" && !(kids.get(c.id) ?? []).length) continue;   // a stranded preposition ("Who did Jonathan write a letter to?") is the gap's role, not a participant
     if (!PART.has(c.panini) && c.deprel !== "nsubj" && c.deprel !== "obj") continue;
     const sub = []; const st = [c]; while (st.length) { const x = st.pop(); sub.push(x); for (const y of kids.get(x.id) ?? []) st.push(y); }
     if (sub.some((x) => WH.has(x.form.toLowerCase()))) continue;
@@ -526,6 +527,9 @@ async function readQuestion(q) {
   return { passive, declarative: decl?.text ?? null, asked: asked.map((r) => r.form).join(" "), rows: rows.map((r) => ({ id: r.id, form: r.form, lemma: r.lemma, upos: r.upos, deprel: r.deprel, head: r.head, panini: r.panini, contested: r.karakaContested ?? null })), wh: (wh ?? wh0)?.form ?? null, kriya: kriya ? low(kriya) : null, kriyaForm: kriya?.form ?? null, copular, gap, gapVia, filled, words: rows.filter((r) => ["NOUN", "PROPN", "VERB", "ADJ"].includes(r.upos)).map((r) => ({ form: r.form, lemma: low(r), upos: r.upos })) };
 }
 
+// THE REFERENT RULE: a role filled by a pronoun ("She lives in the village") is the referent the caller resolves it to, never the string "she". The caller (the thread) hands in `resolve(node) -> [the referent's written names]`;
+// without it (the book panel) a pronoun matches only itself, as before.
+let pronounResolver = null;
 const fillerMatches = (want, got) => want.names.length ? want.names.some((n) => got.names.includes(n) || got.head === n) : got.head === want.head || got.names.includes(want.head);
 const address = (span) => (span ? { chars: span, bytes: [S.B[span[0]], S.B[span[1]]] } : null);
 const chapterAt = (pos) => { const c = S.chapters.find((x) => x.start <= pos && pos < x.end); return c ? (c.book === c.title ? c.title : `${c.book} · ${c.title}`) : null; };
@@ -552,9 +556,12 @@ async function answer(q, { upTo = null, limit = 12, polarity = false, neg = fals
   let cands = kriyas.flatMap((k) => (S.byKriya.get(k) ?? []).map((f) => ({ f, viaSynonym: k !== Q.kriya }))).filter(({ f }) => inScope(f));
   // POLARITY (opt-in: the book panel keeps its old answers): "Mina did not give Jonathan a book" is not a frame that says who gave. A frame answers a question of its own
   // polarity only, and an affirmed frame is RETRACTED by a later negated one about the same event (same action, every role the negated clause names filled by the same participant).
+  const resolved = new Map();   // node -> the folded words of the names of the referent a pronoun role stands for (this question only: what the user settles can change it)
+  const stands = (got) => { if (!got.pron || !got.node || !pronounResolver) return []; if (!resolved.has(got.node)) { let ws = []; try { ws = (pronounResolver(got.node) ?? []).flatMap((n) => String(n).split(" ")).map(fold); } catch { /* an unresolvable pronoun matches nothing */ } resolved.set(got.node, ws); } return resolved.get(got.node); };
+  const FM = (want, got) => fillerMatches(want, got) || (stands(got).length > 0 && (want.names.length ? want.names.some((n) => stands(got).includes(n)) : stands(got).includes(want.head)));
   out.retracted = [];
   if (polarity) {
-    const sameThing = (g, f) => g.roles.every((w) => !KARAKAS.includes(w.label) || f.roles.some((x) => x.label === w.label && fillerMatches(w, x)));
+    const sameThing = (g, f) => g.roles.every((w) => !KARAKAS.includes(w.label) || f.roles.some((x) => x.label === w.label && FM(w, x)));
     const retractedBy = (f) => (S.byKriya.get(f.kriya) ?? []).find((g) => g.neg && g.order > f.order && sameThing(g, f));
     cands = cands.filter(({ f }) => {
       if (!!f.neg !== !!neg) return false;
@@ -567,7 +574,7 @@ async function answer(q, { upTo = null, limit = 12, polarity = false, neg = fals
   // patient swap. Only if no frame answers that way are frames that hold the participant in another role offered, marked loose.
   const swap = { "kartṛ": "karman", "karman": "kartṛ" };
   const roleOk = (w, g, f) => g.label === w.label || (!!Q.passive !== (f.voice === "passive") && swap[w.label] === g.label);
-  const pass = (strict) => cands.filter(({ f }) => Q.filled.every((w) => f.roles.some((g) => fillerMatches(w, g) && (!strict || roleOk(w, g, f)))));
+  const pass = (strict) => cands.filter(({ f }) => Q.filled.every((w) => f.roles.some((g) => FM(w, g) && (!strict || roleOk(w, g, f)))));
   let strict = true, kept = pass(true);
   const hasGap = (f) => !Q.gap || f.roles.some((g) => Q.gap.includes(g.label) || (g.contested ?? []).some((c) => Q.gap.includes(c)));
   // frames that hold the named participants only in OTHER roles are context, never answers
@@ -575,7 +582,7 @@ async function answer(q, { upTo = null, limit = 12, polarity = false, neg = fals
   if (!kept.some(({ f }) => hasGap(f))) { const strictSet = new Set(kept.map((x) => x.f)); out.loose = pass(false).filter(({ f }) => !strictSet.has(f) && hasGap(f)).slice(0, 5).map(({ f }) => ({ order: f.order, kriya: f.kriya, chapter: f.span ? chapterAt(f.span[0]) : null, sentence: clip(f.span), at: f.span?.[0] ?? null, address: address(f.span) })); }
   out.matching = "the question's participants in the same roles (agent and patient swap across voices)";
   for (const { f, viaSynonym } of kept) {
-    const sameRole = Q.filled.filter((w) => f.roles.some((g) => fillerMatches(w, g) && roleOk(w, g, f))).length;
+    const sameRole = Q.filled.filter((w) => f.roles.some((g) => FM(w, g) && roleOk(w, g, f))).length;
     const fillers = gapSet ? f.roles.filter((g) => gapSet.has(g.label) || (g.contested ?? []).some((c) => gapSet.has(c))) : [];
     const pronounOnly = fillers.length > 0 && fillers.every((g) => g.pron);
     const used = new Set(fillers.map((g) => g.node));
@@ -608,6 +615,6 @@ async function answer(q, { upTo = null, limit = 12, polarity = false, neg = fals
 
 return {
   get S() { return S; }, get HL_HEAD() { return HL_HEAD; }, HL, EN, KARAKAS, PART, PERSPECTIVES,
-  ingest, wordProfile, tokenProfile, textProfile, answer, propositionsOf, egoGraph, clip, setClassOf: (fn) => { classOf = typeof fn === "function" ? fn : null; },
+  ingest, wordProfile, tokenProfile, textProfile, answer, propositionsOf, egoGraph, clip, setClassOf: (fn) => { classOf = typeof fn === "function" ? fn : null; }, setPronounResolver: (fn) => { pronounResolver = typeof fn === "function" ? fn : null; },
 };
 }
