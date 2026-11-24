@@ -9,28 +9,52 @@
 // find the nearest centroid (by string similarity or embedding distance).
 
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { priorJson } from "../../the-fold/prior-source.mjs";
+import { cellOf, OPERATOR_CHAIN } from "../../kernel/cube.js";
 
-const FULL_CENTROIDS_PATH = "/Users/mlacy/Downloads/workspace/khora-clone/native/priors/phasepost-centroids-full.json";
-const EMBEDDINGS_3D_PATH = "/Users/mlacy/eo-lexical-analysis/output/phasepost_embeddings_3d.json";
-const CROSSING_PATH = "/Users/mlacy/eo-lexical-analysis/output/crossling_27_cells.json";
+// WHERE THE STUDY'S DATA IS. Three absolute paths on one machine (/Users/mlacy/...) were hard-coded here, and a machine without them did not read less: it threw on the first row.
+// Now: the study's directory is $EO_LEXICAL_ANALYSIS_DIR, else ~/eo-lexical-analysis (the eo-lexical-analysis study's own checkout); the full-dimensional centroids come through the
+// priors door by name (janus/priors holds them); a file that is not there is a typed gap that `smellStatus()` states, never a throw and never a silent empty.
+const STUDY_DIR = process.env.EO_LEXICAL_ANALYSIS_DIR ? path.resolve(process.env.EO_LEXICAL_ANALYSIS_DIR) : path.join(os.homedir(), "eo-lexical-analysis");
+const EMBEDDINGS_3D_PATH = path.join(STUDY_DIR, "output", "phasepost_embeddings_3d.json");
+const CROSSING_PATH = path.join(STUDY_DIR, "output", "crossling_27_cells.json");
+const FULL_CENTROIDS_NAME = "phasepost-centroids-full.json";
 
 let _fullCentroids = null;
 let _pool3d = null;
 
 export function loadFullCentroids() {
   if (_fullCentroids) return _fullCentroids;
-  try {
-    _fullCentroids = JSON.parse(fs.readFileSync(FULL_CENTROIDS_PATH, "utf8"));
-  } catch (e) {
-    _fullCentroids = null;
-  }
+  _fullCentroids = priorJson(FULL_CENTROIDS_NAME) ?? null;
   return _fullCentroids;
 }
 
+// The study (2026-02, eo-lexical-analysis) named the nine operators by an older registry: DES, ALT and SUP stand where the kernel says SIG, DEF and EVA (cube.js: "ALT and SUP are
+// not canonical operators"). The study's own records carry each operator's MODE (pos) and DOMAIN (tri), which is what the kernel's operators are defined by, so the translation is
+// DERIVED from the data, never typed: the kernel operator with the same mode and domain. DES is (Relate, Existence) = SIG; ALT (Differentiate, Interpretation) = DEF; SUP (Relate,
+// Interpretation) = EVA; the other six are the same operator under the same name. An operator with no kernel counterpart, or two that collide, is a gap in the status.
+function kernelOpMap(centroids) {
+  const byModeDomain = new Map(OPERATOR_CHAIN.map((op) => { const c = cellOf(op, "Ground"); return [`${c.mode}|${c.domain}`, op]; }));
+  const map = {}, gaps = [];
+  for (const c of centroids) {
+    const k = byModeDomain.get(`${c.pos}|${c.tri}`);
+    if (!k) { gaps.push({ op: c.op, why: `no kernel operator is (${c.pos}, ${c.tri})` }); continue; }
+    if (map[c.op] && map[c.op] !== k) gaps.push({ op: c.op, why: `maps to both ${map[c.op]} and ${k}` });
+    map[c.op] = k;
+  }
+  const used = Object.values(map); if (new Set(used).size !== used.length) gaps.push({ why: "two study operators map to one kernel operator" });
+  return { map, gaps };
+}
+
+const GAP = (why, lang) => ({ pool: null, centroidMap: null, nCells: 0, K: 0, lang, opMap: {}, gap: why });   // carries the language so a gap is not rebuilt on every row
+
 export function buildExemplarPool(lang = "English", K = 10) {
-  const data = JSON.parse(fs.readFileSync(EMBEDDINGS_3D_PATH, "utf8"));
+  let data;
+  try { data = JSON.parse(fs.readFileSync(EMBEDDINGS_3D_PATH, "utf8")); } catch (e) { return GAP(`the study's file ${EMBEDDINGS_3D_PATH} could not be read (${String(e?.code ?? e?.message ?? e).slice(0, 60)}); set EO_LEXICAL_ANALYSIS_DIR`, lang); }
   const langData = data[lang];
-  if (!langData) return null;
+  if (!langData) return GAP(`the study has no language "${lang}"`, lang);
   const centroids = langData.centroids;
   const scatter = langData.scatter;
 
@@ -53,7 +77,8 @@ export function buildExemplarPool(lang = "English", K = 10) {
     }));
   }
 
-  return { pool, centroidMap, nCells: Object.keys(pool).length, K, lang };
+  const { map: opMap, gaps } = kernelOpMap(centroids);
+  return { pool, centroidMap, nCells: Object.keys(pool).length, K, lang, opMap, ...(gaps.length ? { gap: `operator translation: ${gaps.map((g) => g.why).join("; ")}` } : {}) };
 }
 
 export function getExemplarPool(lang = "English") {
@@ -169,6 +194,22 @@ export function nearestCellFull(embedding) {
 }
 
 // List supported languages
+/** A cell key of the study ("DES|GROUND") in the kernel's own form ("SIG·Ground"), or null where the translation has a gap. The reader's rows still carry the study's form (row.phasepost,
+ *  from reading.js, which is a baseline-guarded file); a consumer that joins the smell with the grammar's cells translates with this. */
+export function kernelCell(cellKey, lang = "English") {
+  const [op, ref] = String(cellKey ?? "").split("|"), { opMap } = getExemplarPool(lang), k = opMap?.[op];
+  return k && ref ? `${k}·${ref[0]}${ref.slice(1).toLowerCase()}` : null;
+}
+
+/** What the smell stands on, said: whether the study's data was found, how many exemplar verbs it holds, how its operators were translated, and any gap. Never throws. */
+export function smellStatus(lang = "English") {
+  const P = getExemplarPool(lang), exists = (f) => { try { return fs.existsSync(f); } catch { return false; } };
+  const exemplars = P.pool ? Object.values(P.pool).reduce((n, v) => n + v.length, 0) : 0;
+  return { on: !!P.pool && !P.gap, gap: P.gap ?? null, lang, cells: P.nCells, exemplars, opMap: P.opMap ?? {},
+    files: [{ what: "study embeddings (exemplar verbs per cell)", path: EMBEDDINGS_3D_PATH, found: exists(EMBEDDINGS_3D_PATH) }, { what: "study cross-language cells", path: CROSSING_PATH, found: exists(CROSSING_PATH) }, { what: `full centroids, through the priors door as ${FULL_CENTROIDS_NAME}`, found: !!loadFullCentroids() }],
+    how: "a token is smelled when its form is one of the exemplar verbs (exact), or within 0.8 string similarity of one: a lookup of at most K verbs per cell, not an embedding of the word" };
+}
+
 export function supportedLanguages() {
   try {
     const data = JSON.parse(fs.readFileSync(EMBEDDINGS_3D_PATH, "utf8"));
