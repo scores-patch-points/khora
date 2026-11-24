@@ -20,6 +20,7 @@ const fold = (x) => { let o = ""; for (const ch of String(x ?? "").normalize("NF
 const { KARAKAS, PANINI_LABELS: EN } = await K("native/adapters/text/karaka-total.mjs");
 const PART = new Set([...KARAKAS, "kāraka"]);
 const { featsOf, proformClass } = await K("native/adapters/text/gender-from-corpus.js");
+const { loadNamePrior, MIN_EVIDENCE: NAME_MIN_EVIDENCE } = await K("native/adapters/text/name-prior.js");
 const { mergeBy } = await K("native/adapters/text/referents-in-order.mjs");
 // KIND INDUCTION is khora's own (kernel/entity-kind-induction.js): kinds are stable basins in the interaction field, held against a
 // random-subset null. A referent enters the population once the text returns to it often enough to have a profile of channels
@@ -193,12 +194,25 @@ const sentenceOf = (order) => { const p = S.rowsOf.get(order); const sp = S.node
 const nameWordOf = (b) => { if (b.kind === "nominal") return b.head; for (const [f] of b.forms) for (const w of f.split(" ")) if (!S.titles.has(w.toLowerCase())) return w; return b.forms[0]?.[0] ?? ""; };
 // a pro-form as the book writes it, or null when the read did not decide one (contested, or no evidence)
 const pronounOf = (d, source) => (d && !d.contested && S.pro[d.cls]?.nom ? { cls: d.cls, nom: S.pro[d.cls].nom, poss: S.pro[d.cls].poss, was: S.be.past[d.cls === "x" ? "Plur" : "Sing"], is: S.be.pres[d.cls === "x" ? "Plur" : "Sing"], n: d.n, of: d.of, source } : null);
-// WHEN THE GENDER IS NOT SETTLED THE VOICE SAYS "THEY" (the owner, 2026-11-23: default to "they" when you're not sure). A person (a being that acts: it fills an agent role at least once, so a place
-// like Paris stays "Paris") whose pro-form the read did not decide, or decided only as a contested guess, is told with they / them / their and the plural verb ("they were"), never with a guess and never
-// with the bare name where a pronoun belongs. The book's own forms are kept whenever it decided; a decided class whose forms the thread never showed (no "she" yet) is left unvoiced, not overruled with "they". Same forms as native/adapters/text/gender-of-words.js pronounsFor(null) (the English reader's declared table),
-// kept here so the engine does not depend on a file that may be absent.
+// WHEN THE GENDER IS NOT SETTLED THE VOICE SAYS "THEY" (the owner, 2026-11-23: default to "they" when you're not sure). "Not sure" is what the whole thread knows, not only what the read's own pro-forms
+// decided (the other session's probe of 7dcf5ca: "Natasha wrote a letter" was told "They wrote", and the chat held her as a woman): the voice asks the CALLER's class of the being
+// (`setClassOf`: the thread's, which is what the user settled, then the pro-forms the thread attached, then the given-name prior with its source), says he / she when it is m or f, and says "they"
+// only when that is null. The book's own pro-form still wins whenever it decided and showed its forms. A being that is not a person is never "they": the repo's own person ruling
+// (adapters/text/name-prior.js, measured on GUM's gold entity types: not-person > person over the words the table knows, at least MIN_EVIDENCE) applied to the being's written forms (the thread's cast
+// carries no mention spans), and "they" applies only to a being that acts (it fills an agent role at least once) and is not a nominal. Forms are English closed-class chrome (rule 4), kept here
+// so the engine does not depend on a file that may be absent.
 const THEY = Object.freeze({ cls: "x", nom: "they", acc: "them", poss: "their", refl: "themself", is: "are", was: "were" });
-const theyFor = (being) => (being && being.kind !== "nominal" && !(being.proform && !being.proform.contested) && (S.framesOfRef?.get(being.ref) ?? []).some((u) => u.label === "kartṛ") ? { ...THEY, source: "they-default", decided: false, note: "gender not settled, so “they”" } : null);
+const HE = Object.freeze({ cls: "m", nom: "he", acc: "him", poss: "his", refl: "himself", is: "is", was: "was" }), SHE = Object.freeze({ cls: "f", nom: "she", acc: "her", poss: "her", refl: "herself", is: "is", was: "was" });
+let classOf = null;   // (being) -> { cls: "m" | "f" | null, source, text } : set by the caller that knows more than the read (the thread). Unset (the book panel): the read's own pro-form only.
+const notAPerson = (being) => { const prior = loadNamePrior(); if (!prior?.words) return false; let p = 0, n = 0; for (const [f] of being.forms ?? []) for (const w of String(f).toLowerCase().split(" ")) { const c = prior.words[w]; if (c) { p += c[0]; n += c[1]; } } return n > p && n + p >= NAME_MIN_EVIDENCE; };
+const actsAsAgent = (being) => (S.framesOfRef?.get(being.ref) ?? []).some((u) => u.label === "kartṛ");
+const theyFor = (being) => {
+  if (!being || being.kind === "nominal" || !actsAsAgent(being) || notAPerson(being)) return null;
+  const c = classOf?.(being);
+  if (c?.cls === "m" || c?.cls === "f") return { ...(c.cls === "m" ? HE : SHE), source: c.source ?? "thread", decided: true, ...(c.text ? { note: c.text } : {}) };
+  if (being.proform && !being.proform.contested) return null;   // the read decided a class whose forms nothing showed, and the caller gave none: unvoiced, as before, not overruled with "they"
+  return { ...THEY, source: "they-default", decided: false, note: "gender not settled, so “they”" };
+};
 const cap = (w) => (w ? w[0].toUpperCase() + w.slice(1) : w);
 const listed = (xs) => (xs.length < 2 ? xs.join("") : `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}`);
 // ── WHAT THE BOOK SAYS ABOUT A REFERENT: its most meaningful PROPOSITIONS, not a summary stitched from counts.
@@ -375,7 +389,8 @@ async function wordProfile(word0, { ref = null, perspective = "as read" } = {}) 
   const parts = [];
   if (sentences.length) parts.push(`${display} appears in ${sentences.length.toLocaleString()} sentence${sentences.length === 1 ? "" : "s"}, from ${chapterAt(S.sentenceStart.get(sentences[0])) ?? "the start"} to ${chapterAt(S.sentenceStart.get(sentences[sentences.length - 1])) ?? "the end"}.`);
   const pct = lead ? Math.round((100 * lead.n) / Math.max(1, roleShare.reduce((a, x) => a + x.n, 0))) : 0;
-  if (does.length) parts.push(pron ? `${cap(pron.nom)} ${listed(does.slice(0, 4).map((x) => x.show))}.` : `As the agent: ${listed(does.slice(0, 4).map((x) => x.show))}.`);
+  const acts = does.filter((x) => S.vform.has(x.k));   // a predicate adjective ("was tired") is a state the person is in, not something it did
+  if (acts.length) parts.push(pron ? `${cap(pron.nom)} ${listed(acts.slice(0, 4).map((x) => x.show))}.` : `As the agent: ${listed(acts.slice(0, 4).map((x) => x.show))}.`);
   if (withList.length) parts.push(`Most often with ${withList.slice(0, 3).map((x) => x.show).join(", ")}.`);
   if (keepAction) parts.push(`As an action, ${asAction.length.toLocaleString()} times.`);
   if (!sentences.length) parts.push(`The book never uses “${word}”.`);
@@ -593,6 +608,6 @@ async function answer(q, { upTo = null, limit = 12, polarity = false, neg = fals
 
 return {
   get S() { return S; }, get HL_HEAD() { return HL_HEAD; }, HL, EN, KARAKAS, PART, PERSPECTIVES,
-  ingest, wordProfile, tokenProfile, textProfile, answer, propositionsOf, egoGraph, clip,
+  ingest, wordProfile, tokenProfile, textProfile, answer, propositionsOf, egoGraph, clip, setClassOf: (fn) => { classOf = typeof fn === "function" ? fn : null; },
 };
 }

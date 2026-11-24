@@ -132,3 +132,16 @@ test("the exact verb is never replaced: when it answers, no stand-in runs; with 
   const bare = await mkThread({ verbEmbed: async () => { throw new Error("connection refused"); } }); await bare.turn("Claude was created by Anthropic.");
   const g = await bare.turn("Who made Claude?"); assert.equal(g.handled, false); assert.match(g.trace.find((t) => t.step === "verb_stand_in").gap, /embedder could not be reached/);
 });
+test("“they” is for what the whole thread does not settle: a name or title the prior settles is he or she, four pronouns settle it for the thread, a place that acts keeps its name, a predicate adjective is not something done", T, async () => {
+  const { makeThread } = await import("./thread.mjs");
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  await th.turn("Casey wrote a letter. Casey was tired. Casey waved. Pierre wrote a letter. Pierre lost the hat. Pierre waved. Mrs Bennet wrote a letter. Mrs Bennet lost the hat. Mrs Bennet waved. Paris sent a letter. Paris lost the hat. Paris waved. Mina kissed her son. She hugged herself. Mina lost her hat. Mina washed herself. Mina opened her door.");
+  const profile = async (name) => th.engine.wordProfile("", { ref: th.engine.S.read.cast.referents.find((b) => b.forms[0][0] === name).ref });
+  const casey = await profile("Casey"); assert.equal(casey.pronoun.source, "they-default"); assert.match(casey.summary, /They wrote and waved\./, "the adjective “tired” is a state, not an act");
+  if (HAVE) {
+    const pierre = await profile("Pierre"); assert.equal(pierre.pronoun.nom, "he"); assert.equal(pierre.pronoun.decided, true); assert.ok(["name", "title", "snapshot"].includes(pierre.pronoun.source)); assert.match(pierre.summary, /He wrote, lost and waved\./);
+    const bennet = await profile("Mrs Bennet"); assert.equal(bennet.pronoun.nom, "she"); assert.equal(bennet.pronoun.source, "title");
+  }
+  const paris = await profile("Paris"); assert.equal(paris.pronoun, null); assert.doesNotMatch(paris.summary, /They |He |She /);
+  const mina = await profile("Mina"); assert.equal(mina.pronoun.nom, "she"); assert.equal(mina.pronoun.decided !== false, true);
+});

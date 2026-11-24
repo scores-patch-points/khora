@@ -148,6 +148,16 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   const proformEvidence = (b) => { const cls = new Map(); for (const p of parse) for (const r of p.rows) if (r.upos === "PRON") { const F = featsOf(r.feats); if (F.Person === "3" && (F.Gender === "Masc" || F.Gender === "Fem")) cls.set(String(r.form).toLowerCase(), F.Gender === "Masc" ? "m" : "f"); }
     let m = 0, f = 0; for (const [form, n] of b.proformForms ?? []) { const c = cls.get(String(form).toLowerCase()); if (c === "m") m += n; else if (c === "f") f += n; } return m > f ? "m" : f > m ? "f" : null; };
   const classOfBeing = (b) => told.get(b.ref) ?? (b.proform && !b.proform.contested ? b.proform.cls : null) ?? proformEvidence(b) ?? genderOf((b.forms ?? []).flatMap(([f]) => String(f).split(" ")));
+  // the class of a being WITH ITS REASON, for the engine's voice (engine.setClassOf): what the user settled, the book's own decided pro-form, the pro-forms the thread attached, the given-name prior (its source and how often it has been right)
+  const classWhy = (b) => {
+    const t = told.get(b.ref); if (t) return { cls: t, source: "told", text: "you settled it" };
+    if (b.proform && !b.proform.contested && (b.proform.cls === "m" || b.proform.cls === "f")) return { cls: b.proform.cls, source: "pro-forms", text: "the pronouns that name it" };
+    const pe = proformEvidence(b); if (pe) return { cls: pe, source: "pro-forms", text: "the pronouns the thread attached to it" };
+    const words = (b.forms ?? []).flatMap(([f]) => String(f).split(" ")), g = genderOf(words);
+    if (g === "m" || g === "f") { const w = genderWhy(words); return { cls: g, source: w?.source ?? "name prior", text: w?.reliability?.text ?? null }; }
+    return { cls: null };
+  };
+  engine.setClassOf(classWhy);
   const placeOnly = (ref) => { const uses = engine.S.framesOfRef?.get(ref) ?? []; return uses.length > 0 && uses.every((u) => u.label === "adhikaraṇa"); };
   const listOr = (xs) => (xs.length < 2 ? xs[0] ?? "" : `${xs.slice(0, -1).join(", ")} or ${xs.at(-1)}`);
   const pronounInfo = (F, order) => {
