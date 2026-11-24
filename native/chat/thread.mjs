@@ -96,11 +96,17 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   const table = loadNameGender();
   // a missing prior is a gap said, never a silent degrade (nexus rule 2): without this table no name's gender is known, so no pronoun is steered by a name's lean and the fit of a name
   // to "he" or "she" cannot be checked. It was missing from this checkout for the whole session (found by the other session, 2026-11-23); the state and the pairing say so.
-  const nameGender = genderMod?.makeDefaultNameGenderPrior ? genderMod.makeDefaultNameGenderPrior({}) : null;
+  // WHAT THE USER SAID IN AN EARLIER THREAD (the owner, 2026-11-24: "the system will be right next time"): each correction is written to the log (kind `correction`: { key, class, said, thread, was }) and read back
+  // HERE, at the start of every thread, by the prior's own reader (gender-of-words.js readCorrections: log order, the newest wins, null retracts). The prior ranks it first among its sources, as "told", with the
+  // user's own words as its reason; the thread's own pro-forms still overcome it. Without a log, or without the prior, nothing is remembered (state().priors.corrections says which).
+  let corrections = null; try { if (log && genderMod?.readCorrections) corrections = genderMod.readCorrections(readKinds(log, ["correction"])); } catch { /* an unreadable log remembers nothing */ }
+  const nameGender = genderMod?.makeDefaultNameGenderPrior ? genderMod.makeDefaultNameGenderPrior({ corrections }) : null;
   const legacyGender = (words) => { let m = 0, f = 0; for (const w of words ?? []) { const c = table?.words?.[String(w).toLowerCase()]; if (c) { m += c[0]; f += c[1]; } } return m + f >= MIN_EVIDENCE && m !== f ? (m > f ? "m" : "f") : null; };
   const nameGenderGap = nameGender && !nameGender.missing ? null : table ? null : nameGender ? "no table of given names (native/adapters/text/name-gender/dictionary-en.json has not been built; scripts/build-name-gender-dictionary.mjs builds it): a name's gender cannot be checked" : "no table of given names (native/adapters/text/gender-of-words.js and name-gender/ are not in this checkout): a name's gender cannot be checked";
-  const genderOf = (words) => (nameGender && !nameGender.missing ? nameGender.genderOf(words) : legacyGender(words));
-  const genderWhy = (words) => (nameGender && !nameGender.missing ? nameGender.explain(words) : null);   // { gender, source, word, reliability: { text }, open }
+  const priorUsable = !!nameGender && (!nameGender.missing || !!corrections?.size);   // what the user told us works with no table of given names
+  const genderOf = (words) => (priorUsable ? nameGender.genderOf(words) : legacyGender(words));
+  const genderWhy = (words) => (priorUsable ? nameGender.explain(words) : null);
+  const classOfWords = (words) => { const e = genderWhy(words); return e ? e.class ?? e.gender ?? null : legacyGender(words); };   // m, f, or x (the user said this person goes by "they")   // { gender, source, word, reliability: { text }, open }
   const abbr = (t) => abbreviationsFor(t, { priors: pr, aliases: [], abbreviations: null }).set;
   const id = `thread:${sha(now().toISOString() + Math.random())}`;
   let text = "", parse = [], folded = "", cast = null, last = null, persona = null;
@@ -145,11 +151,6 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   const givenPersons = new Set();        // refs a giver confirmed as people (the person door: Wikidata "instance of human"): a better candidate for he or she than a being of unknown kind
   const told = new Map();               // ref -> "m" | "f" | "x" (they): a class the user settled, by answering "Do you mean ...?" or by correcting a binding (presented evidence, never a guess)
   let lastBinding = null;               // the last pronoun the chat settled for the user, by asking or by its own pick: { cls, ref, label, pron }. "No, I meant Jordan" and "that's not right, she is Jordan" correct THIS.
-  // WHAT THE USER SAID IN AN EARLIER THREAD (the owner, 2026-11-24: "the system will be right next time"): a correction is written to the log (kind `correction`) and read back here, by name. It outranks the
-  // given-name prior and nothing the thread itself shows; the newest correction of a name wins. Without a log there is nothing to remember, and nothing is said about it.
-  let rememberedMap = null;
-  const remembered = () => { if (rememberedMap) return rememberedMap; rememberedMap = new Map(); try { for (const e of log ? readKinds(log, ["correction"]) : []) if (e.body?.name && e.body?.cls) rememberedMap.set(String(e.body.name).toLowerCase(), e.body.cls); } catch { /* an unreadable log remembers nothing */ } return rememberedMap; };
-  const rememberedClass = (b) => remembered().get(String(b.forms?.[0]?.[0] ?? "").toLowerCase()) ?? null;
   // A BINDING STATEMENT, read from the reader's rows (never a pattern on words): "she is Jordan" (a name that is the complement of a copula whose subject is a personal pronoun), "they means Casey" /
   // "I meant Jordan" (a name that is the object of "mean"), "Natasha is a man" (a name whose copula complement states a gender). The first two say who a pronoun is; the last says what a name is.
   const chunkOf = (rows, n) => [n, ...rows.filter((r) => r.head === n.id && r.upos === "PROPN" && ["compound", "flat", "flat:name"].includes(r.deprel))].sort((a, b) => a.id - b.id).map((r) => r.form).join(" ");
@@ -185,15 +186,14 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // ("Pierre took HIS hat") is evidence even when it is the only one: a sign test needs several, a man needs one
   const proformEvidence = (b) => { const cls = new Map(); for (const p of parse) for (const r of p.rows) if (r.upos === "PRON") { const F = featsOf(r.feats); if (F.Person === "3" && (F.Gender === "Masc" || F.Gender === "Fem")) cls.set(String(r.form).toLowerCase(), F.Gender === "Masc" ? "m" : "f"); }
     let m = 0, f = 0; for (const [form, n] of b.proformForms ?? []) { const c = cls.get(String(form).toLowerCase()); if (c === "m") m += n; else if (c === "f") f += n; } return m > f ? "m" : f > m ? "f" : null; };
-  const classOfBeing = (b) => told.get(b.ref) ?? (b.proform && !b.proform.contested ? b.proform.cls : null) ?? proformEvidence(b) ?? rememberedClass(b) ?? genderOf((b.forms ?? []).flatMap(([f]) => String(f).split(" ")));
+  const classOfBeing = (b) => told.get(b.ref) ?? (b.proform && !b.proform.contested ? b.proform.cls : null) ?? proformEvidence(b) ?? classOfWords((b.forms ?? []).flatMap(([f]) => String(f).split(" ")));
   // the class of a being WITH ITS REASON, for the engine's voice (engine.setClassOf): what the user settled, the book's own decided pro-form, the pro-forms the thread attached, the given-name prior (its source and how often it has been right)
   const classWhy = (b) => {
     const t = told.get(b.ref); if (t) return { cls: t, source: "told", text: "you settled it" };
     if (b.proform && !b.proform.contested && (b.proform.cls === "m" || b.proform.cls === "f")) return { cls: b.proform.cls, source: "pro-forms", text: "the pronouns that name it" };
     const pe = proformEvidence(b); if (pe) return { cls: pe, source: "pro-forms", text: "the pronouns the thread attached to it" };
-    const rc = rememberedClass(b); if (rc) return { cls: rc, source: "told earlier", text: "you said so in an earlier thread" };
-    const words = (b.forms ?? []).flatMap(([f]) => String(f).split(" ")), g = genderOf(words);
-    if (g === "m" || g === "f") { const w = genderWhy(words); return { cls: g, source: w?.source ?? "name prior", text: w?.reliability?.text ?? null }; }
+    const words = (b.forms ?? []).flatMap(([f]) => String(f).split(" ")), c = classOfWords(words);
+    if (c === "m" || c === "f" || c === "x") { const w = genderWhy(words); return { cls: c, source: w?.source ?? "name prior", text: w?.reliability?.text ?? null }; }
     return { cls: null };
   };
   engine.setClassOf(classWhy);
@@ -203,7 +203,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const cls = F.Gender === "Masc" ? "m" : F.Gender === "Fem" ? "f" : F.Number === "Plur" && !F.Gender ? "x" : null; if (!cls || F.Person !== "3" || F.PronType !== "Prs") return null;
     const names = (cast?.referents ?? []).filter((b) => b.kind === "name" && b.first <= order && !placeOnly(b.ref));
     // "they" is mostly a group or a thing (16% and 13% of the time it is the one named person in the window, CorefUD gold): it is bound only to a being the user TOLD is "they", never guessed, and left unbound otherwise
-    if (cls === "x") { const sure = names.filter((b) => classOfBeing(b) === "x"), c = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] })); return sure.length === 1 ? { cls, open: false, ref: sure[0].ref, candidates: c(sure), via: { source: told.has(sure[0].ref) ? "you told me" : "you said so in an earlier thread" } } : sure.length > 1 ? { cls, open: true, ref: null, candidates: c(sure) } : null; }
+    if (cls === "x") { const sure = names.filter((b) => classOfBeing(b) === "x"), c = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] })); return sure.length === 1 ? { cls, open: false, ref: sure[0].ref, candidates: c(sure), via: told.has(sure[0].ref) ? { source: "you told me" } : { source: "told", text: genderWhy((sure[0].forms ?? []).flatMap(([f]) => String(f).split(" ")))?.reliability?.text ?? null } } : sure.length > 1 ? { cls, open: true, ref: null, candidates: c(sure) } : null; }
     const fits = names.filter((b) => { const c = classOfBeing(b); return c == null || c === cls; }), sure = fits.filter((b) => classOfBeing(b) === cls);
     // evidence in tiers: the class is known (settled, a pro-form, a table) > a giver says it is a person > nothing is known; the best non-empty tier decides, and only a tie inside it is open
     const known = fits.filter((b) => givenPersons.has(b.ref));
@@ -635,7 +635,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         const info = row ? pronounInfo(featsOf(row.feats), o) : null;
         if (info?.ref) {
           const nm = S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? x.text;
-          if (["title", "name", "snapshot"].includes(info.via?.source)) {   // settled by the name prior: said, with its source and how often that source is right
+          if (["title", "name", "snapshot", "told"].includes(info.via?.source)) {   // settled by the name prior: said, with its source and how often that source is right
             if (ideation) { const c = idea({ label: `${quote(x.text)} stands for ${nm}`, relation: { subject: x.text, verb: "stands for", object: nm }, door: "induced", giver: `name prior:${info.via.source}` });
             ideation.assess(c, { verdict: "supported", method: "deduction", by: `the name prior (${info.via.source})`, basis: `${quote(nm)} reads as ${info.cls === "f" ? "a woman's" : "a man's"} name (${info.via.source}; ${info.via.text ?? "reliability not recorded"})`, license: "a prior that records how often each source has been right on held-out text" }); }
             trace.push({ step: "gender", of: nm, source: info.via.source, reliability: info.via.text });
@@ -708,7 +708,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
           said.push(against ? `${head} (${label} is usually ${against === "m" ? "a man's" : "a woman's"} name; I'll go with what you said.)` : head);
           steps.push({ step: "rebound", kind: f.kind, name: label, cls, was: prev?.label ?? null, source: "you said so", ...(against ? { prior_leaned: against } : {}) });
           ids.push(propose(f.kind === "class" ? `${label} is ${f.said}` : `${quote(pron || "they")} is ${label}`, { subject: f.kind === "class" ? label : pron || "they", verb: "is", object: f.kind === "class" ? f.said : label }, true, { verdict: "supported", method: "testimony", by: "your correction", basis: `you said so${prev ? `, and it takes my earlier pick (${prev.label}) back` : ""}; what you say outranks what I picked or what a table leans`, witnesses: [witness] }));
-          try { if (log) weaveEntry(log, { cell: "REC·Figure", kind: "correction", addr: `${id}:c${msgN}:${Date.now()}`, body: { thread: id, name: label, cls, was: prev?.label ?? null, text: f.text } }); } catch { /* the log is not there: the correction still holds in this thread */ }
+          try { if (log) weaveEntry(log, { cell: "REC·Figure", kind: "correction", addr: `${id}:c${msgN}:${Date.now()}`, body: { key: label.toLowerCase(), class: cls, said: f.text, thread: id, was: prev?.label ?? null } }); } catch { /* the log is not there: the correction still holds in this thread */ }
         }
         const inner = rest.length ? await turn(rest.join(" "), { ...opts, _ids: ids }) : null;
         return { question: t, ...(inner ?? { tools: [] }), type: "correction", handled: true, text: [...said, inner?.text].filter(Boolean).join(" "), trace: [...steps, ...(inner?.trace ?? [])], thought: ideation ? ideation.view([...new Set(ids)]) : null, acts: { working: "correction", open: false } };
@@ -838,5 +838,5 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
   }
 
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
 }
