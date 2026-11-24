@@ -27,7 +27,6 @@ import { loadNameGender, MIN_EVIDENCE } from "../adapters/text/name-gender.js";
 // the given-name prior (another session's module): a title before a name, then the name's dictionary given-name sense, then the Wikidata given-name snapshot, each saying where it came from and how often that source was right on held-out novels. Absent, the older table below is used if there is one, and the gap is said.
 const genderMod = await import("../adapters/text/gender-of-words.js").catch(() => null);
 import { makeIdeation } from "./ideation.mjs";
-import * as DC from "./delclose.mjs";
 import { weaveOne as weaveEntry, readKinds } from "./record.mjs";
 import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
@@ -149,41 +148,6 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // ideation: candidates put forward, tested, and read back off the shared log (ideation.mjs). Needs the log; without janus mounted the
   // candidates are still written but nothing is judged, and the reply says nothing was linted.
   const ideation = log ? makeIdeation({ threadId: id, h: log, janus }) : null;
-  // DELCLOSE (delclose.mjs; native/docs/THE-IMPROVISER-DELCLOSE.md): an offer built only from this thread's own parts, drawn by a seed, read back by the same reader before it is said, kept in a scene apart
-  // from what the thread holds, and written to the log as this chat's own activity (a candidate, an assessment, and the draw with its pool). The seed is the one typed, else the count of offers so far:
-  // the same thread state gives the same offer. A reply never says how; the trail sits behind the affordance.
-  const sceneEvents = []; let improvN = 0;
-  const openSeries = [];   // the open places after each offer: the series the kernel's streaming DMD measures the gain of
-  const improviseRaw = async (args, { focus = null, act = "offer" } = {}) => {
-    if (!parse.length) return { ok: false, gap: "no_fold", text: DC.CHROME.eng.empty, cites: [] };
-    await refold();
-    const arg = String(args ?? "").trim(), seed = arg === "" ? improvN : Number.isFinite(Number(arg)) ? Number(arg) : arg;
-    const KAR = engine.KARAKAS, fold = DC.foldOfEngine(engine.S, { KARAKAS: KAR, featsOf, scene: sceneEvents });
-    const reread = async (t) => { const f = await makeThread({ hl, know: null, codeRouter: null, now }); await f.say(t, { given: "read back" }); const S2 = f.engine.S; return { events: S2.frames.map((fr) => ({ kriya: fr.kriya, roles: fr.roles.filter((g) => KAR.includes(g.label)).map((g) => ({ role: g.label, text: S2.text.slice(g.span[0], g.span[1]) })) })) }; };
-    const fx = focus ? { events: fold.events.filter((e) => e.world === "thread" && e.order === focus.order && e.kriya === focus.kriya).map((e) => e.id), roles: focus.roles } : null;
-    const out = await DC.improvise(fold, { seed, thread: id, turn: improvN, reread, n: improvN, history: openSeries, focus: fx, act });
-    if (!out.ok) return { ok: false, gap: out.gap, text: out.text, cites: [], detail: { title: "What I looked at", rows: [{ rung: "open places", where: String(out.edge?.openBefore ?? 0), verdict: `${out.edge?.licensed ?? 0} ways to fill them that stay inside what you told me` }, ...Object.entries(out.refused ?? {}).map(([why, c]) => ({ rung: "set aside", where: `${c}`, verdict: why.split("_").join(" ") })), ...(out.refusedAtVoice ?? []).map((x) => ({ rung: "could not say it", where: x.text ?? x.key, verdict: x.detail ?? x.why }))] } };
-    sceneEvents.push(out.scene); openSeries.push(out.edge.openAfter); const n = ++improvN;
-    if (log) {
-      try {
-        const rec = DC.recordOf(out, { threadId: id, n, addressOf: (sp) => (sp ? `${id}:text#${sp[0]}-${sp[1]}` : null) });
-        try { weaveEntry(log, { cell: "DEF·Figure", kind: "kind", addr: "kind:improvisation", body: { name: "improvisation", cell: "SYN·Pattern" } }); } catch { /* already declared */ }
-        weaveEntry(log, rec.draw);
-        if (ideation) { const cid = ideation.propose(rec.candidate); ideation.assess(cid, rec.assessment); }
-      } catch { /* the record is additive; a miss never blocks the reply */ }
-    }
-    const EN = engine.EN, e = out.edge;
-    return { ok: true, text: `${out.text} ${out.chrome}`, cites: [{ label: "your own words" }], detail: { title: "How I made it up", rows: [
-      ...(out.act === "guess" ? [{ rung: "not told", where: "what you asked for", verdict: "your words do not say it, so this is a guess, not an answer" }] : []),
-      { rung: "seed", where: `${out.seed}`, verdict: `${out.how === "scout" ? "tried something I use less" : "drawn"} from ${out.pool.length} ways to say yes and add one thing${e.derived ? `; ${(e.pSwap * 100).toFixed(0)}% of draws add an event, the share at which the number of open places stays where it is` : ""}` },
-      ...(out.builtOn?.sentence ? [{ rung: "built on", where: out.builtOn.sentence, verdict: "something I made up earlier, not something you told me" }] : []),
-      ...out.parts.map((p) => ({ rung: p.role === out.offer.role ? "added" : "kept", where: `“${p.text}” as the ${EN[p.role] ?? p.role}`, verdict: p.from?.span ? `${p.role === out.offer.role ? "copied from your words" : "from your words"} (characters ${p.from.span[0]} to ${p.from.span[1]})` : "from your words" })),
-      { rung: "read back", where: out.sentence, verdict: "the reader gives the same event, with the new part in its place" },
-      { rung: "open places", where: `${e.openBefore} before, ${e.openAfter} after`, verdict: e.gain?.growth == null ? "one is left for you" : `one is left for you; across the moves so far they have been ${e.gain.growth > 0 ? "growing" : e.gain.growth < 0 ? "closing" : "holding"}, so I took ${e.gain.steer === "close" ? "a detail" : e.gain.steer === "open" ? "a new event" : "the usual mix"}` },
-      ...Object.entries(out.refused ?? {}).map(([why, c]) => ({ rung: "set aside", where: `${c}`, verdict: why.split("_").join(" ") })),
-      ...(out.refusedAtVoice ?? []).map((x) => ({ rung: "could not say it", where: x.text ?? x.key, verdict: x.detail ?? x.why })),
-    ] } };
-  };
   const givenAt = new Map();            // order of a sentence of the thread -> the giver that supplied it (not the user): "Wikidata"
   const kinFacts = () => [];            // kin facts the thread holds, as janus facts: NOT EXTRACTED YET (pin: janus scripts/kinship/bind-kin.mjs reads them from text)
   // DOORS (doors.mjs): the declared ways out of the thread. Not knowing is the signal to use one: a gap with a shape that a door fills is
@@ -510,9 +474,6 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       // GOING ON. A man who has just told someone about Tolstoy, and is told "say more", says more about Tolstoy: he opens the book and reads on. A request with no thing of its own in it
       // ("say more", "go on", "continue", "tell me more") continues the last topic; "research it" is the open gap if there is one, else the last topic.
       const goOn = async () => {
-        if (!lastTopic && parse.length) {   // nothing read to go on about, but a thread told: going on is thinking forward from it. That is the improviser (delclose.mjs), the system's own capacity, and it leaves the floor to the person when it has said enough
-          const o = await improviseRaw(); const out = done({ type: "offer", handled: o.ok, gap: o.ok ? null : o.gap, text: o.text, cites: o.cites ?? [], ...(o.detail ? { detail: o.detail } : {}) }); if (o.ok) last = out; return out;
-        }
         if (!lastTopic) return done({ type: "request", handled: false, gap: "no_topic", text: "I haven't told you anything yet to go on about. Ask me something." });
         if (!lastTopic.sentences) {
           const w = await callDoor("wiki", lastTopic.name);   // reads the opening of the article into the thread, as Wikipedia's words
@@ -731,10 +692,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       last = out; return out;
     }
     const gap = a.gaps?.[0];
-    // THINKING: the question names a place of an event the thread holds and never filled. The notebook says so first; then, as a man would, a guess made only of what the thread has used in that place, said as a guess
-    // and kept apart from what it was told (delclose.mjs). It never changes the answer: the question stays unanswered.
-    const guess = gap?.gap === "the_text_does_not_say" && a.partial?.length && a.read?.gap?.length ? await improviseRaw(undefined, { focus: { order: a.partial[0].order, kriya: a.partial[0].kriya, roles: a.read.gap }, act: "guess" }) : null;
-    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: (aboutUs && !a.answers?.length ? "That's about you or me, and I only know what's been said in this chat." : unreadable.length && !a.answers?.length ? "I couldn't read some of those words, so I didn't look anything up." : looked.length ? (lookedOk ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : `I haven't been told that, and I couldn't look it up: ${looked.at(-1)}`) : "I haven't been told that.") + (guess?.ok ? ` ${guess.text} ${guess.chrome ?? ""}`.trimEnd() : ""), detail: guess?.ok ? guess.detail : (gap?.detail ?? null), ...(guess?.ok ? { guessed: true } : {}), ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
+    return done({ type: "relational", handled: false, gap: gap?.gap ?? "no_answer", text: aboutUs && !a.answers?.length ? "That's about you or me, and I only know what's been said in this chat." : unreadable.length && !a.answers?.length ? "I couldn't read some of those words, so I didn't look anything up." : looked.length ? (lookedOk ? `I haven't been told that, and I went to look: ${looked.at(-1)}, but it doesn't answer it.` : `I haven't been told that, and I couldn't look it up: ${looked.at(-1)}`) : "I haven't been told that.", detail: gap?.detail ?? null, ...(topic ? { research: { gap: "no_answer", args: topic } } : {}) });
   }
 
   /** turn(message) → the reply to ONE message, whatever it is: small talk, a calculation, a question, or a statement to read into the fold */
@@ -956,5 +914,5 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
   }
 
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), improvise: serial(improviseRaw), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), language: READING.readerFor ? "asked before a message is read (reading.js readerFor): a language it places that is not English, a language no codec reads, or a script no prior holds is a typed gap and nothing is read; a message it cannot place is read as this thread's declared English and the trace says so" + (identifierKnown === false ? " (this priors home has no language identifier, so a message it cannot place is always read as English)" : "") : "not asked: readerFor is not in this checkout, so every message is read as English as before", corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), language: READING.readerFor ? "asked before a message is read (reading.js readerFor): a language it places that is not English, a language no codec reads, or a script no prior holds is a typed gap and nothing is read; a message it cannot place is read as this thread's declared English and the trace says so" : "not asked: readerFor is not in this checkout, so every message is read as English as before", corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
 }
