@@ -309,8 +309,9 @@ test("words the reader does not know never leave: no outside call for a message 
   const sent = [], mine = await make({ getJson: async (u) => { sent.push(u); return { query: { search: [] } }; } });
   const r = await mine.turn("Indha help kuda panna maataengura la?:-(");
   assert.equal(sent.length, 0, "nothing was sent to Wikipedia"); assert.equal(r.handled, false);
-  assert.match(r.text, /^I couldn't read some of those words, so I didn't look anything up\.$/);
-  assert.ok(r.trace.some((s) => s.step === "no_research" && s.unreadable >= 1));
+  // refused up front by the language gate where the priors home has an identifier ("most of the words aren't English I know"), or by the chat's own check of the words it knows: either way nothing is read and nothing is sent
+  assert.match(r.text, /^(I couldn't read some of those words, so I didn't look anything up\.|I couldn't tell what language that is: most of the words aren't English I know, so I haven't read it\.)$/);
+  assert.ok(r.trace.some((s) => (s.step === "no_research" && s.unreadable >= 1) || s.step === "language"));
   const typo = await mine.turn("wat is the captial of italy?"); assert.equal(sent.length, 0, "a misspelling is not sent out either");
   const fine = await mine.turn("Who wrote War and Peace?"); assert.ok(sent.length > 0, "a question made of words the reader knows still goes looking");
 });

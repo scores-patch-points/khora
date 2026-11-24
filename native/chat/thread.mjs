@@ -27,6 +27,7 @@ import { loadNameGender, MIN_EVIDENCE } from "../adapters/text/name-gender.js";
 // the given-name prior (another session's module): a title before a name, then the name's dictionary given-name sense, then the Wikidata given-name snapshot, each saying where it came from and how often that source was right on held-out novels. Absent, the older table below is used if there is one, and the gap is said.
 const genderMod = await import("../adapters/text/gender-of-words.js").catch(() => null);
 import { makeIdeation } from "./ideation.mjs";
+import * as DC from "./delclose.mjs";
 import { weaveOne as weaveEntry, readKinds } from "./record.mjs";
 import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
@@ -49,6 +50,9 @@ const verbOrgan = await import("../organs/verb-equivalents.js").catch(() => null
 // words so a wrong offer looks wrong, and runs nothing until the user says yes. T = 0.673, the 97.5th percentile of the closeness of 300 NUS SMS messages (DEV), from eval/route-mark/RESULTS.md.
 const CODE_ROUTE_T = 0.673;
 const codeRoute = await import("./code-route.mjs").catch(() => null), codeMeaning = await import("./code-meaning.mjs").catch(() => null);
+const langid = await import("../the-fold/langid.mjs").catch(() => null);
+let identifierWorksP = null, identifierKnown = null;   // whether this priors home has a language identifier at all (the 20-file stand-in has none): tested once, on a fixed English sentence
+const identifierWorks = () => (identifierWorksP ??= Promise.resolve().then(() => langid?.identifyLanguage?.("This is a sentence written in English.")).then((r) => r?.language === "eng").catch(() => false).then((v) => (identifierKnown = v)));
 let sharedEmbedder = null;   // one vector library per process, shared by every thread (the persona fold is a thread too)
 
 const WH = new Set(["who", "whom", "what"]);
@@ -143,6 +147,37 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // ideation: candidates put forward, tested, and read back off the shared log (ideation.mjs). Needs the log; without janus mounted the
   // candidates are still written but nothing is judged, and the reply says nothing was linted.
   const ideation = log ? makeIdeation({ threadId: id, h: log, janus }) : null;
+  // DELCLOSE (delclose.mjs; native/docs/THE-IMPROVISER-DELCLOSE.md): an offer built only from this thread's own parts, drawn by a seed, read back by the same reader before it is said, kept in a scene apart
+  // from what the thread holds, and written to the log as this chat's own activity (a candidate, an assessment, and the draw with its pool). The seed is the one typed, else the count of offers so far:
+  // the same thread state gives the same offer. A reply never says how; the trail sits behind the affordance.
+  const sceneEvents = []; let improvN = 0;
+  const improviseRaw = async (args) => {
+    if (!parse.length) return { ok: false, gap: "no_fold", text: DC.CHROME.eng.empty, cites: [] };
+    await refold();
+    const arg = String(args ?? "").trim(), seed = arg === "" ? improvN : Number.isFinite(Number(arg)) ? Number(arg) : arg;
+    const KAR = engine.KARAKAS, fold = DC.foldOfEngine(engine.S, { KARAKAS: KAR, featsOf, scene: sceneEvents });
+    const reread = async (t) => { const f = await makeThread({ hl, know: null, codeRouter: null, now }); await f.say(t, { given: "read back" }); const S2 = f.engine.S; return { events: S2.frames.map((fr) => ({ kriya: fr.kriya, roles: fr.roles.filter((g) => KAR.includes(g.label)).map((g) => ({ role: g.label, text: S2.text.slice(g.span[0], g.span[1]) })) })) }; };
+    const out = await DC.improvise(fold, { seed, thread: id, turn: improvN, reread, n: improvN });
+    if (!out.ok) return { ok: false, gap: out.gap, text: out.text, cites: [], detail: { title: "What I looked at", rows: [{ rung: "open places", where: String(out.edge?.openBefore ?? 0), verdict: `${out.edge?.licensed ?? 0} ways to fill them that stay inside what you told me` }, ...Object.entries(out.refused ?? {}).map(([why, c]) => ({ rung: "set aside", where: `${c}`, verdict: why.split("_").join(" ") })), ...(out.refusedAtVoice ?? []).map((x) => ({ rung: "could not say it", where: x.text ?? x.key, verdict: x.detail ?? x.why }))] } };
+    sceneEvents.push(out.scene); const n = ++improvN;
+    if (log) {
+      try {
+        const rec = DC.recordOf(out, { threadId: id, n, addressOf: (sp) => (sp ? `${id}:text#${sp[0]}-${sp[1]}` : null) });
+        try { weaveEntry(log, { cell: "DEF·Figure", kind: "kind", addr: "kind:improvisation", body: { name: "improvisation", cell: "SYN·Pattern" } }); } catch { /* already declared */ }
+        weaveEntry(log, rec.draw);
+        if (ideation) { const cid = ideation.propose(rec.candidate); ideation.assess(cid, rec.assessment); }
+      } catch { /* the record is additive; a miss never blocks the reply */ }
+    }
+    const EN = engine.EN, e = out.edge;
+    return { ok: true, text: `${out.text} ${out.chrome}`, cites: [{ label: "your own words" }], detail: { title: "How I made it up", rows: [
+      { rung: "seed", where: `${out.seed}`, verdict: `${out.how === "scout" ? "tried something I use less" : "drawn"} from ${out.pool.length} ways to say yes and add one thing${e.derived ? `; ${(e.pSwap * 100).toFixed(0)}% of draws add an event, the share at which the number of open places stays where it is` : ""}` },
+      ...out.parts.map((p) => ({ rung: p.role === out.offer.role ? "added" : "kept", where: `“${p.text}” as the ${EN[p.role] ?? p.role}`, verdict: p.from?.span ? `${p.role === out.offer.role ? "copied from your words" : "from your words"} (characters ${p.from.span[0]} to ${p.from.span[1]})` : "from your words" })),
+      { rung: "read back", where: out.sentence, verdict: "the reader gives the same event, with the new part in its place" },
+      { rung: "open places", where: `${e.openBefore} before, ${e.openAfter} after`, verdict: "one is left for you" },
+      ...Object.entries(out.refused ?? {}).map(([why, c]) => ({ rung: "set aside", where: `${c}`, verdict: why.split("_").join(" ") })),
+      ...(out.refusedAtVoice ?? []).map((x) => ({ rung: "could not say it", where: x.text ?? x.key, verdict: x.detail ?? x.why })),
+    ] } };
+  };
   const givenAt = new Map();            // order of a sentence of the thread -> the giver that supplied it (not the user): "Wikidata"
   const kinFacts = () => [];            // kin facts the thread holds, as janus facts: NOT EXTRACTED YET (pin: janus scripts/kinship/bind-kin.mjs reads them from text)
   // DOORS (doors.mjs): the declared ways out of the thread. Not knowing is the signal to use one: a gap with a shape that a door fills is
@@ -336,6 +371,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     // ---- DOORS: called by hand (/name args) or by the chat itself, because not knowing is the signal (doors.mjs)
     const refByName = (name) => (cast?.referents ?? []).find((b) => (b.forms ?? []).some(([f]) => String(f).toLowerCase() === String(name).toLowerCase()))?.ref ?? null;
     const host = {
+      improvise: (a) => improviseRaw(a),
       setQid, qidOf: (n) => qids.get(String(n).toLowerCase()) ?? null, call: (name, args) => callDoor(name, args),
       kin: (term, name) => { const ref = refByName(name); return ref ? kinAtom({ janus, term, of: ref, facts: kinFacts() }) : { gap: { kind: "unknown_referent" } }; },
       hunt: async () => {
@@ -702,10 +738,21 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       let g = null; try { g = await READING.readerFor(t, { thread: "eng", known: [...new Set((cast?.referents ?? []).filter((b) => b.kind === "name").map((b) => b.forms?.[0]?.[0]).filter(Boolean))] }); } catch { g = null; }   // the gate itself unavailable: the old reading stands, and state() says so
       const name = (stem) => { try { return stem ? new Intl.DisplayNames(["en"], { type: "language" }).of(stem) : null; } catch { return null; } };
       const placedElsewhere = g && !g.gap && g.language && g.language !== "eng", noCodec = g?.gap?.gap === "no_codec", foreignScript = g?.gap?.gap === "no_language" && g.gap.evidence === "script";
-      if (placedElsewhere || noCodec || foreignScript) {
+      // THE DETECTOR DID NOT DECIDE, AND THERE IS A LOT TO READ: the gate's own counts (gap.readable words, gap.knownToEnglish of them known to the English prior) cannot tell novel English NAMES from foreign words ("Zelko met Brannoc."
+      // is 3 readable, 1 known, like "kal milte hai yaar" 4 and 1), but the message can: a word typed with a capital in the middle of a sentence is a name's kind of word, not evidence of another language. So a message is refused as
+      // "not English I know" only when it has three or more words that English does not know, typed in lower case (or opening a sentence), and they are most of what it says; one or two unknowns and names are read as the thread's
+      // English. Romanised Hindi has no codec and no script marker; this is how it is told from English with names, and it is a count, not a language ID (the gate's). It applies only where the priors home HAS a language
+      // identifier: the 20-file stand-in has none and almost no inflected English, so there "Casey smiled. They waved." would look mostly unknown.
+      const unknownWords = g?.gap?.gap === "no_language" && g.gap.evidence === "detector" && await identifierWorks() ? (() => {
+        const toks = parser.rowsOf(t) ?? []; let n = 0;
+        const letters = (w) => [...w].filter((ch) => ch.toLowerCase() !== ch.toUpperCase()).length, hasDigit = (w) => [...w].some((ch) => ch >= "0" && ch <= "9"), stops = new Set([".", "!", "?"]);   // a character with two cases is a letter of a cased script (a foreign script was refused above)
+        for (let i = 0; i < toks.length; i++) { const w = String(toks[i].form); if (toks[i].upos === "PUNCT" || letters(w) < 2 || hasDigit(w)) continue; const opening = i === 0 || stops.has(String(toks[i - 1].form)); const capital = w[0] !== w[0].toLowerCase(); if (capital && !opening) continue; if (!wordKnown({ form: w })) n++; }
+        return n; })() : 0;
+      const mostlyUnknown = unknownWords >= 3 && unknownWords * 2 > (g?.gap?.readable ?? 0);
+      if (placedElsewhere || noCodec || foreignScript || mostlyUnknown) {
         const lang = name(g.language ?? g.gap?.language);
-        const text = foreignScript ? "That is in a script I have no reader for, so I haven't read it." : noCodec ? `That looks like ${lang ?? "a language I have no name for"}, and I have no reader for it yet, so I haven't read it.` : `That looks like ${lang ?? "another language"}. I read English here, so I haven't read it.`;
-        return { question: t, type: "unread", handled: false, gap: noCodec ? "no_codec" : foreignScript ? "no_language" : "language_not_english", text, tools: [], trace: [{ step: "language", language: g.language ?? g.gap?.language ?? null, evidence: g.evidence ?? g.gap?.evidence ?? null, gap: g.gap?.gap ?? "not_english", detail: g.gap?.detail ?? null }], acts: { working: "unread", open: false, alternatives: [] } };
+        const text = mostlyUnknown ? "I couldn't tell what language that is: most of the words aren't English I know, so I haven't read it." : foreignScript ? "That is in a script I have no reader for, so I haven't read it." : noCodec ? `That looks like ${lang ?? "a language I have no name for"}, and I have no reader for it yet, so I haven't read it.` : `That looks like ${lang ?? "another language"}. I read English here, so I haven't read it.`;
+        return { question: t, type: "unread", handled: false, gap: noCodec ? "no_codec" : foreignScript || mostlyUnknown ? "no_language" : "language_not_english", text, tools: [], trace: [{ step: "language", language: g.language ?? g.gap?.language ?? null, evidence: g.evidence ?? g.gap?.evidence ?? null, gap: g.gap?.gap ?? "not_english", detail: g.gap?.detail ?? null }], acts: { working: "unread", open: false, alternatives: [] } };
       }
       if (g?.gap) opts = { ...opts, _langTrace: { step: "language", language: null, evidence: g.gap.evidence ?? null, gap: g.gap.gap, detail: `${g.gap.detail ?? ""}${g.gap.candidate ? " (candidate: " + JSON.stringify(g.gap.candidate) + ")" : ""}`.trim(), read_as: "english (the thread's declared language)" } };
       opts = { ...opts, _gated: true };
@@ -897,5 +944,5 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
   }
 
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), language: READING.readerFor ? "asked before a message is read (reading.js readerFor): a language it places that is not English, a language no codec reads, or a script no prior holds is a typed gap and nothing is read; a message it cannot place is read as this thread's declared English and the trace says so" : "not asked: readerFor is not in this checkout, so every message is read as English as before", corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), improvise: serial(improviseRaw), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), language: READING.readerFor ? "asked before a message is read (reading.js readerFor): a language it places that is not English, a language no codec reads, or a script no prior holds is a typed gap and nothing is read; a message it cannot place is read as this thread's declared English and the trace says so" + (identifierKnown === false ? " (this priors home has no language identifier, so a message it cannot place is always read as English)" : "") : "not asked: readerFor is not in this checkout, so every message is read as English as before", corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
 }

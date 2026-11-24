@@ -14,3 +14,11 @@ test("a message the gate cannot place by its words is read as the thread's decla
   const shrug = await th.turn("Hmm"); assert.notEqual(shrug.type, "unread", "a shrug is not another language");
   assert.match(th.state().priors.language, /asked before a message is read/);
 });
+test("English with novel names is read; a lower-case message that is mostly words English does not know is a typed gap (romanised Hindi), not English by default", T, async () => {
+  const th = await mk(); const names = await th.turn("Zelko met Brannoc."); assert.equal(names.type, "read", "names are not evidence of another language");
+  // the rule needs a priors home with a language identifier; the 20-file stand-in has none, so there it reads as English and state() says so
+  const noIdentifier = th.state().priors.language.includes("has no language identifier"), hindi = await th.turn("kal milte hai yaar");
+  if (noIdentifier) assert.notEqual(hindi.type, "unread", "no identifier here: the message is read as the thread's English, and state() says so");
+  else { assert.equal(hindi.type, "unread"); assert.equal(hindi.gap, "no_language"); assert.match(hindi.text, /most of the words aren't English I know/); assert.equal(th.state().sentences, 1, "only the English sentence is in the thread"); }
+  for (const m of ["Hmm", "Hahaha", "Who smiled?"]) assert.notEqual((await th.turn(m)).type, "unread", m);
+});
