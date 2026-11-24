@@ -259,7 +259,7 @@ test("the chat says what it takes a message to be: claims on marks, ambiguity le
 
   const amb = await mine.turn("really?");
   assert.equal(amb.acts.open, true); assert.equal(amb.acts.working, "fragment"); assert.deepEqual(amb.acts.alternatives, ["question"]);
-  assert.match(amb.taken, /^I took that as something I can't place; it could also be a question/); assert.equal(amb.text, "I'm not sure what you mean by “really?”.");
+  assert.equal(amb.type, "clarify"); assert.equal(amb.gap, "act_open"); assert.equal(amb.text, "Did you mean “really?” as a question?", "an open act is asked about, not routed to the least harmful reading"); assert.equal(amb.taken, null);
   assert.deepEqual(amb.thought.claims.filter((x) => x.relation.verb === "counts as").map((x) => x.standing), ["unresolved", "unresolved"]);
 
   await mine.turn("Pierre loves Natasha.");
@@ -399,4 +399,26 @@ test("“say more” tells the page in short, not in its own sentences: brackets
   const r = await mine.turn("say more");
   assert.equal(r.text, "Leo Tolstoy was a Russian writer. He wrote War and Peace.");
   assert.match(r.evidence[0].text, /\(Russian: Лев Николаевич Толстой; 1828–1910\), usually referred to/, "the page's sentence, verbatim, is what the reply rests on");
+});
+
+test("an open act is asked about, and a yes or a no after it settles it; anything else drops the question", T, async () => {
+  const yes = await make(); await yes.turn("really?");
+  const y = await yes.turn("yes");
+  assert.deepEqual(y.settled, { message: "really?", act: "question" }, "yes: the first message is read again as a question"); assert.equal(y.question, "really?");
+  assert.ok(y.thought.claims.some((x) => x.relation.verb === "answers" && x.standing === "supported" && /a yes, straight after I asked/.test(x.assessed.basis)));
+  const no = await make(); await no.turn("really?");
+  const n = await no.turn("no"); assert.equal(n.type, "social"); assert.equal(n.text, "Okay."); assert.equal(n.settled, undefined);
+  assert.equal((await no.turn("yes")).type, "social", "the question is closed: a later yes is only a remark");
+  const drop = await make(); await drop.turn("really?");
+  const d = await drop.turn("Mina gave Jonathan a book."); assert.equal(d.type, "read", "a statement is read as a statement; the question was dropped");
+  assert.equal((await drop.turn("yes")).type, "social");
+});
+
+test("a “no” after the chat asked what a message meant answers that question; it does not take back what was said before", T, async () => {
+  const mine = await make();
+  await mine.turn("Pierre loves Natasha.");
+  await mine.turn("really?");
+  const n = await mine.turn("no"); assert.equal(n.type, "social"); assert.equal(n.text, "Okay.");
+  assert.equal((await mine.turn("Who loves Natasha?")).text, "Pierre.", "the statement still stands");
+  const c = await mine.turn("no, Pierre hates Natasha."); assert.equal(c.type, "correction", "a “no” with nothing asked is still a correction");
 });

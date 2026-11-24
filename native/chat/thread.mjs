@@ -341,7 +341,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       }
       if (cmd === "research") { if (rest) return ask(rest, { onStatus: opts.onStatus }); if (pending) return ask(pending.question, { onStatus: opts.onStatus }); return done({ type: "door", handled: true, text: "There's nothing I'm missing right now. When I can't answer something I go and look for it myself." }); }
       const out = await callDoor(cmd, rest);
-      return done({ type: "door", handled: out.ok, gap: out.ok ? null : out.gap, text: out.text, cites: out.cites ?? [] });
+      return done({ type: "door", handled: out.ok, gap: out.ok ? null : out.gap, text: out.text, cites: out.cites ?? [], ...(out.code ? { code: out.code } : {}), ...(out.detail ? { detail: out.detail } : {}) });   // a door may hand back code (shown as a code block) and its trail (shown behind a collapsed disclosure)
     }
     // a request is acted on when it is about what is not known: an object that is a pronoun (or none) means the open gap; a name the thread has not met is a gap of its own
     if (opts.request) {
@@ -575,7 +575,8 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
 
     // ---- a correction takes the previous reading back, and whatever rests on it
-    if (marks.correction_mark) {
+    // a bare "no" straight after the chat asked "did you mean that as a question?" is the answer to THAT, not a correction of what was said before; "no, Pierre hates Natasha." has a clause of its own and is a correction
+    if (marks.correction_mark && !(asked?.kind === "act" && !rows.some((r) => r.upos === "VERB" || r.upos === "AUX"))) {
       const cid = propose("this message corrects your previous one", { subject: "this message", verb: "corrects", object: "your previous message" }, true, lastAct
         ? { verdict: "supported", method: "testimony", by, basis: `an opening “no”, and there is a previous message to correct`, witnesses: [witness] }
         : { verdict: "refuted", method: "deduction", by, basis: "an opening “no”, but nothing was said before it to correct" });
@@ -593,6 +594,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
 
     // ---- the claims about what this message is
     const j = judge(candidates(marks));
+    if (opts.forceAct) { j.working = opts.forceAct; j.open = false; j.alternatives = []; }   // the user said what they meant: the act is no longer open
     let workingClaim = null;
     if (ideation) {
       for (const c of j.claims) {
@@ -605,14 +607,14 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       }
       if (j.working === "unread") { workingClaim = propose("this message counts as something I couldn't read", { subject: "this message", verb: "counts as", object: LABEL.eng.unread }, true, { verdict: "unresolved", method: "deduction", by, basis: "no mark supports any kind of message" }); ids.push(workingClaim); }
     }
-    if (asked && j.working !== "fragment") asked = null;
+    if (asked && asked.kind !== "act" && j.working !== "fragment") asked = null;
     const premise = ideation && !j.open && j.working !== "unread" ? workingClaim : null;   // a claim that is only open cannot be a premise of an answer
     const aOpts = { ...opts, actIds: ids, actPremise: premise };
     const finish = (out, orders = []) => {
       if (!out) return out;
       // what a later "no" corrects is the last message that SAID something (a statement, a question, a sum), never a social remark or one that could not be read: "really?" does not take "Pierre loves Natasha" back
       if (workingClaim && !["social", "unread", "fragment"].includes(j.working)) lastAct = { claim: workingClaim, orders, dependents: out.ideaIds?.filter((x) => !ids.includes(x)) ?? [] };
-      return { question: t, ...out, acts: { working: j.working, open: j.open, alternatives: j.alternatives }, taken: takenAs(j), thought: ideation ? ideation.view([...new Set([...ids, ...(out.ideaIds ?? [])])]) : (out.thought ?? null) };
+      return { question: t, ...out, acts: { working: j.working, open: j.open, alternatives: j.alternatives }, taken: j.open ? null : takenAs(j), thought: ideation ? ideation.view([...new Set([...ids, ...(out.ideaIds ?? [])])]) : (out.thought ?? null) };
     };
 
     // ---- MECHANIC 7: a question the chat put to the user is answered by the next fragment, IF the fragment fits what was asked. A man who asked "what does it stand for?" and is told
@@ -650,6 +652,24 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? fill : r.form)));
       const inner = await turn(rebuilt, { ...opts, _ids: [...ids, cid].filter(Boolean) });
       return inner ? { ...inner, paired: { question: pending.question, answer: fill, rebuilt }, trace: [{ step: "paired", asked: pending.question, answer: fill, rebuilt }, ...(inner.trace ?? [])] } : inner;
+    }
+
+    // ---- AN OPEN ACT IS ASKED ABOUT, NOT ROUTED TO THE LEAST HARMFUL READING (a man who cannot tell whether "really?" is a question asks "did you mean that as a question?").
+    // The answer is the next message: an interjection without negative polarity is yes, one with it is no (the reader's own marks), anything else drops the question.
+    if (asked?.kind === "act" && !opts.forceAct) {
+      const pending = asked; asked = null;
+      const first = rows.find((r) => r.upos !== "PUNCT"), isInterj = first?.upos === "INTJ" && !rows.some((r) => r.upos === "VERB" || r.upos === "AUX"), negative = isInterj && String(first.feats ?? "").split("|").includes("Polarity=Neg");
+      if (isInterj) {
+        const cid = propose(`this message settles what you meant by ${quote(pending.message)}`, { subject: "this message", verb: "answers", object: "the question about what you meant" }, true, { verdict: "supported", method: "testimony", by, basis: `${negative ? "a no" : "a yes"}, straight after I asked whether ${quote(pending.message)} was ${LABEL.eng[pending.act]}`, witnesses: [witness] });
+        if (negative) return finish({ type: "social", handled: true, text: "Okay.", question: t, tools: [], trace: [{ step: "act_settled", act: "not " + pending.act }], ideaIds: [cid].filter(Boolean) });
+        const inner = await turn(pending.message, { ...opts, forceAct: pending.act, _ids: [...ids, cid].filter(Boolean) });
+        return inner ? { ...inner, settled: { message: pending.message, act: pending.act }, trace: [{ step: "act_settled", act: pending.act }, ...(inner.trace ?? [])] } : inner;
+      }
+    }
+    if (j.open && !opts.forceAct) {
+      const act = ["question", "request", "statement"].find((a) => j.alternatives.includes(a)) ?? j.alternatives[0];
+      asked = { kind: "act", message: t, act };
+      return finish({ type: "clarify", handled: false, gap: "act_open", text: `Did you mean ${quote(t)} as ${LABEL.eng[act]}?`, question: t, tools: [], trace: [{ step: "ask_back", between: [j.working, ...j.alternatives] }] });
     }
 
     // ---- route by the standing act
