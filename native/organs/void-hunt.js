@@ -17,6 +17,8 @@
 //   role      the sentence has the question's relation as a verb and the filler sits in a role the question left open
 //   copular   "the capital of X is Y" / "Y is the capital of X": the relation noun, the anchor under it, the filler on the other side
 //   linked    the sentence has the relation and every anchor, and a filler of the right kind, but the parse does not give it the open role
+//   identity  (a question with no relation, “Who is X?”) the sentence says what the anchor IS: a predicate noun (“X was a solicitor”), an apposition (“my friend and master, Professor X, of Amsterdam”)
+//             or a title before the name; the answer is that description, read off the parse; several descriptions are said together, up to three, each with its sentence and address
 //   comention every anchor and a filler of the right kind within two steps of an anchor, with no relation in the sentence at all (a cast list:
 //             "Mel Gibson as Martin Riggs")
 //
@@ -26,7 +28,10 @@ import { INTERROGATIVE_ADMITS, ADMITS_KARAKA } from "../adapters/text/wh-narrow.
 export const HUNT_SCHEMA = "VoidHunt@1";
 const lem = (r) => String(r?.lemma ?? r?.form ?? "").toLowerCase();
 const low = (s) => String(s ?? "").toLowerCase();
-const TIERS = Object.freeze(["role", "byline", "copular", "linked", "comention"]);
+const TIERS = Object.freeze(["role", "byline", "copular", "linked", "identity", "comention"]);
+/** An identity description (“a solicitor”, “Professor”) is an answer only when at least this many DIFFERENT sentences say it: one sentence of a novel, a play or a heading can be a misparse, a quotation or a label, and a description said once is a lead.
+ *  A declared dial, the least that "corroborated" can mean (more than one); the hunt's other tiers are judged by documents, which one document of a book cannot supply for a character. */
+export const IDENTITY_MIN_SUPPORT = 2;
 // the English reader's own small table: verbs whose doer is credited with “a NOUN by PERSON”. A stand-in for the induced class of verbs of making (the owner's own-hypernym work); until that is wired, a verb outside it gets no by-line.
 export const MAKING = Object.freeze(["write", "compose", "paint", "direct", "create", "found", "build", "design", "invent", "discover", "make", "produce", "author", "draw", "sculpt", "compose", "publish", "develop"]);
 const KIND_OK = Object.freeze({ person: ["PROPN"], place: ["PROPN"], thing: ["PROPN", "NOUN"], time: ["NUM"], quantity: ["NUM"] });
@@ -73,7 +78,7 @@ export function voidOfQuestion(rows) {
 const isUpper = (c) => !!c && c !== c.toLowerCase() && c === c.toUpperCase();
 const spanOf = (rows, tokens, { surnameOk = false, fn = null, forms = null } = {}) => {   // where an anchor's tokens stand in these rows: whole, or (only on a page named for it) as a bare surname
   const f = rows.map((r) => low(r.form));
-  for (let i = 0; i + tokens.length <= f.length; i++) if (tokens.every((t, k) => f[i + k] === t && (!isUpper(forms?.[k]?.[0]) || isUpper(String(rows[i + k].form)[0]))) && rows[i - 1]?.upos !== "PROPN" && rows[i + tokens.length]?.upos !== "PROPN") return rows.slice(i, i + tokens.length);   // “Hans Albert Einstein” is not Albert Einstein
+  for (let i = 0; i + tokens.length <= f.length; i++) if (tokens.every((t, k) => f[i + k] === t && (!isUpper(forms?.[k]?.[0]) || isUpper(String(rows[i + k].form)[0]))) && (rows[i - 1]?.upos !== "PROPN" || rows[i - 1]?.deprel === "nmod:desc") && rows[i + tokens.length]?.upos !== "PROPN") return rows.slice(i, i + tokens.length);   // “Hans Albert Einstein” is not Albert Einstein; “Professor Van Helsing” is Van Helsing (the parser marks a title before a name nmod:desc)
   if (surnameOk && tokens.length > 1) {   // on a page named for the person, the person is also “Lincoln” or “Leonardo”: of the bare first or last name in the sentence, the one that stands as the anchor does in the question (“Leonardo was born in Vinci”)
     const bare = rows.filter((r, i) => (low(r.form) === tokens[0] || low(r.form) === tokens.at(-1)) && rows.slice(0, i).filter((x) => x.upos !== "PUNCT").at(-1)?.upos !== "PROPN");   // “Edward Baker “Eddie” Lincoln” is not Lincoln
     const pick = (fn && bare.find((r) => functionOf(rows, r) === fn)) || (!fn ? bare[0] : null);
@@ -96,12 +101,38 @@ const phraseOf = (rows, node) => {   // a date or a name phrase: the node and wh
 };
 
 /** matchSentence(void, rows, title) -> [{ answer, tier, why }] : what in this sentence could fill the void, and by which tier */
-export function matchSentence(v, rows, title = "", { aliases = new Set() } = {}) {
+// ---------------------------------------------------------------------------------------------------------------- what the anchor IS
+const IDENT_OK = new Set(["det", "det:poss", "amod", "compound", "nmod", "nmod:poss", "nmod:desc", "case", "nummod", "appos", "conj", "cc", "flat", "fixed"]);   // what a noun phrase is made of; a relative clause, an adverbial or a verb under it is not a description
+// (the copula and the subject belong to the sentence, not to the description, so they are skipped; anything else outside the noun-phrase deprels makes the description unclean)
+const subtreeOf = (rows, root, skip = new Set()) => { const kids = new Map(); for (const r of rows) { if (!kids.has(r.head)) kids.set(r.head, []); kids.get(r.head).push(r); } const out = [], q = [root]; let clean = true; while (q.length) { const n = q.shift(); out.push(n); for (const c of kids.get(n.id) ?? []) { if (skip.has(c.id) || c.deprel === "punct" || c.deprel === "cop") continue; if (!IDENT_OK.has(c.deprel)) { clean = false; continue; } q.push(c); } } out.clean = clean; return out.sort((a, b) => a.id - b.id); };
+const headingLike = (rows) => { const w = rows.filter((r) => /\p{L}/u.test(r.form)); return w.length > 2 && w.filter((r) => r.form === r.form.toUpperCase()).length / w.length > 0.5; };   // regex-ok: a letter-class test on a token's characters (is it a word, is it in capitals), not language
+/** identityOf(rows, anchorFound) -> [{ text, why }]: what the sentence says the anchor IS, from the parse alone: a predicate noun said OF the anchor (the anchor is the subject itself, not something inside it), an apposition (either way round), a title that stands before the name.
+ *  Only noun phrases made of determiners, modifiers, compounds and nmods count; a sentence in capitals (a heading, a speaker's label) says nothing. */
+export function identityOf(rows, f) {
+  const span = f.span ?? []; if (!span.length || headingLike(rows)) return [];
+  const ids = new Set(span.map((r) => r.id)), aroot = span.find((r) => !ids.has(r.head)) ?? span.at(-1), out = [], text = (rs) => rs.map((r) => r.form).join(" "), anchorLow = low(text(span));
+  const own = (n) => { const o = new Set([n.id]); let grew = true; while (grew) { grew = false; for (const r of rows) if (!o.has(r.id) && o.has(r.head)) { o.add(r.id); grew = true; } } return o; };
+  const add = (rs, why, { upos = ["NOUN"] } = {}) => { const top = rs.find((r) => !rs.some((x) => x.id === r.head)), t = text(rs).trim(); if (rs.length && rs.length <= 14 && rs.clean !== false && upos.includes(top?.upos) && low(t) !== anchorLow && !rs.some((r) => ids.has(r.id))) out.push({ text: t, why }); };
+  // “X was a solicitor”, “X is the father of Y”: the predicate noun of a clause whose SUBJECT is the anchor
+  for (const n of rows) if (n.upos === "NOUN" && rows.some((c) => c.deprel === "cop" && c.head === n.id)) { const subj = rows.find((c) => c.head === n.id && c.deprel === "nsubj" && (ids.has(c.id) || c.id === aroot.id)); if (subj) add(subtreeOf(rows, n, own(subj)), "the sentence says what the anchor is: a predicate noun after “is”"); }
+  // “X, the Lord Chamberlain”: an apposition on the anchor
+  for (const n of rows) if (n.deprel === "appos" && n.upos === "NOUN" && (ids.has(n.head) || n.head === aroot.id)) add(subtreeOf(rows, n), "an apposition on the anchor");
+  // “my old friend and master, Professor Van Helsing”: the anchor is the apposition, the noun it stands beside is what it is
+  if (aroot.deprel === "appos") { const H = rows.find((r) => r.id === aroot.head); if (H && H.upos === "NOUN") add(subtreeOf(rows, H, own(aroot)), "the anchor stands in apposition to this noun"); }
+  // “Professor Van Helsing”: a title noun right before the name
+  const first = Math.min(...span.map((r) => r.id)), title = rows.find((r) => r.id === first - 1 && ids.has(r.head) && ((r.upos === "NOUN" && ["compound", "flat"].includes(r.deprel)) || r.deprel === "nmod:desc"));
+  if (title) add([title], "a title before the name", { upos: ["NOUN", "PROPN"] });
+  return out;
+}
+
+export function matchSentence(v, rows, title = "", { aliases = new Set(), collect = null } = {}) {
   const titleLow = low(title), out = [];
   // every anchor must be carried by the sentence or be the document's own subject
   const found = v.anchors.map((a) => { const bare = titleLow.split(" (")[0], isTitle = !!titleLow && (bare === a.tokens.join(" ") || (bare.startsWith("the ") && bare.slice(4) === a.tokens.join(" "))); return { a, span: spanOf(rows, a.tokens, { surnameOk: isTitle, fn: a.fn, forms: a.forms }), isTitle }; });
   if (found.some((f) => !f.span && !f.isTitle)) return out;
+  collect?.(rows);   // the sentence carries every anchor: what verbs it has is what the relation may be said as (the relation stand-in in huntVoid)
   const inAnchor = new Set(found.flatMap((f) => (f.span ?? []).map((r) => r.id)));
+  if (!v.relation && v.admits === "person" && v.anchors.length === 1 && found[0].span) { for (const d of identityOf(rows, found[0])) out.push({ answer: d.text, peers: [], tier: "identity", why: d.why }); return out; }   // “Who is X?”: names beside X are not what is asked; what X is, is
   const kinds = KIND_OK[v.admits] ?? [], fillers = v.admits === "time"
     ? rows.filter((r) => rows.find((h) => h.id === r.head)?.upos === "VERB" && !inAnchor.has(r.id) && r.upos !== "PUNCT" && r.deprel !== "case" && !["nsubj", "nsubj:pass", "obj", "iobj", "csubj", "xcomp", "ccomp", "parataxis", "conj"].includes(r.deprel) && rows.some((c) => c.upos === "NUM" && under(rows, c, r))).map((r) => [r])   // the phrase under the verb that holds the date
     : runsOf(rows, (r) => kinds.includes(r.upos) && !inAnchor.has(r.id) && !(v.relation?.kind === "noun" && lem(r) === v.relation.lemma) && !(r.upos === "PROPN" && rows.find((h) => h.id === r.head)?.upos === "NUM"));   // a name hanging from a number is part of a date (“7 November”), not a person or a place
@@ -185,7 +216,7 @@ export function matchSentence(v, rows, title = "", { aliases = new Set() } = {})
  *   read     (sentence) -> rows       the reader, one sentence
  *   split    (text) -> [sentence]     the reader's own splitter
  */
-async function huntCore(v, { sources = [], read, split, maxSentences = 600, budgetMs = 60000, now = () => Date.now() } = {}) {
+async function huntCore0(v, { sources = [], read, split, maxSentences = 600, budgetMs = 60000, now = () => Date.now(), _state = null } = {}) {
   if (!v?.ok) return { void: v, trail: [], candidates: [], answer: null, unique: false, gap: v?.gap ?? { kind: "no_void", detail: "no void to hunt" } };
   if (typeof read !== "function" || typeof split !== "function") throw new TypeError("huntVoid: read and split must be supplied");
   const trail = [], found = new Map(), deadline = now() + budgetMs;
@@ -197,7 +228,7 @@ async function huntCore(v, { sources = [], read, split, maxSentences = 600, budg
   for (const src of sources) {
     let docs = [];
     if (now() > deadline) { trail.push({ source: src.name, error: "time budget spent before this source was asked" }); continue; }
-    try { docs = (await src.find(v, { note: (n) => trail.push({ source: src.name, ...n }), deadline })) ?? []; } catch (e) { trail.push({ source: src.name, error: String(e?.message ?? e).slice(0, 120) }); continue; }
+    try { docs = (await src.find(v, { note: (n) => trail.push({ source: src.name, ...n }), deadline })) ?? []; _state?.docs.set(src.name, docs); } catch (e) { trail.push({ source: src.name, error: String(e?.message ?? e).slice(0, 120) }); continue; }
     for (const doc of docs) {
       let read_ = 0, matched = 0;
       // a page named for the thing asked about is cited first (its evidence is ordered so)
@@ -213,7 +244,7 @@ async function huntCore(v, { sources = [], read, split, maxSentences = 600, budg
           const s = String(sent).trim(); if (!s) continue;
           read_++;
           const rows = read(s); if (!rows?.length) continue;
-          for (const m of matchSentence(v, rows, doc.title, { aliases })) {
+          for (const m of matchSentence(v, rows, doc.title, { aliases, collect: _state ? (rws) => { for (const r of rws) if (r.upos === "VERB") _state.verbs.add(lem(r)); } : null })) {
             matched++;
             const key = low(m.answer), cur = found.get(key) ?? { answer: m.answer, tier: m.tier, support: [], docs: new Set(), sources: new Set(), peers: new Set(), contexts: new Set() };
             for (const q of m.peers ?? []) cur.peers.add(q);
@@ -230,8 +261,8 @@ async function huntCore(v, { sources = [], read, split, maxSentences = 600, budg
   // “Shakespeare” and “William Shakespeare” are one candidate: the shorter is folded into the longer that contains it, with its support
   const all = [...found.values()].sort((a, b) => b.answer.split(" ").length - a.answer.split(" ").length);
   for (const c of all) { const longer = all.filter((d) => d !== c && c.answer.split(" ").length === 1 && d.answer.split(" ").length > 1 && low(d.answer).split(" ").at(-1) === low(c.answer) && found.has(low(d.answer))), big = longer.length === 1 ? longer[0] : null; if (big && found.has(low(c.answer))) { big.support.push(...c.support); c.docs.forEach((x) => big.docs.add(x)); c.sources.forEach((x) => big.sources.add(x)); if (TIERS.indexOf(c.tier) < TIERS.indexOf(big.tier)) { big.tier = c.tier; big.why = c.why; } found.delete(low(c.answer)); } }
-  const candidates = [...found.values()].map((c) => ({ answer: c.answer, tier: c.tier, why: c.why, support: c.support.length, documents: c.docs.size, sources: [...c.sources], evidence: [...c.support].sort((x, y) => Number(!v.anchors.some((an) => low(String(x.title)).split(" (")[0] === an.tokens.join(" "))) - Number(!v.anchors.some((an) => low(String(y.title)).split(" (")[0] === an.tokens.join(" ")))).slice(0, 4), corroborated: c.docs.size > 1 }))
-    .sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier) || b.documents - a.documents || b.support - a.support);
+  const candidates = [...found.values()].map((c) => ({ answer: c.answer, tier: c.tier, why: c.why, support: c.support.length, sentences: new Set(c.support.map((x) => x.sentence)).size, documents: c.docs.size, sources: [...c.sources], evidence: [...c.support].sort((x, y) => Number(!v.anchors.some((an) => low(String(x.title)).split(" (")[0] === an.tokens.join(" "))) - Number(!v.anchors.some((an) => low(String(y.title)).split(" (")[0] === an.tokens.join(" ")))).slice(0, 4), corroborated: c.docs.size > 1 }))
+    .sort((a, b) => TIERS.indexOf(a.tier) - TIERS.indexOf(b.tier) || Number(b.tier === "identity" && b.sentences >= IDENTITY_MIN_SUPPORT) - Number(a.tier === "identity" && a.sentences >= IDENTITY_MIN_SUPPORT) || b.documents - a.documents || b.support - a.support);
   const peerKey = (c) => new Set([low(c.answer), ...[...(found.get(low(c.answer))?.peers ?? [])].map(low)]);
   const best = candidates.filter((c) => c.tier === candidates[0]?.tier);
   const containersEarly = new Set([...found.values()].flatMap((c) => [...c.contexts])), top = best.find((c) => !containersEarly.has(low(c.answer))) ?? best[0];
@@ -243,12 +274,19 @@ async function huntCore(v, { sources = [], read, split, maxSentences = 600, budg
   const members = top ? raced.filter((c) => c === top || peerKey(top).has(low(c.answer)) || peerKey(c).has(low(top.answer))) : [], rest = raced.filter((c) => !members.includes(c)), second = rest[0];
   if (top && members.length > 1) { top.set = members.map((c) => c.answer); top.documents = Math.max(...members.map((c) => c.documents)); }
   // alone in the best tier, or in strictly more documents than the next: nothing else is a judgement call
-  const unique = !!top && top.tier !== "comention" && (!second || top.documents > second.documents);   // a name seen next to the anchors, with no sentence that says the relation, is a lead and never an answer
+  const identity = top?.tier === "identity", unique = !!top && top.tier !== "comention" && (identity ? top.sentences >= IDENTITY_MIN_SUPPORT : (!second || top.documents > second.documents));   // descriptions of what a thing is are not rivals: they are said together   // a name seen next to the anchors, with no sentence that says the relation, is a lead and never an answer
   if (unique && top.set) top.answerText = top.set.length > 1 ? `${top.set.slice(0, -1).join(", ")} and ${top.set.at(-1)}` : top.answer;
+  if (unique && identity) { top.set = candidates.filter((c) => c.tier === "identity" && c.sentences >= IDENTITY_MIN_SUPPORT).slice(0, 3).map((c) => c.answer); top.answerText = top.set.join("; "); }
   const limited = trail.filter((t) => ["rate limit", "429", "time budget"].some((x) => String(t.error ?? "").includes(x)));
   if (!candidates.length && limited.length) return { void: v, trail, candidates, answer: null, unique: false, gap: { kind: "source_rate_limited", detail: `${limited.length} request${limited.length === 1 ? "" : "s"} refused as too many; nothing was read, so nothing can be said about the answer` } };
   if (!candidates.length) return { void: v, trail, candidates, answer: null, unique: false, gap: { kind: "nothing_fills_the_void", detail: `${trail.filter((t) => t.sentencesRead != null).reduce((n, t) => n + t.sentencesRead, 0)} sentences read in ${trail.filter((t) => t.sentencesRead != null).length} documents; none carries every anchor with a filler of the kind asked for` } };
-  return { void: v, trail, candidates, answer: unique ? top : null, lead: top ?? null, unique, gap: unique ? null : top?.tier === "comention" ? { kind: "relation_not_attested", detail: `${best.slice(0, 3).map((c) => c.answer).join(", ")} stand next to ${v.anchors.map((a) => a.text).join(" and ")}, but no sentence says “${v.relation?.lemma ?? "the relation"}”` } : { kind: "several_fill_the_void", detail: best.slice(0, 4).map((c) => `${c.answer} (${c.tier}, ${c.support})`).join("; ") } };
+  return { void: v, trail, candidates, answer: unique ? top : null, lead: top ?? null, unique, gap: unique ? null : top?.tier === "identity" ? { kind: "uncorroborated", detail: `said by one sentence only, so a lead and not an answer: ${best.slice(0, 3).map((c) => c.answer).join("; ")}` } : top?.tier === "comention" ? { kind: "relation_not_attested", detail: `${best.slice(0, 3).map((c) => c.answer).join(", ")} stand next to ${v.anchors.map((a) => a.text).join(" and ")}, but no sentence says “${v.relation?.lemma ?? "the relation"}”` } : { kind: "several_fill_the_void", detail: best.slice(0, 4).map((c) => `${c.answer} (${c.tier}, ${c.support})`).join("; ") } };
+}
+
+async function huntCore(v, opts = {}) {
+  const state = { docs: new Map(), verbs: new Set() }, r = await huntCore0(v, { ...opts, _state: state });
+  Object.defineProperty(r, "_docs", { value: state.docs, enumerable: false }); Object.defineProperty(r, "pool", { value: { verbs: [...state.verbs] }, enumerable: false });
+  return r;
 }
 
 // ---------------------------------------------------------------------------------------------------------------- the hunt, with a memory in the environment
@@ -264,7 +302,7 @@ const routeOf = (e) => `${e.source}|${e.title}|${e.section ?? ""}`;
  * it again that is the answer (via: "trail"), with one request and not seven. If they do not, he hunts as if he had never looked, and what he finds leaves a
  * new trail; the old one is never deleted by this file, it evaporates, unless the caller raises an alarm (trails.veto(head, route)) because it was wrong.
  */
-export async function huntVoid(v, opts = {}) {
+async function huntVoidBase(v, opts = {}) {
   const { trails = null, sources = [], now = () => Date.now() } = opts;
   if (!trails || !v?.ok) return huntCore(v, opts);
   const head = huntHead(v), t0 = now();
@@ -281,4 +319,25 @@ export async function huntVoid(v, opts = {}) {
   const r = await huntCore(v, opts), routes = r.unique ? [...new Set(r.answer.evidence.map(routeOf))] : [];
   for (const x of routes) trails.deposit(head, x, true, now() - t0);
   return { ...r, head, routes, via: "hunt" };
+}
+
+/**
+ * huntVoid(v, { ..., equivalents }) — THE RELATION STAND-IN. A man with a notebook who is asked who "founded" something and reads "Genghis Khan established the Mongol Empire" does not say the notebook is
+ * silent. When the exact relation finds no answer, and the caller injects `equivalents(lemma, pool) -> [{ verb, similarity, near_miss }]` (organs/verb-equivalents.js over a frozen embedder; async, so it is
+ * the caller's, not this file's), the verbs of the sentences that carry every anchor are the pool, and the hunt is run again under each near verb (the same documents, already fetched): a near verb stands
+ * in only WITHIN A DMD: the answers under every near verb that has one must be the same (organs/verb-equivalents.js standsIn); different answers pick none and are listed, an answer under a near miss is said beside the
+ * answer and never decides. The exact verb is always tried first; nothing here replaces an answer the exact verb found. The trail says what was done: { step: "relation_stand_in", asked, near, verdict, readAs, agreed, also }.
+ */
+export async function huntVoid(v, opts = {}) {
+  const r = await huntVoidBase(v, opts), eq = opts.equivalents;
+  if (r.unique || typeof eq !== "function" || !v?.ok || v.relation?.kind !== "verb" || !(r.pool?.verbs?.length)) return r;
+  const { standsIn } = await import("./verb-equivalents.js"), asked = v.relation.lemma;
+  let near = []; try { near = (await eq(asked, r.pool.verbs.filter((x) => x !== asked))) ?? []; } catch (e) { r.trail.push({ step: "relation_stand_in", asked, gap: { kind: "equivalents_unavailable", why: String(e?.message ?? e).slice(0, 100) } }); return r; }
+  if (!near.length) return r;
+  const memo = (opts.sources ?? []).map((src) => ({ ...src, exists: undefined, page: undefined, find: async () => r._docs?.get(src.name) ?? [] })), ran = new Map();
+  const asUnder = async (lemma) => { if (!ran.has(lemma)) ran.set(lemma, await huntVoidBase({ ...v, relation: { ...v.relation, lemma } }, { ...opts, trails: null, equivalents: null, sources: memo })); const r2 = ran.get(lemma); return r2.unique ? [low(r2.answer.answerText ?? r2.answer.answer)] : null; };
+  const d = await standsIn(near, asUnder), step = { step: "relation_stand_in", asked, near: near.map((x) => ({ verb: x.verb, similarity: x.similarity, near_miss: !!x.near_miss })), verdict: d.verdict, readAs: d.chosen?.verb ?? null, agreed: d.agreeing, also: d.alsoSays };
+  if (d.verdict === "same") { const best = ran.get(d.chosen.verb); return { ...best, trail: [...r.trail, step, ...best.trail], via: r.via ?? "hunt", readAs: d.chosen.verb, alsoSays: d.alsoSays }; }
+  if (d.verdict === "other") return { ...r, trail: [...r.trail, step], gap: { kind: "several_fill_the_void", detail: `under near verbs the answers differ: ${d.answers.map((a) => `“${a.verb}” → ${a.answer.join(" / ")}`).join("; ")}; none is picked` } };
+  r.trail.push(step); return r;
 }

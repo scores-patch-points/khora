@@ -240,3 +240,44 @@ test("live: the real article, the real Cast section (HUNT_LIVE=1)", { skip: !rea
   console.log(JSON.stringify({ answer: h.answer?.answer, candidates: h.candidates.slice(0, 5).map((c) => [c.answer, c.tier, c.support, c.documents]), trail: h.trail, gap: h.gap }, null, 1));
   assert.ok(h.candidates.length > 0);
 });
+
+test("the relation stand-in: when the exact verb finds nothing the hunt is run again under the near verbs of the sentences that carry the anchors, and a near verb stands in only if every near verb that answers gives the same answer", T, async () => {
+  const v = voidOf("Who founded the Mongol Empire?"), one = { title: "Mongol Empire", passages: [{ section: null, text: "Genghis Khan established the Mongol Empire in 1206." }] };
+  const eqOf = (list) => async (lemma, pool) => list.filter((x) => pool.includes(x.verb)), near = (verb, similarity = 0.9, near_miss = false) => ({ verb, similarity, near_miss });
+  const exact = await huntVoid(v, { sources: [source(one)], read, split }); assert.equal(exact.answer, null, "the exact verb finds no sentence that says 'found': the name stands next to the anchor, a lead and never an answer");
+  const h = await huntVoid(v, { sources: [source(one)], read, split, equivalents: eqOf([near("establish")]) });
+  assert.equal(h.answer?.answer, "Genghis Khan"); assert.equal(h.readAs, "establish"); const st = h.trail.find((t) => t.step === "relation_stand_in"); assert.equal(st.verdict, "same"); assert.equal(st.asked, "found"); assert.deepEqual(st.agreed, ["establish"]);
+  // two near verbs, two different people: none is picked and both are listed
+  const two = { title: "Mongol Empire", passages: [{ section: null, text: "Genghis Khan established the Mongol Empire in 1206. Marco Polo created the Mongol Empire in a book." }] };
+  const o = await huntVoid(v, { sources: [source(two)], read, split, equivalents: eqOf([near("establish"), near("create", 0.88)]) });
+  assert.equal(o.answer, null); assert.equal(o.gap.kind, "several_fill_the_void"); assert.equal(o.trail.find((t) => t.step === "relation_stand_in").verdict, "other");
+  // an answer the exact verb found is never replaced by a near verb's
+  const exactDoc = { title: "Mongol Empire", passages: [{ section: null, text: "Temujin founded the Mongol Empire." }] }, kept = await huntVoid(v, { sources: [source(exactDoc)], read, split, equivalents: eqOf([near("establish")]) });
+  assert.equal(kept.answer?.answer, "Temujin"); assert.ok(!kept.trail.some((t) => t.step === "relation_stand_in"));
+  // no equivalents given, or none near: the gap is what it was
+  assert.equal((await huntVoid(v, { sources: [source(one)], read, split, equivalents: eqOf([]) })).answer, null);
+  const broken = await huntVoid(v, { sources: [source(one)], read, split, equivalents: async () => { throw new Error("no embedder"); } }); assert.equal(broken.answer, null); assert.equal(broken.trail.find((t) => t.step === "relation_stand_in").gap.kind, "equivalents_unavailable");
+});
+
+test("identity: “Who is X?” is answered by what the sentences say X is (a predicate noun, an apposition, a title before the name), said together with each sentence; a name beside X is not an answer, and “Hans Albert Einstein” is not Albert Einstein", T, async () => {
+  const ask = async (q, text) => { const h = await huntVoid(voidOf(q), { sources: [source({ title: "t", passages: [{ section: null, text }] })], read, split }); return h; };
+  const pol = await ask("Who is Polonius?", "Polonius was the Lord Chamberlain of Denmark. Polonius is the father of Ophelia and Laertes. Polonius was the father of Ophelia and Laertes. Hamlet killed Polonius.");
+  assert.equal(pol.answer.answerText, "the father of Ophelia and Laertes", "a predicate whose head is a capitalised noun (“the Lord Chamberlain”) is an office or a name, and cannot be told from one: it is not taken; precision before recall"); assert.ok(pol.candidates.every((c) => c.tier === "identity")); assert.equal(pol.candidates[0].evidence[0].sentence.slice(0, 8), "Polonius");
+  assert.equal((await ask("Who is Jonathan Harker?", "Jonathan Harker is a young solicitor. Jonathan Harker was a young solicitor. Mina loves Jonathan Harker.")).answer.answerText, "a young solicitor");
+  assert.equal((await ask("Who is Van Helsing?", "I have written to my old friend and master, Professor Van Helsing, of Amsterdam. Professor Van Helsing arrived at noon.")).answer.answerText, "Professor", "a title the parser marks as a descriptor does not stop the name being the anchor");
+  assert.equal((await ask("Who is Albert Einstein?", "Hans Albert Einstein was an engineer. Albert Einstein was a physicist. Albert Einstein is a physicist.")).answer.answerText, "a physicist");
+  const none = await ask("Who is Harker?", "Jonathan Harker arrived. Mina Harker wrote a letter."); assert.equal(none.answer, null); assert.equal(none.gap.kind, "nothing_fills_the_void", "a first name before the surname is part of the name, not a description");
+});
+
+test("identity, what it must not say (the failures of the first run on real text): a description of something INSIDE the subject, a relative clause or verbs under the noun, a sentence in capitals", T, async () => {
+  const ask = async (q, text) => huntVoid(voidOf(q), { sources: [source({ title: "t", passages: [{ section: null, text }] })], read, split });
+  const a = await ask("Who is Aristotle?", "Aristotle's works are not well-established. In general, the chronology of Aristotle is not well-established."); assert.equal(a.answer, null, "'not well-established' is said of his works and his chronology, not of him");
+  const b = await ask("Who is Polonius?", "POLONIUS IS A LORD. Polonius dies and have done but greenly in hugger-mugger."); assert.equal(b.answer, null, "a sentence in capitals is a heading or a label; a verb phrase is not a description");
+});
+
+test("identity needs corroboration: a description said by one sentence is a lead and not an answer; the same description in two different sentences is an answer (the same sentence twice is one)", T, async () => {
+  const ask = async (q, text) => huntVoid(voidOf(q), { sources: [source({ title: "t", passages: [{ section: null, text }] })], read, split });
+  const once = await ask("Who is Jonathan Harker?", "Jonathan Harker is a young solicitor. Mina loves Jonathan Harker."); assert.equal(once.answer, null); assert.equal(once.gap.kind, "uncorroborated"); assert.match(once.gap.detail, /a young solicitor/); assert.equal(once.lead.answer, "a young solicitor");
+  const same = await ask("Who is Jonathan Harker?", "Jonathan Harker is a young solicitor. Jonathan Harker is a young solicitor."); assert.equal(same.answer, null, "the same sentence twice is one sentence");
+  const twice = await ask("Who is Jonathan Harker?", "Jonathan Harker is a young solicitor. Jonathan Harker was a young solicitor."); assert.equal(twice.answer.answerText, "a young solicitor"); assert.equal(twice.candidates[0].sentences, 2);
+});

@@ -1,0 +1,1434 @@
+{
+ "schema": "YlirAnswerProbe@1",
+ "split": "DEV / EXPLORATORY (the questions were scored for document finding before; what counts as right was fixed before: answers-dev.json)",
+ "at": "2026-11-24T17:14:54.834Z",
+ "tally": {
+  "gap": 13,
+  "not scored": 10
+ },
+ "scoredQuestions": 10,
+ "right": 0,
+ "wrong": 0,
+ "gap": 10,
+ "controls": [
+  {
+   "q": "Who won the 2022 World Cup?",
+   "verdict": "gap",
+   "answer": null
+  },
+  {
+   "q": "What is the capital of Burkina Faso?",
+   "verdict": "gap",
+   "answer": null
+  },
+  {
+   "q": "Who is the chief executive of Anthropic?",
+   "verdict": "gap",
+   "answer": null
+  }
+ ],
+ "results": [
+  {
+   "q": "Who was Aristotle's most famous student?",
+   "void": {
+    "admits": "person",
+    "relation": null,
+    "anchors": [
+     "Aristotle"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4658,
+     "file": "02-encyclopedic/wikipedia/Aristotle.txt",
+     "score": 22.08,
+     "sentences": 315,
+     "passages": 130
+    },
+    {
+     "doc": 9272,
+     "file": "21-anti-colonial/colonial-studies/74220-Heitland-Agricola.txt",
+     "score": 18.88,
+     "sentences": 12844,
+     "passages": 76
+    },
+    {
+     "doc": 4,
+     "file": "01-literature-books/gutenberg/pg55201_The_Republic_by_Plato.txt",
+     "score": 18.25,
+     "sentences": 13680,
+     "passages": 62
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Plato, Greek, Theophrastus stand next to Aristotle, but no sentence says “the relation”"
+   },
+   "candidates": [
+    {
+     "answer": "Plato",
+     "tier": "comention",
+     "documents": 3,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 27956-28367",
+       "sentence": "The Neoplatonists saw all subsequent philosophical systems after Plato, including Aristotle's, as developments on Plato's philosophy, and sought to explain how Plato and Aristotle were in agreement, e"
+      }
+     ]
+    },
+    {
+     "answer": "Greek",
+     "tier": "comention",
+     "documents": 3,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 41397-41962",
+       "sentence": "[https://www.perseus.tufts.edu/cgi-bin/perscoll?.submit=Change&collection=Any&type=text&lang=Any&lookup=Aristotle Perseus Project] at Tufts University At the [https://web.archive.org/web/2007101721104"
+      }
+     ]
+    },
+    {
+     "answer": "Theophrastus",
+     "tier": "comention",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 8378-8715",
+       "sentence": "He often lectured small groups of distinguished students and, along with some of them, such as Theophrastus, Eudemus of RhodesEudemus, and Aristoxenus, Aristotle built a large library which included m"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "ms": 1531,
+   "error": null
+  },
+  {
+   "q": "Who wrote the Divine Comedy?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "Divine Comedy"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 32.19,
+     "sentences": 167485,
+     "passages": 46
+    },
+    {
+     "doc": 4652,
+     "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 24.93,
+     "sentences": 109614,
+     "passages": 12
+    },
+    {
+     "doc": 8557,
+     "file": "15-western-canon/folger-shakespeare/shakespeare-complete-gutenberg.txt",
+     "score": 24.93,
+     "sentences": 109614,
+     "passages": 12
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "70 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "ms": 566,
+   "error": null
+  },
+  {
+   "q": "Who tutored Alexander the Great?",
+   "void": {
+    "ok": false
+   },
+   "documents": [
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 32.19,
+     "sentences": 167485,
+     "passages": 46
+    },
+    {
+     "doc": 4652,
+     "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 24.93,
+     "sentences": 109614,
+     "passages": 12
+    },
+    {
+     "doc": 8557,
+     "file": "15-western-canon/folger-shakespeare/shakespeare-complete-gutenberg.txt",
+     "score": 24.93,
+     "sentences": 109614,
+     "passages": 12
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": null,
+   "candidates": [],
+   "verdict": "gap",
+   "ms": 0,
+   "error": null
+  },
+  {
+   "q": "What did Watson and Crick discover about DNA?",
+   "void": {
+    "admits": "thing",
+    "relation": null,
+    "anchors": [
+     "Watson",
+     "Crick",
+     "DNA"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 11,
+     "file": "02-encyclopedic/wikipedia/DNA.txt",
+     "score": 53.14,
+     "sentences": 487,
+     "passages": 272
+    },
+    {
+     "doc": 3091,
+     "file": "11-multi-language/sadilar/tn/autshumato-monolingual-setswana-corpus.txt",
+     "score": 28.7,
+     "sentences": 205277,
+     "passages": 154
+    },
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 23.29,
+     "sentences": 167485,
+     "passages": 99
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Maurice Wilkins stand next to Watson and Crick and DNA, but no sentence says “the relation”"
+   },
+   "candidates": [
+    {
+     "answer": "Maurice Wilkins",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "DNA",
+       "section": "bytes 59453-59578",
+       "sentence": "This photo was given to Watson and Crick by Maurice Wilkins and was critical to their obtaining the correct structure of DNA."
+      }
+     ]
+    }
+   ],
+   "verdict": "not scored",
+   "ms": 1826,
+   "error": null
+  },
+  {
+   "q": "Who founded the Mongol Empire?",
+   "void": {
+    "admits": "person",
+    "relation": "found",
+    "anchors": [
+     "Mongol Empire"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 17,
+     "file": "02-encyclopedic/wikipedia/Mongol_Empire.txt",
+     "score": 43.38,
+     "sentences": 636,
+     "passages": 235
+    },
+    {
+     "doc": 4500,
+     "file": "21-anti-colonial/colonial-studies/37115-Gobineau-The-Moral-and-Intellectual-Diversity-of-.txt",
+     "score": 31.78,
+     "sentences": 4315,
+     "passages": 37
+    },
+    {
+     "doc": 9222,
+     "file": "21-anti-colonial/colonial-studies/61063-Van-Evrie-Negroes-and-Negro-Slavery-the-first-an-i.txt",
+     "score": 31.64,
+     "sentences": 2477,
+     "passages": 53
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Eurasia, Empire, Mongol stand next to Mongol Empire, but no sentence says “found”"
+   },
+   "candidates": [
+    {
+     "answer": "Eurasia",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Mongol_Empire",
+       "section": "bytes 0-162",
+       "sentence": "(Middle Mongol) Mongol Empire Nomadic empire Expansion of the Mongol Empire across Eurasia between 1206 and 1294, with modern political boundaries superimposed"
+      }
+     ]
+    },
+    {
+     "answer": "Empire",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Mongol_Empire",
+       "section": "bytes 556-655",
+       "sentence": "The Mongol Empire was the List of largest empireslargest contiguous empire in human historyhistory."
+      }
+     ]
+    },
+    {
+     "answer": "Mongol",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Mongol_Empire",
+       "section": "bytes 0-162",
+       "sentence": "(Middle Mongol) Mongol Empire Nomadic empire Expansion of the Mongol Empire across Eurasia between 1206 and 1294, with modern political boundaries superimposed"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "ms": 734,
+   "error": null
+  },
+  {
+   "q": "What did Wittgenstein write in the Tractatus?",
+   "void": {
+    "admits": "thing",
+    "relation": "write",
+    "anchors": [
+     "Wittgenstein",
+     "Tractatus"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 2340,
+     "file": "02-encyclopedic/wikipedia/Ludwig_Wittgenstein.txt",
+     "score": 78.17,
+     "sentences": 862,
+     "passages": 38
+    },
+    {
+     "doc": 6100,
+     "file": "11-multi-language/war-and-peace/en/pg2600_War_and_Peace_Tolstoy_Maude.txt",
+     "score": 18.3,
+     "sentences": 34187,
+     "passages": 0
+    },
+    {
+     "doc": 4514,
+     "file": "21-anti-colonial/colonial-studies/45473-Sumner-Charles-Sumner-his-complete-works-volume.txt",
+     "score": 12.78,
+     "sentences": 5480,
+     "passages": 1
+    }
+   ],
+   "gaps": [],
+   "answer": "book",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "book",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig_Wittgenstein",
+       "section": "bytes 88186-88451",
+       "sentence": "Daniel Dennett wrote that, rather than solving all the major philosophical problems, as he had intended the Tractatus to do, Wittgenstein wrote \"a book of such tantalizing perplexity and controversy t"
+      }
+     ]
+    },
+    {
+     "answer": "tantalizing perplexity",
+     "tier": "linked",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig_Wittgenstein",
+       "section": "bytes 88186-88451",
+       "sentence": "Daniel Dennett wrote that, rather than solving all the major philosophical problems, as he had intended the Tractatus to do, Wittgenstein wrote \"a book of such tantalizing perplexity and controversy t"
+      }
+     ]
+    },
+    {
+     "answer": "controversy",
+     "tier": "linked",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig_Wittgenstein",
+       "section": "bytes 88186-88451",
+       "sentence": "Daniel Dennett wrote that, rather than solving all the major philosophical problems, as he had intended the Tractatus to do, Wittgenstein wrote \"a book of such tantalizing perplexity and controversy t"
+      }
+     ]
+    }
+   ],
+   "verdict": "not scored",
+   "ms": 139,
+   "error": null
+  },
+  {
+   "q": "Who is Long John Silver?",
+   "void": {
+    "admits": "person",
+    "relation": null,
+    "anchors": [
+     "John Silver"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 9128,
+     "file": "21-anti-colonial/colonial-studies/24882-Jameson-Privateering-and-Piracy-in-the-Colonial-.txt",
+     "score": 14.13,
+     "sentences": 15006,
+     "passages": 82
+    },
+    {
+     "doc": 1889,
+     "file": "20-first-person-voices/old-bailey/old-bailey-18280911.txt",
+     "score": 13.5,
+     "sentences": 10709,
+     "passages": 76
+    },
+    {
+     "doc": 4652,
+     "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 13.47,
+     "sentences": 109614,
+     "passages": 89
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "259 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "ms": 948,
+   "error": null
+  },
+  {
+   "q": "Who is Jonathan Harker?",
+   "void": {
+    "admits": "person",
+    "relation": null,
+    "anchors": [
+     "Jonathan Harker"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4651,
+     "file": "01-literature-books/gitenberg/pg345_Dracula.txt",
+     "score": 38.04,
+     "sentences": 9389,
+     "passages": 172
+    },
+    {
+     "doc": 6989,
+     "file": "01-literature-books/gutenberg/pg345_Dracula.txt",
+     "score": 38.04,
+     "sentences": 9349,
+     "passages": 172
+    },
+    {
+     "doc": 6572,
+     "file": "20-first-person-voices/old-bailey/old-bailey-18420404.txt",
+     "score": 15.86,
+     "sentences": 6637,
+     "passages": 8
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "JOURNAL, Evening._ stand next to Jonathan Harker, but no sentence says “the relation”"
+   },
+   "candidates": [
+    {
+     "answer": "JOURNAL",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg345_Dracula",
+       "section": "bytes 4146-4171",
+       "sentence": "JONATHAN HARKER'S JOURNAL"
+      }
+     ]
+    },
+    {
+     "answer": "Evening._",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg345_Dracula",
+       "section": "bytes 747799-747944",
+       "sentence": "_11 October, Evening._--Jonathan Harker has asked me to note this, as he says he is hardly equal to the task, and he wants an exact record kept."
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "ms": 1208,
+   "error": null
+  },
+  {
+   "q": "Who is the Cheshire Cat?",
+   "void": {
+    "admits": "person",
+    "relation": "cat",
+    "anchors": [
+     "Cheshire Cat"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 22.99,
+     "sentences": 167485,
+     "passages": 16
+    },
+    {
+     "doc": 2011,
+     "file": "20-first-person-voices/old-bailey/old-bailey-18841229.txt",
+     "score": 18.56,
+     "sentences": 3127,
+     "passages": 86
+    },
+    {
+     "doc": 4490,
+     "file": "21-anti-colonial/colonial-studies/3424-Clarke-For-the-Term-of-His-Natural-Life.txt",
+     "score": 17.57,
+     "sentences": 12606,
+     "passages": 19
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "123 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "not scored",
+   "ms": 1251,
+   "error": null
+  },
+  {
+   "q": "Who is Polonius?",
+   "void": {
+    "admits": "person",
+    "relation": null,
+    "anchors": [
+     "Polonius"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4652,
+     "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 31.58,
+     "sentences": 109614,
+     "passages": 122
+    },
+    {
+     "doc": 8557,
+     "file": "15-western-canon/folger-shakespeare/shakespeare-complete-gutenberg.txt",
+     "score": 31.58,
+     "sentences": 109614,
+     "passages": 122
+    },
+    {
+     "doc": 10897,
+     "file": "15-western-canon/folger-shakespeare/As_You_Like_It.txt",
+     "score": 31.58,
+     "sentences": 3786,
+     "passages": 122
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Enter Claudius King, Queen, Denmark stand next to Polonius, but no sentence says “the relation”"
+   },
+   "candidates": [
+    {
+     "answer": "Enter Claudius King",
+     "tier": "comention",
+     "documents": 3,
+     "evidence": [
+      {
+       "title": "pg100_Complete_Works_of_Shakespeare",
+       "section": "bytes 985642-985765",
+       "sentence": "Enter Claudius King of Denmark, Gertrude the Queen, Hamlet, Polonius, Laertes, Voltemand, Cornelius, Lords and Attendant."
+      }
+     ]
+    },
+    {
+     "answer": "Queen",
+     "tier": "comention",
+     "documents": 3,
+     "evidence": [
+      {
+       "title": "pg100_Complete_Works_of_Shakespeare",
+       "section": "bytes 985642-985765",
+       "sentence": "Enter Claudius King of Denmark, Gertrude the Queen, Hamlet, Polonius, Laertes, Voltemand, Cornelius, Lords and Attendant."
+      }
+     ]
+    },
+    {
+     "answer": "Denmark",
+     "tier": "comention",
+     "documents": 3,
+     "evidence": [
+      {
+       "title": "pg100_Complete_Works_of_Shakespeare",
+       "section": "bytes 985642-985765",
+       "sentence": "Enter Claudius King of Denmark, Gertrude the Queen, Hamlet, Polonius, Laertes, Voltemand, Cornelius, Lords and Attendant."
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "ms": 513,
+   "error": null
+  },
+  {
+   "q": "What is the allegory of the cave?",
+   "void": {
+    "ok": false
+   },
+   "documents": [
+    {
+     "doc": 4652,
+     "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 31.58,
+     "sentences": 109614,
+     "passages": 122
+    },
+    {
+     "doc": 8557,
+     "file": "15-western-canon/folger-shakespeare/shakespeare-complete-gutenberg.txt",
+     "score": 31.58,
+     "sentences": 109614,
+     "passages": 122
+    },
+    {
+     "doc": 10897,
+     "file": "15-western-canon/folger-shakespeare/As_You_Like_It.txt",
+     "score": 31.58,
+     "sentences": 3786,
+     "passages": 122
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": null,
+   "candidates": [],
+   "verdict": "not scored",
+   "ms": 1,
+   "error": null
+  },
+  {
+   "q": "What is the state of nature according to Hobbes?",
+   "void": {
+    "admits": "thing",
+    "relation": "accord",
+    "anchors": [
+     "Hobbes"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 11476,
+     "file": "21-anti-colonial/colonial-studies/28148-Elliott-Cotton-is-king-and-pro-slavery-arguments.txt",
+     "score": 16.57,
+     "sentences": 14365,
+     "passages": 5
+    },
+    {
+     "doc": 11630,
+     "file": "22-commons/commons-mutual-aid.txt",
+     "score": 15.66,
+     "sentences": 3524,
+     "passages": 9
+    },
+    {
+     "doc": 9183,
+     "file": "21-anti-colonial/colonial-studies/47422-Dabney-A-Defence-of-Virginia-And-Through-Her-of.txt",
+     "score": 13.91,
+     "sentences": 3711,
+     "passages": 5
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Whewell, Malmesbury stand next to Hobbes, but no sentence says “accord”"
+   },
+   "candidates": [
+    {
+     "answer": "Whewell",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "28148-Elliott-Cotton-is-king-and-pro-slavery-arguments",
+       "section": "bytes 728645-728937",
+       "sentence": "On the other hand, the great advocates of despotic power, from a Hobbes down to a Whewell, seeing that there can be no genuine liberty--that is, no secure enjoyment of one's rights--in a state of natu"
+      }
+     ]
+    },
+    {
+     "answer": "Malmesbury",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "47422-Dabney-A-Defence-of-Virginia-And-Through-Her-of",
+       "section": "bytes 402575-402646",
+       "sentence": "The true origin of this theory may be found with Hobbes of Malmesbury."
+      }
+     ]
+    }
+   ],
+   "verdict": "not scored",
+   "ms": 138,
+   "error": null
+  },
+  {
+   "q": "Who is Ophelia's father?",
+   "void": {
+    "admits": "person",
+    "relation": "father",
+    "anchors": [
+     "Ophelia"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 2118,
+     "file": "21-anti-colonial/colonial-studies/203-Stowe-Uncle-Tom-s-Cabin.txt",
+     "score": 37.34,
+     "sentences": 10317,
+     "passages": 300
+    },
+    {
+     "doc": 8670,
+     "file": "20-first-person-voices/gutenberg/stowe-woman-203.txt",
+     "score": 37.34,
+     "sentences": 10317,
+     "passages": 300
+    },
+    {
+     "doc": 4652,
+     "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 33.16,
+     "sentences": 109614,
+     "passages": 88
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "688 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "ms": 2001,
+   "error": null
+  },
+  {
+   "q": "What does the second law of thermodynamics say about entropy?",
+   "void": {
+    "admits": "thing",
+    "relation": "say",
+    "anchors": [
+     "entropy"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6995,
+     "file": "02-encyclopedic/wikipedia/Entropy.txt",
+     "score": 33.67,
+     "sentences": 374,
+     "passages": 207
+    },
+    {
+     "doc": 7016,
+     "file": "05-academic-papers/open-access-books/ashby/ashby-1956-an-introduction-to-cybernetics.txt",
+     "score": 29.58,
+     "sentences": 7010,
+     "passages": 48
+    },
+    {
+     "doc": 2342,
+     "file": "02-encyclopedic/wikipedia/Thermodynamics.txt",
+     "score": 18.43,
+     "sentences": 228,
+     "passages": 16
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "several_fill_the_void",
+    "detail": "length (linked, 2); Markov chain (linked, 1)"
+   },
+   "candidates": [
+    {
+     "answer": "length",
+     "tier": "linked",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "ashby-1956-an-introduction-to-cybernetics",
+       "section": "bytes 399454-399610",
+       "sentence": "Briefly it can be said that the entropy of a length of Markov chain is proportional to its length (provided always that it has settled down to equilibrium)."
+      }
+     ]
+    },
+    {
+     "answer": "Markov chain",
+     "tier": "linked",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "ashby-1956-an-introduction-to-cybernetics",
+       "section": "bytes 399454-399610",
+       "sentence": "Briefly it can be said that the entropy of a length of Markov chain is proportional to its length (provided always that it has settled down to equilibrium)."
+      }
+     ]
+    },
+    {
+     "answer": "Ex",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "ashby-1956-an-introduction-to-cybernetics",
+       "section": "bytes 388851-388926",
+       "sentence": "Ex. 3: What is the entropy of the variety in one throw of an unbiased die ?"
+      }
+     ]
+    }
+   ],
+   "verdict": "not scored",
+   "ms": 698,
+   "error": null
+  },
+  {
+   "q": "What does general relativity say about the perihelion of Mercury?",
+   "void": {
+    "admits": "thing",
+    "relation": "say",
+    "anchors": [
+     "Mercury"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 30.89,
+     "sentences": 167485,
+     "passages": 300
+    },
+    {
+     "doc": 6975,
+     "file": "23-healing/healing-domestic-medicine.txt",
+     "score": 20.24,
+     "sentences": 11418,
+     "passages": 90
+    },
+    {
+     "doc": 4646,
+     "file": "23-healing/healing-the-complete-herbal.txt",
+     "score": 20.08,
+     "sentences": 10038,
+     "passages": 74
+    }
+   ],
+   "gaps": [],
+   "answer": "man",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "man",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "guardian-cryptic-clues-1999-2020",
+       "section": "bytes 547566-547638",
+       "sentence": "\"Like wise man said, you must go in calm\" — assuage (setter: Mercury)."
+      }
+     ]
+    },
+    {
+     "answer": "error",
+     "tier": "linked",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "guardian-cryptic-clues-1999-2020",
+       "section": "bytes 245106-245205",
+       "sentence": "\"Turning up, got oneself hit for something said in error\" — slip of the tongue (setter: Mercury)."
+      }
+     ]
+    },
+    {
+     "answer": "butter substitute",
+     "tier": "linked",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "guardian-cryptic-clues-1999-2020",
+       "section": "bytes 1118271-1118361",
+       "sentence": "\"Witty saying about very good butter substitute turning up\" — epigram (setter: Mercury)."
+      }
+     ]
+    }
+   ],
+   "verdict": "not scored",
+   "ms": 2108,
+   "error": null
+  },
+  {
+   "q": "Who is Van Helsing?",
+   "void": {
+    "admits": "person",
+    "relation": null,
+    "anchors": [
+     "Van Helsing"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4651,
+     "file": "01-literature-books/gitenberg/pg345_Dracula.txt",
+     "score": 59.85,
+     "sentences": 9389,
+     "passages": 300
+    },
+    {
+     "doc": 6989,
+     "file": "01-literature-books/gutenberg/pg345_Dracula.txt",
+     "score": 59.79,
+     "sentences": 9349,
+     "passages": 300
+    },
+    {
+     "doc": 4777,
+     "file": "11-multi-language/sadilar/af/african-speech-technology-afrikaans-text-ast-text-corpus-afrikaans-information-guides-afr-l.txt",
+     "score": 10.5,
+     "sentences": 303,
+     "passages": 0
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Telegram, Amsterdam, Seward stand next to Van Helsing, but no sentence says “the relation”"
+   },
+   "candidates": [
+    {
+     "answer": "Telegram",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg345_Dracula",
+       "section": "bytes 271422-271476",
+       "sentence": "_Telegram, Seward, London, to Van Helsing, Amsterdam._"
+      }
+     ]
+    },
+    {
+     "answer": "Amsterdam",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg345_Dracula",
+       "section": "bytes 271422-271476",
+       "sentence": "_Telegram, Seward, London, to Van Helsing, Amsterdam._"
+      }
+     ]
+    },
+    {
+     "answer": "Seward",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg345_Dracula",
+       "section": "bytes 271422-271476",
+       "sentence": "_Telegram, Seward, London, to Van Helsing, Amsterdam._"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "ms": 791,
+   "error": null
+  },
+  {
+   "q": "What did Confucius teach about filial piety?",
+   "void": {
+    "admits": "thing",
+    "relation": "teach",
+    "anchors": [
+     "Confucius"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 2334,
+     "file": "02-encyclopedic/wikipedia/Confucianism.txt",
+     "score": 25.11,
+     "sentences": 515,
+     "passages": 77
+    },
+    {
+     "doc": 6788,
+     "file": "21-anti-colonial/colonial-studies/32528-Camoes-The-Lusiad-Or-The-Discovery-of-India-an-.txt",
+     "score": 16.6,
+     "sentences": 6031,
+     "passages": 6
+    },
+    {
+     "doc": 6973,
+     "file": "22-commons/commons-progress-and-poverty.txt",
+     "score": 15.46,
+     "sentences": 5641,
+     "passages": 5
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Heaven, Analects, Lu stand next to Confucius, but no sentence says “teach”"
+   },
+   "candidates": [
+    {
+     "answer": "Heaven",
+     "tier": "comention",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Confucianism",
+       "section": "bytes 16318-16466",
+       "sentence": "However, Confucianism does venerate many aspects of nature and also respects various , as well as what Confucius saw as the main , the \" of Heaven.\""
+      }
+     ]
+    },
+    {
+     "answer": "Analects",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Confucianism",
+       "section": "bytes 28626-28720",
+       "sentence": "Roger T. Ames and Henry Rosemont, Jr., The Analects of Confucius: A Philosophical Translation."
+      }
+     ]
+    },
+    {
+     "answer": "Lu",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Confucianism",
+       "section": "bytes 8745-8929",
+       "sentence": "Spring and Autumn Annals chronicles the period to which it gives its name, Spring and Autumn period (771–481&nbsp;BC), from the perspective of Confucius's home state of Lu (state)Lu."
+      }
+     ]
+    }
+   ],
+   "verdict": "not scored",
+   "ms": 252,
+   "error": null
+  },
+  {
+   "q": "What are the Four Noble Truths?",
+   "void": {
+    "admits": "thing",
+    "relation": null,
+    "anchors": [
+     "Four Noble Truths"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4659,
+     "file": "02-encyclopedic/wikipedia/Buddhism.txt",
+     "score": 20.8,
+     "sentences": 829,
+     "passages": 15
+    },
+    {
+     "doc": 9083,
+     "file": "21-anti-colonial/colonial-studies/11691-Wren-Driftwood-Spars-The-Stories-of-a-Man-a-B.txt",
+     "score": 16.78,
+     "sentences": 4085,
+     "passages": 1
+    },
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 15.83,
+     "sentences": 167485,
+     "passages": 9
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Eightfold Path, Geoffrey Samuel, rebirth.\"Donald Lopez stand next to Four Noble Truths, but no sentence says “the relation”"
+   },
+   "candidates": [
+    {
+     "answer": "Eightfold Path",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Buddhism",
+       "section": "bytes 2382-2566",
+       "sentence": "Widely observed teachings include the Four Noble Truths, the Noble Eightfold Path, and the doctrines of dependent origination, Karma in Buddhismkarma, and the three marks of existence."
+      }
+     ]
+    },
+    {
+     "answer": "Geoffrey Samuel",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Buddhism",
+       "section": "bytes 13344-13478",
+       "sentence": "Geoffrey Samuel (2008): \"The Four Noble Truths [...] describe the knowledge needed to set out on the path to liberation from rebirth.\""
+      }
+     ]
+    },
+    {
+     "answer": "rebirth.\"Donald Lopez",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Buddhism",
+       "section": "bytes 13780-14161",
+       "sentence": "According to Donald Lopez, \"The Buddha stated in his first sermon that when he gained absolute and intuitive knowledge of the four truths, he achieved complete enlightenment and freedom from future re"
+      }
+     ]
+    }
+   ],
+   "verdict": "not scored",
+   "ms": 469,
+   "error": null
+  },
+  {
+   "q": "Who is Jim Hawkins?",
+   "void": {
+    "admits": "person",
+    "relation": null,
+    "anchors": [
+     "Jim Hawkins"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 2323,
+     "file": "01-literature-books/gitenberg/pg120_Treasure-Island.txt",
+     "score": 23.04,
+     "sentences": 4194,
+     "passages": 94
+    },
+    {
+     "doc": 4491,
+     "file": "21-anti-colonial/colonial-studies/34270-Roberts-Barbara-Ladd.txt",
+     "score": 19.65,
+     "sentences": 5241,
+     "passages": 297
+    },
+    {
+     "doc": 1611,
+     "file": "20-first-person-voices/docsouth-slave-narratives/neh-edwardsc-edwards.txt",
+     "score": 19.16,
+     "sentences": 1873,
+     "passages": 12
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Garrison, Stockade stand next to Jim Hawkins, but no sentence says “the relation”"
+   },
+   "candidates": [
+    {
+     "answer": "Garrison",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg120_Treasure-Island",
+       "section": "bytes 189681-189743",
+       "sentence": "Narrative Resumed by Jim Hawkins: The Garrison in the Stockade"
+      }
+     ]
+    },
+    {
+     "answer": "Stockade",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg120_Treasure-Island",
+       "section": "bytes 189681-189743",
+       "sentence": "Narrative Resumed by Jim Hawkins: The Garrison in the Stockade"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "ms": 625,
+   "error": null
+  },
+  {
+   "q": "What is the Heisenberg uncertainty principle?",
+   "void": {
+    "admits": "thing",
+    "relation": "principle",
+    "anchors": [
+     "Heisenberg"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 19,
+     "file": "02-encyclopedic/wikipedia/Quantum_mechanics.txt",
+     "score": 19.13,
+     "sentences": 353,
+     "passages": 5
+    },
+    {
+     "doc": 9332,
+     "file": "05-academic-papers/ntrs-white-papers/19660014637_total-research-activity-related-to-the-science-of-materials-fourth-annual-techni.txt",
+     "score": 17.71,
+     "sentences": 4018,
+     "passages": 6
+    },
+    {
+     "doc": 4674,
+     "file": "05-academic-papers/ntrs-white-papers/19660017459_research-in-materials-science-and-engineering-annual-report-1965-1966.txt",
+     "score": 11.56,
+     "sentences": 15160,
+     "passages": 2
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "13 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "not scored",
+   "ms": 104,
+   "error": null
+  },
+  {
+   "q": "Who won the 2022 World Cup?",
+   "void": {
+    "admits": "person",
+    "relation": "win",
+    "anchors": [
+     "World Cup"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4652,
+     "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 24.58,
+     "sentences": 109614,
+     "passages": 136
+    },
+    {
+     "doc": 8557,
+     "file": "15-western-canon/folger-shakespeare/shakespeare-complete-gutenberg.txt",
+     "score": 24.58,
+     "sentences": 109614,
+     "passages": 136
+    },
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 23.98,
+     "sentences": 167485,
+     "passages": 300
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "572 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "ms": 5156,
+   "error": null
+  },
+  {
+   "q": "What is the capital of Burkina Faso?",
+   "void": {
+    "admits": "thing",
+    "relation": "capital",
+    "anchors": [
+     "Burkina Faso"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 7158,
+     "file": "11-multi-language/sadilar/nso/autshumato-monolingual-sepedi-corpus.txt",
+     "score": 18.4,
+     "sentences": 133389,
+     "passages": 2
+    },
+    {
+     "doc": 3091,
+     "file": "11-multi-language/sadilar/tn/autshumato-monolingual-setswana-corpus.txt",
+     "score": 16.38,
+     "sentences": 205277,
+     "passages": 2
+    },
+    {
+     "doc": 10015,
+     "file": "11-multi-language/sadilar/st/sesotho-genre-classification-corpus-st-nf-sub-nf-sub390.txt",
+     "score": 14.36,
+     "sentences": 93,
+     "passages": 2
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "6 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "ms": 1493,
+   "error": null
+  },
+  {
+   "q": "Who is the chief executive of Anthropic?",
+   "void": {
+    "admits": "person",
+    "relation": null,
+    "anchors": [
+     "Anthropic"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 10902,
+     "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+     "score": 6.49,
+     "sentences": 167485,
+     "passages": 4
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "4 sentences read in 1 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "ms": 378,
+   "error": null
+  }
+ ]
+}

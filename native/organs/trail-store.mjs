@@ -17,7 +17,9 @@ import fs from "node:fs"; import path from "node:path"; import os from "node:os"
 import { deposit as kDeposit, trailStats, routeOrderFor, TRAIL_HALF_LIFE_DAYS } from "../kernel/stigmergy.js";
 
 export const TRAIL_STORE_SCHEMA = "TrailStore@1";
-const PHAROS_KINDS = [["trail-deposit", "INS·Figure", "one attempt: which route was tried for which head, whether it resolved, what it cost"], ["trail-veto", "EVA·Figure", "an alarm: this route gave a wrong answer for this head, and what it had deposited no longer counts"], ["trail-mark", "INS·Figure", "a thing about the world other users of the environment should know (a throttle, until when)"]];
+// The owner, 2026-11-24: the ground is the source, the figure is what Ýlir-One is (the readings), the PATTERN is attention: the SIG pheromone trails, synapses, expressways. So a trail mark is a SIG in the Pattern face, not a nomination of a figure
+// (an alarm is a signal too; EVA·Pattern would be the alternative for the veto if the owner prefers it).
+const PHAROS_KINDS = [["trail-deposit", "SIG·Pattern", "one attempt: which route was tried for which head, whether it resolved, what it cost"], ["trail-veto", "SIG·Pattern", "an alarm: this route gave a wrong answer for this head, and what it had deposited no longer counts"], ["trail-mark", "SIG·Pattern", "a thing about the world other users of the environment should know (a throttle, until when)"]];
 /** pharosMarkWriter({ dir, writer }) -> onMark(mark) with .status(): writes each trail mark into the shared pharos log (the chat's log by default), declaring the three kinds once.
  *  Lazy and additive: pharos is imported on the first mark; if it cannot be found the writer records why in status() and drops nothing silently (the store's own file still has the mark). */
 export function pharosMarkWriter({ dir = process.env.CHAT_PHAROS_DIR || path.join(os.homedir(), ".pharos", "fold-demo"), writer = "khora-trails", pharos = null } = {}) {
@@ -31,7 +33,7 @@ export function pharosMarkWriter({ dir = process.env.CHAT_PHAROS_DIR || path.joi
   })();
   const write = (m) => {
     chain = chain.then(async () => {
-      try { const { P, h } = await open(), k = PHAROS_KINDS.find(([n]) => n === m.kind); if (!k) return; const key = m.kind === "trail-mark" ? m.key : m.head; P.weave(h, { cell: k[1], kind: m.kind, addr: `${m.kind === "trail-mark" ? "mark" : "trail"}:${m.store}:${key}`, body: m }); status.on = true; status.why = null; status.written++; }
+      try { const { P, h } = await open(), k = PHAROS_KINDS.find(([n]) => n === m.kind); if (!k) return; const key = m.kind === "trail-mark" ? m.key : m.head; (P.weaveUnchained ?? P.weave)(h, { cell: k[1], kind: m.kind, addr: `${m.kind === "trail-mark" ? "mark" : "trail"}:${m.store}:${key}`, body: m }); status.on = true; status.why = null; status.written++; }   // a mark is a fact of its own, not a claim in a causal chain: weaveUnchained (one entry, no view of the whole log) where pharos has it, weave where it does not
       catch (e) { status.on = false; status.why = `pharos not reachable (${String(e?.message ?? e).slice(0, 80)}): clone scores-patch-points/pharos beside khora or set PHAROS_HOME`; }
     });
   };

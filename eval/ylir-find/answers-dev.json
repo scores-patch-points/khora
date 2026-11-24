@@ -1,0 +1,19 @@
+{
+  "written": "2026-11-24, before the answer-from-Ýlir-One run, on the DEV question set (questions.json: already scored for document finding, so every number here is DEV/EXPLORATORY); the fresh set (questions-fresh.json) is NOT used",
+  "why": "What counts as a right answer, fixed before any answer is read. An answer is RIGHT if its text contains one of `accept` (case-insensitive substring), WRONG if the hunt names an answer that contains none, a GAP if the hunt names none. Only the ten questions with a short checkable answer are scored; the open 'what' questions need a rubric and are only listed. The keyword lists are mine, from knowing the works, and generous on purpose (a descriptor of a character has many true wordings).",
+  "scored": {
+    "Who was Aristotle's most famous student?": ["alexander"],
+    "Who wrote the Divine Comedy?": ["dante"],
+    "Who tutored Alexander the Great?": ["aristotle"],
+    "Who founded the Mongol Empire?": ["genghis", "chinggis", "temüjin", "temujin"],
+    "Who is Long John Silver?": ["cook", "pirate", "buccaneer", "one-legged", "sea"],
+    "Who is Jonathan Harker?": ["solicitor", "lawyer", "clerk", "englishman", "estate"],
+    "Who is Polonius?": ["ophelia", "laertes", "chamberlain", "counsellor", "counselor", "father", "councillor"],
+    "Who is Ophelia's father?": ["polonius"],
+    "Who is Van Helsing?": ["professor", "doctor", "physician", "vampire", "dutch", "amsterdam"],
+    "Who is Jim Hawkins?": ["boy", "narrator", "cabin", "innkeeper", "son"]
+  },
+  "notScored": ["Who is the Cheshire Cat?", "What did Watson and Crick discover about DNA?", "What did Wittgenstein write in the Tractatus?", "What is the allegory of the cave?", "What is the state of nature according to Hobbes?", "What does the second law of thermodynamics say about entropy?", "What does general relativity say about the perihelion of Mercury?", "What did Confucius teach about filial piety?", "What are the Four Noble Truths?", "What is the Heisenberg uncertainty principle?"],
+  "controls": "the three controls of questions.json: a hunt that names an answer for them is a wrong answer (there is none in the corpus)",
+  "protocol": "find the top 3 documents with the scratch postings (log(1 + count) x log(N / df) over the question's anchor lemmas and relation lemma), hand them to huntVoid as a source whose passages are the sentences that contain an anchor's surface form, each labelled with its byte address; the hunt's own reading decides what answers. No threshold is tuned on these questions."
+}

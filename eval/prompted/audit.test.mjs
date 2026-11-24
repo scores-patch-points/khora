@@ -8,7 +8,7 @@ const salt = M?.FIXTURES.find((f) => f.id === "captain-salt");
 
 test("the same question under different prompts gives different replies, and the audit names the prompt by its sha256", T, async () => {
   const none = await M.audit(null, "Who are you?"), a = await M.audit(salt, "Who are you?");
-  assert.notEqual(none.reply, a.reply); assert.match(a.reply, /^I'm Captain Salt/, "the reply names the persona the prompt gave (the chat's wording may add the descriptor or not: it said \"…, a weathered pirate captain.\" until the persona route changed)"); assert.equal(a.simulated, true); assert.equal(a.model, "none");
+  assert.notEqual(none.reply, a.reply); assert.equal(a.reply, "I'm Captain Salt, a weathered pirate captain."); assert.equal(a.simulated, true); assert.equal(a.model, "none");
   assert.equal(a.prompt.sha256.length, 64); assert.equal(a.answeredFrom, "the prompt"); assert.equal(none.answeredFrom, "the system's own description or its tools (code), no prompt"); assert.equal(none.prompt, null);
 });
 
