@@ -162,7 +162,8 @@ test("without the verb-equivalents organ nothing is substituted: the question's 
 });
 test("recall is by referent: a frame a pronoun fills answers the name's question, a pronoun is not another argument of its own verb, and a stranded preposition is not a participant", T, async () => {
   const th = await mkThread(); for (const m of ["Mina gave Jonathan a book.", "She lives in the village.", "Pierre visited Mina in the village.", "Pierre brought a basket of apples.", "He gave the apples to Jonathan."]) await th.turn(m);
-  const where = await th.turn("Where does Mina live?"); assert.equal(where.handled, true); assert.match(where.text, /village/);
+  // “She” is Mina only if something settles it (Jonathan is the other name): with the given-name prior it does; without it “she” is open between them and the chat does not guess
+  const where = await th.turn("Where does Mina live?"); if (HAVE) { assert.equal(where.handled, true); assert.match(where.text, /village/); } else assert.equal(where.handled, false, "an open “she” matches no one");
   // “He” is not Jonathan only where the reader hangs “to Jonathan” on the same verb as “He” (the stand-in parser does; the real one attaches it to “apples”, and then no clause says they are co-arguments)
   const rows = [...th.engine.S.rowsOf.values()].map((x) => x.rows).find((rs) => rs?.some((r) => r.upos === "PRON" && r.form === "He")) ?? [], he = rows.find((r) => r.form === "He"), jon = rows.find((r) => r.form === "Jonathan");
   if (HAVE && he && jon && he.head === jon.head) { const who = await th.turn("Who gave the apples to Jonathan?"); assert.match(who.text, /^Pierre\./, "“He” is not Jonathan: Jonathan is the other argument of the same verb"); }
