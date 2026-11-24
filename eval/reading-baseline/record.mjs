@@ -10,7 +10,8 @@ export const READING_FILES = ["native/reading.js", "native/the-fold/pharos-gate.
   "native/adapters/text/karaka-total.mjs", "native/adapters/text/text-mereology.mjs",
   "native/reading-in-order.mjs", "native/reading-in-order.worker.mjs", "native/adapters/text/referents-in-order.mjs", "native/adapters/text/gender-from-corpus.js",
   "native/adapters/text/recase.mjs", "native/adapters/text/language-gate.mjs", "native/priors-shipped/truecase-eng.json",
-  "native/adapters/text/gender-chain.js", "native/adapters/text/gender-of-words.js", "native/adapters/text/name-gender/dictionary-en.json", "identity/givers/wikidata-given-names-en.json"];
+  "native/adapters/text/gender-chain.js", "native/adapters/text/gender-of-words.js", "native/adapters/text/name-gender/dictionary-en.json", "identity/givers/wikidata-given-names-en.json",
+  "native/adapters/text/speakers.js"];
 export const sha = (f) => crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, f))).digest("hex");
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const i = process.argv.indexOf("--note"); const note = i > 0 ? process.argv[i + 1] : null; if (!note) { console.error('a note is required: --note "why the reading changed"'); process.exit(2); }

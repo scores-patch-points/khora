@@ -338,7 +338,7 @@ export function declensionOrgansFor(option, { stem, pr, discoverReferents: disco
  * synchronous read cannot ask, so an async caller asks first (reading.js::readDocument does) and hands its report in as
  * `aliasReport`, which rides the entry. A short source is a typed skip, a reader failure a typed error — never silent.
  */
-export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false, castIdentity = false, admitNominals = false, speakers = false } = {}) {
+export function readWith(text, { address = null, category = null, language = null, priors = null, aliases = [], abbreviations = null, quality = true, minCharacters = 200, features = {}, reader = null, readerOptions = {}, selfRead = false, aliasReport = null, rowsOf = null, referents = false, declension = null, card = false, castIdentity = false, admitNominals = false, speakers = null } = {}) {
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
@@ -568,14 +568,18 @@ export function readWith(text, { address = null, category = null, language = nul
     if (caseClauses && caseClauses.length && !(clauses && clauses.length)) { clauses = caseClauses; qualityReport.clauses = { source: "case-marked", clauses: caseClauses.length, nullSubjects: caseClauses.filter((c) => c.nullSubject).length }; }
     qualityReport.gates = readGates({ edges, cast, text: str });
   }
-  // THE SPEAKER/ADDRESSEE RUNG (opt-in, `speakers: true`): first- and second-person mentions are bound to
-  // one speaker referent and one addressee referent per document (the round-30 kind admission, the gain is
-  // from admitting the KIND not the quotation structure). Off, the entry is byte-identical to before.
+  // THE SPEAKER/ADDRESSEE RUNG (the owner, 2026-11-24: "speakers into the read"). First- and second-person mentions are referents: an "I" inside a quotation is the speaker of that quotation (the cast mention in its tag, else an
+  // anonymous speaker of that quotation), a "you" is the previous quotation's speaker, and a recurring first person outside quotations is the narrator (adapters/text/speakers.js). ON by default for English, the one language
+  // whose quotation conventions the adapter declares; another language is a typed gap (`speakers_english_only`), never an English guess; `speakers: true` / `false` overrides. Each binding keeps `cl` ("one:speaker" /
+  // "one:addressee", one referent per kind per text, what the round-30 measurement scored) and adds `ref` (the speaker's own referent: a cast ref or an anonymous one per quotation, the honest one: two quotations by two
+  // people are two referents). Measured on the fixed giver (CorefUD DEV, CoNLL F1): LitBank 37.77 -> 44.66, GUM 19.91 -> 29.44; a shuffled control (the same mentions, random speakers) gets 43.08 and 29.03: the gain is from admitting the KIND.
   let speakerBindings = null;
-  if (speakers) {
+  const speakersOn = speakers === null || speakers === undefined ? stem === "eng" : !!speakers;
+  if (speakersOn && stem !== "eng") speakerBindings = { gap: "speakers_english_only", detail: `the speaker adapter reads English quotation conventions; this read is ${stem}` };
+  else if (speakersOn) {
     try {
       const sp = speakerReferents(str, { cast });
-      speakerBindings = sp.mentions.map((m) => ({ a: m.a, b: m.b, cl: m.kind === "addressee" ? "one:addressee" : "one:speaker", kind: m.kind, via: m.via }));
+      speakerBindings = sp.mentions.map((m) => ({ a: m.a, b: m.b, cl: m.kind === "addressee" ? "one:addressee" : "one:speaker", ref: m.cl, kind: m.kind, via: m.via }));
     } catch (e) { speakerBindings = { gap: "speakers_failed", detail: String(e?.message ?? e).slice(0, 120) }; }
   }
   const entry = {

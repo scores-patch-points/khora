@@ -215,8 +215,8 @@
   "native/the-fold/pharos-gate.mjs": "b34ff85e49bc6af219431103ac7c3b5af8d92207a1fb7ff095be035d5a509f27",
   "holon.json": "298357fb1047105d96c6fde9dbe51c81a1d69cb92e04731431479246a1d8032f",
   "native/tests/door-allowlist.json": "6bd9ece610624f428e1485082f276aa56034c7cbab2b4f361f4a4d9a4baabfec",
-  "native/the-fold/read-process.mjs": "1c0f31fd4e8b6da3b7a4f5ea6c7b6db48e8564ed52c8fe4e2e8f4b4f2b70c24e",
-  "native/the-fold/read-core.mjs": "f8456ffcfc9e2dfde0ceab26f4a9e4d7cfe38d2040ce9e9d646293f44ad7db14",
+  "native/the-fold/read-process.mjs": "97a2e6ce72c8bcee0b9fe7e1fdc2b28e7912820a57254ad4e3a007a813714e7f",
+  "native/the-fold/read-core.mjs": "a3a8520f6afa814b3ec467515e93d6bdbd56079e3fe113fd7b111f1062629a43",
   "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
   "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
   "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
@@ -233,7 +233,7 @@
   "native/adapters/text/pronoun-registers/grc.json": "1bf7ac99690f99af7a3c864c4bd65f739e721a5117d15b05ffe0270e072de5ce",
   "native/adapters/text/pronoun-registers/san.json": "696e7f5347c1c8461940df140b493edce6cd5e3c8d053f18f1f154c379510ac5",
   "native/priors-shipped/frame-san.json": "a77aa7301bd35fca3af3bb61b8ed32aa20590f1d38eadc7aa1074731fc5d83c0",
-  "native/adapters/text/language-competency.js": "7c386fb05d9ac901cd396a5a1c46a2c61a70a242beea5fe58b0cdf2d7cbb8d56",
+  "native/adapters/text/language-competency.js": "49910f85b5114c17f993a2139ef093cb1efd0f78b80eb033b4eb5c4b8d2ae300",
   "native/adapters/text/karaka-total.mjs": "9632a30bfb63227dd9f74f465d8f191e637ee401f882250133940ba8e6c381f1",
   "native/adapters/text/text-mereology.mjs": "ec7a865099d4d2b07b689feec1be485045b447fba507d26a25cbce4756dac3d9",
   "native/reading-in-order.mjs": "24e14dd0a8e4f2bbd87e406101a1a893e9466fa08fabc133615e03b1355c5b11",
@@ -246,7 +246,8 @@
   "native/adapters/text/gender-chain.js": "6ee418b30f65efaab59eafc97a49df6d35a5dedfc95616037e0ca1d7bf7b6def",
   "native/adapters/text/gender-of-words.js": "4fab0721485bc9dd3d516712724a26a9946c88b3554e397f45b2010eb719e984",
   "native/adapters/text/name-gender/dictionary-en.json": "0ae55d2772543f1af91f107b187d73321a651b9e9d23ac65369b251141ecbe4c",
-  "identity/givers/wikidata-given-names-en.json": "c522b09d9be8d8acb38ed7b5352cda2673c93446a51eb557e3fbe33bdd4f3aae"
+  "identity/givers/wikidata-given-names-en.json": "c522b09d9be8d8acb38ed7b5352cda2673c93446a51eb557e3fbe33bdd4f3aae",
+  "native/adapters/text/speakers.js": "c1dbe7ef2562deabea22e0a341ab3e13ec7126622953bf42c37ccaeb145e5aed"
  },
  "recorded": "2026-11-24"
 }
