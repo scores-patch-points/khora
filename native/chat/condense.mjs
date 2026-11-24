@@ -13,7 +13,16 @@
 // PURE. rows = the reader's rows for one sentence; read(text) = the reader, for the check.
 
 const NO_SPACE_BEFORE = new Set([",", ".", ";", ":", "!", "?", ")", "’", "'s", "n't", "%"]), NO_SPACE_AFTER = new Set(["(", "“", "‘", "["]);
-const detok = (forms) => { let o = ""; forms.forEach((w, i) => { o += (i && !NO_SPACE_BEFORE.has(w) && !NO_SPACE_AFTER.has(forms[i - 1]) ? " " : "") + w; }); return o; };
+const detok = (forms) => {
+  let o = "", open = false, prev = null;   // a straight quote opens, then closes: no space inside it ("youthful sins", not " youthful sins ")
+  forms.forEach((w, i) => {
+    const q = w === '"'; let space = i > 0;
+    if (NO_SPACE_BEFORE.has(w) || NO_SPACE_AFTER.has(prev)) space = false;
+    if (q && open) space = false; if (prev === '"' && open) space = false;
+    o += (space ? " " : "") + w; if (q) open = !open; prev = w;
+  });
+  return o;
+};
 const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 
 function subtree(rows, id) { const out = new Set([id]); let grew = true; while (grew) { grew = false; for (const r of rows) if (!out.has(r.id) && out.has(r.head)) { out.add(r.id); grew = true; } } return out; }

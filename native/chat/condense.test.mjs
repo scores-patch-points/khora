@@ -23,3 +23,8 @@ test("an unbalanced bracket is not trusted, and nothing is dropped for it", T, (
   const t = "Tolstoy wrote War and Peace (1869 and Anna Karenina.";
   assert.equal(tell(t).text, t);
 });
+
+test("a straight quotation is told without spaces inside its marks", T, () => {
+  const t = tell("Resurrection, which is based on his \"youthful sins\", is often cited as a pinnacle of realist fiction.");
+  assert.ok(t.text.includes('"youthful sins"'), t.text);
+});
