@@ -28,6 +28,7 @@ import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
 import { LABEL, MARK_TEXT, marksOf, candidates, judge, takenAs } from "./acts.mjs";
 import { settled } from "./hunt-check.mjs";
+import { condense } from "./condense.mjs";
 import { detok } from "./personas.mjs";
 // the puzzle reader is another session's organ (pure; imports only the reasoner): without it the door is off and says so
 const puzzleOrgan = await import("../organs/puzzle-reader.js").catch(() => null);
@@ -346,7 +347,9 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         }
         const chunk = lastTopic.sentences.slice(lastTopic.next, lastTopic.next + 2); lastTopic.next += 2;
         if (!chunk.length) return done({ type: "request", handled: false, gap: "nothing_more", text: `That's all I've read about ${lastTopic.name}.`, cites: lastTopic.cites ?? [] });
-        const out = done({ type: "answer", handled: true, text: chunk.join(" "), evidence: chunk.map((x) => ({ order: null, text: x, given: "Wikipedia" })), cites: lastTopic.cites ?? [] });
+        // told in short, not in the page's own sentences: furniture (brackets, pronunciations) off, the subject under the name the person already uses; the sentence as the page wrote it stays under Reasoning
+        const told = chunk.map((x) => condense(parser.rowsOf(x) ?? [], { name: lastTopic.name, read: (t) => parser.rowsOf(t) ?? [] }).text);
+        const out = done({ type: "answer", handled: true, text: told.join(" "), evidence: chunk.map((x) => ({ order: null, text: x, given: "Wikipedia" })), cites: lastTopic.cites ?? [] });
         last = out; return out;
       };
       if (!nominal.length && !pronounObj) return goOn();

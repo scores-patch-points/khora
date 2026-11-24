@@ -392,3 +392,11 @@ test("“say more” goes on about what the chat was just telling: the article i
   for (const m of ["tell me more", "continue"]) { const r = await again.turn(m); assert.ok(r.handled || r.gap === "nothing_more", `${m} → ${r.gap}`); }
   const door = await again.turn("open the door"); assert.equal(door.gap, "act_not_possible");
 });
+
+test("“say more” tells the page in short, not in its own sentences: brackets off, the name the person uses; the page's sentence stays under Reasoning", T, async () => {
+  const mine = await make({ getJson: async (u) => (u.includes("exintro") ? { query: { pages: { 1: { title: "Leo Tolstoy", extract: "Count Lev Nikolayevich Tolstoy (Russian: Лев Николаевич Толстой; 1828–1910), usually referred to in English as Leo Tolstoy, was a Russian writer. He wrote War and Peace." } } } } : { query: { search: [{ title: "Leo Tolstoy" }] } }) });
+  await mine.turn("who is Tolstoy?");
+  const r = await mine.turn("say more");
+  assert.equal(r.text, "Leo Tolstoy was a Russian writer. He wrote War and Peace.");
+  assert.match(r.evidence[0].text, /\(Russian: Лев Николаевич Толстой; 1828–1910\), usually referred to/, "the page's sentence, verbatim, is what the reply rests on");
+});
