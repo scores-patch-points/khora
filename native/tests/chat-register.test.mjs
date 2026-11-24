@@ -79,6 +79,17 @@ test("recase: text that is capitalised keeps its lowercase words: the shelves ar
   assert.equal(recaseEnglish("I went to france on monday").text, "I went to France on Monday", "the pronoun I is not a capitalising habit");
   assert.equal(recaseEnglish("Pierre met Natasha, then pierre kissed natasha").text, "Pierre met Natasha, then pierre kissed Natasha", "the notebook is the text's own evidence and always applies");
 });
+test("recase: a lowercase word inside a noun phrase is its head, not a name (a peer: 'Captain Salt, a weathered pirate captain' lost its appositive)", () => {
+  const pos = { a: "DET", the: "DET", loves: "VERB", kissed: "VERB", dear: "ADJ", with: "ADP", and: "CCONJ", to: "ADP" };    // a stub of the POS prior: unknown words are null
+  const re = (t) => recaseEnglish(t, { posOf: (w) => pos[w] ?? null });
+  assert.equal(re("You are Captain Salt, a weathered pirate captain.").changes.length, 0, "the second captain stays a common noun: a determiner stands before it");
+  assert.equal(re("Captain Salt sailed. the old captain waved.").text, "Captain Salt sailed. the old captain waved.");
+  assert.equal(re("Mark met Natasha. later pierre kissed natasha").text, "Mark met Natasha. later pierre kissed Natasha", "behind a verb the notebook still applies");
+  assert.equal(re("Then Natasha came. dear natasha, to natasha, with natasha and natasha").text, "Then Natasha came. dear Natasha, to Natasha, with Natasha and Natasha", "an adjective, a preposition, a comma or a conjunction ends the phrase: a name may follow");
+  const r = re("Salt met Captain Salt, then kissed salt"), rows = [{ form: "Salt" }, { form: "met" }, { form: "Captain" }, { form: "Salt" }, { form: "then" }, { form: "kissed" }, { form: "Salt" }];
+  const marked = markRecased(rows, r.changes, r.candidates);
+  assert.deepEqual(marked.map((x) => x.recased?.by ?? null), [null, null, null, null, null, null, "notebook"], "the mark lands on the changed row, not on the first row that wears the same form");
+});
 test("recase: markRecased writes what was done on the rows, so a later read can overturn it", () => {
   const r = recaseEnglish("i went to france"), rows = [{ form: "I" }, { form: "went" }, { form: "to" }, { form: "France" }];
   const marked = markRecased(rows, r.changes, r.candidates);

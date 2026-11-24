@@ -17,11 +17,13 @@
 // A word in the treebank's function-word list is never a name. A sentence-initial word is recased only when a giver names it (the first word's casing is positional, not evidence),
 // so "lol" stays "lol". Without the treebank prior nothing is recased and the typed gap says why: no capital is ever guessed.
 //   recaseEnglish(text) -> { text, changes: [{ start, end, typed, cased, by }], gaps: [] }      (offsets are into the INPUT text; case changes never move a character)
+//   (a lowercase word inside a noun phrase, behind a determiner, is its head: the notebook never copies a capital onto it)
 //   markRecased(rows, changes) -> rows with row.recased = { typed, by } on the rows the changes produced
 // Status: EXPERIMENTAL (exploratory measurement only; see eval/chat-register/RESULTS-READER.md).
 import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 import { tokenize } from "./english-parser.js";
 import { priorJson } from "../../the-fold/prior-source.mjs";
+import { classifyWord } from "./wordclass.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 // a given name must be at least this many letters: a two-letter token in chat is a greeting or an abbreviation ("hi", "ty", "np", "ya"), and two-letter given names are rare; a declared dial, chosen on EWT dev and confirmed on EWT test (eval/chat-register/recase-check.mjs)
@@ -43,7 +45,10 @@ const commonCache = new WeakMap();
 const commonSet = (table) => { if (!commonCache.has(table)) commonCache.set(table, new Set([...(table.common ?? []), ...(table.closed ?? [])])); return commonCache.get(table); };
 const isLetter = (c) => c.toLowerCase() !== c.toUpperCase();
 
-export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), names = givenNames(), known = null, unattested = UNATTESTED_GIVEN_NAMES } = {}) {
+// the part of speech the English POS prior counted most for a word (null when it never met the word, or knows it only as an attested class with no count)
+let defaultPos; // undefined = not read yet; null = no POS prior
+const posFromPrior = (w) => { if (defaultPos === undefined) defaultPos = priorJson("pos-eng.json") ?? null; if (!defaultPos) return null; const c = classifyWord(w, { posPrior: defaultPos }); const top = c?.found ? c.candidates?.[0] : null; return top && top.count > 0 ? top.upos : null; };
+export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), names = givenNames(), known = null, unattested = UNATTESTED_GIVEN_NAMES, posOf = posFromPrior } = {}) {
   const T = String(text ?? ""), gaps = [], changes = [], candidates = [];
   if (!table) { gaps.push({ gap: "no_truecase_prior", detail: "native/priors-shipped/truecase-eng.json is absent: build it with native/scripts/build-truecase-eng.mjs; nothing was recased" }); return { text: T, changes, candidates, gaps }; }
   if (!names) gaps.push({ gap: "no_given_name_giver", detail: "identity/givers/wikidata-given-names-en.json is absent: only the treebank's own casing was applied" });
@@ -57,14 +62,20 @@ export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), na
   // and always applies.
   const habit = toks.some((t) => { const f = t.form, first = [...f][0]; return isLetter(first) && f !== f.toLowerCase() && f !== "I"; });
   for (const k of known ?? []) if ([...String(k)].some(isLetter) && k !== String(k).toLowerCase() && !ordinary.has(String(k).toLowerCase()) && !notebook.has(String(k).toLowerCase())) notebook.set(String(k).toLowerCase(), String(k));
-  for (const t of toks) {
-    const f = t.form; if (![...f].some(isLetter)) { if (f === "." || f === "?" || f === "!" || f === "…") lead = true; continue; }
+  // A NAME TYPED WITHOUT A CAPITAL IS NOT INSIDE A NOUN PHRASE: "You are Captain Salt, a weathered pirate captain." must not make the second captain a name (found by a peer: the persona lost its
+  // appositive). Walking back from the word over words that can be modifiers (an adjective, a noun, a numeral, a word the prior does not know), a DETERMINER before it means the word is a phrase's head
+  // ("a weathered pirate captain", "the old king"); a verb, a preposition, a conjunction, a pronoun, an interjection or any punctuation ends the phrase first ("loves natasha", "dear natasha", "to natasha").
+  const inNounPhrase = (i) => { for (let k = i - 1; k >= 0 && k >= i - 4; k--) { const g = toks[k].form; if (![...g].some(isLetter)) return false; const pos = posOf(g.toLowerCase()); if (pos === "DET") return true; if (pos && pos !== "ADJ" && pos !== "NOUN" && pos !== "NUM" && pos !== "PROPN") return false; } return false; };
+  for (let ti = 0; ti < toks.length; ti++) {
+    const t = toks[ti], f = t.form; if (![...f].some(isLetter)) { if (f === "." || f === "?" || f === "!" || f === "…") lead = true; continue; }
     const initial = lead; lead = false;
     if (f !== f.toLowerCase()) continue;                         // the writer cased it: respected
     const first = [...f][0]; if (!isLetter(first)) continue;     // a clitic ("n't") is no word
     if (f.length === 1 && f !== "i") continue;                  // a lone letter is an abbreviation, not a name
     let cased = null, by = null;
-    const heard = notebook.get(f), shelf = table.forms?.[f];
+    // the NOTEBOOK copies a capital from one occurrence of a word to another, so a capitalised common noun ("Captain Salt") would capitalise the same noun elsewhere; the shelves are counted from a treebank of
+    // names and need no such guard (measured: applying it to them cost 4-5 points of held-out recall for no false recase it prevented)
+    const heard = inNounPhrase(ti) ? undefined : notebook.get(f), shelf = table.forms?.[f];
     if (heard) { cased = heard; by = "notebook"; }
     else if (habit) continue;                                    // the writer capitalises: what is lowercase is lowercase on purpose
     else if (shelf) { cased = shelf[0]; by = "treebank-casing"; }
@@ -79,6 +90,8 @@ export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), na
     if (!cased || cased === f) continue;
     changes.push({ start: t.start, end: t.end, typed: f, cased, by, initial });
   }
+  // which occurrence of the cased form a change is, among the tokens as they stand after recasing (markRecased finds the row by it)
+  { const finalForm = new Map(changes.map((c) => [c.start, c.cased])); for (const c of changes) c.nth = toks.filter((u) => u.start < c.start && (finalForm.get(u.start) ?? u.form) === c.cased).length; }
   let out = T; for (const c of [...changes].reverse()) out = out.slice(0, c.start) + c.cased + out.slice(c.end);
   return { text: out, changes, candidates, gaps };
 }
@@ -88,7 +101,8 @@ export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), na
 export function markRecased(rows, changes, candidates = []) {
   if ((!changes?.length && !candidates?.length) || !Array.isArray(rows)) return rows;
   const out = rows.map((r) => ({ ...r })); let from = 0;
-  for (const c of changes ?? []) { const i = out.findIndex((r, j) => j >= from && r.form === c.cased); if (i >= 0) { out[i].recased = { typed: c.typed, by: c.by }; from = i + 1; } }
+  // the n-th row wearing the cased form is the changed one (an earlier row may wear the same form because the writer capitalised it: "Captain Salt, a pirate captain")
+  for (const c of changes ?? []) { let seen = 0; const i = out.findIndex((r) => r.form === c.cased && seen++ === (c.nth ?? 0)); if (i >= 0) out[i].recased = { typed: c.typed, by: c.by }; }
   from = 0; for (const c of candidates ?? []) { const i = out.findIndex((r, j) => j >= from && r.form === c.typed && !r.recased); if (i >= 0) { out[i].nameCandidate = { cased: c.cased, by: c.by, attested: false }; from = i + 1; } }
   return out;
 }
