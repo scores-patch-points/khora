@@ -1,0 +1,1746 @@
+{
+ "stamp": {
+  "when": "2026-11-24T05:47:43.946Z",
+  "split": "EXPLORATORY; gold = UD PUD test (the floor is read from it) and, held out from that, one other treebank per language (dev, else test); neither was counted into a prior",
+  "N": 40,
+  "floor": 11,
+  "vocabularyFloor": 0.5
+ },
+ "calibration": {
+  "n": 386,
+  "marginQ10": 11.149999999999864,
+  "vocabularyQ10": 0.5
+ },
+ "out": {
+  "PUD": {
+   "cmn": {
+    "short": {
+     "n": 39,
+     "gate": {
+      "right": 39,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "ces": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 21,
+      "unnamed": 19,
+      "wrong": 0,
+      "read": 21
+     },
+     "raw": {
+      "right": 27,
+      "unnamed": 10,
+      "wrong": 3
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 27,
+      "unnamed": 13,
+      "wrong": 0,
+      "read": 27
+     },
+     "raw": {
+      "right": 34,
+      "unnamed": 4,
+      "wrong": 2
+     },
+     "wrongs": []
+    }
+   },
+   "eng": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "fin": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 30,
+      "unnamed": 10,
+      "wrong": 0,
+      "read": 30
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 35,
+      "unnamed": 5,
+      "wrong": 0,
+      "read": 35
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "fra": {
+    "short": {
+     "n": 26,
+     "gate": {
+      "right": 19,
+      "unnamed": 6,
+      "wrong": 1,
+      "read": 19
+     },
+     "raw": {
+      "right": 23,
+      "unnamed": 3,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: La robe a un style contemporain."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "glg": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 18,
+      "unnamed": 22,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 22,
+      "unnamed": 18,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 30,
+      "unnamed": 9,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 2,
+      "wrong": 1
+     },
+     "wrongs": [
+      "spa: El cre que ninguén que nos espera nos está esperan"
+     ]
+    }
+   },
+   "deu": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0,
+      "read": 36
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "hin": {
+    "short": {
+     "n": 30,
+     "gate": {
+      "right": 26,
+      "unnamed": 3,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 26,
+      "unnamed": 3,
+      "wrong": 1
+     },
+     "wrongs": [
+      "mar: शायद ड्रेस कोड बहुत उबाऊ था।"
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "ind": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0,
+      "read": 36
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "ita": {
+    "short": {
+     "n": 37,
+     "gate": {
+      "right": 26,
+      "unnamed": 10,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 32,
+      "unnamed": 5,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: John di Gaunt morì nel 1399."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "pol": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 34,
+      "unnamed": 6,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "por": {
+    "short": {
+     "n": 35,
+     "gate": {
+      "right": 21,
+      "unnamed": 13,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 25,
+      "unnamed": 10,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: John de Gaunt morreu em 1399."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 36,
+      "unnamed": 3,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 2,
+      "wrong": 2
+     },
+     "wrongs": [
+      "glg: A taxa fixa da Eon custa £760 e os clientes da Avr"
+     ]
+    }
+   },
+   "rus": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 38,
+      "unnamed": 1,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 1,
+      "wrong": 1
+     },
+     "wrongs": [
+      "bul: Объяснение происхождения музыки зависит от определ"
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "spa": {
+    "short": {
+     "n": 36,
+     "gate": {
+      "right": 20,
+      "unnamed": 16,
+      "wrong": 0,
+      "read": 20
+     },
+     "raw": {
+      "right": 27,
+      "unnamed": 8,
+      "wrong": 1
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "swe": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 31,
+      "unnamed": 9,
+      "wrong": 0,
+      "read": 31
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 35,
+      "unnamed": 5,
+      "wrong": 0,
+      "read": 35
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "tur": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 23,
+      "unnamed": 17,
+      "wrong": 0,
+      "read": 23
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 33,
+      "unnamed": 7,
+      "wrong": 0,
+      "read": 33
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   }
+  },
+  "VAL": {
+   "afr": {
+    "short": {
+     "n": 4,
+     "gate": {
+      "right": 3,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 3
+     },
+     "raw": {
+      "right": 3,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "eus": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 35,
+      "unnamed": 5,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "cat": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 22,
+      "unnamed": 16,
+      "wrong": 2,
+      "read": 22
+     },
+     "raw": {
+      "right": 28,
+      "unnamed": 11,
+      "wrong": 1
+     },
+     "wrongs": [
+      "eng: La fruita de la tardor.",
+      "eng: No hi ha una consigna a seguir."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "cmn": {
+    "short": {
+     "n": 5,
+     "gate": {
+      "right": 5,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 5
+     },
+     "raw": {
+      "right": 5,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "hrv": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 2,
+      "unnamed": 38,
+      "wrong": 0,
+      "read": 2
+     },
+     "raw": {
+      "right": 10,
+      "unnamed": 26,
+      "wrong": 4
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 9,
+      "unnamed": 28,
+      "wrong": 3,
+      "read": 9
+     },
+     "raw": {
+      "right": 21,
+      "unnamed": 12,
+      "wrong": 7
+     },
+     "wrongs": [
+      "srp: Udruženje Pro Democratia (APD), vodeća rumunjska n",
+      "srp: Događanje će uključivati prikazivanje 55 igranih, ",
+      "srp: \"Međunarodni sukobi ne mogu se riješiti silom, nas"
+     ]
+    }
+   },
+   "ces": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 19,
+      "unnamed": 21,
+      "wrong": 0,
+      "read": 19
+     },
+     "raw": {
+      "right": 27,
+      "unnamed": 13,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 34,
+      "unnamed": 6,
+      "wrong": 0,
+      "read": 34
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "dan": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 17,
+      "unnamed": 23,
+      "wrong": 0,
+      "read": 17
+     },
+     "raw": {
+      "right": 25,
+      "unnamed": 15,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 32,
+      "unnamed": 7,
+      "wrong": 1,
+      "read": 32
+     },
+     "raw": {
+      "right": 34,
+      "unnamed": 6,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: Her formanden for Mellemfolkeligt Samvirke, Knud V"
+     ]
+    }
+   },
+   "nld": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 20,
+      "unnamed": 19,
+      "wrong": 1,
+      "read": 20
+     },
+     "raw": {
+      "right": 23,
+      "unnamed": 13,
+      "wrong": 4
+     },
+     "wrongs": [
+      "afr: Lid uitgebreid bureau Vlaams Parlement (1992-...)"
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 35,
+      "unnamed": 5,
+      "wrong": 0,
+      "read": 35
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "eng": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0,
+      "read": 37
+     },
+     "raw": {
+      "right": 31,
+      "unnamed": 9,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0,
+      "read": 37
+     },
+     "raw": {
+      "right": 33,
+      "unnamed": 7,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "est": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 30,
+      "unnamed": 10,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 35,
+      "unnamed": 5,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "fin": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0,
+      "read": 38
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0,
+      "read": 38
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "fra": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 0,
+      "unnamed": 40,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 4,
+      "unnamed": 36,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 0,
+      "unnamed": 38,
+      "wrong": 2,
+      "read": 0
+     },
+     "raw": {
+      "right": 5,
+      "unnamed": 35,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: Agents _",
+      "eng: De _ __ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __"
+     ]
+    }
+   },
+   "glg": {
+    "short": {
+     "n": 1,
+     "gate": {
+      "right": 0,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 0,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "deu": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0,
+      "read": 36
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 40
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "hin": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "hun": {
+    "short": {
+     "n": 14,
+     "gate": {
+      "right": 11,
+      "unnamed": 3,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 13,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 23,
+      "unnamed": 17,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "ind": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 31,
+      "unnamed": 9,
+      "wrong": 0,
+      "read": 31
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "gle": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 35,
+      "unnamed": 5,
+      "wrong": 0,
+      "read": 35
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "ita": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 24,
+      "unnamed": 15,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 31,
+      "unnamed": 8,
+      "wrong": 1
+     },
+     "wrongs": [
+      "eng: Quanto ha pagato l'IBM per Lotus?"
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 36,
+      "unnamed": 3,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: Quanto ha pagato l'IBM per Lotus?"
+     ]
+    }
+   },
+   "lat": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 31,
+      "unnamed": 7,
+      "wrong": 2,
+      "read": 0
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 1,
+      "wrong": 2
+     },
+     "wrongs": [
+      "fra: et est talis.",
+      "fra: et est talis."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "lav": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 29,
+      "unnamed": 11,
+      "wrong": 0,
+      "read": 29
+     },
+     "raw": {
+      "right": 30,
+      "unnamed": 10,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "lit": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 26,
+      "unnamed": 14,
+      "wrong": 0,
+      "read": 26
+     },
+     "raw": {
+      "right": 32,
+      "unnamed": 8,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 32,
+      "unnamed": 8,
+      "wrong": 0,
+      "read": 32
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "mlt": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 21,
+      "unnamed": 18,
+      "wrong": 1,
+      "read": 21
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: Wasalna sat-tieni post ma' Chiara."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 26,
+      "unnamed": 13,
+      "wrong": 1,
+      "read": 26
+     },
+     "raw": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: Wasalna sat-tieni post ma' Chiara."
+     ]
+    }
+   },
+   "nob": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 11,
+      "unnamed": 28,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 17,
+      "unnamed": 22,
+      "wrong": 1
+     },
+     "wrongs": [
+      "eng: - Stein for stein"
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 21,
+      "unnamed": 18,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 27,
+      "unnamed": 11,
+      "wrong": 2
+     },
+     "wrongs": [
+      "eng: - Stein for stein"
+     ]
+    }
+   },
+   "pol": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 34,
+      "unnamed": 6,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "por": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 20,
+      "unnamed": 19,
+      "wrong": 1,
+      "read": 0
+     },
+     "raw": {
+      "right": 25,
+      "unnamed": 15,
+      "wrong": 0
+     },
+     "wrongs": [
+      "eng: Com TV ou sem TV ."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 34,
+      "unnamed": 6,
+      "wrong": 0,
+      "read": 0
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "ron": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 18,
+      "unnamed": 22,
+      "wrong": 0,
+      "read": 18
+     },
+     "raw": {
+      "right": 33,
+      "unnamed": 7,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 32,
+      "unnamed": 8,
+      "wrong": 0,
+      "read": 32
+     },
+     "raw": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "rus": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 24,
+      "unnamed": 11,
+      "wrong": 5,
+      "read": 0
+     },
+     "raw": {
+      "right": 24,
+      "unnamed": 11,
+      "wrong": 5
+     },
+     "wrongs": [
+      "bul: Да, наконец-то увидим солнце 🌤",
+      "bul: Светка смотрела на меня сияющими глазами.",
+      "ukr: я один я терплю я спокойно сон куплю",
+      "bul: Далат: крейзи Хаус не страшно."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 27,
+      "unnamed": 10,
+      "wrong": 3,
+      "read": 0
+     },
+     "raw": {
+      "right": 27,
+      "unnamed": 11,
+      "wrong": 2
+     },
+     "wrongs": [
+      "bul: Да, наконец-то увидим солнце 🌤",
+      "eng: Cool!...",
+      "bul: Светка смотрела на меня сияющими глазами."
+     ]
+    }
+   },
+   "slk": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 15,
+      "unnamed": 25,
+      "wrong": 0,
+      "read": 15
+     },
+     "raw": {
+      "right": 27,
+      "unnamed": 13,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 20,
+      "unnamed": 20,
+      "wrong": 0,
+      "read": 20
+     },
+     "raw": {
+      "right": 32,
+      "unnamed": 8,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "slv": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 20,
+      "unnamed": 20,
+      "wrong": 0,
+      "read": 20
+     },
+     "raw": {
+      "right": 30,
+      "unnamed": 9,
+      "wrong": 1
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 34,
+      "unnamed": 6,
+      "wrong": 0,
+      "read": 34
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 2,
+      "wrong": 1
+     },
+     "wrongs": []
+    }
+   },
+   "swe": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 19,
+      "unnamed": 20,
+      "wrong": 1,
+      "read": 19
+     },
+     "raw": {
+      "right": 28,
+      "unnamed": 11,
+      "wrong": 1
+     },
+     "wrongs": [
+      "eng: Han älskade New York."
+     ]
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 36,
+      "unnamed": 4,
+      "wrong": 0,
+      "read": 36
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "tur": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 24,
+      "unnamed": 16,
+      "wrong": 0,
+      "read": 24
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 31,
+      "unnamed": 9,
+      "wrong": 0,
+      "read": 31
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "vie": {
+    "short": {
+     "n": 3,
+     "gate": {
+      "right": 3,
+      "unnamed": 0,
+      "wrong": 0,
+      "read": 3
+     },
+     "raw": {
+      "right": 3,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "cym": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 31,
+      "unnamed": 9,
+      "wrong": 0,
+      "read": 31
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 39,
+      "unnamed": 1,
+      "wrong": 0,
+      "read": 39
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   },
+   "wol": {
+    "short": {
+     "n": 40,
+     "gate": {
+      "right": 35,
+      "unnamed": 5,
+      "wrong": 0,
+      "read": 35
+     },
+     "raw": {
+      "right": 37,
+      "unnamed": 3,
+      "wrong": 0
+     },
+     "wrongs": []
+    },
+    "any": {
+     "n": 40,
+     "gate": {
+      "right": 38,
+      "unnamed": 2,
+      "wrong": 0,
+      "read": 38
+     },
+     "raw": {
+      "right": 40,
+      "unnamed": 0,
+      "wrong": 0
+     },
+     "wrongs": []
+    }
+   }
+  }
+ },
+ "totals": {
+  "PUD short": {
+   "n": 603,
+   "right": 458,
+   "raw_right": 528,
+   "unnamed": 140,
+   "raw_unnamed": 69,
+   "wrong": 5,
+   "raw_wrong": 6
+  },
+  "PUD any": {
+   "n": 640,
+   "right": 594,
+   "raw_right": 625,
+   "unnamed": 44,
+   "raw_unnamed": 10,
+   "wrong": 2,
+   "raw_wrong": 5
+  },
+  "VAL short": {
+   "n": 1227,
+   "right": 765,
+   "raw_right": 939,
+   "unnamed": 447,
+   "raw_unnamed": 268,
+   "wrong": 15,
+   "raw_wrong": 20
+  },
+  "VAL any": {
+   "n": 1400,
+   "right": 1158,
+   "raw_right": 1268,
+   "unnamed": 230,
+   "raw_unnamed": 120,
+   "wrong": 12,
+   "raw_wrong": 12
+  }
+ }
+}

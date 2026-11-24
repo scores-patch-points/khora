@@ -86,10 +86,14 @@ export async function rowsOfFor(stem) {
       }).join("");
     } catch (e) { /* model-missing or marker-missing: slice is a no-op */ }
   }
-  if (stem === "eng") { const GE = await import("./adapters/text/grammar-en.js");
-    p = { rowsOf: (t) => GE.rowsOf(cleanText(sliceSentence(t)).text), by: GE.READER ?? "grammar-en", claimsOf: (t, rows) => GE.claimsOf(t, rows) }; }
+  if (stem === "eng") { const GE = await import("./adapters/text/grammar-en.js"), { recaseEnglish, markRecased } = await import("./adapters/text/recase.mjs");
+    // MECHANIC 3 (names without capitals): the capitals a message was typed without are restored from two givers with provenance BEFORE the parse (recase.mjs): the treebank's own
+    // casing and the Wikidata given names. A prior, never a verdict: a word the writer cased is left alone, and each row it changed says what was typed and which giver (row.recased).
+    p = { rowsOf: (t, o = {}) => { const c = recaseEnglish(cleanText(sliceSentence(t)).text, { known: o.known ?? null }); return markRecased(GE.rowsOf(c.text), c.changes, c.candidates); }, by: GE.READER ?? "grammar-en", claimsOf: (t, rows) => GE.claimsOf(t, rows) }; }
   // the language's codec, committed or vendored on this machine (grammar-ud.js reads both); a pointed-at codec not yet vendored names its source
-  else { const code = iso1Of(stem) ?? stem, { loadGrammar, codecStatus } = await import("./adapters/text/grammar-ud.js"), g = await loadGrammar(code, {}); p = g ? { rowsOf: (t) => g.rowsOf(cleanText(sliceSentence(t)).text), by: `grammar-ud:${code}`, claimsOf: (t, rows) => g.claimsOf(t, rows) } : { gap: codecStatus(stem).why ?? `no UD parser is filed for ${stem}` }; }  } catch (e) { p = { gap: `parser for ${stem} did not load: ${String(e?.message ?? e).slice(0, 80)}` }; }
+  // the codec is looked for in the SAME priors home every other prior comes from (prior-source.mjs: KHORA_PRIORS_DIR, janus, ...), not in grammar-ud's own default (native/priors, a link that dangles or points at a stand-in):
+  // otherwise a language janus holds a codec for was reported as "no codec filed", a false typed gap
+  else { const code = iso1Of(stem) ?? stem, { loadGrammar, codecStatus } = await import("./adapters/text/grammar-ud.js"), home = (await import("./the-fold/prior-source.mjs")).priorsHome().dir, opts = home ? { priors: home } : {}, g = await loadGrammar(code, opts); p = g ? { rowsOf: (t) => g.rowsOf(cleanText(sliceSentence(t)).text), by: `grammar-ud:${code}`, claimsOf: (t, rows) => g.claimsOf(t, rows) } : { gap: codecStatus(stem, opts).why ?? `no UD parser is filed for ${stem}` }; }  } catch (e) { p = { gap: `parser for ${stem} did not load: ${String(e?.message ?? e).slice(0, 80)}` }; }
   // a held parser is kept for the process; a gap is not, so a codec vendored after the first ask is read by the next one
   // Wire the Pāṇinian relations into the parse rows, read over the WHOLE sentence (karaka-total.mjs): every row gets
   // `panini` (one label of a closed set, never null), `karaka` (one of the nine, or null for a non-kāraka relation or an
@@ -97,14 +101,35 @@ export async function rowsOfFor(stem) {
   // (Was: two copies of a row-local karakaOf wrapper that looked up only the base relation; see karaka-map.mjs.)
   if (p.rowsOf && !p.gap) {
     const origRowsOf = p.rowsOf;
-    p.rowsOf = (t) => {
-      const rows = origRowsOf(t);
+    p.rowsOf = (t, o) => {
+      const rows = origRowsOf(t, o);
       if (!Array.isArray(rows)) return rows;
       return karakaRows(rows, { stem }).map((row) => { const ex = sniffByExemplar(row.form); const near = nearestCellByString(row.form); const phasepost = ex ? ex.cell : (near && near.similarity > 0.8 ? near.cell : null); return { ...row, phasepost }; });
     };
   }
   if (!p.gap) parsers.set(stem, p);
   return p;
+}
+
+/** READ ONE MESSAGE (mechanic 5): which language is it, then its rows; when no codec can read it, a typed gap and no rows. NEVER English by default (nexus rule 8).
+ *  The man in the box asks what language a line is before he reads it (adapters/text/language-gate.mjs: the language identifier, then how much of it is English the reader knows).
+ *    readerFor(text, { thread, known }) -> { rows, language, evidence, parseBy?, gap: null | { gap: "no_codec" | "no_language", language: <stem>|null, evidence: "script" | "detector", detail, candidate? } }
+ *  gap "no_codec": the language is known and no codec reads it (language says which); gap "no_language": the message's language could not be established (language is null; evidence says whether
+ *  it is a script no prior holds or the identifier did not decide). `candidate` is the identifier's weak guess when it did not stand ("it might be Welsh"): for the words of the reply, never an assertion.
+ *  per message, never per thread (a thread can code-switch). `thread` is the thread's language, used only when the message has nothing in it to read; `known` is the names the thread was
+ *  told (the notebook), handed to the English recaser. rowsOf(text) from rowsOfFor("eng") is unchanged, for callers that have already decided the language. */
+export async function readerFor(text, { thread = null, known = null } = {}) {
+  const { classifyWord } = await import("./adapters/text/wordclass.js"), { identifyLanguage } = await import("./the-fold/langid.mjs");
+  const { languageOf } = await import("./adapters/text/language-gate.mjs"), { givenNames } = await import("./adapters/text/recase.mjs");
+  const pr = priorsFor("eng"), names = givenNames();
+  const countOf = (w) => { const c = classifyWord(w, { posPrior: pr.posPrior }); return c?.found ? c.total : 0; };
+  const lexicons = new Map(), knownIn = (w, stem) => { if (!lexicons.has(stem)) { let p = null; try { p = priorsFor(stem)?.posPrior ?? null; } catch { /* no prior for that stem: null says so */ } lexicons.set(stem, p); } const p = lexicons.get(stem); if (!p) return null; const c = classifyWord(w, { posPrior: p }); return c?.found ? c.total : 0; };
+  const lang = languageOf(text, { thread, countOf, knownIn, isName: (w) => !!names?.has(w), identify: (t, o) => identifyLanguage(t, o) });
+  const gapEvidence = lang.evidence === "script" ? "script" : "detector";
+  if (!lang.language) return { rows: [], language: null, evidence: lang.evidence, gap: { gap: "no_language", language: null, evidence: gapEvidence, detail: lang.detail, ...(lang.candidate ? { candidate: lang.candidate } : {}) } };
+  const p = await rowsOfFor(lang.language);
+  if (p.gap) return { rows: [], language: lang.language, evidence: lang.evidence, gap: { gap: "no_codec", language: lang.language, evidence: gapEvidence, detail: p.gap } };
+  return { rows: p.rowsOf(text, { known }) ?? [], language: lang.language, evidence: lang.evidence, parseBy: p.by, gap: null };
 }
 
 /** THE MASTER PIPELINE under Node: read-core.mjs::readDocument asking the hyperlexicon through its door (lexicon: "hyperlexicon", the

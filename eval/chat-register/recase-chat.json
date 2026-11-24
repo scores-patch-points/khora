@@ -1,0 +1,66 @@
+{
+ "stamp": {
+  "when": "2026-11-24T04:37:24.849Z",
+  "split": "EXPLORATORY, held out from the table and the giver",
+  "perSource": 4000
+ },
+ "report": {
+  "sms": {
+   "messages": 3305,
+   "writerCapitalised": {
+    "messages": 518,
+    "words": 1776,
+    "recall": 0.052,
+    "precision": 0.317
+   },
+   "lowercase": {
+    "messages": 2787,
+    "words": 22082,
+    "recasedPer1000": 14.1,
+    "bySource": {
+     "treebank-casing": 253,
+     "given-name": 59
+    },
+    "mostRecased": "hai 40, nw 29, hu 27, cal 25, wen 15, la 8, din 8, don 8, al 7, ami 6, boston 6, bta 6, thi 6, sir 5, ny 5, nyc 5, jana 5, anna 5, yo 5, god 4, andrew 4, ana 4, wednesday 3, eve 3, tor 3"
+   }
+  },
+  "cosem": {
+   "messages": 4000,
+   "writerCapitalised": {
+    "messages": 159,
+    "words": 183,
+    "recall": 0.219,
+    "precision": 0.784
+   },
+   "lowercase": {
+    "messages": 3841,
+    "words": 14019,
+    "recasedPer1000": 4,
+    "bySource": {
+     "treebank-casing": 49,
+     "given-name": 7
+    },
+    "mostRecased": "la 17, fri 4, bc 2, st 2, kay 2, phoenix 2, dong 2, google 2, july 1, friday 1, zero 1, sec 1, james 1, patterson 1, cone 1, yo 1, bin 1, san 1, dec 1, yang 1, valentine 1, din 1, fridays 1, india 1, ono 1"
+   }
+  },
+  "irc": {
+   "messages": 4000,
+   "writerCapitalised": {
+    "messages": 661,
+    "words": 1046,
+    "recall": 0.019,
+    "precision": 0.339
+   },
+   "lowercase": {
+    "messages": 3339,
+    "words": 29519,
+    "recasedPer1000": 3.4,
+    "bySource": {
+     "treebank-casing": 77,
+     "given-name": 22
+    },
+    "mostRecased": "google 10, deb 8, sec 6, lan 5, ram 4, janice 4, iso 4, youtube 4, daniels 3, devil 3, proxy 3, god 3, don 3, james 2, zero 2, sam 2, bout 2, apple 2, dell 2, australia 1, pat 1, un 1, bbc 1, omar 1, callum 1"
+   }
+  }
+ }
+}

@@ -211,7 +211,7 @@
   }
  },
  "files": {
-  "native/reading.js": "5d33e9054ce69bcfa75e1006de5b99c2f74c329261685f3ff4a316753b638824",
+  "native/reading.js": "78c6b9bc50551a5edb46e218a79b25ca0471963b9239fa78c4803a378fe6e0cf",
   "native/the-fold/pharos-gate.mjs": "943dcbfa18d2a8207402b02e89fa29bd4b7be10ddf638fbdf07180eb45c69136",
   "holon.json": "298357fb1047105d96c6fde9dbe51c81a1d69cb92e04731431479246a1d8032f",
   "native/tests/door-allowlist.json": "6bd9ece610624f428e1485082f276aa56034c7cbab2b4f361f4a4d9a4baabfec",
@@ -239,7 +239,10 @@
   "native/reading-in-order.mjs": "24e14dd0a8e4f2bbd87e406101a1a893e9466fa08fabc133615e03b1355c5b11",
   "native/reading-in-order.worker.mjs": "677b222d7fa847d77eeb9c910033115725ff627b49db2eefb85b96ea0ce8fb21",
   "native/adapters/text/referents-in-order.mjs": "6c02259f81968237089a7a26b9f1e307206ebc98fbe17fb06708907ba030c217",
-  "native/adapters/text/gender-from-corpus.js": "bf500d233236e19b8c0dea838c620b438dafec2b2aa7b9e176842e21b49d1c0f"
+  "native/adapters/text/gender-from-corpus.js": "bf500d233236e19b8c0dea838c620b438dafec2b2aa7b9e176842e21b49d1c0f",
+  "native/adapters/text/recase.mjs": "b50c0bdd26d414fd0dd418988bcd223971b2ab88917f3d51fd4d5b2c68a4c59c",
+  "native/adapters/text/language-gate.mjs": "c2228e6582d39e5676576c004a91029d855bc5283435e67039ff68d94d863500",
+  "native/priors-shipped/truecase-eng.json": "5c5ded4aaeae23222924a222cdda510233f547b17e9fb86db6fddf49ccfd4b7e"
  },
- "recorded": "2026-11-23"
+ "recorded": "2026-11-24"
 }
