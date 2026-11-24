@@ -74,3 +74,11 @@ test("a question that rests on the final question mark alone is fragile, and say
   const aux = verdict([row(1, "does", "AUX"), row(2, "Mina", "PROPN", { deprel: "nsubj", head: 3 }), row(3, "sleep", "VERB"), Q]);
   assert.equal(!!aux.fragile, false);
 });
+
+test("a known greeting or thanks outranks a lone question mark; a question word or an auxiliary before the subject does not give way", () => {
+  const thanks = verdict([row(1, "thank", "VERB"), row(2, "you", "PRON"), row(3, "?", "PUNCT"), row(4, "?", "PUNCT")], { small: true });
+  assert.equal(thanks.working, "social"); assert.equal(thanks.open, false);
+  assert.equal(thanks.claims.find((c) => c.act === "question").standing, "refuted");
+  const how = verdict([row(1, "how", "ADV"), row(2, "are", "AUX"), row(3, "you", "PRON", { deprel: "nsubj", head: 2 }), Q], { small: true, wh: true });
+  assert.equal(how.working, "question", "“how are you?” keeps its question word");
+});

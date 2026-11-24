@@ -75,7 +75,10 @@ export function candidates(marks) {
   const out = [];
   for (const [act, r] of Object.entries(RULES)) {
     const f = r.for.filter((k) => marks[k]); if (!f.length) continue;
-    out.push({ act, for: f, against: r.against.filter((k) => marks[k]) });
+    const against = r.against.filter((k) => marks[k]);
+    // a known greeting or thanks outranks a lone question mark ("Thank you ????" is thanks, not a question about thanks): the mark opposes the question only when nothing else backs it
+    if (act === "question" && marks.small_talk && f.length === 1 && f[0] === "final_question_mark") against.push("small_talk");
+    out.push({ act, for: f, against });
   }
   return out;
 }
