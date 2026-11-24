@@ -109,9 +109,9 @@ test("a person whose gender is not settled is told with “they” (plural verb)
 });
 // the near-verb stand-in (organs/verb-equivalents.js), with fixed directions standing in for the embedder (a codec stands in for a codec)
 const D = 24, dir = (i, ...o) => { const v = new Array(D).fill(0); v[i] = 1; o.forEach(([j, x]) => { v[j] = x; }); return v; };
-const VEC = { make: dir(0, [10, 0.1]), create: dir(0, [10, 0.2]), build: dir(0, [11, 0.3]), give: dir(1, [0, 0.4]) };
+const VEC = { make: dir(0, [10, 0.1]), create: dir(0, [10, 0.2]), build: dir(0, [11, 0.3]), give: dir(1, [0, 0.4]) }, NEAR_MISS = { ...VEC, build: dir(0, [11, 2.0]) };   // build at 0.44 against a bar of 0.51: a near miss
 const rnd = (key) => { let a = 0; for (const c of key) a = (a * 31 + c.charCodeAt(0)) >>> 0; return Array.from({ length: D }, () => { a = (a * 1664525 + 1013904223) >>> 0; return a / 4294967296 - 0.5; }); };
-const verbEmbed = async (ts) => ts.map((t) => VEC[t.replace(/^to /, "")] ?? rnd(t));
+const embedOf = (table) => async (ts) => ts.map((t) => table[t.replace(/^to /, "")] ?? rnd(t)), verbEmbed = embedOf(VEC);
 const mkThread = async (extra = {}) => { const { makeThread } = await import("./thread.mjs"); return makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00"), ...extra }); };
 test("a near verb stands in when the exact verb finds nothing and the near verbs agree: “Who made Claude?” against “created”, and the reply says what it read", T, async () => {
   const th = await mkThread({ verbEmbed }); await th.turn("Claude was created by Anthropic.");
@@ -144,4 +144,10 @@ test("“they” is for what the whole thread does not settle: a name or title t
   }
   const paris = await profile("Paris"); assert.equal(paris.pronoun, null); assert.doesNotMatch(paris.summary, /They |He |She /);
   const mina = await profile("Mina"); assert.equal(mina.pronoun.nom, "she"); assert.equal(mina.pronoun.decided !== false, true);
+});
+test("a verb a little below the bar never votes, but an answer under it that differs is said beside the answer", T, async () => {
+  const th = await mkThread({ verbEmbed: embedOf(NEAR_MISS) }); await th.turn("Claude was created by Anthropic. Claude was built by Acme.");
+  const r = await th.turn("Who made Claude?");
+  assert.equal(r.handled, true); assert.match(r.text, /^By Anthropic\./); assert.match(r.text, /I read “make” as “create”/); assert.match(r.text, /I also hold “build”: by Acme\./);
+  const s = r.trace.find((t) => t.step === "verb_stand_in"); assert.equal(s.verdict, "same"); assert.deepEqual(s.near.map((x) => [x.verb, !!x.near_miss]), [["create", false], ["build", true]]); assert.equal(s.also[0].verb, "build");
 });

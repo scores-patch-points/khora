@@ -184,7 +184,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // two notes that say different things under near words says so instead of choosing. The test is the owner's DMD (a difference that makes a difference): the question is asked of the notes under
   // EVERY near verb; if the answers are one and the same, the choice of verb does not matter to the asker and it stands; if they differ, none is picked. The question's own verb is always tried first
   // (this runs only when it found nothing). The near verbs come from a frozen embedder (a codec, never a model that answers); absent, there is no substitution and the trace says why.
-  // NOT DONE: verbs a little below the bar that still fill the same role ("built" at 0.85 against a bar of 0.86) are not offered as a second answer; that needs the organ to expose the near misses.
+  // NEAR MISSES: a verb a little below the bar ("built" at 0.85 against a bar of 0.86) is never a candidate and never votes, but when the answer under it differs, the chat says it beside the answer (the organ's `band`, standsIn's alsoSays).
   let verbEqP = null;
   const verbEq = () => (verbEqP ??= (async () => {
     if (!verbOrgan) return { gap: "the verb-equivalents organ (native/organs/verb-equivalents.js) is not in this checkout" };
@@ -195,13 +195,13 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   async function standInFor(q, qv, qNeg) {
     const veq = await verbEq(); if (veq.gap) return { step: { step: "verb_stand_in", ran: false, gap: veq.gap } };
     const pool = [...(engine.S.verbs ?? [])].filter((v) => v && v !== qv);
-    let eq; try { eq = await veq.E.equivalents(qv, pool); } catch (e) { return { step: { step: "verb_stand_in", ran: false, gap: `the embedder could not be reached (${String(e?.message ?? e).slice(0, 80)}): no verb was substituted` } }; } finally { sharedEmbedder?.save?.(); }
-    const near = eq.map((x) => ({ verb: x.verb, similarity: x.similarity }));
-    if (!eq.length) return { step: { step: "verb_stand_in", ran: true, asked: qv, near, verdict: "none", note: "no verb the thread uses says the same thing as it" } };
+    let eq; try { eq = await veq.E.equivalents(qv, pool, { band: verbOrgan.DIALS?.nearMissSigma?.value ?? 0 }); } catch (e) { return { step: { step: "verb_stand_in", ran: false, gap: `the embedder could not be reached (${String(e?.message ?? e).slice(0, 80)}): no verb was substituted` } }; } finally { sharedEmbedder?.save?.(); }
+    const near = eq.map((x) => ({ verb: x.verb, similarity: x.similarity, ...(x.near_miss ? { near_miss: true } : {}) }));
+    if (!eq.some((x) => !x.near_miss)) return { step: { step: "verb_stand_in", ran: true, asked: qv, near, verdict: "none", note: "no verb the thread uses says the same thing as it" } };
     const heard = new Map();
     const answerFor = async (v) => { const r = await engine.answer(q, { polarity: true, neg: qNeg, skip: withdrawn, verb: v }); const top = r.answers?.[0]; if (!top || top.pronounOnly) return null; heard.set(v, r); return top.confirms ? ["yes"] : top.answer.map((x) => x.text); };
     const g = await verbOrgan.standsIn(eq, answerFor);
-    return { g, heard, step: { step: "verb_stand_in", ran: true, asked: qv, near, verdict: g.verdict, ...(g.chosen ? { read_as: g.chosen.verb, similarity: g.chosen.similarity, agreed: g.agreeing } : {}), ...(g.verdict === "other" ? { answers: g.answers.map((x) => ({ verb: x.verb, answer: x.answer })) } : {}) } };
+    return { g, heard, step: { step: "verb_stand_in", ran: true, asked: qv, near, verdict: g.verdict, ...(g.chosen ? { read_as: g.chosen.verb, similarity: g.chosen.similarity, agreed: g.agreeing, ...(g.alsoSays?.length ? { also: g.alsoSays } : {}) } : {}), ...(g.verdict === "other" ? { answers: g.answers.map((x) => ({ verb: x.verb, answer: x.answer })) } : {}) } };
   }
   let msgN = 0;
   let pending = null;                   // { gap, args, question }: the last question no door has filled yet
@@ -539,7 +539,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     let verbNote = null;
     if (!a.answers?.length && !qNeg && a.read?.kriya && !a.read.copular && a.gaps?.some((g) => g.gap === "action_not_in_text" || g.gap === "the_text_does_not_say")) {
       const sv = await standInFor(q, a.read.kriya, qNeg); trace.push(sv.step);
-      if (sv.g?.verdict === "same") { a = sv.heard.get(sv.g.chosen.verb); verbNote = { asked: sv.step.asked, read: sv.g.chosen.verb, similarity: sv.g.chosen.similarity }; }
+      if (sv.g?.verdict === "same") { a = sv.heard.get(sv.g.chosen.verb); verbNote = { asked: sv.step.asked, read: sv.g.chosen.verb, similarity: sv.g.chosen.similarity, also: sv.g.alsoSays ?? [] }; }
       else if (sv.g?.verdict === "other") {
         const said = sv.g.answers.map((x) => `“${x.verb}”: ${x.answer.join(" and ")}`).join("; ");
         return done({ type: "relational", handled: false, gap: "near_verbs_differ", text: `What I hold says different things under verbs close to “${sv.step.asked}” (${said}), so I won't pick one for you.`, evidence: sv.g.answers.flatMap((x) => (sv.heard.get(x.verb)?.answers ?? []).slice(0, 1).map((y) => ({ order: parse.find((p) => p.text === y.sentence)?.order ?? null, text: y.sentence }))) });
@@ -604,7 +604,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       const fillers = top.answer.filter((x, i, all) => !all.some((y, j) => j !== i && y.label === x.label && y.text.length > x.text.length && y.text.includes(x.text)));   // "rum and treasure" and its own part "and treasure" are one answer
       const phraseOf = fillers.map(sayFiller).join(" and ");
       const ev = a.answers.slice(0, 3).map((x) => { const pp = parse.find((y) => y.text === x.sentence); return { order: pp?.order ?? null, text: x.sentence, ...(pp && givenAt.has(pp.order) ? { given: givenAt.get(pp.order) } : {}) }; });
-      const out = done({ type: "answer", handled: true, text: `${cap(phraseOf)}.${verbNote ? ` I read “${verbNote.asked}” as “${verbNote.read}”, which is what I hold.` : ""}`, evidence: ev, answers: a.answers.slice(0, 3).map((x) => x.answer) });
+      const out = done({ type: "answer", handled: true, text: `${cap(phraseOf)}.${verbNote ? ` I read “${verbNote.asked}” as “${verbNote.read}”, which is what I hold.${(verbNote.also ?? []).map((x) => ` I also hold “${x.verb}”: ${x.answer.join(" and ")}.`).join("")}` : ""}`, evidence: ev, answers: a.answers.slice(0, 3).map((x) => x.answer) });
       last = out; return out;
     }
     const gap = a.gaps?.[0];
