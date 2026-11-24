@@ -36,6 +36,10 @@ import { detok } from "./personas.mjs";
 const puzzleOrgan = await import("../organs/puzzle-reader.js").catch(() => null);
 // the void hunt (declare what is missing, read whole pages for what fills it) is another session's pair of organs, imported the same way: absent, the door is off and the search door answers
 const huntOrgan = await import("../organs/void-hunt.js").catch(() => null), huntSources = await import("../organs/hunt-sources.js").catch(() => null);
+// a near verb that stands in for the question's verb when the choice does not move the answer (organs/verb-equivalents.js, another session's; the owner, 2026-11-24: "if its within a DMD then why not?"),
+// with the frozen local embedder it needs. Either absent: no substitution, said in the trace (a typed gap, never a silent degrade).
+const verbOrgan = await import("../organs/verb-equivalents.js").catch(() => null), embedMod = await import("../adapters/text/embed-personhood.js").catch(() => null);
+let sharedEmbedder = null;   // one vector library per process, shared by every thread (the persona fold is a thread too)
 
 const WH = new Set(["who", "whom", "what"]);
 const WH_ANY = new Set(["who", "whom", "what", "when", "where", "why", "how", "which"]);
@@ -80,7 +84,7 @@ const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 const sha = (s) => createHash("sha256").update(String(s)).digest("hex").slice(0, 16);
 
 /** makeThread({ hl, know, now }) → { say, ask, state }.  know: the givers (demo/knowledge.mjs makeKnowledge) or null (typed gaps). */
-export async function makeThread({ hl, know = null, now = () => new Date(), janus = null, log = null, getJson = undefined } = {}) {
+export async function makeThread({ hl, know = null, now = () => new Date(), janus = null, log = null, getJson = undefined, verbEmbed = null } = {}) {
   const parser = await rowsOfFor("eng"), pr = priorsFor("eng"), engine = await makeEngine({ hl });
   const commonNoun = (t) => { const c = classifyWord(t, { posPrior: pr.posPrior }); if (!c?.found || !(c.total > 0)) return false; const n = (u) => c.candidates.filter((x) => x.upos === u).reduce((a, x) => a + x.count, 0); return n("NOUN") > n("PROPN"); };
   const wordKnown = (r) => { const c = classifyWord(String(r.form).toLowerCase(), { posPrior: pr.posPrior }); return !!c?.found && c.total > 0; };   // a word the reader's part-of-speech prior holds
@@ -166,6 +170,29 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   let asked = null;                     // a question the chat put to the user and is waiting on (mechanic 7): { kind, question, rows, row } — the next fragment is its answer
   let lastAct = null;                   // { claim, orders, dependents }: what the chat took the last message to be, and what was built on it
   const withdrawn = new Set();          // orders of sentences the speaker took back: never an answer
+  // THE QUESTION'S VERB, SAID OTHERWISE ("Who made Claude?" against "Claude was created by Anthropic."). A man looking in his own notes reads "created" as the answer to "made", and a man who finds
+  // two notes that say different things under near words says so instead of choosing. The test is the owner's DMD (a difference that makes a difference): the question is asked of the notes under
+  // EVERY near verb; if the answers are one and the same, the choice of verb does not matter to the asker and it stands; if they differ, none is picked. The question's own verb is always tried first
+  // (this runs only when it found nothing). The near verbs come from a frozen embedder (a codec, never a model that answers); absent, there is no substitution and the trace says why.
+  // NOT DONE: verbs a little below the bar that still fill the same role ("built" at 0.85 against a bar of 0.86) are not offered as a second answer; that needs the organ to expose the near misses.
+  let verbEqP = null;
+  const verbEq = () => (verbEqP ??= (async () => {
+    if (!verbOrgan) return { gap: "the verb-equivalents organ (native/organs/verb-equivalents.js) is not in this checkout" };
+    const embed = verbEmbed ?? (embedMod?.makeEmbedder ? (t) => (sharedEmbedder ??= embedMod.makeEmbedder({ prefix: embedMod.PREFIX })).embed(t) : null);
+    if (!embed) return { gap: "no embedder (native/adapters/text/embed-personhood.js is not in this checkout)" };
+    try { return { E: verbOrgan.makeVerbEquivalence({ embed, reference: verbOrgan.referenceVerbs(pr.posPrior) }) }; } catch (e) { return { gap: String(e?.message ?? e).slice(0, 120) }; }
+  })());
+  async function standInFor(q, qv, qNeg) {
+    const veq = await verbEq(); if (veq.gap) return { step: { step: "verb_stand_in", ran: false, gap: veq.gap } };
+    const pool = [...(engine.S.verbs ?? [])].filter((v) => v && v !== qv);
+    let eq; try { eq = await veq.E.equivalents(qv, pool); } catch (e) { return { step: { step: "verb_stand_in", ran: false, gap: `the embedder could not be reached (${String(e?.message ?? e).slice(0, 80)}): no verb was substituted` } }; } finally { sharedEmbedder?.save?.(); }
+    const near = eq.map((x) => ({ verb: x.verb, similarity: x.similarity }));
+    if (!eq.length) return { step: { step: "verb_stand_in", ran: true, asked: qv, near, verdict: "none", note: "no verb the thread uses says the same thing as it" } };
+    const heard = new Map();
+    const answerFor = async (v) => { const r = await engine.answer(q, { polarity: true, neg: qNeg, skip: withdrawn, verb: v }); const top = r.answers?.[0]; if (!top || top.pronounOnly) return null; heard.set(v, r); return top.confirms ? ["yes"] : top.answer.map((x) => x.text); };
+    const g = await verbOrgan.standsIn(eq, answerFor);
+    return { g, heard, step: { step: "verb_stand_in", ran: true, asked: qv, near, verdict: g.verdict, ...(g.chosen ? { read_as: g.chosen.verb, similarity: g.chosen.similarity, agreed: g.agreeing } : {}), ...(g.verdict === "other" ? { answers: g.answers.map((x) => ({ verb: x.verb, answer: x.answer })) } : {}) } };
+  }
   let msgN = 0;
   let pending = null;                   // { gap, args, question }: the last question no door has filled yet
   let chain = Promise.resolve();        // one message at a time: a slow lookup must not let the next message overtake it (found 2026-11-23)
@@ -498,6 +525,16 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         last = out; return out;
       }
     }
+    // the exact verb found nothing: before the world, the notes under a near verb (see standInFor)
+    let verbNote = null;
+    if (!a.answers?.length && !qNeg && a.read?.kriya && !a.read.copular && a.gaps?.some((g) => g.gap === "action_not_in_text" || g.gap === "the_text_does_not_say")) {
+      const sv = await standInFor(q, a.read.kriya, qNeg); trace.push(sv.step);
+      if (sv.g?.verdict === "same") { a = sv.heard.get(sv.g.chosen.verb); verbNote = { asked: sv.step.asked, read: sv.g.chosen.verb, similarity: sv.g.chosen.similarity }; }
+      else if (sv.g?.verdict === "other") {
+        const said = sv.g.answers.map((x) => `“${x.verb}”: ${x.answer.join(" and ")}`).join("; ");
+        return done({ type: "relational", handled: false, gap: "near_verbs_differ", text: `What I hold says different things under verbs close to “${sv.step.asked}” (${said}), so I won't pick one for you.`, evidence: sv.g.answers.flatMap((x) => (sv.heard.get(x.verb)?.answers ?? []).slice(0, 1).map((y) => ({ order: parse.find((p) => p.text === y.sentence)?.order ?? null, text: y.sentence }))) });
+      }
+    }
     // what the question is about, by part of speech (no word list): the content words, without the question word, the auxiliaries and the function words
     const topicRows = qRows.filter((r) => !["PRON", "AUX", "PUNCT", "DET", "ADP", "SCONJ", "CCONJ", "PART"].includes(r.upos));
     const topic = topicRows.map((r) => r.form).join(" ") || null;
@@ -557,7 +594,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       const fillers = top.answer.filter((x, i, all) => !all.some((y, j) => j !== i && y.label === x.label && y.text.length > x.text.length && y.text.includes(x.text)));   // "rum and treasure" and its own part "and treasure" are one answer
       const phraseOf = fillers.map(sayFiller).join(" and ");
       const ev = a.answers.slice(0, 3).map((x) => { const pp = parse.find((y) => y.text === x.sentence); return { order: pp?.order ?? null, text: x.sentence, ...(pp && givenAt.has(pp.order) ? { given: givenAt.get(pp.order) } : {}) }; });
-      const out = done({ type: "answer", handled: true, text: `${cap(phraseOf)}.`, evidence: ev, answers: a.answers.slice(0, 3).map((x) => x.answer) });
+      const out = done({ type: "answer", handled: true, text: `${cap(phraseOf)}.${verbNote ? ` I read “${verbNote.asked}” as “${verbNote.read}”, which is what I hold.` : ""}`, evidence: ev, answers: a.answers.slice(0, 3).map((x) => x.answer) });
       last = out; return out;
     }
     const gap = a.gaps?.[0];
@@ -718,5 +755,5 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
   }
 
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded") } }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
 }
