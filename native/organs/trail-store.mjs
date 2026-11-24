@@ -9,11 +9,35 @@
 // The file is read before a mark is consulted and merged before it is written, so two sessions that never call each other still see each other's
 // marks: the environment is the message. The store knows nothing about what a head or a route is about.
 //
-// EVERY MARK IS ALSO OFFERED to `onMark` (the caller's own writer to the shared log, pharos), so the trail is a record and not only a cache.
-import fs from "node:fs"; import path from "node:path"; import os from "node:os";
+// EVERY MARK IS ALSO WRITTEN TO PHAROS (the owner, 2026-11-24: "be sure everything writes to the pharos"). The machine-wide store (no `file` given) mirrors each deposit, alarm and mark
+// into the shared log by default, as trail-deposit / trail-veto / trail-mark entries (pharosMarkWriter below); a caller's own `onMark` replaces that writer, and `onMark: null` turns it off.
+// A store with its own `file` (a test, a scratch run) writes nothing outside that file unless it is given a writer. Where pharos cannot be found the store still works and SAYS so:
+// store.pharos() is { on: false, why } with how to get it, never a silent drop.
+import fs from "node:fs"; import path from "node:path"; import os from "node:os"; import { pathToFileURL } from "node:url";
 import { deposit as kDeposit, trailStats, routeOrderFor, TRAIL_HALF_LIFE_DAYS } from "../kernel/stigmergy.js";
 
 export const TRAIL_STORE_SCHEMA = "TrailStore@1";
+const PHAROS_KINDS = [["trail-deposit", "INS·Figure", "one attempt: which route was tried for which head, whether it resolved, what it cost"], ["trail-veto", "EVA·Figure", "an alarm: this route gave a wrong answer for this head, and what it had deposited no longer counts"], ["trail-mark", "INS·Figure", "a thing about the world other users of the environment should know (a throttle, until when)"]];
+/** pharosMarkWriter({ dir, writer }) -> onMark(mark) with .status(): writes each trail mark into the shared pharos log (the chat's log by default), declaring the three kinds once.
+ *  Lazy and additive: pharos is imported on the first mark; if it cannot be found the writer records why in status() and drops nothing silently (the store's own file still has the mark). */
+export function pharosMarkWriter({ dir = process.env.CHAT_PHAROS_DIR || path.join(os.homedir(), ".pharos", "fold-demo"), writer = "khora-trails", pharos = null } = {}) {
+  const status = { on: false, why: "no mark written yet", written: 0, dir, writer };
+  let ready = null, chain = Promise.resolve();
+  const open = () => ready ??= (async () => {
+    const home = pharos ?? (process.env.PHAROS_HOME ? path.resolve(process.env.PHAROS_HOME) : path.resolve(new URL(".", import.meta.url).pathname, "..", "..", "..", "pharos"));
+    const P = await import(pathToFileURL(path.join(home, "lib", "pharos.mjs")).href), h = P.open("fold-demo", { dir, writer });
+    for (const [name, cell, why] of PHAROS_KINDS) { try { P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${name}`, body: { name, cell, why } }); } catch { /* already declared */ } }
+    return { P, h };
+  })();
+  const write = (m) => {
+    chain = chain.then(async () => {
+      try { const { P, h } = await open(), k = PHAROS_KINDS.find(([n]) => n === m.kind); if (!k) return; const key = m.kind === "trail-mark" ? m.key : m.head; P.weave(h, { cell: k[1], kind: m.kind, addr: `${m.kind === "trail-mark" ? "mark" : "trail"}:${m.store}:${key}`, body: m }); status.on = true; status.why = null; status.written++; }
+      catch (e) { status.on = false; status.why = `pharos not reachable (${String(e?.message ?? e).slice(0, 80)}): clone scores-patch-points/pharos beside khora or set PHAROS_HOME`; }
+    });
+  };
+  write.status = () => ({ ...status }); write.flush = () => chain;
+  return write;
+}
 const merge = (a, b) => {
   const out = { trails: {}, vetoes: {}, marks: {} };
   for (const src of [a, b]) {
@@ -24,13 +48,14 @@ const merge = (a, b) => {
   return out;
 };
 
-export function makeTrailStore({ name = "default", file = null, now = () => Date.now(), halfLifeDays = TRAIL_HALF_LIFE_DAYS, persist = true, onMark = null } = {}) {
+export function makeTrailStore({ name = "default", file = null, now = () => Date.now(), halfLifeDays = TRAIL_HALF_LIFE_DAYS, persist = true, onMark = undefined } = {}) {
   const f = file ?? path.join(os.homedir(), ".khora", "trails", `${name}.json`);
+  const sink = onMark === undefined ? (file == null && persist ? pharosMarkWriter() : null) : onMark;   // the machine-wide store mirrors to pharos; any other store only if it is given a writer
   let mem = { trails: {}, vetoes: {}, marks: {} }, seen = 0;
   const disk = () => { try { return JSON.parse(fs.readFileSync(f, "utf8")); } catch { return { trails: {}, vetoes: {}, marks: {} }; } };
   const refresh = () => { if (!persist) return; try { const m = fs.statSync(f).mtimeMs; if (m !== seen) { mem = merge(mem, disk()); seen = m; } } catch { /* no file yet */ } };
   const save = () => { if (!persist) return; try { fs.mkdirSync(path.dirname(f), { recursive: true }); mem = merge(mem, disk()); const tmp = `${f}.${process.pid}.tmp`; fs.writeFileSync(tmp, JSON.stringify({ schema: TRAIL_STORE_SCHEMA, ...mem })); fs.renameSync(tmp, f); seen = fs.statSync(f).mtimeMs; } catch { /* the environment is additive: a miss never blocks an answer */ } };
-  const tell = (m) => { try { onMark?.({ schema: TRAIL_STORE_SCHEMA, store: name, ...m }); } catch { /* the log is additive too */ } };
+  const tell = (m) => { try { sink?.({ schema: TRAIL_STORE_SCHEMA, store: name, ...m }); } catch { /* the log is additive too */ } };
   refresh();
 
   /** the head's deposits that came after any alarm on their route */
@@ -38,6 +63,10 @@ export function makeTrailStore({ name = "default", file = null, now = () => Date
 
   return {
     name, file: f,
+    /** is each mark also in pharos? { on, why, written, dir, writer }; on: false with a reason when there is no writer or pharos cannot be reached */
+    pharos() { return sink?.status ? sink.status() : { on: false, why: "no writer: this store has its own file or onMark: null" }; },
+    /** resolves when every mark so far has been offered to the writer (tests and exits) */
+    flush() { return sink?.flush ? sink.flush() : Promise.resolve(); },
     /** one attempt, left in the environment; a success strengthens the route, a failure is a deposit that earns nothing (it only marks the route as tried) */
     deposit(head, route, ok = true, ms = 0) { refresh(); const at = now(); mem.trails = kDeposit(mem.trails, { head, route, ok, ms, at }); save(); tell({ kind: "trail-deposit", head, route, ok, ms, at }); },
     /** an alarm: this route gave a wrong answer for this head; what it deposited before no longer counts */

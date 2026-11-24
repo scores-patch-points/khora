@@ -100,6 +100,7 @@ function card(r, ptext) {
     <section><h4>4 · The record</h4><dl>
       <dt>Kind</dt><dd>${esc(record.schema)} · ${esc(record.at)} · ${esc(kind(r))}</dd>
       ${p ? `<dt>Prompt</dt><dd>${esc(p.label)}<br><span class="k">source: ${esc(p.source)} · ${p.bytes} bytes</span><br>sha256 <code>${esc(p.sha256)}</code></dd>` : ""}
+      <dt>Pharos</dt><dd>${r.pharos?.written ? "written when it was made: kind " + esc(r.pharos.kind) + ", writer " + esc(r.pharos.writer) + ", log " + esc(r.pharos.log) : esc(r.pharos?.why ?? "this record was made by the experiment: it is written with the whole matrix")}</dd>
       <dt>Replay</dt><dd><code>${esc(r.replay)}</code> <button class="small" type="button" data-copy="${esc(r.replay)}">copy</button></dd></dl>
       <details><summary>Show the whole record (what is written to pharos)</summary><pre class="ptext">${esc(JSON.stringify(record, null, 1))}</pre></details></section>
   </article>`;
@@ -151,7 +152,7 @@ $("run").onclick = async () => {
     ${chk(cause.length > 0 && cause.every((c) => c.changed), "CAUSE", "Cut out the one sentence a reply was drawn from, read the rest again from scratch, ask again: the reply must change, or that sentence was not the cause.", `<table><tr><th>Prompt</th><th>Question</th><th>sentence cut out</th><th>reply with</th><th>reply without</th><th></th></tr>${cause.map((c) => `<tr><td>${esc(lab[c.prompt])}</td><td>${esc(c.question)}</td><td>${esc(c.removed)}</td><td>${esc(cell(c.question, c.prompt).reply)}</td><td>${esc(cell(c.question, c.prompt).counterfactual?.reply ?? "")}</td><td class="${c.changed ? "ok-t" : "bad-t"}">${c.changed ? "changed" : "SAME"}</td></tr>`).join("")}</table>`)}
     ${chk(cov.every((c) => c.used), "COVERAGE", `Where a fixture prompt <i>does</i> say something, did the system use it? A miss is a finding about the system, not a pass. Used in ${cov.filter((c) => c.used).length} of ${cov.length}.`, `<table><tr><th>Prompt</th><th>Question</th><th>the prompt says</th><th>the system said</th><th></th></tr>${cov.map((c) => `<tr><td>${esc(lab[c.prompt])}</td><td>${esc(c.question)}</td><td>${esc(c.promptSays)}</td><td>${esc(c.replied)}</td><td class="${c.used ? "ok-t" : "bad-t"}">${c.used ? "used" : "MISSED"}</td></tr>`).join("")}</table>`)}
     <div class="note">One run, fixtures and one cached Claude prompt: an exploratory result, not a held-out one.</div>`;
-  $("run").disabled = false; $("weave").disabled = false;
+  $("run").disabled = false; $("weave").disabled = false; $("weave").textContent = o.woven ? `written to pharos as it was made: ${o.woven} entries (write again)` : `not written to pharos${o.wovenWhy ? ": " + o.wovenWhy : ""} (try again)`;
 };
 $("exp").addEventListener("click", (e) => {
   const td = e.target.closest("td.cell"); if (!td || !window.__o) return; const o = window.__o, r = o.matrix[td.dataset.q][td.dataset.id];

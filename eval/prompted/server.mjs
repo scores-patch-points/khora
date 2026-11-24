@@ -19,13 +19,15 @@ http.createServer(async (req, res) => {
     if (req.method === "POST" && url.pathname === "/api/ask") {
       const { promptId, custom, question, prove } = JSON.parse((await body(req)) || "{}"), p = find(promptId, custom), t0 = Date.now();
       const rec = await audit(p, String(question ?? ""), { prove: !!prove }); rec.ms = Date.now() - t0;
+      try { await weaveAudits([rec]); rec.pharos = { written: 1, kind: "prompted-turn", writer: "prompt-audit", log: "fold-demo" }; } catch (e) { rec.pharos = { written: 0, why: `not written to pharos: ${String(e?.message ?? e).slice(0, 90)} (clone scores-patch-points/pharos beside khora or set PHAROS_HOME)` }; }   // every audited reply is a pharos entry, as it happens
       trail.push(rec); return json(res, 200, { ...rec, promptText: p.text ?? null });   // the whole prompt goes with the reply so the page can show the sentence in place; it is not part of the audit record
     }
     if (req.method === "GET" && url.pathname === "/api/prompt") { const p = prompts.find((x) => x.id === url.searchParams.get("id")); return json(res, p ? 200 : 404, p ? { id: p.id, label: p.label, source: p.source, sha256: p.text ? sha(p.text) : null, text: p.text } : { error: "no such prompt" }); }
     if (req.method === "POST" && url.pathname === "/api/policy") { const { promptId, custom } = JSON.parse((await body(req)) || "{}"), p = find(promptId, custom); if (!p.text) return json(res, 200, { none: true }); const out = await policyOf(p, (t) => embedder.embed(t)); embedder.save(); return json(res, 200, { prompt: { id: p.id, label: p.label, bytes: Buffer.byteLength(p.text) }, capacities: LEVERS.map((l) => ({ id: l.id, kind: l.kind, says: l.says, why: l.why, acts: l.acts ?? null })), ...out }); }
     if (req.method === "POST" && url.pathname === "/api/experiment") {
       const use = prompts.filter((p) => p.fixture || (p.label.includes("Claude") && p.bytes === undefined && p.size > 20000 && p.size < 30000));
-      matrix = await experiment({ prompts: use }); return json(res, 200, { ...matrix, order: ["none", ...use.map((p) => p.id)], self: SELF, controls: CONTROLS, texts: Object.fromEntries(use.map((p) => [p.id, p.text])) });
+      matrix = await experiment({ prompts: use }); let woven = 0, wovenWhy = null; try { woven = await weaveAudits(Object.values(matrix.matrix).flatMap((r) => Object.values(r))); } catch (e) { wovenWhy = String(e?.message ?? e).slice(0, 90); }   // the whole matrix is written as it is made
+      return json(res, 200, { woven, wovenWhy, ...matrix, order: ["none", ...use.map((p) => p.id)], self: SELF, controls: CONTROLS, texts: Object.fromEntries(use.map((p) => [p.id, p.text])) });
     }
     if (req.method === "POST" && url.pathname === "/api/weave") { const recs = matrix ? Object.values(matrix.matrix).flatMap((r) => Object.values(r)) : trail; return json(res, 200, { woven: await weaveAudits(recs), writer: "prompt-audit", kind: "prompted-turn" }); }
     json(res, 404, { error: "not found" });
