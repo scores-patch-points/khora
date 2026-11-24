@@ -22,6 +22,28 @@ export function referenceVerbs(posPrior, { n = 300 } = {}) {
   const step = Math.max(1, Math.floor(vs.length / n)); return vs.filter((_, i) => i % step === 0).slice(0, n);
 }
 
+/** THE DMD GUARD. The owner, 2026-11-24, asked whether a near-synonym may stand in for a question's verb: "if it's within a DMD then why not?" A difference that makes a difference
+ *  (Bateson; the repo's idiom is the destroy test of penelope organs/asker-dmd.mjs) is one that moves the thing the asker cares about, and here that is the ANSWER. So a near verb
+ *  stands in only when swapping it for each of the other near verbs would not move the answer: the fold is asked the question under EVERY candidate verb (`answerFor`, the
+ *  caller's: it asks the fold, this organ never reads text) and the answers must be one and the same.
+ *    "same"  every candidate that has an answer gives the same one: the differences among these verbs make no difference to the asker; it stands (nearest first), and `agreeing` names every verb that agreed
+ *    "other" two near verbs give different answers: the verb choice makes a difference, so NONE is picked; `answers` lists each under its verb, to be said as they are (a typed gap, never a vote)
+ *    "none"  no candidate has an answer: the gap stays what it was
+ *  `rivals` (optional): verbs of the fold that are NOT near enough to count as the same verb but that the caller knows fill the same role (the engine's frames know that); when the verdict is
+ *  "same" the fold is asked under each, and those that say something DIFFERENT are returned as `alsoSays`, to be said next to the answer: the notebook holds a second answer under a verb
+ *  we could not call the same, and a man would mention it. They never block the answer and never vote.
+ *  The exact verb is always the caller's first try and is never replaced by this. `answerFor(verb)` -> an array of answers (strings or ids; compared as sets) or null/[] when the fold has none.
+ *  WHAT IT DOES NOT SHOW: that "make" and "create" mean the same in general; only that, for this question and this fold, choosing between the near verbs would not change what is said. */
+export async function standsIn(equivalents, answerFor, { rivals = [] } = {}) {
+  if (typeof answerFor !== "function") throw new TypeError("standsIn: answerFor(verb) must be supplied: the fold is asked once per candidate verb");
+  const key = (a) => JSON.stringify([...new Set((a ?? []).map(String))].sort()), heard = [];
+  for (const c of equivalents ?? []) { const a = await answerFor(c.verb); if (a && a.length) heard.push({ verb: c.verb, similarity: c.similarity, answer: [...new Set(a.map(String))].sort() }); }
+  if (!heard.length) return { verdict: "none", chosen: null, answers: [], agreeing: [], tried: (equivalents ?? []).map((c) => c.verb) };
+  const distinct = new Set(heard.map((h) => key(h.answer)));
+  if (distinct.size === 1) { const alsoSays = []; for (const v of rivals) { const a = await answerFor(v); if (a && a.length && key(a) !== key(heard[0].answer)) alsoSays.push({ verb: v, answer: [...new Set(a.map(String))].sort() }); } return { verdict: "same", chosen: heard[0], answers: heard, agreeing: heard.map((h) => h.verb), alsoSays, tried: (equivalents ?? []).map((c) => c.verb) }; }
+  return { verdict: "other", chosen: null, answers: heard, agreeing: [], tried: (equivalents ?? []).map((c) => c.verb) };
+}
+
 export function makeVerbEquivalence({ embed, reference = [] } = {}) {
   if (typeof embed !== "function") throw new TypeError("makeVerbEquivalence: an embedder must be supplied (a frozen codec)");
   let R = null, tau = null;
