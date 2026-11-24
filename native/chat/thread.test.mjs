@@ -44,8 +44,11 @@ test("small talk and who-are-you are answered by rule, and say so", T, async () 
   const s = await thread.turn("who are you?"); assert.equal(s.type, "self"); assert.match(s.text, /no language model/);
 });
 test("a request is not a fact: about what is not known it is acted on, about the world it is refused; a description nobody tied to a name is a typed gap", T, async () => {
-  const before = thread.state().sentences, r = await thread.turn("go research it");
-  assert.match(r.text, /nothing I'm missing/, "no gap is open, so there is nothing to look for, and it says so"); assert.equal(thread.state().sentences, before, "nothing was read into the fold");
+  const { makeThread } = await import("./thread.mjs");
+  const fresh = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  const r = await fresh.turn("go research it");
+  assert.match(r.text, /nothing I'm missing/, "no gap is open and nothing was just told, so there is nothing to look for, and it says so"); assert.equal(fresh.state().sentences, 0, "nothing was read into the fold");
+  const before = thread.state().sentences;
   const w = await thread.turn("open the door"); assert.equal(w.gap, "act_not_possible"); assert.equal(thread.state().sentences, before);
   const g = await thread.turn("who is the president?"); assert.equal(g.handled, false); assert.equal(g.gap, "unknown_description");
 });

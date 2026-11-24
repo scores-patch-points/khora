@@ -46,7 +46,7 @@ test("messages are answered one at a time, in the order they were sent", T, asyn
   assert.deepEqual(order, ["first", "second"]);
   assert.equal(ra.type, "reference"); assert.match(ra.text, /^Leo Tolstoy: Russian author/);
   assert.deepEqual(ra.cites.map((c) => c.label), ["Wikidata"]); assert.equal(ra.cites[0].id, "Q7243");
-  assert.match(rb.text, /nothing I'm missing/, "“go research it” with nothing open is not refused: the chat says it has no gap, and that it looks by itself when it has one");
+  assert.equal(rb.handled, true); assert.equal(rb.text, "Leo Tolstoy wrote War and Peace. He was born in Russia.", "“go research it” after telling about Tolstoy goes on about Tolstoy: it reads the article, as Wikipedia's words");
 });
 
 test("a person a giver named is someone the thread can point to, and the thread says whose word it is", T, async () => {
@@ -153,7 +153,7 @@ test("a throttled Wikipedia is said as throttled, with nothing read", TH, async 
 test("a request about a name the thread has not met is acted on; one about the world is not", T, async () => {
   const mine = await make();
   const a = await mine.turn("find Tolstoy"); assert.equal(a.type, "reference"); assert.match(a.text, /^Leo Tolstoy/);
-  const b = await mine.turn("open the door"); assert.equal(b.handled, false); assert.equal(b.gap, "act_not_possible"); assert.match(b.text, /\/doors/);
+  const b = await mine.turn("open the door"); assert.equal(b.handled, false); assert.equal(b.gap, "act_not_possible"); assert.equal(b.text, "I can look things up and answer from what I'm told, but I can't do that.");
 });
 
 test("“go research it” after a gap looks again at that gap", T, async () => {
@@ -377,4 +377,18 @@ test("a missing prior is said, not silently skipped: without the given-name tabl
   assert.equal(r.paired?.rebuilt, "did Pierre arrive?");
   const claim = r.thought.claims.find((x) => x.relation.verb === "answers");
   assert.match(claim.assessed.basis, /I have no table of given names, so I could not check that the name suits “he”/);
+});
+
+test("“say more” goes on about what the chat was just telling: the article is read, two sentences at a time, as Wikipedia's words, until there is no more", T, async () => {
+  const mine = await make();
+  assert.equal((await mine.turn("say more")).gap, "no_topic", "nothing was said yet, so there is nothing to go on about");
+  await mine.turn("who is Tolstoy?");   // Leo Tolstoy: Russian author (1828–1910): the topic is now Leo Tolstoy
+  const more = await mine.turn("say more");
+  assert.equal(more.handled, true); assert.equal(more.text, "Leo Tolstoy wrote War and Peace. He was born in Russia.");
+  assert.ok(more.evidence.every((e) => e.given === "Wikipedia")); assert.equal(more.cites[0].label, "Wikipedia");
+  const end = await mine.turn("go on"); assert.equal(end.handled, false); assert.equal(end.gap, "nothing_more"); assert.equal(end.text, "That's all I've read about Leo Tolstoy.");
+  // other ways to ask for more, and the request that names a thing of its own is not "more"
+  const again = await make(); await again.turn("who is Tolstoy?");
+  for (const m of ["tell me more", "continue"]) { const r = await again.turn(m); assert.ok(r.handled || r.gap === "nothing_more", `${m} → ${r.gap}`); }
+  const door = await again.turn("open the door"); assert.equal(door.gap, "act_not_possible");
 });

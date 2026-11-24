@@ -115,6 +115,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const r = puzzleOrgan.readPuzzle(sents, { reader: puzzleOrgan.READER });
     return r?.read?.items?.items?.length >= 2 && r?.read?.agents?.length >= 2 ? r : null;   // a list of things and at least two people: the scene of a puzzle
   };
+  const givenPersons = new Set();        // refs a giver confirmed as people (the person door: Wikidata "instance of human"): a better candidate for he or she than a being of unknown kind
   const told = new Map();               // ref -> "m" | "f": a class the user settled, by answering "Do you mean ...?" (presented evidence, never a guess)
   // WHO A PRONOUN MEANS. A being's class (m / f) is known from what the user settled, from the pro-forms the thread attached to it, or from the given-name table if there is one. A man with
   // no evidence about two people does not pick the first: "Pierre met Natasha. She smiled." leaves "she" OPEN between them, and he asks (the other session's probe: with no table the chat bound
@@ -130,6 +131,9 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const cls = F.Gender === "Masc" ? "m" : F.Gender === "Fem" ? "f" : null; if (!cls || F.Person !== "3" || F.PronType !== "Prs") return null;
     const names = (cast?.referents ?? []).filter((b) => b.kind === "name" && b.first <= order && !placeOnly(b.ref));
     const fits = names.filter((b) => { const c = classOfBeing(b); return c == null || c === cls; }), sure = fits.filter((b) => classOfBeing(b) === cls);
+    // evidence in tiers: the class is known (settled, a pro-form, a table) > a giver says it is a person > nothing is known; the best non-empty tier decides, and only a tie inside it is open
+    const known = fits.filter((b) => givenPersons.has(b.ref));
+    if (!sure.length && known.length === 1) return { cls, open: false, ref: known[0].ref, candidates: [{ ref: known[0].ref, label: known[0].forms[0][0] }] };
     const cand = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] }));
     if (sure.length === 1) return { cls, open: false, ref: sure[0].ref, candidates: cand(sure) };
     if (sure.length > 1) return { cls, open: true, ref: null, candidates: cand(sure) };
@@ -137,6 +141,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     if (!fits.length) return { cls, open: false, ref: null, candidates: [] };
     return { cls, open: true, ref: null, candidates: cand(fits) };
   };
+  let lastTopic = null;                 // what the chat was last telling the user about: { name, sentences, next } ("say more" goes on about it)
   let asked = null;                     // a question the chat put to the user and is waiting on (mechanic 7): { kind, question, rows, row } — the next fragment is its answer
   let lastAct = null;                   // { claim, orders, dependents }: what the chat took the last message to be, and what was built on it
   const withdrawn = new Set();          // orders of sentences the speaker took back: never an answer
@@ -258,6 +263,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       if (!out?.ok) return null;
       if (out.door === "wiki") return done({ type: "reference", handled: true, text: out.text, cites: out.cites });   // not a person: an article, read into the thread
       trace.push({ step: "reference", giver: "Wikidata (wbsearchentities + P31)", out: out.data?.label });
+      lastTopic = { name: out.data?.label ?? name }; { const rr = refByName(out.data?.label ?? name) ?? refByName(name); if (rr) givenPersons.add(rr); }   // the giver said this name is a person: the cast knows it as the label or as the short name the user typed
       if (ideation) {
         const c = idea({ label: out.text.slice(0, -1), relation: { subject: out.data?.label ?? name, verb: "is", object: out.text.slice(out.text.indexOf(": ") + 2, -1) || "a person" }, door: "given", giver: `wikidata:${out.data?.id ?? "unidentified"}` });
         ideation.assess(c, { verdict: "supported", method: "deduction", by: "Wikidata (wbsearchentities, instance of human)", basis: "a giver's description of the entity", license: "a named giver's own record: it licenses the claim, it is not witnessed in the thread" });
@@ -325,14 +331,28 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
     // a request is acted on when it is about what is not known: an object that is a pronoun (or none) means the open gap; a name the thread has not met is a gap of its own
     if (opts.request) {
-      const root = qRows.find((r) => r.head === 0 && r.upos !== "PUNCT"), obj = qRows.find((r) => r.deprel === "obj" && r.head === root?.id) ?? qRows.find((r) => r.deprel === "obj");
-      trace.push({ step: "request", about: !obj || obj.upos === "PRON" ? "the open gap" : obj.form });
-      if (!obj || obj.upos === "PRON") {
-        if (pending) return ask(pending.question, { onStatus: opts.onStatus });
-        return done({ type: "request", handled: true, text: "There's nothing I'm missing right now. When I can't answer something I go and look for it myself, so ask me something and I will." });
-      }
-      if (obj.upos === "PROPN" && know) { const r = await reference(nameChunk(obj)); return r ?? done({ type: "request", handled: false, gap: lastOut?.gap ?? "no_door", text: lastOut?.text ?? "I could not find out." }); }
-      return done({ type: "request", handled: false, gap: "act_not_possible", text: `That reads as a request (${quote(q)}). I can look things up and answer from what I'm told, but I can't do that; /doors lists what I can reach.` });
+      const root = qRows.find((r) => r.head === 0 && r.upos !== "PUNCT");
+      const nominal = qRows.filter((r) => r.id !== root?.id && (r.upos === "PROPN" || r.upos === "NOUN")), propn = nominal.find((r) => r.upos === "PROPN");
+      const pronounObj = qRows.find((r) => r.upos === "PRON" && r.deprel === "obj" && !isYou(r) && featsOf(r.feats).Person !== "1");
+      trace.push({ step: "request", about: nominal.length ? nominal.map((r) => r.form).join(" ") : pronounObj ? "the open gap or the last topic" : "going on" });
+      // GOING ON. A man who has just told someone about Tolstoy, and is told "say more", says more about Tolstoy: he opens the book and reads on. A request with no thing of its own in it
+      // ("say more", "go on", "continue", "tell me more") continues the last topic; "research it" is the open gap if there is one, else the last topic.
+      const goOn = async () => {
+        if (!lastTopic) return done({ type: "request", handled: false, gap: "no_topic", text: "I haven't told you anything yet to go on about. Ask me something." });
+        if (!lastTopic.sentences) {
+          const w = await callDoor("wiki", lastTopic.name);   // reads the opening of the article into the thread, as Wikipedia's words
+          if (!w.ok) return done({ type: "request", handled: false, gap: w.gap, text: w.text, cites: w.cites ?? [] });
+          lastTopic.sentences = splitSentences(w.introduce.text, { abbreviations: abbr(w.introduce.text) }).map((c) => c.text.trim()).filter(Boolean); lastTopic.next = 0; lastTopic.cites = w.cites;
+        }
+        const chunk = lastTopic.sentences.slice(lastTopic.next, lastTopic.next + 2); lastTopic.next += 2;
+        if (!chunk.length) return done({ type: "request", handled: false, gap: "nothing_more", text: `That's all I've read about ${lastTopic.name}.`, cites: lastTopic.cites ?? [] });
+        const out = done({ type: "answer", handled: true, text: chunk.join(" "), evidence: chunk.map((x) => ({ order: null, text: x, given: "Wikipedia" })), cites: lastTopic.cites ?? [] });
+        last = out; return out;
+      };
+      if (!nominal.length && !pronounObj) return goOn();
+      if (!nominal.length && pronounObj) { if (pending) return ask(pending.question, { onStatus: opts.onStatus }); if (lastTopic) return goOn(); return done({ type: "request", handled: true, text: "There's nothing I'm missing right now. When I can't answer something I go and look for it myself, so ask me something and I will." }); }
+      if (propn && know) { const r = await reference(nameChunk(propn)); return r ?? done({ type: "request", handled: false, gap: lastOut?.gap ?? "no_door", text: lastOut?.text ?? "I could not find out." }); }
+      return done({ type: "request", handled: false, gap: "act_not_possible", text: `I can look things up and answer from what I'm told, but I can't do that.` });
     }
     // a persona: a question about "you" is answered by the persona's prompt, before any other route (help, small talk, the clock)
     if (persona && qRows.some((r) => WH.has(lemma(r))) && qRows.some(isYou)) {
@@ -406,9 +426,10 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         if (known && S.sentencesOfRef.has(ref)) {
           const p = await engine.wordProfile("", { ref });
           const sents = [...S.sentencesOfRef.get(ref)].sort((a, b) => a - b).slice(0, 3).map((o) => ({ order: o, text: S.rowsOf.get(o)?.text })).filter((x) => x.text);
-          const name = being.forms[0][0], lead = p?.portrait?.lead;
-          const fromGiver = sents.length && sents.every((x) => givenAt.has(x.order));   // what the cast knows of him came from a giver, not from the user
-          const told = sents.length ? `${fromGiver ? `${givenAt.get(sents[0].order)} says` : "You told me"} ${sents.map((x) => quote(x.text)).join(" and ")}` : "";
+          const name = being.forms[0][0], lead = p?.portrait?.lead; lastTopic = { name };
+          // each sentence under the name of who said it: the user, or the giver that supplied it (Wikidata and Wikipedia are not one voice)
+          const groups = []; for (const x of sents) { const who = givenAt.get(x.order) ?? "You told me"; const g = groups.at(-1); if (g && g.who === who) g.texts.push(x.text); else groups.push({ who, texts: [x.text] }); }
+          const told = groups.map((g) => `${g.who === "You told me" ? g.who : `${g.who} says`} ${g.texts.map((x) => quote(x)).join(" and ")}`).join(". ");
           const said = `${tgt.upos === "PRON" ? `That would be ${name}.${told ? " " : ""}` : ""}${told || (tgt.upos === "PRON" ? "" : `${name}.`)}`;
           return done({ type: "identity", handled: true, ref, text: said, evidence: sents, profile: { lead, propositions: p?.portrait?.propositions ?? [] } });
         }
