@@ -53,6 +53,8 @@ const codeRoute = await import("./code-route.mjs").catch(() => null), codeMeanin
 const langid = await import("../the-fold/langid.mjs").catch(() => null);
 let identifierWorksP = null, identifierKnown = null;   // whether this priors home has a language identifier at all (the 20-file stand-in has none): tested once, on a fixed English sentence
 const identifierWorks = () => (identifierWorksP ??= Promise.resolve().then(() => langid?.identifyLanguage?.("This is a sentence written in English.")).then((r) => r?.language === "eng").catch(() => false).then((v) => (identifierKnown = v)));
+// the gate loads the language identifier and the lexicons on its first call (a minute on the real priors): warmed when this module loads, so the first message of a conversation does not pay for it
+if (READING.readerFor) Promise.resolve().then(() => READING.readerFor("This is a sentence written in English.", { thread: "eng" })).catch(() => {});
 let sharedEmbedder = null;   // one vector library per process, shared by every thread (the persona fold is a thread too)
 
 const WH = new Set(["who", "whom", "what"]);
