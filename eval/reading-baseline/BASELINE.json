@@ -242,7 +242,11 @@
   "native/adapters/text/gender-from-corpus.js": "bf500d233236e19b8c0dea838c620b438dafec2b2aa7b9e176842e21b49d1c0f",
   "native/adapters/text/recase.mjs": "fc7af6422555c996b42d6d16fb14a9ea2f6ec848bea5809fcba9b236b85d175f",
   "native/adapters/text/language-gate.mjs": "81bcdfb9be7f7699d7e07f253dc308c0e4d7e1ea15ed83c673c7422f2140b738",
-  "native/priors-shipped/truecase-eng.json": "5c5ded4aaeae23222924a222cdda510233f547b17e9fb86db6fddf49ccfd4b7e"
+  "native/priors-shipped/truecase-eng.json": "5c5ded4aaeae23222924a222cdda510233f547b17e9fb86db6fddf49ccfd4b7e",
+  "native/adapters/text/gender-chain.js": "6ee418b30f65efaab59eafc97a49df6d35a5dedfc95616037e0ca1d7bf7b6def",
+  "native/adapters/text/gender-of-words.js": "4fab0721485bc9dd3d516712724a26a9946c88b3554e397f45b2010eb719e984",
+  "native/adapters/text/name-gender/dictionary-en.json": "0ae55d2772543f1af91f107b187d73321a651b9e9d23ac65369b251141ecbe4c",
+  "identity/givers/wikidata-given-names-en.json": "c522b09d9be8d8acb38ed7b5352cda2673c93446a51eb557e3fbe33bdd4f3aae"
  },
  "recorded": "2026-11-24"
 }

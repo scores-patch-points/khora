@@ -9,7 +9,8 @@ export const READING_FILES = ["native/reading.js", "native/the-fold/pharos-gate.
   "native/adapters/text/pronoun-presence-chosen.js", "native/adapters/text/clause-attach.js", "native/adapters/text/non-personal.js", "native/adapters/text/name-prior.js", "native/adapters/text/name-prior/eng.json", "native/adapters/text/case-marked-clauses.js", "native/adapters/text/greek-seam.js", "native/the-fold/prior-source.mjs", "native/adapters/text/pronoun-registers/grc.json", "native/adapters/text/pronoun-registers/san.json", "native/priors-shipped/frame-san.json", "native/adapters/text/language-competency.js",
   "native/adapters/text/karaka-total.mjs", "native/adapters/text/text-mereology.mjs",
   "native/reading-in-order.mjs", "native/reading-in-order.worker.mjs", "native/adapters/text/referents-in-order.mjs", "native/adapters/text/gender-from-corpus.js",
-  "native/adapters/text/recase.mjs", "native/adapters/text/language-gate.mjs", "native/priors-shipped/truecase-eng.json"];
+  "native/adapters/text/recase.mjs", "native/adapters/text/language-gate.mjs", "native/priors-shipped/truecase-eng.json",
+  "native/adapters/text/gender-chain.js", "native/adapters/text/gender-of-words.js", "native/adapters/text/name-gender/dictionary-en.json", "identity/givers/wikidata-given-names-en.json"];
 export const sha = (f) => crypto.createHash("sha256").update(fs.readFileSync(path.join(ROOT, f))).digest("hex");
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
   const i = process.argv.indexOf("--note"); const note = i > 0 ? process.argv[i + 1] : null; if (!note) { console.error('a note is required: --note "why the reading changed"'); process.exit(2); }
