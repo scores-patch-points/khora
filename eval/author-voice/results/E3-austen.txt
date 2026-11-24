@@ -1,0 +1,18 @@
+Austen: 2 book(s), 30854 verb tokens; 505 verbs used at least 8 times; 343 near pairs (bar 0.855); the rest of the corpus: 545882 verb tokens.
+The 16 pairs where Austen reaches furthest from the rest (deviation = log-ratio of the author minus log-ratio of the others):
+  pleasure     over enjoy        Austen: 68 vs 27   others: 0 vs 471   dev 7.76  (embedder 0.92)
+  pleasure     over joy          Austen: 68 vs 12   others: 0 vs 126   dev 7.23  (embedder 0.87)
+  pleasure     over satisfy      Austen: 68 vs 53   others: 0 vs 298   dev 6.64  (embedder 0.88)
+  pleasure     over delight      Austen: 68 vs 45   others: 0 vs 143   dev 6.07  (embedder 0.91)
+  such         over likewise     Austen: 208 vs 17   others: 0 vs 14   dev 5.85  (embedder 0.9)
+  pleasure     over gratify      Austen: 68 vs 28   others: 0 vs 62   dev 5.71  (embedder 0.88)
+  compliment   over praise       Austen: 51 vs 26   others: 6 vs 294   dev 4.48  (embedder 0.88)
+  game         over play         Austen: 8 vs 38   others: 2 vs 563   dev 3.91  (embedder 0.9)
+  humour       over laugh        Austen: 14 vs 39   others: 6 vs 844   dev 3.86  (embedder 0.92)
+  likewise     over beside       Austen: 17 vs 9   others: 14 vs 267   dev 3.53  (embedder 0.86)
+  last         over persist      Austen: 123 vs 9   others: 35 vs 65   dev 3.18  (embedder 0.86)
+  heighten     over rise         Austen: 17 vs 36   others: 21 vs 870   dev 2.97  (embedder 0.86)
+  distress     over suffer       Austen: 20 vs 76   others: 9 vs 657   dev 2.92  (embedder 0.87)
+  dine         over eat          Austen: 47 vs 17   others: 141 vs 924   dev 2.88  (embedder 0.94)
+  heighten     over raise        Austen: 17 vs 38   others: 21 vs 821   dev 2.85  (embedder 0.88)
+  pretend      over lie          Austen: 20 vs 18   others: 196 vs 3069   dev 2.85  (embedder 0.86)
