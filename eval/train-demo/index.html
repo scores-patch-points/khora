@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Train of thought</title>
+<style>
+:root { --bg:#f7f6f3; --panel:#fff; --ink:#1f2328; --muted:#6b7280; --line:#e4e1d8; --me:#2b5fd9; --bot:#efede6; --accent:#b45309; --ok:#15803d; --bad:#b91c1c; }
+@media (prefers-color-scheme: dark) { :root { --bg:#14161a; --panel:#1b1e23; --ink:#e8e6e1; --muted:#9aa0a6; --line:#2c3036; --me:#3b6fe0; --bot:#262a30; --accent:#e08a3c; --ok:#4ade80; --bad:#f87171; } }
+* { box-sizing:border-box; } html, body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:14px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+body { display:grid; grid-template-columns:minmax(320px, 1fr) minmax(300px, 420px); grid-template-rows:auto 1fr; }
+header { grid-column:1 / 3; padding:10px 16px; border-bottom:1px solid var(--line); background:var(--panel); display:flex; gap:12px; align-items:baseline; flex-wrap:wrap; }
+header b { font-size:15px; } header span { color:var(--muted); font-size:12.5px; } header button { margin-left:auto; }
+#chat { display:flex; flex-direction:column; min-height:0; border-right:1px solid var(--line); }
+#log { flex:1; overflow:auto; padding:14px; } .row { display:flex; margin:0 0 10px; } .row.me { justify-content:flex-end; }
+.msg { max-width:85%; padding:8px 12px; border-radius:14px; white-space:pre-wrap; } .me .msg { background:var(--me); color:#fff; } .bot .msg { background:var(--bot); }
+.meta { margin-top:6px; font-size:11.5px; color:var(--muted); } .chip { display:inline-block; font:11px ui-monospace, Menlo, monospace; padding:1px 6px; margin:0 3px 3px 0; border-radius:8px; border:1px solid var(--line); background:var(--panel); }
+.chip.hunt { border-color:var(--accent); color:var(--accent); } .chip.trail { border-color:var(--ok); color:var(--ok); } .chip.bad { border-color:var(--bad); color:var(--bad); }
+form { display:flex; gap:8px; padding:10px 14px; border-top:1px solid var(--line); background:var(--panel); } input[type=text] { flex:1; border:1px solid var(--line); border-radius:18px; padding:8px 14px; background:var(--bg); color:var(--ink); font:inherit; }
+button { border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:14px; padding:4px 12px; font:inherit; cursor:pointer; } button.go { background:var(--me); color:#fff; border:0; } button:disabled { opacity:.5; }
+#side { overflow:auto; padding:12px 14px; } h3 { margin:14px 0 6px; font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); } h3:first-child { margin-top:0; }
+.bar { display:flex; align-items:center; gap:8px; margin:2px 0; font-size:12.5px; } .bar i { display:block; height:8px; background:var(--accent); border-radius:4px; min-width:2px; } .bar span { min-width:120px; } .bar small { color:var(--muted); }
+.route { display:flex; gap:8px; align-items:center; font:12px ui-monospace, Menlo, monospace; margin:2px 0; } .route button { padding:0 8px; font-size:11px; color:var(--bad); }
+.test { font-size:12.5px; } .test.ok::before { content:"✔ "; color:var(--ok); } .test.bad::before { content:"✖ "; color:var(--bad); } #sum { font-weight:600; }
+.hint { color:var(--muted); font-size:12.5px; } .quick { display:flex; flex-wrap:wrap; gap:6px; padding:0 14px 8px; }
+@media (max-width: 760px) { body { grid-template-columns:1fr; grid-template-rows:auto 60vh auto; } #chat { border-right:0; } header { grid-column:1; } }
+</style>
+</head>
+<body>
+<header><b>Train of thought</b><span>the loop, the trails and the wording library, running on live Wikipedia · no model</span><button id="forget" title="empty the trails and start the thread again">Forget the trails</button></header>
+<div id="chat">
+  <div id="log"><div class="hint">Ask something the thread does not hold (“Who directed Lethal Weapon?”), then ask it again and watch the steps and the trails. Say “thanks!” a few times and watch the wording change. The second panel shows what the last turn used.</div></div>
+  <div class="quick" id="quick"></div>
+  <form id="f"><input type="text" id="m" placeholder="Say something, or ask a question" autocomplete="off" autofocus><button class="go" id="b">Send</button></form>
+</div>
+<div id="side">
+  <h3>The last turn</h3><div id="steps" class="hint">nothing yet</div>
+  <h3>The wording pool (who could be said, and how likely)</h3><div id="pool" class="hint">nothing yet</div>
+  <h3>The trails (what has worked, fading with time)</h3><div id="trails" class="hint">nothing yet</div>
+  <h3>Marks in the environment</h3><div id="marks" class="hint">none</div>
+  <h3>Tests <button id="run" style="margin-left:8px">Run the organ tests</button></h3><div id="tests" class="hint">press the button: void-hunt, puzzle-reader, epistemic-core, expression-library, trail-store, train</div>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+const ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }; const esc = (s) => { let o = ""; for (const c of String(s ?? "")) o += ENT[c] ?? c; return o; };
+function add(who, html, extra = "") { const r = document.createElement("div"); r.className = `row ${who}`; r.innerHTML = `<div class="msg">${html}${extra}</div>`; $("log").appendChild(r); $("log").scrollTop = 1e9; return r; }
+function showSide(o) {
+  $("steps").innerHTML = (o.steps ?? []).map((s) => { const cls = s.via === "hunt" ? "hunt" : s.via === "trail" ? "trail" : s.landed === false || s.ok === false ? "bad" : ""; const t = [s.step, s.via, s.kind, s.landed === true ? "landed" : s.landed === false ? "did not land" : "", s.how, s.admits, s.wording, s.gap, s.ok === false ? "refused" : ""].filter(Boolean).join(" · "); return `<span class="chip ${cls}">${esc(t)}</span>`; }).join("") + `<div class="hint">${o.requests ?? 0} request${o.requests === 1 ? "" : "s"} to Wikipedia · ${((o.ms ?? 0) / 1000).toFixed(1)} s</div>`;
+  const w = (o.steps ?? []).find((s) => s.step === "wording"); $("pool").innerHTML = w?.pool?.length ? w.pool.map((p) => `<div class="bar"><span>${esc(p.key)}${p.key === w.key ? " ◀" : ""}</span><i style="width:${Math.round(p.p * 160)}px"></i><small>${Math.round(p.p * 100)}%</small></div>`).join("") + `<div class="hint">drawn: ${esc(w.how)}</div>` : '<span class="hint">this turn did not word a social act</span>';
+  trails(o);
+}
+function trails(o) {
+  $("trails").innerHTML = (o.heads ?? []).length ? o.heads.map((h) => `<div><b style="font-size:12px">${esc(h.head)}</b>${h.routes.map((r) => `<div class="route"><span>${esc(r.route)}</span><small>${r.strength} (${r.deposits})</small><button data-h="${esc(h.head)}" data-r="${esc(r.route)}" title="this route gave a wrong answer">wrong ✗</button></div>`).join("")}</div>`).join("") : '<span class="hint">no trails yet: they are left when a hunt settles a question</span>';
+  $("marks").innerHTML = (o.marks ?? []).length ? o.marks.map((m) => `<div class="route">${esc(m.key)} <small>${m.seconds}s left</small></div>`).join("") : '<span class="hint">none (a refusal from Wikipedia would be left here for every session to read)</span>';
+}
+async function send(text) {
+  const t = text.trim(); if (!t) return; add("me", esc(t)); $("m").value = ""; $("b").disabled = true;
+  const pending = add("bot", "<i>thinking…</i>");
+  try {
+    const o = await (await fetch("/api/turn", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ message: t }) })).json();
+    const via = (o.steps ?? []).find((s) => s.step === "shelf")?.via, cite = o.cite ? `<div class="meta">${esc(o.cite.title)}${o.cite.section ? " / " + esc(o.cite.section) : ""}: “${esc(String(o.cite.sentence ?? "").slice(0, 140))}”</div>` : "";
+    const how = via ? `<div class="meta"><span class="chip ${via}">${via === "trail" ? "from the trail: " + (o.requests) + " calls" : "hunted: " + o.requests + " calls"}</span> ${((o.ms ?? 0) / 1000).toFixed(1)} s</div>` : "";
+    const reply = o.reply ?? (o.gap ? `(I could not settle it: ${o.gap.kind.split("_").join(" ")}${o.gap.detail ? " — " + String(o.gap.detail).slice(0, 120) : ""})` : "(nothing to say)");
+    pending.querySelector(".msg").innerHTML = esc(reply) + cite + how; showSide(o);
+  } catch (e) { pending.querySelector(".msg").textContent = "The demo server did not answer."; }
+  $("b").disabled = false; $("m").focus(); $("log").scrollTop = 1e9;
+}
+$("f").addEventListener("submit", (e) => { e.preventDefault(); send($("m").value); });
+$("forget").onclick = async () => { const o = await (await fetch("/api/forget", { method: "POST" })).json(); trails(o); add("bot", "<i>The trails are empty and the thread starts again.</i>"); };
+$("trails").addEventListener("click", async (e) => { const b = e.target.closest("button"); if (!b) return; const o = await (await fetch("/api/veto", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ head: b.dataset.h, route: b.dataset.r }) })).json(); trails(o); });
+$("run").onclick = async () => { $("run").disabled = true; $("tests").innerHTML = '<span class="hint">running…</span>'; const o = await (await fetch("/api/tests")).json(); $("tests").innerHTML = `<div id="sum" style="color:${o.failed ? "var(--bad)" : "var(--ok)"}">${o.passed} passed, ${o.failed} failed · ${(o.ms / 1000).toFixed(1)} s</div>` + o.tests.map((t) => `<div class="test ${t.ok ? "ok" : "bad"}">${esc(t.name)}</div>`).join(""); $("run").disabled = false; };
+$("quick").innerHTML = ["Who directed Lethal Weapon?", "Who did Mel Gibson play in Lethal Weapon?", "Who wrote War and Peace?", "What is the capital of Japan?", "thanks!", "hi"].map((q) => `<button>${esc(q)}</button>`).join("");
+$("quick").onclick = (e) => { const b = e.target.closest("button"); if (b) send(b.textContent); };
+fetch("/api/state").then((r) => r.json()).then((s) => { trails(s); if (!s.library) add("bot", `<i>The wording library is off: ${esc(s.why)}</i>`); });
+</script>
+</body>
+</html>
