@@ -1,0 +1,2053 @@
+{
+ "stamp": {
+  "when": "2026-11-24T04:04:11.881Z",
+  "split": "EXPLORATORY",
+  "n": 1200,
+  "zenodotus": "/Users/mlacy/Downloads/workspace/Zenodotus",
+  "files": {
+   "sms": 25,
+   "cosem": 40,
+   "irc": 45,
+   "formal": 1
+  },
+  "messages": {
+   "sms": 3610,
+   "cosem": 17685,
+   "irc": 195547,
+   "formal": 1693
+  }
+ },
+ "register": {
+  "sms": {
+   "label": "NUS SMS (en)",
+   "sampled": 1200,
+   "tokensPerMessage": 10.2,
+   "oovShare": 0.311,
+   "startsLowercase": 0.019,
+   "endsWithPunct": 0.414,
+   "noVerb": 0.332,
+   "propnPerMessage": 1.143,
+   "lowercasePropnShare": 0.121,
+   "emoticonOrOther": 0.051,
+   "ms": 7396
+  },
+  "cosem": {
+   "label": "CoSEM (Singapore English messages)",
+   "sampled": 1200,
+   "tokensPerMessage": 3.15,
+   "oovShare": 0.23,
+   "startsLowercase": 0.117,
+   "endsWithPunct": 0.311,
+   "noVerb": 0.333,
+   "propnPerMessage": 0.362,
+   "lowercasePropnShare": 0.062,
+   "emoticonOrOther": 0.018,
+   "ms": 1741
+  },
+  "irc": {
+   "label": "Ubuntu + Kubuntu IRC (en)",
+   "sampled": 1200,
+   "tokensPerMessage": 9.85,
+   "oovShare": 0.179,
+   "startsLowercase": 0.708,
+   "endsWithPunct": 0.302,
+   "noVerb": 0.182,
+   "propnPerMessage": 0.487,
+   "lowercasePropnShare": 0.328,
+   "emoticonOrOther": 0.066,
+   "ms": 11109
+  },
+  "formal": {
+   "label": "Alice in Wonderland (formal control)",
+   "sampled": 1200,
+   "tokensPerMessage": 14.29,
+   "oovShare": 0.091,
+   "startsLowercase": 0.152,
+   "endsWithPunct": 0.573,
+   "noVerb": 0.068,
+   "propnPerMessage": 0.663,
+   "lowercasePropnShare": 0.001,
+   "emoticonOrOther": 0.01,
+   "ms": 3394
+  }
+ },
+ "mechanics": {
+  "sms": [
+   {
+    "sig": "fragment",
+    "n": 380,
+    "ex": [
+     "Ru in kaju rum",
+     "Ok dear",
+     "Up to dadar",
+     "K d"
+    ],
+    "share": 0.317
+   },
+   {
+    "sig": "statement/noun",
+    "n": 211,
+    "ex": [
+     "India took some great catchs :-)",
+     "Indha help kuda panna maataengura la?:-(",
+     "Dnt want explanation",
+     "Ha bt ask amit tht he'l c0me or nt.."
+    ],
+    "share": 0.176
+   },
+   {
+    "sig": "statement/none",
+    "n": 165,
+    "ex": [
+     "Dnt worry .. Jst try 2 score gud mark @ public exm..k",
+     "Boring. Bored. Waiting for david. I know he's gonna kill.",
+     "Unka abi lunch chal raha he bhai 2 bje ke bd ek br ph0n try karna",
+     "Tell d... Wat doing? Going for aoe"
+    ],
+    "share": 0.138
+   },
+   {
+    "sig": "statement/I",
+    "n": 79,
+    "ex": [
+     "Hw many times i remembered u dis is fourth tym",
+     "Hey nw i got one program frm my dept frnd i am verifyin it .if nt i vil ask dat akka..thank u",
+     "I'm always looking for an excuse to be in the city.",
+     "Me to ghar pe hu..me &lt;#&gt; th me fail h0 gya tha:-P"
+    ],
+    "share": 0.066
+   },
+   {
+    "sig": "question/none",
+    "n": 78,
+    "ex": [
+     "Buzzzz! *grins* Did I buzz your ass? Buzz your chest ? Buzz your cock ? Where do you keep your phone ? Is the ",
+     "Next generation LKG poem..:-D Drinking Drinkng little BEER..%-) How i wonder what a BAR.. Quarter rates r up s",
+     "Nice lines 4 life: \"Dont miss a chance to express your affection. Becoz hearts are broken when words are unspo",
+     "A FLOWER NEVR KNOWS HOW BEAUTIFUL IT IS. A SEA NEVR KNOS HOW DEEP IT IS. U NEVR KNOW HOW VALUABLE U R TWO ME. "
+    ],
+    "share": 0.065
+   },
+   {
+    "sig": "imperative",
+    "n": 63,
+    "ex": [
+     "Helo krish ji.. H0w areu?.. Sory me us time away tha.. So aur sunao:-)",
+     "Goin 2 study..",
+     "Check mail.i have mailed varma and kept copy to you regarding membership.take care.insha allah.",
+     "Go n hav.. Obey 1st"
+    ],
+    "share": 0.052
+   },
+   {
+    "sig": "question/noun",
+    "n": 42,
+    "ex": [
+     "Kali kites sabo jabi neki?",
+     "Hey 2morow wat portions 4 ss test?",
+     "Ya sure?",
+     "The weakest part of a relation comes when one of the person has to give explanation to prove the trust... gn p"
+    ],
+    "share": 0.035
+   },
+   {
+    "sig": "statement/noun+neg",
+    "n": 22,
+    "ex": [
+     "A BIRLA INSTITUTE student is not the one who reads the book before exam! But, the one who writes a new book du",
+     "Da pls put money today.account number; &lt;#&gt; ,Rakhesh KR",
+     "A BIRLA INSTITUTE student is not the one who reads the book before exam! But, the one who writes a new book du",
+     "That means from february to april i'll be getting a place to stay down there so i don't have to hustle back an"
+    ],
+    "share": 0.018
+   },
+   {
+    "sig": "statement/you",
+    "n": 18,
+    "ex": [
+     "You have come into my life and brought the sun ..Shiny down on me, warming my heart. Putting a constant smile ",
+     "So,did u leave bag there? Have u found a room. Thurairaja didnt yet find a place 4 son. Bye",
+     "You have made me a hot chocolate drinker! Drinking Kahlua Hazelnut Coco- hot choc with hazelnut kahlua topped ",
+     "Can you bring memory stick tomorrow so that i can copy pics or in usb"
+    ],
+    "share": 0.015
+   },
+   {
+    "sig": "question/you",
+    "n": 17,
+    "ex": [
+     "Do you always celebrate NY's with your family ?",
+     "Did u hve ny cold tablets wit u?",
+     "LOL ... Have you made plans for new years?",
+     "Hellow, how what u?"
+    ],
+    "share": 0.014
+   },
+   {
+    "sig": "fragment+neg",
+    "n": 14,
+    "ex": [
+     "Crowd undu huge crowd....but not like season crowd...",
+     "Itz nt d tim.",
+     "Nt nw...",
+     "No prob"
+    ],
+    "share": 0.012
+   },
+   {
+    "sig": "statement/I+neg",
+    "n": 14,
+    "ex": [
+     "I calls you later. Afternoon onwords mtnl service get problem in south mumbai. I can hear you but you cann't l",
+     "I'm gonna be home soon and i don't want to talk about this stuff anymore tonight, k? I've cried enough today.",
+     "I wish nt to get d msg frm u tht wh0 am i..",
+     "I'm Not Shakespear 2 Write About U. I'm Not Sonu 2 Sing About U. I'm Not MF Hussain 2 Paint U. I'm Just ur sha"
+    ],
+    "share": 0.012
+   },
+   {
+    "sig": "statement/none+neg",
+    "n": 11,
+    "ex": [
+     "Hope you are not scared!",
+     "Hey.. Our cooker s slightly damaged.. So v r not lendin to anyone.. sorry",
+     "Great Quotation..... Don't Trust Your Heart..... Because Its Not On The Right Side..... ;-)gud day.",
+     "Got ur mail Dileep.thank you so muchand look forward to lots of support...very less contacts here,remember one"
+    ],
+    "share": 0.009
+   },
+   {
+    "sig": "question/I",
+    "n": 10,
+    "ex": [
+     "I am great! How are you?",
+     "Where are you now exactely?shall we wait for dinner?",
+     "I want to show you the world, princess :) how about europe?",
+     "I slready did,, remembee?"
+    ],
+    "share": 0.008
+   },
+   {
+    "sig": "imperative+neg",
+    "n": 9,
+    "ex": [
+     "Say this slowly. Jesus Christ, I love u &amp; I need u, clean my heart with your blood. I can feel you standin",
+     "Search a beautiful heart, but not search a beautiful face. Beautiful things are not always good, But good thin",
+     "Hey ask any of ur frnds whether they want carpidem t.shirt medium size",
+     "Of course ! Don't tease me ... You know I simply must see ! *grins* ... Do keep me posted my prey ... *loving "
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "statement/it",
+    "n": 9,
+    "ex": [
+     "He was in my grp oly nah! Our topic was \"xamination s it kilng education\"",
+     "She vil mistake me only cha.dnt talk to me also",
+     "It is possibl. Trust in god. Nothng is imposibl 4 hm. Do only 2 thngs. Pray wel, love him frm depth of ur hear",
+     "It happens always only na.i am used it.."
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "statement/noun+addressed",
+    "n": 9,
+    "ex": [
+     "Dear Hero,i am leaving to qatar tonite for an apt opportunity.pls do keep in touch at &lt;EMAIL&gt; ,kerala",
+     "Agr shubnkr sadam se dilwata he to t0tal &lt;#&gt; ayenge tere ac0unt me.. 7 shubu ke n &lt;#&gt; mere.. Bhai ",
+     "Aldrine, rakhesh ex RTM here.pls call.urgent.",
+     "HURRAY! www.FullOnSms.com is here! - Save ur mobile bills - Send unlimited sms for FREE - Also send FREE jokes"
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "interjection",
+    "n": 5,
+    "ex": [
+     "Ok",
+     "Okay...",
+     "Ok",
+     "Yes."
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "question/none+neg",
+    "n": 5,
+    "ex": [
+     "Just trying to figure out when I'm suppose to see a couple different people this week. We said we'd get togeth",
+     "Why don't you wait 'til at least wednesday to see if you get your .",
+     "Why don't u understand my life codition",
+     "Nt only for driving even for many reasons she is called BBD..thts it chikku, then hw abt dvg cold..heard tht v"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "statement/none+addressed",
+    "n": 5,
+    "ex": [
+     "RC &lt;#&gt; = &lt;#&gt; Loc SMS free. Know fun and positive facts about Urself with your Date of Birth. SMS D",
+     "Dude i'v g0t item bt d rat of ganesh ji was br0kn..bt Its ok i applied fevi kwik n tht w0rkd.. Try to pck as g",
+     "Dear Saptarishi, your bathing date validity for one year is expired today. So kindly RE-BATH within 1 hour and",
+     "Da, in the mrng v hav 2 b der in kankanady church at sharp 9 o clok. Come alone. V hav 2 meet siya. Dont 4gt 2"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "statement/you+neg",
+    "n": 5,
+    "ex": [
+     "You are right though. I can't give you the space you want and need. This is really starting to become an issue",
+     "You do not have enough balance in your vodafone account.Rs. &lt;#&gt; needed to activate this service.",
+     "Did u fix the teeth?if not do it asap.ok take care.",
+     "You said to me before i went back to bed that you can't sleep for anything."
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "question/noun+neg",
+    "n": 5,
+    "ex": [
+     "Stil im msgng no?",
+     "Ha ha nan yalrigu heltini..Iyo kothi chikku, u shared many things wit me..so far i didn't told any body and ev",
+     "3 realities of life: 1.U tink abt dat prsn a lot whom u r tryn2 4gt. 2.U hurt dem d mst whom u luv d mst. 3.U ",
+     "A ship in a harbor is safe, but that's not what ships are built for.GUDNUN TC - Sent via WAY2SMS.COM"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "question/none+addressed",
+    "n": 4,
+    "ex": [
+     "Hi Andreu, have v 2 get down at piliyandala town?",
+     "Mayawati Mulayam se: What is condom? Mulayam: ye wo cheej hai jise agar tumhare baap ne lagakar tumhari Maa ko",
+     "Aj chal0ge ya nahi?",
+     "Swami saranam.rchd sannidanam.now with a trvandrum gang..so net surfing?"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "fragment+addressed",
+    "n": 4,
+    "ex": [
+     "Sorry Dear",
+     "Losar &lt;#&gt; . Eptoin &lt;#&gt; . Fludac syrup. Pan &lt;#&gt; . Leon &lt;#&gt; . Tvs &lt;#&gt;",
+     "Losar &lt;#&gt; . Eptoin &lt;#&gt; . Fludac syrup. Pan &lt;#&gt; . Leon &lt;#&gt; . Tvs &lt;#&gt;",
+     "Thanks bro :-)"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "question/it",
+    "n": 4,
+    "ex": [
+     "Ydid she get a song to gerself?",
+     "Were they all to your satisfaction?",
+     "Did either of you have any idea's? Do you know of anyplaces doing something?",
+     ":-Daur padai karta he?"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "question/I+neg",
+    "n": 3,
+    "ex": [
+     "I don,t think so. You don't need to be going out that late on a school night. ESPECIALLY when the one class yo",
+     "I'm not sure, I was just checking out what was happening around the area",
+     "I actually did for the first time in a while. I went to bed not too long after i spoke with you. Woke up at 7."
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "interjection+neg",
+    "n": 3,
+    "ex": [
+     "No",
+     "No",
+     "No"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "statement/it+neg",
+    "n": 2,
+    "ex": [
+     "He is out for work, donot disturb. kindly call him after 5 minute or leave a message. Thank You. Do not reply ",
+     "No it's MS. No p. And nope."
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "question/none+addressed+neg",
+    "n": 1,
+    "ex": [
+     "Geeee ... I miss you already, you know ? Your all I can think about. Fuck, I can't wait till next year when we"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/you+addressed+neg",
+    "n": 1,
+    "ex": [
+     "wow. You're right! I didn't mean to do that. I guess once i gave up on boston men and changed my search locati"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/noun+addressed+neg",
+    "n": 1,
+    "ex": [
+     "Every girl may not be a queen to their lover,,, but are always a Princess to their father........ Happy world "
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "empty",
+    "n": 1,
+    "ex": [
+     ":-)"
+    ],
+    "share": 0.001
+   }
+  ],
+  "cosem": [
+   {
+    "sig": "fragment",
+    "n": 380,
+    "ex": [
+     "Tuesday afternoon frisbee (after 1630)",
+     "JY",
+     "Okie",
+     "*point"
+    ],
+    "share": 0.317
+   },
+   {
+    "sig": "empty",
+    "n": 219,
+    "ex": [
+     "???",
+     "??",
+     "??????",
+     "??"
+    ],
+    "share": 0.182
+   },
+   {
+    "sig": "statement/I",
+    "n": 108,
+    "ex": [
+     "I JUST FOUND OUT TOO",
+     "I also want!",
+     "so I had a wtf moment then I went back to sleep HAHAHA",
+     "I think if walk can have shelter all the way"
+    ],
+    "share": 0.09
+   },
+   {
+    "sig": "statement/noun",
+    "n": 82,
+    "ex": [
+     "Tonight will be a long night",
+     "U have to duck and cover",
+     "1.0 is enough for me HAHA",
+     "Someone take my shoe bag"
+    ],
+    "share": 0.068
+   },
+   {
+    "sig": "interjection",
+    "n": 73,
+    "ex": [
+     "HAHHA",
+     "HI",
+     "HAHHA",
+     "LOLOL"
+    ],
+    "share": 0.061
+   },
+   {
+    "sig": "question/none",
+    "n": 65,
+    "ex": [
+     "Thank you ????",
+     "What?",
+     "Merry Christmas! ??????",
+     "What? Haha help what?"
+    ],
+    "share": 0.054
+   },
+   {
+    "sig": "statement/none",
+    "n": 60,
+    "ex": [
+     "?oo haha I mean the arrangement of the bonding and antibonding pairs at the 2p level",
+     "Is a hellweek",
+     "Walking to Town",
+     "HAHA EH CAN FOODPANDA TGT"
+    ],
+    "share": 0.05
+   },
+   {
+    "sig": "imperative",
+    "n": 47,
+    "ex": [
+     "Must quickly choose before ur eyes get confused",
+     "plot the graph on the GC HAHA",
+     "Wed 5pm",
+     "Have to take the stalker MP"
+    ],
+    "share": 0.039
+   },
+   {
+    "sig": "question/noun",
+    "n": 29,
+    "ex": [
+     "Hahah project meeting ah ??",
+     "what does the rpa do ah",
+     "Huh what Jia",
+     "What is ug"
+    ],
+    "share": 0.024
+   },
+   {
+    "sig": "question/I",
+    "n": 18,
+    "ex": [
+     "Either we meet in early july or in aug ????",
+     "I ask you all arh. Are you all going to s/u those grades with A-?",
+     "I'm in front of Lee Hwa?",
+     "Haha yepp u got it oso?"
+    ],
+    "share": 0.015
+   },
+   {
+    "sig": "statement/it",
+    "n": 15,
+    "ex": [
+     "she said she cfm with me ASAP",
+     "it's ok",
+     "Like she gonna zero me likedat",
+     "THEY HAVE JY"
+    ],
+    "share": 0.013
+   },
+   {
+    "sig": "statement/you",
+    "n": 14,
+    "ex": [
+     "later you die",
+     "u have alot of matches",
+     "you wanna ruin friendships again? xD",
+     "LAI HUI YOU ALSO GOT PLAY AH"
+    ],
+    "share": 0.012
+   },
+   {
+    "sig": "statement/none+neg",
+    "n": 12,
+    "ex": [
+     "Sorry I can't but y'all go ahead",
+     "Not enough performers for MADNUS ?? so I have to go",
+     "Public speaking not that bad lah",
+     "Not dedicated lah"
+    ],
+    "share": 0.01
+   },
+   {
+    "sig": "fragment+neg",
+    "n": 11,
+    "ex": [
+     "i not",
+     "no im not",
+     "I not",
+     "Not in edu employment and training"
+    ],
+    "share": 0.009
+   },
+   {
+    "sig": "statement/I+neg",
+    "n": 10,
+    "ex": [
+     "Then I don't want",
+     "I'M NOT SAYIBG",
+     "Cause I don't wanna exhaust my level 1k",
+     "I can't clear any year 3 Lsm mods"
+    ],
+    "share": 0.008
+   },
+   {
+    "sig": "fragment+addressed",
+    "n": 9,
+    "ex": [
+     "Thanks!! JY",
+     "FREE CONE DAAAY",
+     "Thanks MP",
+     "Gong Xi fa cai LHL"
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "question/it",
+    "n": 8,
+    "ex": [
+     "They gave out all prizes alr ????",
+     "How did it even get inside lol",
+     "IDW later it show on my pants",
+     "when its binned its considered categorical liao"
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "question/you",
+    "n": 7,
+    "ex": [
+     "Whoa you all can stand back to back?",
+     "Do u still need more??",
+     "where are you guys uh?? lai's back in the LT alr ??",
+     "When you hungry"
+    ],
+    "share": 0.006
+   },
+   {
+    "sig": "statement/noun+neg",
+    "n": 6,
+    "ex": [
+     "If my project meeting doesn't end too late",
+     "Hahah sry couldn't find you all",
+     "Somehow the lsm3243 doesn't sound very hiong",
+     "eh wear shoe/don't wear shoe"
+    ],
+    "share": 0.005
+   },
+   {
+    "sig": "imperative+neg",
+    "n": 5,
+    "ex": [
+     "Aiya it's very stupid la some old lady damn kp making rounds in the pc commons taking away chairs with people'",
+     "Don't tell you",
+     "REMEMBER ANOT i think we missed the slide then actually got 3 ans one or something",
+     "no have"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "question/none+neg",
+    "n": 4,
+    "ex": [
+     "I just... don't want you ??",
+     "first isn't protecting at all i think?",
+     "Please don't play frisbee in this weather guys üò?",
+     "cannot lah I cant absorb anything when i watch webcast"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "question/I+neg",
+    "n": 4,
+    "ex": [
+     "I don't do geog even in sec sch ??",
+     "I think they didn't cancel out?",
+     "no eh I think! I don't rmb them mentioning ??",
+     "didn't I mention that? ??"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "question/none+addressed",
+    "n": 3,
+    "ex": [
+     "Happy belated birdday CW/M/CH/25 ?üë?",
+     "HAHAHHA WHY WE ALWAYS MISCOMMUNICATE",
+     "Thank you KY!! ??"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "statement/you+neg",
+    "n": 2,
+    "ex": [
+     "You all want or not",
+     "You're not the only one"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "statement/it+neg",
+    "n": 2,
+    "ex": [
+     "But they haven't reply!!",
+     "Haha it won't rain!"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "statement/I+addressed+neg",
+    "n": 1,
+    "ex": [
+     "I wasn't talking to you Jyn..."
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/none+addressed",
+    "n": 1,
+    "ex": [
+     "Thank you RC"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "imperative+addressed+neg",
+    "n": 1,
+    "ex": [
+     "Can't expect much. Airforce üíÅüèª"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "interjection+neg",
+    "n": 1,
+    "ex": [
+     "Oh no"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/noun+addressed",
+    "n": 1,
+    "ex": [
+     "Eeee I'm in group B4 for 2241. Lai Hui"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "question/you+neg",
+    "n": 1,
+    "ex": [
+     "So you didn't so congrats!!! ????"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "question/it+neg",
+    "n": 1,
+    "ex": [
+     "it's not raining alr (right)?"
+    ],
+    "share": 0.001
+   }
+  ],
+  "irc": [
+   {
+    "sig": "statement/none",
+    "n": 235,
+    "ex": [
+     "sagredo: have a look if this helps u: http://is.gd/1A3vE",
+     "aaas: you cluld use cut maybe",
+     "gaelfx: ya dude ..actually this is the main reason i was afraid to install ubuntu on my vaio tz .. i think tha",
+     "Pooh22: Want to see volume/trash icons on the desktop? Go to /apps/nautilus/desktop in gconf-editor (GNOME) or"
+    ],
+    "share": 0.196
+   },
+   {
+    "sig": "fragment",
+    "n": 202,
+    "ex": [
+     "!3ddesktop",
+     "500 http://us.archive.ubuntu.com intrepid/main",
+     "DBE",
+     "piratehead: no only from the console"
+    ],
+    "share": 0.168
+   },
+   {
+    "sig": "question/none",
+    "n": 139,
+    "ex": [
+     "is it worth doing?",
+     "Terminal and Synaptic give me grey screens and do nothing, after installing aptitude. Help?",
+     "any help?",
+     "8.10, cuz that's what I have. . . are you telling me i have to track down a blank cd?"
+    ],
+    "share": 0.116
+   },
+   {
+    "sig": "statement/noun",
+    "n": 96,
+    "ex": [
+     "Slart, kk, just thought if someone new here",
+     "stefano:could that be the problem",
+     "lufs can do sftp i think",
+     "someone else triaged it and sent it back to you"
+    ],
+    "share": 0.08
+   },
+   {
+    "sig": "statement/I",
+    "n": 85,
+    "ex": [
+     "i removed the k-menu on accident",
+     "I installed the package manually",
+     "I suppose I could have different xorg.confs with a script to switch between them.",
+     "i have a problem"
+    ],
+    "share": 0.071
+   },
+   {
+    "sig": "question/I",
+    "n": 55,
+    "ex": [
+     "how do I undo it to try again?",
+     "and i wanted to know how can i see which configure-options/output has been used in the package that is in the ",
+     "then i wouldnt recommend trying to fight with beryl....especially if you called what popped up after aptitude ",
+     "I'd guess that 20GB is far enough for lvm root volume ? (separate home and boot), right ?"
+    ],
+    "share": 0.046
+   },
+   {
+    "sig": "statement/none+neg",
+    "n": 54,
+    "ex": [
+     "speedy:  Another clue is the line at the bottom of the configure script end:  \"We can't promise to not kill an",
+     "Upgrades between LTS releases are not enabled by default until the first point release, 14.04.1, scheduled for",
+     "spork969: correction, drop the cd part, you don't actually need it, so \"/home/<fill-in-your-user-name>/jUpload",
+     "adrian_2002ca: for some reason XPMCE read it without any issues, by Vista, and XP won't"
+    ],
+    "share": 0.045
+   },
+   {
+    "sig": "question/noun",
+    "n": 53,
+    "ex": [
+     "brandon, why dont you try it out :d",
+     "that's what route is for",
+     "mercurus, er, is the windows remote desktop a VNC client?",
+     "zAmaranth, do you refere them to the server op ?"
+    ],
+    "share": 0.044
+   },
+   {
+    "sig": "imperative",
+    "n": 50,
+    "ex": [
+     "make my own shortcuts and stuff",
+     "after \"remove gstreamer*\" \"install gstreamer*\"",
+     "and use kate and you can edit them from there too.  makes the remote server feel like your local machine",
+     "conorkirkpatrick: The fact that you can connect? o.O"
+    ],
+    "share": 0.042
+   },
+   {
+    "sig": "interjection",
+    "n": 42,
+    "ex": [
+     "ok",
+     "hm...",
+     "hmm",
+     "oh"
+    ],
+    "share": 0.035
+   },
+   {
+    "sig": "question/none+neg",
+    "n": 24,
+    "ex": [
+     "dev, router or no?",
+     "AngryElf: the drive isn't mounted, is it?",
+     "catNode: This seems to be caused by the factory default reset, which suggests it was previously configured wit",
+     "quick question for anyone: I'm trying to add a cron on Ubuntu 14.04 to run screen and execute a program inside"
+    ],
+    "share": 0.02
+   },
+   {
+    "sig": "statement/it",
+    "n": 18,
+    "ex": [
+     "It opens in Kae.",
+     "if it does i will be back for a big pat on the back",
+     "Their's a generic Display Settings in the Ubuntu desktop under the regular window manager",
+     "it's the equivalent of Vmware GSX"
+    ],
+    "share": 0.015
+   },
+   {
+    "sig": "statement/noun+neg",
+    "n": 17,
+    "ex": [
+     "ummm.. no. Now all my desktop icons have gone. I still have wallpaper tho!",
+     "ryan_ishere, in anycase. Your whole problem was mostly caused by your not using the default player",
+     "that bottom unity panel thing. may or may not work with newer releases. ive not seen it mentioned in ages",
+     "Boxee wouldn't run in windows, I figured, well the OS is crap and nothing works right anyway, but now it doesn"
+    ],
+    "share": 0.014
+   },
+   {
+    "sig": "statement/I+neg",
+    "n": 15,
+    "ex": [
+     "but i can't figure it out",
+     "i was just asking for objective reasons...im not asking for 'the best'",
+     "I did that and it said it can't find them",
+     "I don't know who to listen to."
+    ],
+    "share": 0.013
+   },
+   {
+    "sig": "question/I+neg",
+    "n": 13,
+    "ex": [
+     "hello, I am usin quassel IRC, but it signs me as MrS1lentcz_ but not MrS1lentcz, why please?",
+     "I changed it to 1024 succesfully, but when I boot it goes into cmd prompt auto, and not into the loginscreen I",
+     "i read an article about the state of 64bit linux, i never tried 64 bit linux, i figured, why not?",
+     "I'm having trouble - Iam trying to mount an NTFS partition on a laptop harddrive and I don't know what command"
+    ],
+    "share": 0.011
+   },
+   {
+    "sig": "statement/you",
+    "n": 13,
+    "ex": [
+     "you can  use it as a radio through  the browser but  to access it through a app where ever you go   yes its pa",
+     "edbian do you think I need to alter it like this: GRUB_CMDLINE_LINUX_DEFAULT=\"quiet splash nomodeset acpi_osi=",
+     "you might try insert",
+     "need_help: Yeah you could try that."
+    ],
+    "share": 0.011
+   },
+   {
+    "sig": "fragment+neg",
+    "n": 10,
+    "ex": [
+     "lulu: nope.. not really",
+     "if not, thats lame",
+     "DJones: No, at the top between audio and bluetooth",
+     "ares-mars: not really..."
+    ],
+    "share": 0.008
+   },
+   {
+    "sig": "question/noun+neg",
+    "n": 9,
+    "ex": [
+     "sudo apt-get install vlc doesn't work ?",
+     "and when the system came back up, that partition won't mount",
+     "niteshade, The linux kernel is just another package.  I don't know which one off the top of my head.",
+     "so what is the command to install it (synaptic) make doesn't work"
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "statement/I+addressed",
+    "n": 7,
+    "ex": [
+     "damo22, i have high hopes for songbird, but it's still beta.",
+     "dek_aik, nope, i dont have this folder",
+     "Yum! Err, I mean, APT!",
+     "eth0, I think C"
+    ],
+    "share": 0.006
+   },
+   {
+    "sig": "imperative+neg",
+    "n": 7,
+    "ex": [
+     "ryan_ishere, say that a little louder.. I don't think the FBI quite heard you",
+     "does not support frames though check website",
+     "don't remember",
+     "can't find :S"
+    ],
+    "share": 0.006
+   },
+   {
+    "sig": "question/you",
+    "n": 6,
+    "ex": [
+     "ok, can you boot rescue from live cd?",
+     "hank, you mean make to compile source code?",
+     "ubottu, What does ubuntu have for a VRML 2.0 viewer?",
+     "are you guys going to hate on me if i use non-free drivers?"
+    ],
+    "share": 0.005
+   },
+   {
+    "sig": "fragment+addressed",
+    "n": 5,
+    "ex": [
+     "Hello osmodivs",
+     "hi all",
+     "Doc-Saintly: look here http://www.watchingthenet.com/how-to-enable-automati-logon-in-ubuntu-or-kubuntu.html",
+     "Drakonik, hmmm"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "statement/noun+addressed",
+    "n": 5,
+    "ex": [
+     "this is my card.  RS690M [Radeon X1200 Series]",
+     "bawnio, kickstart is a script for setting up an unattended install and also your mom is off topic",
+     "dabaR, netbeans is non-free by definition",
+     "on an OS X machine, the fonts look pretty"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "question/none+addressed",
+    "n": 5,
+    "ex": [
+     "Hi guys, i wanna to print a file in gvim with line number, anybody knows how?",
+     "Ademan, its the bloe screen with the grey box, saying X mashed do you want to view x server output?",
+     "Hey guys, do you suck?",
+     "ActionParsnip1, is there a way i can write that to a file so i can see all of it at once?"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "question/it",
+    "n": 4,
+    "ex": [
+     "ok, it just does? No confirmation or anything on the confirmation page before install?",
+     "is it already on the CD?",
+     "every time i do compiz then 3D effects come but after restarting it's gone       plzzz tell me what to do",
+     "exactly as it is?"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "empty",
+    "n": 3,
+    "ex": [
+     "所以我把他卸了。",
+     ":-(",
+     ":)"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "statement/none+addressed",
+    "n": 3,
+    "ex": [
+     "Thanks guys I will try them both!",
+     "ZykoticK9, oh thanks for info btw",
+     "james147, thanks!"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "statement/it+addressed",
+    "n": 3,
+    "ex": [
+     "chrissyRO, it will tell you if it is detected properly",
+     "dmgunn, it means you're installing unofficial software",
+     "crazy4ubuntu, it bypasses the packaging system of ubuntu and the community, plus the guy that created it is a "
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "imperative+addressed",
+    "n": 2,
+    "ex": [
+     "mikebot, then ignore my rambling",
+     "zoli2k, then ask in #iptables . i didnt know about connection table"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "question/you+addressed+neg",
+    "n": 2,
+    "ex": [
+     "bullgard4, what the heck are you talking about.  \"beep\" is not a command.",
+     "Drakonik, your not on a mac are you?"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "statement/you+addressed",
+    "n": 2,
+    "ex": [
+     "Wizek, you can only have 4 primary partitions on a hdd I beleive , so if your total exceeds some will need to ",
+     "nucc1, then you can use dpkg to shwo the files : dpkg --status gpodder"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "question/noun+addressed",
+    "n": 2,
+    "ex": [
+     "int_main, right, which happens to be the resolution of Ubuntu that I use...I'm just unsure of what to put in t",
+     "markdymek, what is your sound card and speaker model?"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "statement/none+addressed+neg",
+    "n": 2,
+    "ex": [
+     "not sure yet, im gonna try now",
+     "Lilandra, lol, details details...atleast you didn't have to spend an hour at your parents trying to load up ub"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "statement/it+neg",
+    "n": 2,
+    "ex": [
+     "it is not in the repositories so you need to find another source for it",
+     "it won't work if you kernel paniced"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "question/you+addressed",
+    "n": 2,
+    "ex": [
+     "ikonia, have you done 64 bit?",
+     "Rabbitbunny,  you have flash installed ...yes?"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "question/you+neg",
+    "n": 1,
+    "ex": [
+     "do you know why this would happen? With 12.04 I was able to install successfully. I am not even able to go ahe"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "question/I+addressed",
+    "n": 1,
+    "ex": [
+     "TechniCore, i never heard something about \"mrextraproper\" (no results in google), looks like a typo or somethi"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "interjection+neg",
+    "n": 1,
+    "ex": [
+     "no"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "fragment+addressed+neg",
+    "n": 1,
+    "ex": [
+     "crdlb: not at all?  Bummer"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "question/none+addressed+neg",
+    "n": 1,
+    "ex": [
+     "dante123, heat issue? cpu not seated properly? bad hardware (hard drive)?"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "imperative+addressed+neg",
+    "n": 1,
+    "ex": [
+     "jigp, no, m-a a-i madwifi"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/it+addressed+neg",
+    "n": 1,
+    "ex": [
+     "jief, no, they're all down south"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/I+addressed+neg",
+    "n": 1,
+    "ex": [
+     "Dr_Willis64, i can't see embedded konsole in Kdevelop"
+    ],
+    "share": 0.001
+   }
+  ],
+  "formal": [
+   {
+    "sig": "statement/noun",
+    "n": 238,
+    "ex": [
+     "“I—I’m a little girl,” said Alice, rather doubtfully, as she remembered the number of changes she had gone thr",
+     "but the Mouse only shook its head impatiently, and walked a little quicker.",
+     "The Queen turned crimson with fury, and, after glaring at her for a moment like a wild beast, screamed “Off wi",
+     "Alice asked."
+    ],
+    "share": 0.198
+   },
+   {
+    "sig": "statement/none",
+    "n": 208,
+    "ex": [
+     "“_Stolen!_” the King exclaimed, turning to the jury, who instantly made a memorandum of the fact.",
+     "cried the Mouse, who was trembling down to the end of his tail.",
+     "said the Mouse, turning to Alice, and sighing.",
+     "thought Alice."
+    ],
+    "share": 0.173
+   },
+   {
+    "sig": "statement/it",
+    "n": 137,
+    "ex": [
+     "she exclaimed in a tone of great dismay, and began picking them up again as quickly as she could, for the acci",
+     "In a little while, however, she again heard a little pattering of footsteps in the distance, and she looked up",
+     "Suddenly she came upon a little three-legged table, all made of solid glass; there was nothing on it except a ",
+     "he added looking angrily at the March Hare."
+    ],
+    "share": 0.114
+   },
+   {
+    "sig": "statement/I",
+    "n": 80,
+    "ex": [
+     "“I’m glad I’ve seen that done,” thought Alice.",
+     "“We quarrelled last March—just before _he_ went mad, you know—” (pointing with his tea spoon at the March Hare",
+     "“I believe so,” Alice replied thoughtfully.",
+     "“I should like it very much,” said Alice, “but I haven’t been invited yet.”"
+    ],
+    "share": 0.067
+   },
+   {
+    "sig": "fragment",
+    "n": 76,
+    "ex": [
+     "CHAPTER IV.",
+     "“A knot!”",
+     "“Behead that Dormouse!",
+     "CHAPTER X."
+    ],
+    "share": 0.063
+   },
+   {
+    "sig": "question/none",
+    "n": 53,
+    "ex": [
+     "Besides, _she’s_ she, and _I’m_ I, and—oh dear, how puzzling it all is!",
+     "“Call it what you like,” said the Cat.",
+     "“Why with an M?”",
+     "roared the Queen, and Alice joined the procession, wondering very much what would happen next."
+    ],
+    "share": 0.044
+   },
+   {
+    "sig": "statement/I+neg",
+    "n": 51,
+    "ex": [
+     "“Yes, but _I_ grow at a reasonable pace,” said the Dormouse: “not in that ridiculous fashion.”",
+     "“But I don’t want to go among mad people,” Alice remarked.",
+     "I only wish people knew _that_: then they wouldn’t be so stingy about it, you know—”",
+     "“Well, I can’t show it you myself,” the Mock Turtle said: “I’m too stiff."
+    ],
+    "share": 0.043
+   },
+   {
+    "sig": "question/noun",
+    "n": 48,
+    "ex": [
+     "The Cat only grinned when it saw Alice.",
+     "Who ever saw one that size?",
+     "“And yet what a dear little puppy it was!”",
+     "“That’s different from what _I_ used to say when I was a child,” said the Gryphon."
+    ],
+    "share": 0.04
+   },
+   {
+    "sig": "statement/noun+neg",
+    "n": 38,
+    "ex": [
+     "“I can’t explain _myself_, I’m afraid, sir,” said Alice, “because I’m not myself, you see.”",
+     "There was a long silence after this, and Alice could only hear whispers now and then; such as, “Sure, I don’t ",
+     "and the Dormouse sulkily remarked, “If you can’t be civil, you’d better finish the story for yourself.”",
+     "Some of the birds hurried off at once: one old Magpie began wrapping itself up very carefully, remarking, “I r"
+    ],
+    "share": 0.032
+   },
+   {
+    "sig": "statement/you",
+    "n": 30,
+    "ex": [
+     "“You ought to have finished,” said the King.",
+     "“_Are_ you to get in at all?”",
+     "You’re a serpent; and there’s no use denying it.",
+     "you may nurse it a bit, if you like!”"
+    ],
+    "share": 0.025
+   },
+   {
+    "sig": "statement/it+neg",
+    "n": 30,
+    "ex": [
+     "And she thought of herself, “I wish the creatures wouldn’t be so easily offended!”",
+     "It doesn’t look like one, but it is.”",
+     "She went on growing, and growing, and very soon had to kneel down on the floor: in another minute there was no",
+     "By the time she had caught the flamingo and brought it back, the fight was over, and both the hedgehogs were o"
+    ],
+    "share": 0.025
+   },
+   {
+    "sig": "statement/none+neg",
+    "n": 29,
+    "ex": [
+     "The Queen’s argument was, that if something wasn’t done about it in less than no time she’d have everybody exe",
+     "Don’t be all day about it!”",
+     "“It must have been that,” said the King, “unless it was written to nobody, which isn’t usual, you know.”",
+     "“Cheshire Puss,” she began, rather timidly, as she did not at all know whether it would like the name: however"
+    ],
+    "share": 0.024
+   },
+   {
+    "sig": "imperative",
+    "n": 27,
+    "ex": [
+     "“Please come back and finish your story!”",
+     "Visit either you like: they’re both mad.”",
+     "“Never mind!”",
+     "Come and help me out of _this!_” (Sounds of more broken glass.)"
+    ],
+    "share": 0.022
+   },
+   {
+    "sig": "question/it",
+    "n": 26,
+    "ex": [
+     "“Why, _she_,” said the Gryphon.",
+     "She ate a little bit, and said anxiously to herself, “Which way?",
+     "“What did they draw?”",
+     "when it grunted again, so violently, that she looked down into its face in some alarm."
+    ],
+    "share": 0.022
+   },
+   {
+    "sig": "question/I",
+    "n": 19,
+    "ex": [
+     "I shall only look up and say ‘Who am I then?",
+     "However, I’ve got back to my right size: the next thing is, to get into that beautiful garden—how _is_ that to",
+     "“Well, if I must, I must,” the King said, with a melancholy air, and, after folding his arms and frowning at t",
+     "“But what am _I_ to do?”"
+    ],
+    "share": 0.016
+   },
+   {
+    "sig": "question/noun+neg",
+    "n": 15,
+    "ex": [
+     "Alice didn’t think that proved it at all; however, she went on “And how do you know that you’re mad?”",
+     "Who for such dainties would not stoop?",
+     "“Well, then,” the Gryphon went on, “if you don’t know what to uglify is, you _are_ a simpleton.”",
+     "“What _is_ the use of repeating all that stuff,” the Mock Turtle interrupted, “if you don’t explain it as you "
+    ],
+    "share": 0.013
+   },
+   {
+    "sig": "question/you",
+    "n": 13,
+    "ex": [
+     "“You know what to beautify is, I suppose?”",
+     "“When did you begin?”",
+     "“How _could_ he turn them out with his nose, you know?”",
+     "Do you think you could manage it?) “And what an ignorant little girl she’ll think me for asking!"
+    ],
+    "share": 0.011
+   },
+   {
+    "sig": "question/I+neg",
+    "n": 12,
+    "ex": [
+     "“No, I give it up,” Alice replied: “what’s the answer?”",
+     "“I don’t believe it,” said the Pigeon; “but if they do, why then they’re a kind of serpent, that’s all I can s",
+     "Why, I haven’t had a wink of sleep these three weeks!”",
+     "“I don’t know the meaning of half those long words, and, what’s more, I don’t believe you do either!”"
+    ],
+    "share": 0.01
+   },
+   {
+    "sig": "statement/you+neg",
+    "n": 11,
+    "ex": [
+     "then yours wasn’t a really good school,” said the Mock Turtle in a tone of great relief.",
+     "“You are not attending!”",
+     "“_You’d_ better not talk!”",
+     "“_That_ you won’t!”"
+    ],
+    "share": 0.009
+   },
+   {
+    "sig": "interjection",
+    "n": 11,
+    "ex": [
+     "“Oh, hush!”",
+     "“Wow!",
+     "“Yes!”",
+     "“Oh!"
+    ],
+    "share": 0.009
+   },
+   {
+    "sig": "question/none+neg",
+    "n": 8,
+    "ex": [
+     "There was no “One, two, three, and away,” but they began running when they liked, and left off when they liked",
+     "“Of course not,” said the Mock Turtle: “why, if a fish came to _me_, and told me he was going a journey, I sho",
+     "And oh, my poor hands, how is it I can’t see you?”",
+     "“Can’t remember _what_ things?”"
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "empty",
+    "n": 8,
+    "ex": [
+     "* * * * * * *",
+     "* * * * * * *",
+     "* * * * * * *",
+     "* * * * * *"
+    ],
+    "share": 0.007
+   },
+   {
+    "sig": "question/it+neg",
+    "n": 6,
+    "ex": [
+     "on their slates, and she could even make out that one of them didn’t know how to spell “stupid,” and that he h",
+     "“It tells the day of the month, and doesn’t tell what o’clock it is!”",
+     "“Then it doesn’t matter which way you go,” said the Cat.",
+     "And it’ll fetch things when you throw them, and it’ll sit up and beg for its dinner, and all sorts of things—I"
+    ],
+    "share": 0.005
+   },
+   {
+    "sig": "fragment+neg",
+    "n": 5,
+    "ex": [
+     "“Not I!”",
+     "“No, no!”",
+     "“Not I!”",
+     "“Not yet, not yet!”"
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "imperative+neg",
+    "n": 5,
+    "ex": [
+     "Would not, could not, would not, could not, could not join the dance.",
+     "Don’t go splashing paint over me like that!”",
+     "“No, please go on!”",
+     "Would not, could not, would not, could not, would not join the dance."
+    ],
+    "share": 0.004
+   },
+   {
+    "sig": "question/you+neg",
+    "n": 3,
+    "ex": [
+     "“You can’t think how glad I am to see you again, you dear old thing!”",
+     "for, you see, as she couldn’t answer either question, it didn’t much matter which way she put it.",
+     "(If you don’t know what a Gryphon is, look at the picture.) “Up, lazy thing!”"
+    ],
+    "share": 0.003
+   },
+   {
+    "sig": "statement/I+addressed",
+    "n": 2,
+    "ex": [
+     "So you see, Miss, we’re doing our best, afore she comes, to—” At this moment Five, who had been anxiously look",
+     "“Serpent, I say again!”"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "statement/noun+addressed",
+    "n": 2,
+    "ex": [
+     "This was quite a new idea to Alice, and she thought it over a little before she made her next remark.",
+     "The King laid his hand upon her arm, and timidly said “Consider, my dear: she is only a child!”"
+    ],
+    "share": 0.002
+   },
+   {
+    "sig": "statement/it+addressed+neg",
+    "n": 1,
+    "ex": [
+     "she asked the Gryphon, and the Gryphon answered, very nearly in the same words as before, “It’s all his fancy,"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "question/you+addressed",
+    "n": 1,
+    "ex": [
+     "“You promised to tell me your history, you know,” said Alice, “and why it is you hate—C and D,” she added in a"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "interjection+neg",
+    "n": 1,
+    "ex": [
+     "“No, no!"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/noun+addressed+neg",
+    "n": 1,
+    "ex": [
+     "Alice was very nearly getting up and saying, “Thank you, sir, for your interesting story,” but she could not h"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "fragment+addressed",
+    "n": 1,
+    "ex": [
+     "Oh my fur and whiskers!"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/none+addressed",
+    "n": 1,
+    "ex": [
+     "The poor little Lizard, Bill, was in the middle, being held up by two guinea-pigs, who were giving it somethin"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "question/noun+addressed",
+    "n": 1,
+    "ex": [
+     "This was such a new idea to Alice, that she was quite silent for a minute or two, which gave the Pigeon the op"
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/it+addressed",
+    "n": 1,
+    "ex": [
+     "“It’s all her fancy, that: they never executes nobody, you know."
+    ],
+    "share": 0.001
+   },
+   {
+    "sig": "statement/you+addressed+neg",
+    "n": 1,
+    "ex": [
+     "_You_ do it!—_That_ I won’t, then!—Bill’s to go down—Here, Bill!"
+    ],
+    "share": 0.001
+   }
+  ]
+ },
+ "conversation": {
+  "lines": 195547,
+  "addressedShare": 0.394,
+  "gapToAddresseesLastLine": {
+   "n": 76868,
+   "median": 3,
+   "p90": 11
+  },
+  "questionLines": 37235,
+  "questionsFollowedByAnotherSpeakerWithin5": 0.999,
+  "addressedQuestionsAnsweredByAddresseeWithin5": 0.708,
+  "sameSpeakerRunShare": 0.15
+ },
+ "examples": {},
+ "chatBehaviour": [
+  {
+   "sig": "fragment",
+   "share": 0.267,
+   "replies": [
+    {
+     "said": "Ru in kaju rum",
+     "type": "fragment",
+     "handled": false,
+     "gap": "fragment_unclear",
+     "doorCalls": 0,
+     "text": "I'm not sure what you mean by “Ru in kaju rum”."
+    },
+    {
+     "said": "Ok dear",
+     "type": "social",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Okay."
+    }
+   ]
+  },
+  {
+   "sig": "statement/none",
+   "share": 0.128,
+   "replies": [
+    {
+     "said": "Dnt worry .. Jst try 2 score gud mark @ public exm..k",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "Boring. Bored. Waiting for david. I know he's gonna kill.",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "statement/noun",
+   "share": 0.108,
+   "replies": [
+    {
+     "said": "India took some great catchs :-)",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "Indha help kuda panna maataengura la?:-(",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "I couldn't read some of those words, so I didn't look anything up."
+    }
+   ]
+  },
+  {
+   "sig": "question/none",
+   "share": 0.078,
+   "replies": [
+    {
+     "said": "Buzzzz! *grins* Did I buzz your ass? Buzz your chest ? Buzz your cock ? Where do you keep ",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "Next generation LKG poem..:-D Drinking Drinkng little BEER..%-) How i wonder what a BAR.. ",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "statement/I",
+   "share": 0.076,
+   "replies": [
+    {
+     "said": "Hw many times i remembered u dis is fourth tym",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "Hey nw i got one program frm my dept frnd i am verifyin it .if nt i vil ask dat akka..than",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "empty",
+   "share": 0.062,
+   "replies": [
+    {
+     "said": "??????",
+     "type": "unread",
+     "handled": false,
+     "gap": "act_unread",
+     "doorCalls": 0,
+     "text": "I couldn't tell what kind of message that was."
+    },
+    {
+     "said": "所以我把他卸了。",
+     "type": "unread",
+     "handled": false,
+     "gap": "act_unread",
+     "doorCalls": 0,
+     "text": "I couldn't tell what kind of message that was."
+    }
+   ]
+  },
+  {
+   "sig": "imperative",
+   "share": 0.044,
+   "replies": [
+    {
+     "said": "Helo krish ji.. H0w areu?.. Sory me us time away tha.. So aur sunao:-)",
+     "type": "unread",
+     "handled": false,
+     "gap": "act_unread",
+     "doorCalls": 0,
+     "text": "I couldn't tell what kind of message that was."
+    },
+    {
+     "said": "Goin 2 study..",
+     "type": "request",
+     "handled": false,
+     "gap": "act_not_possible",
+     "doorCalls": 0,
+     "text": "That reads as a request (“Goin 2 study..”). I can look things up and answer from what I'm told, but "
+    }
+   ]
+  },
+  {
+   "sig": "question/noun",
+   "share": 0.034,
+   "replies": [
+    {
+     "said": "Kali kites sabo jabi neki?",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "I couldn't read some of those words, so I didn't look anything up."
+    },
+    {
+     "said": "Hey 2morow wat portions 4 ss test?",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "I couldn't read some of those words, so I didn't look anything up."
+    }
+   ]
+  },
+  {
+   "sig": "interjection",
+   "share": 0.033,
+   "replies": [
+    {
+     "said": "Okay...",
+     "type": "social",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Okay."
+    },
+    {
+     "said": "Yes.",
+     "type": "social",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Okay."
+    }
+   ]
+  },
+  {
+   "sig": "question/I",
+   "share": 0.023,
+   "replies": [
+    {
+     "said": "I am great! How are you?",
+     "type": "smalltalk",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "I'm a program, so I don't have good days or bad ones, but I'm working."
+    },
+    {
+     "said": "Where are you now exactely?shall we wait for dinner?",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "That's about you or me, and I only know what's been said in this chat."
+    }
+   ]
+  },
+  {
+   "sig": "statement/none+neg",
+   "share": 0.021,
+   "replies": [
+    {
+     "said": "Hope you are not scared!",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "Hey.. Our cooker s slightly damaged.. So v r not lendin to anyone.. sorry",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "statement/noun+neg",
+   "share": 0.013,
+   "replies": [
+    {
+     "said": "A BIRLA INSTITUTE student is not the one who reads the book before exam! But, the one who ",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "Da pls put money today.account number; &lt;#&gt; ,Rakhesh KR",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "statement/you",
+   "share": 0.013,
+   "replies": [
+    {
+     "said": "You have come into my life and brought the sun ..Shiny down on me, warming my heart. Putti",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "So,did u leave bag there? Have u found a room. Thurairaja didnt yet find a place 4 son. By",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "That's about you or me, and I only know what's been said in this chat."
+    }
+   ]
+  },
+  {
+   "sig": "statement/it",
+   "share": 0.012,
+   "replies": [
+    {
+     "said": "He was in my grp oly nah! Our topic was \"xamination s it kilng education\"",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "She vil mistake me only cha.dnt talk to me also",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "statement/I+neg",
+   "share": 0.011,
+   "replies": [
+    {
+     "said": "I calls you later. Afternoon onwords mtnl service get problem in south mumbai. I can hear ",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "I'm gonna be home soon and i don't want to talk about this stuff anymore tonight, k? I've ",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "fragment+neg",
+   "share": 0.01,
+   "replies": [
+    {
+     "said": "Crowd undu huge crowd....but not like season crowd...",
+     "type": "fragment",
+     "handled": false,
+     "gap": "fragment_unclear",
+     "doorCalls": 0,
+     "text": "I'm not sure what you mean by “Crowd undu huge crowd....but not like season crowd...”."
+    },
+    {
+     "said": "Itz nt d tim.",
+     "type": "fragment",
+     "handled": false,
+     "gap": "fragment_unclear",
+     "doorCalls": 0,
+     "text": "I'm not sure what you mean by “Itz nt d tim.”."
+    }
+   ]
+  },
+  {
+   "sig": "question/none+neg",
+   "share": 0.009,
+   "replies": [
+    {
+     "said": "Just trying to figure out when I'm suppose to see a couple different people this week. We ",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "Why don't you wait 'til at least wednesday to see if you get your .",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "That's about you or me, and I only know what's been said in this chat."
+    }
+   ]
+  },
+  {
+   "sig": "question/you",
+   "share": 0.008,
+   "replies": [
+    {
+     "said": "Do you always celebrate NY's with your family ?",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "That's about you or me, and I only know what's been said in this chat."
+    },
+    {
+     "said": "Did u hve ny cold tablets wit u?",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "That's about you or me, and I only know what's been said in this chat."
+    }
+   ]
+  },
+  {
+   "sig": "imperative+neg",
+   "share": 0.006,
+   "replies": [
+    {
+     "said": "Say this slowly. Jesus Christ, I love u &amp; I need u, clean my heart with your blood. I ",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted. (I set aside “Say this slowly.”: it reads as a request, which I can't act on.)"
+    },
+    {
+     "said": "Search a beautiful heart, but not search a beautiful face. Beautiful things are not always",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted. (I set aside “Search a beautiful heart, but not search a beautiful face.”: it reads as a requ"
+    }
+   ]
+  },
+  {
+   "sig": "question/I+neg",
+   "share": 0.006,
+   "replies": [
+    {
+     "said": "I don,t think so. You don't need to be going out that late on a school night. ESPECIALLY w",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    },
+    {
+     "said": "I'm not sure, I was just checking out what was happening around the area",
+     "type": "read",
+     "handled": true,
+     "gap": null,
+     "doorCalls": 0,
+     "text": "Noted."
+    }
+   ]
+  },
+  {
+   "sig": "fragment+addressed",
+   "share": 0.005,
+   "replies": [
+    {
+     "said": "Sorry Dear",
+     "type": "fragment",
+     "handled": false,
+     "gap": "fragment_unclear",
+     "doorCalls": 0,
+     "text": "I'm not sure what you mean by “Sorry Dear”."
+    },
+    {
+     "said": "Losar &lt;#&gt; . Eptoin &lt;#&gt; . Fludac syrup. Pan &lt;#&gt; . Leon &lt;#&gt; . Tvs &l",
+     "type": "fragment",
+     "handled": false,
+     "gap": "fragment_unclear",
+     "doorCalls": 0,
+     "text": "I'm not sure what you mean by “Losar &lt;#&gt; . Eptoin &lt;#&gt; . Fludac syrup. Pan &lt;#&gt; . Le"
+    }
+   ]
+  },
+  {
+   "sig": "question/it",
+   "share": 0.004,
+   "replies": [
+    {
+     "said": "Ydid she get a song to gerself?",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "That's about you or me, and I only know what's been said in this chat."
+    },
+    {
+     "said": "Were they all to your satisfaction?",
+     "type": "relational",
+     "handled": false,
+     "gap": "action_not_in_text",
+     "doorCalls": 0,
+     "text": "That's about you or me, and I only know what's been said in this chat."
+    }
+   ]
+  }
+ ]
+}

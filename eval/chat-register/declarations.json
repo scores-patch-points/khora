@@ -1,0 +1,260 @@
+{
+ "stamp": {
+  "when": "2026-11-23T23:31:52.309Z",
+  "split": "EXPLORATORY",
+  "n": 600,
+  "note": "declaration from the reader's universal marks only; the thread's English-supplied booleans (small talk, arithmetic, slash, address) are not given"
+ },
+ "profile": {
+  "sms": {
+   "sampled": 600,
+   "working": {
+    "social": 0.377,
+    "statement": 0.368,
+    "question": 0.142,
+    "request": 0.062,
+    "unread": 0.052
+   },
+   "open": 0.057,
+   "unread": 0.052,
+   "someMarkOpposes": 0.135,
+   "openPairs": {
+    "social+question": 22,
+    "question+statement": 9,
+    "question+request": 3
+   }
+  },
+  "cosem": {
+   "sampled": 600,
+   "working": {
+    "social": 0.393,
+    "unread": 0.238,
+    "statement": 0.21,
+    "question": 0.108,
+    "request": 0.05
+   },
+   "open": 0.03,
+   "unread": 0.238,
+   "someMarkOpposes": 0.097,
+   "openPairs": {
+    "social+question": 12,
+    "question+request": 3,
+    "question+statement": 3
+   }
+  },
+  "irc": {
+   "sampled": 600,
+   "working": {
+    "statement": 0.385,
+    "question": 0.267,
+    "social": 0.233,
+    "unread": 0.078,
+    "request": 0.037
+   },
+   "open": 0.047,
+   "unread": 0.078,
+   "someMarkOpposes": 0.24,
+   "openPairs": {
+    "social+question": 16,
+    "question+statement": 9,
+    "question+request": 3
+   }
+  },
+  "formal": {
+   "sampled": 600,
+   "working": {
+    "statement": 0.59,
+    "question": 0.213,
+    "unread": 0.102,
+    "social": 0.065,
+    "request": 0.03
+   },
+   "open": 0.008,
+   "unread": 0.102,
+   "someMarkOpposes": 0.205,
+   "openPairs": {
+    "social+question": 2,
+    "question+statement": 2,
+    "question+request": 1
+   }
+  }
+ },
+ "stability": {
+  "sms": {
+   "lower": {
+    "changed": 577,
+    "sameWorkingAct": 0.901,
+    "sameWorkingActAndOpen": 0.901
+   },
+   "nopunct": {
+    "changed": 248,
+    "sameWorkingAct": 0.839,
+    "sameWorkingActAndOpen": 0.726
+   },
+   "typo": {
+    "changed": 497,
+    "sameWorkingAct": 0.934,
+    "sameWorkingActAndOpen": 0.934
+   }
+  },
+  "cosem": {
+   "lower": {
+    "changed": 419,
+    "sameWorkingAct": 0.974,
+    "sameWorkingActAndOpen": 0.971
+   },
+   "nopunct": {
+    "changed": 185,
+    "sameWorkingAct": 0.843,
+    "sameWorkingActAndOpen": 0.768
+   },
+   "typo": {
+    "changed": 358,
+    "sameWorkingAct": 0.925,
+    "sameWorkingActAndOpen": 0.925
+   }
+  },
+  "irc": {
+   "lower": {
+    "changed": 279,
+    "sameWorkingAct": 0.971,
+    "sameWorkingActAndOpen": 0.971
+   },
+   "nopunct": {
+    "changed": 198,
+    "sameWorkingAct": 0.692,
+    "sameWorkingActAndOpen": 0.586
+   },
+   "typo": {
+    "changed": 538,
+    "sameWorkingAct": 0.97,
+    "sameWorkingActAndOpen": 0.97
+   }
+  },
+  "formal": {
+   "lower": {
+    "changed": 575,
+    "sameWorkingAct": 0.957,
+    "sameWorkingActAndOpen": 0.957
+   },
+   "nopunct": {
+    "changed": 345,
+    "sameWorkingAct": 0.974,
+    "sameWorkingActAndOpen": 0.968
+   },
+   "typo": {
+    "changed": 552,
+    "sameWorkingAct": 0.96,
+    "sameWorkingActAndOpen": 0.96
+   }
+  }
+ },
+ "bySupport": {
+  "lower": {
+   "1 mark": {
+    "n": 1162,
+    "survives": 0.94
+   },
+   "2 marks": {
+    "n": 36,
+    "survives": 0.972
+   },
+   "3+ marks": {
+    "n": 2,
+    "survives": 1
+   }
+  },
+  "nopunct": {
+   "1 mark": {
+    "n": 443,
+    "survives": 0.711
+   },
+   "2 marks": {
+    "n": 55,
+    "survives": 0.982
+   },
+   "3+ marks": {
+    "n": 2,
+    "survives": 1
+   }
+  },
+  "typo": {
+   "1 mark": {
+    "n": 1242,
+    "survives": 0.958
+   },
+   "2 marks": {
+    "n": 53,
+    "survives": 0.962
+   },
+   "3+ marks": {
+    "n": 2,
+    "survives": 1
+   }
+  },
+  "all": {
+   "1 mark": {
+    "n": 2847,
+    "survives": 0.912
+   },
+   "2 marks": {
+    "n": 144,
+    "survives": 0.972
+   },
+   "3+ marks": {
+    "n": 6,
+    "survives": 1
+   }
+  },
+  "byOpen": {
+   "closed": {
+    "n": 2818,
+    "survives": 0.912
+   },
+   "open (two acts held)": {
+    "n": 179,
+    "survives": 0.961
+   }
+  },
+  "singleMark": {
+   "subject_predicate": {
+    "n": 1172,
+    "survives": 0.949
+   },
+   "no_predicate": {
+    "n": 951,
+    "survives": 0.955
+   },
+   "final_question_mark": {
+    "n": 335,
+    "survives": 0.612
+   },
+   "wh_word": {
+    "n": 185,
+    "survives": 0.957
+   },
+   "imperative_form": {
+    "n": 163,
+    "survives": 0.951
+   },
+   "aux_first": {
+    "n": 41,
+    "survives": 0.976
+   }
+  }
+ },
+ "ledger": {
+  "lower": {
+   "messages": 24,
+   "declarationSurvives": 0.958
+  },
+  "nopunct": {
+   "messages": 41,
+   "declarationSurvives": 0.683
+  },
+  "typo": {
+   "messages": 52,
+   "declarationSurvives": 0.981
+  }
+ }
+}

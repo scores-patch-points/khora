@@ -1,0 +1,954 @@
+{
+ "stamp": {
+  "when": "2026-11-23T23:19:12.753Z",
+  "split": "EXPLORATORY",
+  "dials": {
+   "MIN": 30,
+   "WINDOW": 3,
+   "nullDraws": 2000
+  },
+  "ircLines": 195547,
+  "giver": "kaikki-en",
+  "embedder": "nomic-embed-text (frozen codec)"
+ },
+ "forms": [
+  "lol",
+  "oh",
+  "yea",
+  "ok",
+  "hehe",
+  "yes",
+  "yep",
+  "wow",
+  "nope",
+  "hi",
+  "heh",
+  "yeah",
+  "hello",
+  "hmmm",
+  "haha",
+  "right",
+  "hmm",
+  "no",
+  "hey",
+  "okay",
+  "well",
+  "ahh",
+  "yup",
+  "oops",
+  "please"
+ ],
+ "answeredWith": {
+  "lol": "i 36, lol 14, how 10, hi 8",
+  "oh": "i 7, anyone 4, can 3, how 3",
+  "yea": "calc 2, and 2, usual 1, it's 1",
+  "ok": "i 31, hi 18, is 11, how 9",
+  "hehe": "hi 3, i 3, hello 2, tiglionabbit 2",
+  "yes": "i 22, ok 20, how 11, yes 7",
+  "yep": "i 5, ok 4, hi 3, is 3",
+  "wow": "i 2, ok 1, mjr 1, my 1",
+  "nope": "the 3, ah 2, maybe 2, ok 2",
+  "hi": "hi 44, i 33, how 15, hello 14",
+  "heh": "i 6, no 3, lol 3, i'm 3",
+  "yeah": "i 14, ok 6, anyone 5, how 4",
+  "hello": "hi 32, hello 27, i 17, how 12",
+  "hmmm": "i 5, just 1, calc 1, tolstoy 1",
+  "haha": "i 5, the 2, or 2, umkulu 2",
+  "right": "i 3, because 2, is 2, it 2",
+  "hmm": "i 12, how 4, ok 4, what 4",
+  "no": "ok 8, i 8, what 7, so 5",
+  "hey": "i 5, hi 5, how 4, hey 3",
+  "okay": "i 5, sophia 3, no 2, is 2",
+  "well": "sophia 3, i've 2, exactly 1, stazich 1",
+  "ahh": "i 3, ok 2, hey 2, hello 2",
+  "yup": "ok 4, i 3, can 2, catnode 2",
+  "oops": "hi 2, how 2, is 2, windows 1",
+  "please": "i 3, tuxyrochefort 3, celestianpower 1, kidvulcan 1"
+ },
+ "glossesPerForm": {
+  "lol": 11,
+  "oh": 9,
+  "yea": 6,
+  "ok": 11,
+  "hehe": 3,
+  "yes": 5,
+  "yep": 3,
+  "wow": 6,
+  "nope": 6,
+  "hi": 6,
+  "heh": 3,
+  "yeah": 3,
+  "hello": 3,
+  "hmmm": 1,
+  "haha": 4,
+  "right": 5,
+  "hmm": 3,
+  "no": 14,
+  "hey": 5,
+  "okay": 5,
+  "well": 6,
+  "ahh": 5,
+  "yup": 5,
+  "oops": 4,
+  "please": 4
+ },
+ "agreement": {
+  "pairs": 300,
+  "rho": 0.187,
+  "nullMedian": 0.001,
+  "null95": 0.246,
+  "p": 0.1089,
+  "nnHit": 0.44,
+  "nnNullMedian": 0.12,
+  "nnNull95": 0.24,
+  "nnP": 0.0033
+ },
+ "glossActs": [],
+ "glossTau": 0.956,
+ "withinUsage": {
+  "tested": false,
+  "why": "no gloss group formed"
+ },
+ "notInterjectionsToTheReader": [
+  "cool/PROPN",
+  "thanks/NOUN",
+  "ah/PROPN",
+  "hm/PROPN",
+  "np/PROPN",
+  "anyone/PRON",
+  "er/NOUN",
+  "bye/PROPN",
+  "wtf/NOUN",
+  "kk/PROPN",
+  "brb/PROPN",
+  "thx/NOUN",
+  "sorry/ADJ",
+  "why/ADV",
+  "help/NOUN",
+  "ty/NOUN",
+  "how/ADV",
+  "sure/ADJ",
+  "what/PRON",
+  "so/ADV",
+  "hola/PROPN",
+  "exit/NOUN"
+ ],
+ "usageNeighbours": {
+  "lol": [
+   {
+    "form": "ok",
+    "sim": 0.94
+   },
+   {
+    "form": "yes",
+    "sim": 0.9
+   },
+   {
+    "form": "oh",
+    "sim": 0.89
+   }
+  ],
+  "oh": [
+   {
+    "form": "lol",
+    "sim": 0.89
+   },
+   {
+    "form": "yes",
+    "sim": 0.89
+   },
+   {
+    "form": "ok",
+    "sim": 0.87
+   }
+  ],
+  "cool": [
+   {
+    "form": "oh",
+    "sim": 0.75
+   },
+   {
+    "form": "yeah",
+    "sim": 0.73
+   },
+   {
+    "form": "np",
+    "sim": 0.71
+   }
+  ],
+  "yea": [
+   {
+    "form": "no",
+    "sim": 0.68
+   },
+   {
+    "form": "ok",
+    "sim": 0.67
+   },
+   {
+    "form": "oh",
+    "sim": 0.65
+   }
+  ],
+  "ok": [
+   {
+    "form": "lol",
+    "sim": 0.94
+   },
+   {
+    "form": "hi",
+    "sim": 0.91
+   },
+   {
+    "form": "yes",
+    "sim": 0.91
+   }
+  ],
+  "thanks": [
+   {
+    "form": "hi",
+    "sim": 0.95
+   },
+   {
+    "form": "hello",
+    "sim": 0.92
+   },
+   {
+    "form": "ok",
+    "sim": 0.89
+   }
+  ],
+  "ah": [
+   {
+    "form": "ok",
+    "sim": 0.79
+   },
+   {
+    "form": "lol",
+    "sim": 0.77
+   },
+   {
+    "form": "heh",
+    "sim": 0.75
+   }
+  ],
+  "hehe": [
+   {
+    "form": "lol",
+    "sim": 0.83
+   },
+   {
+    "form": "ok",
+    "sim": 0.78
+   },
+   {
+    "form": "hmm",
+    "sim": 0.76
+   }
+  ],
+  "yes": [
+   {
+    "form": "ok",
+    "sim": 0.91
+   },
+   {
+    "form": "lol",
+    "sim": 0.9
+   },
+   {
+    "form": "hi",
+    "sim": 0.9
+   }
+  ],
+  "yep": [
+   {
+    "form": "no",
+    "sim": 0.79
+   },
+   {
+    "form": "wow",
+    "sim": 0.78
+   },
+   {
+    "form": "hello",
+    "sim": 0.78
+   }
+  ],
+  "wow": [
+   {
+    "form": "yep",
+    "sim": 0.78
+   },
+   {
+    "form": "why",
+    "sim": 0.75
+   },
+   {
+    "form": "bye",
+    "sim": 0.72
+   }
+  ],
+  "nope": [
+   {
+    "form": "oh",
+    "sim": 0.81
+   },
+   {
+    "form": "yes",
+    "sim": 0.73
+   },
+   {
+    "form": "ok",
+    "sim": 0.72
+   }
+  ],
+  "hi": [
+   {
+    "form": "hello",
+    "sim": 0.95
+   },
+   {
+    "form": "thanks",
+    "sim": 0.95
+   },
+   {
+    "form": "ok",
+    "sim": 0.91
+   }
+  ],
+  "hm": [
+   {
+    "form": "hmm",
+    "sim": 0.66
+   },
+   {
+    "form": "ahh",
+    "sim": 0.64
+   },
+   {
+    "form": "hehe",
+    "sim": 0.64
+   }
+  ],
+  "np": [
+   {
+    "form": "hi",
+    "sim": 0.82
+   },
+   {
+    "form": "yeah",
+    "sim": 0.81
+   },
+   {
+    "form": "ok",
+    "sim": 0.78
+   }
+  ],
+  "anyone": [
+   {
+    "form": "ok",
+    "sim": 0.84
+   },
+   {
+    "form": "yes",
+    "sim": 0.82
+   },
+   {
+    "form": "lol",
+    "sim": 0.82
+   }
+  ],
+  "heh": [
+   {
+    "form": "lol",
+    "sim": 0.87
+   },
+   {
+    "form": "sorry",
+    "sim": 0.86
+   },
+   {
+    "form": "hi",
+    "sim": 0.83
+   }
+  ],
+  "yeah": [
+   {
+    "form": "ok",
+    "sim": 0.89
+   },
+   {
+    "form": "hi",
+    "sim": 0.88
+   },
+   {
+    "form": "yes",
+    "sim": 0.87
+   }
+  ],
+  "bye": [
+   {
+    "form": "hello",
+    "sim": 0.77
+   },
+   {
+    "form": "thanks",
+    "sim": 0.77
+   },
+   {
+    "form": "yes",
+    "sim": 0.76
+   }
+  ],
+  "hello": [
+   {
+    "form": "hi",
+    "sim": 0.95
+   },
+   {
+    "form": "thanks",
+    "sim": 0.92
+   },
+   {
+    "form": "ok",
+    "sim": 0.86
+   }
+  ],
+  "hmmm": [
+   {
+    "form": "lol",
+    "sim": 0.72
+   },
+   {
+    "form": "yes",
+    "sim": 0.68
+   },
+   {
+    "form": "oh",
+    "sim": 0.64
+   }
+  ],
+  "haha": [
+   {
+    "form": "hmm",
+    "sim": 0.81
+   },
+   {
+    "form": "lol",
+    "sim": 0.76
+   },
+   {
+    "form": "heh",
+    "sim": 0.74
+   }
+  ],
+  "right": [
+   {
+    "form": "no",
+    "sim": 0.7
+   },
+   {
+    "form": "oh",
+    "sim": 0.69
+   },
+   {
+    "form": "lol",
+    "sim": 0.67
+   }
+  ],
+  "hmm": [
+   {
+    "form": "lol",
+    "sim": 0.86
+   },
+   {
+    "form": "oh",
+    "sim": 0.85
+   },
+   {
+    "form": "yes",
+    "sim": 0.85
+   }
+  ],
+  "wtf": [
+   {
+    "form": "hey",
+    "sim": 0.78
+   },
+   {
+    "form": "thanks",
+    "sim": 0.75
+   },
+   {
+    "form": "lol",
+    "sim": 0.75
+   }
+  ],
+  "kk": [
+   {
+    "form": "brb",
+    "sim": 0.78
+   },
+   {
+    "form": "wtf",
+    "sim": 0.68
+   },
+   {
+    "form": "oh",
+    "sim": 0.66
+   }
+  ],
+  "brb": [
+   {
+    "form": "yeah",
+    "sim": 0.81
+   },
+   {
+    "form": "kk",
+    "sim": 0.78
+   },
+   {
+    "form": "np",
+    "sim": 0.77
+   }
+  ],
+  "no": [
+   {
+    "form": "yes",
+    "sim": 0.89
+   },
+   {
+    "form": "lol",
+    "sim": 0.88
+   },
+   {
+    "form": "ok",
+    "sim": 0.88
+   }
+  ],
+  "thx": [
+   {
+    "form": "yeah",
+    "sim": 0.83
+   },
+   {
+    "form": "hmm",
+    "sim": 0.81
+   },
+   {
+    "form": "yes",
+    "sim": 0.81
+   }
+  ],
+  "hey": [
+   {
+    "form": "hi",
+    "sim": 0.87
+   },
+   {
+    "form": "hello",
+    "sim": 0.85
+   },
+   {
+    "form": "thanks",
+    "sim": 0.84
+   }
+  ],
+  "okay": [
+   {
+    "form": "ok",
+    "sim": 0.82
+   },
+   {
+    "form": "sorry",
+    "sim": 0.79
+   },
+   {
+    "form": "heh",
+    "sim": 0.79
+   }
+  ],
+  "sorry": [
+   {
+    "form": "hi",
+    "sim": 0.86
+   },
+   {
+    "form": "heh",
+    "sim": 0.86
+   },
+   {
+    "form": "lol",
+    "sim": 0.84
+   }
+  ],
+  "why": [
+   {
+    "form": "wow",
+    "sim": 0.75
+   },
+   {
+    "form": "sorry",
+    "sim": 0.69
+   },
+   {
+    "form": "hello",
+    "sim": 0.69
+   }
+  ],
+  "help": [
+   {
+    "form": "hehe",
+    "sim": 0.65
+   },
+   {
+    "form": "hello",
+    "sim": 0.64
+   },
+   {
+    "form": "sorry",
+    "sim": 0.58
+   }
+  ],
+  "ahh": [
+   {
+    "form": "yep",
+    "sim": 0.77
+   },
+   {
+    "form": "wow",
+    "sim": 0.71
+   },
+   {
+    "form": "sure",
+    "sim": 0.7
+   }
+  ],
+  "ty": [
+   {
+    "form": "hello",
+    "sim": 0.73
+   },
+   {
+    "form": "yep",
+    "sim": 0.68
+   },
+   {
+    "form": "anyone",
+    "sim": 0.68
+   }
+  ],
+  "how": [
+   {
+    "form": "yes",
+    "sim": 0.6
+   },
+   {
+    "form": "no",
+    "sim": 0.59
+   },
+   {
+    "form": "oh",
+    "sim": 0.59
+   }
+  ],
+  "sure": [
+   {
+    "form": "ahh",
+    "sim": 0.7
+   },
+   {
+    "form": "thanks",
+    "sim": 0.68
+   },
+   {
+    "form": "hi",
+    "sim": 0.67
+   }
+  ],
+  "yup": [
+   {
+    "form": "yeah",
+    "sim": 0.75
+   },
+   {
+    "form": "yes",
+    "sim": 0.75
+   },
+   {
+    "form": "lol",
+    "sim": 0.73
+   }
+  ],
+  "oops": [
+   {
+    "form": "thanks",
+    "sim": 0.82
+   },
+   {
+    "form": "hello",
+    "sim": 0.77
+   },
+   {
+    "form": "hi",
+    "sim": 0.76
+   }
+  ],
+  "what": [
+   {
+    "form": "lol",
+    "sim": 0.7
+   },
+   {
+    "form": "ok",
+    "sim": 0.67
+   },
+   {
+    "form": "hmm",
+    "sim": 0.66
+   }
+  ],
+  "so": [
+   {
+    "form": "ah",
+    "sim": 0.52
+   },
+   {
+    "form": "no",
+    "sim": 0.45
+   },
+   {
+    "form": "yea",
+    "sim": 0.45
+   }
+  ],
+  "hola": [
+   {
+    "form": "heh",
+    "sim": 0.76
+   },
+   {
+    "form": "hmm",
+    "sim": 0.67
+   },
+   {
+    "form": "hi",
+    "sim": 0.67
+   }
+  ],
+  "please": [
+   {
+    "form": "thx",
+    "sim": 0.7
+   },
+   {
+    "form": "wtf",
+    "sim": 0.69
+   },
+   {
+    "form": "brb",
+    "sim": 0.68
+   }
+  ],
+  "exit": [
+   {
+    "form": "bye",
+    "sim": 0.7
+   },
+   {
+    "form": "hi",
+    "sim": 0.69
+   },
+   {
+    "form": "hello",
+    "sim": 0.68
+   }
+  ]
+ },
+ "giverFirstGlosses": {
+  "lol": [
+   "Alternative form of LOL.",
+   "Alternative letter-case form of LOL."
+  ],
+  "oh": [
+   "Abbreviation of Ohio: a state of the United States.",
+   "Initialism of other half: a husband, wife, partner, etc."
+  ],
+  "cool": [
+   "Of a mildly low temperature.",
+   "A moderate or refreshing state of cold; moderate temperature of the air between hot and cold; coolness."
+  ],
+  "yea": [
+   "Yes, indeed.",
+   "Or even, or more like, nay. Introduces a stronger and more appropriate expression than the preceding one."
+  ],
+  "ok": [
+   "Endorsement; approval; acceptance; acquiescence.",
+   "To approve; to accept; to acquiesce to."
+  ],
+  "thanks": [
+   "Used to express appreciation or gratitude.",
+   "An expression of appreciation or gratitude."
+  ],
+  "ah": [
+   "An expression of relief, relaxation, comfort, confusion, understanding, wonder, awe, etc. according to uttered inflection.",
+   "An instance of the interjection ah."
+  ],
+  "hehe": [
+   "An approximation to the sound of a mischievous giggle.",
+   "A Bantu people of Tanzania."
+  ],
+  "yes": [
+   "Used to show agreement or acceptance.",
+   "An exclamation of pleasure or approval, usually transcribed with an exclamation point."
+  ],
+  "yep": [
+   "Yes.",
+   "Yes."
+  ],
+  "wow": [
+   "An indication of excitement, surprise, astonishment, or pleasure.",
+   "To amaze or awe."
+  ],
+  "nope": [
+   "No.",
+   "A negative reply, no."
+  ],
+  "hi": [
+   "A friendly, informal, casual greeting said upon someone's arrival.",
+   "The word \"hi\" used as a greeting."
+  ],
+  "hm": [
+   "A shorter variant of hmm.",
+   "Initialism of how much."
+  ],
+  "np": [
+   "Initialism of National Party.",
+   "Initialism of no problem."
+  ],
+  "anyone": [
+   "Any person; anybody."
+  ],
+  "heh": [
+   "The fifth letter of many Semitic alphabets (Phoenician 𐤄, Aramaic 𐡄, Hebrew ה, Syriac ܗ, Arabic ه, and others).",
+   "Weak amusement, sometimes signaling boredom or slight embarrassment."
+  ],
+  "yeah": [
+   "Yes.",
+   "Expressing joy, celebration, glee, etc."
+  ],
+  "er": [
+   "Said when hesitating in speech.",
+   "To utter the word er when hesitating in speech."
+  ],
+  "bye": [
+   "The position of a person or team in a tournament or competition who draws no opponent in a particular round so advances to the next round unopposed, or is awarded points for a win in a league table; also the phantom opponent of such a person or team.",
+   "Out of the way; remote."
+  ],
+  "hello": [
+   "A greeting (salutation) said when meeting someone or acknowledging someone’s arrival or presence.",
+   "\"Hello!\" or an equivalent greeting."
+  ],
+  "hmmm": [
+   "Elongated form of hmm."
+  ],
+  "haha": [
+   "An onomatopoeic representation of laughter.",
+   "To laugh."
+  ],
+  "right": [
+   "Designating the side of the body which is positioned to the east if one is facing north, the side on which the heart is not located in most humans. This arrow points to the reader's right: →",
+   "On the right side."
+  ],
+  "hmm": [
+   "Indicates thinking or pondering.",
+   "To make a thoughtful humming noise."
+  ],
+  "wtf": [
+   "Initialism of what the fuck.",
+   "Initialism of World Taekwondo Federation."
+  ],
+  "kk": [
+   "Okay (indicates that no further explanation is necessary for a subject, or that the message was understood and will be acted upon without further confirmation).",
+   "Initialism of Kota Kinabalu."
+  ],
+  "brb": [
+   "Initialism of be right back.",
+   "Initialism of bevelled-rim bowl or bevel-rimmed bowl (“a small, undecorated, mass-produced clay bowl, most commonly from the 4th millennium B.C.”)."
+  ],
+  "no": [
+   "Initialism of normally open.",
+   "Initialism of Novus Ordo."
+  ],
+  "thx": [
+   "Abbreviation of thanks."
+  ],
+  "hey": [
+   "An exclamation to get attention.",
+   "To greet with a \"hey\""
+  ],
+  "okay": [
+   "Alternative spelling of OK.",
+   "Alternative spelling of OK."
+  ],
+  "sorry": [
+   "Of a person, regretful or apologetic for one's actions.",
+   "Expresses regret, remorse, or sorrow."
+  ],
+  "why": [
+   "For what cause, reason, or purpose.",
+   "Reason."
+  ],
+  "help": [
+   "Action given to provide assistance; aid.",
+   "To provide assistance to (someone or something)."
+  ],
+  "well": [
+   "Accurately, competently, satisfactorily.",
+   "In good health."
+  ],
+  "ahh": [
+   "Alternative spelling of aah.",
+   "Alternative spelling of aah."
+  ],
+  "ty": [
+   "Initialism of thank you.",
+   "A diminutive of the male given name Tyrone, Tyler, Tyson, Tyron, and other male given names beginning with \"Ty\"."
+  ],
+  "how": [
+   "To what degree or extent.",
+   "Used to state that something is in a certain way or state."
+  ],
+  "sure": [
+   "Physically secure and certain, non-failing, reliable.",
+   "Without doubt, certainly."
+  ],
+  "yup": [
+   "A yes; an affirmative answer.",
+   "Yes."
+  ],
+  "oops": [
+   "Used to acknowledge a small mistake or accident.",
+   "A minor mistake or unforeseen difficulty."
+  ],
+  "what": [
+   "Which, especially which of an open-ended set of possibilities.",
+   "Which thing, event, circumstance, etc.: used in asking for the specification of an identity, quantity, quality, etc."
+  ],
+  "so": [
+   "Reduced form of 'so that', used to express purpose; in order that.",
+   "To the (explicitly stated) extent."
+  ],
+  "hola": [
+   "Hello, hi, hey."
+  ],
+  "please": [
+   "To make happy or satisfy; to give pleasure to.",
+   "Used to make a polite request."
+  ],
+  "exit": [
+   "An act of going out or going away, or leaving; a departure.",
+   "To go out or go away from a place or situation; to depart, to leave."
+  ]
+ }
+}

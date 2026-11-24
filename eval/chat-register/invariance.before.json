@@ -1,0 +1,186 @@
+{
+ "stamp": {
+  "when": "2026-11-23T22:43:22.980Z",
+  "split": "EXPLORATORY",
+  "asks": 56,
+  "source": "asks.json"
+ },
+ "results": {
+  "lower": {
+   "messages": 24,
+   "same": 0.167,
+   "upos": 0.735,
+   "propn": 0.136,
+   "propnMessages": 22,
+   "rels": 0.699
+  },
+  "nopunct": {
+   "messages": 41,
+   "same": 0.829,
+   "upos": 0.995,
+   "propn": 1,
+   "propnMessages": 19,
+   "rels": 0.898
+  },
+  "typo": {
+   "messages": 52,
+   "same": 0.904,
+   "upos": 0.995,
+   "propn": 1,
+   "propnMessages": 21,
+   "rels": 0.929
+  },
+  "control": {
+   "messages": 56,
+   "rels": 1
+  }
+ },
+ "worst": {
+  "lower": [
+   {
+    "said": "who is marie curie?",
+    "was": "who is Marie Curie?",
+    "upos": 0.5,
+    "propn": 0,
+    "rels": 0
+   },
+   {
+    "said": "when was abraham lincoln born?",
+    "was": "when was Abraham Lincoln born?",
+    "upos": 0.6,
+    "propn": 0,
+    "rels": 0.33
+   },
+   {
+    "said": "mina gave jonathan a book.",
+    "was": "Mina gave Jonathan a book.",
+    "upos": 0.8,
+    "propn": 0.5,
+    "rels": 0.33
+   },
+   {
+    "said": "pierre loves natasha.",
+    "was": "Pierre loves Natasha.",
+    "upos": 0.33,
+    "propn": 0,
+    "rels": 0.33
+   },
+   {
+    "said": "if all cats are animals and tom is a cat, is tom an animal?",
+    "was": "If all cats are animals and Tom is a cat, is Tom an animal?",
+    "upos": 0.86,
+    "propn": 0,
+    "rels": 0.37
+   },
+   {
+    "said": "i have a dog called rex.",
+    "was": "I have a dog called Rex.",
+    "upos": 0.83,
+    "propn": 0,
+    "rels": 0.43
+   },
+   {
+    "said": "did mina give jonathan a book?",
+    "was": "did Mina give Jonathan a book?",
+    "upos": 0.67,
+    "propn": 0,
+    "rels": 0.43
+   },
+   {
+    "said": "no, mina gave jonathan a pen.",
+    "was": "no, Mina gave Jonathan a pen.",
+    "upos": 0.67,
+    "propn": 0,
+    "rels": 0.43
+   }
+  ],
+  "nopunct": [
+   {
+    "said": "how tall is Mount Everest",
+    "was": "how tall is Mount Everest?",
+    "upos": 1,
+    "propn": 1,
+    "rels": 0
+   },
+   {
+    "said": "who is Abraham Lincoln",
+    "was": "who is Abraham Lincoln?",
+    "upos": 1,
+    "propn": 1,
+    "rels": 0
+   },
+   {
+    "said": "who directed Lethal Weapon",
+    "was": "who directed Lethal Weapon?",
+    "upos": 1,
+    "propn": 1,
+    "rels": 0.2
+   },
+   {
+    "said": "when was Abraham Lincoln born",
+    "was": "when was Abraham Lincoln born?",
+    "upos": 1,
+    "propn": 1,
+    "rels": 0.33
+   },
+   {
+    "said": "what is my dog called",
+    "was": "what is my dog called?",
+    "upos": 1,
+    "propn": null,
+    "rels": 0.6
+   },
+   {
+    "said": "I have a dog called Rex",
+    "was": "I have a dog called Rex.",
+    "upos": 1,
+    "propn": 1,
+    "rels": 0.67
+   },
+   {
+    "said": "why is the sky blue",
+    "was": "why is the sky blue?",
+    "upos": 0.8,
+    "propn": null,
+    "rels": 1
+   }
+  ],
+  "typo": [
+   {
+    "said": "what's the date tdoay?",
+    "was": "what's the date today?",
+    "upos": 1,
+    "propn": null,
+    "rels": 0
+   },
+   {
+    "said": "what does serendiptiy mean?",
+    "was": "what does serendipity mean?",
+    "upos": 1,
+    "propn": null,
+    "rels": 0
+   },
+   {
+    "said": "what is my dog caleld?",
+    "was": "what is my dog called?",
+    "upos": 1,
+    "propn": null,
+    "rels": 0
+   },
+   {
+    "said": "I have a dog caleld Rex.",
+    "was": "I have a dog called Rex.",
+    "upos": 1,
+    "propn": 1,
+    "rels": 0.33
+   },
+   {
+    "said": "why is the sky bule?",
+    "was": "why is the sky blue?",
+    "upos": 0.75,
+    "propn": null,
+    "rels": 1
+   }
+  ]
+ }
+}

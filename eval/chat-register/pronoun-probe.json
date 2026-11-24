@@ -1,0 +1,88 @@
+{
+ "stamp": {
+  "when": "2026-11-24T04:03:53.190Z",
+  "split": "EXPLORATORY (developer-written probes)",
+  "commit": "1e14abe"
+ },
+ "probes": 8,
+ "outcomes": {
+  "right": 0,
+  "asked": 8,
+  "wrong": 0
+ },
+ "wrongBindings": 0,
+ "dialogues": {
+  "passed": 6,
+  "of": 6,
+  "rows": [
+   {
+    "name": "ask which, take the name, answer with it",
+    "ok": true,
+    "trail": [
+     "Pierre met Natasha. She smiled. => Noted.",
+     "Who is she? => Do you mean Pierre or Natasha?",
+     "Natasha => You told me “Pierre met Natasha.”",
+     "Who smiled? => Natasha."
+    ]
+   },
+   {
+    "name": "one pro-form settles a man (no question needed)",
+    "ok": true,
+    "trail": [
+     "Pierre took his hat. Natasha smiled. He waved. => Noted.",
+     "Who waved? => Pierre."
+    ]
+   },
+   {
+    "name": "a woman who smiled is the only one it can be (no question needed)",
+    "ok": true,
+    "trail": [
+     "Pierre took his hat. Natasha smiled. She waved. => Noted.",
+     "Who waved? => Natasha."
+    ]
+   },
+   {
+    "name": "a settled she makes he someone else",
+    "ok": true,
+    "trail": [
+     "Pierre met Natasha. She smiled. He left. => Noted.",
+     "Who is she? => Do you mean Pierre or Natasha?",
+     "Natasha => You told me “Pierre met Natasha.” and “He left.”",
+     "Who is he? => That would be Pierre. You told me “Pierre met Na"
+    ]
+   },
+   {
+    "name": "one person only, no ambiguity (no question needed)",
+    "ok": true,
+    "trail": [
+     "Natasha smiled. She waved. => Noted.",
+     "Who waved? => Natasha."
+    ]
+   },
+   {
+    "name": "a wrong answer is refused and the question stays open",
+    "ok": true,
+    "trail": [
+     "Pierre met Natasha. She smiled. => Noted.",
+     "Who is she? => Do you mean Pierre or Natasha?",
+     "the course => I can't use “the course”: I asked whether you me",
+     "Natasha => You told me “Pierre met Natasha.”",
+     "Who smiled? => Natasha."
+    ]
+   }
+  ]
+ },
+ "byPlace": {
+  "first": {
+   "right": 0,
+   "asked": 3,
+   "wrong": 0
+  },
+  "second": {
+   "right": 0,
+   "asked": 5,
+   "wrong": 0
+  }
+ },
+ "whoAnsweredWithBarePronoun": 0
+}
