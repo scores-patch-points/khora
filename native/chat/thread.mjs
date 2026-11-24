@@ -249,13 +249,15 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     try { return { E: verbOrgan.makeVerbEquivalence({ embed, reference: verbOrgan.referenceVerbs(pr.posPrior) }) }; } catch (e) { return { gap: String(e?.message ?? e).slice(0, 120) }; }
   })());
   let codeRouterP = null;
+  // the unit's text as the index embeds it ("search_document: <name>. <what it says it does>"): the codec's own prefix and the repeated name are not the function's words
+  const plainWords = (raw, name) => { let t = String(raw).split("\n")[0]; if (t.startsWith("search_document:")) t = t.slice("search_document:".length).trim(); if (t.startsWith(`${name}.`)) t = t.slice(name.length + 1).trim(); return trimEnd(t, " \t.:").slice(0, 110); };
   const codeHint = async (text) => {
     try {
       codeRouterP ??= Promise.resolve(codeRouter !== undefined ? codeRouter : codeRoute?.makeRouter ? codeRoute.makeRouter({}) : null);
       const router = await codeRouterP; if (!router?.score) return null;
       const sc = await router.score(String(text ?? "")); if (!(sc.unitSim >= CODE_ROUTE_T)) return { data: false, score: +sc.unitSim.toFixed(3) };
       let words = null; try { words = router.describe ? router.describe(sc.nearest.name) : null; if (words == null && codeMeaning?.INDEX_DIR) { const file = `${codeMeaning.INDEX_DIR}/units.jsonl`; const row = (await import("node:fs")).readFileSync(file, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)).find((r) => r.name === sc.nearest.name); words = row ? codeMeaning.textOfUnit(row) : null; } } catch { words = null; }
-      return { data: true, mark: "code-request", score: +sc.unitSim.toFixed(3), nearest: sc.nearest, words: words ? trimEnd(String(words).split("\n")[0], " \t.:") .slice(0, 110) : null };
+      return { data: true, mark: "code-request", score: +sc.unitSim.toFixed(3), nearest: sc.nearest, words: words ? plainWords(words, sc.nearest.name) : null };
     } catch { return null; }   // no index, no embedder: no offer, the refusal stands
   };
   async function standInFor(q, qv, qNeg) {

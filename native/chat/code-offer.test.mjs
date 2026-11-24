@@ -22,3 +22,7 @@ test("a request the mark does not flag, or no router at all, keeps the old refus
   const far = await mk({ codeRouter: router }); const f = await far.turn("Open the door."); assert.equal(f.gap, "act_not_possible"); assert.match(f.text, /I can't do that\.$/);
   const none = await mk({ codeRouter: null }); assert.equal((await none.turn("Reverse this string.")).gap, "act_not_possible");
 });
+test("the quoted words are the function's own: the codec's prefix and the repeated name are dropped", T, async () => {
+  const raw = { score: async () => ({ unitSim: 0.9, bankSim: null, nearest: { name: "reversed", score: 0.9 } }), describe: () => "search_document: reversed. Return the characters in the opposite order.\nMore." };
+  const r = await (await mk({ codeRouter: raw })).turn("Reverse this string."); assert.match(r.text, /\(“Return the characters in the opposite order”\)/); assert.doesNotMatch(r.text, /search_document/);
+});
