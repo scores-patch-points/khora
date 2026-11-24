@@ -1,17 +1,17 @@
 {
  "stamp": {
-  "when": "2026-11-24T18:02:43.117Z",
+  "when": "2026-11-24T18:04:10.619Z",
   "split": "EXPLORATORY (developer-written conversations, three prose passages)",
-  "commit": "85de2ae",
+  "commit": "fc4afc2",
   "priorsHome": "/Users/mlacy/Documents/janus/priors"
  },
  "totals": {
-  "agree": 4,
+  "agree": 12,
   "conflict": 11,
   "chat_open": 82,
-  "chat_none": 2,
-  "canon_none": 22,
-  "both_none": 23
+  "chat_none": 0,
+  "canon_none": 14,
+  "both_none": 25
  },
  "rows": [
   {
@@ -351,8 +351,8 @@
       "Pierre"
      ],
      "via": null,
-     "canonical": "Mina",
-     "confident": null
+     "canonical": "Jonathan",
+     "confident": false
     }
    ]
   },
@@ -435,8 +435,8 @@
       "Mem"
      ],
      "via": null,
-     "canonical": "Mina",
-     "confident": null
+     "canonical": "Klausenburgh",
+     "confident": false
     },
     {
      "kind": "chat_open",
@@ -449,7 +449,7 @@
       "Mem"
      ],
      "via": null,
-     "canonical": "Mina",
+     "canonical": "Transylvania",
      "confident": false
     },
     {
@@ -554,14 +554,14 @@
    "label": "prose: Emma, 6,000 characters",
    "chars": 5999,
    "pronouns": 84,
-   "aligned": 76,
+   "aligned": 82,
    "counts": {
-    "agree": 0,
+    "agree": 8,
     "conflict": 11,
     "chat_open": 63,
-    "chat_none": 2,
-    "canon_none": 8,
-    "both_none": 0
+    "chat_none": 0,
+    "canon_none": 0,
+    "both_none": 2
    },
    "conflicts": [
     {
@@ -572,8 +572,8 @@
      "chat": "Frank",
      "open": null,
      "via": "name",
-     "canonical": "Enscombe",
-     "confident": null
+     "canonical": "Captain Weston",
+     "confident": false
     },
     {
      "kind": "conflict",
@@ -583,7 +583,7 @@
      "chat": "Frank",
      "open": null,
      "via": "name",
-     "canonical": "Enscombe",
+     "canonical": "Churchills",
      "confident": null
     },
     {
@@ -594,7 +594,7 @@
      "chat": "Frank",
      "open": null,
      "via": "name",
-     "canonical": "Enscombe",
+     "canonical": "Churchills",
      "confident": null
     },
     {
@@ -606,7 +606,7 @@
      "open": null,
      "via": "name",
      "canonical": "Churchills",
-     "confident": false
+     "confident": true
     },
     {
      "kind": "conflict",
@@ -617,7 +617,7 @@
      "open": null,
      "via": "name",
      "canonical": "Churchills",
-     "confident": false
+     "confident": true
     },
     {
      "kind": "conflict",
@@ -627,7 +627,7 @@
      "chat": "Frank",
      "open": null,
      "via": "name",
-     "canonical": "Enscombe",
+     "canonical": "Churchills",
      "confident": null
     },
     {
@@ -638,7 +638,7 @@
      "chat": "Frank",
      "open": null,
      "via": "name",
-     "canonical": "Enscombe",
+     "canonical": "Churchills",
      "confident": null
     },
     {
@@ -649,7 +649,7 @@
      "chat": "Frank",
      "open": null,
      "via": "name",
-     "canonical": "Enscombe",
+     "canonical": "Churchills",
      "confident": null
     },
     {
@@ -660,7 +660,7 @@
      "chat": "Frank",
      "open": null,
      "via": "name",
-     "canonical": "Enscombe",
+     "canonical": "Churchills",
      "confident": null
     },
     {
@@ -672,7 +672,7 @@
      "open": null,
      "via": "name",
      "canonical": "Churchills",
-     "confident": false
+     "confident": true
     },
     {
      "kind": "conflict",
@@ -682,97 +682,125 @@
      "chat": "Miss Taylor",
      "open": null,
      "via": "title",
-     "canonical": "Enscombe",
+     "canonical": "Churchills",
      "confident": null
     }
    ],
    "items": [
     {
-     "kind": "canon_none",
+     "kind": "chat_open",
      "pronoun": "she",
-     "at": 110,
-     "context": "ton ought to have found more in it, for she had a\r husband whose warm ",
-     "chat": "Mrs. Weston",
-     "open": null,
-     "via": "title",
-     "canonical": null,
-     "confident": null
-    },
-    {
-     "kind": "chat_none",
-     "pronoun": "him",
-     "at": 167,
-     "context": "d whose warm heart and sweet temper made him think every thing due\r to",
+     "at": 626,
+     "context": " was nothing in comparison\r of Enscombe: she did not cease to love her",
      "chat": null,
-     "open": null,
+     "open": [
+      "Mrs. Weston",
+      "Miss Churchill"
+     ],
      "via": null,
      "canonical": "Mrs Weston",
      "confident": null
     },
     {
-     "kind": "canon_none",
+     "kind": "chat_open",
      "pronoun": "her",
-     "at": 196,
-     "context": "temper made him think every thing due\r to her in return for the great ",
-     "chat": "Mrs. Weston",
-     "open": null,
-     "via": "title",
-     "canonical": null,
-     "confident": null
-    },
-    {
-     "kind": "chat_none",
-     "pronoun": "him",
-     "at": 255,
-     "context": " the great goodness of being in love with him;\r but though she had one",
+     "at": 652,
+     "context": "\r of Enscombe: she did not cease to love her husband, but she wanted a",
      "chat": null,
-     "open": null,
+     "open": [
+      "Mrs. Weston",
+      "Miss Churchill"
+     ],
      "via": null,
      "canonical": "Mrs Weston",
-     "confident": true
+     "confident": null
     },
     {
-     "kind": "canon_none",
+     "kind": "chat_open",
      "pronoun": "she",
-     "at": 271,
-     "context": "ess of being in love with him;\r but though she had one sort of spirit,",
-     "chat": "Mrs. Weston",
-     "open": null,
-     "via": "title",
-     "canonical": null,
-     "confident": null
+     "at": 669,
+     "context": "e did not cease to love her husband, but she wanted at\r once to be the",
+     "chat": null,
+     "open": [
+      "Mrs. Weston",
+      "Miss Churchill"
+     ],
+     "via": null,
+     "canonical": "Enscombe",
+     "confident": false
     },
     {
-     "kind": "canon_none",
-     "pronoun": "she",
-     "at": 299,
-     "context": "m;\r but though she had one sort of spirit, she had not the best. She h",
-     "chat": "Mrs. Weston",
-     "open": null,
-     "via": "title",
-     "canonical": null,
-     "confident": null
+     "kind": "chat_open",
+     "pronoun": "his",
+     "at": 922,
+     "context": " much the worst of\r the bargain; for when his wife died, after a three",
+     "chat": null,
+     "open": [
+      "Enscombe",
+      "Captain Weston",
+      "Churchills"
+     ],
+     "via": null,
+     "canonical": "Captain Weston",
+     "confident": false
     },
     {
-     "kind": "canon_none",
-     "pronoun": "She",
-     "at": 324,
-     "context": "e sort of spirit, she had not the best. She had\r resolution enough to ",
-     "chat": "Mrs. Weston",
-     "open": null,
-     "via": "title",
-     "canonical": null,
-     "confident": null
+     "kind": "chat_open",
+     "pronoun": "he",
+     "at": 968,
+     "context": "wife died, after a three years' marriage, he\r was rather a poorer man ",
+     "chat": null,
+     "open": [
+      "Enscombe",
+      "Captain Weston",
+      "Churchills"
+     ],
+     "via": null,
+     "canonical": "Captain Weston",
+     "confident": false
     },
     {
-     "kind": "canon_none",
+     "kind": "chat_open",
+     "pronoun": "he",
+     "at": 1084,
+     "context": "From the expense of the child, however, he was soon relieved. The boy\r",
+     "chat": null,
+     "open": [
+      "Enscombe",
+      "Captain Weston",
+      "Churchills"
+     ],
+     "via": null,
+     "canonical": "Captain Weston",
+     "confident": false
+    },
+    {
+     "kind": "chat_open",
      "pronoun": "her",
-     "at": 360,
-     "context": "st. She had\r resolution enough to pursue her own will in spite of her ",
-     "chat": "Mrs. Weston",
-     "open": null,
-     "via": "title",
-     "canonical": null,
+     "at": 1423,
+     "context": "whole charge of the\r little Frank soon after her decease. Some scruple",
+     "chat": null,
+     "open": [
+      "Mrs. Weston",
+      "Miss Churchill",
+      "Churchill"
+     ],
+     "via": null,
+     "canonical": "Mrs Weston",
+     "confident": null
+    },
+    {
+     "kind": "chat_open",
+     "pronoun": "He",
+     "at": 2203,
+     "context": "rs of his\r life passed cheerfully away. He had, by that time, realised",
+     "chat": null,
+     "open": [
+      "Frank",
+      "Miss Taylor"
+     ],
+     "via": null,
+     "canonical": "Churchills",
      "confident": null
     }
    ]

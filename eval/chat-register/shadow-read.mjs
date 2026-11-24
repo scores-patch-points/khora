@@ -30,6 +30,9 @@ const convs = [
     .map(([label, f, a, b]) => [label, prose(f, a, b)]).filter(([, t]) => t).map(([label, t]) => [label, [t]]),
 ];
 const norm = (s) => String(s ?? "").toLowerCase();
+// the same BEING under two spellings is not a conflict: compare without full stops ("Mrs." and "Mrs") and by the words of one name being among the words of the other ("Frank" and "Frank Churchill", "Mrs Weston" and "Weston")
+const wordsOf = (s) => norm(s).split(".").join(" ").split(" ").filter(Boolean);
+const same = (a, b) => { const x = wordsOf(a), y = wordsOf(b); return x.length > 0 && y.length > 0 && (x.every((w) => y.includes(w)) || y.every((w) => x.includes(w))); };
 const totals = { agree: 0, conflict: 0, chat_open: 0, chat_none: 0, canon_none: 0, both_none: 0 }, rows = [], castDiffs = [];
 for (const [label, msgs] of convs) {
   const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-24T12:00:00") });
@@ -45,7 +48,7 @@ for (const [label, msgs] of convs) {
   const counts = { agree: 0, conflict: 0, chat_open: 0, chat_none: 0, canon_none: 0, both_none: 0 }, items = [];
   for (const [key, b] of chatKeyed) {
     const c = canon.get(key) ?? null, cn = c?.surface ?? null; let kind;
-    if (b.chat && cn) kind = norm(b.chat) === norm(cn) ? "agree" : "conflict";
+    if (b.chat && cn) kind = same(b.chat, cn) ? "agree" : "conflict";
     else if (b.open && cn) kind = "chat_open";
     else if (!b.chat && cn) kind = "chat_none";
     else if (b.chat && !cn) kind = "canon_none";
