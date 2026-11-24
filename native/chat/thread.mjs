@@ -26,6 +26,7 @@ import { loadNameGender, MIN_EVIDENCE } from "../adapters/text/name-gender.js";
 // the given-name prior (another session's module): a title before a name, then the name's dictionary given-name sense, then the Wikidata given-name snapshot, each saying where it came from and how often that source was right on held-out novels. Absent, the older table below is used if there is one, and the gap is said.
 const genderMod = await import("../adapters/text/gender-of-words.js").catch(() => null);
 import { makeIdeation } from "./ideation.mjs";
+import { weaveOne as weaveEntry, readKinds } from "./record.mjs";
 import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
 import { LABEL, MARK_TEXT, marksOf, candidates, judge, takenAs } from "./acts.mjs";
@@ -38,6 +39,9 @@ const puzzleOrgan = await import("../organs/puzzle-reader.js").catch(() => null)
 const huntOrgan = await import("../organs/void-hunt.js").catch(() => null), huntSources = await import("../organs/hunt-sources.js").catch(() => null);
 // a near verb that stands in for the question's verb when the choice does not move the answer (organs/verb-equivalents.js, another session's; the owner, 2026-11-24: "if its within a DMD then why not?"),
 // with the frozen local embedder it needs. Either absent: no substitution, said in the trace (a typed gap, never a silent degrade).
+// the words that STATE a person's gender ("Natasha is a man"), as the English reader's declared lexicon (authored here, with the author as giver: no giver lists them; another language has no table, and a
+// statement of gender in it is read as any statement). "x" is "they".
+const GENDER_WORDS = Object.freeze({ man: "m", boy: "m", gentleman: "m", male: "m", woman: "f", girl: "f", lady: "f", female: "f", nonbinary: "x" });
 const verbOrgan = await import("../organs/verb-equivalents.js").catch(() => null), embedMod = await import("../adapters/text/embed-personhood.js").catch(() => null);
 let sharedEmbedder = null;   // one vector library per process, shared by every thread (the persona fold is a thread too)
 
@@ -139,7 +143,41 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     return r?.read?.items?.items?.length >= 2 && r?.read?.agents?.length >= 2 ? r : null;   // a list of things and at least two people: the scene of a puzzle
   };
   const givenPersons = new Set();        // refs a giver confirmed as people (the person door: Wikidata "instance of human"): a better candidate for he or she than a being of unknown kind
-  const told = new Map();               // ref -> "m" | "f": a class the user settled, by answering "Do you mean ...?" (presented evidence, never a guess)
+  const told = new Map();               // ref -> "m" | "f" | "x" (they): a class the user settled, by answering "Do you mean ...?" or by correcting a binding (presented evidence, never a guess)
+  let lastBinding = null;               // the last pronoun the chat settled for the user, by asking or by its own pick: { cls, ref, label, pron }. "No, I meant Jordan" and "that's not right, she is Jordan" correct THIS.
+  // WHAT THE USER SAID IN AN EARLIER THREAD (the owner, 2026-11-24: "the system will be right next time"): a correction is written to the log (kind `correction`) and read back here, by name. It outranks the
+  // given-name prior and nothing the thread itself shows; the newest correction of a name wins. Without a log there is nothing to remember, and nothing is said about it.
+  let rememberedMap = null;
+  const remembered = () => { if (rememberedMap) return rememberedMap; rememberedMap = new Map(); try { for (const e of log ? readKinds(log, ["correction"]) : []) if (e.body?.name && e.body?.cls) rememberedMap.set(String(e.body.name).toLowerCase(), e.body.cls); } catch { /* an unreadable log remembers nothing */ } return rememberedMap; };
+  const rememberedClass = (b) => remembered().get(String(b.forms?.[0]?.[0] ?? "").toLowerCase()) ?? null;
+  // A BINDING STATEMENT, read from the reader's rows (never a pattern on words): "she is Jordan" (a name that is the complement of a copula whose subject is a personal pronoun), "they means Casey" /
+  // "I meant Jordan" (a name that is the object of "mean"), "Natasha is a man" (a name whose copula complement states a gender). The first two say who a pronoun is; the last says what a name is.
+  const chunkOf = (rows, n) => [n, ...rows.filter((r) => r.head === n.id && r.upos === "PROPN" && ["compound", "flat", "flat:name"].includes(r.deprel))].sort((a, b) => a.id - b.id).map((r) => r.form).join(" ");
+  const bindingOf = (rows) => {
+    const kids = (h) => rows.filter((r) => r.head === h.id), lem = (r) => String(r.lemma ?? r.form).toLowerCase();
+    // a QUESTION ("Is she Jordan?": a final question mark, or an auxiliary before its subject) asks, it does not tell; a NEGATED clause ("She is not Jordan.": a negative mark after the subject) says who it is NOT, which is not a binding
+    const first = rows.find((r) => r.upos !== "PUNCT"); if (rows.some((r) => r.form === "?") || (first?.upos === "AUX" && rows.some((r) => String(r.deprel).startsWith("nsubj") && r.id > first.id))) return null;
+    const negAfter = (subj) => rows.some((r) => String(r.feats ?? "").split("|").includes("Polarity=Neg") && r.id > subj.id);
+    const personal = (r) => r.upos === "PRON" && String(r.deprel).startsWith("nsubj") && featsOf(r.feats).Person === "3" && featsOf(r.feats).PronType === "Prs";
+    const clsOf = (r) => { const F = featsOf(r.feats); return F.Gender === "Masc" ? "m" : F.Gender === "Fem" ? "f" : F.Number === "Plur" ? "x" : null; };
+    for (const n of rows) {
+      if (n.upos !== "PROPN" || ["compound", "flat", "flat:name"].includes(n.deprel)) continue;
+      const mine = kids(n), h = rows.find((r) => r.id === n.head);
+      const sp = mine.find(personal); if (sp && mine.some((r) => r.deprel === "cop") && clsOf(sp) && !negAfter(sp)) return { kind: "pronoun", name: chunkOf(rows, n), cls: clsOf(sp), pron: String(sp.form).toLowerCase() };
+      if (h?.upos === "VERB" && lem(h) === "mean" && n.deprel === "obj") {
+        const hs = kids(h).find((r) => r.upos === "PRON" && String(r.deprel).startsWith("nsubj"));
+        if (hs && negAfter(hs)) continue;
+        if (hs && featsOf(hs.feats).Person === "1") return { kind: "meant", name: chunkOf(rows, n) };
+        if (hs && personal(hs) && clsOf(hs)) return { kind: "pronoun", name: chunkOf(rows, n), cls: clsOf(hs), pron: String(hs.form).toLowerCase() };
+      }
+      if (h && String(n.deprel).startsWith("nsubj") && kids(h).some((r) => r.deprel === "cop") && GENDER_WORDS[lem(h)] && !negAfter(n)) {
+        const cop = kids(h).find((r) => r.deprel === "cop");
+        return { kind: "class", name: chunkOf(rows, n), cls: GENDER_WORDS[lem(h)], said: detok(rows.filter((r) => r.id > cop.id && r.upos !== "PUNCT").map((r) => r.form)) };
+      }
+    }
+    return null;
+  };
+  const beingNamed = (chunk) => (cast?.referents ?? []).find((b) => b.kind === "name" && (b.forms ?? []).some(([f]) => String(f).toLowerCase() === String(chunk).toLowerCase())) ?? null;
   // WHO A PRONOUN MEANS. A being's class (m / f) is known from what the user settled, from the pro-forms the thread attached to it, or from the given-name table if there is one. A man with
   // no evidence about two people does not pick the first: "Pierre met Natasha. She smiled." leaves "she" OPEN between them, and he asks (the other session's probe: with no table the chat bound
   // the pronoun to the first-named person whatever its gender, 3 of 8 right). A being that only ever fills a place (a locus) is not a candidate for he or she.
@@ -147,12 +185,13 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // ("Pierre took HIS hat") is evidence even when it is the only one: a sign test needs several, a man needs one
   const proformEvidence = (b) => { const cls = new Map(); for (const p of parse) for (const r of p.rows) if (r.upos === "PRON") { const F = featsOf(r.feats); if (F.Person === "3" && (F.Gender === "Masc" || F.Gender === "Fem")) cls.set(String(r.form).toLowerCase(), F.Gender === "Masc" ? "m" : "f"); }
     let m = 0, f = 0; for (const [form, n] of b.proformForms ?? []) { const c = cls.get(String(form).toLowerCase()); if (c === "m") m += n; else if (c === "f") f += n; } return m > f ? "m" : f > m ? "f" : null; };
-  const classOfBeing = (b) => told.get(b.ref) ?? (b.proform && !b.proform.contested ? b.proform.cls : null) ?? proformEvidence(b) ?? genderOf((b.forms ?? []).flatMap(([f]) => String(f).split(" ")));
+  const classOfBeing = (b) => told.get(b.ref) ?? (b.proform && !b.proform.contested ? b.proform.cls : null) ?? proformEvidence(b) ?? rememberedClass(b) ?? genderOf((b.forms ?? []).flatMap(([f]) => String(f).split(" ")));
   // the class of a being WITH ITS REASON, for the engine's voice (engine.setClassOf): what the user settled, the book's own decided pro-form, the pro-forms the thread attached, the given-name prior (its source and how often it has been right)
   const classWhy = (b) => {
     const t = told.get(b.ref); if (t) return { cls: t, source: "told", text: "you settled it" };
     if (b.proform && !b.proform.contested && (b.proform.cls === "m" || b.proform.cls === "f")) return { cls: b.proform.cls, source: "pro-forms", text: "the pronouns that name it" };
     const pe = proformEvidence(b); if (pe) return { cls: pe, source: "pro-forms", text: "the pronouns the thread attached to it" };
+    const rc = rememberedClass(b); if (rc) return { cls: rc, source: "told earlier", text: "you said so in an earlier thread" };
     const words = (b.forms ?? []).flatMap(([f]) => String(f).split(" ")), g = genderOf(words);
     if (g === "m" || g === "f") { const w = genderWhy(words); return { cls: g, source: w?.source ?? "name prior", text: w?.reliability?.text ?? null }; }
     return { cls: null };
@@ -161,8 +200,10 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   const placeOnly = (ref) => { const uses = engine.S.framesOfRef?.get(ref) ?? []; return uses.length > 0 && uses.every((u) => u.label === "adhikaraṇa"); };
   const listOr = (xs) => (xs.length < 2 ? xs[0] ?? "" : `${xs.slice(0, -1).join(", ")} or ${xs.at(-1)}`);
   const pronounInfo = (F, order) => {
-    const cls = F.Gender === "Masc" ? "m" : F.Gender === "Fem" ? "f" : null; if (!cls || F.Person !== "3" || F.PronType !== "Prs") return null;
+    const cls = F.Gender === "Masc" ? "m" : F.Gender === "Fem" ? "f" : F.Number === "Plur" && !F.Gender ? "x" : null; if (!cls || F.Person !== "3" || F.PronType !== "Prs") return null;
     const names = (cast?.referents ?? []).filter((b) => b.kind === "name" && b.first <= order && !placeOnly(b.ref));
+    // "they" is mostly a group or a thing (16% and 13% of the time it is the one named person in the window, CorefUD gold): it is bound only to a being the user TOLD is "they", never guessed, and left unbound otherwise
+    if (cls === "x") { const sure = names.filter((b) => classOfBeing(b) === "x"), c = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] })); return sure.length === 1 ? { cls, open: false, ref: sure[0].ref, candidates: c(sure), via: { source: told.has(sure[0].ref) ? "you told me" : "you said so in an earlier thread" } } : sure.length > 1 ? { cls, open: true, ref: null, candidates: c(sure) } : null; }
     const fits = names.filter((b) => { const c = classOfBeing(b); return c == null || c === cls; }), sure = fits.filter((b) => classOfBeing(b) === cls);
     // evidence in tiers: the class is known (settled, a pro-form, a table) > a giver says it is a person > nothing is known; the best non-empty tier decides, and only a tie inside it is open
     const known = fits.filter((b) => givenPersons.has(b.ref));
@@ -170,6 +211,8 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const cand = (xs) => xs.map((b) => ({ ref: b.ref, label: b.forms[0][0] }));
     // what the decision rested on, for the reply to show: what the user settled, a pro-form the thread attached, or the name prior with its source and its measured reliability
     const viaOf = (b) => { if (told.has(b.ref)) return { source: "you told me" }; const wd = (b.forms ?? []).flatMap(([f]) => String(f).split(" ")); const e = genderWhy(wd); return e?.gender ? { source: e.source, word: e.word, text: e.reliability?.text ?? null } : { source: "the thread's own pronouns" }; };
+    // what the user SAID outranks what a table leans: of several beings the thread holds as "she", the one the user settled is the one
+    const said = sure.filter((b) => told.has(b.ref)); if (sure.length > 1 && said.length === 1) return { cls, open: false, ref: said[0].ref, candidates: cand(said), via: { source: "you told me" } };
     if (sure.length === 1) return { cls, open: false, ref: sure[0].ref, candidates: cand(sure), via: viaOf(sure[0]) };
     if (sure.length > 1) return { cls, open: true, ref: null, candidates: cand(sure) };
     if (fits.length === 1) return { cls, open: false, ref: fits[0].ref, candidates: cand(fits), via: { source: "the only one it could be" } };
@@ -597,6 +640,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
             ideation.assess(c, { verdict: "supported", method: "deduction", by: `the name prior (${info.via.source})`, basis: `${quote(nm)} reads as ${info.cls === "f" ? "a woman's" : "a man's"} name (${info.via.source}; ${info.via.text ?? "reliability not recorded"})`, license: "a prior that records how often each source has been right on held-out text" }); }
             trace.push({ step: "gender", of: nm, source: info.via.source, reliability: info.via.text });
           }
+          lastBinding = { cls: info.cls, ref: info.ref, label: nm, pron: x.text };
           return nm;
         }
         return info?.open ? `${quote(x.text)}, but I can't tell whether that is ${listOr(info.candidates.map((c) => c.label))}` : x.text;
@@ -640,6 +684,35 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       ids.push(propose(`this message is addressed to ${address.name}`, { subject: "this message", verb: "is addressed to", object: address.name }, true, { verdict: "supported", method: "testimony", by, basis: `a name and a comma at the start, before ${address.rest.endsWith("?") ? "a question" : "a request"}`, witnesses: [witness] }));
       const out = await turn(address.rest, { ...opts, _ids: ids });
       return out ? { ...out, addressed: address.name, trace: [{ step: "addressed", to: address.name }, ...(out.trace ?? [])] } : out;
+    }
+
+    // ---- A CORRECTION OF A BINDING (the owner, 2026-11-24: "if the person says 'that's not right' they can correct the record and the system will be right next time"). "No, I meant Jordan", "that's not
+    // right, she is Jordan", "no, they means Casey", "Natasha is a man": what the user says outranks the chat's pick (a table's lean is noted when it disagrees, never obeyed over the user). The being named must
+    // be one the thread holds. The earlier pick is taken off the record as the delta ("not Casey"), later answers follow, and the correction is written to the log so the next thread starts from it. The rest
+    // of the message ("He smiled.") is read as itself.
+    {
+      const fixes = [], rest = [];
+      for (const c of cut) {
+        const f = bindingOf(parser.rowsOf(c.text) ?? []), being = f ? beingNamed(f.name) : null;
+        if (f && being && (f.kind !== "meant" || lastBinding)) fixes.push({ ...f, being, text: c.text }); else rest.push(c.text);
+      }
+      if (fixes.length) {
+        const said = [], steps = [];
+        for (const f of fixes) {
+          const b = f.being, label = b.forms[0][0], cls = f.kind === "meant" ? lastBinding.cls : f.cls, pron = f.kind === "meant" ? String(lastBinding.pron ?? "").toLowerCase() : f.pron;
+          const prev = f.kind !== "class" && lastBinding && lastBinding.ref !== b.ref && lastBinding.cls === cls ? lastBinding : null;
+          if (prev && told.get(prev.ref) === cls) told.delete(prev.ref);
+          const lean = cls === "m" || cls === "f" ? genderOf(label.split(" ")) : null, against = lean && lean !== cls ? lean : null;
+          told.set(b.ref, cls); if (f.kind !== "class") lastBinding = { cls, ref: b.ref, label, pron };
+          const head = f.kind === "class" ? `Right: ${label} is ${f.said}.` : cls === "x" ? `Right: “${pron || "they"}” means ${label}.` : `Right: ${pron || (cls === "f" ? "she" : "he")} is ${label}${prev ? `, not ${prev.label}` : ""}.`;
+          said.push(against ? `${head} (${label} is usually ${against === "m" ? "a man's" : "a woman's"} name; I'll go with what you said.)` : head);
+          steps.push({ step: "rebound", kind: f.kind, name: label, cls, was: prev?.label ?? null, source: "you said so", ...(against ? { prior_leaned: against } : {}) });
+          ids.push(propose(f.kind === "class" ? `${label} is ${f.said}` : `${quote(pron || "they")} is ${label}`, { subject: f.kind === "class" ? label : pron || "they", verb: "is", object: f.kind === "class" ? f.said : label }, true, { verdict: "supported", method: "testimony", by: "your correction", basis: `you said so${prev ? `, and it takes my earlier pick (${prev.label}) back` : ""}; what you say outranks what I picked or what a table leans`, witnesses: [witness] }));
+          try { if (log) weaveEntry(log, { cell: "REC·Figure", kind: "correction", addr: `${id}:c${msgN}:${Date.now()}`, body: { thread: id, name: label, cls, was: prev?.label ?? null, text: f.text } }); } catch { /* the log is not there: the correction still holds in this thread */ }
+        }
+        const inner = rest.length ? await turn(rest.join(" "), { ...opts, _ids: ids }) : null;
+        return { question: t, ...(inner ?? { tools: [] }), type: "correction", handled: true, text: [...said, inner?.text].filter(Boolean).join(" "), trace: [...steps, ...(inner?.trace ?? [])], thought: ideation ? ideation.view([...new Set(ids)]) : null, acts: { working: "correction", open: false } };
+      }
     }
 
     // ---- a correction takes the previous reading back, and whatever rests on it
@@ -697,7 +770,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         ? { verdict: "supported", method: "testimony", by, basis: `${quote(fill)} is one of the two I asked about, and you said it`, witnesses: [witness] }
         : { verdict: "refuted", method: "deduction", by, basis: `${quote(fill)} is neither of the two I asked about` });
       if (!pick) return finish({ type: "identity", handled: false, gap: "answer_does_not_fit", text: `I can't use ${quote(fill || t)}: I asked whether you mean ${listOr(pending.options.map((c) => c.label))}.`, question: t, tools: [], trace: [{ step: "pairing_refused", why: "not one of the options" }], ideaIds: [cid].filter(Boolean) });   // the question stays open
-      asked = null; told.set(pick.ref, pending.cls);   // what the user settled is evidence from here on: this being is "she", so "he" is someone else
+      asked = null; told.set(pick.ref, pending.cls); lastBinding = { cls: pending.cls, ref: pick.ref, label: pick.label, pron: pron.form };   // what the user settled is evidence from here on: this being is "she", so "he" is someone else
       const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? pick.label : r.form)));
       const inner = await turn(rebuilt, { ...opts, _ids: [...ids, cid].filter(Boolean) });
       return inner ? { ...inner, paired: { question: pending.question, answer: pick.label, rebuilt }, trace: [{ step: "paired", asked: pending.question, answer: pick.label, rebuilt }, ...(inner.trace ?? [])] } : inner;
