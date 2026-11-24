@@ -94,6 +94,12 @@ test("recase: a lowercase word inside a noun phrase is its head, not a name (a p
   const marked = markRecased(rows, r.changes, r.candidates);
   assert.deepEqual(marked.map((x) => x.recased?.by ?? null), [null, null, null, null, null, null, "notebook"], "the mark lands on the changed row, not on the first row that wears the same form");
 });
+test("recase: the notebook does not copy a Title Case capital onto an ordinary word (a peer's Aristotle sample: 'Psychology in the Light of the East', then \"the father of psychology\")", () => {
+  const ordinary = new Set(["psychology", "criticism"]), re = (t) => recaseEnglish(t, { posOf: () => null, ordinaryWord: (w) => ordinary.has(w) });
+  const t = '"the father of psychology": Margot Borden, Psychology in the Light of the East, p. 12';
+  assert.equal(re(t).changes.length, 0, "a word the prior knows as an ordinary word keeps its lowercase");
+  assert.equal(re("I met Natasha, then Natasha called natasha").text, "I met Natasha, then Natasha called Natasha", "a word the prior has never met is still a name the notebook may copy");
+});
 test("recase: markRecased writes what was done on the rows, so a later read can overturn it", () => {
   const r = recaseEnglish("i went to france"), rows = [{ form: "I" }, { form: "went" }, { form: "to" }, { form: "France" }];
   const marked = markRecased(rows, r.changes, r.candidates);

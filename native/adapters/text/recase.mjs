@@ -5,7 +5,8 @@
 // (row.recased = { typed, by }) so a later read can overturn it.
 // THE MAN IN THE BOX (native/docs/THE-MAN-IN-THE-BOX.md): how would a person with a notebook and a shelf read a name typed in lowercase? He looks in his NOTEBOOK first, then on his SHELF,
 // and where neither knows the word he does not invent a capital: it is read as typed.
-//   notebook        a word the writer, or the thread (passed in as `known`), already capitalised somewhere that is not the start of a sentence is that name wherever it recurs lowercase:
+//   notebook        a word the writer, or the thread (passed in as `known`), already capitalised somewhere that is not the start of a sentence is that name wherever it recurs lowercase,
+//                   unless the English prior knows it as an ORDINARY word (a Title Case or heading capital on "psychology" is no name):
 //                   the text's own evidence, for any name and any language written with capitals, listed nowhere.
 //   (the two shelves below apply only to text typed WITHOUT capitals: any capital but "I" in the message and they stay silent)
 //   shelf, casing   priors-shipped/truecase-eng.json (native/scripts/build-truecase-eng.mjs, UD English-EWT train, CC BY-SA): the casing most of a word's non-initial occurrences wear,
@@ -48,20 +49,24 @@ const isLetter = (c) => c.toLowerCase() !== c.toUpperCase();
 // the part of speech the English POS prior counted most for a word (null when it never met the word, or knows it only as an attested class with no count)
 let defaultPos; // undefined = not read yet; null = no POS prior
 const posFromPrior = (w) => { if (defaultPos === undefined) defaultPos = priorJson("pos-eng.json") ?? null; if (!defaultPos) return null; const c = classifyWord(w, { posPrior: defaultPos }); const top = c?.found ? c.candidates?.[0] : null; return top && top.count > 0 ? top.upos : null; };
-export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), names = givenNames(), known = null, unattested = UNATTESTED_GIVEN_NAMES, posOf = posFromPrior } = {}) {
+// an ORDINARY word: one the English prior knows as a common word more often than as a proper noun, or knows only from the received lexicon (UniMorph) with no proper-noun use. A capital on such a word in the
+// middle of a sentence is a title, a heading or an emphasis, not a name ("Psychology in the Light of the East"), so the notebook does not copy it. A word the prior has never met ("natasha") or that is
+// mostly a proper noun there ("mark", "bill") is not ordinary: a capital on it may be a name.
+const ordinaryFromPrior = (w) => { if (defaultPos === undefined) posFromPrior("a"); if (!defaultPos) return false; const c = classifyWord(w, { posPrior: defaultPos }); if (!c?.found || c.attested === "shape") return false; if (!c.total) return true; const propn = c.candidates?.find((x) => x.upos === "PROPN")?.count ?? 0; return c.total - propn > propn; };
+export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), names = givenNames(), known = null, unattested = UNATTESTED_GIVEN_NAMES, posOf = posFromPrior, ordinaryWord = ordinaryFromPrior } = {}) {
   const T = String(text ?? ""), gaps = [], changes = [], candidates = [];
   if (!table) { gaps.push({ gap: "no_truecase_prior", detail: "native/priors-shipped/truecase-eng.json is absent: build it with native/scripts/build-truecase-eng.mjs; nothing was recased" }); return { text: T, changes, candidates, gaps }; }
   if (!names) gaps.push({ gap: "no_given_name_giver", detail: "identity/givers/wikidata-given-names-en.json is absent: only the treebank's own casing was applied" });
   // where the shelf is split ("mark", "bill"), the sentence decides, not the shelf: the word is left lowercase for the parser to read in its sentence
   const closed = closedSet(table), ordinary = commonSet(table), notebook = new Map(), nameShare = table.dials?.NAME_SHARE ?? 0.8; let lead = true;
   const toks = tokenize(T);
-  { let l = true; for (const t of toks) { const f = t.form; if (![...f].some(isLetter)) { if (f === "." || f === "?" || f === "!" || f === "…") l = true; continue; } const first = [...f][0]; if (!l && isLetter(first) && f !== f.toLowerCase() && f !== "I" && f !== f.toUpperCase() && !ordinary.has(f.toLowerCase())) notebook.set(f.toLowerCase(), f); l = false; } }
+  { let l = true; for (const t of toks) { const f = t.form; if (![...f].some(isLetter)) { if (f === "." || f === "?" || f === "!" || f === "…") l = true; continue; } const first = [...f][0]; if (!l && isLetter(first) && f !== f.toLowerCase() && f !== "I" && f !== f.toUpperCase() && !ordinary.has(f.toLowerCase()) && !ordinaryWord(f.toLowerCase())) notebook.set(f.toLowerCase(), f); l = false; } }
   // THE SHELVES ARE FOR TEXT TYPED WITHOUT CAPITALS. A writer who capitalises ("The Magic Flute is an opera ... by Wolfgang Amadeus Mozart") has told us where the capitals go, so a lowercase word in that text
   // is lowercase on purpose: the casing shelf and the given-name shelf stay silent (found by a peer: formal prose had "opera" recased to "Opera" and parsed as a proper noun). Any capital that is not the
   // pronoun "I" counts, including a sentence's first letter (a phone capitalises that one itself, but then the name beside it is the writer's own to capitalise). The NOTEBOOK is the text's own evidence
   // and always applies.
   const habit = toks.some((t) => { const f = t.form, first = [...f][0]; return isLetter(first) && f !== f.toLowerCase() && f !== "I"; });
-  for (const k of known ?? []) if ([...String(k)].some(isLetter) && k !== String(k).toLowerCase() && !ordinary.has(String(k).toLowerCase()) && !notebook.has(String(k).toLowerCase())) notebook.set(String(k).toLowerCase(), String(k));
+  for (const k of known ?? []) if ([...String(k)].some(isLetter) && k !== String(k).toLowerCase() && !ordinary.has(String(k).toLowerCase()) && !ordinaryWord(String(k).toLowerCase()) && !notebook.has(String(k).toLowerCase())) notebook.set(String(k).toLowerCase(), String(k));
   // A NAME TYPED WITHOUT A CAPITAL IS NOT INSIDE A NOUN PHRASE: "You are Captain Salt, a weathered pirate captain." must not make the second captain a name (found by a peer: the persona lost its
   // appositive). Walking back from the word over words that can be modifiers (an adjective, a noun, a numeral, a word the prior does not know), a DETERMINER before it means the word is a phrase's head
   // ("a weathered pirate captain", "the old king"); a verb, a preposition, a conjunction, a pronoun, an interjection or any punctuation ends the phrase first ("loves natasha", "dear natasha", "to natasha").

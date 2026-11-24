@@ -176,3 +176,6 @@ files changed since the last record: native/adapters/text/recase.mjs
 
 ## 2026-11-24: readerFor's gap gains two structured counts, readable and knownToEnglish (the chat owner asked: a one-word fragment is the thread's language, several words English does not know are a typed gap). No decision changes; the gate numbers in eval/chat-register/RESULTS-READER.md stand.
 files changed since the last record: native/reading.js, native/adapters/text/language-gate.mjs
+
+## 2026-11-24: recase.mjs: the notebook skips words the English prior knows as ordinary (Title Case and heading capitals are no names). A peer's Aristotle sample (EXPLORATORY, 196 sentences): reader recases 9 -> 4 -> 2 (the 2 left: a no-capital fragment, as designed; a link-markup artefact on a word the prior never met). EWT dev/test lowercased recall 0.315/0.300 and precision 0.746/0.711 unchanged; false recases on cased EWT 0.08/0.04 per 1000 words. eval/chat-register/RESULTS-READER.md.
+files changed since the last record: native/adapters/text/recase.mjs
