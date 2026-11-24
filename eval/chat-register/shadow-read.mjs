@@ -9,7 +9,7 @@
 import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url"; import { execSync } from "node:child_process";
 process.env.KHORA_NO_PHAROS_GATE = "1";
 const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, "..", "..");
-const { makeThread } = await import("file://" + ROOT + "/native/chat/thread.mjs"), { readDocument } = await import("file://" + ROOT + "/native/reading.js");
+const { makeThread } = await import("file://" + ROOT + "/native/chat/thread.mjs"), { compareBindings } = await import("file://" + ROOT + "/native/chat/compare-read.mjs"), { readDocument } = await import("file://" + ROOT + "/native/reading.js");
 const commit = (() => { try { return execSync("git rev-parse --short HEAD", { cwd: ROOT }).toString().trim(); } catch { return "unknown"; } })();
 const home = process.env.KHORA_PRIORS_DIR ? process.env.KHORA_PRIORS_DIR : "(default order)";
 const WS = path.resolve(ROOT, "..");
@@ -30,32 +30,15 @@ const convs = [
     .map(([label, f, a, b]) => [label, prose(f, a, b)]).filter(([, t]) => t).map(([label, t]) => [label, [t]]),
 ];
 const norm = (s) => String(s ?? "").toLowerCase();
-// the same BEING under two spellings is not a conflict: compare without full stops ("Mrs." and "Mrs") and by the words of one name being among the words of the other ("Frank" and "Frank Churchill", "Mrs Weston" and "Weston")
-const wordsOf = (s) => norm(s).split(".").join(" ").split(" ").filter(Boolean);
-const same = (a, b) => { const x = wordsOf(a), y = wordsOf(b); return x.length > 0 && y.length > 0 && (x.every((w) => y.includes(w)) || y.every((w) => x.includes(w))); };
 const totals = { agree: 0, conflict: 0, chat_open: 0, chat_none: 0, canon_none: 0, both_none: 0 }, rows = [], castDiffs = [];
 for (const [label, msgs] of convs) {
   const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-24T12:00:00") });
   for (const m of msgs) { if (m.length > 600) await th.say(m, { given: "shadow-read" }); else await th.turn(m); }   // a passage is read into the thread as it stands; a short message goes through the chat as a user message
   const text = th.engine.S.text ?? th.state().text, chat = th.bindings();   // the engine's own text: sentenceStart indexes into it
   const w = await readDocument(text, { language: "eng", rows: true, minCharacters: 1 });
-  // PAIRED BY SENTENCE AND OCCURRENCE, not by character offset: the two reads number their sentences the same way (the same splitter) but count offsets differently on a hard-wrapped text (a line break the
-  // chat folds to a space shifts every later offset), and 59 of 84 offsets did not line up on a page of Emma. A pronoun is (sentence, its form, which time that form occurs in the sentence).
-  const keyed = (list, sentenceOf, formOf, posOf) => { const seen = new Map(), out = new Map(); for (const x of [...list].sort((a, b) => posOf(a) - posOf(b))) { const base = `${sentenceOf(x)}|${norm(formOf(x))}`, k = seen.get(base) ?? 0; seen.set(base, k + 1); out.set(`${base}|${k}`, x); } return out; };
-  const canonList = [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])];
-  const canon = keyed(canonList, (b) => b.sentence, (b) => b.pronoun, (b) => b.at?.[0] ?? 0), chatKeyed = keyed(chat, (b) => b.order, (b) => b.form, (b) => b.at);
-  const aligned = [...chatKeyed.keys()].filter((k) => canon.has(k)).length, canonSentences = (w.sentences ?? []).length, chatSentences = th.engine.S.sentenceStart.size;
-  const counts = { agree: 0, conflict: 0, chat_open: 0, chat_none: 0, canon_none: 0, both_none: 0 }, items = [];
-  for (const [key, b] of chatKeyed) {
-    const c = canon.get(key) ?? null, cn = c?.surface ?? null; let kind;
-    if (b.chat && cn) kind = same(b.chat, cn) ? "agree" : "conflict";
-    else if (b.open && cn) kind = "chat_open";
-    else if (!b.chat && cn) kind = "chat_none";
-    else if (b.chat && !cn) kind = "canon_none";
-    else kind = "both_none";
-    counts[kind]++; totals[kind]++;
-    if (kind !== "agree" && kind !== "both_none") items.push({ kind, pronoun: b.form, at: b.at, context: text.slice(Math.max(0, b.at - 40), b.at + 30).split("\n").join(" "), chat: b.chat, open: b.open ? b.candidates : null, via: b.via, canonical: cn, confident: c?.confident ?? null });
-  }
+  // the pairing is native/chat/compare-read.mjs (shared with the chat's opt-in comparison mode): by sentence and occurrence, the same being under two spellings is not a conflict
+  const { counts, items, paired: aligned } = compareBindings(chat, w, { text }), canonSentences = (w.sentences ?? []).length, chatSentences = th.engine.S.sentenceStart.size;
+  for (const k of Object.keys(counts)) totals[k] += counts[k];
   const chatNames = new Set((th.engine.S.read?.cast?.referents ?? []).filter((b) => b.kind === "name").map((b) => norm(b.forms?.[0]?.[0]))), canonNames = new Set((w.cast ?? []).map((c) => norm(c.surface)));
   const only = (a, b) => [...a].filter((x) => !b.has(x));
   castDiffs.push({ label, chatOnly: only(chatNames, canonNames).length, canonOnly: only(canonNames, chatNames).length, both: [...chatNames].filter((x) => canonNames.has(x)).length, chatOnlyNames: only(chatNames, canonNames).slice(0, 6), canonOnlyNames: only(canonNames, chatNames).slice(0, 6) });

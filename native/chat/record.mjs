@@ -15,7 +15,7 @@ const P = await import(pathToFileURL(path.join(pharosHome, "lib", "pharos.mjs"))
 export const LOG_DIR = process.env.CHAT_PHAROS_DIR || path.join(os.homedir(), ".pharos", "fold-demo");   // the same log foldcode's demo writes to
 export function openLog() {
   const h = P.open("fold-demo", { dir: LOG_DIR, writer: "khora-chat" });
-  for (const [name, cell] of [["utterance", "REC·Figure"], ["statement", "INS·Figure"], ["referent", "INS·Figure"], ["identity", "SYN·Pattern"], ["frame", "SYN·Pattern"], ["void", "DEF·Ground"], ["thought", "INS·Figure"], ["candidate", "SEG·Pattern"], ["binding", "CON·Figure"], ["verdict", "EVA·Figure"], ["empty", "NUL·Figure"], ["pin", "EVA·Figure"], ["correction", "REC·Figure"], ["assessment", "EVA·Figure"], ["tool", "INS·Figure"]]) {
+  for (const [name, cell] of [["utterance", "REC·Figure"], ["statement", "INS·Figure"], ["referent", "INS·Figure"], ["identity", "SYN·Pattern"], ["frame", "SYN·Pattern"], ["void", "DEF·Ground"], ["thought", "INS·Figure"], ["candidate", "SEG·Pattern"], ["binding", "CON·Figure"], ["verdict", "EVA·Figure"], ["empty", "NUL·Figure"], ["pin", "EVA·Figure"], ["correction", "REC·Figure"], ["read_comparison", "EVA·Figure"], ["assessment", "EVA·Figure"], ["tool", "INS·Figure"]]) {
     try { P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${name}`, body: { name, cell } }); } catch { /* already declared */ }
   }
   return h;
