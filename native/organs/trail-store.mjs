@@ -50,7 +50,7 @@ const merge = (a, b) => {
   return out;
 };
 
-export function makeTrailStore({ name = "default", file = null, now = () => Date.now(), halfLifeDays = TRAIL_HALF_LIFE_DAYS, persist = true, onMark = undefined } = {}) {
+export function makeTrailStore({ name = "default", file = null, now = () => Date.now(), halfLifeDays = TRAIL_HALF_LIFE_DAYS, persist = true, onMark = undefined, law = "exp", alpha = undefined } = {}) {   // law "power": the measured fade (kernel/stigmergy.js); default "exp" changes nothing for existing callers
   const f = file ?? path.join(os.homedir(), ".khora", "trails", `${name}.json`);
   const sink = onMark === undefined ? (file == null && persist ? pharosMarkWriter() : null) : onMark;   // the machine-wide store mirrors to pharos; any other store only if it is given a writer
   let mem = { trails: {}, vetoes: {}, marks: {} }, seen = 0;
@@ -74,9 +74,9 @@ export function makeTrailStore({ name = "default", file = null, now = () => Date
     /** an alarm: this route gave a wrong answer for this head; what it deposited before no longer counts */
     veto(head, route, why = null) { refresh(); const at = now(); (mem.vetoes[head] ??= {})[route] = at; save(); tell({ kind: "trail-veto", head, route, why, at }); },
     /** per-route strength with evaporation: [{ route, strength, deposits, hits, meanMs }] */
-    stats(head, routes = null) { return trailStats(live(head), head, { now: now(), routes, halfLifeDays }); },
+    stats(head, routes = null) { return trailStats(live(head), head, { now: now(), routes, halfLifeDays, law, ...(alpha != null ? { alpha } : {}) }); },
     /** the learned order of `routes` for `head`: earned routes strongest first, then untried, then dead; a scout sometimes goes first */
-    orderFor(head, routes, { explore, rng = Math.random } = {}) { return routeOrderFor(live(head), head, { now: now(), routes, rng, halfLifeDays, ...(explore != null ? { explore } : {}) }); },
+    orderFor(head, routes, { explore, rng = Math.random } = {}) { return routeOrderFor(live(head), head, { now: now(), routes, rng, halfLifeDays, law, ...(alpha != null ? { alpha } : {}), ...(explore != null ? { explore } : {}) }); },
     /** routes with a live success, strongest first */
     known(head) { return this.stats(head).filter((s) => s.strength > 0).sort((a, b) => b.strength - a.strength).map((s) => s.route); },
     /** a thing about the world, for everyone who reads this store: `until` is an epoch ms */
