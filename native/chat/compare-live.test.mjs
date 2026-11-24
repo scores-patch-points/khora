@@ -23,3 +23,15 @@ test("a failing canonical read is counted and never reaches the user; a burst of
   let runs = 0; const t2 = await mk({ compare: true, compareRead: async () => { runs++; await new Promise((r2) => setTimeout(r2, 30)); return { pronounsGuess: [], pronounsPresence: [] }; } });
   await t2.turn("Mina gave Jonathan a book."); await t2.turn("She lives in the village."); await t2.turn("Pierre visited Mina."); await t2.compareDone(); assert.ok(runs >= 1 && runs <= 2, `a burst is coalesced (${runs} runs for 3 statements)`);
 });
+test("I and you: in what the user typed a first person is the user and a second person is the chat; inside a quotation and in a passage a giver supplied the chat binds nobody; the counts reach the log without the text", T, async () => {
+  const log = openLog(); let th; const canon = () => ({ pronounsGuess: [], pronounsPresence: [], speakerBindings: th.participants().filter((x) => x.kind === "speaker").map((x) => ({ a: x.at, b: x.at + x.form.length, cl: "one:speaker", ref: "narrator", kind: "narrator", via: "first person outside quotations" })) });
+  th = await mk({ log, compare: true, compareRead: async () => canon() });
+  await th.turn("I live in Paris. My dog is named Rex. You are kind."); await th.compareDone();
+  const ps = th.participants(); assert.deepEqual(ps.map((x) => [x.form.toLowerCase(), x.kind, x.chat]), [["i", "speaker", "user"], ["my", "speaker", "user"], ["you", "addressee", "me"]], JSON.stringify(ps));
+  assert.ok(ps.every((x) => x.at >= 0 && th.engine.S.text.slice(x.at, x.at + x.form.length) === x.form), "each offset points at its own word in the thread's text");
+  const e = readKinds(log, ["read_comparison"]).filter((r) => r.body?.thread === th.id).at(-1); assert.equal(e.body.speakers.mentions, 3); assert.deepEqual([e.body.speakers.counts.agree, e.body.speakers.counts.canon_none], [2, 1], "the I and the my agree with the narrator; the canonical read has no addressee outside a quotation");
+  assert.deepEqual(e.body.speakers.refs.chat, ["user"]); assert.ok(!JSON.stringify(e.body).includes("Paris"), "the text is never written");
+  await th.turn('Mina said "I will leave". I stayed.'); const q = th.participants().filter((x) => x.order >= 3);
+  assert.deepEqual(q.map((x) => [x.form, x.chat]), [["I", null], ["I", "user"]], "the quoted I is Mina's, not the user's; the chat does not read quotations, so it binds nobody; the unquoted I is the user");
+  await th.say("I was born in Spain.", { given: "a passage" }); assert.equal(th.participants().filter((x) => x.order >= 5).length, 0, "a passage a giver supplied is not the user's words");
+});

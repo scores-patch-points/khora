@@ -32,7 +32,8 @@ import { kinRuleOf, lintKinClaim, kinAtom } from "./janus-lint.mjs";
 import { makeDoors } from "./doors.mjs";
 import { LABEL, MARK_TEXT, marksOf, candidates, judge, takenAs } from "./acts.mjs";
 import { settled } from "./hunt-check.mjs";
-import { compareBindings } from "./compare-read.mjs";
+import { compareBindings, compareSpeakers } from "./compare-read.mjs";
+import { quotesOf } from "../adapters/text/speakers.js";   // where a quotation opens and closes (a scan of the quote marks, no language): the canonical read's own piece
 import { condense } from "./condense.mjs";
 import { detok } from "./personas.mjs";
 // the puzzle reader is another session's organ (pure; imports only the reasoner): without it the door is off and says so
@@ -99,6 +100,8 @@ const quote = (s) => `“${String(s).trim()}”`;
 const cap = (s) => (s ? s[0].toUpperCase() + s.slice(1) : s);
 const sha = (s) => createHash("sha256").update(String(s)).digest("hex").slice(0, 16);
 
+// the closed paradigm of the two participants, for SAYING a told "I" to the one who told it ("you") and a told "you" back as "I": a form by its place in the clause (subject, object, possessive before a noun, possessive alone, reflexive)
+const PARTICIPANT_FORMS = Object.freeze({ you: Object.freeze({ nom: "you", acc: "you", det: "your", ind: "yours", refl: "yourself" }), me: Object.freeze({ nom: "I", acc: "me", det: "my", ind: "mine", refl: "myself" }) });
 /** makeThread({ hl, know, now }) → { say, ask, state }.  know: the givers (demo/knowledge.mjs makeKnowledge) or null (typed gaps). */
 export async function makeThread({ hl, know = null, now = () => new Date(), janus = null, log = null, getJson = undefined, verbEmbed = null, codeRouter = undefined, compare = process.env.CHAT_COMPARE === "1", compareRead = null } = {}) {
   const parser0 = await rowsOfFor("eng"), pr = priorsFor("eng"), engine = await makeEngine({ hl });
@@ -673,6 +676,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       const sayFiller = (x) => {
         if (!x.pron || !x.node) return x.text;
         const dot = x.node.indexOf("."), o = Number(x.node.slice(1, dot < 0 ? undefined : dot)), row = dot < 0 ? null : S.rowsOf.get(o)?.rows?.find((r) => r.id === Number(x.node.slice(dot + 2)));
+        const pt = row ? participantOf(o, row) : null; if (pt?.chat) { trace.push({ step: "participant", said: x.text, as: personForm(row, pt.kind) }); return personForm(row, pt.kind); }   // "I" the user told is "you" to the user; "you" the user told is "I"
         const info = row ? pronounInfo(featsOf(row.feats), o, row) : null;
         if (info?.ref) {
           const nm = S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? x.text;
@@ -921,6 +925,20 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const info = pronounInfo(featsOf(r.feats), p.order, r), nm = info?.ref ? engine.S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? null : null;
     return { order: p.order, form: r.form, at: (engine.S.sentenceStart.get(p.order) ?? 0) + (r.start ?? 0), chat: info?.ref && !info.open ? nm : null, open: !!info?.open, candidates: (info?.candidates ?? []).map((c) => c.label), via: info?.via?.source ?? null };
   }));
+  /** I AND YOU, in what the USER TYPED: a person in a conversation knows that "I" in the other's message is the other and "you" is themselves. chat = "user" for a first person, "me" for a second person (the chat, whoever it is speaking as);
+   *  null inside a quotation (whose words those are is not the user's to say: the canonical read binds them to the quoted speaker, the chat does not read quotations) and in a passage a giver supplied (not the user's words at all).
+   *  Singular first person only (we, us, our are the user and others: not one participant). participantOf is the one test; participants() lists every such word of the thread and is a READ-ONLY view like bindings() (at = the character
+   *  offset in the thread's text), for comparing with the canonical read's speakerBindings; sayFiller (an answer that is "I" or "you") uses the same test to say it to the user as the user would hear it. */
+  const participantOf = (order, r, qs = null) => {
+    if (!parse.some((p) => p.order === order) || givenAt.has(order)) return null;
+    const F = featsOf(r.feats), kind = (r.upos === "PRON" || r.upos === "DET") && F.Person === "1" && F.Number !== "Plur" ? "speaker" : youRow(r) ? "addressee" : null; if (!kind) return null;
+    const at = (engine.S.sentenceStart.get(order) ?? 0) + (r.start ?? 0), quoted = (qs ?? quotesOf(engine.S.text ?? "")).some((q) => at > q.open && at < q.close);
+    return { order, form: r.form, at, kind, chat: quoted ? null : kind === "speaker" ? "user" : "me", via: quoted ? "inside a quotation: not the user's words" : "a message the user typed" };
+  };
+  const participants = () => { const qs = quotesOf(engine.S.text ?? ""); return parse.flatMap((p) => p.rows.map((r) => participantOf(p.order, r, qs)).filter(Boolean)); };
+  /** the form of a told "I" (kind "speaker") or "you" (kind "addressee"), said to the user: "you" for the first, "I" for the second, in the place the word held in its clause */
+  const personForm = (row, kind) => { const F = featsOf(row.feats), T = PARTICIPANT_FORMS[kind === "speaker" ? "you" : "me"], det = String(row.deprel).startsWith("nmod:poss") || row.deprel === "det:poss";
+    return F.Reflex === "Yes" ? T.refl : det ? T.det : F.Poss === "Yes" ? T.ind : String(row.deprel).startsWith("nsubj") ? T.nom : T.acc; };
   // THE CANONICAL COMPARISON (opt-in: CHAT_COMPARE=1 or makeThread({ compare: true }); OFF by default). After a turn that read statements, the thread's text is read by the canonical door (reading.js readDocument) beside
   // the chat's own reading, and the gendered pronouns are paired and counted (compare-read.mjs). It runs AFTER the reply, one at a time (a run waiting to start reads the latest text, so a burst is one run), and never
   // changes or delays what the chat says; a failure is counted, never thrown. Each run is one `read_comparison` entry in the chat's log: counts and the pairs that disagree, never the text. The canonical read is the REAL
@@ -930,11 +948,11 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     const text = engine.S.text; if (!text || !text.trim()) return;
     const t0 = Date.now(), chat = bindings();
     const w = await (compareRead ?? ((t) => READING.readDocument(t, { language: "eng", rows: true, minCharacters: 1 })))(text);
-    const r = compareBindings(chat, w, { text }); cmp.runs++; cmp.last = { at: new Date().toISOString(), ms: Date.now() - t0, sentences: parse.length, pronouns: r.pronouns, counts: r.counts };
-    if (log) try { weaveEntry(log, { cell: "EVA·Figure", kind: "read_comparison", addr: `${id}:cmp${cmp.runs}`, body: { thread: id, sentences: parse.length, pronouns: r.pronouns, paired: r.paired, counts: r.counts, ms: cmp.last.ms, disagreements: r.items.filter((x) => x.kind === "conflict" || x.kind === "chat_none").slice(0, 20).map((x) => ({ kind: x.kind, pronoun: x.pronoun, order: x.order, chat: x.chat, canonical: x.canonical })) } }); } catch { /* the record is additive */ }
+    const r = compareBindings(chat, w, { text }), sp = compareSpeakers(participants(), w, { text }); cmp.runs++; cmp.last = { at: new Date().toISOString(), ms: Date.now() - t0, sentences: parse.length, pronouns: r.pronouns, counts: r.counts, speakers: { mentions: sp.mentions, counts: sp.counts, ...(sp.gap ? { gap: sp.gap.gap } : {}) } };
+    if (log) try { weaveEntry(log, { cell: "EVA·Figure", kind: "read_comparison", addr: `${id}:cmp${cmp.runs}`, body: { thread: id, sentences: parse.length, pronouns: r.pronouns, paired: r.paired, counts: r.counts, ms: cmp.last.ms, disagreements: r.items.filter((x) => x.kind === "conflict" || x.kind === "chat_none").slice(0, 20).map((x) => ({ kind: x.kind, pronoun: x.pronoun, order: x.order, chat: x.chat, canonical: x.canonical })), speakers: { mentions: sp.mentions, paired: sp.paired, counts: sp.counts, refs: sp.refs, ...(sp.gap ? { gap: sp.gap } : {}), disagreements: sp.items.filter((x) => x.kind === "conflict" || x.kind === "chat_none").slice(0, 20).map((x) => ({ kind: x.kind, pronoun: x.pronoun, role: x.role, chat: x.chat, canonical: x.canonical })) } } }); } catch { /* the record is additive */ }
   };
   const queueCompare = () => { if (!cmp.on || cmpPending) return; cmpPending = true; cmpChain = cmpChain.then(async () => { cmpPending = false; try { await runCompare(); } catch (e) { cmp.errors++; cmp.lastError = String(e?.message ?? e).slice(0, 160); } }); };
   const compareState = () => (cmp.on ? { on: true, runs: cmp.runs, errors: cmp.errors, last: cmp.last, ...(cmp.lastError ? { lastError: cmp.lastError } : {}) } : { on: false, how: "off by default; CHAT_COMPARE=1 reads each thread's text by the canonical read after the reply and counts where the chat's pronoun binding and the canonical read's agree" });
   const turnCompared = async (message, opts) => { const r = await turn(message, opts); if (cmp.on && r?.type === "read") queueCompare(); return r; };
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turnCompared), setPersona, engine, bindings, compareDone: () => cmpChain, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), compare: compareState(), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), language: READING.readerFor ? "asked before a message is read (reading.js readerFor): a language it places that is not English, a language no codec reads, or a script no prior holds is a typed gap and nothing is read; a message it cannot place is read as this thread's declared English and the trace says so" : "not asked: readerFor is not in this checkout, so every message is read as English as before", corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turnCompared), setPersona, engine, bindings, participants, compareDone: () => cmpChain, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), compare: compareState(), priors: { nameGender: nameGenderGap ?? (nameGender && !nameGender.missing ? "loaded: titles, dictionary given-name senses, Wikidata given-name snapshot" : "loaded"), language: READING.readerFor ? "asked before a message is read (reading.js readerFor): a language it places that is not English, a language no codec reads, or a script no prior holds is a typed gap and nothing is read; a message it cannot place is read as this thread's declared English and the trace says so" : "not asked: readerFor is not in this checkout, so every message is read as English as before", corrections: !genderMod?.readCorrections ? "not remembered: the given-name prior (native/adapters/text/gender-of-words.js) is not in this checkout" : !log ? "not remembered: this thread has no log" : `${corrections?.size ?? 0} remembered from the log (what you told me in earlier threads)`, verbEquivalence: !verbOrgan ? "the verb-equivalents organ is not in this checkout" : verbEmbed ? "on (an embedder was handed in)" : embedMod ? "on demand, when the exact verb finds nothing: needs the local embedder (ollama nomic-embed-text); without it the trace says so and no verb is substituted" : "no embedder module" } }) };
 }

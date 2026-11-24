@@ -43,3 +43,28 @@ export function compareBindings(chat, weft, { text = null } = {}) {
   }
   return { counts, items, paired: [...chatKeyed.keys()].filter((k) => canon.has(k)).length, pronouns: chatKeyed.size };
 }
+
+// ---- I AND YOU (the speaker rung, native/adapters/text/speakers.js, in the canonical read since 9113500) ----
+// The canonical read binds a first person to the speaker of its quotation, or (outside quotations, when it recurs) to the one narrator of the text, and a second person only inside a quotation, to the speaker of the quotation before it. It
+// has no notion of a conversation. The chat does: in a message the user typed, "I" is the user and "you" is the chat (thread.participants()). This pairs the two by CHARACTER OFFSET (the same text is read by both and a typed message has no
+// hard wrap) and counts them with the same kinds. A speaker (chat) agrees with a speaker or a narrator (canonical); an addressee with an addressee. A mention only the canonical read binds is a mention the chat has nobody for (a quotation
+// it does not read, or a passage somebody else said): chat_none, counted and named, never guessed.
+/**
+ * compareSpeakers(chat, weft, { text }) -> { counts, items, paired, mentions, refs, gap }
+ *   chat   thread.participants(): [{ order, form, at, kind: "speaker"|"addressee", chat: "user"|"me"|null, via }]  (chat null = the chat binds nobody: inside a quotation)
+ *   weft   the canonical entry: speakerBindings: [{ a, b, cl, ref, kind: "speaker"|"addressee"|"narrator", via }] or { gap, detail }
+ */
+export function compareSpeakers(chat, weft, { text = null } = {}) {
+  const sb = weft?.speakerBindings, gap = sb && !Array.isArray(sb) ? { gap: sb.gap ?? "speakers_unavailable", detail: sb.detail ?? null } : null;
+  const canon = new Map((Array.isArray(sb) ? sb : []).map((m) => [m.a, m])), seen = new Set(), counts = Object.fromEntries(KINDS.map((k) => [k, 0])), items = [];
+  const ctx = (at) => (text ? { context: text.slice(Math.max(0, at - 40), at + 30).split("\n").join(" ") } : {});
+  for (const b of [...(chat ?? [])].sort((x, y) => x.at - y.at)) {
+    const c = canon.get(b.at) ?? null; if (c) seen.add(b.at); let kind;
+    if (b.chat && c) kind = (b.kind === "speaker" && (c.kind === "speaker" || c.kind === "narrator")) || (b.kind === "addressee" && c.kind === "addressee") ? "agree" : "conflict";
+    else if (!b.chat && c) kind = "chat_none"; else if (b.chat && !c) kind = "canon_none"; else kind = "both_none";
+    counts[kind]++; if (kind !== "agree" && kind !== "both_none") items.push({ kind, pronoun: b.form, role: b.kind, order: b.order, at: b.at, ...ctx(b.at), chat: b.chat, via: b.via, canonical: c ? { kind: c.kind, ref: c.ref, via: c.via } : null });
+  }
+  for (const [a, c] of canon) if (!seen.has(a)) { counts.chat_none++; items.push({ kind: "chat_none", pronoun: text ? text.slice(a, c.b) : null, role: c.kind, order: null, at: a, ...ctx(a), chat: null, via: "the chat lists no such mention here", canonical: { kind: c.kind, ref: c.ref, via: c.via } }); }
+  const refs = { chat: [...new Set((chat ?? []).filter((b) => b.chat && b.kind === "speaker").map((b) => b.chat))], canonical: [...new Set([...canon.values()].filter((m) => m.kind !== "addressee").map((m) => String(m.ref)))] };
+  return { counts, items, paired: [...seen].length, mentions: (chat ?? []).length + [...canon.keys()].filter((a) => !seen.has(a)).length, refs, gap };
+}
