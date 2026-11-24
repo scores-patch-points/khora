@@ -43,7 +43,7 @@ http.createServer(async (req, res) => {
       const read = await readPersona(prompt, { source: `github.com/asgeirtj/system_prompts_leaks/${it.path}` });
       const pz = { ...read, name: read.name ?? it.name, label: it.label ?? it.name, vendor: it.vendor };
       personaNow = pz; await thread.setPersona(pz);
-      return json(res, 200, { persona: { name: pz.name, label: pz.label, vendor: pz.vendor, identity: pz.identity, declaredTools: pz.declaredTools, source: pz.source, foldSentences: !!pz.text }, bytes: prompt.length });
+      return json(res, 200, { persona: { name: pz.name, label: pz.label, vendor: pz.vendor, identity: pz.identity, declaredTools: pz.declaredTools, source: pz.source, foldSentences: !!pz.text, behaviours: pz.behaviours ?? null }, bytes: prompt.length });
     } catch (e) { return json(res, 502, { error: String(e?.message ?? e) }); }
   }
   if (req.method === "POST" && url.pathname === "/api/chat") {

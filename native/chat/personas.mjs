@@ -112,9 +112,22 @@ export async function readPersona(promptText, { source = null } = {}) {
   });
   // the name: the protagonist if it is a name, else the identity's own first phrase ("ChatGPT, a large language model ...")
   const name = protagonist && protagonist !== "you" ? protagonist : identity ? identity.split(",")[0].trim() : null;
+  // WHAT THE PROMPT ASKS OF IT: the sentences that say what the protagonist does or should do: a main verb with the protagonist as its subject, either with a deontic modal ("Claude should
+  // not give precise numbers") or in the present tense ("Claude uses a warm tone"). Read from the rows' marks; the modals are the English reader's declared table. Each is kept as
+  // written, with its marks: conditional (an adverbial clause with its own marker: "If the person ..."), negative (the reader's Polarity=Neg). Nothing here follows any of them.
+  const MODAL = new Set(["should", "must", "shall", "ought", "can", "may"]);
+  const behaviours = [];
+  for (const c of all.slice(0, 600)) {
+    const { rows } = read(c), root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT"); if (!root || root.upos !== "VERB") continue;
+    const sub = rows.find((r) => r.head === root.id && r.deprel?.startsWith("nsubj")); if (!sub) continue;
+    const about = protagonist === "you" || !protagonist ? isYou(sub) : sub.form === protagonist; if (!about) continue;
+    const modal = rows.some((r) => r.head === root.id && r.deprel === "aux" && MODAL.has(String(r.lemma ?? r.form).toLowerCase())), F = featsOf(root.feats), present = F.VerbForm === "Fin" && F.Tense === "Pres";
+    if (!modal && !present) continue;
+    behaviours.push({ text: c.text.trim().slice(0, 260), modal, negative: rows.some((r) => String(r.feats ?? "").split("|").includes("Polarity=Neg")), conditional: rows.some((r) => r.deprel === "advcl" && rows.some((m) => m.head === r.id && m.deprel === "mark")) });
+  }
   // the prompt as the persona's own fold: the sentences about it, in order, up to the cap (what it can answer "you" questions from)
   let text = "", n = 0; for (const c of about) { if (n + c.text.length > 12000) break; text += (text ? " " : "") + c.text; n += c.text.length; }
   const lines = String(promptText ?? "").split("\n"), tools = [];
   lines.forEach((ln, i) => { const t = ln.trim(); if (t.startsWith("#") && ["tool", "function"].some((w) => t.toLowerCase().includes(w))) for (const nx of lines.slice(i + 1, i + 40)) { const m = nx.trim(); if (m.startsWith("#")) break; if (m.startsWith("## ") || m.startsWith("- `") || m.startsWith("* `")) tools.push(m.replace(/[#*`-]/g, "").trim().split(/[\s:(]/)[0]); } });   // regex-ok: tool names in a markdown file's headings and bullets, a file format and not language
-  return { identity, name, source, declaredTools: [...new Set(tools.filter(Boolean))].slice(0, 30), text };
+  return { identity, name, source, declaredTools: [...new Set(tools.filter(Boolean))].slice(0, 30), text, behaviours: { total: behaviours.length, conditional: behaviours.filter((b) => b.conditional).length, negative: behaviours.filter((b) => b.negative).length, modal: behaviours.filter((b) => b.modal).length, sample: behaviours.slice(0, 40) } };
 }
