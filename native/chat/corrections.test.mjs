@@ -22,12 +22,15 @@ test("a question or a negated clause is not a correction: “Is she Jordan?” a
   for (const m of ["Is she Jordan?", "She is not Jordan."]) assert.notEqual((await th.turn(m)).type, "correction", m);
   const none = await mk(); assert.notEqual((await none.turn("No, I meant Jordan.")).type, "correction", "nothing was chosen, so there is nothing to correct (the old reading of “no” stands)");
 });
-test("a correction is written to the log and the next thread starts from it; the newest correction of a name wins", T, async () => {
+const HAVE = !!(await import("../adapters/text/gender-of-words.js").catch(() => null))?.readCorrections;   // the next thread reads the log through the given-name prior's own reader
+test("a correction is written to the log in the prior's shape and the next thread starts from it; the newest correction of a name wins", { skip: !mk ? T.skip : HAVE ? false : "the given-name prior (gender-of-words.js) is not in this checkout, so nothing is remembered across threads" }, async () => {
   const log = openLog(); const a = await mk({ log }); await say(a, "Casey met Jordan. She smiled.", "Who is she?", "Casey", "No, I meant Jordan.");
-  const b = await mk({ log }); await say(b, "Jordan met Casey. She smiled."); assert.equal((await b.turn("Who smiled?")).text, "Jordan.");
+  const { readKinds } = await import("./record.mjs"), entry = readKinds(log, ["correction"]).map((e) => e.body).find((x) => x.key === "jordan");
+  assert.deepEqual({ key: entry.key, class: entry.class, said: entry.said, was: entry.was }, { key: "jordan", class: "f", said: "No, I meant Jordan.", was: "Casey" }, "one entry per name changed, with the user's words and the pick it replaced");
+  const b = await mk({ log }); await say(b, "Jordan met Casey. She smiled."); assert.equal((await b.turn("Who smiled?")).text, "Jordan."); assert.match(b.state().priors.corrections, /remembered from the log/);
   const prof = async (th, name) => th.engine.wordProfile("", { ref: th.engine.S.read.cast.referents.find((x) => x.forms[0][0] === name).ref });
   const c = await mk({ log }); await say(c, "Casey smiled. They waved.", "No, they means Casey."); const d = await mk({ log }); await say(d, "Casey wrote a letter. Casey waved.");
-  const p = (await prof(d, "Casey")).pronoun; assert.equal(p.nom, "they"); assert.equal(p.decided, true); assert.match(p.source, /^told/);
+  const p = (await prof(d, "Casey")).pronoun; assert.equal(p.nom, "they"); assert.equal(p.decided, true); assert.equal(p.source, "told"); assert.match(p.note, /you told me on \d{4}-\d{2}-\d{2}: “No, they means Casey\.”/);
   const e = await mk({ log }); await say(e, "Casey wrote a letter. Casey waved.", "Casey is a woman."); const f = await mk({ log }); await say(f, "Casey wrote a letter. Casey waved.");
   assert.equal((await prof(f, "Casey")).pronoun.nom, "she", "the newest correction of the name wins");
   const none = await mk(); await say(none, "Casey wrote a letter. Casey waved."); assert.equal((await prof(none, "Casey")).pronoun.source, "they-default", "no log, nothing remembered");
