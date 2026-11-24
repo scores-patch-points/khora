@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompted, and audited</title>
+<style>
+:root { --bg:#f7f6f3; --panel:#fff; --ink:#1f2328; --muted:#5b6370; --line:#ddd9cd; --me:#2b5fd9; --bot:#efede6; --accent:#b45309; --ok:#15803d; --bad:#b91c1c; --mark:#fde68a; --soft:#faf9f6; }
+@media (prefers-color-scheme: dark) { :root { --bg:#14161a; --panel:#1b1e23; --ink:#ebe9e4; --muted:#a4aab2; --line:#33383f; --me:#3b6fe0; --bot:#262a30; --accent:#e9954a; --ok:#4ade80; --bad:#f87171; --mark:#5b4a12; --soft:#20242a; } }
+* { box-sizing:border-box; } html, body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+header { padding:12px 18px; border-bottom:1px solid var(--line); background:var(--panel); } header b { font-size:17px; } header .k { margin-left:6px; }
+.banner { margin:0; padding:10px 18px; background:var(--mark); font-size:14px; }
+main { display:grid; grid-template-columns:minmax(360px, 1.15fr) minmax(360px, 1fr); } section.col { padding:16px 18px; min-width:0; } section.col + section.col { border-left:1px solid var(--line); }
+h3 { margin:20px 0 8px; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); } h3:first-child { margin-top:0; }
+h4 { margin:0 0 6px; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
+select, textarea, input[type=text] { width:100%; border:1px solid var(--line); border-radius:10px; padding:9px 11px; background:var(--panel); color:var(--ink); font:inherit; } textarea { height:84px; resize:vertical; }
+button { border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:12px; padding:5px 13px; font:inherit; cursor:pointer; } button.go { background:var(--me); color:#fff; border:0; } button:disabled { opacity:.5; cursor:default; } button.small { font-size:12.5px; padding:2px 9px; }
+.k { color:var(--muted); } .row { display:flex; margin:10px 0 6px; } .row.me { justify-content:flex-end; } .msg { max-width:92%; padding:9px 14px; border-radius:14px; background:var(--bot); white-space:pre-wrap; font-size:16px; } .me .msg { background:var(--me); color:#fff; }
+code { font:12.5px ui-monospace, Menlo, monospace; word-break:break-all; } pre { font:12.5px/1.5 ui-monospace, Menlo, monospace; margin:0; white-space:pre-wrap; word-break:break-word; }
+mark { background:var(--mark); color:inherit; padding:1px 2px; border-radius:3px; outline:1px solid color-mix(in srgb, var(--accent) 55%, transparent); }
+.card { margin:4px 0 18px; border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:2px 14px 6px; } .card > section { padding:11px 0; border-top:1px solid var(--line); } .card > section:first-child { border-top:0; }
+.lead { margin:0 0 6px; font-size:15px; } .note { font-size:13px; color:var(--muted); margin-top:4px; }
+blockquote.src { margin:6px 0; padding:9px 13px; border-left:4px solid var(--accent); background:var(--mark); font-size:15px; border-radius:0 8px 8px 0; }
+dl { display:grid; grid-template-columns:9.5em 1fr; gap:5px 12px; margin:0; } dt { color:var(--muted); } dd { margin:0; min-width:0; } dd ul { margin:0; padding-left:18px; }
+details { margin:6px 0; } summary { cursor:pointer; color:var(--muted); font-size:13.5px; } summary:hover { color:var(--ink); }
+.ptext { margin-top:6px; padding:10px 12px; max-height:300px; overflow:auto; background:var(--soft); border:1px solid var(--line); border-radius:8px; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:10px; } .two > div { padding:9px 12px; border:1px solid var(--line); border-radius:10px; background:var(--soft); } .two b.t { display:block; font-size:12px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; font-weight:600; } del { color:var(--bad); }
+.verdict { margin-top:8px; font-weight:600; } .verdict.ok { color:var(--ok); } .verdict.bad { color:var(--bad); }
+table { border-collapse:collapse; width:100%; font-size:13.5px; } th, td { border:1px solid var(--line); padding:6px 8px; vertical-align:top; text-align:left; } th { color:var(--muted); font-weight:600; background:var(--soft); }
+td.cell { cursor:pointer; } td.cell:hover { outline:2px solid var(--me); outline-offset:-2px; } td.cell.sel { outline:2px solid var(--accent); outline-offset:-2px; } td.diff { background:color-mix(in srgb, var(--accent) 13%, transparent); } td .tag { display:block; margin-top:3px; font-size:11.5px; color:var(--muted); }
+.check { margin:12px 0; padding:10px 12px; border:1px solid var(--line); border-left-width:5px; border-radius:10px; background:var(--panel); } .check.ok { border-left-color:var(--ok); } .check.bad { border-left-color:var(--bad); } .check .h { font-weight:600; } .check .what { color:var(--muted); font-size:13.5px; margin:2px 0 6px; } .check table { margin-top:4px; } .check { overflow-x:auto; } td.cell { min-width:110px; }
+.ok-t { color:var(--ok); font-weight:600; } .bad-t { color:var(--bad); font-weight:600; }
+.group { margin:12px 0; } .rule { margin:6px 0; padding:7px 10px; border:1px solid var(--line); border-radius:8px; background:var(--soft); } .rule .meta { font-size:12.5px; color:var(--muted); margin-top:2px; }
+@media (max-width:860px) { main { grid-template-columns:1fr; } section.col + section.col { border-left:0; border-top:1px solid var(--line); } .two { grid-template-columns:1fr; } dl { grid-template-columns:1fr; } dt { margin-top:4px; } }
+</style>
+</head>
+<body>
+<header><b>Prompted, and audited</b> <span class="k">the same system under different prompts; every reply shows where it came from</span></header>
+<p class="banner">No language model runs here. When a prompt is on, the system computes each reply from the prompt's own sentences, and the card under the reply names the sentence, the prompt (by sha256), and the command that replays it. “As Claude” means “answered from the words of a Claude system prompt.” It is not Claude.</p>
+<main>
+<section class="col">
+  <h3>The prompt</h3>
+  <select id="p"></select>
+  <textarea id="custom" placeholder="…or paste or write your own prompt here" style="margin-top:6px"></textarea>
+  <div class="k" id="pinfo" style="margin-top:6px"></div>
+  <h3>Ask</h3>
+  <form id="f" style="display:flex; gap:6px"><input type="text" id="q" placeholder="Ask a question" autocomplete="off"><button class="go">Ask</button></form>
+  <label class="k" style="display:block; margin-top:6px"><input type="checkbox" id="prove" checked> prove the cause (run it again with the source sentence cut out of the prompt)</label>
+  <div style="margin-top:10px"><button id="policy" type="button">What does this prompt ask of the system?</button></div><div id="pol"></div>
+  <div id="log" style="margin-top:10px"></div>
+</section>
+<section class="col">
+  <h3>The experiment <button id="run" class="small">Run it</button> <button id="weave" class="small" disabled>Write the audit to pharos</button></h3>
+  <div id="exp" class="k">Five checks, each of which can fail. DIFFERENCE: the same question under different prompts gets different replies. INVARIANCE: a question a prompt cannot speak to gets the same reply under every prompt. DETERMINISM: the same prompt asked twice gives the same bytes. CAUSE: cutting out the sentence a reply came from changes the reply. COVERAGE: where a fixture prompt says something, the system used it. It takes about 30 seconds, then every cell of the table opens its own full audit.</div>
+  <div id="cellcard" style="margin-top:14px"></div>
+</section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }; const esc = (s) => { let o = ""; for (const c of String(s ?? "")) o += ENT[c] ?? c; return o; };
+let prompts = []; const texts = {};
+const pick = () => prompts.find((p) => p.id === $("p").value);
+async function promptText(id) { if (texts[id] !== undefined) return texts[id]; const r = await (await fetch("/api/prompt?id=" + encodeURIComponent(id))).json(); return (texts[id] = r.text ?? null); }
+function info() {
+  const p = pick(), typed = $("custom").value.trim();
+  $("pinfo").innerHTML = typed ? `Using the prompt you typed (${new TextEncoder().encode(typed).length} bytes).`
+    : p.sha256 ? `<div>${esc(p.source)} · ${p.bytes} bytes</div><div>sha256 <code>${esc(p.sha256)}</code></div><details id="pshow"><summary>Show the prompt</summary><pre class="ptext" id="ptext">loading…</pre></details>`
+    : "No prompt: the system as it is, answering from its own code.";
+  const d = $("pshow"); if (d) d.ontoggle = async () => { if (d.open) $("ptext").textContent = (await promptText(p.id)) ?? ""; };
+}
+const GLOSS = { self: "the persona route (a question about “you”, answered from the prompt)", read: "a statement read into the thread", reference: "a lookup of an article or person", door: "a slash command", puzzle: "a puzzle door" };
+const HOW = { "evidence the persona's fold quoted": "the system's reading of the prompt quoted this sentence as the evidence for its answer", "the clause the identity was read from": "this is the clause the persona's identity was read from" };
+const kind = (r) => !r.prompt ? "own code, no prompt" : r.handled === false ? "could not answer" : r.answeredFrom === "the prompt" ? "from the prompt" : "from code, not the prompt";
+function card(r, ptext) {
+  const T = ptext ?? r.promptText ?? null, s = r.span, p = r.prompt, cf = r.counterfactual, { promptText: _omit, ...record } = r;
+  let lead, src = "";
+  if (!p) lead = "No prompt was on, so nothing was drawn from a prompt. The system answered with its own code.";
+  else if (s) { lead = `Drawn from the prompt “${esc(p.label)}”. The reply is built from this sentence (characters ${s.from}–${s.to} of ${T ? T.length : p.bytes}):`; src = `<blockquote class="src">${esc(s.text ?? (T ? T.slice(s.from, s.to) : ""))}</blockquote><div class="note">It was found because ${esc(HOW[s.how] ?? s.how)}.</div>`; }
+  else if (r.answeredFrom === "the prompt") lead = `Drawn from the prompt “${esc(p.label)}”, but the audit could not locate a single sentence to point at.`;
+  else lead = `A prompt was on (“${esc(p.label)}”), but nothing in it was used for this question. ${r.handled === false ? "The system said it could not answer." : "The system answered with its own code and tools."}`;
+  const whole = T && s ? `<details ${T.length < 1500 ? "open" : ""}><summary>Show the whole prompt with that sentence marked (${p.bytes} bytes)</summary><pre class="ptext">${esc(T.slice(0, s.from))}<mark>${esc(T.slice(s.from, s.to))}</mark>${esc(T.slice(s.to))}</pre></details>` : "";
+  const ev = (r.evidence ?? []).length ? `<ul>${r.evidence.map((e) => `<li>${esc(e)}</li>`).join("")}</ul>` : "none";
+  let proof;
+  if (cf) proof = `<div class="two"><div><b class="t">With the sentence</b>${esc(r.reply)}</div><div><b class="t">Without it</b>${esc(cf.reply)}<div class="note">cut out: <del>${esc(cf.removed)}</del></div></div></div>
+    <div class="verdict ${cf.changed ? "ok" : "bad"}">${cf.changed ? "The reply changed, so that sentence is what produced it." : "The reply did not change, so that sentence was not what produced it."}</div><div class="note">The prompt was edited (that sentence removed), read again from scratch, and asked the same question.</div>`;
+  else if (s) proof = `<div class="k">Not tested. Tick “prove the cause” and ask again to cut the sentence out and see whether the reply changes.</div>`;
+  else proof = `<div class="k">There is no sentence to cut out, because no sentence of the prompt was used.</div>`;
+  return `<article class="card">
+    <section><h4>1 · Where the reply came from</h4><p class="lead">${lead}</p>${src}${whole}</section>
+    <section><h4>2 · How the system got there</h4><dl>
+      <dt>Model</dt><dd><b>none</b>. ${r.simulated ? "The persona is simulated: the system read the prompt into a fold of sentences and answered from it. It is not Claude." : "The system's own code answered."}</dd>
+      <dt>Route</dt><dd>${esc(r.type)}${GLOSS[r.type] ? ` <span class="k">: ${esc(GLOSS[r.type])}</span>` : ""}</dd>
+      <dt>Handled</dt><dd>${r.handled === false ? "no: the system said it could not answer" : r.handled === true ? "yes" : "n/a"}</dd>
+      ${r.identity ? `<dt>Persona read as</dt><dd>${esc(r.identity)}</dd>` : ""}
+      <dt>Sentences quoted</dt><dd>${ev}</dd>
+      <dt>Cited</dt><dd>${(r.cites ?? []).length ? esc(r.cites.join(" · ")) : "nothing"}</dd>
+      <dt>Tools</dt><dd>${(r.tools ?? []).length ? esc(r.tools.join(", ")) : "none"}</dd>
+      ${r.ms != null ? `<dt>Time</dt><dd>${r.ms} ms (including reading the prompt the first time)</dd>` : ""}</dl></section>
+    <section><h4>3 · Is that sentence really the cause?</h4>${proof}</section>
+    <section><h4>4 · The record</h4><dl>
+      <dt>Kind</dt><dd>${esc(record.schema)} · ${esc(record.at)} · ${esc(kind(r))}</dd>
+      ${p ? `<dt>Prompt</dt><dd>${esc(p.label)}<br><span class="k">source: ${esc(p.source)} · ${p.bytes} bytes</span><br>sha256 <code>${esc(p.sha256)}</code></dd>` : ""}
+      <dt>Replay</dt><dd><code>${esc(r.replay)}</code> <button class="small" type="button" data-copy="${esc(r.replay)}">copy</button></dd></dl>
+      <details><summary>Show the whole record (what is written to pharos)</summary><pre class="ptext">${esc(JSON.stringify(record, null, 1))}</pre></details></section>
+  </article>`;
+}
+document.addEventListener("click", async (e) => { const b = e.target.closest("button[data-copy]"); if (!b) return; try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "copied"; } catch { b.textContent = "select it and copy"; } });
+async function ask(question) {
+  const q = question.trim(); if (!q) return; $("q").value = "";
+  const me = document.createElement("div"); me.className = "row me"; me.innerHTML = `<div class="msg">${esc(q)}</div>`; $("log").prepend(me);
+  const bot = document.createElement("div"); bot.innerHTML = '<div class="row"><div class="msg"><i>reading…</i></div></div>'; me.after(bot);
+  const r = await (await fetch("/api/ask", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ promptId: $("p").value, custom: $("custom").value.trim() || null, question: q, prove: $("prove").checked }) })).json();
+  bot.innerHTML = r.error ? `<div class="row"><div class="msg">${esc(r.error)}</div></div>` : `<div class="row"><div class="msg">${esc(r.reply)}</div></div>${card(r)}`;
+}
+$("f").onsubmit = (e) => { e.preventDefault(); ask($("q").value); };
+$("p").onchange = info; $("custom").oninput = info;
+
+$("policy").onclick = async () => {
+  $("pol").innerHTML = '<div class="k" style="margin-top:8px">reading the prompt\'s rules…</div>';
+  const o = await (await fetch("/api/policy", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ promptId: $("p").value, custom: $("custom").value.trim() || null }) })).json();
+  if (o.none) { $("pol").innerHTML = '<div class="k" style="margin-top:8px">No prompt is on, so nothing is asked of the system.</div>'; return; }
+  if (o.error) { $("pol").innerHTML = `<div class="k" style="margin-top:8px">${esc(o.error)}</div>`; return; }
+  const rule = (x, meta) => `<div class="rule">${esc(x.behaviour)}<div class="meta">${meta}${x.span ? ` · characters ${x.span.from}–${x.span.to} of the prompt` : ""}${x.negative ? " · a prohibition" : ""}</div></div>`;
+  const grp = (title, why, items, mk, open) => `<details class="group" ${open && items.length ? "open" : ""}><summary><b>${title} (${items.length})</b> <span class="k">${why}</span></summary>${items.length ? items.map(mk).join("") : '<div class="k">none</div>'}</details>`;
+  const S = o.summary;
+  $("pol").innerHTML = `<article class="card" style="margin-top:10px"><section><h4>What this prompt asks of the system</h4>
+    <p class="lead">The system read <b>${o.read}</b> rule${o.read === 1 ? "" : "s"} about how the assistant behaves${S.behaviours < o.read ? ` and sorted the first ${S.behaviours}` : ""}. It <b class="ok-t">acts on ${S.actsOn}</b>, can be <b>checked against ${S.canCheck}</b>, finds ${S.ambiguous} about <b>two capacities at once</b>, and ${S.outside} are <b class="bad-t">about work it does not do</b>. Every rule is listed below, none hidden.</p></section>
+    <section><h4>The system's own capacities (the only things a rule can be about)</h4>${(o.capacities ?? []).map((c) => `<div class="rule"><b>${esc(c.id)}</b> · ${esc(c.kind === "acts" ? "the system acts: " + (c.acts ?? "") : "the system can only be checked: a reply either obeys it or does not")}<div class="meta">${esc(c.says)}<br>why it exists: ${esc(c.why)}</div></div>`).join("")}</section>
+    <section><h4>The rules, sorted</h4>
+    ${grp("Acts on", "the system does something differently when the rule is on", o.levers, (x) => rule(x, `capacity <b>${esc(x.lever)}</b> (nearness ${x.similarity}) · would: ${esc(x.obey)} · rule says: ${esc(x.polarity === "not" ? "do not" : "do")}`), true)}
+    ${grp("Can be checked", "the system cannot change for it, but a reply can be tested against it", o.checks, (x) => rule(x, `capacity <b>${esc(x.lever)}</b> (nearness ${x.similarity}) · ${esc(x.obey)}`), true)}
+    ${grp("About two capacities at once", "nearly as near one as another, so it is not forced onto either", o.ambiguous, (x) => rule(x, `either ${x.candidates.map((c) => `<b>${esc(c.lever)}</b> ${c.similarity}`).join(" or ")}`), true)}
+    ${grp("About work this system does not do", "no capacity is near enough: the system cannot act on these or be checked against them", o.outside, (x) => rule(x, x.nearest ? `nearest capacity ${esc(x.nearest.lever)} (${x.nearest.similarity})${x.nearest.clear ? "" : ", not clearly"}, below the bar` : "no capacity"), false)}</section>
+    <section><h4>How a rule is sorted</h4><div class="note" style="font-size:14px">The rule and each capacity are turned into numbers by a frozen embedding model (it reads, it does not write). A rule belongs to a capacity when it is nearer to it than ${o.threshold}, a bar set from how near sentences about nothing in particular are (mean ${o.spread.mean} plus 2.5 spreads of ${o.spread.sd}, measured on ${esc(o.nullFrom)}), and clearly nearer to it than to the second-nearest by ${o.margin}. Polarity (do or do not) is the reader's mark on the rule, not a word list.</div></section></article>`;
+};
+
+$("run").onclick = async () => {
+  $("run").disabled = true; $("cellcard").innerHTML = ""; $("exp").innerHTML = '<i>running the five checks…</i>';
+  const o = await (await fetch("/api/experiment", { method: "POST" })).json(), ids = o.order, lab = Object.fromEntries(o.prompts.map((p) => [p.id, p.label ?? p.id])), v = o.verdict, N = ids.length;
+  window.__o = o; const cell = (q, id) => o.matrix[q][id];
+  const col = (id) => `<th>${esc(lab[id])}<div class="k" style="font-weight:400">${id === "none" ? "no prompt" : esc((o.prompts.find((p) => p.id === id)?.sha256 ?? "").slice(0, 10)) + "…"}</div></th>`;
+  const tbl = (qs) => `<div style="overflow-x:auto"><table><tr><th>Question</th>${ids.map(col).join("")}</tr>${qs.map((q) => { const cells = ids.map((id) => cell(q, id).reply), distinct = new Set(cells).size; return `<tr><th>${esc(q)}</th>${ids.map((id, i) => `<td class="cell ${distinct > 1 ? "diff" : ""}" data-q="${esc(q)}" data-id="${esc(id)}">${esc(cells[i])}<span class="tag">${esc(kind(cell(q, id)))}</span></td>`).join("")}</tr>`; }).join("")}</table></div>`;
+  const chk = (ok, name, what, body) => `<div class="check ${ok ? "ok" : "bad"}"><div class="h"><span class="${ok ? "ok-t" : "bad-t"}">${ok ? "✔ passed" : "✖ failed"}</span> · ${name}</div><div class="what">${what}</div>${body}</div>`;
+  const cause = v.cause, cov = v.coverage, det = Object.entries(v.determinism);
+  $("exp").innerHTML = `<h4>Questions about “you” <span class="k" style="text-transform:none; letter-spacing:0">(click any cell for its full audit; shaded rows are where the prompts disagree)</span></h4>${tbl(o.self)}
+    <h4 style="margin-top:14px">Controls: things a prompt cannot speak to</h4>${tbl(o.controls)}
+    <h3>The five checks</h3>
+    ${chk(Object.values(v.difference).some((n) => n > 1), "DIFFERENCE", `Does the same question get different replies under different prompts? There are ${N} settings (no prompt, plus each prompt).`, `<table><tr><th>Question</th><th>distinct replies</th><th>of</th></tr>${Object.entries(v.difference).map(([q, n]) => `<tr><td>${esc(q)}</td><td>${n}</td><td>${N}</td></tr>`).join("")}</table>`)}
+    ${chk(Object.values(v.invariance).every(Boolean), "INVARIANCE", "Does a question the prompts cannot speak to (arithmetic, a greeting, a fact) get the same reply under every prompt? It should: the prompt must not leak into things it has no say over.", `<table><tr><th>Question</th><th>identical under every prompt</th></tr>${Object.entries(v.invariance).map(([q, b]) => `<tr><td>${esc(q)}</td><td class="${b ? "ok-t" : "bad-t"}">${b ? "yes" : "NO"}</td></tr>`).join("")}</table>`)}
+    ${chk(det.every(([, b]) => b), "DETERMINISM", "Asked a second time with the same prompt, does it give the same bytes? There is no randomness and no model, so it must.", `<table><tr><th>Prompt / question</th><th>second run identical</th></tr>${det.map(([k, b]) => `<tr><td>${esc(k)}</td><td class="${b ? "ok-t" : "bad-t"}">${b ? "yes" : "NO"}</td></tr>`).join("")}</table>`)}
+    ${chk(cause.length > 0 && cause.every((c) => c.changed), "CAUSE", "Cut out the one sentence a reply was drawn from, read the rest again from scratch, ask again: the reply must change, or that sentence was not the cause.", `<table><tr><th>Prompt</th><th>Question</th><th>sentence cut out</th><th>reply with</th><th>reply without</th><th></th></tr>${cause.map((c) => `<tr><td>${esc(lab[c.prompt])}</td><td>${esc(c.question)}</td><td>${esc(c.removed)}</td><td>${esc(cell(c.question, c.prompt).reply)}</td><td>${esc(cell(c.question, c.prompt).counterfactual?.reply ?? "")}</td><td class="${c.changed ? "ok-t" : "bad-t"}">${c.changed ? "changed" : "SAME"}</td></tr>`).join("")}</table>`)}
+    ${chk(cov.every((c) => c.used), "COVERAGE", `Where a fixture prompt <i>does</i> say something, did the system use it? A miss is a finding about the system, not a pass. Used in ${cov.filter((c) => c.used).length} of ${cov.length}.`, `<table><tr><th>Prompt</th><th>Question</th><th>the prompt says</th><th>the system said</th><th></th></tr>${cov.map((c) => `<tr><td>${esc(lab[c.prompt])}</td><td>${esc(c.question)}</td><td>${esc(c.promptSays)}</td><td>${esc(c.replied)}</td><td class="${c.used ? "ok-t" : "bad-t"}">${c.used ? "used" : "MISSED"}</td></tr>`).join("")}</table>`)}
+    <div class="note">One run, fixtures and one cached Claude prompt: an exploratory result, not a held-out one.</div>`;
+  $("run").disabled = false; $("weave").disabled = false;
+};
+$("exp").addEventListener("click", (e) => {
+  const td = e.target.closest("td.cell"); if (!td || !window.__o) return; const o = window.__o, r = o.matrix[td.dataset.q][td.dataset.id];
+  $("exp").querySelectorAll("td.sel").forEach((x) => x.classList.remove("sel")); td.classList.add("sel");
+  $("cellcard").innerHTML = `<h4>Audit of: “${esc(td.dataset.q)}” under ${esc(o.prompts.find((p) => p.id === td.dataset.id)?.label ?? td.dataset.id)}</h4><div class="row"><div class="msg">${esc(r.reply)}</div></div>${card(r, o.texts?.[td.dataset.id] ?? null)}`;
+  $("cellcard").scrollIntoView({ block: "nearest", behavior: "smooth" });
+});
+$("weave").onclick = async () => { const o = await (await fetch("/api/weave", { method: "POST" })).json(); $("weave").textContent = `written: ${o.woven} entries, kind ${o.kind}, writer ${o.writer}`; };
+fetch("/api/prompts").then((r) => r.json()).then((d) => { prompts = d.prompts; $("p").innerHTML = prompts.map((p) => `<option value="${esc(p.id)}">${esc(p.label)}</option>`).join(""); info(); });
+</script>
+</body>
+</html>
