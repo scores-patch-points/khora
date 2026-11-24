@@ -1,6 +1,6 @@
 {
  "stamp": {
-  "when": "2026-11-24T04:37:24.849Z",
+  "when": "2026-11-24T16:09:10.417Z",
   "split": "EXPLORATORY, held out from the table and the giver",
   "perSource": 4000
  },
@@ -16,12 +16,12 @@
    "lowercase": {
     "messages": 2787,
     "words": 22082,
-    "recasedPer1000": 14.1,
+    "recasedPer1000": 1.4,
     "bySource": {
-     "treebank-casing": 253,
-     "given-name": 59
+     "treebank-casing": 23,
+     "given-name": 7
     },
-    "mostRecased": "hai 40, nw 29, hu 27, cal 25, wen 15, la 8, din 8, don 8, al 7, ami 6, boston 6, bta 6, thi 6, sir 5, ny 5, nyc 5, jana 5, anna 5, yo 5, god 4, andrew 4, ana 4, wednesday 3, eve 3, tor 3"
+    "mostRecased": "hu 6, la 4, sunday 2, nw 2, don 2, din 2, march 2, tx 1, europe 1, wen 1, thi 1, sec 1, guard 1, andrew 1, dick 1, eve 1, ami 1"
    }
   },
   "cosem": {
@@ -35,12 +35,12 @@
    "lowercase": {
     "messages": 3841,
     "words": 14019,
-    "recasedPer1000": 4,
+    "recasedPer1000": 1.7,
     "bySource": {
-     "treebank-casing": 49,
-     "given-name": 7
+     "treebank-casing": 21,
+     "given-name": 3
     },
-    "mostRecased": "la 17, fri 4, bc 2, st 2, kay 2, phoenix 2, dong 2, google 2, july 1, friday 1, zero 1, sec 1, james 1, patterson 1, cone 1, yo 1, bin 1, san 1, dec 1, yang 1, valentine 1, din 1, fridays 1, india 1, ono 1"
+    "mostRecased": "la 6, fri 4, kay 2, phoenix 2, bc 1, friday 1, sec 1, james 1, patterson 1, fridays 1, ono 1, sunday 1, hui 1, hai 1"
    }
   },
   "irc": {
@@ -54,12 +54,12 @@
    "lowercase": {
     "messages": 3339,
     "words": 29519,
-    "recasedPer1000": 3.4,
+    "recasedPer1000": 2.6,
     "bySource": {
-     "treebank-casing": 77,
-     "given-name": 22
+     "treebank-casing": 61,
+     "given-name": 16
     },
-    "mostRecased": "google 10, deb 8, sec 6, lan 5, ram 4, janice 4, iso 4, youtube 4, daniels 3, devil 3, proxy 3, god 3, don 3, james 2, zero 2, sam 2, bout 2, apple 2, dell 2, australia 1, pat 1, un 1, bbc 1, omar 1, callum 1"
+    "mostRecased": "deb 7, google 7, sec 5, janice 4, ram 3, daniels 3, devil 3, don 3, james 2, zero 2, sam 2, proxy 2, god 2, bout 2, lan 2, apple 2, youtube 2, pat 1, un 1, omar 1, callum 1, hunter 1, chris 1, argentina 1, paul 1"
    }
   }
  }

@@ -7,6 +7,7 @@
 // and where neither knows the word he does not invent a capital: it is read as typed.
 //   notebook        a word the writer, or the thread (passed in as `known`), already capitalised somewhere that is not the start of a sentence is that name wherever it recurs lowercase:
 //                   the text's own evidence, for any name and any language written with capitals, listed nowhere.
+//   (the two shelves below apply only to text typed WITHOUT capitals: any capital but "I" in the message and they stay silent)
 //   shelf, casing   priors-shipped/truecase-eng.json (native/scripts/build-truecase-eng.mjs, UD English-EWT train, CC BY-SA): the casing most of a word's non-initial occurrences wear,
 //                   counted, never typed ("france" -> "France", "i" -> "I", "monday" -> "Monday").
 //   shelf, names    identity/givers/wikidata-given-names-en.json (Wikidata, CC0, fetched 2026-11-18, TRUNCATED by the query service: a name it lacks is simply not recased):
@@ -50,6 +51,11 @@ export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), na
   const closed = closedSet(table), ordinary = commonSet(table), notebook = new Map(), nameShare = table.dials?.NAME_SHARE ?? 0.8; let lead = true;
   const toks = tokenize(T);
   { let l = true; for (const t of toks) { const f = t.form; if (![...f].some(isLetter)) { if (f === "." || f === "?" || f === "!" || f === "…") l = true; continue; } const first = [...f][0]; if (!l && isLetter(first) && f !== f.toLowerCase() && f !== "I" && f !== f.toUpperCase() && !ordinary.has(f.toLowerCase())) notebook.set(f.toLowerCase(), f); l = false; } }
+  // THE SHELVES ARE FOR TEXT TYPED WITHOUT CAPITALS. A writer who capitalises ("The Magic Flute is an opera ... by Wolfgang Amadeus Mozart") has told us where the capitals go, so a lowercase word in that text
+  // is lowercase on purpose: the casing shelf and the given-name shelf stay silent (found by a peer: formal prose had "opera" recased to "Opera" and parsed as a proper noun). Any capital that is not the
+  // pronoun "I" counts, including a sentence's first letter (a phone capitalises that one itself, but then the name beside it is the writer's own to capitalise). The NOTEBOOK is the text's own evidence
+  // and always applies.
+  const habit = toks.some((t) => { const f = t.form, first = [...f][0]; return isLetter(first) && f !== f.toLowerCase() && f !== "I"; });
   for (const k of known ?? []) if ([...String(k)].some(isLetter) && k !== String(k).toLowerCase() && !ordinary.has(String(k).toLowerCase()) && !notebook.has(String(k).toLowerCase())) notebook.set(String(k).toLowerCase(), String(k));
   for (const t of toks) {
     const f = t.form; if (![...f].some(isLetter)) { if (f === "." || f === "?" || f === "!" || f === "…") lead = true; continue; }
@@ -60,6 +66,7 @@ export function recaseEnglish(text, { table = priorJson("truecase-eng.json"), na
     let cased = null, by = null;
     const heard = notebook.get(f), shelf = table.forms?.[f];
     if (heard) { cased = heard; by = "notebook"; }
+    else if (habit) continue;                                    // the writer capitalises: what is lowercase is lowercase on purpose
     else if (shelf) { cased = shelf[0]; by = "treebank-casing"; }
     else if (names?.has(f) && f.length >= MIN_GIVEN_NAME_LETTERS && !closed.has(f)) {
       const att = table.attested?.[f];                           // [times the treebank calls it anything but a proper noun, times it calls it one]

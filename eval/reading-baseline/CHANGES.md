@@ -167,3 +167,6 @@ files changed since the last record: native/reading.js, native/adapters/text/rec
 
 ## 2026-11-24: language-gate.mjs: unknown words capitalised in mid-sentence are names, set aside by the English witness (a peer found 'Madame Defarge wrote a letter.' unread). Gold re-run: UD PUD short wrong 4 -> 5 of 603, VAL short 14 -> 15 of 1227, VAL any 10 -> 12 of 1400; real SMS English-via-words 13.0% -> 13.4%. EXPLORATORY; eval/chat-register/RESULTS-READER.md.
 files changed since the last record: native/adapters/text/language-gate.mjs
+
+## 2026-11-24: recase.mjs: the casing and given-name shelves apply only to text typed without capitals (any capital but I silences them; the notebook always applies). A peer found formal prose recased through the reader ('opera' -> 'Opera', the hunt test 'a work by someone' failing). Held out on EWT dev/test lowercased: recall 0.315/0.300 and precision 0.746/0.711 unchanged; false recases on cased text 1.0/0.5 -> 0.36/0.24 per 1000 words; invariance unchanged; real chat recased per 1000 in lowercase-typed SMS/CoSEM/IRC 14/4/3.4 -> 1.4/1.7/2.6. EXPLORATORY; eval/chat-register/RESULTS-READER.md.
+files changed since the last record: native/adapters/text/recase.mjs

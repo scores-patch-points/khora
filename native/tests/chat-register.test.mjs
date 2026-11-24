@@ -74,6 +74,11 @@ test("recase: a name only the giver knows is NOMINATED, not recased; a greeting,
   assert.equal(recaseEnglish("lol hi").text, "lol hi", "a two-letter token is never a name (the named valve)");
   assert.equal(recaseEnglish("mark the notebook").text, "mark the notebook", "where the shelf is split the sentence decides, not the shelf");
 });
+test("recase: text that is capitalised keeps its lowercase words: the shelves are for text typed WITHOUT capitals (a peer found formal prose recased: 'opera' to 'Opera')", () => {
+  for (const t of ["The Magic Flute is an opera in two acts by Wolfgang Amadeus Mozart to a German libretto by Emanuel Schikaneder.", "Many people love opera.", "The states of the soul are many.", "Hi john, how r u", "Alice and bob went home."]) assert.equal(recaseEnglish(t).changes.length, 0, t);
+  assert.equal(recaseEnglish("I went to france on monday").text, "I went to France on Monday", "the pronoun I is not a capitalising habit");
+  assert.equal(recaseEnglish("Pierre met Natasha, then pierre kissed natasha").text, "Pierre met Natasha, then pierre kissed Natasha", "the notebook is the text's own evidence and always applies");
+});
 test("recase: markRecased writes what was done on the rows, so a later read can overturn it", () => {
   const r = recaseEnglish("i went to france"), rows = [{ form: "I" }, { form: "went" }, { form: "to" }, { form: "France" }];
   const marked = markRecased(rows, r.changes, r.candidates);
