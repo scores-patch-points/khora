@@ -366,3 +366,15 @@ test("mechanic 7, over-pairing closed: an answer is used only if it fits what wa
   // the question stays open after a bad answer, and a good one then pairs
   const th = await mk(); await th.turn("is it open?"); await th.turn("Hahaha"); const good = await th.turn("the shop"); assert.equal(good.paired?.rebuilt, "is the shop open?");
 });
+
+test("a missing prior is said, not silently skipped: without the given-name table the state says so, and a pairing of a name to he or she says it could not check the name", T, async () => {
+  const { loadNameGender } = await import("../adapters/text/name-gender.js");
+  const mine = await make(); const have = !!loadNameGender();
+  assert.equal(mine.state().priors.nameGender === "loaded", have);
+  if (have) return;   // with the table present there is nothing to say
+  assert.match(mine.state().priors.nameGender, /^no table of given names \(native\/adapters\/text\/name-gender\/eng\.json is not in this checkout\)/);
+  await mine.turn("did he arrive?"); const r = await mine.turn("Pierre");
+  assert.equal(r.paired?.rebuilt, "did Pierre arrive?");
+  const claim = r.thought.claims.find((x) => x.relation.verb === "answers");
+  assert.match(claim.assessed.basis, /I have no table of given names, so I could not check that the name suits “he”/);
+});

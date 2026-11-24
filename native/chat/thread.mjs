@@ -83,6 +83,9 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   const wordKnown = (r) => { const c = classifyWord(String(r.form).toLowerCase(), { posPrior: pr.posPrior }); return !!c?.found && c.total > 0; };   // a word the reader's part-of-speech prior holds
   // the given-name table (a giver, with its provenance inside the file): a name's lean for he / she until the thread's own pronouns say otherwise
   const table = loadNameGender();
+  // a missing prior is a gap said, never a silent degrade (nexus rule 2): without this table no name's gender is known, so no pronoun is steered by a name's lean and the fit of a name
+  // to "he" or "she" cannot be checked. It was missing from this checkout for the whole session (found by the other session, 2026-11-23); the state and the pairing say so.
+  const nameGenderGap = table ? null : "no table of given names (native/adapters/text/name-gender/eng.json is not in this checkout): a name's gender cannot be checked";
   const genderOf = (words) => { let m = 0, f = 0; for (const w of words ?? []) { const c = table?.words?.[String(w).toLowerCase()]; if (c) { m += c[0]; f += c[1]; } } return m + f >= MIN_EVIDENCE && m !== f ? (m > f ? "m" : "f") : null; };
   const abbr = (t) => abbreviationsFor(t, { priors: pr, aliases: [], abbreviations: null }).set;
   const id = `thread:${sha(now().toISOString() + Math.random())}`;
@@ -543,7 +546,7 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         : names.length ? (held ? null : `I don't know “${fill}”, so I can't tell whether it is the thing you mean`) : (heads.every((r) => wordKnown(r)) ? null : `I can't read “${fill}”`);
       const cid = propose(`this message answers your question about ${quote(pron.form)}`, { subject: "this message", verb: "answers", object: "the question about the pronoun" }, true, why
         ? { verdict: "refuted", method: "deduction", by, basis: `it came straight after my question about “${pron.form}”, but ${why}` }
-        : { verdict: "supported", method: "testimony", by, basis: `a ${names.length ? "name" : "noun phrase"} that fits “${pron.form}”, straight after I asked what it stood for`, witnesses: [witness] });
+        : { verdict: "supported", method: "testimony", by, basis: `a ${names.length ? "name" : "noun phrase"} that fits “${pron.form}”, straight after I asked what it stood for${gendered && names.length && nameGenderGap ? " (I have no table of given names, so I could not check that the name suits “" + pron.form + "”)" : ""}`, witnesses: [witness] });
       if (why) return finish({ type: "relational", handled: false, gap: "answer_does_not_fit", text: `I can't use ${quote(fill || t)} for ${quote(pron.form)}: ${why}. Who or what do you mean?`, question: t, tools: [], trace: [{ step: "pairing_refused", why }], ideaIds: [cid].filter(Boolean) });   // the question stays open
       asked = null;
       const rebuilt = detok(pending.rows.map((r) => (r.id === pending.row ? fill : r.form)));
@@ -576,5 +579,5 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
     }
   }
 
-  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted") }) };
+  return { id, say: serial(say), ask: serial(ask), turn: serial(turn), setPersona, engine, ideation, doors: () => doors.list(), state: () => ({ id, sentences: parse.length, referents: cast?.referents?.length ?? 0, text, janus: janus?.on ? "on" : (janus?.why ?? "not mounted"), priors: { nameGender: nameGenderGap ?? "loaded" } }) };
 }
