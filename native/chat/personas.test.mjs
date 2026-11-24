@@ -52,3 +52,24 @@ test("what a prompt asks of its protagonist is read from the rows' marks and kep
   assert.deepEqual([b.conditional, b.negative, b.modal], [1, 1, 3]);
   // a limit, stated: the reader tags a present-tense verb after a bare name unreliably ("Claude uses a warm tone"), so present-tense behaviours are undercounted
 });
+
+const SALT = "You are Captain Salt, a weathered pirate captain. You were made by Cap'n Bob in a tavern. You love rum and treasure. You can read maps.";
+test("a persona's prompt is read about the persona: its own “you” is the persona's name, so “Who made you?” finds “You were made by Cap'n Bob”, and the evidence quotes the prompt as written", T, async () => {
+  const { makeThread } = await import("./thread.mjs");
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  await th.setPersona({ ...(await P.readPersona(SALT)), label: "Captain Salt (fixture)" });
+  const made = await th.turn("Who made you?");
+  assert.equal(made.handled, true); assert.match(made.text, /Cap'n Bob/); assert.ok(made.evidence.some((e) => e.text === "You were made by Cap'n Bob in a tavern."), "the sentence as the prompt wrote it, not the fold's rewrite");
+  assert.equal((await th.turn("Who are you?")).text, "I'm Captain Salt, a weathered pirate captain.");
+  assert.equal((await th.turn("What do you love?")).text, "Rum and treasure.", "an answer that is a part of a longer answer is not said twice");
+  const can = await th.turn("What can you do?"); assert.equal(can.text, "I can read maps."); assert.ok(can.evidence.every((e) => e.given === "Captain Salt (fixture)'s prompt"));
+});
+
+test("a prompt with no sentence that says who it is gives a typed gap, never a quotation of the prompt", T, async () => {
+  const { makeThread } = await import("./thread.mjs");
+  const th = await makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00") });
+  await th.setPersona({ ...(await P.readPersona("You were made by Cap'n Bob in a tavern. You love rum.")), label: "Anonymous (fixture)" });
+  const r = await th.turn("Who are you?");
+  assert.equal(r.handled, false); assert.equal(r.gap, "no_identity_in_prompt"); assert.equal(r.text, "My instructions don't say who I am.");
+  assert.ok(!/Bob|tavern|prompt says/.test(r.text));
+});

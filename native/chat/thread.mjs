@@ -94,10 +94,23 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
   // A PERSONA is a prompt read as a document ABOUT the assistant: its sentences about the protagonist are read into a fold of their own (as the
   // prompt's words, door: given), and a question about "you" is asked of THAT fold with "you" turned into the persona's name. No model: what the
   // persona can say about itself is what its prompt says.
-  let personaFold = null;
+  let personaFold = null, personaOriginal = new Map();
+  const youRow = (r) => (r.upos === "PRON" && featsOf(r.feats).Person === "2") || String(r.lemma ?? r.form).toLowerCase() === "u";
+  // the closed-class forms of "be", "have" and "do" that change when "you" becomes a name (the English reader's declared table: nothing open-class is inflected)
+  const AGREE = new Map([["are", "is"], ["were", "was"], ["'re", "is"], ["’re", "is"], ["have", "has"], ["do", "does"]]);
+  /** a prompt sentence told about the persona: the prompt's own "you" is the persona's name ("You were made by Cap'n Bob" -> "Captain Salt was made by Cap'n Bob"), so the fold has one referent for it */
+  const aboutPersona = (sentence, name) => {
+    const rows = parser.rowsOf(sentence) ?? []; if (!rows.some(youRow)) return sentence;
+    const youVerbs = new Set(rows.filter((r) => youRow(r) && String(r.deprel).startsWith("nsubj")).map((r) => r.head));
+    return detok(rows.map((r) => (youRow(r) ? (r.deprel === "nmod:poss" ? `${name}'s` : name) : (r.upos === "AUX" && youVerbs.has(r.head) && AGREE.has(String(r.form).toLowerCase()) ? AGREE.get(String(r.form).toLowerCase()) : r.form))));
+  };
   const setPersona = async (pz) => {
-    persona = pz ?? null; personaFold = null;
-    if (pz?.text && pz.name) { const f = await makeThread({ hl }); await f.say(pz.text, { given: `${pz.label ?? pz.name}'s prompt` }); personaFold = f; }
+    persona = pz ?? null; personaFold = null; personaOriginal = new Map();
+    if (pz?.text && pz.name) {
+      const sents = splitSentences(pz.text, { abbreviations: abbr(pz.text) }).map((c) => c.text.trim()).filter(Boolean);
+      const told = sents.map((x) => { const t = aboutPersona(x, pz.name); if (t !== x) personaOriginal.set(t, x); return t; });
+      const f = await makeThread({ hl }); await f.say(told.join(" "), { given: `${pz.label ?? pz.name}'s prompt` }); personaFold = f;
+    }
   };
   // ideation: candidates put forward, tested, and read back off the shared log (ideation.mjs). Needs the log; without janus mounted the
   // candidates are still written but nothing is judged, and the reply says nothing was linted.
@@ -364,10 +377,21 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
       // "who are you?" / "what are you?": nothing else nominal in the question, so it asks what the persona IS; "what is your favourite colour?" has a noun of its own
       const asksIdentity = qRows.some((r) => r.deprel === "cop") && !qRows.some((r) => (r.upos === "NOUN" || r.upos === "PROPN") && !isYou(r));
       if (asksIdentity && persona.identity) return done({ type: "self", handled: true, text: `I'm ${persona.identity}.`, cites: cite });
+      if (asksIdentity) return done({ type: "self", handled: false, gap: "no_identity_in_prompt", text: "My instructions don't say who I am.", cites: cite });   // never a quotation of the prompt's first lines
+      // "What can you do?": a void of its own shape, filled by the prompt's sentences whose subject is the persona and whose verb sits under "can" (the English reader's declared modal)
+      const asksCan = qRows.some((r) => r.upos === "AUX" && ["can", "could"].includes(lemma(r))) && qRows.some((r) => lemma(r) === "do");
+      if (asksCan) {
+        const can = (persona.behaviours?.sample ?? []).filter((b) => (b.modals ?? []).some((m) => m === "can") && !b.negative && !b.conditional);
+        if (can.length) {
+          const mine = (b) => detok((parser.rowsOf(b.text) ?? []).map((r) => (youRow(r) || (String(r.deprel).startsWith("nsubj") && r.form === persona.name) ? "I" : r.deprel === "nmod:poss" && youRow(r) ? "my" : r.form)));
+          const shown = can.slice(0, 4).map(mine);
+          return done({ type: "self", handled: true, text: `${shown.join(" ")}${can.length > shown.length ? ` (${can.length - shown.length} more in my instructions.)` : ""}`, evidence: can.slice(0, 4).map((b) => ({ order: null, text: b.text, given: who })), cites: cite });
+        }
+      }
       if (personaFold && persona.name) {
         const asked = detok(qRows.map((r) => (isYou(r) ? (r.deprel === "nmod:poss" ? `${persona.name}'s` : persona.name) : r.form)));
         const r = await tool("persona.ask", { question: asked }, () => personaFold.ask(asked));
-        if (r.handled) return done({ type: "self", handled: true, text: r.text, evidence: r.evidence ?? [], cites: cite });
+        if (r.handled) return done({ type: "self", handled: true, text: r.text, evidence: (r.evidence ?? []).map((e) => ({ ...e, text: personaOriginal.get(e.text) ?? e.text })), cites: cite });
       }
       return done({ type: "self", handled: false, gap: "not_in_persona_prompt", text: "That isn't something my instructions say.", cites: cite });
     }
@@ -509,7 +533,8 @@ export async function makeThread({ hl, know = null, now = () => new Date(), janu
         if (info?.ref) return S.refByRef.get(info.ref)?.forms?.[0]?.[0] ?? x.text;
         return info?.open ? `${quote(x.text)}, but I can't tell whether that is ${listOr(info.candidates.map((c) => c.label))}` : x.text;
       };
-      const phraseOf = top.answer.map(sayFiller).join(" and ");
+      const fillers = top.answer.filter((x, i, all) => !all.some((y, j) => j !== i && y.label === x.label && y.text.length > x.text.length && y.text.includes(x.text)));   // "rum and treasure" and its own part "and treasure" are one answer
+      const phraseOf = fillers.map(sayFiller).join(" and ");
       const ev = a.answers.slice(0, 3).map((x) => { const pp = parse.find((y) => y.text === x.sentence); return { order: pp?.order ?? null, text: x.sentence, ...(pp && givenAt.has(pp.order) ? { given: givenAt.get(pp.order) } : {}) }; });
       const out = done({ type: "answer", handled: true, text: `${cap(phraseOf)}.`, evidence: ev, answers: a.answers.slice(0, 3).map((x) => x.answer) });
       last = out; return out;
