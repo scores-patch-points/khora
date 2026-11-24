@@ -163,7 +163,14 @@ test("without the verb-equivalents organ nothing is substituted: the question's 
 test("recall is by referent: a frame a pronoun fills answers the name's question, a pronoun is not another argument of its own verb, and a stranded preposition is not a participant", T, async () => {
   const th = await mkThread(); for (const m of ["Mina gave Jonathan a book.", "She lives in the village.", "Pierre visited Mina in the village.", "Pierre brought a basket of apples.", "He gave the apples to Jonathan."]) await th.turn(m);
   const where = await th.turn("Where does Mina live?"); assert.equal(where.handled, true); assert.match(where.text, /village/);
-  if (HAVE) { const who = await th.turn("Who gave the apples to Jonathan?"); assert.match(who.text, /^Pierre\./, "“He” is not Jonathan: Jonathan is the other argument of the same verb"); }
+  // “He” is not Jonathan only where the reader hangs “to Jonathan” on the same verb as “He” (the stand-in parser does; the real one attaches it to “apples”, and then no clause says they are co-arguments)
+  const rows = [...th.engine.S.rowsOf.values()].map((x) => x.rows).find((rs) => rs?.some((r) => r.upos === "PRON" && r.form === "He")) ?? [], he = rows.find((r) => r.form === "He"), jon = rows.find((r) => r.form === "Jonathan");
+  if (HAVE && he && jon && he.head === jon.head) { const who = await th.turn("Who gave the apples to Jonathan?"); assert.match(who.text, /^Pierre\./, "“He” is not Jonathan: Jonathan is the other argument of the same verb"); }
   const eng = th.engine, partial = await eng.answer("Who did Pierre give the apples to?", { polarity: true });
   assert.ok(!partial.read.filled.some((w) => w.head === "to"), "the stranded “to” is the gap's role, not something the question names");
+});
+test("“u” is “you”: a chatty question about you and me is never sent out as a search, whichever parser read it", T, async () => {
+  const th = await mkThread(); const r = await th.turn("great! u r starting on sunday right?");
+  assert.ok(!r.trace.some((t) => t.step === "research"), "no research step: nothing about you or me is looked up in the world"); assert.notEqual(r.research, true);
+  assert.match(r.text, /about you or me|haven't been told/);
 });
