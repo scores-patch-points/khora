@@ -121,9 +121,9 @@ export async function readPersona(promptText, { source = null } = {}) {
     const { rows } = read(c), root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT"); if (!root || root.upos !== "VERB") continue;
     const sub = rows.find((r) => r.head === root.id && r.deprel?.startsWith("nsubj")); if (!sub) continue;
     const about = protagonist === "you" || !protagonist ? isYou(sub) : sub.form === protagonist; if (!about) continue;
-    const modal = rows.some((r) => r.head === root.id && r.deprel === "aux" && MODAL.has(String(r.lemma ?? r.form).toLowerCase())), F = featsOf(root.feats), present = F.VerbForm === "Fin" && F.Tense === "Pres";
+    const modals = rows.filter((r) => r.head === root.id && r.deprel === "aux" && MODAL.has(String(r.lemma ?? r.form).toLowerCase())).map((r) => String(r.lemma ?? r.form).toLowerCase()), modal = modals.length > 0, F = featsOf(root.feats), present = F.VerbForm === "Fin" && F.Tense === "Pres";
     if (!modal && !present) continue;
-    behaviours.push({ text: c.text.trim().slice(0, 260), modal, negative: rows.some((r) => String(r.feats ?? "").split("|").includes("Polarity=Neg")), conditional: rows.some((r) => r.deprel === "advcl" && rows.some((m) => m.head === r.id && m.deprel === "mark")) });
+    behaviours.push({ text: c.text.trim().slice(0, 260), modal, modals, negative: rows.some((r) => String(r.feats ?? "").split("|").includes("Polarity=Neg")), conditional: rows.some((r) => r.deprel === "advcl" && rows.some((m) => m.head === r.id && m.deprel === "mark")) });
   }
   // the prompt as the persona's own fold: the sentences about it, in order, up to the cap (what it can answer "you" questions from)
   let text = "", n = 0; for (const c of about) { if (n + c.text.length > 12000) break; text += (text ? " " : "") + c.text; n += c.text.length; }
