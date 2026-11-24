@@ -82,8 +82,8 @@ test("the same question when the giver has an answer: the chat found it itself, 
 
 test("slash commands call a door by hand, and /doors says what is on and what is not and why", T, async () => {
   const d = await th.turn("/doors");
-  assert.equal(d.type, "door"); assert.ok(d.doors.some((x) => x.name === "relation" && x.on)); assert.ok(d.doors.some((x) => x.name === "reason" && x.on), "the reasoner is a door now");
-  assert.match(d.text, /\/person <name>/); assert.ok(!/reason.*\(off:/.test(d.text));
+  assert.equal(d.type, "door"); assert.ok(d.doors.some((x) => x.name === "relation" && x.on)); { const have = !TP.skip; const reason = d.doors.find((x) => x.name === "reason"); assert.equal(reason.on, have, "the reason door is on exactly when the puzzle reader is in this checkout"); if (!have) assert.match(reason.why, /puzzle reader/); }
+  assert.match(d.text, /\/person <name>/);
   assert.equal((await th.turn("/calc 15 % of 80")).text, "12.");
   assert.match((await th.turn("/clock day")).text, /^Today is Monday\./);
   assert.match((await th.turn("/define dog")).text, /^Dog: A domesticated canid\./);
