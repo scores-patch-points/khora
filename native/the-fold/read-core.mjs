@@ -229,7 +229,7 @@ export function makeReader({ priors = null, language = "eng", abbreviations = nu
   const same = (a, b) => (sameAct ? sameAct(a, b) ?? null : null) ?? (useMorph ? pr.lemmatizer.sameAct(a, b) : String(a).toLowerCase() === String(b).toLowerCase());
   return makeRelationReader({
     splitSentences: split,
-    extractSurfaces: surfaceOptions ? (sents, o = {}) => extractSurfacesHeard(sents, { ...o, ...surfaceOptions }) : extractSurfacesHeard,
+    extractSurfaces: (sents, o = {}) => extractSurfacesHeard(sents, { language, ...o, ...(surfaceOptions ?? {}) }),   // the read's language is SETTLED (declared, or heard once at the door): the surfaces are read in it, not detected again from the text (the identifier rebuilt its model from the priors in every process: 3.9 s of a first read)
     discoverReferents,
     namesCorefer,
     diaNorm,
