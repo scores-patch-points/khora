@@ -1,0 +1,211 @@
+{
+ "schema": "E1c-cross-author-verbs@1",
+ "split": "EXPLORATORY (post-hoc robustness, after the stamped E1)",
+ "at": "2026-11-24T05:57:33.932Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d",
+  "reader": "khora@ccf2033+baseline@2026-11-23"
+ },
+ "test": "pg12_Through_the_Looking_Glass",
+ "train": "pg11_Alice_s_Adventures_in_Wonderland",
+ "author": "Carroll",
+ "dials": {
+  "kMin": 5,
+  "band": 0,
+  "bar": 0.855,
+  "floor": 0.812,
+  "why": "kMin: a verb used fewer than K times in either book has a count dominated by chance; the bar is the organ's (mean + 2.5 sd of random verb pairs)"
+ },
+ "eligibleVerbs": 100,
+ "pairs": 30,
+ "pairsWithATestPreference": 30,
+ "accuracy": {
+  "sameAuthorBook": 0.867,
+  "pooledOtherAuthors": 0.867,
+  "otherAuthorBooks": {
+   "n": 38,
+   "mean": 0.778,
+   "best": [
+    {
+     "book": "pg1400_Great-Expectations",
+     "author": "Dickens",
+     "acc": 0.9166666666666666
+    },
+    {
+     "book": "pg2554_Crime-and-Punishment",
+     "author": "Dostoevsky",
+     "acc": 0.9166666666666666
+    },
+    {
+     "book": "pg98_A_Tale_of_Two_Cities",
+     "author": "Dickens",
+     "acc": 0.9
+    }
+   ],
+   "worst": [
+    {
+     "book": "pg32063_On_the_Electrodynamics_of_Moving_Bodies__Einstein_",
+     "author": "Einstein",
+     "acc": 0.5
+    }
+   ]
+  }
+ },
+ "rankOfSameAuthorBook": {
+  "rank": 10,
+  "of": 39,
+  "note": "1 = best; under no author effect the rank is uniform"
+ },
+ "mcnemarVsPooled": {
+  "sameAuthorRightPooledWrong": 2,
+  "pooledRightSameAuthorWrong": 2,
+  "pTwoSided": 1
+ },
+ "examples": [
+  {
+   "pair": "bring/carry",
+   "similarity": 0.86,
+   "test": [
+    9,
+    6
+   ],
+   "train": [
+    9,
+    7
+   ]
+  },
+  {
+   "pair": "bring/come",
+   "similarity": 0.86,
+   "test": [
+    9,
+    116
+   ],
+   "train": [
+    9,
+    97
+   ]
+  },
+  {
+   "pair": "consider/think",
+   "similarity": 0.86,
+   "test": [
+    11,
+    142
+   ],
+   "train": [
+    10,
+    135
+   ]
+  },
+  {
+   "pair": "deny/lie",
+   "similarity": 0.86,
+   "test": [
+    6,
+    16
+   ],
+   "train": [
+    6,
+    14
+   ]
+  },
+  {
+   "pair": "explain/understand",
+   "similarity": 0.92,
+   "test": [
+    9,
+    10
+   ],
+   "train": [
+    11,
+    7
+   ]
+  },
+  {
+   "pair": "forget/remember",
+   "similarity": 0.89,
+   "test": [
+    9,
+    16
+   ],
+   "train": [
+    14,
+    20
+   ]
+  },
+  {
+   "pair": "get/have",
+   "similarity": 0.86,
+   "test": [
+    147,
+    142
+   ],
+   "train": [
+    109,
+    131
+   ]
+  },
+  {
+   "pair": "give/let",
+   "similarity": 0.88,
+   "test": [
+    35,
+    30
+   ],
+   "train": [
+    30,
+    22
+   ]
+  },
+  {
+   "pair": "guess/suppose",
+   "similarity": 0.87,
+   "test": [
+    8,
+    21
+   ],
+   "train": [
+    6,
+    13
+   ]
+  },
+  {
+   "pair": "guess/wonder",
+   "similarity": 0.87,
+   "test": [
+    8,
+    26
+   ],
+   "train": [
+    6,
+    26
+   ]
+  },
+  {
+   "pair": "have/keep",
+   "similarity": 0.86,
+   "test": [
+    142,
+    33
+   ],
+   "train": [
+    131,
+    26
+   ]
+  },
+  {
+   "pair": "hear/listen",
+   "similarity": 0.94,
+   "test": [
+    34,
+    8
+   ],
+   "train": [
+    46,
+    11
+   ]
+  }
+ ]
+}

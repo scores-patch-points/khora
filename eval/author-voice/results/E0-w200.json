@@ -1,0 +1,57 @@
+{
+ "schema": "E0-author-signal@1",
+ "split": "EXPLORATORY",
+ "at": "2026-11-24T05:32:17.097Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d"
+ },
+ "words": 200,
+ "documents": 40,
+ "queries": [
+  {
+   "query": "pg161_Sense-and-Sensibility",
+   "author": "Austen",
+   "nOthers": 39,
+   "sameAuthorBooks": [
+    {
+     "book": "pg1342_Pride_and_Prejudice",
+     "rank": 1,
+     "delta": 0.34
+    },
+    {
+     "book": "pg158_Emma",
+     "rank": 2,
+     "delta": 0.463
+    }
+   ],
+   "nearest3": [
+    "pg1342_Pride_and_Prejudice (Austen) 0.340",
+    "pg158_Emma (Austen) 0.463",
+    "pg768_Wuthering-Heights (Bronte) 0.813"
+   ]
+  },
+  {
+   "query": "pg1342_Pride_and_Prejudice",
+   "author": "Austen",
+   "nOthers": 39,
+   "sameAuthorBooks": [
+    {
+     "book": "pg161_Sense-and-Sensibility",
+     "rank": 1,
+     "delta": 0.34
+    },
+    {
+     "book": "pg158_Emma",
+     "rank": 2,
+     "delta": 0.399
+    }
+   ],
+   "nearest3": [
+    "pg161_Sense-and-Sensibility (Austen) 0.340",
+    "pg158_Emma (Austen) 0.399",
+    "pg768_The_Adventures_of_Sherlock_Holmes (Doyle) 0.737"
+   ]
+  }
+ ]
+}

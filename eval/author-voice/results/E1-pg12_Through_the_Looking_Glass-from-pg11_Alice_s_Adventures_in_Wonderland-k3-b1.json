@@ -1,0 +1,211 @@
+{
+ "schema": "E1-lexical-preference@1",
+ "split": "EXPLORATORY",
+ "at": "2026-11-24T05:30:43.472Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d",
+  "reader": "khora@ccf2033+baseline@2026-11-23"
+ },
+ "test": "pg12_Through_the_Looking_Glass",
+ "train": "pg11_Alice_s_Adventures_in_Wonderland",
+ "author": "Carroll",
+ "dials": {
+  "kMin": 3,
+  "band": 1,
+  "bar": 0.855,
+  "floor": 0.812,
+  "why": "kMin: a verb used fewer than K times in either book has a count dominated by chance; the bar is the organ's (mean + 2.5 sd of random verb pairs)"
+ },
+ "eligibleVerbs": 141,
+ "pairs": 110,
+ "pairsWithATestPreference": 105,
+ "accuracy": {
+  "sameAuthorBook": 0.871,
+  "pooledOtherAuthors": 0.838,
+  "otherAuthorBooks": {
+   "n": 38,
+   "mean": 0.734,
+   "best": [
+    {
+     "book": "pg514_Little-Women",
+     "author": "Alcott",
+     "acc": 0.8666666666666667
+    },
+    {
+     "book": "pg45_Anne-of-Green-Gables",
+     "author": "Montgomery",
+     "acc": 0.8333333333333334
+    },
+    {
+     "book": "pg36_The-War-of-the-Worlds",
+     "author": "Wells",
+     "acc": 0.819047619047619
+    }
+   ],
+   "worst": [
+    {
+     "book": "aesop-11339_The-Fox-and-the-Grapes",
+     "author": "Aesop",
+     "acc": 0.5619047619047619
+    }
+   ]
+  }
+ },
+ "rankOfSameAuthorBook": {
+  "rank": 1,
+  "of": 39,
+  "note": "1 = best; under no author effect the rank is uniform"
+ },
+ "mcnemarVsPooled": {
+  "sameAuthorRightPooledWrong": 11,
+  "pooledRightSameAuthorWrong": 8,
+  "pTwoSided": 0.6476
+ },
+ "examples": [
+  {
+   "pair": "address/call",
+   "similarity": 0.83,
+   "test": [
+    4,
+    31
+   ],
+   "train": [
+    3,
+    25
+   ]
+  },
+  {
+   "pair": "ask/beg",
+   "similarity": 0.83,
+   "test": [
+    45,
+    5
+   ],
+   "train": [
+    33,
+    7
+   ]
+  },
+  {
+   "pair": "ask/wonder",
+   "similarity": 0.83,
+   "test": [
+    45,
+    26
+   ],
+   "train": [
+    33,
+    26
+   ]
+  },
+  {
+   "pair": "beat/win",
+   "similarity": 0.85,
+   "test": [
+    4,
+    5
+   ],
+   "train": [
+    5,
+    3
+   ]
+  },
+  {
+   "pair": "become/change",
+   "similarity": 0.85,
+   "test": [
+    3,
+    5
+   ],
+   "train": [
+    7,
+    25
+   ]
+  },
+  {
+   "pair": "become/make",
+   "similarity": 0.85,
+   "test": [
+    3,
+    85
+   ],
+   "train": [
+    7,
+    75
+   ]
+  },
+  {
+   "pair": "become/grow",
+   "similarity": 0.83,
+   "test": [
+    3,
+    9
+   ],
+   "train": [
+    7,
+    29
+   ]
+  },
+  {
+   "pair": "become/live",
+   "similarity": 0.82,
+   "test": [
+    3,
+    19
+   ],
+   "train": [
+    7,
+    16
+   ]
+  },
+  {
+   "pair": "beg/try",
+   "similarity": 0.82,
+   "test": [
+    5,
+    36
+   ],
+   "train": [
+    7,
+    45
+   ]
+  },
+  {
+   "pair": "begin/introduce",
+   "similarity": 0.83,
+   "test": [
+    85,
+    5
+   ],
+   "train": [
+    89,
+    3
+   ]
+  },
+  {
+   "pair": "believe/hope",
+   "similarity": 0.84,
+   "test": [
+    14,
+    21
+   ],
+   "train": [
+    10,
+    7
+   ]
+  },
+  {
+   "pair": "believe/seem",
+   "similarity": 0.83,
+   "test": [
+    14,
+    39
+   ],
+   "train": [
+    10,
+    40
+   ]
+  }
+ ]
+}

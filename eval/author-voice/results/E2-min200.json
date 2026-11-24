@@ -1,0 +1,56 @@
+{
+ "schema": "E2-usage-corroborates@1",
+ "split": "EXPLORATORY",
+ "at": "2026-11-24T05:47:51.031Z",
+ "merged": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/corpus-lexicon-en.superseded-standin.json",
+  "sha256": "f7f398c84f61cef7651a6c6e8d06502c4fa94797abb38c0de5209ac25d2c42c6",
+  "reader": "khora@ccf2033+baseline@2026-11-23",
+  "documents": 40
+ },
+ "verbsUsed": 450,
+ "minUses": 200,
+ "bar": 0.855,
+ "embedderEquivalents": {
+  "pairs": 237,
+  "meanCosine": 0.163,
+  "median": 0.122,
+  "probMoreSharedUsageThanARandomPairOfTheSameFrequency": 0.736,
+  "comparisons": 4740
+ },
+ "embedderNearMisses": {
+  "pairs": 367,
+  "meanCosine": 0.114,
+  "median": 0.084,
+  "probMoreSharedUsageThanARandomPairOfTheSameFrequency": 0.673,
+  "comparisons": 7340
+ },
+ "lowestUsageAmongEquivalents": [
+  "accord/agree emb 0.86 usage 0.008",
+  "acquire/buy emb 0.89 usage 0.008",
+  "push/urge emb 0.87 usage 0.008",
+  "banish/remove emb 0.86 usage 0.009",
+  "prevail/win emb 0.88 usage 0.009",
+  "cure/fix emb 0.88 usage 0.01",
+  "hold/retain emb 0.87 usage 0.011",
+  "determine/measure emb 0.87 usage 0.013",
+  "help/support emb 0.88 usage 0.014",
+  "keep/retain emb 0.92 usage 0.015",
+  "acknowledge/thank emb 0.87 usage 0.016",
+  "advance/improve emb 0.86 usage 0.016"
+ ],
+ "highestUsageAmongEquivalents": [
+  "forget/remember emb 0.89 usage 0.6",
+  "perceive/see emb 0.88 usage 0.6",
+  "pray/worship emb 0.88 usage 0.585",
+  "give/let emb 0.88 usage 0.575",
+  "continue/remain emb 0.88 usage 0.524",
+  "behold/see emb 0.92 usage 0.521",
+  "lift/raise emb 0.86 usage 0.504",
+  "bring/come emb 0.86 usage 0.487",
+  "deliver/receive emb 0.88 usage 0.475",
+  "have/need emb 0.87 usage 0.464",
+  "speak/whisper emb 0.87 usage 0.463",
+  "say/speak emb 0.9 usage 0.455"
+ ]
+}

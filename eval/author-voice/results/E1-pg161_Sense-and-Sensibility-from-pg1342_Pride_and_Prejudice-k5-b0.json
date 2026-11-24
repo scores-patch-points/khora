@@ -1,0 +1,211 @@
+{
+ "schema": "E1-lexical-preference@1",
+ "split": "EXPLORATORY",
+ "at": "2026-11-24T05:39:44.412Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d",
+  "reader": "khora@ccf2033+baseline@2026-11-23"
+ },
+ "test": "pg161_Sense-and-Sensibility",
+ "train": "pg1342_Pride_and_Prejudice",
+ "author": "Austen",
+ "dials": {
+  "kMin": 5,
+  "band": 0,
+  "bar": 0.855,
+  "floor": 0.812,
+  "why": "kMin: a verb used fewer than K times in either book has a count dominated by chance; the bar is the organ's (mean + 2.5 sd of random verb pairs)"
+ },
+ "eligibleVerbs": 322,
+ "pairs": 192,
+ "pairsWithATestPreference": 180,
+ "accuracy": {
+  "sameAuthorBook": 0.811,
+  "pooledOtherAuthors": 0.747,
+  "otherAuthorBooks": {
+   "n": 37,
+   "mean": 0.67,
+   "best": [
+    {
+     "book": "pg521_The-Life-and-Adventures-of-Robinson-Crusoe",
+     "author": "Defoe",
+     "acc": 0.7611111111111111
+    },
+    {
+     "book": "pg84_Frankenstein",
+     "author": "Shelley",
+     "acc": 0.7333333333333333
+    },
+    {
+     "book": "pg11_Alice_s_Adventures_in_Wonderland",
+     "author": "Carroll",
+     "acc": 0.7277777777777777
+    }
+   ],
+   "worst": [
+    {
+     "book": "aesop-11339_The-Fox-and-the-Grapes",
+     "author": "Aesop",
+     "acc": 0.5222222222222223
+    }
+   ]
+  }
+ },
+ "rankOfSameAuthorBook": {
+  "rank": 1,
+  "of": 38,
+  "note": "1 = best; under no author effect the rank is uniform"
+ },
+ "mcnemarVsPooled": {
+  "sameAuthorRightPooledWrong": 29,
+  "pooledRightSameAuthorWrong": 19,
+  "pTwoSided": 0.1934
+ },
+ "examples": [
+  {
+   "pair": "accept/admit",
+   "similarity": 0.87,
+   "test": [
+    23,
+    14
+   ],
+   "train": [
+    37,
+    19
+   ]
+  },
+  {
+   "pair": "accept/agree",
+   "similarity": 0.86,
+   "test": [
+    23,
+    16
+   ],
+   "train": [
+    37,
+    21
+   ]
+  },
+  {
+   "pair": "acknowledge/admit",
+   "similarity": 0.87,
+   "test": [
+    28,
+    14
+   ],
+   "train": [
+    28,
+    19
+   ]
+  },
+  {
+   "pair": "acknowledge/thank",
+   "similarity": 0.87,
+   "test": [
+    28,
+    18
+   ],
+   "train": [
+    28,
+    30
+   ]
+  },
+  {
+   "pair": "act/behave",
+   "similarity": 0.9,
+   "test": [
+    23,
+    13
+   ],
+   "train": [
+    20,
+    10
+   ]
+  },
+  {
+   "pair": "act/perform",
+   "similarity": 0.89,
+   "test": [
+    23,
+    10
+   ],
+   "train": [
+    20,
+    11
+   ]
+  },
+  {
+   "pair": "admire/compliment",
+   "similarity": 0.86,
+   "test": [
+    13,
+    10
+   ],
+   "train": [
+    21,
+    41
+   ]
+  },
+  {
+   "pair": "admit/confess",
+   "similarity": 0.88,
+   "test": [
+    14,
+    16
+   ],
+   "train": [
+    19,
+    20
+   ]
+  },
+  {
+   "pair": "advance/proceed",
+   "similarity": 0.89,
+   "test": [
+    9,
+    14
+   ],
+   "train": [
+    9,
+    22
+   ]
+  },
+  {
+   "pair": "advance/improve",
+   "similarity": 0.86,
+   "test": [
+    9,
+    16
+   ],
+   "train": [
+    9,
+    12
+   ]
+  },
+  {
+   "pair": "advise/recommend",
+   "similarity": 0.87,
+   "test": [
+    12,
+    14
+   ],
+   "train": [
+    12,
+    23
+   ]
+  },
+  {
+   "pair": "agree/approve",
+   "similarity": 0.86,
+   "test": [
+    16,
+    10
+   ],
+   "train": [
+    21,
+    8
+   ]
+  }
+ ]
+}
