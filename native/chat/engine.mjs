@@ -516,13 +516,16 @@ const address = (span) => (span ? { chars: span, bytes: [S.B[span[0]], S.B[span[
 const chapterAt = (pos) => { const c = S.chapters.find((x) => x.start <= pos && pos < x.end); return c ? (c.book === c.title ? c.title : `${c.book} · ${c.title}`) : null; };
 const clip = (span, n = 320) => (span ? S.text.slice(span[0], Math.min(span[1], span[0] + n)).split("\r\n").join(" ").split("\n").join(" ") : "");
 
-async function answer(q, { upTo = null, limit = 12, polarity = false, neg = false, skip = null } = {}) {
+// `verb`: ask the same question with its action put as this lemma (the caller's near-verb test: organs/verb-equivalents.js standsIn). The question's own action is replaced in the READ, not in the
+// string, so no inflection is guessed; the hyperlexicon's synonyms of the question's own verb are not added (the caller is testing the verbs one at a time), and the reply says what was asked.
+async function answer(q, { upTo = null, limit = 12, polarity = false, neg = false, skip = null, verb = null } = {}) {
   const t0 = performance.now();
   const Q = await readQuestion(q);
+  if (verb) { Q.askedKriya = Q.kriya; Q.kriya = String(verb).toLowerCase(); Q.kriyaForm = null; }
   const out = { question: q, read: Q, answers: [], partial: [], synonyms: [], given: [], gaps: [], limits: ["participants are matched by their word (lemma or a proper name in the phrase), not by a referent: the in-order read has no cast yet", "the hyperlexicon store holds names and relations, no glosses"], scope: upTo ? { upTo, chapter: chapterAt(upTo) } : { whole: true } };
   // the slice: frames of the action, and of its synonyms the hyperlexicon's givers list
   let kriyas = Q.kriya ? [Q.kriya] : [];
-  if (Q.kriya && HL_HEAD && !Q.copular) {
+  if (Q.kriya && HL_HEAD && !Q.copular && !verb) {
     const names = await hl([{ op: "names", surfaces: [Q.kriya], lang: "en" }]);
     const nodes = (names?.[0]?.surfaces?.[Q.kriya]?.written ?? []).filter((x) => x.pos?.includes("verb")).map((x) => x.node);
     const rels = nodes.length ? await hl(nodes.map((id) => ({ op: "relations", id }))) : [];

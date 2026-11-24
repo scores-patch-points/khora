@@ -107,3 +107,28 @@ test("a person whose gender is not settled is told with “they” (plural verb)
   const paris = await profile("Paris");
   assert.equal(paris.pronoun, null); assert.doesNotMatch(paris.summary, /They /);
 });
+// the near-verb stand-in (organs/verb-equivalents.js), with fixed directions standing in for the embedder (a codec stands in for a codec)
+const D = 24, dir = (i, ...o) => { const v = new Array(D).fill(0); v[i] = 1; o.forEach(([j, x]) => { v[j] = x; }); return v; };
+const VEC = { make: dir(0, [10, 0.1]), create: dir(0, [10, 0.2]), build: dir(0, [11, 0.3]), give: dir(1, [0, 0.4]) };
+const rnd = (key) => { let a = 0; for (const c of key) a = (a * 31 + c.charCodeAt(0)) >>> 0; return Array.from({ length: D }, () => { a = (a * 1664525 + 1013904223) >>> 0; return a / 4294967296 - 0.5; }); };
+const verbEmbed = async (ts) => ts.map((t) => VEC[t.replace(/^to /, "")] ?? rnd(t));
+const mkThread = async (extra = {}) => { const { makeThread } = await import("./thread.mjs"); return makeThread({ hl: "http://127.0.0.1:1", know: null, now: () => new Date("2026-11-23T14:51:00"), ...extra }); };
+test("a near verb stands in when the exact verb finds nothing and the near verbs agree: “Who made Claude?” against “created”, and the reply says what it read", T, async () => {
+  const th = await mkThread({ verbEmbed }); await th.turn("Claude was created by Anthropic.");
+  const r = await th.turn("Who made Claude?");
+  assert.equal(r.handled, true); assert.match(r.text, /^By Anthropic\./); assert.match(r.text, /I read “make” as “create”/);
+  const s = r.trace.find((t) => t.step === "verb_stand_in"); assert.equal(s.verdict, "same"); assert.equal(s.read_as, "create"); assert.ok(s.similarity > 0.8); assert.ok(r.evidence.length >= 1);
+});
+test("two near verbs that say different things are not chosen between: the chat says both and picks none", T, async () => {
+  const th = await mkThread({ verbEmbed }); await th.turn("Claude was created by Anthropic. Claude was built by Acme.");
+  const r = await th.turn("Who made Claude?");
+  assert.equal(r.handled, false); assert.equal(r.gap, "near_verbs_differ"); assert.match(r.text, /“create”: by Anthropic/); assert.match(r.text, /“build”: by Acme/); assert.match(r.text, /I won't pick/);
+  assert.equal(r.trace.find((t) => t.step === "verb_stand_in").verdict, "other");
+});
+test("the exact verb is never replaced: when it answers, no stand-in runs; with no near verb the gap stays; without an embedder nothing is substituted and the trace says why", T, async () => {
+  const th = await mkThread({ verbEmbed }); await th.turn("Claude was created by Anthropic.");
+  const exact = await th.turn("Who created Claude?"); assert.match(exact.text, /^By Anthropic\./); assert.ok(!exact.trace.some((t) => t.step === "verb_stand_in"), "the exact verb answered: no stand-in");
+  const far = await th.turn("Who gave Claude?"); assert.equal(far.handled, false); assert.equal(far.trace.find((t) => t.step === "verb_stand_in")?.verdict ?? "none", "none");
+  const bare = await mkThread({ verbEmbed: async () => { throw new Error("connection refused"); } }); await bare.turn("Claude was created by Anthropic.");
+  const g = await bare.turn("Who made Claude?"); assert.equal(g.handled, false); assert.match(g.trace.find((t) => t.step === "verb_stand_in").gap, /embedder could not be reached/);
+});
