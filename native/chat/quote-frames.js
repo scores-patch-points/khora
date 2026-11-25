@@ -11,14 +11,28 @@
 // NOT DONE: reported speech inside a quotation ("Mrs. Long says that…" is a second frame inside the first); a speaker named only by a pronoun; em-dash dialogue (no closing mark).
 export const QUOTE_TABLES = Object.freeze({
   eng: Object.freeze({ pairs: [["“", "”"]], toggle: ['"'], end: [".", "!", "?"] }),
-  fra: Object.freeze({ pairs: [["«", "»"], ["“", "”"]], toggle: [], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
-  spa: Object.freeze({ pairs: [["«", "»"], ["“", "”"]], toggle: [], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
-  rus: Object.freeze({ pairs: [["«", "»"], ["„", "“"]], toggle: [], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
-  ita: Object.freeze({ pairs: [["«", "»"], ["“", "”"]], toggle: [], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
+  fra: Object.freeze({ pairs: [["«", "»"], ["“", "”"]], toggle: ['"'], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
+  spa: Object.freeze({ pairs: [["«", "»"], ["“", "”"]], toggle: ['"'], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
+  rus: Object.freeze({ pairs: [["«", "»"], ["„", "“"]], toggle: ['"'], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
+  ita: Object.freeze({ pairs: [["«", "»"], ["“", "”"]], toggle: ['"'], end: [".", "!", "?"], dash: ["—", "–", "―"] }),
   deu: Object.freeze({ pairs: [["„", "“"], ["»", "«"]], toggle: [], end: [".", "!", "?"] }),
   jpn: Object.freeze({ pairs: [["「", "」"], ["『", "』"]], toggle: [], end: ["。", "！", "？"] }),
   zho: Object.freeze({ pairs: [["“", "”"], ["「", "」"], ["『", "』"]], toggle: [], end: ["。", "！", "？"] }),
 });
+
+// A CODEC REGISTERS ITS OWN TABLE (the conventions differ by codec and edition, so the tables are data a codec brings, not code here). A built-in cannot be replaced silently.
+const REGISTERED = new Map();
+const tableOf = (lang) => QUOTE_TABLES[lang] ?? REGISTERED.get(lang) ?? null;
+export function registerQuoteTable(lang, table) {
+  if (QUOTE_TABLES[lang]) throw new Error(`a built-in quote table for "${lang}" cannot be replaced; register under another code`);
+  const ok = (a) => Array.isArray(a) && a.every((x) => typeof x === "string");
+  if (!Array.isArray(table?.pairs) || !table.pairs.every((p) => Array.isArray(p) && p.length >= 2 && typeof p[0] === "string" && typeof p[1] === "string")) throw new Error("a quote table needs pairs: [[open, close], ...]");
+  if (!ok(table.toggle ?? []) || !ok(table.end ?? [])) throw new Error("toggle and end must be arrays of strings");
+  REGISTERED.set(lang, Object.freeze({ pairs: table.pairs, toggle: table.toggle ?? [], end: table.end ?? [".", "!", "?"], ...(table.dash ? { dash: table.dash } : {}) })); return true;
+}
+// the marks a text uses that could be quotation marks (apostrophes and single curly quotes are not counted: they are mostly apostrophes)
+const CANDIDATES = ["“", "”", '"', "«", "»", "„", "‹", "›", "「", "」", "『", "』"];
+const marksIn = (s, except = new Set()) => { const m = {}; for (const ch of s) if (CANDIDATES.includes(ch) && !except.has(ch)) m[ch] = (m[ch] ?? 0) + 1; return m; };
 
 /**
  * quoteSpans(text, lang) -> { spans: [{ open, close, inner: [a, b], depth, continues?, continued? }], gap, gaps }  (character offsets into `text`)
@@ -27,7 +41,7 @@ export const QUOTE_TABLES = Object.freeze({
  * `gap` is the first of `gaps` (kept for callers that read one).
  */
 export function quoteSpans(text, lang = "eng") {
-  const T = QUOTE_TABLES[lang]; if (!T) return { spans: [], gap: { gap: "no_quote_table", lang }, gaps: [{ gap: "no_quote_table", lang }] };
+  const T = tableOf(lang); if (!T) { const g = { gap: "no_quote_table", lang, marks: marksIn(String(text ?? "")) }; return { spans: [], gap: g, gaps: [g] }; }
   const opens = new Map(T.pairs.map(([o, c]) => [o, c])), closes = new Set(T.pairs.map(([, c]) => c)), toggles = new Set(T.toggle);
   const stack = [], spans = [], gaps = []; const s = String(text ?? "");
   const close = (o, i) => spans.push({ open: o.open, close: i, inner: [o.open + 1, i], depth: stack.length });
@@ -42,12 +56,13 @@ export function quoteSpans(text, lang = "eng") {
   }
   while (stack.length) { const o = stack.pop(); spans.push({ open: o.open, close: s.length, inner: [o.open + 1, s.length], depth: stack.length, continues: true }); gaps.push({ gap: "quotation_continues", at: o.open }); }
   gaps.sort((a, b) => a.at - b.at);
+  const known = new Set([...T.pairs.flat(), ...T.toggle]), stray = marksIn(s, known); if (Object.keys(stray).length) gaps.push({ gap: "marks_outside_table", lang, marks: stray });
   return { spans: spans.sort((a, b) => a.open - b.open), gap: gaps[0] ?? null, gaps };
 }
 
 /** does this paragraph open with a dash that marks speech (no closing mark follows)? Only for a language whose table declares it; otherwise false (no claim). */
 export function dashDialogue(paragraph, lang = "eng") {
-  const d = QUOTE_TABLES[lang]?.dash; if (!d) return false;
+  const d = tableOf(lang)?.dash; if (!d) return false;
   const t = String(paragraph ?? "").trimStart(); return d.some((m) => t.startsWith(m));
 }
 

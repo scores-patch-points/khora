@@ -109,3 +109,22 @@ test("FALSIFIER: a dash-dialogue paragraph, or a language with no table, is fram
   const u = await ingestDocument(await mk(), "“Hello,” said Pierre.", { lang: "xxx" });
   assert.ok(u.frames.length >= 1 && u.frames.every((f) => f.framed === null), JSON.stringify(u.frames)); assert.ok(u.quoteGaps.some((g) => g.gap === "no_quote_table"));
 });
+
+// ── found by the Genesis run (65 languages, 2026-11-25): the Spanish table found 0 quotations in a Bible that marks 224 with straight quotes, and said nothing; 45 languages used marks and had no table. ──
+import { registerQuoteTable } from "./quote-frames.js";
+test("FALSIFIER: marks the table does not know are a typed gap that lists them, never a silent zero", () => {
+  const r = quoteSpans("Dijo ‹hola› y se fue.", "spa"); assert.equal(r.spans.length, 0); assert.equal(r.gaps.some((g) => g.gap === "marks_outside_table"), true);
+  assert.deepEqual(r.gaps.find((g) => g.gap === "marks_outside_table").marks, { "‹": 1, "›": 1 });
+});
+test("a language with no table says which quotation marks the text uses, so a codec author can write the table", () => {
+  const g = quoteSpans("Он сказал «да» и «нет».", "xxx").gap; assert.equal(g.gap, "no_quote_table"); assert.deepEqual(g.marks, { "«": 2, "»": 2 });
+});
+test("straight double quotes are read in Spanish, French, Italian and Russian too (a plain-text edition)", () => {
+  for (const l of ["spa", "fra", "ita", "rus"]) assert.equal(quoteSpans('Dijo "hola" y se fue.', l).spans.length, 1, l);
+});
+test("a codec registers its own table; a built-in cannot be silently replaced; a malformed table is refused", () => {
+  assert.equal(quoteSpans("«a»", "swh").gap.gap, "no_quote_table");
+  registerQuoteTable("swh", { pairs: [["«", "»"]], toggle: [], end: ["."] }); assert.equal(quoteSpans("Alisema «habari».", "swh").spans.length, 1);
+  assert.throws(() => registerQuoteTable("eng", { pairs: [["“", "”"]], toggle: [], end: ["."] }), /built-in/);
+  assert.throws(() => registerQuoteTable("zzz", { pairs: "no" }), /pairs/);
+});

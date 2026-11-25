@@ -23,10 +23,12 @@ const paragraphsOf = (text) => {
 };
 const bracketed = (p) => p.startsWith("[") && p.endsWith("]");   // a note in the source's own markup (an illustration credit), not a sentence of the text
 
+// `lang` is the language of the QUOTATION CONVENTIONS, and the result says which one was used (`lang`): the chat reads English only today, so its thread declares English; a caller reading another
+// language passes its own, and a language with no table is a typed gap on every frame, never an English reading.
 export async function ingestDocument(thread, text, { onRead = null, lang = "eng" } = {}) {
   const paras = paragraphsOf(text);
   if (!paras.length) return { paragraphs: 0, read: 0, sentences: 0, facts: 0, setAside: [], frames: [], quoteGaps: [], gap: "empty_text" };
-  const res = { paragraphs: paras.length, read: 0, sentences: 0, facts: 0, setAside: [], frames: [], quoteGaps: [], gap: null };
+  const res = { lang, paragraphs: paras.length, read: 0, sentences: 0, facts: 0, setAside: [], frames: [], quoteGaps: [], gap: null };
   const store = STORE.get(thread) ?? STORE.set(thread, []).get(thread);
   for (const [pi, p] of paras.entries()) {
     if (bracketed(p)) { res.setAside.push({ text: p, why: "a bracketed note in the source's markup, not a sentence" }); continue; }
