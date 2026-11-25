@@ -24,7 +24,7 @@ const addressOf = (e) => { const sec = String(e.section ?? ""), file = String(e.
 const ask = async (question) => {
   const t0 = Date.now(), asked = read(question), bound = conv.bind(asked), rows = bound.rows, v = voidOfQuestion(rows), conversation = { bindings: bound.bindings, unresolved: bound.unresolved };
   if (!v.ok) { conv.note({ void: v, answer: null }); return { question, conversation, void: { ok: false, gap: v.gap ?? null }, documents: [], answer: null, gap: bound.unresolved.length ? { kind: "pronoun_unresolved", detail: bound.unresolved.map((u) => `“${u.pronoun}”: ${u.why}`).join("; ") } : (v.gap ?? { kind: "no_void", detail: "the question declares nothing to look for" }), ms: Date.now() - t0 }; }
-  const h = await huntVoid(v, { sources: [src], read, split, equivalents }), run = src.lastRun();
+  const h = await huntVoid(v, { sources: [src], read, split, equivalents, maxSentences: 3000 }), run = src.lastRun();
   const ev = (c) => (c.evidence ?? []).slice(0, 2).map((e) => ({ title: e.title, sentence: e.sentence, address: addressOf(e) }));
   const stand = (h.trail ?? []).find((x) => x.step === "relation_stand_in") ?? null;
   const said = h.answer && h.answer.tier !== "identity" && ["person", "place"].includes(v.admits) ? { text: h.answer.answer, admits: v.admits } : null; conv.note({ void: v, answer: said });
@@ -36,7 +36,7 @@ const ask = async (question) => {
     candidates: (h.candidates ?? []).slice(0, 5).map((c) => ({ answer: c.answer, tier: c.tier, support: c.support, sentences: c.sentences, documents: c.documents, why: c.why, evidence: ev(c).slice(0, 1) })),
     gap: h.gap ?? null, equivalents: equivalents ? "on" : `off (${equivalentsNote})`, ms: Date.now() - t0 };
 };
-const facts = () => { const rd = (f) => { try { return JSON.parse(fs.readFileSync(path.join(HERE, f), "utf8")); } catch { return null; } }, A = rd("answers-facts.json"), X = rd("results-answers-facts-exact.json"), B = rd("results-answers-facts-equiv.json"); if (!A || !X) return null; return { stamp: fs.existsSync(path.join(HERE, "STAMP-FACTS.txt")) ? fs.readFileSync(path.join(HERE, "STAMP-FACTS.txt"), "utf8").split("\n")[0] : null, accept: A.scored, rows: X.results.filter((r) => A.scored[r.q]).map((r) => ({ q: r.q, verdict: r.verdict, answer: r.answer, equiv: B?.results?.find((x) => x.q === r.q)?.verdict ?? null, gap: r.gap?.kind ?? null })), controls: X.results.filter((r) => (A.controls ?? []).includes(r.q)).map((r) => ({ q: r.q, verdict: r.verdict })) }; };
+const facts = () => { const rd = (f) => { try { return JSON.parse(fs.readFileSync(path.join(HERE, f), "utf8")); } catch { return null; } }, A = rd("answers-facts.json"), X = rd(process.env.FACTS_RESULTS ?? "results-answers-facts-equiv-realpriors-v11.json"), B = null; if (!A || !X) return null; return { stamp: fs.existsSync(path.join(HERE, "STAMP-FACTS.txt")) ? fs.readFileSync(path.join(HERE, "STAMP-FACTS.txt"), "utf8").split("\n")[0] : null, accept: A.scored, rows: X.results.filter((r) => A.scored[r.q]).map((r) => ({ q: r.q, verdict: r.verdict, answer: r.answer, equiv: B?.results?.find((x) => x.q === r.q)?.verdict ?? null, gap: r.gap?.kind ?? null })), controls: X.results.filter((r) => (A.controls ?? []).includes(r.q)).map((r) => ({ q: r.q, verdict: r.verdict })) }; };
 http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://localhost:${PORT}`);
   try {

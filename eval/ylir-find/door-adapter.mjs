@@ -10,7 +10,7 @@ export async function ylirDoor({ lang = "eng" } = {}) {
   return {
     Y, total: Y.documents, lemmaOf: (w) => Y.lemmaOf(w),
     lookup: (w) => Y.lookup(w),
-    catalog: (doc) => { const c = Y.catalog(doc), d = Y.docOf(doc); return c ? { file: c.file ?? d?.file, sha256: c.sha256 } : null; },
+    catalog: (doc) => { const c = Y.catalog(doc), d = Y.docOf(doc); return c ? { file: c.file ?? d?.file, sha256: c.sha256, sentences: c.sentences ?? null, title: c.title ?? null } : null; },
     sentences: (doc) => {
       if (cache.has(doc)) return cache.get(doc);
       let out = null;

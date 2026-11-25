@@ -287,11 +287,79 @@ test("lifespan: “X (22 April 1724 – 12 February 1804) was …” answers whe
   const kant = "Immanuel Kant (22 April 1724 – 12 February 1804) was a German philosopher.";
   assert.equal((await ask("When was Immanuel Kant born?", kant)).answer?.answer, "22 April 1724"); assert.equal((await ask("When did Immanuel Kant die?", kant)).answer?.answer, "12 February 1804");
   const plato = "Plato (428–348 BC) was an Athenian philosopher."; assert.equal((await ask("When was Plato born?", plato)).answer?.answer, "428 BC"); assert.equal((await ask("When did Plato die?", plato)).answer?.answer, "348 BC");
-  const h = await ask("When did Goethe die?", "Johann Wolfgang von Goethe (28 August 1749 – 22 March 1832) was a German writer."); assert.equal(h.answer?.answer, "22 March 1832", "“Johann Wolfgang von Goethe (…)” is Goethe himself; “Hans Albert Einstein (…)” is not Albert Einstein (the span guard)");
+  const h = await ask("When did Goethe die?", "Johann Wolfgang von Goethe (28 August 1749 – 22 March 1832) was a German writer.", "Johann Wolfgang von Goethe"); assert.equal(h.answer?.answer, "22 March 1832", "on the page titled “Johann Wolfgang von Goethe” the name run is Goethe himself; “Hans Albert Einstein (…)” is not Albert Einstein (the span guard)");
   const titled = await ask("When did Kant die?", "Kant died in Königsberg in 1804.", "Immanuel Kant"); assert.equal(titled.answer?.answer, "1804", "a page named with more of the name is the subject's own: the bare surname counts");
 });
 
 test("the page named for the subject outranks another document in the same tier, and a page named with more of a name is the subject's own", T, async () => {
   const own = { title: "Plato", passages: [{ section: null, text: "Plato was born in Athens." }] }, other = { title: "Epimenides", passages: [{ section: null, text: "Plato was born in Aegina, they say." }] };
   const h = await huntVoid(voidOf("Where was Plato born?"), { sources: [source(other, own)], read, split }); assert.equal(h.answer?.answer, "Athens", JSON.stringify(h.candidates.map((c) => [c.answer, c.tier, c.inOwnPage])));
+});
+
+test("a pronoun stands for the page's subject only with the subject's gender, read from the page's own pronouns: “She died when Beatrice was ten” is not said of Plato", T, async () => {
+  const lead = "Plato was a philosopher. He wrote the Republic. He lived in Athens. His work is read. He was admired. He died in Athens in 348 BC.";
+  const page = { title: "Plato", passages: [{ section: null, text: `${lead} She died when Beatrice was not yet ten years old.` }] };
+  const h = await huntVoid(voidOf("When did Plato die?"), { sources: [source(page)], read, split });
+  assert.equal(h.answer?.answer, "348 BC", JSON.stringify(h.candidates.map((c) => [c.answer, c.tier]))); assert.ok(!h.candidates.some((c) => /ten/.test(c.answer)), "the woman who died when Beatrice was ten is not the page's subject");
+});
+
+test("what the false answers of the first fact set taught: a date has a year (“two”, “at the age of 79”), a pronoun in a subordinate clause is not the page's subject (“until he died in 1751”), and of places said in a row after one verb the first is the answer", T, async () => {
+  const ask = async (q, title, text) => huntVoid(voidOf(q), { sources: [source({ title, passages: [{ section: null, text }] })], read, split });
+  const kant = await ask("When did Kant die?", "Immanuel Kant", "Kant studied under Martin Knutzen until he died in 1751. His mother died when he was two. He died in Königsberg on 12 February 1804, at the age of 79.");
+  assert.equal(kant.answer?.answer, "12 February 1804", JSON.stringify(kant.candidates.map((c) => [c.answer, c.tier])));
+  assert.ok(!kant.candidates.some((c) => ["two", "age", "1751"].includes(c.answer)), JSON.stringify(kant.candidates.map((c) => c.answer)));
+  const plato = await ask("Where was Plato born?", "Plato", "Plato was born in Athens in Greece."); assert.equal(plato.answer?.answer, "Athens", JSON.stringify(plato.candidates.map((c) => [c.answer, c.tier]))); assert.ok(!plato.candidates.some((c) => c.answer === "Greece" && c.tier === "role"), "Greece is Athens's container, said after it");
+});
+
+test("a sentence-initial “he” right after a sentence about someone else is theirs (“Rudolf was a student. But he died in 1902”), a name part inside another person's name is not the anchor (“Christiane von Kant”), a capitalised relation word is a title word, and a place named for the person is not where he was born", T, async () => {
+  const ask = async (q, title, text) => huntVoid(voidOf(q), { sources: [source({ title, passages: [{ section: null, text }] })], read, split });
+  const a = await ask("When did Plato die?", "Plato", "Plato was a philosopher. Rudolf was his student. But he died in 1902 near Athens. Plato died in 348 BC."); assert.equal(a.answer?.answer, "348 BC", JSON.stringify(a.candidates.map((c) => [c.answer, c.tier])));
+  const b = await ask("When did Kant die?", "Immanuel Kant", "Christiane von Kant died in 1816. Kant died in 1804."); assert.equal(b.answer?.answer, "1804", JSON.stringify(b.candidates.map((c) => [c.answer, c.tier])));
+  const c = await ask("When did Kant die?", "Immanuel Kant", "1762: The False Subtlety (Die falsche Spitzfindigkeit) 1763: The Only Possible Argument. He died in 1804."); assert.equal(c.answer?.answer, "1804", JSON.stringify(c.candidates.map((x) => [x.answer, x.tier])));
+  const d = await ask("Where was Plato born?", "Plato", "Plato was born in the Villa Plato in Athens."); assert.equal(d.answer?.answer, "Athens", JSON.stringify(d.candidates.map((x) => [x.answer, x.tier])));
+});
+
+test("possessive authorship: for a verb of making, “Kant’s Prolegomena” credits Kant; a possessor of something that is not the work asked about does not", T, async () => {
+  const ask = async (q, text) => huntVoid(voidOf(q), { sources: [source({ title: "t", passages: [{ section: null, text }] })], read, split });
+  const a = await ask("Who wrote Prolegomena?", "Kant\u2019s Prolegomena is a short book. Plato\u2019s teacher was wise."); assert.equal(a.answer?.answer, "Kant", JSON.stringify(a.candidates.map((c) => [c.answer, c.tier]))); assert.equal(a.answer?.tier, "byline");
+  const b = await ask("Who wrote Prolegomena?", "Plato\u2019s teacher read the Prolegomena."); assert.equal(b.answer, null, "Plato possesses the teacher, not the Prolegomena");
+  const c = await ask("Who painted Prolegomena?", "Kant\u2019s Prolegomena is a short book."); assert.equal(c.answer?.answer, "Kant", "any verb of making credits the possessor of the work; whether it is the right verb is the question's, not the sentence's");
+});
+
+test("what the second look at the fact set taught: a piece the splitter cut off a sentence (“… crying ‘Wrong! Wrong!’ | when two brass bands …”) does not clear whose sentence a bare “he” follows, and a title is the whole title (“the Divine Comedy”, “World War I”, “Thus Spoke Zarathustra”)", T, async () => {
+  const ask = async (q, title, text) => huntVoid(voidOf(q), { sources: [source({ title, passages: [{ section: null, text }] })], read, split });
+  const hans = "The eldest brother, Hans, was hailed as a musical prodigy. At the age of four, writes Alexander Waugh, Hans could identify the Doppler effect in a passing siren as a quarter-tone drop in pitch, and at five started crying \"Wrong! Wrong!\" when two brass bands in a carnival played the same tune in different keys. But he died in mysterious circumstances in May 1902, when he ran away to the US. Plato died in 348 BC.";
+  const a = await ask("When did Plato die?", "Plato", hans); assert.equal(a.answer?.answer, "348 BC", JSON.stringify(a.candidates.map((c) => [c.answer, c.tier])));
+  assert.ok(!a.candidates.some((c) => String(c.answer).includes("1902")), "the brother's death is not Plato's: " + JSON.stringify(a.candidates.map((c) => c.answer)));
+  assert.deepEqual(voidOf("Who wrote the Divine Comedy?").anchors.map((x) => x.text), ["Divine Comedy"]);
+  assert.deepEqual(voidOf("When did World War I begin?").anchors.map((x) => x.text), ["World War I"]);
+  assert.deepEqual(voidOf("Who wrote Thus Spoke Zarathustra?").anchors.map((x) => x.text), ["Thus Spoke Zarathustra"]);
+  assert.deepEqual(voidOf("Who directed Lethal Weapon?").anchors.map((x) => x.text), ["Lethal Weapon"]);
+  assert.deepEqual(voidOf("When did Ludwig Wittgenstein die?").anchors.map((x) => x.text), ["Ludwig Wittgenstein"], "a name keeps its own words and takes none from the verb");
+});
+
+test("the extraction runs a link's display text into its target (“Dante AlighieriDante”): the answer is the name once; a name with its own capital inside (“DiCaprio”) stays", T, async () => {
+  const ask = async (q, title, text) => huntVoid(voidOf(q), { sources: [source({ title, passages: [{ section: null, text }] })], read, split });
+  const a = await ask("Who wrote the Divine Comedy?", "Divine Comedy", "Dante AlighieriDante wrote the Divine Comedy in the early fourteenth century."); assert.equal(a.answer?.answer, "Dante Alighieri", JSON.stringify(a.candidates.map((c) => [c.answer, c.tier])));
+  const b = await ask("Who wrote the Divine Comedy?", "Epic poetry", "Famous examples include Dante AlighieriDante's Divine Comedy and the Iliad."); assert.ok(b.answer ? b.answer.answer === "Dante Alighieri" : !b.candidates.some((c) => String(c.answer).includes("AlighieriDante")), JSON.stringify(b.candidates.map((c) => [c.answer, c.tier])));
+});
+
+test("a day and a month with no year take the year the sentence gave before them (“in mid-August 1900, … died at noon on 25 August”), and a number that is not a date does not (“when he was two”)", T, async () => {
+  const ask = async (q, title, text) => huntVoid(voidOf(q), { sources: [source({ title, passages: [{ section: null, text }] })], read, split });
+  const a = await ask("When did Nietzsche die?", "Friedrich Nietzsche", "After contracting pneumonia in mid-August 1900, he suffered another stroke during the night and died at about noon on 25 August."); assert.equal(a.answer?.answer, "25 August 1900", JSON.stringify(a.candidates.map((c) => [c.answer, c.tier])));
+  const b = await ask("When did Kant die?", "Immanuel Kant", "His mother died when he was two."); assert.equal(b.answer, null, "“two” is not a date and takes no year: " + JSON.stringify(b.candidates.map((c) => c.answer)));
+});
+
+test("a year is not the family name of a date: “(1889–1951)” on one page does not make “25 April 1951” on another (a manuscript begun that day) the death", T, async () => {
+  const wit = { title: "Ludwig Wittgenstein", passages: [{ section: null, text: "Wittgenstein began work on his final manuscript on 25 April 1951." }] };
+  const met = { title: "Metaphysics", passages: [{ section: null, text: "Logical atomists, like Russell and the early Ludwig Wittgenstein (1889–1951), conceived the world as a multitude of atomic facts." }] };
+  const h = await huntVoid(voidOf("When did Ludwig Wittgenstein die?"), { sources: [source(wit, met)], read, split });
+  assert.equal(h.answer?.answer, "1951", JSON.stringify(h.candidates.map((c) => [c.answer, c.tier, c.documents])));
+});
+
+test("“born in the city of Stagira in Chalkidiki”: the locative is on the settlement noun, so the city is the place and the region is its container; “born to Caterina” is still no place", T, async (t) => {
+  if (!process.env.KHORA_PRIORS_DIR) return t.skip("the stand-in priors home reads this sentence another way; the chat runs on the real home (KHORA_PRIORS_DIR=~/Documents/janus/priors)");
+  const ask = async (q, title, text) => huntVoid(voidOf(q), { sources: [source({ title, passages: [{ section: null, text }] })], read, split });
+  const a = await ask("Where was Aristotle born?", "Aristotle", "He was born in the city of Stagira in Chalkidiki during the Classical period."); assert.equal(a.answer?.answer, "Stagira", JSON.stringify(a.candidates.map((c) => [c.answer, c.tier])));
+  const b = await ask("Where was Leonardo born?", "Leonardo", "He was born to Caterina in Vinci."); assert.equal(b.answer?.answer, "Vinci", JSON.stringify(b.candidates.map((c) => [c.answer, c.tier])));
 });

@@ -71,7 +71,7 @@ fetch("/api/state").then((r) => r.json()).then((s) => {
   const n = (v) => f.rows.filter((r) => r.verdict === v).length;
   $("facts").innerHTML = `<p>Out of ${f.rows.length}: <span class="right">${n("right")} right</span>, <span class="wrong">${n("wrong")} wrong</span>, <span class="gap">${n("gap")} said “I can't say”</span>. The three questions with no answer in the corpus were all left as gaps. Exploratory; it is the first real result, not a score to be proud of.</p>
   <details><summary>every question, and what it said</summary><table><tr><th>question</th><th>result</th><th>what it said</th></tr>${f.rows.map((r) => `<tr><td>${esc(r.q)}</td><td class="${r.verdict}">${r.verdict === "gap" ? "can't say" : r.verdict}</td><td>${esc(r.answer ?? r.gap ?? "")}</td></tr>`).join("")}</table></details>
-  <p class="k" style="font-size:13px">Why most are gaps: the question is misread (an anchor lost), the wrong documents are retrieved when the words are common, or the answer is not in a sentence the hunt can read (“Kant (1724–1804)”). Written up in eval/ylir-find/RESULTS-ANSWER.md.</p>`;
+  <p class="k" style="font-size:13px">What is left: the birth place or date of a person whose page says it as a noun (“His birthplace, Röcken”) or in a parenthesis the extraction broke; a work whose author the page does not state beside the work (Hamlet, the Tractatus); a teacher or a capital, which the question asks by a noun and the hunt reads only as a verb. “Right” is the stamped rule: the accepted word is in the answer, so a right year with a wrong day would still count; the days were checked by hand. Written up in eval/ylir-find/RESULTS-ANSWER.md.</p>`;
 });
 </script>
 </body>

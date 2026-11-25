@@ -1,0 +1,2695 @@
+{
+ "schema": "YlirAnswerProbe@1",
+ "priorsHome": "/Users/mlacy/Documents/janus/priors",
+ "set": "facts",
+ "arm": "equiv-realpriors-v8",
+ "index": "the Ýlir-One door (11640 documents)",
+ "split": "DEV / EXPLORATORY (the questions were scored for document finding before; what counts as right was fixed before: answers-dev.json)",
+ "at": "2026-11-25T02:48:48.639Z",
+ "tally": {
+  "gap": 17,
+  "right": 17
+ },
+ "scoredQuestions": 31,
+ "right": 17,
+ "wrong": 0,
+ "gap": 14,
+ "controls": [
+  {
+   "q": "Where was Aristotle buried in the year 2022?",
+   "verdict": "gap",
+   "answer": null
+  },
+  {
+   "q": "Who won the 1998 World Cup?",
+   "verdict": "gap",
+   "answer": null
+  },
+  {
+   "q": "When was the telephone invented?",
+   "verdict": "gap",
+   "answer": null
+  }
+ ],
+ "results": [
+  {
+   "q": "Where was Aristotle born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "Aristotle"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4658,
+     "file": "02-encyclopedic/wikipedia/Aristotle.txt",
+     "score": 11.58,
+     "sentences": 315,
+     "passages": 315,
+     "ownPage": true
+    },
+    {
+     "doc": 11568,
+     "file": "21-anti-colonial/colonial-studies/63503-Ferguson-Greek-Imperialism.txt",
+     "score": 11.44,
+     "sentences": 2932,
+     "passages": 60,
+     "ownPage": false
+    },
+    {
+     "doc": 4668,
+     "file": "02-encyclopedic/wikipedia/Plato.txt",
+     "score": 11.27,
+     "sentences": 232,
+     "passages": 9,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "several_fill_the_void",
+    "detail": "Chalkidiki (role, 1); Stagira (role, 1)"
+   },
+   "candidates": [
+    {
+     "answer": "Chalkidiki",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 1017-1165",
+       "sentence": "He was born in the city of Stagira (ancient city)Stagira in Chalkidiki (northern Greecenorthern Greece) during the Classical GreeceClassical period."
+      }
+     ]
+    },
+    {
+     "answer": "Stagira",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 3648-4699",
+       "sentence": "covers ancient biographies of Aristotle.}} Aristotle was born in 384&nbsp;BC}} in Stagira (ancient city)Stagira, Chalcidice,; ; ; about 55&nbsp;km (34 miles) east of modern-day Thessaloniki.; He was t"
+      }
+     ]
+    },
+    {
+     "answer": "Politics",
+     "tier": "comention",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 40784-40845",
+       "sentence": "\"On Aristotle's Politics\", in The City and Man, Rand McNally."
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bear",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 3975,
+   "error": null
+  },
+  {
+   "q": "Where was Dante Alighieri born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "Dante Alighieri"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4660,
+     "file": "02-encyclopedic/wikipedia/Dante_Alighieri.txt",
+     "score": 27.1,
+     "sentences": 213,
+     "passages": 213,
+     "ownPage": true
+    },
+    {
+     "doc": 12,
+     "file": "02-encyclopedic/wikipedia/Homer.txt",
+     "score": 22.94,
+     "sentences": 215,
+     "passages": 2,
+     "ownPage": false
+    },
+    {
+     "doc": 2341,
+     "file": "02-encyclopedic/wikipedia/Renaissance.txt",
+     "score": 21.59,
+     "sentences": 574,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Florence",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Florence",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 3157-3184",
+       "sentence": "Dante was born in Florence."
+      }
+     ]
+    },
+    {
+     "answer": "Italiani",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 349-416",
+       "sentence": "See \"Alighieri, Dante\" in the Dizionario Biografico degli Italiani."
+      }
+     ]
+    },
+    {
+     "answer": "Tale",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 25233-25391",
+       "sentence": "Dante is also sometimes credited with writing (\"The Flower\"), a series of sonnets summarizing , and (\"Tale of Love\"), a short narrative poem also based on ."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 1733,
+   "error": null
+  },
+  {
+   "q": "Where was Friedrich Nietzsche born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "Friedrich Nietzsche"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 27.13,
+     "sentences": 765,
+     "passages": 765,
+     "ownPage": true
+    },
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 24.62,
+     "sentences": 465,
+     "passages": 4,
+     "ownPage": false
+    },
+    {
+     "doc": 2343,
+     "file": "02-encyclopedic/wikipedia/Tragedy.txt",
+     "score": 23.2,
+     "sentences": 205,
+     "passages": 3,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Essence, Wagners, Rome stand next to Friedrich Nietzsche, but no sentence says “bear”"
+   },
+   "candidates": [
+    {
+     "answer": "Essence",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 9073-9231",
+       "sentence": "In addition, Ludwig Feuerbach's The Essence of Christianity influenced young Nietzsche with its argument that people created God and not the other way around."
+      }
+     ]
+    },
+    {
+     "answer": "Wagners",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 14727-14931",
+       "sentence": "The Wagners brought Nietzsche into their most intimate circle—which included Franz Liszt, of whom Nietzsche colloquially described: \"Liszt or the art of running after women!\"Rupert HughesHughes, Ruper"
+      }
+     ]
+    },
+    {
+     "answer": "Rome",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 21515-21650",
+       "sentence": "The two met Nietzsche in Rome in April 1882, and Nietzsche is believed to have instantly fallen in love with Salomé, as Rée had done."
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bear",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 3730,
+   "error": null
+  },
+  {
+   "q": "Where was Immanuel Kant born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "Immanuel Kant"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4663,
+     "file": "02-encyclopedic/wikipedia/Immanuel_Kant.txt",
+     "score": 26.4,
+     "sentences": 624,
+     "passages": 624,
+     "ownPage": true
+    },
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 22.3,
+     "sentences": 765,
+     "passages": 3,
+     "ownPage": false
+    },
+    {
+     "doc": 2336,
+     "file": "02-encyclopedic/wikipedia/Epistemology.txt",
+     "score": 21.64,
+     "sentences": 103,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Königsberg",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Königsberg",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 874-1007",
+       "sentence": "Born in Königsberg in the Kingdom of Prussia, he is considered one of the central thinkers of the Age of EnlightenmentEnlightenment."
+      }
+     ]
+    },
+    {
+     "answer": "philosopher)Eric Watkins",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 6242-6597",
+       "sentence": "In 1749, he published his first philosophical work, Thoughts on the True Estimation of Living Forces (written in 1745–1747).Eric Watkins (philosopher)Eric Watkins (ed.), Immanuel Kant: Natural Science"
+      }
+     ]
+    },
+    {
+     "answer": "Knutzen",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 5002-5121",
+       "sentence": "Knutzen dissuaded Kant from the theory of pre-established harmony, which he regarded as \"the pillow for the lazy mind\"."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 7899,
+   "error": null
+  },
+  {
+   "q": "Where was Goethe born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "Goethe"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 12.53,
+     "sentences": 465,
+     "passages": 465,
+     "ownPage": true
+    },
+    {
+     "doc": 2151,
+     "file": "21-anti-colonial/colonial-studies/30710-Cramb-The-Origins-and-Destiny-of-Imperial-Brit.txt",
+     "score": 12.01,
+     "sentences": 2545,
+     "passages": 23,
+     "ownPage": false
+    },
+    {
+     "doc": 7,
+     "file": "01-literature-books/gutenberg/pg8394_Beyond_Good_and_Evil_by_Nietzsche.txt",
+     "score": 11.45,
+     "sentences": 1977,
+     "passages": 11,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Faust, Thomas Carlyle, Weimar stand next to Goethe, but no sentence says “bear”"
+   },
+   "candidates": [
+    {
+     "answer": "Faust",
+     "tier": "comention",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 35166-35294",
+       "sentence": "These include Hippocrates' \"Art is long, life is short\", which is echoed in Goethe's Faust and Wilhelm Meister's Apprenticeship."
+      }
+     ]
+    },
+    {
+     "answer": "Thomas Carlyle",
+     "tier": "comention",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 52926-53450",
+       "sentence": "In Victorian England, Goethe's great disciple was Thomas Carlyle, who wrote the essays \"Faustus\" (1822), \"Goethe's Helena\" (1828), \"Goethe\" (1828), \"Goethe's Works\" (1832), \"Goethe's Portrait\" (1832),"
+      }
+     ]
+    },
+    {
+     "answer": "Weimar",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 894-1208",
+       "sentence": "Goethe took up residence in Weimar in 1775 following the success of his first novel, The Sorrows of Young Werther (1774), and joined a thriving intellectual and cultural environment under the patronag"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bear",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 5082,
+   "error": null
+  },
+  {
+   "q": "Where was Leo Tolstoy born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "Leo Tolstoy"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 9328,
+     "file": "02-encyclopedic/wikipedia/Leo_Tolstoy.txt",
+     "score": 20.13,
+     "sentences": 384,
+     "passages": 384,
+     "ownPage": true
+    },
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 15.87,
+     "sentences": 765,
+     "passages": 2,
+     "ownPage": false
+    },
+    {
+     "doc": 11624,
+     "file": "21-anti-colonial/saho-archive/hundred-years-of-resistance-e-s-reddy-29-january-2012.txt",
+     "score": 14.65,
+     "sentences": 56,
+     "passages": 3,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Yasnaya Polyana",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Yasnaya Polyana",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 5139-5245",
+       "sentence": "Tolstoy was born at Yasnaya Polyana, a family estate southwest of Tula, RussiaTula, and south of Moscow."
+      }
+     ]
+    },
+    {
+     "answer": "Russia",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 0-81",
+       "sentence": "Yasnaya Polyana, Russia (aged 82) Lev Tolstoy (rural locality)Astapovo, Russia"
+      }
+     ]
+    },
+    {
+     "answer": "Griboyedov Prize",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 200-253",
+       "sentence": "Leo Tolstoy bibliographyList Griboyedov Prize (1892)"
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 2528,
+   "error": null
+  },
+  {
+   "q": "Where was Ludwig Wittgenstein born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "Ludwig Wittgenstein"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 2340,
+     "file": "02-encyclopedic/wikipedia/Ludwig_Wittgenstein.txt",
+     "score": 28.25,
+     "sentences": 862,
+     "passages": 862,
+     "ownPage": true
+    },
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 21.41,
+     "sentences": 465,
+     "passages": 1,
+     "ownPage": false
+    },
+    {
+     "doc": 4665,
+     "file": "02-encyclopedic/wikipedia/Metaphysics.txt",
+     "score": 19.48,
+     "sentences": 99,
+     "passages": 1,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Cambridge, Bertrand Russell, Rhees stand next to Ludwig Wittgenstein, but no sentence says “bear”"
+   },
+   "candidates": [
+    {
+     "answer": "Cambridge",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig Wittgenstein",
+       "section": "bytes 78062-78353",
+       "sentence": "in Cambridge, 2021]] Wittgenstein was given a Catholic burial at Ascension Parish Burial Ground in Cambridge.A Guide to Churchill College, Cambridge: text by Mark Goldie (2009), pages&nbsp;62–63 Drury"
+      }
+     ]
+    },
+    {
+     "answer": "Bertrand Russell",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig Wittgenstein",
+       "section": "bytes 26670-26744",
+       "sentence": "Bertrand Russell introduced Wittgenstein to Pinsent in the summer of 1912."
+      }
+     ]
+    },
+    {
+     "answer": "Rhees",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig Wittgenstein",
+       "section": "bytes 4560-4852",
+       "sentence": "According to John King, Wittgenstein \"was always immaculately neat and tidy, small of stature and with piercing blue eyes under a shock of curly hair.\"John King, \"Recollections of Wittgenstein\", in Ru"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bear",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 12589,
+   "error": null
+  },
+  {
+   "q": "Where was William Shakespeare born?",
+   "void": {
+    "admits": "place",
+    "relation": "bear",
+    "anchors": [
+     "William Shakespeare"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4671,
+     "file": "02-encyclopedic/wikipedia/William_Shakespeare.txt",
+     "score": 12.24,
+     "sentences": 135,
+     "passages": 135,
+     "ownPage": true
+    },
+    {
+     "doc": 9028,
+     "file": "20-first-person-voices/old-bailey/old-bailey-19040418.txt",
+     "score": 12.2,
+     "sentences": 1338,
+     "passages": 25,
+     "ownPage": false
+    },
+    {
+     "doc": 11509,
+     "file": "21-anti-colonial/colonial-studies/40080-Hudson-A-Pictorial-Booklet-on-Early-Jamestown-C.txt",
+     "score": 11.64,
+     "sentences": 605,
+     "passages": 10,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Stratford-upon-Avon",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Stratford-upon-Avon",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "William Shakespeare",
+       "section": "bytes 3893-3975",
+       "sentence": "He was born in Stratford-upon-Avon, where he was Baptismbaptised on 26 April 1564."
+      }
+     ]
+    },
+    {
+     "answer": "School",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "William Shakespeare",
+       "section": "bytes 4291-4630",
+       "sentence": "Although no attendance records for the period survive, most biographers agree that Shakespeare was probably educated at the King Edward VI School, Stratford-upon-AvonKing's New School in Stratford, a "
+      }
+     ]
+    },
+    {
+     "answer": "Stratford",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "William Shakespeare",
+       "section": "bytes 4291-4630",
+       "sentence": "Although no attendance records for the period survive, most biographers agree that Shakespeare was probably educated at the King Edward VI School, Stratford-upon-AvonKing's New School in Stratford, a "
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 5830,
+   "error": null
+  },
+  {
+   "q": "When was Aristotle born?",
+   "void": {
+    "admits": "time",
+    "relation": "bear",
+    "anchors": [
+     "Aristotle"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4658,
+     "file": "02-encyclopedic/wikipedia/Aristotle.txt",
+     "score": 11.58,
+     "sentences": 315,
+     "passages": 315,
+     "ownPage": true
+    },
+    {
+     "doc": 11568,
+     "file": "21-anti-colonial/colonial-studies/63503-Ferguson-Greek-Imperialism.txt",
+     "score": 11.44,
+     "sentences": 2932,
+     "passages": 60,
+     "ownPage": false
+    },
+    {
+     "doc": 4668,
+     "file": "02-encyclopedic/wikipedia/Plato.txt",
+     "score": 11.27,
+     "sentences": 232,
+     "passages": 9,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "343/42&nbsp;BC, 322&nbsp;BC stand next to Aristotle, but no sentence says “bear”"
+   },
+   "candidates": [
+    {
+     "answer": "343/42&nbsp;BC",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 6219-7105",
+       "sentence": "In 343/42&nbsp;BC, Aristotle was invited to Pella by Philip II of Macedon to become the tutor to his thirteen-year-old son Alexander the GreatAlexander;; ; ; ; ; a choice perhaps influenced by the rel"
+      }
+     ]
+    },
+    {
+     "answer": "322&nbsp;BC",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 10262-10625",
+       "sentence": "In 322&nbsp;BC, Demophilus and Eurymedon the Hierophant reportedly denounced Aristotle for impiety, prompting him to flee to his mother's family estate in Chalcis, Euboea, at which occasion he was sai"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bear",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 3705,
+   "error": null
+  },
+  {
+   "q": "When was Dante Alighieri born?",
+   "void": {
+    "admits": "time",
+    "relation": "bear",
+    "anchors": [
+     "Dante Alighieri"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4660,
+     "file": "02-encyclopedic/wikipedia/Dante_Alighieri.txt",
+     "score": 27.1,
+     "sentences": 213,
+     "passages": 213,
+     "ownPage": true
+    },
+    {
+     "doc": 12,
+     "file": "02-encyclopedic/wikipedia/Homer.txt",
+     "score": 22.94,
+     "sentences": 215,
+     "passages": 2,
+     "ownPage": false
+    },
+    {
+     "doc": 2341,
+     "file": "02-encyclopedic/wikipedia/Renaissance.txt",
+     "score": 21.59,
+     "sentences": 574,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "1265",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "1265",
+     "tier": "role",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 3360-3698",
+       "sentence": "Its first section, the Inferno (Dante)Inferno, begins, \"\" (\"Midway upon the journey of our life\"), implying that Dante was around 35 years old, since the average lifespan according to the Bible (Psalm"
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 4340,
+   "error": null
+  },
+  {
+   "q": "When was Friedrich Nietzsche born?",
+   "void": {
+    "admits": "time",
+    "relation": "bear",
+    "anchors": [
+     "Friedrich Nietzsche"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 27.13,
+     "sentences": 765,
+     "passages": 765,
+     "ownPage": true
+    },
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 24.62,
+     "sentences": 465,
+     "passages": 4,
+     "ownPage": false
+    },
+    {
+     "doc": 2343,
+     "file": "02-encyclopedic/wikipedia/Tragedy.txt",
+     "score": 23.2,
+     "sentences": 205,
+     "passages": 3,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "1882, March 1890, 1937 essay stand next to Friedrich Nietzsche, but no sentence says “bear”"
+   },
+   "candidates": [
+    {
+     "answer": "1882",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 23955-24043",
+       "sentence": "By 1882 Nietzsche was taking huge doses of opium and continued to have trouble sleeping."
+      }
+     ]
+    },
+    {
+     "answer": "March 1890",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 31553-31666",
+       "sentence": "In March 1890, Franziska removed Nietzsche from the clinic and, in May 1890, brought him to her home in Naumburg."
+      }
+     ]
+    },
+    {
+     "answer": "1937 essay",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 94879-95042",
+       "sentence": "Georges Bataille was also influential in this revival, defending Nietzsche against appropriation by the Nazis with his notable 1937 essay \"Nietzsche and Fascists\"."
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bear",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 6406,
+   "error": null
+  },
+  {
+   "q": "When was Immanuel Kant born?",
+   "void": {
+    "admits": "time",
+    "relation": "bear",
+    "anchors": [
+     "Immanuel Kant"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4663,
+     "file": "02-encyclopedic/wikipedia/Immanuel_Kant.txt",
+     "score": 26.4,
+     "sentences": 624,
+     "passages": 624,
+     "ownPage": true
+    },
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 22.3,
+     "sentences": 765,
+     "passages": 3,
+     "ownPage": false
+    },
+    {
+     "doc": 2336,
+     "file": "02-encyclopedic/wikipedia/Epistemology.txt",
+     "score": 21.64,
+     "sentences": 103,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "22 April 1724",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "22 April 1724",
+     "tier": "role",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 2620-2783",
+       "sentence": "Immanuel Kant was born on 22 April 1724 into a Prussian German family of LutheranismLutheran faith in Königsberg in East Prussia (now Kaliningrad Oblast, Russia)."
+      }
+     ]
+    },
+    {
+     "answer": "1770",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 12310-12411",
+       "sentence": "In 1770, Kant was appointed Full Professor of Logic and Metaphysics at the University of Königsberg."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 5436,
+   "error": null
+  },
+  {
+   "q": "When was William Shakespeare born?",
+   "void": {
+    "admits": "time",
+    "relation": "bear",
+    "anchors": [
+     "William Shakespeare"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4671,
+     "file": "02-encyclopedic/wikipedia/William_Shakespeare.txt",
+     "score": 12.24,
+     "sentences": 135,
+     "passages": 135,
+     "ownPage": true
+    },
+    {
+     "doc": 9028,
+     "file": "20-first-person-voices/old-bailey/old-bailey-19040418.txt",
+     "score": 12.2,
+     "sentences": 1338,
+     "passages": 25,
+     "ownPage": false
+    },
+    {
+     "doc": 11509,
+     "file": "21-anti-colonial/colonial-studies/40080-Hudson-A-Pictorial-Booklet-on-Early-Jamestown-C.txt",
+     "score": 11.64,
+     "sentences": 605,
+     "passages": 10,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "172 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bear",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 3901,
+   "error": null
+  },
+  {
+   "q": "When did Dante Alighieri die?",
+   "void": {
+    "admits": "time",
+    "relation": "die",
+    "anchors": [
+     "Dante Alighieri"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4660,
+     "file": "02-encyclopedic/wikipedia/Dante_Alighieri.txt",
+     "score": 27.05,
+     "sentences": 213,
+     "passages": 213,
+     "ownPage": true
+    },
+    {
+     "doc": 12,
+     "file": "02-encyclopedic/wikipedia/Homer.txt",
+     "score": 22.78,
+     "sentences": 215,
+     "passages": 2,
+     "ownPage": false
+    },
+    {
+     "doc": 2341,
+     "file": "02-encyclopedic/wikipedia/Renaissance.txt",
+     "score": 19.37,
+     "sentences": 574,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "September 14 1321",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "September 14 1321",
+     "tier": "role",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 19449-19607",
+       "sentence": "Dante died in Ravenna on September 14, 1321, aged about 56, of quartan malaria contracted while returning from a diplomatic mission to the Republic of Venice."
+      }
+     ]
+    },
+    {
+     "answer": "1300",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 11911-12308",
+       "sentence": "In March 1302, Dante, a White Guelph by affiliation, along with the Gherardini family, was condemned to exile for two years and ordered to pay a large fine.Dino Compagni, Cronica delle cose occorrenti"
+      }
+     ]
+    },
+    {
+     "answer": "3000 volumes",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 27701-29205",
+       "sentence": "The [http://www.museocasadidante.it/en/ Dante Museum in Florence]: his life, his books and a history & literature blog about Dante The [https://web.archive.org/web/20170830160755/http://www.worldofdan"
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 1690,
+   "error": null
+  },
+  {
+   "q": "When did Friedrich Nietzsche die?",
+   "void": {
+    "admits": "time",
+    "relation": "die",
+    "anchors": [
+     "Friedrich Nietzsche"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 27.11,
+     "sentences": 765,
+     "passages": 765,
+     "ownPage": true
+    },
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 25.12,
+     "sentences": 465,
+     "passages": 4,
+     "ownPage": false
+    },
+    {
+     "doc": 2343,
+     "file": "02-encyclopedic/wikipedia/Tragedy.txt",
+     "score": 21.45,
+     "sentences": 205,
+     "passages": 3,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "30 August 1900",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "30 August 1900",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 34403-34725",
+       "sentence": "After contracting pneumonia in mid-August 1900, he suffered another stroke during the night of 24–25 August and died at about noon on 25 August.Concurring reports in Elisabeth Förster-Nietzsche's biog"
+      }
+     ]
+    },
+    {
+     "answer": "1888",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 20763-20941",
+       "sentence": "Beginning with Human, All Too Human in 1878, Nietzsche published one book or major section of a book each year until 1888, his last year of writing; that year, he completed five."
+      }
+     ]
+    },
+    {
+     "answer": "June 1865",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 9232-9368",
+       "sentence": "In June 1865, at the age of 20, Nietzsche wrote to his sister Elisabeth, who was deeply religious, a letter regarding his loss of faith."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 3548,
+   "error": null
+  },
+  {
+   "q": "When did Immanuel Kant die?",
+   "void": {
+    "admits": "time",
+    "relation": "die",
+    "anchors": [
+     "Immanuel Kant"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4663,
+     "file": "02-encyclopedic/wikipedia/Immanuel_Kant.txt",
+     "score": 26.66,
+     "sentences": 624,
+     "passages": 624,
+     "ownPage": true
+    },
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 22.28,
+     "sentences": 765,
+     "passages": 3,
+     "ownPage": false
+    },
+    {
+     "doc": 2336,
+     "file": "02-encyclopedic/wikipedia/Epistemology.txt",
+     "score": 21.64,
+     "sentences": 103,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "12 February 1804",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "12 February 1804",
+     "tier": "role",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 22731-22915",
+       "sentence": "He died in Königsberg on 12 February 1804, uttering Es ist gut (\"It is good\") before his death.Karl Vorländer, Immanuel Kant: Der Mann und das Werk, Hamburg: Meiner, 1992, p. II 332."
+      }
+     ]
+    },
+    {
+     "answer": "22 April 1724",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 2620-2783",
+       "sentence": "Immanuel Kant was born on 22 April 1724 into a Prussian German family of LutheranismLutheran faith in Königsberg in East Prussia (now Kaliningrad Oblast, Russia)."
+      }
+     ]
+    },
+    {
+     "answer": "August 1748",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 6053-6139",
+       "sentence": "Kant left Königsberg shortly after August 1748; he would return there in August 1754."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 2648,
+   "error": null
+  },
+  {
+   "q": "When did Goethe die?",
+   "void": {
+    "admits": "time",
+    "relation": "die",
+    "anchors": [
+     "Goethe"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 13.03,
+     "sentences": 465,
+     "passages": 465,
+     "ownPage": true
+    },
+    {
+     "doc": 2151,
+     "file": "21-anti-colonial/colonial-studies/30710-Cramb-The-Origins-and-Destiny-of-Imperial-Brit.txt",
+     "score": 12.1,
+     "sentences": 2545,
+     "passages": 23,
+     "ownPage": false
+    },
+    {
+     "doc": 7096,
+     "file": "11-multi-language/parallel-classics/faust-part-1/en/pg3023_Faust-Part-1.txt",
+     "score": 11,
+     "sentences": 3866,
+     "passages": 15,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "1832",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "1832",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 20916-21130",
+       "sentence": "They had already had several children together by this time, including their son, Julius August Walter von Goethe (1789–1830), whose wife, Ottilie von Pogwisch, cared for the elder Goethe until his de"
+      }
+     ]
+    },
+    {
+     "answer": "19 October 1806",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 20752-20915",
+       "sentence": "Days afterward, on 19 October 1806, Goethe legitimized their 18-year relationship by marrying Christiane in a quiet marriage service at the Jakobskirche in Weimar."
+      }
+     ]
+    },
+    {
+     "answer": "14 October 1808",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 51901-51985",
+       "sentence": "Goethe would receive the Légion d'honneur from Napoleon himself on 14 October 1808."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 2576,
+   "error": null
+  },
+  {
+   "q": "When did Leo Tolstoy die?",
+   "void": {
+    "admits": "time",
+    "relation": "die",
+    "anchors": [
+     "Leo Tolstoy"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 9328,
+     "file": "02-encyclopedic/wikipedia/Leo_Tolstoy.txt",
+     "score": 20.16,
+     "sentences": 384,
+     "passages": 384,
+     "ownPage": true
+    },
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 15.85,
+     "sentences": 765,
+     "passages": 2,
+     "ownPage": false
+    },
+    {
+     "doc": 2340,
+     "file": "02-encyclopedic/wikipedia/Ludwig_Wittgenstein.txt",
+     "score": 14.93,
+     "sentences": 862,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "20 November 1910",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "20 November 1910",
+     "tier": "role",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 40485-40560",
+       "sentence": "Tolstoy died on 20 November 1910 at the age of 82 of pneumonia,Leo Tolstoy."
+      }
+     ]
+    },
+    {
+     "answer": "1857 visit",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 7102-7228",
+       "sentence": "During his 1857 visit, Tolstoy witnessed a public execution in Paris, a traumatic experience that marked the rest of his life."
+      }
+     ]
+    },
+    {
+     "answer": "1862 essay",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 8854-8946",
+       "sentence": "Tolstoy described the schools' principles in his 1862 essay \"The School at Yasnaya Polyana\"."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 1785,
+   "error": null
+  },
+  {
+   "q": "When did Ludwig Wittgenstein die?",
+   "void": {
+    "admits": "time",
+    "relation": "die",
+    "anchors": [
+     "Ludwig Wittgenstein"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 2340,
+     "file": "02-encyclopedic/wikipedia/Ludwig_Wittgenstein.txt",
+     "score": 28.95,
+     "sentences": 862,
+     "passages": 862,
+     "ownPage": true
+    },
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 21.91,
+     "sentences": 465,
+     "passages": 1,
+     "ownPage": false
+    },
+    {
+     "doc": 4665,
+     "file": "02-encyclopedic/wikipedia/Metaphysics.txt",
+     "score": 19.48,
+     "sentences": 99,
+     "passages": 1,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "25&nbsp;April 1951",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "25&nbsp;April 1951",
+     "tier": "lifespan",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Ludwig Wittgenstein",
+       "section": "bytes 76894-76978",
+       "sentence": "Wittgenstein began work on his final manuscript, MS&nbsp;177, on 25&nbsp;April 1951."
+      }
+     ]
+    },
+    {
+     "answer": "1912",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig Wittgenstein",
+       "section": "bytes 13292-13403",
+       "sentence": "In 1912, Wittgenstein wrote to Bertrand Russell saying that Mozart and Beethoven were the 'actual' sons of God."
+      }
+     ]
+    },
+    {
+     "answer": "1929",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig Wittgenstein",
+       "section": "bytes 23495-23697",
+       "sentence": "Wittgenstein left Cambridge in 1913, but would return to Cambridge in 1929 and resume attending meetings.Klagge, James Carl and Nordmann, Alfred (eds.) Ludwig Wittgenstein: Public and Private Occasion"
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 3402,
+   "error": null
+  },
+  {
+   "q": "Who wrote Faust?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "Faust"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6998,
+     "file": "02-encyclopedic/wikipedia/Johann_Wolfgang_von_Goethe.txt",
+     "score": 13.9,
+     "sentences": 465,
+     "passages": 25,
+     "ownPage": false
+    },
+    {
+     "doc": 7096,
+     "file": "11-multi-language/parallel-classics/faust-part-1/en/pg3023_Faust-Part-1.txt",
+     "score": 13.52,
+     "sentences": 3866,
+     "passages": 282,
+     "ownPage": false
+    },
+    {
+     "doc": 4459,
+     "file": "21-anti-colonial/colonial-studies/22084-Creswell-Oration-on-the-Life-and-Character-of-Hen.txt",
+     "score": 9.55,
+     "sentences": 425,
+     "passages": 1,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Goethe",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Goethe",
+     "tier": "byline",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 33317-33396",
+       "sentence": "The first operatic version of Goethe's Faust, by Louis Spohr, appeared in 1814."
+      }
+     ]
+    },
+    {
+     "answer": "FaustGoethe",
+     "tier": "byline",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Johann Wolfgang von Goethe",
+       "section": "bytes 56977-57154",
+       "sentence": "The Serbian inventor and electrical engineer Nikola Tesla was heavily influenced by Goethe's FaustGoethe's Faust, his favourite poem, and had actually memorized the entire text."
+      }
+     ]
+    },
+    {
+     "answer": "MARGARET",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "pg3023 Faust-Part-1",
+       "section": "bytes 123137-123164",
+       "sentence": "FAUST (MARGARET passing by)"
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 207,
+   "error": null
+  },
+  {
+   "q": "Who wrote War and Peace?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "War",
+     "Peace"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6994,
+     "file": "02-encyclopedic/wikipedia/Cold_War.txt",
+     "score": 8.46,
+     "sentences": 721,
+     "passages": 721,
+     "ownPage": true
+    },
+    {
+     "doc": 9328,
+     "file": "02-encyclopedic/wikipedia/Leo_Tolstoy.txt",
+     "score": 8.86,
+     "sentences": 384,
+     "passages": 47,
+     "ownPage": false
+    },
+    {
+     "doc": 11504,
+     "file": "21-anti-colonial/colonial-studies/37792-Desjardins-England-Canada-and-the-Great-War.txt",
+     "score": 8.85,
+     "sentences": 3286,
+     "passages": 300,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Tolstoy",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Tolstoy",
+     "tier": "byline",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 7940-8048",
+       "sentence": "The similar evocation of battle scenes in Hugo's novel and Tolstoy's War and Peace indicates this influence."
+      }
+     ]
+    },
+    {
+     "answer": "Gary Saul Morson",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 2799-2939",
+       "sentence": "Virginia Woolf called Tolstoy \"the greatest of all novelists\", and Gary Saul Morson referred to War and Peace as the greatest of all novels."
+      }
+     ]
+    },
+    {
+     "answer": "Anna Karenina",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Leo Tolstoy",
+       "section": "bytes 1038-1284",
+       "sentence": "War and Peace (1869), Anna Karenina (1878), and Resurrection (Tolstoy novel)Resurrection (1899), which is based on his \"youthful sins\", are often cited as pinnacles of Literary realismrealist fiction "
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 5357,
+   "error": null
+  },
+  {
+   "q": "Who wrote the Critique of Pure Reason?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "Critique"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4663,
+     "file": "02-encyclopedic/wikipedia/Immanuel_Kant.txt",
+     "score": 14.07,
+     "sentences": 624,
+     "passages": 51,
+     "ownPage": false
+    },
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 13.09,
+     "sentences": 765,
+     "passages": 7,
+     "ownPage": false
+    },
+    {
+     "doc": 9328,
+     "file": "02-encyclopedic/wikipedia/Leo_Tolstoy.txt",
+     "score": 12.76,
+     "sentences": 384,
+     "passages": 4,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Professor Kant",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Professor Kant",
+     "tier": "byline",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 17121-17392",
+       "sentence": "Shortly thereafter, Kant's friend Johann Friedrich Schultz (1739–1805), a professor of mathematics, published Explanations of Professor Kant's Critique of Pure Reason (Königsberg, 1784), which was a b"
+      }
+     ]
+    },
+    {
+     "answer": "Reason",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Immanuel Kant",
+       "section": "bytes 18890-19048",
+       "sentence": "He continued to develop his moral philosophy, notably in 1788's Critique of Practical Reason (known as the second Critique), and 1797's Metaphysics of Morals."
+      }
+     ]
+    },
+    {
+     "answer": "Nietzsche",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 60417-60724",
+       "sentence": "Among his critique of traditional philosophy of Immanuel Kant, René Descartes and Plato in Beyond Good and Evil, Nietzsche attacked the thing in itself and cogito ergo sum (\"I think, therefore I am\") "
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 304,
+   "error": null
+  },
+  {
+   "q": "Who wrote Thus Spoke Zarathustra?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "Thus Spoke Zarathustra"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 6997,
+     "file": "02-encyclopedic/wikipedia/Friedrich_Nietzsche.txt",
+     "score": 24.34,
+     "sentences": 765,
+     "passages": 28,
+     "ownPage": false
+    },
+    {
+     "doc": 7002,
+     "file": "02-encyclopedic/wikipedia/Zoroastrianism.txt",
+     "score": 17.64,
+     "sentences": 539,
+     "passages": 3,
+     "ownPage": false
+    },
+    {
+     "doc": 11552,
+     "file": "21-anti-colonial/colonial-studies/58314-Gurowski-Slavery-in-History.txt",
+     "score": 15.37,
+     "sentences": 2324,
+     "passages": 4,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Gay Science, Zarathustra, Prologue stand next to Thus Spoke Zarathustra, but no sentence says “write”"
+   },
+   "candidates": [
+    {
+     "answer": "Gay Science",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 56108-56309",
+       "sentence": "Nietzsche first proposed the idea of eternal return in a parable in Section 341 of The Gay Science, and also in the chapter \"Of the Vision and the Riddle\" in Thus Spoke Zarathustra, among other places"
+      }
+     ]
+    },
+    {
+     "answer": "Zarathustra",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 68955-69025",
+       "sentence": "From Thus Spoke Zarathustra (Zarathustra's Prologue; pp.&nbsp;9–11):"
+      }
+     ]
+    },
+    {
+     "answer": "Prologue",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Friedrich Nietzsche",
+       "section": "bytes 68955-69025",
+       "sentence": "From Thus Spoke Zarathustra (Zarathustra's Prologue; pp.&nbsp;9–11):"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "write",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 337,
+   "error": null
+  },
+  {
+   "q": "Who wrote the Tractatus?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "Tractatus"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 2340,
+     "file": "02-encyclopedic/wikipedia/Ludwig_Wittgenstein.txt",
+     "score": 18.94,
+     "sentences": 862,
+     "passages": 38,
+     "ownPage": false
+    },
+    {
+     "doc": 4425,
+     "file": "21-anti-colonial/colonial-studies/12288-Taylor-The-Witchcraft-Delusion-in-Colonial-Conn.txt",
+     "score": 9.4,
+     "sentences": 1463,
+     "passages": 1,
+     "ownPage": false
+    },
+    {
+     "doc": 9119,
+     "file": "21-anti-colonial/colonial-studies/22680-Lowell-The-Biglow-Papers.txt",
+     "score": 7.77,
+     "sentences": 2352,
+     "passages": 1,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Wittgenstein, dæmonum stand next to Tractatus, but no sentence says “write”"
+   },
+   "candidates": [
+    {
+     "answer": "Wittgenstein",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Ludwig Wittgenstein",
+       "section": "bytes 37177-37323",
+       "sentence": "The extent to which The Gospel in Brief influenced Wittgenstein can be seen in the Tractatus, in the unique way both books number their sentences."
+      }
+     ]
+    },
+    {
+     "answer": "dæmonum",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "12288-Taylor-The-Witchcraft-Delusion-in-Colonial-Conn",
+       "section": "bytes 26569-27850",
+       "sentence": "Those of the Inquisitor General, Eymeric, in 1359, entitled _Tractatus contra dæmonum_; the Formicarius or Ant Hill of the German Dominican Nider, 1337; the _De calcatione dæmonum_, 1452; the _Flagell"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "write",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 367,
+   "error": null
+  },
+  {
+   "q": "Who wrote the Divine Comedy?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "Divine Comedy"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4660,
+     "file": "02-encyclopedic/wikipedia/Dante_Alighieri.txt",
+     "score": 15.41,
+     "sentences": 213,
+     "passages": 21,
+     "ownPage": false
+    },
+    {
+     "doc": 5,
+     "file": "01-literature-books/gutenberg/pg5827_Meditations_by_Marcus_Aurelius.txt",
+     "score": 14.06,
+     "sentences": 3262,
+     "passages": 13,
+     "ownPage": false
+    },
+    {
+     "doc": 9327,
+     "file": "02-encyclopedic/wikipedia/Epic_poetry.txt",
+     "score": 13.86,
+     "sentences": 125,
+     "passages": 3,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Dante AlighieriDante",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Dante AlighieriDante",
+     "tier": "byline",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Epic poetry",
+       "section": "bytes 2735-3393",
+       "sentence": "Famous examples of epic poetry include the Sumerian Epic of Gilgamesh, the ancient Indian Mahabharata and Rāmāyaṇa in Sanskrit and Silappatikaram and Manimekalai in Tamil, the Persian Shahnameh, the A"
+      }
+     ]
+    },
+    {
+     "answer": "Giovanni Boccaccio,Edward Hutton",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 1323-1468",
+       "sentence": "His Divine Comedy, originally called (modern Italian: ) and later christened by Giovanni Boccaccio,Edward Hutton (writer)Hutton, Edward (1910)."
+      }
+     ]
+    },
+    {
+     "answer": "Life",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Dante Alighieri",
+       "section": "bytes 2072-2239",
+       "sentence": "His use of the Florentine dialect for works such as La Vita NuovaThe New Life (1295) and Divine Comedy'' helped establish the modern-day standardized Italian language."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 326,
+   "error": null
+  },
+  {
+   "q": "Who wrote Hamlet?",
+   "void": {
+    "admits": "person",
+    "relation": "write",
+    "anchors": [
+     "Hamlet"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 1557,
+     "file": "15-western-canon/folger-shakespeare/Hamlet.txt",
+     "score": 1.88,
+     "sentences": 3176,
+     "passages": 3000,
+     "ownPage": true
+    },
+    {
+     "doc": 2343,
+     "file": "02-encyclopedic/wikipedia/Tragedy.txt",
+     "score": 8.81,
+     "sentences": 205,
+     "passages": 4,
+     "ownPage": false
+    },
+    {
+     "doc": 10897,
+     "file": "15-western-canon/folger-shakespeare/As_You_Like_It.txt",
+     "score": 8.56,
+     "sentences": 3786,
+     "passages": 300,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "TRAGEDY, Denmark CLAUDIUS, King stand next to Hamlet, but no sentence says “write”"
+   },
+   "candidates": [
+    {
+     "answer": "TRAGEDY",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "As You Like It",
+       "section": "bytes 836-876",
+       "sentence": "THE TRAGEDY OF HAMLET, PRINCE OF DENMARK"
+      }
+     ]
+    },
+    {
+     "answer": "Denmark CLAUDIUS",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "As You Like It",
+       "section": "bytes 1749-2370",
+       "sentence": "HAMLET, Prince of Denmark CLAUDIUS, King of Denmark, Hamlet’s uncle The GHOST of the late king, Hamlet’s father GERTRUDE, the Queen, Hamlet’s mother, now wife of Claudius POLONIUS, Lord Chamberlain LA"
+      }
+     ]
+    },
+    {
+     "answer": "King",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "As You Like It",
+       "section": "bytes 1749-2370",
+       "sentence": "HAMLET, Prince of Denmark CLAUDIUS, King of Denmark, Hamlet’s uncle The GHOST of the late king, Hamlet’s father GERTRUDE, the Queen, Hamlet’s mother, now wife of Claudius POLONIUS, Lord Chamberlain LA"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "write",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 7509,
+   "error": null
+  },
+  {
+   "q": "Who was Plato's teacher?",
+   "void": {
+    "admits": "person",
+    "relation": "teacher",
+    "anchors": [
+     "Plato"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4668,
+     "file": "02-encyclopedic/wikipedia/Plato.txt",
+     "score": 12.91,
+     "sentences": 232,
+     "passages": 232,
+     "ownPage": true
+    },
+    {
+     "doc": 4,
+     "file": "01-literature-books/gutenberg/pg55201_The_Republic_by_Plato.txt",
+     "score": 12.37,
+     "sentences": 13680,
+     "passages": 3000,
+     "ownPage": true
+    },
+    {
+     "doc": 8656,
+     "file": "20-first-person-voices/gutenberg/chesnutt-black-472.txt",
+     "score": 13.19,
+     "sentences": 3578,
+     "passages": 64,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "3299 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": null,
+   "ms": 15560,
+   "error": null
+  },
+  {
+   "q": "Who was Aristotle's teacher?",
+   "void": {
+    "admits": "person",
+    "relation": "teacher",
+    "anchors": [
+     "Aristotle"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4658,
+     "file": "02-encyclopedic/wikipedia/Aristotle.txt",
+     "score": 13.67,
+     "sentences": 315,
+     "passages": 315,
+     "ownPage": true
+    },
+    {
+     "doc": 4668,
+     "file": "02-encyclopedic/wikipedia/Plato.txt",
+     "score": 13.11,
+     "sentences": 232,
+     "passages": 9,
+     "ownPage": false
+    },
+    {
+     "doc": 3815,
+     "file": "11-multi-language/translations-en/jowett-plato-sophist.txt",
+     "score": 12.66,
+     "sentences": 2241,
+     "passages": 18,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "344 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": null,
+   "ms": 1118,
+   "error": null
+  },
+  {
+   "q": "What was the capital of the Byzantine Empire?",
+   "void": {
+    "admits": "thing",
+    "relation": "capital",
+    "anchors": [
+     "Byzantine Empire"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 9324,
+     "file": "02-encyclopedic/wikipedia/Byzantine_Empire.txt",
+     "score": 21.09,
+     "sentences": 463,
+     "passages": 463,
+     "ownPage": true
+    },
+    {
+     "doc": 7000,
+     "file": "02-encyclopedic/wikipedia/Roman_Empire.txt",
+     "score": 20.4,
+     "sentences": 738,
+     "passages": 11,
+     "ownPage": false
+    },
+    {
+     "doc": 9326,
+     "file": "02-encyclopedic/wikipedia/Christianity.txt",
+     "score": 18.57,
+     "sentences": 972,
+     "passages": 8,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "482 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": null,
+   "ms": 2480,
+   "error": null
+  },
+  {
+   "q": "When did World War I begin?",
+   "void": {
+    "admits": "time",
+    "relation": "begin",
+    "anchors": [
+     "World War I"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4672,
+     "file": "02-encyclopedic/wikipedia/World_War_I.txt",
+     "score": 8.68,
+     "sentences": 731,
+     "passages": 731,
+     "ownPage": true
+    },
+    {
+     "doc": 6274,
+     "file": "20-first-person-voices/docsouth-slave-narratives/neh-jacksonc-jackson.txt",
+     "score": 17.57,
+     "sentences": 1799,
+     "passages": 300,
+     "ownPage": false
+    },
+    {
+     "doc": 7001,
+     "file": "02-encyclopedic/wikipedia/Taoism.txt",
+     "score": 16.07,
+     "sentences": 918,
+     "passages": 300,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "1918 stand next to World War I, but no sentence says “begin”"
+   },
+   "candidates": [
+    {
+     "answer": "1918",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "World War I",
+       "section": "bytes 98643-99091",
+       "sentence": "Cornelissen, Christoph, and Arndt Weinrich, eds. Writing the Great War: the historiography of World War I from 1918 to the present (Berghahn Books, 2020) [https://www.google.com/books/edition/Writing_"
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "begin",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 5899,
+   "error": null
+  },
+  {
+   "q": "Who founded Sikhism?",
+   "void": {
+    "admits": "person",
+    "relation": "found",
+    "anchors": [
+     "Sikhism"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4670,
+     "file": "02-encyclopedic/wikipedia/Sikhism.txt",
+     "score": 20.02,
+     "sentences": 628,
+     "passages": 628,
+     "ownPage": true
+    },
+    {
+     "doc": 13,
+     "file": "02-encyclopedic/wikipedia/Islam.txt",
+     "score": 16.98,
+     "sentences": 583,
+     "passages": 3,
+     "ownPage": false
+    },
+    {
+     "doc": 2338,
+     "file": "02-encyclopedic/wikipedia/Hinduism.txt",
+     "score": 15.05,
+     "sentences": 663,
+     "passages": 2,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": "Guru Nanak",
+   "unique": true,
+   "gap": null,
+   "candidates": [
+    {
+     "answer": "Guru Nanak",
+     "tier": "role",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Sikhism",
+       "section": "bytes 41206-41590",
+       "sentence": "One, according to Cole and Sambhi, is based on hagiographical Janamsakhis,Cole, William Owen; Sambhi, Piara Singh (1995), The Sikhs: Their Religious Beliefs and Practices, Sussex Academic Press, , pp."
+      }
+     ]
+    },
+    {
+     "answer": "Punjab",
+     "tier": "linked",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Sikhism",
+       "section": "bytes 8366-8440",
+       "sentence": "\"Sikhism, Indian religion founded in the Punjab in the late 15th century.\""
+      }
+     ]
+    },
+    {
+     "answer": "Pakistan",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Sikhism",
+       "section": "bytes 66812-66942",
+       "sentence": "Likewise, Sikhism was founded in what is now Pakistan, and some of the gurus were born near Lahore and in other parts of Pakistan."
+      }
+     ]
+    }
+   ],
+   "verdict": "right",
+   "readAs": null,
+   "standIn": null,
+   "ms": 3628,
+   "error": null
+  },
+  {
+   "q": "Where was Aristotle buried in the year 2022?",
+   "void": {
+    "admits": "place",
+    "relation": "bury",
+    "anchors": [
+     "Aristotle"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 4658,
+     "file": "02-encyclopedic/wikipedia/Aristotle.txt",
+     "score": 12.1,
+     "sentences": 315,
+     "passages": 315,
+     "ownPage": true
+    },
+    {
+     "doc": 11568,
+     "file": "21-anti-colonial/colonial-studies/63503-Ferguson-Greek-Imperialism.txt",
+     "score": 11.93,
+     "sentences": 2932,
+     "passages": 60,
+     "ownPage": false
+    },
+    {
+     "doc": 4668,
+     "file": "02-encyclopedic/wikipedia/Plato.txt",
+     "score": 11.84,
+     "sentences": 232,
+     "passages": 9,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "relation_not_attested",
+    "detail": "Politics, Athens, Metaphysics stand next to Aristotle, but no sentence says “bury”"
+   },
+   "candidates": [
+    {
+     "answer": "Politics",
+     "tier": "comention",
+     "documents": 2,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 40784-40845",
+       "sentence": "\"On Aristotle's Politics\", in The City and Man, Rand McNally."
+      }
+     ]
+    },
+    {
+     "answer": "Athens",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 1427-1576",
+       "sentence": "Shortly after Plato died, Aristotle left Athens and, at the request of Philip II of Macedon, tutored his son Alexander the Great beginning in 343 BC."
+      }
+     ]
+    },
+    {
+     "answer": "Metaphysics",
+     "tier": "comention",
+     "documents": 1,
+     "evidence": [
+      {
+       "title": "Aristotle",
+       "section": "bytes 39102-39190",
+       "sentence": "Potentiality in Aristotle's Science and Metaphysics, Pacific Philosophical Quarterly 76."
+      }
+     ]
+    }
+   ],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "bury",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 2941,
+   "error": null
+  },
+  {
+   "q": "Who won the 1998 World Cup?",
+   "void": {
+    "admits": "person",
+    "relation": "win",
+    "anchors": [
+     "World Cup"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 1643,
+     "file": "20-first-person-voices/gutenberg/dunbar-black-18338.txt",
+     "score": 9.39,
+     "sentences": 4395,
+     "passages": 26,
+     "ownPage": false
+    },
+    {
+     "doc": 3978,
+     "file": "20-first-person-voices/docsouth-slave-narratives/neh-wilkerson-wilkerson.txt",
+     "score": 9.35,
+     "sentences": 361,
+     "passages": 6,
+     "ownPage": false
+    },
+    {
+     "doc": 9084,
+     "file": "21-anti-colonial/colonial-studies/12052-Swisshelm-Half-a-Century.txt",
+     "score": 9.08,
+     "sentences": 4639,
+     "passages": 48,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "80 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": null,
+   "ms": 2194,
+   "error": null
+  },
+  {
+   "q": "When was the telephone invented?",
+   "void": {
+    "admits": "time",
+    "relation": "invent",
+    "anchors": [
+     "telephone"
+    ]
+   },
+   "documents": [
+    {
+     "doc": 11385,
+     "file": "20-first-person-voices/old-bailey/old-bailey-19050626.txt",
+     "score": 10.44,
+     "sentences": 2085,
+     "passages": 33,
+     "ownPage": false
+    },
+    {
+     "doc": 6704,
+     "file": "20-first-person-voices/old-bailey/old-bailey-19060205.txt",
+     "score": 9.42,
+     "sentences": 1826,
+     "passages": 19,
+     "ownPage": false
+    },
+    {
+     "doc": 9043,
+     "file": "20-first-person-voices/old-bailey/old-bailey-19110717.txt",
+     "score": 9.21,
+     "sentences": 3435,
+     "passages": 8,
+     "ownPage": false
+    }
+   ],
+   "gaps": [],
+   "answer": null,
+   "unique": false,
+   "gap": {
+    "kind": "nothing_fills_the_void",
+    "detail": "62 sentences read in 3 documents; none carries every anchor with a filler of the kind asked for"
+   },
+   "candidates": [],
+   "verdict": "gap",
+   "readAs": null,
+   "standIn": {
+    "step": "relation_stand_in",
+    "asked": "invent",
+    "gap": {
+     "kind": "equivalents_unavailable",
+     "why": "ollama does not hold nomic-embed-text:latest"
+    }
+   },
+   "ms": 9635,
+   "error": null
+  }
+ ]
+}

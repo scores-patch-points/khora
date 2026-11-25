@@ -43,7 +43,7 @@ const results = [];
 for (const q of [...Q.gold.map((g) => g.q), ...Q.controls]) {
   if (only && !q.toLowerCase().includes(only)) continue;
   const t = Date.now(), v = voidOfQuestion(read(q)); let h = null, err = null;
-  try { h = v.ok ? await huntVoid(v, { sources: [src], read, split, equivalents }) : null; } catch (e) { err = String(e?.message ?? e).slice(0, 120); }
+  try { h = v.ok ? await huntVoid(v, { sources: [src], read, split, equivalents, maxSentences: 3000 }) : null; } catch (e) { err = String(e?.message ?? e).slice(0, 120); }
   const run = src.lastRun(), ans = h?.answer?.answer ?? h?.answer?.text ?? (typeof h?.answer === "string" ? h.answer : null), top = (h?.candidates ?? []).slice(0, 3).map((c) => ({ answer: c.answer, tier: c.tier, documents: c.documents, evidence: (c.evidence ?? []).slice(0, 1).map((e) => ({ title: e.title, section: e.section, sentence: String(e.sentence ?? e.text ?? "").slice(0, 200) })) }));
   const r = { q, void: v.ok ? { admits: v.admits, relation: v.relation?.lemma ?? null, anchors: v.anchors.map((a) => a.text) } : { ok: false }, documents: run.docs, gaps: run.gaps, answer: ans, unique: !!h?.unique, gap: h?.gap ?? null, candidates: top, verdict: judge(q, ans), readAs: h?.readAs ?? null, standIn: (h?.trail ?? []).find((x) => x.step === "relation_stand_in") ?? null, ms: Date.now() - t, error: err };
   results.push(r); console.log(`${r.verdict.padEnd(10)} ${q}\n   docs: ${run.docs.map((d) => `${path.basename(d.file)} (${d.passages} passages)`).join(" · ") || "none"}\n   answer: ${JSON.stringify(ans)}${h?.readAs ? ` (read “${v.relation?.lemma}” as “${h.readAs}”)` : ""}${h?.gap ? ` | gap: ${JSON.stringify(h.gap).slice(0, 140)}` : ""}${err ? ` | error: ${err}` : ""} | ${r.ms} ms`);
