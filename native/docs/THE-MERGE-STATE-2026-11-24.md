@@ -18,11 +18,12 @@ The only red check is `native-kernel` ("Native v7 kernel parity"). `main` is red
 - code session: `code-door`, `code-hunt`, `code-meaning`, `code-nl`, `code-route`, `code-shortlist`, `crispr`, `crispr-thoughts`, `request-void` (all `native/chat/`)
 - improviser / intent: `delclose`, `program-env`, `plausible`, `witness`, `intent-satisfy`
 - language gate / Spanish / codec on the fly: `language-place`, `voice`, `codec-hunt`, `karaka-attune`, `native/adapters/text/negation.js`
-- Ýlir / hunt / officeholder: `ylir-shelf`, `ylir-material`, `ylir-pairdocs`, `office-holder`
+- improviser session (it answered: all four are its, with `delclose`, `plausible`, `witness`, `referent`, `intent-satisfy`, `program-env`, `office-holder` and its test, and `eval/delclose`, `eval/ylir-heads`, `eval/difference-demo`): `ylir-shelf`, `ylir-material`, `ylir-pairdocs`, `office-holder`. `ylir-material` reads the ingestion session's Ýlir-One door by `../../../Zenodotus/scripts/ylir-one.mjs` (env `YLIR_DOOR`) and returns null when it is absent, which is the clean-checkout case (that door is itself uncommitted in the local Zenodotus checkout and on no remote).
+- the improviser session's small negation hunks are also in the working tree of three tracked files, `native/chat/engine.mjs`, `native/adapters/text/grammar-en.js` and `native/kernel/eot-claim-match.js`: they travel with its commit, not with the chat owner's.
 
 ## The order that works
 1. Each session commits its own named paths locally (no push), tests in its own area passing.
-2. The chat owner (top session) then commits `thread.mjs`, `doors.mjs`, `server.mjs`, `app.html` and `engine.mjs` **together**, from a clean checkout where every import resolves, and runs the chat tests there.
+2. The chat owner (top session) then commits `thread.mjs`, `doors.mjs`, `server.mjs` and `app.html` **together**, from a clean checkout where every import resolves, and runs the chat tests there. Each session commits only after the owner's own yes in that session: a relay between sessions is not that yes, and four sessions have said so.
 3. CI fix for `exemplar-pool.mjs` goes first or alongside, on a branch off `main` so both `main` and `chat-engine` get it.
 4. Only then does the owner choose: merge `chat-engine` into `main` (PR #113). After it, `eval/reading-baseline/record.mjs` must be re-run (both sides edit the baseline).
 
