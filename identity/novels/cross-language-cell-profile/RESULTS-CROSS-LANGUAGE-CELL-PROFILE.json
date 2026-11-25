@@ -1,0 +1,854 @@
+{
+ "seed": 20261123,
+ "languages": [
+  "Arabic",
+  "Chinese",
+  "Czech",
+  "English",
+  "Finnish",
+  "French",
+  "Galician",
+  "German",
+  "Hindi",
+  "Icelandic",
+  "Indonesian",
+  "Italian",
+  "Japanese",
+  "Korean",
+  "Polish",
+  "Portuguese",
+  "Russian",
+  "Spanish",
+  "Swedish",
+  "Thai",
+  "Turkish"
+ ],
+ "sentences": 1000,
+ "categories": 158,
+ "unplacedTop": [
+  [
+   "F:PunctType=Peri",
+   2102
+  ],
+  [
+   "F:PunctType=Comm",
+   2068
+  ],
+  [
+   "F:PrepCase=Npr",
+   619
+  ],
+  [
+   "F:NameType=Geo",
+   403
+  ],
+  [
+   "F:PartForm=Past",
+   360
+  ],
+  [
+   "F:PunctType=Quot",
+   353
+  ],
+  [
+   "F:Mood=Gen",
+   349
+  ],
+  [
+   "F:NameType=Sur",
+   345
+  ],
+  [
+   "F:Derivation=Inen",
+   344
+  ],
+  [
+   "F:PunctSide=Fin",
+   319
+  ],
+  [
+   "F:PunctSide=Ini",
+   317
+  ],
+  [
+   "F:InfForm=1",
+   218
+  ]
+ ],
+ "formFeaturesSkipped": 9880,
+ "sentencesMissingByLanguage": {
+  "Arabic": 0,
+  "Chinese": 0,
+  "Czech": 0,
+  "Finnish": 0,
+  "French": 0,
+  "Galician": 0,
+  "German": 0,
+  "Hindi": 0,
+  "Icelandic": 0,
+  "Indonesian": 0,
+  "Italian": 0,
+  "Japanese": 0,
+  "Korean": 0,
+  "Polish": 0,
+  "Portuguese": 0,
+  "Russian": 0,
+  "Spanish": 0,
+  "Swedish": 0,
+  "Thai": 0,
+  "Turkish": 0
+ },
+ "analyses": {
+  "A": {
+   "what": "every channel: part of speech, relation, feature value",
+   "observedMacroAUC": 0.7641151264691259,
+   "bootstrapCI95": [
+    0.7607757513750345,
+    0.7674335013443138
+   ],
+   "nullMacroAUC": {
+    "n": 200,
+    "mean": 0.7763123412974541,
+    "median": 0.7773252513386308,
+    "p025": 0.7340315012061036,
+    "p975": 0.8132723766859853,
+    "max": 0.843431001862837
+   },
+   "pValueOneSided": 0.746268656716418,
+   "perLanguage": {
+    "Arabic": {
+     "auc": 0.731135001479648,
+     "queries": 1000
+    },
+    "Chinese": {
+     "auc": 0.6716850007567555,
+     "queries": 1000
+    },
+    "Czech": {
+     "auc": 0.6979525001430884,
+     "queries": 1000
+    },
+    "Finnish": {
+     "auc": 0.8528750019297003,
+     "queries": 1000
+    },
+    "French": {
+     "auc": 0.7961325017083436,
+     "queries": 1000
+    },
+    "Galician": {
+     "auc": 0.8343550020884722,
+     "queries": 1000
+    },
+    "German": {
+     "auc": 0.8443825021274388,
+     "queries": 1000
+    },
+    "Hindi": {
+     "auc": 0.7909200012190267,
+     "queries": 1000
+    },
+    "Icelandic": {
+     "auc": 0.7771750012552365,
+     "queries": 1000
+    },
+    "Indonesian": {
+     "auc": 0.8469275015452876,
+     "queries": 1000
+    },
+    "Italian": {
+     "auc": 0.8157525020325557,
+     "queries": 1000
+    },
+    "Japanese": {
+     "auc": 0.6352875011088327,
+     "queries": 1000
+    },
+    "Korean": {
+     "auc": 0.6823600009083748,
+     "queries": 1000
+    },
+    "Polish": {
+     "auc": 0.6996375015135855,
+     "queries": 1000
+    },
+    "Portuguese": {
+     "auc": 0.845280002053827,
+     "queries": 1000
+    },
+    "Russian": {
+     "auc": 0.71307500118576,
+     "queries": 1000
+    },
+    "Spanish": {
+     "auc": 0.8396650015981868,
+     "queries": 1000
+    },
+    "Swedish": {
+     "auc": 0.8092800017781555,
+     "queries": 1000
+    },
+    "Thai": {
+     "auc": 0.6613275018986314,
+     "queries": 1000
+    },
+    "Turkish": {
+     "auc": 0.7370975010516122,
+     "queries": 1000
+    }
+   },
+   "verdict": "NOT SUPPORTED"
+  },
+  "B": {
+   "what": "feature values only (the stated signals)",
+   "observedMacroAUC": 0.6550201100724805,
+   "bootstrapCI95": [
+    0.6514584497456612,
+    0.6587239403133766
+   ],
+   "nullMacroAUC": {
+    "n": 100,
+    "mean": 0.673054011587072,
+    "median": 0.6769705106563633,
+    "p025": 0.6079536868217909,
+    "p975": 0.7072390195402185,
+    "max": 0.7152180790476801
+   },
+   "pValueOneSided": 0.8217821782178217,
+   "perLanguage": {
+    "Arabic": {
+     "auc": 0.612655000705272,
+     "queries": 1000
+    },
+    "Chinese": {
+     "auc": 0.6182979345341705,
+     "queries": 929
+    },
+    "Czech": {
+     "auc": 0.6179550002366304,
+     "queries": 1000
+    },
+    "Finnish": {
+     "auc": 0.7836900007380173,
+     "queries": 1000
+    },
+    "French": {
+     "auc": 0.7144375003259629,
+     "queries": 1000
+    },
+    "Galician": {
+     "auc": 0.7106675007864833,
+     "queries": 1000
+    },
+    "German": {
+     "auc": 0.7469600013904274,
+     "queries": 1000
+    },
+    "Hindi": {
+     "auc": 0.6549800006197766,
+     "queries": 1000
+    },
+    "Icelandic": {
+     "auc": 0.6324600004805252,
+     "queries": 1000
+    },
+    "Indonesian": {
+     "auc": 0.6468382731109887,
+     "queries": 999
+    },
+    "Italian": {
+     "auc": 0.7059099998082966,
+     "queries": 1000
+    },
+    "Japanese": {
+     "auc": 0.5,
+     "queries": 158
+    },
+    "Korean": {
+     "auc": 0.6168724998184479,
+     "queries": 1000
+    },
+    "Polish": {
+     "auc": 0.6279725006166845,
+     "queries": 1000
+    },
+    "Portuguese": {
+     "auc": 0.7002400008449331,
+     "queries": 1000
+    },
+    "Russian": {
+     "auc": 0.6256925006769598,
+     "queries": 1000
+    },
+    "Spanish": {
+     "auc": 0.7281850008666515,
+     "queries": 1000
+    },
+    "Swedish": {
+     "auc": 0.6380625001825392,
+     "queries": 1000
+    },
+    "Thai": {
+     "auc": 0.5706909855168897,
+     "queries": 868
+    },
+    "Turkish": {
+     "auc": 0.6478350001899525,
+     "queries": 1000
+    }
+   }
+  },
+  "C": {
+   "what": "relations only",
+   "observedMacroAUC": 0.7852948761631968,
+   "bootstrapCI95": [
+    0.7822761262058513,
+    0.7882950011723675
+   ],
+   "nullMacroAUC": {
+    "n": 100,
+    "mean": 0.7667350587066069,
+    "median": 0.7674932511006947,
+    "p025": 0.7430821259606862,
+    "p975": 0.7938267513683298,
+    "max": 0.8009778764323796
+   },
+   "pValueOneSided": 0.06930693069306931,
+   "perLanguage": {
+    "Arabic": {
+     "auc": 0.738925001357682,
+     "queries": 1000
+    },
+    "Chinese": {
+     "auc": 0.6800049995593727,
+     "queries": 1000
+    },
+    "Czech": {
+     "auc": 0.7938825012044981,
+     "queries": 1000
+    },
+    "Finnish": {
+     "auc": 0.7372200007373467,
+     "queries": 1000
+    },
+    "French": {
+     "auc": 0.8487350017018617,
+     "queries": 1000
+    },
+    "Galician": {
+     "auc": 0.8413975017564371,
+     "queries": 1000
+    },
+    "German": {
+     "auc": 0.8678500023782253,
+     "queries": 1000
+    },
+    "Hindi": {
+     "auc": 0.8079800012297929,
+     "queries": 1000
+    },
+    "Icelandic": {
+     "auc": 0.7909500012826175,
+     "queries": 1000
+    },
+    "Indonesian": {
+     "auc": 0.8002550015049055,
+     "queries": 1000
+    },
+    "Italian": {
+     "auc": 0.8573225016426295,
+     "queries": 1000
+    },
+    "Japanese": {
+     "auc": 0.6701525002978742,
+     "queries": 1000
+    },
+    "Korean": {
+     "auc": 0.644582500167191,
+     "queries": 1000
+    },
+    "Polish": {
+     "auc": 0.8020175009928644,
+     "queries": 1000
+    },
+    "Portuguese": {
+     "auc": 0.8861250019092113,
+     "queries": 1000
+    },
+    "Russian": {
+     "auc": 0.787347500666976,
+     "queries": 1000
+    },
+    "Spanish": {
+     "auc": 0.8554650017656386,
+     "queries": 1000
+    },
+    "Swedish": {
+     "auc": 0.9103000025656074,
+     "queries": 1000
+    },
+    "Thai": {
+     "auc": 0.6899574999860488,
+     "queries": 1000
+    },
+    "Turkish": {
+     "auc": 0.6954275005571544,
+     "queries": 1000
+    }
+   }
+  },
+  "D": {
+   "what": "parts of speech only",
+   "observedMacroAUC": 0.8056572518212255,
+   "bootstrapCI95": [
+    0.8026367516852915,
+    0.8087166267657653
+   ],
+   "nullMacroAUC": {
+    "n": 100,
+    "mean": 0.840401831763588,
+    "median": 0.8395536267066139,
+    "p025": 0.8050837511383463,
+    "p975": 0.870222126995702,
+    "max": 0.8730702518174425
+   },
+   "pValueOneSided": 0.9702970297029703,
+   "perLanguage": {
+    "Arabic": {
+     "auc": 0.8034575020335615,
+     "queries": 1000
+    },
+    "Chinese": {
+     "auc": 0.7052925010491162,
+     "queries": 1000
+    },
+    "Czech": {
+     "auc": 0.7936825014837087,
+     "queries": 1000
+    },
+    "Finnish": {
+     "auc": 0.821330000910908,
+     "queries": 1000
+    },
+    "French": {
+     "auc": 0.8267175012901425,
+     "queries": 1000
+    },
+    "Galician": {
+     "auc": 0.8503875021552667,
+     "queries": 1000
+    },
+    "German": {
+     "auc": 0.8650850022984669,
+     "queries": 1000
+    },
+    "Hindi": {
+     "auc": 0.8135475019244477,
+     "queries": 1000
+    },
+    "Icelandic": {
+     "auc": 0.8433100025597959,
+     "queries": 1000
+    },
+    "Indonesian": {
+     "auc": 0.8818075028760358,
+     "queries": 1000
+    },
+    "Italian": {
+     "auc": 0.8645825013611466,
+     "queries": 1000
+    },
+    "Japanese": {
+     "auc": 0.6905875011952594,
+     "queries": 1000
+    },
+    "Korean": {
+     "auc": 0.645912500847131,
+     "queries": 1000
+    },
+    "Polish": {
+     "auc": 0.7720575015414506,
+     "queries": 1000
+    },
+    "Portuguese": {
+     "auc": 0.8963950027571991,
+     "queries": 1000
+    },
+    "Russian": {
+     "auc": 0.7734925018753857,
+     "queries": 1000
+    },
+    "Spanish": {
+     "auc": 0.8756850025765598,
+     "queries": 1000
+    },
+    "Swedish": {
+     "auc": 0.9307575029879809,
+     "queries": 1000
+    },
+    "Thai": {
+     "auc": 0.717040001229383,
+     "queries": 1000
+    },
+    "Turkish": {
+     "auc": 0.7420175014715642,
+     "queries": 1000
+    }
+   }
+  }
+ },
+ "rawCategoriesMacroAUC": 0.9048135021932888,
+ "allPairsMeanAUCByLanguage": {
+  "English": 0.7644487515971996,
+  "Arabic": 0.6871350009455346,
+  "Chinese": 0.6449525005601349,
+  "Czech": 0.7424850011952221,
+  "Finnish": 0.7165490011548623,
+  "French": 0.7329302513843402,
+  "Galician": 0.73833525137119,
+  "German": 0.7471222514137625,
+  "Hindi": 0.7156317512421869,
+  "Icelandic": 0.7188500009427778,
+  "Indonesian": 0.695431251061149,
+  "Italian": 0.7555172516142018,
+  "Japanese": 0.5995885002929718,
+  "Korean": 0.6333175005406142,
+  "Polish": 0.7153025012604893,
+  "Portuguese": 0.7616067517744377,
+  "Russian": 0.7131735010636971,
+  "Spanish": 0.7615440015043132,
+  "Swedish": 0.6974365010279232,
+  "Thai": 0.6324802503101528,
+  "Turkish": 0.6657672507598066
+ },
+ "perCellAgreementWithEnglish": {
+  "A": [
+   {
+    "cell": "NUL·Ground",
+    "meanR": 0.11318839771067568,
+    "languagesDefined": 19,
+    "englishTokens": 22
+   },
+   {
+    "cell": "NUL·Figure",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "NUL·Pattern",
+    "meanR": 0.47622991553375604,
+    "languagesDefined": 20,
+    "englishTokens": 2050
+   },
+   {
+    "cell": "SIG·Ground",
+    "meanR": 0.6664602681621816,
+    "languagesDefined": 18,
+    "englishTokens": 192
+   },
+   {
+    "cell": "SIG·Figure",
+    "meanR": 0.8147932747074741,
+    "languagesDefined": 20,
+    "englishTokens": 16458
+   },
+   {
+    "cell": "SIG·Pattern",
+    "meanR": 0.5179002732961075,
+    "languagesDefined": 20,
+    "englishTokens": 5774
+   },
+   {
+    "cell": "INS·Ground",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "INS·Figure",
+    "meanR": 0.604419271182296,
+    "languagesDefined": 18,
+    "englishTokens": 2109
+   },
+   {
+    "cell": "INS·Pattern",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "SEG·Ground",
+    "meanR": 0.7638831870223993,
+    "languagesDefined": 20,
+    "englishTokens": 6286
+   },
+   {
+    "cell": "SEG·Figure",
+    "meanR": 0.6497124306690466,
+    "languagesDefined": 20,
+    "englishTokens": 3810
+   },
+   {
+    "cell": "SEG·Pattern",
+    "meanR": 0.6330251454686848,
+    "languagesDefined": 20,
+    "englishTokens": 2638
+   },
+   {
+    "cell": "CON·Ground",
+    "meanR": 0.6967523863349324,
+    "languagesDefined": 20,
+    "englishTokens": 5718
+   },
+   {
+    "cell": "CON·Figure",
+    "meanR": 0.699469172706146,
+    "languagesDefined": 20,
+    "englishTokens": 2260
+   },
+   {
+    "cell": "CON·Pattern",
+    "meanR": 0.733836195336629,
+    "languagesDefined": 20,
+    "englishTokens": 7025
+   },
+   {
+    "cell": "SYN·Ground",
+    "meanR": 0.5524366286688766,
+    "languagesDefined": 20,
+    "englishTokens": 1295
+   },
+   {
+    "cell": "SYN·Figure",
+    "meanR": 0.5069048945867577,
+    "languagesDefined": 20,
+    "englishTokens": 2127
+   },
+   {
+    "cell": "SYN·Pattern",
+    "meanR": 0.7809014362294652,
+    "languagesDefined": 20,
+    "englishTokens": 1033
+   },
+   {
+    "cell": "DEF·Ground",
+    "meanR": 0.5932585869854607,
+    "languagesDefined": 19,
+    "englishTokens": 82
+   },
+   {
+    "cell": "DEF·Figure",
+    "meanR": 0.8766608127890727,
+    "languagesDefined": 20,
+    "englishTokens": 1008
+   },
+   {
+    "cell": "DEF·Pattern",
+    "meanR": 0.24941885783354115,
+    "languagesDefined": 6,
+    "englishTokens": 274
+   },
+   {
+    "cell": "EVA·Ground",
+    "meanR": 0.5520405121802958,
+    "languagesDefined": 18,
+    "englishTokens": 1574
+   },
+   {
+    "cell": "EVA·Figure",
+    "meanR": 0.4925313862948112,
+    "languagesDefined": 17,
+    "englishTokens": 2433
+   },
+   {
+    "cell": "EVA·Pattern",
+    "meanR": 0.5618713981633335,
+    "languagesDefined": 20,
+    "englishTokens": 3215
+   },
+   {
+    "cell": "REC·Ground",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "REC·Figure",
+    "meanR": 0.4394872166518397,
+    "languagesDefined": 13,
+    "englishTokens": 416
+   },
+   {
+    "cell": "REC·Pattern",
+    "meanR": 0.7450070003845359,
+    "languagesDefined": 16,
+    "englishTokens": 1463
+   }
+  ],
+  "B": [
+   {
+    "cell": "NUL·Ground",
+    "meanR": 0.2347834105405169,
+    "languagesDefined": 15,
+    "englishTokens": 5
+   },
+   {
+    "cell": "NUL·Figure",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "NUL·Pattern",
+    "meanR": 0.1164647844945897,
+    "languagesDefined": 13,
+    "englishTokens": 482
+   },
+   {
+    "cell": "SIG·Ground",
+    "meanR": 0.6664602681621816,
+    "languagesDefined": 18,
+    "englishTokens": 192
+   },
+   {
+    "cell": "SIG·Figure",
+    "meanR": 0.6724061111243017,
+    "languagesDefined": 19,
+    "englishTokens": 9684
+   },
+   {
+    "cell": "SIG·Pattern",
+    "meanR": 0.5829573863186234,
+    "languagesDefined": 19,
+    "englishTokens": 3694
+   },
+   {
+    "cell": "INS·Ground",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "INS·Figure",
+    "meanR": 0.604419271182296,
+    "languagesDefined": 18,
+    "englishTokens": 2109
+   },
+   {
+    "cell": "INS·Pattern",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "SEG·Ground",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "SEG·Figure",
+    "meanR": 0.07126615710472442,
+    "languagesDefined": 15,
+    "englishTokens": 430
+   },
+   {
+    "cell": "SEG·Pattern",
+    "meanR": 0.2926729906589677,
+    "languagesDefined": 13,
+    "englishTokens": 646
+   },
+   {
+    "cell": "CON·Ground",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "CON·Figure",
+    "meanR": 0.24215085786692928,
+    "languagesDefined": 15,
+    "englishTokens": 108
+   },
+   {
+    "cell": "CON·Pattern",
+    "meanR": 0.317901459853767,
+    "languagesDefined": 16,
+    "englishTokens": 520
+   },
+   {
+    "cell": "SYN·Ground",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "SYN·Figure",
+    "meanR": 0.5271017892375937,
+    "languagesDefined": 12,
+    "englishTokens": 496
+   },
+   {
+    "cell": "SYN·Pattern",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "DEF·Ground",
+    "meanR": 0.5932585869854607,
+    "languagesDefined": 19,
+    "englishTokens": 82
+   },
+   {
+    "cell": "DEF·Figure",
+    "meanR": 0.7132623045651214,
+    "languagesDefined": 13,
+    "englishTokens": 544
+   },
+   {
+    "cell": "DEF·Pattern",
+    "meanR": 0.24941885783354115,
+    "languagesDefined": 6,
+    "englishTokens": 274
+   },
+   {
+    "cell": "EVA·Ground",
+    "meanR": 0.6101045476530558,
+    "languagesDefined": 16,
+    "englishTokens": 1573
+   },
+   {
+    "cell": "EVA·Figure",
+    "meanR": 0.4925313862948112,
+    "languagesDefined": 17,
+    "englishTokens": 2433
+   },
+   {
+    "cell": "EVA·Pattern",
+    "meanR": 0.48197512627204003,
+    "languagesDefined": 16,
+    "englishTokens": 1751
+   },
+   {
+    "cell": "REC·Ground",
+    "meanR": null,
+    "languagesDefined": 0,
+    "englishTokens": 0
+   },
+   {
+    "cell": "REC·Figure",
+    "meanR": 0.4394872166518397,
+    "languagesDefined": 13,
+    "englishTokens": 416
+   },
+   {
+    "cell": "REC·Pattern",
+    "meanR": 0.7450070003845359,
+    "languagesDefined": 16,
+    "englishTokens": 1463
+   }
+  ]
+ }
+}

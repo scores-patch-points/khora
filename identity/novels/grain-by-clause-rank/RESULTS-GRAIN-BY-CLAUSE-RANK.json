@@ -1,0 +1,2124 @@
+{
+ "seed": 20261123,
+ "B_BOOT": 1000,
+ "B_NULL": 200,
+ "stats": {
+  "unresolvedTokens": 0,
+  "tokens": 678887,
+  "formFeatures": 33052
+ },
+ "unplacedTop": [
+  [
+   "PunctType=Comm",
+   8317
+  ],
+  [
+   "SubGender=Masc3",
+   7370
+  ],
+  [
+   "PunctType=Peri",
+   6737
+  ],
+  [
+   "NameType=Giv",
+   5821
+  ],
+  [
+   "SubGender=Masc1",
+   4958
+  ],
+  [
+   "Emph=No",
+   3986
+  ],
+  [
+   "NameType=Geo",
+   3164
+  ],
+  [
+   "PrepCase=Npr",
+   2258
+  ],
+  [
+   "PunctType=Quot",
+   2076
+  ],
+  [
+   "NameType=Oth",
+   1739
+  ],
+  [
+   "PunctType=Brck",
+   1180
+  ],
+  [
+   "PunctType=Dash",
+   1108
+  ],
+  [
+   "PunctSide=Fin",
+   848
+  ],
+  [
+   "PunctSide=Ini",
+   816
+  ],
+  [
+   "PrepCase=Pre",
+   591
+  ]
+ ],
+ "excluded": [
+  {
+   "name": "CorefUD_Ancient_Greek-PROIEL",
+   "why": "the measured grammar table (cube.js CELL_OF_GRAMMAR) was tallied on this treebank"
+  }
+ ],
+ "analyses": {
+  "primary": {
+   "what": "measured table values with a Ground or Figure grain; main and adjunct clauses",
+   "languagesUsed": 22,
+   "languagesUndefined": 1,
+   "macroKappa": -0.013519331344910386,
+   "macroKappaCI95": [
+    -0.018361505777993118,
+    -0.008519655864616109
+   ],
+   "pooledKappa": -0.0027207081109421926,
+   "pooledCounts": [
+    290433,
+    72857,
+    112244,
+    27722
+   ],
+   "macroPo": 0.6411925962372013,
+   "macroPe": 0.6460760558991103,
+   "positiveLanguages": 6,
+   "perLanguage": [
+    {
+     "language": "CorefUD_Ancient_Hebrew-PTNK",
+     "instances": 6310,
+     "counts": [
+      4212,
+      1065,
+      860,
+      173
+     ],
+     "kappa": -0.03180754282382477,
+     "po": 0.6949286846275753,
+     "pe": 0.7043331215262167
+    },
+    {
+     "language": "CorefUD_Catalan-AnCora",
+     "instances": 25519,
+     "counts": [
+      12959,
+      1957,
+      9095,
+      1508
+     ],
+     "kappa": 0.012210995545282917,
+     "po": 0.5669109291116423,
+     "pe": 0.561557104872378
+    },
+    {
+     "language": "CorefUD_Czech-PCEDT",
+     "instances": 132212,
+     "counts": [
+      73686,
+      18743,
+      30718,
+      9065
+     ],
+     "kappa": 0.027429884274369352,
+     "po": 0.6258962877802318,
+     "pe": 0.6153452525727146
+    },
+    {
+     "language": "CorefUD_Czech-PDT",
+     "instances": 86877,
+     "counts": [
+      51838,
+      15297,
+      14970,
+      4772
+     ],
+     "kappa": 0.013783257891854979,
+     "po": 0.6516108981663732,
+     "pe": 0.6467418499822793
+    },
+    {
+     "language": "CorefUD_English-GUM",
+     "instances": 17117,
+     "counts": [
+      9558,
+      2554,
+      4097,
+      908
+     ],
+     "kappa": -0.03237494794718646,
+     "po": 0.6114389203715604,
+     "pe": 0.6236240714664094
+    },
+    {
+     "language": "CorefUD_English-LitBank",
+     "instances": 12500,
+     "counts": [
+      6822,
+      1511,
+      3558,
+      609
+     ],
+     "kappa": -0.04010346782684412,
+     "po": 0.59448,
+     "pe": 0.610115712
+    },
+    {
+     "language": "CorefUD_English-ParCorFull",
+     "instances": 544,
+     "counts": [
+      336,
+      59,
+      134,
+      15
+     ],
+     "kappa": -0.05774733024380396,
+     "po": 0.6452205882352942,
+     "pe": 0.6645896410034602
+    },
+    {
+     "language": "CorefUD_French-ANCOR",
+     "instances": 30801,
+     "counts": [
+      17616,
+      4568,
+      6957,
+      1660
+     ],
+     "kappa": -0.014501067000585814,
+     "po": 0.6258238368884127,
+     "pe": 0.6311722330486507
+    },
+    {
+     "language": "CorefUD_French-Democrat",
+     "instances": 15931,
+     "counts": [
+      9589,
+      1649,
+      4235,
+      458
+     ],
+     "kappa": -0.058534643830288675,
+     "po": 0.6306572092147386,
+     "pe": 0.6510810553646112
+    },
+    {
+     "language": "CorefUD_German-ParCorFull",
+     "instances": 720,
+     "counts": [
+      409,
+      131,
+      140,
+      40
+     ],
+     "kappa": -0.020715630885122335,
+     "po": 0.6236111111111111,
+     "pe": 0.63125
+    },
+    {
+     "language": "CorefUD_German-PotsdamCC",
+     "instances": 2787,
+     "counts": [
+      1818,
+      426,
+      430,
+      113
+     ],
+     "kappa": 0.01831469273880945,
+     "po": 0.692859705776821,
+     "pe": 0.6871295801705829
+    },
+    {
+     "language": "CorefUD_Hindi-HDTB",
+     "instances": 17238,
+     "counts": [
+      13373,
+      516,
+      3245,
+      104
+     ],
+     "kappa": -0.008826845376249172,
+     "po": 0.7818192365703678,
+     "pe": 0.7837282340080273
+    },
+    {
+     "language": "CorefUD_Hungarian-KorKor",
+     "instances": 2832,
+     "counts": [
+      2008,
+      145,
+      628,
+      51
+     ],
+     "kappa": 0.010261177159928794,
+     "po": 0.72704802259887,
+     "pe": 0.7242181764499346
+    },
+    {
+     "language": "CorefUD_Hungarian-SzegedKoref",
+     "instances": 12718,
+     "counts": [
+      8345,
+      2093,
+      1828,
+      452
+     ],
+     "kappa": -0.002173027473338861,
+     "po": 0.6916968076741626,
+     "pe": 0.6923653063152917
+    },
+    {
+     "language": "CorefUD_Korean-ECMT",
+     "instances": 0,
+     "counts": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "kappa": null,
+     "po": null,
+     "pe": null
+    },
+    {
+     "language": "CorefUD_Lithuanian-LCC",
+     "instances": 2275,
+     "counts": [
+      1311,
+      227,
+      643,
+      94
+     ],
+     "kappa": -0.023505064650045652,
+     "po": 0.6175824175824176,
+     "pe": 0.6263647385581451
+    },
+    {
+     "language": "CorefUD_Norwegian-BokmaalNARC",
+     "instances": 10864,
+     "counts": [
+      5885,
+      1656,
+      2642,
+      681
+     ],
+     "kappa": -0.015991239756147333,
+     "po": 0.604381443298969,
+     "pe": 0.6106082993432255
+    },
+    {
+     "language": "CorefUD_Norwegian-NynorskNARC",
+     "instances": 9672,
+     "counts": [
+      5261,
+      1488,
+      2305,
+      618
+     ],
+     "kappa": -0.009829223152135885,
+     "po": 0.6078370554177006,
+     "pe": 0.6116541930147549
+    },
+    {
+     "language": "CorefUD_Old_Church_Slavonic-PROIEL",
+     "instances": 12828,
+     "counts": [
+      7064,
+      2048,
+      3138,
+      578
+     ],
+     "kappa": -0.07579817597847727,
+     "po": 0.5957280947926411,
+     "pe": 0.6242121299009835
+    },
+    {
+     "language": "CorefUD_Polish-PCC",
+     "instances": 53659,
+     "counts": [
+      30413,
+      10350,
+      9669,
+      3227
+     ],
+     "kappa": -0.0036089558706097623,
+     "po": 0.626921858402132,
+     "pe": 0.6282634392453876
+    },
+    {
+     "language": "CorefUD_Russian-RuCor",
+     "instances": 18803,
+     "counts": [
+      11038,
+      3522,
+      3220,
+      1023
+     ],
+     "kappa": -0.0007731154631666131,
+     "po": 0.64144019571345,
+     "pe": 0.6417171896942842
+    },
+    {
+     "language": "CorefUD_Spanish-AnCora",
+     "instances": 21875,
+     "counts": [
+      10864,
+      1670,
+      8127,
+      1214
+     ],
+     "kappa": -0.003588916736469416,
+     "po": 0.5521371428571429,
+     "pe": 0.5537387373714285
+    },
+    {
+     "language": "CorefUD_Turkish-ITCC",
+     "instances": 9174,
+     "counts": [
+      6028,
+      1182,
+      1605,
+      359
+     ],
+     "kappa": 0.020453897816022065,
+     "po": 0.6962066710268149,
+     "pe": 0.6898631638716615
+    }
+   ],
+   "nullStratifiedByPos": {
+    "mean": 0.008231080952005969,
+    "p975": 0.014108757329313893,
+    "p025": 0.0030028314476368764,
+    "pValue": 1
+   },
+   "verdict": "NOT SUPPORTED"
+  },
+  "secondary": {
+   "what": "every placed value (measured and declared) with a Ground or Figure grain; main and adjunct clauses",
+   "languagesUsed": 22,
+   "languagesUndefined": 1,
+   "macroKappa": -0.009987052811264573,
+   "macroKappaCI95": [
+    -0.014507635530754499,
+    -0.0056124721485500025
+   ],
+   "pooledKappa": -0.01352241264114242,
+   "pooledCounts": [
+    374361,
+    134035,
+    152462,
+    50953
+   ],
+   "macroPo": 0.6326744484419348,
+   "macroPe": 0.6361148094790379,
+   "positiveLanguages": 8,
+   "perLanguage": [
+    {
+     "language": "CorefUD_Ancient_Hebrew-PTNK",
+     "instances": 8850,
+     "counts": [
+      6238,
+      1089,
+      1341,
+      182
+     ],
+     "kappa": -0.031170101758611398,
+     "po": 0.7254237288135593,
+     "pe": 0.733723591560535
+    },
+    {
+     "language": "CorefUD_Catalan-AnCora",
+     "instances": 35261,
+     "counts": [
+      18030,
+      2386,
+      12972,
+      1873
+     ],
+     "kappa": 0.010303799011929038,
+     "po": 0.5644479736819716,
+     "pe": 0.5599134099098374
+    },
+    {
+     "language": "CorefUD_Czech-PCEDT",
+     "instances": 205103,
+     "counts": [
+      93999,
+      48608,
+      41163,
+      21333
+     ],
+     "kappa": 0.0004809211657021145,
+     "po": 0.5623125941600075,
+     "pe": 0.5621019997432654
+    },
+    {
+     "language": "CorefUD_Czech-PDT",
+     "instances": 130764,
+     "counts": [
+      64796,
+      35213,
+      19982,
+      10773
+     ],
+     "kappa": -0.0015483148278643965,
+     "po": 0.5779037043834695,
+     "pe": 0.5785562320185462
+    },
+    {
+     "language": "CorefUD_English-GUM",
+     "instances": 24240,
+     "counts": [
+      14372,
+      2795,
+      6109,
+      964
+     ],
+     "kappa": -0.03075603349351914,
+     "po": 0.6326732673267327,
+     "pe": 0.6436336817468875
+    },
+    {
+     "language": "CorefUD_English-LitBank",
+     "instances": 18141,
+     "counts": [
+      10246,
+      1635,
+      5590,
+      670
+     ],
+     "kappa": -0.03596027207441017,
+     "po": 0.6017308858387079,
+     "pe": 0.6155556106762697
+    },
+    {
+     "language": "CorefUD_English-ParCorFull",
+     "instances": 749,
+     "counts": [
+      477,
+      59,
+      197,
+      16
+     ],
+     "kappa": -0.04343661910514673,
+     "po": 0.6582109479305741,
+     "pe": 0.672439086561343
+    },
+    {
+     "language": "CorefUD_French-ANCOR",
+     "instances": 40696,
+     "counts": [
+      23714,
+      5447,
+      9613,
+      1922
+     ],
+     "kappa": -0.022638213000317955,
+     "po": 0.6299390603499115,
+     "pe": 0.6381311250198966
+    },
+    {
+     "language": "CorefUD_French-Democrat",
+     "instances": 21172,
+     "counts": [
+      12861,
+      1872,
+      5903,
+      536
+     ],
+     "kappa": -0.05319207879591386,
+     "po": 0.6327696958246741,
+     "pe": 0.6513168760297073
+    },
+    {
+     "language": "CorefUD_German-ParCorFull",
+     "instances": 1019,
+     "counts": [
+      581,
+      178,
+      205,
+      55
+     ],
+     "kappa": -0.023792847455581738,
+     "po": 0.6241413150147204,
+     "pe": 0.6328762347584318
+    },
+    {
+     "language": "CorefUD_German-PotsdamCC",
+     "instances": 3966,
+     "counts": [
+      2549,
+      627,
+      621,
+      169
+     ],
+     "kappa": 0.016458959112120718,
+     "po": 0.6853252647503782,
+     "pe": 0.6800593750866226
+    },
+    {
+     "language": "CorefUD_Hindi-HDTB",
+     "instances": 20507,
+     "counts": [
+      14232,
+      2227,
+      3441,
+      607
+     ],
+     "kappa": 0.016511673932528507,
+     "po": 0.7236065733651924,
+     "pe": 0.7189662354814308
+    },
+    {
+     "language": "CorefUD_Hungarian-KorKor",
+     "instances": 3690,
+     "counts": [
+      2541,
+      267,
+      799,
+      83
+     ],
+     "kappa": -0.0012370567213412763,
+     "po": 0.7111111111111111,
+     "pe": 0.7114680415096833
+    },
+    {
+     "language": "CorefUD_Hungarian-SzegedKoref",
+     "instances": 16442,
+     "counts": [
+      10792,
+      2710,
+      2371,
+      569
+     ],
+     "kappa": -0.006864027524952477,
+     "po": 0.690974334022625,
+     "pe": 0.693081034251453
+    },
+    {
+     "language": "CorefUD_Korean-ECMT",
+     "instances": 0,
+     "counts": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "kappa": null,
+     "po": null,
+     "pe": null
+    },
+    {
+     "language": "CorefUD_Lithuanian-LCC",
+     "instances": 3092,
+     "counts": [
+      1503,
+      495,
+      792,
+      302
+     ],
+     "kappa": 0.03015547132729697,
+     "po": 0.583764553686934,
+     "pe": 0.5708225040123576
+    },
+    {
+     "language": "CorefUD_Norwegian-BokmaalNARC",
+     "instances": 15170,
+     "counts": [
+      8615,
+      1840,
+      3959,
+      756
+     ],
+     "kappa": -0.017855872181556782,
+     "po": 0.6177323665128543,
+     "pe": 0.6244383473783606
+    },
+    {
+     "language": "CorefUD_Norwegian-NynorskNARC",
+     "instances": 13334,
+     "counts": [
+      7643,
+      1613,
+      3419,
+      659
+     ],
+     "kappa": -0.014457412064275003,
+     "po": 0.6226188690565472,
+     "pe": 0.627997068723135
+    },
+    {
+     "language": "CorefUD_Old_Church_Slavonic-PROIEL",
+     "instances": 14469,
+     "counts": [
+      7979,
+      2278,
+      3530,
+      682
+     ],
+     "kappa": -0.06595061371726846,
+     "po": 0.5985900891561269,
+     "pe": 0.6234254141999653
+    },
+    {
+     "language": "CorefUD_Polish-PCC",
+     "instances": 70465,
+     "counts": [
+      37514,
+      15173,
+      12178,
+      5600
+     ],
+     "kappa": 0.025584423547835168,
+     "po": 0.6118498545377138,
+     "pe": 0.6016585173283702
+    },
+    {
+     "language": "CorefUD_Russian-RuCor",
+     "instances": 22769,
+     "counts": [
+      14008,
+      3634,
+      4070,
+      1057
+     ],
+     "kappa": 0.00018326020404573268,
+     "po": 0.6616452193772234,
+     "pe": 0.6615832010455945
+    },
+    {
+     "language": "CorefUD_Spanish-AnCora",
+     "instances": 31520,
+     "counts": [
+      15334,
+      2053,
+      12573,
+      1560
+     ],
+     "kappa": -0.008273007927482878,
+     "po": 0.5359771573604061,
+     "pe": 0.5397845236446442
+    },
+    {
+     "language": "CorefUD_Turkish-ITCC",
+     "instances": 10392,
+     "counts": [
+      6337,
+      1836,
+      1634,
+      585
+     ],
+     "kappa": 0.03773880049896341,
+     "po": 0.6660892994611239,
+     "pe": 0.6529936978524963
+    }
+   ]
+  },
+  "sensitivity": {
+   "what": "primary, with argument clauses counted as Figure",
+   "languagesUsed": 22,
+   "languagesUndefined": 1,
+   "macroKappa": -0.005990086000042943,
+   "macroKappaCI95": [
+    -0.010179730850572177,
+    -0.0015706479412534024
+   ],
+   "pooledKappa": -0.001287224596160663,
+   "pooledCounts": [
+    381058,
+    94844,
+    112244,
+    27722
+   ],
+   "macroPo": 0.6762457859924557,
+   "macroPe": 0.6781082199721623,
+   "positiveLanguages": 13,
+   "perLanguage": [
+    {
+     "language": "CorefUD_Ancient_Hebrew-PTNK",
+     "instances": 7550,
+     "counts": [
+      5143,
+      1374,
+      860,
+      173
+     ],
+     "kappa": -0.03585369140063385,
+     "po": 0.7041059602649007,
+     "pe": 0.7143476514187974
+    },
+    {
+     "language": "CorefUD_Catalan-AnCora",
+     "instances": 31700,
+     "counts": [
+      18509,
+      2588,
+      9095,
+      1508
+     ],
+     "kappa": 0.023074276068666594,
+     "po": 0.6314511041009464,
+     "pe": 0.6227462468528894
+    },
+    {
+     "language": "CorefUD_Czech-PCEDT",
+     "instances": 176320,
+     "counts": [
+      107761,
+      28776,
+      30718,
+      9065
+     ],
+     "kappa": 0.0174061407886451,
+     "po": 0.6625794010889292,
+     "pe": 0.6566021701154434
+    },
+    {
+     "language": "CorefUD_Czech-PDT",
+     "instances": 104075,
+     "counts": [
+      64723,
+      19610,
+      14970,
+      4772
+     ],
+     "kappa": 0.008428945572007292,
+     "po": 0.6677396108575546,
+     "pe": 0.6649151993105362
+    },
+    {
+     "language": "CorefUD_English-GUM",
+     "instances": 19632,
+     "counts": [
+      11778,
+      2849,
+      4097,
+      908
+     ],
+     "kappa": -0.01455164719567983,
+     "po": 0.6461898940505297,
+     "pe": 0.6512645690069736
+    },
+    {
+     "language": "CorefUD_English-LitBank",
+     "instances": 14677,
+     "counts": [
+      8725,
+      1785,
+      3558,
+      609
+     ],
+     "kappa": -0.02717966751659366,
+     "po": 0.6359610274579274,
+     "pe": 0.6455936735759115
+    },
+    {
+     "language": "CorefUD_English-ParCorFull",
+     "instances": 723,
+     "counts": [
+      492,
+      82,
+      134,
+      15
+     ],
+     "kappa": -0.04844513668832914,
+     "po": 0.7012448132780082,
+     "pe": 0.715049289402348
+    },
+    {
+     "language": "CorefUD_French-ANCOR",
+     "instances": 38837,
+     "counts": [
+      24480,
+      5740,
+      6957,
+      1660
+     ],
+     "kappa": 0.002845664907539908,
+     "po": 0.6730694955841079,
+     "pe": 0.672136505944611
+    },
+    {
+     "language": "CorefUD_French-Democrat",
+     "instances": 18623,
+     "counts": [
+      12077,
+      1853,
+      4235,
+      458
+     ],
+     "kappa": -0.04259875488261733,
+     "po": 0.6730924126080653,
+     "pe": 0.6864492827552435
+    },
+    {
+     "language": "CorefUD_German-ParCorFull",
+     "instances": 1039,
+     "counts": [
+      676,
+      183,
+      140,
+      40
+     ],
+     "kappa": 0.00839151747592615,
+     "po": 0.6891241578440809,
+     "pe": 0.6864933614075132
+    },
+    {
+     "language": "CorefUD_German-PotsdamCC",
+     "instances": 3427,
+     "counts": [
+      2319,
+      565,
+      430,
+      113
+     ],
+     "kappa": 0.011076956629802551,
+     "po": 0.709658593522031,
+     "pe": 0.7064064707315335
+    },
+    {
+     "language": "CorefUD_Hindi-HDTB",
+     "instances": 17910,
+     "counts": [
+      14018,
+      543,
+      3245,
+      104
+     ],
+     "kappa": -0.009047790968343636,
+     "po": 0.7884980457844779,
+     "pe": 0.7903945124219023
+    },
+    {
+     "language": "CorefUD_Hungarian-KorKor",
+     "instances": 3304,
+     "counts": [
+      2453,
+      172,
+      628,
+      51
+     ],
+     "kappa": 0.012763999351603803,
+     "po": 0.7578692493946732,
+     "pe": 0.7547387347642303
+    },
+    {
+     "language": "CorefUD_Hungarian-SzegedKoref",
+     "instances": 15010,
+     "counts": [
+      10317,
+      2413,
+      1828,
+      452
+     ],
+     "kappa": 0.007865085358089332,
+     "po": 0.7174550299800133,
+     "pe": 0.7152151730070249
+    },
+    {
+     "language": "CorefUD_Korean-ECMT",
+     "instances": 0,
+     "counts": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "kappa": null,
+     "po": null,
+     "pe": null
+    },
+    {
+     "language": "CorefUD_Lithuanian-LCC",
+     "instances": 3032,
+     "counts": [
+      1976,
+      319,
+      643,
+      94
+     ],
+     "kappa": -0.013462643648207751,
+     "po": 0.6827176781002638,
+     "pe": 0.6869323956948226
+    },
+    {
+     "language": "CorefUD_Norwegian-BokmaalNARC",
+     "instances": 12722,
+     "counts": [
+      7469,
+      1930,
+      2642,
+      681
+     ],
+     "kappa": -0.0004358815969317395,
+     "po": 0.6406225436252162,
+     "pe": 0.6407791213954336
+    },
+    {
+     "language": "CorefUD_Norwegian-NynorskNARC",
+     "instances": 11040,
+     "counts": [
+      6422,
+      1695,
+      2305,
+      618
+     ],
+     "kappa": 0.002792046778808238,
+     "po": 0.6376811594202898,
+     "pe": 0.63666671589477
+    },
+    {
+     "language": "CorefUD_Old_Church_Slavonic-PROIEL",
+     "instances": 14256,
+     "counts": [
+      8287,
+      2253,
+      3138,
+      578
+     ],
+     "kappa": -0.06307651363791549,
+     "po": 0.6218434343434344,
+     "pe": 0.6442809517421377
+    },
+    {
+     "language": "CorefUD_Polish-PCC",
+     "instances": 62961,
+     "counts": [
+      37645,
+      12420,
+      9669,
+      3227
+     ],
+     "kappa": 0.001996995541674621,
+     "po": 0.6491637680468861,
+     "pe": 0.6484617477243636
+    },
+    {
+     "language": "CorefUD_Russian-RuCor",
+     "instances": 21514,
+     "counts": [
+      13220,
+      4051,
+      3220,
+      1023
+     ],
+     "kappa": 0.006097543386637538,
+     "po": 0.6620340243562332,
+     "pe": 0.6599606194803492
+    },
+    {
+     "language": "CorefUD_Spanish-AnCora",
+     "instances": 27687,
+     "counts": [
+      16018,
+      2328,
+      8127,
+      1214
+     ],
+     "kappa": 0.0036224428036491117,
+     "po": 0.6223859573084841,
+     "pe": 0.6210130989360477
+    },
+    {
+     "language": "CorefUD_Turkish-ITCC",
+     "instances": 9829,
+     "counts": [
+      6550,
+      1315,
+      1605,
+      359
+     ],
+     "kappa": 0.016508220871257435,
+     "po": 0.7029199308169702,
+     "pe": 0.6979333478046887
+    }
+   ]
+  }
+ },
+ "patternShare": {
+  "measured": {
+   "instances": 897124,
+   "patternShare": 0.3135085004971442
+  },
+  "all": {
+   "instances": 1529086,
+   "patternShare": 0.4253272870198275
+  }
+ },
+ "byValue": [
+  {
+   "value": "Number=Sing",
+   "cell": "SIG·Figure",
+   "basis": "measured",
+   "main": 144466,
+   "adjunct": 51684,
+   "argument": 42082,
+   "share_adjunct_of_main_or_adjunct": 0.26349222533775174
+  },
+  {
+   "value": "Gender=Masc",
+   "cell": "NUL·Pattern",
+   "basis": "declared",
+   "main": 79263,
+   "adjunct": 28886,
+   "argument": 23412,
+   "share_adjunct_of_main_or_adjunct": 0.267094471516149
+  },
+  {
+   "value": "Number=Plur",
+   "cell": "SIG·Pattern",
+   "basis": "measured",
+   "main": 50974,
+   "adjunct": 23258,
+   "argument": 18243,
+   "share_adjunct_of_main_or_adjunct": 0.3133150123935769
+  },
+  {
+   "value": "Gender=Fem",
+   "cell": "NUL·Pattern",
+   "basis": "declared",
+   "main": 49863,
+   "adjunct": 20082,
+   "argument": 17689,
+   "share_adjunct_of_main_or_adjunct": 0.28711130173707916
+  },
+  {
+   "value": "Polarity=Pos",
+   "cell": "DEF·Ground",
+   "basis": "declared",
+   "main": 32929,
+   "adjunct": 13055,
+   "argument": 14621,
+   "share_adjunct_of_main_or_adjunct": 0.28390309672929714
+  },
+  {
+   "value": "Person=3",
+   "cell": "INS·Figure",
+   "basis": "measured",
+   "main": 34055,
+   "adjunct": 14326,
+   "argument": 8476,
+   "share_adjunct_of_main_or_adjunct": 0.2961079762716769
+  },
+  {
+   "value": "Case=Nom",
+   "cell": "SEG·Figure",
+   "basis": "measured",
+   "main": 37513,
+   "adjunct": 10352,
+   "argument": 6772,
+   "share_adjunct_of_main_or_adjunct": 0.2162749399352345
+  },
+  {
+   "value": "Case=Gen",
+   "cell": "CON·Pattern",
+   "basis": "measured",
+   "main": 30734,
+   "adjunct": 9590,
+   "argument": 10315,
+   "share_adjunct_of_main_or_adjunct": 0.237823628608273
+  },
+  {
+   "value": "VerbForm=Fin",
+   "cell": "EVA·Pattern",
+   "basis": "measured",
+   "main": 30249,
+   "adjunct": 12554,
+   "argument": 7319,
+   "share_adjunct_of_main_or_adjunct": 0.293297198794477
+  },
+  {
+   "value": "Mood=Ind",
+   "cell": "EVA·Ground",
+   "basis": "measured",
+   "main": 29303,
+   "adjunct": 11324,
+   "argument": 6296,
+   "share_adjunct_of_main_or_adjunct": 0.2787308932483324
+  },
+  {
+   "value": "Degree=Pos",
+   "cell": "EVA·Figure",
+   "basis": "declared",
+   "main": 27857,
+   "adjunct": 9108,
+   "argument": 9769,
+   "share_adjunct_of_main_or_adjunct": 0.24639523873934804
+  },
+  {
+   "value": "Case=Acc",
+   "cell": "CON·Figure",
+   "basis": "measured",
+   "main": 23862,
+   "adjunct": 11014,
+   "argument": 11448,
+   "share_adjunct_of_main_or_adjunct": 0.31580456474366325
+  },
+  {
+   "value": "Animacy=Inan",
+   "cell": "NUL·Pattern",
+   "basis": "declared",
+   "main": 24773,
+   "adjunct": 8168,
+   "argument": 9166,
+   "share_adjunct_of_main_or_adjunct": 0.24795847120609574
+  },
+  {
+   "value": "Voice=Act",
+   "cell": "EVA·Figure",
+   "basis": "measured",
+   "main": 22338,
+   "adjunct": 9007,
+   "argument": 6574,
+   "share_adjunct_of_main_or_adjunct": 0.2873504546179614
+  },
+  {
+   "value": "Gender=Neut",
+   "cell": "NUL·Pattern",
+   "basis": "declared",
+   "main": 21407,
+   "adjunct": 7560,
+   "argument": 7375,
+   "share_adjunct_of_main_or_adjunct": 0.2609866399696206
+  },
+  {
+   "value": "Tense=Pres",
+   "cell": "EVA·Figure",
+   "basis": "measured",
+   "main": 20304,
+   "adjunct": 9585,
+   "argument": 5457,
+   "share_adjunct_of_main_or_adjunct": 0.3206865401987353
+  },
+  {
+   "value": "AdpType=Prep",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 16739,
+   "adjunct": 5469,
+   "argument": 6041,
+   "share_adjunct_of_main_or_adjunct": 0.24626260806916425
+  },
+  {
+   "value": "Aspect=Imp",
+   "cell": "NUL·Ground",
+   "basis": "measured",
+   "main": 14528,
+   "adjunct": 6876,
+   "argument": 6319,
+   "share_adjunct_of_main_or_adjunct": 0.3212483647916277
+  },
+  {
+   "value": "PronType=Prs",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 15040,
+   "adjunct": 7012,
+   "argument": 5511,
+   "share_adjunct_of_main_or_adjunct": 0.31797569381462
+  },
+  {
+   "value": "Tense=Past",
+   "cell": "REC·Pattern",
+   "basis": "measured",
+   "main": 16875,
+   "adjunct": 6837,
+   "argument": 2838,
+   "share_adjunct_of_main_or_adjunct": 0.28833502024291496
+  },
+  {
+   "value": "PronType=Art",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 14194,
+   "adjunct": 6732,
+   "argument": 5053,
+   "share_adjunct_of_main_or_adjunct": 0.3217050559113065
+  },
+  {
+   "value": "Case=Loc",
+   "cell": "SIG·Ground",
+   "basis": "measured",
+   "main": 15796,
+   "adjunct": 4927,
+   "argument": 5000,
+   "share_adjunct_of_main_or_adjunct": 0.23775515128118516
+  },
+  {
+   "value": "VerbForm=Part",
+   "cell": "SEG·Pattern",
+   "basis": "measured",
+   "main": 13653,
+   "adjunct": 7982,
+   "argument": 3939,
+   "share_adjunct_of_main_or_adjunct": 0.3689392188583314
+  },
+  {
+   "value": "Definite=Def",
+   "cell": "SIG·Pattern",
+   "basis": "declared",
+   "main": 13081,
+   "adjunct": 6298,
+   "argument": 4351,
+   "share_adjunct_of_main_or_adjunct": 0.3249909696062748
+  },
+  {
+   "value": "Aspect=Perf",
+   "cell": "INS·Pattern",
+   "basis": "measured",
+   "main": 9962,
+   "adjunct": 4289,
+   "argument": 4402,
+   "share_adjunct_of_main_or_adjunct": 0.3009613360465932
+  },
+  {
+   "value": "Animacy=Anim",
+   "cell": "NUL·Pattern",
+   "basis": "declared",
+   "main": 12456,
+   "adjunct": 3200,
+   "argument": 2676,
+   "share_adjunct_of_main_or_adjunct": 0.20439448134900357
+  },
+  {
+   "value": "NumType=Card",
+   "cell": "DEF·Figure",
+   "basis": "declared",
+   "main": 9488,
+   "adjunct": 2313,
+   "argument": 2296,
+   "share_adjunct_of_main_or_adjunct": 0.1960003389543259
+  },
+  {
+   "value": "Case=Ins",
+   "cell": "SIG·Pattern",
+   "basis": "measured",
+   "main": 7923,
+   "adjunct": 2823,
+   "argument": 3051,
+   "share_adjunct_of_main_or_adjunct": 0.26270240089335567
+  },
+  {
+   "value": "VerbForm=Inf",
+   "cell": "SYN·Figure",
+   "basis": "measured",
+   "main": 2146,
+   "adjunct": 3479,
+   "argument": 7763,
+   "share_adjunct_of_main_or_adjunct": 0.6184888888888889
+  },
+  {
+   "value": "Definite=Ind",
+   "cell": "SIG·Pattern",
+   "basis": "declared",
+   "main": 7348,
+   "adjunct": 2887,
+   "argument": 2313,
+   "share_adjunct_of_main_or_adjunct": 0.2820713238886175
+  },
+  {
+   "value": "PronType=Dem",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 6960,
+   "adjunct": 1764,
+   "argument": 2257,
+   "share_adjunct_of_main_or_adjunct": 0.20220082530949107
+  },
+  {
+   "value": "Person=1",
+   "cell": "SIG·Ground",
+   "basis": "measured",
+   "main": 7195,
+   "adjunct": 1978,
+   "argument": 1723,
+   "share_adjunct_of_main_or_adjunct": 0.21563283549547585
+  },
+  {
+   "value": "Case=Dat",
+   "cell": "CON·Ground",
+   "basis": "measured",
+   "main": 4835,
+   "adjunct": 2384,
+   "argument": 2438,
+   "share_adjunct_of_main_or_adjunct": 0.3302396453802466
+  },
+  {
+   "value": "PronType=Rel",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 788,
+   "adjunct": 6589,
+   "argument": 704,
+   "share_adjunct_of_main_or_adjunct": 0.8931815100989562
+  },
+  {
+   "value": "Reflex=Yes",
+   "cell": "SIG·Ground",
+   "basis": "declared",
+   "main": 3655,
+   "adjunct": 2068,
+   "argument": 1892,
+   "share_adjunct_of_main_or_adjunct": 0.36134894286213526
+  },
+  {
+   "value": "Polarity=Neg",
+   "cell": "DEF·Ground",
+   "basis": "declared",
+   "main": 3926,
+   "adjunct": 1542,
+   "argument": 1439,
+   "share_adjunct_of_main_or_adjunct": 0.28200438917337234
+  },
+  {
+   "value": "Voice=Pass",
+   "cell": "REC·Figure",
+   "basis": "measured",
+   "main": 3084,
+   "adjunct": 1767,
+   "argument": 1353,
+   "share_adjunct_of_main_or_adjunct": 0.3642547928262214
+  },
+  {
+   "value": "Poss=Yes",
+   "cell": "CON·Pattern",
+   "basis": "declared",
+   "main": 2796,
+   "adjunct": 1637,
+   "argument": 1324,
+   "share_adjunct_of_main_or_adjunct": 0.3692758854049177
+  },
+  {
+   "value": "PronType=Int",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 1119,
+   "adjunct": 3570,
+   "argument": 763,
+   "share_adjunct_of_main_or_adjunct": 0.7613563659628919
+  },
+  {
+   "value": "VerbForm=Vnoun",
+   "cell": "DEF·Pattern",
+   "basis": "declared",
+   "main": 2972,
+   "adjunct": 1047,
+   "argument": 1333,
+   "share_adjunct_of_main_or_adjunct": 0.2605125653147549
+  },
+  {
+   "value": "PronType=Ind",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 2344,
+   "adjunct": 1180,
+   "argument": 1019,
+   "share_adjunct_of_main_or_adjunct": 0.3348467650397276
+  },
+  {
+   "value": "Person=2",
+   "cell": "SIG·Figure",
+   "basis": "measured",
+   "main": 2665,
+   "adjunct": 1030,
+   "argument": 700,
+   "share_adjunct_of_main_or_adjunct": 0.2787550744248985
+  },
+  {
+   "value": "Degree=Cmp",
+   "cell": "EVA·Figure",
+   "basis": "declared",
+   "main": 1488,
+   "adjunct": 660,
+   "argument": 695,
+   "share_adjunct_of_main_or_adjunct": 0.30726256983240224
+  },
+  {
+   "value": "Mood=Cnd",
+   "cell": "EVA·Pattern",
+   "basis": "declared",
+   "main": 710,
+   "adjunct": 1011,
+   "argument": 577,
+   "share_adjunct_of_main_or_adjunct": 0.5874491574665892
+  },
+  {
+   "value": "AdpType=Post",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 1671,
+   "adjunct": 486,
+   "argument": 71,
+   "share_adjunct_of_main_or_adjunct": 0.22531293463143254
+  },
+  {
+   "value": "AdpType=Voc",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 1295,
+   "adjunct": 381,
+   "argument": 538,
+   "share_adjunct_of_main_or_adjunct": 0.22732696897374702
+  },
+  {
+   "value": "Tense=Fut",
+   "cell": "SYN·Pattern",
+   "basis": "measured",
+   "main": 1077,
+   "adjunct": 556,
+   "argument": 548,
+   "share_adjunct_of_main_or_adjunct": 0.3404776484996938
+  },
+  {
+   "value": "Tense=Imp",
+   "cell": "REC·Pattern",
+   "basis": "declared",
+   "main": 646,
+   "adjunct": 579,
+   "argument": 264,
+   "share_adjunct_of_main_or_adjunct": 0.4726530612244898
+  },
+  {
+   "value": "PronType=Tot",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 807,
+   "adjunct": 286,
+   "argument": 295,
+   "share_adjunct_of_main_or_adjunct": 0.2616651418115279
+  },
+  {
+   "value": "NumType=Ord",
+   "cell": "DEF·Figure",
+   "basis": "declared",
+   "main": 814,
+   "adjunct": 236,
+   "argument": 235,
+   "share_adjunct_of_main_or_adjunct": 0.22476190476190477
+  },
+  {
+   "value": "Animacy=Hum",
+   "cell": "NUL·Pattern",
+   "basis": "declared",
+   "main": 677,
+   "adjunct": 356,
+   "argument": 118,
+   "share_adjunct_of_main_or_adjunct": 0.34462729912875123
+  },
+  {
+   "value": "Degree=Sup",
+   "cell": "EVA·Figure",
+   "basis": "declared",
+   "main": 631,
+   "adjunct": 190,
+   "argument": 190,
+   "share_adjunct_of_main_or_adjunct": 0.23142509135200975
+  },
+  {
+   "value": "PronType=Neg",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 592,
+   "adjunct": 184,
+   "argument": 235,
+   "share_adjunct_of_main_or_adjunct": 0.23711340206185566
+  },
+  {
+   "value": "HebBinyan=PAAL",
+   "cell": "REC·Figure",
+   "basis": "declared",
+   "main": 654,
+   "adjunct": 151,
+   "argument": 160,
+   "share_adjunct_of_main_or_adjunct": 0.18757763975155278
+  },
+  {
+   "value": "Mood=Imp",
+   "cell": "NUL·Ground",
+   "basis": "measured",
+   "main": 573,
+   "adjunct": 34,
+   "argument": 119,
+   "share_adjunct_of_main_or_adjunct": 0.05601317957166392
+  },
+  {
+   "value": "Mood=Sub",
+   "cell": "EVA·Pattern",
+   "basis": "measured",
+   "main": 25,
+   "adjunct": 304,
+   "argument": 300,
+   "share_adjunct_of_main_or_adjunct": 0.9240121580547113
+  },
+  {
+   "value": "VerbForm=Ger",
+   "cell": "DEF·Pattern",
+   "basis": "measured",
+   "main": 86,
+   "adjunct": 286,
+   "argument": 149,
+   "share_adjunct_of_main_or_adjunct": 0.7688172043010753
+  },
+  {
+   "value": "Voice=Mid",
+   "cell": "REC·Ground",
+   "basis": "measured",
+   "main": 289,
+   "adjunct": 120,
+   "argument": 64,
+   "share_adjunct_of_main_or_adjunct": 0.293398533007335
+  },
+  {
+   "value": "VerbForm=Conv",
+   "cell": "SEG·Pattern",
+   "basis": "declared",
+   "main": 57,
+   "adjunct": 308,
+   "argument": 22,
+   "share_adjunct_of_main_or_adjunct": 0.8438356164383561
+  },
+  {
+   "value": "VerbType=Quasi",
+   "cell": "SYN·Figure",
+   "basis": "declared",
+   "main": 282,
+   "adjunct": 41,
+   "argument": 38,
+   "share_adjunct_of_main_or_adjunct": 0.12693498452012383
+  },
+  {
+   "value": "AdvType=Tim",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 185,
+   "adjunct": 69,
+   "argument": 42,
+   "share_adjunct_of_main_or_adjunct": 0.27165354330708663
+  },
+  {
+   "value": "Case=Sup",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 194,
+   "adjunct": 36,
+   "argument": 32,
+   "share_adjunct_of_main_or_adjunct": 0.1565217391304348
+  },
+  {
+   "value": "Case=Sbl",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 143,
+   "adjunct": 32,
+   "argument": 47,
+   "share_adjunct_of_main_or_adjunct": 0.18285714285714286
+  },
+  {
+   "value": "Number=Dual",
+   "cell": "SIG·Ground",
+   "basis": "measured",
+   "main": 132,
+   "adjunct": 46,
+   "argument": 17,
+   "share_adjunct_of_main_or_adjunct": 0.25842696629213485
+  },
+  {
+   "value": "Case=Ine",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 137,
+   "adjunct": 28,
+   "argument": 24,
+   "share_adjunct_of_main_or_adjunct": 0.1696969696969697
+  },
+  {
+   "value": "HebBinyan=HIFIL",
+   "cell": "REC·Figure",
+   "basis": "declared",
+   "main": 101,
+   "adjunct": 38,
+   "argument": 26,
+   "share_adjunct_of_main_or_adjunct": 0.2733812949640288
+  },
+  {
+   "value": "Polite=Form",
+   "cell": "EVA·Figure",
+   "basis": "declared",
+   "main": 135,
+   "adjunct": 14,
+   "argument": 10,
+   "share_adjunct_of_main_or_adjunct": 0.09395973154362416
+  },
+  {
+   "value": "Case=Voc",
+   "cell": "SIG·Ground",
+   "basis": "measured",
+   "main": 132,
+   "adjunct": 5,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 0.0364963503649635
+  },
+  {
+   "value": "Case=Ill",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 80,
+   "adjunct": 24,
+   "argument": 29,
+   "share_adjunct_of_main_or_adjunct": 0.23076923076923078
+  },
+  {
+   "value": "NumType=Frac",
+   "cell": "DEF·Figure",
+   "basis": "declared",
+   "main": 81,
+   "adjunct": 31,
+   "argument": 19,
+   "share_adjunct_of_main_or_adjunct": 0.2767857142857143
+  },
+  {
+   "value": "Case=Abl",
+   "cell": "SEG·Ground",
+   "basis": "measured",
+   "main": 74,
+   "adjunct": 28,
+   "argument": 11,
+   "share_adjunct_of_main_or_adjunct": 0.27450980392156865
+  },
+  {
+   "value": "Polite=Infm",
+   "cell": "EVA·Figure",
+   "basis": "declared",
+   "main": 96,
+   "adjunct": 4,
+   "argument": 11,
+   "share_adjunct_of_main_or_adjunct": 0.04
+  },
+  {
+   "value": "PronType=Emp",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 16,
+   "adjunct": 4,
+   "argument": 89,
+   "share_adjunct_of_main_or_adjunct": 0.2
+  },
+  {
+   "value": "Aspect=Prog",
+   "cell": "SIG·Pattern",
+   "basis": "measured",
+   "main": 96,
+   "adjunct": 4,
+   "argument": 8,
+   "share_adjunct_of_main_or_adjunct": 0.04
+  },
+  {
+   "value": "Case=Ess",
+   "cell": "INS·Figure",
+   "basis": "declared",
+   "main": 72,
+   "adjunct": 17,
+   "argument": 11,
+   "share_adjunct_of_main_or_adjunct": 0.19101123595505617
+  },
+  {
+   "value": "Mood=Pot",
+   "cell": "EVA·Pattern",
+   "basis": "declared",
+   "main": 64,
+   "adjunct": 15,
+   "argument": 10,
+   "share_adjunct_of_main_or_adjunct": 0.189873417721519
+  },
+  {
+   "value": "Person=0",
+   "cell": "INS·Figure",
+   "basis": "declared",
+   "main": 65,
+   "adjunct": 15,
+   "argument": 3,
+   "share_adjunct_of_main_or_adjunct": 0.1875
+  },
+  {
+   "value": "NumType=Mult",
+   "cell": "DEF·Figure",
+   "basis": "declared",
+   "main": 53,
+   "adjunct": 11,
+   "argument": 16,
+   "share_adjunct_of_main_or_adjunct": 0.171875
+  },
+  {
+   "value": "VerbType=Mod",
+   "cell": "SYN·Figure",
+   "basis": "declared",
+   "main": 47,
+   "adjunct": 10,
+   "argument": 22,
+   "share_adjunct_of_main_or_adjunct": 0.17543859649122806
+  },
+  {
+   "value": "Aspect=Hab",
+   "cell": "SIG·Pattern",
+   "basis": "declared",
+   "main": 54,
+   "adjunct": 12,
+   "argument": 9,
+   "share_adjunct_of_main_or_adjunct": 0.18181818181818182
+  },
+  {
+   "value": "HebBinyan=PIEL",
+   "cell": "REC·Figure",
+   "basis": "declared",
+   "main": 39,
+   "adjunct": 21,
+   "argument": 14,
+   "share_adjunct_of_main_or_adjunct": 0.35
+  },
+  {
+   "value": "HebBinyan=NIFAL",
+   "cell": "REC·Figure",
+   "basis": "declared",
+   "main": 52,
+   "adjunct": 12,
+   "argument": 10,
+   "share_adjunct_of_main_or_adjunct": 0.1875
+  },
+  {
+   "value": "Case=All",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 45,
+   "adjunct": 9,
+   "argument": 13,
+   "share_adjunct_of_main_or_adjunct": 0.16666666666666666
+  },
+  {
+   "value": "Case=Ela",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 34,
+   "adjunct": 13,
+   "argument": 13,
+   "share_adjunct_of_main_or_adjunct": 0.2765957446808511
+  },
+  {
+   "value": "Case=Erg",
+   "cell": "SEG·Figure",
+   "basis": "declared",
+   "main": 50,
+   "adjunct": 1,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 0.0196078431372549
+  },
+  {
+   "value": "Case=Del",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 37,
+   "adjunct": 4,
+   "argument": 4,
+   "share_adjunct_of_main_or_adjunct": 0.0975609756097561
+  },
+  {
+   "value": "PartType=Int",
+   "cell": "EVA·Pattern",
+   "basis": "declared",
+   "main": 23,
+   "adjunct": 3,
+   "argument": 18,
+   "share_adjunct_of_main_or_adjunct": 0.11538461538461539
+  },
+  {
+   "value": "Tense=Pqp",
+   "cell": "REC·Pattern",
+   "basis": "declared",
+   "main": 41,
+   "adjunct": 0,
+   "argument": 2,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "AdpType=Comprep",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 31,
+   "adjunct": 2,
+   "argument": 7,
+   "share_adjunct_of_main_or_adjunct": 0.06060606060606061
+  },
+  {
+   "value": "Number=Ptan",
+   "cell": "SIG·Pattern",
+   "basis": "declared",
+   "main": 22,
+   "adjunct": 13,
+   "argument": 3,
+   "share_adjunct_of_main_or_adjunct": 0.37142857142857144
+  },
+  {
+   "value": "PartType=Vbp",
+   "cell": "EVA·Pattern",
+   "basis": "declared",
+   "main": 33,
+   "adjunct": 1,
+   "argument": 2,
+   "share_adjunct_of_main_or_adjunct": 0.029411764705882353
+  },
+  {
+   "value": "ConjType=Comp",
+   "cell": "SYN·Pattern",
+   "basis": "declared",
+   "main": 16,
+   "adjunct": 10,
+   "argument": 7,
+   "share_adjunct_of_main_or_adjunct": 0.38461538461538464
+  },
+  {
+   "value": "Voice=Cau",
+   "cell": "REC·Figure",
+   "basis": "declared",
+   "main": 23,
+   "adjunct": 5,
+   "argument": 4,
+   "share_adjunct_of_main_or_adjunct": 0.17857142857142858
+  },
+  {
+   "value": "PartType=Inf",
+   "cell": "EVA·Pattern",
+   "basis": "declared",
+   "main": 2,
+   "adjunct": 4,
+   "argument": 24,
+   "share_adjunct_of_main_or_adjunct": 0.6666666666666666
+  },
+  {
+   "value": "Evident=Nfh",
+   "cell": "EVA·Ground",
+   "basis": "declared",
+   "main": 15,
+   "adjunct": 7,
+   "argument": 1,
+   "share_adjunct_of_main_or_adjunct": 0.3181818181818182
+  },
+  {
+   "value": "Case=Ade",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 18,
+   "adjunct": 1,
+   "argument": 2,
+   "share_adjunct_of_main_or_adjunct": 0.05263157894736842
+  },
+  {
+   "value": "Case=Ter",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 15,
+   "adjunct": 3,
+   "argument": 3,
+   "share_adjunct_of_main_or_adjunct": 0.16666666666666666
+  },
+  {
+   "value": "PronType=Rcp",
+   "cell": "SIG·Figure",
+   "basis": "declared",
+   "main": 9,
+   "adjunct": 5,
+   "argument": 6,
+   "share_adjunct_of_main_or_adjunct": 0.35714285714285715
+  },
+  {
+   "value": "Case=Tem",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 14,
+   "adjunct": 0,
+   "argument": 4,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "HebBinyan=PUAL",
+   "cell": "REC·Figure",
+   "basis": "declared",
+   "main": 7,
+   "adjunct": 3,
+   "argument": 3,
+   "share_adjunct_of_main_or_adjunct": 0.3
+  },
+  {
+   "value": "HebBinyan=HITPAEL",
+   "cell": "REC·Figure",
+   "basis": "declared",
+   "main": 9,
+   "adjunct": 2,
+   "argument": 1,
+   "share_adjunct_of_main_or_adjunct": 0.18181818181818182
+  },
+  {
+   "value": "ConjType=Oper",
+   "cell": "SYN·Pattern",
+   "basis": "declared",
+   "main": 8,
+   "adjunct": 2,
+   "argument": 2,
+   "share_adjunct_of_main_or_adjunct": 0.2
+  },
+  {
+   "value": "Case=Cau",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 8,
+   "adjunct": 0,
+   "argument": 4,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "Case=Abs",
+   "cell": "CON·Figure",
+   "basis": "declared",
+   "main": 6,
+   "adjunct": 1,
+   "argument": 3,
+   "share_adjunct_of_main_or_adjunct": 0.14285714285714285
+  },
+  {
+   "value": "Mood=Nec",
+   "cell": "EVA·Pattern",
+   "basis": "declared",
+   "main": 9,
+   "adjunct": 0,
+   "argument": 1,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "Case=Tra",
+   "cell": "INS·Figure",
+   "basis": "declared",
+   "main": 6,
+   "adjunct": 2,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 0.25
+  },
+  {
+   "value": "Mood=Opt",
+   "cell": "EVA·Pattern",
+   "basis": "measured",
+   "main": 3,
+   "adjunct": 3,
+   "argument": 1,
+   "share_adjunct_of_main_or_adjunct": 0.5
+  },
+  {
+   "value": "AdpType=Circ",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 2,
+   "adjunct": 1,
+   "argument": 2,
+   "share_adjunct_of_main_or_adjunct": 0.3333333333333333
+  },
+  {
+   "value": "AdvType=Deg",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 4,
+   "adjunct": 0,
+   "argument": 1,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "VerbForm=Sup",
+   "cell": "SYN·Figure",
+   "basis": "declared",
+   "main": 0,
+   "adjunct": 5,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 1
+  },
+  {
+   "value": "Degree=Abs",
+   "cell": "EVA·Figure",
+   "basis": "declared",
+   "main": 3,
+   "adjunct": 0,
+   "argument": 2,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "NumType=Sets",
+   "cell": "DEF·Figure",
+   "basis": "declared",
+   "main": 0,
+   "adjunct": 1,
+   "argument": 1,
+   "share_adjunct_of_main_or_adjunct": 1
+  },
+  {
+   "value": "Case=Par",
+   "cell": "CON·Pattern",
+   "basis": "declared",
+   "main": 0,
+   "adjunct": 1,
+   "argument": 1,
+   "share_adjunct_of_main_or_adjunct": 1
+  },
+  {
+   "value": "Case=Com",
+   "cell": "CON·Ground",
+   "basis": "declared",
+   "main": 1,
+   "adjunct": 1,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 0.5
+  },
+  {
+   "value": "Aspect=Prosp",
+   "cell": "SYN·Pattern",
+   "basis": "declared",
+   "main": 2,
+   "adjunct": 0,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "Mood=Des",
+   "cell": "EVA·Pattern",
+   "basis": "declared",
+   "main": 0,
+   "adjunct": 2,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 1
+  },
+  {
+   "value": "Animacy=Nhum",
+   "cell": "NUL·Pattern",
+   "basis": "declared",
+   "main": 1,
+   "adjunct": 0,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 0
+  },
+  {
+   "value": "ConjType=Pred",
+   "cell": "SYN·Pattern",
+   "basis": "declared",
+   "main": 0,
+   "adjunct": 1,
+   "argument": 0,
+   "share_adjunct_of_main_or_adjunct": 1
+  }
+ ]
+}

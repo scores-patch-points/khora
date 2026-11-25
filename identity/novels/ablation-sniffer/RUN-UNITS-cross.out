@@ -1,0 +1,102 @@
+{
+ "stage": "cross",
+ "model": "qwen3-embedding:4b",
+ "caps": {
+  "wordsPerOp": 400,
+  "trainPerOp": 150,
+  "test": 600,
+  "crossWordsPerOp": 35,
+  "crossPerLanguage": 15,
+  "crossMin": 8
+ },
+ "n": 405,
+ "languages": [
+  "Ancient_Greek",
+  "Arabic",
+  "Basque",
+  "Classical_Chinese",
+  "Coptic",
+  "English",
+  "Finnish",
+  "French",
+  "German",
+  "Gothic",
+  "Hindi",
+  "Indonesian",
+  "Japanese",
+  "Korean",
+  "Latin",
+  "Naija",
+  "Old_Church_Slavonic",
+  "Old_East_Slavic",
+  "Persian",
+  "Russian",
+  "Sanskrit",
+  "Tamil",
+  "Turkish",
+  "Uyghur",
+  "Vietnamese",
+  "Wolof",
+  "Yoruba"
+ ],
+ "classesPresent": 9,
+ "chanceBalancedAccuracy": 0.1111,
+ "balancedAccuracy": {
+  "A": 0.1953,
+  "C": 0.049,
+  "B": 0.3503,
+  "F": 0.3356
+ },
+ "accuracy": {
+  "A": 0.1333,
+  "C": 0.0617,
+  "B": 0.2444,
+  "F": 0.2025
+ },
+ "meanCosineDeltaVsBareClause": 0.4013,
+ "shuffledLabelNull": {
+  "n": 200,
+  "mean": 0.1152,
+  "p975": 0.238
+ },
+ "bootstrap": [
+  {
+   "name": "A minus size-matched control",
+   "ci95": [
+    0.0815,
+    0.2287
+   ]
+  },
+  {
+   "name": "A minus bare clause",
+   "ci95": [
+    -0.1939,
+    -0.0096
+   ]
+  },
+  {
+   "name": "fusion minus bare clause",
+   "ci95": [
+    -0.0529,
+    0.0226
+   ]
+  },
+  {
+   "name": "A",
+   "ci95": [
+    0.1353,
+    0.2823
+   ]
+  }
+ ],
+ "H1": false,
+ "H2": true,
+ "H3": false,
+ "H5_fusionAddsBeyondBareClause": false,
+ "verdict": "FALSIFIED",
+ "failed": [
+  "H1",
+  "H3"
+ ],
+ "modelCalls": 1585
+}

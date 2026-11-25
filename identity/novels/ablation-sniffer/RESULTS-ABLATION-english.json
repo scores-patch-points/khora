@@ -1,0 +1,115 @@
+{
+ "stage": "english",
+ "model": "nomic-embed-text:latest",
+ "caps": {
+  "englishWordsPerOp": 400,
+  "englishTrainOccPerOp": 250,
+  "englishTest": 1000,
+  "crossWordsPerOp": 35,
+  "crossPerLanguage": 30,
+  "crossMinPerLanguage": 10
+ },
+ "arms": {
+  "P1": "negative space of the REMOVED unit vs canonical word centroids (the claim)",
+  "P2": "same, vs centroids of negative spaces",
+  "P3": "MASKED unit vs mask-delta centroids (the older design)",
+  "P4": "the bare word alone vs canonical word centroids (no sentence, no ablation)",
+  "P5": "negative space of ANOTHER word removed vs canonical word centroids (control)",
+  "P5b": "same control vs delta centroids",
+  "P6": "masked-unit delta vs canonical word centroids"
+ },
+ "result": {
+  "n": 999,
+  "classesPresent": 8,
+  "chanceBalancedAccuracy": 0.125,
+  "balancedAccuracy": {
+   "P1": 0.435237991720622,
+   "P2": 0.3771812394020831,
+   "P3": 0.36383064768610673,
+   "P4": 0.6135182205901809,
+   "P5": 0.20882942188773454,
+   "P5b": 0.16013995941105122,
+   "P6": 0.33480387478526435
+  },
+  "accuracy": {
+   "P1": 0.13913913913913914,
+   "P2": 0.3113113113113113,
+   "P3": 0.42742742742742745,
+   "P4": 0.7867867867867868,
+   "P5": 0.06306306306306306,
+   "P5b": 0.1841841841841842,
+   "P6": 0.08608608608608609
+  },
+  "shuffledLabelNull": {
+   "n": 200,
+   "mean": 0.12311764555692906,
+   "p975": 0.2875010541108556,
+   "max": 0.3846425011437419
+  },
+  "bootstrap": [
+   {
+    "name": "P1 minus control unit (P5)",
+    "ci95": [
+     -0.055322320353524856,
+     0.3604043509379138
+    ]
+   },
+   {
+    "name": "P1 minus bare word (P4)",
+    "ci95": [
+     -0.3473408835022187,
+     -0.08936395831307337
+    ]
+   },
+   {
+    "name": "P1",
+    "ci95": [
+     0.189272030651341,
+     0.5003791427152082
+    ]
+   }
+  ],
+  "H1_beatsShuffledLabels": true,
+  "H2_unitNotJustSentence": false,
+  "H3_ablationAddsBeyondTheWord": false,
+  "verdict": "FALSIFIED",
+  "failed": [
+   "H2",
+   "H3"
+  ]
+ },
+ "calibration": [
+  {
+   "tercile": "low margin",
+   "n": 333,
+   "accuracyP1": 0.14714714714714713
+  },
+  {
+   "tercile": "mid",
+   "n": 333,
+   "accuracyP1": 0.15315315315315314
+  },
+  {
+   "tercile": "high margin",
+   "n": 333,
+   "accuracyP1": 0.11711711711711711
+  }
+ ],
+ "multiLabel": {
+  "meanCellsClaimed": 0.33233233233233234,
+  "unitsWithNoClaim": 0.9369369369369369,
+  "anyHit": 0.04504504504504504,
+  "precision": 0.13855421686746988,
+  "recall": 0.04125560538116592,
+  "f1": 0.0635798203178991,
+  "withAlternativeInGold": 0.11611611611611612
+ },
+ "cells27": {
+  "n": 984,
+  "cellsInTrain": 22,
+  "balancedAccuracy": 0.1359546016941087,
+  "bareWordBalancedAccuracy": 0.39253059214637254,
+  "chance": 0.07142857142857142
+ },
+ "modelCalls": 11627
+}
