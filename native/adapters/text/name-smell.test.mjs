@@ -1,55 +1,93 @@
-// adapters/text/name-smell.test.mjs — does a surface SMELL like a name? Measured from the text's own casing and the reader's part-of-speech prior; no word list, no typed threshold.
-// Written before the module; each test says what would falsify it.
+// adapters/text/name-smell.test.mjs — does a surface SMELL like a name? Every signal is a WEIGHT on a log-odds score; the answer is a probability, never a veto.
+// Written to survive casual speech and typos: casing evidence is scaled by how reliably the document uses case at all, the part-of-speech prior is a Bayesian offset (not a rule), and strong contrary evidence can outvote any single signal.
+// The tests inject simple weights so they check the DIRECTION and SHAPE of the model; the fitted weights are measured separately (native/scripts/fit-name-smell.mjs) and falsified under noise.
 import test from "node:test"; import assert from "node:assert/strict";
-import { nameSmell, sentenceStartsOf } from "./name-smell.js";
+import { nameSmell, casingReliability, sentenceStartsOf, logit, sigmoid } from "./name-smell.js";
 
-// a prior in the shape of janus/priors/pos-eng.json forms: lowercase form -> { UPOS: count }
-const POS = { i: { PRON: 900 }, "i’m": { PRON: 40 }, and: { CCONJ: 999 }, the: { DET: 999 }, day: { NOUN: 170, PROPN: 8 }, man: { NOUN: 36 }, see: { VERB: 205 }, yea: { INTJ: 3 }, kitty: { NOUN: 3, PROPN: 2 }, bennet: undefined, hast: undefined, shalt: undefined, wherefore: undefined };
-const text = "Kitty coughed. Day came and the day went. Yea, said Bennet. See the man and the man saw Kitty. I think Bennet knew. Hast thou eaten? Shalt thou go? Wherefore did Mrs. Long call Bennet? Bennet saw Long.";
+const W = { intercept: -1.2, w: { mid: 3.0, init: -0.4, tag: 1.6, repeat: 0.9 }, prior: { pseudo: 2, base: 0.2 } };   // test weights, plainly directional
+const POS = { i: { PRON: 900 }, and: { CCONJ: 999 }, day: { NOUN: 170, PROPN: 8 }, man: { NOUN: 36 }, yea: { INTJ: 3 }, see: { VERB: 205 }, kitty: { NOUN: 3, PROPN: 2 }, elizabeth: { PROPN: 2 }, "shed": { VERB: 4 } };
+const text = "Kitty coughed. Day came and the day went. Yea, said Bennet. See the man and the man saw Kitty. I think Bennet knew. Hast thou eaten? Wherefore did Mrs. Long call Bennet? Bennet saw Long.";
 const S = sentenceStartsOf(text);
-const v = (surface, o = {}) => nameSmell({ surface, text, sentenceStarts: S, pos: POS, ...o });
+const p = (surface, o = {}) => nameSmell({ surface, text, sentenceStarts: S, pos: POS, weights: W, ...o });
 
-test("a surface capitalised away from a sentence start and never lowercase is a name, even when the prior has never seen it", () => {
-  const r = v("Bennet"); assert.equal(r.verdict, "name"); assert.ok(r.capMid >= 1); assert.equal(r.lower, 0);
+test("the answer is a probability with its evidence: p, logit and each signal's contribution", () => {
+  const r = p("Bennet"); assert.ok(r.p > 0 && r.p < 1); assert.ok(Math.abs(logit(r.p) - r.logit) < 1e-9); assert.ok(r.contributions && "mid" in r.contributions && "prior" in r.contributions);
+  assert.ok(Math.abs(Object.values(r.contributions).reduce((a, b) => a + b, 0) + W.intercept - r.logit) < 1e-9, "the contributions sum to the logit");
 });
-test("an open-class word the prior knows as a noun is still a name when the text capitalises it everywhere ('Kitty')", () => { assert.equal(v("Kitty").verdict, "name"); });
-test("a word that also occurs lowercase in the same text is a common word, not a name ('Day', 'Man')", () => {
-  assert.equal(v("Day").verdict, "not_name"); assert.match(v("Day").why, /lowercase/); assert.equal(nameSmell({ surface: "Man", text: "Man was made. The man left.", sentenceStarts: sentenceStartsOf("Man was made. The man left."), pos: POS }).verdict, "not_name");
+test("ORDER: a name capitalised mid-sentence and repeated outranks a word that also occurs lowercase, a sentence-opener and a pronoun", () => {
+  const b = p("Bennet").p; for (const w of ["Day", "Yea", "Hast", "See", "I"]) assert.ok(b > p(w).p, `Bennet ${b.toFixed(2)} > ${w} ${p(w).p.toFixed(2)}`);
+  assert.ok(b > 0.5, `a clear name is more likely than not: ${b}`);
 });
-test("TRAP: a word capitalised ONLY because it opens a sentence is unknown, never a name ('Yea', 'Hast', 'Shalt', 'Wherefore', 'See')", () => {
-  for (const w of ["Yea", "Hast", "Shalt", "Wherefore", "See"]) { const r = v(w); assert.notEqual(r.verdict, "name", w); }
-  assert.equal(v("Hast").verdict, "unknown"); assert.equal(v("Wherefore").verdict, "unknown");
+test("MONOTONE: each lowercase occurrence of the same word lowers its probability; each capitalised mid-sentence one raises it", () => {
+  const base = (t) => nameSmell({ surface: "Rowan", text: t, sentenceStarts: sentenceStartsOf(t), pos: {}, weights: W }).p;
+  const t0 = "Then Rowan came. We saw Rowan.", t1 = t0 + " A rowan tree grew.", t2 = t1 + " The rowan fell.", t3 = t0 + " Then Rowan left.";
+  assert.ok(base(t0) > base(t1) && base(t1) > base(t2), `${base(t0)} ${base(t1)} ${base(t2)}`); assert.ok(base(t3) > base(t0));
 });
-test("TRAP: a closed-class word the prior knows (a pronoun, a conjunction) is never a name, however it is capitalised ('I', 'I’m', 'And')", () => {
-  const t = "Then I went. And I saw. Bennet said I’m here. I stayed.", s = sentenceStartsOf(t);
-  for (const w of ["I", "And", "I’m"]) assert.equal(nameSmell({ surface: w, text: t, sentenceStarts: s, pos: POS }).verdict, "not_name", w);
+test("CASUAL SPEECH: in text with no capitalisation the casing signals carry no weight, so a name is still found by what remains (the parser's tag, repetition, the prior), and a stopword is not", () => {
+  const t = "howard shore wrote it. i think howard shore is great. you know howard shore. the man said it and the man left.", s = sentenceStartsOf(t), posAt = new Map([[0, "PROPN"], [t.indexOf("howard", 20), "PROPN"], [t.indexOf("howard", 60), "PROPN"]]);
+  assert.ok(casingReliability(t, s) < 0.2, `a lowercase text is not casing-reliable: ${casingReliability(t, s)}`);
+  const h = nameSmell({ surface: "howard", text: t, sentenceStarts: s, pos: {}, posAt, weights: W }), m = nameSmell({ surface: "man", text: t, sentenceStarts: s, pos: POS, posAt: new Map(), weights: W });
+  assert.ok(Math.abs(h.contributions.mid) < 0.05 && Math.abs(h.contributions.init) < 0.05, "no casing evidence in a lowercase text"); assert.ok(h.p > m.p, `howard ${h.p.toFixed(2)} > man ${m.p.toFixed(2)}`);
+  assert.ok(h.p > 0.5, `the tag and the repetition carry it: ${h.p}`);
 });
-test("a title with its name is judged on the name: 'Mrs. Long' by 'Long'; a bare dotted title is not a being ('Mr.')", () => {
-  assert.equal(v("Mrs. Long").verdict, "name");
-  assert.equal(nameSmell({ surface: "Mr.", text: "Mr. Bennet came. Mr. Bennet left.", sentenceStarts: sentenceStartsOf("Mr. Bennet came. Mr. Bennet left."), pos: POS }).verdict, "not_name");
+test("TYPOS: a name misspelled in one place and spelled right in others stays a name; a one-off mistyped COMMON word does not become one", () => {
+  const t = "Then Bingley came. We saw Bingley. Bingly left. Later Bingley wrote. teh man came.", s = sentenceStartsOf(t);
+  assert.ok(nameSmell({ surface: "Bingley", text: t, sentenceStarts: s, pos: {}, weights: W }).p > 0.5);
+  assert.ok(nameSmell({ surface: "Bingly", text: t, sentenceStarts: s, pos: {}, weights: W }).p > nameSmell({ surface: "teh", text: t, sentenceStarts: s, pos: {}, weights: W }).p, "a capitalised mid-sentence one-off outranks a lowercase typo");
 });
-test("a surface that is not in the text at all is unknown, never a name by default; no prior is a typed gap on the verdict, not a crash", () => {
-  assert.equal(v("Zebulun").verdict, "unknown");
-  const r = nameSmell({ surface: "Bennet", text, sentenceStarts: S, pos: null }); assert.equal(r.verdict, "name"); assert.equal(r.priorGap, "no_pos_prior");
+test("SOFT, NOT A VETO: a word the prior knows as a pronoun only a couple of times, used as a capitalised name over and over, can be a name; one the prior knows from 900 uses cannot", () => {
+  const t = "Then Ye came. We saw Ye. Ye left. Ye wrote. Ye said.", s = sentenceStartsOf(t);
+  const rare = nameSmell({ surface: "Ye", text: t, sentenceStarts: s, pos: { ye: { PRON: 2 } }, posAt: new Map(), weights: W }).p, common = nameSmell({ surface: "Ye", text: t, sentenceStarts: s, pos: { ye: { PRON: 900 } }, posAt: new Map(), weights: W }).p;
+  assert.ok(rare > 0.5, `rare pronoun use is outvoted by the text: ${rare}`); assert.ok(common < 0.05, `900 pronoun uses dominate: ${common}`); assert.ok(common > 0 && common < rare);
 });
-test("the verdict carries its evidence, so a reader can see why", () => { const r = v("Bennet"); assert.ok("capMid" in r && "capInitial" in r && "lower" in r && "why" in r); });
+test("the parser's tag is evidence, not a veto: PROPN in context raises, VERB in context lowers, and a single mis-tag can be outvoted by the text", () => {
+  const t = "Then Shed came. We saw Shed. Shed left.", s = sentenceStartsOf(t), at = (n) => { let i = -1; for (let k = 0; k <= n; k++) i = t.indexOf("Shed", i + 1); return i; };
+  const mk = (tags) => nameSmell({ surface: "Shed", text: t, sentenceStarts: s, pos: {}, posAt: new Map(tags.map((u, n) => [at(n), u])), weights: W }).p;
+  assert.ok(mk(["PROPN", "PROPN", "PROPN"]) > mk(["PROPN", "PROPN", "VERB"]) && mk(["PROPN", "PROPN", "VERB"]) > mk(["VERB", "VERB", "VERB"])); assert.ok(mk(["PROPN", "PROPN", "VERB"]) > 0.5, "one mis-tag in three is outvoted");
+});
+test("a title with its name is judged on the name; a bare title is just a token, and joining it to the name is the cast builder's job (no special case here)", () => {
+  const t2 = "Then Mr. Bennet came. We saw Mr. Bennet. Mr. Bennet left.", r2 = nameSmell({ surface: "Mr.", text: t2, sentenceStarts: sentenceStartsOf(t2), pos: {}, weights: W });
+  assert.ok(p("Mrs. Long").p > 0.5); assert.equal(r2.schema, "NameSmell@2"); assert.ok(r2.p > 0 && !("abbreviation" in r2.contributions), "scored by the same joint model, no disconnected branch for abbreviations");
+});
+test("a surface not in the text, or weights not given, are typed gaps, never a default answer", () => {
+  assert.equal(p("Zebulun").p, null); assert.equal(p("Zebulun").gap, "not_in_text");
+  const r = nameSmell({ surface: "Bennet", text, sentenceStarts: S, pos: POS, weights: null, weightsFile: "/nonexistent.json" }); assert.equal(r.p, null); assert.equal(r.gap, "no_name_smell_weights");
+});
+test("no prior is a typed note on the answer, and the answer still stands", () => {
+  const r = nameSmell({ surface: "Bennet", text, sentenceStarts: S, pos: null, weights: W }); assert.ok(r.p > 0.5); assert.equal(r.priorGap, "no_pos_prior");
+});
+test("casingReliability is the share of sentence starts that are capitalised: 1 for ordinary prose, 0 for a lowercase chat message", () => {
+  assert.equal(casingReliability("Then he came. And she left. So it went.", sentenceStartsOf("Then he came. And she left. So it went.")), 1);
+  assert.equal(casingReliability("then he came. and she left.", sentenceStartsOf("then he came. and she left.")), 0);
+});
+test("sigmoid and logit are inverses", () => { for (const x of [-4, -0.3, 0, 2.2]) assert.ok(Math.abs(logit(sigmoid(x)) - x) < 1e-9); });
 
-// ── found by running it over both builders' casts on Genesis and Pride and Prejudice (2026-11-26) ──
-test("FOUND: an ALL-CAPS token is its own word: 'LORD' (the divine name) is not vetoed by the common word 'lord' in the same text", () => {
-  const t = "And the LORD said unto Pharaoh, my lord, I will go. The LORD spake. A lord of Egypt came.", s = sentenceStartsOf(t);
-  assert.equal(nameSmell({ surface: "LORD", text: t, sentenceStarts: s, pos: POS }).verdict, "name");
-  assert.equal(nameSmell({ surface: "Lord", text: "Then Lord Byron came. The lord left.", sentenceStarts: sentenceStartsOf("Then Lord Byron came. The lord left."), pos: POS }).verdict, "not_name", "title-case still meets the lowercase test");
+// ── STACKING: the signals are ONE joint model, so evidence that agrees collapses the uncertainty and evidence that conflicts widens it (no branches that do not connect) ──
+// `cov` is the posterior covariance of [intercept, mid, init, tag, repeat] from the fit (Laplace approximation); the model returns the logit's standard deviation and a certainty = |logit| / sd.
+const WC = { ...W, cov: [[0.05, 0, 0, 0, 0], [0, 0.05, 0, 0, 0], [0, 0, 0.05, 0, 0], [0, 0, 0, 0.05, 0], [0, 0, 0, 0, 0.05]] };
+test("STACKING: each signal that agrees raises the certainty; a signal that conflicts lowers it relative to the agreeing case", () => {
+  const t = "Then Rowan came. We saw Rowan. Later Rowan left. Rowan wrote.", s = sentenceStartsOf(t), at = (n) => { let i = -1; for (let k = 0; k <= n; k++) i = t.indexOf("Rowan", i + 1); return i; };
+  const tags = (u) => new Map([0, 1, 2, 3].map((n) => [at(n), u]));
+  const f = (posAt) => nameSmell({ surface: "Rowan", text: t, sentenceStarts: s, pos: {}, posAt, weights: WC });
+  const none = f(undefined), agree = f(tags("PROPN")), conflict = f(tags("VERB"));
+  assert.ok(agree.certainty > none.certainty, `casing + tag agree: ${agree.certainty} > casing alone ${none.certainty}`);
+  assert.ok(agree.certainty > conflict.certainty, `agreeing ${agree.certainty} > conflicting ${conflict.certainty}`);
+  assert.ok(agree.sd > 0 && "sd" in none);
 });
-test("FOUND: the reader's own tag for the token in context decides what position cannot: a capital after the comma that opens an unmarked speech ('said unto them, Shed no blood') is not a name when the parser tags it VERB", () => {
-  const t = "And Reuben said unto them, Shed no blood. Reuben went. And Judah said, Wherefore go we? Judah stayed.", s = sentenceStartsOf(t);
-  const at = (w, n = 0) => { let i = -1; for (let k = 0; k <= n; k++) i = t.indexOf(w, i + 1); return i; };
-  const posAt = new Map([[at("Reuben"), "PROPN"], [at("Shed"), "VERB"], [at("Reuben", 1), "PROPN"], [at("Judah"), "PROPN"], [at("Wherefore"), "ADV"], [at("Judah", 1), "PROPN"]]);
-  assert.equal(nameSmell({ surface: "Shed", text: t, sentenceStarts: s, pos: POS, posAt }).verdict, "not_name"); assert.match(nameSmell({ surface: "Shed", text: t, sentenceStarts: s, pos: POS, posAt }).why, /VERB in context/);
-  assert.equal(nameSmell({ surface: "Wherefore", text: t, sentenceStarts: s, pos: POS, posAt }).verdict, "not_name");
-  assert.equal(nameSmell({ surface: "Reuben", text: t, sentenceStarts: s, pos: POS, posAt }).verdict, "name");
-  assert.equal(nameSmell({ surface: "Shed", text: t, sentenceStarts: s, pos: POS }).verdict, "name", "without the contextual tags the verdict is the casing verdict, unchanged");
+test("STACKING: with no covariance given, the model still answers and says it has no uncertainty estimate (typed), never a made-up one", () => {
+  const r = nameSmell({ surface: "Bennet", text, sentenceStarts: S, pos: POS, weights: W }); assert.ok(r.p > 0.5); assert.equal(r.sd, null); assert.equal(r.uncertaintyGap, "no_covariance");
 });
-test("the contextual tag only ever REMOVES a name: a token the parser tags PROPN is not made a name by the tag alone (a sentence-initial one stays unknown)", () => {
-  const t = "Yea, said Bennet. Yea went on.", s = sentenceStartsOf(t); const posAt = new Map([[0, "PROPN"], [t.indexOf("Yea went"), "PROPN"]]);
-  assert.equal(nameSmell({ surface: "Yea", text: t, sentenceStarts: s, pos: { yea: undefined }, posAt }).verdict, "unknown");
+
+// ── the SHIPPED weights: they are the file that passed the gate, and the test pins what the gate decided ──
+import { loadWeights } from "./name-smell.js";
+test("the shipped weights are the gate's: no 'repeat' signal, a covariance, the gate's own numbers, and the weak-label (circular) fit is not what is installed", () => {
+  const w = loadWeights(); assert.ok(w, "weights file present"); assert.equal(w.schema, "NameSmellWeights@2"); assert.deepEqual(w.signals, ["mid", "init", "tag"]); assert.equal(w.w.repeat, 0);
+  assert.ok(w.w.mid > 0 && w.w.init < 0 && w.w.tag > 0, "the signs a reader would expect once the labels are independent of the parser: capitalised mid-sentence and the parser's PROPN raise, sentence-initial-only lowers");
+  assert.ok(Array.isArray(w.cov) && w.cov.length === 4 && w.covOrder.join() === "intercept,mid,init,tag"); assert.equal(w.gate.passed, true); assert.ok(w.gate.heldOutAUC.lowercase > 0.9 && w.gate.heldOutAUC.ALL > w.gate.baselines.priorOnly);
+});
+test("with the shipped weights a name outranks a common word, a stopword and a sentence-opener, in clean prose and in a lowercase chat message, and the answer carries its uncertainty", () => {
+  const t = "Then Bingley came. We saw Bingley. The day was fine and the day ended. Yea, said Bingley. See the man.", s = sentenceStartsOf(t), tl = t.toLowerCase(), sl = sentenceStartsOf(tl);
+  const tg = (txt, sm, w) => new Map(); const run = (txt, st, w) => nameSmell({ surface: w, text: txt, sentenceStarts: st, pos: POS, posAt: undefined });
+  const a = run(t, s, "Bingley"), b = run(t, s, "Day"); assert.ok(a.p > b.p && a.p > 0.5, `${a.p} ${b.p}`); assert.ok(a.sd > 0 && a.certainty > 0 && !a.uncertaintyGap);
+  const c = run(tl, sl, "bingley"), d = run(tl, sl, "day"); assert.ok(c.p > d.p, `lowercase chat: bingley ${c.p} > day ${d.p}`);
 });
