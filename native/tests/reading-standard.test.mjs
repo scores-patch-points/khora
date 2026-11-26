@@ -84,7 +84,7 @@ test("L7: the read's codec, layer ledger, quotation spans and frames are woven i
   const fs = await import("node:fs"), os = await import("node:os"), path = await import("node:path"), { weaveFramedReading } = await import("../the-fold/pharos-framed.mjs"), d = fs.mkdtempSync(path.join(os.tmpdir(), "kl7-"));
   const r = await weaveFramedReading(DOC, { language: "eng", log: "t", dir: d, actPrior: null }); for (const k of ["text-codec", "text-layers", "text-quotes", "text-frames"]) assert.ok(r.written.includes(k), k);
 });
-test("L7 (the rest): an EOT, a promoted trail-rule, and the round trip are woven by cell and kind", { todo: "NOT BUILT: the EOT of a text is Janus's to write (it reads text and text-codec by kind; a kind and cell for it are not declared); a promoted trail-rule is a proposal at EVA·Pattern, and EVA is Penelope's; the round trip (R3 to R5) has no entries" }, () => { throw new Error("not woven"); });
+test("L7 (the rest): an EOT, a promoted trail-rule, and the round trip are woven by cell and kind", { todo: "NOT BUILT, and NOT KHORA'S TO BUILD: the EOT of a text and the round trip (R3 to R5) are Janus's (nl-eot.mjs; khora never imports it; no kind or cell is declared); a promoted trail-rule is a JUDGEMENT at EVA·Pattern, which is Penelope's cell (khora may only leave the held-out evidence). BUILT on khora's side: weaving the reading and READING BACK verdicts (the-fold/pharos-verdicts.mjs)" }, () => { throw new Error("not woven"); });
 
 // ── L10: the codec carries its conventions ──
 test("L10: the codec foldCodec finds carries its quote table, read from the text where the text gives evidence and from the codec default where it does not", async () => {
