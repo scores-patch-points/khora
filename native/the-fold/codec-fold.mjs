@@ -57,9 +57,11 @@ function tokensOf(text, v) {
 const knownIn = (v, tok) => v.forms.has(tok) || (v.spaced && tok.includes("'") && v.forms.has(tok.split("'").pop())) || (v.spaced && tok.includes("’") && v.forms.has(tok.split("’").pop()));
 
 /** surpriseOf(text, code) -> { code, tokens, known, coverage, totalBits, bitsPerToken } */
-export function surpriseOf(text, code) {
+export const KNOWN_BITS_MODELS = Object.freeze(["vocab", "constant"]);   // how a KNOWN word is priced: "vocab" = log2(this codec's table size) (the table's size is the TREEBANK's, not the language's); "constant" = one language-independent price
+export const NOMINAL_VOCAB = 2 ** 14;
+export function surpriseOf(text, code, { bits = "vocab" } = {}) {
   const v = loadVocab(code), toks = tokensOf(text, v), known = toks.filter((t) => knownIn(v, t)).length, n = toks.length || 1;
-  const bitsKnown = Math.log2(v.size / (1 - ESCAPE)), bitsUnknown = Math.log2(UNIVERSE / ESCAPE), total = known * bitsKnown + (toks.length - known) * bitsUnknown;
+  const bitsKnown = Math.log2((bits === "constant" ? NOMINAL_VOCAB : v.size) / (1 - ESCAPE)), bitsUnknown = Math.log2(UNIVERSE / ESCAPE), total = known * bitsKnown + (toks.length - known) * bitsUnknown;
   return Promise.resolve({ code, tokens: toks.length, known, coverage: known / n, totalBits: total, bitsPerToken: total / n });
 }
 export const entropyOf = (dist) => -dist.reduce((s, d) => s + (d.p > 0 ? d.p * Math.log2(d.p) : 0), 0);
@@ -70,14 +72,14 @@ const shuffleLetters = (text, r) => String(text).replace(/[\p{L}\p{M}]+/gu, (w) 
  * foldCodec(text, { codes }) -> { chosen, distribution: [{ code, p, coverage, bitsPerToken, tokens }], entropy, pruned, nullCoverage, gap? }
  * `distribution` is over the codecs that survived the alphabet pass, sorted by probability; `chosen` is its head, and is null with a typed gap when the best codec's coverage does not beat the shuffled null.
  */
-export async function foldCodec(text, { codes = null, seed = 1 } = {}) {
+export async function foldCodec(text, { codes = null, seed = 1, bits = process.env.CODEC_FOLD_BITS ?? "vocab" } = {}) {
   const idx = index(), held = codes ?? idx.codes; considered = held.length;
   const letters = [...String(text ?? "").toLowerCase()].filter(isLetter); if (!letters.length) return { chosen: null, distribution: [], entropy: 0, pruned: held.length, gap: { gap: "no_letters" } };
   // stage 1: the alphabet pass: how much of the text's letters can this codec write at all? keep the codecs within a whisker of the best (relative, not a typed floor)
   const cover = Object.fromEntries(held.map((c) => { const a = new Set(idx.by[c].alphabet); return [c, letters.filter((ch) => a.has(ch)).length / letters.length]; })), best = Math.max(...Object.values(cover));
   const cand = held.filter((c) => cover[c] >= best - 0.02);
   // stage 2: surprise under each candidate's vocabulary (loaded now, memoised)
-  const rows = []; for (const c of cand) rows.push(await surpriseOf(text, c));
+  const rows = []; for (const c of cand) rows.push(await surpriseOf(text, c, { bits }));
   const minBits = Math.min(...rows.map((r) => r.totalBits)), z = rows.reduce((s, r) => s + 2 ** (-(r.totalBits - minBits)), 0);
   const distribution = rows.map((r) => ({ code: r.code, p: 2 ** (-(r.totalBits - minBits)) / z, coverage: r.coverage, bitsPerToken: r.bitsPerToken, tokens: r.tokens })).sort((a, b) => b.p - a.p);
   // the measured null: the same text with each token's letters shuffled, under the best codec: coverage by chance
