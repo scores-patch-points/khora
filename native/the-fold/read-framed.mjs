@@ -9,7 +9,7 @@
 //
 // readFramed(text, { language, actPrior, ...readDocumentOptions }) -> the canonical entry + entry.frames = { schema: "Frames@1", lang, frames, speech, gaps, crossCheck }
 import { readDocument } from "../reading.js";
-import { frameVerbs } from "../adapters/text/frames-layer.js";
+import { frameVerbs } from "../adapters/text/frames-layer.js"; import { codecQuotes } from "../adapters/text/quote-frames.js";
 import { speechVerbFromActPrior, loadActPrior } from "../adapters/text/speech-frames.js";
 import { layerLedger } from "./reading-standard.mjs";
 
@@ -30,9 +30,9 @@ export async function readFramed(text, { language, actPrior, ablate = [], ...opt
   const sentences = entry.parse.map((p) => ({ order: p.order, offset: p.offset, rows: p.rows ?? [] }));
   const targets = entry.parse.flatMap((p) => (p.rows ?? []).filter((r) => r.upos === "VERB").map((r) => ({ order: p.order, row: r, form: r.form, kriya: String(r.lemma ?? r.form).toLowerCase() })));
   const names = [...new Set((entry.cast ?? []).flatMap((c) => [c.surface, ...(c.allSurfaces ?? [])]).filter(Boolean))];
-  const out = frameVerbs({ text: T, sentences, targets, names, lang: stem, speech, ablate }), gaps = [...out.gaps]; if (speech.gap) gaps.push(speech.gap);
+  const cq = ablate.includes("quotes") ? null : codecQuotes(stem, T), out = frameVerbs({ text: T, sentences, targets, names, lang: stem, speech, ablate, quotes: cq?.table ?? null }), gaps = [...out.gaps]; if (speech.gap) gaps.push(speech.gap);
   const noTable = out.gaps.find((g) => g.gap === "no_quote_table");
-  entry.frames = { schema: FRAMES_SCHEMA, lang: stem, frames: out.frames, speech: out.speech, gaps, ablate, crossCheck: clauseTreeAgreement(entry, out.frames, speech) };
+  entry.frames = { schema: FRAMES_SCHEMA, lang: stem, frames: out.frames, speech: out.speech, gaps, ablate, quotes: cq ? { source: cq.source, differs: cq.differs, table: cq.table } : null, crossCheck: clauseTreeAgreement(entry, out.frames, speech) };
   entry.layers = layerLedger(entry, { stem, quotes: noTable ? { gap: "no_quote_table" } : {}, speech, ablate });
   return entry;
 }

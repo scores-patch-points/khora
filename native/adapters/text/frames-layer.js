@@ -18,14 +18,15 @@ import { speechFrames, heldAt } from "./speech-frames.js";
 // One that closed in an earlier paragraph is not a tag: found by running the canonical door over a whole document (the chat door, one paragraph at a time, never saw it).
 const quotesNear = (spans, s, text) => { const end = s.offset + Math.max(0, ...s.rows.map((r) => r.end)); return spans.filter((q) => (q.close >= s.offset && q.open <= end) || (q.close < s.offset && s.offset - q.close <= 4 && !text.slice(q.close + 1, s.offset).includes("\n"))); };
 
-export function frameVerbs({ text, sentences, targets, names, lang = "eng", speech, ablate = [] }) {
+export function frameVerbs({ text, sentences, targets, names, lang = "eng", speech, ablate = [], quotes = null }) {
+  const Q = quotes ?? lang;   // the codec's quote table for THIS text (codecQuotes), else the language's
   // ablate: ["quotes"] switches the quotation-mark layer off, and the speech layer is switched off by passing a speech gap; either way the frames are UNKNOWN (null), never false: an ablated layer is not an absent one
-  const { spans, gap: spanGap } = ablate.includes("quotes") ? { spans: [], gap: { gap: "ablated:quotes" } } : quoteSpans(text, lang), noTable = spanGap && (spanGap.gap === "no_quote_table" || spanGap.gap === "ablated:quotes") ? spanGap : null;
+  const { spans, gap: spanGap } = ablate.includes("quotes") ? { spans: [], gap: { gap: "ablated:quotes" } } : quoteSpans(text, Q), noTable = spanGap && (spanGap.gap === "no_quote_table" || spanGap.gap === "ablated:quotes") ? spanGap : null;
   const sentByOrder = new Map(sentences.map((s) => [s.order, s])), perOrder = new Map(), speechOut = [], frames = [], dashed = new Map();
   const paragraphStart = (pos) => { const i = text.lastIndexOf("\n\n", pos); return i < 0 ? 0 : i + 2; };
   for (const t of targets) {
     const s = sentByOrder.get(t.order); if (!s || !t.row) continue;
-    const pStart = paragraphStart(s.offset), dash = dashed.has(pStart) ? dashed.get(pStart) : (dashed.set(pStart, dashDialogue(text.slice(pStart), lang)), dashed.get(pStart)), gap = dash ? { gap: "dash_dialogue_not_read" } : noTable;
+    const pStart = paragraphStart(s.offset), dash = dashed.has(pStart) ? dashed.get(pStart) : (dashed.set(pStart, dashDialogue(text.slice(pStart), Q)), dashed.get(pStart)), gap = dash ? { gap: "dash_dialogue_not_read" } : noTable;
     if (!perOrder.has(t.order)) {
       // the mark-free layer, per sentence, on the sentence's own rows; a quotation abutting the speech verb is that quotation's tag and is left to the mark layer
       const frs = speech.gap ? [] : speechFrames(s.rows, speech.isSpeech, { quotes: quotesNear(spans, s, text).map((q) => ({ open: q.open - s.offset, close: q.close - s.offset, depth: q.depth })) });
@@ -37,9 +38,9 @@ export function frameVerbs({ text, sentences, targets, names, lang = "eng", spee
     if (gap) { frames.push({ ...base, framed: null, holder: null, via: gap.gap, depth: 0, ...rep }); continue; }
     const pos = s.offset + t.row.start, q = innermostAt(spans, pos);
     if (!q) { frames.push({ ...base, framed: false, holder: null, via: null, depth: 0, ...rep }); continue; }
-    const top = spans.findIndex((x) => x.depth === 0 && x.open <= q.open && x.close >= q.close), h = speakerOfSpan(text, spans, top < 0 ? 0 : top, names, lang);
+    const top = spans.findIndex((x) => x.depth === 0 && x.open <= q.open && x.close >= q.close), h = speakerOfSpan(text, spans, top < 0 ? 0 : top, names, Q);
     frames.push({ ...base, framed: true, holder: h.holder, via: h.via, depth: q.depth, ...rep });
   }
-  const gaps = [...(spanGap ? [spanGap] : [])]; if (sentences.some((s) => dashDialogue(text.slice(paragraphStart(s.offset)), lang))) gaps.push({ gap: "dash_dialogue_not_read" });
+  const gaps = [...(spanGap ? [spanGap] : [])]; if (sentences.some((s) => dashDialogue(text.slice(paragraphStart(s.offset)), Q))) gaps.push({ gap: "dash_dialogue_not_read" });
   return { frames, speech: speechOut, gap: noTable ?? null, gaps };
 }

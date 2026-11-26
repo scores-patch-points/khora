@@ -13,6 +13,7 @@
 // explains a neighbour's text, Norwegian under Danish reaching 0.76 to 0.80). pOwn below one half is the typed gap, with the nearest codec named. No calibration file: pOwn is null and a typed note says so.
 // KNOWN GAP: unspaced scripts (Chinese, Japanese, Thai) have no calibrated open-world term, so Traditional Chinese (no held codec) still chooses Japanese at p = 1.00; it needs word or bigram surprise there (the todo test in codec-fold.test.mjs).
 // NOT HERE (stated, not hidden): morphology beyond the form table (an inflected form the table never attested counts as unseen); a codec that exists but is not vendored yet (nl-eot.mjs loadGrammar vendors it, in the background); mixed-language text.
+import { codecQuotes } from "../adapters/text/quote-frames.js";
 import fs from "node:fs"; import path from "node:path"; import zlib from "node:zlib"; import os from "node:os"; import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const PRIORS = process.env.KHORA_PRIORS_DIR ? path.resolve(process.env.KHORA_PRIORS_DIR) : path.resolve(HERE, "..", "..", "..", "janus", "priors");
@@ -87,5 +88,5 @@ export async function foldCodec(text, { codes = null, seed = 1 } = {}) {
   const out = { chosen: top.code, distribution, entropy: entropyOf(distribution), pruned: held.length - cand.length, nullCoverage: nullMax, pOwn, ...(!spaced ? { calibrationGap: "uncalibrated_for_unspaced_scripts" } : cal ? {} : { calibrationGap: "no_codec_fold_calibration" }) };
   if (cal && pOwn < 0.5) return { ...out, chosen: null, gap: { gap: "no_codec_explains_it", nearest: top.code, coverage: top.coverage, pOwn, bitsPerToken: top.bitsPerToken, how: "the nearest held codec explains too little of this text to be its own language (calibrated on Genesis in 65 editions); vendor a codec for this language (nl-eot.mjs loadGrammar, vendor-ud-codec.mjs)" } };
   if (spacedTop && !(top.coverage > nullMax)) return { ...out, chosen: null, gap: { gap: "no_codec_explains_it", nearest: top.code, coverage: top.coverage, nullCoverage: nullMax, bitsPerToken: top.bitsPerToken, how: "no held codec's vocabulary beats a letter-shuffled version of this text; vendor a codec for this language (nl-eot.mjs loadGrammar, vendor-ud-codec.mjs)" } };
-  return out;
+  return { ...out, quotes: codecQuotes(top.code, String(text ?? "")) };   // the codec carries its conventions: the quote table (the default, or this text's own variant)
 }

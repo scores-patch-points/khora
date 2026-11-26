@@ -144,3 +144,14 @@ test("infer: an inferred table drives quoteSpans directly (the table is the edit
   const text = SPEECH("«", "»"), { table } = inferQuoteTable(text), r = quoteSpans(text, table); assert.equal(r.spans.length, 6); assert.equal(r.gaps.length, 0);
   assert.equal(quoteSpans(text, "xxx").gap.gap, "no_quote_table", "a language with no table and no inferred table stays a typed gap");
 });
+
+// ── the quote convention is PART OF A CODEC: codecQuotes(code, text) ──
+import { codecQuotes } from "./quote-frames.js";
+test("codec: with no marks to read, the codec's own default table is used (source codec)", () => { const r = codecQuotes("eng", "He said go home. She said no."); assert.equal(r.source, "codec"); assert.deepEqual(r.table.pairs, QUOTE_TABLES.eng.pairs); assert.equal(r.differs, false); });
+test("codec: an edition that differs from its language default wins, and keeps the codec's dash and enders (Spanish with „ “ where the default has « » and “ ”)", () => {
+  const r = codecQuotes("spa", SPEECH("„", "“")); assert.equal(r.source, "inferred+codec"); assert.equal(r.differs, true); assert.deepEqual(r.table.pairs[0], ["„", "“"]); assert.ok(r.table.pairs.some((p) => p[0] === "«"), "the codec's other pair is kept"); assert.ok(!r.table.pairs.some((p) => p[0] === "“" || p[1] === "“" && p[0] !== "„"), "a default pair that uses a mark the edition uses another way is dropped"); assert.deepEqual(r.table.dash, QUOTE_TABLES.spa.dash);
+});
+test("codec: an edition that matches its default says so (differs false)", () => { const r = codecQuotes("eng", SPEECH("“", "”")); assert.equal(r.differs, false); assert.deepEqual(r.table.pairs, [["“", "”"]]); assert.equal(r.source, "inferred+codec"); });
+test("codec: a language with no default and marks that give a convention reads it (source inferred); with neither it is the typed gap", () => {
+  assert.equal(codecQuotes("xxx", SPEECH("«", "»")).source, "inferred"); const g = codecQuotes("xxx", "no marks here at all. ".repeat(5)); assert.equal(g.table, null); assert.equal(g.gap.gap, "no_quote_table");
+});

@@ -11,7 +11,7 @@ const T = { skip: readFramed ? false : `no canonical reader here: ${why}` };
 const DOC = ["“My dear Mr. Bennet,” said his lady to him one day, “have you heard that Netherfield Park is let at last?”", "Mr. Bennet replied that he had not.", "And God said, Let there be light: and there was light.", "Mr. Bennet made no answer."].join("\n\n") + "\n\n" + "Mr. Bennet made no answer. ".repeat(4);
 
 test("the standard is data: every clause has an id, a rule, a status and its evidence; the round trip (R1-R6) and the layer rules (L1-L9) are all there", () => {
-  const ids = STANDARD.map((c) => c.id); assert.equal(new Set(ids).size, ids.length); for (const id of ["R1", "R2", "R3", "R4", "R5", "R6", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9"]) assert.ok(ids.includes(id), id);
+  const ids = STANDARD.map((c) => c.id); assert.equal(new Set(ids).size, ids.length); for (const id of ["R1", "R2", "R3", "R4", "R5", "R6", "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L10"]) assert.ok(ids.includes(id), id);
   for (const c of STANDARD) assert.ok(c.rule && c.status && c.evidence, c.id);
 });
 
@@ -81,3 +81,10 @@ test("R3: a transform takes EOT and returns new EOT (modify, reason) with no sur
 test("R4: encode PROSIFIES: the target codec restores natural order, negation placement, punctuation, capitalisation and sentence boundaries", { todo: "NOT BUILT. Baseline measured 2026-11-26 on 25 English sentences with janus nl-eot.mjs: surface identical to the original 16% (4 of 25); form_unattested on 13.8% of content nodes; 'Mr. Bennet replied that he had not.' -> ['Mr', 'Bennet replied that he not had']; 'It is a truth universally acknowledged' -> 'is it a truth universally acknowledged'. Test belongs in janus." }, () => { throw new Error("the codec carries a form table and order parameters, not prosification rules"); });
 test("R5: for a sentence the codec fully attests (no gaps), decode(encode(decode(x))) is the same EOT as decode(x)", { todo: "FAILS today. Baseline: the EOT is a fixed point for 24% of 25 English sentences (6 of 25), counting gap-bearing ones. The invariant is conditional (gap-free sentences only) so it needs no tuned bar: it must hold for 100% of them. Test belongs in janus." }, () => { throw new Error("round trip is not an EOT fixed point"); });
 test("L7: the read's frames, its layer ledger and any promoted rule are woven into the pharos by cell and kind", { todo: "NOT BUILT: entry.frames and entry.layers are not woven; the kind and cell are proposals only (trail-rule at EVA·Pattern; Penelope owns writes at DEF, EVA and REC)" }, () => { throw new Error("not woven"); });
+
+// ── L10: the codec carries its conventions ──
+test("L10: the codec foldCodec finds carries its quote table, read from the text where the text gives evidence and from the codec default where it does not", async () => {
+  const quoted = "“My dear Mr. Bennet,” said his lady to him one day, “have you heard that Netherfield Park is let at last?” Mr. Bennet replied that he had not. “But it is,” returned she; “for Mrs. Long has just been here, and she told me all about it.” Mr. Bennet made no answer. “Do you not want to know who has taken it?” cried his wife impatiently. “You want to tell me, and I have no objection to hearing it.”";
+  const a = await foldCodec(quoted); assert.equal(a.chosen, "eng"); assert.ok(a.quotes.table.pairs.some((p) => p[0] === "“")); assert.ok(["inferred+codec", "codec"].includes(a.quotes.source));
+  const b = await foldCodec("Mr. Bennet replied that he had not. The woman said that the serpent beguiled her. My dear, you must know that Netherfield is taken by a young man of large fortune."); assert.equal(b.quotes.source, "codec");
+});

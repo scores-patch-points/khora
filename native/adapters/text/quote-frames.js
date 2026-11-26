@@ -73,6 +73,23 @@ export function inferQuoteTable(text, { end = [".", "!", "?"] } = {}) {
   return { table: Object.freeze({ pairs, toggle, end }), evidence: ev, gap: null };
 }
 
+/**
+ * codecQuotes(code, text) -> { table, source, differs, evidence, gap }  THE QUOTE CONVENTION IS PART OF A CODEC (the owner, 2026-11-26): the codec for a language brings its quote conventions, as it brings its form table and order parameters.
+ * A codec's conventions are a default (the built-in or registered table for that code) and the EDITION's own variant, read from the marks (inferQuoteTable): the variant wins where the text gives evidence, because the convention varies by edition
+ * (measured: the same language shows several), and the codec default fills in what marks cannot show (the dash for dialogue, the sentence enders). No evidence and no default is the typed gap `no_quote_table`, never a guess.
+ *   source "inferred" | "inferred+codec" (the variant plus the codec's dash and enders) | "codec" (the default) | null
+ */
+export function codecQuotes(code, text) {
+  const dflt = tableOf(code), inf = inferQuoteTable(text);
+  if (inf.table) {   // the edition's own marks first; the codec's other pairs are kept unless they use a mark the edition uses another way (so a nested 『』 or a second convention is not lost, and a reversed default never fights the edition)
+    const used = new Set([...inf.table.pairs.flat(), ...inf.table.toggle]), has = (T, p) => T.pairs.some((d) => d[0] === p[0] && d[1] === p[1]);
+    const differs = !!dflt && (inf.table.pairs.some((p) => !has(dflt, p)) || inf.table.toggle.some((t) => !dflt.toggle.includes(t)));
+    const table = dflt ? Object.freeze({ pairs: [...inf.table.pairs, ...dflt.pairs.filter((p) => !p.some((m) => used.has(m)))], toggle: [...inf.table.toggle, ...dflt.toggle.filter((t) => !used.has(t))], end: dflt.end, ...(dflt.dash ? { dash: dflt.dash } : {}) }) : inf.table;
+    return { table, source: dflt ? "inferred+codec" : "inferred", differs, evidence: inf.evidence.slice(0, 3), gap: null }; }
+  if (dflt) return { table: dflt, source: "codec", differs: false, evidence: inf.evidence.slice(0, 3), gap: null };
+  return { table: null, source: null, differs: false, evidence: inf.evidence.slice(0, 3), gap: { gap: "no_quote_table", lang: typeof code === "string" ? code : null, how: "the codec carries no quote table and the text's marks give no convention (inferQuoteTable); register one (registerQuoteTable) or supply more text" } };
+}
+
 // the marks a text uses that could be quotation marks (apostrophes and single curly quotes are not counted: they are mostly apostrophes)
 const CANDIDATES = ["“", "”", '"', "«", "»", "„", "‹", "›", "「", "」", "『", "』"];
 const marksIn = (s, except = new Set()) => { const m = {}; for (const ch of s) if (CANDIDATES.includes(ch) && !except.has(ch)) m[ch] = (m[ch] ?? 0) + 1; return m; };
