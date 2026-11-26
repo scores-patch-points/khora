@@ -46,7 +46,7 @@ function pick(h) { return { holder: h.holder, via: h.via }; }
 
 // ── on a thread: which verbs are framed, against a hand-labelled gold (pg1342 chapter I, paragraphs 1 to 8; labelled from the text, not from the output) ──
 let mk = null, ingestDocument = null, askFramed = null, why = null;
-try { const { makeThread } = await import("./thread.mjs"); ({ ingestDocument, askFramed } = await import("./ingest.mjs")); mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-25T14:00:00") }); await mk(); } catch (e) { why = String(e?.message ?? e).slice(0, 100); if (String(e?.message).includes("ingest.mjs")) throw e; }
+try { const { makeThread } = await import("../../chat/thread.mjs"); ({ ingestDocument, askFramed } = await import("../../chat/ingest.mjs")); mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-25T14:00:00") }); await mk(); } catch (e) { why = String(e?.message ?? e).slice(0, 100); if (String(e?.message).includes("ingest.mjs")) throw e; }
 const T = { skip: mk ? false : `no reader here: ${why}` };
 const CH1 = [
   "“My dear Mr. Bennet,” said his lady to him one day, “have you heard that\nNetherfield Park is let at last?”", "Mr. Bennet replied that he had not.",

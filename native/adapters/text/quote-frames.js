@@ -45,13 +45,16 @@ export function quoteSpans(text, lang = "eng") {
   const opens = new Map(T.pairs.map(([o, c]) => [o, c])), closes = new Set(T.pairs.map(([, c]) => c)), toggles = new Set(T.toggle);
   const stack = [], spans = [], gaps = []; const s = String(text ?? "");
   const close = (o, i) => spans.push({ open: o.open, close: i, inner: [o.open + 1, i], depth: stack.length });
+  let paraStart = 0;   // where the current paragraph begins: a closer with no opener closes a quotation that began earlier IN THIS PARAGRAPH'S frame, never one from a paragraph before
   for (let i = 0; i < s.length; i++) {
     const c = s[i], top = stack[stack.length - 1];
+    // a paragraph break ends every open quotation here (the convention is that a speech that goes on reopens in the next paragraph without the last having closed): typed as continuing, so narration after the final mark is not swallowed
+    if (c === "\n" && s[i + 1] === "\n") { while (stack.length) { const o = stack.pop(); spans.push({ open: o.open, close: i, inner: [o.open + 1, i], depth: stack.length, continues: true }); gaps.push({ gap: "quotation_continues", at: o.open }); } while (s[i + 1] === "\n") i++; paraStart = i + 1; continue; }
     if (toggles.has(c)) { if (top && top.mark === c) close(stack.pop(), i); else stack.push({ open: i, mark: c, closer: c }); continue; }
     if (opens.has(c) && !(closes.has(c) && top && top.closer === c)) { stack.push({ open: i, mark: c, closer: opens.get(c) }); continue; }
     if (closes.has(c)) {
       if (top && top.closer === c) close(stack.pop(), i);
-      else { spans.push({ open: -1, close: i, inner: [0, i], depth: 0, continued: true }); gaps.push({ gap: "quotation_continued", at: i }); }
+      else { spans.push({ open: paraStart - 1, close: i, inner: [paraStart, i], depth: 0, continued: true }); gaps.push({ gap: "quotation_continued", at: i }); }
     }
   }
   while (stack.length) { const o = stack.pop(); spans.push({ open: o.open, close: s.length, inner: [o.open + 1, s.length], depth: stack.length, continues: true }); gaps.push({ gap: "quotation_continues", at: o.open }); }

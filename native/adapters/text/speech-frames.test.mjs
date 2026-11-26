@@ -55,7 +55,7 @@ test("speech verbs come from the act prior's communication classes (VerbNet 37.x
 
 // ── on a thread, over real KJV Genesis (no quotation marks anywhere), hand-labelled from the verses: `reported` is true inside what was said, false for narration, null where the text cannot say ──
 let mk = null, ingestDocument = null, askFramed = null, why = null;
-try { const { makeThread } = await import("./thread.mjs"); ({ ingestDocument, askFramed } = await import("./ingest.mjs")); mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-26T10:00:00") }); await mk(); } catch (e) { why = String(e?.message ?? e).slice(0, 100); }
+try { const { makeThread } = await import("../../chat/thread.mjs"); ({ ingestDocument, askFramed } = await import("../../chat/ingest.mjs")); mk = () => makeThread({ hl: "http://127.0.0.1:1", know: null, codeRouter: null, now: () => new Date("2026-11-26T10:00:00") }); await mk(); } catch (e) { why = String(e?.message ?? e).slice(0, 100); }
 const T = { skip: mk ? false : `no reader here: ${why}` };
 const KJV = ["And God said, Let there be light: and there was light.", "And the LORD God said unto the woman, What is this that thou hast done?", "And the woman said, The serpent beguiled me, and I did eat.", "Now the serpent was more subtil than any beast of the field which the LORD God had made.", "Mr. Bennet replied that he had not.", "“Hello,” said Pierre, and he left.", "And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?"];
 // [paragraph, verb form, reported, holder]

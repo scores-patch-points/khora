@@ -13,11 +13,8 @@
 // saying happened; askFramed() says whose words an answer is. Direct quotation only: reported speech inside a quotation is a second frame, not read yet.
 //
 // ingestDocument(thread, text, { onRead, lang }) -> { paragraphs, read, sentences, facts, setAside: [{ text, why }], frames: [{ order, form, kriya, framed, holder, via, depth }], quoteGaps, gap }
-import { quoteSpans, speakerOfSpan, innermostAt, dashDialogue } from "./quote-frames.js";
-import { speechFrames, heldAt, speechVerbFromActPrior } from "./speech-frames.js";
-import fs from "node:fs";
-const ACT_PRIOR_FILE = process.env.ACT_PRIOR || new URL("../../../Zenodotus/derived-priors/act-priors/act-prior-en.json", import.meta.url).pathname;
-let ACT_CACHE; const loadActPrior = () => (ACT_CACHE !== undefined ? ACT_CACHE : (ACT_CACHE = (() => { try { return JSON.parse(fs.readFileSync(ACT_PRIOR_FILE, "utf8")); } catch { return null; } })()));
+import { speechVerbFromActPrior, loadActPrior } from "../adapters/text/speech-frames.js";
+import { frameVerbs } from "../adapters/text/frames-layer.js";
 const SPEECH = new WeakMap();   // thread -> [{ order, a, b, holder, mode }]: where in the thread text reported speech lies (known part only)
 const STORE = new WeakMap();   // thread -> frames, so a question asked later can say whose words an answer is
 const paragraphsOf = (text) => {
@@ -51,30 +48,14 @@ export async function ingestDocument(thread, text, { onRead = null, lang = "eng"
   return res;
 }
 
-/** the frames of one just-read paragraph: for each verb the chat found, is it inside a quotation, and whose */
+/** the frames of one just-read paragraph: for each verb the chat found, is it inside a quotation or inside reported speech, and whose. The decision is frames-layer.js, shared with the canonical reader. */
 function framesOf(thread, p, r, lang, speech) {
-  const S = thread.engine.S, base0 = quoteSpans(p, lang), spans = base0.spans, dash = dashDialogue(p, lang);
-  const gap = dash ? { gap: "dash_dialogue_not_read" } : base0.gap && base0.gap.gap === "no_quote_table" ? base0.gap : null, base = S.text.length - p.length, orders = new Set((r.facts ?? []).map((f) => f.order));
+  const S = thread.engine.S, base = S.text.length - p.length, orders = new Set((r.facts ?? []).map((f) => f.order));
   const names = (S.read?.cast?.referents ?? []).filter((b) => b.kind === "name").map((b) => b.forms?.[0]?.[0]).filter(Boolean);
-  const out = [], speechOut = [], perOrder = new Map();
-  for (const f of S.frames) {
-    if (!orders.has(f.order)) continue;
-    const rows = S.rowsOf.get(f.order)?.rows ?? [], row = rows.find((x) => x.form === f.form), off = S.read.sentences.find((s) => s.order === f.order)?.offset;
-    if (!row || off == null) continue;
-    // the mark-free layer, per sentence, on the sentence's own rows (offsets are the sentence's); a quotation abutting the speech verb is that quotation's tag and is left to the mark layer
-    const sOff = off - base;
-    if (!perOrder.has(f.order)) {
-      const frs = speech.gap ? [] : speechFrames(rows, speech.isSpeech, { quotes: spans.map((q) => ({ open: q.open - sOff, close: q.close - sOff, depth: q.depth })) });
-      perOrder.set(f.order, frs); for (const x of frs) speechOut.push({ order: f.order, a: base + sOff + x.known[0], b: base + sOff + x.known[1], holder: x.holder, mode: x.mode });
-    }
-    const held = speech.gap ? null : heldAt(perOrder.get(f.order), row.start), rep = speech.gap || dash ? { reported: null, reportedBy: null, reportedHead: null, mode: null } : held ? { reported: held.unknown ? null : true, reportedBy: held.holder?.text ?? null, reportedHead: held.holder?.head ?? null, mode: held.mode } : { reported: false, reportedBy: null, reportedHead: null, mode: null };
-    if (gap) { out.push({ order: f.order, form: f.form, kriya: f.kriya, framed: null, holder: null, via: gap.gap, depth: 0, ...rep }); continue; }
-    const pos = off + row.start - base, q = innermostAt(spans, pos);
-    if (!q) { out.push({ order: f.order, form: f.form, kriya: f.kriya, framed: false, holder: null, via: null, depth: 0, ...rep }); continue; }
-    const top = spans.findIndex((x) => x.depth === 0 && x.open <= q.open && x.close >= q.close), h = speakerOfSpan(p, spans, top < 0 ? 0 : top, names, lang);
-    out.push({ order: f.order, form: f.form, kriya: f.kriya, framed: true, holder: h.holder, via: h.via, depth: q.depth, ...rep });
-  }
-  return { frames: out, gap, speech: speechOut };
+  const sentences = [...orders].map((order) => ({ order, offset: (S.read.sentences.find((s) => s.order === order)?.offset ?? base) - base, rows: S.rowsOf.get(order)?.rows ?? [] }));
+  const targets = S.frames.filter((f) => orders.has(f.order)).map((f) => ({ order: f.order, row: (S.rowsOf.get(f.order)?.rows ?? []).find((x) => x.form === f.form), form: f.form, kriya: f.kriya }));
+  const out = frameVerbs({ text: p, sentences, targets, names, lang, speech });
+  return { frames: out.frames, gap: out.gaps.find((x) => x.gap === "dash_dialogue_not_read" || x.gap === "no_quote_table") ?? null, speech: out.speech.map((x) => ({ ...x, a: x.a + base, b: x.b + base })) };
 }
 
 /** askFramed(thread, question) -> the thread's own reply, plus { framed, holder }: an answer drawn wholly from inside a quotation says whose words they are; a mixed or narrated one is left as it was */

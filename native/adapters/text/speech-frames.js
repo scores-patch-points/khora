@@ -72,3 +72,11 @@ export function speechVerbFromActPrior(prior) {
     const cls = e.classes ?? []; return cls.length > 0 && cls.filter(comm).length * 2 >= cls.length;
   } };
 }
+
+// the act prior as Zenodotus holds it, found as a sibling of this repo (ACT_PRIOR overrides); null when absent, and the caller says so (speechVerbFromActPrior(null) is the typed gap)
+import fs from "node:fs";
+let ACT_CACHE;
+export const loadActPrior = (file = process.env.ACT_PRIOR || new URL("../../../../Zenodotus/derived-priors/act-priors/act-prior-en.json", import.meta.url).pathname) => {
+  if (file === ACT_CACHE?.file) return ACT_CACHE.value;
+  let value = null; try { value = JSON.parse(fs.readFileSync(file, "utf8")); } catch { value = null; } ACT_CACHE = { file, value }; return value;
+};
