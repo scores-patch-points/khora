@@ -18,8 +18,9 @@ import { speechFrames, heldAt } from "./speech-frames.js";
 // One that closed in an earlier paragraph is not a tag: found by running the canonical door over a whole document (the chat door, one paragraph at a time, never saw it).
 const quotesNear = (spans, s, text) => { const end = s.offset + Math.max(0, ...s.rows.map((r) => r.end)); return spans.filter((q) => (q.close >= s.offset && q.open <= end) || (q.close < s.offset && s.offset - q.close <= 4 && !text.slice(q.close + 1, s.offset).includes("\n"))); };
 
-export function frameVerbs({ text, sentences, targets, names, lang = "eng", speech }) {
-  const { spans, gap: spanGap } = quoteSpans(text, lang), noTable = spanGap?.gap === "no_quote_table" ? spanGap : null;
+export function frameVerbs({ text, sentences, targets, names, lang = "eng", speech, ablate = [] }) {
+  // ablate: ["quotes"] switches the quotation-mark layer off, and the speech layer is switched off by passing a speech gap; either way the frames are UNKNOWN (null), never false: an ablated layer is not an absent one
+  const { spans, gap: spanGap } = ablate.includes("quotes") ? { spans: [], gap: { gap: "ablated:quotes" } } : quoteSpans(text, lang), noTable = spanGap && (spanGap.gap === "no_quote_table" || spanGap.gap === "ablated:quotes") ? spanGap : null;
   const sentByOrder = new Map(sentences.map((s) => [s.order, s])), perOrder = new Map(), speechOut = [], frames = [], dashed = new Map();
   const paragraphStart = (pos) => { const i = text.lastIndexOf("\n\n", pos); return i < 0 ? 0 : i + 2; };
   for (const t of targets) {

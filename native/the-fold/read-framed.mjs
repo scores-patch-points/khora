@@ -11,26 +11,29 @@
 import { readDocument } from "../reading.js";
 import { frameVerbs } from "../adapters/text/frames-layer.js";
 import { speechVerbFromActPrior, loadActPrior } from "../adapters/text/speech-frames.js";
+import { layerLedger } from "./reading-standard.mjs";
 
 export const FRAMES_SCHEMA = "Frames@1";
 const norm = (t) => String(t ?? "").split("\r\n").join("\n").split("\r").join("\n");
 
-export async function readFramed(text, { language, actPrior, ...opts } = {}) {
+export async function readFramed(text, { language, actPrior, ablate = [], ...opts } = {}) {
   const T = norm(text);
-  if (!language) { const entry = await readDocument(T, { rows: true, ...opts }); entry.frames = { schema: FRAMES_SCHEMA, lang: null, frames: [], speech: [], gaps: [{ gap: "language_not_declared", how: "pass language (a stem such as eng): the frames layer never reads a language it was not told" }], crossCheck: null }; return entry; }
+  if (!language) { const entry = await readDocument(T, { rows: true, ...opts }); entry.frames = { schema: FRAMES_SCHEMA, lang: null, frames: [], speech: [], gaps: [{ gap: "language_not_declared", how: "pass language (a stem such as eng): the frames layer never reads a language it was not told" }], crossCheck: null }; entry.layers = layerLedger(entry, { ablate }); return entry; }
   const entry = await readDocument(T, { language, rows: true, ...opts }), stem = entry.language?.stem ?? null, held = (entry.gaps ?? []).map((g) => g.gap ?? g);
-  const fail = (gap) => { entry.frames = { schema: FRAMES_SCHEMA, lang: stem, frames: [], speech: [], gaps: [gap], crossCheck: null }; return entry; };
+  const fail = (gap) => { entry.frames = { schema: FRAMES_SCHEMA, lang: stem, frames: [], speech: [], gaps: [gap], crossCheck: null }; entry.layers = layerLedger(entry, { stem, ablate }); return entry; };
   if (!stem || held.includes("unknown_language") || held.includes("language_default")) return fail({ gap: "language_not_held", declared: language, read_as: stem, how: "the reader fell back to default priors; frames are not read for a language it does not hold" });
   if (!Array.isArray(entry.parse) || !entry.parse.length) return fail({ gap: "no_parse_rows", how: "the language has no UD codec filed (reading.js::rowsOfFor): frames need rows" });
   // the canonical entry's sentence offsets are into the normalised text; if they do not line up the layer refuses rather than frame the wrong span
   const bad = entry.parse.filter((p) => T.slice(p.offset, p.offset + p.text.length) !== p.text).length;
   if (bad) return fail({ gap: "offsets_not_aligned", sentences: bad, of: entry.parse.length });
-  const speech = stem === "eng" ? speechVerbFromActPrior(actPrior === undefined ? loadActPrior() : actPrior) : { isSpeech: () => false, gap: { gap: "no_speech_verbs_for_language", lang: stem } };
+  const speech = ablate.includes("speech") ? { isSpeech: () => false, gap: { gap: "ablated:speech" } } : stem === "eng" ? speechVerbFromActPrior(actPrior === undefined ? loadActPrior() : actPrior) : { isSpeech: () => false, gap: { gap: "no_speech_verbs_for_language", lang: stem } };
   const sentences = entry.parse.map((p) => ({ order: p.order, offset: p.offset, rows: p.rows ?? [] }));
   const targets = entry.parse.flatMap((p) => (p.rows ?? []).filter((r) => r.upos === "VERB").map((r) => ({ order: p.order, row: r, form: r.form, kriya: String(r.lemma ?? r.form).toLowerCase() })));
   const names = [...new Set((entry.cast ?? []).flatMap((c) => [c.surface, ...(c.allSurfaces ?? [])]).filter(Boolean))];
-  const out = frameVerbs({ text: T, sentences, targets, names, lang: stem, speech }), gaps = [...out.gaps]; if (speech.gap) gaps.push(speech.gap);
-  entry.frames = { schema: FRAMES_SCHEMA, lang: stem, frames: out.frames, speech: out.speech, gaps, crossCheck: clauseTreeAgreement(entry, out.frames, speech) };
+  const out = frameVerbs({ text: T, sentences, targets, names, lang: stem, speech, ablate }), gaps = [...out.gaps]; if (speech.gap) gaps.push(speech.gap);
+  const noTable = out.gaps.find((g) => g.gap === "no_quote_table");
+  entry.frames = { schema: FRAMES_SCHEMA, lang: stem, frames: out.frames, speech: out.speech, gaps, ablate, crossCheck: clauseTreeAgreement(entry, out.frames, speech) };
+  entry.layers = layerLedger(entry, { stem, quotes: noTable ? { gap: "no_quote_table" } : {}, speech, ablate });
   return entry;
 }
 
