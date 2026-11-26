@@ -128,3 +128,19 @@ test("a codec registers its own table; a built-in cannot be silently replaced; a
   assert.throws(() => registerQuoteTable("eng", { pairs: [["“", "”"]], toggle: [], end: ["."] }), /built-in/);
   assert.throws(() => registerQuoteTable("zzz", { pairs: "no" }), /pairs/);
 });
+
+// ── inferQuoteTable: the convention belongs to the EDITION (measured on 209 Genesis editions), so it is read from the marks, not looked up by language ──
+import { inferQuoteTable } from "./quote-frames.js";
+const SPEECH = (o, c) => `He said, ${o}Go home.${c} She said, ${o}No, I will not.${c} Then ${o}Why?${c} he asked, and she said, ${o}Because it is late.${c} He said, ${o}Go home.${c} She said, ${o}No.${c}`;
+test("infer: a curly pair is found, and a reversed pair is read as the OPPOSITE direction, from the text around the marks", () => {
+  assert.deepEqual(inferQuoteTable(SPEECH("“", "”")).table.pairs, [["“", "”"]]); assert.deepEqual(inferQuoteTable(SPEECH("«", "»")).table.pairs, [["«", "»"]]);
+  assert.deepEqual(inferQuoteTable(SPEECH("„", "“")).table.pairs, [["„", "“"]]);
+});
+test("infer: straight quotes are a toggle; one mark that opens and closes alike", () => { const t = inferQuoteTable(SPEECH('"', '"')).table; assert.deepEqual(t.toggle, ['"']); assert.deepEqual(t.pairs, []); });
+test("infer: French guillemets with a space inside are found (shape undecided; the first mark is an opener)", () => { assert.deepEqual(inferQuoteTable(SPEECH("« ", " »")).table.pairs, [["«", "»"]]); });
+test("infer: no quotation marks, or too few, is a typed gap and NO default table", () => { const r = inferQuoteTable("He said go home and she said no. ".repeat(10)); assert.equal(r.table, null); assert.equal(r.gap.gap, "no_quote_convention_found"); assert.equal(inferQuoteTable("He said, “Go.”").table, null); });
+test("infer: apostrophes are not quotation marks (they are not candidates)", () => { assert.equal(inferQuoteTable("It's the dog's bone, isn't it? ".repeat(20)).table, null); });
+test("infer: an inferred table drives quoteSpans directly (the table is the edition's, not a language's)", () => {
+  const text = SPEECH("«", "»"), { table } = inferQuoteTable(text), r = quoteSpans(text, table); assert.equal(r.spans.length, 6); assert.equal(r.gaps.length, 0);
+  assert.equal(quoteSpans(text, "xxx").gap.gap, "no_quote_table", "a language with no table and no inferred table stays a typed gap");
+});
