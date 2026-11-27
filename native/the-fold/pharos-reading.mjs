@@ -19,7 +19,7 @@ import { priorsHome } from "./prior-source.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 export const sha16 = (s) => crypto.createHash("sha256").update(String(s), "utf8").digest("hex").slice(0, 16);
-const canon = (v) => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon(v[k])}`).join(",")}}` : JSON.stringify(v));   // pharos stores bodies with sorted keys
+export const canon = (v) => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon(v[k])}`).join(",")}}` : JSON.stringify(v));   // pharos stores bodies with sorted keys
 export const TEXT_KIND = "text", READING_KIND = "text-reading", REFERENTS_KIND = "text-referents", CUTS_KIND = "text-cuts";
 const MODELS = new Map();
 /** the parser (and tokenizer) prior for a language, from the prior door's home; a typed gap when absent */
@@ -51,7 +51,7 @@ export function readingRows(g, text, { predicate = false } = {}) {   // predicat
   return rows;
 }
 // where pharos is: PHAROS_HOME, else a checkout beside this repo, else <repo>/pharos, else ~/Documents/pharos (the same places the gate looks)
-const pharosLib = () => [process.env.PHAROS_HOME, path.join(ROOT, "..", "pharos"), path.join(ROOT, "pharos"), path.join(os.homedir(), "Documents", "pharos")].filter(Boolean).map((p) => path.join(path.resolve(p), "lib", "pharos.mjs")).find((f) => fs.existsSync(f));
+export const pharosLib = () => [process.env.PHAROS_HOME, path.join(ROOT, "..", "pharos"), path.join(ROOT, "pharos"), path.join(os.homedir(), "Documents", "pharos")].filter(Boolean).map((p) => path.join(path.resolve(p), "lib", "pharos.mjs")).find((f) => fs.existsSync(f));
 /**
  * writeReading(text, { language, log, dir, writer }) -> { text: id, reading: id, written: [kinds], skipped: [kinds] } or { gap, why }
  * log / dir name the pharos log (PHAROS_LOG, PHAROS as the other doors); the writer is "khora".

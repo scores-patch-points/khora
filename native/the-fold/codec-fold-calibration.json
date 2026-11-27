@@ -1,0 +1,14 @@
+{
+ "schema": "CodecFoldCalibration@2",
+ "source": "native/scripts/measure-codec-fold.mjs on Genesis (christos-c/bible-corpus, CC0), first 40 verses, 65 editions",
+ "a": -3.1175,
+ "b": 6.6057,
+ "own": 31,
+ "notOwn": 28,
+ "caveats": [
+  "Bible genre only",
+  "English-script-heavy sample",
+  "separability AUC reported by the script",
+  "related languages score high under a neighbour's codec (Norwegian under Danish reaches 0.76-0.80 coverage), so coverage alone cannot decide"
+ ]
+}
