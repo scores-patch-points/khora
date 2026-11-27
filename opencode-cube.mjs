@@ -273,7 +273,7 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
     package: row.package,
     env: row.env,
     module: "pydmd",
-    attr: "Koopman",
+    attr: "DMD",   // PyDMD's own class name (pydmd.DMD): a library identifier, not this codebase's DMD
     construct_args: [],
     construct_kwargs: rank ? { svd_rank: rank } : {},
     method: "fit",
