@@ -19,6 +19,7 @@ import { foldCodec } from "./codec-fold.mjs";
 import { quoteSpans } from "../adapters/text/quote-frames.js";
 import { writeReading, sha16, canon, pharosLib } from "./pharos-reading.mjs";
 import { pathToFileURL } from "node:url";
+import { weaveShape } from "./pharos-roles.mjs";
 
 export const CODEC_KIND = "text-codec", LAYERS_KIND = "text-layers", QUOTES_KIND = "text-quotes", FRAMES_KIND = "text-frames", GAP_KIND = "text-gap";
 export const KINDS = Object.freeze([
@@ -73,6 +74,9 @@ export async function weaveFramedReading(text, { language, ablate = [], log = pr
     put(FRAMES_KIND, "CON·Figure", `frames:${sha}`, { frames: entry.frames.frames, speech: entry.frames.speech, gaps: entry.frames.gaps ?? [], ablate, crossCheck: entry.frames.crossCheck ?? null }, { by: NOMINATED });
   }
   for (const g of entry.frames?.gaps ?? []) gap(g);
+
+  // the sentence's shape the read already knows (roles by kāraka, polarity, question form): the-fold/pharos-roles.mjs, each the output of an existing organ over the same rows
+  if (base.text && !ablate.includes("shape")) { const sh = await weaveShape(T, { language: entry.language?.stem ?? language, log, dir, writer }); if (sh.gap) gap({ gap: sh.gap, why: sh.why ?? null }); else { out.written.push(...sh.written); out.skipped.push(...sh.skipped); for (const g of sh.gaps) if (!out.gaps.includes(g)) out.gaps.push(g); } }
 
   out.ids = { ...out.ids, codec: (P.fold(h, { kind: CODEC_KIND, addr: `codec:${sha}` }).entries ?? []).at(-1)?.id ?? null, layers: (P.fold(h, { kind: LAYERS_KIND, addr: `layers:${sha}` }).entries ?? []).at(-1)?.id ?? null };
   return out;
