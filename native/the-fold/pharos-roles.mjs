@@ -3,7 +3,7 @@
 // (the log is the only seam; a repo may not import another). Nothing here is a new reader: each entry is the output of an organ khora already had, run over the SAME rows pharos-reading.mjs weaves.
 //
 //   kind           cell         addr                body                                                                          the organ (unchanged)
-//   text-roles     CON·Figure   roles:<sha16>       { rows: [{ s, id, panini, karaka, via, contested? }], coverage, markers }     adapters/text/karaka-total.mjs karakaRows: every row one Pāṇinian label, the nine kārakas for participants
+//   text-roles     CON·Figure   roles:<sha16>       { rows: [{ s, id, panini, karaka, via, contested? }], sentences: [{ s, consistent, unknown, gaps }], coverage, markers }     adapters/text/karaka-total.mjs karakaRows: every row one Pāṇinian label, the nine kārakas for participants
 //   text-polarity  SIG·Figure   polarity:<sha16>    { negated: [{ s, id, via: [{ id, deprel, how }] }], gaps, source }            adapters/text/negation-read.js readPolarity: UD Polarity=Neg / PronType=Neg, placed on its predication
 //   text-question  SIG·Figure   question:<sha16>    { sentences: [{ s, form, admits, modality }], giver }                         adapters/text/question-grammar.en.js readQuestion: wh | polar | deliberative | statement (ENGLISH ONLY)
 //   text-gap       NUL·Figure   gap:<sha16>:<gap>   a typed gap: no_question_grammar (a language with no question adapter), no-polarity-source, no_marker_table
@@ -14,6 +14,7 @@ import fs from "node:fs"; import path from "node:path"; import { pathToFileURL }
 import { grammarFor, readingRows, cutsOf, sha16, canon, pharosLib } from "./pharos-reading.mjs";
 import { karakaRows, karakaCoverage, markerTableFor, PANINI_GIVER } from "../adapters/text/karaka-total.mjs";
 import { readPolarity, POLARITY_GAP } from "../adapters/text/negation-read.js";
+import { consistencyOf } from "../adapters/text/parse-consistency.mjs";
 import { priorsHome } from "./prior-source.mjs";
 
 export const ROLES_KIND = "text-roles", POLARITY_KIND = "text-polarity", QUESTION_KIND = "text-question";
@@ -34,9 +35,11 @@ export async function shapeOf(text, { language = "eng" } = {}) {
   const g = await grammarFor(language); if (g.gap) return g;
   const rows = readingRows(g, text), bySent = new Map(); for (const r of rows) { if (!bySent.has(r.s)) bySent.set(r.s, []); bySent.get(r.s).push(r); }
   const gaps = [], table = markerTableFor(language), labelled = [], roleRows = [];
-  for (const [s, rs] of bySent) { const k = karakaRows(rs, { stem: language }); labelled.push(k); for (const r of k) roleRows.push({ s, id: r.id, panini: r.panini, karaka: r.karaka ?? null, via: r.karakaVia ?? null, ...(r.karakaContested ? { contested: r.karakaContested } : {}) }); }
+  const sentences = [];
+  for (const [s, rs] of bySent) { const k = karakaRows(rs, { stem: language }); labelled.push(k); const c = consistencyOf(k, { lexicon: g.parser.lexicon }); sentences.push({ s, consistent: c.consistent, unknown: c.unknown, gaps: c.gaps }); for (const r of k) roleRows.push({ s, id: r.id, panini: r.panini, karaka: r.karaka ?? null, via: r.karakaVia ?? null, ...(r.karakaContested ? { contested: r.karakaContested } : {}) }); }
   if (!table) gaps.push({ gap: "no_marker_table", language, why: `karaka-total.mjs holds no marker table for ${language}: roles carried by an adposition or subordinator stay generic` });
-  const roles = { rows: roleRows, coverage: karakaCoverage(labelled), markers: table ? language : null, giver: PANINI_GIVER };
+  // `sentences`: parse-consistency.mjs per sentence. A sentence that is not consistent has roles (and, where unknown.polarity, a root and a polarity) a reader must treat as UNKNOWN: the rows are still written, as what the parser said
+  const roles = { rows: roleRows, sentences, coverage: karakaCoverage(labelled), markers: table ? language : null, giver: PANINI_GIVER };
   const negated = [], pgaps = []; let source = null;
   for (const [s, rs] of bySent) { const p = readPolarity(g.parser, rs); source = p.source; if (p.gap) { if (!gaps.some((x) => x.gap === POLARITY_GAP)) gaps.push({ gap: POLARITY_GAP, why: p.reason }); continue; }
     for (const [id, v] of p.heads) negated.push({ s, id, via: v.via.map((x) => ({ id: x.id, deprel: x.deprel, how: x.how })) }); for (const x of p.gaps) pgaps.push({ s, id: x.id, gap: x.gap }); }
