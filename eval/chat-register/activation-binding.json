@@ -1,0 +1,201 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Downloads/workspace/janus/priors",
+   "priorsFiles": 20,
+   "KHORA_PRIORS_DIR": null,
+   "parser": "english-parser"
+  },
+  "when": "2026-11-24T15:12:22.541Z",
+  "split": "EXPLORATORY (DEV: CorefUD 1.3 English GUM dev, LitBank dev; rules and N = 2 fixed before the run; N = 1 and 3 reported)",
+  "commit": "92d428f"
+ },
+ "results": {
+  "GUM dev": {
+   "N1": {
+    "T": {
+     "he": {
+      "n": 7,
+      "random": 3.5,
+      "rules": {
+       "subject of the nearest earlier sentence": 3,
+       "most recent mention": 1,
+       "first mention in the window": 3,
+       "most mentions (ties to the latest)": 3
+      }
+     },
+     "she": {
+      "n": 1,
+      "random": 0.5,
+      "rules": {
+       "subject of the nearest earlier sentence": 1,
+       "most recent mention": 0,
+       "first mention in the window": 1,
+       "most mentions (ties to the latest)": 1
+      }
+     }
+    },
+    "twoOrMoreCandidatesBeforeTheGenderPrior": 17
+   },
+   "N2": {
+    "T": {
+     "he": {
+      "n": 23,
+      "random": 9.7,
+      "rules": {
+       "subject of the nearest earlier sentence": 15,
+       "most recent mention": 9,
+       "first mention in the window": 13,
+       "most mentions (ties to the latest)": 9
+      }
+     },
+     "she": {
+      "n": 8,
+      "random": 4,
+      "rules": {
+       "subject of the nearest earlier sentence": 3,
+       "most recent mention": 5,
+       "first mention in the window": 3,
+       "most mentions (ties to the latest)": 6
+      }
+     }
+    },
+    "twoOrMoreCandidatesBeforeTheGenderPrior": 53
+   },
+   "N3": {
+    "T": {
+     "he": {
+      "n": 50,
+      "random": 20.878968253968253,
+      "rules": {
+       "subject of the nearest earlier sentence": 27,
+       "most recent mention": 21,
+       "first mention in the window": 29,
+       "most mentions (ties to the latest)": 24
+      }
+     },
+     "she": {
+      "n": 12,
+      "random": 5.5,
+      "rules": {
+       "subject of the nearest earlier sentence": 7,
+       "most recent mention": 8,
+       "first mention in the window": 5,
+       "most mentions (ties to the latest)": 10
+      }
+     }
+    },
+    "twoOrMoreCandidatesBeforeTheGenderPrior": 94
+   }
+  },
+  "LitBank dev": {
+   "N1": {
+    "T": {
+     "he": {
+      "n": 11,
+      "random": 5,
+      "rules": {
+       "subject of the nearest earlier sentence": 3,
+       "most recent mention": 8,
+       "first mention in the window": 3,
+       "most mentions (ties to the latest)": 5
+      }
+     },
+     "she": {
+      "n": 19,
+      "random": 9.333333333333334,
+      "rules": {
+       "subject of the nearest earlier sentence": 12,
+       "most recent mention": 10,
+       "first mention in the window": 8,
+       "most mentions (ties to the latest)": 10
+      }
+     }
+    },
+    "twoOrMoreCandidatesBeforeTheGenderPrior": 34
+   },
+   "N2": {
+    "T": {
+     "he": {
+      "n": 50,
+      "random": 23.916666666666668,
+      "rules": {
+       "subject of the nearest earlier sentence": 20,
+       "most recent mention": 31,
+       "first mention in the window": 23,
+       "most mentions (ties to the latest)": 30
+      }
+     },
+     "she": {
+      "n": 51,
+      "random": 23.833333333333332,
+      "rules": {
+       "subject of the nearest earlier sentence": 25,
+       "most recent mention": 29,
+       "first mention in the window": 20,
+       "most mentions (ties to the latest)": 27
+      }
+     }
+    },
+    "twoOrMoreCandidatesBeforeTheGenderPrior": 132
+   },
+   "N3": {
+    "T": {
+     "he": {
+      "n": 76,
+      "random": 34.833333333333336,
+      "rules": {
+       "subject of the nearest earlier sentence": 29,
+       "most recent mention": 48,
+       "first mention in the window": 29,
+       "most mentions (ties to the latest)": 45
+      }
+     },
+     "she": {
+      "n": 85,
+      "random": 38.4166666666667,
+      "rules": {
+       "subject of the nearest earlier sentence": 38,
+       "most recent mention": 53,
+       "first mention in the window": 31,
+       "most mentions (ties to the latest)": 53
+      }
+     }
+    },
+    "twoOrMoreCandidatesBeforeTheGenderPrior": 204
+   }
+  }
+ },
+ "pooled": {
+  "N1": {
+   "n": 38,
+   "random": 48,
+   "rules": {
+    "subject of the nearest earlier sentence": "19 of 38 = 50% [35,65]",
+    "most recent mention": "19 of 38 = 50% [35,65]",
+    "first mention in the window": "15 of 38 = 39% [26,55]",
+    "most mentions (ties to the latest)": "19 of 38 = 50% [35,65]"
+   }
+  },
+  "N2": {
+   "n": 132,
+   "random": 47,
+   "rules": {
+    "subject of the nearest earlier sentence": "63 of 132 = 48% [39,56]",
+    "most recent mention": "74 of 132 = 56% [48,64]",
+    "first mention in the window": "59 of 132 = 45% [36,53]",
+    "most mentions (ties to the latest)": "72 of 132 = 55% [46,63]"
+   }
+  },
+  "N3": {
+   "n": 223,
+   "random": 45,
+   "rules": {
+    "subject of the nearest earlier sentence": "101 of 223 = 45% [39,52]",
+    "most recent mention": "130 of 223 = 58% [52,65]",
+    "first mention in the window": "94 of 223 = 42% [36,49]",
+    "most mentions (ties to the latest)": "132 of 223 = 59% [53,65]"
+   }
+  }
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "schema": "E1b-treebank-verbs@1",
+ "split": "EXPLORATORY (post-hoc robustness, after the stamped E1)",
+ "at": "2026-11-24T05:54:32.474Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d",
+  "reader": "khora@ccf2033+baseline@2026-11-23"
+ },
+ "test": "pg12_Through_the_Looking_Glass",
+ "train": "pg11_Alice_s_Adventures_in_Wonderland",
+ "author": "Carroll",
+ "dials": {
+  "kMin": 5,
+  "band": 0,
+  "bar": 0.855,
+  "floor": 0.812,
+  "why": "kMin: a verb used fewer than K times in either book has a count dominated by chance; the bar is the organ's (mean + 2.5 sd of random verb pairs)"
+ },
+ "eligibleVerbs": 35,
+ "pairs": 6,
+ "pairsWithATestPreference": 6,
+ "accuracy": {
+  "sameAuthorBook": 1,
+  "pooledOtherAuthors": 0.833,
+  "otherAuthorBooks": {
+   "n": 38,
+   "mean": 0.803,
+   "best": [
+    {
+     "book": "pg120_Treasure-Island",
+     "author": "Stevenson",
+     "acc": 1
+    },
+    {
+     "book": "pg1400_Great-Expectations",
+     "author": "Dickens",
+     "acc": 1
+    },
+    {
+     "book": "pg215_The-Call-of-the-Wild",
+     "author": "London",
+     "acc": 1
+    }
+   ],
+   "worst": [
+    {
+     "book": "pg59129_Leviathan_by_Hobbes",
+     "author": "Hobbes",
+     "acc": 0.5
+    }
+   ]
+  }
+ },
+ "rankOfSameAuthorBook": {
+  "rank": 13,
+  "of": 39,
+  "note": "1 = best; under no author effect the rank is uniform"
+ },
+ "mcnemarVsPooled": {
+  "sameAuthorRightPooledWrong": 1,
+  "pooledRightSameAuthorWrong": 0,
+  "pTwoSided": 1
+ },
+ "examples": [
+  {
+   "pair": "bring/come",
+   "similarity": 0.86,
+   "test": [
+    9,
+    116
+   ],
+   "train": [
+    9,
+    97
+   ]
+  },
+  {
+   "pair": "get/want",
+   "similarity": 0.87,
+   "test": [
+    147,
+    26
+   ],
+   "train": [
+    109,
+    15
+   ]
+  },
+  {
+   "pair": "give/let",
+   "similarity": 0.88,
+   "test": [
+    35,
+    30
+   ],
+   "train": [
+    30,
+    22
+   ]
+  },
+  {
+   "pair": "know/tell",
+   "similarity": 0.89,
+   "test": [
+    138,
+    40
+   ],
+   "train": [
+    107,
+    41
+   ]
+  },
+  {
+   "pair": "know/understand",
+   "similarity": 0.87,
+   "test": [
+    138,
+    10
+   ],
+   "train": [
+    107,
+    7
+   ]
+  },
+  {
+   "pair": "let/put",
+   "similarity": 0.87,
+   "test": [
+    30,
+    47
+   ],
+   "train": [
+    22,
+    34
+   ]
+  }
+ ]
+}

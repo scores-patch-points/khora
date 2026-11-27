@@ -1,0 +1,140 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:34:09.777Z",
+  "split": "EXPLORATORY (developer-written probes)",
+  "commit": "working tree"
+ },
+ "probes": 10,
+ "priorState": "title + dictionary table + Wikidata snapshot",
+ "outcomes": {
+  "right": 10,
+  "asked": 0,
+  "wrong": 0
+ },
+ "openNames": {
+  "probes": 4,
+  "asked": 3,
+  "guessed": 1,
+  "other": 0,
+  "rows": [
+   {
+    "say": "Casey met Jordan. She smiled.",
+    "outcome": "asked",
+    "text": "Do you mean Casey or Jordan?"
+   },
+   {
+    "say": "Jordan met Casey. He smiled.",
+    "outcome": "asked",
+    "text": "Do you mean Jordan or Casey?"
+   },
+   {
+    "say": "Laurie met Avery. She smiled.",
+    "outcome": "asked",
+    "text": "Do you mean Laurie or Avery?"
+   },
+   {
+    "say": "Riley called Taylor. He answered.",
+    "outcome": "guessed",
+    "text": "That would be Taylor. You told me “Riley called Taylor.” and “He answered.”"
+   }
+  ]
+ },
+ "wrongBindings": 0,
+ "dialogues": {
+  "passed": 8,
+  "of": 8,
+  "rows": [
+   {
+    "name": "names the prior settles: no question, the pronoun binds",
+    "ok": true,
+    "trail": [
+     "Pierre met Natasha. She smiled. => Noted.",
+     "Who is she? => That would be Natasha. You told me “Pierre met N",
+     "Who smiled? => Natasha."
+    ]
+   },
+   {
+    "name": "a title gives it away: Mrs",
+    "ok": true,
+    "trail": [
+     "Mr Pierre met Mrs Natasha. She smiled. => Noted.",
+     "Who is she? => That would be Mrs Natasha. You told me “Mr Pierr"
+    ]
+   },
+   {
+    "name": "open names: ask which, take the name, answer with it",
+    "ok": true,
+    "trail": [
+     "Casey met Jordan. She smiled. => Noted.",
+     "Who is she? => Do you mean Casey or Jordan?",
+     "Casey => You told me “Casey met Jordan.” and “She smiled.",
+     "Who smiled? => Casey."
+    ]
+   },
+   {
+    "name": "open names: a settled she makes he someone else",
+    "ok": true,
+    "trail": [
+     "Casey met Jordan. She smiled. He left. => Noted.",
+     "Who is she? => Do you mean Casey or Jordan?",
+     "Casey => You told me “Casey met Jordan.” and “She smiled.",
+     "Who is he? => That would be Jordan. You told me “Casey met Jor"
+    ]
+   },
+   {
+    "name": "open names: a wrong answer is refused and the question stays open",
+    "ok": true,
+    "trail": [
+     "Casey met Jordan. She smiled. => Noted.",
+     "Who is she? => Do you mean Casey or Jordan?",
+     "the course => I can't use “the course”: I asked whether you me",
+     "Casey => You told me “Casey met Jordan.” and “She smiled.",
+     "Who smiled? => Casey."
+    ]
+   },
+   {
+    "name": "one pro-form settles a man (no question needed)",
+    "ok": true,
+    "trail": [
+     "Pierre took his hat. Natasha smiled. He waved. => Noted.",
+     "Who waved? => Pierre."
+    ]
+   },
+   {
+    "name": "a woman who smiled is the only one it can be (no question needed)",
+    "ok": true,
+    "trail": [
+     "Pierre took his hat. Natasha smiled. She waved. => Noted.",
+     "Who waved? => Natasha."
+    ]
+   },
+   {
+    "name": "one person only, no ambiguity (no question needed)",
+    "ok": true,
+    "trail": [
+     "Natasha smiled. She waved. => Noted.",
+     "Who waved? => Natasha."
+    ]
+   }
+  ]
+ },
+ "byPlace": {
+  "first": {
+   "right": 3,
+   "asked": 0,
+   "wrong": 0
+  },
+  "second": {
+   "right": 7,
+   "asked": 0,
+   "wrong": 0
+  }
+ },
+ "whoAnsweredWithBarePronoun": 0
+}

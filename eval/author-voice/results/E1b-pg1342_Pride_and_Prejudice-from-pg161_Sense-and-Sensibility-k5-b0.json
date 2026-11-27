@@ -1,0 +1,187 @@
+{
+ "schema": "E1b-treebank-verbs@1",
+ "split": "EXPLORATORY (post-hoc robustness, after the stamped E1)",
+ "at": "2026-11-24T05:53:03.556Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d",
+  "reader": "khora@ccf2033+baseline@2026-11-23"
+ },
+ "test": "pg1342_Pride_and_Prejudice",
+ "train": "pg161_Sense-and-Sensibility",
+ "author": "Austen",
+ "dials": {
+  "kMin": 5,
+  "band": 0,
+  "bar": 0.855,
+  "floor": 0.812,
+  "why": "kMin: a verb used fewer than K times in either book has a count dominated by chance; the bar is the organ's (mean + 2.5 sd of random verb pairs)"
+ },
+ "eligibleVerbs": 46,
+ "pairs": 10,
+ "pairsWithATestPreference": 10,
+ "accuracy": {
+  "sameAuthorBook": 0.9,
+  "pooledOtherAuthors": 0.9,
+  "otherAuthorBooks": {
+   "n": 37,
+   "mean": 0.749,
+   "best": [
+    {
+     "book": "pg13453_The_Divine_Comedy_by_Dante",
+     "author": "Dante",
+     "acc": 1
+    },
+    {
+     "book": "pg147_Common-Sense",
+     "author": "Paine",
+     "acc": 0.95
+    },
+    {
+     "book": "pg1400_Great-Expectations",
+     "author": "Dickens",
+     "acc": 0.9
+    }
+   ],
+   "worst": [
+    {
+     "book": "pg10671_The_Iliad__Greek_",
+     "author": "Darwin, E. (the file is the Botanic Garden, per the ingestion session)",
+     "acc": 0.4
+    }
+   ]
+  }
+ },
+ "rankOfSameAuthorBook": {
+  "rank": 7,
+  "of": 38,
+  "note": "1 = best; under no author effect the rank is uniform"
+ },
+ "mcnemarVsPooled": {
+  "sameAuthorRightPooledWrong": 1,
+  "pooledRightSameAuthorWrong": 1,
+  "pTwoSided": 1
+ },
+ "examples": [
+  {
+   "pair": "attend/come",
+   "similarity": 0.86,
+   "test": [
+    37,
+    253
+   ],
+   "train": [
+    39,
+    222
+   ]
+  },
+  {
+   "pair": "bring/come",
+   "similarity": 0.86,
+   "test": [
+    70,
+    253
+   ],
+   "train": [
+    88,
+    222
+   ]
+  },
+  {
+   "pair": "give/provide",
+   "similarity": 0.89,
+   "test": [
+    276,
+    13
+   ],
+   "train": [
+    287,
+    10
+   ]
+  },
+  {
+   "pair": "give/let",
+   "similarity": 0.88,
+   "test": [
+    276,
+    83
+   ],
+   "train": [
+    287,
+    31
+   ]
+  },
+  {
+   "pair": "know/tell",
+   "similarity": 0.89,
+   "test": [
+    385,
+    149
+   ],
+   "train": [
+    381,
+    168
+   ]
+  },
+  {
+   "pair": "know/understand",
+   "similarity": 0.87,
+   "test": [
+    385,
+    39
+   ],
+   "train": [
+    381,
+    41
+   ]
+  },
+  {
+   "pair": "let/put",
+   "similarity": 0.87,
+   "test": [
+    83,
+    41
+   ],
+   "train": [
+    31,
+    48
+   ]
+  },
+  {
+   "pair": "need/provide",
+   "similarity": 0.86,
+   "test": [
+    23,
+    13
+   ],
+   "train": [
+    23,
+    10
+   ]
+  },
+  {
+   "pair": "recommend/suggest",
+   "similarity": 0.87,
+   "test": [
+    23,
+    7
+   ],
+   "train": [
+    14,
+    10
+   ]
+  },
+  {
+   "pair": "learn/understand",
+   "similarity": 0.86,
+   "test": [
+    25,
+    39
+   ],
+   "train": [
+    19,
+    41
+   ]
+  }
+ ]
+}

@@ -1,0 +1,163 @@
+{
+ "stamp": {
+  "when": "2026-11-24T05:40:16.085Z",
+  "split": "EXPLORATORY (every probe run twice at one commit)",
+  "commit": "3af3f77+working tree",
+  "standin": {
+   "priorsHome": "/Users/mlacy/Downloads/workspace/janus/priors",
+   "priorsFiles": 20,
+   "KHORA_PRIORS_DIR": null,
+   "parser": "english-parser"
+  },
+  "canonical": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  }
+ },
+ "rows": [
+  {
+   "probe": "pronoun-probe",
+   "standin": {
+    "settled": "10 right, 0 asked, 0 wrong of 10",
+    "openNames": "4 asked, 0 guessed of 4",
+    "askBack": "8 of 8"
+   },
+   "canonical": {
+    "settled": "10 right, 0 asked, 0 wrong of 10",
+    "openNames": "3 asked, 1 guessed of 4",
+    "askBack": "8 of 8"
+   },
+   "same": false
+  },
+  {
+   "probe": "pairing-probe",
+   "standin": {
+    "positives": "8 of 8",
+    "refusals": "5 of 5",
+    "badThenGood": "2 of 2"
+   },
+   "canonical": {
+    "positives": "8 of 8",
+    "refusals": "5 of 5",
+    "badThenGood": "2 of 2"
+   },
+   "same": true
+  },
+  {
+   "probe": "they-voice-probe",
+   "standin": {
+    "mine": "9 of 9",
+    "unseen": {
+     "right": 12,
+     "safe": 1,
+     "wrong": 1
+    },
+    "unseenNotRight": [
+     "Mrs Okafor said not a referent",
+     "Florence said name"
+    ]
+   },
+   "canonical": {
+    "mine": "9 of 9",
+    "unseen": {
+     "right": 13,
+     "safe": 1,
+     "wrong": 0
+    },
+    "unseenNotRight": [
+     "Florence said name"
+    ]
+   },
+   "same": false
+  },
+  {
+   "probe": "correction-probe",
+   "standin": {
+    "changedTheAnswer": "6 of 6",
+    "notedAndNothingChanged": 0
+   },
+   "canonical": {
+    "changedTheAnswer": "6 of 6",
+    "notedAndNothingChanged": 0
+   },
+   "same": true
+  },
+  {
+   "probe": "invariance",
+   "standin": {
+    "lower": {
+     "same": 0.167,
+     "propn": 0.136,
+     "rels": 0.699
+    },
+    "nopunct": {
+     "same": 0.829,
+     "propn": 1,
+     "rels": 0.898
+    },
+    "typo": {
+     "same": 0.904,
+     "propn": 1,
+     "rels": 0.929
+    }
+   },
+   "canonical": {
+    "lower": {
+     "same": 0.292,
+     "propn": 0.295,
+     "rels": 0.799
+    },
+    "nopunct": {
+     "same": 0.707,
+     "propn": 1,
+     "rels": 0.833
+    },
+    "typo": {
+     "same": 0.846,
+     "propn": 0.925,
+     "rels": 0.888
+    }
+   },
+   "same": false
+  },
+  {
+   "probe": "declared-vs-done",
+   "standin": {
+    "mismatchesOf390": 5,
+    "sentWordsOut": 4
+   },
+   "canonical": {
+    "mismatchesOf390": 6,
+    "sentWordsOut": 6
+   },
+   "same": false
+  },
+  {
+   "probe": "mechanics",
+   "standin": {
+    "fragment": 14.9,
+    "social": 16.7,
+    "read": 41.6,
+    "relational": 11.6,
+    "unread": 8.4,
+    "request": 2.2,
+    "smalltalk": 1.1,
+    "clarify": 0.7
+   },
+   "canonical": {
+    "fragment": 14.5,
+    "social": 16.4,
+    "read": 44.2,
+    "clarify": 3.3,
+    "unread": 7.9,
+    "relational": 6.2,
+    "request": 2.5,
+    "smalltalk": 1.3
+   },
+   "same": false
+  }
+ ],
+ "note": "unlike every number in this directory before 2026-11-24, which came from the stand-in. Mrs Okafor and Madame Defarge are stand-in effects (fixed under the real home); a guess on an unsettled name and two researched chatty messages appear only under the real home."
+}

@@ -1,0 +1,220 @@
+{
+ "stamp": {
+  "when": "2026-11-24T05:39:42.485Z",
+  "split": "EXPLORATORY, no language gold; samples are read by a person",
+  "perSource": 2500
+ },
+ "out": {
+  "sms": {
+   "messages": 2500,
+   "tally": {
+    "eng via detector": 1167,
+    "gap: undetected (detector)": 842,
+    "eng via english-words": 336,
+    "gap: undetected (detector, nothing to read)": 141,
+    "nld via detector": 11,
+    "mlt via detector": 1,
+    "tur via detector": 1,
+    "gap: ita (detector)": 1
+   },
+   "samples": {
+    "eng via detector": [
+     "Dnt worry .. Jst try 2 score gud mark @ public exm..k",
+     "India took some great catchs :-)",
+     "A BIRLA INSTITUTE student is not the one who reads the book before exa",
+     "Up to dadar",
+     "I don,t think so. You don't need to be going out that late on a school",
+     "Dnt want explanation",
+     "Boring. Bored. Waiting for david. I know he's gonna kill.",
+     "Buzzzz! *grins* Did I buzz your ass? Buzz your chest ? Buzz your cock "
+    ],
+    "gap: undetected (detector)": [
+     "Ru in kaju rum",
+     "Indha help kuda panna maataengura la?:-(",
+     "Kali kites sabo jabi neki?",
+     "Hey plz da! Kaetu sollu!",
+     "Unka abi lunch chal raha he bhai 2 bje ke bd ek br ph0n try karna",
+     "Ji ha",
+     "Oh okie d...",
+     "Bhai &lt;#&gt; ka hi kara paya tha s0ry"
+    ],
+    "eng via english-words": [
+     "Ok dear",
+     "Come",
+     "Ok",
+     "Hey 2morow wat portions 4 ss test?",
+     "Luv u too. 1sec.",
+     "Itz nt d tim.",
+     "Ya sure?",
+     "Thank u"
+    ],
+    "gap: undetected (detector, nothing to read)": [
+     "K d",
+     "P",
+     "P",
+     "K",
+     "K",
+     "K",
+     "Chuma",
+     "K"
+    ],
+    "nld via detector": [
+     "Wat happened",
+     "Wat doin",
+     "Wat doin",
+     "Wat doin",
+     "Then wat u want",
+     "Wat doin?",
+     "Wat doin d",
+     "Wat doin"
+    ],
+    "mlt via detector": [
+     "When l u cm 4 din"
+    ],
+    "tur via detector": [
+     "Ya.. Im here."
+    ],
+    "gap: ita (detector)": [
+     "Come fast.."
+    ]
+   }
+  },
+  "cosem": {
+   "messages": 2500,
+   "tally": {
+    "eng via detector": 1001,
+    "gap: undetected (detector, nothing to read)": 448,
+    "eng via english-words": 316,
+    "gap: undetected (detector)": 728,
+    "fra via detector": 1,
+    "afr via detector": 3,
+    "gap: lat (detector)": 1,
+    "ind via detector": 2
+   },
+   "samples": {
+    "eng via detector": [
+     "I JUST FOUND OUT TOO",
+     "I also want!",
+     "Then I don't want",
+     "so I had a wtf moment then I went back to sleep HAHAHA",
+     "I think if walk can have shelter all the way",
+     "Must quickly choose before ur eyes get confused",
+     "?oo haha I mean the arrangement of the bonding and antibonding pairs a",
+     "Either we meet in early july or in aug ????"
+    ],
+    "gap: undetected (detector, nothing to read)": [
+     "???",
+     "??",
+     "??????",
+     "??",
+     "??",
+     "??",
+     "??",
+     "????????????"
+    ],
+    "eng via english-words": [
+     "Hahah project meeting ah ??",
+     "Tuesday afternoon frisbee (after 1630)",
+     "I can",
+     "*point",
+     "HI",
+     "OH",
+     "Merry Christmas! ??????",
+     "I lazy walk tho"
+    ],
+    "gap: undetected (detector)": [
+     "JY",
+     "Okie",
+     "HAHHA",
+     "HAHHA",
+     "LOLOL",
+     "HUHHH",
+     "Is a hellweek",
+     "#imissYilian"
+    ],
+    "fra via detector": [
+     "End lecture le!!!!!"
+    ],
+    "afr via detector": [
+     "ehehe bring JY",
+     "Bring JY",
+     "OMG JY"
+    ],
+    "gap: lat (detector)": [
+     "Super super"
+    ],
+    "ind via detector": [
+     "Shan yang",
+     "Ya lah Ya lah take liao lah"
+    ]
+   }
+  },
+  "irc": {
+   "messages": 2500,
+   "tally": {
+    "eng via detector": 1912,
+    "gap: undetected (detector, nothing to read)": 44,
+    "gap: undetected (detector)": 340,
+    "eng via english-words": 200,
+    "cmn via detector": 1,
+    "ces via detector": 1,
+    "spa via detector": 1,
+    "tur via detector": 1
+   },
+   "samples": {
+    "eng via detector": [
+     "sagredo: have a look if this helps u: http://is.gd/1A3vE",
+     "Slart, kk, just thought if someone new here",
+     "aaas: you cluld use cut maybe",
+     "how do I undo it to try again?",
+     "500 http://us.archive.ubuntu.com intrepid/main",
+     "stefano:could that be the problem",
+     "damo22, i have high hopes for songbird, but it's still beta.",
+     "lufs can do sftp i think"
+    ],
+    "gap: undetected (detector, nothing to read)": [
+     "!3ddesktop",
+     "\\",
+     "!w32codecs",
+     "errno=111",
+     "elsebis_87@hotmail.com",
+     ":P",
+     "ohci1394               34596  0",
+     ":D"
+    ],
+    "gap: undetected (detector)": [
+     "DBE",
+     "root@ubuntu:/home/sean # mount /dev/hdc3",
+     "tmdx120: sudo dpkg -i *.deb",
+     "!flash",
+     "!skype > bob3213243",
+     "ahorner: yes",
+     "o.O Eel-CRITICAL yadda yadda yadda failed",
+     "!google"
+    ],
+    "eng via english-words": [
+     "_Sophia_: yes",
+     "bad joke",
+     "after \"remove gstreamer*\" \"install gstreamer*\"",
+     "ok",
+     "people",
+     "games",
+     "It opens in Kae.",
+     "Malacius: no problem man"
+    ],
+    "cmn via detector": [
+     "所以我把他卸了。"
+    ],
+    "ces via detector": [
+     "někdo z České Republiky? :)"
+    ],
+    "spa via detector": [
+     "kaligula: En la mayoría de canales de Ubuntu se habla sólo en inglés. "
+    ],
+    "tur via detector": [
+     "olm ne diyo bunlar :D"
+    ]
+   }
+  }
+ }
+}

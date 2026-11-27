@@ -1,0 +1,67 @@
+#!/usr/bin/env node
+// scripts/build-name-gender-dictionary.mjs [--kaikki file] [--out file] — native/adapters/text/name-gender/dictionary-en.json (NameGenderDictionary@1).
+// A GIVER, not a sample: what the English Wiktionary extract (kaikki.org, CC BY-SA 4.0, the file the chat's definitions already read) says about a word, read THROUGH KHORA'S READER:
+//   words   a lemma with a sense that is "a female / male / unisex given name" -> [masc, fem], each gendered sense counting the table's declared minimum of 2 observations once
+//           ("A female given name from Russian" gives natasha [0, 2]; a word with both kinds of sense gets both; several senses of one gender add nothing)
+//   titles  a word that is ATTESTED before a capitalised name in other novels (5+ times: "Mrs. Bennet", "Madame Defarge", "Aunt March"; the books are listed in the output, none is a book
+//           the sources were tested on), gendered by what the dictionary's glosses of that word say: all senses read through the reader, the gender words in them counted, a word whose senses
+//           say one gender is a title for that gender ("Mrs": "used before an adult woman's name"; "count": "The male ruler of a county"; "aunt": "The sister ... of one's parent"), one hop of the
+//           dictionary's own cross-reference followed for abbreviations ("Mr": "Abbreviation of Mister"); a word whose senses say both or neither (Dr, Captain) says nothing
+// The rule over the reader's lemmas is positional ("<gender> given name"), because the parser reads "A male given name" with "male" as the root a third of the time.
+// DECLARED (English reader parameter, with its reason): the words that say a gender. Weights are declared, not fitted: senseWeight 2 (one attestation by a named giver meets the table's
+// minimum of two observations), titleWeight 4 (a title sits in the name itself, so it outweighs a given-name sense of a surname, "Miss Lucas"). The measured reliability of each source on
+// held-out novels is recorded in `provenance.measured` (eval/chat-register/name-gender-giver.*.json).
+import fs from "node:fs"; import path from "node:path"; import readline from "node:readline"; import crypto from "node:crypto"; import { fileURLToPath, pathToFileURL } from "node:url";
+const HERE = path.dirname(fileURLToPath(import.meta.url)), ROOT = path.resolve(HERE, ".."), args = process.argv.slice(2), opt = (k) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : null; };
+const KAIKKI = opt("--kaikki") ?? process.env.KAIKKI_EN ?? "/tmp/given-pharos/kaikki-en.jsonl", OUT = opt("--out") ?? path.join(ROOT, "native", "adapters", "text", "name-gender", "dictionary-en.json");
+if (!fs.existsSync(KAIKKI)) { console.error(`no dictionary giver at ${KAIKKI}: pass --kaikki or set KAIKKI_EN (a typed gap, nothing was guessed)`); process.exit(2); }
+const { rowsOfFor } = await import(pathToFileURL(path.join(ROOT, "native", "reading.js")).href); const parser = await rowsOfFor("eng");
+const GN = { female: "f", feminine: "f", male: "m", masculine: "m", unisex: "both" };                                   // gender words of a given-name gloss
+const FEM = new Set(["female", "woman", "women", "girl", "lady", "wife", "feminine", "mistress"]), MASC = new Set(["male", "man", "men", "boy", "gentleman", "husband", "masculine"]);   // gender words of a title gloss
+const SENSE_WEIGHT = 2, TITLE_WEIGHT = 4, HEAD = 12;   // HEAD (declared): the first 12 lemmas of a gloss are its genus; "used before an adult woman's name" is inside them, a gender word later is not
+const side = (lems) => { const f = lems.some((l) => FEM.has(l)), m = lems.some((l) => MASC.has(l)); return f && m ? "both" : f ? "f" : m ? "m" : null; };
+const lem = (r) => String(r.lemma ?? r.form).toLowerCase();
+const XREF = /^(?:Abbreviation|Alternative (?:spelling|form|letter-case form)|Short form|Clipping|Contraction) of ([A-Za-z]+)/;   // regex-ok: the dictionary's own cross-reference gloss format
+// ---- the words attested before a name, in novels that are not the test books
+const ZEN = process.env.ZENODOTUS ?? path.resolve(ROOT, "..", "Zenodotus"), BOOKS = ["gutenberg/pg345_Dracula.txt", "gutenberg/pg84_Frankenstein.txt", "gutenberg/pg174_The_Picture_of_Dorian_Gray.txt", "gutenberg/pg2701_Moby_Dick.txt", "gutenberg/pg768_The_Adventures_of_Sherlock_Holmes.txt", "gutenberg/pg1661_The_Adventures_of_Tom_Sawyer.txt", "gutenberg/pg145_Middlemarch-George-Eliot.txt", "gitenberg/pg158_Emma.txt", "gitenberg/pg120_Treasure-Island.txt", "gitenberg/pg2554_Crime-and-Punishment.txt", "gitenberg/pg55_The-Wonderful-Wizard-of-Oz.txt", "gitenberg/pg219_Heart-of-Darkness.txt", "gitenberg/pg521_The-Life-and-Adventures-of-Robinson-Crusoe.txt", "gitenberg/pg829_Gulliver-s-Travels.txt"].map((b) => path.join(ZEN, "01-literature-books", b));
+const before = new Map(), usedBooks = []; const CAP = /^\p{Lu}[\p{L}'’-]*\.?$/u;   // regex-ok: a token that starts with a capital letter (the surface shape of a name or a title)
+for (const f of BOOKS) { if (!fs.existsSync(f)) continue; usedBooks.push(path.basename(f)); const toks = fs.readFileSync(f, "utf8").split(/\s+/);   // regex-ok: whitespace tokens
+  for (let i = 0; i + 1 < toks.length; i++) if (CAP.test(toks[i]) && CAP.test(toks[i + 1])) { const w = toks[i].replace(/\.$/, "").toLowerCase(); before.set(w, (before.get(w) ?? 0) + 1); } }   // regex-ok: a trailing full stop
+const ATTESTED = 5, CAND = new Set([...before].filter(([, n]) => n >= ATTESTED).map(([w]) => w));   // DECLARED: attested 5 or more times before a capitalised word in the other novels
+console.log(`titles: ${CAND.size} words attested ${ATTESTED}+ times before a capitalised name in ${usedBooks.length} novels`);
+const TITLEISH = ["title", "address", "courtesy", "used before"], explicit = new Map();   // explicit: a gloss that SAYS it is a title or a form of address and names who it is for
+const given = new Map(), xref = new Map(), allGloss = new Map(); let lines = 0, readGiven = 0, readTitle = 0;
+const hash = crypto.createHash("sha256"); const t0 = Date.now();
+for await (const line of readline.createInterface({ input: fs.createReadStream(KAIKKI), crlfDelay: Infinity })) {
+  hash.update(line + "\n"); if (!line.startsWith('{"addr":"lemma:')) continue; lines++;
+  const lemma = line.slice(15, line.indexOf('"', 15)).toLowerCase(); if (!/^[a-z][a-z'’-]*$/.test(lemma)) continue;   // regex-ok: a lemma made of letters (a file key, not language)
+  let gloss; try { gloss = JSON.parse(line).body?.gloss; } catch { continue; } if (!gloss) continue; const low = gloss.toLowerCase();
+  const m = XREF.exec(gloss); if (m) (xref.get(lemma) ?? xref.set(lemma, new Set()).get(lemma)).add(m[1].toLowerCase());
+  if (CAND.has(lemma)) { (allGloss.get(lemma) ?? allGloss.set(lemma, []).get(lemma)).push(gloss);
+    if (TITLEISH.some((t) => low.includes(t))) { const lems = (parser.rowsOf(gloss) ?? []).map(lem); if (lems.includes("title") || lems.includes("address") || lems.includes("courtesy") || (lems.includes("use") && lems.includes("before"))) { const sd = side(lems.slice(0, HEAD + 6)); if (sd === "m" || sd === "f") (explicit.get(lemma) ?? explicit.set(lemma, new Set()).get(lemma)).add(sd); } } }
+  if (low.includes("given name")) { readGiven++; const lems = (parser.rowsOf(gloss) ?? []).map(lem);
+    lems.forEach((l, i) => { if (l === "name" && (lems[i - 1] === "given" || lems[i - 1] === "give")) { const w = lems.slice(Math.max(0, i - 5), i - 1).map((x) => GN[x]).filter(Boolean); if (w.length) { const s = given.get(lemma) ?? new Set(); const g = new Set(w); (g.size > 1 || g.has("both") ? ["m", "f"] : [...g]).forEach((x) => s.add(x)); given.set(lemma, s); } } }); }
+}
+// a second look at the dictionary for the cross-reference targets of the candidate words ("Mr" -> Mister), whose own glosses the first pass did not keep
+const targets = new Set([...CAND].flatMap((w) => [...(xref.get(w) ?? [])]).filter((x) => !allGloss.has(x)));
+if (targets.size) for await (const line of readline.createInterface({ input: fs.createReadStream(KAIKKI), crlfDelay: Infinity })) { if (!line.startsWith('{"addr":"lemma:')) continue; const lemma = line.slice(15, line.indexOf('"', 15)).toLowerCase(); if (!targets.has(lemma)) continue; try { const g = JSON.parse(line).body?.gloss; if (g) (allGloss.get(lemma) ?? allGloss.set(lemma, []).get(lemma)).push(g); } catch { /* torn */ } }
+const words = {}; for (const [w, g] of given) words[w] = [g.has("m") ? SENSE_WEIGHT : 0, g.has("f") ? SENSE_WEIGHT : 0];
+const sidesOf = (w) => { const out = new Set(); for (const g of allGloss.get(w) ?? []) { readTitle++; const lems = (parser.rowsOf(g) ?? []).map(lem).slice(0, HEAD), sd = side(lems); /* only the head of the definition: a gender word far into a gloss is about something else */ if (sd === "m" || sd === "f") out.add(sd); else if (sd === "both") { out.add("m"); out.add("f"); } } return out; };
+// a title is not a function word, not a letter, and not a given name, whatever a gloss says: the reader's tag of the word alone, and the Wikidata given-name snapshot, drop those mechanically
+const FUNCTION = new Set(["ADP", "PRON", "AUX", "ADV", "DET", "SCONJ", "CCONJ", "PART", "INTJ", "NUM", "PUNCT", "SYM"]);
+const snapNames = (() => { try { const j = JSON.parse(fs.readFileSync(path.join(ROOT, "identity", "givers", "wikidata-given-names-en.json"), "utf8")); return new Set([...j.male, ...j.female, ...j.unisex].map((x) => String(x).toLowerCase())); } catch { return new Set(); } })();
+const notATitle = (w) => w.length < 2 || snapNames.has(w) || FUNCTION.has((parser.rowsOf(w) ?? [])[0]?.upos);
+const titles = {}, titleWhy = {};
+for (const w of CAND) { const ex = explicit.get(w); if (ex?.size === 1 && !given.has(w) && w.length > 1 && !FUNCTION.has((parser.rowsOf(w) ?? [])[0]?.upos)) { titles[w] = [...ex][0]; titleWhy[w] = { before: before.get(w), via: "a gloss that says it is a title" }; continue; }
+  if (given.has(w) || notATitle(w)) continue; /* a word with a given-name sense, a function word, a letter or a given name of the snapshot is not a title */ let sd = sidesOf(w), via = w; if (!sd.size) for (const x of xref.get(w) ?? []) { if (CAND.has(x) || allGloss.has(x)) { const sx = sidesOf(x); if (sx.size) { sd = sx; via = x; break; } } } if (sd.size === 1) { titles[w] = [...sd][0]; titleWhy[w] = { before: before.get(w), via }; } }
+const measured = {}; for (const split of ["dev", "fresh", "test"]) { const f = path.join(ROOT, "eval", "chat-register", `name-gender-giver.${split}.json`); if (fs.existsSync(f)) { const j = JSON.parse(fs.readFileSync(f, "utf8")); measured[split] = { gold: j.gold, title: [j.sources.title.says, j.sources.title.right], dictionary: [j.sources.dictionary.says, j.sources.dictionary.right], wikidata: [j.sources.wikidata.says, j.sources.wikidata.right], endingBaseline: [j.sources.endingBaseline.says, j.sources.endingBaseline.right], books: j.stamp.books }; } }
+// the snapshot is used only where the title and the name are silent: its rate THERE, from the last scoring of the module (eval/chat-register/gender-module-score.mjs), when that file exists
+try { const g = JSON.parse(fs.readFileSync(path.join(ROOT, "eval", "chat-register", "gender-module-score.json"), "utf8")), sn = g["title, name, then the snapshot"]?.pooled?.bySource?.snapshot; if (sn) measured.layers = { snapshotWhereOthersSilent: [sn.says, sn.right] }; } catch { /* no scoring yet */ }
+const doc = { schema: "NameGenderDictionary@1", language: "en", provenance: { source: "English Wiktionary extract by kaikki.org (the file the chat's definitions read)", license: "CC BY-SA 4.0", file: KAIKKI, sha256: hash.digest("hex"), glossLines: lines, readAsGivenName: readGiven, readAsTitle: readTitle, titleBooks: usedBooks, titleAttestedAtLeast: ATTESTED, titleGlossHead: HEAD, titlesWithWhy: titleWhy, built: new Date().toISOString(), builtBy: "scripts/build-name-gender-dictionary.mjs",
+  reader: "khora rowsOfFor('eng') over each gloss; given names by the lemma sequence '<female|male|unisex> given name'; titles by a gloss that says title / form of address / courtesy / used before and names who it is for; one cross-reference hop for abbreviations",
+  declared: { senseWeight: SENSE_WEIGHT, titleWeight: TITLE_WEIGHT, reason: "one attestation by a named giver meets the declared minimum of two observations; a title is in the name itself, so it outweighs a given-name sense of a surname", givenNameWords: GN, titleGenderWords: { f: [...FEM], m: [...MASC] } },
+  measured: { note: "agreement with the pronouns held-out novels bind to a named being (8+ pronouns, 90% one side); [says, right]; EXPLORATORY; the dictionary route beat a last-letter baseline (62%) on both", ...measured } },
+  words: Object.fromEntries(Object.entries(words).sort()), titles: Object.fromEntries(Object.entries(titles).sort()) };
+fs.mkdirSync(path.dirname(OUT), { recursive: true }); fs.writeFileSync(OUT, JSON.stringify(doc, null, 1) + "\n");
+const nf = Object.values(words).filter((w) => w[1] && !w[0]).length, nm = Object.values(words).filter((w) => w[0] && !w[1]).length, nb = Object.values(words).filter((w) => w[0] && w[1]).length;
+console.log(`${lines} gloss lines, ${readGiven} read as given-name glosses, ${readTitle} title-candidate glosses (${((Date.now() - t0) / 1000).toFixed(0)} s)\nwords: ${Object.keys(words).length} (${nf} female, ${nm} male, ${nb} both); titles: ${Object.keys(titles).length}\nwrote ${OUT}\ntitles: ${Object.entries(titles).map(([w, g]) => `${w}:${g}`).join(" ")}`);

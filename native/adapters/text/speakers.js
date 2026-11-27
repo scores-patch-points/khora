@@ -12,7 +12,7 @@ const SENT_END = /[.!?]/;
 export function speakerReferents(text, entry) {
   const mentions = (entry?.cast ?? []).flatMap((c) => (c.mentionSpans ?? []).map(([a, b]) => ({ a, b, ref: c.ref }))).sort((x, y) => x.a - y.a); const qs = quotesOf(text); const out = []; const gaps = [];
   // the speaker of a quotation: the cast mention in the tag after the closing quote (up to the next quote or sentence end), else the one in the tag before the opening quote (back to the previous quote or sentence end)
-  const speakerOf = (q, i) => { const nextOpen = qs[i + 1]?.open ?? text.length; let end = q.close + 1; while (end < nextOpen && !SENT_END.test(text[end])) end++; const after = mentions.find((m) => m.a > q.close && m.b <= end);
+  const speakerOf = (q, i) => { const nextOpen = qs[i + 1]?.open ?? text.length; let end = q.close + 1; while (end < nextOpen && !SENT_END.test(text[end])) end++; const after = mentions.find((m) => m.a > q.close && m.a < end);   // a cast span can carry the sentence's own period ("said Pierre."), so the test is where the mention STARTS, not where it ends
     if (after) return { ref: after.ref, via: "tag after" }; const prevClose = i > 0 ? qs[i - 1].close : -1; let start = q.open - 1; while (start > prevClose && !SENT_END.test(text[start])) start--; const before = [...mentions].reverse().find((m) => m.b <= q.open && m.a >= start); return before ? { ref: before.ref, via: "tag before" } : null; };
   const spk = qs.map((q, i) => { const s = speakerOf(q, i); return s ? { ...s, id: s.ref } : { ref: null, via: "anonymous", id: `anon:q${i}` }; });
   qs.forEach((q, i) => {

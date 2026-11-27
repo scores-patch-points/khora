@@ -1,0 +1,435 @@
+{
+ "stamp": {
+  "recordsReadBy": [
+   "khora@ccf2033+baseline@2026-11-23 / parser not recorded (v3 and earlier: built under the 20-file stand-in priors home, english-parser, per the ingestion session 2026-11-24)"
+  ],
+  "when": "2026-11-24T05:54:34.380Z",
+  "split": "EXPLORATORY (DEV; leave-one-book-out; authors declared by title)",
+  "checkpoint": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "books": 40,
+  "authors": 35,
+  "authorsWithTwoOrMoreBooks": [
+   "Dickens (2)",
+   "Austen (3)",
+   "Wells (2)",
+   "Carroll (2)"
+  ]
+ },
+ "results": {
+  "the 27-cell grammar profile (how the author's words sit in the cube: structure, not topic)": {
+   "right": 5,
+   "of": 9,
+   "wilson": [
+    0.27,
+    0.81
+   ],
+   "chance": 0.029,
+   "rows": [
+    {
+     "book": "Great-Expectations",
+     "author": "Dickens",
+     "picked": "Stoker",
+     "rank": 16,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Emma",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Sense-and-Sensibility",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-Time-Machine",
+     "author": "Wells",
+     "picked": "Conrad",
+     "rank": 5,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "The-War-of-the-Worlds",
+     "author": "Wells",
+     "picked": "Swift",
+     "rank": 2,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Alice_s_Adventures_in_Wonderland",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Through_the_Looking_Glass",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "A_Tale_of_Two_Cities",
+     "author": "Dickens",
+     "picked": "Conrad",
+     "rank": 10,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Pride_and_Prejudice",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    }
+   ]
+  },
+  "lemma frequency": {
+   "right": 9,
+   "of": 9,
+   "wilson": [
+    0.7,
+    1
+   ],
+   "chance": 0.029,
+   "rows": [
+    {
+     "book": "Great-Expectations",
+     "author": "Dickens",
+     "picked": "Dickens",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Emma",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Sense-and-Sensibility",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-Time-Machine",
+     "author": "Wells",
+     "picked": "Wells",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-War-of-the-Worlds",
+     "author": "Wells",
+     "picked": "Wells",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Alice_s_Adventures_in_Wonderland",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Through_the_Looking_Glass",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "A_Tale_of_Two_Cities",
+     "author": "Dickens",
+     "picked": "Dickens",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Pride_and_Prejudice",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    }
+   ]
+  },
+  "lemma frequency without proper names (the falsifier: characters shared between a sequel and its first book)": {
+   "right": 9,
+   "of": 9,
+   "wilson": [
+    0.7,
+    1
+   ],
+   "chance": 0.029,
+   "rows": [
+    {
+     "book": "Great-Expectations",
+     "author": "Dickens",
+     "picked": "Dickens",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Emma",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Sense-and-Sensibility",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-Time-Machine",
+     "author": "Wells",
+     "picked": "Wells",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-War-of-the-Worlds",
+     "author": "Wells",
+     "picked": "Wells",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Alice_s_Adventures_in_Wonderland",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Through_the_Looking_Glass",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "A_Tale_of_Two_Cities",
+     "author": "Dickens",
+     "picked": "Dickens",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Pride_and_Prejudice",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    }
+   ]
+  },
+  "verb frequency": {
+   "right": 6,
+   "of": 9,
+   "wilson": [
+    0.35,
+    0.88
+   ],
+   "chance": 0.029,
+   "rows": [
+    {
+     "book": "Great-Expectations",
+     "author": "Dickens",
+     "picked": "Stevenson",
+     "rank": 4,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Emma",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Sense-and-Sensibility",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-Time-Machine",
+     "author": "Wells",
+     "picked": "Wells",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-War-of-the-Worlds",
+     "author": "Wells",
+     "picked": "Stoker",
+     "rank": 2,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Alice_s_Adventures_in_Wonderland",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Through_the_Looking_Glass",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "A_Tale_of_Two_Cities",
+     "author": "Dickens",
+     "picked": "Doyle",
+     "rank": 4,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Pride_and_Prejudice",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    }
+   ]
+  },
+  "role share of each lemma": {
+   "right": 6,
+   "of": 9,
+   "wilson": [
+    0.35,
+    0.88
+   ],
+   "chance": 0.029,
+   "rows": [
+    {
+     "book": "Great-Expectations",
+     "author": "Dickens",
+     "picked": "Stoker",
+     "rank": 2,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Emma",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Sense-and-Sensibility",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "The-Time-Machine",
+     "author": "Wells",
+     "picked": "Stoker",
+     "rank": 3,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "The-War-of-the-Worlds",
+     "author": "Wells",
+     "picked": "Wells",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Alice_s_Adventures_in_Wonderland",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "Through_the_Looking_Glass",
+     "author": "Carroll",
+     "picked": "Carroll",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    },
+    {
+     "book": "A_Tale_of_Two_Cities",
+     "author": "Dickens",
+     "picked": "Stoker",
+     "rank": 2,
+     "of": 35,
+     "ok": false
+    },
+    {
+     "book": "Pride_and_Prejudice",
+     "author": "Austen",
+     "picked": "Austen",
+     "rank": 1,
+     "of": 35,
+     "ok": true
+    }
+   ]
+  }
+ }
+}

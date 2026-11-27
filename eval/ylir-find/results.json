@@ -1,0 +1,831 @@
+{
+ "schema": "YlirFindProbe@1",
+ "split": "EXPLORATORY",
+ "at": "2026-11-24T15:05:44.883Z",
+ "index": {
+  "documents": 11640,
+  "lemmaTypes": 2028792,
+  "postings": 19438368,
+  "buildSeconds": 113
+ },
+ "questions": [
+  {
+   "q": "Who was Aristotle's most famous student?",
+   "gold": [
+    "Aristotle.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 4,
+   "lemmas": [
+    "aristotle",
+    "famous",
+    "student"
+   ],
+   "rarest": {
+    "lemma": "aristotle",
+    "docFreq": 147
+   },
+   "top3": [
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 38.65
+    },
+    {
+     "file": "pg55201_The_Republic_by_Plato.txt",
+     "score": 33.09
+    },
+    {
+     "file": "74220-Heitland-Agricola.txt",
+     "score": 33.04
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+    "lemma": "aristotle",
+    "at": 13868,
+    "text": "\"A knight rising to let out Alexander's mentor\" — aristotle (setter: Plodge)."
+   }
+  },
+  {
+   "q": "Who wrote the Divine Comedy?",
+   "gold": [
+    "Dante_Alighieri.txt",
+    "pg13453_The_Divine_Comedy_by_Dante.txt"
+   ],
+   "goldInIndex": 2,
+   "rank": 9,
+   "lemmas": [
+    "write",
+    "divine",
+    "comedy"
+   ],
+   "rarest": {
+    "lemma": "comedy",
+    "docFreq": 257
+   },
+   "top3": [
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 32.19
+    },
+    {
+     "file": "pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 24.93
+    },
+    {
+     "file": "shakespeare-complete-gutenberg.txt",
+     "score": 24.93
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+    "lemma": "comedy",
+    "at": 7855,
+    "text": "\"Second red nose comedy\" — endorse (setter: Boatman)."
+   }
+  },
+  {
+   "q": "Who tutored Alexander the Great?",
+   "gold": [
+    "Aristotle.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 255,
+   "lemmas": [
+    "tutor",
+    "great"
+   ],
+   "rarest": {
+    "lemma": "tutor",
+    "docFreq": 419
+   },
+   "top3": [
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 19.76
+    },
+    {
+     "file": "pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 18.4
+    },
+    {
+     "file": "shakespeare-complete-gutenberg.txt",
+     "score": 18.4
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+    "lemma": "tutor",
+    "at": 152,
+    "text": "\"Looks at tutor, which causes physical discomfort\" — eye strain (setter: Janus)."
+   }
+  },
+  {
+   "q": "What did Watson and Crick discover about DNA?",
+   "gold": [
+    "DNA.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "watson",
+    "crick",
+    "dna"
+   ],
+   "rarest": {
+    "lemma": "dna",
+    "docFreq": 35
+   },
+   "top3": [
+    {
+     "file": "DNA.txt",
+     "score": 53.14
+    },
+    {
+     "file": "autshumato-monolingual-setswana-corpus.txt",
+     "score": 28.7
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 23.29
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/DNA.txt",
+    "lemma": "dna",
+    "at": 2,
+    "text": "Deoxyribonucleic acid (;: DNA) is a polymer composed of two polynucleotide chains that coil around each other to form a Nucleic acid double helixdouble helix."
+   }
+  },
+  {
+   "q": "Who founded the Mongol Empire?",
+   "gold": [
+    "Mongol_Empire.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "found",
+    "mongol",
+    "empire"
+   ],
+   "rarest": {
+    "lemma": "mongol",
+    "docFreq": 45
+   },
+   "top3": [
+    {
+     "file": "Mongol_Empire.txt",
+     "score": 43.38
+    },
+    {
+     "file": "37115-Gobineau-The-Moral-and-Intellectual-Diversity-of-.txt",
+     "score": 31.78
+    },
+    {
+     "file": "61063-Van-Evrie-Negroes-and-Negro-Slavery-the-first-an-i.txt",
+     "score": 31.64
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/Mongol_Empire.txt",
+    "lemma": "mongol",
+    "at": 0,
+    "text": "(Middle Mongol) Mongol Empire Nomadic empire Expansion of the Mongol Empire across Eurasia between 1206 and 1294, with modern political boundaries superimposed"
+   }
+  },
+  {
+   "q": "What did Wittgenstein write in the Tractatus?",
+   "gold": [
+    "Ludwig_Wittgenstein.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "wittgenstein",
+    "write",
+    "tractatus"
+   ],
+   "rarest": {
+    "lemma": "tractatus",
+    "docFreq": 5
+   },
+   "top3": [
+    {
+     "file": "Ludwig_Wittgenstein.txt",
+     "score": 78.17
+    },
+    {
+     "file": "pg2600_War_and_Peace_Tolstoy_Maude.txt",
+     "score": 18.3
+    },
+    {
+     "file": "45473-Sumner-Charles-Sumner-his-complete-works-volume.txt",
+     "score": 12.78
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/Ludwig_Wittgenstein.txt",
+    "lemma": "tractatus",
+    "at": 2,
+    "text": "Tractatus Logico-Philosophicus https://en.wikisource.org/wiki/Tractatus_Logico-Philosophicus 1929 Frank Ramsey (mathematician)Frank Ramsey Bertrand Russell Reuben GoodsteinNuno Venturinha, The Textual Genesis of Wittgenstein's Philosophical Investigations (Routledge, 2013), p. 39."
+   }
+  },
+  {
+   "q": "Who is Long John Silver?",
+   "gold": [
+    "pg120_Treasure-Island.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 9,
+   "lemmas": [
+    "long",
+    "john",
+    "silver"
+   ],
+   "rarest": {
+    "lemma": "silver",
+    "docFreq": 2985
+   },
+   "top3": [
+    {
+     "file": "pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 20.09
+    },
+    {
+     "file": "shakespeare-complete-gutenberg.txt",
+     "score": 20.09
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 19.92
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+    "lemma": "silver",
+    "at": 45,
+    "text": "When I do count the clock that tells the time, And see the brave day sunk in hideous night, When I behold the violet past prime, And sable curls all silvered o’er with white: When lofty trees I see barren of leaves, Which erst from heat did canopy the herd And summer’s green all girded up in sheaves"
+   }
+  },
+  {
+   "q": "Who is Jonathan Harker?",
+   "gold": [
+    "pg345_Dracula.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "jonathan",
+    "harker"
+   ],
+   "rarest": {
+    "lemma": "harker",
+    "docFreq": 71
+   },
+   "top3": [
+    {
+     "file": "pg345_Dracula.txt",
+     "score": 38.04
+    },
+    {
+     "file": "pg345_Dracula.txt",
+     "score": 38.04
+    },
+    {
+     "file": "old-bailey-18420404.txt",
+     "score": 15.86
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "01-literature-books/gitenberg/pg345_Dracula.txt",
+    "lemma": "harker",
+    "at": 17,
+    "text": "Jonathan Harker's Journal 1"
+   }
+  },
+  {
+   "q": "Who is the Cheshire Cat?",
+   "gold": [
+    "pg11_Alice_s_Adventures_in_Wonderland.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 4,
+   "lemmas": [
+    "cheshire",
+    "cat"
+   ],
+   "rarest": {
+    "lemma": "cheshire",
+    "docFreq": 327
+   },
+   "top3": [
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 22.99
+    },
+    {
+     "file": "old-bailey-18841229.txt",
+     "score": 18.56
+    },
+    {
+     "file": "3424-Clarke-For-the-Term-of-His-Natural-Life.txt",
+     "score": 17.57
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "16-wordplay/guardian-cryptics/guardian-cryptic-clues-1999-2020.txt",
+    "lemma": "cheshire",
+    "at": 7082,
+    "text": "\"Bottom of league in Cheshire and East Lancashire?\""
+   }
+  },
+  {
+   "q": "Who is Polonius?",
+   "gold": [
+    "Hamlet.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 18,
+   "lemmas": [
+    "polonius"
+   ],
+   "rarest": {
+    "lemma": "polonius",
+    "docFreq": 17
+   },
+   "top3": [
+    {
+     "file": "pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 31.58
+    },
+    {
+     "file": "shakespeare-complete-gutenberg.txt",
+     "score": 31.58
+    },
+    {
+     "file": "As_You_Like_It.txt",
+     "score": 31.58
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "01-literature-books/gutenberg/pg100_Complete_Works_of_Shakespeare.txt",
+    "lemma": "polonius",
+    "at": 19090,
+    "text": "A room in Polonius’s house Scene IV."
+   }
+  },
+  {
+   "q": "What is the allegory of the cave?",
+   "gold": [
+    "pg55201_The_Republic_by_Plato.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 2,
+   "lemmas": [
+    "allegory",
+    "cave"
+   ],
+   "rarest": {
+    "lemma": "allegory",
+    "docFreq": 81
+   },
+   "top3": [
+    {
+     "file": "32528-Camoes-The-Lusiad-Or-The-Discovery-of-India-an-.txt",
+     "score": 21.29
+    },
+    {
+     "file": "pg55201_The_Republic_by_Plato.txt",
+     "score": 21.05
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 19.03
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "21-anti-colonial/colonial-studies/32528-Camoes-The-Lusiad-Or-The-Discovery-of-India-an-.txt",
+    "lemma": "allegory",
+    "at": 290,
+    "text": "He has not, like Tasso, given it a total appearance of fiction; nor has he, like Lucan, excluded allegory and poetical machinery."
+   }
+  },
+  {
+   "q": "What is the state of nature according to Hobbes?",
+   "gold": [
+    "pg59129_Leviathan_by_Hobbes.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 164,
+   "lemmas": [
+    "state",
+    "nature",
+    "accord",
+    "hobbes"
+   ],
+   "rarest": {
+    "lemma": "hobbes",
+    "docFreq": 36
+   },
+   "top3": [
+    {
+     "file": "28148-Elliott-Cotton-is-king-and-pro-slavery-arguments.txt",
+     "score": 31.86
+    },
+    {
+     "file": "commons-mutual-aid.txt",
+     "score": 26.73
+    },
+    {
+     "file": "47422-Dabney-A-Defence-of-Virginia-And-Through-Her-of.txt",
+     "score": 24.91
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "21-anti-colonial/colonial-studies/28148-Elliott-Cotton-is-king-and-pro-slavery-arguments.txt",
+    "lemma": "hobbes",
+    "at": 4562,
+    "text": "This, too, was the great fundamental error of Hobbes."
+   }
+  },
+  {
+   "q": "Who is Ophelia's father?",
+   "gold": [
+    "Hamlet.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1302,
+   "lemmas": [
+    "ophelia",
+    "father"
+   ],
+   "rarest": {
+    "lemma": "ophelia",
+    "docFreq": 48
+   },
+   "top3": [
+    {
+     "file": "203-Stowe-Uncle-Tom-s-Cabin.txt",
+     "score": 37.34
+    },
+    {
+     "file": "stowe-woman-203.txt",
+     "score": 37.34
+    },
+    {
+     "file": "pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 33.16
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "21-anti-colonial/colonial-studies/203-Stowe-Uncle-Tom-s-Cabin.txt",
+    "lemma": "ophelia",
+    "at": 3,
+    "text": "VOLUME I CHAPTER I—In Which the Reader Is Introduced to a Man of Humanity CHAPTER II—The Mother CHAPTER III —The Husband and Father CHAPTER IV—An Evening in Uncle Tom’s Cabin CHAPTER V—Showing the Feelings of Living Property on Changing Owners CHAPTER VI—Discovery CHAPTER VII—The Mother’s Struggle C"
+   }
+  },
+  {
+   "q": "What does the second law of thermodynamics say about entropy?",
+   "gold": [
+    "Thermodynamics.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 2,
+   "lemmas": [
+    "second",
+    "law",
+    "thermodynamic",
+    "say",
+    "entropy"
+   ],
+   "rarest": {
+    "lemma": "entropy",
+    "docFreq": 30
+   },
+   "top3": [
+    {
+     "file": "Entropy.txt",
+     "score": 68.05
+    },
+    {
+     "file": "Thermodynamics.txt",
+     "score": 54.18
+    },
+    {
+     "file": "ashby-1956-an-introduction-to-cybernetics.txt",
+     "score": 47.26
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/Entropy.txt",
+    "lemma": "entropy",
+    "at": 1,
+    "text": "Entropy is a thermodynamic state variable that quantifies the probabilistic distribution of accessible Microstate (statistical mechanics)microstates in a system."
+   }
+  },
+  {
+   "q": "What does general relativity say about the perihelion of Mercury?",
+   "gold": [
+    "General_relativity.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "general",
+    "relativity",
+    "say",
+    "perihelion",
+    "mercury"
+   ],
+   "rarest": {
+    "lemma": "perihelion",
+    "docFreq": 12
+   },
+   "top3": [
+    {
+     "file": "General_relativity.txt",
+     "score": 51.73
+    },
+    {
+     "file": "pg32063_On_the_Electrodynamics_of_Moving_Bodies__Einstein_.txt",
+     "score": 51.4
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 49.67
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/General_relativity.txt",
+    "lemma": "perihelion",
+    "at": 48,
+    "text": "Einstein showed in 1915 how his theory explained the Perihelion precession of Mercuryanomalous perihelion advance of the planet Mercury (planet)Mercury without any arbitrary parameters (\"wikt:fudge factorfudge factors\"), and in 1919 an expedition led by Arthur EddingtonEddington confirmed general re"
+   }
+  },
+  {
+   "q": "Who is Van Helsing?",
+   "gold": [
+    "pg345_Dracula.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "van",
+    "helsing"
+   ],
+   "rarest": {
+    "lemma": "helsing",
+    "docFreq": 2
+   },
+   "top3": [
+    {
+     "file": "pg345_Dracula.txt",
+     "score": 59.85
+    },
+    {
+     "file": "pg345_Dracula.txt",
+     "score": 59.79
+    },
+    {
+     "file": "african-speech-technology-afrikaans-text-ast-text-corpus-afrikaans-information-guides-afr-l.txt",
+     "score": 10.5
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "01-literature-books/gitenberg/pg345_Dracula.txt",
+    "lemma": "helsing",
+    "at": 63,
+    "text": "Dr. Seward's Phonograph Diary, spoken by Van Helsing 294"
+   }
+  },
+  {
+   "q": "What did Confucius teach about filial piety?",
+   "gold": [
+    "Confucianism.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "confucius",
+    "teach",
+    "filial",
+    "piety"
+   ],
+   "rarest": {
+    "lemma": "confucius",
+    "docFreq": 50
+   },
+   "top3": [
+    {
+     "file": "Confucianism.txt",
+     "score": 45.2
+    },
+    {
+     "file": "32528-Camoes-The-Lusiad-Or-The-Discovery-of-India-an-.txt",
+     "score": 30.3
+    },
+    {
+     "file": "49140-Fletcher-Studies-on-Slavery-in-Easy-Lessons.txt",
+     "score": 23.88
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/Confucianism.txt",
+    "lemma": "confucius",
+    "at": 8,
+    "text": "It is a wenmiao (), a temple where Confucius is worshipped as Chinese gods and immortalsWendi, \"God of Culture\" ().]] , Shanxi]] Confucianism, also known as Ruism or Ru classicism, is a system of thought and behavior originating in ancient China, and is variously described as a tradition, philosophy"
+   }
+  },
+  {
+   "q": "What are the Four Noble Truths?",
+   "gold": [
+    "Buddhism.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "four",
+    "noble",
+    "truths"
+   ],
+   "rarest": {
+    "lemma": "truths",
+    "docFreq": 22
+   },
+   "top3": [
+    {
+     "file": "Buddhism.txt",
+     "score": 20.8
+    },
+    {
+     "file": "11691-Wren-Driftwood-Spars-The-Stories-of-a-Man-a-B.txt",
+     "score": 16.78
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 15.83
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/Buddhism.txt",
+    "lemma": "truths",
+    "at": 12,
+    "text": "Widely observed teachings include the Four Noble Truths, the Noble Eightfold Path, and the doctrines of dependent origination, Karma in Buddhismkarma, and the three marks of existence."
+   }
+  },
+  {
+   "q": "Who is Jim Hawkins?",
+   "gold": [
+    "pg120_Treasure-Island.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "jim",
+    "hawkins"
+   ],
+   "rarest": {
+    "lemma": "jim",
+    "docFreq": 580
+   },
+   "top3": [
+    {
+     "file": "pg120_Treasure-Island.txt",
+     "score": 23.04
+    },
+    {
+     "file": "34270-Roberts-Barbara-Ladd.txt",
+     "score": 19.65
+    },
+    {
+     "file": "neh-edwardsc-edwards.txt",
+     "score": 19.16
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "01-literature-books/gitenberg/pg120_Treasure-Island.txt",
+    "lemma": "jim",
+    "at": 193,
+    "text": "NARRATIVE RESUMED BY JIM HAWKINS: THE GARRISON IN THE STOCKADE ."
+   }
+  },
+  {
+   "q": "What is the Heisenberg uncertainty principle?",
+   "gold": [
+    "Quantum_mechanics.txt"
+   ],
+   "goldInIndex": 1,
+   "rank": 1,
+   "lemmas": [
+    "heisenberg",
+    "uncertainty",
+    "principle"
+   ],
+   "rarest": {
+    "lemma": "heisenberg",
+    "docFreq": 5
+   },
+   "top3": [
+    {
+     "file": "Quantum_mechanics.txt",
+     "score": 25.69
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 17.98
+    },
+    {
+     "file": "19660014637_total-research-activity-related-to-the-science-of-materials-fourth-annual-techni.txt",
+     "score": 17.71
+    }
+   ],
+   "sentenceFromTop1": {
+    "file": "02-encyclopedic/wikipedia/Quantum_mechanics.txt",
+    "lemma": "heisenberg",
+    "at": 11,
+    "text": "These early attempts to understand microscopic phenomena, now known as the \"old quantum theory\", led to the full development of quantum mechanics in the mid-1920s by Niels Bohr, Erwin Schrödinger, Werner Heisenberg, Max Born, Paul Dirac and others."
+   }
+  }
+ ],
+ "found": {
+  "atK": {
+   "1": "10 of 20",
+   "3": "12 of 20",
+   "10": "16 of 20"
+  },
+  "chanceAtK": {
+   "1": 0.00009,
+   "3": 0.00026,
+   "10": 0.00086
+  }
+ },
+ "controls": [
+  {
+   "q": "Who won the 2022 World Cup?",
+   "lemmas": [
+    "win",
+    "world",
+    "cup"
+   ],
+   "top3": [
+    {
+     "file": "pg100_Complete_Works_of_Shakespeare.txt",
+     "score": 24.58
+    },
+    {
+     "file": "shakespeare-complete-gutenberg.txt",
+     "score": 24.58
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 23.98
+    }
+   ]
+  },
+  {
+   "q": "What is the capital of Burkina Faso?",
+   "lemmas": [
+    "capital",
+    "burkina",
+    "faso"
+   ],
+   "top3": [
+    {
+     "file": "autshumato-monolingual-sepedi-corpus.txt",
+     "score": 18.4
+    },
+    {
+     "file": "autshumato-monolingual-setswana-corpus.txt",
+     "score": 16.38
+    },
+    {
+     "file": "sesotho-genre-classification-corpus-st-nf-sub-nf-sub390.txt",
+     "score": 14.36
+    }
+   ]
+  },
+  {
+   "q": "Who is the chief executive of Anthropic?",
+   "lemmas": [
+    "chief",
+    "executive",
+    "anthropic"
+   ],
+   "top3": [
+    {
+     "file": "20587-MacGregor-Integration-of-the-Armed-Forces-1940-196.txt",
+     "score": 23.78
+    },
+    {
+     "file": "pg1404_The-Federalist-Papers.txt",
+     "score": 21.84
+    },
+    {
+     "file": "guardian-cryptic-clues-1999-2020.txt",
+     "score": 21.67
+    }
+   ]
+  }
+ ]
+}

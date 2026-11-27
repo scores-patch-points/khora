@@ -1,0 +1,330 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:34:13.019Z",
+  "split": "EXPLORATORY (developer-written probes)",
+  "commit": "unspecified"
+ },
+ "positives": [
+  {
+   "q": "is it worth doing?",
+   "a": "the course",
+   "ok": true,
+   "paired": {
+    "question": "is it worth doing?",
+    "answer": "the course",
+    "rebuilt": "is the course worth doing?"
+   },
+   "gap": "action_not_in_text",
+   "stored": 0
+  },
+  {
+   "q": "did he arrive?",
+   "a": "Pierre",
+   "ok": true,
+   "paired": {
+    "question": "did he arrive?",
+    "answer": "Pierre",
+    "rebuilt": "did Pierre arrive?"
+   },
+   "gap": "action_not_in_text",
+   "stored": 0
+  },
+  {
+   "q": "what did she say?",
+   "a": "Natasha",
+   "ok": true,
+   "paired": {
+    "question": "what did she say?",
+    "answer": "Natasha",
+    "rebuilt": "what did Natasha say?"
+   },
+   "gap": "nothing_fills_the_void",
+   "stored": 0
+  },
+  {
+   "q": "is it open?",
+   "a": "the shop",
+   "ok": true,
+   "paired": {
+    "question": "is it open?",
+    "answer": "the shop",
+    "rebuilt": "is the shop open?"
+   },
+   "gap": "action_not_in_text",
+   "stored": 0
+  },
+  {
+   "q": "was it good?",
+   "a": "the film",
+   "ok": true,
+   "paired": {
+    "question": "was it good?",
+    "answer": "the film",
+    "rebuilt": "was the film good?"
+   },
+   "gap": "action_not_in_text",
+   "stored": 0
+  },
+  {
+   "q": "where is she?",
+   "a": "Mina",
+   "ok": true,
+   "paired": {
+    "question": "where is she?",
+    "answer": "Mina",
+    "rebuilt": "where is Mina?"
+   },
+   "gap": "nothing_fills_the_void",
+   "stored": 0
+  },
+  {
+   "q": "does she live here?",
+   "a": "Sonya",
+   "ok": true,
+   "paired": {
+    "question": "does she live here?",
+    "answer": "Sonya",
+    "rebuilt": "does Sonya live here?"
+   },
+   "gap": "action_not_in_text",
+   "stored": 0
+  },
+  {
+   "q": "is it far?",
+   "a": "the station",
+   "ok": true,
+   "paired": {
+    "question": "is it far?",
+    "answer": "the station",
+    "rebuilt": "is the station far?"
+   },
+   "gap": "action_not_in_text",
+   "stored": 0
+  }
+ ],
+ "controls": {
+  "a full statement between the question and the fragment": {
+   "held": 3,
+   "of": 3,
+   "rows": [
+    {
+     "seq": [
+      "is it worth doing?",
+      "Pierre loves Natasha.",
+      "the course"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    },
+    {
+     "seq": [
+      "did he arrive?",
+      "Pierre loves Natasha.",
+      "Pierre"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": null
+    },
+    {
+     "seq": [
+      "what did she say?",
+      "Pierre loves Natasha.",
+      "Natasha"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": null
+    }
+   ]
+  },
+  "the fragment alone, nothing asked back": {
+   "held": 3,
+   "of": 3,
+   "rows": [
+    {
+     "seq": [
+      "the course"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    },
+    {
+     "seq": [
+      "Pierre"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    },
+    {
+     "seq": [
+      "Natasha"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    }
+   ]
+  },
+  "a second question between": {
+   "held": 3,
+   "of": 3,
+   "rows": [
+    {
+     "seq": [
+      "is it worth doing?",
+      "who is Pierre?",
+      "the course"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    },
+    {
+     "seq": [
+      "did he arrive?",
+      "who is Pierre?",
+      "Pierre"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    },
+    {
+     "seq": [
+      "what did she say?",
+      "who is Pierre?",
+      "Natasha"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    }
+   ]
+  },
+  "a pronoun that has an antecedent (nothing is asked back)": {
+   "held": 2,
+   "of": 2,
+   "rows": [
+    {
+     "seq": [
+      "Pierre loves Natasha.",
+      "does he love her?",
+      "the course"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    },
+    {
+     "seq": [
+      "Mina gave Jonathan a book.",
+      "did she give it?",
+      "the shop"
+     ],
+     "ok": true,
+     "paired": null,
+     "gap": "fragment_unclear"
+    }
+   ]
+  }
+ },
+ "positivePass": 8,
+ "notScored": {
+  "a yes answering a question the chat asked": {
+   "paired": null,
+   "gap": null,
+   "type": "social"
+  },
+  "he / Mina (a woman's name)": {
+   "paired": null,
+   "gap": "answer_does_not_fit"
+  }
+ },
+ "refusals": {
+  "passed": 5,
+  "of": 5,
+  "rows": [
+   {
+    "q": "did he arrive?",
+    "a": "the course",
+    "ok": true,
+    "paired": null,
+    "gap": "answer_does_not_fit",
+    "type": "relational",
+    "outsideCalls": 0
+   },
+   {
+    "q": "is it open?",
+    "a": "Natasha",
+    "ok": true,
+    "paired": null,
+    "gap": "answer_does_not_fit",
+    "type": "relational",
+    "outsideCalls": 0
+   },
+   {
+    "q": "where is she?",
+    "a": "the station",
+    "ok": true,
+    "paired": null,
+    "gap": "answer_does_not_fit",
+    "type": "relational",
+    "outsideCalls": 0
+   },
+   {
+    "q": "is it far?",
+    "a": "Hahaha",
+    "ok": true,
+    "paired": null,
+    "gap": "answer_does_not_fit",
+    "type": "relational",
+    "outsideCalls": 0
+   },
+   {
+    "q": "is it far?",
+    "a": "!pt",
+    "ok": true,
+    "paired": null,
+    "gap": "answer_does_not_fit",
+    "type": "relational",
+    "outsideCalls": 0
+   }
+  ]
+ },
+ "badThenGood": {
+  "passed": 2,
+  "of": 2,
+  "rows": [
+   {
+    "seq": [
+     "is it open?",
+     "Hahaha",
+     "the shop"
+    ],
+    "ok": true,
+    "paired": "is the shop open?",
+    "gap": "action_not_in_text"
+   },
+   {
+    "seq": [
+     "did he arrive?",
+     "the course",
+     "Pierre"
+    ],
+    "ok": true,
+    "paired": "did Pierre arrive?",
+    "gap": "action_not_in_text"
+   }
+  ]
+ }
+}

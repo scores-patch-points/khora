@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Author voice, from the priors</title>
+<style>
+:root { --bg:#f7f6f3; --panel:#fff; --ink:#1f2328; --muted:#5b6370; --line:#ddd9cd; --accent:#b45309; --ok:#15803d; --bad:#b91c1c; --mark:#fde68a; --soft:#faf9f6; --bar:#2b5fd9; --bar2:#9aa3b2; --bar3:#d4a574; }
+@media (prefers-color-scheme: dark) { :root { --bg:#14161a; --panel:#1b1e23; --ink:#ebe9e4; --muted:#a4aab2; --line:#33383f; --accent:#e9954a; --ok:#4ade80; --bad:#f87171; --mark:#5b4a12; --soft:#20242a; --bar:#6c97f0; --bar2:#6b7482; --bar3:#b88a5c; } }
+* { box-sizing:border-box; } html, body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.55 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+header { padding:14px 20px; border-bottom:1px solid var(--line); background:var(--panel); } header b { font-size:18px; } .k { color:var(--muted); }
+.banner { margin:0; padding:10px 20px; background:var(--mark); font-size:14px; }
+main { max-width:1000px; margin:0 auto; padding:8px 20px 60px; }
+h2 { margin:30px 0 4px; font-size:19px; } h3 { margin:18px 0 6px; font-size:12.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
+p { margin:6px 0; } .lead { font-size:16px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin:12px 0; } .card { border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:12px 14px; } .card .q { color:var(--muted); font-size:13px; } .card .a { font-size:17px; font-weight:600; margin:2px 0; } .card .w { font-size:13.5px; }
+.yes { color:var(--ok); } .no { color:var(--bad); } .part { color:var(--accent); }
+.box { border:1px solid var(--line); border-radius:12px; background:var(--panel); padding:12px 16px; margin:10px 0; }
+table { border-collapse:collapse; width:100%; font-size:14px; } th, td { border:1px solid var(--line); padding:6px 9px; vertical-align:top; text-align:left; } th { color:var(--muted); font-weight:600; background:var(--soft); }
+.bars { min-width:260px; } .bar { display:flex; align-items:center; gap:8px; margin:2px 0; font-size:13px; } .bar .lab { width:128px; color:var(--muted); flex:none; } .bar .track { flex:1; height:12px; background:var(--soft); border:1px solid var(--line); border-radius:4px; overflow:hidden; } .bar .fill { display:block; height:100%; } .bar .num { width:46px; text-align:right; font-variant-numeric:tabular-nums; flex:none; }
+.hit { background:color-mix(in srgb, var(--ok) 14%, transparent); }
+details { margin:6px 0; } summary { cursor:pointer; color:var(--muted); font-size:13.5px; } summary:hover { color:var(--ink); }
+pre { font:12.5px/1.5 ui-monospace, Menlo, monospace; margin:6px 0 0; padding:10px 12px; background:var(--soft); border:1px solid var(--line); border-radius:8px; white-space:pre-wrap; word-break:break-word; overflow-x:auto; } code { font:12.5px ui-monospace, Menlo, monospace; word-break:break-all; }
+a { color:var(--bar); } ul { margin:6px 0; padding-left:20px; } li { margin:3px 0; }
+.tag { display:inline-block; font-size:11.5px; padding:1px 8px; border-radius:10px; border:1px solid var(--line); color:var(--muted); margin-left:6px; vertical-align:middle; }
+.scroll { overflow-x:auto; }
+@media (max-width:700px) { .bar .lab { width:90px; } }
+</style>
+</head>
+<body>
+<header><b>Can the ingested priors answer in an author's voice?</b> <span class="k">the owner's question, 2026-11-24; the measured answer</span></header>
+<p class="banner">No model runs here. This page shows only numbers that the experiments wrote to files; every figure says which split it belongs to (FRESH, DEV or EXPLORATORY) and links to its file. Priors: the ingestion session's per-document lexicon, build v3, read only.</p>
+<main id="app"><p class="k">loading the results…</p></main>
+<script>
+const $ = (id) => document.getElementById(id);
+const ENT = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }; const esc = (s) => { let o = ""; for (const c of String(s ?? "")) o += ENT[c] ?? c; return o; };
+const nice = (stem) => String(stem).replace(/^pg\d+_/, "").replace(/[_-]/g, " ").replace(/\.txt$/, "");
+const file = (n, t) => `<a href="/file/${encodeURIComponent(n)}" target="_blank">${esc(t ?? n)}</a>`;
+const bar = (lab, v, cls, max = 1) => `<div class="bar"><span class="lab">${esc(lab)}</span><span class="track"><span class="fill" style="width:${Math.max(0, Math.min(100, (v / max) * 100))}%; background:var(--${cls})"></span></span><span class="num">${v.toFixed(3)}</span></div>`;
+function e0Block(e0) {
+  if (!e0) return "<p class=k>no E0 result file</p>";
+  return `<div class="box"><p><b>How near are two books, by their most common words (Burrows' Delta, ${e0.words} words, character names left out)?</b> Smaller is nearer. 39 other books were compared with each query book.</p>
+  ${e0.queries.map((q) => { const near = q.nearest3.map((s) => { const m = s.match(/^(.*) \((.*)\) ([0-9.]+)$/); return m ? { book: m[1], author: m[2], d: +m[3] } : null; }).filter(Boolean), max = Math.max(...near.map((x) => x.d), 0.9);
+    return `<h3>${esc(nice(q.query))} (${esc(q.author)})</h3>${near.map((x) => bar(nice(x.book) + " · " + x.author, x.d, x.author === q.author ? "bar" : "bar2", max)).join("")}<p class="k" style="font-size:13.5px">${q.sameAuthorBooks.map((s) => `${esc(nice(s.book))} is number ${s.rank} of ${q.nOthers}`).join("; ")}.</p>`; }).join("")}
+  <p class="k" style="font-size:13.5px">Development pair, run earlier (Carroll): <i>Alice</i> and <i>Through the Looking-Glass</i> were each other's nearest, Delta 0.47, against 0.76 or more for every other book (that file was overwritten by the fresh run, as logged in the preregistration).</p>
+  <p><span class="tag">FRESH</span> ${file("E0-fresh-austen.json", "results/E0-fresh-austen.json")}</p></div>`;
+}
+const runLabel = (r) => { const m = r.file.match(/^E1[bc]?-(.+)-from-(.+)-k(\d+)-b(\d+)\.json$/); return m ? { test: nice(m[1]), train: nice(m[2]), k: +m[3], band: +m[4], fresh: /Prejudice|Sensibility/.test(m[1]) } : { test: r.file, train: "", k: 0, band: 0, fresh: false }; };
+function run(r) {
+  const L = runLabel(r), a = r.accuracy, o = a.otherAuthorBooks, rk = r.rankOfSameAuthorBook, mc = r.mcnemarVsPooled;
+  return `<div class="box"><p><b>${esc(L.test)}</b> <span class="k">predicted from</span> <b>${esc(L.train)}</b> <span class="tag">${L.fresh ? "FRESH" : "DEV"}</span> <span class="tag">K=${L.k}, band ${L.band}</span></p>
+    <div class="bars">${bar("same author's book", a.sameAuthorBook, "bar")}${bar("pooled other authors", a.pooledOtherAuthors, "bar3")}${bar("other books, average", o.mean, "bar2")}${bar("best other book", o.best[0].acc, "bar2")}</div>
+    <p style="font-size:14px">Out of ${r.pairsWithATestPreference} verb pairs, the training book predicted the test book's preferred verb right ${(a.sameAuthorBook * 100).toFixed(0)}% of the time. The best single book by another author (${esc(nice(o.best[0].book))}, ${esc(o.best[0].author)}) got ${(o.best[0].acc * 100).toFixed(0)}%. The same author's book ranks <b>${rk.rank} of ${rk.of}</b>. Against the pooled preference of all other authors, the same-author book was right where pooled was wrong ${mc.sameAuthorRightPooledWrong} times and wrong where pooled was right ${mc.pooledRightSameAuthorWrong} times (p ${mc.pTwoSided}).</p>
+    <details><summary>the first 12 pairs, with the counts (verbs used in the test book / in the training book)</summary><table><tr><th>pair</th><th>embedder</th><th>test book</th><th>training book</th></tr>${r.examples.map((e) => `<tr><td>${esc(e.pair)}</td><td>${e.similarity}</td><td>${e.test.join(" vs ")}</td><td>${e.train.join(" vs ")}</td></tr>`).join("")}</table></details>
+    <p class="k" style="font-size:13px">${file(r.file, "results/" + r.file)} · ${r.eligibleVerbs} verbs used often enough in both books, ${r.pairs} near pairs among them</p></div>`;
+}
+fetch("/api/results").then((r) => r.json()).then((d) => {
+  const e1 = d.e1, primary = e1.filter((r) => runLabel(r).fresh && runLabel(r).k === 5), second = e1.filter((r) => runLabel(r).fresh && runLabel(r).k === 3), dev = e1.filter((r) => !runLabel(r).fresh);
+  $("app").innerHTML = `
+  <h2>The short answer</h2>
+  <div class="cards">
+    <div class="card"><div class="q">Do the priors carry an author?</div><div class="a yes">Yes</div><div class="w">Two books by the same author are each other's nearest out of 39 (Austen fresh, Carroll on the development set).</div></div>
+    <div class="card"><div class="q">Do they carry a voice, as a choice among ways of saying the same thing?</div><div class="a part">Yes on the fresh pair, with caveats</div><div class="w">One Austen book predicts which near-synonym verb she uses in the other better than any single book by another author. It does not beat the pooled preference at the main setting, and the Carroll pair did not show it.</div></div>
+    <div class="card"><div class="q">Can the system answer <i>from</i> the priors?</div><div class="a no">Not facts</div><div class="w">The lexicon holds how words are used, not what is true. Facts come from reading the books. Usage agrees with the embedder on which verbs mean the same only weakly.</div></div>
+    <div class="card"><div class="q">A voiced reply, beyond a swapped verb?</div><div class="a no">Not from this</div><div class="w">It would need the author's own phrases and surface forms, which the lexicon does not store.</div></div>
+  </div>
+  <p class="lead">Nothing here is wired into the chat. The protocol was written and stamped before the fresh run (${file("PREREG-E0-E1.md", "preregistration")}, ${file("STAMP-E0-E1.txt", "stamp")}); the full write-up is ${file("RESULTS-E0-E1-E2.md", "RESULTS-E0-E1-E2.md")}.</p>
+
+  <h2>1 · Does the lexicon carry an author at all?</h2>
+  <p class="k">The test: for a book, is its nearest neighbour (by how often it uses the commonest words) another book by the same author? Under no author signal, one given book would be nearest with chance 1 in 39.</p>
+  ${e0Block(d.e0.fresh)}
+
+  <h2>2 · Does it carry a voice? The author's choice between two verbs that say the same thing</h2>
+  <p class="k">The pairs are the near-verb organ's own (mutual nearest and above the bar of random verb pairs, 0.855). For each pair, the question is which of the two the author uses more in a book the predictor has not seen. Each bar is the share of pairs predicted right; the bars are drawn from 0 to 1.</p>
+  <h3>Fresh pair, the stamped main setting (K=5, band 0) <span class="tag">the headline</span></h3>${primary.map(run).join("")}
+  <p class="lead">The rule stamped in advance was: the same-author book must rank in the top 4 in both directions. It ranks first in both, so the rule holds. But at this setting the same-author book is not clearly better than the pooled preference of 37 other books (p 0.40 and 0.19), because the pooled estimate rests on far more data.</p>
+  <h3>Fresh pair, a second setting chosen after the development pair looked best there (K=3, band 1) <span class="tag">secondary, not the headline</span></h3>${second.map(run).join("")}
+  <h3>Development pair (Carroll)</h3>${dev.map(run).join("")}
+  <p class="lead">On the development pair at the main setting the same-author book ranks 10th of 39 with only 30 pairs: too few pairs to say anything, but it is a mark against calling the effect general. Only two authors have been tested.</p>
+
+  <h2>3 · Is it a parser habit, not a choice? <span class="tag">EXPLORATORY, after the stamped test</span></h2>
+  <p class="k">Austen's largest deviations (section 5) include "pleasure", "such" and "game" counted as verbs: the reader tags them so in her syntax and nowhere else. Two checks, run after the stamped test:</p>
+  <div class="box scroll"><table><tr><th>test ← train</th><th>variant</th><th>pairs scored</th><th>same author's book</th><th>pooled</th><th>rank</th></tr>
+  ${[...d.e1c.map((r) => ({ r, v: "other authors also use it as a verb (3 verbs dropped)" })), ...d.e1b.map((r) => ({ r, v: "only verbs the treebank prior calls ≥ 90% verb (too few pairs)" }))].map(({ r, v }) => { const L = runLabel(r); return `<tr><td>${esc(L.test)} ← ${esc(L.train)}</td><td>${esc(v)}</td><td>${r.pairsWithATestPreference}</td><td>${r.accuracy.sameAuthorBook}</td><td>${r.accuracy.pooledOtherAuthors}</td><td>${r.rankOfSameAuthorBook.rank} of ${r.rankOfSameAuthorBook.of}</td></tr>`; }).join("")}</table></div>
+  <p>With the first variant Austen's ranks stay at 1 and 1: the parser habit does not drive the result. The second leaves 6 to 10 pairs, so it cannot decide anything.</p>
+
+  <h2>4 · Can the system answer <i>from</i> the priors? Does usage agree with the embedder about which verbs mean the same? <span class="tag">EXPLORATORY</span></h2>
+  ${d.e2 ? `<div class="box"><p>${d.e2.verbsUsed} verbs used at least ${d.e2.minUses} times. For the ${d.e2.embedderEquivalents.pairs} pairs the embedder calls equivalent, the chance that a pair shares more usage than a random pair of the same frequency is <b>${d.e2.embedderEquivalents.probMoreSharedUsageThanARandomPairOfTheSameFrequency}</b> (0.5 would be no agreement); for ${d.e2.embedderNearMisses.pairs} near misses, ${d.e2.embedderNearMisses.probMoreSharedUsageThanARandomPairOfTheSameFrequency}. Usage corroborates a little, not enough to replace the answer-invariance test.</p>
+   <div class="two" style="display:grid; grid-template-columns:1fr 1fr; gap:12px"><div><h3>most shared usage among the equivalents</h3><pre>${esc(d.e2.highestUsageAmongEquivalents.join("\n"))}</pre><p class="k" style="font-size:13px">Opposites and relatives (forget/remember, give/let) share the most: usage cannot tell antonyms apart.</p></div><div><h3>least shared usage among the equivalents</h3><pre>${esc(d.e2.lowestUsageAmongEquivalents.join("\n"))}</pre><p class="k" style="font-size:13px">Some are true synonyms (acquire/buy, keep/retain): the stored company lists are capped at 30 words, so they are sparse.</p></div></div>
+   <p class="k" style="font-size:13px">${file("E2-min200.json", "results/E2-min200.json")}</p></div>` : "<p class=k>no E2 result file</p>"}
+
+  <h2>5 · What Austen's choices look like <span class="tag">descriptive, not a test</span></h2>
+  <p class="k">Among near-verb pairs, where Austen (two books) reaches for the other verb than the rest of the corpus does, largest deviations first. Read the first rows with care: "pleasure", "such", "likewise" and "game" are the reader's tags, not choices.</p>
+  ${d.e3 ? `<pre>${esc(d.e3)}</pre><p class="k" style="font-size:13px">${file("E3-austen.txt", "results/E3-austen.txt")}</p>` : '<p class="k">the table has not been written yet</p>'}
+
+  <h2>What this means, and what it does not</h2>
+  <ul>
+   <li><b>An author is in the priors</b>, as a profile and, on the one fresh pair, as a preference among near verbs.</li>
+   <li><b>A voice for a chat reply is thin.</b> A short reply has a word or two to change. Beyond that the voice has to be the author's own phrases, built from the books as the expression library does, and the lexicon does not store them.</li>
+   <li><b>Saying a swapped verb needs its form.</b> The lexicon is by lemma only; I asked the ingestion session whether it can add the surface forms per lemma.</li>
+   <li><b>The near pairs are loose</b> (bring/come, get/have): part of a pair's preference is grammar. Same-author books also share a period and a genre, so "author" may mean "author, period and register".</li>
+   <li><b>Build v3 only.</b> A v4 build is in progress under another priors directory; reading it is a new row, not these numbers.</li>
+  </ul>
+  <p class="k">Scripts: ${["e0-author-signal.mjs", "e1-lexical-preference.mjs", "e1b-treebank-verbs.mjs", "e1c-cross-author-verbs.mjs", "e2-usage-corroborates.mjs", "e3-voice-table.mjs"].map((n) => file(n)).join(" · ")} · ${file("authors.json", "authors.json (file to author, declared)")}</p>`;
+}).catch((e) => { $("app").innerHTML = `<p>${esc(e)}</p>`; });
+</script>
+</body>
+</html>

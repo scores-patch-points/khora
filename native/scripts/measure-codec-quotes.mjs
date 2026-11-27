@@ -1,0 +1,9 @@
+// native/scripts/measure-codec-quotes.mjs — does the CODEC'S quote table (codecQuotes: the edition's own marks plus the codec default) beat the language default? Usage: node native/scripts/measure-codec-quotes.mjs <genesis json of { name: { iso, verses } }>
+import fs from "node:fs"; const { codecQuotes, quoteSpans, QUOTE_TABLES } = await import("../adapters/text/quote-frames.js");
+const all = JSON.parse(fs.readFileSync(process.argv[2] ?? (() => { throw new Error("usage: measure-codec-quotes.mjs <genesis json>"); })(), "utf8")); const MARK = /["“”„‟«»‹›「」『』]/g; const rows = [];
+for (const [n, L] of Object.entries(all)) { const t = Object.values(L.verses).slice(0, 600).join(" "), nm = (t.match(MARK) || []).length, def = QUOTE_TABLES[L.iso] ?? (L.iso === "cmn" ? QUOTE_TABLES.zho : null); if (nm < 6 || !def) continue;
+  const a = quoteSpans(t, def), cq = codecQuotes(L.iso === "cmn" ? "zho" : L.iso, t), b = cq.table ? quoteSpans(t, cq.table) : null;
+  const bad = (r) => r ? r.gaps.filter((g) => g.gap === "quotation_continued" || g.gap === "marks_outside_table").length : null; rows.push({ n, iso: L.iso, differs: cq.differs, nm, defBad: bad(a), codecBad: bad(b), defSpans: a.spans.length, codecSpans: b?.spans.length }); }
+console.log("editions in a language WITH a default table:", rows.length, "| the codec's table differs from the default on", rows.filter((r) => r.differs).length);
+for (const r of rows.filter((r) => r.differs)) console.log(`  ${r.n}[${r.iso}] ${r.nm} marks: default table -> ${r.defSpans} spans, ${r.defBad} stray/unmatched marks | codec table -> ${r.codecSpans} spans, ${r.codecBad} stray/unmatched`);
+const same = rows.filter((r) => !r.differs); console.log(`where it does NOT differ (${same.length}): identical spans on ${same.filter((r) => r.defSpans === r.codecSpans).length}; unmatched marks default ${same.reduce((a, r) => a + r.defBad, 0)} vs codec ${same.reduce((a, r) => a + r.codecBad, 0)}`);

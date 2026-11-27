@@ -1,0 +1,275 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:37:56.443Z",
+  "split": "EXPLORATORY",
+  "n": 600,
+  "note": "declaration from the reader's universal marks only; the thread's English-supplied booleans (small talk, arithmetic, slash, address) are not given"
+ },
+ "profile": {
+  "sms": {
+   "sampled": 600,
+   "working": {
+    "statement": 0.405,
+    "fragment": 0.337,
+    "question": 0.145,
+    "request": 0.045,
+    "unread": 0.045,
+    "social": 0.023
+   },
+   "open": 0.057,
+   "unread": 0.045,
+   "someMarkOpposes": 0.163,
+   "openPairs": {
+    "fragment+question": 23,
+    "question+statement": 8,
+    "question+request": 3
+   }
+  },
+  "cosem": {
+   "sampled": 600,
+   "working": {
+    "fragment": 0.377,
+    "unread": 0.228,
+    "statement": 0.212,
+    "question": 0.103,
+    "request": 0.047,
+    "social": 0.033
+   },
+   "open": 0.028,
+   "unread": 0.228,
+   "someMarkOpposes": 0.123,
+   "openPairs": {
+    "fragment+question": 11,
+    "question+request": 2,
+    "social+question": 2,
+    "question+statement": 2
+   }
+  },
+  "irc": {
+   "sampled": 600,
+   "working": {
+    "statement": 0.407,
+    "question": 0.267,
+    "fragment": 0.178,
+    "social": 0.06,
+    "unread": 0.048,
+    "request": 0.04
+   },
+   "open": 0.048,
+   "unread": 0.048,
+   "someMarkOpposes": 0.3,
+   "openPairs": {
+    "fragment+question": 16,
+    "question+statement": 10,
+    "social+question": 2,
+    "question+request": 1
+   }
+  },
+  "formal": {
+   "sampled": 600,
+   "working": {
+    "statement": 0.615,
+    "question": 0.215,
+    "unread": 0.063,
+    "request": 0.048,
+    "fragment": 0.04,
+    "social": 0.018
+   },
+   "open": 0.008,
+   "unread": 0.063,
+   "someMarkOpposes": 0.233,
+   "openPairs": {
+    "question+statement": 3,
+    "fragment+question": 2
+   }
+  }
+ },
+ "stability": {
+  "sms": {
+   "lower": {
+    "changed": 577,
+    "sameWorkingAct": 0.884,
+    "sameWorkingActAndOpen": 0.884
+   },
+   "nopunct": {
+    "changed": 248,
+    "sameWorkingAct": 0.839,
+    "sameWorkingActAndOpen": 0.726
+   },
+   "typo": {
+    "changed": 497,
+    "sameWorkingAct": 0.913,
+    "sameWorkingActAndOpen": 0.911
+   }
+  },
+  "cosem": {
+   "lower": {
+    "changed": 419,
+    "sameWorkingAct": 0.881,
+    "sameWorkingActAndOpen": 0.881
+   },
+   "nopunct": {
+    "changed": 185,
+    "sameWorkingAct": 0.827,
+    "sameWorkingActAndOpen": 0.746
+   },
+   "typo": {
+    "changed": 358,
+    "sameWorkingAct": 0.891,
+    "sameWorkingActAndOpen": 0.891
+   }
+  },
+  "irc": {
+   "lower": {
+    "changed": 279,
+    "sameWorkingAct": 0.971,
+    "sameWorkingActAndOpen": 0.971
+   },
+   "nopunct": {
+    "changed": 198,
+    "sameWorkingAct": 0.697,
+    "sameWorkingActAndOpen": 0.586
+   },
+   "typo": {
+    "changed": 538,
+    "sameWorkingAct": 0.95,
+    "sameWorkingActAndOpen": 0.948
+   }
+  },
+  "formal": {
+   "lower": {
+    "changed": 575,
+    "sameWorkingAct": 0.981,
+    "sameWorkingActAndOpen": 0.981
+   },
+   "nopunct": {
+    "changed": 345,
+    "sameWorkingAct": 0.933,
+    "sameWorkingActAndOpen": 0.928
+   },
+   "typo": {
+    "changed": 552,
+    "sameWorkingAct": 0.955,
+    "sameWorkingActAndOpen": 0.955
+   }
+  }
+ },
+ "bySupport": {
+  "lower": {
+   "1 mark": {
+    "n": 1179,
+    "survives": 0.897
+   },
+   "2 marks": {
+    "n": 36,
+    "survives": 1
+   },
+   "3+ marks": {
+    "n": 2,
+    "survives": 1
+   }
+  },
+  "nopunct": {
+   "1 mark": {
+    "n": 448,
+    "survives": 0.712
+   },
+   "2 marks": {
+    "n": 55,
+    "survives": 0.982
+   },
+   "3+ marks": {
+    "n": 2,
+    "survives": 1
+   }
+  },
+  "typo": {
+   "1 mark": {
+    "n": 1271,
+    "survives": 0.93
+   },
+   "2 marks": {
+    "n": 53,
+    "survives": 0.981
+   },
+   "3+ marks": {
+    "n": 2,
+    "survives": 1
+   }
+  },
+  "all": {
+   "1 mark": {
+    "n": 2898,
+    "survives": 0.883
+   },
+   "2 marks": {
+    "n": 144,
+    "survives": 0.986
+   },
+   "3+ marks": {
+    "n": 6,
+    "survives": 1
+   }
+  },
+  "byOpen": {
+   "closed": {
+    "n": 2867,
+    "survives": 0.884
+   },
+   "open (two acts held)": {
+    "n": 181,
+    "survives": 0.95
+   }
+  },
+  "singleMark": {
+   "subject_predicate": {
+    "n": 1242,
+    "survives": 0.948
+   },
+   "no_predicate": {
+    "n": 889,
+    "survives": 0.879
+   },
+   "final_question_mark": {
+    "n": 327,
+    "survives": 0.599
+   },
+   "wh_word": {
+    "n": 191,
+    "survives": 0.958
+   },
+   "imperative_form": {
+    "n": 137,
+    "survives": 0.883
+   },
+   "interjection_led": {
+    "n": 75,
+    "survives": 0.853
+   },
+   "aux_first": {
+    "n": 37,
+    "survives": 1
+   }
+  }
+ },
+ "ledger": {
+  "lower": {
+   "messages": 24,
+   "declarationSurvives": 1
+  },
+  "nopunct": {
+   "messages": 41,
+   "declarationSurvives": 0.683
+  },
+  "typo": {
+   "messages": 52,
+   "declarationSurvives": 0.962
+  }
+ }
+}

@@ -1,0 +1,66 @@
+{
+ "stamp": {
+  "when": "2026-11-24T16:18:57.189Z",
+  "split": "EXPLORATORY, held out from the table and the giver",
+  "perSource": 4000
+ },
+ "report": {
+  "sms": {
+   "messages": 3305,
+   "writerCapitalised": {
+    "messages": 518,
+    "words": 1776,
+    "recall": 0.052,
+    "precision": 0.317
+   },
+   "lowercase": {
+    "messages": 2787,
+    "words": 22082,
+    "recasedPer1000": 1.4,
+    "bySource": {
+     "treebank-casing": 23,
+     "given-name": 7
+    },
+    "mostRecased": "hu 6, la 4, sunday 2, nw 2, don 2, din 2, march 2, tx 1, europe 1, wen 1, thi 1, sec 1, guard 1, andrew 1, dick 1, eve 1, ami 1"
+   }
+  },
+  "cosem": {
+   "messages": 4000,
+   "writerCapitalised": {
+    "messages": 159,
+    "words": 183,
+    "recall": 0.219,
+    "precision": 0.784
+   },
+   "lowercase": {
+    "messages": 3841,
+    "words": 14019,
+    "recasedPer1000": 1.7,
+    "bySource": {
+     "treebank-casing": 21,
+     "given-name": 3
+    },
+    "mostRecased": "la 6, fri 4, kay 2, phoenix 2, bc 1, friday 1, sec 1, james 1, patterson 1, fridays 1, ono 1, sunday 1, hui 1, hai 1"
+   }
+  },
+  "irc": {
+   "messages": 4000,
+   "writerCapitalised": {
+    "messages": 661,
+    "words": 1046,
+    "recall": 0.019,
+    "precision": 0.339
+   },
+   "lowercase": {
+    "messages": 3339,
+    "words": 29519,
+    "recasedPer1000": 2.6,
+    "bySource": {
+     "treebank-casing": 61,
+     "given-name": 16
+    },
+    "mostRecased": "deb 7, google 7, sec 5, janice 4, ram 3, daniels 3, devil 3, don 3, james 2, zero 2, sam 2, proxy 2, god 2, bout 2, lan 2, apple 2, youtube 2, pat 1, un 1, omar 1, callum 1, hunter 1, chris 1, argentina 1, paul 1"
+   }
+  }
+ }
+}

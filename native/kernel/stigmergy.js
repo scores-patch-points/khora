@@ -41,9 +41,14 @@ export const TRAIL_WINDOW = 128; // deposits kept per head — old ones evaporat
 export const EXPLORE_EPSILON = 0.1; // chance a never-tried route is probed first
 
 export const ageDays = (at, now) => Math.max(0, (now - at) / DAY_MS);
+// THE FADE'S SHAPE. The 7-day exponential above is a hand-set half-life. The nexus measured the shape on real reads (pharos/eoql/SIG-ANSWER.md, the replication: "reuse fades as a power law, with a slope of about -1.2 in
+// seconds"; at hit@8 a power-law sum beat plain recency 39.7 against 34.8, and frequency was worst at 29.5), so `law: "power"` is offered: weight = (1 + age in seconds) ^ -alpha. The default stays "exp" so nothing that
+// already runs changes; the formicary (organs/formicary.mjs) asks for "power". alpha 1.2 is the measured slope, not tuned here.
+export const TRAIL_POWER_ALPHA = 1.2;
 
-/** Evaporation: how much of a deposit from `at` is still in the air at `now`. */
-export function trailWeight(at, now, { halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
+/** Evaporation: how much of a deposit from `at` is still in the air at `now`. `law` "exp" (default, half-life) or "power" (the measured shape). */
+export function trailWeight(at, now, { halfLifeDays = TRAIL_HALF_LIFE_DAYS, law = "exp", alpha = TRAIL_POWER_ALPHA } = {}) {
+  if (law === "power") return Math.pow(1 + Math.max(0, now - at) / 1000, -alpha);
   return Math.exp(-ageDays(at, now) / halfLifeDays);
 }
 
@@ -60,7 +65,7 @@ export function deposit(trails, entry) {
 }
 
 /** The per-route reading of one head's trails, compared for speed and efficiency. */
-export function trailStats(trails, head, { now = Date.now(), routes = null, halfLifeDays = TRAIL_HALF_LIFE_DAYS } = {}) {
+export function trailStats(trails, head, { now = Date.now(), routes = null, halfLifeDays = TRAIL_HALF_LIFE_DAYS, law = "exp", alpha = TRAIL_POWER_ALPHA } = {}) {
   const list = trails?.[head] ?? [];
   const out = new Map();
   const blank = (r) => ({ route: r, strength: 0, deposits: 0, hits: 0, totalMs: 0, lastAt: -Infinity });
@@ -69,7 +74,7 @@ export function trailStats(trails, head, { now = Date.now(), routes = null, half
     const s = out.get(t.route) ?? blank(t.route);
     s.deposits += 1;
     s.lastAt = Math.max(s.lastAt, Number(t.at) || 0);
-    if (t.ok) { s.hits += 1; s.strength += halfLifeDays === Infinity ? 1 : trailWeight(t.at, now, { halfLifeDays }); s.totalMs += t.ms; }
+    if (t.ok) { s.hits += 1; s.strength += law !== "power" && halfLifeDays === Infinity ? 1 : trailWeight(t.at, now, { halfLifeDays, law, alpha }); s.totalMs += t.ms; }
     out.set(t.route, s);
   }
   return [...out.values()].map((s) => ({ ...s, meanMs: s.hits ? s.totalMs / s.hits : null }));
@@ -95,10 +100,10 @@ export function trailStats(trails, head, { now = Date.now(), routes = null, half
  * restores that. `explore: 0` turns scouts off. The rng is injectable.
  * `halfLifeDays` sets evaporation (Infinity = none).
  */
-export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, deadLast = true, scoutTried = true } = {}) {
+export function routeOrderFor(trails, head, { now = Date.now(), routes = null, explore = EXPLORE_EPSILON, rng = Math.random, halfLifeDays = TRAIL_HALF_LIFE_DAYS, deadLast = true, scoutTried = true, law = "exp", alpha = TRAIL_POWER_ALPHA } = {}) {
   const defaults = routes ?? [];
   const idx = (r) => { const i = defaults.indexOf(r); return i < 0 ? Infinity : i; };
-  const stats = trailStats(trails, head, { now, routes: defaults, halfLifeDays });
+  const stats = trailStats(trails, head, { now, routes: defaults, halfLifeDays, law, alpha });
   const byStrength = (a, b) => {
     if (b.strength !== a.strength) return b.strength - a.strength;
     if (a.meanMs !== null && b.meanMs !== null && a.meanMs !== b.meanMs) return a.meanMs - b.meanMs;

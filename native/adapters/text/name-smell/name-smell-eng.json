@@ -1,0 +1,89 @@
+{
+  "schema": "NameSmellWeights@2",
+  "lang": "eng",
+  "signals": [
+    "mid",
+    "init",
+    "tag"
+  ],
+  "intercept": 0.7796,
+  "w": {
+    "mid": 1.4833,
+    "init": -0.6923,
+    "tag": 2.6327,
+    "repeat": 0
+  },
+  "prior": {
+    "pseudo": 2,
+    "base": 0.0968
+  },
+  "cov": [
+    [
+      0.009845,
+      -0.002937,
+      -0.002576,
+      0.00823
+    ],
+    [
+      -0.002937,
+      0.031387,
+      0.002885,
+      -0.008354
+    ],
+    [
+      -0.002576,
+      0.002885,
+      0.042807,
+      0.000221
+    ],
+    [
+      0.00823,
+      -0.008354,
+      0.000221,
+      0.020262
+    ]
+  ],
+  "covOrder": [
+    "intercept",
+    "mid",
+    "init",
+    "tag"
+  ],
+  "fit": {
+    "how": "logistic regression on the INDEPENDENT gold; folds leave one text family out; backward elimination of credibly harmful signals; Laplace covariance",
+    "gold": 1496
+  },
+  "gate": {
+    "passed": true,
+    "how": "native/scripts/ablate-name-smell-loto.mjs: leave-one-group-out on the independent hand-labelled gold (native/tests/data/name-smell-gold.json), backward elimination, bootstrap 90% intervals",
+    "heldOutAUC": {
+      "clean": 0.994,
+      "lowercase": 0.954,
+      "caseNoise": 0.973,
+      "typos": 0.993,
+      "ALL": 0.981
+    },
+    "baselines": {
+      "capitalisedMidSentence": 0.716,
+      "priorOnly": 0.949
+    },
+    "unattestedNamesAUC": 0.835,
+    "attestedAUC": 0.988,
+    "droppedSignal": "repeat (credibly harmful on lowercase text)",
+    "priorWeight": "fixed at 1.0: letting it be learned (0.725) did not improve held-out AUC (0.979 v 0.981)",
+    "learningCurve_largestEigenvalue": {
+      "60": 1.2629,
+      "150": 0.4461,
+      "400": 0.1732,
+      "1000": 0.0647,
+      "1496": 0.0442
+    },
+    "caveats": [
+      "one labeller, 5 texts, 3 folds",
+      "bootstrap treats the four degraded copies of a word as independent: intervals are optimistic",
+      "unattested names are the weak slice (AUC 0.835)",
+      "English only"
+    ]
+  },
+  "sha16": "72c90821cb1514bc"
+}

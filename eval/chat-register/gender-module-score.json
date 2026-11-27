@@ -1,0 +1,296 @@
+{
+ "stamp": {
+  "when": "2026-11-24T05:01:45.761Z",
+  "split": "DEV and FRESH (the fresh books were scored before by name-gender-giver.mjs: this is a REUSED scoring); EXPLORATORY"
+ },
+ "title and name": {
+  "dev": {
+   "gold": 60,
+   "says": 37,
+   "coverage": 0.62,
+   "right": 36,
+   "rightRate": 0.97,
+   "ci95": [
+    86,
+    100
+   ],
+   "bySource": {
+    "name": {
+     "says": 29,
+     "right": 28
+    },
+    "title": {
+     "says": 8,
+     "right": 8
+    }
+   },
+   "endingBaseline": {
+    "says": 47,
+    "right": 28,
+    "ci95": [
+     45,
+     72
+    ]
+   },
+   "wrong": [
+    "Kate (text m, name: kate)"
+   ]
+  },
+  "fresh": {
+   "gold": 46,
+   "says": 22,
+   "coverage": 0.48,
+   "right": 20,
+   "rightRate": 0.91,
+   "ci95": [
+    72,
+    97
+   ],
+   "bySource": {
+    "title": {
+     "says": 7,
+     "right": 7
+    },
+    "name": {
+     "says": 15,
+     "right": 13
+    }
+   },
+   "endingBaseline": {
+    "says": 32,
+    "right": 21,
+    "ci95": [
+     48,
+     80
+    ]
+   },
+   "wrong": [
+    "Margaret (text m, name: margaret)",
+    "Barry (text f, name: barry)"
+   ]
+  },
+  "test": {
+   "gold": 40,
+   "says": 14,
+   "coverage": 0.35,
+   "right": 13,
+   "rightRate": 0.93,
+   "ci95": [
+    69,
+    99
+   ],
+   "bySource": {
+    "name": {
+     "says": 11,
+     "right": 10
+    },
+    "title": {
+     "says": 3,
+     "right": 3
+    }
+   },
+   "endingBaseline": {
+    "says": 37,
+    "right": 24,
+    "ci95": [
+     49,
+     78
+    ]
+   },
+   "wrong": [
+    "Mary (text m, name: mary)"
+   ]
+  },
+  "pooled": {
+   "gold": 146,
+   "says": 73,
+   "coverage": 0.5,
+   "right": 69,
+   "rightRate": 0.95,
+   "ci95": [
+    87,
+    98
+   ],
+   "bySource": {
+    "name": {
+     "says": 55,
+     "right": 51
+    },
+    "title": {
+     "says": 18,
+     "right": 18
+    }
+   },
+   "endingBaseline": {
+    "says": 116,
+    "right": 73,
+    "ci95": [
+     54,
+     71
+    ]
+   },
+   "wrong": [
+    "Kate (text m, name: kate)",
+    "Margaret (text m, name: margaret)",
+    "Barry (text f, name: barry)",
+    "Mary (text m, name: mary)"
+   ]
+  }
+ },
+ "title, name, then the snapshot": {
+  "dev": {
+   "gold": 60,
+   "says": 44,
+   "coverage": 0.73,
+   "right": 42,
+   "rightRate": 0.95,
+   "ci95": [
+    85,
+    99
+   ],
+   "bySource": {
+    "name": {
+     "says": 29,
+     "right": 28
+    },
+    "title": {
+     "says": 8,
+     "right": 8
+    },
+    "snapshot": {
+     "says": 7,
+     "right": 6
+    }
+   },
+   "endingBaseline": {
+    "says": 47,
+    "right": 28,
+    "ci95": [
+     45,
+     72
+    ]
+   },
+   "wrong": [
+    "Hannah (text m, snapshot: hannah)",
+    "Kate (text m, name: kate)"
+   ]
+  },
+  "fresh": {
+   "gold": 46,
+   "says": 28,
+   "coverage": 0.61,
+   "right": 24,
+   "rightRate": 0.86,
+   "ci95": [
+    69,
+    94
+   ],
+   "bySource": {
+    "title": {
+     "says": 7,
+     "right": 7
+    },
+    "name": {
+     "says": 15,
+     "right": 13
+    },
+    "snapshot": {
+     "says": 6,
+     "right": 4
+    }
+   },
+   "endingBaseline": {
+    "says": 32,
+    "right": 21,
+    "ci95": [
+     48,
+     80
+    ]
+   },
+   "wrong": [
+    "Margaret (text m, name: margaret)",
+    "Barry (text f, name: barry)",
+    "Andrews (text f, snapshot: andrews)",
+    "Phillips (text f, snapshot: phillips)"
+   ]
+  },
+  "test": {
+   "gold": 40,
+   "says": 22,
+   "coverage": 0.55,
+   "right": 21,
+   "rightRate": 0.95,
+   "ci95": [
+    78,
+    99
+   ],
+   "bySource": {
+    "name": {
+     "says": 11,
+     "right": 10
+    },
+    "snapshot": {
+     "says": 8,
+     "right": 8
+    },
+    "title": {
+     "says": 3,
+     "right": 3
+    }
+   },
+   "endingBaseline": {
+    "says": 37,
+    "right": 24,
+    "ci95": [
+     49,
+     78
+    ]
+   },
+   "wrong": [
+    "Mary (text m, name: mary)"
+   ]
+  },
+  "pooled": {
+   "gold": 146,
+   "says": 94,
+   "coverage": 0.64,
+   "right": 87,
+   "rightRate": 0.93,
+   "ci95": [
+    85,
+    96
+   ],
+   "bySource": {
+    "name": {
+     "says": 55,
+     "right": 51
+    },
+    "title": {
+     "says": 18,
+     "right": 18
+    },
+    "snapshot": {
+     "says": 21,
+     "right": 18
+    }
+   },
+   "endingBaseline": {
+    "says": 116,
+    "right": 73,
+    "ci95": [
+     54,
+     71
+    ]
+   },
+   "wrong": [
+    "Hannah (text m, snapshot: hannah)",
+    "Kate (text m, name: kate)",
+    "Margaret (text m, name: margaret)",
+    "Barry (text f, name: barry)",
+    "Andrews (text f, snapshot: andrews)",
+    "Phillips (text f, snapshot: phillips)",
+    "Mary (text m, name: mary)"
+   ]
+  }
+ }
+}

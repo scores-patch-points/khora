@@ -1,0 +1,293 @@
+{
+ "stamp": {
+  "when": "2026-11-24T05:17:12.555Z",
+  "split": "EXPLORATORY (DEV: CorefUD 1.3 English GUM dev and LitBank dev; the rule was fixed before the run; N = 2 chosen before the run, N = 1 and 3 reported)",
+  "commit": "3a7a09c",
+  "data": {
+   "GUM dev": "present",
+   "LitBank dev": "present"
+  }
+ },
+ "results": {
+  "GUM dev": {
+   "N1": {
+    "tally": {
+     "they": {
+      "one": [
+       5,
+       21
+      ],
+      "two": [
+       2,
+       3
+      ],
+      "none": 163,
+      "all": 187
+     },
+     "he": {
+      "one": [
+       34,
+       43
+      ],
+      "two": [
+       7,
+       10
+      ],
+      "none": 166,
+      "all": 219
+     },
+     "she": {
+      "one": [
+       9,
+       11
+      ],
+      "two": [
+       5,
+       7
+      ],
+      "none": 57,
+      "all": 75
+     }
+    },
+    "wrongKinds": {
+     "group": 10,
+     "nonperson": 6,
+     "singleton": 0,
+     "otherPerson": 0
+    }
+   },
+   "N2": {
+    "tally": {
+     "they": {
+      "one": [
+       5,
+       32
+      ],
+      "two": [
+       9,
+       24
+      ],
+      "none": 131,
+      "all": 187
+     },
+     "he": {
+      "one": [
+       66,
+       91
+      ],
+      "two": [
+       30,
+       31
+      ],
+      "none": 97,
+      "all": 219
+     },
+     "she": {
+      "one": [
+       14,
+       22
+      ],
+      "two": [
+       19,
+       22
+      ],
+      "none": 31,
+      "all": 75
+     }
+    },
+    "wrongKinds": {
+     "group": 16,
+     "nonperson": 11,
+     "singleton": 0,
+     "otherPerson": 0
+    }
+   },
+   "N3": {
+    "tally": {
+     "they": {
+      "one": [
+       4,
+       39
+      ],
+      "two": [
+       15,
+       39
+      ],
+      "none": 109,
+      "all": 187
+     },
+     "he": {
+      "one": [
+       54,
+       78
+      ],
+      "two": [
+       59,
+       62
+      ],
+      "none": 79,
+      "all": 219
+     },
+     "she": {
+      "one": [
+       11,
+       22
+      ],
+      "two": [
+       29,
+       32
+      ],
+      "none": 21,
+      "all": 75
+     }
+    },
+    "wrongKinds": {
+     "group": 28,
+     "nonperson": 7,
+     "singleton": 0,
+     "otherPerson": 0
+    }
+   }
+  },
+  "LitBank dev": {
+   "N1": {
+    "tally": {
+     "they": {
+      "one": [
+       3,
+       17
+      ],
+      "two": [
+       1,
+       2
+      ],
+      "none": 100,
+      "all": 119
+     },
+     "he": {
+      "one": [
+       89,
+       121
+      ],
+      "two": [
+       14,
+       14
+      ],
+      "none": 312,
+      "all": 447
+     },
+     "she": {
+      "one": [
+       86,
+       110
+      ],
+      "two": [
+       17,
+       20
+      ],
+      "none": 245,
+      "all": 375
+     }
+    },
+    "wrongKinds": {
+     "group": 14,
+     "nonperson": 0,
+     "singleton": 0,
+     "otherPerson": 0
+    }
+   },
+   "N2": {
+    "tally": {
+     "they": {
+      "one": [
+       5,
+       40
+      ],
+      "two": [
+       4,
+       19
+      ],
+      "none": 60,
+      "all": 119
+     },
+     "he": {
+      "one": [
+       130,
+       182
+      ],
+      "two": [
+       63,
+       70
+      ],
+      "none": 195,
+      "all": 447
+     },
+     "she": {
+      "one": [
+       132,
+       155
+      ],
+      "two": [
+       56,
+       62
+      ],
+      "none": 158,
+      "all": 375
+     }
+    },
+    "wrongKinds": {
+     "group": 35,
+     "nonperson": 0,
+     "singleton": 0,
+     "otherPerson": 0
+    }
+   },
+   "N3": {
+    "tally": {
+     "they": {
+      "one": [
+       5,
+       41
+      ],
+      "two": [
+       5,
+       28
+      ],
+      "none": 50,
+      "all": 119
+     },
+     "he": {
+      "one": [
+       149,
+       206
+      ],
+      "two": [
+       92,
+       108
+      ],
+      "none": 133,
+      "all": 447
+     },
+     "she": {
+      "one": [
+       133,
+       154
+      ],
+      "two": [
+       83,
+       96
+      ],
+      "none": 125,
+      "all": 375
+     }
+    },
+    "wrongKinds": {
+     "group": 36,
+     "nonperson": 0,
+     "singleton": 0,
+     "otherPerson": 0
+    }
+   }
+  }
+ }
+}

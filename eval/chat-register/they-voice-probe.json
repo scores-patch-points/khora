@@ -1,0 +1,220 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:34:18.667Z",
+  "split": "EXPLORATORY (developer-written probes)",
+  "commit": "0a933f1+working tree"
+ },
+ "passed": 9,
+ "of": 9,
+ "rows": [
+  {
+   "label": "an open name that acts, nothing says its gender",
+   "name": "Casey",
+   "want": "they",
+   "got": "they",
+   "source": "they-default",
+   "ok": true,
+   "summary": "Casey appears in 3 sentences, from the start to the end. They wrote, opened and waved."
+  },
+  {
+   "label": "two open names, then a she that could be either (contested)",
+   "name": "Casey",
+   "want": "they",
+   "got": "they",
+   "source": "they-default",
+   "ok": true,
+   "summary": "Casey appears in 3 sentences, from the start to the end. They met and wrote. Most often with Jordan."
+  },
+  {
+   "label": "a woman's given name, the book never says she",
+   "name": "Natasha",
+   "want": "she",
+   "got": "she",
+   "source": "name",
+   "ok": true,
+   "summary": "Natasha appears in 3 sentences, from the start to the end. She wrote, lost and waved."
+  },
+  {
+   "label": "a man's given name, the book never says he",
+   "name": "Pierre",
+   "want": "he",
+   "got": "he",
+   "source": "name",
+   "ok": true,
+   "summary": "Pierre appears in 3 sentences, from the start to the end. He wrote, lost and waved."
+  },
+  {
+   "label": "a title gives it away (Mrs), the book never says she",
+   "name": "Mrs Bennet",
+   "want": "she",
+   "got": "she",
+   "source": "title",
+   "ok": true,
+   "summary": "Mrs Bennet appears in 3 sentences, from the start to the end. She wrote, lost and waved."
+  },
+  {
+   "label": "the book decided: six she / her / herself, none against (the read's sign test, p 0.031)",
+   "name": "Mina",
+   "want": "she",
+   "got": "she",
+   "source": "referent",
+   "ok": true,
+   "summary": "Mina appears in 7 sentences, from the start to the end. She kissed, lost, washed and opened."
+  },
+  {
+   "label": "four she / her / herself and none against (the read's sign test says p 0.125: contested)",
+   "name": "Mina",
+   "want": "she",
+   "got": "she",
+   "source": "pro-forms",
+   "ok": true,
+   "summary": "Mina appears in 5 sentences, from the start to the end. She kissed, lost, washed and opened."
+  },
+  {
+   "label": "a place that is not an agent",
+   "name": "Paris",
+   "want": "name",
+   "got": "name",
+   "source": null,
+   "ok": true,
+   "summary": "Paris appears in 2 sentences, from the start to the end. Most often with Jordan."
+  },
+  {
+   "label": "a place that is the subject (metonymy: Paris sent a letter)",
+   "name": "Paris",
+   "want": "name",
+   "got": "name",
+   "source": null,
+   "ok": true,
+   "summary": "Paris appears in 3 sentences, from the start to the end. As the agent: sent, lost and waved."
+  }
+ ],
+ "unseen": {
+  "counts": {
+   "right": 13,
+   "safe": 1,
+   "wrong": 0
+  },
+  "of": 14,
+  "rows": [
+   {
+    "name": "Priya",
+    "what": "f person",
+    "got": "she",
+    "source": "name",
+    "verdict": "right",
+    "summary": "Priya appears in 3 sentences, from the start to the end. She wrote, lost and waved."
+   },
+   {
+    "name": "Omar",
+    "what": "m person",
+    "got": "he",
+    "source": "snapshot",
+    "verdict": "right",
+    "summary": "Omar appears in 2 sentences, from the start to the end. He wrote and waved."
+   },
+   {
+    "name": "Liam",
+    "what": "m person",
+    "got": "he",
+    "source": "name",
+    "verdict": "right",
+    "summary": "Liam appears in 3 sentences, from the start to the end. He wrote, lost and waved."
+   },
+   {
+    "name": "Svetlana",
+    "what": "f person",
+    "got": "she",
+    "source": "name",
+    "verdict": "right",
+    "summary": "Svetlana appears in 3 sentences, from the start to the end. She wrote, lost and waved."
+   },
+   {
+    "name": "Mr Hargreaves",
+    "what": "m person, title",
+    "got": "he",
+    "source": "title",
+    "verdict": "right",
+    "summary": "Mr Hargreaves appears in 3 sentences, from the start to the end. He wrote, lost and waved."
+   },
+   {
+    "name": "Mrs Okafor",
+    "what": "f person, title",
+    "got": "she",
+    "source": "title",
+    "verdict": "right",
+    "summary": "Mrs Okafor appears in 3 sentences, from the start to the end. She wrote, lost and waved."
+   },
+   {
+    "name": "Jamie",
+    "what": "unisex name",
+    "got": "they",
+    "source": "they-default",
+    "verdict": "right",
+    "summary": "Jamie appears in 3 sentences, from the start to the end. They wrote, lost and waved."
+   },
+   {
+    "name": "Alex",
+    "what": "unisex name",
+    "got": "they",
+    "source": "they-default",
+    "verdict": "right",
+    "summary": "Alex appears in 2 sentences, from the start to the end. They wrote and waved."
+   },
+   {
+    "name": "Casey",
+    "what": "a woman, once the user says so (told)",
+    "got": "she",
+    "source": "pro-forms",
+    "verdict": "right",
+    "summary": "Casey appears in 7 sentences, from the start to the end. She wrote, lost, waved and opened."
+   },
+   {
+    "name": "London",
+    "what": "a place that acts",
+    "got": "name",
+    "source": null,
+    "verdict": "right",
+    "summary": "London appears in 3 sentences, from the start to the end. As the agent: sent, lost and waved."
+   },
+   {
+    "name": "Kansas",
+    "what": "a place that acts",
+    "got": "name",
+    "source": null,
+    "verdict": "right",
+    "summary": "Kansas appears in 3 sentences, from the start to the end. As the agent: sent, lost and waved."
+   },
+   {
+    "name": "Rome",
+    "what": "a place that acts",
+    "got": "name",
+    "source": null,
+    "verdict": "right",
+    "summary": "Rome appears in 2 sentences, from the start to the end. As the agent: lost and waved."
+   },
+   {
+    "name": "Microsoft",
+    "what": "an organisation that acts",
+    "got": "name",
+    "source": null,
+    "verdict": "right",
+    "summary": "Microsoft appears in 3 sentences, from the start to the end. As the agent: sent, lost and waved."
+   },
+   {
+    "name": "Florence",
+    "what": "a woman whose name is also a city",
+    "got": "name",
+    "source": null,
+    "verdict": "safe",
+    "summary": "Florence appears in 3 sentences, from the start to the end. As the agent: wrote, lost and waved."
+   }
+  ]
+ }
+}

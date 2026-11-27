@@ -1,0 +1,812 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Downloads/workspace/janus/priors",
+   "priorsFiles": 20,
+   "KHORA_PRIORS_DIR": null,
+   "parser": "english-parser"
+  },
+  "when": "2026-11-24T16:02:23.952Z",
+  "split": "EXPLORATORY (CorefUD 1.3 DEV; shipped weights trained on LitBank, Spanish and Catalan AnCora train; learning rate 0.1, window of three sentences and the one-half level declared first)",
+  "commit": "d0ac15d",
+  "weightsProvenance": [
+   "LitBank (English)",
+   "AnCora (Spanish)",
+   "AnCora (Catalan)"
+  ]
+ },
+ "rows": [
+  {
+   "dataset": "CorefUD_Ancient_Greek-PROIEL",
+   "licence": "CC BY-NC-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 495,
+   "zeroShare": 0.69,
+   "random": 0.253,
+   "latest": 0.453,
+   "shipped": {
+    "right": 240,
+    "rate": 0.485,
+    "wilson": [
+     0.44,
+     0.53
+    ]
+   },
+   "ownBatch": {
+    "right": 247,
+    "rate": 0.499
+   },
+   "stream": {
+    "frozen": [
+     0.521,
+     0.436,
+     0.497
+    ],
+    "oracle": [
+     0.509,
+     0.424,
+     0.503
+    ],
+    "wrong-only": [
+     0.515,
+     0.418,
+     0.497
+    ],
+    "self": [
+     0.533,
+     0.473,
+     0.539
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Ancient_Hebrew-PTNK",
+   "licence": "CC BY-NC 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 409,
+   "zeroShare": 0,
+   "random": 0.15,
+   "latest": 0.425,
+   "shipped": {
+    "right": 176,
+    "rate": 0.43,
+    "wilson": [
+     0.38,
+     0.48
+    ]
+   },
+   "ownBatch": {
+    "right": 208,
+    "rate": 0.509
+   },
+   "stream": {
+    "frozen": [
+     0.434,
+     0.449,
+     0.409
+    ],
+    "oracle": [
+     0.419,
+     0.441,
+     0.431
+    ],
+    "wrong-only": [
+     0.426,
+     0.434,
+     0.416
+    ],
+    "self": [
+     0.434,
+     0.471,
+     0.401
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Catalan-AnCora",
+   "licence": "CC BY 4.0",
+   "trainedOnByShipped": true,
+   "devCases": 1053,
+   "zeroShare": 0.71,
+   "random": 0.174,
+   "latest": 0.417,
+   "shipped": {
+    "right": 548,
+    "rate": 0.52,
+    "wilson": [
+     0.49,
+     0.55
+    ]
+   },
+   "ownBatch": {
+    "right": 570,
+    "rate": 0.541
+   },
+   "stream": {
+    "frozen": [
+     0.427,
+     0.544,
+     0.59
+    ],
+    "oracle": [
+     0.419,
+     0.558,
+     0.587
+    ],
+    "wrong-only": [
+     0.442,
+     0.53,
+     0.57
+    ],
+    "self": [
+     0.427,
+     0.538,
+     0.593
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Czech-PCEDT",
+   "licence": "CC BY-NC-SA 3.0",
+   "trainedOnByShipped": false,
+   "devCases": 4475,
+   "zeroShare": 0.94,
+   "random": 0.218,
+   "latest": 0.45,
+   "shipped": {
+    "right": 2342,
+    "rate": 0.523,
+    "wilson": [
+     0.51,
+     0.54
+    ]
+   },
+   "ownBatch": {
+    "right": 2321,
+    "rate": 0.519
+   },
+   "stream": {
+    "frozen": [
+     0.502,
+     0.511,
+     0.557
+    ],
+    "oracle": [
+     0.496,
+     0.518,
+     0.558
+    ],
+    "wrong-only": [
+     0.484,
+     0.5,
+     0.544
+    ],
+    "self": [
+     0.506,
+     0.514,
+     0.553
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Czech-PDT",
+   "licence": "CC BY-NC-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 1946,
+   "zeroShare": 0.88,
+   "random": 0.165,
+   "latest": 0.381,
+   "shipped": {
+    "right": 965,
+    "rate": 0.496,
+    "wilson": [
+     0.47,
+     0.52
+    ]
+   },
+   "ownBatch": {
+    "right": 1013,
+    "rate": 0.521
+   },
+   "stream": {
+    "frozen": [
+     0.471,
+     0.511,
+     0.506
+    ],
+    "oracle": [
+     0.458,
+     0.512,
+     0.511
+    ],
+    "wrong-only": [
+     0.471,
+     0.502,
+     0.511
+    ],
+    "self": [
+     0.472,
+     0.532,
+     0.542
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_English-GUM",
+   "licence": "CC BY-NC-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 737,
+   "zeroShare": 0,
+   "random": 0.134,
+   "latest": 0.391,
+   "shipped": {
+    "right": 335,
+    "rate": 0.455,
+    "wilson": [
+     0.42,
+     0.49
+    ]
+   },
+   "ownBatch": {
+    "right": 353,
+    "rate": 0.479
+   },
+   "stream": {
+    "frozen": [
+     0.453,
+     0.453,
+     0.457
+    ],
+    "oracle": [
+     0.478,
+     0.449,
+     0.453
+    ],
+    "wrong-only": [
+     0.461,
+     0.453,
+     0.417
+    ],
+    "self": [
+     0.473,
+     0.445,
+     0.445
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_English-LitBank",
+   "licence": "CC BY 4.0",
+   "trainedOnByShipped": true,
+   "devCases": 892,
+   "zeroShare": 0,
+   "random": 0.268,
+   "latest": 0.607,
+   "shipped": {
+    "right": 564,
+    "rate": 0.632,
+    "wilson": [
+     0.6,
+     0.66
+    ]
+   },
+   "ownBatch": {
+    "right": 572,
+    "rate": 0.641
+   },
+   "stream": {
+    "frozen": [
+     0.667,
+     0.64,
+     0.591
+    ],
+    "oracle": [
+     0.69,
+     0.64,
+     0.604
+    ],
+    "wrong-only": [
+     0.68,
+     0.62,
+     0.584
+    ],
+    "self": [
+     0.673,
+     0.643,
+     0.597
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_French-ANCOR",
+   "licence": "CC BY-NC-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 1172,
+   "zeroShare": 0,
+   "random": 0.158,
+   "latest": 0.353,
+   "shipped": {
+    "right": 471,
+    "rate": 0.402,
+    "wilson": [
+     0.37,
+     0.43
+    ]
+   },
+   "ownBatch": {
+    "right": 616,
+    "rate": 0.526
+   },
+   "stream": {
+    "frozen": [
+     0.392,
+     0.456,
+     0.357
+    ],
+    "oracle": [
+     0.431,
+     0.513,
+     0.441
+    ],
+    "wrong-only": [
+     0.428,
+     0.508,
+     0.429
+    ],
+    "self": [
+     0.397,
+     0.456,
+     0.375
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_French-Democrat",
+   "licence": "CC BY-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 644,
+   "zeroShare": 0,
+   "random": 0.119,
+   "latest": 0.436,
+   "shipped": {
+    "right": 295,
+    "rate": 0.458,
+    "wilson": [
+     0.42,
+     0.5
+    ]
+   },
+   "ownBatch": {
+    "right": 352,
+    "rate": 0.547
+   },
+   "stream": {
+    "frozen": [
+     0.411,
+     0.509,
+     0.454
+    ],
+    "oracle": [
+     0.458,
+     0.547,
+     0.523
+    ],
+    "wrong-only": [
+     0.435,
+     0.542,
+     0.5
+    ],
+    "self": [
+     0.421,
+     0.509,
+     0.5
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Hindi-HDTB",
+   "licence": "CC BY-NC-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 187,
+   "zeroShare": 0,
+   "random": 0.207,
+   "latest": 0.326,
+   "shipped": {
+    "right": 73,
+    "rate": 0.39,
+    "wilson": [
+     0.32,
+     0.46
+    ]
+   },
+   "ownBatch": {
+    "right": 85,
+    "rate": 0.455
+   },
+   "stream": {
+    "frozen": [
+     0.419,
+     0.355,
+     0.397
+    ],
+    "oracle": [
+     0.435,
+     0.371,
+     0.397
+    ],
+    "wrong-only": [
+     0.435,
+     0.371,
+     0.397
+    ],
+    "self": [
+     0.419,
+     0.355,
+     0.397
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Hungarian-SzegedKoref",
+   "licence": "CC BY 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 109,
+   "zeroShare": 0,
+   "random": 0.322,
+   "latest": 0.514,
+   "shipped": {
+    "right": 67,
+    "rate": 0.615,
+    "wilson": [
+     0.52,
+     0.7
+    ]
+   },
+   "ownBatch": {
+    "right": 73,
+    "rate": 0.67
+   },
+   "stream": {
+    "frozen": [
+     0.639,
+     0.583,
+     0.622
+    ],
+    "oracle": [
+     0.639,
+     0.611,
+     0.649
+    ],
+    "wrong-only": [
+     0.639,
+     0.611,
+     0.649
+    ],
+    "self": [
+     0.639,
+     0.611,
+     0.622
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Norwegian-BokmaalNARC",
+   "licence": "CC BY-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 321,
+   "zeroShare": 0,
+   "random": 0.118,
+   "latest": 0.483,
+   "shipped": {
+    "right": 166,
+    "rate": 0.517,
+    "wilson": [
+     0.46,
+     0.57
+    ]
+   },
+   "ownBatch": {
+    "right": 182,
+    "rate": 0.567
+   },
+   "stream": {
+    "frozen": [
+     0.449,
+     0.542,
+     0.561
+    ],
+    "oracle": [
+     0.477,
+     0.57,
+     0.57
+    ],
+    "wrong-only": [
+     0.477,
+     0.579,
+     0.533
+    ],
+    "self": [
+     0.449,
+     0.542,
+     0.561
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Norwegian-NynorskNARC",
+   "licence": "CC BY-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 347,
+   "zeroShare": 0,
+   "random": 0.129,
+   "latest": 0.401,
+   "shipped": {
+    "right": 163,
+    "rate": 0.47,
+    "wilson": [
+     0.42,
+     0.52
+    ]
+   },
+   "ownBatch": {
+    "right": 181,
+    "rate": 0.522
+   },
+   "stream": {
+    "frozen": [
+     0.452,
+     0.478,
+     0.479
+    ],
+    "oracle": [
+     0.452,
+     0.504,
+     0.504
+    ],
+    "wrong-only": [
+     0.461,
+     0.496,
+     0.504
+    ],
+    "self": [
+     0.452,
+     0.496,
+     0.487
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Old_Church_Slavonic-PROIEL",
+   "licence": "CC BY-NC-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 1057,
+   "zeroShare": 0.69,
+   "random": 0.29,
+   "latest": 0.403,
+   "shipped": {
+    "right": 437,
+    "rate": 0.413,
+    "wilson": [
+     0.38,
+     0.44
+    ]
+   },
+   "ownBatch": {
+    "right": 482,
+    "rate": 0.456
+   },
+   "stream": {
+    "frozen": [
+     0.415,
+     0.418,
+     0.408
+    ],
+    "oracle": [
+     0.423,
+     0.412,
+     0.397
+    ],
+    "wrong-only": [
+     0.429,
+     0.415,
+     0.377
+    ],
+    "self": [
+     0.409,
+     0.418,
+     0.408
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Polish-PCC",
+   "licence": "CC BY 3.0",
+   "trainedOnByShipped": false,
+   "devCases": 544,
+   "zeroShare": 0,
+   "random": 0.119,
+   "latest": 0.272,
+   "shipped": {
+    "right": 173,
+    "rate": 0.318,
+    "wilson": [
+     0.28,
+     0.36
+    ]
+   },
+   "ownBatch": {
+    "right": 187,
+    "rate": 0.344
+   },
+   "stream": {
+    "frozen": [
+     0.315,
+     0.298,
+     0.341
+    ],
+    "oracle": [
+     0.298,
+     0.298,
+     0.335
+    ],
+    "wrong-only": [
+     0.287,
+     0.287,
+     0.324
+    ],
+    "self": [
+     0.315,
+     0.287,
+     0.313
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Russian-RuCor",
+   "licence": "CC BY-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 269,
+   "zeroShare": 0,
+   "random": 0.323,
+   "latest": 0.524,
+   "shipped": {
+    "right": 152,
+    "rate": 0.565,
+    "wilson": [
+     0.51,
+     0.62
+    ]
+   },
+   "ownBatch": {
+    "right": 152,
+    "rate": 0.565
+   },
+   "stream": {
+    "frozen": [
+     0.551,
+     0.562,
+     0.582
+    ],
+    "oracle": [
+     0.551,
+     0.551,
+     0.593
+    ],
+    "wrong-only": [
+     0.551,
+     0.551,
+     0.582
+    ],
+    "self": [
+     0.551,
+     0.562,
+     0.593
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Spanish-AnCora",
+   "licence": "CC BY 4.0",
+   "trainedOnByShipped": true,
+   "devCases": 937,
+   "zeroShare": 0.81,
+   "random": 0.181,
+   "latest": 0.473,
+   "shipped": {
+    "right": 510,
+    "rate": 0.544,
+    "wilson": [
+     0.51,
+     0.58
+    ]
+   },
+   "ownBatch": {
+    "right": 513,
+    "rate": 0.547
+   },
+   "stream": {
+    "frozen": [
+     0.542,
+     0.526,
+     0.565
+    ],
+    "oracle": [
+     0.545,
+     0.554,
+     0.55
+    ],
+    "wrong-only": [
+     0.538,
+     0.522,
+     0.514
+    ],
+    "self": [
+     0.545,
+     0.538,
+     0.55
+    ]
+   },
+   "streamLr": 0.03
+  },
+  {
+   "dataset": "CorefUD_Turkish-ITCC",
+   "licence": "CC BY-NC-SA 4.0",
+   "trainedOnByShipped": false,
+   "devCases": 947,
+   "zeroShare": 0.94,
+   "random": 0.248,
+   "latest": 0.405,
+   "shipped": {
+    "right": 378,
+    "rate": 0.399,
+    "wilson": [
+     0.37,
+     0.43
+    ]
+   },
+   "ownBatch": {
+    "right": 431,
+    "rate": 0.455
+   },
+   "stream": {
+    "frozen": [
+     0.413,
+     0.39,
+     0.394
+    ],
+    "oracle": [
+     0.457,
+     0.463,
+     0.47
+    ],
+    "wrong-only": [
+     0.473,
+     0.47,
+     0.41
+    ],
+    "self": [
+     0.394,
+     0.365,
+     0.382
+    ]
+   },
+   "streamLr": 0.03
+  }
+ ]
+}

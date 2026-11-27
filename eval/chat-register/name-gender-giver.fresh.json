@@ -1,0 +1,782 @@
+{
+ "stamp": {
+  "when": "2026-11-24T04:36:15.493Z",
+  "split": "FRESH (EXPLORATORY; gold is the text's own bound pronouns, 8+ and 90% one side)",
+  "books": [
+   "pg161_Sense-and-Sensibility",
+   "pg768_Wuthering-Heights",
+   "pg45_Anne-of-Green-Gables",
+   "pg98_A_Tale_of_Two_Cities"
+  ],
+  "sentencesPerBook": 4000,
+  "givers": "title and dictionary: kaikki-en glosses read by khora's reader; wikidata: identity/givers/wikidata-given-names-en.json (the canonical read's snapshot); learned: corpus-en.json (Dracula, Emma, Treasure Island, War and Peace); baseline: last letter a, e, i or y"
+ },
+ "gold": 46,
+ "strictGold": 16,
+ "sources": {
+  "title": {
+   "says": 12,
+   "of": 46,
+   "right": 10,
+   "wrong": 2,
+   "rightRate": 0.833,
+   "ci95": [
+    0.55,
+    0.95
+   ],
+   "both": 0,
+   "coverage": 0.261
+  },
+  "wikidata": {
+   "says": 19,
+   "of": 46,
+   "right": 15,
+   "wrong": 4,
+   "rightRate": 0.789,
+   "ci95": [
+    0.57,
+    0.91
+   ],
+   "both": 3,
+   "coverage": 0.413
+  },
+  "dictionary": {
+   "says": 15,
+   "of": 46,
+   "right": 13,
+   "wrong": 2,
+   "rightRate": 0.867,
+   "ci95": [
+    0.62,
+    0.96
+   ],
+   "both": 1,
+   "coverage": 0.326
+  },
+  "learned": {
+   "says": 4,
+   "of": 46,
+   "right": 2,
+   "wrong": 2,
+   "rightRate": 0.5,
+   "ci95": [
+    0.15,
+    0.85
+   ],
+   "both": 0,
+   "coverage": 0.087
+  },
+  "endingBaseline": {
+   "says": 32,
+   "of": 46,
+   "right": 21,
+   "wrong": 11,
+   "rightRate": 0.656,
+   "ci95": [
+    0.48,
+    0.8
+   ],
+   "both": 0,
+   "coverage": 0.696
+  },
+  "chain": {
+   "says": 31,
+   "of": 46,
+   "right": 23,
+   "wrong": 8,
+   "rightRate": 0.742,
+   "ci95": [
+    0.57,
+    0.86
+   ],
+   "coverage": 0.674
+  }
+ },
+ "dictionaryAddsBeyondWikidata": {
+  "beings": 0,
+  "right": 0
+ },
+ "wikidataVsDictionaryDisagree": 0,
+ "rows": [
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Dashwood",
+   "gold": "m",
+   "evidence": "582 of 582",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "dashwood",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Norland",
+   "gold": "f",
+   "evidence": "66 of 66",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "norland",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Mrs. Jennings",
+   "gold": "f",
+   "evidence": "581 of 581",
+   "strict": true,
+   "title": "f",
+   "titleTok": [
+    "mrs"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Elinor",
+   "gold": "f",
+   "evidence": "634 of 634",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "elinor",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Marianne",
+   "gold": "f",
+   "evidence": "636 of 636",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "marianne",
+   "wikidata": "f",
+   "dictionary": null,
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Margaret",
+   "gold": "m",
+   "evidence": "38 of 38",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "margaret",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Miss",
+   "gold": "f",
+   "evidence": "89 of 89",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "miss"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Edward",
+   "gold": "m",
+   "evidence": "582 of 582",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "edward",
+   "wikidata": "m",
+   "dictionary": "m",
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Fanny",
+   "gold": "f",
+   "evidence": "35 of 35",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "fanny",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Lady Middleton",
+   "gold": "f",
+   "evidence": "103 of 103",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "lady"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Colonel Brandon",
+   "gold": "m",
+   "evidence": "342 of 342",
+   "strict": true,
+   "title": null,
+   "titleTok": [
+    "colonel"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Charlotte",
+   "gold": "f",
+   "evidence": "19 of 19",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "charlotte",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Miss Steele",
+   "gold": "f",
+   "evidence": "34 of 34",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "miss"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Lucy",
+   "gold": "f",
+   "evidence": "121 of 121",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "lucy",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": "f",
+   "ending": "f"
+  },
+  {
+   "book": "pg161_Sense-and-Sensibility",
+   "name": "Lucy",
+   "gold": "f",
+   "evidence": "18 of 18",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "miss"
+   ],
+   "given": "lucy",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": "f",
+   "ending": "f"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Mrs. Lynde",
+   "gold": "f",
+   "evidence": "186 of 186",
+   "strict": true,
+   "title": "f",
+   "titleTok": [
+    "mrs"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Matthew",
+   "gold": "m",
+   "evidence": "248 of 248",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "matthew",
+   "wikidata": "m",
+   "dictionary": "m",
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Marilla",
+   "gold": "f",
+   "evidence": "354 of 354",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "marilla",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Anne",
+   "gold": "f",
+   "evidence": "533 of 533",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "anne",
+   "wikidata": "both",
+   "dictionary": "both",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Diana",
+   "gold": "f",
+   "evidence": "148 of 148",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "diana",
+   "wikidata": "f",
+   "dictionary": null,
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Mr.",
+   "gold": "m",
+   "evidence": "121 of 121",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Barry",
+   "gold": "f",
+   "evidence": "49 of 49",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "barry",
+   "wikidata": "m",
+   "dictionary": "m",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Mrs. Thomas",
+   "gold": "f",
+   "evidence": "30 of 30",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "mrs"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Miss Cuthbert",
+   "gold": "f",
+   "evidence": "25 of 25",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "miss"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Andrews",
+   "gold": "f",
+   "evidence": "14 of 14",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "andrews",
+   "wikidata": "m",
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Phillips",
+   "gold": "f",
+   "evidence": "29 of 29",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "phillips",
+   "wikidata": "m",
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Gilbert Blythe",
+   "gold": "m",
+   "evidence": "52 of 52",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "gilbert",
+   "wikidata": "m",
+   "dictionary": "m",
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg45_Anne-of-Green-Gables",
+   "name": "Josephine",
+   "gold": "f",
+   "evidence": "11 of 11",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "josephine",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Monseigneur",
+   "gold": "m",
+   "evidence": "71 of 71",
+   "strict": false,
+   "title": null,
+   "titleTok": [
+    "monseigneur"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Paris",
+   "gold": "f",
+   "evidence": "29 of 29",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "paris",
+   "wikidata": "both",
+   "dictionary": null,
+   "learned": "m",
+   "ending": "m"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Lord",
+   "gold": "m",
+   "evidence": "12 of 12",
+   "strict": false,
+   "title": null,
+   "titleTok": [
+    "lord",
+    "justice"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Lorry",
+   "gold": "m",
+   "evidence": "266 of 266",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "lorry",
+   "wikidata": "both",
+   "dictionary": null,
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Jerry",
+   "gold": "m",
+   "evidence": "115 of 115",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "jerry",
+   "wikidata": "m",
+   "dictionary": "m",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Manette",
+   "gold": "m",
+   "evidence": "162 of 162",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "miss"
+   ],
+   "given": "manette",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Defarge",
+   "gold": "m",
+   "evidence": "286 of 286",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "madame",
+    "marquis"
+   ],
+   "given": "defarge",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "God",
+   "gold": "f",
+   "evidence": "15 of 15",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "god",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": "m",
+   "ending": "m"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Cruncher",
+   "gold": "m",
+   "evidence": "107 of 107",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "cruncher",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Judge",
+   "gold": "m",
+   "evidence": "30 of 30",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Darnay",
+   "gold": "m",
+   "evidence": "137 of 137",
+   "strict": false,
+   "title": null,
+   "titleTok": [
+    "marquis"
+   ],
+   "given": "darnay",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Roger Cly",
+   "gold": "m",
+   "evidence": "25 of 25",
+   "strict": false,
+   "title": null,
+   "titleTok": [],
+   "given": "roger",
+   "wikidata": "m",
+   "dictionary": "m",
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Stryver",
+   "gold": "m",
+   "evidence": "81 of 81",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "stryver",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Carton",
+   "gold": "m",
+   "evidence": "17 of 17",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "carton",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Lucie",
+   "gold": "f",
+   "evidence": "102 of 102",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "miss"
+   ],
+   "given": "lucie",
+   "wikidata": "f",
+   "dictionary": "f",
+   "learned": null,
+   "ending": "f"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Carton",
+   "gold": "m",
+   "evidence": "51 of 51",
+   "strict": true,
+   "title": null,
+   "titleTok": [],
+   "given": "carton",
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": "m"
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Miss Pross",
+   "gold": "f",
+   "evidence": "62 of 62",
+   "strict": false,
+   "title": "f",
+   "titleTok": [
+    "miss"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  },
+  {
+   "book": "pg98_A_Tale_of_Two_Cities",
+   "name": "Marquis",
+   "gold": "m",
+   "evidence": "60 of 60",
+   "strict": false,
+   "title": null,
+   "titleTok": [
+    "marquis"
+   ],
+   "given": null,
+   "wikidata": null,
+   "dictionary": null,
+   "learned": null,
+   "ending": null
+  }
+ ]
+}

@@ -1,0 +1,211 @@
+{
+ "schema": "E1c-cross-author-verbs@1",
+ "split": "EXPLORATORY (post-hoc robustness, after the stamped E1)",
+ "at": "2026-11-24T05:56:03.239Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d",
+  "reader": "khora@ccf2033+baseline@2026-11-23"
+ },
+ "test": "pg1342_Pride_and_Prejudice",
+ "train": "pg161_Sense-and-Sensibility",
+ "author": "Austen",
+ "dials": {
+  "kMin": 5,
+  "band": 0,
+  "bar": 0.855,
+  "floor": 0.812,
+  "why": "kMin: a verb used fewer than K times in either book has a count dominated by chance; the bar is the organ's (mean + 2.5 sd of random verb pairs)"
+ },
+ "eligibleVerbs": 319,
+ "pairs": 191,
+ "pairsWithATestPreference": 187,
+ "accuracy": {
+  "sameAuthorBook": 0.802,
+  "pooledOtherAuthors": 0.735,
+  "otherAuthorBooks": {
+   "n": 37,
+   "mean": 0.663,
+   "best": [
+    {
+     "book": "pg84_Frankenstein",
+     "author": "Shelley",
+     "acc": 0.7379679144385026
+    },
+    {
+     "book": "pg768_Wuthering-Heights",
+     "author": "Bronte",
+     "acc": 0.7352941176470589
+    },
+    {
+     "book": "pg2701_Moby_Dick",
+     "author": "Melville",
+     "acc": 0.7352941176470589
+    }
+   ],
+   "worst": [
+    {
+     "book": "aesop-11339_The-Fox-and-the-Grapes",
+     "author": "Aesop",
+     "acc": 0.5240641711229946
+    }
+   ]
+  }
+ },
+ "rankOfSameAuthorBook": {
+  "rank": 1,
+  "of": 38,
+  "note": "1 = best; under no author effect the rank is uniform"
+ },
+ "mcnemarVsPooled": {
+  "sameAuthorRightPooledWrong": 29,
+  "pooledRightSameAuthorWrong": 22,
+  "pTwoSided": 0.4011
+ },
+ "examples": [
+  {
+   "pair": "accept/admit",
+   "similarity": 0.87,
+   "test": [
+    37,
+    19
+   ],
+   "train": [
+    23,
+    14
+   ]
+  },
+  {
+   "pair": "accept/agree",
+   "similarity": 0.86,
+   "test": [
+    37,
+    21
+   ],
+   "train": [
+    23,
+    16
+   ]
+  },
+  {
+   "pair": "acknowledge/admit",
+   "similarity": 0.87,
+   "test": [
+    28,
+    19
+   ],
+   "train": [
+    28,
+    14
+   ]
+  },
+  {
+   "pair": "acknowledge/thank",
+   "similarity": 0.87,
+   "test": [
+    28,
+    30
+   ],
+   "train": [
+    28,
+    18
+   ]
+  },
+  {
+   "pair": "act/behave",
+   "similarity": 0.9,
+   "test": [
+    20,
+    10
+   ],
+   "train": [
+    23,
+    13
+   ]
+  },
+  {
+   "pair": "act/perform",
+   "similarity": 0.89,
+   "test": [
+    20,
+    11
+   ],
+   "train": [
+    23,
+    10
+   ]
+  },
+  {
+   "pair": "admit/confess",
+   "similarity": 0.88,
+   "test": [
+    19,
+    20
+   ],
+   "train": [
+    14,
+    16
+   ]
+  },
+  {
+   "pair": "advance/proceed",
+   "similarity": 0.89,
+   "test": [
+    9,
+    22
+   ],
+   "train": [
+    9,
+    14
+   ]
+  },
+  {
+   "pair": "advance/improve",
+   "similarity": 0.86,
+   "test": [
+    9,
+    12
+   ],
+   "train": [
+    9,
+    16
+   ]
+  },
+  {
+   "pair": "advise/recommend",
+   "similarity": 0.87,
+   "test": [
+    12,
+    23
+   ],
+   "train": [
+    12,
+    14
+   ]
+  },
+  {
+   "pair": "agree/approve",
+   "similarity": 0.86,
+   "test": [
+    21,
+    8
+   ],
+   "train": [
+    16,
+    10
+   ]
+  },
+  {
+   "pair": "allow/let",
+   "similarity": 0.92,
+   "test": [
+    66,
+    83
+   ],
+   "train": [
+    45,
+    31
+   ]
+  }
+ ]
+}

@@ -1,0 +1,28 @@
+{
+  "written": "2026-11-24, before any index was built or any score read; frozen by the sha256 in STAMP.txt",
+  "why": "Questions a person would ask, each answerable from one document of Ýlir-One (English). gold = the file(s) whose text answers it, chosen by me from knowing the documents' topics, not from any score. Three controls have no gold: a good find says nothing confident for them.",
+  "gold": [
+    { "q": "Who was Aristotle's most famous student?", "files": ["02-encyclopedic/wikipedia/Aristotle.txt"] },
+    { "q": "Who wrote the Divine Comedy?", "files": ["02-encyclopedic/wikipedia/Dante_Alighieri.txt", "01-literature-books/gutenberg/pg13453_The_Divine_Comedy_by_Dante.txt"] },
+    { "q": "Who tutored Alexander the Great?", "files": ["02-encyclopedic/wikipedia/Aristotle.txt"] },
+    { "q": "What did Watson and Crick discover about DNA?", "files": ["02-encyclopedic/wikipedia/DNA.txt"] },
+    { "q": "Who founded the Mongol Empire?", "files": ["02-encyclopedic/wikipedia/Mongol_Empire.txt"] },
+    { "q": "What did Wittgenstein write in the Tractatus?", "files": ["02-encyclopedic/wikipedia/Ludwig_Wittgenstein.txt"] },
+    { "q": "Who is Long John Silver?", "files": ["01-literature-books/gitenberg/pg120_Treasure-Island.txt"] },
+    { "q": "Who is Jonathan Harker?", "files": ["01-literature-books/gitenberg/pg345_Dracula.txt"] },
+    { "q": "Who is the Cheshire Cat?", "files": ["01-literature-books/gutenberg/pg11_Alice_s_Adventures_in_Wonderland.txt"] },
+    { "q": "Who is Polonius?", "files": ["15-western-canon/folger-shakespeare/Hamlet.txt"] },
+    { "q": "What is the allegory of the cave?", "files": ["01-literature-books/gutenberg/pg55201_The_Republic_by_Plato.txt"] },
+    { "q": "What is the state of nature according to Hobbes?", "files": ["01-literature-books/gutenberg/pg59129_Leviathan_by_Hobbes.txt"] },
+    { "q": "Who is Ophelia's father?", "files": ["15-western-canon/folger-shakespeare/Hamlet.txt"] },
+    { "q": "What does the second law of thermodynamics say about entropy?", "files": ["02-encyclopedic/wikipedia/Thermodynamics.txt"] },
+    { "q": "What does general relativity say about the perihelion of Mercury?", "files": ["02-encyclopedic/wikipedia/General_relativity.txt"] },
+    { "q": "Who is Van Helsing?", "files": ["01-literature-books/gitenberg/pg345_Dracula.txt"] },
+    { "q": "What did Confucius teach about filial piety?", "files": ["02-encyclopedic/wikipedia/Confucianism.txt"] },
+    { "q": "What are the Four Noble Truths?", "files": ["02-encyclopedic/wikipedia/Buddhism.txt"] },
+    { "q": "Who is Jim Hawkins?", "files": ["01-literature-books/gitenberg/pg120_Treasure-Island.txt"] },
+    { "q": "What is the Heisenberg uncertainty principle?", "files": ["02-encyclopedic/wikipedia/Quantum_mechanics.txt"] }
+  ],
+  "controls": ["Who won the 2022 World Cup?", "What is the capital of Burkina Faso?", "Who is the chief executive of Anthropic?"],
+  "rule": "FOUND at k if a gold file is among the top k documents by the score; the score is the sum over the question's content lemmas (NOUN, PROPN, VERB, ADJ by the reader) of log(1 + count in the document) x log(N / document frequency): no free dial. Chance of a given document in the top k is k / N, N = 11640."
+}

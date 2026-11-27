@@ -1,0 +1,187 @@
+{
+ "schema": "E1b-treebank-verbs@1",
+ "split": "EXPLORATORY (post-hoc robustness, after the stamped E1)",
+ "at": "2026-11-24T05:53:43.239Z",
+ "checkpoint": {
+  "file": "/Users/mlacy/Downloads/workspace/Zenodotus/derived-priors/corpus-lexicon/checkpoint-en-v3.jsonl",
+  "sha256": "451a3da505086a908a9a659a67f922e64a72dea1c78ecab1e772ea25ad80a33d",
+  "reader": "khora@ccf2033+baseline@2026-11-23"
+ },
+ "test": "pg161_Sense-and-Sensibility",
+ "train": "pg1342_Pride_and_Prejudice",
+ "author": "Austen",
+ "dials": {
+  "kMin": 5,
+  "band": 0,
+  "bar": 0.855,
+  "floor": 0.812,
+  "why": "kMin: a verb used fewer than K times in either book has a count dominated by chance; the bar is the organ's (mean + 2.5 sd of random verb pairs)"
+ },
+ "eligibleVerbs": 46,
+ "pairs": 10,
+ "pairsWithATestPreference": 10,
+ "accuracy": {
+  "sameAuthorBook": 0.9,
+  "pooledOtherAuthors": 0.8,
+  "otherAuthorBooks": {
+   "n": 37,
+   "mean": 0.743,
+   "best": [
+    {
+     "book": "pg1400_Great-Expectations",
+     "author": "Dickens",
+     "acc": 1
+    },
+    {
+     "book": "pg120_Treasure-Island",
+     "author": "Stevenson",
+     "acc": 0.9
+    },
+    {
+     "book": "pg35_The-Time-Machine",
+     "author": "Wells",
+     "acc": 0.9
+    }
+   ],
+   "worst": [
+    {
+     "book": "pg10671_The_Iliad__Greek_",
+     "author": "Darwin, E. (the file is the Botanic Garden, per the ingestion session)",
+     "acc": 0.5
+    }
+   ]
+  }
+ },
+ "rankOfSameAuthorBook": {
+  "rank": 9,
+  "of": 38,
+  "note": "1 = best; under no author effect the rank is uniform"
+ },
+ "mcnemarVsPooled": {
+  "sameAuthorRightPooledWrong": 1,
+  "pooledRightSameAuthorWrong": 0,
+  "pTwoSided": 1
+ },
+ "examples": [
+  {
+   "pair": "attend/come",
+   "similarity": 0.86,
+   "test": [
+    39,
+    222
+   ],
+   "train": [
+    37,
+    253
+   ]
+  },
+  {
+   "pair": "bring/come",
+   "similarity": 0.86,
+   "test": [
+    88,
+    222
+   ],
+   "train": [
+    70,
+    253
+   ]
+  },
+  {
+   "pair": "give/provide",
+   "similarity": 0.89,
+   "test": [
+    287,
+    10
+   ],
+   "train": [
+    276,
+    13
+   ]
+  },
+  {
+   "pair": "give/let",
+   "similarity": 0.88,
+   "test": [
+    287,
+    31
+   ],
+   "train": [
+    276,
+    83
+   ]
+  },
+  {
+   "pair": "know/tell",
+   "similarity": 0.89,
+   "test": [
+    381,
+    168
+   ],
+   "train": [
+    385,
+    149
+   ]
+  },
+  {
+   "pair": "know/understand",
+   "similarity": 0.87,
+   "test": [
+    381,
+    41
+   ],
+   "train": [
+    385,
+    39
+   ]
+  },
+  {
+   "pair": "let/put",
+   "similarity": 0.87,
+   "test": [
+    31,
+    48
+   ],
+   "train": [
+    83,
+    41
+   ]
+  },
+  {
+   "pair": "need/provide",
+   "similarity": 0.86,
+   "test": [
+    23,
+    10
+   ],
+   "train": [
+    23,
+    13
+   ]
+  },
+  {
+   "pair": "recommend/suggest",
+   "similarity": 0.87,
+   "test": [
+    14,
+    10
+   ],
+   "train": [
+    23,
+    7
+   ]
+  },
+  {
+   "pair": "learn/understand",
+   "similarity": 0.86,
+   "test": [
+    19,
+    41
+   ],
+   "train": [
+    25,
+    39
+   ]
+  }
+ ]
+}

@@ -1,0 +1,146 @@
+{
+ "written": "2026-11-24, before any answer was read; a FRESH set for the answer-from-Ýlir-One test, in the hunt's own domain (a person's birth, death, work; a capital; a founder) over the 50 Wikipedia articles of the corpus",
+ "why": "The dev questions (novels and plays: 'Who is X?') have no single sentence that says the answer. These are questions a sentence of the article does answer. Gold = accepted whole words; answerability was checked by hand before stamping (oracle: a sentence of the question's own article holds the subject's name and an accepted word); questions failing it were dropped and are listed. The oracle looks at the corpus text; it does not run the hunt.",
+ "scored": {
+  "Where was Aristotle born?": [
+   "stagira",
+   "stageira"
+  ],
+  "Where was Dante Alighieri born?": [
+   "florence"
+  ],
+  "Where was Friedrich Nietzsche born?": [
+   "röcken",
+   "rocken"
+  ],
+  "Where was Immanuel Kant born?": [
+   "königsberg",
+   "konigsberg"
+  ],
+  "Where was Goethe born?": [
+   "frankfurt"
+  ],
+  "Where was Leo Tolstoy born?": [
+   "yasnaya",
+   "tula"
+  ],
+  "Where was Ludwig Wittgenstein born?": [
+   "vienna"
+  ],
+  "Where was William Shakespeare born?": [
+   "stratford-upon-avon",
+   "stratford"
+  ],
+  "When was Aristotle born?": [
+   "384"
+  ],
+  "When was Dante Alighieri born?": [
+   "1265"
+  ],
+  "When was Friedrich Nietzsche born?": [
+   "1844"
+  ],
+  "When was Immanuel Kant born?": [
+   "1724"
+  ],
+  "When was William Shakespeare born?": [
+   "1564"
+  ],
+  "When did Dante Alighieri die?": [
+   "1321"
+  ],
+  "When did Friedrich Nietzsche die?": [
+   "1900"
+  ],
+  "When did Immanuel Kant die?": [
+   "1804"
+  ],
+  "When did Goethe die?": [
+   "1832"
+  ],
+  "When did Leo Tolstoy die?": [
+   "1910"
+  ],
+  "When did Ludwig Wittgenstein die?": [
+   "1951"
+  ],
+  "Who wrote Faust?": [
+   "goethe"
+  ],
+  "Who wrote War and Peace?": [
+   "tolstoy"
+  ],
+  "Who wrote the Critique of Pure Reason?": [
+   "kant"
+  ],
+  "Who wrote Thus Spoke Zarathustra?": [
+   "nietzsche"
+  ],
+  "Who wrote the Tractatus?": [
+   "wittgenstein"
+  ],
+  "Who wrote the Divine Comedy?": [
+   "dante"
+  ],
+  "Who wrote Hamlet?": [
+   "shakespeare"
+  ],
+  "Who was Plato's teacher?": [
+   "socrates"
+  ],
+  "Who was Aristotle's teacher?": [
+   "plato"
+  ],
+  "What was the capital of the Byzantine Empire?": [
+   "constantinople"
+  ],
+  "When did World War I begin?": [
+   "1914"
+  ],
+  "Who founded Sikhism?": [
+   "nanak"
+  ]
+ },
+ "article": {
+  "Where was Aristotle born?": "Aristotle",
+  "Where was Dante Alighieri born?": "Dante_Alighieri",
+  "Where was Friedrich Nietzsche born?": "Friedrich_Nietzsche",
+  "Where was Immanuel Kant born?": "Immanuel_Kant",
+  "Where was Goethe born?": "Johann_Wolfgang_von_Goethe",
+  "Where was Leo Tolstoy born?": "Leo_Tolstoy",
+  "Where was Ludwig Wittgenstein born?": "Ludwig_Wittgenstein",
+  "Where was William Shakespeare born?": "William_Shakespeare",
+  "When was Aristotle born?": "Aristotle",
+  "When was Dante Alighieri born?": "Dante_Alighieri",
+  "When was Friedrich Nietzsche born?": "Friedrich_Nietzsche",
+  "When was Immanuel Kant born?": "Immanuel_Kant",
+  "When was William Shakespeare born?": "William_Shakespeare",
+  "When did Dante Alighieri die?": "Dante_Alighieri",
+  "When did Friedrich Nietzsche die?": "Friedrich_Nietzsche",
+  "When did Immanuel Kant die?": "Immanuel_Kant",
+  "When did Goethe die?": "Johann_Wolfgang_von_Goethe",
+  "When did Leo Tolstoy die?": "Leo_Tolstoy",
+  "When did Ludwig Wittgenstein die?": "Ludwig_Wittgenstein",
+  "Who wrote Faust?": "Johann_Wolfgang_von_Goethe",
+  "Who wrote War and Peace?": "Leo_Tolstoy",
+  "Who wrote the Critique of Pure Reason?": "Immanuel_Kant",
+  "Who wrote Thus Spoke Zarathustra?": "Friedrich_Nietzsche",
+  "Who wrote the Tractatus?": "Ludwig_Wittgenstein",
+  "Who wrote the Divine Comedy?": "Dante_Alighieri",
+  "Who wrote Hamlet?": "William_Shakespeare",
+  "Who was Plato's teacher?": "Plato",
+  "Who was Aristotle's teacher?": "Aristotle",
+  "What was the capital of the Byzantine Empire?": "Byzantine_Empire",
+  "When did World War I begin?": "World_War_I",
+  "Who founded Sikhism?": "Sikhism"
+ },
+ "dropped_unanswerable": [
+  "When was Leo Tolstoy born?"
+ ],
+ "controls": [
+  "Where was Aristotle buried in the year 2022?",
+  "Who won the 1998 World Cup?",
+  "When was the telephone invented?"
+ ],
+ "protocol": "documents: the top 3 by log(1 + count) x log(N / df) through the real door; passages: sentences that carry the rarest anchor word, with byte addresses; the hunt reads them. Arms, declared in advance and run with no code change between them: (A) exact relation only; (B) with the near-verb relation stand-in. Judged by whole words. No threshold or rule is changed after seeing these answers."
+}

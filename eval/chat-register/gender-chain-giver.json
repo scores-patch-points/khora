@@ -1,0 +1,239 @@
+{
+ "stamp": {
+  "when": "2026-11-24T17:59:45.234Z",
+  "split": "EXPLORATORY (CorefUD 1.3 DEV, one deterministic run per arm; the chain was not tuned on these sets)",
+  "versions": "khora f223e79; pharos 776269b; priors /Users/mlacy/Documents/janus/priors (the giver's default)",
+  "giver": "official CorefUD scorer (ufal/corefud-scorer 4fd7b0e), head match, CoNLL F1 = mean of MUC, B-cubed, CEAFe; run by identity/pronouns-multilingual/score/run-giver.sh",
+  "pharos": "776269b"
+ },
+ "arms": {
+  "before-off": "no gender prior (GENDER_PRIOR=off)",
+  "before-chain": "the canonical chain before this change (Wikidata vote-giver; the corpus layer and name table absent)",
+  "after-words": "the chain after: the given-name prior as layers (title, dictionary, snapshot), the old giver only as a fallback"
+ },
+ "results": {
+  "English-LitBank": {
+   "documents": "10 dev documents",
+   "before-off": {
+    "singletonsIgnored": {
+     "muc": 55.31,
+     "bcub": 31.49,
+     "ceafe": 23.59,
+     "conll": 36.8
+    },
+    "singletonsIncluded": {
+     "muc": 55.31,
+     "bcub": 29.39,
+     "ceafe": 15.32,
+     "conll": 33.34
+    },
+    "mentionMix": {
+     "named": {
+      "n": 356,
+      "share": 15.1
+     },
+     "third_person_pronoun": {
+      "n": 981,
+      "share": 41.7
+     },
+     "speaker_addressee": {
+      "n": 530,
+      "share": 22.5
+     },
+     "nominal": {
+      "n": 447,
+      "share": 19
+     },
+     "other": {
+      "n": 39,
+      "share": 1.7
+     }
+    }
+   },
+   "before-chain": {
+    "singletonsIgnored": {
+     "muc": 55.51,
+     "bcub": 32.21,
+     "ceafe": 24.87,
+     "conll": 37.53
+    },
+    "singletonsIncluded": {
+     "muc": 55.51,
+     "bcub": 29.97,
+     "ceafe": 15.68,
+     "conll": 33.72
+    },
+    "mentionMix": {
+     "named": {
+      "n": 356,
+      "share": 15.1
+     },
+     "third_person_pronoun": {
+      "n": 981,
+      "share": 41.7
+     },
+     "speaker_addressee": {
+      "n": 530,
+      "share": 22.5
+     },
+     "nominal": {
+      "n": 447,
+      "share": 19
+     },
+     "other": {
+      "n": 39,
+      "share": 1.7
+     }
+    }
+   },
+   "after-words": {
+    "singletonsIgnored": {
+     "muc": 55.09,
+     "bcub": 32.74,
+     "ceafe": 25.48,
+     "conll": 37.77
+    },
+    "singletonsIncluded": {
+     "muc": 55.09,
+     "bcub": 30.41,
+     "ceafe": 15.89,
+     "conll": 33.8
+    },
+    "mentionMix": {
+     "named": {
+      "n": 356,
+      "share": 15.1
+     },
+     "third_person_pronoun": {
+      "n": 981,
+      "share": 41.7
+     },
+     "speaker_addressee": {
+      "n": 530,
+      "share": 22.5
+     },
+     "nominal": {
+      "n": 447,
+      "share": 19
+     },
+     "other": {
+      "n": 39,
+      "share": 1.7
+     }
+    }
+   }
+  },
+  "English-GUM": {
+   "documents": "30 dev documents",
+   "before-off": {
+    "singletonsIgnored": {
+     "muc": 24.91,
+     "bcub": 17.16,
+     "ceafe": 16.81,
+     "conll": 19.62
+    },
+    "singletonsIncluded": {
+     "muc": 24.91,
+     "bcub": 17.91,
+     "ceafe": 16.3,
+     "conll": 19.71
+    },
+    "mentionMix": {
+     "named": {
+      "n": 756,
+      "share": 14.9
+     },
+     "third_person_pronoun": {
+      "n": 793,
+      "share": 15.7
+     },
+     "speaker_addressee": {
+      "n": 1280,
+      "share": 25.3
+     },
+     "nominal": {
+      "n": 1911,
+      "share": 37.8
+     },
+     "other": {
+      "n": 319,
+      "share": 6.3
+     }
+    }
+   },
+   "before-chain": {
+    "singletonsIgnored": {
+     "muc": 25.08,
+     "bcub": 17.43,
+     "ceafe": 17.11,
+     "conll": 19.88
+    },
+    "singletonsIncluded": {
+     "muc": 25.08,
+     "bcub": 18.09,
+     "ceafe": 16.39,
+     "conll": 19.85
+    },
+    "mentionMix": {
+     "named": {
+      "n": 756,
+      "share": 14.9
+     },
+     "third_person_pronoun": {
+      "n": 793,
+      "share": 15.7
+     },
+     "speaker_addressee": {
+      "n": 1280,
+      "share": 25.3
+     },
+     "nominal": {
+      "n": 1911,
+      "share": 37.8
+     },
+     "other": {
+      "n": 319,
+      "share": 6.3
+     }
+    }
+   },
+   "after-words": {
+    "singletonsIgnored": {
+     "muc": 25.13,
+     "bcub": 17.45,
+     "ceafe": 17.14,
+     "conll": 19.91
+    },
+    "singletonsIncluded": {
+     "muc": 25.13,
+     "bcub": 18.1,
+     "ceafe": 16.38,
+     "conll": 19.87
+    },
+    "mentionMix": {
+     "named": {
+      "n": 756,
+      "share": 14.9
+     },
+     "third_person_pronoun": {
+      "n": 793,
+      "share": 15.7
+     },
+     "speaker_addressee": {
+      "n": 1280,
+      "share": 25.3
+     },
+     "nominal": {
+      "n": 1911,
+      "share": 37.8
+     },
+     "other": {
+      "n": 319,
+      "share": 6.3
+     }
+    }
+   }
+  }
+ },
+ "reading": "d8a89c1+working tree (gender-chain.js changed for the after arm)"
+}

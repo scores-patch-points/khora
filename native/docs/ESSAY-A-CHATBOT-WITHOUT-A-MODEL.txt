@@ -1,0 +1,97 @@
+Can a chatbot work without a language model, and reason better than one?
+========================================================================
+
+2026-11-23. An essay with a measurement behind it. The measurement is exploratory (a set of asks I wrote, judged by my own reading, run against public APIs that rate-limited it), and the essay says where that matters.
+
+
+THE SHORT ANSWER
+----------------
+
+The question hides two questions. One is whether we can build something that answers correctly, shows how it knows, and reasons exactly. The other is whether we can build something you can talk to about anything, fluently. A language model is built for the second and gets the first by accident, when it gets it. We have been building for the first, and the owner's sense that it is "within spitting distance" is right about that half and wrong about the other.
+
+After measuring it, my answer is: the reasoning and the accountability are close, because every piece they need exists and runs; the open-ended fluency is far, and the part of the distance people expect to be the hard part (the reasoning) is the part that is nearly done. What is left is the translation from a person's sentences into something exact reasoning can work on, and a way to talk about anything that does not require us to have read the whole internet.
+
+
+FOUR JOBS, DONE BY ONE MECHANISM IN A LANGUAGE MODEL
+----------------------------------------------------
+
+Every reply needs four things done. Something has to read what was said (who did what to whom, which "he" is which person). Something has to know things (what was said earlier, what a dictionary says, what a source says). Something has to reason from what is known. And something has to say the result in words.
+
+A language model does all four with one mechanism, which is why it is fluent, and also why it cannot tell you which job produced a sentence: whether it read it, looked it up, worked it out, or only found it likely. We took the four apart. Reading is the reader. Knowing is the conversation itself plus a small set of doors out of it: the clock, a calculator, the dictionary, Wikidata, Wikipedia. Reasoning is exact organs that enumerate instead of predict. Saying is, for now, plain and mostly fixed. That separation is the whole bet, and it is also what makes the system checkable: each step is a different piece of code and each one writes down what it did.
+
+
+WHAT ALREADY WORKS
+------------------
+
+Exact reasoning. The reasoner for who-knows-what puzzles is 108 lines and knows nothing about words or birthdays. It holds the ways things could be, what each person can see of them, and what was said out loud, and it removes every way in which saying that could not have been true. On the puzzle with the six words on the board (three students each hold one letter of one word, and each in turn says they know the word) it goes from five candidate words to three to one, and the answer is "dog", with the single arrangement of letters that makes all three statements true: Albert holds the o, Bernard the g, Cheryl the d. It then solved Cheryl's birthday, a second well-known puzzle with knowledge about other people's knowledge in it, and got July 16 from the same code with nothing changed. The answer is not a guess. If the puzzle has been written down correctly, the answer is a consequence, and the trace shows which ways of the world each statement removed. The owner's observation yesterday was that puzzles of this shape are ones language models stumble on and our reasoning did not. I have not run a head-to-head, so I do not make that comparison here; I only claim the answers are computed and can be checked line by line.
+
+Showing where a claim came from. When the owner asked the chat "who was his wife?" after asking who Tolstoy was, the old chat answered "tolstoy". Now the answer that points back at the owner is put forward as a candidate, tested by janus's kinship rules, and refused (a person cannot be their own wife). The chat then does what its not-knowing calls for: it goes to Wikidata, finds the spouse, and answers "Sophia Tolstaya" with a numbered source. And it records the claim as resting on a giver's word, not as something it saw in the conversation, because those are different kinds of knowing. Every one of those steps is a line in the shared log, written by whoever did it (the chat's entries by the chat, janus's verdicts by janus through its own door). A language model has no equivalent of the difference between "you told me", "a source says", and "I inferred it".
+
+Looking things up when it does not know. Not knowing is the signal. A question that cannot be answered ends in a gap with a shape, and the doors declare which shapes they can fill, so the chat goes to look without being asked. "Go research it" asks for what it already does.
+
+
+WHAT DOES NOT WORK YET
+----------------------
+
+I ran 53 ordinary chat asks, each in a fresh conversation: greetings, thanks, who and what and when questions, definitions, arithmetic, follow-ups, memory ("my name is Dana", then "what's my name?"), yes-or-no questions, requests, typos, and one puzzle in plain English. By the chat's own count 24 were handled, 27 ended in a gap, and 2 timed out. By my reading only 13 were right or honestly declined. That is about a quarter, on asks I wrote, with no outside gold. So this is a baseline and a list of faults, not a score.
+
+The faults are not one fault. Grouped by what is missing:
+
+- Plain knowledge. "What is the capital of France?", "who wrote Hamlet?", "how tall is Mount Everest?": none answered. The chat has Wikidata for people and the opening of Wikipedia articles, and nothing that reliably matches a question to the sentence that answers it. In 11 of the 53 the public APIs refused us (HTTP 429), partly because the census itself hammered them, so this group is worse than it should be and the number is unreliable in that direction.
+- A wrong answer, said confidently. "Who is Marie Curie?" came back "Marie de France: medieval poet", with a source. This worries me more than every gap together. A gap is honest. A sourced wrong answer is the failure we are supposed to be better at than a language model, and it came from taking the nearest label without checking it was the right person.
+- Searching for the wrong thing. "How's it going?" sent the chat to read a Wikipedia article about people who went over Niagara Falls. Small talk and unanswerable questions should not reach a door at all.
+- Conversational glue. "Good morning" was filed as a fact ("Noted."). "What's your name?" returned the dictionary definition of the word "name". "Did Mina give Jonathan a book?" answered with an empty sentence. "What's my name?" quoted my own sentence back instead of saying "Dana". "What do you think about pizza?" described the system.
+- The reasoner is not connected to language. The puzzle, asked in English, came back "I haven't been told about Albert." The reasoning exists and the chat cannot reach it, which is the next section.
+- Small surface faults with large effects: a lowercase name ("who was napoleon") is read as a verb or a noun, not a person, and the chat gives up.
+
+
+THE REAL WALL: TURNING A PARAGRAPH INTO SOMETHING EXACT
+-------------------------------------------------------
+
+The reasoner is exact only after the puzzle has been written down as worlds, what each person sees, and what is announced. That translation is the hard part, and it is the same wall symbolic systems have always hit. A language model crosses it implicitly and sloppily. We have to cross it in the open, so that when it goes wrong we can see where.
+
+The puzzle shows the shape of the problem. "A piece of paper with one letter from one of the words" can be read three ways. If the three students hold different letters of the same word, in any order, the statements narrow five words to three to one and the answer is dog. If their letters are the first, second and third, no word fits at all. If two students may hold the same letter, nothing narrows past five words. I checked all three. Only one reading makes the puzzle's own question have an answer, and a puzzle presupposes that its question has one.
+
+That is the method. The reading is not picked by a person and not by a model. Candidate readings are listed, each is run through the reasoner, and a rule that does not depend on the puzzle judges them: one answer holds, none is refuted, several are left open and said to be open. The same shape already runs for kin claims, where janus is the judge. It is the piece to build next, and it decides whether "better reasoning" is something the chat can do for a person or something only we can do by hand. Cheryl's birthday will be harder, because "at first I did not know, but now I do" is about change over time.
+
+
+WHERE A SMALL MODEL COULD FIT
+-----------------------------
+
+The owner's rule is no language model in the loop. The one place it could be allowed, as an experiment and off by default, is the mouth: a small local model that rewrites a sentence the system has already verified, with every word it adds compared against the original and refused if it adds content. The mouth would change how a reply sounds and never what it claims or cites. We have not run this. My hypothesis, which could be wrong, is that a good share of the "does this feel like a chat" gap is in the mouth (variety, warmth, not answering "good morning" with "Noted."), and that none of the knowledge gap is. A mouth that rewrites "I haven't been told that" more nicely does not know the capital of France. The way to learn how far we get without it is to measure the same asks with and without it: how often the rewritten sentence still reads back to the same claim, and how often it tries to add something.
+
+
+WHAT "SPITTING DISTANCE" WOULD MEAN
+-----------------------------------
+
+It should be a number, not a feeling, and it should have rungs.
+
+1. No confidently wrong answers on the ask list. Known shape: check the entity against the question before answering, and treat a mismatch as a gap. Close.
+2. Every ask is either answered with a source, or declined with the kind of gap it is, and never sent to a door by mistake. Known shape: match a door only when the question's open slot has a shape the door fills. Close.
+3. The conversational basics (greetings, thanks, names, yes-or-no, follow-ups, memory) answered. Known shape and a lot of small work. Close in effort, not in zero.
+4. A puzzle in plain English formalized, solved, and cited step by step, for the families we can read. Open research, but small and testable on the two puzzles above.
+5. Fluent answers about anything. Not close. It needs a source with the reach of a language model's memory, and the way to get it is the doors, with a question-to-sentence match we do not have. This rung is a coverage problem, not a reasoning problem, and it is where a language model will stay ahead.
+
+So the honest verdict is that the thing within spitting distance is not a replacement for a language model chatbot. It is a different thing: a conversation partner that reasons exactly where it can, says where each claim came from, goes and looks when it does not know, and refuses to say what it cannot back. Rungs one to three are ordinary engineering of a known shape. Rung four is the interesting research. Rung five is the one we should not promise.
+
+
+ADDENDUM, LATER THE SAME DAY: THE HUNT
+--------------------------------------
+
+The owner's next instruction was that the void a question declares should drive a hunt for the answer, and that the hunt should not be limited to the lead of a Wikipedia article. That is built (native/organs/void-hunt.js and hunt-sources.js, with 17 tests that run offline).
+
+How it works. The question is read into a void: what kind of thing is missing (a person, a place, a time), which things the question names (the anchors), and the relation that ties them. A source returns whole documents, section by section, with the page's own furniture (references, external links) dropped. Every sentence is read through the reader, and a sentence counts only if it carries every anchor, in the role the question gives it, with a filler of the right kind. The page's own title counts as carrying the anchor it is named for, which is how a Cast list that never says the film's name can still be read. Candidates are never picked silently: each is listed with the page, section and sentence it came from, with how it was found (the sentence says the relation, or only the names stand next to each other), and with how many pages agree. Names said together are one answer ("Bill Gates and Paul Allen"); a place and what contains it are not two.
+
+What it did. On a set of eight questions I developed against, all eight came back right in the lead position: Martin Riggs, Richard Donner, Paris, William Shakespeare, Warsaw, February 12 1809, Leonardo da Vinci, and Gates and Allen. That set is not evidence, because I changed the matcher while looking at it. The first run on questions I had not looked at gave five right of eight (Jaws, Pride and Prejudice, Guernica, Newton's birth, penicillin), one open, one empty, and one confidently wrong: it said the composer of The Magic Flute was Prince Tamino, a character in a film's plot. That wrong answer is why a name seen next to the anchors, with no sentence that says the relation, can no longer be an answer; it is reported as "seen next to, but no sentence says so". A second fresh set was worse and more honest: one right (Ottawa), four declined with a reason (a title the reader does not tag as a name, "invent" never said of the telephone, a Titanic page whose lead the parser rooted in the wrong clause, an anchor split in two by "da" in Leonardo da Vinci), no wrong answers. After fixing the causes, those sets are development sets too.
+
+The causes are the useful part. Almost every failure was the same kind: the parser's labels for adjuncts vary (a place under "born" labelled as the object, a date labelled as a place), a page names its subject in other ways (a bare surname, "the country", a birth name), and a relation is often said without its verb ("an opera by Mozart"). The first is handled by trusting hang-from-the-verb and nearest-to-the-verb for places and times, and the label only for people. The second by deriving what the page calls its subject from its own first sentence. The third is not handled: it needs "compose, write, paint, direct, found" to be one class of verbs of making, which is the owner's own-hypernym work, and until then the hunt says it found names near the anchors and not that any of them composed it.
+
+Two things it cannot do yet. Facts that only sit in an infobox are not in the plain text of a page (the capital of Japan came from a sentence in the body, but a fact that appears only in the box would not), so the next source should be Wikidata's claims, which the doors already reach. And Wikipedia throttles this machine hard, so a hunt can take about a minute; when it is refused the answer is a typed gap that says nothing was read, never a guess.
+
+So the measurement for rung five moves, but not much: the hunt makes "what is the capital of X", "who directed Y", "where was Z born" answerable from whole pages with sources, for names the reader tags as names. It does not make the chat fluent about anything. On the thirteen questions I had not seen when I asked them, six came back right, one confidently wrong, and six were declined or left open with a reason. That is about half not answered, and the one wrong answer matters more than the six declined.
+
+
+WHAT I DID NOT CHECK
+--------------------
+
+I did not compare against any language model, so "better" here means exact and traceable, not more accurate across the board. The census asks are mine and the judgements are mine. The public APIs rate-limited the run. The mouth experiment has not been run. And the full test gate for the repo has not passed on this branch in my hands: the chat and reasoner tests pass except one persona test that another session was editing at the time, and the wider gate was started but did not finish.

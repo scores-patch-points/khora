@@ -1,0 +1,3657 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Documents/janus/priors",
+   "priorsFiles": 1957,
+   "KHORA_PRIORS_DIR": "/Users/mlacy/Documents/janus/priors",
+   "parser": "ud-parser"
+  },
+  "when": "2026-11-24T05:36:18.760Z",
+  "split": "EXPLORATORY",
+  "perSource": 130,
+  "commit": "unspecified"
+ },
+ "crosstab": {
+  "statement -> read": 141,
+  "fragment -> fragment(gap)": 109,
+  "social -> social": 15,
+  "question -> relational(gap)": 35,
+  "request -> request(gap)": 13,
+  "unread -> unread(gap)": 45,
+  "composite -> smalltalk": 1,
+  "fragment -> clarify(gap)": 8,
+  "social -> smalltalk": 6,
+  "composite -> relational(gap)": 7,
+  "question -> clarify(gap)": 6,
+  "question -> identity(gap)": 1,
+  "request -> request": 2,
+  "composite -> help": 1
+ },
+ "mismatches": 6,
+ "total": 390,
+ "sentWordsOut": 6,
+ "rows": [
+  {
+   "source": "sms",
+   "said": "Dnt worry .. Jst try 2 score gud mark @ public exm..k",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ru in kaju rum",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "India took some great catchs :-)",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "A BIRLA INSTITUTE student is not the one who reads the book before exam! But, th",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ok dear",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Up to dadar",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I don,t think so. You don't need to be going out that late on a school night. ES",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "K d",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Indha help kuda panna maataengura la?:-(",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Dnt want explanation",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Kali kites sabo jabi neki?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hey plz da! Kaetu sollu!",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Boring. Bored. Waiting for david. I know he's gonna kill.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Buzzzz! *grins* Did I buzz your ass? Buzz your chest ? Buzz your cock ? Where do",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Unka abi lunch chal raha he bhai 2 bje ke bd ek br ph0n try karna",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Come",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "no_topic",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Geeee ... I miss you already, you know ? Your all I can think about. Fuck, I can",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ji ha",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ok",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Tell d... Wat doing? Going for aoe",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "He is out for work, donot disturb. kindly call him after 5 minute or leave a mes",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ha bt ask amit tht he'l c0me or nt..",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "India &lt;#&gt; all out...laxman &lt;#&gt; :)",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Thnx same to u",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Oh okie d...",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hey 2morow wat portions 4 ss test?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Bhai &lt;#&gt; ka hi kara paya tha s0ry",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Crowd undu huge crowd....but not like season crowd...",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Huggggggg uuuuuuuuuu dear.......uuuuummmaaaa",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "You have come into my life and brought the sun ..Shiny down on me, warming my he",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Luv u too. 1sec.",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Kya hua b0l",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Wat happened",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "O ya nvr plyd that.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Just trying to figure out when I'm suppose to see a couple different people this",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I am great! How are you?",
+   "declared": "composite",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Helo krish ji.. H0w areu?.. Sory me us time away tha.. So aur sunao:-)",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Der",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "RC &lt;#&gt; = &lt;#&gt; Loc SMS free. Know fun and positive facts about Urself ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hw many times i remembered u dis is fourth tym",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Oi tui kobe ashbi",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "U do wot evr u wnt. I jst dnt care.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Itz nt d tim.",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Miles and smiles r made frm same letters but do u know d difference..? smile on ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hope u r bak frm baba. Rums in &lt;#&gt; chappel lane, n dehiwela junction.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "You are right though. I can't give you the space you want and need. This is real",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ya sure?",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hey a key with a guitar shaped keychain was found near de volley ball court . . ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "0hk tx hv u gt trckng numbr fr dtdc?..",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Thank u",
+   "declared": "social",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hey nw i got one program frm my dept frnd i am verifyin it .if nt i vil ask dat ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "|;-):-*:-D| {[(:-)g)]} {[(:-D貌)]} {[(;-)枚)]} {[(:-P冒)]} {[(:-&gt;锚)]} {[(B-)v)]}",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ami 2r sthe r thakte parchi na.plz leave me",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Mid way thru malakayattam.really out but walked without stopping till half way..",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ok d free vidu ll get it on sme othr day d",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hi Andreu, have v 2 get down at piliyandala town?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": true
+  },
+  {
+   "source": "sms",
+   "said": "Gn",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I'm always looking for an excuse to be in the city.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "&lt;R&gt;",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Aftr &lt;#&gt; mins",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Shal i cal",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Next generation LKG poem..:-D Drinking Drinkng little BEER..%-) How i wonder wha",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Kaha par he",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Me to ghar pe hu..me &lt;#&gt; th me fail h0 gya tha:-P",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ok d",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Sweta bechari ka ek v prnt nahi nikla,mai uski hlp krta hun-hunhh..rehna uske st",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Avaliyae kaelu!",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I realy dnt knw u re",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Warden avala apudi dhaan chellama kupiduvanga!",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I dnt wnt 2 hear ur voice...",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Why don't you wait 'til at least wednesday to see if you get your .",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Nice lines 4 life: \"Dont miss a chance to express your affection. Becoz hearts a",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Keeriyooodee",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "A FLOWER NEVR KNOWS HOW BEAUTIFUL IT IS. A SEA NEVR KNOS HOW DEEP IT IS. U NEVR ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Goin 2 study..",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Nai re niklna hai , room saf ker raha tha.",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Bro aap aaye nai m0rng me 0nlne..",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Has rolcal cum di",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "&lt;#&gt; th mari tcs lo join authava",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Kal se crickt khelne chalega kya.. Janta grnd me.. &lt;#&gt; l0g he",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Nahaya nai mai",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Kodawal sir called regarding DD for darshan creation sa i said i will take today",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Oh...!%-)",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Say this slowly. Jesus Christ, I love u &amp; I need u, clean my heart with your",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hogaya didi &lt;#&gt; ka",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Wru",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Check mail.i have mailed varma and kept copy to you regarding membership.take ca",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ohk bro.. Wht d risk if we caugt by eby later afta getng tht pr0duct.. N bro agr",
+   "declared": "composite",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "STATUS 9RA3ZAQC",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hey nw sastra super singer is goin in vkj audi..d..n group music starts frm &lt;",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Go n hav.. Obey 1st",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Chuma",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Say dear, abhi yad aa rahi hai.",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Niche aaja",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Bro kar do na yaar order..",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Search a beautiful heart, but not search a beautiful face. Beautiful things are ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Hey ask any of ur frnds whether they want carpidem t.shirt medium size",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "U n other girl alone",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Said no havng fud.. Cant u undrstnd or wot?",
+   "declared": "composite",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "The weakest part of a relation comes when one of the person has to give explanat",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Nevr..",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Rajee,pls get the address or we cant answer the airport authority qatar",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I'm not sure, I was just checking out what was happening around the area",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Water logging in desert. Geoenvironmental implications.",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I am so happy for us",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Plz rply 1.ur birthday - 5th march &lt;DECIMAL&gt; word u say most- thapad padeg",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Usb mang",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "E-7CE &lt;#&gt; B &lt;#&gt; C license key",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "He was in my grp oly nah! Our topic was \"xamination s it kilng education\"",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "&lt;DECIMAL&gt; %",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I calls you later. Afternoon onwords mtnl service get problem in south mumbai. I",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Tats gud..",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Wah.",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Moive",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Are me ajmer me.. Bhai tjse ek jaruri kam tha",
+   "declared": "question",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Mur2 brthday jua kalie gol!",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Where are you now exactely?shall we wait for dinner?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Der",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Have a good show!",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Legal VOTING age for BOYS is &lt;#&gt; , but legal MARRIAGE age for BOYS is &lt;",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Dnt knw?",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Mrk i am fine and u",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Ya",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Wot",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Bangalore",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "great! u r starting on sunday right?",
+   "declared": "composite",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": true
+  },
+  {
+   "source": "sms",
+   "said": "PI",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Y crying for that",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "Vidhut",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "sms",
+   "said": "I'm gonna be home soon and i don't want to talk about this stuff anymore tonight",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I JUST FOUND OUT TOO",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "???",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I also want!",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Hahah project meeting ah ??",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Then I don't want",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Tuesday afternoon frisbee (after 1630)",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "so I had a wtf moment then I went back to sleep HAHAHA",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??????",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I think if walk can have shelter all the way",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Must quickly choose before ur eyes get confused",
+   "declared": "question",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "?oo haha I mean the arrangement of the bonding and antibonding pairs at the 2p l",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "JY",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Okie",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Either we meet in early july or in aug ????",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I can",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "*point",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHHA",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HI",
+   "declared": "social",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I cant recognise you????!!!@@@@@@@@@",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Tonight will be a long night",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHHA",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "????????????",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Me and RC",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "i not",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I just... don't want you ??",
+   "declared": "composite",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "LOLOL",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I saw you typing CA/M/CH/25",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "They gave out all prizes alr ????",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "no_antecedent",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Sorry I can't but y'all go ahead",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HUHHH",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Thank you ????",
+   "declared": "social",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Is a hellweek",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "#imissYilian",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Yun ZI",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "K whatt",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "U have to duck and cover",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Not enough performers for MADNUS ?? so I have to go",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "plot the graph on the GC HAHA",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "no_article",
+   "sentOut": true
+  },
+  {
+   "source": "cosem",
+   "said": "1.0 is enough for me HAHA",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "What?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "needs_more",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHHAHAHA",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I group A11! Means I going Kent ridge trail..",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Wed 5pm",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "what does the rpa do ah",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "JY",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHAHAHHAA",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Someone take my shoe bag",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Whutt",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Walking to Town",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "You all want or not",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHAHA",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHA EH CAN FOODPANDA TGT",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "?? ya hor",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "OH",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Wah but",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "‚ö°‚ö°‚ö°",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "If my project meeting doesn't end too late",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "omoooo",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Merry Christmas! ??????",
+   "declared": "composite",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "I lazy walk tho",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??????",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Huh what Jia",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "JY",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Hello hello. W/M/CH/23 and R/F/CH/22's love life aside. Can I trouble everyone t",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "So that 1-2 my sp class (if I can get it) is in the same classroom",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Lazy to use mine",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "JY",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Wru lol",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "????",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Hahahha",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Howw",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Gals",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Omg jy angry",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "JY",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Walao eh I working üò•",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "What? Haha help what?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "nothing_fills_the_void",
+   "sentOut": true
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Haha I added disclaimer only",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "she said she cfm with me ASAP",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHA I MORE DEVELOPED",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Hurryyy",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Hahaha ??",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "_*benedict cumberbatch*_",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Honoured",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Erm also please take note each course costs 45 bucks for theory+practical",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Have to take the stalker MP",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "our club",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "then become 2 compounds",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "What is ug",
+   "declared": "question",
+   "open": false,
+   "did": "identity",
+   "gap": "unknown_referent",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Frisbee this wed @ 530 because I'm done with essay submissions",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "but idk what color is that",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "isnt it free",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "NOO WHY LIL INDIA",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??????????????????",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "LHL",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "since lh dw her",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Tuesday afternoon frisbee (after 1630)",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Alight from bus",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHAHAHA so nicee",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Whywhy",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Huh it is out?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "no_antecedent",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Yay*",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "MMK",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "??????",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "i wearing! but then bc i going out after lab",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "THERES A CEMETERY NEAR YOU",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "End lecture le!!!!!",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "160 messages",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "no im not",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "HAHAHAHAH",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Then fuck lot of monkeys?! WHATTHE",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "))",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "SHHHH",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "Thanks!! JY",
+   "declared": "social",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "BROKE LIAO LAH AHHAHA. Next sem must choose 1 point mods ??????",
+   "declared": "composite",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "cosem",
+   "said": "End what omg",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "sagredo: have a look if this helps u: http://is.gd/1A3vE",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Slart, kk, just thought if someone new here",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "aaas: you cluld use cut maybe",
+   "declared": "question",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "!3ddesktop",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "how do I undo it to try again?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "500 http://us.archive.ubuntu.com intrepid/main",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "stefano:could that be the problem",
+   "declared": "question",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "damo22, i have high hopes for songbird, but it's still beta.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "lufs can do sftp i think",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "DBE",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "gaelfx: ya dude ..actually this is the main reason i was afraid to install ubunt",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "i removed the k-menu on accident",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Pooh22: Want to see volume/trash icons on the desktop? Go to /apps/nautilus/desk",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "make my own shortcuts and stuff",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "piratehead: no only from the console",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "ok, can you boot rescue from live cd?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "is it worth doing?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "no_antecedent",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "jhutchins: mkay.. But I think kerio got greedy and want money for it as well now",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "lulu: nope.. not really",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "brandon, why dont you try it out :d",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "mikebot, then ignore my rambling",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "bonez46: err, that's strange, because ext4 drives appear as ext3 in cfdisk",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "hello, I am usin quassel IRC, but it signs me as MrS1lentcz_ but not MrS1lentcz,",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "someone else triaged it and sent it back to you",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "_Sophia_: yes",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "bad joke",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "root@ubuntu:/home/sean # mount /dev/hdc3",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "dek_aik, nope, i dont have this folder",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "tmdx120: sudo dpkg -i *.deb",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "sudo apt-get install vlc doesn't work ?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "that's what route is for",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "coc is, like, the Ubuntu Code of Conduct, which we ask all Ubuntu users to follo",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "!flash",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "db_loco: Doesnt matter, actually. Just update it. But dont mix up v4l1 with v4l2",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "hey everyone, i have a question",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "!skype > bob3213243",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "jaalto: you should use beep media player",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "there is no such thing as a pcmcia connector as far as I know",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Terminal and Synaptic give me grey screens and do nothing, after installing apti",
+   "declared": "composite",
+   "open": false,
+   "did": "help",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "ahorner: yes",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "any help?",
+   "declared": "social",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "iceroot: http://bashshell.net/file-permissions-and-attributes/understanding-linu",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "ummm.. no. Now all my desktop icons have gone. I still have wallpaper tho!",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "8.10, cuz that's what I have. . . are you telling me i have to track down a blan",
+   "declared": "composite",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Matthew12: if you have that package, just try running \"gstreamer-properties\" fro",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Cannon: right click the file type, the properties",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "after \"remove gstreamer*\" \"install gstreamer*\"",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "I installed the package manually",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "bullgard-I see ok only 2 max in future then ha ha ha",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "riaal, they're included in ubuntu I believe...",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "!virus > gumbo    (gumbo, see the private message from ubottu)",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "o.O Eel-CRITICAL yadda yadda yadda failed",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "I suppose I could have different xorg.confs with a script to switch between them",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "noiz: that guide is modifying a specific block of code to fix DVI on an old rele",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "speedy:  Another clue is the line at the bottom of the configure script end:  \"W",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "and use kate and you can edit them from there too.  makes the remote server feel",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "ok",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "[nih0] nice to meet you",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "!google",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "just downloaded a program and i have NO idea how to install it....",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "staticRails: hi any luck?",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "mercurus, er, is the windows remote desktop a VNC client?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": true
+  },
+  {
+   "source": "irc",
+   "said": "所以我把他卸了。",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Chaorain: yes",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "hm...",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "fusionxtc, just copy and paste it in your termina",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "act_not_possible",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Upgrades between LTS releases are not enabled by default until the first point r",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Factoid search of 'mergefb' by value returned no results.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "is anyone in here using xchat? I just have a question about joining another netw",
+   "declared": "question",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "zAmaranth, do you refere them to the server op ?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "erUSUL: if i change the nameserver settings on ubuntu it works ... (ie i drop in",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Eh?",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "but i can't figure it out",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "No idea  what that  U in the nameis  for. ;)",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "and i wanted to know how can i see which configure-options/output has been used ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "RiverGirl_, is from australia :P",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "my sources are all jacked up",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "cna't even watch Hulu shows",
+   "declared": "request",
+   "open": false,
+   "did": "request",
+   "gap": "no_article",
+   "sentOut": true
+  },
+  {
+   "source": "irc",
+   "said": "i have a problem",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "!info sl",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "tgunr: yes, . is different from .*",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "people",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "mobi-sheep: Right click only seems to brong up the options: Add Widgets, Add pan",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "nicomachus: I need Windows for a work thing but I prefer Ubuntu. Thanks for the ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "jdub, [00:02]  <|trey|> htaccess, the clipboard is one thing that annoys me abou",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "then i wouldnt recommend trying to fight with beryl....especially if you called ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "ActionParsnip, yea i already have ssh set up so i can control the box remotely",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "ikonia, would everything go into the dhcp config file?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "we have here a new mussolini name berlusconi",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Julie: are you asking howto mount it manually?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "most of the time in ENV somewhere",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "hank, you mean make to compile source code?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "http://paste.ubuntu-nl.org/10456/ here is the last lines of the problem",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "my brain does that too",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "you can  use it as a radio through  the browser but  to access it through a app ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "tristanmike, hehe okay, thanks",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "games",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "and when the system came back up, that partition won't mount",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Ubuntu bug 700910 in grub2 (Ubuntu) \"Unable to install GRUB2 to the same device ",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "yowshi1-  that's inconvenient",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "TgWaKu: ok that's weird, since how else are you going to boot Ubuntu?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "I'd guess that 20GB is far enough for lvm root volume ? (separate home and boot)",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "anyone knows what liblarne0 packet is",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "crshman: sudo dpkg-reconfigure xserver-xorg",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "It opens in Kae.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "the things i have done is i have tried the default compiz theme, uninstalling co",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "nocilis, no worries",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "what command or process do I need to edit system files with admin priv's. Networ",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "i was just asking for objective reasons...im not asking for 'the best'",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "I changed it to 1024 succesfully, but when I boot it goes into cmd prompt auto, ",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "namelessjon: the HD to which you rsync should be ext..",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Hello osmodivs",
+   "declared": "social",
+   "open": false,
+   "did": "smalltalk",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "kibbly: yeah.",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "hmm",
+   "declared": "social",
+   "open": false,
+   "did": "social",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "this is my card.  RS690M [Radeon X1200 Series]",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "bullgard4, what the heck are you talking about.  \"beep\" is not a command.",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "_joey: hmm keyring doesnt do it for ya?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "no_antecedent",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "sudo dpkg-reconfigure --force mysql-server",
+   "declared": "fragment",
+   "open": false,
+   "did": "fragment",
+   "gap": "fragment_unclear",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "gnomefreak, i have a breedzy badger can i have xgl ?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Hi. Can anyone help me get my sound back? I've just done a kernel upgrade and al",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "does anyone have amule",
+   "declared": "question",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "K-Ryan: k :) just checking everything",
+   "declared": "unread",
+   "open": false,
+   "did": "unread",
+   "gap": "act_unread",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "sourcemaker : use add stream in the amarok and it will update automatially",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "so what if i want to print all these with a diff of .25 seconds or less",
+   "declared": "statement",
+   "open": false,
+   "did": "read",
+   "gap": null,
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "rahab: do you really need to trust the signature from a bill?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "Is there no one except me who has troubles with facebook in newest konqueror?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "how many distroboards are there?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "conorkirkpatrick: The fact that you can connect? o.O",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "negge^ how to extract the tar gz?",
+   "declared": "question",
+   "open": false,
+   "did": "relational",
+   "gap": "action_not_in_text",
+   "sentOut": false
+  },
+  {
+   "source": "irc",
+   "said": "dev, router or no?",
+   "declared": "fragment",
+   "open": true,
+   "did": "clarify",
+   "gap": "act_open",
+   "sentOut": false
+  }
+ ],
+ "sent": [
+  {
+   "source": "sms",
+   "declared": "question",
+   "did": "relational",
+   "said": "Hi Andreu, have v 2 get down at piliyandala town?",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=have+v+2+get+down+piliyandala+town&srlimit=3&format=json&origin=*"
+  },
+  {
+   "source": "sms",
+   "declared": "composite",
+   "did": "relational",
+   "said": "great! u r starting on sunday right?",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=u+starting+sunday+right&srlimit=3&format=json&origin=*"
+  },
+  {
+   "source": "cosem",
+   "declared": "request",
+   "did": "request",
+   "said": "plot the graph on the GC HAHA",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=GC+HAHA&format=json&origin=*"
+  },
+  {
+   "source": "cosem",
+   "declared": "question",
+   "did": "relational",
+   "said": "What? Haha help what?",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Haha&srlimit=4&format=json&origin=*"
+  },
+  {
+   "source": "irc",
+   "declared": "question",
+   "did": "relational",
+   "said": "mercurus, er, is the windows remote desktop a VNC client?",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=er+windows+remote+VNC+client&srlimit=3&format=json&origin=*"
+  },
+  {
+   "source": "irc",
+   "declared": "request",
+   "did": "request",
+   "said": "cna't even watch Hulu shows",
+   "query": "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&redirects=1&titles=Hulu+shows&format=json&origin=*"
+  }
+ ],
+ "examples": [
+  {
+   "k": "sms",
+   "t": "Are me ajmer me.. Bhai tjse ek jaruri kam tha",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "cosem",
+   "t": "Must quickly choose before ur eyes get confused",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "aaas: you cluld use cut maybe",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "stefano:could that be the problem",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "is anyone in here using xchat? I just have a question about joining another netw",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  },
+  {
+   "k": "irc",
+   "t": "does anyone have amule",
+   "working": "question",
+   "open": true,
+   "type": "clarify",
+   "handled": false,
+   "gap": "act_open",
+   "calls": 0,
+   "urls": []
+  }
+ ]
+}

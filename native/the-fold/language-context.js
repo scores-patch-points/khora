@@ -74,7 +74,7 @@ export function languageContextFor(text, { language = null } = {}) {
 export function extractSurfacesHeard(sentences, opts = {}) {
   const capital = extractSurfaces(sentences, opts);
   const text = (sentences ?? []).map((s) => String(s?.text ?? s ?? "")).join("\n");
-  const ctx = languageContextFor(text);
+  const ctx = languageContextFor(text, { language: opts.language ?? null });   // a language the caller has settled is authoritative (as languageContextFor says); only a text with none has its own words choose one
   if (!ctx.grammar?.framePrior) return capital;
   const idx = createNominalIndex({ posPrior: ctx.language === "san" ? withSandhiVariants(ctx.grammar.posPrior) : ctx.grammar.posPrior, framePrior: ctx.grammar.framePrior, segment: ctx.ear.segment, peel: ctx.ear.peel, commonNouns: !ctx.casedScript });
   for (const s of sentences ?? []) idx.add(s);

@@ -90,13 +90,29 @@ export function recordAct({ door, text, stem, parse = null, used, body = {}, all
   return GATE.record(ROOT, { door, addr: `sha256:${N.crypto.createHash("sha256").update(str).digest("hex")}`, degraded: allowDegraded, pharosDir, chatterDir, writer: "khora", capacities: { available: capacitiesFor(stem, parse), used }, body: { chars: str.length, language: stem, ...body } });
 }
 
+// WHAT A WRITE NEEDS FROM THE LOG, AND NO MORE. Asking whether a kind is declared used to build the whole view of the log (entries(h): load, causal order, 26 s on 214,481 entries), and weaving each entry
+// built it again for its frontier: a full read of one document took minutes. Now the kinds still missing are found by ONE backward fold (pharos missingKinds: newest file first, each file from its end, stop when
+// every kind is found), and a read's entries are written in ONE bulk append (weaveMany: no view; the entries are facts of the read, not claims in a causal chain). An older pharos without these falls back to what it
+// had. Entries already written by this process are not written twice.
+const WOVEN = new Set();
+function declareKinds(h, pairs) {
+  const miss = typeof P.missingKinds === "function" ? new Set(P.missingKinds(h, pairs.map(([k]) => k))) : null;
+  for (const [kind, cell] of pairs) if (miss ? miss.has(kind) : !P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
+}
+function bulkWeave(h, batch) {
+  const fresh = batch.filter((x) => { const k = `${h.dir}|${x.kind}|${x.addr}|${JSON.stringify(x.body)}`; if (WOVEN.has(k)) return false; WOVEN.add(k); return true; });
+  if (!fresh.length) return 0;
+  if (typeof P.weaveMany === "function") P.weaveMany(h, fresh); else for (const x of fresh) P.weave(h, x);
+  return fresh.length;
+}
+
 // THE CAST OF AN ORDERED READ, WOVEN (kind `referent`, INS·Figure): each being by the text's hash and its ref, with every written form,
 // the pro-forms its own clauses bind to it and its decided pro-form, so a later surface reads the referent off the pharos the
 // same way instead of re-deriving it. Returns how many were woven.
 export function weaveReferents({ text, referents, edges = [] }) {
   if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P || !referents?.length) return 0;
   const { pharosDir } = dirs(); const h = P.open("khora", { dir: pharosDir, writer: "khora" });
-  for (const [kind, cell] of [["referent", "INS·Figure"], ["identity", "SYN·Pattern"]]) if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
+  declareKinds(h, [["referent", "INS·Figure"], ["identity", "SYN·Pattern"]]);
   const doc = N.crypto.createHash("sha256").update(String(text ?? "")).digest("hex").slice(0, 16);
   // every name; a description only when the text returns to it (a one-off "a chair" is a mention, not yet a referent worth a line)
   const kept = referents.filter((b) => b.kind !== "nominal" || b.mentions > 1);
@@ -107,7 +123,7 @@ export function weaveReferents({ text, referents, edges = [] }) {
     proformForms: b.proformForms ?? [], pronouns: (b.pronouns ?? []).slice(0, 12), proform: b.proform ? { cls: b.proform.cls, contested: !!b.proform.contested, p: b.proform.p ?? null } : null, source: "reading-in-order.mjs (rows)" } });
   // identity edges (never merges): the kinds a perspective may collapse; same-head (the same description again past the horizon) stays in the read
   for (const e of edges) if (e.type !== "same-head") batch.push({ cell: "SYN·Pattern", kind: "identity", addr: `${doc}:${e.a}~${e.b}:${e.type}`, body: { a: `${doc}:${e.a}`, b: `${doc}:${e.b}`, type: e.type, n: e.n ?? 1, first: e.first ?? null } });
-  if (typeof P.weaveMany === "function") P.weaveMany(h, batch); else for (const x of batch) P.weave(h, x);
+  bulkWeave(h, batch);
   return batch.length;
 }
 
@@ -134,19 +150,18 @@ export function recordRead(w, text, { door, allowDegraded = false } = {}) {
 export function weaveFullRead(w, text, { door, pharosDir } = {}) {
   if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P) return;
   const h = P.open("khora", { dir: pharosDir, writer: "khora" });
-  for (const [kind, cell] of [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"], ["gender", "DEF·Figure"], ["proform", "DEF·Figure"], ["part_of", "SYN·Pattern"]]) {
-    if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
-  }
+  declareKinds(h, [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"], ["gender", "DEF·Figure"], ["proform", "DEF·Figure"], ["part_of", "SYN·Pattern"]]);
+  const batch = [];   // every entry of this read, written in one append at the end
   // beings: each cast referent is one node of the fold
-  for (const c of w.cast ?? []) P.weave(h, { cell: "INS·Figure", kind: "being", addr: String(c.ref), body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
+  for (const c of w.cast ?? []) batch.push({ cell: "INS·Figure", kind: "being", addr: String(c.ref), body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
   // the speaker/addressee referents (I/you) — beings too, one per document
   const spk = new Map();
   for (const sb of w.speakerBindings ?? []) if (sb && typeof sb === "object" && sb.cl) spk.set(String(sb.cl), sb.kind ?? "speaker");
-  for (const [cl, kind] of spk) P.weave(h, { cell: "INS·Figure", kind: "being", addr: cl, body: { surface: kind === "addressee" ? "you" : "I", surfaces: [kind === "addressee" ? "you" : "I"], spans: [], kind } });
+  for (const [cl, kind] of spk) batch.push({ cell: "INS·Figure", kind: "being", addr: cl, body: { surface: kind === "addressee" ? "you" : "I", surfaces: [kind === "addressee" ? "you" : "I"], spans: [], kind } });
   // the gender prior: each being's attested class from the ingested-material chain (the corpus/Wikidata)
   try {
     const giver = genderPriorChainFor(w?.competency?.stem ?? w?.language?.stem ?? "en");
-    if (giver) { const prior = giver({ text: String(text ?? ""), cast: w.cast ?? [] }); for (const [ref, cls] of prior ?? []) P.weave(h, { cell: "DEF·Figure", kind: "gender", addr: String(ref), body: { gender: cls } }); }
+    if (giver) { const prior = giver({ text: String(text ?? ""), cast: w.cast ?? [] }); for (const [ref, cls] of prior ?? []) batch.push({ cell: "DEF·Figure", kind: "gender", addr: String(ref), body: { gender: cls } }); }
   } catch { /* a giver that throws on this cast is a gap, never a crash */ }
   // the pro-form the TEXT'S OWN GRAMMAR binds to each being (its reflexives and possessives, entry.proforms): above the
   // givers in the chain (the text's own evidence, recurring), contested when the sign test does not decide, absent without evidence
@@ -154,12 +169,12 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
     const classes = {}; let reflexive = 0, possessive = 0;
     const keys = new Set(); for (const s of [c.surface, ...(c.allSurfaces ?? [])]) for (const k of String(s ?? "").normalize("NFC").toLowerCase().split(" ")) if (k) keys.add(k);
     for (const k of keys) { const e = w.proforms?.[k]; if (!e) continue; reflexive += e.reflexive; possessive += e.possessive; for (const [cl, n] of Object.entries(e.classes)) classes[cl] = (classes[cl] ?? 0) + n; }
-    const d = proformOf({ classes }); if (d) P.weave(h, { cell: "DEF·Figure", kind: "proform", addr: String(c.ref), body: { proform: d.cls, contested: d.contested, p: d.p, evidence: classes, reflexive, possessive, source: "grammar" } });
+    const d = proformOf({ classes }); if (d) batch.push({ cell: "DEF·Figure", kind: "proform", addr: String(c.ref), body: { proform: d.cls, contested: d.contested, p: d.p, evidence: classes, reflexive, possessive, source: "grammar" } });
   }
   // the containment relations (a referent inside another) — the holarchy's part_of edges, from the
   // kāraka roles (subject kartṛ inside the locus adhikaraṇa, both proper nouns), not surface labels
   try {
-    for (const { child, parent } of containmentFromKarakas(w)) P.weave(h, { cell: "SYN·Pattern", kind: "part_of", addr: `part_of:${child}:${parent}`, body: { child, parent } });
+    for (const { child, parent } of containmentFromKarakas(w)) batch.push({ cell: "SYN·Pattern", kind: "part_of", addr: `part_of:${child}:${parent}`, body: { child, parent } });
   } catch { /* containmentFromKarakas throwing on this read is a gap, never a crash */ }
   // kāraka edges: the read's own relations, deduped (head|role|arg). The ARG is a REFERENT, not a
   // string: a token inside a cast mention span is that referent, so "Mina?" and "the book" resolve to
@@ -180,7 +195,8 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
       if (hd?.lemma) { const argRef = refAt.get((p.offset ?? 0) + (row.start ?? 0)) ?? (row.lemma ?? row.form); const k = `${hd.lemma}|${role}|${argRef}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role, arg: argRef }); }
     }
   }
-  for (const [, e] of edges) P.weave(h, { cell: "SYN·Pattern", kind: "karaka", addr: `edge:${e.head}:${e.role}:${e.arg}`, body: e });
+  for (const [, e] of edges) batch.push({ cell: "SYN·Pattern", kind: "karaka", addr: `edge:${e.head}:${e.role}:${e.arg}`, body: e });
   // pronoun bindings: the identity edges, with their agreement label
-  for (const b of [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])]) P.weave(h, { cell: "CON·Figure", kind: "binding", addr: `bind:${b.at?.[0] ?? ""}`, body: { pronoun: b.pronoun, ref: b.ref, agreement: b.agreement ?? {}, at: b.at ?? null } });
+  for (const b of [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])]) batch.push({ cell: "CON·Figure", kind: "binding", addr: `bind:${b.at?.[0] ?? ""}`, body: { pronoun: b.pronoun, ref: b.ref, agreement: b.agreement ?? {}, at: b.at ?? null } });
+  bulkWeave(h, batch);
 }

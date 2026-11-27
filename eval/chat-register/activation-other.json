@@ -1,0 +1,917 @@
+{
+ "stamp": {
+  "reader": {
+   "priorsHome": "/Users/mlacy/Downloads/workspace/janus/priors",
+   "priorsFiles": 20,
+   "KHORA_PRIORS_DIR": null,
+   "parser": "english-parser"
+  },
+  "when": "2026-11-24T15:15:24.257Z",
+  "split": "EXPLORATORY (DEV: CorefUD 1.3 dev sets; kinds, rules and N = 2 fixed before the run; N = 1 and 3 reported)",
+  "commit": "92d428f"
+ },
+ "results": {
+  "Spanish AnCora dev": {
+   "zero N1": {
+    "n": 519,
+    "random": 179.20440115440118,
+    "one": [
+     76,
+     105
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 269,
+     "most recent mention": 135,
+     "first mention in the window": 249,
+     "most mentions (ties to the latest)": 178
+    },
+    "outside": 143
+   },
+   "zero N2": {
+    "n": 730,
+    "random": 174.7399683649684,
+    "one": [
+     22,
+     31
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 286,
+     "most recent mention": 225,
+     "first mention in the window": 268,
+     "most mentions (ties to the latest)": 302
+    },
+    "outside": 6
+   },
+   "zero N3": {
+    "n": 755,
+    "random": 139.01328989637827,
+    "one": [
+     11,
+     11
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 296,
+     "most recent mention": 239,
+     "first mention in the window": 228,
+     "most mentions (ties to the latest)": 315
+    },
+    "outside": 1
+   }
+  },
+  "Catalan AnCora dev": {
+   "zero N1": {
+    "n": 505,
+    "random": 163.81190476190483,
+    "one": [
+     84,
+     126
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 228,
+     "most recent mention": 148,
+     "first mention in the window": 202,
+     "most mentions (ties to the latest)": 183
+    },
+    "outside": 130
+   },
+   "zero N2": {
+    "n": 720,
+    "random": 165.81537531096322,
+    "one": [
+     34,
+     37
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 246,
+     "most recent mention": 245,
+     "first mention in the window": 230,
+     "most mentions (ties to the latest)": 294
+    },
+    "outside": 4
+   },
+   "zero N3": {
+    "n": 746,
+    "random": 130.28399304943437,
+    "one": [
+     14,
+     14
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 267,
+     "most recent mention": 266,
+     "first mention in the window": 204,
+     "most mentions (ties to the latest)": 325
+    },
+    "outside": 1
+   }
+  },
+  "Czech PDT dev": {
+   "zero N1": {
+    "n": 887,
+    "random": 300.17254689754645,
+    "one": [
+     131,
+     328
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 385,
+     "most recent mention": 225,
+     "first mention in the window": 300,
+     "most mentions (ties to the latest)": 295
+    },
+    "outside": 505
+   },
+   "zero N2": {
+    "n": 1617,
+    "random": 386.5837818899872,
+    "one": [
+     54,
+     91
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 603,
+     "most recent mention": 444,
+     "first mention in the window": 453,
+     "most mentions (ties to the latest)": 588
+    },
+    "outside": 12
+   },
+   "zero N3": {
+    "n": 1707,
+    "random": 284.44105474269395,
+    "one": [
+     10,
+     12
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 637,
+     "most recent mention": 490,
+     "first mention in the window": 314,
+     "most mentions (ties to the latest)": 692
+    },
+    "outside": 1
+   }
+  },
+  "Hungarian Szeged dev": {
+   "zero N1": {
+    "n": 0,
+    "random": 0,
+    "one": [
+     0,
+     0
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 0,
+     "most recent mention": 0,
+     "first mention in the window": 0,
+     "most mentions (ties to the latest)": 0
+    },
+    "outside": 0
+   },
+   "zero N2": {
+    "n": 0,
+    "random": 0,
+    "one": [
+     0,
+     0
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 0,
+     "most recent mention": 0,
+     "first mention in the window": 0,
+     "most mentions (ties to the latest)": 0
+    },
+    "outside": 0
+   },
+   "zero N3": {
+    "n": 0,
+    "random": 0,
+    "one": [
+     0,
+     0
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 0,
+     "most recent mention": 0,
+     "first mention in the window": 0,
+     "most mentions (ties to the latest)": 0
+    },
+    "outside": 0
+   }
+  },
+  "Polish PCC dev": {
+   "zero N1": {
+    "n": 0,
+    "random": 0,
+    "one": [
+     0,
+     0
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 0,
+     "most recent mention": 0,
+     "first mention in the window": 0,
+     "most mentions (ties to the latest)": 0
+    },
+    "outside": 0
+   },
+   "zero N2": {
+    "n": 0,
+    "random": 0,
+    "one": [
+     0,
+     0
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 0,
+     "most recent mention": 0,
+     "first mention in the window": 0,
+     "most mentions (ties to the latest)": 0
+    },
+    "outside": 0
+   },
+   "zero N3": {
+    "n": 0,
+    "random": 0,
+    "one": [
+     0,
+     0
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 0,
+     "most recent mention": 0,
+     "first mention in the window": 0,
+     "most mentions (ties to the latest)": 0
+    },
+    "outside": 0
+   }
+  },
+  "Ancient Greek PROIEL dev": {
+   "zero N1": {
+    "n": 163,
+    "random": 63.769047619047655,
+    "one": [
+     45,
+     71
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 76,
+     "most recent mention": 45,
+     "first mention in the window": 65,
+     "most mentions (ties to the latest)": 60
+    },
+    "outside": 110
+   },
+   "zero N2": {
+    "n": 316,
+    "random": 102.77460317460319,
+    "one": [
+     18,
+     27
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 109,
+     "most recent mention": 123,
+     "first mention in the window": 101,
+     "most mentions (ties to the latest)": 164
+    },
+    "outside": 1
+   },
+   "zero N3": {
+    "n": 341,
+    "random": 86.26872294372299,
+    "one": [
+     2,
+     3
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 126,
+     "most recent mention": 139,
+     "first mention in the window": 78,
+     "most mentions (ties to the latest)": 174
+    },
+    "outside": 0
+   }
+  },
+  "Turkish ITCC dev": {
+   "zero N1": {
+    "n": 474,
+    "random": 163.33566433566403,
+    "one": [
+     120,
+     263
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 188,
+     "most recent mention": 126,
+     "first mention in the window": 141,
+     "most mentions (ties to the latest)": 154
+    },
+    "outside": 172
+   },
+   "zero N2": {
+    "n": 811,
+    "random": 241.83680217122082,
+    "one": [
+     52,
+     95
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 205,
+     "most recent mention": 279,
+     "first mention in the window": 189,
+     "most mentions (ties to the latest)": 291
+    },
+    "outside": 3
+   },
+   "zero N3": {
+    "n": 887,
+    "random": 216.7233617552821,
+    "one": [
+     16,
+     22
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 234,
+     "most recent mention": 320,
+     "first mention in the window": 197,
+     "most mentions (ties to the latest)": 334
+    },
+    "outside": 0
+   }
+  },
+  "English GUM dev": {
+   "it N1": {
+    "n": 135,
+    "random": 41.832215007215005,
+    "one": [
+     8,
+     40
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 37,
+     "most recent mention": 31,
+     "first mention in the window": 31,
+     "most mentions (ties to the latest)": 29
+    },
+    "outside": 77
+   },
+   "it N2": {
+    "n": 235,
+    "random": 51.960877439553975,
+    "one": [
+     9,
+     14
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 57,
+     "most recent mention": 45,
+     "first mention in the window": 54,
+     "most mentions (ties to the latest)": 58
+    },
+    "outside": 3
+   },
+   "it N3": {
+    "n": 248,
+    "random": 40.11119913155453,
+    "one": [
+     2,
+     2
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 65,
+     "most recent mention": 51,
+     "first mention in the window": 45,
+     "most mentions (ties to the latest)": 83
+    },
+    "outside": 2
+   },
+   "definite N1": {
+    "n": 236,
+    "random": 70.51115828615838,
+    "one": [
+     24,
+     91
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 24,
+     "most recent mention": 36,
+     "first mention in the window": 19,
+     "most mentions (ties to the latest)": 33
+    },
+    "outside": 64
+   },
+   "definite N2": {
+    "n": 382,
+    "random": 68.09320357705757,
+    "one": [
+     2,
+     7
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 33,
+     "most recent mention": 62,
+     "first mention in the window": 38,
+     "most mentions (ties to the latest)": 66
+    },
+    "outside": 2
+   },
+   "definite N3": {
+    "n": 390,
+    "random": 47.52785654486934,
+    "one": [
+     0,
+     0
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 35,
+     "most recent mention": 64,
+     "first mention in the window": 38,
+     "most mentions (ties to the latest)": 66
+    },
+    "outside": 1
+   }
+  },
+  "English LitBank dev": {
+   "it N1": {
+    "n": 18,
+    "random": 5.733333333333333,
+    "one": [
+     2,
+     9
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 3,
+     "most recent mention": 6,
+     "first mention in the window": 4,
+     "most mentions (ties to the latest)": 2
+    },
+    "outside": 8
+   },
+   "it N2": {
+    "n": 32,
+    "random": 8.709163059163059,
+    "one": [
+     0,
+     2
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 8,
+     "most recent mention": 8,
+     "first mention in the window": 7,
+     "most mentions (ties to the latest)": 1
+    },
+    "outside": 1
+   },
+   "it N3": {
+    "n": 32,
+    "random": 6.923423798423799,
+    "one": [
+     0,
+     2
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 8,
+     "most recent mention": 8,
+     "first mention in the window": 5,
+     "most mentions (ties to the latest)": 5
+    },
+    "outside": 1
+   },
+   "definite N1": {
+    "n": 56,
+    "random": 22.27619047619047,
+    "one": [
+     4,
+     42
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 6,
+     "most recent mention": 0,
+     "first mention in the window": 5,
+     "most mentions (ties to the latest)": 3
+    },
+    "outside": 57
+   },
+   "definite N2": {
+    "n": 125,
+    "random": 38.59448051948053,
+    "one": [
+     2,
+     20
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 18,
+     "most recent mention": 12,
+     "first mention in the window": 20,
+     "most mentions (ties to the latest)": 13
+    },
+    "outside": 10
+   },
+   "definite N3": {
+    "n": 145,
+    "random": 35.140784215784215,
+    "one": [
+     1,
+     9
+    ],
+    "rules": {
+     "subject of the nearest earlier sentence": 23,
+     "most recent mention": 16,
+     "first mention in the window": 18,
+     "most mentions (ties to the latest)": 24
+    },
+    "outside": 1
+   }
+  }
+ },
+ "pooled": {
+  "zero N1": {
+   "n": 2548,
+   "random": 0.34,
+   "oneCandidate": [
+    456,
+    893
+   ],
+   "outside": 1060,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 1146,
+     "rate": 0.45,
+     "wilson": [
+      0.43,
+      0.47
+     ]
+    },
+    "most recent mention": {
+     "right": 679,
+     "rate": 0.27,
+     "wilson": [
+      0.25,
+      0.28
+     ]
+    },
+    "first mention in the window": {
+     "right": 957,
+     "rate": 0.38,
+     "wilson": [
+      0.36,
+      0.39
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 870,
+     "rate": 0.34,
+     "wilson": [
+      0.32,
+      0.36
+     ]
+    }
+   }
+  },
+  "zero N2": {
+   "n": 4194,
+   "random": 0.26,
+   "oneCandidate": [
+    180,
+    281
+   ],
+   "outside": 26,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 1449,
+     "rate": 0.35,
+     "wilson": [
+      0.33,
+      0.36
+     ]
+    },
+    "most recent mention": {
+     "right": 1316,
+     "rate": 0.31,
+     "wilson": [
+      0.3,
+      0.33
+     ]
+    },
+    "first mention in the window": {
+     "right": 1241,
+     "rate": 0.3,
+     "wilson": [
+      0.28,
+      0.31
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 1639,
+     "rate": 0.39,
+     "wilson": [
+      0.38,
+      0.41
+     ]
+    }
+   }
+  },
+  "zero N3": {
+   "n": 4436,
+   "random": 0.19,
+   "oneCandidate": [
+    53,
+    62
+   ],
+   "outside": 3,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 1560,
+     "rate": 0.35,
+     "wilson": [
+      0.34,
+      0.37
+     ]
+    },
+    "most recent mention": {
+     "right": 1454,
+     "rate": 0.33,
+     "wilson": [
+      0.31,
+      0.34
+     ]
+    },
+    "first mention in the window": {
+     "right": 1021,
+     "rate": 0.23,
+     "wilson": [
+      0.22,
+      0.24
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 1840,
+     "rate": 0.41,
+     "wilson": [
+      0.4,
+      0.43
+     ]
+    }
+   }
+  },
+  "it N1": {
+   "n": 153,
+   "random": 0.31,
+   "oneCandidate": [
+    10,
+    49
+   ],
+   "outside": 85,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 40,
+     "rate": 0.26,
+     "wilson": [
+      0.2,
+      0.34
+     ]
+    },
+    "most recent mention": {
+     "right": 37,
+     "rate": 0.24,
+     "wilson": [
+      0.18,
+      0.32
+     ]
+    },
+    "first mention in the window": {
+     "right": 35,
+     "rate": 0.23,
+     "wilson": [
+      0.17,
+      0.3
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 31,
+     "rate": 0.2,
+     "wilson": [
+      0.15,
+      0.27
+     ]
+    }
+   }
+  },
+  "it N2": {
+   "n": 267,
+   "random": 0.23,
+   "oneCandidate": [
+    9,
+    16
+   ],
+   "outside": 4,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 65,
+     "rate": 0.24,
+     "wilson": [
+      0.2,
+      0.3
+     ]
+    },
+    "most recent mention": {
+     "right": 53,
+     "rate": 0.2,
+     "wilson": [
+      0.16,
+      0.25
+     ]
+    },
+    "first mention in the window": {
+     "right": 61,
+     "rate": 0.23,
+     "wilson": [
+      0.18,
+      0.28
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 59,
+     "rate": 0.22,
+     "wilson": [
+      0.18,
+      0.27
+     ]
+    }
+   }
+  },
+  "it N3": {
+   "n": 280,
+   "random": 0.17,
+   "oneCandidate": [
+    2,
+    4
+   ],
+   "outside": 3,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 73,
+     "rate": 0.26,
+     "wilson": [
+      0.21,
+      0.32
+     ]
+    },
+    "most recent mention": {
+     "right": 59,
+     "rate": 0.21,
+     "wilson": [
+      0.17,
+      0.26
+     ]
+    },
+    "first mention in the window": {
+     "right": 50,
+     "rate": 0.18,
+     "wilson": [
+      0.14,
+      0.23
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 88,
+     "rate": 0.31,
+     "wilson": [
+      0.26,
+      0.37
+     ]
+    }
+   }
+  },
+  "definite N1": {
+   "n": 292,
+   "random": 0.32,
+   "oneCandidate": [
+    28,
+    133
+   ],
+   "outside": 121,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 30,
+     "rate": 0.1,
+     "wilson": [
+      0.07,
+      0.14
+     ]
+    },
+    "most recent mention": {
+     "right": 36,
+     "rate": 0.12,
+     "wilson": [
+      0.09,
+      0.17
+     ]
+    },
+    "first mention in the window": {
+     "right": 24,
+     "rate": 0.08,
+     "wilson": [
+      0.06,
+      0.12
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 36,
+     "rate": 0.12,
+     "wilson": [
+      0.09,
+      0.17
+     ]
+    }
+   }
+  },
+  "definite N2": {
+   "n": 507,
+   "random": 0.21,
+   "oneCandidate": [
+    4,
+    27
+   ],
+   "outside": 12,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 51,
+     "rate": 0.1,
+     "wilson": [
+      0.08,
+      0.13
+     ]
+    },
+    "most recent mention": {
+     "right": 74,
+     "rate": 0.15,
+     "wilson": [
+      0.12,
+      0.18
+     ]
+    },
+    "first mention in the window": {
+     "right": 58,
+     "rate": 0.11,
+     "wilson": [
+      0.09,
+      0.15
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 79,
+     "rate": 0.16,
+     "wilson": [
+      0.13,
+      0.19
+     ]
+    }
+   }
+  },
+  "definite N3": {
+   "n": 535,
+   "random": 0.15,
+   "oneCandidate": [
+    1,
+    9
+   ],
+   "outside": 2,
+   "rules": {
+    "subject of the nearest earlier sentence": {
+     "right": 58,
+     "rate": 0.11,
+     "wilson": [
+      0.08,
+      0.14
+     ]
+    },
+    "most recent mention": {
+     "right": 80,
+     "rate": 0.15,
+     "wilson": [
+      0.12,
+      0.18
+     ]
+    },
+    "first mention in the window": {
+     "right": 56,
+     "rate": 0.1,
+     "wilson": [
+      0.08,
+      0.13
+     ]
+    },
+    "most mentions (ties to the latest)": {
+     "right": 90,
+     "rate": 0.17,
+     "wilson": [
+      0.14,
+      0.2
+     ]
+    }
+   }
+  }
+ }
+}
