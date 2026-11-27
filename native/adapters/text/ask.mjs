@@ -10,7 +10,8 @@
 // about that — "Mina" in the question matches "Mina" in the text by lemma, and a lemma-based match is
 // a disclosed simplification, not a claim of coreference. Full referent identity is the reader's
 // referent graph, one wiring layer deeper.
-import { gapRole, INTERROGATIVE_ADMITS } from "./wh-narrow.js";
+import { INTERROGATIVE_ADMITS } from "./wh-narrow.js";
+import { whGapRole } from "./wh-role.mjs";
 import { fillGap } from "./gap-fill.js";
 
 const LEMMA = (row) => String(row.lemma ?? row.form ?? "").toLowerCase();
@@ -37,12 +38,14 @@ export function triplesOfRows(rows) {
   });
 }
 
-/** questionDag(rows, admits) -> { gap, filled }: the question's own DAG, with the WH-word's role as the
+/** questionDag(rows, admits) -> { gap, filled, via, contested? }: the question's own DAG, with the WH-word's role as the
  *  gap and every other kāraka as a filled role. The WH-word is found by its lemma (a closed class),
  *  not by the deprel the parser gave it — WH-movement means a fronted "what" is often tagged nsubj
- *  when it is really the patient, so its role is taken from `admits`, never the parse. */
+ *  when it is really the patient, so its role is never taken from that relation. It comes from a MARKER
+ *  on the phrase ("to whom", or a stranded "to") when there is one, else from the declared class
+ *  default in `admits` (wh-role.mjs: `via` names which). */
 export function questionDag(rows, admits) {
-  const role = gapRole(admits).role;
+  const { role, via, contested, ambiguous } = whGapRole(rows, admits);
   const root = rows.find((r) => r.head === 0 && r.upos !== "PUNCT");
   const filled = { predicate: root ? LEMMA(root) : null };
   for (const r of rows) {
@@ -51,7 +54,7 @@ export function questionDag(rows, admits) {
     const v = LEMMA(r);
     if (filled[r.karaka] === undefined) filled[r.karaka] = v;
   }
-  return { gap: role, filled };
+  return { gap: role, filled, via, ...(contested ? { contested } : {}), ...(ambiguous ? { ambiguous } : {}) };
 }
 
 /** answerQuestion({ textRows, questionRows, admits }) -> the fillGap verdict over the text's triples.
@@ -60,8 +63,8 @@ export function answerQuestion({ textRows, questionRows, admits } = {}) {
   if (!Array.isArray(textRows) || !Array.isArray(questionRows) || !admits) return { answer: null, reason: "missing-input" };
   const triples = triplesOfRows(textRows);
   if (!triples.length) return { answer: null, reason: "no-triples" };
-  const { gap, filled } = questionDag(questionRows, admits);
+  const { gap, filled, via, contested } = questionDag(questionRows, admits);
   const r = fillGap({ gap, filled, triples });
   const answer = Array.isArray(r.answer) ? (r.answer.length === 1 ? r.answer[0] : r.answer) : r.answer;
-  return { ...r, answer, gap, filled };
+  return { ...r, answer, gap, filled, gapVia: via, ...(contested ? { gapContested: contested } : {}) };
 }

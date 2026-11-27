@@ -12,6 +12,8 @@
 //
 // The mapping is DECLARED (like THRAX_MAP and KARAKA_MAP): a translation between the question's
 // surface class and Panini's roles, falsifiable by a language or a question where the mapping fails.
+// It is the DEFAULT for the gap's role, not the whole of it: a marker on the phrase ("to whom" -> sampradāna,
+// "from whom" -> apādāna) overrides the class (wh-role.mjs, which the ask path uses); this table answers when no marker does.
 // The narrowing is the DMD made explicit: every candidate cut is a difference-that-makes-a-difference,
 // and the trace names which candidate fell to which constraint. Pure: no imports, no model, no clock.
 export const WH_SCHEMA = "WhNarrow@1";
@@ -39,7 +41,7 @@ export const KARAKA_KIND = Object.freeze({
   karman: ["thing", "quantity"],
   karaṇa: ["manner", "thing"],
   sampradāna: ["person"],
-  apādāna: ["place", "thing"],
+  apādāna: ["place", "thing", "person"], // "from whom": a source can be a being (wh-role.mjs routes a marked "from whom" here)
   adhikaraṇa: ["place"],
   kāla: ["time"],
   hetu: ["reason"],
