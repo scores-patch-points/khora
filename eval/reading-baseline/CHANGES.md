@@ -158,3 +158,6 @@ files changed since the last record: native/the-fold/pharos-gate.mjs, native/rea
 
 ## 2026-11-23: weaveReferents writes its batch in ONE pharos weaveMany call (one P.weave per entry took about 8 minutes for War and Peace's ~20,000 entries). Same entries.
 files changed since the last record: native/the-fold/pharos-gate.mjs
+
+## 2026-11-27: read-process.mjs: readToWeft passes a caller's declared minCharacters through, as readDocument already did (the two front doors take the same options; default 200 unchanged; native/tests/min-characters-door.test.mjs, which fails on the old door). pharos-gate.mjs weaveFullRead: one bulk write per read (weaveMany) instead of weave() per entry, the kind check by missingKinds, duplicates within a read and address-global repeats across reads written once, and the binding address scoped by the text's hash (bind:<sha16>:<offset>). Measured on 8 Old Bailey documents read in sequence into one log: the same 6,120 distinct entries (kind, cell, address, body) as the old gate; 87.3 s to 15.2 s; khora.phb 1,465,171 to 1,322,423 bytes. The read (WeftEntry) is unchanged; metrics not re-run (no gold in this checkout).
+files changed since the last record: native/the-fold/pharos-gate.mjs, native/the-fold/read-process.mjs

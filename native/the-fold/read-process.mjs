@@ -60,10 +60,12 @@ export function assertPrimed(w, { allowDegraded = false } = {}) {
   const home = priorsHome();
   throw new Error(`khora read refused: the reader is not primed for language "${w.language?.stem ?? w.language ?? "?"}" (gaps: ${[...new Set(missing)].join(", ")}). Priors were looked for in ${home.dir ?? home.base ?? "(no directory)"}. Set KHORA_PRIORS_DIR to the janus priors folder (janus/priors), or pass { allowDegraded: true } / KHORA_ALLOW_DEGRADED=1 to read without them knowingly. See native/docs/THE-READING-PIPELINE.md.`);
 }
-export function readToWeft(text, { address, category = null, language = null, quality = true, aliases = [], abbreviations = null, priors = null, aliasReport = null, readerOptions = {}, declension = canonicalDeclension, allowDegraded = false, rowsOf = null, admitNominals = false, speakers = false } = {}) {
+export function readToWeft(text, { address, category = null, language = null, quality = true, aliases = [], abbreviations = null, priors = null, aliasReport = null, readerOptions = {}, declension = canonicalDeclension, allowDegraded = false, rowsOf = null, admitNominals = false, speakers = false, minCharacters = undefined } = {}) {
   assertPharos(); // khora works only through pharos: its rules are held there (pharos-gate.mjs)
   // the canonical read binds pronouns by presence with the class of the language the reader settles on (a function of the stem); readerOptions.pronounPresence: null turns it off, an object or function overrides
-  const w = readWith(text, { declension, address, category, language, quality, aliases, abbreviations, priors, aliasReport, rowsOf, admitNominals, speakers, readerOptions: { ...canonicalReaderOptions(), ...readerOptions } });
+  // `minCharacters` is the caller's declared floor, passed through as reading.js::readDocument already passes it (its opts reach read-core):
+  // the two front doors take the same options. Absent, read-core's own default (200) holds, so the canonical read of a document is unchanged.
+  const w = readWith(text, { declension, address, category, language, quality, aliases, abbreviations, priors, aliasReport, rowsOf, admitNominals, speakers, ...(minCharacters !== undefined ? { minCharacters } : {}), readerOptions: { ...canonicalReaderOptions(), ...readerOptions } });
   assertPrimed(w, { allowDegraded });
   noteMissingRuling(w, readerOptions);
   return recordRead(w, text, { door: "native/the-fold/read-process.mjs#readToWeft", allowDegraded }); // written into pharos, or refused (a capacity left out; pharos rules WRITES-TO-PHAROS, FULL-CAPACITY)
