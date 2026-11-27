@@ -1,0 +1,506 @@
+[
+ {
+  "id": 101,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "barley"
+ },
+ {
+  "id": 102,
+  "negated": false,
+  "form": "statement",
+  "agent": "engineer",
+  "patient": "turbine"
+ },
+ {
+  "id": 103,
+  "negated": false,
+  "form": "statement",
+  "agent": "violinist",
+  "patient": "she"
+ },
+ {
+  "id": 104,
+  "negated": false,
+  "form": "statement",
+  "agent": "falcon",
+  "patient": "quarry"
+ },
+ {
+  "id": 105,
+  "negated": false,
+  "form": "statement",
+  "agent": "marguerite",
+  "patient": "mural"
+ },
+ {
+  "id": 106,
+  "negated": false,
+  "form": "statement",
+  "agent": "committee",
+  "patient": "proposal"
+ },
+ {
+  "id": 107,
+  "negated": false,
+  "form": "statement",
+  "agent": "child",
+  "patient": "puppet"
+ },
+ {
+  "id": 108,
+  "negated": false,
+  "form": "statement",
+  "agent": "vaccine",
+  "patient": "regulator"
+ },
+ {
+  "id": 109,
+  "negated": false,
+  "form": "statement",
+  "agent": "temple",
+  "patient": "earthquake"
+ },
+ {
+  "id": 110,
+  "negated": false,
+  "form": "statement",
+  "agent": "contract",
+  "patient": "lawyer"
+ },
+ {
+  "id": 111,
+  "negated": false,
+  "form": "statement",
+  "agent": "window",
+  "patient": "riot"
+ },
+ {
+  "id": 112,
+  "negated": false,
+  "form": "statement",
+  "agent": "thief",
+  "patient": "constable"
+ },
+ {
+  "id": 113,
+  "negated": false,
+  "form": "statement",
+  "agent": "harvest",
+  "patient": "granary"
+ },
+ {
+  "id": 114,
+  "negated": false,
+  "form": "statement",
+  "agent": "symphony",
+  "patient": "city"
+ },
+ {
+  "id": 115,
+  "negated": true,
+  "form": "statement",
+  "agent": "plumber",
+  "patient": "pipe"
+ },
+ {
+  "id": 116,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "invitation"
+ },
+ {
+  "id": 117,
+  "negated": true,
+  "form": "statement",
+  "agent": "tourist",
+  "patient": "cathedral"
+ },
+ {
+  "id": 118,
+  "negated": true,
+  "form": "statement",
+  "agent": "nobody",
+  "patient": "parcel"
+ },
+ {
+  "id": 119,
+  "negated": true,
+  "form": "statement",
+  "agent": "nothing",
+  "patient": "sleeping"
+ },
+ {
+  "id": 120,
+  "negated": true,
+  "form": "statement",
+  "agent": "sailor",
+  "patient": "strait"
+ },
+ {
+  "id": 121,
+  "negated": true,
+  "form": "statement",
+  "agent": "bakery",
+  "patient": "bread"
+ },
+ {
+  "id": 122,
+  "negated": false,
+  "form": "statement",
+  "agent": "witness",
+  "patient": "suspect"
+ },
+ {
+  "id": 123,
+  "negated": true,
+  "form": "statement",
+  "agent": "who",
+  "patient": "engine"
+ },
+ {
+  "id": 124,
+  "negated": true,
+  "form": "statement",
+  "agent": "professor",
+  "patient": "student"
+ },
+ {
+  "id": 125,
+  "negated": true,
+  "form": "statement",
+  "agent": "family",
+  "patient": "petition"
+ },
+ {
+  "id": 126,
+  "negated": true,
+  "form": "statement",
+  "agent": "train",
+  "patient": "commuter"
+ },
+ {
+  "id": 127,
+  "negated": true,
+  "form": "statement",
+  "agent": "gardener",
+  "patient": "rose"
+ },
+ {
+  "id": 128,
+  "negated": true,
+  "form": "statement",
+  "agent": "she",
+  "patient": "chemistry"
+ },
+ {
+  "id": 129,
+  "negated": false,
+  "form": "question",
+  "agent": "who",
+  "patient": "diamond"
+ },
+ {
+  "id": 130,
+  "negated": false,
+  "form": "question",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 131,
+  "negated": false,
+  "form": "question",
+  "agent": "pilot",
+  "patient": "helicopter"
+ },
+ {
+  "id": 132,
+  "negated": false,
+  "form": "question",
+  "agent": "council",
+  "patient": "budget"
+ },
+ {
+  "id": 133,
+  "negated": false,
+  "form": "question",
+  "agent": "nurse",
+  "patient": "monitor"
+ },
+ {
+  "id": 134,
+  "negated": false,
+  "form": "question",
+  "agent": "hiker",
+  "patient": "their"
+ },
+ {
+  "id": 135,
+  "negated": false,
+  "form": "question",
+  "agent": "landlord",
+  "patient": "heater"
+ },
+ {
+  "id": 136,
+  "negated": false,
+  "form": "question",
+  "agent": "that",
+  "patient": null
+ },
+ {
+  "id": 137,
+  "negated": false,
+  "form": "statement",
+  "agent": "housekeeper",
+  "patient": "dustpan"
+ },
+ {
+  "id": 138,
+  "negated": false,
+  "form": "statement",
+  "agent": "who",
+  "patient": "vienna"
+ },
+ {
+  "id": 139,
+  "negated": false,
+  "form": "statement",
+  "agent": "concert",
+  "patient": "janitor"
+ },
+ {
+  "id": 140,
+  "negated": false,
+  "form": "statement",
+  "agent": "captain",
+  "patient": "ship"
+ },
+ {
+  "id": 141,
+  "negated": false,
+  "form": "statement",
+  "agent": "archaeologist",
+  "patient": "shard"
+ },
+ {
+  "id": 142,
+  "negated": false,
+  "form": "statement",
+  "agent": "alarm",
+  "patient": "guard"
+ },
+ {
+  "id": 143,
+  "negated": false,
+  "form": "statement",
+  "agent": "carpenter",
+  "patient": null
+ },
+ {
+  "id": 144,
+  "negated": false,
+  "form": "statement",
+  "agent": "baker",
+  "patient": "loaf"
+ },
+ {
+  "id": 145,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "gate"
+ },
+ {
+  "id": 146,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "tomatoe"
+ },
+ {
+  "id": 147,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "exhibit"
+ },
+ {
+  "id": 148,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "pigeon"
+ },
+ {
+  "id": 149,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "register"
+ },
+ {
+  "id": 150,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "furnace"
+ },
+ {
+  "id": 151,
+  "negated": false,
+  "form": "statement",
+  "agent": "senator",
+  "patient": "reporter"
+ },
+ {
+  "id": 152,
+  "negated": false,
+  "form": "statement",
+  "agent": "i",
+  "patient": "landlord"
+ },
+ {
+  "id": 153,
+  "negated": false,
+  "form": "statement",
+  "agent": "brother",
+  "patient": "lawnmover"
+ },
+ {
+  "id": 154,
+  "negated": false,
+  "form": "statement",
+  "agent": "mayor",
+  "patient": "parking"
+ },
+ {
+  "id": 155,
+  "negated": false,
+  "form": "statement",
+  "agent": "she",
+  "patient": "she"
+ },
+ {
+  "id": 156,
+  "negated": false,
+  "form": "statement",
+  "agent": "team",
+  "patient": "week"
+ },
+ {
+  "id": 157,
+  "negated": false,
+  "form": "statement",
+  "agent": "grandfather",
+  "patient": "his"
+ },
+ {
+  "id": 158,
+  "negated": false,
+  "form": "statement",
+  "agent": "courier",
+  "patient": "package"
+ },
+ {
+  "id": 159,
+  "negated": false,
+  "form": "statement",
+  "agent": "trophy",
+  "patient": "winner"
+ },
+ {
+  "id": 160,
+  "negated": false,
+  "form": "statement",
+  "agent": "lucia",
+  "patient": "she"
+ },
+ {
+  "id": 161,
+  "negated": false,
+  "form": "statement",
+  "agent": "boulanger",
+  "patient": "pain"
+ },
+ {
+  "id": 162,
+  "negated": false,
+  "form": "statement",
+  "agent": "étudiant",
+  "patient": "roman"
+ },
+ {
+  "id": 163,
+  "negated": false,
+  "form": "statement",
+  "agent": "marie",
+  "patient": "chorale"
+ },
+ {
+  "id": 164,
+  "negated": false,
+  "form": "statement",
+  "agent": "pêcheur",
+  "patient": "saumon"
+ },
+ {
+  "id": 165,
+  "negated": true,
+  "form": "statement",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 166,
+  "negated": true,
+  "form": "statement",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 167,
+  "negated": true,
+  "form": "statement",
+  "agent": "personne",
+  "patient": "soupe"
+ },
+ {
+  "id": 168,
+  "negated": false,
+  "form": "statement",
+  "agent": "village",
+  "patient": "rivière"
+ },
+ {
+  "id": 169,
+  "negated": false,
+  "form": "question",
+  "agent": "facteur",
+  "patient": "colis"
+ },
+ {
+  "id": 170,
+  "negated": false,
+  "form": "question",
+  "agent": "qui",
+  "patient": "maison"
+ },
+ {
+  "id": 171,
+  "negated": false,
+  "form": "statement",
+  "agent": "directrice",
+  "patient": "contrat"
+ },
+ {
+  "id": 172,
+  "negated": true,
+  "form": "statement",
+  "agent": "enfant",
+  "patient": "télévision"
+ }
+]
