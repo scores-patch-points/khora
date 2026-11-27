@@ -31,3 +31,10 @@ test("FALSE IF another language is read as English: a language with no question 
   const fra = await grammarFor("fra"); if (fra.gap) return; const sh = await shapeOf("Le chat ne dort pas sur le tapis.", { language: "fra" });
   assert.equal(sh.question, null); assert.deepEqual(sh.gaps.map((x) => x.gap).sort(), ["no_marker_table", "no_question_grammar"]); assert.equal(sh.roles.markers, null); assert.ok(sh.roles.rows.length > 0, "the universal relation map still labels every row");
 });
+
+test("FOUND 2026-11-27: English has no ud-tokenizer prior. The grammar now SAYS so (tokenizer_absent) and names what fills it (the English adapter's tokenizer); a contraction is split and its negation is read; KHORA_UD_TOKENS=prior gives the old tokens", { skip }, async () => {
+  assert.equal(g.tokenizerGap?.gap, "tokenizer_absent"); if (process.env.KHORA_UD_TOKENS === "prior") { assert.equal(g.adapterTokenize, undefined); return; }
+  assert.ok(g.tokenizerGap.filledBy.includes("english-parser.js")); const t = "The dog didn't chase the cat.", rows = readingRows(g, t); assert.deepEqual(rows.map((r) => r.form), ["The", "dog", "did", "n't", "chase", "the", "cat", "."]);
+  assert.ok(rows.every((r) => t.slice(r.at, r.end) === r.form), "every token keeps its offsets in the text"); const sh = await shapeOf(t, { language: "eng" }); assert.equal(sh.polarity.negated.length, 1); assert.equal(rows.find((r) => r.id === sh.polarity.negated[0].id).lemma, "chase");
+  const fra = await grammarFor("fra"); if (!fra.gap) { assert.equal(fra.tokenizerGap, undefined, "a language WITH a tokenizer prior is untouched"); assert.equal(fra.adapterTokenize, undefined); }
+});

@@ -22,12 +22,18 @@ export const sha16 = (s) => crypto.createHash("sha256").update(String(s), "utf8"
 export const canon = (v) => (Array.isArray(v) ? `[${v.map(canon).join(",")}]` : v && typeof v === "object" ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${canon(v[k])}`).join(",")}}` : JSON.stringify(v));   // pharos stores bodies with sorted keys
 export const TEXT_KIND = "text", READING_KIND = "text-reading", REFERENTS_KIND = "text-referents", CUTS_KIND = "text-cuts";
 const MODELS = new Map();
+// a language adapter's own tokenizer, used ONLY when the codec has no tokenizer prior: declared here with its giver, never a default for another language
+const ADAPTER_TOKENIZERS = Object.freeze({ eng: { module: "../adapters/text/english-parser.js", name: "adapters/text/english-parser.js tokenize (the English adapter; cuts n't, 's and keeps dotted abbreviations, as UD English-EWT does)" } });
 /** the parser (and tokenizer) prior for a language, from the prior door's home; a typed gap when absent */
 export async function grammarFor(code = "eng") {
   if (MODELS.has(code)) return MODELS.get(code);
   const dir = priorsHome().dir, files = dir && fs.existsSync(dir) ? fs.readdirSync(dir) : [];
   const pf = files.find((f) => f.startsWith(`ud-parser-${code}-`) && f.endsWith(".json.gz")), tf = files.find((f) => f === `ud-tokenizer-${code}.json.gz`);
   const g = !pf ? { code, gap: "no_parser_prior", why: `no ud-parser-${code}-*.json.gz in ${dir ?? "the prior home"}` } : { code, parser: loadModel(await readJsonMaybeGz(path.join(dir, pf))), tokenizer: tf ? await readJsonMaybeGz(path.join(dir, tf)) : null, prior: pf };
+  // A MISSING TOKENIZER PRIOR IS SAID, NOT SILENT (found 2026-11-27: English has a parser prior and NO ud-tokenizer-eng, so "didn't", "dog's" and "U.S." reached a parser trained on split tokens unsplit). The gap is typed on the grammar;
+  // where the language's own adapter has a tokenizer that makes the treebank's tokens (ADAPTER_TOKENIZERS), it is used in the prior's place and the grammar says which. KHORA_UD_TOKENS=prior switches the adapter tokenizer off (the old behaviour, for comparison).
+  if (!g.gap && !g.tokenizer) { g.tokenizerGap = { gap: "tokenizer_absent", why: `no ud-tokenizer-${code}.json.gz in ${dir ?? "the prior home"}: tokens are cut on spaces and punctuation only` };
+    if (ADAPTER_TOKENIZERS[code] && process.env.KHORA_UD_TOKENS !== "prior") { const A = await import(ADAPTER_TOKENIZERS[code].module); g.adapterTokenize = (sent) => A.tokenize(sent).map((t) => t.form); g.tokenizerGap.filledBy = ADAPTER_TOKENIZERS[code].name; } }
   MODELS.set(code, g); return g;
 }
 /** cutsOf(g, text) -> [[start, end], ...]: where khora's one sentence cut falls in the text (an observation: the offsets only) */
@@ -40,7 +46,7 @@ export function cutsOf(g, text) {
 export function readingRows(g, text, { predicate = false } = {}) {   // predicate: opt-in repair, a clause with no verb gets the word the tagger finds closest to a verb (row.repaired = "predicate")
   const rows = []; let s = 0, cur = 0;
   for (const sent of sentences(text, "und", g.tokenizer)) {
-    const forms = tokenize(sent, g.tokenizer); if (!forms.length) continue;
+    const forms = g.adapterTokenize ? g.adapterTokenize(sent) : tokenize(sent, g.tokenizer); if (!forms.length) continue;
     const base = text.indexOf(sent, cur), b0 = base < 0 ? null : base; if (b0 != null) cur = b0 + sent.length;
     let c = 0;                                                         // each token's UTF-16 offsets in the text (null if the tokenizer changed the form and it cannot be found)
     const at = forms.map((f) => { const i = b0 == null ? -1 : sent.indexOf(f, c); if (i < 0) return null; c = i + f.length; return [b0 + i, b0 + c]; });
