@@ -8,8 +8,8 @@
 // Same EOT read, same element grain ({paradigm-cell · role-pair · outcome}), same janus
 // induceKinds + idf-cosine as the base driver `../../scene-kinds.mjs`. ONLY the boundary
 // changes: pure fixed runs of minLen ∈ {8,15,25}, and bayes-delta cut above the 95th pct
-// with the same minimum span enforced. Then a DMD-TYPED variant: cut at the top revisions,
-// type each arena by the DMD class of its bayes stream, induce WITHIN the class.
+// with the same minimum span enforced. Then a Koopman-TYPED variant: cut at the top revisions,
+// type each arena by the Koopman class of its bayes stream, induce WITHIN the class.
 //
 // Writes only under experiments/scenes/ (arena.log + README.md written here).
 import fs from "node:fs";
@@ -17,7 +17,7 @@ const KHOR = "/Users/mlacy/Documents/3.0/khora";
 const HERE = "/Users/mlacy/Documents/3.0/khora/native/eval/the-fold/scene/experiments/scenes";
 const { confirmedVerbSet, greekClauses, paradigmOf } = await import(`${KHOR}/native/eval/lavar/greek.mjs`);
 const { createHolograph, admit } = await import(`${KHOR}/native/kernel/bayes-surprise.js`);
-const { dmd } = await import(`${KHOR}/native/kernel/dmd.js`);
+const { koopmanModes } = await import(`${KHOR}/native/kernel/koopman.js`);
 const { induceKinds, jaccard, cosine, frequencyBands } = await import(`${KHOR}/../janus/native/organs/kind-induction.js`);
 const { createSeededRng } = await import(`${KHOR}/native/kernel/rng.js`);
 const posPrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/pos-grc.json", "utf8"));
@@ -118,9 +118,9 @@ function permutedCompany(list, rng) {
 }
 const med = (a) => { const s = [...a].sort((x, y) => x - y); return s[Math.floor(s.length / 2)] ?? 0; };
 
-// DMD time-class of an arena from its bayes stream. The base action-situation.mjs
+// Koopman time-class of an arena from its bayes stream. The base action-situation.mjs
 // reads a rank-1 scalar stream — which can NEVER yield a complex (cycling) mode, so it
-// can never type anything RECURRING. We give the DMD an honest delay embedding (dim 2)
+// can never type anything RECURRING. We give the Koopman an honest delay embedding (dim 2)
 // so a complex pair — the signature of recurrence — is representable.
 function timeClass(S) {
   if (S.length < 5) return { cls: "too-short", label: "(too short)" };
@@ -128,7 +128,7 @@ function timeClass(S) {
   for (let i = 0; i + 2 < S.length; i++) { X.push([S[i], S[i + 1]]); Xp.push([S[i + 1], S[i + 2]]); }
   const rank = Math.min(2, X.length);
   try {
-    const r = dmd(X, Xp, { rank });
+    const r = koopmanModes(X, Xp, { rank });
     const lam = r.eigenvalues?.[0];
     if (!lam || !Number.isFinite(lam.magnitude)) return { cls: "indeterminate", label: "indeterminate" };
     const hasComplex = r.eigenvalues.some((e) => Math.abs(e.im) > 1e-6);
@@ -196,15 +196,15 @@ const results = {};
 for (const ml of [8, 15, 25]) results[`pure@${ml}`] = runSeg(`PURE RUNS minLen=${ml}`, pureRuns(ml));
 for (const ml of [8, 15, 25]) results[`bayes95@${ml}`] = runSeg(`BAYES p95 CUT minLen=${ml}`, bayesRuns(ml, 0.95));
 
-// ── PART 3: DMD-TYPED ARENAS ──────────────────────────────────────────────────
-// split at the top revisions (bayes p95, minLen 15) AND type each arena by the DMD
+// ── PART 3: Koopman-TYPED ARENAS ──────────────────────────────────────────────────
+// split at the top revisions (bayes p95, minLen 15) AND type each arena by the Koopman
 // class of its surprise stream; induce WITHIN the class.
-p(`\n\n████ DMD-TYPED ARENAS — cut at top revisions (bayes p95, minLen 15), typed by DMD of the bayes stream ████`);
+p(`\n\n████ Koopman-TYPED ARENAS — cut at top revisions (bayes p95, minLen 15), typed by Koopman of the bayes stream ████`);
 const typedScenes = bayesRuns(15, 0.95);
 const typed = typedScenes.map((s, i) => ({ ...s, idx: i, tc: timeClass(B.slice(s.off, s.off + s.clauses.length)) }));
 const byClass = new Map();
 for (const t of typed) { if (!byClass.has(t.tc.cls)) byClass.set(t.tc.cls, []); byClass.get(t.tc.cls).push(t); }
-p(`arena DMD classes: ${[...byClass.entries()].map(([c, a]) => `${c}=${a.length}`).join("  ")}`);
+p(`arena Koopman classes: ${[...byClass.entries()].map(([c, a]) => `${c}=${a.length}`).join("  ")}`);
 p(`class          arenas  kinds  blob   single share`);
 p(`-----------    ------  -----  -----  ------------`);
 const withinRows = [];

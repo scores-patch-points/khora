@@ -1,7 +1,7 @@
-// native/kernel/dmd-stream.js — Dynamic Mode Decomposition as a READER has
+// native/kernel/koopman-stream.js — Dynamic Mode Decomposition as a READER has
 // to do it: one snapshot at a time, nothing from the future.
 //
-// kernel/dmd.js is the batch core, and its own header says what a caller
+// kernel/koopman.js is the batch core, and its own header says what a caller
 // owes: batch over a whole reading consumes the future (READING-SPEC S3,
 // S11). This file is the causal consumer — the streaming formulation of
 // Hemati, Williams & Rowley (Phys. Fluids 26, 111701, 2014): maintain the
@@ -11,8 +11,8 @@
 //   K = Σ x_{k+1} x_k^T    (transition cross-moment)
 //
 // updated O(dims²) per push, and at ANY moment recover the operator
-// A = K · P⁺ — mathematically the same least-squares operator batch DMD
-// fits, so `modes()` at snapshot t equals batch DMD over the prefix ..t.
+// A = K · P⁺ — mathematically the same least-squares operator batch Koopman
+// fits, so `modes()` at snapshot t equals batch Koopman over the prefix ..t.
 // That equality is pinned by test, not asserted.
 //
 // WHAT IS DELIBERATELY NOT HERE: no decay constant. The state pushed in is
@@ -21,11 +21,11 @@
 // before decomposing would hand the modes my number and call it theirs —
 // the same contamination S10 names, one level up.
 
-import { symmetricEigen, eigenvalues, matmul, transpose } from "./dmd.js";
+import { symmetricEigen, eigenvalues, matmul, transpose } from "./koopman.js";
 
-export function createStreamingDmd({ dims, dt = 1 } = {}) {
+export function createStreamingKoopman({ dims, dt = 1 } = {}) {
   if (!Number.isInteger(dims) || dims < 1)
-    throw new TypeError("createStreamingDmd: dims is declared — how many observables the reading tracks is the caller's to say");
+    throw new TypeError("createStreamingKoopman: dims is declared — how many observables the reading tracks is the caller's to say");
 
   const P = Array.from({ length: dims }, () => new Array(dims).fill(0));
   const K = Array.from({ length: dims }, () => new Array(dims).fill(0));
@@ -35,7 +35,7 @@ export function createStreamingDmd({ dims, dt = 1 } = {}) {
 
   const push = (x) => {
     if (!Array.isArray(x) || x.length !== dims)
-      throw new TypeError(`createStreamingDmd.push: state must have the declared ${dims} dims, got ${x?.length}`);
+      throw new TypeError(`createStreamingKoopman.push: state must have the declared ${dims} dims, got ${x?.length}`);
     if (prev) {
       for (let i = 0; i < dims; i += 1) {
         const pi = prev[i];
@@ -54,13 +54,13 @@ export function createStreamingDmd({ dims, dt = 1 } = {}) {
 
   /**
    * The modes of everything pushed so far. `rank` is declared (S11's own
-   * standing, inherited from dmd()): P's eigenspace is truncated there
-   * before inversion, which is the projected-DMD regularization — a
+   * standing, inherited from koopmanModes()): P's eigenspace is truncated there
+   * before inversion, which is the projected-Koopman regularization — a
    * direction the data never excited is not inverted into.
    */
   const modes = ({ rank, relTol = 1e-10 } = {}) => {
     if (!Number.isInteger(rank) || rank < 1)
-      throw new TypeError("createStreamingDmd.modes: rank is declared — how many modes a reading may resolve is never a default");
+      throw new TypeError("createStreamingKoopman.modes: rank is declared — how many modes a reading may resolve is never a default");
     if (pairs < 2) return Object.freeze({ eigenvalues: Object.freeze([]), rank: 0, pairs, gap: "insufficient_pairs" });
 
     const { values, vectors } = symmetricEigen(P);

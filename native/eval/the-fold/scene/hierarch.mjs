@@ -1,12 +1,12 @@
-// hierarch.mjs — REAL DMD UP THE LEVELS. Level 1: each CHAPTER of the book is
+// hierarch.mjs — REAL Koopman UP THE LEVELS. Level 1: each CHAPTER of the book is
 // read as GFP arrangements and reduces to a TOPIC (its standing figures).
 // Level 2: the trajectory of chapter-topics is itself a dynamical system —
-// decompose it with the kernel's DMD (Koopman) into modes, each with GROWTH
+// decompose it with the kernel's Koopman (Koopman) into modes, each with GROWTH
 // and FREQUENCY. The mode that carries the book is the rim; chapters that load
 // that mode carry the theme; addresses ground every step. No model; a level
 // above is a level below's trajectory re-read.
 import fs from "node:fs";
-import { dmd } from "/Users/mlacy/Documents/3.0/khora/native/kernel/dmd.js";
+import { koopmanModes } from "/Users/mlacy/Documents/3.0/khora/native/kernel/koopman.js";
 const { extractGfpRelations } = await import("/Users/mlacy/Documents/3.0/khora/native/adapters/text/relations-gfp.js");
 const pos = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/pos-eng.json", "utf8"));
 const full = fs.readFileSync("/Users/mlacy/Documents/3.0/Zenodotus/01-literature-books/gutenberg/pg1342_Pride_and_Prejudice.txt", "utf8");
@@ -49,10 +49,10 @@ console.log("LEVEL 1 — chapter topics (the read's own, per chapter):");
 for (let i = 0; i < Math.min(chNum, 12); i++) console.log(`   ch${i + 1}: ${chTopics[i].join(", ") || "(no settled vocab)"}`);
 console.log(`   … ${chNum} chapters of topics.`);
 
-// LEVEL 2 — DMD over the topic-trajectory: Koopman modes of the BOOK.
+// LEVEL 2 — Koopman over the topic-trajectory: Koopman modes of the BOOK.
 const X = topicStates.slice(0, -1);
 const Xp = topicStates.slice(1);
-const mode = dmd(X, Xp, { rank: "numerical", dt: 1 });
+const mode = koopmanModes(X, Xp, { rank: "numerical", dt: 1 });
 const evals = mode.eigenvalues.slice(0, 6);
 console.log("\nLEVEL 2 — the BOOK's Koopman modes (growth |λ|, argument frequency):");
 for (const e of evals) console.log(`   λ = ${e.magnitude.toFixed(3)} · growth ${e.growth.toFixed(3)} · freq ${e.frequency.toFixed(2)} rad`);

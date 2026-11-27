@@ -670,7 +670,7 @@ export const ARCHONS = Object.freeze([
   {
     handle: "koopman",
     name: "the Koopman operator (Bernard O. Koopman)",
-    organ: "kernel/dmd.js",
+    organ: "kernel/koopman.js",
     role: "modes with growth and frequency",
     pdStatus: "fair-use",
     work: "The Koopman operator (with dynamic mode decomposition) represents a nonlinear system's evolution as linear modes, each with its own growth and frequency. Modes with growth and frequency — the spectral face of a stream.",

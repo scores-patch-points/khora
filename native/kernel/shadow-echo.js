@@ -5,7 +5,7 @@
 // model) teaches; this kernel is what the child keeps. A CV read is expensive
 // and external; the child cannot run it. But the child CAN hold two cheap,
 // byte-derived traces of anything it was shown — the SHADOW and the ECHO —
-// and match a new thing's traces against the DMD framework of what a concept
+// and match a new thing's traces against the Koopman framework of what a concept
 // is, next time, without the parent in the loop.
 //
 //   SHADOW — the spatial footprint: the thing's own shape projected flat.
@@ -21,9 +21,9 @@
 //     still rings once (echo); a moving thing leaves an impression — what it
 //     rang like, and when. Series face: `descriptorFromSeries`.
 //
-// A concept's DMD framework is what things OF THAT CONCEPT have in common:
+// A concept's Koopman framework is what things OF THAT CONCEPT have in common:
 // the examples are a trajectory (teaching order), decomposed by the same
-// Dynamic Mode Decomposition kernel/dmd.js already carries. The modes with
+// Dynamic Mode Decomposition kernel/koopman.js already carries. The modes with
 // the largest magnitudes are the dogness that persists across dogs; the
 // decaying modes are the quirks of particular dogs. Recognition projects a
 // new descriptor onto that coherent subspace and measures the residual — how
@@ -35,7 +35,7 @@
 // OMNIMODAL. The kernel knows nothing about images. `descriptorOf(grid)` is
 // the image face; `descriptorFromSeries(series)` is the audio/video face
 // (RMS envelope shadow + spectral echo of the series); text has its own
-// established face (contextual-dmd over motif windows, wired by the organ).
+// established face (contextual-koopman over motif windows, wired by the organ).
 // One framework, one store, every sense — the child is not a vision model,
 // it is a memory of what every sense has been shown.
 //
@@ -45,7 +45,7 @@
 // concatenated. The shape is the contract: a mismatch between two
 // descriptors is a hard error, not a silent zero.
 
-import { dmd, economySVD, matmul } from "./dmd.js";
+import { koopmanModes, economySVD, matmul } from "./koopman.js";
 
 const EPS = 1e-12;
 
@@ -207,7 +207,7 @@ const FFT_LEN = 64; // power of two for the radix-2 FFT — resample target, der
 
 // ── tiny radix-2 FFT (magnitude only), hand-rolled like the rest of this
 //    kernel's math — the codebase does not import a numeric library for a
-//    transform it can hold and test in isolation (dmd.js's own precedent). ──
+//    transform it can hold and test in isolation (koopman.js's own precedent). ──
 export function fftMagnitude(signal) {
   const n = signal.length;
   if (n === 0 || (n & (n - 1)) !== 0) throw new TypeError(`fftMagnitude: length must be a power of two (got ${n})`);
@@ -676,11 +676,11 @@ export function figureSegments(series, { window = SERIES_WINDOW_BINS, envelope =
   return { segments, mask: segments.length ? "figure" : "no_figure", mean, std };
 }
 
-// ── the DMD framework of a concept: what things of its kind have in common ─
-// The examples, in teaching order, are a trajectory; the DMD operator's
+// ── the Koopman framework of a concept: what things of its kind have in common ─
+// The examples, in teaching order, are a trajectory; the Koopman operator's
 // coherent subspace is the dogness. The projector is U — the SVD basis the
-// DMD operator itself acts on (its eigenvectors live in exactly that
-// subspace; dmd.js's economySVD is the reduction every call shares). The
+// Koopman operator itself acts on (its eigenvectors live in exactly that
+// subspace; koopman.js's economySVD is the reduction every call shares). The
 // eigenvalues carry each mode's growth and frequency, disclosed as the
 // framework's own diagnostics: how many modes the kind excites, how many
 // oscillate, how fast the idiosyncratic ones decay.
@@ -692,7 +692,7 @@ export function frameworkOf(examples, { cache = null } = {}) {
   const nCols = states[0].length;
   const X = Array.from({ length: nCols }, (_, i) => states.slice(0, m - 1).map((s) => s[i]));
   const Xp = Array.from({ length: nCols }, (_, i) => states.slice(1).map((s) => s[i]));
-  const { eigenvalues, rank, operator } = dmd(X, Xp, { rank: "numerical" });
+  const { eigenvalues, rank, operator } = koopmanModes(X, Xp, { rank: "numerical" });
   const { U } = economySVD(X, { rank: Infinity });
   const coherent = eigenvalues.filter((l) => l.magnitude >= 1 - EPS).length;
   const oscillatory = eigenvalues.filter((l) => Math.abs(l.im) > EPS).length;
@@ -736,9 +736,9 @@ export function residualOf(descriptor, framework) {
 // nearest SIBLING among the others; the worst such distance is how far a
 // thing of this kind may sit from its nearest kin and still be one of them.
 // Measured (mnemonic.test.mjs): in 144-bin quantized space with a handful of
-// examples, the DMD subspace residual is uninformative — every new thing is
+// examples, the Koopman subspace residual is uninformative — every new thing is
 // nearly orthogonal to a span of 3-4 examples — while the within-family
-// nearest distance separates kinds by two orders of magnitude. The DMD
+// nearest distance separates kinds by two orders of magnitude. The Koopman
 // framework remains the disclosed family structure; this bound is the
 // recognition floor. There is no confidence SCORE: a thing is inside its
 // kind's bound or it is not, and how far inside is the margin — geometry,
@@ -845,7 +845,7 @@ export const distanceOf = (a, b) => {
 //
 // THE VERDICT IS BOUNDED GEOMETRY, NOT A SCORE: inside the kind's own
 // within-family bound → recognized, outside → not; how far inside is the
-// margin. The DMD framework (modes, eigenvalues, residual) is computed only
+// margin. The Koopman framework (modes, eigenvalues, residual) is computed only
 // when `diagnostics: true` — the verdict never pays for it.
 export function recognizeDescriptor(store, concept, descriptor, { cache = null, diagnostics = false } = {}) {
   const conceptEntry = store?.concepts?.[concept];

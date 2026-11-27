@@ -8,7 +8,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const STACK = /(\.\/native\/|janus|penelope|reasoning-spiral|kind-induction|spiral-contract|weft|ground-closure|dmd)/;
+const STACK = /(\.\/native\/|janus|penelope|reasoning-spiral|kind-induction|spiral-contract|weft|ground-closure|koopman)/;
 
 for (const f of ["opencode-surf.mjs", "opencode-eot.mjs", "opencode-worknotes.mjs", "opencode-record.mjs"]) {
   test(`X1 ${f} imports an organ of the stack (ingest/reason/induct) rather than re-implementing it`, () => {

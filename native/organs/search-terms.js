@@ -11,7 +11,7 @@
 // `family` is PERTURBATION / PREDICTION / DEDUCTION — THE-CORE-MECHANISM.md's
 // own three, named by what the observed is compared against, never invented
 // here — or STRUCTURAL for the two organs that are neither: contextuality.js
-// and dmd.js are each exact, no null, a structural fact of the data (both
+// and koopman.js are each exact, no null, a structural fact of the data (both
 // files' own words).
 //
 // clusters: is routed to kind-standing.js, NOT terrain-induction.js, though
@@ -93,7 +93,7 @@ export const SEARCH_TERMS = Object.freeze([
   }),
   Object.freeze({
     id: "cycles-in", family: "STRUCTURAL", cell: "DEF.Paradigm",
-    module: "native/kernel/dmd.js", fn: "dmd",
+    module: "native/kernel/koopman.js", fn: "koopmanModes",
     question: "is there a hidden oscillatory or growth mode in this trajectory?",
   }),
 ]);

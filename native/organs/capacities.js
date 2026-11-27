@@ -468,11 +468,11 @@ export const CAPACITIES = Object.freeze([
     what: "the one quantum-style quantity READING-SPEC S13 named computable from exactly our data and left unbuilt: do the per-context readings glue into one global reading? An empirical model (contexts = sets of slots read jointly, each with its support of joint sections) is judged on the possibilistic hierarchy — signalling (overlaps disagree: a direct influence, not contextuality; Contextuality-by-Default owed), noncontextual (every local section extends to a global one), logically_contextual (some do not — Hardy), strongly_contextual (no global section — the PR box). Exact, no null (a structural fact of the data); the extension search is bounded by a declared node budget and refuses typed when spent; the contextual fraction (the LP) is owed, reported null. contextualityOfSteps groups bayes-surprise-shaped instances by slot set — the seam form-prior.js reports it at, because a one-reading-per-place ledger can only ever be signalling or gluable (the lemma pinned in its tests). Typing reasoned: gluing local sections into a whole over the whole cover — Generate·Structure at Pattern grain, SYN·Network.",
   }),
   Object.freeze({
-    id: "dmd",
+    id: "koopman",
     terrain: "Paradigm",
     op: "DEF",
-    module: "eoreader7/native/kernel/dmd.js",
-    fn: "dmd",
+    module: "eoreader7/native/kernel/koopman.js",
+    fn: "koopmanModes",
     what: "Dynamic Mode Decomposition of a state trajectory into modes, each with its own growth rate and its own FREQUENCY (complex Koopman eigenvalues) — the one place on the record where PHASE is estimated from dynamics rather than asserted from counts (READING-SPEC S13: a density matrix over counts reduces to Bayes). Batch core; a causal consumer feeds prefixes or streams (Hemati, Williams & Rowley 2014). Registered 2026-09-25 — it had no row, and it is not on the holograph's hand-off path (resolutions.js / holon.js import only dmdWindow, Bateson's cut, a disclosed name collision). Typing reasoned: the rim's trajectory cut into a family of modes — Differentiate·Interpretation at Pattern grain, DEF·Paradigm, the family of solutions THE-THREE-MATHEMATICS.md names for that terrain.",
   }),
   // ── 2026-09-25: the arrow of time and the learned conventions ────────────

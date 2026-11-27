@@ -357,7 +357,7 @@ table, and `archon-holocracy/archons.json`. See CODING-LESSONS.md #75.
 | `kernel/kind-graph-structure.js` | Xunzi | Names graded by resemblance — a graph, not a tree. |
 | `kernel/kind-graph-structure.js` | Osgood | An injected embedding reports the distance between two predicates as a number, never their identity. |
 | `kernel/lexicon.js` / `hyperlexicon.js` | Xushen | Dictionary projected from attested usage. |
-| `kernel/dmd.js` | Koopman | Modes with growth and frequency. |
+| `kernel/koopman.js` | Koopman | Modes with growth and frequency. |
 | `kernel/surprise-segments.js` | Rubin | The boundary is where the ground was most wrong. |
 | `kernel/terrain-activation.js` | Hubel | Reach of the present is local and bounded. |
 | `organs/frame.js` | Alhazen | Declare the frame before comparing results. |

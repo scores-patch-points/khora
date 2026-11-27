@@ -970,11 +970,11 @@ The 749 migratable regexes below FIND. Each becomes a needle set measured at byt
   `findNeedles(field, ["seed"])` — measured, never matched; absence is a result.
 - `native/tests/contest.test.js:138` — `alpha`
   `findNeedles(field, ["alpha"])` — measured, never matched; absence is a result.
-- `native/tests/contextual-dmd.test.js:59` — `DIMS`
+- `native/tests/contextual-koopman.test.js:59` — `DIMS`
   `findNeedles(field, ["DIMS"])` — measured, never matched; absence is a result.
-- `native/tests/contextual-dmd.test.js:60` — `RANK`
+- `native/tests/contextual-koopman.test.js:60` — `RANK`
   `findNeedles(field, ["RANK"])` — measured, never matched; absence is a result.
-- `native/tests/contextual-dmd.test.js:62` — `"numerical"`
+- `native/tests/contextual-koopman.test.js:62` — `"numerical"`
   `findNeedles(field, ["\"numerical\""])` — measured, never matched; absence is a result.
 - `native/tests/contextual-dmd.test.js:63` — `dmdWindow`
   `findNeedles(field, ["dmdWindow"])` — measured, never matched; absence is a result.
@@ -1026,11 +1026,11 @@ The 749 migratable regexes below FIND. Each becomes a needle set measured at byt
   `findNeedles(field, ["never resolves"])` — measured, never matched; absence is a result.
 - `native/tests/distinguishing-plan.test.js:89` — `must return true or false`
   `findNeedles(field, ["must return true or false"])` — measured, never matched; absence is a result.
-- `native/tests/dmd-stream.test.js:59` — `declared`
+- `native/tests/koopman-stream.test.js:59` — `declared`
   `findNeedles(field, ["declared"])` — measured, never matched; absence is a result.
-- `native/tests/dmd-stream.test.js:61` — `declared`
+- `native/tests/koopman-stream.test.js:61` — `declared`
   `findNeedles(field, ["declared"])` — measured, never matched; absence is a result.
-- `native/tests/dmd-stream.test.js:65` — `declared 2 dims`
+- `native/tests/koopman-stream.test.js:65` — `declared 2 dims`
   `findNeedles(field, ["declared 2 dims"])` — measured, never matched; absence is a result.
 - `native/tests/dmd.test.js:100` — `declared`
   `findNeedles(field, ["declared"])` — measured, never matched; absence is a result.
@@ -1182,9 +1182,9 @@ The 749 migratable regexes below FIND. Each becomes a needle set measured at byt
   `findNeedles(field, ["requires `nul`"])` — measured, never matched; absence is a result.
 - `native/tests/perturbation-challenger.test.js:95` — `requires `extract``
   `findNeedles(field, ["requires `extract`"])` — measured, never matched; absence is a result.
-- `native/tests/phasepost-dmd.test.mjs:65` — `classify is injected`
+- `native/tests/phasepost-koopman.test.mjs:65` — `classify is injected`
   `findNeedles(field, ["classify is injected"])` — measured, never matched; absence is a result.
-- `native/tests/phasepost-dmd.test.mjs:84` — `candidate set`
+- `native/tests/phasepost-koopman.test.mjs:84` — `candidate set`
   `findNeedles(field, ["candidate set"])` — measured, never matched; absence is a result.
 - `native/tests/phasepost.test.mjs:57` — `destroyed->destroy`
   `findNeedles(field, ["destroyed->destroy"])` — measured, never matched; absence is a result.

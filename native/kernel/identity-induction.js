@@ -58,7 +58,7 @@
 
 import { createSeededRng } from "./rng.js";
 import { BOUND, CONTRADICTED, UNBOUND, BEYOND_REACH, verdictOfSupport } from "../interpretation/hl.js";
-import { economySVD, matmul, transpose } from "./dmd.js";
+import { economySVD, matmul, transpose } from "./koopman.js";
 
 const need = (opts, keys) => {
   for (const k of keys) if (opts[k] === undefined || opts[k] === null) throw new TypeError(`identity-induction: '${k}' must be declared`);
@@ -287,7 +287,7 @@ export function makeIdentityInduction(record, opts = {}) {
   };
 
 
-  // ── test 5 — THE DMD BOUND: identity is the universe folded at a node OVER
+  // ── test 5 — THE Koopman BOUND: identity is the universe folded at a node OVER
   // THE READING, bounded by the dynamic modes that survive their own
   // order-shuffled null (the user's refinement, 2026-09-27: "a person's
   // identity for a given for whom is the universe folded at them bounded
@@ -297,7 +297,7 @@ export function makeIdentityInduction(record, opts = {}) {
   //   state(x, t)  x's features in reading-window t, on a shared basis of the
   //                background's most frequent features, as a unit direction
   //   dynamics(x)  the least-squares transition operator over x's consecutive
-  //                present windows, at rank r_x = the number of DMD modes
+  //                present windows, at rank r_x = the number of Koopman modes
   //                whose magnitude beats the same trajectory with its window
   //                ORDER shuffled (for-whom.js's trajectoryNull, per mode)
   //   test         a's dynamics predict b's transitions (and b's a's) better
@@ -346,8 +346,8 @@ export function makeIdentityInduction(record, opts = {}) {
     return pairs;
   };
   const asMatrices = (pairs) => [transpose(pairs.map((p) => p[0])), transpose(pairs.map((p) => p[1]))];
-  // The rank-r least-squares operator Xp·X⁺ — exact DMD's own operator (the
-  // modes dmd.js reports are its eigendecomposition); it is fitted here in the
+  // The rank-r least-squares operator Xp·X⁺ — exact Koopman's own operator (the
+  // modes koopman.js reports are its eigendecomposition); it is fitted here in the
   // full feature space so two nodes' operators act on the same states.
   const operatorOf = (pairs, r) => {
     if (pairs.length < 1) return null;
@@ -365,7 +365,7 @@ export function makeIdentityInduction(record, opts = {}) {
     return z ? e / z : NaN;
   };
   // The bound is PREQUENTIAL, not a magnitude comparison. Measured: at a
-  // 24-feature state over ~33 transitions DMD is underdetermined and its
+  // 24-feature state over ~33 transitions Koopman is underdetermined and its
   // eigenvalues overfit — a shuffled order produced LARGER magnitudes than
   // the real one (Pierre: 1.27 real vs 2.33 at the shuffle's 95th), so a
   // magnitude test could never pass. A mode survives when an operator of that
@@ -408,7 +408,7 @@ export function makeIdentityInduction(record, opts = {}) {
     // predicting b's transitions), and a twin whose trajectory ran BACKWARDS
     // through the reading was judged bound — a smooth drift persists window to
     // window in either direction, so an operator describes how a trajectory
-    // moves, never where it is. The DMD bound above stays the gate (both must
+    // moves, never where it is. The Koopman bound above stays the gate (both must
     // carry order-dependent dynamics); the comparison is synchronous, and its
     // null CIRCULARLY SHIFTS b's trajectory, which keeps b's own smoothness
     // intact so persistence alone can never pass (the swarm's strongest leg).

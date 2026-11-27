@@ -40,11 +40,11 @@ import * as nul from "./native/legacy-ported/nul/index.js";
  *  and the ledger carries rec:true — shadow only, it gates nothing here. */
 export const REC_AGREEMENT_FLOOR = 0.5;
 
-/** Relative eigenvalue tolerance for the DMD witness's agreement — declared,
+/** Relative eigenvalue tolerance for the Koopman witness's agreement — declared,
  *  never silently tuned. A pair counts as matched within 1e-3 of |1+|λ|+|μ||. */
 export const EIGEN_AGREEMENT_TOL = 1e-3;
 
-/** The longest series the witness will take. dmd.js is cubic in the window (which defaults to n/2)
+/** The longest series the witness will take. koopman.js is cubic in the window (which defaults to n/2)
  *  and runs on the door's own thread, which every turn's calls wait behind. Measured here:
  *  800 points held the door ~230 ms, 1,600 held it ~1.6 s, 3,200 held it ~16 s. Over the cap the
  *  call is refused by name and nothing is truncated. FOLD_CUBE_MAX_SERIES moves it. */
@@ -191,8 +191,8 @@ export function eigenAgreement(pyValues, jsValues) {
  * Gavish & Donoho's (2014) optimal hard threshold for UNKNOWN noise — the rule PyDMD's own
  * svd_rank=0 uses: tau = omega(beta) * median(sigma), omega(beta) = 0.56 beta^3 - 0.95 beta^2 +
  * 1.82 beta + 1.43, beta = min(m,n) / max(m,n) — floored at the precision the singular values
- * actually have. dmd.js's economySVD eigendecomposes X Xᵀ, which squares the condition number, so
- * a value below sqrt(max(m,n) * eps) * sigma_1 is rounding, not signal. (dmd.js's own "numerical"
+ * actually have. koopman.js's economySVD eigendecomposes X Xᵀ, which squares the condition number, so
+ * a value below sqrt(max(m,n) * eps) * sigma_1 is rounding, not signal. (koopman.js's own "numerical"
  * rank applies the textbook max(m,n) * eps floor to those Gram-route values and so keeps rounding
  * noise as modes: 16 of them for a 3-mode series, which read as a disagreement with PyDMD.)
  *
@@ -218,7 +218,7 @@ export function derivedRank(s, m, n) {
 }
 
 /**
- * The pydmd witness (DEF·Pattern): PyDMD against the kernel's own dmd.js on the
+ * The pydmd witness (DEF·Pattern): PyDMD against the kernel's own koopman.js on the
  * same declared series. Both engines read the SAME Hankel embedding (built here
  * once, from the declared window) and the SAME model order (declared, or derived
  * once by derivedRank and recorded with its basis), return discrete eigenvalues;
@@ -253,17 +253,17 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
   let js = null;
   let jsWhy = null;
   let rank = declaredRank;
-  let rankBasis = declaredRank ? "declared (body.rank)" : "none — dmd.js was unavailable to derive one; PyDMD's own default";
+  let rankBasis = declaredRank ? "declared (body.rank)" : "none — koopman.js was unavailable to derive one; PyDMD's own default";
   try {
-    const { dmd, economySVD } = await import("./native/kernel/dmd.js");
+    const { koopmanModes, economySVD } = await import("./native/kernel/koopman.js");
     if (!declaredRank) {
       const derived = derivedRank(economySVD(X, { rank: Infinity, relTol: 0 }).s, X.length, X[0].length);
       if (derived.rank === 0) return { ok: false, gap: "no_signal", why: "the series carries no signal to decompose (its spectrum is empty or zero)" };
       rank = derived.rank;
       rankBasis = derived.basis;
     }
-    const out = dmd(X, Xp, { rank });
-    js = { eigenvalues: out.eigenvalues.map((e) => ({ re: e.re, im: e.im })), rank: out.rank, producer: `js:dmd.js@${rank}` };
+    const out = koopmanModes(X, Xp, { rank });
+    js = { eigenvalues: out.eigenvalues.map((e) => ({ re: e.re, im: e.im })), rank: out.rank, producer: `js:koopman.js@${rank}` };
   } catch (e) {
     jsWhy = String(e?.message ?? e).slice(0, 200);
   }
@@ -273,7 +273,7 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
     package: row.package,
     env: row.env,
     module: "pydmd",
-    attr: "DMD",
+    attr: "Koopman",
     construct_args: [],
     construct_kwargs: rank ? { svd_rank: rank } : {},
     method: "fit",
@@ -281,7 +281,7 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
     args: [X],
     // `eigs` is PyDMD's discrete-eigenvalue property (the locked 2025.8.1 names
     // it eigs; the newer `eigenvalues` alias does not exist there) — the same
-    // discrete spectrum dmd.js returns.
+    // discrete spectrum koopman.js returns.
     extract: "eigs",
   });
 
@@ -294,7 +294,7 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
   return {
     ok: true,
     py: py.ok === true ? { values: pyValues, offUse: py.off_use ?? null } : { gap: py.gap, why: py.why ?? null },
-    js: js ? { values: js.eigenvalues, rank: js.rank } : { gap: jsWhy ?? "dmd.js produced no reading" },
+    js: js ? { values: js.eigenvalues, rank: js.rank } : { gap: jsWhy ?? "koopman.js produced no reading" },
     agreement: agreement.agreement,
     matched: agreement.matched,
     pairs: agreement.pairs,
@@ -308,7 +308,7 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
       rank,
       rankBasis,
       seriesLength: n,
-      prequential: { scored: "before", basis: `${spread} — no prediction score is claimed; agreement with dmd.js only` },
+      prequential: { scored: "before", basis: `${spread} — no prediction score is claimed; agreement with koopman.js only` },
       producer,
       bounds,
     },
@@ -318,7 +318,7 @@ async function pydmdWitness({ body, task, agent, cell, row, spread }) {
 /** The executor map: one entry per tool that can actually run. The registry
  *  carries all 27 cells; this map is the wiring, one witness at a time. */
 const CUBE_EXECUTORS = new Map([
-  ["pydmd", { target: "dmd.js", run: pydmdWitness }],
+  ["pydmd", { target: "koopman.js", run: pydmdWitness }],
 ]);
 
 const normPkg = (name) => String(name ?? "").replace(/[-_.]+/g, "-").toLowerCase();

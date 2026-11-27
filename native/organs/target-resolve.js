@@ -12,7 +12,7 @@
 // already built for entirely different reasons — kind-standing.js's own
 // signature (the company a word keeps), arrow.js's k-gram distribution
 // against itself reversed (order), consequential-surprise.js's cascade
-// reach (reach), dmd.js's dynamic mode decomposition (rhythm). This file
+// reach (reach), koopman.js's Koopman mode decomposition (rhythm). This file
 // adds no new statistic and no new null of its own: it composes what
 // already exists, and adds exactly one new thing — resolveTarget's ordering
 // — which nothing had before.
@@ -79,7 +79,7 @@ const SHAPE_DOOR_NAME = Object.freeze({
   company: "discoverCompanyKinds", // kind-standing.js(sentences, vocabulary, opts)
   order: "arrowOf",                // arrow.js(events, opts)
   reach: "consequentialSurprise",  // consequential-surprise.js(holograph, facts, opts)
-  rhythm: "dmd",                   // dmd.js(X, Xp, opts)
+  rhythm: "koopmanModes",          // koopman.js(X, Xp, opts)
 });
 
 /**
