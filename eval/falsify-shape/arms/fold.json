@@ -1,0 +1,410 @@
+[
+ {
+  "id": 1,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 2,
+  "negated": false,
+  "form": "statement",
+  "agent": "mina",
+  "patient": "book",
+  "gaps": []
+ },
+ {
+  "id": 3,
+  "negated": false,
+  "form": "statement",
+  "agent": "editor",
+  "patient": "clip",
+  "gaps": []
+ },
+ {
+  "id": 4,
+  "negated": false,
+  "form": "statement",
+  "agent": "storm",
+  "patient": "bridge",
+  "gaps": []
+ },
+ {
+  "id": 5,
+  "negated": false,
+  "form": "statement",
+  "agent": "child",
+  "patient": "cake",
+  "gaps": []
+ },
+ {
+  "id": 6,
+  "negated": false,
+  "form": "statement",
+  "agent": "sister",
+  "patient": "letter",
+  "gaps": []
+ },
+ {
+  "id": 7,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 8,
+  "negated": false,
+  "form": "statement",
+  "agent": "storm",
+  "patient": "bridge",
+  "gaps": []
+ },
+ {
+  "id": 9,
+  "negated": false,
+  "form": "statement",
+  "agent": "editor",
+  "patient": "clip",
+  "gaps": []
+ },
+ {
+  "id": 10,
+  "negated": false,
+  "form": "statement",
+  "agent": "sister",
+  "patient": "letter",
+  "gaps": []
+ },
+ {
+  "id": 11,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "cake",
+  "gaps": []
+ },
+ {
+  "id": 12,
+  "negated": true,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 13,
+  "negated": true,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 14,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 15,
+  "negated": true,
+  "form": "statement",
+  "agent": "nobody",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 16,
+  "negated": true,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 17,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": null,
+  "gaps": []
+ },
+ {
+  "id": 18,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": null,
+  "gaps": []
+ },
+ {
+  "id": 19,
+  "negated": false,
+  "form": "question",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 20,
+  "negated": false,
+  "form": "question",
+  "agent": "who",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 21,
+  "negated": false,
+  "form": "question",
+  "agent": "what",
+  "patient": null,
+  "gaps": []
+ },
+ {
+  "id": 22,
+  "negated": false,
+  "form": "question",
+  "agent": "editor",
+  "patient": "clip",
+  "gaps": []
+ },
+ {
+  "id": 23,
+  "negated": false,
+  "form": "question",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 24,
+  "negated": false,
+  "form": "statement",
+  "agent": "cat",
+  "patient": null,
+  "gaps": []
+ },
+ {
+  "id": 25,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": null,
+  "gaps": []
+ },
+ {
+  "id": 26,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": null,
+  "gaps": []
+ },
+ {
+  "id": 27,
+  "negated": false,
+  "form": "statement",
+  "agent": "engineer",
+  "patient": "it",
+  "gaps": []
+ },
+ {
+  "id": 28,
+  "negated": false,
+  "form": "statement",
+  "agent": "editor",
+  "patient": "clip",
+  "gaps": []
+ },
+ {
+  "id": 29,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "clip",
+  "gaps": []
+ },
+ {
+  "id": 30,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "file",
+  "gaps": []
+ },
+ {
+  "id": 31,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "clip",
+  "gaps": []
+ },
+ {
+  "id": 32,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "pause",
+  "gaps": []
+ },
+ {
+  "id": 33,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "door",
+  "gaps": []
+ },
+ {
+  "id": 34,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 35,
+  "negated": false,
+  "form": "statement",
+  "agent": "dgo",
+  "patient": "cat",
+  "gaps": []
+ },
+ {
+  "id": 36,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "clip",
+  "gaps": []
+ },
+ {
+  "id": 37,
+  "negated": false,
+  "form": "statement",
+  "agent": "cat",
+  "patient": "chase",
+  "gaps": []
+ },
+ {
+  "id": 38,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "man",
+  "gaps": []
+ },
+ {
+  "id": 39,
+  "negated": false,
+  "form": "statement",
+  "agent": "teacher",
+  "patient": "student",
+  "gaps": []
+ },
+ {
+  "id": 40,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "jonathan",
+  "gaps": []
+ },
+ {
+  "id": 41,
+  "negated": false,
+  "form": "ABSTAIN",
+  "agent": "chien",
+  "patient": "gâteau",
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ },
+ {
+  "id": 42,
+  "negated": true,
+  "form": "ABSTAIN",
+  "agent": "chien",
+  "patient": "gâteau",
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ },
+ {
+  "id": 43,
+  "negated": false,
+  "form": "ABSTAIN",
+  "agent": "chien",
+  "patient": "gâteau",
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ },
+ {
+  "id": 44,
+  "negated": false,
+  "form": "ABSTAIN",
+  "agent": "marie",
+  "patient": "livre",
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ },
+ {
+  "id": 45,
+  "negated": true,
+  "form": "ABSTAIN",
+  "agent": "personne",
+  "patient": "voir",
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ },
+ {
+  "id": 46,
+  "negated": true,
+  "form": "ABSTAIN",
+  "agent": "chat",
+  "patient": null,
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ },
+ {
+  "id": 47,
+  "negated": false,
+  "form": "ABSTAIN",
+  "agent": "ce",
+  "patient": "gâteau",
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ },
+ {
+  "id": 48,
+  "negated": false,
+  "form": "ABSTAIN",
+  "agent": "qui",
+  "patient": "gâteau",
+  "gaps": [
+   "no_marker_table",
+   "no_question_grammar"
+  ]
+ }
+]

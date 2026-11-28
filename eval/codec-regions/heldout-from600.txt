@@ -1,0 +1,23 @@
+alternate eng-spa tok  586 REGIONS 0.952 SINGLE 0.483 TOKEN 0.766 roots spa+eng+ind NO  stay 0.9354 1440ms
+splice    eng-spa tok  608 REGIONS 0.952 SINGLE 0.464 TOKEN 0.760 roots spa+eng+ind NO  stay 0.9342 36ms
+alternate eng-fra tok  588 REGIONS 0.889 SINGLE 0.519 TOKEN 0.679 roots fra+eng     ok  stay 0.9371 24ms
+splice    eng-fra tok  615 REGIONS 0.896 SINGLE 0.541 TOKEN 0.694 roots fra+eng     ok  stay 0.9432 24ms
+alternate eng-swe tok  564 REGIONS 0.947 SINGLE 0.498 TOKEN 0.798 roots swe+eng+dan NO  stay 0.9116 31ms
+splice    eng-swe tok  585 REGIONS 0.935 SINGLE 0.518 TOKEN 0.803 roots swe+eng+dan NO  stay 0.9208 36ms
+alternate eng-tgl tok  600 REGIONS 0.703 SINGLE 0.472 TOKEN 0.635 roots eng+tgl+ind+pcm NO  stay 0.7848 61ms
+splice    eng-tgl tok  624 REGIONS 0.679 SINGLE 0.452 TOKEN 0.630 roots eng+tgl+ind+pcm NO  stay 0.7678 57ms
+alternate eng-hat tok  624 REGIONS 0.907 SINGLE 0.546 TOKEN 0.920 roots eng+hat+ind+pcm NO  stay 0.8658 26ms
+splice    eng-hat tok  643 REGIONS 0.916 SINGLE 0.561 TOKEN 0.919 roots eng+hat+ind+pcm NO  stay 0.8667 29ms
+alternate spa-fra tok  580 REGIONS 0.936 SINGLE 0.526 TOKEN 0.752 roots fra+spa     ok  stay 0.9316 17ms
+splice    spa-fra tok  607 REGIONS 0.932 SINGLE 0.549 TOKEN 0.763 roots fra+spa     ok  stay 0.9333 12ms
+alternate eng-tur tok  451 REGIONS 0.914 SINGLE 0.373 TOKEN 0.747 roots eng+tur+ind NO  stay 0.926 20ms
+splice    eng-tur tok  466 REGIONS 0.916 SINGLE 0.395 TOKEN 0.755 roots eng+tur+ind NO  stay 0.9262 20ms
+alternate swe-dan tok  532 REGIONS 0.904 SINGLE 0.509 TOKEN 0.707 roots dan+swe     ok  stay 0.9309 18ms
+splice    swe-dan tok  554 REGIONS 0.890 SINGLE 0.527 TOKEN 0.715 roots dan+swe     ok  stay 0.9318 17ms
+alternate ron-spa tok  563 REGIONS 0.991 SINGLE 0.000 TOKEN 0.627 roots spa+ron     ok  stay 0.9523 19ms
+splice    ron-spa tok  580 REGIONS 0.974 SINGLE 0.000 TOKEN 0.634 roots spa+ron     ok  stay 0.9522 17ms
+alternate eng-ind tok  549 REGIONS 0.922 SINGLE 0.485 TOKEN 0.661 roots ind+eng     ok  stay 0.9266 19ms
+splice    eng-ind tok  567 REGIONS 0.903 SINGLE 0.503 TOKEN 0.672 roots ind+eng     ok  stay 0.9335 19ms
+alternate MEAN token accuracy: REGIONS 0.906 SINGLE 0.441 TOKEN 0.729 | roots exactly right in 5 of 10
+splice MEAN token accuracy: REGIONS 0.899 SINGLE 0.451 TOKEN 0.734 | roots exactly right in 5 of 10
+MONO control: eng:eng+ind+pcm(0.054) spa:spa+fra(0.021) fra:one(0) dan:one(0) tgl:tgl+ind(0.249) hat:hat+ind(0.032) swe:swe+dan(0.028) tur:one(0) ron:one(0) ind:ind+fra(0.007) | one root in 4 of 10

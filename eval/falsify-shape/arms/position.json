@@ -1,0 +1,338 @@
+[
+ {
+  "id": 1,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 2,
+  "negated": false,
+  "form": "statement",
+  "agent": "mina",
+  "patient": "book"
+ },
+ {
+  "id": 3,
+  "negated": false,
+  "form": "statement",
+  "agent": "editor",
+  "patient": "clip"
+ },
+ {
+  "id": 4,
+  "negated": false,
+  "form": "statement",
+  "agent": "storm",
+  "patient": "bridge"
+ },
+ {
+  "id": 5,
+  "negated": false,
+  "form": "statement",
+  "agent": "child",
+  "patient": "cake"
+ },
+ {
+  "id": 6,
+  "negated": false,
+  "form": "statement",
+  "agent": "sister",
+  "patient": "letter"
+ },
+ {
+  "id": 7,
+  "negated": false,
+  "form": "statement",
+  "agent": "cat",
+  "patient": "dog"
+ },
+ {
+  "id": 8,
+  "negated": false,
+  "form": "statement",
+  "agent": "bridge",
+  "patient": "storm"
+ },
+ {
+  "id": 9,
+  "negated": false,
+  "form": "statement",
+  "agent": "clip",
+  "patient": "editor"
+ },
+ {
+  "id": 10,
+  "negated": false,
+  "form": "statement",
+  "agent": "letter",
+  "patient": "my"
+ },
+ {
+  "id": 11,
+  "negated": false,
+  "form": "statement",
+  "agent": "cake",
+  "patient": null
+ },
+ {
+  "id": 12,
+  "negated": true,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 13,
+  "negated": true,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 14,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 15,
+  "negated": true,
+  "form": "statement",
+  "agent": "nobody",
+  "patient": "cat"
+ },
+ {
+  "id": 16,
+  "negated": true,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 17,
+  "negated": true,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 18,
+  "negated": true,
+  "form": "statement",
+  "agent": "that",
+  "patient": "cat"
+ },
+ {
+  "id": 19,
+  "negated": false,
+  "form": "question",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 20,
+  "negated": false,
+  "form": "question",
+  "agent": "who",
+  "patient": "cat"
+ },
+ {
+  "id": 21,
+  "negated": false,
+  "form": "question",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 22,
+  "negated": false,
+  "form": "question",
+  "agent": "editor",
+  "patient": "clip"
+ },
+ {
+  "id": 23,
+  "negated": false,
+  "form": "question",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 24,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": null
+ },
+ {
+  "id": 25,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": null
+ },
+ {
+  "id": 26,
+  "negated": false,
+  "form": "statement",
+  "agent": "that",
+  "patient": "cat"
+ },
+ {
+  "id": 27,
+  "negated": false,
+  "form": "statement",
+  "agent": "storm",
+  "patient": "bridge"
+ },
+ {
+  "id": 28,
+  "negated": false,
+  "form": "statement",
+  "agent": "editor",
+  "patient": "clip"
+ },
+ {
+  "id": 29,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "clip"
+ },
+ {
+  "id": 30,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "file"
+ },
+ {
+  "id": 31,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "clip"
+ },
+ {
+  "id": 32,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "pause"
+ },
+ {
+  "id": 33,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "door"
+ },
+ {
+  "id": 34,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "cat"
+ },
+ {
+  "id": 35,
+  "negated": false,
+  "form": "statement",
+  "agent": "dgo",
+  "patient": "cat"
+ },
+ {
+  "id": 36,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "trim"
+ },
+ {
+  "id": 37,
+  "negated": false,
+  "form": "statement",
+  "agent": "cat",
+  "patient": "dog"
+ },
+ {
+  "id": 38,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "man"
+ },
+ {
+  "id": 39,
+  "negated": false,
+  "form": "statement",
+  "agent": "teacher",
+  "patient": "student"
+ },
+ {
+  "id": 40,
+  "negated": false,
+  "form": "statement",
+  "agent": "jonathan",
+  "patient": "book"
+ },
+ {
+  "id": 41,
+  "negated": false,
+  "form": "statement",
+  "agent": "chien",
+  "patient": "gâteau"
+ },
+ {
+  "id": 42,
+  "negated": true,
+  "form": "statement",
+  "agent": "chien",
+  "patient": "gâteau"
+ },
+ {
+  "id": 43,
+  "negated": false,
+  "form": "statement",
+  "agent": "gâteau",
+  "patient": "chien"
+ },
+ {
+  "id": 44,
+  "negated": false,
+  "form": "statement",
+  "agent": "marie",
+  "patient": "livre"
+ },
+ {
+  "id": 45,
+  "negated": true,
+  "form": "statement",
+  "agent": "personne",
+  "patient": "chat"
+ },
+ {
+  "id": 46,
+  "negated": true,
+  "form": "statement",
+  "agent": "chat",
+  "patient": null
+ },
+ {
+  "id": 47,
+  "negated": false,
+  "form": "question",
+  "agent": "chien",
+  "patient": "gâteau"
+ },
+ {
+  "id": 48,
+  "negated": false,
+  "form": "question",
+  "agent": "qui",
+  "patient": "gâteau"
+ }
+]

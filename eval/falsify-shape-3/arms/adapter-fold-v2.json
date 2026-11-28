@@ -1,0 +1,450 @@
+[
+ {
+  "id": 201,
+  "negated": true,
+  "form": "statement",
+  "agent": "assistant",
+  "patient": "invoice"
+ },
+ {
+  "id": 202,
+  "negated": false,
+  "form": "statement",
+  "agent": "plumber",
+  "patient": "pipe"
+ },
+ {
+  "id": 203,
+  "negated": false,
+  "form": "statement",
+  "agent": "council",
+  "patient": "bridge"
+ },
+ {
+  "id": 204,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": null
+ },
+ {
+  "id": 205,
+  "negated": true,
+  "form": "statement",
+  "agent": "nobody",
+  "patient": "phone"
+ },
+ {
+  "id": 206,
+  "negated": true,
+  "form": "question",
+  "agent": "you",
+  "patient": "report"
+ },
+ {
+  "id": 207,
+  "negated": false,
+  "form": "question",
+  "agent": "child",
+  "patient": "vegetable"
+ },
+ {
+  "id": 208,
+  "negated": true,
+  "form": "statement",
+  "agent": "we",
+  "patient": "lease"
+ },
+ {
+  "id": 209,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "window"
+ },
+ {
+  "id": 210,
+  "negated": false,
+  "form": "statement",
+  "agent": "lawyer",
+  "patient": "overnight"
+ },
+ {
+  "id": 211,
+  "negated": false,
+  "form": "statement",
+  "agent": "bank",
+  "patient": "savings"
+ },
+ {
+  "id": 212,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "parcel"
+ },
+ {
+  "id": 213,
+  "negated": true,
+  "form": "statement",
+  "agent": "she",
+  "patient": "letter"
+ },
+ {
+  "id": 214,
+  "negated": false,
+  "form": "statement",
+  "agent": "meeting",
+  "patient": "a.m."
+ },
+ {
+  "id": 215,
+  "negated": "ABSTAIN",
+  "form": "question",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 216,
+  "negated": false,
+  "form": "statement",
+  "agent": "hiker",
+  "patient": "ridge"
+ },
+ {
+  "id": 217,
+  "negated": false,
+  "form": "question",
+  "agent": "brother",
+  "patient": "truck"
+ },
+ {
+  "id": 218,
+  "negated": true,
+  "form": "statement",
+  "agent": "council",
+  "patient": "budget"
+ },
+ {
+  "id": 219,
+  "negated": false,
+  "form": "statement",
+  "agent": "they",
+  "patient": "house"
+ },
+ {
+  "id": 220,
+  "negated": "ABSTAIN",
+  "form": "statement",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 221,
+  "negated": false,
+  "form": "statement",
+  "agent": "ms.",
+  "patient": "report"
+ },
+ {
+  "id": 222,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "unattended"
+ },
+ {
+  "id": 223,
+  "negated": false,
+  "form": "statement",
+  "agent": "dog",
+  "patient": "carrier"
+ },
+ {
+  "id": 224,
+  "negated": true,
+  "form": "statement",
+  "agent": "i",
+  "patient": "ladder"
+ },
+ {
+  "id": 225,
+  "negated": true,
+  "form": "question",
+  "agent": null,
+  "patient": "raise"
+ },
+ {
+  "id": 226,
+  "negated": false,
+  "form": "statement",
+  "agent": "museum",
+  "patient": "painting"
+ },
+ {
+  "id": 227,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "flight"
+ },
+ {
+  "id": 228,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "file"
+ },
+ {
+  "id": 229,
+  "negated": false,
+  "form": "question",
+  "agent": "worker",
+  "patient": "building"
+ },
+ {
+  "id": 230,
+  "negated": "ABSTAIN",
+  "form": "statement",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 231,
+  "negated": false,
+  "form": "question",
+  "agent": "you",
+  "patient": "scarf"
+ },
+ {
+  "id": 232,
+  "negated": "ABSTAIN",
+  "form": "statement",
+  "agent": "ABSTAIN",
+  "patient": "ABSTAIN"
+ },
+ {
+  "id": 233,
+  "negated": true,
+  "form": "statement",
+  "agent": "witness",
+  "patient": "man"
+ },
+ {
+  "id": 234,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": null
+ },
+ {
+  "id": 235,
+  "negated": false,
+  "form": "question",
+  "agent": "inspector",
+  "patient": "restaurant"
+ },
+ {
+  "id": 236,
+  "negated": false,
+  "form": "question",
+  "agent": "you",
+  "patient": "tent"
+ },
+ {
+  "id": 237,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "tenant"
+ },
+ {
+  "id": 238,
+  "negated": false,
+  "form": "statement",
+  "agent": "knife",
+  "patient": "tomato"
+ },
+ {
+  "id": 239,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "light"
+ },
+ {
+  "id": 240,
+  "negated": false,
+  "form": "statement",
+  "agent": "package",
+  "patient": null
+ },
+ {
+  "id": 241,
+  "negated": false,
+  "form": "statement",
+  "agent": "storm",
+  "patient": "line"
+ },
+ {
+  "id": 242,
+  "negated": true,
+  "form": "statement",
+  "agent": "he",
+  "patient": "meat"
+ },
+ {
+  "id": 243,
+  "negated": false,
+  "form": "statement",
+  "agent": "geese",
+  "patient": "lake"
+ },
+ {
+  "id": 244,
+  "negated": false,
+  "form": "statement",
+  "agent": "researcher",
+  "patient": "vaccine"
+ },
+ {
+  "id": 245,
+  "negated": false,
+  "form": "question",
+  "agent": "landlord",
+  "patient": "heating"
+ },
+ {
+  "id": 246,
+  "negated": false,
+  "form": "statement",
+  "agent": "pilot",
+  "patient": "plane"
+ },
+ {
+  "id": 247,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "paint"
+ },
+ {
+  "id": 248,
+  "negated": false,
+  "form": "question",
+  "agent": "volunteer",
+  "patient": "donation"
+ },
+ {
+  "id": 249,
+  "negated": true,
+  "form": "statement",
+  "agent": "nobody",
+  "patient": "wallet"
+ },
+ {
+  "id": 250,
+  "negated": false,
+  "form": "statement",
+  "agent": "speech",
+  "patient": "crowd"
+ },
+ {
+  "id": 251,
+  "negated": false,
+  "form": "statement",
+  "agent": "orchestra",
+  "patient": "symphony"
+ },
+ {
+  "id": 252,
+  "negated": false,
+  "form": "question",
+  "agent": "library",
+  "patient": "downtown"
+ },
+ {
+  "id": 253,
+  "negated": false,
+  "form": "statement",
+  "agent": "crew",
+  "patient": "window"
+ },
+ {
+  "id": 254,
+  "negated": false,
+  "form": "statement",
+  "agent": "porter",
+  "patient": "gate"
+ },
+ {
+  "id": 255,
+  "negated": false,
+  "form": "statement",
+  "agent": "teacher",
+  "patient": "boy"
+ },
+ {
+  "id": 256,
+  "negated": false,
+  "form": "statement",
+  "agent": "cat",
+  "patient": "vase"
+ },
+ {
+  "id": 257,
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": "passport"
+ },
+ {
+  "id": 258,
+  "negated": true,
+  "form": "statement",
+  "agent": "we",
+  "patient": "key"
+ },
+ {
+  "id": 259,
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": "figure"
+ },
+ {
+  "id": 260,
+  "negated": false,
+  "form": "statement",
+  "agent": "partner",
+  "patient": "document"
+ },
+ {
+  "id": 261,
+  "negated": false,
+  "form": "question",
+  "agent": "who",
+  "patient": "clock"
+ },
+ {
+  "id": 262,
+  "negated": false,
+  "form": "statement",
+  "agent": "club",
+  "patient": "picnic"
+ },
+ {
+  "id": 263,
+  "negated": false,
+  "form": "statement",
+  "agent": "camper",
+  "patient": "tent"
+ },
+ {
+  "id": 264,
+  "negated": false,
+  "form": "statement",
+  "agent": "editor",
+  "patient": "article"
+ }
+]

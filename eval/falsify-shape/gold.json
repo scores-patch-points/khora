@@ -1,0 +1,608 @@
+[
+ {
+  "id": 1,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "active"
+ },
+ {
+  "id": 2,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "mina"
+  ],
+  "patient": [
+   "book"
+  ],
+  "category": "active"
+ },
+ {
+  "id": 3,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "editor"
+  ],
+  "patient": [
+   "clip"
+  ],
+  "category": "active"
+ },
+ {
+  "id": 4,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "storm"
+  ],
+  "patient": [
+   "bridge"
+  ],
+  "category": "active"
+ },
+ {
+  "id": 5,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "child",
+   "children"
+  ],
+  "patient": [
+   "cake"
+  ],
+  "category": "active"
+ },
+ {
+  "id": 6,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "sister"
+  ],
+  "patient": [
+   "letter"
+  ],
+  "category": "active"
+ },
+ {
+  "id": 7,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "passive"
+ },
+ {
+  "id": 8,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "storm"
+  ],
+  "patient": [
+   "bridge"
+  ],
+  "category": "passive"
+ },
+ {
+  "id": 9,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "editor"
+  ],
+  "patient": [
+   "clip"
+  ],
+  "category": "passive"
+ },
+ {
+  "id": 10,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "sister"
+  ],
+  "patient": [
+   "letter"
+  ],
+  "category": "passive"
+ },
+ {
+  "id": 11,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": [
+   "cake"
+  ],
+  "category": "passive"
+ },
+ {
+  "id": 12,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "negation"
+ },
+ {
+  "id": 13,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "negation"
+ },
+ {
+  "id": 14,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "negation"
+ },
+ {
+  "id": 15,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "nobody"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "negation"
+ },
+ {
+  "id": 16,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "negation"
+ },
+ {
+  "id": 17,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "negation-trap"
+ },
+ {
+  "id": 18,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "negation-trap"
+ },
+ {
+  "id": 19,
+  "lang": "eng",
+  "negated": false,
+  "form": "question",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "question"
+ },
+ {
+  "id": 20,
+  "lang": "eng",
+  "negated": false,
+  "form": "question",
+  "agent": [
+   "who"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "question"
+ },
+ {
+  "id": 21,
+  "lang": "eng",
+  "negated": false,
+  "form": "question",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "what"
+  ],
+  "category": "question"
+ },
+ {
+  "id": 22,
+  "lang": "eng",
+  "negated": false,
+  "form": "question",
+  "agent": [
+   "editor"
+  ],
+  "patient": [
+   "clip"
+  ],
+  "category": "question"
+ },
+ {
+  "id": 23,
+  "lang": "eng",
+  "negated": false,
+  "form": "question",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "question"
+ },
+ {
+  "id": 24,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "order"
+ },
+ {
+  "id": 25,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "cat"
+  ],
+  "patient": null,
+  "category": "order"
+ },
+ {
+  "id": 26,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": null,
+  "category": "order"
+ },
+ {
+  "id": 27,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "engineer",
+   "engineers"
+  ],
+  "patient": [
+   "it"
+  ],
+  "category": "order"
+ },
+ {
+  "id": 28,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "editor"
+  ],
+  "patient": [
+   "clip"
+  ],
+  "category": "order"
+ },
+ {
+  "id": 29,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": [
+   "clip"
+  ],
+  "category": "imperative"
+ },
+ {
+  "id": 30,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": [
+   "file"
+  ],
+  "category": "imperative"
+ },
+ {
+  "id": 31,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": [
+   "clip"
+  ],
+  "category": "imperative"
+ },
+ {
+  "id": 32,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": [
+   "pause"
+  ],
+  "category": "imperative"
+ },
+ {
+  "id": 33,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": null,
+  "patient": [
+   "door"
+  ],
+  "category": "imperative"
+ },
+ {
+  "id": 34,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "casual"
+ },
+ {
+  "id": 35,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "casual"
+ },
+ {
+  "id": 36,
+  "lang": "eng",
+  "negated": true,
+  "form": "statement",
+  "agent": null,
+  "patient": [
+   "clip"
+  ],
+  "category": "casual"
+ },
+ {
+  "id": 37,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "cat"
+  ],
+  "category": "casual"
+ },
+ {
+  "id": 38,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "dog"
+  ],
+  "patient": [
+   "man"
+  ],
+  "category": "casual"
+ },
+ {
+  "id": 39,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "teacher"
+  ],
+  "patient": [
+   "message"
+  ],
+  "category": "ditransitive"
+ },
+ {
+  "id": 40,
+  "lang": "eng",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "mina"
+  ],
+  "patient": [
+   "book"
+  ],
+  "category": "ditransitive"
+ },
+ {
+  "id": 41,
+  "lang": "fra",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "chien"
+  ],
+  "patient": [
+   "gâteau"
+  ],
+  "category": "french"
+ },
+ {
+  "id": 42,
+  "lang": "fra",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "chien"
+  ],
+  "patient": [
+   "gâteau"
+  ],
+  "category": "french"
+ },
+ {
+  "id": 43,
+  "lang": "fra",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "chien"
+  ],
+  "patient": [
+   "gâteau"
+  ],
+  "category": "french"
+ },
+ {
+  "id": 44,
+  "lang": "fra",
+  "negated": false,
+  "form": "statement",
+  "agent": [
+   "marie"
+  ],
+  "patient": [
+   "livre"
+  ],
+  "category": "french"
+ },
+ {
+  "id": 45,
+  "lang": "fra",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "personne"
+  ],
+  "patient": [
+   "chat"
+  ],
+  "category": "french"
+ },
+ {
+  "id": 46,
+  "lang": "fra",
+  "negated": true,
+  "form": "statement",
+  "agent": [
+   "chat"
+  ],
+  "patient": null,
+  "category": "french"
+ },
+ {
+  "id": 47,
+  "lang": "fra",
+  "negated": false,
+  "form": "question",
+  "agent": [
+   "chien"
+  ],
+  "patient": [
+   "gâteau"
+  ],
+  "category": "french"
+ },
+ {
+  "id": 48,
+  "lang": "fra",
+  "negated": false,
+  "form": "question",
+  "agent": [
+   "qui"
+  ],
+  "patient": [
+   "gâteau"
+  ],
+  "category": "french"
+ }
+]
