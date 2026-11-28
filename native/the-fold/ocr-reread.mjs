@@ -14,7 +14,7 @@ import { pathToFileURL } from "node:url";
 import { undecided, collapse } from "../kernel/undecided.js";
 
 export const REREADING_KIND = "text-rereading", REREADING_CELL = "INS·Figure", SCHEMA = "OcrRereading@1";
-export const DEFAULT_DIALS = Object.freeze({ floor: -14, margin: 2, docKnown: 2, maxEdits: 2 });   // replaced by the fitted values of eval/ocr-reread (see FREEZE there)
+export const DEFAULT_DIALS = Object.freeze({ floor: -14, margin: 2, docKnown: 2, maxEdits: 2, beam: 300 });   // replaced by the fitted values of eval/ocr-reread (see FREEZE there)
 const isLetter = (c) => c.toLowerCase() !== c.toUpperCase(), isDigit = (c) => c >= "0" && c <= "9", isWord = (c) => isLetter(c) || isDigit(c);
 const SPACE = new Set([" ", "\n", "\t", "\r", "\f", " "]), APOS = new Map([["’", "'"], ["‘", "'"], ["`", "'"]]);
 const norm = (s) => [...s].map((c) => APOS.get(c) ?? c).join("").toLowerCase();
@@ -46,6 +46,25 @@ export function channelOf(json) {
   for (const [k, c] of Object.entries(json.ops)) { const cut = k.indexOf(">"), from = k.slice(0, cut), to = k.slice(cut + 1); if (!m.has(from)) m.set(from, []); m.get(from).push([to, Math.log(c / total)]); }
   return m;
 }
+// REACH, bounded and remembered: the attested forms within maxEdits operations of a token. The second step expands only the `beam` best first-step strings (a declared bound on work, not on meaning: 300);
+// results are cached per (forms, channel, maxEdits, token) because a page repeats its misreadings.
+const REACH = new WeakMap(), UNIFORM = {}, OPMAP = new WeakMap();
+function vocabReach(k, channel, forms, d) {
+  let byCh = REACH.get(forms); if (!byCh) REACH.set(forms, byCh = new WeakMap()); const key = channel ?? UNIFORM; let m = byCh.get(key); if (!m) byCh.set(key, m = new Map());
+  const id = `${d.maxEdits}|${k}`; if (m.has(id)) return m.get(id);
+  const best = new Map(), take = (f, w) => { if (f !== k && forms.has(f) && (best.get(f) ?? -Infinity) < w) best.set(f, w); }, s1 = oneStep(k, channel, ALPHABET); for (const [f, w] of s1) take(f, w);
+  if (d.maxEdits >= 2 && k.length >= 4) for (const [f, w] of [...s1].sort((a, b) => b[1] - a[1]).slice(0, d.beam ?? 300)) for (const [f2, w2] of oneStep(f, channel, ALPHABET)) take(f2, w + w2);
+  const out = [...best]; m.set(id, out); return out;
+}
+function opMap(channel) { let m = OPMAP.get(channel); if (!m) { m = new Map(); for (const [from, tos] of channel) m.set(from, new Map(tos)); OPMAP.set(channel, m); } return m; }
+function pathWeight(k, f, channel, maxOps) {   // best log weight of rewriting k into f with at most maxOps operations; -Infinity when out of reach
+  const ops = channel ? opMap(channel) : null, w0 = Math.log(1 / (ALPHABET.length * 3)), n = k.length, m = f.length, D = Array.from({ length: maxOps + 1 }, () => Array.from({ length: n + 1 }, () => new Float64Array(m + 1).fill(-Infinity))); D[0][0][0] = 0;
+  for (let u = 0; u <= maxOps; u++) for (let i = 0; i <= n; i++) for (let j = 0; j <= m; j++) { const cur = D[u][i][j]; if (cur === -Infinity) continue;
+    if (i < n && j < m && k[i] === f[j] && D[u][i + 1][j + 1] < cur) D[u][i + 1][j + 1] = cur;
+    if (u === maxOps) continue;
+    for (let L = 0; L <= 2 && i + L <= n; L++) for (let M = 0; M <= 2 && j + M <= m; M++) { if (!L && !M) continue; const w = ops ? ops.get(k.slice(i, i + L))?.get(f.slice(j, j + M)) : (L <= 1 && M <= 1 ? w0 : undefined); if (w === undefined) continue; if (D[u + 1][i + L][j + M] < cur + w) D[u + 1][i + L][j + M] = cur + w; } }
+  let best = -Infinity; for (let u = 1; u <= maxOps; u++) best = Math.max(best, D[u][n][m]); return best;
+}
 const ALPHABET = [..."abcdefghijklmnopqrstuvwxyz'"];
 const recase = (cand, core) => { const L = [...core].filter(isLetter); if (L.length > 1 && L.every((c) => c === c.toUpperCase())) return cand.toUpperCase(); if (L.length && core[0] === core[0].toUpperCase() && isLetter(core[0])) return cand[0].toUpperCase() + cand.slice(1); return cand; };
 
@@ -60,9 +79,9 @@ export function rereadOcr(text, { language = "eng", channel = null, dials = DEFA
   for (const t of toks) {
     const k = norm(t.core); if (!k || known(k)) { counts.kept++; continue; }
     let cands = memo.get(k);
-    if (!cands) { const best = new Map(), s1 = oneStep(k, channel, ALPHABET); const take = (form, w) => { if (form !== k && (V.forms.has(form) || (d.docKnown > 0 && (seen.get(form) ?? 0) >= d.docKnown && form !== k))) { const sc = w + freq(form); if ((best.get(form) ?? -Infinity) < sc) best.set(form, sc); } };
-      for (const [f, w] of s1) take(f, w);
-      if (d.maxEdits >= 2 && k.length >= 4) for (const [f, w] of s1) for (const [f2, w2] of oneStep(f, channel, ALPHABET)) take(f2, w + w2);
+    if (!cands) { const best = new Map(); for (const [f, w] of vocabReach(k, channel, V.forms, d)) best.set(f, w + freq(f));
+      // the text's own recurring forms (names the giver never heard) are tried one by one: the best path of at most maxEdits channel operations from the token to the form
+      if (d.docKnown > 0) for (const [f, c] of seen) { if (c < d.docKnown || f === k || V.forms.has(f) || Math.abs(f.length - k.length) > 2 * d.maxEdits) continue; const w = pathWeight(k, f, channel, d.maxEdits); if (w > -Infinity) best.set(f, w + freq(f)); }
       cands = [...best].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1)).slice(0, 3).map(([f, sc]) => [f, Math.round(sc * 100) / 100]); memo.set(k, cands); }
     const row = { at: t.at, initial: t.token, cands: cands.map(([f, sc]) => [t.pre + recase(f, t.core) + t.post, sc]) };
     if (!cands.length) { row.status = "unknown"; counts.unknown++; }
