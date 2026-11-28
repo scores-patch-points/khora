@@ -1,0 +1,15 @@
+documents whose main root is not eng, left out: {"literature":3,"encyclopedic":0,"academic":6,"government-legal":348}
+sources: literature terms 18058 (from 17 docs) in 0.7772 out 0.5135 (rates from 8 docs) | encyclopedic terms 1843 (from 24 docs) in 0.3961 out 0.1929 (rates from 8 docs) | academic terms 943 (from 70 docs) in 0.2254 out 0.017 (rates from 36 docs) | government-legal terms 215 (from 5 docs) in 0.121 out 0.006 (rates from 4 docs)
+test part 1 (FRESH): 65 passages of 300 terms: literature 9, encyclopedic 14, academic 41, government-legal 1
+PATTERN   {"correct":62,"wrong":3,"abstain":0} | by genre c/w/a: literature 9/0/0  encyclopedic 12/2/0  academic 41/0/0  government-legal 0/1/0 | {"encyclopedic->academic":2,"government-legal->academic":1}
+RATES     {"correct":57,"wrong":0,"abstain":8} | by genre c/w/a: literature 9/0/0  encyclopedic 9/0/5  academic 39/0/2  government-legal 0/0/1 | {}
+V1        {"correct":48,"wrong":5,"abstain":12} | by genre c/w/a: literature 0/5/4  encyclopedic 13/0/1  academic 35/0/6  government-legal 0/0/1 | {"literature->encyclopedic":5}
+COUNT     {"correct":18,"wrong":47,"abstain":0} | by genre c/w/a: literature 9/0/0  encyclopedic 0/14/0  academic 9/32/0  government-legal 0/1/0 | {"encyclopedic->literature":14,"academic->literature":32,"government-legal->literature":1}
+MAJORITY  {"correct":41,"wrong":24,"abstain":0} | by genre c/w/a: literature 0/9/0  encyclopedic 0/14/0  academic 41/0/0  government-legal 0/1/0 | {"literature->academic":9,"encyclopedic->academic":14,"government-legal->academic":1}
+---- 40 terms
+test part 1 (FRESH): 67 passages of 40 terms: literature 9, encyclopedic 15, academic 42, government-legal 1
+PATTERN   {"correct":58,"wrong":5,"abstain":4} | by genre c/w/a: literature 9/0/0  encyclopedic 8/4/3  academic 41/0/1  government-legal 0/1/0 | {"encyclopedic->academic":3,"encyclopedic->literature":1,"government-legal->academic":1}
+RATES     {"correct":51,"wrong":3,"abstain":13} | by genre c/w/a: literature 8/0/1  encyclopedic 6/3/6  academic 37/0/5  government-legal 0/0/1 | {"encyclopedic->literature":2,"encyclopedic->academic":1}
+V1        {"correct":39,"wrong":1,"abstain":27} | by genre c/w/a: literature 0/0/9  encyclopedic 9/1/5  academic 30/0/12  government-legal 0/0/1 | {"encyclopedic->academic":1}
+COUNT     {"correct":23,"wrong":44,"abstain":0} | by genre c/w/a: literature 9/0/0  encyclopedic 1/14/0  academic 13/29/0  government-legal 0/1/0 | {"encyclopedic->literature":14,"academic->literature":29,"government-legal->literature":1}
+MAJORITY  {"correct":42,"wrong":25,"abstain":0} | by genre c/w/a: literature 0/9/0  encyclopedic 0/15/0  academic 42/0/0  government-legal 0/1/0 | {"literature->academic":9,"encyclopedic->academic":15,"government-legal->academic":1}
