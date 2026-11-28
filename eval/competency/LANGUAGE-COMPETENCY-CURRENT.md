@@ -33,7 +33,7 @@ Mandarin pronouns, Latin, Devanagari-script reading, and per-language gold accur
 
 ## The sentence shape layer (UD codec rows: roles by kāraka, polarity, question form)
 
-*A second axis beside the read above. 96 languages have a UD codec in the manifest or the priors (79 committed, 0 pointed at and vendored on this machine, 17 pointed at and not vendored here). 134 languages have a POS prior and NO UD codec: the shape layer gives them a typed gap. A marker table exists for 2 (elsewhere a role carried by an adposition stays generic); a question adapter for 2. The role map is declared, not measured (no gold with roles).*
+*A second axis beside the read above. 96 languages have a UD codec in the manifest or the priors (79 committed, 17 pointed at because their treebank licence forbids redistribution; this board does not depend on any machine's codec cache). 134 languages have a POS prior and NO UD codec: the shape layer gives them a typed gap. A marker table exists for 2 (elsewhere a role carried by an adposition stays generic); a question adapter for 2. The role map is declared, not measured (no gold with roles).*
 
 Genesis columns: eval/genesis-shape (FRESH, no role gold, 200 verses, reference English-WEB): negation is "tracks" when its per-verse kappa with the reference is above its own permuted null, "not-read" when it is not, "abstain" when the prior carries no negation source; flag = share of sentences parse-consistency flags (it over-fires on prose: see eval/genesis-shape/RESULT.md).
 
@@ -42,14 +42,14 @@ Genesis columns: eval/genesis-shape (FRESH, no role gold, 200 verses, reference 
 | `abk` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `afr` | committed | prior | no | no | yes | abstain:no-polarity-source | 0.704 | 0.784 |
 | `aii` | committed | prior | no | no | yes | not in Genesis | — | — |
-| `arb` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | not-read (0 / 0) | 0.659 | 0.497 |
-| `auv` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | not in Genesis | — | — |
+| `arb` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | not-read (0 / 0) | 0.659 | 0.497 |
+| `auv` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | not in Genesis | — | — |
 | `bam` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `bel` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `ben` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `bho` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `bre` | committed | prior | no | no | yes | not in Genesis | — | — |
-| `bul` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | tracks (0.7 / 0.1) | 0.846 | 0.402 |
+| `bul` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | tracks (0.7 / 0.1) | 0.846 | 0.402 |
 | `cat` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `ceb` | committed | prior | no | no | yes | tracks (0.65 / 0.11) | 0.77 | 0.973 |
 | `ces` | committed | prior | no | no | yes | not-read (-0.01 / 0.13) | 0.743 | 0.639 |
@@ -59,29 +59,29 @@ Genesis columns: eval/genesis-shape (FRESH, no role gold, 200 verses, reference 
 | `deu` | committed | prior | no | no | yes | tracks (0.65 / 0.11) | 0.799 | 0.496 |
 | `eng` | committed | absent, filled by the English adapter | yes | yes | yes | reference (1 / 0.1) | 0.97 | 0.364 |
 | `epo` | committed | prior | no | no | yes | abstain:no-polarity-source | 0.825 | 0.855 |
-| `est` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | not-read (0.13 / 0.13) | 0.863 | 0.395 |
-| `eus` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | not in Genesis | — | — |
+| `est` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | not-read (0.13 / 0.13) | 0.863 | 0.395 |
+| `eus` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | not in Genesis | — | — |
 | `fao` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `fin` | committed | prior | no | no | yes | not-read (0 / 0) | 0.822 | 0.422 |
 | `fra` | committed | prior | no | no | yes | tracks (0.53 / 0.1) | 0.716 | 0.633 |
 | `gla` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `gle` | committed | prior | no | no | yes | not in Genesis | — | — |
-| `glg` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | not in Genesis | — | — |
+| `glg` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | not in Genesis | — | — |
 | `glv` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `gsw` | committed | prior | no | no | no | not in Genesis | — | — |
 | `gug` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `guj` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `hat` | committed | prior | no | no | yes | tracks (0.51 / 0.1) | 0.797 | 0.471 |
 | `hau` | committed | prior | no | no | yes | not in Genesis | — | — |
-| `heb` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | tracks (0.7 / 0.1) | 0.749 | 0.61 |
-| `hin` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | tracks (0.56 / 0.17) | 0.615 | 0.597 |
+| `heb` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | tracks (0.7 / 0.1) | 0.749 | 0.61 |
+| `hin` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | tracks (0.56 / 0.17) | 0.615 | 0.597 |
 | `hrv` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `hsb` | committed | prior | no | no | yes | not in Genesis | — | — |
-| `hun` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | tracks (0.33 / 0.09) | 0.884 | 0.644 |
+| `hun` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | tracks (0.33 / 0.09) | 0.884 | 0.644 |
 | `hye` | committed | prior | no | no | yes | tracks (0.25 / 0.12) | 0.748 | 0.769 |
 | `ind` | committed | prior | no | no | yes | not-read (0.09 / 0.09) | 0.826 | 0.274 |
 | `isl` | committed | prior | no | no | yes | abstain:no-polarity-source | 0.704 | 0.428 |
-| `ita` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | tracks (0.47 / 0.11) | 0.701 | 0.316 |
+| `ita` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | tracks (0.47 / 0.11) | 0.701 | 0.316 |
 | `jav` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `jpn` | committed | prior | no | no | yes | not-read (0.13 / 0.13) | 0.58 | 0.155 |
 | `kat` | committed | prior | no | no | yes | not in Genesis | — | — |
@@ -90,9 +90,9 @@ Genesis columns: eval/genesis-shape (FRESH, no role gold, 200 verses, reference 
 | `koi` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `kor` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `krl` | committed | prior | no | no | yes | not in Genesis | — | — |
-| `lat` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | not in Genesis | — | — |
+| `lat` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | not in Genesis | — | — |
 | `lav` | committed | prior | no | no | yes | not in Genesis | — | — |
-| `lij` | pointed at, NOT vendored (typed gap codec_not_vendored) (C-UDA 1.0) | — | no | no | no | not in Genesis | — | — |
+| `lij` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (C-UDA 1.0) | built with the codec | no | no | no | not in Genesis | — | — |
 | `lit` | committed | prior | no | no | yes | not-read (0.13 / 0.13) | 0.783 | 0.5 |
 | `ltz` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `mal` | committed | prior | no | no | yes | not-read (0 / 0) | 0.646 | 0.827 |
@@ -106,10 +106,10 @@ Genesis columns: eval/genesis-shape (FRESH, no role gold, 200 verses, reference 
 | `pbu` | committed | prior | no | no | no | not in Genesis | — | — |
 | `pcm` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `pes` | committed | prior | no | no | yes | tracks (0.33 / 0.09) | 0.713 | 0.5 |
-| `pol` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | tracks (0.62 / 0.16) | 0.712 | 0.427 |
+| `pol` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | tracks (0.62 / 0.16) | 0.712 | 0.427 |
 | `quc` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `ron` | committed | prior | no | no | yes | tracks (0.72 / 0.17) | 0.716 | 0.429 |
-| `rus` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | tracks (0.68 / 0.12) | 0.722 | 0.369 |
+| `rus` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | tracks (0.68 / 0.12) | 0.722 | 0.369 |
 | `sah` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `san` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `sin` | committed | prior | no | no | yes | not in Genesis | — | — |
@@ -118,15 +118,15 @@ Genesis columns: eval/genesis-shape (FRESH, no role gold, 200 verses, reference 
 | `sms` | committed | prior | no | no | no | not in Genesis | — | — |
 | `spa` | committed | prior | no | yes | yes | tracks (0.62 / 0.1) | 0.722 | 0.349 |
 | `swe` | committed | prior | no | no | yes | tracks (0.64 / 0.17) | 0.711 | 0.389 |
-| `tam` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 3.0) | — | no | no | yes | not in Genesis | — | — |
+| `tam` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 3.0) | built with the codec | no | no | yes | not in Genesis | — | — |
 | `tat` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `tel` | committed | prior | no | no | yes | abstain:no-polarity-source | 0.917 | 0.813 |
 | `tgl` | committed | prior | no | no | yes | tracks (0.42 / 0.14) | 0.588 | 0.991 |
 | `tha` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `tsn` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `tur` | committed | prior | no | no | yes | tracks (0.62 / 0.13) | 0.919 | 0.476 |
-| `ukr` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | not in Genesis | — | — |
-| `urd` | pointed at, NOT vendored (typed gap codec_not_vendored) (CC BY-NC-SA 4.0) | — | no | no | yes | not in Genesis | — | — |
+| `ukr` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | not in Genesis | — | — |
+| `urd` | pointed at: built on the machine that uses it (typed gap codec_not_vendored until then) (CC BY-NC-SA 4.0) | built with the codec | no | no | yes | not in Genesis | — | — |
 | `vep` | committed | prior | no | no | yes | not in Genesis | — | — |
 | `vie` | committed | prior | no | no | yes | abstain:no-polarity-source | 0.884 | 0.841 |
 | `wol` | committed | prior | no | no | yes | not in Genesis | — | — |
