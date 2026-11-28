@@ -1,4 +1,4 @@
-// name-convention-summary.mjs <r31-json>... — PREREG-ROUND31-CONVENTION.md: pooled R, P, FB (OFF, ON), ΔR, ΔP, ΔFB with a document bootstrap
+// name-convention-summary.mjs <r31-or-r32-json>... — PREREG-ROUND31-CONVENTION.md (and ROUND32: with r31 rows beside, H5 = R(on) - R(r31)): pooled R, P, FB (OFF, ON), ΔR, ΔP, ΔFB with a document bootstrap
 // (2,000 resamples, seed 20261128, 95% percentile), and the falsifier K (the rung's pooled ΔP against the 95th percentile of the random arms').
 import fs from "node:fs";
 const docs = process.argv.slice(2).flatMap((f) => JSON.parse(fs.readFileSync(f, "utf8")));
@@ -10,6 +10,7 @@ const boot = (f) => { const v = []; for (let b = 0; b < 2000; b++) { const rs = 
 const st = stats(docs);
 const out = { documents: docs.length, fired: docs.filter((d) => d.fired).length, refusedSurfaces: docs.reduce((a, d) => a + d.refused, 0), ...st,
   ci: { dR: boot((rs) => stats(rs).dR), dP: boot((rs) => stats(rs).dP), dFB: boot((rs) => stats(rs).dFB) } };
+if (docs.every((d) => d.r31)) { const h5 = (rs) => R(pool(rs, (r) => r.on)) - R(pool(rs, (r) => r.r31)); const p5 = (rs) => P(pool(rs, (r) => r.on)) - P(pool(rs, (r) => r.r31)); out.H5 = { dR_vs_r31: h5(docs), ci: boot(h5), dP_vs_r31: p5(docs), ciP: boot(p5), r31: { P: P(pool(docs, (r) => r.r31)), R: R(pool(docs, (r) => r.r31)), FB: pool(docs, (r) => r.r31).FB } }; }
 const withK = docs.filter((d) => Array.isArray(d.K) && d.K.length);
 if (withK.length) {
   const nK = withK[0].K.length; const kdP = [];

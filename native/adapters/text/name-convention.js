@@ -83,3 +83,14 @@ export function refusedByConvention(surfaces, { forms } = {}) {
   }
   return refused;
 }
+/** Round 32's `support` feature: over a row's surfaces, `propn` if a token's lower-case form is PROPN-dominant in the prior, else `unseen` if a
+ *  token is not in the prior, else `common` (every token known, none PROPN). The same tokens and the same prior as FIGURE above. */
+export function supportOf(surfaces, { forms } = {}) {
+  const dominant = dominantOf(forms); let unseen = false;
+  for (const s of surfaces ?? []) for (const t of String(s ?? "").split(/\s+/).map(word).filter(Boolean)) {   // regex-ok: whitespace, the capital tier's own token split
+    const d = dominant(t.toLowerCase());
+    if (d === "PROPN") return "propn";
+    if (d === null) unseen = true;
+  }
+  return unseen ? "unseen" : "common";
+}

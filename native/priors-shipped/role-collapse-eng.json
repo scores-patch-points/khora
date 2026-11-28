@@ -1,0 +1,70 @@
+{
+ "schema": "RoleCollapse@1",
+ "language": "eng",
+ "says": "for a cast row no pronoun binds: how often each feature value comes with a gold name versus a gold common noun",
+ "ground": "UD_English-GUM train (en_gum-ud-train.conllu), each document plain and with every gold NOUN capitalized",
+ "sha256": "4672bc446b6f516877b023384d2e33952bb012aca052506b197c92ddba67b78e",
+ "documents": 394,
+ "rows": 24393,
+ "rowsBound": 806,
+ "rowsUnlabelled": 1240,
+ "features": [
+  "support",
+  "ground",
+  "multi",
+  "recur"
+ ],
+ "smoothing": "Laplace +1 per value (applied at read time, adapters/text/role-collapse.js)",
+ "builder": "identity/novels/build-role-collapse.mjs",
+ "licence": "GUM: CC BY 4.0 (the text); only counts are kept here",
+ "prior": {
+  "name": 8425,
+  "other": 15968
+ },
+ "likelihood": {
+  "support": {
+   "propn": {
+    "name": 3547,
+    "other": 483
+   },
+   "unseen": {
+    "name": 3305,
+    "other": 3709
+   },
+   "common": {
+    "name": 1573,
+    "other": 11776
+   }
+  },
+  "ground": {
+   "no": {
+    "name": 3461,
+    "other": 585
+   },
+   "yes": {
+    "name": 4964,
+    "other": 15383
+   }
+  },
+  "multi": {
+   "yes": {
+    "name": 4399,
+    "other": 2771
+   },
+   "no": {
+    "name": 4026,
+    "other": 13197
+   }
+  },
+  "recur": {
+   "yes": {
+    "name": 2881,
+    "other": 4186
+   },
+   "no": {
+    "name": 5544,
+    "other": 11782
+   }
+  }
+ }
+}

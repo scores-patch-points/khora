@@ -54,7 +54,8 @@ import { renderCard } from "../adapters/text/folded-card.js";
 import { createDeclensionFolder, createRunBreak } from "../adapters/text/declension.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
-import { nameConventionOf, refusedByConvention } from "../adapters/text/name-convention.js";
+import { nameConventionOf, refusedByConvention, supportOf } from "../adapters/text/name-convention.js";
+import { collapseRoles } from "../adapters/text/role-collapse.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { autonymOf } from "./language-names.js";
@@ -343,7 +344,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, caseProDrop, pronounGuess, nameConvention, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, caseProDrop, pronounGuess, nameConvention, roleCollapse, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -590,6 +591,24 @@ export function readWith(text, { address = null, category = null, language = nul
       speakerBindings = sp.mentions.map((m) => ({ a: m.a, b: m.b, cl: m.kind === "addressee" ? "one:addressee" : "one:speaker", kind: m.kind, via: m.via }));
     } catch (e) { speakerBindings = { gap: "speakers_failed", detail: String(e?.message ?? e).slice(0, 120) }; }
   }
+  // A SPAN'S ROLE HELD OPEN UNTIL AN ACT COLLAPSES IT (opt-in `readerOptions.roleCollapse`, round 32: identity/novels/PREREG-ROUND32-SUPERPOSITION.md;
+  // adapters/text/role-collapse.js). The pronoun rungs above ran on the uncollapsed cast; a row a pronoun binds to collapses to a being (the act
+  // measured it); every other row collapses here, at the writing of the cast, by its posterior. A row collapsed to not-a-name stays `heard`.
+  let roleCollapseReport = null;
+  if (roleCollapse && (languageRead.source === "declared" || languageRead.source === "heard") && formUsageFor(stem, pr.posPrior)) {
+    try {
+      const forms = pr.posPrior?.forms;
+      const groundFired = !!nameConventionOf(cuts, { forms, conventions: pr.conventions, spread: priorJson(`convention-spread-${stem}.json`) }).fired;
+      const bound = new Set([...(pronounsPresence ?? []), ...(pronounsGuess ?? [])].map((b) => b?.ref).filter(Boolean));
+      const model = priorJson(`role-collapse-${stem}.json`);
+      const r = collapseRoles(cast, { bound, supportOfRow: (row) => supportOf(row.allSurfaces ?? [row.surface], { forms }), groundFired, model, mode: roleCollapse === "features" ? "features" : "collapse" });
+      // the falsifier's control arm (PREREG K) passes `{ demote(unboundRows, n) }`: the same number of rows, its own choice
+      const demote = typeof roleCollapse?.demote === "function" ? roleCollapse.demote(cast.filter((row) => !bound.has(row.ref)), r.demote.length) : r.demote;
+      const out = new Set(demote.map((row) => row.ref));
+      if (out.size) { cast = cast.filter((row) => !out.has(row.ref)); heardRows = [...heardRows, ...demote.map((row) => ({ ...row, standing: "heard" }))]; }
+      roleCollapseReport = { groundFired, model: model?.schema === "RoleCollapse@1" ? { documents: model.documents ?? null, sha256: model.sha256 ?? null } : { gap: "no_role_collapse_prior" }, rows: r.report, demoted: [...out] };
+    } catch (e) { roleCollapseReport = { gap: "role_collapse_failed", detail: String(e?.message ?? e).slice(0, 160) }; }
+  }
   const entry = {
     ...empty,
     readCharacters: str.length,
@@ -617,7 +636,8 @@ export function readWith(text, { address = null, category = null, language = nul
   Object.defineProperty(entry, "reader", { value: R, enumerable: false });
   Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
   Object.defineProperty(entry, "formUsageReport", { value: formUsageReport, enumerable: false });
-  if (nameConventionReport) Object.defineProperty(entry, "nameConventionReport", { value: nameConventionReport, enumerable: false });   // round 31: the convention rung, auditable, off the wire
+  if (nameConventionReport) Object.defineProperty(entry, "nameConventionReport", { value: nameConventionReport, enumerable: false });
+  if (roleCollapseReport) Object.defineProperty(entry, "roleCollapseReport", { value: roleCollapseReport, enumerable: false });   // round 32: each row's features, posterior and collapsing act, off the wire   // round 31: the convention rung, auditable, off the wire
   if (presenceInputs) Object.defineProperty(entry, "presenceInputs", { value: presenceInputs, enumerable: false });
   // THE REFERENT LEDGER (opt-in, `referents: true`; off, the entry is byte-identical to before): the same reading projected onto referents, each inserted once and
   // addressed by its event, a span only its address, an edge between referents per statement; what the spans cannot decide is a typed gap (adapters/text/reading-referents.js).
