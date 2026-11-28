@@ -1,0 +1,15 @@
+{
+ "fittedOn": "dev-pairs.json: 86 page readings of 10 development documents, 80 and 65 dpi grey renders",
+ "grid": "docKnown 0,2,3 x maxEdits 1,2 x floor -22..-6 x margin 0,1,2,4; chosen by greatest fixed - broken on development pages",
+ "dials": {
+  "floor": -6,
+  "margin": 2,
+  "docKnown": 2,
+  "maxEdits": 2
+ },
+ "net": 285,
+ "fixed": 519,
+ "broken": 234,
+ "wrongBefore": 2555,
+ "tokens": 33664
+}
