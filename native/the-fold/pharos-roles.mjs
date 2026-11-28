@@ -23,7 +23,8 @@ export const ROLE_KINDS = Object.freeze([
   { kind: POLARITY_KIND, cell: "SIG·Figure", why: "which predications a negator was read onto (UD Polarity=Neg / PronType=Neg), with the negators the read refused to place: a mark on the reading, not a judgement" },
   { kind: QUESTION_KIND, cell: "SIG·Figure", why: "each sentence's form (wh, polar, deliberative, statement), what a wh-word admits and the modality: read by the language's question adapter; a nomination" },
 ]);
-const QUESTION_ADAPTERS = { eng: "../adapters/text/question-grammar.en.js" };   // a language with no adapter is a typed gap, never English
+// the question adapters khora holds (adapters/text/question-grammar.<lang>.js). A language with none is a typed gap, never English. `model`: the adapter parses with the English parser prior; the Spanish one is a DECLARED closed-class fallback and says so in its own giver.
+const QUESTION_ADAPTERS = { eng: { module: "../adapters/text/question-grammar.en.js", model: true }, spa: { module: "../adapters/text/question-grammar.es.js", model: false } };
 let ENG = null;
 async function englishModel() {   // the model question-grammar.en.js was built on (english-parser.js, parser-eng-ewt.json), through the prior door's home
   if (ENG) return ENG; const f = path.join(priorsHome().dir ?? "", "parser-eng-ewt.json"); if (!fs.existsSync(f)) return (ENG = { gap: "no_question_parser_prior", why: `parser-eng-ewt.json is not in ${priorsHome().dir}` });
@@ -46,8 +47,8 @@ export async function shapeOf(text, { language = "eng" } = {}) {
   const polarity = { negated, gaps: pgaps, source };
   let question = null;
   if (!QUESTION_ADAPTERS[language]) gaps.push({ gap: "no_question_grammar", language, why: `no question adapter for ${language} (adapters/text/question-grammar.<lang>.js); the form of its sentences is not read, never read as English` });
-  else { const m = await englishModel(); if (m.gap) gaps.push(m); else { const { readQuestion } = await import(QUESTION_ADAPTERS[language]), cuts = cutsOf(g, text);
-    question = { sentences: cuts.map(([a, b], s) => { const q = readQuestion(text.slice(a, b), { model: m.model }); return { s, form: q.form, admits: q.admits, modality: q.modality }; }), giver: "adapters/text/question-grammar.en.js (UD English-EWT parser + English closed classes, CGEL)" }; } }
+  else { const A = QUESTION_ADAPTERS[language], m = A.model ? await englishModel() : { model: null }; if (m.gap) gaps.push(m); else { const Q = await import(A.module), cuts = cutsOf(g, text);
+    question = { sentences: cuts.map(([a, b], s) => { const q = Q.readQuestion(text.slice(a, b), { model: m.model }); return { s, form: q.form, admits: q.admits, modality: q.modality }; }), giver: Q.default?.giver ?? Q.readQuestion("", { model: m.model }).giver ?? A.module }; } }
   return { roles, polarity, question, gaps };
 }
 
