@@ -8,7 +8,7 @@
 // WHY THIS EXISTS. READING-SPEC S13 drew the boundary for "quantum-style"
 // mathematics on this record: a density matrix built from counts reduces to
 // Bayes (no interference term is estimable from frequencies), and phase is
-// earned only from dynamics (kernel/dmd.js). What S13 named as the ONE
+// earned only from dynamics (kernel/koopman.js). What S13 named as the ONE
 // quantum-style quantity computable from exactly our data — and left unbuilt
 // — is contextuality: the obstruction to gluing per-context readings into one
 // global assignment. This module is that, in its possibilistic form. No

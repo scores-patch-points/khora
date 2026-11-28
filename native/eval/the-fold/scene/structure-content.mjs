@@ -1,6 +1,6 @@
 import fs from "node:fs";
 const J = await import("/Users/mlacy/Documents/3.0/janus/native/organs/kind-induction.js");
-const { dmd } = await import("/Users/mlacy/Documents/3.0/khora/native/kernel/dmd.js");
+const { koopmanModes } = await import("/Users/mlacy/Documents/3.0/khora/native/kernel/koopman.js");
 const { induceKinds } = J;
 
 // structure-content.mjs — THE OMNIMODAL STRUCTURE/CONTENT PARSER.
@@ -74,9 +74,9 @@ export function parseStructureContent(read, { genre = "generic" } = {}) {
     positions: hashSet((k.members ?? []).map((m) => `sc-seat@${m}`)),
   }));
 
-  // trajectory modes — settle/cycle, the DMD bound (structure is bounded).
+  // trajectory modes — settle/cycle, the Koopman bound (structure is bounded).
   const trav = claims.map((c, i) => (c.position.s || c.position.o ? 1 : 0));
-  const h = (arr) => { const X = arr.slice(0, -1).map((v) => [v]); const Xp = arr.slice(1).map((v) => [v]); try { const r = dmd(X, Xp, { rank: 1 }); return r.eigenvalues?.[0]?.magnitude ?? 0; } catch { return 0; } };
+  const h = (arr) => { const X = arr.slice(0, -1).map((v) => [v]); const Xp = arr.slice(1).map((v) => [v]); try { const r = koopmanModes(X, Xp, { rank: 1 }); return r.eigenvalues?.[0]?.magnitude ?? 0; } catch { return 0; } };
   const mode = h(trav);
 
   return { genre, structure: { seatsUsed, kindPositions, mode, settled: mode >= 0 && mode <= 1 }, content: { cast, claims } };

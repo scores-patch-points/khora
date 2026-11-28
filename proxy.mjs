@@ -36,7 +36,7 @@ import { resolveTarget } from "./native/organs/target-resolve.js";
 import { discoverCompanyKinds } from "./native/organs/kind-standing.js";
 import { arrowOf } from "./native/kernel/arrow.js";
 import { consequentialSurprise } from "./native/kernel/consequential-surprise.js";
-import { dmd } from "./native/kernel/dmd.js";
+import { koopmanModes } from "./native/kernel/koopman.js";
 
 // The caller's own tier ask for an ENGINE turn (x-er7-tier): "exact" pins
 // the asked model for every draw; anything else lets Heimdall's mouth pick
@@ -940,7 +940,7 @@ async function handleRequest(req, res) {
     req.on("end", () => {
       try {
         const parsed = JSON.parse(body || "{}");
-        const doors = { discoverCompanyKinds, arrowOf, consequentialSurprise, dmd };
+        const doors = { discoverCompanyKinds, arrowOf, consequentialSurprise, koopmanModes };
         const opts = {
           pattern: parsed.pattern ?? null,
           allowNearMiss: parsed.allowNearMiss !== false,

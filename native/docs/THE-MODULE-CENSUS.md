@@ -682,8 +682,8 @@ a verb.
 | contest.js | bind an unlabelled deixis to its best-scoring candidate; co-presence raises the bar never the score | CON·Figure | reasoned, corroborated by 3 independent callers self-declaring this exact cell | adjudicate+nullAdjudicate; proven medium-general (text/film/music) |
 | continuation.js | sediment a recurring predictive pattern from a heard stream | SIG·Pattern | reasoned | sedimentPrior/mergePriors/sedimentShapePrior |
 | continuation.js | predict/generate likely continuation, score actual events prequentially | EVA·Pattern | reasoned | matches THE-CORE-MECHANISM's PREDICTION family; observed/generated kept apart |
-| dmd-stream.js | — | — | not-applicable | pure streaming linear-algebra substrate |
-| dmd.js | — | — | not-applicable | pure batch DMD math library |
+| koopman-stream.js | — | — | not-applicable | pure streaming linear-algebra substrate |
+| koopman.js | — | — | not-applicable | pure batch DMD math library |
 | dynamics.js | — | — | not-applicable | diagnostic/summary reader, no operator move itself |
 | emergent-terrain.js | — | — | not-applicable | incremental index/orchestrator spanning 4 terrains at once, deliberately multi-cell |
 | entity-kind-induction.js | discover candidate kinds as stable interaction-affinity basins, validated against random-subset null | SIG·Pattern | **self-declared**: "SIG·Pattern — signing a recurring kind, provisionally" | — |
@@ -825,7 +825,7 @@ Note on method: 6 files self-declare a CELL/comment (relations.js, declension.js
 | perspective-claims.js | pick an arrangement-end's claim key, priority-ordered among candidates | DEF·Figure | reasoned | — |
 | surfaces.js | extract candidate referent surfaces & fold name-variant coreference | SIG·Ground | **self-declared**: "SIG · Void · Tending — candidate referent surfaces, from the text's own statistics" | bundles namesCorefer/discoverReferents |
 | segments.js | find structural boundaries (headings/outline) by form alone | SEG·Ground | **self-declared**: "SEG · Field · Clearing — structural boundaries found by form and nothing else" |  |
-| contextual-dmd.js | decompose a windowed motif-count sequence into dynamic modes | SYN·Pattern | reasoned | construction whose conclusion is tested for recurrence-stability |
+| contextual-koopman.js | decompose a windowed motif-count sequence into dynamic modes | SYN·Pattern | reasoned | construction whose conclusion is tested for recurrence-stability |
 | identity-evidence.js | generate appositional identity support (descriptor<->name) | CON·Figure | reasoned | — |
 | identity-evidence.js | attack a live identity alternative via separated co-presentation | EVA·Figure | reasoned | refutation signal |
 | priors.js (adapters/text) | — | — | not-applicable | pure received closed-class data tables, each entry carries _META.giver |

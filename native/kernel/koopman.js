@@ -5,39 +5,39 @@ extended in such a way as to include classical Hamiltonian mechanics,
 or, more generally, systems defining a steady n-dimensional flow of a 
 fluid of positive density.”
  *
- * This file implements the DMD operator, a method for approximating the eigenvectors and eigenvalues of a dynamical system.  The DMD operator is used to analyze the dynamics of a system and to understand the system's behavior.  My teaching, however, emphasizes the importance of understanding the underlying mathematical principles that govern the DMD operator's application.
+ * This file implements the Koopman operator, a method for approximating the eigenvectors and eigenvalues of a dynamical system.  The Koopman operator is used to analyze the dynamics of a system and to understand the system's behavior.  My teaching, however, emphasizes the importance of understanding the underlying mathematical principles that govern the Koopman operator's application.
  *
  * — the engineering record below, kept whole —
  */
-// native/kernel/dmd.js — Dynamic Mode Decomposition: the coherent modes of a
-// Handle: Koopman — after the operator whose eigenvalues DMD approximates: modes with their own growth rate and their own frequency. Amendment XVII.
+// native/kernel/koopman.js — Dynamic Mode Decomposition: the coherent modes of a
+// Handle: Koopman — after the operator whose eigenvalues Koopman approximates: modes with their own growth rate and their own frequency. Amendment XVII.
 // state trajectory, each with its own growth rate and its own FREQUENCY.
 //
 // WHY THIS IS HERE, and what it closes. A received prior holds a form's class
 // in superposition ({AUX:154, VERB:335}) and a frequency table can never say
 // more than a magnitude — counts give |amplitude|^2 and throw the PHASE away,
 // which is why a density-matrix treatment built on counts reduces exactly to
-// Bayes' rule and adds nothing but notation. DMD gets the missing quantity
+// Bayes' rule and adds nothing but notation. Koopman gets the missing quantity
 // from somewhere a count cannot reach: the DYNAMICS. Its eigenvalues are
 // complex, lambda = |lambda| * e^(i*theta) — magnitude is growth or decay,
-// argument is frequency. DMD eigenvalues approximate KOOPMAN eigenvalues, and
+// argument is frequency. Koopman eigenvalues approximate KOOPMAN eigenvalues, and
 // the Koopman operator is the linear representation of a nonlinear system in
 // observable space, so the Hilbert-space structure here is measured rather
 // than asserted.
 //
-// THE WHEEL (native/docs/THE-WHEEL.md): DMD decomposes the RIM's dynamics —
+// THE WHEEL (native/docs/THE-WHEEL.md): Koopman decomposes the RIM's dynamics —
 // the Fold grain, the difference the being made, at its own growth and its
 // own frequency. The fold is one (1), the mode the many (n) excite.
 //
 // WHY DECOMPOSITION AND NOT A DEEPER SPREAD. memory/activation.js rejects
 // multi-hop spreading activation by name: a diffuse spread "pools inside a
 // passage's own dense vocabulary and drowns the distant target," so it stops
-// at ONE recurrent hop. That objection is about SPREADING. DMD does not
+// at ONE recurrent hop. That objection is about SPREADING. Koopman does not
 // spread; it decomposes a trajectory that has already been read. The flood
 // argument does not transfer, which is the reason to decompose rather than to
 // lift the one-hop cap.
 //
-// CAUSALITY, AND THE VARIANT THIS FILE IS. Batch DMD over a whole reading
+// CAUSALITY, AND THE VARIANT THIS FILE IS. Batch Koopman over a whole reading
 // consumes the future, which this repo's memory law forbids ("computed with
 // nothing from the future"). The functions here are the BATCH core, written
 // to be correct and testable in isolation; a causal consumer must feed them
@@ -63,7 +63,7 @@ export const transpose = (M) => {
 
 export const matmul = (A, B) => {
   const m = rows(A), k = cols(A), n = cols(B);
-  if (k !== rows(B)) throw new TypeError(`dmd.matmul: inner dimensions disagree (${k} vs ${rows(B)})`);
+  if (k !== rows(B)) throw new TypeError(`koopmanModes.matmul: inner dimensions disagree (${k} vs ${rows(B)})`);
   const out = zeros(m, n);
   for (let i = 0; i < m; i += 1) {
     for (let p = 0; p < k; p += 1) {
@@ -272,7 +272,7 @@ export const eigenvalues = (Ain, { iterations = 500, tol = 1e-12 } = {}) => {
 };
 
 /**
- * dmd — the decomposition itself.
+ * koopmanModes — the decomposition itself.
  *
  * @param {number[][]} X  states 0..n-2 as columns (observables x snapshots)
  * @param {number[][]} Xp states 1..n-1 as columns, same shape
@@ -285,12 +285,12 @@ export const eigenvalues = (Ain, { iterations = 500, tol = 1e-12 } = {}) => {
  * @param {number} [options.dt] sample spacing, for continuous-time rates
  * @returns {{eigenvalues: Array<{re,im,magnitude,frequency,growth}>, rank: number, operator: number[][]}}
  */
-export const dmd = (X, Xp, { rank, dt = 1, relTol = null } = {}) => {
+export const koopmanModes = (X, Xp, { rank, dt = 1, relTol = null } = {}) => {
   const numerical = rank === "numerical";
   if (!numerical && (!Number.isInteger(rank) || rank < 1))
-    throw new TypeError('dmd: rank is declared — an integer model order, or "numerical" to derive it from the spectrum; never a silent default');
+    throw new TypeError('koopmanModes: rank is declared — an integer model order, or "numerical" to derive it from the spectrum; never a silent default');
   if (rows(X) !== rows(Xp) || cols(X) !== cols(Xp))
-    throw new TypeError("dmd: X and X' must have the same shape");
+    throw new TypeError("koopmanModes: X and X' must have the same shape");
   const { U, s, V, rank: r } = economySVD(X, { rank: numerical ? Infinity : rank, relTol });
   if (r === 0) return Object.freeze({ eigenvalues: [], rank: 0, operator: [] });
 

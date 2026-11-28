@@ -27,7 +27,7 @@
 // candidate regions itself — figure/ground by deviation from the grid's own
 // mean, connected components (kernel figureRegions), the SAME [x,y,w,h]
 // address shape the parent certifies — and matches each region's shadow/echo
-// against each concept's DMD framework. A photograph with a dog AND a cat is
+// against each concept's Koopman framework. A photograph with a dog AND a cat is
 // two regions, each named where it is; nothing assumes a photograph is one
 // thing. The fast path is a MEMORY READ, and says so in its standing.
 //
@@ -64,7 +64,7 @@ import {
   SERIES_LEN,
 } from "../kernel/shadow-echo.js";
 import { load, loadColor } from "../adapters/image/material.js";
-import { contextualModes } from "../adapters/text/contextual-dmd.js";
+import { contextualModes } from "../adapters/text/contextual-koopman.js";
 import { referentForm, referentIdentity } from "../adapters/text/surfaces.js";
 import { colorNameOf, loadColorNamePrior } from "../kernel/color-name-space.js";
 import {
@@ -345,8 +345,8 @@ export function teachSeries(store, concept, series, { source = null, label = nul
 // ── the text face: the same shadow/echo over the material's own motifs ────
 // SHADOW of text = the motif-density profile across reading-order windows
 // (WHERE in the text the motifs cluster); ECHO of text = the magnitudes of
-// the modes the windowed motif observations excite (contextual-dmd's own
-// decomposition — the DMD this codebase already carries). Windows are the
+// the modes the windowed motif observations excite (contextual-koopman's own
+// decomposition — the Koopman this codebase already carries). Windows are the
 // text adapters' own per-unit motif-count Maps, exactly the observations
 // contextualModes consumes. A passage's regions are figureSegments over the
 // density profile — WHERE in the text the thing is said.
@@ -606,7 +606,7 @@ export function hueClassRegions(rgb, w, h, { bins = 12, minArea = 32 } = {}) {
 // child's color face. The dominant hue is the chroma-weighted CIRCULAR MEAN
 // of the region's hues (measured: a bin-center estimate put red — which
 // sits at the wheel's wrap boundary — closer to orange; the circular mean
-// is boundary-honest), and the wheel's DMD navigation names it.
+// is boundary-honest), and the wheel's Koopman navigation names it.
 export function dominantColorName(rgb, w, h, region) {
   const [x, y, cw, ch] = region;
   let cosSum = 0;
@@ -754,7 +754,7 @@ export function recognizeGridColor(store, grid, rgb, w, h) {
     const recognized = Object.keys(concepts).filter((c) => concepts[c].verdict === "recognized");
     const node = { region, area, via: via ?? "luminance", recognized, concepts, parts: [] };
     // the STANDARD name of the region's color — the child says "red", not
-    // just a hue vector; the wheel's DMD navigation discloses the name and
+    // just a hue vector; the wheel's Koopman navigation discloses the name and
     // the between-reading. A hue-class region's color is read from ITS OWN
     // masked crop (measured: the bbox's corners held the overlapping
     // square's blue, and the disc was named pink — the ground has no

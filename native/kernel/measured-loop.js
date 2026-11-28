@@ -11,14 +11,14 @@
 // be MEASURED the same way every other stopping rule here is, not typed as
 // a constant.
 //
-// THE MEASURE, reused whole: `kernel/dmd-stream.js`'s own streaming Dynamic
+// THE MEASURE, reused whole: `kernel/koopman-stream.js`'s own streaming Dynamic
 // Mode Decomposition — the causal, one-snapshot-at-a-time formulation this
 // kernel already carries for reading a stream's own modes. A caller reports
 // ONE NUMBER per round: how much is still unresolved (open disputes, live
 // findings, whatever the caller's domain counts). Pushed as a 1-dimensional
-// state, the streaming DMD's own eigenvalue IS the measured growth rate of
+// state, the streaming Koopman's own eigenvalue IS the measured growth rate of
 // that count round over round — nothing invented here, the same `modes()`
-// dmd-stream.js already proves equals batch DMD over the prefix.
+// koopman-stream.js already proves equals batch Koopman over the prefix.
 //
 //   growth < 0   the issue count is measurably decaying  -> keep going
 //   growth ~ 0   nothing is moving                        -> STOP: converged
@@ -26,14 +26,14 @@
 //                (a repair that measurably makes things worse gets no more
 //                budget, whatever budget remains)
 //
-// `insufficient_pairs`/`degenerate_gram` (dmd-stream.js's own typed gaps,
+// `insufficient_pairs`/`degenerate_gram` (koopman-stream.js's own typed gaps,
 // fewer than two rounds or a state that never moved at all) read as
 // "continue" here — the measured test needs at least two rounds of history
 // before it can measure anything, so the loop is never stopped on a
 // measurement that was never taken.
 //
 //   a state that returns   -> STOP: cycling (the last rounds repeat the
-//                rounds before them exactly; a 1-D DMD fit reads such a
+//                rounds before them exactly; a 1-D Koopman fit reads such a
 //                limit cycle as decay, so it is found by equality instead)
 //
 // A HARD CEILING still bounds every loop this module makes (P9: a budget is
@@ -42,7 +42,7 @@
 // always stop on "converged" or "diverging" well before it, and a loop that
 // only ever stops on the ceiling is itself worth a look.
 
-import { createStreamingDmd } from "./dmd-stream.js";
+import { createStreamingKoopman } from "./koopman-stream.js";
 
 /** A growth this close to zero reads as "not moving" — this is a numerical
  * tolerance for floating-point noise around an exact fixed point, never a
@@ -66,7 +66,7 @@ export const VERDICTS = Object.freeze({
  * The smallest period p >= 2 for which the last p rounds repeat the p rounds
  * before them EXACTLY (and are not all one value), or 0.
  *
- * A one-dimensional DMD fit cannot see a limit cycle: 4,2,4,2 fits a
+ * A one-dimensional Koopman fit cannot see a limit cycle: 4,2,4,2 fits a
  * decaying mode on every prefix and the loop ran to the ceiling, which this
  * module's header calls the safety floor and not the operative stop. A state
  * that returns to the very rounds it just left is a repeated state, found by
@@ -91,20 +91,20 @@ const cyclePeriod = (rounds) => {
  * makeMeasuredLoop({ ceiling, relTol }) — one loop's own convergence
  * instrument. `ceiling` (required, P9) is the hard safety floor: the number
  * of rounds after which the loop stops regardless of what the measure says.
- * `relTol` is dmd-stream.js's own rank-truncation tolerance, passed through
+ * `relTol` is koopman-stream.js's own rank-truncation tolerance, passed through
  * unchanged (never re-derived here).
  */
 export function makeMeasuredLoop({ ceiling, relTol = 1e-10 } = {}) {
   if (!Number.isFinite(ceiling) || ceiling < 1)
     throw new TypeError("makeMeasuredLoop: ceiling is the declared safety floor under the measured test (P9) — every loop is bounded, never implicitly");
-  const dmd = createStreamingDmd({ dims: 1, dt: 1 });
+  const koopmanModes = createStreamingKoopman({ dims: 1, dt: 1 });
   const rounds = [];
 
   /** Report this round's own count of what is still unresolved. */
   function push(issueCount) {
     if (!Number.isFinite(issueCount) || issueCount < 0)
       throw new TypeError("makeMeasuredLoop.push: the caller's own non-negative count of what remains unresolved");
-    dmd.push([issueCount]);
+    koopmanModes.push([issueCount]);
     rounds.push(issueCount);
   }
 
@@ -119,7 +119,7 @@ export function makeMeasuredLoop({ ceiling, relTol = 1e-10 } = {}) {
     const period = cyclePeriod(rounds);
     if (period) return Object.freeze({ continue: false, verdict: VERDICTS.CYCLING, rounds: n, period });
     if (n >= ceiling) return Object.freeze({ continue: false, verdict: VERDICTS.CEILING, rounds: n });
-    const m = dmd.modes({ rank: 1, relTol });
+    const m = koopmanModes.modes({ rank: 1, relTol });
     if (m.gap) return Object.freeze({ continue: true, verdict: VERDICTS.INSUFFICIENT_HISTORY, rounds: n, gap: m.gap });
     const top = m.eigenvalues[0];
     if (top.growth > STILLNESS_TOLERANCE) return Object.freeze({ continue: false, verdict: VERDICTS.DIVERGING, rounds: n, growth: top.growth });

@@ -1,23 +1,23 @@
-// native/adapters/text/phasepost-dmd.js — the adapter that was missing: a
+// native/adapters/text/phasepost-koopman.js — the adapter that was missing: a
 // stream of already-extracted, still-revisable relations, classified one
 // by one into the engine's 27 cells (phasepost.js), turned into the
-// numeric trajectory contextual-dmd.js's own `contextualModes` already
+// numeric trajectory contextual-koopman.js's own `contextualModes` already
 // knows how to decompose. Nothing new is computed here — this module
 // composes two already-real, already-tested organs; it owns only the
 // GLUE, and the glue is small on purpose.
 //
 // WHY THIS DID NOT ALREADY EXIST, checked rather than assumed (the-fold
 // POLICIES.md P229's browser-verification pass, 2026-09-15): the two real,
-// measured DMD drivers that exist — eval/salience-dmd.mjs and this
-// directory's own contextual-dmd.js — both decompose LEXICAL SALIENCE
+// measured Koopman drivers that exist — eval/salience-koopmanModes.mjs and this
+// directory's own contextual-koopman.js — both decompose LEXICAL SALIENCE
 // trajectories (word/motif recurrence). Neither has ever been pointed at
 // phasepost.js's 27-cell classifications. So "the phaseposts, as the
-// measured output of DMD run over a trajectory of revisable
+// measured output of Koopman run over a trajectory of revisable
 // classifications" — the synthesis this file's own CLAUDE.md section
 // ("Cognition takes place with the phaseposts") already names as the
 // destination — was a stated goal, not yet a wired pipeline. This module
 // is that wiring, nothing more: it does not touch phasepost.js, cube.js,
-// contextual-dmd.js, or dmd.js, and it introduces no new mathematics.
+// contextual-koopman.js, or koopman.js, and it introduces no new mathematics.
 //
 // THE UNIT IS ONE ACT, BY DEFAULT — occurrence-level, the same grain
 // phasepost.js's own header already commits to ("GRAIN IS
@@ -42,21 +42,21 @@
 //
 // THE UNIT'S OWN TIME STEP IS NEVER DELETED FOR BEING UNCERTAIN. A unit
 // whose only edge turned out contested still occupies a real position in
-// the trajectory — an all-zero snapshot — because DMD's own math depends
+// the trajectory — an all-zero snapshot — because Koopman's own math depends
 // on uniform, ordered time spacing; silently skipping an uncertain moment
 // would misdate everything after it. Only an all-excluded PREFIX or
 // SUFFIX changes what the basis or the windowing measure; contextual-
-// dmd.js's own `dmdWindow` already decides how much of the trajectory a
+// koopman.js's own `dmdWindow` already decides how much of the trajectory a
 // causal read should actually spend, and this module does not
 // second-guess that.
 //
 // PURE. classify() is injected (phasepost.js::makePhasepost's own output
 // — never re-derived here), and edges arrive already in reading order;
 // this module preserves that order and adds none of its own, so the
-// causal guarantee dmd.js/contextual-dmd.js already carry ("a caller that
+// causal guarantee koopman.js/contextual-koopman.js already carry ("a caller that
 // hands it a whole book has read the future") is inherited unbroken.
 
-import { contextualModes } from "./contextual-dmd.js";
+import { contextualModes } from "./contextual-koopman.js";
 
 // A REAL COMPATIBILITY GAP, FOUND BUILDING THIS, AND FIXED AT ITS SOURCE
 // RATHER THAN PAPERED OVER HERE. The first cut of this module added a
@@ -105,7 +105,7 @@ export const cellLabel = (cell) => (cell && !cell.gap && cell.op && cell.grain ?
  *   edge, one unit — the finest honest grain). Returns a unit key; edges
  *   sharing a key land in the same snapshot, counts summed.
  *
- * `observations` is the sequence contextual-dmd.js's own `contextualModes`
+ * `observations` is the sequence contextual-koopman.js's own `contextualModes`
  * expects: one Map<cellLabel, count> per unit, in unit order — including
  * a unit whose only edges were excluded, which still contributes an empty
  * Map rather than a hole in the trajectory.
@@ -154,19 +154,19 @@ export function phasepostObservations(edges, { classify, unitOf = (edge, i) => i
  *   classification, only a trajectory.
  *
  * A REAL BUG, CAUGHT WHILE FIXING THE TESTS FOR THE SVO CORRECTION ABOVE,
- * NOT SHIPPED: `decompose()` (contextual-dmd.js) returns `observations` as
+ * NOT SHIPPED: `decompose()` (contextual-koopman.js) returns `observations` as
  * a bare COUNT on its gap paths (`{gap, observations: observations.
  * length}`) and omits the field entirely on success — a first draft here
  * spread `...out` last, so a gapped call silently exposed `observations`
  * as that ambiguous number while a successful call exposed nothing under
  * that name at all. This module's OWN richer meaning — the actual array
  * of per-unit Maps it built, useful on both outcomes — now always wins,
- * spread last and explicitly; contextual-dmd.js's own gap-count is
+ * spread last and explicitly; contextual-koopman.js's own gap-count is
  * redundant with `units.length` here regardless, so nothing is lost by
  * not exposing it under this name.
  *
  * This is the whole adapter: classify every edge, build the trajectory,
- * hand it to the SAME contextual-dmd.js this repo already trusts for
+ * hand it to the SAME contextual-koopman.js this repo already trusts for
  * lexical-salience modes. No new decomposition, no new windowing rule, no
  * new rank criterion — the only thing new is what the trajectory's
  * dimensions MEAN.

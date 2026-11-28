@@ -3,12 +3,12 @@
 //   Ostrom slots {actor, action, outcome}), NOT word-appearance surprisal. The Iliad
 //   seeds the holograph (the carried ground); the Odyssey is walked causally; a scene's
 //   opener = the first clause's delta, its closure = the max-delta (where belief was
-//   revised most), its type = the DMD of the scene's bayes stream. No model.
+//   revised most), its type = the Koopman of the scene's bayes stream. No model.
 import fs from "node:fs";
 const KHOR = "/Users/mlacy/Documents/3.0/khora";
 const { confirmedVerbSet, greekClauses } = await import(`${KHOR}/native/eval/lavar/greek.mjs`);
 const { createHolograph, admit, ABSENT } = await import(`${KHOR}/native/kernel/bayes-surprise.js`);
-const { dmd } = await import(`${KHOR}/native/kernel/dmd.js`);
+const { koopmanModes } = await import(`${KHOR}/native/kernel/koopman.js`);
 const posPrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/pos-grc.json", "utf8"));
 const casePrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/case-marking-grc.json", "utf8"));
 
@@ -38,7 +38,7 @@ for (const c of iliadClauses) admit(holo, factsOf(c));
 const B = clauses.map((c) => admit(holo, factsOf(c)).bayes);
 console.log(`EOT: ${clauses.length} Odyssey clauses · holograph seeded with ${iliadClauses.length} Iliad clauses\n`);
 
-// scenes: a boundary is a BLINK (Murch: the DMD of surprise) OR A SEAT-SET TURNOVER —
+// scenes: a boundary is a BLINK (Murch: the Koopman of surprise) OR A SEAT-SET TURNOVER —
 // a position the situation has not yet used (Ostrom: the ground = who is eligible to act).
 const length = (c) => String(c.verb ?? "").length + face(c.subject).length + face(c.object).length;
 const lens = clauses.map(length);
@@ -60,7 +60,7 @@ if (cur.length) scenes.push(cur);
 function timeClass(S) {
   if (S.length < 3) return { label: "(too short)" };
   const X = S.slice(0, -1).map((v) => [v]), Xp = S.slice(1).map((v) => [v]);
-  try { const r = dmd(X, Xp, { rank: 1 }); const lam = r.eigenvalues?.[0];
+  try { const r = koopmanModes(X, Xp, { rank: 1 }); const lam = r.eigenvalues?.[0];
     if (!lam || !Number.isFinite(lam.magnitude)) return { label: "indeterminate" };
     const mag = lam.magnitude, freq = Math.abs(lam.frequency ?? 0);
     return { label: freq > 1e-6 ? "RECURRING (cycling)" : mag > 1 ? "ONCE — still building" : "ONCE — finite (settled)", mag: +mag.toFixed(3), freq: +freq.toFixed(3) };

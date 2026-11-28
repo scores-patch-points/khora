@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import { confirmedVerbSet, greekClauses, nominalClass } from "../../lavar/greek.mjs";
 import { splitSentences } from "../../../adapters/text/spans.js";
-import { dmd, economySVD } from "../../../kernel/dmd.js";
+import { koopmanModes, economySVD } from "../../../kernel/koopman.js";
 
 const cellKey = (cell) => (cell ? `${cell.op}·${cell.grain}` : null);
 
@@ -139,10 +139,10 @@ export function makeGreekShadow(rawText, { posPrior, casePrior, dict = null, kin
   };
 
   // THE READ'S DYNAMICS, IN CELLS AS EIGENVALUES. The clause stream is a
-  // trajectory over the 27-cell spine; DMD (kernel/dmd.js, Koopman) decomposes
+  // trajectory over the 27-cell spine; Koopman (kernel/koopman.js, Koopman) decomposes
   // it into modes each with complex eigenvalue — |λ| is the cell's growth,
   // arg(λ) its FREQUENCY in the read's own flow. The trajectory's SVD basis U
-  // is DMD's own observable space: orthonormal, dense, built from the read
+  // is Koopman's own observable space: orthonormal, dense, built from the read
   // itself (never a hand-chosen weight). A word's shadow, projected onto U,
   // becomes a dense spectral signature — how the word loads the read's modes —
   // and sparse-cell saturation vanishes because the modes are orthonormal:
@@ -158,8 +158,8 @@ export function makeGreekShadow(rawText, { posPrior, casePrior, dict = null, kin
     if (T.length < 4) return { proj: (v) => v, eigenvalues: [] };
     const X = T.slice(0, -1);
     const Xp = T.slice(1);
-    const modeMap = dmd(X, Xp, { rank: "numerical", dt: 1 });
-    // U = the left singular vectors of the trajectory (DMD's observable basis).
+    const modeMap = koopmanModes(X, Xp, { rank: "numerical", dt: 1 });
+    // U = the left singular vectors of the trajectory (Koopman's observable basis).
     const { U, s: sing } = economySVD(X);
     const r = U.length ? U[0].length : 0;
     return {

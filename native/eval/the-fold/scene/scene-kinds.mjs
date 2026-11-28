@@ -6,7 +6,7 @@ import fs from "node:fs";
 const KHOR = "/Users/mlacy/Documents/3.0/khora";
 const { confirmedVerbSet, greekClauses, paradigmOf } = await import(`${KHOR}/native/eval/lavar/greek.mjs`);
 const { createHolograph, admit } = await import(`${KHOR}/native/kernel/bayes-surprise.js`);
-const { dmd } = await import(`${KHOR}/native/kernel/dmd.js`);
+const { koopmanModes } = await import(`${KHOR}/native/kernel/koopman.js`);
 const { induceKinds, frequencyBands } = await import(`${KHOR}/../janus/native/organs/kind-induction.js`);
 const posPrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/pos-grc.json", "utf8"));
 const casePrior = JSON.parse(fs.readFileSync("/Users/mlacy/Documents/3.0/janus/priors/case-marking-grc.json", "utf8"));

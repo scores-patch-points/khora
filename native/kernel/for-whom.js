@@ -16,7 +16,7 @@
 // the spokes, the span-free referent nodes. A for-whom is a being's
 // jurisdiction: identity exists only for-whom (S113), the spoke's witness.
 //
-// THE GATE IS THREE LEGS (2026-09-13, measured): DMD coherence (the
+// THE GATE IS THREE LEGS (2026-09-13, measured): Koopman coherence (the
 // trajectory has order-dependent structure above its shuffled null),
 // material discovery (it found the text at all), and QUESTION RELEVANCE
 // (its structure touches the question's terms — Bateson: a difference
@@ -36,11 +36,11 @@
 // back. Different for-whoms see different slices of it — an English-POS
 // for-whom, a Russian-POS for-whom, a reduced-clause for-whom, a
 // music-events for-whom — each with its own universe, each gated by
-// whether its trajectory finds DMD.
+// whether its trajectory finds Koopman.
 //
 //   node for-whom.mjs --for=english --ground=wp-work-prior-v4 <text>
 //   node for-whom.mjs --for=russian --ground=wp-work-prior-v4 <text>
-import { dmd } from "./dmd.js";
+import { koopmanModes } from "./koopman.js";
 
 // A pure SHA-256 (FIPS 180-4) so this organ loads in a browser as well as in Node: it was `node:crypto`'s createHash and the output
 // (first 16 hex chars of the digest) is byte-identical, so every for-whom id already minted still matches.
@@ -167,7 +167,7 @@ export function foldForWhom(fold, entry) {
 /** gateForWhomFold(fold, { nullDraws, nullSeed }) — a PROJECTION over the
  * folded state, never a recomputation: the discovery trajectory is read
  * from the running per-encounter map, the relevance from the running
- * count, and the DMD coherence from the folded trajectory. Nothing here
+ * count, and the Koopman coherence from the folded trajectory. Nothing here
  * re-scans the entries the fold has already absorbed. */
 export function gateForWhomFold(fold, { nullDraws = 40, nullSeed = 42, minDiscovered = 0, minRelevance = 0, minTrajectoryLength = 12 } = {}) {
   const trajectory = Object.freeze([...fold.byEncounter.entries()].sort((a, b) => encounterOrder(a[0], b[0])).map(([, n]) => n));
@@ -176,7 +176,7 @@ export function gateForWhomFold(fold, { nullDraws = 40, nullSeed = 42, minDiscov
   const totalDiscovered = fold.totalDiscovered;
   const relevance = fold.qTerms.length && totalDiscovered ? fold.relevantDiscovered / totalDiscovered : 0; // nothing discovered is 0, never NaN
   // THE COHERENCE LEG NEEDS A REAL TRAJECTORY (2026-09-13, measured): a
-  // rank-1 DMD on <12 points collapses real and null both to ~1.0 — the
+  // rank-1 Koopman on <12 points collapses real and null both to ~1.0 — the
   // leg is not evaluable, not "noise". Below the declared minimum, the
   // coherence leg is WITHHELD (a typed gap, never a false refusal); the
   // gate falls to the two legs that ARE evaluable (material + relevance).
@@ -235,7 +235,7 @@ export function relevanceOf(entries = [], qTerms = []) {
 }
 
 /** discoveryTrajectory(entries) — the for-whom's reading as a series: new
- * referents + relations per encounter. This is the SIGNAL DMD decomposes:
+ * referents + relations per encounter. This is the SIGNAL Koopman decomposes:
  * a for-whom that finds structure has a trajectory with real dynamics; a
  * for-whom whose priors match nothing is flat. */
 export function discoveryTrajectory(entries = []) {
@@ -249,9 +249,9 @@ export function discoveryTrajectory(entries = []) {
 }
 
 /** coherentMass(trajectory) — the Born-rule coherent mass of the
- * trajectory's dominant DMD mode: |λ|² of the largest mode. A trajectory
+ * trajectory's dominant Koopman mode: |λ|² of the largest mode. A trajectory
  * with real structure has a dominant mode; flat noise has none. Uses the
- * REAL dmd organ (kernel/dmd.js) — a trajectory as a 1-row state,
+ * REAL koopmanModes organ (kernel/koopman.js) — a trajectory as a 1-row state,
  * decomposed at rank 1, the single eigenvalue's magnitude squared. Same
  * mathematics the swarm uses; not an autocorrelation shortcut. */
 export function coherentMass(trajectory = []) {
@@ -259,7 +259,7 @@ export function coherentMass(trajectory = []) {
   if (n < 4) return 0;
   const X = trajectory.slice(0, -1).map((v) => [v]);
   const Xp = trajectory.slice(1).map((v) => [v]);
-  const r = dmd(X, Xp, { rank: 1 });
+  const r = koopmanModes(X, Xp, { rank: 1 });
   const lam = r.eigenvalues[0];
   if (!lam || !Number.isFinite(lam.magnitude)) return 0;
   return lam.magnitude * lam.magnitude;
@@ -270,7 +270,7 @@ export function coherentMass(trajectory = []) {
  * shuffling are not order-dependent signal. Declared draws + seed (the
  * null-arm's own discipline: a null drawn once is a null drawn zero
  * times). Returns the max coherent mass across the draws — the
- * false-positive floor for "this for-whom found DMD." */
+ * false-positive floor for "this for-whom found Koopman." */
 export function trajectoryNull(trajectory = [], { draws = 40, seed = 42 } = {}) {
   let s = seed >>> 0;
   const rng = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };

@@ -64,7 +64,7 @@ test("each family pays its own price; a wrong-family use is refused by name", ()
   assert.equal(familyAdmission({ family: "prediction" }).refused.type, "prequential_unframed");
   assert.equal(familyAdmission({ family: "prediction", prequential: { scored: "before" } }).ok, true);
   assert.equal(familyAdmission({ family: "prediction", witness: true }).refused.type, "no_witness_reading");
-  assert.equal(familyAdmission({ family: "prediction", witness: true, witnessAgainst: "dmd.js" }).ok, true);
+  assert.equal(familyAdmission({ family: "prediction", witness: true, witnessAgainst: "koopman.js" }).ok, true);
   assert.equal(familyAdmission({ family: "deduction" }).refused.type, "no_giver");
   assert.equal(familyAdmission({ family: "deduction", giver: "the operator" }).ok, true);
   assert.equal(familyAdmission({ family: "substrate" }).refused.type, "unbounded");

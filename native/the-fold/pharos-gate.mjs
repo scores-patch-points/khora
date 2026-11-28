@@ -131,22 +131,29 @@ export function recordRead(w, text, { door, allowDegraded = false } = {}) {
 // they do not call the reader. Khora writes its own entries: beings (INS·Figure), kāraka edges (SYN·Pattern),
 // pronoun bindings (CON·Figure), the gender prior (DEF·Figure), and the speaker/addressee beings — each addressed,
 // each the read's own claim, none special to the fold.
+const WOVEN_GLOBAL = new Set();
 export function weaveFullRead(w, text, { door, pharosDir } = {}) {
   if (!IS_NODE || process.env.KHORA_NO_PHAROS_GATE === "1" || !P) return;
   const h = P.open("khora", { dir: pharosDir, writer: "khora" });
-  for (const [kind, cell] of [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"], ["gender", "DEF·Figure"], ["proform", "DEF·Figure"], ["part_of", "SYN·Pattern"]]) {
-    if (!P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
+  // ONE bulk write per read (pharos weaveMany), as weaveReferents already does: weave() builds the whole log's view for every entry, so writing a read
+  // entry by entry grew with the log (measured: 2 documents in 10 minutes on a growing shard). The entries are the same; their `seen` is empty (unchained).
+  const batch = [];
+  const doc = N.crypto.createHash("sha256").update(String(text ?? "")).digest("hex").slice(0, 16);   // the read's text, as weaveReferents addresses it
+  const KINDS = [["being", "INS·Figure"], ["karaka", "SYN·Pattern"], ["binding", "CON·Figure"], ["gender", "DEF·Figure"], ["proform", "DEF·Figure"], ["part_of", "SYN·Pattern"]];
+  const missing = typeof P.missingKinds === "function" ? new Set(P.missingKinds(h, KINDS.map(([k]) => k))) : null;   // the schema by a raw scan, not the whole view per kind
+  for (const [kind, cell] of KINDS) {
+    if (missing ? missing.has(kind) : !P.entries(h).some((e) => e.kind === "kind" && e.addr === `kind:${kind}`)) P.weave(h, { cell: "DEF·Figure", kind: "kind", addr: `kind:${kind}`, body: { name: kind, cell } });
   }
   // beings: each cast referent is one node of the fold
-  for (const c of w.cast ?? []) P.weave(h, { cell: "INS·Figure", kind: "being", addr: String(c.ref), body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
+  for (const c of w.cast ?? []) batch.push({ cell: "INS·Figure", kind: "being", addr: String(c.ref), body: { surface: c.surface, surfaces: c.allSurfaces ?? [], spans: c.mentionSpans ?? [] } });
   // the speaker/addressee referents (I/you) — beings too, one per document
   const spk = new Map();
   for (const sb of w.speakerBindings ?? []) if (sb && typeof sb === "object" && sb.cl) spk.set(String(sb.cl), sb.kind ?? "speaker");
-  for (const [cl, kind] of spk) P.weave(h, { cell: "INS·Figure", kind: "being", addr: cl, body: { surface: kind === "addressee" ? "you" : "I", surfaces: [kind === "addressee" ? "you" : "I"], spans: [], kind } });
+  for (const [cl, kind] of spk) batch.push({ cell: "INS·Figure", kind: "being", addr: cl, body: { surface: kind === "addressee" ? "you" : "I", surfaces: [kind === "addressee" ? "you" : "I"], spans: [], kind } });
   // the gender prior: each being's attested class from the ingested-material chain (the corpus/Wikidata)
   try {
     const giver = genderPriorChainFor(w?.competency?.stem ?? w?.language?.stem ?? "en");
-    if (giver) { const prior = giver({ text: String(text ?? ""), cast: w.cast ?? [] }); for (const [ref, cls] of prior ?? []) P.weave(h, { cell: "DEF·Figure", kind: "gender", addr: String(ref), body: { gender: cls } }); }
+    if (giver) { const prior = giver({ text: String(text ?? ""), cast: w.cast ?? [] }); for (const [ref, cls] of prior ?? []) batch.push({ cell: "DEF·Figure", kind: "gender", addr: String(ref), body: { gender: cls } }); }
   } catch { /* a giver that throws on this cast is a gap, never a crash */ }
   // the pro-form the TEXT'S OWN GRAMMAR binds to each being (its reflexives and possessives, entry.proforms): above the
   // givers in the chain (the text's own evidence, recurring), contested when the sign test does not decide, absent without evidence
@@ -154,12 +161,12 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
     const classes = {}; let reflexive = 0, possessive = 0;
     const keys = new Set(); for (const s of [c.surface, ...(c.allSurfaces ?? [])]) for (const k of String(s ?? "").normalize("NFC").toLowerCase().split(" ")) if (k) keys.add(k);
     for (const k of keys) { const e = w.proforms?.[k]; if (!e) continue; reflexive += e.reflexive; possessive += e.possessive; for (const [cl, n] of Object.entries(e.classes)) classes[cl] = (classes[cl] ?? 0) + n; }
-    const d = proformOf({ classes }); if (d) P.weave(h, { cell: "DEF·Figure", kind: "proform", addr: String(c.ref), body: { proform: d.cls, contested: d.contested, p: d.p, evidence: classes, reflexive, possessive, source: "grammar" } });
+    const d = proformOf({ classes }); if (d) batch.push({ cell: "DEF·Figure", kind: "proform", addr: String(c.ref), body: { proform: d.cls, contested: d.contested, p: d.p, evidence: classes, reflexive, possessive, source: "grammar" } });
   }
   // the containment relations (a referent inside another) — the holarchy's part_of edges, from the
   // kāraka roles (subject kartṛ inside the locus adhikaraṇa, both proper nouns), not surface labels
   try {
-    for (const { child, parent } of containmentFromKarakas(w)) P.weave(h, { cell: "SYN·Pattern", kind: "part_of", addr: `part_of:${child}:${parent}`, body: { child, parent } });
+    for (const { child, parent } of containmentFromKarakas(w)) batch.push({ cell: "SYN·Pattern", kind: "part_of", addr: `part_of:${child}:${parent}`, body: { child, parent } });
   } catch { /* containmentFromKarakas throwing on this read is a gap, never a crash */ }
   // kāraka edges: the read's own relations, deduped (head|role|arg). The ARG is a REFERENT, not a
   // string: a token inside a cast mention span is that referent, so "Mina?" and "the book" resolve to
@@ -180,7 +187,20 @@ export function weaveFullRead(w, text, { door, pharosDir } = {}) {
       if (hd?.lemma) { const argRef = refAt.get((p.offset ?? 0) + (row.start ?? 0)) ?? (row.lemma ?? row.form); const k = `${hd.lemma}|${role}|${argRef}`; if (!edges.has(k)) edges.set(k, { head: hd.lemma, role, arg: argRef }); }
     }
   }
-  for (const [, e] of edges) P.weave(h, { cell: "SYN·Pattern", kind: "karaka", addr: `edge:${e.head}:${e.role}:${e.arg}`, body: e });
+  for (const [, e] of edges) batch.push({ cell: "SYN·Pattern", kind: "karaka", addr: `edge:${e.head}:${e.role}:${e.arg}`, body: e });
   // pronoun bindings: the identity edges, with their agreement label
-  for (const b of [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])]) P.weave(h, { cell: "CON·Figure", kind: "binding", addr: `bind:${b.at?.[0] ?? ""}`, body: { pronoun: b.pronoun, ref: b.ref, agreement: b.agreement ?? {}, at: b.at ?? null } });
+  for (const b of [...(w.pronounsPresence ?? []), ...(w.pronounsGuess ?? [])]) batch.push({ cell: "CON·Figure", kind: "binding", addr: `bind:${doc}:${b.at?.[0] ?? ""}`, body: { pronoun: b.pronoun, ref: b.ref, agreement: b.agreement ?? {}, at: b.at ?? null } });
+  // weave() wrote an identical entry once (a re-weave of the same content is a no-op); the bulk path keeps that: an entry repeated within this read
+  // (a confident binding is also in the guesses; a gender the chain gives twice) is written once. Measured on 8 documents: the same 6,120 distinct entries.
+  // Across reads, weave() also wrote an address-global entry once (a gender, a proform, a part_of or a kāraka edge is keyed by its ref or edge, not by
+  // the document); WOVEN_GLOBAL remembers those this process wrote, by hash, bounded by the vocabulary, not the corpus. A binding is scoped by the text's
+  // hash and a being carries its spans, so neither repeats across documents.
+  const once = new Map(); for (const x of batch) { const k = typeof P.canonical === "function" ? P.canonical([x.cell, x.kind, x.addr, x.body]) : JSON.stringify([x.cell, x.kind, x.addr, x.body]); if (!once.has(k)) once.set(k, x); }
+  const unique = [];
+  for (const [k, x] of once) {
+    const global = x.kind !== "binding" && !(x.kind === "being" && (x.body?.spans ?? []).length);
+    if (global) { const g = `${pharosDir ?? ""}|${N.crypto.createHash("sha256").update(k).digest("hex").slice(0, 24)}`; if (WOVEN_GLOBAL.has(g)) continue; WOVEN_GLOBAL.add(g); }
+    unique.push(x);
+  }
+  if (unique.length) { if (typeof P.weaveMany === "function") P.weaveMany(h, unique); else for (const x of unique) P.weave(h, x); }
 }

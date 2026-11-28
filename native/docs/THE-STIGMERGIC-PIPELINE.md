@@ -112,8 +112,8 @@ then release — higher resolution for the more recent past.
 
 ## 5. DMD as the folding gate
 
-**The instrument.** `native/kernel/dmd.js` (batch core) and
-`native/kernel/dmd-stream.js` (`createStreamingDmd` — the causal
+**The instrument.** `native/kernel/koopman.js` (batch core) and
+`native/kernel/koopman-stream.js` (`createStreamingKoopman` — the causal
 formulation: "modes() at snapshot t equals batch DMD over the prefix
 ..t," pinned by test). The state pushed in is the trajectory of the
 material's observables — surprise, Kelsen grade, affinity, novelty —
@@ -122,8 +122,8 @@ measured dynamics: `|λ|` is growth or decay, `arg λ` is frequency.
 
 **The causality law is the house law**: "a causal consumer must feed
 them only a prefix, or use the streaming formulation… a caller that
-hands it a whole book has read the future" (`dmd.js` header). The gate
-never consumes the future. This is why the gate is `dmd-stream`, never
+hands it a whole book has read the future" (`koopman.js` header). The gate
+never consumes the future. This is why the gate is `koopman-stream`, never
 batch.
 
 **The decision per mode:**
@@ -155,7 +155,7 @@ corrected): three divergent stopping mechanisms
 detectors) become one measured stop — DMD decay — with each old
 mechanism kept as its falsifying control's detector. The other agent's
 `measured-loop.js` does not exist; the real module is
-`dmd-stream.js`, and the real consumers of DMD today are the reading
+`koopman-stream.js`, and the real consumers of DMD today are the reading
 layer (`mnemonic.js`, `for-whom.js`, `shadow-echo.js`,
 `color-name-space.js`) — the integration extends DMD from the reading
 layer to the rewrite and folding layers.
@@ -202,7 +202,7 @@ it delivers. The contract:
 
 **Phase A — the Ranke stop.** BUILT AND LIVE 2026-09-29.
 `native/kernel/rewrite-gate.js` (`createRewriteGate`) wraps
-`createStreamingDmd` with the decide law, wired into the grounding loop
+`createStreamingKoopman` with the decide law, wired into the grounding loop
 (`proxy-runner.mjs`): the gate decides BETWEEN rounds over the rounds
 completed — decay fires only when the material is still settling (last
 two transitions non-increasing), oscillation fires with a measured period
@@ -275,12 +275,12 @@ The inventory that prompted this document was checked claim by claim:
 
 | Claim | Verdict |
 |---|---|
-| `kernel/measured-loop.js` exists with "real streaming DMD, growth-eigenvalue stop" | **Falsified** — no such file in the workspace; the real modules are `native/kernel/dmd.js`, `native/kernel/dmd-stream.js`, `native/adapters/text/contextual-dmd.js` |
+| `kernel/measured-loop.js` exists with "real streaming DMD, growth-eigenvalue stop" | **Falsified** — no such file in the workspace; the real modules are `native/kernel/koopman.js`, `native/kernel/koopman-stream.js`, `native/adapters/text/contextual-koopman.js` |
 | `podcast.js` (built tonight) uses it | **Falsified** — `podcast-app/src/podcast.js` is a 105-byte stub (`episodes() → []`); it imports nothing |
 | `concedeCorrectionRule`/`observeAndConcede` exist in `correction-rule.js` | **Falsified** — the exports are `falsifiableRule`, `readCorrectionRules`, `correctionApplies`, `naturalSizeRuleForTask`, `falsifiesFormRule`, `authorCorrectionRule`; the concede path does not exist in this tree |
 | The fact gate "checks a task's own claim against ground BEFORE drafting — a gate, not a repair loop" | **Falsified** — it is post-process (`proxy-runner.mjs:8288`, "7.4" after postprocess "7"), strikes and replaces sentences mechanically; it is the L3 member of the draft→check→revise shape |
 | `MAX_REWRITE_ROUNDS` at line 6055 | **Corrected** — it is a local const at `proxy-runner.mjs:6026` |
-| Three divergent stopping mechanisms in Group A | **Holds** — the cap at 6026/7177/7345/8160 and the ratio at 300/7296 are separate implementations of one stop; the unification target is real, but the mechanism is `dmd-stream.js`, not a missing module |
+| Three divergent stopping mechanisms in Group A | **Holds** — the cap at 6026/7177/7345/8160 and the ratio at 300/7296 are separate implementations of one stop; the unification target is real, but the mechanism is `koopman-stream.js`, not a missing module |
 | `void-loop.js` has zero production call sites; `void-brief.js` is live | **Unverified** — both live in `3.0/the-fold/` (a separate repo); the call-site grep over that tree did not complete in budget. Neither is referenced from `proxy-runner.mjs` or `proxy.mjs`, so the eoreader7 half of the claim holds |
 
 The inventory's shape analysis survives; its citations do not. The

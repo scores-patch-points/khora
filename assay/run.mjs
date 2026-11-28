@@ -1,6 +1,6 @@
 // assay/run.mjs — the preregistered cube witness trials (assay/preregistrations.json).
 //
-// The wired trial: PyDMD against the kernel's own dmd.js, both reading one
+// The wired trial: PyDMD against the kernel's own koopman.js, both reading one
 // series from a DECLARED linear system with published eigenvalues, plus the
 // shuffled null of the same series. The reads and the falsifying control are
 // the preregistration's, verbatim; this runner invents no verdict the pair of
