@@ -57,3 +57,34 @@ Two reads were built on DEV:
 - `registerByPattern` has no hypothesis for a register NO source measures: it names the nearest. `registerByRates` abstains there (hand examples only). The business-formal register is still not addressed: no source exists.
 - Not wired: the shipped GenrePrior@1 files carry no hit rates and are not scoped by language (their generator hard-codes the owner's machine path and was not run). Wiring needs those two things added where the prior is made.
 - "Literature" is still a shelf, not a register: the Federalist Papers, the Origin of Species and Leviathan sit in it.
+
+---
+# RUN 3 (2026-11-28): a business-email source from the Enron corpus, five-way. The gate PASSED, and the source is mostly Enron, not a register.
+
+`native/scripts/measure-codec-register-enron.mjs`, committed before the run (khora bf9bed4); preregistration and gate in `STAMP-run3.txt` (2026-11-28T02:25:05Z, before any mail was opened). Corpus: the CMU release of 2015-05-07 (443,254,787 bytes, sha256 b3da1b3f...748ca7), fetched to scratch on the owner's word; **no mail text is committed**, and the output kept here has the source's term list removed because it holds people's names (`run3-output-redacted.txt`).
+Source: what mailbox owners SENT (148 mailboxes with a sent folder), headers and quoted or forwarded material dropped, a body of 40+ terms, at most 12 per mailbox, English by `codec-regions` (37 left out). Split by MAILBOX, so a test author is never a training author. One run, 40-term passages, at most 60 per genre.
+
+| FRESH, 128 passages (literature 9, encyclopedic 15, academic 42, government-legal 2, business-email 60) | correct | wrong | abstain |
+|---|---|---|---|
+| **PATTERN** | **90** | **21** | 17 |
+| RATES | 86 | 17 | 25 |
+| COUNT | 54 | 74 | 0 |
+| MAJORITY (business-email) | 60 | 68 | 0 |
+
+Business-email passages: PATTERN 37 right, 12 wrong, 11 abstained; RATES 33 / 13 / 14; COUNT 3 / 57.
+**Gate (PATTERN more correct than COUNT, no more wrong, and more business passages right than wrong): PASSED.**
+
+## What the source actually holds (the important part)
+The business-email source has **35 terms**. A handful are register words (please, thanks, email, phone, asap, weekend, guys, sender, counterparty); the rest are the company's own name and products, its city, energy-trading terms, mail hosts, and the first names and surnames of its staff. So most of what it recognises is ENRON, not business writing: it would not recognise another company's mail by those terms. Its hit rate inside its own genre is 0.049 (about two terms in forty) against roughly zero outside, so a single hit carries the decision.
+Why only 35: the term test is by DOCUMENT frequency against the other genres, and those are long books and papers in which almost every ordinary word occurs somewhere. A 40-term mail cannot over-represent a word by that test. The test is biased against short documents; it is the wrong selection rule for a register made of short texts.
+
+## The sentence that started this
+"Per my last email, kindly revert by EOD so we can circle back and align on the deliverables." is now read as business-email by both reads. It is a hand example, and it rests on one term ("email"): not evidence that the register is read.
+
+## Also measured
+`codec-regions` keeps a fresh business mail as ONE English root in 124 of 200 (62%): on real business text it over-segments more than on Genesis (the same failure as the kept "English plus Indonesian" example).
+
+## What stands and what does not
+- Stands: the mechanism (sources with measured rates, scoped by language, split by author) separates five kinds of text on unseen authors far better than counting or the majority.
+- Does not stand: that a BUSINESS REGISTER has been captured. What was captured is one company. Falsifier for a real one: a source built from Enron must recognise business mail from a DIFFERENT organisation at better than the rates' own abstention; no second corpus is held, so this is untested.
+- Next, untested: select terms by rate within length-matched windows (so a short text can mark a word), and drop terms that are names (the name-smell organ exists in khora, unwired).

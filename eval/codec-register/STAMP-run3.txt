@@ -1,0 +1,9 @@
+PREREG (written before any Enron mail was opened): a business-email register source from Enron sent mail, five-way test.
+Split: FRESH. Test authors are mailboxes never used for terms or rates (part 1 by a hash of the mailbox name); Zenodotus test documents are part 1 by a hash of the path. Part 1 of Zenodotus was the fresh part of the previous run, so its four-genre passages have been scored once before with FOUR sources; the five-source read of them is new, the business passages are entirely new.
+One run at 40 terms (the length of a short mail). Gate, declared now: PATTERN has more correct than COUNT and no more wrong than COUNT, and gets more of the business-email passages right than wrong. RATES, MAJORITY, the per-genre counts and the confusions are reported whatever happens.
+Also reported, not gated: the source's 40 most widespread terms (to see whether it holds a register or Enron's own names); the hand example; how often codec-regions keeps a fresh business mail as one English root.
+Not measured: any business register other than this one company's mail of 1999 to 2002; a human judgement of register; other languages.
+56a04f255e869dc37e5c6f4e67741725a9f38d9f7a6b7cf15f5d1477dab7869b  the-fold/codec-register.
+0bfcf238eada23717123e6583a59c5d0cdfd8d213f2be8597bef972d9ae30dad  the-fold/codec-regions.m
+e7d23cf2c41d3c81ff4bce620df86671fb48bbc438e7a901939c316ec12b1006  scripts/measure-codec-re
+2026-11-28T02:25:05Z
