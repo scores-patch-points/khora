@@ -23,3 +23,23 @@ Share of sentences flagged: English-WEB 0.36, English KJV 0.54, French 0.63, Ger
 
 ## Not measured
 Roles against any gold, in any language. Question form outside English. Whether the 17 "tracking" languages negate the RIGHT predicate. More than 200 verses. The 24 languages with no parser prior.
+
+---
+# RUN 2 (2026-11-28): the same measure with the codecs the manifest points at. A NEW ROW; run 1 above stands as recorded.
+
+Run 1 said "24 editions have no parser prior". That was wrong for nine of them: Arabic, Bulgarian, Estonian, Hebrew, Hindi, Hungarian, Italian, Polish and Russian are in `priors/ud-codecs.json` as POINTED-AT codecs (treebank licences CC BY-NC-SA: built on the machine that uses them, never committed), and `pharos-reading.mjs` never looked in the codec cache. It does now (khora b2e3853). The nine were vendored on this machine with janus `scripts/vendor-ud-codec.mjs` into a scratch cache (nothing licence-restricted is committed). Six of the nine builds report `pinMatches: false` (arb, bul, est, hin, pol, rus): the upstream treebank moved since the manifest pinned it; the script builds anyway and records the drift in its receipt. Those six are therefore NOT the pinned codecs.
+
+Same code path as run 1 otherwise, now the standing script `native/scripts/measure-shape-genesis.mjs` at khora e91f94a, started 2026-11-28T00:57:50Z, 200 verses, reference English-WEB. Run 1's files are `summary-run1.json` and `out-run1/`; run 2's are `summary.json`, `out/`, `run2-output.txt`. The script now maps `ara -> arb` and `nor -> nob` as well.
+
+| | run 1 | run 2 |
+|---|---|---|
+| editions read | 33 | 42 |
+| typed gap, no codec | 24 | 15 |
+| negation tracks the reference | 17 | 24 |
+| negation not read (C1) | 7 | 9 |
+| abstain, no negation source | 8 | 8 |
+
+- New and tracking: Bulgarian 0.70, Hebrew 0.70, Russian 0.68, Polish 0.62, Hindi 0.56, Italian 0.47, Hungarian 0.33. New and NOT read: Arabic (0 negated verses found), Estonian (1).
+- The 33 editions of run 1 give the same figures in run 2.
+- Still no codec (15): Albanian, Burmese, Greek, Kannada, Malagasy, Maori, Norwegian, Paite, Portuguese, Q'eqchi', Shona, Somali, Tuareg, Xhosa, Zarma. Nine of these have a POS prior (the canonical read reads them; the shape layer cannot): als, mya, ell, kan, nob, por, sna, som, xho. Six have nothing found anywhere: Malagasy, Maori, Paite, Q'eqchi', Tuareg, Zarma.
+- parse-consistency still over-fires on every language (flag rate 0.16 to 0.99); unchanged finding.
