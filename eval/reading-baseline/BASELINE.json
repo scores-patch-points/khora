@@ -216,7 +216,7 @@
   "holon.json": "298357fb1047105d96c6fde9dbe51c81a1d69cb92e04731431479246a1d8032f",
   "native/tests/door-allowlist.json": "6bd9ece610624f428e1485082f276aa56034c7cbab2b4f361f4a4d9a4baabfec",
   "native/the-fold/read-process.mjs": "ce4e297278fcd2477b62a117d52daf047dd397855c9c9f4efd1ef244cc41ccab",
-  "native/the-fold/read-core.mjs": "6d4088036f660aefc3514aca9763e605478fbe2e74161d079705222a06e1b7fb",
+  "native/the-fold/read-core.mjs": "c72a2e698c47afeb1d9eceee19eba90256193c34fcfd2913c57dc346fe3473a2",
   "native/the-fold/language-grammar.js": "d3a8658213bf2c83eb72a68ea8a79431d78eefc94effdaf59ecf98c3b24b2ce5",
   "native/the-fold/language-names.js": "cff0de2097bc1279ccd16f506957ae2c963afe86273aa148b845b2fe81ff8522",
   "native/the-fold/language-names.data.js": "a2acaaf1f6c5652c4246584800d3cebca0bb7d144a7da6fcf6b1516c9e77dbd2",
@@ -239,7 +239,11 @@
   "native/reading-in-order.mjs": "24e14dd0a8e4f2bbd87e406101a1a893e9466fa08fabc133615e03b1355c5b11",
   "native/reading-in-order.worker.mjs": "677b222d7fa847d77eeb9c910033115725ff627b49db2eefb85b96ea0ce8fb21",
   "native/adapters/text/referents-in-order.mjs": "c6bdc764df225ff5ed353f6a9edfa43ab5b167d50fcffc294114c31d9e04e655",
-  "native/adapters/text/gender-from-corpus.js": "bf500d233236e19b8c0dea838c620b438dafec2b2aa7b9e176842e21b49d1c0f"
+  "native/adapters/text/gender-from-corpus.js": "bf500d233236e19b8c0dea838c620b438dafec2b2aa7b9e176842e21b49d1c0f",
+  "native/adapters/text/name-convention.js": "253eb1808263c1578cd7814fcd5e40ad40e756fe7f08d315950d7f14c1942a34",
+  "native/priors-shipped/convention-spread-eng.json": "77b752d015d9d3c569b8dc3c83cc1b02e68cc93ff8388bccfb9f0088f2605ecc",
+  "native/adapters/text/role-collapse.js": "c4c50068d67d61b87735d9ce566ef2ba53dc8bcfc6c9cb6609c1b3fa4477e2e9",
+  "native/priors-shipped/role-collapse-eng.json": "fbe1662572122c4f9652f51149f64844e9810f1d0460a4c38f2c6df0a6913c09"
  },
- "recorded": "2026-11-27"
+ "recorded": "2026-11-28"
 }

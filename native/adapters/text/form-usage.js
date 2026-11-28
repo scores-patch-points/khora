@@ -37,10 +37,10 @@ import { classifyWord } from "./wordclass.js";
 
 const NOMINAL = new Set(["NOUN", "PROPN", "ADJ"]);
 const CLOSED = new Set(["ADP", "AUX", "CCONJ", "DET", "NUM", "PART", "PRON", "SCONJ"]);   // UD's own closed-class tags
-const ALPHA = 0.05;                                                                          // the alpha of surfaces.js CAP_SIG_ALPHA, the rule this amends
+export const ALPHA = 0.05;                                                                          // the alpha of surfaces.js CAP_SIG_ALPHA, the rule this amends
 
 /** P(X >= k | n, p), exact, in log space (no overflow at any n the prior holds). */
-const upperTail = (k, n, p) => {
+export const upperTail = (k, n, p) => {
   if (k <= 0) return 1;
   if (k > n) return 0;
   const step = Math.log(p) - Math.log1p(-p);

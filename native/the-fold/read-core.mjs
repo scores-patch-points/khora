@@ -54,6 +54,8 @@ import { renderCard } from "../adapters/text/folded-card.js";
 import { createDeclensionFolder, createRunBreak } from "../adapters/text/declension.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
+import { nameConventionOf, refusedByConvention, supportOf } from "../adapters/text/name-convention.js";
+import { collapseRoles } from "../adapters/text/role-collapse.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { autonymOf } from "./language-names.js";
@@ -342,7 +344,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, caseProDrop, pronounGuess, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, caseProDrop, pronounGuess, nameConvention, roleCollapse, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -412,7 +414,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `mentionsOf` bounds a mention by \p{L} on both sides, so in a script written without spaces (a zh probe) every row gets zero spans and the cast
   // is empty. Not fixed here: it changes the cast's output for every language and needs its own registration. Suggested fix: take the mention
   // boundaries from the language's tokenizer adapter (Intl.Segmenter), not the regex.
-  let cast = [], heardRows = [], formUsageReport = null, identity = null;
+  let cast = [], heardRows = [], formUsageReport = null, identity = null, nameConventionReport = null;
   const identityRows = [];
   try {
     // A capital is a convention of the language (conventions.js): form-usage.js decides, per language, whether it has a ledgered convention to read by
@@ -424,6 +426,17 @@ export function readWith(text, { address = null, category = null, language = nul
     const verdicts = formUsage ? { undecided: [], separated: [] } : null;
     const capitalSurfaces = extractSurfaces(cuts, { ...(formUsage ? { formUsage, verdicts } : {}), ...(surfaceOptions ?? {}) });
     const capital = new Set(capitalSurfaces.map((x) => x.surface));
+    // DOES A CAPITAL MARK A NAME IN THIS TEXT? (opt-in `readerOptions.nameConvention`, round 31: identity/novels/PREREG-ROUND31-CONVENTION.md + ADDENDUM-1;
+    // adapters/text/name-convention.js). Only where the capital tier reads by a ledgered convention (formUsage: English). When the text capitalizes
+    // non-names beyond the received rate, a capital surface none of whose tokens supports a name leaves the capital set: its referent stays `heard`.
+    if (nameConvention && formUsage) {
+      const g = nameConventionOf(cuts, { forms: pr.posPrior?.forms, conventions: pr.conventions, spread: priorJson(`convention-spread-${stem}.json`) });
+      // the falsifier's control arm (PREREG K) passes `{ refuse(surfaces) }`: the same GROUND, its own choice of what to refuse
+      const refuse = typeof nameConvention?.refuse === "function" ? nameConvention.refuse : (xs) => refusedByConvention(xs, { forms: pr.posPrior?.forms });
+      const refused = g.fired ? refuse([...capital]) : [];
+      for (const s of refused) capital.delete(s);
+      nameConventionReport = { ...g, refused };
+    }
     // what the treebank's use refused, kept beside the entry (not enumerable: the wire stays what it was) so the rule is auditable
     // the conventions this branch reads by, cited from their one home (janus priors/conventions-<stem>.json); a gap is typed here, not on the wire
     if (formUsage) formUsageReport = { conventions: ["capital-marks-a-name", "treebank-attests-a-forms-use"].map((s) => conventionOf(pr.conventions, s)).filter(Boolean), gap: conventionsGap(pr.conventions), giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s) && !verdicts.undecided.some((u) => u.surface === s)), undecided: verdicts.undecided, separated: verdicts.separated };
@@ -578,6 +591,24 @@ export function readWith(text, { address = null, category = null, language = nul
       speakerBindings = sp.mentions.map((m) => ({ a: m.a, b: m.b, cl: m.kind === "addressee" ? "one:addressee" : "one:speaker", kind: m.kind, via: m.via }));
     } catch (e) { speakerBindings = { gap: "speakers_failed", detail: String(e?.message ?? e).slice(0, 120) }; }
   }
+  // A SPAN'S ROLE HELD OPEN UNTIL AN ACT COLLAPSES IT (opt-in `readerOptions.roleCollapse`, round 32: identity/novels/PREREG-ROUND32-SUPERPOSITION.md;
+  // adapters/text/role-collapse.js). The pronoun rungs above ran on the uncollapsed cast; a row a pronoun binds to collapses to a being (the act
+  // measured it); every other row collapses here, at the writing of the cast, by its posterior. A row collapsed to not-a-name stays `heard`.
+  let roleCollapseReport = null;
+  if (roleCollapse && (languageRead.source === "declared" || languageRead.source === "heard") && formUsageFor(stem, pr.posPrior)) {
+    try {
+      const forms = pr.posPrior?.forms;
+      const groundFired = !!nameConventionOf(cuts, { forms, conventions: pr.conventions, spread: priorJson(`convention-spread-${stem}.json`) }).fired;
+      const bound = new Set([...(pronounsPresence ?? []), ...(pronounsGuess ?? [])].map((b) => b?.ref).filter(Boolean));
+      const model = priorJson(`role-collapse-${stem}.json`);
+      const r = collapseRoles(cast, { bound, supportOfRow: (row) => supportOf(row.allSurfaces ?? [row.surface], { forms }), groundFired, model, mode: roleCollapse === "features" ? "features" : "collapse" });
+      // the falsifier's control arm (PREREG K) passes `{ demote(unboundRows, n) }`: the same number of rows, its own choice
+      const demote = typeof roleCollapse?.demote === "function" ? roleCollapse.demote(cast.filter((row) => !bound.has(row.ref)), r.demote.length) : r.demote;
+      const out = new Set(demote.map((row) => row.ref));
+      if (out.size) { cast = cast.filter((row) => !out.has(row.ref)); heardRows = [...heardRows, ...demote.map((row) => ({ ...row, standing: "heard" }))]; }
+      roleCollapseReport = { groundFired, model: model?.schema === "RoleCollapse@1" ? { documents: model.documents ?? null, sha256: model.sha256 ?? null } : { gap: "no_role_collapse_prior" }, rows: r.report, demoted: [...out] };
+    } catch (e) { roleCollapseReport = { gap: "role_collapse_failed", detail: String(e?.message ?? e).slice(0, 160) }; }
+  }
   const entry = {
     ...empty,
     readCharacters: str.length,
@@ -605,6 +636,8 @@ export function readWith(text, { address = null, category = null, language = nul
   Object.defineProperty(entry, "reader", { value: R, enumerable: false });
   Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
   Object.defineProperty(entry, "formUsageReport", { value: formUsageReport, enumerable: false });
+  if (nameConventionReport) Object.defineProperty(entry, "nameConventionReport", { value: nameConventionReport, enumerable: false });
+  if (roleCollapseReport) Object.defineProperty(entry, "roleCollapseReport", { value: roleCollapseReport, enumerable: false });   // round 32: each row's features, posterior and collapsing act, off the wire   // round 31: the convention rung, auditable, off the wire
   if (presenceInputs) Object.defineProperty(entry, "presenceInputs", { value: presenceInputs, enumerable: false });
   // THE REFERENT LEDGER (opt-in, `referents: true`; off, the entry is byte-identical to before): the same reading projected onto referents, each inserted once and
   // addressed by its event, a span only its address, an edge between referents per statement; what the spans cannot decide is a typed gap (adapters/text/reading-referents.js).
