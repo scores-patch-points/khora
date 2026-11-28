@@ -4,7 +4,7 @@
 // Nothing is synthesised: the errors are the engine's own. Output (not committed: it is third parties' text): [{ doc, page, dpi, gold, ocr }].
 import fs from "node:fs"; import path from "node:path"; import os from "node:os"; import { execFileSync } from "node:child_process";
 const [dir, out] = process.argv.slice(2), arg = (k, d) => { const i = process.argv.indexOf(`--${k}`); return i < 0 ? d : process.argv[i + 1]; }, DPIS = arg("dpi", "80,65").split(",").map(Number), PAGES = Number(arg("pages", 6));
-const run = (cmd, args) => execFileSync(cmd, args, { maxBuffer: 64e6, stdio: ["ignore", "pipe", "ignore"] }).toString("utf8"), rows = [];
+const run = (cmd, args) => execFileSync(cmd, args, { maxBuffer: 64e6, stdio: ["ignore", "pipe", "ignore"], env: { ...process.env, OMP_THREAD_LIMIT: "1" } }).toString("utf8"), rows = [];
 for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".pdf")).sort()) {
   const pdf = path.join(dir, f), n = Number(run("pdfinfo", [pdf]).split("\n").find((l) => l.startsWith("Pages"))?.split(":")[1] ?? 0);
   // pages spread across the document, not the first few

@@ -11,6 +11,7 @@
 import { priorJson } from "./prior-source.mjs";
 import { sha16, canon, pharosLib, writeReading, TEXT_KIND } from "./pharos-reading.mjs";
 import { pathToFileURL } from "node:url";
+import { undecided, collapse } from "../kernel/undecided.js";
 
 export const REREADING_KIND = "text-rereading", REREADING_CELL = "INS·Figure", SCHEMA = "OcrRereading@1";
 export const DEFAULT_DIALS = Object.freeze({ floor: -14, margin: 2, docKnown: 2, maxEdits: 2 });   // replaced by the fitted values of eval/ocr-reread (see FREEZE there)
@@ -75,6 +76,24 @@ export function rereadOcr(text, { language = "eng", channel = null, dials = DEFA
 export function revisedText(text, rr) { let out = "", at = 0; for (const r of rr.tokens) { if (r.status !== "proposed") continue; out += text.slice(at, r.at[0]) + r.proposed; at = r.at[1]; } return out + text.slice(at); }
 /** initialText(revised, rereading) -> the first reading back from the revised text and the rereading alone (the proof that nothing is lost) */
 export function initialText(revised, rr) { let out = "", at = 0, shift = 0; for (const r of rr.tokens) { if (r.status !== "proposed") continue; const a = r.at[0] + shift; out += revised.slice(at, a) + r.initial; at = a + r.proposed.length; shift += r.proposed.length - r.initial.length; } return out + revised.slice(at); }
+
+// THE ONE SHAPE (kernel/undecided.js, the owner 2026-09-28: "putting things into a superposition until they collapse at a certain reading at a for whom"; "everywhere where it makes something better").
+// The first version of this file invented its own statuses and did not use it (found the same day, 2026-11-28). A token the codec does not know is an OPEN SLOT: candidate 0 is ALWAYS the first reading, as read;
+// the others are the forms it could have been, each with its evidence. Nothing is chosen at read time. `collapseToken` is the one act that chooses, FOR a for-whom, under a NAMED rule with its dials; it appends and
+// never rewrites, so a later reader (a better scan, a second eye, a later page that uses the word) collapses the same slot again and both collapses stand: that is the re-entry.
+export const OCR_QUESTION = "token-form";
+/** undecidedOf(text, rereading) -> [EOUndecided@1]: one open slot per token the codec did not know; candidate 0 is the first reading */
+export function undecidedOf(text, rr) {
+  return rr.tokens.map((r) => undecided({ question: OCR_QUESTION, slot: `text:${rr.initial.sha16}@${r.at[0]}-${r.at[1]}`, cursor: r.at[0], at: { at: r.at }, giver: `ocr-reread.mjs over ${rr.vocabulary}; channel ${rr.channel}`,
+    candidates: [{ value: r.initial, via: "first reading", features: { attested: false } }, ...r.cands.map(([form, score]) => ({ value: form, via: "codec form through the channel", features: { attested: true, score } }))] }));
+}
+/** floorMarginRule(dials) -> the named collapse rule this organ's `proposed` status is: the best attested form if it clears the floor and leads the next by the margin; two that do not separate are CONTESTED; none attested is NONE (the first reading stands unasserted) */
+export const floorMarginRule = (dials = DEFAULT_DIALS) => ({ name: "ocr-floor-margin", giver: "eval/ocr-reread fitted-dials.json (development pages)", params: { floor: dials.floor, margin: dials.margin },
+  decide(cs) { const alt = cs.filter((c) => c.features.attested).sort((a, b) => b.features.score - a.features.score); if (!alt.length) return { reason: "no attested form within reach" };
+    if (alt[0].features.score >= dials.floor && (alt.length === 1 || alt[0].features.score - alt[1].features.score >= dials.margin)) return { chosen: alt[0].index, reason: "clears the floor and the margin" };
+    return { contested: [0, ...alt.map((c) => c.index)], reason: "the forms do not separate" }; } });
+/** collapseToken(record, { forWhom, dials, rule }) -> EOCollapse@1 */
+export const collapseToken = (record, { forWhom, dials = DEFAULT_DIALS, rule = floorMarginRule(dials), cursor = null } = {}) => collapse(record, { forWhom, rule, cursor });
 
 /** weaveRereading(text, opts) -> { written, skipped, initial, revised, rereading } | { gap }
  *  The initial text and its reading are written FIRST and are never rewritten (the pharos is append-only). Then the rereading (text-rereading, INS·Figure, reread:<sha16 of the initial text>, of the initial text and

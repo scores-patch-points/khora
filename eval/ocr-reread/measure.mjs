@@ -30,7 +30,7 @@ function nearest(text) {   // the strings twin
     if (best) { out += text.slice(at, t.at[0]) + t.pre + best + t.post; at = t.at[1]; } }
   return out + text.slice(at); }
 function score(rows, revise) {   // per page: { right, fixed, broken, wrongStill, seg }
-  return rows.map((r) => { const g = tokensOf(r.gold), o = tokensOf(r.ocr), v = tokensOf(revise(r.ocr)); const s = { doc: r.doc, tokens: 0, wrongBefore: 0, fixed: 0, broken: 0, seg: 0 };
+  return rows.map((r, idx) => { const g = tokensOf(r.gold), o = tokensOf(r.ocr), v = tokensOf(revise(r.ocr, idx)); const s = { doc: r.doc, tokens: 0, wrongBefore: 0, fixed: 0, broken: 0, seg: 0 };
     if (v.length !== o.length) throw new Error("a revision changed the token count");
     for (const a of align(g.map((t) => fold(t.core)), o.map((t) => fold(t.core)))) { if (a.seg) { s.seg += a.seg[0]; continue; } const [gi, oi] = a, G = fold(g[gi].core), before = fold(o[oi].core) === G, after = fold(v[oi].core) === G; s.tokens++; if (!before) s.wrongBefore++; if (!before && after) s.fixed++; if (before && !after) s.broken++; }
     return s; }); }
@@ -41,8 +41,11 @@ if (mode === "fit") {
   for (const r of pairs) { const g = tokensOf(r.gold), o = tokensOf(r.ocr); for (const a of align(g.map((t) => fold(t.core)), o.map((t) => fold(t.core)))) { if (a.seg) continue; const G = lower(g[a[0]].core), O = lower(o[a[1]].core); if (G === O || !G || !O) continue; errors++; for (const op of opsOf(O, G)) ops[op] = (ops[op] ?? 0) + 1; } }
   const channel = { schema: "OcrChannel@1", engine: "tesseract 5.3.4 eng", fittedOn: `${path.basename(file)}: ${pairs.length} page readings of ${new Set(pairs.map((p) => p.doc)).size} development documents, 80 and 65 dpi grey renders`, errors, ops };
   fs.writeFileSync(path.join(HERE, "channel-tesseract-dev.json"), JSON.stringify(channel, null, 1) + "\n"); const ch = channelOf(channel);
-  let best = null; for (const docKnown of [0, 2, 3]) for (const maxEdits of [1, 2]) for (const floor of [-22, -18, -14, -10, -6]) for (const margin of [0, 1, 2, 4]) { const dials = { floor, margin, docKnown, maxEdits }, ps = score(pairs, (t) => revisedText(t, rereadOcr(t, { channel: ch, dials, forms: V.forms }))), net = sum(ps, "fixed") - sum(ps, "broken");
-    if (!best || net > best.net) best = { dials, net, fixed: sum(ps, "fixed"), broken: sum(ps, "broken"), wrongBefore: sum(ps, "wrongBefore"), tokens: sum(ps, "tokens") }; }
+  // candidates do not depend on floor or margin: read each page once per (docKnown, maxEdits) with the dials open, then decide each (floor, margin) by the organ's own rule (proposed iff top >= floor and it leads the second by >= margin)
+  let best = null; for (const docKnown of [0, 2, 3]) for (const maxEdits of [1, 2]) { const open = pairs.map((r) => rereadOcr(r.ocr, { channel: ch, dials: { floor: -1e9, margin: 0, docKnown, maxEdits }, forms: V.forms }));
+    for (const floor of [-22, -18, -14, -10, -6]) for (const margin of [0, 1, 2, 4]) { const dials = { floor, margin, docKnown, maxEdits };
+      const ps = score(pairs, (t, i) => revisedText(t, { tokens: open[i].tokens.map((r) => ({ ...r, status: r.cands.length && r.cands[0][1] >= floor && (r.cands.length === 1 || r.cands[0][1] - r.cands[1][1] >= margin) ? "proposed" : "kept", proposed: r.cands[0]?.[0] })) })), net = sum(ps, "fixed") - sum(ps, "broken");
+      if (!best || net > best.net) best = { dials, net, fixed: sum(ps, "fixed"), broken: sum(ps, "broken"), wrongBefore: sum(ps, "wrongBefore"), tokens: sum(ps, "tokens") }; } }
   fs.writeFileSync(path.join(HERE, "fitted-dials.json"), JSON.stringify({ fittedOn: channel.fittedOn, grid: "docKnown 0,2,3 x maxEdits 1,2 x floor -22..-6 x margin 0,1,2,4; chosen by greatest fixed - broken on development pages", ...best }, null, 1) + "\n");
   console.log("channel:", errors, "wrong tokens,", Object.keys(ops).length, "distinct operations; top:", Object.entries(ops).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, c]) => `${k} ${c}`).join(" · ")); console.log("fitted (development, in sample):", JSON.stringify(best));
 } else {
