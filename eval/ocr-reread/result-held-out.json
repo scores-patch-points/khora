@@ -1,0 +1,111 @@
+{
+ "label": "held-out",
+ "dials": {
+  "floor": -6,
+  "margin": 2,
+  "docKnown": 2,
+  "maxEdits": 2
+ },
+ "result": {
+  "65": {
+   "FOLD": {
+    "pages": 30,
+    "documents": 5,
+    "tokens": 9487,
+    "segmentation": 858,
+    "wrongBefore": 783,
+    "fixed": 163,
+    "broken": 79,
+    "net": 84,
+    "netInterval95": [
+     51,
+     119
+    ]
+   },
+   "UNIFORM": {
+    "pages": 30,
+    "documents": 5,
+    "tokens": 9487,
+    "segmentation": 858,
+    "wrongBefore": 783,
+    "fixed": 83,
+    "broken": 106,
+    "net": -23,
+    "netInterval95": [
+     -47,
+     2
+    ]
+   },
+   "NEAREST": {
+    "pages": 30,
+    "documents": 5,
+    "tokens": 9487,
+    "segmentation": 858,
+    "wrongBefore": 783,
+    "fixed": 121,
+    "broken": 467,
+    "net": -346,
+    "netInterval95": [
+     -426,
+     -271
+    ]
+   },
+   "foldStatuses": {
+    "tokens": 9942,
+    "proposed": 391,
+    "contested": 432,
+    "unknown": 360
+   }
+  },
+  "80": {
+   "FOLD": {
+    "pages": 30,
+    "documents": 5,
+    "tokens": 10144,
+    "segmentation": 201,
+    "wrongBefore": 105,
+    "fixed": 13,
+    "broken": 84,
+    "net": -71,
+    "netInterval95": [
+     -99,
+     -46
+    ]
+   },
+   "UNIFORM": {
+    "pages": 30,
+    "documents": 5,
+    "tokens": 10144,
+    "segmentation": 201,
+    "wrongBefore": 105,
+    "fixed": 5,
+    "broken": 122,
+    "net": -117,
+    "netInterval95": [
+     -144,
+     -92
+    ]
+   },
+   "NEAREST": {
+    "pages": 30,
+    "documents": 5,
+    "tokens": 10144,
+    "segmentation": 201,
+    "wrongBefore": 105,
+    "fixed": 6,
+    "broken": 521,
+    "net": -515,
+    "netInterval95": [
+     -599,
+     -438
+    ]
+   },
+   "foldStatuses": {
+    "tokens": 10249,
+    "proposed": 114,
+    "contested": 193,
+    "unknown": 290
+   }
+  }
+ }
+}
