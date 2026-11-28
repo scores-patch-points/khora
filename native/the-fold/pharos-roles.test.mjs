@@ -38,3 +38,14 @@ test("FOUND 2026-11-27: English has no ud-tokenizer prior. The grammar now SAYS 
   assert.ok(rows.every((r) => t.slice(r.at, r.end) === r.form), "every token keeps its offsets in the text"); const sh = await shapeOf(t, { language: "eng" }); assert.equal(sh.polarity.negated.length, 1); assert.equal(rows.find((r) => r.id === sh.polarity.negated[0].id).lemma, "chase");
   const fra = await grammarFor("fra"); if (!fra.gap) { assert.equal(fra.tokenizerGap, undefined, "a language WITH a tokenizer prior is untouched"); assert.equal(fra.adapterTokenize, undefined); }
 });
+
+test("WHERE A CODEC LIVES (found 2026-11-28): a codec the manifest POINTS AT and the cache lacks is the typed gap codec_not_vendored with its licence, never no_parser_prior; one in the codec cache is read from there and says so; a code nothing knows is no_parser_prior", { skip }, async () => {
+  const fs2 = await import("node:fs"), path2 = await import("node:path"), { priorsHome } = await import("./prior-source.mjs"), { codecCacheDir } = await import("./pharos-reading.mjs");
+  assert.equal((await grammarFor("zzz")).gap, "no_parser_prior");
+  const man = JSON.parse(fs2.readFileSync(path2.join(priorsHome().dir, "ud-codecs.json"), "utf8")).codecs, cache = codecCacheDir(), inCache = (c) => fs2.existsSync(cache) && fs2.readdirSync(cache).some((f) => f.startsWith(`ud-parser-${c}-`));
+  const pointed = Object.keys(man).filter((c) => man[c].redistribute === false); assert.ok(pointed.length > 0, "the manifest points at some codecs");
+  const missing = pointed.find((c) => !inCache(c)), present = pointed.find(inCache);
+  if (missing) { const g2 = await grammarFor(missing); assert.equal(g2.gap, "codec_not_vendored"); assert.equal(g2.licence, man[missing].licence); assert.ok(g2.why.includes("vendor-ud-codec.mjs")); }
+  if (present) { const g3 = await grammarFor(present); assert.equal(g3.gap, undefined); assert.equal(g3.from, "codec-cache"); }
+  assert.equal(g.from, "priors");
+});
