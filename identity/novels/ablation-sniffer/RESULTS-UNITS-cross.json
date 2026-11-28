@@ -1,0 +1,102 @@
+{
+ "stage": "cross",
+ "model": "qwen3-embedding:4b",
+ "caps": {
+  "wordsPerOp": 400,
+  "trainPerOp": 150,
+  "test": 600,
+  "crossWordsPerOp": 35,
+  "crossPerLanguage": 15,
+  "crossMin": 8
+ },
+ "n": 405,
+ "languages": [
+  "Ancient_Greek",
+  "Arabic",
+  "Basque",
+  "Classical_Chinese",
+  "Coptic",
+  "English",
+  "Finnish",
+  "French",
+  "German",
+  "Gothic",
+  "Hindi",
+  "Indonesian",
+  "Japanese",
+  "Korean",
+  "Latin",
+  "Naija",
+  "Old_Church_Slavonic",
+  "Old_East_Slavic",
+  "Persian",
+  "Russian",
+  "Sanskrit",
+  "Tamil",
+  "Turkish",
+  "Uyghur",
+  "Vietnamese",
+  "Wolof",
+  "Yoruba"
+ ],
+ "classesPresent": 9,
+ "chanceBalancedAccuracy": 0.1111111111111111,
+ "balancedAccuracy": {
+  "A": 0.19528329645279977,
+  "C": 0.04903748318449224,
+  "B": 0.35030238590505336,
+  "F": 0.33559150061090937
+ },
+ "accuracy": {
+  "A": 0.13333333333333333,
+  "C": 0.06172839506172839,
+  "B": 0.24444444444444444,
+  "F": 0.20246913580246914
+ },
+ "meanCosineDeltaVsBareClause": 0.40127766809798976,
+ "shuffledLabelNull": {
+  "n": 200,
+  "mean": 0.11515319487107091,
+  "p975": 0.23801112913845568
+ },
+ "bootstrap": [
+  {
+   "name": "A minus size-matched control",
+   "ci95": [
+    0.08147146496386873,
+    0.2286791365531365
+   ]
+  },
+  {
+   "name": "A minus bare clause",
+   "ci95": [
+    -0.19386344649502543,
+    -0.009588369622833104
+   ]
+  },
+  {
+   "name": "fusion minus bare clause",
+   "ci95": [
+    -0.05288242200336263,
+    0.02258222876779581
+   ]
+  },
+  {
+   "name": "A",
+   "ci95": [
+    0.13530476091545304,
+    0.2822632892816126
+   ]
+  }
+ ],
+ "H1": false,
+ "H2": true,
+ "H3": false,
+ "H5_fusionAddsBeyondBareClause": false,
+ "verdict": "FALSIFIED",
+ "failed": [
+  "H1",
+  "H3"
+ ],
+ "modelCalls": 1585
+}

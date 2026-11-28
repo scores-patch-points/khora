@@ -1,0 +1,469 @@
+{
+ "seed": 20261123,
+ "reusedSplit": true,
+ "languages": 21,
+ "sentences": 1000,
+ "baseline": {
+  "A": 0.7641151264691259,
+  "B": 0.6550201100724805
+ },
+ "edited": {
+  "A": 0.7660516260099596,
+  "B": 0.6595462864187436
+ },
+ "categoriesMoved": 36,
+ "placementsMoved": 265665,
+ "editedCategoriesAbsentFromPUD": [
+  "F:Number=Coll",
+  "F:Case=Sup",
+  "F:Case=Sub",
+  "F:Case=Del",
+  "F:Case=Lat",
+  "F:Case=Add",
+  "F:Case=Sbe",
+  "F:Case=Sbl",
+  "F:Case=Spl",
+  "F:Case=Ter",
+  "F:Case=Per",
+  "F:Definite=Spec",
+  "F:Definite=Cons",
+  "F:Definite=Com",
+  "F:Aspect=Iter",
+  "F:Voice=Antip",
+  "F:Evident=Fh",
+  "F:Degree=Equ",
+  "F:Polite=Elev",
+  "F:Polite=Humb",
+  "F:NumType=Dist"
+ ],
+ "A": {
+  "delta": 0.001936499540833636,
+  "pairedBootstrapCI95": [
+   -0.00025737534649670146,
+   0.0039801246105227615
+  ],
+  "matchedRandomNull": {
+   "n": 200,
+   "mean": 0.0039209978938786385,
+   "p025": -0.023680375375691898,
+   "p975": 0.031329250146867826,
+   "min": -0.03938400048334134,
+   "max": 0.04022937484970324
+  },
+  "pOneSided": 0.5771144278606966
+ },
+ "B": {
+  "delta": 0.004526176346263067,
+  "pairedBootstrapCI95": [
+   0.0024540596574816518,
+   0.006562883479577902
+  ],
+  "matchedRandomNull": {
+   "n": 200,
+   "mean": 0.00885228004112864,
+   "p025": -0.032054024239458356,
+   "p975": 0.03807541200931586,
+   "min": -0.055259189187732316,
+   "max": 0.04798821325728764
+  },
+  "pOneSided": 0.6019900497512438
+ },
+ "nullFallbacks": 0,
+ "groups": [
+  {
+   "group": "Adjective",
+   "to": "DEF·Figure",
+   "categoriesMoved": [
+    "U:ADJ (NUL·Pattern→DEF·Figure)"
+   ],
+   "placementsMoved": 30845,
+   "deltaA": 0.012051749939378298,
+   "deltaB": 0,
+   "deltaA_CI95": [
+    0.011107374995388091,
+    0.01296649994389154
+   ]
+  },
+  {
+   "group": "Clusivity",
+   "to": "SIG·Figure",
+   "categoriesMoved": [
+    "F:Clusivity=Ex (SIG·Ground→SIG·Figure)",
+    "F:Clusivity=In (SIG·Ground→SIG·Figure)"
+   ],
+   "placementsMoved": 45,
+   "deltaA": -0.00005799997709687865,
+   "deltaB": -0.00024288781248305025,
+   "deltaA_CI95": [
+    -0.0000824999701231718,
+    -0.00003424997888505459
+   ]
+  },
+  {
+   "group": "Demonstrative",
+   "to": "DEF·Figure",
+   "categoriesMoved": [
+    "F:PronType=Dem (SIG·Figure→DEF·Figure)"
+   ],
+   "placementsMoved": 3967,
+   "deltaA": 0.0023966248602140805,
+   "deltaB": 0.003239759710065848,
+   "deltaA_CI95": [
+    0.002026749808853492,
+    0.0027693748335819693
+   ]
+  },
+  {
+   "group": "Numeral and quantifier",
+   "to": "SEG·Figure",
+   "categoriesMoved": [
+    "U:NUM (DEF·Figure→SEG·Figure)"
+   ],
+   "placementsMoved": 9608,
+   "deltaA": -0.009415875339321644,
+   "deltaB": 0,
+   "deltaA_CI95": [
+    -0.009793375190347432,
+    -0.009000750095397235
+   ]
+  },
+  {
+   "group": "Interrogative word",
+   "to": "SEG·Ground",
+   "categoriesMoved": [
+    "F:PronType=Int (SIG·Figure→SEG·Ground)"
+   ],
+   "placementsMoved": 1089,
+   "deltaA": 0.0006128748772665782,
+   "deltaB": 0.002372404269117556,
+   "deltaA_CI95": [
+    0.00039887484428472825,
+    0.0007966248186770828
+   ]
+  },
+  {
+   "group": "Interjection",
+   "to": "SIG·Ground",
+   "categoriesMoved": [
+    "U:INTJ (EVA·Ground→SIG·Ground)"
+   ],
+   "placementsMoved": 16,
+   "deltaA": -0.000002500002272531887,
+   "deltaB": 0,
+   "deltaA_CI95": [
+    -0.0000067499952390789985,
+    4.99999523162842e-7
+   ]
+  },
+  {
+   "group": "Number: collective",
+   "to": "SYN·Figure",
+   "categoriesMoved": [],
+   "placementsMoved": 0,
+   "deltaA": 0,
+   "deltaB": 0,
+   "deltaA_CI95": null
+  },
+  {
+   "group": "Case: partitive",
+   "to": "SEG·Figure",
+   "categoriesMoved": [
+    "F:Case=Par (CON·Pattern→SEG·Figure)"
+   ],
+   "placementsMoved": 1167,
+   "deltaA": -0.0005032500321977551,
+   "deltaB": -0.00006249995678675457,
+   "deltaA_CI95": [
+    -0.0007978750216774643,
+    -0.0002653750192373991
+   ]
+  },
+  {
+   "group": "Case: abessive",
+   "to": "NUL·Figure",
+   "categoriesMoved": [
+    "F:Case=Abe (CON·Ground→NUL·Figure)"
+   ],
+   "placementsMoved": 4,
+   "deltaA": 0.0000032500028610549236,
+   "deltaB": -1.1921019726912618e-11,
+   "deltaA_CI95": [
+    0.0000010000020265579225,
+    0.000005500003695487976
+   ]
+  },
+  {
+   "group": "Case: comitative",
+   "to": "CON·Figure",
+   "categoriesMoved": [
+    "F:Case=Com (CON·Ground→CON·Figure)"
+   ],
+   "placementsMoved": 5,
+   "deltaA": -0.00000799999833112075,
+   "deltaB": 1.4900303213494226e-12,
+   "deltaA_CI95": [
+    -0.00003349999114871025,
+    0.000005500002205371858
+   ]
+  },
+  {
+   "group": "Case: local grid",
+   "to": "SEG·Ground",
+   "categoriesMoved": [
+    "F:Case=Ill (CON·Ground→SEG·Ground)",
+    "F:Case=Ine (CON·Ground→SEG·Ground)",
+    "F:Case=All (CON·Ground→SEG·Ground)",
+    "F:Case=Ela (CON·Ground→SEG·Ground)",
+    "F:Case=Ade (CON·Ground→SEG·Ground)"
+   ],
+   "placementsMoved": 1897,
+   "deltaA": -0.0008138749854639249,
+   "deltaB": 0.00008412504047150549,
+   "deltaA_CI95": [
+    -0.0010640000704675912,
+    -0.0005193749338388443
+   ]
+  },
+  {
+   "group": "Gender and noun class",
+   "to": "SEG·Pattern",
+   "categoriesMoved": [
+    "F:Gender=Fem (NUL·Pattern→SEG·Pattern)",
+    "F:Gender=Masc (NUL·Pattern→SEG·Pattern)",
+    "F:Gender=Neut (NUL·Pattern→SEG·Pattern)",
+    "F:Gender=Com (NUL·Pattern→SEG·Pattern)"
+   ],
+   "placementsMoved": 135107,
+   "deltaA": 0.007548874870827449,
+   "deltaB": 0.004597900391382859,
+   "deltaA_CI95": [
+    0.006098124835919589,
+    0.00877387496768497
+   ]
+  },
+  {
+   "group": "Classifier",
+   "to": "SEG·Figure",
+   "categoriesMoved": [
+    "R:clf (CON·Pattern→SEG·Figure)"
+   ],
+   "placementsMoved": 616,
+   "deltaA": -0.0001276250329800277,
+   "deltaB": 0,
+   "deltaA_CI95": [
+    -0.00027437498364597557,
+    0.000031624986138194806
+   ]
+  },
+  {
+   "group": "Definiteness",
+   "to": "DEF·Figure",
+   "categoriesMoved": [
+    "F:Definite=Def (SIG·Pattern→DEF·Figure)",
+    "F:Definite=Ind (SIG·Pattern→DEF·Figure)"
+   ],
+   "placementsMoved": 38351,
+   "deltaA": 0.0019886248703580023,
+   "deltaB": -0.005332128497010813,
+   "deltaA_CI95": [
+    0.0012634999040979894,
+    0.002608249747240916
+   ]
+  },
+  {
+   "group": "Aspect: iterative",
+   "to": "INS·Pattern",
+   "categoriesMoved": [],
+   "placementsMoved": 0,
+   "deltaA": 0,
+   "deltaB": 0,
+   "deltaA_CI95": null
+  },
+  {
+   "group": "Modality: necessity and ability",
+   "to": "EVA·Ground",
+   "categoriesMoved": [
+    "F:Mood=Pot (EVA·Pattern→EVA·Ground)",
+    "F:Mood=Nec (EVA·Pattern→EVA·Ground)"
+   ],
+   "placementsMoved": 26,
+   "deltaA": -0.000020249996753429755,
+   "deltaB": -0.000022250004438673088,
+   "deltaA_CI95": [
+    -0.00006499999929219484,
+    0.00000799999344162643
+   ]
+  },
+  {
+   "group": "Voice: antipassive",
+   "to": "REC·Ground",
+   "categoriesMoved": [],
+   "placementsMoved": 0,
+   "deltaA": 0,
+   "deltaB": 0,
+   "deltaA_CI95": null
+  },
+  {
+   "group": "Voice: causative",
+   "to": "CON·Figure",
+   "categoriesMoved": [
+    "F:Voice=Cau (REC·Figure→CON·Figure)"
+   ],
+   "placementsMoved": 259,
+   "deltaA": -0.000027874998701715725,
+   "deltaB": 0.0001279085969722038,
+   "deltaA_CI95": [
+    -0.00009175004973076282,
+    0.000037124950811266904
+   ]
+  },
+  {
+   "group": "Reflexive",
+   "to": "REC·Figure",
+   "categoriesMoved": [
+    "F:Reflex=Yes (SIG·Ground→REC·Figure)"
+   ],
+   "placementsMoved": 1560,
+   "deltaA": -0.0001860000706278564,
+   "deltaB": -0.0002973809940783889,
+   "deltaA_CI95": [
+    -0.00024300003219395881,
+    -0.0001330000754445791
+   ]
+  },
+  {
+   "group": "Evidentiality",
+   "to": "EVA·Figure",
+   "categoriesMoved": [
+    "F:Evident=Nfh (EVA·Ground→EVA·Figure)"
+   ],
+   "placementsMoved": 219,
+   "deltaA": 0.000009250010084338456,
+   "deltaB": -0.00014112495603035846,
+   "deltaA_CI95": [
+    -0.00003737496891990304,
+    0.00007262501027435064
+   ]
+  },
+  {
+   "group": "Auxiliary construction",
+   "to": "SYN·Pattern",
+   "categoriesMoved": [
+    "R:aux (CON·Ground→SYN·Pattern)"
+   ],
+   "placementsMoved": 11991,
+   "deltaA": 0.000387249853694982,
+   "deltaB": 0,
+   "deltaA_CI95": [
+    -0.00010150030874647199,
+    0.0009147501959931104
+   ]
+  },
+  {
+   "group": "Negation: clausal",
+   "to": "NUL·Ground",
+   "categoriesMoved": [
+    "F:Polarity=Neg (DEF·Ground→NUL·Ground)"
+   ],
+   "placementsMoved": 2758,
+   "deltaA": 0.00014024998401285238,
+   "deltaB": 0.00025007456887771173,
+   "deltaA_CI95": [
+    0.00007625003824941818,
+    0.00020537498029880226
+   ]
+  },
+  {
+   "group": "Equative and predicative",
+   "to": "DEF·Figure",
+   "categoriesMoved": [
+    "R:cop (CON·Ground→DEF·Figure)"
+   ],
+   "placementsMoved": 6019,
+   "deltaA": 0.0011097498213872292,
+   "deltaB": 0,
+   "deltaA_CI95": [
+    0.0007556249934714287,
+    0.0014853748648427428
+   ]
+  },
+  {
+   "group": "Coordination of clauses",
+   "to": "CON·Ground",
+   "categoriesMoved": [
+    "R:conj (SYN·Pattern→CON·Ground)"
+   ],
+   "placementsMoved": 13147,
+   "deltaA": -0.004771875389618763,
+   "deltaB": 0,
+   "deltaA_CI95": [
+    -0.005115750533156096,
+    -0.004381000173976645
+   ]
+  },
+  {
+   "group": "Counterfactual",
+   "to": "EVA·Ground",
+   "categoriesMoved": [
+    "F:Mood=Cnd (EVA·Pattern→EVA·Ground)"
+   ],
+   "placementsMoved": 531,
+   "deltaA": -0.00022612503753038915,
+   "deltaB": -0.0003526249776129031,
+   "deltaA_CI95": [
+    -0.00029750002445653084,
+    -0.00016837505288422105
+   ]
+  },
+  {
+   "group": "Comparison",
+   "to": "DEF·Figure",
+   "categoriesMoved": [
+    "F:Degree=Cmp (EVA·Figure→DEF·Figure)",
+    "F:Degree=Sup (EVA·Figure→DEF·Figure)"
+   ],
+   "placementsMoved": 1412,
+   "deltaA": 0.0003463748921640475,
+   "deltaB": 0.0003839110057922701,
+   "deltaA_CI95": [
+    0.00018899986995384095,
+    0.000502749824989587
+   ]
+  },
+  {
+   "group": "T/V address",
+   "to": "SIG·Figure",
+   "categoriesMoved": [
+    "F:Polite=Form (EVA·Figure→SIG·Figure)",
+    "F:Polite=Infm (EVA·Figure→SIG·Figure)"
+   ],
+   "placementsMoved": 5026,
+   "deltaA": 0.0007798749985172826,
+   "deltaB": 0.00013777910544476857,
+   "deltaA_CI95": [
+    0.0003134999426547438,
+    0.001366749974200502
+   ]
+  },
+  {
+   "group": "Honorific systems",
+   "to": "DEF·Pattern",
+   "categoriesMoved": [],
+   "placementsMoved": 0,
+   "deltaA": 0,
+   "deltaB": 0,
+   "deltaA_CI95": null
+  },
+  {
+   "group": "Distributivity",
+   "to": "SEG·Figure",
+   "categoriesMoved": [],
+   "placementsMoved": 0,
+   "deltaA": 0,
+   "deltaB": 0,
+   "deltaA_CI95": null
+  }
+ ],
+ "verdict": "NOT SUPPORTED",
+ "direction": "above zero"
+}

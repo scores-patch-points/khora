@@ -1,0 +1,175 @@
+{
+ "verdict": "SUPPORTED",
+ "failed": [],
+ "op": {
+  "lfo": {
+   "n": 814,
+   "classesPresent": 9,
+   "chanceBalancedAccuracy": 0.1111,
+   "balancedAccuracy": {
+    "S1": 0.3288,
+    "S2_surface": 0.1024
+   },
+   "plainAccuracy": {
+    "S1": 0.2752,
+    "S2_surface": 0.1265
+   },
+   "shuffledLabelNull": {
+    "n": 200,
+    "mean": 0.1177,
+    "p975": 0.1728
+   },
+   "bootstrapByLanguage": [
+    {
+     "name": "S1 minus surface baseline (S2)",
+     "ci95": [
+      0.1367,
+      0.2999
+     ]
+    },
+    {
+     "name": "top-margin tercile minus bottom",
+     "ci95": [
+      0.0872,
+      0.3386
+     ]
+    },
+    {
+     "name": "S1",
+     "ci95": [
+      0.241,
+      0.3975
+     ]
+    }
+   ],
+   "tercileBA": {
+    "low": 0.1829,
+    "mid": 0.2518,
+    "high": 0.4225
+   },
+   "H1": true,
+   "H2": true,
+   "H3": true
+  },
+  "lolo": {
+   "n": 814,
+   "classesPresent": 9,
+   "chanceBalancedAccuracy": 0.1111,
+   "balancedAccuracy": {
+    "S1": 0.3332,
+    "S2_surface": 0.111
+   },
+   "plainAccuracy": {
+    "S1": 0.2727,
+    "S2_surface": 0.1216
+   },
+   "shuffledLabelNull": {
+    "n": 200,
+    "mean": 0.1132,
+    "p975": 0.1709
+   },
+   "bootstrapByLanguage": [
+    {
+     "name": "S1 minus surface baseline (S2)",
+     "ci95": [
+      0.1333,
+      0.2951
+     ]
+    },
+    {
+     "name": "top-margin tercile minus bottom",
+     "ci95": [
+      0.1115,
+      0.3337
+     ]
+    },
+    {
+     "name": "S1",
+     "ci95": [
+      0.2453,
+      0.4011
+     ]
+    }
+   ],
+   "tercileBA": {
+    "low": 0.1926,
+    "mid": 0.2587,
+    "high": 0.4231
+   },
+   "H1": true,
+   "H2": true,
+   "H3": true
+  }
+ },
+ "cellLFO": {
+  "n": 743,
+  "classesPresent": 25,
+  "chanceBalancedAccuracy": 0.04,
+  "balancedAccuracy": {
+   "S1": 0.2024,
+   "S2_surface": 0.0399
+  },
+  "plainAccuracy": {
+   "S1": 0.1629,
+   "S2_surface": 0.0659
+  },
+  "shuffledLabelNull": {
+   "n": 200,
+   "mean": 0.0445,
+   "p975": 0.1136
+  },
+  "bootstrapByLanguage": [
+   {
+    "name": "S1 minus surface baseline (S2)",
+    "ci95": [
+     0.0842,
+     0.2039
+    ]
+   },
+   {
+    "name": "top-margin tercile minus bottom",
+    "ci95": [
+     0.0362,
+     0.2404
+    ]
+   },
+   {
+    "name": "S1",
+    "ci95": [
+     0.1265,
+     0.2523
+    ]
+   }
+  ],
+  "tercileBA": {
+   "low": 0.0967,
+   "mid": 0.1698,
+   "high": 0.2559
+  },
+  "H1": true,
+  "H2": true,
+  "H3": true
+ },
+ "clause": {
+  "lfo": {
+   "n": 405,
+   "classesPresent": 9,
+   "balancedAccuracy": 0.384,
+   "plain": 0.2272
+  },
+  "lolo": {
+   "n": 405,
+   "classesPresent": 9,
+   "balancedAccuracy": 0.3905,
+   "plain": 0.2321
+  }
+ },
+ "multiLabelLFO": {
+  "meanCellsClaimed": 0.5221,
+  "unitsWithNoClaim": 0.9128,
+  "anyHit": 0.0663,
+  "precision": 0.1388,
+  "recall": 0.0617,
+  "f1": 0.0854
+ }
+}

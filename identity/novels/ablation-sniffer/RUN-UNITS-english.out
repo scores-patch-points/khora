@@ -1,0 +1,220 @@
+{
+ "stage": "english",
+ "model": "nomic-embed-text:latest",
+ "caps": {
+  "wordsPerOp": 400,
+  "trainPerOp": 150,
+  "test": 600,
+  "crossWordsPerOp": 35,
+  "crossPerLanguage": 15,
+  "crossMin": 8
+ },
+ "n": 421,
+ "classesPresent": 6,
+ "chanceBalancedAccuracy": 0.1667,
+ "levels": {
+  "L0": {
+   "unitMeanTokens": 1,
+   "balancedAccuracy": {
+    "A0": 0.2303,
+    "C0": 0.0768,
+    "B0": 0.6186,
+    "F0": 0.4225,
+    "Aw0": 0.3609,
+    "Bw0": 0.502
+   },
+   "accuracy": {
+    "A0": 0.266,
+    "C0": 0.1781,
+    "B0": 0.5368,
+    "F0": 0.3587,
+    "Aw0": 0.1116,
+    "Bw0": 0.7672
+   },
+   "meanCosineDeltaVsBareUnit": 0.1582,
+   "shuffledLabelNull": {
+    "n": 200,
+    "mean": 0.1202,
+    "p975": 0.2698
+   },
+   "bootstrap": [
+    {
+     "name": "A0 minus size-matched control",
+     "ci95": [
+      0.0545,
+      0.3012
+     ]
+    },
+    {
+     "name": "A0 minus bare unit",
+     "ci95": [
+      -0.5329,
+      -0.148
+     ]
+    },
+    {
+     "name": "fusion minus bare unit",
+     "ci95": [
+      -0.3701,
+      -0.0585
+     ]
+    },
+    {
+     "name": "A0",
+     "ci95": [
+      0.1434,
+      0.3677
+     ]
+    }
+   ],
+   "H1": false,
+   "H2": true,
+   "H3": false,
+   "H5_fusionAddsBeyondBareUnit": false
+  },
+  "L1": {
+   "unitMeanTokens": 5.7696,
+   "balancedAccuracy": {
+    "A1": 0.2149,
+    "C1": 0.0861,
+    "B1": 0.4425,
+    "F1": 0.24,
+    "Aw1": 0.2748,
+    "Bw1": 0.4424
+   },
+   "accuracy": {
+    "A1": 0.1591,
+    "C1": 0.1354,
+    "B1": 0.38,
+    "F1": 0.1853,
+    "Aw1": 0.0689,
+    "Bw1": 0.304
+   },
+   "meanCosineDeltaVsBareUnit": 0.3669,
+   "shuffledLabelNull": {
+    "n": 200,
+    "mean": 0.1201,
+    "p975": 0.2822
+   },
+   "bootstrap": [
+    {
+     "name": "A1 minus size-matched control",
+     "ci95": [
+      0.0522,
+      0.2388
+     ]
+    },
+    {
+     "name": "A1 minus bare unit",
+     "ci95": [
+      -0.3947,
+      0.038
+     ]
+    },
+    {
+     "name": "fusion minus bare unit",
+     "ci95": [
+      -0.369,
+      0.064
+     ]
+    },
+    {
+     "name": "A1",
+     "ci95": [
+      0.1156,
+      0.3186
+     ]
+    }
+   ],
+   "H1": false,
+   "H2": true,
+   "H3": false,
+   "H5_fusionAddsBeyondBareUnit": false
+  },
+  "L2": {
+   "unitMeanTokens": 6.5629,
+   "balancedAccuracy": {
+    "A2": 0.1411,
+    "C2": 0.0819,
+    "B2": 0.4386,
+    "F2": 0.1775,
+    "Aw2": 0.288,
+    "Bw2": 0.4418
+   },
+   "accuracy": {
+    "A2": 0.1093,
+    "C2": 0.1378,
+    "B2": 0.3729,
+    "F2": 0.1496,
+    "Aw2": 0.0926,
+    "Bw2": 0.2518
+   },
+   "meanCosineDeltaVsBareUnit": 0.3956,
+   "shuffledLabelNull": {
+    "n": 200,
+    "mean": 0.1298,
+    "p975": 0.3113
+   },
+   "bootstrap": [
+    {
+     "name": "A2 minus size-matched control",
+     "ci95": [
+      -0.0217,
+      0.1418
+     ]
+    },
+    {
+     "name": "A2 minus bare unit",
+     "ci95": [
+      -0.4627,
+      -0.0515
+     ]
+    },
+    {
+     "name": "fusion minus bare unit",
+     "ci95": [
+      -0.4243,
+      -0.0196
+     ]
+    },
+    {
+     "name": "A2",
+     "ci95": [
+      0.053,
+      0.2194
+     ]
+    }
+   ],
+   "H1": false,
+   "H2": false,
+   "H3": false,
+   "H5_fusionAddsBeyondBareUnit": false
+  }
+ },
+ "H6_largerUnit": {
+  "bootstrap": [
+   {
+    "name": "A2 minus A0 (larger unit, better negative space)",
+    "ci95": [
+     -0.2099,
+     -0.0237
+    ]
+   },
+   {
+    "name": "A1 minus A0",
+    "ci95": [
+     -0.1289,
+     0.0585
+    ]
+   }
+  ],
+  "holds": false
+ },
+ "verdict": "FALSIFIED",
+ "failed": [
+  "H1",
+  "H2",
+  "H3"
+ ],
+ "modelCalls": 6065
+}

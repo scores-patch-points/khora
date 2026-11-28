@@ -1,0 +1,351 @@
+{
+ "seed": 20261124,
+ "perms": 2000,
+ "boot": 1000,
+ "shrink": 5,
+ "model": "qwen3-embedding:4b",
+ "headWordsEmbedded": 4096,
+ "embedSeconds": 607.849,
+ "gate": [
+  {
+   "lang": "python",
+   "t": "writes",
+   "mine": 0.5682258682558348,
+   "want": 0.5682258682558348,
+   "ok": true
+  },
+  {
+   "lang": "python",
+   "t": "returnsBool",
+   "mine": 0.7659465710263458,
+   "want": 0.7659465710263458,
+   "ok": true
+  },
+  {
+   "lang": "javascript",
+   "t": "writes",
+   "mine": 0.6529513707781466,
+   "want": 0.6529513707781466,
+   "ok": true
+  },
+  {
+   "lang": "javascript",
+   "t": "returnsBool",
+   "mine": 0.8324961610942928,
+   "want": 0.8324961610942928,
+   "ok": true
+  }
+ ],
+ "headOperatorMix": {
+  "NUL": 239,
+  "DES": 828,
+  "CON": 477,
+  "REC": 490,
+  "SYN": 382,
+  "ALT": 134,
+  "SEG": 253,
+  "INS": 1034,
+  "SUP": 259
+ },
+ "results": [
+  {
+   "lang": "python",
+   "target": "writes",
+   "freshUnits": 4458,
+   "uncoveredUnits": 3002,
+   "uncoveredHeads": 841,
+   "anchors": 717,
+   "positivesUncovered": 335,
+   "negativesUncovered": 2667,
+   "underpowered": false,
+   "aucBaselineAll": 0.5682258682558348,
+   "aucBaselineUncovered": 0.5039616316617139,
+   "arms": {
+    "B1": {
+     "name": "operator class of the head word (the wired sniffer)",
+     "aucUncovered": 0.5842821886070212,
+     "gain": 0.08032055694530726,
+     "gainCI95": [
+      0.03543610791732399,
+      0.12102132332753723
+     ],
+     "nullGainMean": 0.010760587109447111,
+     "nullGain975": 0.06622008069886787,
+     "supported": true,
+     "aucAll": 0.604749534431328,
+     "distinctPriors": 43,
+     "vsVerbFlag": {
+      "diff": -0.009766689611559687,
+      "ci95": [
+       -0.05501878027083118,
+       0.03552725329533313
+      ],
+      "beatsFlag": false
+     }
+    },
+    "B2": {
+     "name": "embedding neighbours of the head word",
+     "aucUncovered": 0.5309677708196923,
+     "gain": 0.027006139157978337,
+     "gainCI95": [
+      -0.002133376972101475,
+      0.05476898064499147
+     ],
+     "nullGainMean": 0.0009105333848194372,
+     "nullGain975": 0.0656442198456536,
+     "supported": false,
+     "aucAll": 0.5804855480093807,
+     "distinctPriors": 841,
+     "vsVerbFlag": {
+      "diff": -0.06308110739888861,
+      "ci95": [
+       -0.11031412729347112,
+       -0.013477468627876243
+      ],
+      "beatsFlag": false
+     }
+    },
+    "B3": {
+     "name": "verb-or-noun flag of the head word (UniMorph lexicon, no embedding)",
+     "aucUncovered": 0.5940488782185809,
+     "gain": 0.09008724655686695,
+     "gainCI95": [
+      0.053630892743078196,
+      0.12338103322823185
+     ],
+     "nullGainMean": 0.0032779664668782047,
+     "nullGain975": 0.04792292754450467,
+     "supported": true,
+     "aucAll": 0.6132236688583026,
+     "distinctPriors": 17
+    }
+   }
+  },
+  {
+   "lang": "python",
+   "target": "returnsBool",
+   "freshUnits": 4458,
+   "uncoveredUnits": 3002,
+   "uncoveredHeads": 841,
+   "anchors": 717,
+   "positivesUncovered": 101,
+   "negativesUncovered": 2901,
+   "underpowered": false,
+   "aucBaselineAll": 0.7659465710263458,
+   "aucBaselineUncovered": 0.5719639182118832,
+   "arms": {
+    "B1": {
+     "name": "operator class of the head word (the wired sniffer)",
+     "aucUncovered": 0.5346005645031928,
+     "gain": -0.03736335370869037,
+     "gainCI95": [
+      -0.14190049803043714,
+      0.05797447237740527
+     ],
+     "nullGainMean": -0.012083064562919544,
+     "nullGain975": 0.07657311749789253,
+     "supported": false,
+     "aucAll": 0.7491554458479779,
+     "distinctPriors": 36,
+     "vsVerbFlag": {
+      "diff": -0.0668444817594479,
+      "ci95": [
+       -0.14152428631209363,
+       0.008133264982580157
+      ],
+      "beatsFlag": false
+     }
+    },
+    "B2": {
+     "name": "embedding neighbours of the head word",
+     "aucUncovered": 0.6021805386329739,
+     "gain": 0.030216620421090745,
+     "gainCI95": [
+      -0.025760043135375388,
+      0.08621665666009093
+     ],
+     "nullGainMean": 0.001713833741181811,
+     "nullGain975": 0.07042467431851773,
+     "supported": false,
+     "aucAll": 0.7773794759574407,
+     "distinctPriors": 841,
+     "vsVerbFlag": {
+      "diff": 0.0007354923703332128,
+      "ci95": [
+       -0.06797157504959606,
+       0.07043298653610774
+      ],
+      "beatsFlag": false
+     }
+    },
+    "B3": {
+     "name": "verb-or-noun flag of the head word (UniMorph lexicon, no embedding)",
+     "aucUncovered": 0.6014450462626407,
+     "gain": 0.029481128050757532,
+     "gainCI95": [
+      -0.034937054557903635,
+      0.10578360481468763
+     ],
+     "nullGainMean": -0.006943770669724633,
+     "nullGain975": 0.07247756833594432,
+     "supported": false,
+     "aucAll": 0.7809210967352684,
+     "distinctPriors": 10
+    }
+   }
+  },
+  {
+   "lang": "javascript",
+   "target": "writes",
+   "freshUnits": 6841,
+   "uncoveredUnits": 3049,
+   "uncoveredHeads": 1000,
+   "anchors": 2778,
+   "positivesUncovered": 641,
+   "negativesUncovered": 2408,
+   "underpowered": false,
+   "aucBaselineAll": 0.6529513707781466,
+   "aucBaselineUncovered": 0.5628945506657476,
+   "arms": {
+    "B1": {
+     "name": "operator class of the head word (the wired sniffer)",
+     "aucUncovered": 0.537201139208359,
+     "gain": -0.02569341145738857,
+     "gainCI95": [
+      -0.061071615120274814,
+      0.01050196506116663
+     ],
+     "nullGainMean": -0.012809305694486895,
+     "nullGain975": 0.02559655542367878,
+     "supported": false,
+     "aucAll": 0.6414993160401405,
+     "distinctPriors": 59,
+     "vsVerbFlag": {
+      "diff": 0.001365054602184057,
+      "ci95": [
+       -0.039191734106988396,
+       0.042679174770024586
+      ],
+      "beatsFlag": false
+     }
+    },
+    "B2": {
+     "name": "embedding neighbours of the head word",
+     "aucUncovered": 0.5930724936638662,
+     "gain": 0.0301779429981186,
+     "gainCI95": [
+      0.006934748155896897,
+      0.053237966422207794
+     ],
+     "nullGainMean": -0.0000654280324036905,
+     "nullGain975": 0.023216618033492065,
+     "supported": true,
+     "aucAll": 0.6612697636699146,
+     "distinctPriors": 1000,
+     "vsVerbFlag": {
+      "diff": 0.05723640905769123,
+      "ci95": [
+       0.023596363776803297,
+       0.09132995700845814
+      ],
+      "beatsFlag": true
+     }
+    },
+    "B3": {
+     "name": "verb-or-noun flag of the head word (UniMorph lexicon, no embedding)",
+     "aucUncovered": 0.5358360846061749,
+     "gain": -0.027058466059572628,
+     "gainCI95": [
+      -0.07297689418927022,
+      0.017084284206910105
+     ],
+     "nullGainMean": -0.001402034818934292,
+     "nullGain975": 0.0212483997698778,
+     "supported": false,
+     "aucAll": 0.6251219988719524,
+     "distinctPriors": 21
+    }
+   }
+  },
+  {
+   "lang": "javascript",
+   "target": "returnsBool",
+   "freshUnits": 6841,
+   "uncoveredUnits": 3049,
+   "uncoveredHeads": 1000,
+   "anchors": 2778,
+   "positivesUncovered": 109,
+   "negativesUncovered": 2940,
+   "underpowered": false,
+   "aucBaselineAll": 0.8324961610942928,
+   "aucBaselineUncovered": 0.5524527242089496,
+   "arms": {
+    "B1": {
+     "name": "operator class of the head word (the wired sniffer)",
+     "aucUncovered": 0.6087468014728827,
+     "gain": 0.056294077263933096,
+     "gainCI95": [
+      -0.008925279410070264,
+      0.1250501280192492
+     ],
+     "nullGainMean": 0.002120468233164822,
+     "nullGain975": 0.08430069275416585,
+     "supported": false,
+     "aucAll": 0.8378127457457814,
+     "distinctPriors": 62,
+     "vsVerbFlag": {
+      "diff": 0.03554109717281406,
+      "ci95": [
+       -0.041895114863753524,
+       0.11996148287981434
+      ],
+      "beatsFlag": false
+     }
+    },
+    "B2": {
+     "name": "embedding neighbours of the head word",
+     "aucUncovered": 0.6486347750109218,
+     "gain": 0.09618205080197217,
+     "gainCI95": [
+      0.05608890260842725,
+      0.13792045454545454
+     ],
+     "nullGainMean": 0.0003221899769081867,
+     "nullGain975": 0.05530955501466639,
+     "supported": true,
+     "aucAll": 0.8461568357328734,
+     "distinctPriors": 1000,
+     "vsVerbFlag": {
+      "diff": 0.07542907071085314,
+      "ci95": [
+       0.013433784521607373,
+       0.13729222930645657
+      ],
+      "beatsFlag": true
+     }
+    },
+    "B3": {
+     "name": "verb-or-noun flag of the head word (UniMorph lexicon, no embedding)",
+     "aucUncovered": 0.5732057043000687,
+     "gain": 0.020752980091119033,
+     "gainCI95": [
+      -0.027298660765890048,
+      0.07343615814010551
+     ],
+     "nullGainMean": 0.0010240146976221618,
+     "nullGain975": 0.07111495974536608,
+     "supported": false,
+     "aucAll": 0.8356080107233019,
+     "distinctPriors": 20
+    }
+   }
+  }
+ ],
+ "verdict": {
+  "B1 writes": "NOT SUPPORTED",
+  "B1 returnsBool": "NOT SUPPORTED",
+  "B2 writes": "PARTIAL (one language)",
+  "B2 returnsBool": "PARTIAL (one language)"
+ },
+ "modelCalls": 4096
+}
