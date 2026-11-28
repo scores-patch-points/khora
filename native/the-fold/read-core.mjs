@@ -54,6 +54,7 @@ import { renderCard } from "../adapters/text/folded-card.js";
 import { createDeclensionFolder, createRunBreak } from "../adapters/text/declension.js";
 import { extractSurfacesHeard, languageContextFor } from "./language-context.js";
 import { formUsageFor, formUsageOf, usedMostlyAsOther } from "../adapters/text/form-usage.js";
+import { nameConventionOf, refusedByConvention } from "../adapters/text/name-convention.js";
 import { conventionOf, conventionsGap } from "../adapters/text/conventions.js";
 import { stemOf } from "./language-grammar.js";
 import { autonymOf } from "./language-names.js";
@@ -342,7 +343,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `readerOptions.formUsage` is the cast's own, not an organ of the reader, so it is taken out before the reader is assembled: the
   // treebank's measured use of a capitalised form the text never writes lower-case (adapters/text/form-usage.js). A caller's own
   // wins; null turns it off.
-  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, caseProDrop, pronounGuess, ...readerOrgans } = readerOptions ?? {};
+  const { formUsage: callerUsage, pronounPresence, namePersonhood, genderPrior, caseMarked, caseRoles, caseProDrop, pronounGuess, nameConvention, ...readerOrgans } = readerOptions ?? {};
   const str = String(text ?? "");
   const bytes = utf8Length(str);
   const gaps = [];
@@ -412,7 +413,7 @@ export function readWith(text, { address = null, category = null, language = nul
   // `mentionsOf` bounds a mention by \p{L} on both sides, so in a script written without spaces (a zh probe) every row gets zero spans and the cast
   // is empty. Not fixed here: it changes the cast's output for every language and needs its own registration. Suggested fix: take the mention
   // boundaries from the language's tokenizer adapter (Intl.Segmenter), not the regex.
-  let cast = [], heardRows = [], formUsageReport = null, identity = null;
+  let cast = [], heardRows = [], formUsageReport = null, identity = null, nameConventionReport = null;
   const identityRows = [];
   try {
     // A capital is a convention of the language (conventions.js): form-usage.js decides, per language, whether it has a ledgered convention to read by
@@ -424,6 +425,17 @@ export function readWith(text, { address = null, category = null, language = nul
     const verdicts = formUsage ? { undecided: [], separated: [] } : null;
     const capitalSurfaces = extractSurfaces(cuts, { ...(formUsage ? { formUsage, verdicts } : {}), ...(surfaceOptions ?? {}) });
     const capital = new Set(capitalSurfaces.map((x) => x.surface));
+    // DOES A CAPITAL MARK A NAME IN THIS TEXT? (opt-in `readerOptions.nameConvention`, round 31: identity/novels/PREREG-ROUND31-CONVENTION.md + ADDENDUM-1;
+    // adapters/text/name-convention.js). Only where the capital tier reads by a ledgered convention (formUsage: English). When the text capitalizes
+    // non-names beyond the received rate, a capital surface none of whose tokens supports a name leaves the capital set: its referent stays `heard`.
+    if (nameConvention && formUsage) {
+      const g = nameConventionOf(cuts, { forms: pr.posPrior?.forms, conventions: pr.conventions, spread: priorJson(`convention-spread-${stem}.json`) });
+      // the falsifier's control arm (PREREG K) passes `{ refuse(surfaces) }`: the same GROUND, its own choice of what to refuse
+      const refuse = typeof nameConvention?.refuse === "function" ? nameConvention.refuse : (xs) => refusedByConvention(xs, { forms: pr.posPrior?.forms });
+      const refused = g.fired ? refuse([...capital]) : [];
+      for (const s of refused) capital.delete(s);
+      nameConventionReport = { ...g, refused };
+    }
     // what the treebank's use refused, kept beside the entry (not enumerable: the wire stays what it was) so the rule is auditable
     // the conventions this branch reads by, cited from their one home (janus priors/conventions-<stem>.json); a gap is typed here, not on the wire
     if (formUsage) formUsageReport = { conventions: ["capital-marks-a-name", "treebank-attests-a-forms-use"].map((s) => conventionOf(pr.conventions, s)).filter(Boolean), gap: conventionsGap(pr.conventions), giver: "UD_English-EWT (pos-eng.json)", refused: extractSurfaces(cuts, {}).map((x) => x.surface).filter((s) => !capital.has(s) && !verdicts.undecided.some((u) => u.surface === s)), undecided: verdicts.undecided, separated: verdicts.separated };
@@ -605,6 +617,7 @@ export function readWith(text, { address = null, category = null, language = nul
   Object.defineProperty(entry, "reader", { value: R, enumerable: false });
   Object.defineProperty(entry, "abbreviationSet", { value: abbr.set, enumerable: false });
   Object.defineProperty(entry, "formUsageReport", { value: formUsageReport, enumerable: false });
+  if (nameConventionReport) Object.defineProperty(entry, "nameConventionReport", { value: nameConventionReport, enumerable: false });   // round 31: the convention rung, auditable, off the wire
   if (presenceInputs) Object.defineProperty(entry, "presenceInputs", { value: presenceInputs, enumerable: false });
   // THE REFERENT LEDGER (opt-in, `referents: true`; off, the entry is byte-identical to before): the same reading projected onto referents, each inserted once and
   // addressed by its event, a span only its address, an edge between referents per statement; what the spans cannot decide is a typed gap (adapters/text/reading-referents.js).
